@@ -128,8 +128,8 @@ function EnergyGraph({ delay }: { delay: number }) {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const maxVal = Math.max(...data);
   const total = data.reduce((a, b) => a + b, 0).toFixed(1);
-  // index of the highest bar
   const peakIdx = data.indexOf(maxVal);
+  const chartHeight = 80; // Fixed pixel height for bars
 
   return (
     <motion.div
@@ -157,37 +157,34 @@ function EnergyGraph({ delay }: { delay: number }) {
         <span className="text-xs text-slate-400 ml-1">kWh this week</span>
       </motion.div>
 
-      {/* Bar chart — 80px tall chart area */}
-      <div className="flex items-end gap-1.5 h-20 mb-2">
+      {/* Bar chart */}
+      <div className="flex items-end justify-between gap-2" style={{ height: chartHeight }}>
         {data.map((value, idx) => {
-          const heightPct = (value / maxVal) * 100;
+          const barHeight = Math.round((value / maxVal) * chartHeight);
           const isPeak = idx === peakIdx;
           return (
-            <div key={days[idx]} className="flex-1 flex flex-col items-center gap-0">
-              {/* kWh label above peak bar */}
-              {isPeak && (
-                <motion.span
-                  initial={{ opacity: 0, y: 4 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: delay + 0.6 }}
-                  viewport={{ once: true }}
-                  className="text-[9px] font-mono text-amber-400 mb-0.5"
-                >
-                  {value}
-                </motion.span>
-              )}
-              {!isPeak && <span className="text-[9px] mb-0.5 opacity-0">0</span>}
+            <div key={days[idx]} className="flex-1 flex flex-col items-center justify-end h-full">
+              {/* kWh label above bar */}
+              <motion.span
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: delay + 0.5 + idx * 0.05 }}
+                viewport={{ once: true }}
+                className={`text-[9px] font-mono mb-1 ${isPeak ? 'text-amber-400' : 'text-slate-500'}`}
+              >
+                {value}
+              </motion.span>
               {/* Bar */}
               <motion.div
                 className={`w-full rounded-t-sm ${
                   isPeak
                     ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
-                    : 'bg-gradient-to-t from-[var(--electric-cyan)]/40 to-[var(--electric-cyan)]/80'
+                    : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
                 }`}
-                style={{ height: 0 }}
-                whileInView={{ height: `${heightPct}%` }}
+                initial={{ height: 0 }}
+                whileInView={{ height: barHeight }}
                 transition={{
-                  duration: 0.6,
+                  duration: 0.8,
                   delay: delay + 0.1 * idx,
                   ease: [0.22, 1, 0.36, 1],
                 }}
@@ -199,7 +196,7 @@ function EnergyGraph({ delay }: { delay: number }) {
       </div>
 
       {/* Day labels */}
-      <div className="flex gap-1.5">
+      <div className="flex justify-between gap-2 mt-2">
         {days.map((d) => (
           <div key={d} className="flex-1 text-center">
             <span className="text-[10px] text-slate-500">{d}</span>
@@ -456,7 +453,7 @@ export function SmartLiving() {
 
               {/* Energy Graph */}
               <motion.div
-                className="lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
+                className="mb-8 lg:mb-0 lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
                 style={{ y: uiY2 }}
               >
                 <EnergyGraph delay={0.8} />
