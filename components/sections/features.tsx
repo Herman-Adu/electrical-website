@@ -55,6 +55,7 @@ function LoadMonitorCard() {
           src="/images/power-distribution.jpg"
           alt="Power Distribution"
           fill
+          loading="eager"
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>

@@ -202,7 +202,7 @@ export function SmartLiving() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[100vh] overflow-hidden bg-[var(--deep-black)]"
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
     >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">
@@ -255,7 +255,7 @@ export function SmartLiving() {
       
       {/* Main Content */}
       <motion.div 
-        className="relative z-20 min-h-[100vh] flex items-center py-20"
+        className="relative z-20 min-h-screen flex items-center py-24 lg:py-20"
         style={{ y: contentY }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -341,39 +341,21 @@ export function SmartLiving() {
             </div>
             
             {/* Right Side - Floating Smart Home UI Elements */}
-            <div className="relative h-[500px] lg:h-[600px]">
-              {/* Dimmer Controls - Parallax Layer 1 */}
-              <motion.div 
-                className="absolute top-0 right-0 w-64 space-y-3"
-                style={{ y: uiY1 }}
-              >
-                <DimmerSlider label="Living Room" defaultValue={75} delay={0.5} />
-                <DimmerSlider label="Kitchen" defaultValue={90} delay={0.6} />
-                <DimmerSlider label="Bedroom" defaultValue={40} delay={0.7} />
-              </motion.div>
-              
-              {/* Energy Graph - Parallax Layer 2 */}
-              <motion.div 
-                className="absolute bottom-20 right-8 w-56"
-                style={{ y: uiY2 }}
-              >
-                <EnergyGraph delay={0.8} />
-              </motion.div>
-              
-              {/* Status Card - Parallax Layer 3 */}
-              <motion.div 
-                className="absolute top-1/3 left-0 lg:-left-8"
+            {/* Mobile: natural stacking flow. Desktop: absolute parallax positioning */}
+            <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block">
+
+              {/* Status Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="lg:absolute lg:top-1/3 lg:-left-8 lg:w-52"
                 style={{ y: uiY3 }}
               >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.9 }}
-                  viewport={{ once: true }}
-                  className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50 w-52"
-                >
+                <div className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shrink-0">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
@@ -397,37 +379,40 @@ export function SmartLiving() {
                       <span className="text-green-400 font-mono">ON</span>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
-              
-              {/* Floating Ambient Indicators */}
+
+              {/* Dimmer Controls */}
               <motion.div
-                className="absolute top-1/4 right-1/3"
-                animate={{
-                  y: [0, -10, 0],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+                className="space-y-3 lg:absolute lg:top-0 lg:right-0 lg:w-64"
+                style={{ y: uiY1 }}
+              >
+                <DimmerSlider label="Living Room" defaultValue={75} delay={0.5} />
+                <DimmerSlider label="Kitchen" defaultValue={90} delay={0.6} />
+                <DimmerSlider label="Bedroom" defaultValue={40} delay={0.7} />
+              </motion.div>
+
+              {/* Energy Graph */}
+              <motion.div
+                className="lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
+                style={{ y: uiY2 }}
+              >
+                <EnergyGraph delay={0.8} />
+              </motion.div>
+
+              {/* Floating Ambient Indicators - desktop only, hidden on mobile */}
+              <motion.div
+                className="hidden lg:block absolute top-1/4 right-1/3"
+                animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <div className="w-3 h-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50" />
               </motion.div>
-              
+
               <motion.div
-                className="absolute bottom-1/3 left-1/4"
-                animate={{
-                  y: [0, -15, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: 1,
-                }}
+                className="hidden lg:block absolute bottom-1/3 left-1/4"
+                animate={{ y: [0, -15, 0], opacity: [0.3, 0.8, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
                 <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] shadow-lg shadow-[var(--electric-cyan)]/50" />
               </motion.div>

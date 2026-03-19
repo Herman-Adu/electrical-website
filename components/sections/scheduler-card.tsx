@@ -53,6 +53,7 @@ export function SchedulerCard() {
           src="/images/maintenance-engineer.jpg"
           alt="Maintenance Engineer"
           fill
+          loading="eager"
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
