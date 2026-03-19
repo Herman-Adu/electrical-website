@@ -22,12 +22,11 @@ const stats = [
 export function Schematic() {
   const sectionRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-150px' });
-  const animated = useRef(false);
+  const isInView = useInView(sectionRef, { once: false, margin: '-150px' });
+  const animatedRef = useRef(false);
 
   useEffect(() => {
-    if (!svgRef.current || !isInView || animated.current) return;
-    animated.current = true;
+    if (!svgRef.current || !isInView) return;
 
     const paths = Array.from(svgRef.current.querySelectorAll('.schematic-path')) as SVGPathElement[];
     const dots = Array.from(svgRef.current.querySelectorAll('.schematic-dot')) as SVGCircleElement[];
