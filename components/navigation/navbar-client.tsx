@@ -15,6 +15,7 @@ const navLinks = [
       { name: 'Architecture', href: '#architecture' },
       { name: 'Dashboard', href: '#dashboard' },
       { name: 'Smart Living', href: '#smart-living' },
+      { name: 'Power Your Vision', href: '#power-vision' },
     ]
   },
   { name: 'Contact', href: '/contact' },
