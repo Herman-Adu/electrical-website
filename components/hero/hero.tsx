@@ -32,12 +32,12 @@ const itemVariants = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       damping: 25,
       stiffness: 120,
     },
   },
-};
+} as const;
 
 const flickerVariants = {
   hidden: { opacity: 0 },
