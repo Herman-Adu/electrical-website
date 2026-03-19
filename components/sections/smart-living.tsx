@@ -122,7 +122,7 @@ function DimmerSlider({ label, defaultValue, delay }: { label: string; defaultVa
   );
 }
 
-function EnergyGraph({ delay }: { delay: number }) {
+function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
   // kWh values per day
   const data = [3.2, 2.1, 3.8, 2.6, 1.9, 1.6, 2.0];
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -182,13 +182,12 @@ function EnergyGraph({ delay }: { delay: number }) {
                     : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
                 }`}
                 initial={{ height: 0 }}
-                whileInView={{ height: barHeight }}
+                animate={inView ? { height: barHeight } : { height: 0 }}
                 transition={{
                   duration: 0.8,
                   delay: delay + 0.1 * idx,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                viewport={{ once: true }}
               />
             </div>
           );
@@ -359,17 +358,19 @@ export function SmartLiving() {
               </motion.h2>
               
               {/* Description */}
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-lg text-slate-300 mb-8 leading-relaxed"
+                className="mb-8 p-4 rounded-xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/30"
               >
-                Transform your home with smart lighting systems that adapt to your 
-                lifestyle. Experience perfect ambiance at every moment while 
-                significantly reducing your energy footprint.
-              </motion.p>
+                <p className="text-lg text-slate-200 leading-relaxed">
+                  Transform your home with smart lighting systems that adapt to your 
+                  lifestyle. Experience perfect ambiance at every moment while 
+                  significantly reducing your energy footprint.
+                </p>
+              </motion.div>
               
               {/* Energy Savings Stat with Animated Progress Ring */}
               <motion.div
@@ -464,7 +465,7 @@ export function SmartLiving() {
                 className="mb-8 lg:mb-0 lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
                 style={{ y: uiY2 }}
               >
-                <EnergyGraph delay={0.8} />
+                <EnergyGraph delay={0.8} inView={inView} />
               </motion.div>
 
               {/* Floating Ambient Indicators - desktop only, hidden on mobile */}
