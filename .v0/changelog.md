@@ -13,6 +13,32 @@
 
 ## Changelog Entries
 
+### [CHG-002] 2026-03-19 | FEAT | L
+
+**Description:** Implemented full theme toggle with light/dark mode support across all sections
+
+**Files Modified:**
+- `app/globals.css` - Added light theme CSS variables, fixed dark variant selector
+- `app/layout.tsx` - Wired ThemeProvider with defaultTheme="dark"
+- `components/ui/theme-toggle.tsx` - New animated sun/moon toggle component
+- `components/hero/index.ts` - Removed duplicate navbar export
+- `components/navigation/navbar-client.tsx` - Added theme toggle, semantic colors
+- `components/hero/hero.tsx` - Updated to semantic tokens
+- `components/hero/blueprint-background.tsx` - Theme-aware grid styling
+- `components/sections/services.tsx` - Semantic color updates
+- `components/sections/features.tsx` - Glass card styling for light mode
+- `components/sections/illumination.tsx` - Forced white text (over dark image)
+- `components/sections/schematic.tsx` - "PRECISION" text fix, semantic colors
+- `components/sections/dashboard.tsx` - "GRID" text fix, terminal theming
+- `components/sections/cta-power.tsx` - "Ready to Power" text fix
+- `components/sections/footer.tsx` - Semantic color updates
+
+**Validation:** Ready for PR
+
+**Session:** SES-2026-03-19-002
+
+---
+
 ### [CHG-001] 2026-03-19 | INIT | M
 
 **Description:** Initialized .v0 agentic framework v2.0 with full platinum-grade setup
@@ -61,10 +87,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Changes | 1 |
-| This Month | 1 |
-| By Type | INIT: 1 |
-| Files Touched | 7 |
+| Total Changes | 2 |
+| This Month | 2 |
+| By Type | INIT: 1, FEAT: 1 |
+| Files Touched | 21 |
 
 ---
 
