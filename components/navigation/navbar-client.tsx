@@ -103,13 +103,11 @@ export function NavbarClient() {
                       
                       {/* Desktop Dropdown */}
                       <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2">
-                        {link.submenu.map((item, idx) => (
+                        {link.submenu.map((item) => (
                           <button
                             key={item.name}
                             onClick={() => scrollToSection(item.href)}
-                            className={`w-full text-left px-4 py-2 text-sm text-slate-300 hover:text-[var(--electric-cyan)] hover:bg-[var(--electric-cyan)]/10 transition-all ${
-                              idx === link.submenu!.length - 1 ? '' : 'border-b border-slate-800/50'
-                            }`}
+                            className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:text-[var(--electric-cyan)] hover:bg-[var(--electric-cyan)]/10 transition-all border-b border-slate-800/50 last:border-b-0"
                           >
                             {item.name}
                           </button>
