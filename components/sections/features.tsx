@@ -67,8 +67,8 @@ function LoadMonitorCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">Power Distribution Monitor</h3>
-        <p className="text-sm text-slate-400 mb-6">
+        <h3 className="text-xl font-bold text-card-foreground mb-2">Power Distribution Monitor</h3>
+        <p className="text-sm text-muted-foreground mb-6">
           Real-time load balancing across multi-zone distribution networks
         </p>
 
@@ -174,8 +174,8 @@ function SystemDiagnosticsCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">System Diagnostics Feed</h3>
-        <p className="text-sm text-slate-400 mb-6">
+        <h3 className="text-xl font-bold text-card-foreground mb-2">System Diagnostics Feed</h3>
+        <p className="text-sm text-muted-foreground mb-6">
           Continuous system health monitoring with predictive fault detection
         </p>
 
@@ -200,7 +200,7 @@ export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-[var(--deep-slate)] overflow-hidden">
+    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -215,8 +215,8 @@ export function Features() {
             </span>
             <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Intelligent Systems</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Intelligent Systems</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Real-time monitoring, diagnostics, and preventive maintenance for modern electrical infrastructure.
           </p>
         </motion.div>

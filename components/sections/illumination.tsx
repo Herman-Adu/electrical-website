@@ -151,7 +151,7 @@ export function Illumination() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
             >
               Powering the Spaces
               <br />
@@ -164,7 +164,7 @@ export function Illumination() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-lg text-slate-300 mb-10 leading-relaxed max-w-xl"
+              className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-xl"
             >
               From high-bay LED retrofits to complete industrial lighting systems, 
               we deliver solutions that reduce energy costs by up to 60% while 
@@ -178,7 +178,7 @@ export function Illumination() {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <button className="group relative px-8 py-4 rounded-2xl border border-[var(--electric-cyan)]/50 text-white font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:border-[var(--electric-cyan)] hover:shadow-lg hover:shadow-[var(--electric-cyan)]/20 hover:scale-[1.03]">
+              <button className="group relative px-8 py-4 rounded-2xl border border-[var(--electric-cyan)]/50 text-foreground font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:border-[var(--electric-cyan)] hover:shadow-lg hover:shadow-[var(--electric-cyan)]/20 hover:scale-[1.03]">
                 <span className="relative z-10 flex items-center gap-3">
                   View Our Projects
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,10 +206,10 @@ export function Illumination() {
                 {/* Corner accent */}
                 <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-[var(--electric-cyan)]/30 rounded-tr-lg group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
                 
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-1 font-mono">
+                <div className="text-3xl lg:text-4xl font-bold text-foreground mb-1 font-mono">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={inView} />
                 </div>
-                <div className="text-sm text-slate-400 font-medium">
+                <div className="text-sm text-muted-foreground font-medium">
                   {stat.label}
                 </div>
                 

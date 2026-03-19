@@ -197,7 +197,7 @@ export function Hero() {
         {/* Main Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight leading-[0.9] mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
         >
           <span className="block">Powering the</span>
           <span className="block text-electric text-transparent bg-clip-text bg-gradient-to-r from-[var(--electric-cyan)] via-cyan-400 to-blue-500">
@@ -209,7 +209,7 @@ export function Hero() {
         {/* Subheadline */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg lg:text-xl text-slate-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
         >
           Expert electrical engineering and installations for commercial 
           and industrial frontiers. Precision-engineered power solutions 
@@ -223,7 +223,7 @@ export function Hero() {
         >
           <button
             onClick={triggerSurge}
-            className="group relative px-8 py-4 bg-[var(--electric-cyan)] text-[var(--deep-slate)] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] active:scale-95"
+            className="group relative px-8 py-4 bg-[var(--electric-cyan)] text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] active:scale-95"
           >
             <span className="relative z-10 flex items-center gap-2 text-sm">
               Initiate System
@@ -233,7 +233,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
           </button>
 
-          <button className="px-8 py-4 border border-slate-700 text-slate-300 font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)] hover:text-[var(--electric-cyan)] transition-all duration-300 text-sm">
+          <button className="px-8 py-4 border border-border text-muted-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)] hover:text-[var(--electric-cyan)] transition-all duration-300 text-sm">
             Our Solutions
           </button>
         </motion.div>
@@ -241,7 +241,7 @@ export function Hero() {
         {/* Technical Metadata */}
         <motion.div
           variants={itemVariants}
-          className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-slate-600 uppercase"
+          className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-muted-foreground/60 uppercase"
         >
           <span>Est. 2024</span>
           <span className="hidden sm:inline">|</span>
@@ -257,7 +257,7 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
         onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-slate-500 hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Scroll</span>
         <ChevronDown size={20} className="animate-bounce" />
