@@ -12,15 +12,13 @@ const CTAPowerClient = () => {
 
   useEffect(() => { setMounted(true); }, []);
 
-  // Intersection observer for animation trigger
+  // Intersection observer for animation trigger — toggles both ways for reanimate
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
+        setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     if (containerRef.current) {
@@ -55,7 +53,7 @@ const CTAPowerClient = () => {
     const targetNum = parseInt(number);
 
     useEffect(() => {
-      if (!isInView) return;
+      if (!isInView) { setCount(0); return; }
       let current = 0;
       const increment = Math.ceil(targetNum / 30);
       const timer = setInterval(() => {
