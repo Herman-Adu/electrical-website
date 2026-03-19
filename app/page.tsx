@@ -1,5 +1,5 @@
 import { Hero } from '@/components/hero';
-import { Services, Features, Schematic, Dashboard, Footer } from '@/components/sections';
+import { Services, Features, Schematic, Dashboard, CTAPower, Footer } from '@/components/sections';
 import { Illumination } from '@/components/sections/illumination';
 import { SmartLiving } from '@/components/sections/smart-living';
 
@@ -26,6 +26,9 @@ export default function Home() {
       
       {/* Smart Living - Residential Showcase */}
       <SmartLiving />
+      
+      {/* Power Your Vision - Final CTA */}
+      <CTAPower />
       
       {/* Footer */}
       <Footer />
