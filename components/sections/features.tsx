@@ -162,6 +162,7 @@ function SystemDiagnosticsCard() {
           src="/images/system-diagnostics.jpg"
           alt="System Diagnostics"
           fill
+          loading="eager"
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>

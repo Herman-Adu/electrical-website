@@ -94,7 +94,7 @@ export function Schematic() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="order-2 lg:order-1"
+            className="order-1 lg:order-1"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--electric-cyan)]/20 mb-6">
               <div className="w-2 h-2 bg-[var(--electric-cyan)] animate-pulse" />
@@ -147,7 +147,7 @@ export function Schematic() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 lg:order-2 relative"
+            className="order-2 lg:order-2 relative"
           >
             <div className="relative aspect-square max-w-lg mx-auto">
               {/* Glow effect behind SVG */}
