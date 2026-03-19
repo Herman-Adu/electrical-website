@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Zap, Home, Building2, Factory } from 'lucide-react';
 
@@ -35,21 +35,8 @@ const CTAPowerClient = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Circuit trace animation (draw effect)
+  // Circuit trace animation (draw effect) — background schematics only
   const circuitOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const circuitScale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
-
-  // Trust stats animation
-  const statsY = useTransform(scrollYProgress, [0.15, 0.35], [40, 0]);
-  const statsOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
-
-  // Headline stagger animation
-  const headlineY = useTransform(scrollYProgress, [0.2, 0.4], [60, 0]);
-  const headlineOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
-
-  // Domain badges animation
-  const badgesY = useTransform(scrollYProgress, [0.3, 0.5], [60, 0]);
-  const badgesOpacity = useTransform(scrollYProgress, [0.25, 0.45], [0, 1]);
 
   const domains = [
     { name: 'Residential', icon: Home },
@@ -250,7 +237,9 @@ const CTAPowerClient = () => {
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Trust Stats */}
         <motion.div
-          style={{ y: statsY, opacity: statsOpacity }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
           className="grid grid-cols-3 gap-8 mb-20 pb-12 border-b border-slate-700/50"
         >
           {stats.map((stat, idx) => (
@@ -260,7 +249,9 @@ const CTAPowerClient = () => {
 
         {/* Main Headline */}
         <motion.div
-          style={{ y: headlineY, opacity: headlineOpacity }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
           className="mb-16 text-center"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -277,7 +268,9 @@ const CTAPowerClient = () => {
 
         {/* Domain Badges */}
         <motion.div
-          style={{ y: badgesY, opacity: badgesOpacity }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
           {domains.map((domain, idx) => (
