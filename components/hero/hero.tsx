@@ -7,7 +7,6 @@ import { Zap, Activity, ChevronDown } from 'lucide-react';
 import { BlueprintBackground } from './blueprint-background';
 import { MouseGlow } from './mouse-glow';
 import { CircuitSVG } from './circuit-svg';
-import { Navbar } from './navbar';
 
 const isClient = typeof window !== 'undefined';
 
@@ -173,9 +172,6 @@ export function Hero() {
       <BlueprintBackground />
       <MouseGlow />
       <CircuitSVG />
-
-      {/* Navigation */}
-      <Navbar />
 
       {/* Main Content */}
       <motion.div
