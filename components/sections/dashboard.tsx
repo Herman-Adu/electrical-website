@@ -15,12 +15,19 @@ interface MetricProps {
 
 function EnergyMetric({ label, targetValue, unit, icon: Icon, delay = 0 }: MetricProps) {
   const countRef = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(countRef, { once: true });
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: false, amount: 0.3 });
 
   useEffect(() => {
-    if (!countRef.current || !isInView || hasAnimated) return;
+    if (!countRef.current) return;
 
+    if (!isInView) {
+      // Reset when scrolling out
+      countRef.current.textContent = '0';
+      return;
+    }
+
+    // Animate when scrolling in
     const target = { value: 0 };
     gsap.to(target, {
       value: targetValue,
@@ -32,16 +39,15 @@ function EnergyMetric({ label, targetValue, unit, icon: Icon, delay = 0 }: Metri
           countRef.current.textContent = Math.round(target.value).toString();
         }
       },
-      onComplete: () => setHasAnimated(true),
     });
-  }, [isInView, targetValue, delay, hasAnimated]);
+  }, [isInView, targetValue, delay]);
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ delay: delay, duration: 0.5 }}
-      viewport={{ once: true }}
       className="group bg-[var(--slate-dark)]/80 border border-slate-800 p-6 hover:border-[var(--electric-cyan)]/30 transition-all duration-300"
     >
       {/* Header */}
@@ -182,7 +188,7 @@ function SystemTerminal() {
 
 export function Dashboard() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
 
   const metrics = [
     { label: 'Active Load', targetValue: 482, unit: 'kW', icon: Zap },
@@ -213,7 +219,7 @@ export function Dashboard() {
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -263,7 +269,7 @@ export function Dashboard() {
         {/* Footer Stats */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.8 }}
           className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-slate-800/50"
         >
