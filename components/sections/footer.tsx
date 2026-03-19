@@ -1,0 +1,230 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Zap, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+
+const footerLinks = {
+  services: [
+    { name: 'Commercial Installations', href: '#' },
+    { name: 'Industrial Systems', href: '#' },
+    { name: 'Power Distribution', href: '#' },
+    { name: 'Safety Systems', href: '#' },
+    { name: 'Energy Management', href: '#' },
+  ],
+  company: [
+    { name: 'About Us', href: '#' },
+    { name: 'Our Team', href: '#' },
+    { name: 'Careers', href: '#' },
+    { name: 'News & Updates', href: '#' },
+    { name: 'Case Studies', href: '#' },
+  ],
+  support: [
+    { name: 'Contact', href: '#contact' },
+    { name: 'Emergency Services', href: '#' },
+    { name: 'Maintenance Plans', href: '#' },
+    { name: 'Documentation', href: '#' },
+    { name: 'FAQs', href: '#' },
+  ],
+  legal: [
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms of Service', href: '#' },
+    { name: 'Licensing', href: '#' },
+  ],
+};
+
+const socialLinks = [
+  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Instagram, href: '#', label: 'Instagram' },
+];
+
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="relative bg-[var(--deep-slate)] overflow-hidden">
+      {/* Top border */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: 'linear-gradient(to right, transparent, var(--electric-cyan), transparent)',
+          opacity: 0.2,
+        }}
+      />
+
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
+          {/* Brand Column */}
+          <div className="col-span-2 lg:col-span-2">
+            <a href="#" className="flex items-center gap-2 group mb-6">
+              <div className="relative">
+                <Zap 
+                  size={28} 
+                  className="text-[var(--electric-cyan)] group-hover:animate-pulse transition-all" 
+                />
+                <div className="absolute inset-0 bg-[var(--electric-cyan)]/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-bold text-lg tracking-tight leading-none">
+                  NEXGEN
+                </span>
+                <span className="font-mono text-[9px] text-[var(--electric-cyan)]/60 tracking-[0.2em] uppercase">
+                  Electrical Innovations
+                </span>
+              </div>
+            </a>
+
+            <p className="text-slate-500 text-sm leading-relaxed mb-6 max-w-xs">
+              Powering the next generation of commercial and industrial innovation with 
+              precision-engineered electrical solutions.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-9 h-9 flex items-center justify-center border border-slate-800 text-slate-500 hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
+                >
+                  <social.icon size={16} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+              Services
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.services.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href}
+                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+              Company
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href}
+                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+              Support
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.support.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href}
+                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Card */}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+              24/7 Emergency
+            </h4>
+            <div className="p-4 border border-slate-800 bg-[var(--slate-dark)]/50">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
+                <span className="font-mono text-[9px] text-emerald-500 tracking-widest">ONLINE</span>
+              </div>
+              <a 
+                href="tel:1800639436"
+                className="text-white font-bold text-lg hover:text-[var(--electric-cyan)] transition-colors"
+              >
+                1800 NEX GEN
+              </a>
+              <p className="text-slate-600 text-xs mt-1">
+                Rapid response team ready
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Copyright */}
+            <div className="font-mono text-[10px] text-slate-600 tracking-widest">
+              {currentYear} NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
+            </div>
+
+            {/* Legal Links */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {footerLinks.legal.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="font-mono text-[10px] text-slate-600 tracking-widest hover:text-[var(--electric-cyan)] transition-colors"
+                >
+                  {link.name.toUpperCase()}
+                </a>
+              ))}
+            </div>
+
+            {/* Technical Badge */}
+            <div className="font-mono text-[9px] text-slate-700 tracking-widest">
+              POWERED BY NEXGEN_CORE v4.2.1
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative Circuit Lines */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none overflow-hidden opacity-10">
+        <svg className="w-full h-full" preserveAspectRatio="none">
+          <path
+            d="M0 100 L200 100 L250 50 L400 50 L450 100 L600 100"
+            stroke="var(--electric-cyan)"
+            strokeWidth="1"
+            fill="none"
+          />
+          <path
+            d="M600 100 L800 100 L850 30 L1000 30 L1050 100 L1200 100"
+            stroke="var(--electric-cyan)"
+            strokeWidth="1"
+            fill="none"
+          />
+        </svg>
+      </div>
+    </footer>
+  );
+}
