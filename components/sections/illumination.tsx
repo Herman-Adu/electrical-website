@@ -57,7 +57,6 @@ export function Illumination() {
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
   const brightness = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.3, 0.7, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  // Filter animation transform - fixed to use useTransform callback instead of useMotionTemplate
   const brightnessFilter = useTransform(brightness, (v) => `brightness(${v})`);
   
   useEffect(() => {
