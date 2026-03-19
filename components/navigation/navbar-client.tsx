@@ -89,13 +89,16 @@ export function NavbarClient() {
                 <div key={link.name} className="relative group">
                   {link.submenu ? (
                     <>
-                      <button
-                        className="relative text-sm text-slate-400 hover:text-white transition-colors font-medium tracking-wide flex items-center gap-1"
-                      >
-                        {link.name}
-                        <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--electric-cyan)] group-hover:w-full transition-all duration-300" />
-                      </button>
+                      <div className="flex items-center gap-0.5">
+                        <a
+                          href={link.href}
+                          className="relative text-sm text-slate-400 hover:text-white transition-colors font-medium tracking-wide"
+                        >
+                          {link.name}
+                          <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--electric-cyan)] group-hover:w-full transition-all duration-300" />
+                        </a>
+                        <ChevronDown size={14} className="text-slate-400 group-hover:rotate-180 transition-transform duration-300 mt-0.5" />
+                      </div>
                       
                       {/* Desktop Dropdown */}
                       <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2">
@@ -163,19 +166,29 @@ export function NavbarClient() {
                   <div key={link.name}>
                     {link.submenu ? (
                       <>
-                        <motion.button
+                        <motion.div
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
-                          className="text-left text-2xl font-bold text-white hover:text-[var(--electric-cyan)] transition-colors py-2 border-b border-slate-800 w-full flex items-center justify-between"
+                          className="flex items-center justify-between py-2 border-b border-slate-800 w-full"
                         >
-                          {link.name}
-                          <ChevronDown 
-                            size={20} 
-                            className={`transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`}
-                          />
-                        </motion.button>
+                          <a
+                            href={link.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-2xl font-bold text-white hover:text-[var(--electric-cyan)] transition-colors"
+                          >
+                            {link.name}
+                          </a>
+                          <button
+                            onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
+                            className="p-1 text-slate-400 hover:text-[var(--electric-cyan)] transition-colors"
+                          >
+                            <ChevronDown 
+                              size={20} 
+                              className={`transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`}
+                            />
+                          </button>
+                        </motion.div>
                         
                         {/* Mobile Dropdown */}
                         <AnimatePresence>
