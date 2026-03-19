@@ -54,14 +54,8 @@ export function NavbarClient() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-[var(--deep-slate)]/90 backdrop-blur-md border-b border-[var(--electric-cyan)]/10' 
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-[var(--deep-black)]/80 backdrop-blur-md border-b border-slate-800/50"
+        suppressHydrationWarning
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
@@ -102,7 +96,7 @@ export function NavbarClient() {
                       </div>
                       
                       {/* Desktop Dropdown */}
-                      <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2">
+                      <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2" suppressHydrationWarning>
                         {link.submenu.map((item) => (
                           <button
                             key={item.name}
