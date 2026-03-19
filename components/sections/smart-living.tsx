@@ -123,34 +123,96 @@ function DimmerSlider({ label, defaultValue, delay }: { label: string; defaultVa
 }
 
 function EnergyGraph({ delay }: { delay: number }) {
-  const data = [65, 45, 78, 52, 40, 35, 42];
+  // kWh values per day
+  const data = [3.2, 2.1, 3.8, 2.6, 1.9, 1.6, 2.0];
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  
+  const maxVal = Math.max(...data);
+  const total = data.reduce((a, b) => a + b, 0).toFixed(1);
+  // index of the highest bar
+  const peakIdx = data.indexOf(maxVal);
+
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
-      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50"
+      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 pb-5 border border-slate-700/50"
     >
-      <div className="flex justify-between items-center mb-4">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-1">
         <span className="text-sm text-slate-300 font-medium">Weekly Usage</span>
         <span className="text-xs font-mono text-[var(--electric-cyan)]">kWh</span>
       </div>
-      <div className="flex items-end gap-2 h-20">
-        {data.map((value, idx) => (
-          <div key={days[idx]} className="flex-1 flex flex-col items-center gap-1">
-            <motion.div 
-              className="w-full rounded-t bg-gradient-to-t from-[var(--electric-cyan)]/60 to-[var(--electric-cyan)]"
-              initial={{ height: 0 }}
-              whileInView={{ height: `${value}%` }}
-              transition={{ duration: 0.5, delay: delay + 0.1 * idx }}
-              viewport={{ once: true }}
-            />
-            <span className="text-[10px] text-slate-500">{days[idx]}</span>
+
+      {/* Total stat */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: delay + 0.2 }}
+        viewport={{ once: true }}
+        className="mb-3"
+      >
+        <span className="text-xl font-bold text-white font-mono">{total}</span>
+        <span className="text-xs text-slate-400 ml-1">kWh this week</span>
+      </motion.div>
+
+      {/* Bar chart — 80px tall chart area */}
+      <div className="flex items-end gap-1.5 h-20 mb-2">
+        {data.map((value, idx) => {
+          const heightPct = (value / maxVal) * 100;
+          const isPeak = idx === peakIdx;
+          return (
+            <div key={days[idx]} className="flex-1 flex flex-col items-center gap-0">
+              {/* kWh label above peak bar */}
+              {isPeak && (
+                <motion.span
+                  initial={{ opacity: 0, y: 4 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: delay + 0.6 }}
+                  viewport={{ once: true }}
+                  className="text-[9px] font-mono text-amber-400 mb-0.5"
+                >
+                  {value}
+                </motion.span>
+              )}
+              {!isPeak && <span className="text-[9px] mb-0.5 opacity-0">0</span>}
+              {/* Bar */}
+              <motion.div
+                className={`w-full rounded-t-sm ${
+                  isPeak
+                    ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
+                    : 'bg-gradient-to-t from-[var(--electric-cyan)]/40 to-[var(--electric-cyan)]/80'
+                }`}
+                style={{ height: 0 }}
+                whileInView={{ height: `${heightPct}%` }}
+                transition={{
+                  duration: 0.6,
+                  delay: delay + 0.1 * idx,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                viewport={{ once: true }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Day labels */}
+      <div className="flex gap-1.5">
+        {days.map((d) => (
+          <div key={d} className="flex-1 text-center">
+            <span className="text-[10px] text-slate-500">{d}</span>
           </div>
         ))}
+      </div>
+
+      {/* Divider + footer stat */}
+      <div className="mt-3 pt-3 border-t border-slate-700/40 flex justify-between items-center">
+        <span className="text-[10px] text-slate-500 uppercase tracking-wide">Avg / day</span>
+        <span className="text-xs font-mono text-[var(--electric-cyan)]">
+          {(Number(total) / 7).toFixed(1)} kWh
+        </span>
       </div>
     </motion.div>
   );
