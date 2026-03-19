@@ -22,7 +22,7 @@ const stats = [
 export function Schematic() {
   const sectionRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const isInView = useInView(sectionRef, { once: false, margin: '-150px' });
+  const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
 
   useEffect(() => {
     if (!svgRef.current || !isInView) {
@@ -99,7 +99,7 @@ export function Schematic() {
           {/* Content Side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-1"
           >
@@ -126,7 +126,7 @@ export function Schematic() {
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="flex items-start gap-3"
                 >
@@ -152,7 +152,7 @@ export function Schematic() {
           {/* Schematic SVG Side */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-2 lg:order-2 relative"
           >
@@ -278,7 +278,7 @@ export function Schematic() {
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ delay: 0.6 }}
           className="mt-20 pt-16 border-t border-slate-800"
         >
@@ -287,7 +287,7 @@ export function Schematic() {
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.8 + index * 0.1 }}
                 className="text-center"
               >
