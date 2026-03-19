@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
 import Image from 'next/image';
 
 const stats = [
@@ -57,6 +57,7 @@ export function Illumination() {
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
   const brightness = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.3, 0.7, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const brightnessFilter = useMotionTemplate`brightness(${brightness})`;
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -83,7 +84,7 @@ export function Illumination() {
       >
         <motion.div 
           className="relative w-full h-[120%]"
-          style={{ filter: brightness.get() < 1 ? `brightness(${brightness.get()})` : 'brightness(1)' }}
+          style={{ filter: brightnessFilter }}
         >
           <Image
             src="/images/warehouse-lighting.jpg"
