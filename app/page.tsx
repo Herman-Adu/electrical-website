@@ -1,6 +1,7 @@
 import { Hero } from '@/components/hero';
 import { Services, Features, Schematic, Dashboard, Contact, Footer } from '@/components/sections';
 import { Illumination } from '@/components/sections/illumination';
+import { SmartLiving } from '@/components/sections/smart-living';
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
       
       {/* Live Dashboard with metrics */}
       <Dashboard />
+      
+      {/* Smart Living - Residential Showcase */}
+      <SmartLiving />
       
       {/* Contact Form Section */}
       <Contact />
