@@ -1,39 +1,110 @@
 {
-  "project": "nexgen-electrical-website",
-  "version": "1.0.0",
-  "lastUpdated": "2026-03-19",
-  "phase": "development",
-  "status": "active",
-  
+  "meta": {
+    "project": "nexgen-electrical-website",
+    "version": "2.0.0",
+    "framework": "next.js-16",
+    "lastUpdated": "2026-03-19T00:00:00Z",
+    "lastValidatedBuild": "2026-03-19T00:00:00Z"
+  },
+
+  "phase": {
+    "current": "BUILD",
+    "status": "active",
+    "activeSince": "2026-03-19"
+  },
+
   "pages": {
-    "home": {
-      "path": "/",
+    "/": {
+      "file": "app/page.tsx",
       "status": "complete",
-      "sections": ["Hero", "Services", "Illumination", "Features", "Schematic", "Dashboard", "SmartLiving", "CTAPower", "Footer"]
+      "sections": [
+        "Hero",
+        "Services", 
+        "Illumination",
+        "Features",
+        "Schematic",
+        "Dashboard",
+        "SmartLiving",
+        "CTAPower",
+        "Footer"
+      ],
+      "lastModified": "2026-03-19"
     },
-    "contact": {
-      "path": "/contact",
-      "status": "complete"
+    "/contact": {
+      "file": "app/contact/page.tsx",
+      "status": "complete",
+      "sections": ["ContactForm"],
+      "lastModified": "2026-03-19"
     }
   },
-  
+
   "components": {
-    "hero": ["hero.tsx", "navbar.tsx", "blueprint-background.tsx", "circuit-svg.tsx", "mouse-glow.tsx"],
-    "navigation": ["navbar.tsx", "navbar-client.tsx"],
-    "sections": ["services.tsx", "features.tsx", "schematic.tsx", "dashboard.tsx", "cta-power.tsx", "footer.tsx", "illumination.tsx", "smart-living.tsx", "contact.tsx", "scheduler-card.tsx"]
+    "hero": {
+      "path": "components/hero/",
+      "barrel": "components/hero/index.ts",
+      "files": [
+        "hero.tsx",
+        "blueprint-background.tsx",
+        "circuit-svg.tsx",
+        "mouse-glow.tsx"
+      ]
+    },
+    "navigation": {
+      "path": "components/navigation/",
+      "barrel": "components/navigation/index.ts",
+      "files": [
+        "navbar.tsx",
+        "navbar-client.tsx"
+      ]
+    },
+    "sections": {
+      "path": "components/sections/",
+      "barrel": "components/sections/index.ts",
+      "files": [
+        "services.tsx",
+        "features.tsx",
+        "schematic.tsx",
+        "dashboard.tsx",
+        "cta-power.tsx",
+        "footer.tsx",
+        "illumination.tsx",
+        "smart-living.tsx",
+        "contact.tsx",
+        "scheduler-card.tsx"
+      ]
+    },
+    "ui": {
+      "path": "components/ui/",
+      "barrel": null,
+      "note": "Direct imports, no barrel"
+    }
   },
-  
+
   "integrations": {
-    "analytics": "vercel",
-    "fonts": ["Inter", "IBM Plex Mono"],
+    "analytics": { "provider": "vercel", "status": "active" },
+    "fonts": { "families": ["Inter", "IBM Plex Mono"], "source": "google" },
     "database": null,
-    "auth": null
+    "auth": null,
+    "payments": null
   },
-  
-  "recentChanges": [
+
+  "driftDetection": {
+    "enabled": true,
+    "lastCheck": "2026-03-19T00:00:00Z",
+    "status": "clean",
+    "knownFiles": 85,
+    "checksumPages": null,
+    "checksumComponents": null
+  },
+
+  "changelog": [
     {
-      "date": "2026-03-19",
-      "description": "Initialized .v0 framework"
+      "id": "CHG-001",
+      "timestamp": "2026-03-19T00:00:00Z",
+      "type": "init",
+      "description": "Initialized .v0 framework v2.0",
+      "files": [".v0/*"],
+      "author": "v0"
     }
   ]
 }
