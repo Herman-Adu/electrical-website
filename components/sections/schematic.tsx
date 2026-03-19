@@ -23,10 +23,18 @@ export function Schematic() {
   const sectionRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const isInView = useInView(sectionRef, { once: false, margin: '-150px' });
-  const animatedRef = useRef(false);
 
   useEffect(() => {
-    if (!svgRef.current || !isInView) return;
+    if (!svgRef.current || !isInView) {
+      // Reset animation when scrolling out
+      const paths = Array.from(svgRef.current?.querySelectorAll('.schematic-path') ?? []) as SVGPathElement[];
+      const dots = Array.from(svgRef.current?.querySelectorAll('.schematic-dot') ?? []) as SVGCircleElement[];
+      const labels = Array.from(svgRef.current?.querySelectorAll('.schematic-label') ?? []) as SVGTextElement[];
+      gsap.set(paths, { strokeDashoffset: (el) => (el as SVGPathElement).getTotalLength?.() ?? 500 });
+      gsap.set(dots, { opacity: 0, scale: 0 });
+      gsap.set(labels, { opacity: 0 });
+      return;
+    }
 
     const paths = Array.from(svgRef.current.querySelectorAll('.schematic-path')) as SVGPathElement[];
     const dots = Array.from(svgRef.current.querySelectorAll('.schematic-dot')) as SVGCircleElement[];
