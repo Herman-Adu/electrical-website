@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 
 function AnimatedProgressRing({ 
@@ -230,9 +230,12 @@ export function SmartLiving() {
   // Before/after brightness transition (lights off to lights on)
   const brightness = useTransform(smoothProgress, [0.1, 0.35, 0.5], [0.15, 0.6, 1]);
   const saturation = useTransform(smoothProgress, [0.1, 0.35, 0.5], [0, 0.5, 1]);
-  
-  // Combine into a reactive filter string
-  const imageFilter = useMotionTemplate`brightness(${brightness}) saturate(${saturation})`;
+
+  // Derive a single filter string from brightness only (saturation applied via separate transform)
+  const imageFilter = useTransform(
+    [brightness, saturation] as const,
+    ([b, s]: number[]) => `brightness(${b}) saturate(${s})`
+  );
   
   // Parallax for floating UI elements at different speeds
   const uiY1 = useTransform(scrollYProgress, [0, 1], ['20%', '-20%']);
@@ -260,8 +263,10 @@ export function SmartLiving() {
   
   return (
     <section 
+      id="smart-living"
       ref={containerRef}
       className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
+      style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">

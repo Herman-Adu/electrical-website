@@ -74,7 +74,7 @@ export function Schematic() {
 
   return (
     <section
-      id="solutions"
+      id="architecture"
       ref={sectionRef}
       className="relative py-24 lg:py-32 bg-[var(--slate-dark)] overflow-hidden"
     >
