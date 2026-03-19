@@ -46,9 +46,12 @@ function AnimatedCounter({ value, suffix, inView }: { value: number; suffix: str
 export function Illumination() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: mounted ? containerRef : undefined,
     offset: ['start end', 'end start'],
   });
   

@@ -8,6 +8,9 @@ import { ArrowRight, Zap } from 'lucide-react';
 const CTAPowerClient = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // Intersection observer for animation trigger
   useEffect(() => {
@@ -28,7 +31,7 @@ const CTAPowerClient = () => {
   }, []);
 
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: mounted ? containerRef : undefined,
     offset: ['start end', 'end start'],
   });
 

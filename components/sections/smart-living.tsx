@@ -218,9 +218,12 @@ function EnergyGraph({ delay }: { delay: number }) {
 export function SmartLiving() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: mounted ? containerRef : undefined,
     offset: ['start end', 'end start'],
   });
   
