@@ -82,15 +82,14 @@ function AnimatedProgressRing({
   );
 }
 
-function DimmerSlider({ label, defaultValue, delay }: { label: string; defaultValue: number; delay: number }) {
+function DimmerSlider({ label, defaultValue, delay, inView }: { label: string; defaultValue: number; delay: number; inView: boolean }) {
   const [value, setValue] = useState(defaultValue);
   
   return (
     <motion.div 
       initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
       transition={{ duration: 0.6, delay }}
-      viewport={{ once: true }}
       className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-amber-500/40 transition-all duration-300"
     >
       <div className="flex justify-between items-center mb-3">
@@ -101,9 +100,8 @@ function DimmerSlider({ label, defaultValue, delay }: { label: string; defaultVa
         <motion.div 
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-600 to-amber-400"
           initial={{ width: 0 }}
-          whileInView={{ width: `${value}%` }}
+          animate={inView ? { width: `${value}%` } : { width: 0 }}
           transition={{ duration: 1, delay: delay + 0.3 }}
-          viewport={{ once: true }}
         />
         <div 
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-600/50 to-amber-400/50 blur-sm"
@@ -455,9 +453,9 @@ export function SmartLiving() {
                 className="space-y-3 lg:absolute lg:top-0 lg:right-0 lg:w-64"
                 style={{ y: uiY1 }}
               >
-                <DimmerSlider label="Living Room" defaultValue={75} delay={0.5} />
-                <DimmerSlider label="Kitchen" defaultValue={90} delay={0.6} />
-                <DimmerSlider label="Bedroom" defaultValue={40} delay={0.7} />
+                <DimmerSlider label="Living Room" defaultValue={75} delay={0.5} inView={inView} />
+                <DimmerSlider label="Kitchen" defaultValue={90} delay={0.6} inView={inView} />
+                <DimmerSlider label="Bedroom" defaultValue={40} delay={0.7} inView={inView} />
               </motion.div>
 
               {/* Energy Graph */}
