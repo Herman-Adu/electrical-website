@@ -22,9 +22,14 @@ const navLinks = [
 ];
 
 export function NavbarClient() {
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +60,6 @@ export function NavbarClient() {
     <>
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-[var(--deep-black)]/80 backdrop-blur-md border-b border-slate-800/50"
-        suppressHydrationWarning
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
@@ -95,18 +99,20 @@ export function NavbarClient() {
                         <ChevronDown size={14} className="text-slate-400 group-hover:rotate-180 transition-transform duration-300 mt-0.5" />
                       </div>
                       
-                      {/* Desktop Dropdown */}
-                      <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2" suppressHydrationWarning>
-                        {link.submenu.map((item) => (
-                          <button
-                            key={item.name}
-                            onClick={() => scrollToSection(item.href)}
-                            className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:text-[var(--electric-cyan)] hover:bg-[var(--electric-cyan)]/10 transition-all border-b border-slate-800/50 last:border-b-0"
-                          >
-                            {item.name}
-                          </button>
-                        ))}
-                      </div>
+                      {/* Desktop Dropdown - render only after mount to avoid hydration mismatch */}
+                      {mounted && (
+                        <div className="absolute left-0 mt-0 w-48 bg-[var(--deep-slate)]/95 backdrop-blur-md border border-[var(--electric-cyan)]/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2">
+                          {link.submenu.map((item) => (
+                            <button
+                              key={item.name}
+                              onClick={() => scrollToSection(item.href)}
+                              className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:text-[var(--electric-cyan)] hover:bg-[var(--electric-cyan)]/10 transition-all border-b border-slate-800/50 last:border-b-0"
+                            >
+                              {item.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </>
                   ) : (
                     <button
