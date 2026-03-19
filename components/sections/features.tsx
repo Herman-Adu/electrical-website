@@ -80,22 +80,22 @@ function LoadMonitorCard() {
             return (
               <div
                 key={card.id}
-                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border bg-slate-900/95 backdrop-blur-md transition-all duration-700 ${
+                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border backdrop-blur-md transition-all duration-700 bg-white/90 dark:bg-slate-900/95 ${
                   isTop 
-                    ? 'z-30 translate-y-0 scale-100 opacity-100 border-[var(--electric-cyan)]/60' 
+                    ? 'z-30 translate-y-0 scale-100 opacity-100 border-[var(--electric-cyan)]/60 shadow-md' 
                     : isMiddle 
-                      ? 'z-20 translate-y-2 scale-[0.96] opacity-60 border-slate-700/40'
-                      : 'z-10 translate-y-4 scale-[0.92] opacity-30 border-slate-700/40'
+                      ? 'z-20 translate-y-2 scale-[0.96] opacity-60 border-slate-300/40 dark:border-slate-700/40'
+                      : 'z-10 translate-y-4 scale-[0.92] opacity-30 border-slate-300/40 dark:border-slate-700/40'
                 }`}
                 style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
               >
                 <div>
-                  <p className="text-xs font-mono text-[var(--electric-cyan)]/80">{card.zone}</p>
-                  <p className="text-sm font-bold text-white">{card.status}</p>
+                  <p className="text-xs font-mono text-[var(--electric-cyan)]">{card.zone}</p>
+                  <p className="text-sm font-bold text-foreground">{card.status}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-lg font-bold text-[var(--electric-cyan)]">{card.capacity}</p>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-wider">Capacity</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Capacity</p>
                 </div>
               </div>
             );

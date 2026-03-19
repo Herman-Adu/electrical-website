@@ -48,12 +48,12 @@ function EnergyMetric({ label, targetValue, unit, icon: Icon, delay = 0 }: Metri
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ delay: delay, duration: 0.5 }}
-      className="group bg-[var(--slate-dark)]/80 border border-slate-800 p-6 hover:border-[var(--electric-cyan)]/30 transition-all duration-300"
+      className="group bg-card border border-border p-6 hover:border-[var(--electric-cyan)]/30 transition-all duration-300"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <Icon size={18} className="text-[var(--electric-cyan)]/60 group-hover:text-[var(--electric-cyan)] transition-colors" />
-        <span className="font-mono text-[10px] tracking-[0.2em] text-slate-500 uppercase">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
           {label}
         </span>
       </div>
@@ -62,7 +62,7 @@ function EnergyMetric({ label, targetValue, unit, icon: Icon, delay = 0 }: Metri
       <div className="flex items-baseline gap-2 mb-4">
         <span 
           ref={countRef} 
-          className="text-4xl lg:text-5xl font-black text-white"
+          className="text-4xl lg:text-5xl font-black text-foreground"
         >
           0
         </span>
@@ -131,16 +131,16 @@ function SystemTerminal() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       viewport={{ once: true }}
-      className="bg-black/60 border border-slate-800 p-4 font-mono overflow-hidden"
+      className="bg-card border border-border p-4 font-mono overflow-hidden"
     >
       {/* Terminal Header */}
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+      <div className="flex items-center justify-between mb-4 pb-2 border-b border-border">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
         </div>
-        <span className="text-[10px] text-slate-600 uppercase tracking-widest">
+        <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
           Diagnostics_Console_v4.2.1
         </span>
       </div>
@@ -173,12 +173,12 @@ function SystemTerminal() {
       </div>
 
       {/* Terminal Footer */}
-      <div className="mt-4 pt-2 border-t border-slate-800/50 flex justify-between items-center">
+      <div className="mt-4 pt-2 border-t border-border/50 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-[9px] text-slate-600 tracking-widest">LIVE</span>
+          <span className="text-[9px] text-muted-foreground tracking-widest">LIVE</span>
         </div>
-        <span className="text-[9px] text-slate-700 tracking-widest">
+        <span className="text-[9px] text-muted-foreground/60 tracking-widest">
           ENCRYPTION: AES-256 // MQTT_TLS
         </span>
       </div>
@@ -201,7 +201,7 @@ export function Dashboard() {
     <section
       id="dashboard"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[var(--deep-slate)] overflow-hidden"
+      className="relative py-24 lg:py-32 bg-background overflow-hidden"
     >
       {/* Background Grid */}
       <div className="absolute inset-0 blueprint-grid opacity-3" />
@@ -232,11 +232,11 @@ export function Dashboard() {
                 </span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4">
                 Grid <span className="text-[var(--electric-cyan)]">Intelligence</span>
               </h2>
               
-              <p className="text-slate-400 max-w-xl text-base lg:text-lg font-light">
+              <p className="text-muted-foreground max-w-xl text-base lg:text-lg font-light">
                 Real-time monitoring of Nexgen installed assets across the industrial sector. 
                 Efficiency is not a goal; it is a constant variable.
               </p>
@@ -271,9 +271,9 @@ export function Dashboard() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-slate-800/50"
+          className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-border/50"
         >
-          <div className="font-mono text-[9px] text-slate-600 tracking-widest flex flex-wrap justify-center gap-4">
+          <div className="font-mono text-[9px] text-muted-foreground/60 tracking-widest flex flex-wrap justify-center gap-4">
             <span>PROTOCOL: IEC 61850</span>
             <span className="hidden sm:inline">|</span>
             <span>LATENCY: 12ms</span>
