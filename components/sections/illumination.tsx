@@ -74,6 +74,7 @@ export function Illumination() {
   
   return (
     <section 
+      id="illumination"
       ref={containerRef}
       className="relative h-[90vh] min-h-[600px] overflow-hidden"
       style={{ position: 'relative' }}

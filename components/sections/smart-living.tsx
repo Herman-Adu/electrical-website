@@ -263,6 +263,7 @@ export function SmartLiving() {
   
   return (
     <section 
+      id="smart-living"
       ref={containerRef}
       className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
       style={{ position: 'relative' }}

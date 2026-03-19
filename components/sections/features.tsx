@@ -200,7 +200,7 @@ export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section ref={sectionRef} className="relative py-24 px-4 bg-[var(--deep-slate)] overflow-hidden">
+    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-[var(--deep-slate)] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
