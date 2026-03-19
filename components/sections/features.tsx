@@ -67,8 +67,8 @@ function LoadMonitorCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">Power Distribution Monitor</h3>
-        <p className="text-sm text-slate-400 mb-6">
+        <h3 className="text-xl font-bold text-card-foreground mb-2">Power Distribution Monitor</h3>
+        <p className="text-sm text-muted-foreground mb-6">
           Real-time load balancing across multi-zone distribution networks
         </p>
 
@@ -80,22 +80,22 @@ function LoadMonitorCard() {
             return (
               <div
                 key={card.id}
-                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border bg-slate-900/95 backdrop-blur-md transition-all duration-700 ${
+                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border backdrop-blur-md transition-all duration-700 bg-white/90 dark:bg-slate-900/95 ${
                   isTop 
-                    ? 'z-30 translate-y-0 scale-100 opacity-100 border-[var(--electric-cyan)]/60' 
+                    ? 'z-30 translate-y-0 scale-100 opacity-100 border-[var(--electric-cyan)]/60 shadow-md' 
                     : isMiddle 
-                      ? 'z-20 translate-y-2 scale-[0.96] opacity-60 border-slate-700/40'
-                      : 'z-10 translate-y-4 scale-[0.92] opacity-30 border-slate-700/40'
+                      ? 'z-20 translate-y-2 scale-[0.96] opacity-60 border-slate-300/40 dark:border-slate-700/40'
+                      : 'z-10 translate-y-4 scale-[0.92] opacity-30 border-slate-300/40 dark:border-slate-700/40'
                 }`}
                 style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
               >
                 <div>
-                  <p className="text-xs font-mono text-[var(--electric-cyan)]/80">{card.zone}</p>
-                  <p className="text-sm font-bold text-white">{card.status}</p>
+                  <p className="text-xs font-mono text-[var(--electric-cyan)]">{card.zone}</p>
+                  <p className="text-sm font-bold text-foreground">{card.status}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-lg font-bold text-[var(--electric-cyan)]">{card.capacity}</p>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-wider">Capacity</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Capacity</p>
                 </div>
               </div>
             );
@@ -174,8 +174,8 @@ function SystemDiagnosticsCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">System Diagnostics Feed</h3>
-        <p className="text-sm text-slate-400 mb-6">
+        <h3 className="text-xl font-bold text-card-foreground mb-2">System Diagnostics Feed</h3>
+        <p className="text-sm text-muted-foreground mb-6">
           Continuous system health monitoring with predictive fault detection
         </p>
 
@@ -200,7 +200,7 @@ export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-[var(--deep-slate)] overflow-hidden">
+    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -215,8 +215,8 @@ export function Features() {
             </span>
             <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Intelligent Systems</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Intelligent Systems</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Real-time monitoring, diagnostics, and preventive maintenance for modern electrical infrastructure.
           </p>
         </motion.div>

@@ -78,7 +78,7 @@ const CTAPowerClient = () => {
         <div className="text-3xl font-bold text-[var(--electric-cyan)] font-mono">
           {count}{number.includes('+') ? '+' : '%'}
         </div>
-        <div className="text-xs text-slate-400 uppercase tracking-wider mt-2">{label}</div>
+        <div className="text-xs text-muted-foreground uppercase tracking-wider mt-2">{label}</div>
       </motion.div>
     );
   };
@@ -87,7 +87,7 @@ const CTAPowerClient = () => {
     <section
       ref={containerRef}
       id="power-vision"
-      className="relative min-h-screen py-32 px-4 bg-[var(--deep-slate)] overflow-hidden"
+      className="relative min-h-screen py-32 px-4 bg-background overflow-hidden"
       style={{ position: 'relative' }}
     >
       {/* Single Electrical Schematic - draws itself on scroll */}
@@ -238,7 +238,7 @@ const CTAPowerClient = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="grid grid-cols-3 gap-8 mb-20 pb-12 border-b border-slate-700/50"
+          className="grid grid-3 gap-8 mb-20 pb-12 border-b border-border"
         >
           {stats.map((stat, idx) => (
             <TrustStat key={idx} number={stat.number} label={stat.label} delay={0.1 * idx} />
@@ -253,13 +253,13 @@ const CTAPowerClient = () => {
           className="mb-16 text-center"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Ready to Power</span>
+            <span className="text-foreground">Ready to Power</span>
             <br />
             <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--amber-warning)] bg-clip-text text-transparent">
               Your Vision?
             </span>
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             From precision engineering to complete installation, we deliver electrical solutions tailored to your domain. Let's build something extraordinary.
           </p>
         </motion.div>
@@ -281,9 +281,9 @@ const CTAPowerClient = () => {
                 scale: 1.05,
                 boxShadow: '0 0 20px rgba(0, 242, 255, 0.4)',
               }}
-              className="px-6 py-3 rounded-lg border border-slate-700 bg-slate-800/30 backdrop-blur-sm hover:border-[var(--electric-cyan)] transition-colors cursor-pointer"
+              className="px-6 py-3 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:border-[var(--electric-cyan)] transition-colors cursor-pointer"
             >
-              <span className="text-sm font-mono uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground flex items-center gap-2">
                 <domain.icon size={16} className="text-[var(--electric-cyan)]" />
                 {domain.name}
               </span>
@@ -389,7 +389,7 @@ const CTAPowerClient = () => {
           >
             <Link href="/#smart-living">
               <motion.button
-                className="px-6 py-4 text-sm font-semibold uppercase tracking-wider text-slate-400 hover:text-[var(--electric-cyan)] transition-colors flex items-center gap-2"
+                className="px-6 py-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors flex items-center gap-2"
                 whileHover={{
                   x: 4,
                 }}

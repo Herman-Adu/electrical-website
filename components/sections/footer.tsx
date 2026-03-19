@@ -44,7 +44,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[var(--deep-slate)] overflow-hidden">
+    <footer className="relative bg-background overflow-hidden">
       {/* Top border */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
@@ -68,7 +68,7 @@ export function Footer() {
                 <div className="absolute inset-0 bg-[var(--electric-cyan)]/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-bold text-lg tracking-tight leading-none">
+                <span className="text-foreground font-bold text-lg tracking-tight leading-none">
                   NEXGEN
                 </span>
                 <span className="font-mono text-[9px] text-[var(--electric-cyan)]/60 tracking-[0.2em] uppercase">
@@ -77,7 +77,7 @@ export function Footer() {
               </div>
             </a>
 
-            <p className="text-slate-500 text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Powering the next generation of commercial and industrial innovation with 
               precision-engineered electrical solutions.
             </p>
@@ -89,7 +89,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 flex items-center justify-center border border-slate-800 text-slate-500 hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
+                  className="w-9 h-9 flex items-center justify-center border border-border text-muted-foreground hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
                 >
                   <social.icon size={16} />
                 </a>
@@ -107,7 +107,7 @@ export function Footer() {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
                   >
                     {link.name}
                   </a>
@@ -126,7 +126,7 @@ export function Footer() {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
                   >
                     {link.name}
                   </a>
@@ -145,7 +145,7 @@ export function Footer() {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-slate-500 text-sm hover:text-white transition-colors"
+                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
                   >
                     {link.name}
                   </a>
@@ -159,18 +159,18 @@ export function Footer() {
             <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
             </h4>
-            <div className="p-4 border border-slate-800 bg-[var(--slate-dark)]/50">
+            <div className="p-4 border border-border bg-card/50">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
                 <span className="font-mono text-[9px] text-emerald-500 tracking-widest">ONLINE</span>
               </div>
               <a 
                 href="tel:1800639436"
-                className="text-white font-bold text-lg hover:text-[var(--electric-cyan)] transition-colors"
+                className="text-foreground font-bold text-lg hover:text-[var(--electric-cyan)] transition-colors"
               >
                 1800 NEX GEN
               </a>
-              <p className="text-slate-600 text-xs mt-1">
+              <p className="text-muted-foreground/60 text-xs mt-1">
                 Rapid response team ready
               </p>
             </div>
@@ -179,11 +179,11 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-800/50">
+      <div className="border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
-            <div className="font-mono text-[10px] text-slate-600 tracking-widest">
+            <div className="font-mono text-[10px] text-muted-foreground/60 tracking-widest">
               {currentYear} NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
             </div>
 
@@ -193,7 +193,7 @@ export function Footer() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-mono text-[10px] text-slate-600 tracking-widest hover:text-[var(--electric-cyan)] transition-colors"
+                  className="font-mono text-[10px] text-muted-foreground/60 tracking-widest hover:text-[var(--electric-cyan)] transition-colors"
                 >
                   {link.name.toUpperCase()}
                 </a>
@@ -201,7 +201,7 @@ export function Footer() {
             </div>
 
             {/* Technical Badge */}
-            <div className="font-mono text-[9px] text-slate-700 tracking-widest">
+            <div className="font-mono text-[9px] text-muted-foreground/40 tracking-widest">
               POWERED BY NEXGEN_CORE v4.2.1
             </div>
           </div>

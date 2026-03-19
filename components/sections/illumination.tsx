@@ -164,7 +164,7 @@ export function Illumination() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-lg text-slate-300 mb-10 leading-relaxed max-w-xl"
+              className="text-lg text-white/80 mb-10 leading-relaxed max-w-xl"
             >
               From high-bay LED retrofits to complete industrial lighting systems, 
               we deliver solutions that reduce energy costs by up to 60% while 
@@ -209,7 +209,7 @@ export function Illumination() {
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-1 font-mono">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={inView} />
                 </div>
-                <div className="text-sm text-slate-400 font-medium">
+                <div className="text-sm text-white/70 font-medium">
                   {stat.label}
                 </div>
                 

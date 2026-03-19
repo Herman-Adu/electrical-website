@@ -83,7 +83,7 @@ export function Schematic() {
     <section
       id="architecture"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[var(--slate-dark)] overflow-hidden"
+      className="relative py-24 lg:py-32 bg-background overflow-hidden"
     >
       {/* Top border gradient */}
       <div 
@@ -110,11 +110,11 @@ export function Schematic() {
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-6">
               Precision <span className="text-[var(--electric-cyan)]">Architecture</span>
             </h2>
 
-            <p className="text-slate-400 text-base lg:text-lg font-light leading-relaxed mb-8">
+            <p className="text-muted-foreground text-base lg:text-lg font-light leading-relaxed mb-8">
               We don't just install; we engineer. Every Nexgen project begins with a 
               high-fidelity digital twin of your electrical infrastructure, ensuring 
               precision before a single wire is laid.
@@ -135,8 +135,8 @@ export function Schematic() {
                     className="text-[var(--electric-cyan)] mt-0.5 flex-shrink-0" 
                   />
                   <div>
-                    <span className="text-white font-medium text-sm">{feature.title}</span>
-                    <p className="text-slate-500 text-xs mt-0.5">{feature.description}</p>
+                    <span className="text-foreground font-medium text-sm">{feature.title}</span>
+                    <p className="text-muted-foreground text-xs mt-0.5">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -280,7 +280,7 @@ export function Schematic() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ delay: 0.6 }}
-          className="mt-20 pt-16 border-t border-slate-800"
+          className="mt-20 pt-16 border-t border-border"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -294,7 +294,7 @@ export function Schematic() {
                 <div className="text-3xl lg:text-4xl font-black text-[var(--electric-cyan)] mb-2">
                   {stat.value}
                 </div>
-                <div className="font-mono text-[10px] text-slate-500 tracking-widest uppercase">
+                <div className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
                   {stat.label}
                 </div>
               </motion.div>

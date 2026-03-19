@@ -76,8 +76,24 @@
     "ui": {
       "path": "components/ui/",
       "barrel": null,
-      "note": "Direct imports, no barrel"
+      "note": "Direct imports, no barrel",
+      "files": [
+        "theme-toggle.tsx",
+        "button.tsx",
+        "input.tsx",
+        "textarea.tsx",
+        "label.tsx",
+        "card.tsx"
+      ]
     }
+  },
+
+  "theming": {
+    "provider": "next-themes",
+    "defaultTheme": "dark",
+    "themes": ["light", "dark", "system"],
+    "cssVariables": true,
+    "status": "complete"
   },
 
   "integrations": {
@@ -98,6 +114,14 @@
   },
 
   "changelog": [
+    {
+      "id": "CHG-002",
+      "timestamp": "2026-03-19T01:00:00Z",
+      "type": "feat",
+      "description": "Theme toggle with full light/dark mode support",
+      "files": ["globals.css", "layout.tsx", "theme-toggle.tsx", "navbar-client.tsx", "hero.tsx", "services.tsx", "features.tsx", "illumination.tsx", "schematic.tsx", "dashboard.tsx", "cta-power.tsx", "footer.tsx"],
+      "author": "v0"
+    },
     {
       "id": "CHG-001",
       "timestamp": "2026-03-19T00:00:00Z",

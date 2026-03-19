@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 
 export function BlueprintBackground() {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-[var(--deep-slate)]">
+    <div className="absolute inset-0 z-0 overflow-hidden bg-background">
       {/* Primary Grid - 40px */}
       <div 
-        className="absolute inset-0 h-full w-full opacity-20"
+        className="absolute inset-0 h-full w-full opacity-20 dark:opacity-20"
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--electric-cyan) 1px, transparent 1px),
@@ -20,7 +20,7 @@ export function BlueprintBackground() {
 
       {/* Secondary Grid - 10px (finer detail) */}
       <div 
-        className="absolute inset-0 h-full w-full opacity-5"
+        className="absolute inset-0 h-full w-full opacity-[0.03] dark:opacity-5"
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--electric-cyan) 1px, transparent 1px),
@@ -30,28 +30,19 @@ export function BlueprintBackground() {
         }}
       />
 
-      {/* Radial Gradient Vignette */}
+      {/* Radial Gradient Vignette - Light mode uses a softer fade */}
       <div 
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, var(--deep-slate) 70%)'
-        }}
+        className="absolute inset-0 dark:bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--deep-slate)_70%)] bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--deep-slate)_85%)]"
       />
 
       {/* Top gradient fade */}
       <div 
-        className="absolute top-0 left-0 right-0 h-32"
-        style={{
-          background: 'linear-gradient(to bottom, var(--deep-slate), transparent)'
-        }}
+        className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent"
       />
 
       {/* Bottom gradient fade */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-48"
-        style={{
-          background: 'linear-gradient(to top, var(--deep-slate), transparent)'
-        }}
+        className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent"
       />
 
       {/* Animated scan line effect */}
