@@ -248,6 +248,5 @@ export function DirectorProfile({
           </div>
         </div>
       </SectionWrapper>
-    </div>
   );
 }

@@ -79,7 +79,6 @@ export function Illumination() {
   return (
     <SectionWrapper
       id="illumination"
-      background={BackgroundLayer}
       variant="full"
     >
       {/* Content */}
