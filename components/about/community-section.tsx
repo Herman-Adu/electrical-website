@@ -97,7 +97,7 @@ export function CommunitySection() {
                 Giving Back
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-5 text-balance">
               Powered by Community,{' '}
               <span className="text-[var(--electric-cyan)]">Built for People</span>
             </h2>
@@ -121,7 +121,7 @@ export function CommunitySection() {
                 className="p-6 rounded-2xl bg-background/70 backdrop-blur-md border border-white/10 hover:border-[var(--electric-cyan)]/40 transition-all duration-300 group"
               >
                 <div className="text-3xl font-black font-mono text-[var(--electric-cyan)] mb-1">{stat.value}</div>
-                <div className="text-sm text-white/70">{stat.label}</div>
+                <div className="text-sm text-foreground/90">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -142,8 +142,8 @@ export function CommunitySection() {
                   <div className="w-10 h-10 rounded-xl border border-[var(--electric-cyan)]/30 bg-[var(--electric-cyan)]/10 flex items-center justify-center mb-4">
                     <Icon size={18} className="text-[var(--electric-cyan)]" />
                   </div>
-                  <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-xs text-white/70 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-sm font-bold text-foreground/90 mb-2">{item.title}</h3>
+                  <p className="text-xs text-foreground/90 leading-relaxed">{item.desc}</p>
                 </motion.div>
               );
             })}
