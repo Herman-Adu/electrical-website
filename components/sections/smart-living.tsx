@@ -264,7 +264,7 @@ export function SmartLiving() {
       <section
       id="smart-living"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding"
       style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
@@ -314,7 +314,7 @@ export function SmartLiving() {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-20 w-full section-padding"
+        className="relative z-20 w-full"
         style={{ y: contentY }}
       >
         <div className="section-content w-full">
@@ -403,7 +403,7 @@ export function SmartLiving() {
 
             {/* Right Side - Floating Smart Home UI Elements */}
             {/* Mobile: natural stacking flow. Desktop: absolute parallax positioning */}
-            <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block pb-8 lg:pb-0">
+            <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block">
 
               {/* Status Card */}
               <motion.div
