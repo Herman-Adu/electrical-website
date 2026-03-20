@@ -403,7 +403,7 @@ export function SmartLiving() {
 
             {/* Right Side - Floating Smart Home UI Elements */}
             {/* Mobile: natural stacking flow. Desktop: absolute parallax positioning */}
-            <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block pb-16 sm:pb-0">
+            <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block pb-8 lg:pb-0">
 
               {/* Status Card */}
               <motion.div
