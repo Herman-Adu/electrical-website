@@ -97,9 +97,13 @@ export function CommunitySection() {
                 Giving Back
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-5 text-balance">
-              Powered by Community,{' '}
-              <span className="text-[var(--electric-cyan)]">Built for People</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-5 text-balance">
+              <span className="bg-gradient-to-r from-amber-400 to-[var(--electric-cyan)] bg-clip-text text-transparent">
+                Powered by Community,{' '}
+              </span>
+              <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-amber-400 bg-clip-text text-transparent">
+                Built for People
+              </span>
             </h2>
             <p className="text-white/80 text-lg leading-relaxed">
               We believe a business is only as strong as the community it serves. That&apos;s
