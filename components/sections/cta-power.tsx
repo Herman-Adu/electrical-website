@@ -87,14 +87,14 @@ const CTAPowerClient = () => {
     <section
       ref={containerRef}
       id="power-vision"
-      className="relative min-h-screen py-32 px-4 bg-background overflow-hidden"
+      className="section-container section-padding relative min-h-screen bg-background"
       style={{ position: 'relative' }}
     >
       {/* Single Electrical Schematic - draws itself on scroll */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Left side schematic */}
         <motion.svg
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-64 lg:w-96 h-auto opacity-20"
+          className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-64 lg:w-96 h-auto opacity-20"
           viewBox="0 0 200 400"
           fill="none"
           style={{ opacity: circuitOpacity }}
@@ -163,7 +163,7 @@ const CTAPowerClient = () => {
 
         {/* Right side schematic */}
         <motion.svg
-          className="absolute right-0 top-1/3 w-48 lg:w-72 h-auto opacity-15"
+          className="hidden md:block absolute right-0 top-1/3 w-48 lg:w-72 h-auto opacity-15"
           viewBox="0 0 150 300"
           fill="none"
           style={{ opacity: circuitOpacity }}
@@ -232,13 +232,13 @@ const CTAPowerClient = () => {
       </motion.div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="section-content relative z-10 max-w-5xl">
         {/* Trust Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="grid grid-3 gap-8 mb-20 pb-12 border-b border-border"
+          className="grid grid-cols-3 gap-4 sm:gap-8 mb-20 pb-12 border-b border-border"
         >
           {stats.map((stat, idx) => (
             <TrustStat key={idx} number={stat.number} label={stat.label} delay={0.1 * idx} />
@@ -252,7 +252,7 @@ const CTAPowerClient = () => {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="text-foreground">Ready to Power</span>
             <br />
             <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--amber-warning)] bg-clip-text text-transparent">

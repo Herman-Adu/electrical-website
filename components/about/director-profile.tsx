@@ -60,7 +60,7 @@ export function DirectorProfile({
     <section
       id={sectionId}
       ref={sectionRef}
-      className="relative py-20 md:py-28 overflow-hidden bg-background"
+      className="section-container section-padding bg-background"
     >
       {/* Blueprint grid */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
@@ -72,7 +72,7 @@ export function DirectorProfile({
         } bg-card/20 border-${reversed ? 'l' : 'r'} border-border/30`}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="section-content">
         <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 lg:gap-20 items-center`}>
 
           {/* Image column */}

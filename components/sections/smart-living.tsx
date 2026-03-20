@@ -4,13 +4,13 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 
-function AnimatedProgressRing({ 
-  value, 
+function AnimatedProgressRing({
+  value,
   inView,
   size = 120,
   strokeWidth = 8
-}: { 
-  value: number; 
+}: {
+  value: number;
   inView: boolean;
   size?: number;
   strokeWidth?: number;
@@ -19,15 +19,15 @@ function AnimatedProgressRing({
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
-  
+
   useEffect(() => {
     if (!inView) return;
-    
+
     const duration = 2000;
     const steps = 60;
     const increment = value / steps;
     let current = 0;
-    
+
     const timer = setInterval(() => {
       current += increment;
       if (current >= value) {
@@ -37,10 +37,10 @@ function AnimatedProgressRing({
         setProgress(current);
       }
     }, duration / steps);
-    
+
     return () => clearInterval(timer);
   }, [value, inView]);
-  
+
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="transform -rotate-90">
@@ -84,26 +84,26 @@ function AnimatedProgressRing({
 
 function DimmerSlider({ label, defaultValue, delay, inView }: { label: string; defaultValue: number; delay: number; inView: boolean }) {
   const [value, setValue] = useState(defaultValue);
-  
+
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, x: 30 }}
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
       transition={{ duration: 0.6, delay }}
-      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-amber-500/40 transition-all duration-300"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-amber-500/40 transition-all duration-300"
     >
       <div className="flex justify-between items-center mb-3">
         <span className="text-sm text-slate-300 font-medium">{label}</span>
         <span className="text-xs font-mono text-amber-400">{value}%</span>
       </div>
       <div className="relative h-2 bg-slate-700/50 rounded-full overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-600 to-amber-400"
           initial={{ width: 0 }}
           animate={inView ? { width: `${value}%` } : { width: 0 }}
           transition={{ duration: 1, delay: delay + 0.3 }}
         />
-        <div 
+        <div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-600/50 to-amber-400/50 blur-sm"
           style={{ width: `${value}%` }}
         />
@@ -135,11 +135,11 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
-      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 pb-5 border border-slate-700/50"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 pb-5 border border-white/20"
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-1">
-        <span className="text-sm text-slate-300 font-medium">Weekly Usage</span>
+        <span className="text-sm text-white font-medium">Weekly Usage</span>
         <span className="text-xs font-mono text-[var(--electric-cyan)]">kWh</span>
       </div>
 
@@ -152,7 +152,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
         className="mb-3"
       >
         <span className="text-xl font-bold text-white font-mono">{total}</span>
-        <span className="text-xs text-slate-400 ml-1">kWh this week</span>
+        <span className="text-xs text-white ml-1">kWh this week</span>
       </motion.div>
 
       {/* Bar chart */}
@@ -168,17 +168,16 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: delay + 0.5 + idx * 0.05 }}
                 viewport={{ once: true }}
-                className={`text-[9px] font-mono mb-1 ${isPeak ? 'text-amber-400' : 'text-slate-500'}`}
+                className={`text-[9px] font-mono mb-1 ${isPeak ? 'text-amber-400' : 'text-white'}`}
               >
                 {value}
               </motion.span>
               {/* Bar */}
               <motion.div
-                className={`w-full rounded-t-sm ${
-                  isPeak
-                    ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
-                    : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
-                }`}
+                className={`w-full rounded-t-sm ${isPeak
+                  ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
+                  : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
+                  }`}
                 initial={{ height: 0 }}
                 animate={inView ? { height: barHeight } : { height: 0 }}
                 transition={{
@@ -223,10 +222,10 @@ export function SmartLiving() {
     target: mounted ? containerRef : undefined,
     offset: ['start end', 'end start'],
   });
-  
+
   // Smooth spring for brightness transition
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  
+
   // Before/after brightness transition (lights off to lights on)
   const brightness = useTransform(smoothProgress, [0.1, 0.35, 0.5], [0.15, 0.6, 1]);
   const saturation = useTransform(smoothProgress, [0.1, 0.35, 0.5], [0, 0.5, 1]);
@@ -236,41 +235,41 @@ export function SmartLiving() {
     [brightness, saturation] as const,
     ([b, s]: number[]) => `brightness(${b}) saturate(${s})`
   );
-  
+
   // Parallax for floating UI elements at different speeds
   const uiY1 = useTransform(scrollYProgress, [0, 1], ['20%', '-20%']);
   const uiY2 = useTransform(scrollYProgress, [0, 1], ['30%', '-10%']);
   const uiY3 = useTransform(scrollYProgress, [0, 1], ['15%', '-25%']);
-  
+
   // Content parallax
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-  
+
   // Ambient glow intensity
   const glowOpacity = useTransform(smoothProgress, [0.2, 0.5], [0, 1]);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.2 }
     );
-    
+
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
-  
+
   return (
-    <section 
+      <section
       id="smart-living"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding-tall"
       style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">
-        <motion.div 
+        <motion.div
           className="relative w-full h-full"
           style={{ filter: imageFilter }}
         >
@@ -282,26 +281,22 @@ export function SmartLiving() {
             priority
           />
         </motion.div>
-        
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--deep-black)] via-[var(--deep-black)]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--deep-black)]/90 via-[var(--deep-black)]/30 to-transparent" />
-        
+
         {/* Ambient Glow Effects from Light Fixtures */}
-        <motion.div 
+        <motion.div
           className="absolute top-[15%] left-[30%] w-64 h-64 rounded-full bg-amber-500/20 blur-3xl"
           style={{ opacity: glowOpacity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-[20%] right-[25%] w-48 h-48 rounded-full bg-amber-400/15 blur-2xl"
           style={{ opacity: glowOpacity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-[30%] left-[45%] w-56 h-56 rounded-full bg-amber-300/10 blur-3xl"
           style={{ opacity: glowOpacity }}
         />
       </div>
-      
+
       {/* Warm Light Scan Effect */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         <motion.div
@@ -316,13 +311,13 @@ export function SmartLiving() {
           }}
         />
       </div>
-      
+
       {/* Main Content */}
-      <motion.div 
-        className="relative z-20 min-h-screen flex items-center py-24 lg:py-20"
+      <motion.div
+        className="relative z-20 w-full"
         style={{ y: contentY }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div className="section-content w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="max-w-xl">
@@ -339,7 +334,7 @@ export function SmartLiving() {
                   Smart Living
                 </span>
               </motion.div>
-              
+
               {/* Headline */}
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
@@ -354,39 +349,39 @@ export function SmartLiving() {
                   For Modern Living
                 </span>
               </motion.h2>
-              
+
               {/* Description */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="mb-8 p-4 rounded-xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/30"
+                className="mb-8 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20"
               >
                 <p className="text-lg text-slate-200 leading-relaxed">
-                  Transform your home with smart lighting systems that adapt to your 
-                  lifestyle. Experience perfect ambiance at every moment while 
+                  Transform your home with smart lighting systems that adapt to your
+                  lifestyle. Experience perfect ambiance at every moment while
                   significantly reducing your energy footprint.
                 </p>
               </motion.div>
-              
+
               {/* Energy Savings Stat with Animated Progress Ring */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-6 mb-10 p-6 rounded-2xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/50"
+                className="flex items-center gap-6 mb-10 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
               >
                 <AnimatedProgressRing value={40} inView={inView} />
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-1">Energy Savings</h3>
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-white text-sm">
                     Average reduction in residential electricity costs with our smart lighting solutions
                   </p>
                 </div>
               </motion.div>
-              
+
               {/* CTA Button */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -405,7 +400,7 @@ export function SmartLiving() {
                 </button>
               </motion.div>
             </div>
-            
+
             {/* Right Side - Floating Smart Home UI Elements */}
             {/* Mobile: natural stacking flow. Desktop: absolute parallax positioning */}
             <div className="flex flex-col gap-4 lg:relative lg:h-[600px] lg:block">
@@ -419,7 +414,7 @@ export function SmartLiving() {
                 className="lg:absolute lg:top-1/3 lg:-left-8 lg:w-52"
                 style={{ y: uiY3 }}
               >
-                <div className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50">
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shrink-0">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -427,21 +422,21 @@ export function SmartLiving() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Status</p>
+                      <p className="text-xs text-white">Status</p>
                       <p className="text-sm font-semibold text-white">All Systems Active</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Connected Lights</span>
+                      <span className="text-white">Connected Lights</span>
                       <span className="text-[var(--electric-cyan)] font-mono">24</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Scenes Active</span>
+                      <span className="text-white">Scenes Active</span>
                       <span className="text-amber-400 font-mono">Evening</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Auto Schedule</span>
+                      <span className="text-white">Auto Schedule</span>
                       <span className="text-green-400 font-mono">ON</span>
                     </div>
                   </div>
@@ -460,7 +455,7 @@ export function SmartLiving() {
 
               {/* Energy Graph */}
               <motion.div
-                className="mb-8 lg:mb-0 lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
+                className="lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
                 style={{ y: uiY2 }}
               >
                 <EnergyGraph delay={0.8} inView={inView} />
@@ -486,7 +481,7 @@ export function SmartLiving() {
           </div>
         </div>
       </motion.div>
-      
+
       {/* Bottom Border */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
     </section>

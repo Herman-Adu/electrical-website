@@ -51,10 +51,10 @@ const values = [
 
 export function CoreValues() {
   return (
-    <section id="core-values" className="relative py-28 px-6 bg-background overflow-hidden">
+    <section id="core-values" className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid-fine opacity-25 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="section-content">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

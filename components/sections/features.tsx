@@ -200,8 +200,8 @@ export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="features" ref={sectionRef} className="relative py-24 px-4 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" ref={sectionRef} className="section-container section-padding bg-background">
+      <div className="section-content">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

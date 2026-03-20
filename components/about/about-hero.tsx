@@ -66,7 +66,7 @@ export function AboutHero() {
   return (
     <section
       ref={scrollRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+      className="section-container section-safe-top section-safe-bottom relative min-h-screen w-full flex flex-col items-center justify-center"
     >
       <BlueprintBackground />
 

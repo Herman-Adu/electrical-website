@@ -75,10 +75,10 @@ export function VisionMission() {
   }, []);
 
   return (
-    <section id="vision-mission" ref={sectionRef} className="relative py-28 px-6 bg-background overflow-hidden">
+    <section id="vision-mission" ref={sectionRef} className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="section-content">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
 
           {/* VISION */}

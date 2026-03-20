@@ -36,11 +36,11 @@ export function AboutCTA() {
   };
 
   return (
-    <section id="why-choose-us" className="relative py-28 px-6 bg-background overflow-hidden">
+    <section id="why-choose-us" className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/40 to-transparent" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="section-content">
 
         {/* Why Choose Us */}
         <div className="grid lg:grid-cols-2 gap-16 mb-24 items-center">
