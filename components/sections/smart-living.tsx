@@ -139,7 +139,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-1">
-        <span className="text-sm text-slate-300 font-medium">Weekly Usage</span>
+        <span className="text-sm text-white font-medium">Weekly Usage</span>
         <span className="text-xs font-mono text-[var(--electric-cyan)]">kWh</span>
       </div>
 
@@ -152,7 +152,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
         className="mb-3"
       >
         <span className="text-xl font-bold text-white font-mono">{total}</span>
-        <span className="text-xs text-slate-400 ml-1">kWh this week</span>
+        <span className="text-xs text-white ml-1">kWh this week</span>
       </motion.div>
 
       {/* Bar chart */}
@@ -168,7 +168,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: delay + 0.5 + idx * 0.05 }}
                 viewport={{ once: true }}
-                className={`text-[9px] font-mono mb-1 ${isPeak ? 'text-amber-400' : 'text-slate-500'}`}
+                className={`text-[9px] font-mono mb-1 ${isPeak ? 'text-amber-400' : 'text-white'}`}
               >
                 {value}
               </motion.span>
