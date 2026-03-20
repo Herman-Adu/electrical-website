@@ -123,7 +123,7 @@ export function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-background overflow-hidden"
+      className="section-container section-padding bg-background"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
@@ -136,7 +136,7 @@ export function Services() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-content">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

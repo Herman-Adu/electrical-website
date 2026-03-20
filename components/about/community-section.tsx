@@ -80,9 +80,9 @@ export function CommunitySection() {
       {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-20 py-28 px-6"
+        className="relative z-20 section-padding"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="section-content">
           {/* Header with glassmorphic backdrop */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

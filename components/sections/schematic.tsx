@@ -83,7 +83,7 @@ export function Schematic() {
     <section
       id="architecture"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-background overflow-hidden"
+      className="section-container section-padding bg-background"
     >
       {/* Top border gradient */}
       <div 
@@ -94,7 +94,7 @@ export function Schematic() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-content">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content Side */}
           <motion.div

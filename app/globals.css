@@ -333,4 +333,47 @@
   line-height: 1.2;
 }
 
+/* ===== FLUID CONTAINER SYSTEM ===== */
+/* Consistent section spacing across all components */
+
+/* Section container - wraps entire section, handles overflow */
+.section-container {
+  @apply relative w-full overflow-hidden;
+}
+
+/* Section padding - responsive vertical spacing */
+.section-padding {
+  @apply py-16 sm:py-20 md:py-24 lg:py-32;
+}
+
+/* Section padding compact - for shorter sections */
+.section-padding-sm {
+  @apply py-12 sm:py-16 md:py-20 lg:py-24;
+}
+
+/* Section content - max-width and horizontal gutters */
+.section-content {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Section content wide - for full-bleed sections with contained content */
+.section-content-wide {
+  @apply max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Combined utility for standard sections */
+.section-standard {
+  @apply section-container section-padding;
+}
+
+/* Safe area for fixed-height sections (accounts for navbar) */
+.section-safe-top {
+  @apply pt-20 sm:pt-24 md:pt-28;
+}
+
+/* Safe area bottom (prevents content cut-off) */
+.section-safe-bottom {
+  @apply pb-16 sm:pb-20 md:pb-24;
+}
+
 

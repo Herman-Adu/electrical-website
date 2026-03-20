@@ -55,7 +55,7 @@ export function CompanyIntro() {
     <section
       id="company-intro"
       ref={sectionRef}
-      className="relative py-28 px-6 bg-background overflow-hidden"
+      className="section-container section-padding bg-background"
     >
       {/* Blueprint grid overlay */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />
@@ -74,7 +74,7 @@ export function CompanyIntro() {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto">
+      <div className="section-content max-w-6xl">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

@@ -18,11 +18,11 @@ const certs = [
 
 export function Certifications() {
   return (
-    <section id="certifications" className="relative py-28 px-6 bg-background overflow-hidden">
+    <section id="certifications" className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="section-content">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

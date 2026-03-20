@@ -87,7 +87,7 @@ const CTAPowerClient = () => {
     <section
       ref={containerRef}
       id="power-vision"
-      className="relative min-h-screen py-32 px-4 bg-background overflow-hidden"
+      className="section-container section-padding relative min-h-screen bg-background"
       style={{ position: 'relative' }}
     >
       {/* Single Electrical Schematic - draws itself on scroll */}
@@ -232,7 +232,7 @@ const CTAPowerClient = () => {
       </motion.div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="section-content relative z-10 max-w-5xl">
         {/* Trust Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

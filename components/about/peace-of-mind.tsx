@@ -51,7 +51,7 @@ const checks = [
 
 export function PeaceOfMind() {
   return (
-    <section id="peace-of-mind" className="relative py-28 px-6 bg-slate-dark overflow-hidden">
+    <section id="peace-of-mind" className="section-container section-padding bg-slate-dark">
       {/* Blueprint grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none" />
 
@@ -72,7 +72,7 @@ export function PeaceOfMind() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="section-content">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

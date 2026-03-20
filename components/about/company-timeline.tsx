@@ -233,10 +233,10 @@ export function CompanyTimeline() {
   const lineHeight = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '100%']);
 
   return (
-    <section id="timeline" ref={sectionRef} className="relative py-28 px-6 bg-background overflow-hidden">
+    <section id="timeline" ref={sectionRef} className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="section-content max-w-5xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

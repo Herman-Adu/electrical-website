@@ -314,10 +314,10 @@ export function SmartLiving() {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-20 min-h-screen flex items-center py-24 lg:py-20"
+        className="relative z-20 min-h-screen flex items-center section-safe-top section-safe-bottom"
         style={{ y: contentY }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div className="section-content w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="max-w-xl">
