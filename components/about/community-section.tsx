@@ -83,7 +83,7 @@ export function CommunitySection() {
         className="relative z-20 py-28 px-6"
       >
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
+          {/* Header with glassmorphic backdrop */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -91,24 +91,26 @@ export function CommunitySection() {
             viewport={{ once: true }}
             className="mb-16 max-w-2xl"
           >
-            <div className="flex items-center gap-3 mb-5">
-              <Heart size={14} className="text-[var(--electric-cyan)]" />
-              <span className="font-mono text-xs tracking-widest uppercase text-[var(--electric-cyan)]">
-                Giving Back
-              </span>
+            <div className="p-8 rounded-2xl bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl">
+              <div className="flex items-center gap-3 mb-5">
+                <Heart size={14} className="text-[var(--electric-cyan)]" />
+                <span className="font-mono text-xs tracking-widest uppercase text-[var(--electric-cyan)]">
+                  Giving Back
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-5 text-balance">
+                <span className="bg-gradient-to-r from-amber-400 to-[var(--electric-cyan)] bg-clip-text text-transparent">
+                  Powered by Community,{' '}
+                </span>
+                <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-amber-400 bg-clip-text text-transparent">
+                  Built for People
+                </span>
+              </h2>
+              <p className="text-foreground/90 text-lg leading-relaxed">
+                We believe a business is only as strong as the community it serves. That&apos;s
+                why we don&apos;t just work in our communities — we actively invest in them.
+              </p>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-5 text-balance">
-              <span className="bg-gradient-to-r from-amber-400 to-[var(--electric-cyan)] bg-clip-text text-transparent">
-                Powered by Community,{' '}
-              </span>
-              <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-amber-400 bg-clip-text text-transparent">
-                Built for People
-              </span>
-            </h2>
-            <p className="text-white/80 text-lg leading-relaxed">
-              We believe a business is only as strong as the community it serves. That&apos;s
-              why we don&apos;t just work in our communities — we actively invest in them.
-            </p>
           </motion.div>
 
           {/* Stats row */}
