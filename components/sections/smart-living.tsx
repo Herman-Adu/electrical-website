@@ -282,10 +282,6 @@ export function SmartLiving() {
           />
         </motion.div>
 
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--deep-black)] via-[var(--deep-black)]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--deep-black)]/90 via-[var(--deep-black)]/30 to-transparent" />
-
         {/* Ambient Glow Effects from Light Fixtures */}
         <motion.div
           className="absolute top-[15%] left-[30%] w-64 h-64 rounded-full bg-amber-500/20 blur-3xl"
