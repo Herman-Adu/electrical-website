@@ -98,7 +98,7 @@ export function DirectorProfile({
               {/* Image */}
               <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden">
                 <motion.div className="absolute inset-0 w-full h-[115%]" style={{ filter: brightnessFilter }}>
-                  <motion.div className="w-full h-full" style={{ y: imageY }}>
+                  <motion.div className="relative w-full h-full" style={{ y: imageY }}>
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
