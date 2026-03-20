@@ -201,15 +201,15 @@ export function Illumination() {
             {stats.map((stat, idx) => (
               <div
                 key={stat.label}
-                className="group relative p-6 rounded-2xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/50 hover:border-[var(--electric-cyan)]/40 transition-all duration-300"
+                className="group relative p-4 sm:p-6 rounded-2xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/50 hover:border-[var(--electric-cyan)]/40 transition-all duration-300"
               >
                 {/* Corner accent */}
                 <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-[var(--electric-cyan)]/30 rounded-tr-lg group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
                 
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-1 font-mono">
+                <div className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-1 font-mono leading-tight">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={inView} />
                 </div>
-                <div className="text-sm text-white/70 font-medium">
+                <div className="text-xs sm:text-sm text-white/70 font-medium leading-snug">
                   {stat.label}
                 </div>
                 

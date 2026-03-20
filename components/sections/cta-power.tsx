@@ -94,7 +94,7 @@ const CTAPowerClient = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Left side schematic */}
         <motion.svg
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-64 lg:w-96 h-auto opacity-20"
+          className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-64 lg:w-96 h-auto opacity-20"
           viewBox="0 0 200 400"
           fill="none"
           style={{ opacity: circuitOpacity }}
@@ -163,7 +163,7 @@ const CTAPowerClient = () => {
 
         {/* Right side schematic */}
         <motion.svg
-          className="absolute right-0 top-1/3 w-48 lg:w-72 h-auto opacity-15"
+          className="hidden md:block absolute right-0 top-1/3 w-48 lg:w-72 h-auto opacity-15"
           viewBox="0 0 150 300"
           fill="none"
           style={{ opacity: circuitOpacity }}
@@ -252,7 +252,7 @@ const CTAPowerClient = () => {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="text-foreground">Ready to Power</span>
             <br />
             <span className="bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--amber-warning)] bg-clip-text text-transparent">
