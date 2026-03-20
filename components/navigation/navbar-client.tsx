@@ -10,13 +10,13 @@ const navLinks = [
     name: 'Home', 
     href: '/',
     submenu: [
-      { name: 'Services', href: '#services' },
-      { name: 'Illumination', href: '#illumination' },
-      { name: 'Features', href: '#features' },
-      { name: 'Architecture', href: '#architecture' },
-      { name: 'Dashboard', href: '#dashboard' },
-      { name: 'Smart Living', href: '#smart-living' },
-      { name: 'Power Your Vision', href: '#power-vision' },
+      { name: 'Services', href: '/#services' },
+      { name: 'Illumination', href: '/#illumination' },
+      { name: 'Features', href: '/#features' },
+      { name: 'Architecture', href: '/#architecture' },
+      { name: 'Dashboard', href: '/#dashboard' },
+      { name: 'Smart Living', href: '/#smart-living' },
+      { name: 'Power Your Vision', href: '/#power-vision' },
     ]
   },
   {
