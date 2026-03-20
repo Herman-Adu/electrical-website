@@ -35,6 +35,24 @@
       "status": "complete",
       "sections": ["ContactForm"],
       "lastModified": "2026-03-19"
+    },
+    "/about": {
+      "file": "app/about/page.tsx",
+      "status": "complete",
+      "sections": [
+        "AboutHero",
+        "CompanyIntro",
+        "DirectorProfile (x2)",
+        "CompanyTimeline",
+        "PeaceOfMind",
+        "VisionMission",
+        "Certifications",
+        "CoreValues",
+        "CommunitySection",
+        "AboutCTA",
+        "Footer"
+      ],
+      "lastModified": "2026-03-20"
     }
   },
 
@@ -71,6 +89,22 @@
         "smart-living.tsx",
         "contact.tsx",
         "scheduler-card.tsx"
+      ]
+    },
+    "about": {
+      "path": "components/about/",
+      "barrel": "components/about/index.ts",
+      "files": [
+        "about-hero.tsx",
+        "company-intro.tsx",
+        "director-profile.tsx",
+        "company-timeline.tsx",
+        "peace-of-mind.tsx",
+        "vision-mission.tsx",
+        "certifications.tsx",
+        "core-values.tsx",
+        "community-section.tsx",
+        "about-cta.tsx"
       ]
     },
     "ui": {

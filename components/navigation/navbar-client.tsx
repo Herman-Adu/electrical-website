@@ -10,14 +10,27 @@ const navLinks = [
     name: 'Home', 
     href: '/',
     submenu: [
-      { name: 'Services', href: '#services' },
-      { name: 'Illumination', href: '#illumination' },
-      { name: 'Features', href: '#features' },
-      { name: 'Architecture', href: '#architecture' },
-      { name: 'Dashboard', href: '#dashboard' },
-      { name: 'Smart Living', href: '#smart-living' },
-      { name: 'Power Your Vision', href: '#power-vision' },
+      { name: 'Services', href: '/#services' },
+      { name: 'Illumination', href: '/#illumination' },
+      { name: 'Features', href: '/#features' },
+      { name: 'Architecture', href: '/#architecture' },
+      { name: 'Dashboard', href: '/#dashboard' },
+      { name: 'Smart Living', href: '/#smart-living' },
+      { name: 'Power Your Vision', href: '/#power-vision' },
     ]
+  },
+  {
+    name: 'About',
+    href: '/about',
+    submenu: [
+      { name: 'Our Story', href: '/about#company-intro' },
+      { name: 'Our Directors', href: '/about#directors' },
+      { name: 'Company History', href: '/about#timeline' },
+      { name: 'Vision & Mission', href: '/about#vision-mission' },
+      { name: 'Certifications', href: '/about#certifications' },
+      { name: 'Community', href: '/about#community' },
+      { name: 'Why Choose Us', href: '/about#why-choose-us' },
+    ],
   },
   { name: 'Contact', href: '/contact' },
 ];
@@ -42,10 +55,16 @@ export function NavbarClient() {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
+      // Same-page anchor scroll
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else if (href.includes('#')) {
+      // Cross-page anchor — navigate then let browser handle the hash
+      window.location.href = href;
+    } else {
+      window.location.href = href;
     }
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
