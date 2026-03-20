@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 function AnimatedProgressRing({
   value,
@@ -207,7 +208,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
           {(Number(total) / 7).toFixed(1)} kWh
         </span>
       </div>
-    </motion.div>
+    </SectionWrapper>
   );
 }
 
@@ -261,9 +262,10 @@ export function SmartLiving() {
   }, []);
 
   return (
-      <section
+    <SectionWrapper
       id="smart-living"
-      ref={containerRef}
+      variant="full"
+    >
       className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding-tall"
       style={{ position: 'relative' }}
     >
@@ -484,6 +486,6 @@ export function SmartLiving() {
 
       {/* Bottom Border */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-    </section>
+    </SectionWrapper>
   );
 }

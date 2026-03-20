@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { Zap, Award, Users, Building, Star, Shield } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const milestones = [
   {
@@ -233,7 +234,10 @@ export function CompanyTimeline() {
   const lineHeight = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '100%']);
 
   return (
-    <section id="timeline" ref={sectionRef} className="section-container section-padding bg-background">
+    <SectionWrapper
+      id="timeline"
+      variant="full"
+    > id="timeline" ref={sectionRef} className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
       <div className="section-content max-w-5xl">
@@ -282,6 +286,6 @@ export function CompanyTimeline() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Heart, Lightbulb, Users, Star, Zap } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const values = [
   {
@@ -51,7 +52,10 @@ const values = [
 
 export function CoreValues() {
   return (
-    <section id="core-values" className="section-container section-padding bg-background">
+    <SectionWrapper
+      id="core-values"
+      variant="full"
+    > id="core-values" className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid-fine opacity-25 pointer-events-none" />
 
       <div className="section-content">
@@ -150,6 +154,6 @@ export function CoreValues() {
           We Live These Daily — Not Just Display Them
         </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

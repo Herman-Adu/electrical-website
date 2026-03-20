@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Shield, Award, Star } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const certs = [
   { abbr: 'NICEIC', name: 'Approved Contractor', category: 'Safety', level: 'Gold', featured: true },
@@ -18,7 +19,10 @@ const certs = [
 
 export function Certifications() {
   return (
-    <section id="certifications" className="section-container section-padding bg-background">
+    <SectionWrapper
+      id="certifications"
+      variant="full"
+    > id="certifications" className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent" />
 
@@ -116,6 +120,6 @@ export function Certifications() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

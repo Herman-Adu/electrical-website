@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, ChevronDown } from 'lucide-react';
 import { BlueprintBackground } from '@/components/hero/blueprint-background';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,7 +65,10 @@ export function AboutHero() {
   };
 
   return (
-    <section
+    <SectionWrapper
+      id="about-hero"
+      variant="full"
+    >
       ref={scrollRef}
       className="section-container section-safe-top section-safe-bottom relative min-h-screen w-full flex flex-col items-center justify-center"
     >
@@ -236,6 +240,6 @@ export function AboutHero() {
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Our Story</span>
         <ChevronDown size={20} className="animate-bounce" />
       </motion.button>
-    </section>
+    </SectionWrapper>
   );
 }

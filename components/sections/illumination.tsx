@@ -201,6 +201,6 @@ export function Illumination() {
           />
         ))}
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

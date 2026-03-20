@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Zap, ArrowRight, Facebook, Instagram, Linkedin, Twitter, Youtube, BookOpen } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const whyUs = [
   'NICEIC Approved Contractor — fully verified and independently audited',
@@ -36,7 +37,10 @@ export function AboutCTA() {
   };
 
   return (
-    <section id="why-choose-us" className="section-container section-padding bg-background">
+    <SectionWrapper
+      id="why-choose-us"
+      variant="full"
+    >
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/40 to-transparent" />
 
@@ -218,6 +222,6 @@ export function AboutCTA() {
         </motion.div>
 
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

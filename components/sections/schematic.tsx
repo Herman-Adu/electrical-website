@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const features = [
   { title: 'Load Analysis', description: 'Comprehensive power requirement assessment' },
@@ -80,10 +81,9 @@ export function Schematic() {
   }, [isInView]);
 
   return (
-    <section
+    <SectionWrapper
       id="architecture"
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
+      variant="full"
     >
       {/* Top border gradient */}
       <div 
@@ -302,6 +302,6 @@ export function Schematic() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const words = [
   'Intact', 'Electrical', 'Innovations', 'was', 'founded', 'on', 'a', 'single',
@@ -52,7 +53,10 @@ export function CompanyIntro() {
   }, []);
 
   return (
-    <section
+    <SectionWrapper
+      id="company-intro"
+      variant="full"
+    >
       id="company-intro"
       ref={sectionRef}
       className="section-container section-padding bg-background"
@@ -158,6 +162,6 @@ export function CompanyIntro() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

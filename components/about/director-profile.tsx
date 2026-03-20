@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { Linkedin, Twitter, Mail, Award, CheckCircle } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 export interface DirectorProfileProps {
   name: string;
@@ -57,7 +58,10 @@ export function DirectorProfile({
   const imageInitialX = reversed ? 50 : -50;
 
   return (
-    <section
+      <SectionWrapper
+        id="directors"
+        variant="full"
+      >
       id={sectionId}
       ref={sectionRef}
       className="section-container section-padding bg-background"
@@ -247,7 +251,7 @@ export function DirectorProfile({
             )}
           </div>
         </div>
-      </div>
-    </section>
+      </SectionWrapper>
+    </div>
   );
 }

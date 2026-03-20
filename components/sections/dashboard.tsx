@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { Zap, Gauge, History, Share2, Activity, Shield } from 'lucide-react';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 interface MetricProps {
   label: string;
@@ -198,9 +199,10 @@ export function Dashboard() {
   ];
 
   return (
-    <section
+    <SectionWrapper
       id="dashboard"
-      ref={sectionRef}
+      variant="full"
+    >
       className="section-container section-padding bg-background"
     >
       {/* Background Grid */}
@@ -294,6 +296,6 @@ export function Dashboard() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }
