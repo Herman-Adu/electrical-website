@@ -208,7 +208,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
           {(Number(total) / 7).toFixed(1)} kWh
         </span>
       </div>
-    </SectionWrapper>
+    </motion.div>
   );
 }
 
