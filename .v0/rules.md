@@ -148,3 +148,65 @@ Must pass with 0 errors before any completion claim.
 | 12 | Health-first model selection | Model |
 | 13 | Model change = metrics update | Model |
 | 14 | **STOP = STOP immediately. No code changes, no recommendations, no continuations.** | **Critical** |
+| 15 | Use SectionWrapper for ALL page sections | Architecture |
+
+---
+
+## RULE 15: Section Container System (v3.0)
+
+### The Problem We Solved
+Inconsistent vertical alignment across sections. Each component had its own padding values, breakpoint jumps, and centering logic. This violated SOLID principles and created a maintenance nightmare.
+
+### The Solution: SectionWrapper Component
+
+**Location:** `components/ui/section-wrapper.tsx`
+
+**Architecture:**
+```
+<SectionWrapper>
+  ├── Background layer (absolute, z-0) - images, videos, gradients
+  ├── Overlay layer (absolute, z-10) - gradient overlays
+  └── Content layer (relative, z-20) - section-content wrapper
+      └── [Component children - NO external margins/padding]
+</SectionWrapper>
+```
+
+**Fluid Spacing (CSS clamp):**
+```css
+.section-fluid {
+  padding-top: clamp(3rem, 8vh, 10rem);
+  padding-bottom: clamp(3rem, 8vh, 10rem);
+}
+```
+- MIN: 3rem (48px) - mobile minimum
+- PREFERRED: 8vh - scales with viewport
+- MAX: 10rem (160px) - desktop maximum
+- SAME top AND bottom = ALWAYS centered
+
+### Usage
+```tsx
+import { SectionWrapper } from "@/components/ui/section-wrapper"
+
+<SectionWrapper
+  id="my-section"
+  background={<Image src="/bg.jpg" ... />}
+  overlay={true}
+  variant="full" // "full" | "short" | "auto"
+>
+  {/* Component content - NO external margins */}
+</SectionWrapper>
+```
+
+### Single Responsibility
+| Layer | Responsibility | Handles |
+|-------|---------------|---------|
+| SectionWrapper | External layout | Height, centering, padding |
+| section-content | Horizontal containment | max-width, horizontal gutters |
+| Component | Internal content | Its own data and presentation |
+
+### Rules
+1. ALL page sections MUST use SectionWrapper
+2. Components MUST NOT add external margins/padding
+3. Background images go in the `background` prop
+4. Use `variant` for height variants, not custom classes
+5. Custom classes are for INTERNAL styling only

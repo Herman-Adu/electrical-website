@@ -333,10 +333,34 @@
   line-height: 1.2;
 }
 
-/* ===== FLUID CONTAINER SYSTEM ===== */
-/* Consistent section spacing across all components */
+/* ===== FLUID CONTAINER SYSTEM v3.0 ===== */
+/* Universal section spacing - truly fluid, no breakpoint jumps */
 
-/* Section container - wraps entire section, handles overflow */
+/**
+ * SECTION-FLUID: The universal section wrapper
+ * 
+ * Uses CSS clamp() for truly responsive padding:
+ * - MIN: 3rem (48px) - comfortable mobile minimum
+ * - PREFERRED: 8vh - scales with viewport height
+ * - MAX: 10rem (160px) - generous desktop maximum
+ * 
+ * At 600px viewport: 8vh = 48px (hits minimum)
+ * At 900px viewport: 8vh = 72px (fluid)
+ * At 1200px viewport: 8vh = 96px (fluid)
+ * At 1600px viewport: 8vh = 128px (fluid)
+ * At 2000px viewport: 8vh = 160px (hits maximum)
+ * 
+ * SAME formula top AND bottom = ALWAYS vertically centered
+ */
+.section-fluid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(3rem, 8vh, 10rem);
+  padding-bottom: clamp(3rem, 8vh, 10rem);
+}
+
+/* Section container - wraps entire section, handles overflow (LEGACY) */
 .section-container {
   position: relative;
   width: 100%;
