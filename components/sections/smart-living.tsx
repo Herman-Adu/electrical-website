@@ -314,7 +314,7 @@ export function SmartLiving() {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-20 min-h-screen flex items-center section-safe-top section-safe-bottom"
+        className="relative z-20 min-h-screen flex items-center py-24 sm:py-28 md:py-32"
         style={{ y: contentY }}
       >
         <div className="section-content w-full">
@@ -455,7 +455,7 @@ export function SmartLiving() {
 
               {/* Energy Graph */}
               <motion.div
-                className="mb-8 lg:mb-0 lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
+                className="lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
                 style={{ y: uiY2 }}
               >
                 <EnergyGraph delay={0.8} inView={inView} />
