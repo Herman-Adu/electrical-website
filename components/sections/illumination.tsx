@@ -79,7 +79,7 @@ export function Illumination() {
     <section 
       id="illumination"
       ref={containerRef}
-      className="section-container relative min-h-[100svh] lg:min-h-[90vh]"
+      className="section-container relative min-h-[100svh] lg:min-h-[90vh] flex flex-col justify-center"
       style={{ position: 'relative' }}
     >
       {/* Parallax Image with Brightness Reveal */}
@@ -126,7 +126,7 @@ export function Illumination() {
       
       {/* Content */}
       <motion.div 
-        className="relative z-20 h-full flex items-center section-safe-top section-safe-bottom"
+        className="relative z-20 w-full section-padding"
         style={{ y: contentY, opacity }}
       >
         <div className="section-content w-full">

@@ -261,10 +261,10 @@ export function SmartLiving() {
   }, []);
 
   return (
-    <section
+      <section
       id="smart-living"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] flex flex-col justify-center"
       style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
@@ -314,7 +314,7 @@ export function SmartLiving() {
 
       {/* Main Content */}
       <motion.div
-        className="relative z-20 min-h-screen flex items-center py-24 sm:py-28 md:py-32"
+        className="relative z-20 w-full section-padding"
         style={{ y: contentY }}
       >
         <div className="section-content w-full">
