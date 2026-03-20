@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 // Unique day identifiers - no duplicates possible
 const DAYS = [
-  { id: 'sunday', label: 'S' },
-  { id: 'monday', label: 'M' },
-  { id: 'tuesday', label: 'T' },
-  { id: 'wednesday', label: 'W' },
-  { id: 'thursday', label: 'T' },
-  { id: 'friday', label: 'F' },
-  { id: 'saturday', label: 'S' },
+  { id: "sunday", label: "S" },
+  { id: "monday", label: "M" },
+  { id: "tuesday", label: "T" },
+  { id: "wednesday", label: "W" },
+  { id: "thursday", label: "T" },
+  { id: "friday", label: "F" },
+  { id: "saturday", label: "S" },
 ] as const;
 
 export function SchedulerCard() {
@@ -39,14 +39,16 @@ export function SchedulerCard() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[var(--electric-cyan)]/40" />
         <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[var(--electric-cyan)]/40 rounded-br-lg" />
       </div>
 
-      <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">03</div>
+      <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
+        03
+      </div>
 
       <div className="relative w-full h-40 overflow-hidden">
         <Image
@@ -65,7 +67,9 @@ export function SchedulerCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">Maintenance Scheduler</h3>
+        <h3 className="text-xl font-bold Maintenance Scheduler mb-2">
+          Maintenance Scheduler
+        </h3>
         <p className="text-sm text-slate-400 mb-6">
           Automated maintenance scheduling aligned with operational windows
         </p>
@@ -78,8 +82,8 @@ export function SchedulerCard() {
                 onClick={() => handleDaySelect(index)}
                 className={`w-full py-3 rounded text-xs font-mono font-bold transition-all duration-300 ${
                   selectedIndex === index
-                    ? 'bg-[var(--electric-cyan)]/20 border border-[var(--electric-cyan)]/80 text-[var(--electric-cyan)]'
-                    : 'bg-transparent border border-slate-700/40 text-slate-400 hover:border-[var(--electric-cyan)]/40 hover:text-[var(--electric-cyan)]/60'
+                    ? "bg-[var(--electric-cyan)]/20 border border-[var(--electric-cyan)]/80 text-[var(--electric-cyan)]"
+                    : "bg-transparent border border-slate-700/40 text-slate-400 hover:border-[var(--electric-cyan)]/40 hover:text-[var(--electric-cyan)]/60"
                 }`}
               >
                 {day.label}
@@ -93,7 +97,7 @@ export function SchedulerCard() {
           disabled={selectedIndex === null || isScheduled}
           className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-slate-700/50 text-sm font-mono tracking-widest uppercase text-[var(--electric-cyan)]/80 hover:border-[var(--electric-cyan)]/80 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isScheduled ? 'Confirmed' : 'Schedule Service'}
+          {isScheduled ? "Confirmed" : "Schedule Service"}
         </button>
       </div>
     </motion.div>

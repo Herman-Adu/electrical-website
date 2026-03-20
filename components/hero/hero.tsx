@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { Zap, Activity, ChevronDown } from 'lucide-react';
-import { BlueprintBackground } from './blueprint-background';
-import { MouseGlow } from './mouse-glow';
-import { CircuitSVG } from './circuit-svg';
+import React, { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import { Zap, Activity, ChevronDown } from "lucide-react";
+import { BlueprintBackground } from "./blueprint-background";
+import { MouseGlow } from "./mouse-glow";
+import { CircuitSVG } from "./circuit-svg";
 
-const isClient = typeof window !== 'undefined';
+const isClient = typeof window !== "undefined";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,10 +22,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 20, 
-    filter: "blur(8px)" 
+  hidden: {
+    opacity: 0,
+    y: 20,
+    filter: "blur(8px)",
   },
   visible: {
     opacity: 1,
@@ -55,12 +55,17 @@ export function Hero() {
   const surgeOverlayRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState('INITIALIZING');
+  const [statusText, setStatusText] = useState("INITIALIZING");
 
   // Boot sequence effect
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = ['INITIALIZING', 'LOADING_MODULES', 'CALIBRATING', 'SYSTEM_READY'];
+    const statuses = [
+      "INITIALIZING",
+      "LOADING_MODULES",
+      "CALIBRATING",
+      "SYSTEM_READY",
+    ];
     let index = 0;
     const interval = setInterval(() => {
       index++;
@@ -79,36 +84,39 @@ export function Hero() {
 
     let ctx: gsap.Context | null = null;
 
-    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
       gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
-      // Parallax effect on scroll - y only, never touch opacity (Framer Motion owns that)
-      gsap.to(heroContentRef.current, {
-        y: 80,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5,
-        },
-      });
-
-      // Circuit lines draw-in animation
-      const circuitPaths = containerRef.current?.querySelectorAll('.circuit-path');
-      circuitPaths?.forEach((path) => {
-        const length = (path as SVGPathElement).getTotalLength?.() || 1000;
-        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          duration: 2,
-          delay: 0.5,
-          ease: 'power2.out',
+        // Parallax effect on scroll - y only, never touch opacity (Framer Motion owns that)
+        gsap.to(heroContentRef.current, {
+          y: 80,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.5,
+          },
         });
-      });
+
+        // Circuit lines draw-in animation
+        const circuitPaths =
+          containerRef.current?.querySelectorAll(".circuit-path");
+        circuitPaths?.forEach((path) => {
+          const length = (path as SVGPathElement).getTotalLength?.() || 1000;
+          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 2,
+            delay: 0.5,
+            ease: "power2.out",
+          });
+        });
       }, containerRef);
     });
 
-    return () => { ctx?.revert(); };
+    return () => {
+      ctx?.revert();
+    };
   }, []);
 
   // Power Surge Animation
@@ -116,50 +124,64 @@ export function Hero() {
     if (!surgeOverlayRef.current || !heroContentRef.current) return;
 
     const tl = gsap.timeline();
-    const electricText = heroContentRef.current.querySelector('.text-electric');
+    const electricText = heroContentRef.current.querySelector(".text-electric");
 
     tl.to(surgeOverlayRef.current, {
       opacity: 0.9,
       duration: 0.05,
       repeat: 4,
       yoyo: true,
-      ease: 'none',
-    })
-    .to(heroContentRef.current, {
-      scale: 1.02,
-      duration: 0.1,
-    }, '<');
-    
-    if (electricText) {
-      tl.to(electricText, {
-        textShadow: '0 0 30px #00f2ff, 0 0 60px #00f2ff',
+      ease: "none",
+    }).to(
+      heroContentRef.current,
+      {
+        scale: 1.02,
         duration: 0.1,
-      }, '<');
+      },
+      "<",
+    );
+
+    if (electricText) {
+      tl.to(
+        electricText,
+        {
+          textShadow: "0 0 30px #00f2ff, 0 0 60px #00f2ff",
+          duration: 0.1,
+        },
+        "<",
+      );
     }
-    
+
     tl.to(surgeOverlayRef.current, {
       opacity: 0,
       duration: 0.5,
-      ease: 'power4.out',
-    })
-    .to(heroContentRef.current, {
-      scale: 1,
-      duration: 0.5,
-      ease: 'elastic.out(1, 0.5)',
-    }, '-=0.3');
-    
-    if (electricText) {
-      tl.to(electricText, {
-        textShadow: '0 0 10px rgba(0, 242, 255, 0.5)',
+      ease: "power4.out",
+    }).to(
+      heroContentRef.current,
+      {
+        scale: 1,
         duration: 0.5,
-      }, '-=0.3');
+        ease: "elastic.out(1, 0.5)",
+      },
+      "-=0.3",
+    );
+
+    if (electricText) {
+      tl.to(
+        electricText,
+        {
+          textShadow: "0 0 10px rgba(0, 242, 255, 0.5)",
+          duration: 0.5,
+        },
+        "-=0.3",
+      );
     }
   };
 
   const scrollToContent = () => {
-    const servicesSection = document.getElementById('services');
+    const servicesSection = document.getElementById("services");
     if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
+      servicesSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -187,7 +209,10 @@ export function Hero() {
           className="flex items-center justify-center gap-3 mb-8"
         >
           <div className="flex items-center gap-3 border-l-2 border-[var(--electric-cyan)] pl-4">
-            <Activity size={14} className="text-[var(--electric-cyan)] animate-pulse" />
+            <Activity
+              size={14}
+              className="text-[var(--electric-cyan)] animate-pulse"
+            />
             <span className="font-mono text-[10px] tracking-[0.3em] text-[var(--electric-cyan)]/80 uppercase">
               Status // {statusText}
             </span>
@@ -197,7 +222,7 @@ export function Hero() {
         {/* Main Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
         >
           <span className="block">Powering the</span>
           <span className="block text-electric text-transparent bg-clip-text bg-gradient-to-r from-[var(--electric-cyan)] via-cyan-400 to-blue-500">
@@ -211,9 +236,9 @@ export function Hero() {
           variants={itemVariants}
           className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
         >
-          Expert electrical engineering and installations for commercial 
-          and industrial frontiers. Precision-engineered power solutions 
-          delivered with absolute excellence.
+          Expert electrical engineering and installations for commercial and
+          industrial frontiers. Precision-engineered power solutions delivered
+          with absolute excellence.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -233,7 +258,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
           </button>
 
-          <button className="px-8 py-4 border border-border text-muted-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)] hover:text-[var(--electric-cyan)] transition-all duration-300 text-sm">
+          <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)] hover:text-[var(--electric-cyan)] transition-all duration-300 text-sm">
             Our Solutions
           </button>
         </motion.div>
@@ -259,7 +284,9 @@ export function Hero() {
         onClick={scrollToContent}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
       >
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+          Scroll
+        </span>
         <ChevronDown size={20} className="animate-bounce" />
       </motion.button>
 
