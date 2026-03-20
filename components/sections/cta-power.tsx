@@ -238,7 +238,7 @@ const CTAPowerClient = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="grid grid-3 gap-8 mb-20 pb-12 border-b border-border"
+          className="grid grid-cols-3 gap-4 sm:gap-8 mb-20 pb-12 border-b border-border"
         >
           {stats.map((stat, idx) => (
             <TrustStat key={idx} number={stat.number} label={stat.label} delay={0.1 * idx} />
