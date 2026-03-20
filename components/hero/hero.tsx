@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { Zap, Activity, ChevronDown } from "lucide-react";
+import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { BlueprintBackground } from "./blueprint-background";
 import { MouseGlow } from "./mouse-glow";
 import { CircuitSVG } from "./circuit-svg";
@@ -185,23 +186,28 @@ export function Hero() {
     }
   };
 
-  return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden"
-    >
-      {/* Background Layers */}
+  const BackgroundLayer = (
+    <>
       <BlueprintBackground />
       <MouseGlow />
       <CircuitSVG />
+    </>
+  );
 
+  return (
+    <SectionWrapper
+      id="hero"
+      sectionRef={containerRef}
+      background={BackgroundLayer}
+      variant="full"
+    >
       {/* Main Content */}
       <motion.div
         ref={heroContentRef}
         variants={containerVariants}
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
-        className="relative z-30 text-center px-4 max-w-5xl mx-auto"
+        className="text-center px-4 max-w-5xl mx-auto"
       >
         {/* Status Label */}
         <motion.div
@@ -295,6 +301,6 @@ export function Hero() {
         ref={surgeOverlayRef}
         className="fixed inset-0 bg-[var(--electric-cyan)] opacity-0 z-50 pointer-events-none mix-blend-overlay"
       />
-    </section>
+    </SectionWrapper>
   );
 }

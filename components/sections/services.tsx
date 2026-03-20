@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { SectionWrapper } from "@/components/ui/section-wrapper";
 import {
   Zap,
   Building2,
@@ -120,10 +121,9 @@ export function Services() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section
+    <SectionWrapper
       id="services"
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
+      variant="full"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
@@ -261,6 +261,6 @@ export function Services() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }
