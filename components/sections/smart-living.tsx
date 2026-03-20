@@ -175,8 +175,8 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
               {/* Bar */}
               <motion.div
                 className={`w-full rounded-t-sm ${isPeak
-                    ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
-                    : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
+                  ? 'bg-gradient-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30'
+                  : 'bg-gradient-to-t from-[var(--electric-cyan)]/50 to-[var(--electric-cyan)]'
                   }`}
                 initial={{ height: 0 }}
                 animate={inView ? { height: barHeight } : { height: 0 }}
@@ -426,21 +426,21 @@ export function SmartLiving() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Status</p>
+                      <p className="text-xs text-white">Status</p>
                       <p className="text-sm font-semibold text-white">All Systems Active</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Connected Lights</span>
+                      <span className="text-white">Connected Lights</span>
                       <span className="text-[var(--electric-cyan)] font-mono">24</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Scenes Active</span>
+                      <span className="text-white">Scenes Active</span>
                       <span className="text-amber-400 font-mono">Evening</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Auto Schedule</span>
+                      <span className="text-white">Auto Schedule</span>
                       <span className="text-green-400 font-mono">ON</span>
                     </div>
                   </div>
