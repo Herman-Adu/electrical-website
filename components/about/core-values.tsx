@@ -60,7 +60,7 @@ export function CoreValues() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -90,7 +90,7 @@ export function CoreValues() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-[var(--electric-cyan)]/30 transition-all duration-400 cursor-default overflow-hidden"
               >
                 {/* Hover background fill */}
@@ -144,7 +144,7 @@ export function CoreValues() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mt-12 text-center font-mono text-sm tracking-widest uppercase text-muted-foreground/50"
         >
           We Live These Daily — Not Just Display Them

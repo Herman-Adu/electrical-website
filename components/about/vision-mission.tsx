@@ -87,7 +87,7 @@ export function VisionMission() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               {/* Section label */}
               <div className="flex items-center gap-3 mb-8">
@@ -121,7 +121,7 @@ export function VisionMission() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="flex gap-4 group"
                   >
                     <div className="w-8 h-8 rounded-lg border border-border flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-[var(--electric-cyan)]/40 transition-colors">
@@ -151,7 +151,7 @@ export function VisionMission() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               {/* Section label */}
               <div className="flex items-center gap-3 mb-8">
@@ -185,7 +185,7 @@ export function VisionMission() {
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="p-5 rounded-xl border border-border bg-card/40 hover:border-[var(--amber-warning)]/30 hover:bg-[var(--amber-warning)]/5 transition-all duration-300 group"
                   >
                     <div className="font-bold text-foreground mb-2 group-hover:text-[var(--amber-warning)] transition-colors">

@@ -88,7 +88,7 @@ export function CommunitySection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="mb-16 max-w-2xl mt-8"
           >
             <div className="p-8 rounded-2xl bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl">
@@ -118,7 +118,7 @@ export function CommunitySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
           >
             {communityStats.map((stat, idx) => (
@@ -142,7 +142,7 @@ export function CommunitySection() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="p-6 rounded-2xl bg-background/70 backdrop-blur-md border border-white/10 hover:border-[var(--electric-cyan)]/30 transition-all duration-300"
                 >
                   <div className="w-10 h-10 rounded-xl border border-[var(--electric-cyan)]/30 bg-[var(--electric-cyan)]/10 flex items-center justify-center mb-4">

@@ -48,7 +48,7 @@ export function AboutCTA() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-8 bg-[var(--electric-cyan)]" />
@@ -68,7 +68,7 @@ export function AboutCTA() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.07 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="flex items-start gap-3"
                 >
                   <CheckCircle size={16} className="text-[var(--electric-cyan)] flex-shrink-0 mt-0.5" />
@@ -83,7 +83,7 @@ export function AboutCTA() {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             <div className="relative p-8 rounded-2xl border border-[var(--electric-cyan)]/30 bg-card/60 hover:border-[var(--electric-cyan)]/60 transition-all duration-300 group overflow-hidden">
               {/* Shimmer */}
@@ -113,7 +113,7 @@ export function AboutCTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-24"
         >
           <div className="text-center mb-10">
@@ -137,7 +137,7 @@ export function AboutCTA() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: idx * 0.06 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="flex items-center gap-3 px-5 py-3 rounded-xl border border-border bg-card/40 hover:border-[var(--electric-cyan)]/40 hover:bg-[var(--electric-cyan)]/5 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300 group"
                 >
                   <Icon size={18} className="text-muted-foreground group-hover:text-[var(--electric-cyan)] transition-colors" />
@@ -156,7 +156,7 @@ export function AboutCTA() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="relative text-center py-20 px-8 rounded-3xl border border-[var(--electric-cyan)]/30 bg-[var(--electric-cyan)]/5 overflow-hidden"
         >
           {/* Blueprint grid inside CTA */}

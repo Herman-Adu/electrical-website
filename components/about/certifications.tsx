@@ -28,7 +28,7 @@ export function Certifications() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -55,7 +55,7 @@ export function Certifications() {
               initial={{ opacity: 0, rotateY: -15, y: 20 }}
               whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.07 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className={`relative group rounded-2xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
                 cert.featured
                   ? 'border-[var(--electric-cyan)]/50 bg-[var(--electric-cyan)]/8 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/20'
@@ -105,7 +105,7 @@ export function Certifications() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mt-12 text-center"
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-card/40">

@@ -78,7 +78,7 @@ export function PeaceOfMind() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -108,7 +108,7 @@ export function PeaceOfMind() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 className={`relative p-7 rounded-2xl border transition-all duration-300 group ${
                   pillar.highlight
                     ? 'border-[var(--electric-cyan)]/60 bg-[var(--electric-cyan)]/8 shadow-lg shadow-[var(--electric-cyan)]/15'
@@ -149,7 +149,7 @@ export function PeaceOfMind() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             <h3 className="text-xl font-bold text-foreground mb-6">What You Always Receive</h3>
             <div className="space-y-3">
@@ -159,7 +159,7 @@ export function PeaceOfMind() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.07 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="flex items-start gap-3"
                 >
                   <CheckCircle size={16} className="text-[var(--electric-cyan)] flex-shrink-0 mt-0.5" />
@@ -174,7 +174,7 @@ export function PeaceOfMind() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             <h3 className="text-xl font-bold text-foreground mb-6">Our Accreditations &amp; Partners</h3>
             <div className="grid grid-cols-3 gap-4">
@@ -184,7 +184,7 @@ export function PeaceOfMind() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: idx * 0.06 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="aspect-square rounded-xl border border-border bg-card/40 flex flex-col items-center justify-center gap-1 hover:border-[var(--electric-cyan)]/40 hover:bg-[var(--electric-cyan)]/5 transition-all duration-300 group cursor-default"
                 >
                   <span className="font-mono text-lg font-bold text-[var(--electric-cyan)]/60 group-hover:text-[var(--electric-cyan)] transition-colors">

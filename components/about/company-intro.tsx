@@ -80,7 +80,7 @@ export function CompanyIntro() {
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="flex items-center gap-3 mb-12"
         >
           <div className="h-px w-8 bg-[var(--electric-cyan)]" />
@@ -101,7 +101,7 @@ export function CompanyIntro() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="text-lg text-muted-foreground max-w-3xl leading-relaxed"
           >
             From a two-man operation wiring domestic extensions in South London to a
@@ -117,7 +117,7 @@ export function CompanyIntro() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl"
         >
           <p className="text-muted-foreground leading-relaxed">
@@ -142,7 +142,7 @@ export function CompanyIntro() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-[var(--electric-cyan)]/40 transition-all duration-400 group"
             >
               {/* Corner brackets */}
