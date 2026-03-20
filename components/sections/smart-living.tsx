@@ -90,7 +90,7 @@ function DimmerSlider({ label, defaultValue, delay, inView }: { label: string; d
       initial={{ opacity: 0, x: 30 }}
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
       transition={{ duration: 0.6, delay }}
-      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-amber-500/40 transition-all duration-300"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-amber-500/40 transition-all duration-300"
     >
       <div className="flex justify-between items-center mb-3">
         <span className="text-sm text-slate-300 font-medium">{label}</span>
@@ -135,7 +135,7 @@ function EnergyGraph({ delay, inView }: { delay: number; inView: boolean }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
-      className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-4 pb-5 border border-slate-700/50"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 pb-5 border border-white/20"
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-1">
@@ -361,7 +361,7 @@ export function SmartLiving() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="mb-8 p-4 rounded-xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/30"
+                className="mb-8 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20"
               >
                 <p className="text-lg text-slate-200 leading-relaxed">
                   Transform your home with smart lighting systems that adapt to your 
@@ -376,7 +376,7 @@ export function SmartLiving() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-6 mb-10 p-6 rounded-2xl bg-[var(--deep-black)]/60 backdrop-blur-md border border-slate-700/50"
+                className="flex items-center gap-6 mb-10 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
               >
                 <AnimatedProgressRing value={40} inView={inView} />
                 <div>
@@ -419,7 +419,7 @@ export function SmartLiving() {
                 className="lg:absolute lg:top-1/3 lg:-left-8 lg:w-52"
                 style={{ y: uiY3 }}
               >
-                <div className="bg-[var(--deep-black)]/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50">
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shrink-0">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
