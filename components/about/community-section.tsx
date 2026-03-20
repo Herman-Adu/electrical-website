@@ -89,7 +89,7 @@ export function CommunitySection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="mb-16 max-w-2xl"
+            className="mb-16 max-w-2xl mt-8"
           >
             <div className="p-8 rounded-2xl bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 mb-5">
