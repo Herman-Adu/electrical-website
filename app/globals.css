@@ -338,42 +338,173 @@
 
 /* Section container - wraps entire section, handles overflow */
 .section-container {
-  @apply relative w-full overflow-hidden;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 /* Section padding - responsive vertical spacing */
 .section-padding {
-  @apply py-16 sm:py-20 md:py-24 lg:py-32;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
 
 /* Section padding compact - for shorter sections */
 .section-padding-sm {
-  @apply py-12 sm:py-16 md:py-20 lg:py-24;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding-sm {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-padding-sm {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding-sm {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
 }
 
 /* Section content - max-width and horizontal gutters */
 .section-content {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* Section content wide - for full-bleed sections with contained content */
 .section-content-wide {
-  @apply max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-content-wide {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-content-wide {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* Combined utility for standard sections */
 .section-standard {
-  @apply section-container section-padding;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-standard {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-standard {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-standard {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
 
 /* Safe area for fixed-height sections (accounts for navbar) */
 .section-safe-top {
-  @apply pt-20 sm:pt-24 md:pt-28;
+  padding-top: 5rem;
+}
+
+@media (min-width: 640px) {
+  .section-safe-top {
+    padding-top: 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-safe-top {
+    padding-top: 7rem;
+  }
 }
 
 /* Safe area bottom (prevents content cut-off) */
 .section-safe-bottom {
-  @apply pb-16 sm:pb-20 md:pb-24;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-safe-bottom {
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-safe-bottom {
+    padding-bottom: 6rem;
+  }
 }
 
 
