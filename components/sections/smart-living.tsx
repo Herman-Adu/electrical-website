@@ -264,7 +264,7 @@ export function SmartLiving() {
       <section
       id="smart-living"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] flex flex-col justify-center"
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)]"
       style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
