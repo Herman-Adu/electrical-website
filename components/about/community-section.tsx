@@ -48,7 +48,7 @@ export function CommunitySection() {
     <section
       id="community"
       ref={sectionRef}
-      className="relative min-h-[80vh] overflow-hidden"
+      className="relative min-h-screen overflow-hidden section-padding-tall"
     >
       {/* Parallax background image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
@@ -80,7 +80,7 @@ export function CommunitySection() {
       {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-20 section-padding"
+        className="relative z-20 w-full"
       >
         <div className="section-content">
           {/* Header with glassmorphic backdrop */}
@@ -89,7 +89,7 @@ export function CommunitySection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: false }}
-            className="mb-16 max-w-2xl mt-8"
+            className="mb-16 max-w-2xl"
           >
             <div className="p-8 rounded-2xl bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 mb-5">
@@ -126,8 +126,8 @@ export function CommunitySection() {
                 key={stat.label}
                 className="p-6 rounded-2xl bg-background/70 backdrop-blur-md border border-white/10 hover:border-[var(--electric-cyan)]/40 transition-all duration-300 group"
               >
-                <div className="text-3xl font-black font-mono text-[var(--electric-cyan)] mb-1">{stat.value}</div>
-                <div className="text-sm text-foreground/90">{stat.label}</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-black font-mono text-[var(--electric-cyan)] mb-1">{stat.value}</div>
+                <div className="text-xs sm:text-sm text-foreground/90">{stat.label}</div>
               </div>
             ))}
           </motion.div>
