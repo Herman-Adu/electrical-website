@@ -1,22 +1,23 @@
 {
   "meta": {
     "project": "nexgen-electrical-website",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "framework": "next.js-16",
-    "lastUpdated": "2026-03-19T00:00:00Z",
-    "lastValidatedBuild": "2026-03-19T00:00:00Z"
+    "lastUpdated": "2026-03-20T12:00:00Z",
+    "lastValidatedBuild": "2026-03-20T12:00:00Z"
   },
 
   "phase": {
-    "current": "BUILD",
+    "current": "REFACTOR",
     "status": "active",
-    "activeSince": "2026-03-19"
+    "activeSince": "2026-03-20",
+    "nextTask": "Migrate all sections to SectionWrapper"
   },
 
   "pages": {
     "/": {
       "file": "app/page.tsx",
-      "status": "complete",
+      "status": "needs-refactor",
       "sections": [
         "Hero",
         "Services", 
@@ -28,17 +29,19 @@
         "CTAPower",
         "Footer"
       ],
+      "sectionWrapperMigration": "pending",
       "lastModified": "2026-03-19"
     },
     "/contact": {
       "file": "app/contact/page.tsx",
-      "status": "complete",
+      "status": "needs-refactor",
       "sections": ["ContactForm"],
+      "sectionWrapperMigration": "pending",
       "lastModified": "2026-03-19"
     },
     "/about": {
       "file": "app/about/page.tsx",
-      "status": "complete",
+      "status": "partial-refactor",
       "sections": [
         "AboutHero",
         "CompanyIntro",
@@ -52,7 +55,30 @@
         "AboutCTA",
         "Footer"
       ],
+      "sectionWrapperMigration": {
+        "CommunitySection": "complete",
+        "others": "pending"
+      },
       "lastModified": "2026-03-20"
+    }
+  },
+
+  "architecture": {
+    "sectionWrapper": {
+      "status": "IMPLEMENTED",
+      "path": "components/ui/section-wrapper.tsx",
+      "cssUtility": ".section-fluid",
+      "spacing": "clamp(3rem, 8vh, 10rem)",
+      "variants": ["full", "short", "auto"],
+      "rule": "RULE 15 in rules.md",
+      "migratedComponents": ["CommunitySection"],
+      "pendingComponents": [
+        "Hero", "Services", "Illumination", "Features", 
+        "Schematic", "Dashboard", "SmartLiving", "CTAPower",
+        "AboutHero", "CompanyIntro", "DirectorProfile",
+        "CompanyTimeline", "PeaceOfMind", "VisionMission",
+        "Certifications", "CoreValues", "AboutCTA"
+      ]
     }
   },
 
@@ -117,7 +143,8 @@
         "input.tsx",
         "textarea.tsx",
         "label.tsx",
-        "card.tsx"
+        "card.tsx",
+        "section-wrapper.tsx"
       ]
     }
   },
@@ -140,14 +167,27 @@
 
   "driftDetection": {
     "enabled": true,
-    "lastCheck": "2026-03-19T00:00:00Z",
+    "lastCheck": "2026-03-20T12:00:00Z",
     "status": "clean",
-    "knownFiles": 85,
+    "knownFiles": 87,
     "checksumPages": null,
     "checksumComponents": null
   },
 
   "changelog": [
+    {
+      "id": "CHG-003",
+      "timestamp": "2026-03-20T12:00:00Z",
+      "type": "arch",
+      "description": "SectionWrapper component created - fluid vertical centering with clamp(3rem, 8vh, 10rem). CommunitySection migrated as proof of concept. Rule 15 documented.",
+      "files": [
+        "components/ui/section-wrapper.tsx",
+        "components/about/community-section.tsx",
+        "app/globals.css",
+        ".v0/rules.md"
+      ],
+      "author": "v0"
+    },
     {
       "id": "CHG-002",
       "timestamp": "2026-03-19T01:00:00Z",
