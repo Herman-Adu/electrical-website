@@ -67,7 +67,7 @@ export function SchedulerCard() {
           </span>
           <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
         </div>
-        <h3 className="text-xl font-bold Maintenance Scheduler mb-2">
+        <h3 className="text-xl font-bold text-card-foreground mb-2">
           Maintenance Scheduler
         </h3>
         <p className="text-sm text-slate-400 mb-6">
@@ -80,11 +80,10 @@ export function SchedulerCard() {
               <button
                 key={day.id}
                 onClick={() => handleDaySelect(index)}
-                className={`w-full py-3 rounded text-xs font-mono font-bold transition-all duration-300 ${
-                  selectedIndex === index
+                className={`w-full py-3 rounded text-xs font-mono font-bold transition-all duration-300 ${selectedIndex === index
                     ? "bg-[var(--electric-cyan)]/20 border border-[var(--electric-cyan)]/80 text-[var(--electric-cyan)]"
                     : "bg-transparent border border-slate-700/40 text-slate-400 hover:border-[var(--electric-cyan)]/40 hover:text-[var(--electric-cyan)]/60"
-                }`}
+                  }`}
               >
                 {day.label}
               </button>
