@@ -147,3 +147,4 @@ Must pass with 0 errors before any completion claim.
 | 11 | No shortcuts - full validation always | Platinum |
 | 12 | Health-first model selection | Model |
 | 13 | Model change = metrics update | Model |
+| 14 | **STOP = STOP immediately. No code changes, no recommendations, no continuations.** | **Critical** |
