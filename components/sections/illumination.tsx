@@ -80,6 +80,7 @@ export function Illumination() {
     <SectionWrapper
       id="illumination"
       variant="full"
+      sectionRef={containerRef}
     >
       {/* Content */}
       <motion.div 

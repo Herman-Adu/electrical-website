@@ -226,9 +226,12 @@ function TimelineNode({
 export function CompanyTimeline() {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollDirection = useScrollDirection();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: mounted ? sectionRef : undefined,
     offset: ['start end', 'end start'],
   });
   const lineHeight = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '100%']);
@@ -237,6 +240,7 @@ export function CompanyTimeline() {
     <SectionWrapper
       id="timeline"
       variant="full"
+      sectionRef={sectionRef}
     >
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 

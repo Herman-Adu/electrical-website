@@ -88,6 +88,7 @@ const CTAPowerClient = () => {
     <SectionWrapper
       id="power-vision"
       variant="full"
+      sectionRef={containerRef}
     >
       {/* Single Electrical Schematic - draws itself on scroll */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

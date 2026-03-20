@@ -79,6 +79,7 @@ export function VisionMission() {
     <SectionWrapper
       id="vision-mission"
       variant="full"
+      sectionRef={sectionRef}
     >
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
 

@@ -56,6 +56,7 @@ export function CompanyIntro() {
     <SectionWrapper
       id="company-intro"
       variant="full"
+      sectionRef={sectionRef}
     >
       {/* Blueprint grid overlay */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />

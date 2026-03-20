@@ -265,6 +265,7 @@ export function SmartLiving() {
     <SectionWrapper
       id="smart-living"
       variant="full"
+      sectionRef={containerRef}
     >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">

@@ -61,6 +61,7 @@ export function DirectorProfile({
     <SectionWrapper
       id="directors"
       variant="full"
+      sectionRef={sectionRef}
     >
       {/* Blueprint grid */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
