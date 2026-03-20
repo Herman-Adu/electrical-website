@@ -22,7 +22,7 @@ export function Certifications() {
     <SectionWrapper
       id="certifications"
       variant="full"
-    > id="certifications" className="section-container section-padding bg-background">
+    >
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent" />
 

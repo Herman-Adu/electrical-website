@@ -203,8 +203,6 @@ export function Dashboard() {
       id="dashboard"
       variant="full"
     >
-      className="section-container section-padding bg-background"
-    >
       {/* Background Grid */}
       <div className="absolute inset-0 blueprint-grid opacity-3" />
       

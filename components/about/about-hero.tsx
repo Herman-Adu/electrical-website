@@ -69,9 +69,6 @@ export function AboutHero() {
       id="about-hero"
       variant="full"
     >
-      ref={scrollRef}
-      className="section-container section-safe-top section-safe-bottom relative min-h-screen w-full flex flex-col items-center justify-center"
-    >
       <BlueprintBackground />
 
       {/* Animated circuit lines - decorative */}

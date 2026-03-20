@@ -237,7 +237,7 @@ export function CompanyTimeline() {
     <SectionWrapper
       id="timeline"
       variant="full"
-    > id="timeline" ref={sectionRef} className="section-container section-padding bg-background">
+    >
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
       <div className="section-content max-w-5xl">

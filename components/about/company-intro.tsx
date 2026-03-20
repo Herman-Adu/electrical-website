@@ -57,10 +57,6 @@ export function CompanyIntro() {
       id="company-intro"
       variant="full"
     >
-      id="company-intro"
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
-    >
       {/* Blueprint grid overlay */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />
 

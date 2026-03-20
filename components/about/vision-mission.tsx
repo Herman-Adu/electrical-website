@@ -79,7 +79,7 @@ export function VisionMission() {
     <SectionWrapper
       id="vision-mission"
       variant="full"
-    > id="vision-mission" ref={sectionRef} className="section-container section-padding bg-background">
+    >
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
 
       <div className="section-content">

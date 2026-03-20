@@ -58,13 +58,9 @@ export function DirectorProfile({
   const imageInitialX = reversed ? 50 : -50;
 
   return (
-      <SectionWrapper
-        id="directors"
-        variant="full"
-      >
-      id={sectionId}
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
+    <SectionWrapper
+      id="directors"
+      variant="full"
     >
       {/* Blueprint grid */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />

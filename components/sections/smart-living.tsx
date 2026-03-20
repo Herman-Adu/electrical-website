@@ -266,9 +266,6 @@ export function SmartLiving() {
       id="smart-living"
       variant="full"
     >
-      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding-tall"
-      style={{ position: 'relative' }}
-    >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">
         <motion.div
