@@ -510,7 +510,7 @@
 /* Tall stacked content padding - for sections with vertical layouts on mobile/tablet */
 .section-padding-tall {
   padding-top: 4rem;
-  padding-bottom: 24rem;
+  padding-bottom: 14rem;
 }
 
 @media (min-width: 1024px) {
