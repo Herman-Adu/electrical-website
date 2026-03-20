@@ -68,8 +68,8 @@ function AnimatedProgressRing({
         />
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--amber-warning)" />
-            <stop offset="100%" stopColor="var(--electric-cyan)" />
+            <stop offset="0%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#00f2ff" />
           </linearGradient>
         </defs>
       </svg>
@@ -350,7 +350,7 @@ export function SmartLiving() {
               >
                 Intelligent Lighting
                 <br />
-                <span className="bg-gradient-to-r from-amber-400 to-[var(--electric-cyan)] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-amber-400 to-[#00f2ff] bg-clip-text text-transparent">
                   For Modern Living
                 </span>
               </motion.h2>
