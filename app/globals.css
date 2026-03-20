@@ -330,3 +330,13 @@
   font-size: 10px;
   line-height: 1.2;
 }
+
+/* ===== FORCE DARK TOKENS FOR IMAGE-BACKED SECTIONS ===== */
+/* SmartLiving and any full-bleed dark image section should
+   always render with dark brand tokens regardless of theme */
+#smart-living {
+  --electric-cyan: #00f2ff;
+  --electric-cyan-dim: rgba(0, 242, 255, 0.6);
+  --amber-warning: #f59e0b;
+  --deep-black: #020617;
+}
