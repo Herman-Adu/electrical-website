@@ -48,7 +48,7 @@ export function CommunitySection() {
     <section
       id="community"
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden section-padding-tall"
+      className="relative min-h-screen overflow-hidden"
     >
       {/* Parallax background image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
@@ -82,7 +82,7 @@ export function CommunitySection() {
         style={{ opacity: contentOpacity }}
         className="relative z-20 w-full"
       >
-        <div className="section-content">
+        <div className="section-content section-padding-tall">
           {/* Header with glassmorphic backdrop */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
