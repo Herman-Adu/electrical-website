@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Eye, Target, ArrowRight } from 'lucide-react';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const visionPoints = [
   { label: 'Innovation', text: 'Pioneering smart electrical systems that set the standard for the next generation of infrastructure.' },
@@ -76,11 +75,7 @@ export function VisionMission() {
   }, []);
 
   return (
-    <SectionWrapper
-      id="vision-mission"
-      variant="full"
-      sectionRef={sectionRef}
-    >
+    <section id="vision-mission" ref={sectionRef} className="section-container section-padding bg-background">
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
 
       <div className="section-content">
@@ -205,6 +200,6 @@ export function VisionMission() {
 
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

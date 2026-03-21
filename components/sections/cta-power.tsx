@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Zap, Home, Building2, Factory } from 'lucide-react';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const CTAPowerClient = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,10 +84,11 @@ const CTAPowerClient = () => {
   };
 
   return (
-    <SectionWrapper
+    <section
+      ref={containerRef}
       id="power-vision"
-      variant="full"
-      sectionRef={containerRef}
+      className="section-container section-padding relative min-h-screen bg-background"
+      style={{ position: 'relative' }}
     >
       {/* Single Electrical Schematic - draws itself on scroll */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -409,7 +409,7 @@ const CTAPowerClient = () => {
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ delay: 1, duration: 1 }}
       />
-    </SectionWrapper>
+    </section>
   );
 };
 

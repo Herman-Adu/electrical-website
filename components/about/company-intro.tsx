@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const words = [
   'Intact', 'Electrical', 'Innovations', 'was', 'founded', 'on', 'a', 'single',
@@ -53,10 +52,10 @@ export function CompanyIntro() {
   }, []);
 
   return (
-    <SectionWrapper
+    <section
       id="company-intro"
-      variant="full"
-      sectionRef={sectionRef}
+      ref={sectionRef}
+      className="section-container section-padding bg-background"
     >
       {/* Blueprint grid overlay */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />
@@ -159,6 +158,6 @@ export function CompanyIntro() {
           ))}
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

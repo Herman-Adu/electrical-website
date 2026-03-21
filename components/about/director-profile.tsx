@@ -4,7 +4,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { Linkedin, Twitter, Mail, Award, CheckCircle } from 'lucide-react';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 export interface DirectorProfileProps {
   name: string;
@@ -58,10 +57,10 @@ export function DirectorProfile({
   const imageInitialX = reversed ? 50 : -50;
 
   return (
-    <SectionWrapper
-      id="directors"
-      variant="full"
-      sectionRef={sectionRef}
+    <section
+      id={sectionId}
+      ref={sectionRef}
+      className="section-container section-padding bg-background"
     >
       {/* Blueprint grid */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
@@ -248,6 +247,7 @@ export function DirectorProfile({
             )}
           </div>
         </div>
-      </SectionWrapper>
+      </div>
+    </section>
   );
 }

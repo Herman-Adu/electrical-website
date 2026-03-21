@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Clock, Award, ThumbsUp, CheckCircle, Zap } from 'lucide-react';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const pillars = [
   {
@@ -52,10 +51,7 @@ const checks = [
 
 export function PeaceOfMind() {
   return (
-    <SectionWrapper
-      id="peace-of-mind"
-      variant="full"
-    >
+    <section id="peace-of-mind" className="section-container section-padding bg-slate-dark">
       {/* Blueprint grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none" />
 
@@ -203,6 +199,6 @@ export function PeaceOfMind() {
           </motion.div>
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

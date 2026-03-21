@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 const stats = [
   { value: 2400, suffix: '+', label: 'Projects Delivered' },
@@ -77,13 +76,57 @@ export function Illumination() {
   }, []);
   
   return (
-    <SectionWrapper
+    <section 
       id="illumination"
-      variant="full"
-      sectionRef={containerRef}
+      ref={containerRef}
+      className="section-container relative min-h-[100svh] lg:min-h-[90vh] flex flex-col justify-center"
+      style={{ position: 'relative' }}
     >
+      {/* Parallax Image with Brightness Reveal */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        style={{ y: imageY }}
+      >
+        <motion.div 
+          className="relative w-full h-[120%]"
+          style={{ filter: brightnessFilter }}
+        >
+          <Image
+            src="/images/warehouse-lighting.jpg"
+            alt="Industrial warehouse lighting installation"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+        
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--deep-black)] via-[var(--deep-black)]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--deep-black)]/80 via-transparent to-[var(--deep-black)]/40" />
+      </motion.div>
+      
+      {/* Scan Line Effect */}
+      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/50 to-transparent"
+          animate={{
+            top: ['0%', '100%'],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      </div>
+      
+      {/* Electric Pulse Border */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent" />
+      
       {/* Content */}
       <motion.div 
+        className="relative z-20 w-full section-padding"
         style={{ y: contentY, opacity }}
       >
         <div className="section-content w-full">
@@ -201,6 +244,6 @@ export function Illumination() {
           />
         ))}
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

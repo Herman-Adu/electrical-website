@@ -4,7 +4,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { SchedulerCard } from './scheduler-card';
 
 const monitorData = [
@@ -201,10 +200,7 @@ export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <SectionWrapper
-      id="features"
-      variant="full"
-    >
+    <section id="features" ref={sectionRef} className="section-container section-padding bg-background">
       <div className="section-content">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -231,6 +227,6 @@ export function Features() {
           <SchedulerCard />
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

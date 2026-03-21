@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 function AnimatedProgressRing({
   value,
@@ -262,10 +261,11 @@ export function SmartLiving() {
   }, []);
 
   return (
-    <SectionWrapper
+      <section
       id="smart-living"
-      variant="full"
-      sectionRef={containerRef}
+      ref={containerRef}
+      className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding-tall"
+      style={{ position: 'relative' }}
     >
       {/* Background Image with Before/After Brightness Transition */}
       <div className="absolute inset-0 z-0">
@@ -484,6 +484,6 @@ export function SmartLiving() {
 
       {/* Bottom Border */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-    </SectionWrapper>
+    </section>
   );
 }
