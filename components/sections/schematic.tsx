@@ -84,6 +84,7 @@ export function Schematic() {
     <SectionWrapper
       id="architecture"
       variant="full"
+      sectionRef={sectionRef}
     >
       {/* Top border gradient */}
       <div 

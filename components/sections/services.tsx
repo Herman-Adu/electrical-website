@@ -124,6 +124,7 @@ export function Services() {
     <SectionWrapper
       id="services"
       variant="full"
+      sectionRef={sectionRef}
     >
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
