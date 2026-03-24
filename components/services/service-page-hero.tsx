@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronDown, Activity } from 'lucide-react';
 import { BlueprintBackground } from '@/components/hero/blueprint-background';
-import type { SectionHeroData } from '@/types/sections';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -26,30 +25,32 @@ const itemVariants = {
 };
 
 interface ServicePageHeroProps {
-  data: SectionHeroData;
+  title: string;
+  subtitle?: string;
+  description: string;
+  backgroundImage?: string;
+  backgroundImageAlt?: string;
+  stats?: Array<{ label: string; value: string }>;
+  scrollTargetId?: string;
 }
 
-export function ServicePageHero({ data }: ServicePageHeroProps) {
-  const {
-    eyebrow,
-    headline,
-    headlineHighlight,
-    subheadline,
-    stats = [],
-    scrollTargetId,
-    scrollLabel = 'Explore',
-    backgroundImage,
-  } = data;
-
+export function ServicePageHero({
+  title,
+  subtitle,
+  description,
+  backgroundImage,
+  backgroundImageAlt = 'Service background',
+  stats = [],
+  scrollTargetId,
+}: ServicePageHeroProps) {
   const scrollToContent = () => {
-    const target = scrollTargetId ? document.getElementById(scrollTargetId) : document.querySelector('section[id]');
+    const target = scrollTargetId
+      ? document.getElementById(scrollTargetId)
+      : document.querySelector('section[id]');
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  // Parse headline into lines
-  const headlineLines = Array.isArray(headline) ? headline : [headline];
 
   return (
     <section className="section-container section-safe-top section-safe-bottom relative min-h-screen w-full flex flex-col items-center justify-center">
@@ -57,11 +58,11 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
       {backgroundImage ? (
         <div className="absolute inset-0 z-0">
           <Image
-            src={backgroundImage.src}
-            alt={backgroundImage.alt}
+            src={backgroundImage}
+            alt={backgroundImageAlt}
             fill
             className="object-cover"
-            priority={backgroundImage.priority}
+            priority
           />
           <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/70 dark:via-black/50 dark:to-black/70 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
         </div>
@@ -110,12 +111,12 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           </div>
         </motion.div>
 
-        {/* Eyebrow */}
-        {eyebrow && (
+        {/* Subtitle/Eyebrow */}
+        {subtitle && (
           <motion.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-12 bg-[var(--electric-cyan)]/60" />
             <span className="font-mono text-xs tracking-[0.3em] uppercase text-[var(--electric-cyan)]/70">
-              {eyebrow}
+              {subtitle}
             </span>
             <span className="h-px w-12 bg-[var(--electric-cyan)]/60" />
           </motion.div>
@@ -124,30 +125,17 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
         {/* Main headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white"
         >
-          {headlineLines.map((line, idx) => {
-            const isHighlighted = headlineHighlight && line.includes(headlineHighlight);
-            return (
-              <span key={idx} className="block">
-                {isHighlighted ? (
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--electric-cyan)] via-cyan-400 to-blue-500">
-                    {line}
-                  </span>
-                ) : (
-                  line
-                )}
-              </span>
-            );
-          })}
+          {title}
         </motion.h1>
 
-        {/* Subheadline */}
+        {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-base sm:text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
         >
-          {subheadline}
+          {description}
         </motion.p>
 
         {/* Stats bar */}
@@ -159,11 +147,11 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="relative p-5 rounded-xl border border-border bg-card/60 backdrop-blur-md hover:border-[var(--electric-cyan)]/50 transition-all duration-300 group"
+                className="relative p-5 rounded-xl border border-white/10 bg-black/40 backdrop-blur-md hover:border-[var(--electric-cyan)]/50 transition-all duration-300 group"
               >
                 <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-[var(--electric-cyan)]/30 rounded-tr group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
                 <div className="text-2xl font-black font-mono text-[var(--electric-cyan)] mb-1">{stat.value}</div>
-                <div className="text-xs text-muted-foreground font-medium tracking-wide">{stat.label}</div>
+                <div className="text-xs text-white/60 font-medium tracking-wide">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -189,9 +177,9 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
         onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-white/60 hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
       >
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">{scrollLabel}</span>
+        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Explore</span>
         <ChevronDown size={20} className="animate-bounce" />
       </motion.button>
     </section>

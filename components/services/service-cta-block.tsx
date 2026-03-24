@@ -51,12 +51,12 @@ export function ServiceCTABlock({
       whileInView="visible"
       viewport={{ once: true, margin: '-60px' }}
       transition={{ delay }}
-      className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden"
+      className="section-container section-padding relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 -z-10 dark:bg-gradient-to-r dark:from-[var(--electric-cyan)]/5 dark:via-transparent dark:to-[var(--electric-cyan)]/5 bg-gradient-to-r from-[var(--electric-cyan)]/3 via-transparent to-[var(--electric-cyan)]/3 rounded-3xl" />
 
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="section-content max-w-3xl mx-auto text-center">
         <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold mb-4">
           {title}
         </motion.h2>
