@@ -93,30 +93,20 @@ function TimelineNode({
   scrollDirection: 'up' | 'down';
 }) {
   const Icon = milestone.icon;
+
+  // Mobile: single column (all on right), Desktop: alternating
   const isEven = index % 2 === 0;
 
-  // When scrolling down: slide in from outside edge → centre
-  // When scrolling up: reverse — slide back out to outside edge
-  const exitX = isEven ? -60 : 60;
-
   const cardVariants = {
-    hidden: (dir: 'up' | 'down') => ({
+    hidden: {
       opacity: 0,
-      x: dir === 'down' ? exitX : 0,
-      y: dir === 'down' ? 0 : -20,
-    }),
+      y: 10,
+    },
     visible: {
       opacity: 1,
-      x: 0,
       y: 0,
-      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 },
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.02 },
     },
-    exit: (dir: 'up' | 'down') => ({
-      opacity: 0,
-      x: dir === 'up' ? exitX : 0,
-      y: dir === 'up' ? 0 : 20,
-      transition: { duration: 0.35, ease: 'easeIn' },
-    }),
   };
 
   const nodeVariants = {
@@ -124,42 +114,36 @@ function TimelineNode({
     visible: {
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.4, delay: index * 0.04 + 0.1, type: 'spring', stiffness: 200 },
+      transition: { duration: 0.35, delay: index * 0.02 + 0.06, type: 'spring', stiffness: 180 },
     },
-    exit: { scale: 0, opacity: 0, transition: { duration: 0.25 } },
   };
 
   const lineVariants = {
     hidden: { scaleY: 0 },
     visible: {
       scaleY: 1,
-      transition: { duration: 0.45, delay: index * 0.04 + 0.25 },
+      transition: { duration: 0.4, delay: index * 0.02 + 0.15 },
     },
-    exit: { scaleY: 0, transition: { duration: 0.25 } },
   };
 
-  const Card = ({ side }: { side: 'left' | 'right' }) => (
+  const Card = () => (
     <motion.div
-      custom={scrollDirection}
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      exit="exit"
-      viewport={{ once: false, margin: '-60px' }}
-      className={`p-6 rounded-xl border transition-all duration-300 group cursor-default max-w-sm ${
-        side === 'left' ? 'ml-auto' : ''
-      } ${
+      viewport={{ once: false, margin: '-40px' }}
+      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm ${
         milestone.highlight
           ? 'border-[var(--electric-cyan)]/50 bg-[var(--electric-cyan)]/5'
           : 'border-border bg-card/40'
       } hover:border-[var(--electric-cyan)]/40 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10`}
     >
       <div className="font-mono text-xs tracking-widest text-[var(--electric-cyan)]/70 mb-2">{milestone.year}</div>
-      <h3 className="text-lg font-bold text-foreground mb-2">{milestone.title}</h3>
+      <h3 className="text-base md:text-lg font-bold text-foreground mb-2 leading-tight">{milestone.title}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed">{milestone.desc}</p>
       {milestone.highlight && (
-        <div className={`mt-3 flex items-center gap-1.5 ${side === 'left' ? 'justify-end' : ''}`}>
-          <Star size={12} className="text-[var(--amber-warning)] fill-[var(--amber-warning)]" />
+        <div className="mt-3 flex items-center gap-1.5">
+          <Star size={12} className="text-[var(--amber-warning)] fill-[var(--amber-warning)] flex-shrink-0" />
           <span className="font-mono text-[10px] text-[var(--amber-warning)] tracking-widest uppercase">Milestone</span>
         </div>
       )}
@@ -167,56 +151,60 @@ function TimelineNode({
   );
 
   return (
-    <div className="relative flex items-start gap-0">
-      {/* Left content — even items */}
-      <div className={`w-[calc(50%-2rem)] pr-8 ${isEven ? 'flex flex-col items-end text-right' : 'invisible'}`}>
-        {isEven && <Card side="left" />}
-      </div>
-
-      {/* Centre spine */}
-      <div className="relative flex flex-col items-center w-16 flex-shrink-0">
+    <div className="relative flex gap-3 md:gap-0">
+      {/* Timeline spine - left side */}
+      <div className="relative flex flex-col items-center flex-shrink-0 md:w-16">
+        {/* Icon node */}
         <motion.div
           variants={nodeVariants}
-          custom={scrollDirection}
           initial="hidden"
           whileInView="visible"
-          exit="exit"
           viewport={{ once: false }}
-          className={`relative z-10 w-12 h-12 rounded-full border-2 flex items-center justify-center ${
+          className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
             milestone.highlight
               ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
               : 'border-border bg-card'
           }`}
         >
           <Icon
-            size={18}
-            className={milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'}
+            size={16}
+            className={`md:size-[18px] ${
+              milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
+            }`}
           />
           {milestone.highlight && (
             <motion.div
               className="absolute inset-0 rounded-full border border-[var(--electric-cyan)]/30"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0, 0.6] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
+              animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
           )}
         </motion.div>
 
+        {/* Connecting line */}
         {!isLast && (
           <motion.div
             variants={lineVariants}
-            custom={scrollDirection}
             initial="hidden"
             whileInView="visible"
-            exit="exit"
             viewport={{ once: false }}
-            className="w-px flex-1 min-h-[3rem] bg-gradient-to-b from-border to-[var(--electric-cyan)]/20 origin-top mt-2"
+            className="w-px flex-1 min-h-[2rem] md:min-h-[3rem] bg-gradient-to-b from-border to-[var(--electric-cyan)]/20 origin-top mt-2 md:mt-0"
           />
         )}
       </div>
 
-      {/* Right content — odd items */}
-      <div className={`w-[calc(50%-2rem)] pl-8 ${!isEven ? 'flex flex-col items-start text-left' : 'invisible'}`}>
-        {!isEven && <Card side="right" />}
+      {/* Card - right side on mobile, alternating on desktop */}
+      <div className="flex-1 md:hidden">
+        <Card />
+      </div>
+
+      {/* Desktop alternating layout */}
+      <div className="hidden md:flex md:w-[calc(50%-2rem)] md:pr-8 flex-col items-end text-right">
+        {isEven && <Card />}
+      </div>
+
+      <div className="hidden md:flex md:w-[calc(50%-2rem)] md:pl-8 flex-col items-start text-left">
+        {!isEven && <Card />}
       </div>
     </div>
   );
@@ -225,9 +213,14 @@ function TimelineNode({
 export function CompanyTimeline() {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollDirection = useScrollDirection();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: mounted ? sectionRef : undefined,
     offset: ['start end', 'end start'],
   });
   const lineHeight = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '100%']);
@@ -243,33 +236,43 @@ export function CompanyTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-[var(--electric-cyan)]" />
-            <span className="font-mono text-xs tracking-widest uppercase text-[var(--electric-cyan)]">Our Journey</span>
-            <div className="h-px w-8 bg-[var(--electric-cyan)]" />
+            <div className="h-px w-6 md:w-8 bg-[var(--electric-cyan)]" />
+            <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-[var(--electric-cyan)]">
+              Our Journey
+            </span>
+            <div className="h-px w-6 md:w-8 bg-[var(--electric-cyan)]" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 text-balance">
             15 Years of <span className="text-[var(--electric-cyan)]">Powering Progress</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            From humble beginnings to industry leadership — every year has been built on the
-            same foundation of quality and community.
+          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            From humble beginnings to industry leadership — every year has been built on the same
+            foundation of quality and community.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Animated progress line */}
-          <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border/40 -translate-x-1/2 overflow-hidden">
+          {/* Animated progress line - hidden on mobile */}
+          <div className="hidden md:block absolute left-1/2 top-6 bottom-6 w-px bg-border/40 -translate-x-1/2 overflow-hidden">
             <motion.div
               className="w-full bg-gradient-to-b from-[var(--electric-cyan)]/60 to-[var(--electric-cyan)]/20"
               style={{ height: lineHeight }}
             />
           </div>
 
-          <div className="flex flex-col gap-8">
+          {/* Mobile progress line - left side */}
+          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border/40 md:hidden overflow-hidden">
+            <motion.div
+              className="w-full bg-gradient-to-b from-[var(--electric-cyan)]/60 to-[var(--electric-cyan)]/20"
+              style={{ height: lineHeight }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-6 md:gap-8">
             {milestones.map((milestone, idx) => (
               <TimelineNode
                 key={milestone.year}
