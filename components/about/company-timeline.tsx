@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { Zap, Award, Users, Building, Star, Shield } from 'lucide-react';
 
 const milestones = [
@@ -93,11 +93,6 @@ function TimelineNode({
   scrollDirection: 'up' | 'down';
 }) {
   const Icon = milestone.icon;
-  const nodeRef = useRef<HTMLDivElement>(null);
-  const isInViewport = useInView(nodeRef, { once: false, margin: '-35% 0px -35% 0px' });
-
-  // Only highlight nodes with highlight: true when they scroll into view
-  const isActive = milestone.highlight && isInViewport;
 
   // Mobile: single column (all on right), Desktop: alternating
   const isEven = index % 2 === 0;
@@ -137,10 +132,11 @@ function TimelineNode({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, margin: '-40px' }}
-      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${milestone.highlight
+      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${
+        milestone.highlight
           ? 'border-[var(--electric-cyan)]/50 bg-[var(--electric-cyan)]/5'
           : 'border-border bg-card/40'
-        } hover:border-[var(--electric-cyan)]/40 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10`}
+      } hover:border-[var(--electric-cyan)]/40 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10`}
     >
       <div className="font-mono text-xs tracking-widest text-[var(--electric-cyan)]/70 mb-2">{milestone.year}</div>
       <h3 className="text-base md:text-lg font-bold text-foreground mb-2 leading-tight">{milestone.title}</h3>
@@ -157,25 +153,25 @@ function TimelineNode({
   /* ── Shared icon node ─────────────────────────────────────────── */
   const IconNode = () => (
     <motion.div
-      ref={nodeRef}
       variants={nodeVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false }}
-      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isActive
+      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+        milestone.highlight
           ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
           : 'border-border bg-card'
-        }`}
+      }`}
     >
       <Icon
         size={16}
-        className={`md:size-[18px] transition-colors duration-500 ${isActive ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
-          }`}
+        className={`md:size-[18px] ${
+          milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
+        }`}
       />
-      {isActive && (
+      {milestone.highlight && (
         <motion.div
           className="absolute inset-0 rounded-full border border-[var(--electric-cyan)]/30"
-          initial={{ scale: 1, opacity: 0 }}
           animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
