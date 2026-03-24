@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Zap, Award, Users, Building, Star, Shield } from 'lucide-react';
 
 const milestones = [
@@ -93,6 +93,11 @@ function TimelineNode({
   scrollDirection: 'up' | 'down';
 }) {
   const Icon = milestone.icon;
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const isInViewport = useInView(nodeRef, { once: false, margin: '-35% 0px -35% 0px' });
+  
+  // Only highlight nodes with highlight: true when they scroll into view
+  const isActive = milestone.highlight && isInViewport;
 
   // Mobile: single column (all on right), Desktop: alternating
   const isEven = index % 2 === 0;
@@ -153,25 +158,27 @@ function TimelineNode({
   /* ── Shared icon node ─────────────────────────────────────────── */
   const IconNode = () => (
     <motion.div
+      ref={nodeRef}
       variants={nodeVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false }}
-      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-        milestone.highlight
+      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
+        isActive
           ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
           : 'border-border bg-card'
       }`}
     >
       <Icon
         size={16}
-        className={`md:size-[18px] ${
-          milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
+        className={`md:size-[18px] transition-colors duration-500 ${
+          isActive ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
         }`}
       />
-      {milestone.highlight && (
+      {isActive && (
         <motion.div
           className="absolute inset-0 rounded-full border border-[var(--electric-cyan)]/30"
+          initial={{ scale: 1, opacity: 0 }}
           animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
