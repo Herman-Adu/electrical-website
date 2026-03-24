@@ -22,6 +22,11 @@ export const residentialPageData: ServicePageData = {
     ],
     scrollTargetId: 'electrical',
     scrollLabel: 'Our Services',
+    backgroundImage: {
+      src: '/images/smart-living-interior.jpg',
+      alt: 'Modern residential electrical installation',
+      priority: true,
+    },
   },
   sections: [
     {
@@ -37,7 +42,7 @@ export const residentialPageData: ServicePageData = {
         quote: 'Your home deserves the same quality electrical work we'd put in our own.',
         credentials: ['Full Rewires', 'Consumer Units', 'New Builds', 'Extensions', 'Part P Certified'],
         image: {
-          src: '/images/residential-electrical.jpg',
+          src: '/images/smart-living-interior.jpg',
           alt: 'Modern residential electrical installation',
           priority: true,
         },
@@ -58,7 +63,7 @@ export const residentialPageData: ServicePageData = {
         quote: 'The homes of tomorrow are being built today — make sure yours is ready.',
         credentials: ['EV Chargers', 'Smart Lighting', 'Home Automation', 'Solar-Ready', 'Voice Control'],
         image: {
-          src: '/images/smart-home.jpg',
+          src: '/images/smart-living-interior.jpg',
           alt: 'Smart home control panel and EV charger',
         },
         cta: { label: 'Upgrade Your Home', href: '/contact' },
@@ -167,7 +172,7 @@ export const residentialPageData: ServicePageData = {
           description:
             "Whether it's a simple repair or a complete rewire, we treat every home with the same care and professionalism.",
           primaryCTA: { label: 'Get a Free Quote', href: '/contact' },
-          secondaryCTA: { label: 'Call Us Today', href: 'tel:+441onal' },
+          secondaryCTA: { label: 'Call Us Today', href: 'tel:+442012345678' },
         },
       },
     },

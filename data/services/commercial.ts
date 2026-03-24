@@ -22,6 +22,11 @@ export const commercialPageData: ServicePageData = {
     ],
     scrollTargetId: 'installations',
     scrollLabel: 'Our Services',
+    backgroundImage: {
+      src: '/images/services-commercial.jpg',
+      alt: 'Commercial electrical installation',
+      priority: true,
+    },
   },
   sections: [
     {
@@ -58,7 +63,7 @@ export const commercialPageData: ServicePageData = {
         quote: 'Great lighting transforms spaces — and dramatically cuts your energy bills.',
         credentials: ['LED Upgrades', 'Smart Controls', 'Motion Sensors', 'Daylight Harvesting', 'Energy Savings'],
         image: {
-          src: '/images/commercial-lighting.jpg',
+          src: '/images/warehouse-lighting.jpg',
           alt: 'Modern commercial LED lighting installation',
         },
         cta: { label: 'Explore Lighting', href: '/contact' },
@@ -78,7 +83,7 @@ export const commercialPageData: ServicePageData = {
         quote: 'Your network infrastructure should accelerate your business, not hold it back.',
         credentials: ['Cat6A Cabling', 'Fiber Optics', 'Server Rooms', 'ISO/IEC 11801', '10-Year Support'],
         image: {
-          src: '/images/data-comms.jpg',
+          src: '/images/services-data-comms.jpg',
           alt: 'Structured cabling and network infrastructure',
         },
         cta: { label: 'Plan Your Network', href: '/contact' },
@@ -187,7 +192,7 @@ export const commercialPageData: ServicePageData = {
           description:
             "Whether you're planning a new fit-out, upgrading your lighting, or need ongoing maintenance support — we're here to help.",
           primaryCTA: { label: 'Request a Quote', href: '/contact' },
-          secondaryCTA: { label: 'Call Us Now', href: 'tel:+441onal' },
+          secondaryCTA: { label: 'Call Us Now', href: 'tel:+442012345678' },
         },
       },
     },

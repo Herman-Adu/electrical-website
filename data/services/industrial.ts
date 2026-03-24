@@ -22,6 +22,11 @@ export const industrialPageData: ServicePageData = {
     ],
     scrollTargetId: 'systems',
     scrollLabel: 'Our Capabilities',
+    backgroundImage: {
+      src: '/images/services-industrial.jpg',
+      alt: 'Industrial electrical systems',
+      priority: true,
+    },
   },
   sections: [
     {
@@ -37,7 +42,7 @@ export const industrialPageData: ServicePageData = {
         quote: 'Industrial electrical isn't just about power — it's about uptime, safety, and operational efficiency.',
         credentials: ['Motor Control', 'Variable Speed Drives', 'PLC Integration', 'Hazardous Areas', 'ATEX Certified'],
         image: {
-          src: '/images/industrial-systems.jpg',
+          src: '/images/services-industrial.jpg',
           alt: 'Industrial electrical control panel installation',
           priority: true,
         },
@@ -78,7 +83,7 @@ export const industrialPageData: ServicePageData = {
         quote: 'The data tells the story — and the story is usually about wasted energy you can reclaim.',
         credentials: ['SCADA Integration', 'Real-Time Analytics', 'Power Factor Correction', 'Demand Management', 'Sustainability'],
         image: {
-          src: '/images/energy-management.jpg',
+          src: '/images/services-energy.jpg',
           alt: 'Energy management system dashboard and analytics',
         },
         cta: { label: 'Optimize Your Energy', href: '/contact' },
@@ -187,7 +192,7 @@ export const industrialPageData: ServicePageData = {
           description:
             'From emergency repairs to complete system upgrades, our industrial team is ready to keep your operations running.',
           primaryCTA: { label: 'Request Site Survey', href: '/contact' },
-          secondaryCTA: { label: 'Emergency Callout', href: 'tel:+441onal' },
+          secondaryCTA: { label: 'Emergency Callout', href: 'tel:+442012345678' },
         },
       },
     },

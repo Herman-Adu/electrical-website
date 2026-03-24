@@ -3,46 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import {
-  ArrowRight,
-  Building2,
-  Lightbulb,
-  Wifi,
-  ClipboardCheck,
-  Wrench,
-  Factory,
-  Zap,
-  Gauge,
-  Home,
-  Phone,
-  AlertTriangle,
-  Shield,
-  Clock,
-  Battery,
-  Plug,
-  Settings,
-  type LucideIcon,
-} from 'lucide-react';
-
-// Icon mapping for string-based icon names
-const iconMap: Record<string, LucideIcon> = {
-  Building2,
-  Lightbulb,
-  Wifi,
-  ClipboardCheck,
-  Wrench,
-  Factory,
-  Zap,
-  Gauge,
-  Home,
-  Phone,
-  AlertTriangle,
-  Shield,
-  Clock,
-  Battery,
-  Plug,
-  Settings,
-};
+import { ArrowRight, Building2 } from 'lucide-react';
+import { iconMap } from '@/components/shared/icon-map';
+import type { IconName } from '@/types/sections';
 
 export interface ServiceSectionProps {
   id: string;
@@ -55,7 +18,7 @@ export interface ServiceSectionProps {
   };
   imagePosition?: 'left' | 'right';
   features: Array<{
-    icon: string;
+    icon: IconName;
     title: string;
     description: string;
   }>;

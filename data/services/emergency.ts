@@ -22,6 +22,11 @@ export const emergencyPageData: ServicePageData = {
     ],
     scrollTargetId: 'response',
     scrollLabel: 'Get Help Now',
+    backgroundImage: {
+      src: '/images/services-emergency.jpg',
+      alt: '24/7 emergency electrical response',
+      priority: true,
+    },
   },
   sections: [
     {
@@ -37,11 +42,11 @@ export const emergencyPageData: ServicePageData = {
         quote: "In an electrical emergency, you need someone who'll pick up the phone — and show up fast.",
         credentials: ['2-Hour Response', 'Fully Stocked Vans', 'Expert Diagnosis', 'Immediate Solutions', 'All Sectors'],
         image: {
-          src: '/images/emergency-response.jpg',
+          src: '/images/services-emergency.jpg',
           alt: 'Emergency electrician responding to callout',
           priority: true,
         },
-        cta: { label: 'Call Now', href: 'tel:+441onal' },
+        cta: { label: 'Call Now', href: 'tel:+442012345678' },
         reversed: false,
       },
     },
@@ -131,7 +136,7 @@ export const emergencyPageData: ServicePageData = {
         quote: "Finding the fault is half the battle. We don't leave until we've fixed the cause, not just the symptom.",
         credentials: ['Thermal Imaging', 'Advanced Metering', 'Systematic Testing', 'Root Cause Analysis', 'Full Reports'],
         image: {
-          src: '/images/fault-diagnosis.jpg',
+          src: '/images/system-diagnostics.jpg',
           alt: 'Electrician using thermal imaging for fault diagnosis',
         },
         cta: { label: 'Report a Fault', href: '/contact' },
@@ -148,7 +153,7 @@ export const emergencyPageData: ServicePageData = {
           headlineHighlight: 'Now',
           description:
             "Don't wait. Our emergency team is standing by 24/7 to take your call and dispatch help immediately.",
-          primaryCTA: { label: 'Emergency Callout', href: 'tel:+441onal' },
+          primaryCTA: { label: 'Emergency Callout', href: 'tel:+442012345678' },
           secondaryCTA: { label: 'Send Details', href: '/contact' },
         },
       },

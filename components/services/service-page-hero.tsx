@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronDown, Activity } from 'lucide-react';
 import { BlueprintBackground } from '@/components/hero/blueprint-background';
+import type { SectionHeroData } from '@/types/sections';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,24 +26,21 @@ const itemVariants = {
 };
 
 interface ServicePageHeroProps {
-  title: string;
-  subtitle?: string;
-  description: string;
-  backgroundImage?: string;
-  backgroundImageAlt?: string;
-  stats?: Array<{ label: string; value: string }>;
-  scrollTargetId?: string;
+  data: SectionHeroData;
 }
 
-export function ServicePageHero({
-  title,
-  subtitle,
-  description,
-  backgroundImage,
-  backgroundImageAlt = 'Service background',
-  stats = [],
-  scrollTargetId,
-}: ServicePageHeroProps) {
+export function ServicePageHero({ data }: ServicePageHeroProps) {
+  const {
+    eyebrow,
+    headline,
+    headlineHighlight,
+    subheadline,
+    stats = [],
+    scrollTargetId,
+    scrollLabel = 'Explore',
+    backgroundImage,
+  } = data;
+
   const scrollToContent = () => {
     const target = scrollTargetId
       ? document.getElementById(scrollTargetId)
@@ -52,17 +50,20 @@ export function ServicePageHero({
     }
   };
 
+  // Format headline: can be string or array
+  const headlineText = Array.isArray(headline) ? headline.join(' ') : headline;
+
   return (
     <section className="section-container section-safe-top section-safe-bottom relative min-h-screen w-full flex flex-col items-center justify-center">
       {/* Background */}
       {backgroundImage ? (
         <div className="absolute inset-0 z-0">
           <Image
-            src={backgroundImage}
-            alt={backgroundImageAlt}
+            src={backgroundImage.src}
+            alt={backgroundImage.alt}
             fill
             className="object-cover"
-            priority
+            priority={backgroundImage.priority}
           />
           <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/70 dark:via-black/50 dark:to-black/70 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
         </div>
@@ -111,12 +112,12 @@ export function ServicePageHero({
           </div>
         </motion.div>
 
-        {/* Subtitle/Eyebrow */}
-        {subtitle && (
+        {/* Eyebrow */}
+        {eyebrow && (
           <motion.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-12 bg-[var(--electric-cyan)]/60" />
             <span className="font-mono text-xs tracking-[0.3em] uppercase text-[var(--electric-cyan)]/70">
-              {subtitle}
+              {eyebrow}
             </span>
             <span className="h-px w-12 bg-[var(--electric-cyan)]/60" />
           </motion.div>
@@ -127,7 +128,15 @@ export function ServicePageHero({
           variants={itemVariants}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white"
         >
-          {title}
+          {headlineHighlight ? (
+            <>
+              {headlineText.split(headlineHighlight)[0]}
+              <span className="text-[var(--electric-cyan)]">{headlineHighlight}</span>
+              {headlineText.split(headlineHighlight)[1]}
+            </>
+          ) : (
+            headlineText
+          )}
         </motion.h1>
 
         {/* Description */}
@@ -135,7 +144,7 @@ export function ServicePageHero({
           variants={itemVariants}
           className="text-base sm:text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
         >
-          {description}
+          {subheadline}
         </motion.p>
 
         {/* Stats bar */}
@@ -179,7 +188,7 @@ export function ServicePageHero({
         onClick={scrollToContent}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-white/60 hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
       >
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Explore</span>
+        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">{scrollLabel}</span>
         <ChevronDown size={20} className="animate-bounce" />
       </motion.button>
     </section>
