@@ -49,9 +49,9 @@ const cardVariants = {
 function WindowDots() {
   return (
     <div className="flex items-center gap-1.5 mb-4" aria-hidden>
-      <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-      <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-      <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
+      <div className="w-2.5 h-2.5 rounded-full bg-white/15 dark:bg-white/15 bg-black/15" />
+      <div className="w-2.5 h-2.5 rounded-full bg-white/15 dark:bg-white/15 bg-black/15" />
+      <div className="w-2.5 h-2.5 rounded-full bg-white/15 dark:bg-white/15 bg-black/15" />
     </div>
   );
 }
@@ -78,13 +78,15 @@ function GlassCard({
       viewport={{ once: true, margin: '-60px' }}
       whileHover={glowOnHover ? { scale: 1.015 } : undefined}
       transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-      className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-card/60 backdrop-blur-md
-        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/8' : ''}
+      className={`group relative overflow-hidden rounded-2xl
+        dark:border-white/8 dark:bg-card/60 dark:backdrop-blur-md
+        border-slate-200/50 bg-white/70 backdrop-blur-md shadow-sm
+        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/8 dark:hover:shadow-[var(--electric-cyan)]/8' : ''}
         transition-all duration-500 ${className}`}
     >
       {/* Corner accents */}
-      <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors" aria-hidden />
-      <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors" aria-hidden />
+      <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/25" aria-hidden />
+      <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/25" aria-hidden />
       {children}
     </motion.div>
   );
@@ -122,13 +124,13 @@ function ImageHeroCard({
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-card/95 via-card/30 to-transparent" />
+        <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-card/95 dark:via-card/30 dark:to-transparent bg-gradient-to-t from-black/75 via-black/40 to-transparent" />
         {/* Voltage badge */}
         <div className="absolute top-3 right-3 z-10 px-2 py-1 rounded bg-black/60 backdrop-blur-sm border border-[var(--electric-cyan)]/30">
           <span className="font-mono text-[10px] tracking-widest text-[var(--electric-cyan)]">{voltage}</span>
         </div>
         {/* Index number */}
-        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold text-white/10 select-none leading-none">
+        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold dark:text-white/10 text-slate-900/5 select-none leading-none">
           {String(index + 1).padStart(2, '0')}
         </div>
       </div>
@@ -315,8 +317,8 @@ function DiagnosticCard({ delay }: { delay: number }) {
         Continuous health monitoring with real-time fault detection across all active installations.
       </p>
 
-      <div className="flex-1 min-h-[100px] p-3 rounded-xl bg-black/40 border border-[var(--electric-cyan)]/10 font-mono text-[11px] leading-5 overflow-hidden hover:border-[var(--electric-cyan)]/25 transition-colors">
-        <div className="text-[var(--electric-cyan)]/80 whitespace-pre-line">{displayText}</div>
+      <div className="flex-1 min-h-[100px] p-3 rounded-xl dark:bg-black/40 bg-white border dark:border-[var(--electric-cyan)]/10 border-slate-200/70 font-mono text-[11px] leading-5 overflow-hidden hover:border-[var(--electric-cyan)]/25 transition-colors">
+        <div className="dark:text-[var(--electric-cyan)]/80 text-slate-700 whitespace-pre-line">{displayText}</div>
         {isComplete && (
           <span className="inline-block w-2 h-3 bg-[var(--electric-cyan)] animate-pulse ml-0.5" />
         )}
@@ -596,7 +598,7 @@ export function ServicesBento() {
                   fill
                   className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-card/95 via-card/70 to-card/30" />
+                <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/70 dark:to-card/30 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
               </div>
 
               <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
@@ -732,7 +734,7 @@ export function ServicesBento() {
                     fill
                     className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-card/95 via-card/80 to-card/40" />
+                  <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/80 dark:to-card/40 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
                 </div>
 
                 <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
