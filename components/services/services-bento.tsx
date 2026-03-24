@@ -76,13 +76,13 @@ function GlassCard({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-60px' }}
-      whileHover={glowOnHover ? { scale: 1.015 } : undefined}
-      transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+      whileHover={glowOnHover ? { y: -4 } : undefined}
+      transition={{ type: 'spring', damping: 25, stiffness: 400, mass: 0.5 }}
       className={`group relative overflow-hidden rounded-2xl
         dark:border-white/12 dark:bg-white/8 dark:backdrop-blur-xl dark:shadow-xl dark:shadow-black/40
         border-slate-200/50 bg-white/70 backdrop-blur-md shadow-sm
-        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/8 dark:hover:border-[var(--electric-cyan)]/40 dark:hover:shadow-[var(--electric-cyan)]/15' : ''}
-        transition-all duration-500 ${className}`}
+        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-2xl hover:shadow-[var(--electric-cyan)]/10 dark:hover:border-[var(--electric-cyan)]/40 dark:hover:shadow-2xl dark:hover:shadow-[var(--electric-cyan)]/20' : ''}
+        transition-all duration-300 ease-out ${className}`}
     >
       {/* Corner accents */}
       <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/30 dark:group-hover:border-[var(--electric-cyan)]/60" aria-hidden />
