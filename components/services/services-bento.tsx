@@ -16,6 +16,8 @@ import {
   CheckCircle2,
   Activity,
   Lightbulb,
+  ClipboardCheck,
+  Wifi,
 } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -449,6 +451,18 @@ const lightingSpecs: ServiceSpec[] = [
   { label: 'Warranty', value: '5 Years' },
 ];
 
+const testingSpecs: ServiceSpec[] = [
+  { label: 'Standards', value: 'BS 7909 + NICEIC' },
+  { label: 'Coverage', value: 'Full Scope' },
+  { label: 'Reports', value: 'Certified' },
+];
+
+const dataCommunicationsSpecs: ServiceSpec[] = [
+  { label: 'Cabling', value: 'Cat6A + Fiber' },
+  { label: 'Standards', value: 'ISO/IEC 11801' },
+  { label: 'Support', value: '10 Years' },
+];
+
 export function ServicesBento() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -734,9 +748,35 @@ export function ServicesBento() {
             </div>
           </div>
 
+          {/* Testing & Certification — lg: col-span-1 */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <TextDetailCard
+              title="Testing & Certification"
+              description="Comprehensive electrical testing and compliance certification — EICR reports, PAT testing, periodic inspections, and all required compliance documentation."
+              icon={ClipboardCheck}
+              specs={testingSpecs}
+              voltage="All V"
+              delay={0.68}
+              index={6}
+            />
+          </div>
+
+          {/* Data & Communications — lg: col-span-1 */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <TextDetailCard
+              title="Data & Communications"
+              description="Structured cabling infrastructure, fiber optics, network installations, and full data centre solutions — future-proofed for growth with enterprise-grade support."
+              icon={Wifi}
+              specs={dataCommunicationsSpecs}
+              voltage="Network"
+              delay={0.72}
+              index={7}
+            />
+          </div>
+
           {/* Row 4: Full-width CTA */}
           <div className="sm:col-span-2 lg:col-span-4">
-            <CTACard delay={0.72} />
+            <CTACard delay={0.8} />
           </div>
         </div>
       </div>
