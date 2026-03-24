@@ -88,8 +88,8 @@ export function ServiceSection({
 }: ServiceSectionProps) {
   const containerClasses =
     imagePosition === 'left'
-      ? 'flex flex-col md:flex-row gap-8 md:gap-12'
-      : 'flex flex-col md:flex-row-reverse gap-8 md:gap-12';
+      ? 'flex flex-col-reverse md:flex-row gap-8 md:gap-12'
+      : 'flex flex-col-reverse md:flex-row-reverse gap-8 md:gap-12';
 
   return (
     <motion.section
