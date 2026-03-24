@@ -596,32 +596,32 @@ export function ServicesBento() {
                   src="/images/services-lighting.jpg"
                   alt="Commercial LED lighting installation"
                   fill
-                  className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover dark:opacity-50 opacity-90 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/70 dark:to-card/30 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+                <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/70 dark:to-card/30 bg-gradient-to-r from-black/90 via-black/80 to-black/70" />
               </div>
 
-              <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
+              <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between text-white">
                 <div>
                   <WindowDots />
                   <div className="flex items-center gap-2 mb-3">
                     <Lightbulb size={18} className="text-[var(--electric-cyan)]" />
-                    <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--electric-cyan)]/70">
+                    <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--electric-cyan)]">
                       Lighting Installation
                     </span>
                     <div className="ml-auto flex gap-2">
-                      <div className="px-2 py-0.5 rounded border border-green-500/25 bg-green-500/10">
-                        <span className="font-mono text-[9px] tracking-widest text-green-400">ECO</span>
+                      <div className="px-2 py-0.5 rounded border border-green-400/40 bg-green-500/20">
+                        <span className="font-mono text-[9px] tracking-widest text-green-300">ECO</span>
                       </div>
-                      <div className="px-2 py-0.5 rounded border border-[var(--electric-cyan)]/25 bg-[var(--electric-cyan)]/5">
+                      <div className="px-2 py-0.5 rounded border border-[var(--electric-cyan)]/40 bg-[var(--electric-cyan)]/15">
                         <span className="font-mono text-[9px] tracking-widest text-[var(--electric-cyan)]">LED</span>
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-card-foreground mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                     High-Performance Commercial Lighting
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-lg">
+                  <p className="text-sm text-white/75 leading-relaxed mb-4 max-w-lg">
                     Energy-efficient LED lighting solutions for offices, warehouses, retail spaces, and industrial facilities. 
                     Reduce running costs by up to 70% with professional design, installation, and smart controls — 
                     delivering superior illumination with minimal environmental impact.
@@ -634,7 +634,7 @@ export function ServicesBento() {
                     {['Office Spaces', 'Warehouses', 'Retail', 'Industrial', 'Emergency Lighting', 'Controls'].map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[9px] px-2 py-1 rounded bg-[var(--electric-cyan)]/10 border border-[var(--electric-cyan)]/20 text-[var(--electric-cyan)]/80 tracking-wider"
+                        className="font-mono text-[9px] px-2 py-1 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider"
                       >
                         {tag}
                       </span>
@@ -642,20 +642,20 @@ export function ServicesBento() {
                   </div>
                   
                   {/* Stats row */}
-                  <div className="flex flex-wrap gap-6 pt-3 border-t border-[var(--electric-cyan)]/10">
+                  <div className="flex flex-wrap gap-6 pt-3 border-t border-white/15">
                     <div className="flex flex-col">
                       <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">70%</span>
-                      <span className="text-[10px] text-muted-foreground mt-1">Energy Savings</span>
+                      <span className="text-[10px] text-white/60 mt-1">Energy Savings</span>
                     </div>
                     <div className="flex flex-col">
                       <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">50K+</span>
-                      <span className="text-[10px] text-muted-foreground mt-1">Hour Lifespan</span>
+                      <span className="text-[10px] text-white/60 mt-1">Hour Lifespan</span>
                     </div>
                     <div className="flex flex-col">
                       <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">5yr</span>
-                      <span className="text-[10px] text-muted-foreground mt-1">Warranty</span>
+                      <span className="text-[10px] text-white/60 mt-1">Warranty</span>
                     </div>
-                    <button className="ml-auto flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors">
+                    <button className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors">
                       <span className="font-medium">Explore Lighting</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -732,27 +732,27 @@ export function ServicesBento() {
                     src="/images/services-industrial.jpg"
                     alt="Energy management systems"
                     fill
-                    className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover dark:opacity-40 opacity-90 group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/80 dark:to-card/40 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+                  <div className="absolute inset-0 dark:bg-gradient-to-r dark:from-card/95 dark:via-card/80 dark:to-card/40 bg-gradient-to-r from-black/90 via-black/80 to-black/70" />
                 </div>
 
-                <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
+                <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between text-white">
                   <div>
                     <WindowDots />
                     <div className="flex items-center gap-2 mb-3">
                       <Gauge size={18} className="text-[var(--electric-cyan)]" />
-                      <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--electric-cyan)]/70">
+                      <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--electric-cyan)]">
                         Energy Management
                       </span>
-                      <div className="ml-auto px-2 py-0.5 rounded border border-[var(--electric-cyan)]/25 bg-[var(--electric-cyan)]/5">
+                      <div className="ml-auto px-2 py-0.5 rounded border border-[var(--electric-cyan)]/40 bg-[var(--electric-cyan)]/15">
                         <span className="font-mono text-[9px] tracking-widest text-[var(--electric-cyan)]">SMART</span>
                       </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-card-foreground mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                       Intelligent Energy Optimisation
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-md">
+                    <p className="text-sm text-white/75 leading-relaxed mb-4 max-w-md">
                       Smart monitoring and optimisation systems that reduce operational costs, improve efficiency, and meet sustainability compliance targets through SCADA integration and real-time analytics.
                     </p>
                   </div>
@@ -761,12 +761,12 @@ export function ServicesBento() {
                     {['SCADA', 'Metering', 'Analytics', 'Power Factor', 'Compliance'].map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[9px] px-2 py-1 rounded bg-[var(--electric-cyan)]/10 border border-[var(--electric-cyan)]/20 text-[var(--electric-cyan)]/80 tracking-wider"
+                        className="font-mono text-[9px] px-2 py-1 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider"
                       >
                         {tag}
                       </span>
                     ))}
-                    <button className="ml-auto flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors">
+                    <button className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors">
                       <span className="font-medium">Learn More</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
