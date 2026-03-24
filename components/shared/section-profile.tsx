@@ -63,16 +63,16 @@ export function SectionProfile({ data }: SectionProfileProps) {
       className="section-container section-padding bg-background"
     >
       {/* Blueprint grid */}
-      <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none z-0" />
 
       {/* Alternating background accent */}
       <div
         className={`absolute top-0 bottom-0 w-1/2 ${
           reversed ? 'right-0' : 'left-0'
-        } bg-card/20 border-${reversed ? 'l' : 'r'} border-border/30`}
+        } bg-card/20 border-${reversed ? 'l' : 'r'} border-border/30 z-0`}
       />
 
-      <div className="section-content">
+      <div className="section-content relative z-10">
         <div
           className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 lg:gap-20 items-center`}
         >
@@ -134,7 +134,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
           </motion.div>
 
           {/* Text column */}
-          <div className="w-full md:w-7/12">
+          <div className="w-full md:w-7/12 relative z-20 bg-background/40 backdrop-blur-sm rounded-xl p-8 lg:p-12">
             {/* Section label */}
             <motion.div
               initial={{ opacity: 0, x: textInitialX }}
