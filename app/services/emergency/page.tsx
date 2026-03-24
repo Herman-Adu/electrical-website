@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ServicePageHero, ServiceSection, ServiceCTABlock } from '@/components/services';
 import { Footer } from '@/components/sections/footer';
-import { AlertTriangle, Clock, Phone, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: '24/7 Emergency Electrical Response | Nexgen Electrical Innovations',
@@ -29,13 +28,6 @@ export default function EmergencyPage() {
         description="Round-the-clock emergency electrical support for all sectors. When something goes wrong, we're here — fast diagnosis, rapid resolution, and complete peace of mind."
         backgroundImage="/images/services-emergency.jpg"
         backgroundImageAlt="24/7 emergency electrical response"
-        cta={{
-          label: 'Get Emergency Help',
-          onClick: () => {
-            const phone = 'tel:+441234567890'; // Replace with actual number
-            window.location.href = phone;
-          },
-        }}
       />
 
       {/* 24/7 Callout Service */}
@@ -49,28 +41,22 @@ export default function EmergencyPage() {
         }}
         features={[
           {
-            icon: Clock,
+            icon: 'Clock',
             title: 'Rapid Response',
             description: 'Fast dispatch and arrival to minimize downtime and safety risks.',
           },
           {
-            icon: Clock,
+            icon: 'Clock',
             title: 'No Holiday Surcharge',
             description: 'Emergency rates available 365 days a year without premium pricing.',
           },
           {
-            icon: Clock,
+            icon: 'Phone',
             title: 'Expert On-Call Team',
             description: 'Experienced electricians ready to handle any electrical emergency.',
           },
         ]}
-        cta={{
-          label: 'Call Emergency Line',
-          onClick: () => {
-            const phone = 'tel:+441234567890'; // Replace with actual number
-            window.location.href = phone;
-          },
-        }}
+        cta={{ label: 'Call Emergency Line', href: 'tel:+441onal234567890' }}
         delay={0.1}
       />
 
@@ -86,17 +72,17 @@ export default function EmergencyPage() {
         imagePosition="right"
         features={[
           {
-            icon: AlertTriangle,
+            icon: 'AlertTriangle',
             title: 'Systematic Diagnostics',
             description: 'Professional testing and investigation to pinpoint electrical problems.',
           },
           {
-            icon: AlertTriangle,
+            icon: 'AlertTriangle',
             title: 'Root Cause Analysis',
             description: 'Identify not just the immediate issue, but underlying causes to prevent recurrence.',
           },
           {
-            icon: AlertTriangle,
+            icon: 'Wrench',
             title: 'Rapid Repairs',
             description: 'Swift resolution to restore power and safety to your property.',
           },
@@ -112,17 +98,17 @@ export default function EmergencyPage() {
         description="Whether residential, commercial, or industrial — we have the expertise to handle emergencies in any environment. Specialized knowledge for each sector ensures appropriate, effective solutions."
         features={[
           {
-            icon: Shield,
+            icon: 'Building2',
             title: 'Commercial Emergencies',
             description: 'Restore critical operations with minimal disruption to your business.',
           },
           {
-            icon: Shield,
+            icon: 'Factory',
             title: 'Industrial Response',
             description: 'Handle complex systems with specialized expertise in heavy-duty infrastructure.',
           },
           {
-            icon: Shield,
+            icon: 'Home',
             title: 'Residential Support',
             description: 'Fast help when your home electrical system fails — any time, any day.',
           },
@@ -137,28 +123,22 @@ export default function EmergencyPage() {
         description="Don't wait for email responses or callbacks. Call us directly 24/7 for immediate assistance with any electrical emergency."
         features={[
           {
-            icon: Phone,
+            icon: 'Phone',
             title: 'Emergency Hotline',
             description: 'Call immediately for fast dispatch and expert response.',
           },
           {
-            icon: Phone,
+            icon: 'Clock',
             title: 'Available 24/7/365',
             description: 'No delays — we respond to emergencies every single day of the year.',
           },
           {
-            icon: Phone,
+            icon: 'Shield',
             title: 'Local & Rapid',
             description: 'Stationed strategically to ensure fast arrival in your area.',
           },
         ]}
-        cta={{
-          label: 'Emergency Hotline',
-          onClick: () => {
-            const phone = 'tel:+441234567890'; // Replace with actual number
-            window.location.href = phone;
-          },
-        }}
+        cta={{ label: 'Emergency Hotline', href: 'tel:+441234567890' }}
         delay={0.4}
       />
 
@@ -166,13 +146,7 @@ export default function EmergencyPage() {
       <ServiceCTABlock
         title="When Electrical Emergency Strikes — We're There"
         description="24/7 expert response, rapid diagnosis, and professional resolution. Call now for immediate emergency electrical support."
-        primaryCTA={{
-          label: 'Call Emergency Line',
-          onClick: () => {
-            const phone = 'tel:+441234567890'; // Replace with actual number
-            window.location.href = phone;
-          },
-        }}
+        primaryCTA={{ label: 'Call Emergency Line', href: 'tel:+441234567890' }}
         secondaryCTA={{ label: 'Non-Emergency Inquiry', href: '/contact' }}
         delay={0.5}
       />

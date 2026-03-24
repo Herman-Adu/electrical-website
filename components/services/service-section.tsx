@@ -3,11 +3,51 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { LucideIcon, ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Building2,
+  Lightbulb,
+  Wifi,
+  ClipboardCheck,
+  Wrench,
+  Factory,
+  Zap,
+  Gauge,
+  Home,
+  Phone,
+  AlertTriangle,
+  Shield,
+  Clock,
+  Battery,
+  Plug,
+  Settings,
+  type LucideIcon,
+} from 'lucide-react';
+
+// Icon mapping for string-based icon names
+const iconMap: Record<string, LucideIcon> = {
+  Building2,
+  Lightbulb,
+  Wifi,
+  ClipboardCheck,
+  Wrench,
+  Factory,
+  Zap,
+  Gauge,
+  Home,
+  Phone,
+  AlertTriangle,
+  Shield,
+  Clock,
+  Battery,
+  Plug,
+  Settings,
+};
 
 export interface ServiceSectionProps {
   id: string;
   title: string;
+  subtitle?: string;
   description: string;
   image?: {
     src: string;
@@ -15,7 +55,7 @@ export interface ServiceSectionProps {
   };
   imagePosition?: 'left' | 'right';
   features: Array<{
-    icon: LucideIcon;
+    icon: string;
     title: string;
     description: string;
   }>;
@@ -96,25 +136,28 @@ export function ServiceSection({
 
           {/* Features */}
           <div className="space-y-4 mb-8">
-            {features.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: delay + 0.3 + idx * 0.1 }}
-                className="flex gap-4 items-start"
-              >
-                <feature.icon
-                  size={24}
-                  className="text-[var(--electric-cyan)] flex-shrink-0 mt-1"
-                />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
+            {features.map((feature, idx) => {
+              const IconComponent = iconMap[feature.icon] || Building2;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: delay + 0.3 + idx * 0.1 }}
+                  className="flex gap-4 items-start"
+                >
+                  <IconComponent
+                    size={24}
+                    className="text-[var(--electric-cyan)] flex-shrink-0 mt-1"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground">{feature.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* CTA */}

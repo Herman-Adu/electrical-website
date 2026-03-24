@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ServicePageHero, ServiceSection, ServiceCTABlock } from '@/components/services';
 import { Footer } from '@/components/sections/footer';
-import { Factory, Zap, Gauge, ClipboardCheck, Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Industrial & Infrastructure Electrical Services | Nexgen Electrical Innovations',
@@ -42,17 +41,17 @@ export default function IndustrialPage() {
         }}
         features={[
           {
-            icon: Factory,
+            icon: 'Factory',
             title: 'Switchgear & Transformers',
             description: 'High-voltage switching and transformation equipment for large-scale operations.',
           },
           {
-            icon: Factory,
+            icon: 'Settings',
             title: 'Motor Control Systems',
             description: 'Variable frequency drives, soft starters, and motor protection systems.',
           },
           {
-            icon: Factory,
+            icon: 'Gauge',
             title: 'Load Management',
             description: 'Intelligent load balancing and demand-side management to optimize efficiency.',
           },
@@ -73,17 +72,17 @@ export default function IndustrialPage() {
         imagePosition="right"
         features={[
           {
-            icon: Zap,
+            icon: 'Zap',
             title: 'Multi-Zone Networks',
             description: 'Distributed power with multiple feeds, isolation points, and redundancy.',
           },
           {
-            icon: Zap,
+            icon: 'Gauge',
             title: 'Sub-Metering & Monitoring',
             description: 'Real-time visibility into consumption patterns by zone or department.',
           },
           {
-            icon: Zap,
+            icon: 'Settings',
             title: 'SCADA Integration',
             description: 'Automated control and monitoring systems for complex multi-site operations.',
           },
@@ -103,17 +102,17 @@ export default function IndustrialPage() {
         }}
         features={[
           {
-            icon: Gauge,
+            icon: 'Gauge',
             title: 'Real-Time Monitoring',
             description: 'Live dashboards showing power consumption, voltage, current, and power quality.',
           },
           {
-            icon: Gauge,
+            icon: 'Settings',
             title: 'SCADA Systems',
             description: 'Supervisory Control and Data Acquisition for automated facility management.',
           },
           {
-            icon: Gauge,
+            icon: 'Shield',
             title: 'Sustainability Compliance',
             description: 'Meet environmental targets and regulatory reporting requirements with detailed analytics.',
           },
@@ -134,17 +133,17 @@ export default function IndustrialPage() {
         imagePosition="right"
         features={[
           {
-            icon: ClipboardCheck,
+            icon: 'ClipboardCheck',
             title: 'Thermographic Surveys',
             description: 'Thermal imaging to identify hot spots, connection issues, and potential failures.',
           },
           {
-            icon: ClipboardCheck,
+            icon: 'ClipboardCheck',
             title: 'Insulation Testing',
             description: 'Comprehensive insulation resistance and dielectric strength verification.',
           },
           {
-            icon: ClipboardCheck,
+            icon: 'Shield',
             title: 'Industrial Certification',
             description: 'Full compliance reports meeting industrial standards and safety requirements.',
           },
@@ -160,17 +159,17 @@ export default function IndustrialPage() {
         description="Scheduled maintenance programs that prevent costly downtime. From routine inspections and repairs to condition monitoring and predictive analytics, we keep your systems running at peak efficiency."
         features={[
           {
-            icon: Wrench,
+            icon: 'Wrench',
             title: 'Preventive Maintenance Plans',
             description: 'Scheduled inspections, cleaning, and repairs to prevent failures before they happen.',
           },
           {
-            icon: Wrench,
+            icon: 'Gauge',
             title: 'Condition Monitoring',
             description: 'Continuous monitoring systems alert you to developing issues before they cause problems.',
           },
           {
-            icon: Wrench,
+            icon: 'Phone',
             title: 'Emergency Response',
             description: '24/7 emergency support minimizes downtime when unexpected faults occur.',
           },

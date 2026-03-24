@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ServicePageHero, ServiceSection, ServiceCTABlock } from '@/components/services';
 import { Footer } from '@/components/sections/footer';
-import { Building2, Lightbulb, Wifi, ClipboardCheck, Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Commercial & Retail Electrical Services | Nexgen Electrical Innovations',
@@ -42,17 +41,17 @@ export default function CommercialPage() {
         }}
         features={[
           {
-            icon: Building2,
+            icon: 'Building2',
             title: 'New Builds & Refurbishments',
             description: 'Complete electrical design and installation from foundation to finishing.',
           },
           {
-            icon: Building2,
+            icon: 'Shield',
             title: 'Emergency Systems',
             description: 'Emergency lighting, backup power, and safety systems integrated throughout.',
           },
           {
-            icon: Building2,
+            icon: 'Wifi',
             title: 'Data Distribution',
             description: 'Cable routes, containment systems, and infrastructure for network connectivity.',
           },
@@ -74,17 +73,17 @@ export default function CommercialPage() {
         imagePosition="right"
         features={[
           {
-            icon: Lightbulb,
+            icon: 'Lightbulb',
             title: 'LED Upgrades',
             description: '70% energy savings with modern, efficient LED solutions.',
           },
           {
-            icon: Lightbulb,
+            icon: 'Settings',
             title: 'Smart Controls',
             description: 'Motion sensors, dimming, scheduling, and occupancy management.',
           },
           {
-            icon: Lightbulb,
+            icon: 'Lightbulb',
             title: 'Design & Layout',
             description: 'Professional lighting design optimized for your space and workflow.',
           },
@@ -104,17 +103,17 @@ export default function CommercialPage() {
         }}
         features={[
           {
-            icon: Wifi,
+            icon: 'Wifi',
             title: 'Structured Cabling',
             description: 'Cat6A, fiber optics, and organized cable management systems.',
           },
           {
-            icon: Wifi,
+            icon: 'Wifi',
             title: 'Network Design',
             description: 'Enterprise-grade network infrastructure planning and installation.',
           },
           {
-            icon: Wifi,
+            icon: 'Clock',
             title: '10-Year Support',
             description: 'Comprehensive maintenance and support for all communications systems.',
           },
@@ -135,17 +134,17 @@ export default function CommercialPage() {
         imagePosition="right"
         features={[
           {
-            icon: ClipboardCheck,
+            icon: 'ClipboardCheck',
             title: 'EICR Reports',
             description: 'Electrical Installation Condition Reports with detailed findings and recommendations.',
           },
           {
-            icon: ClipboardCheck,
+            icon: 'ClipboardCheck',
             title: 'PAT Testing',
             description: 'Portable Appliance Testing for all equipment and safety devices.',
           },
           {
-            icon: ClipboardCheck,
+            icon: 'Shield',
             title: 'Full Compliance',
             description: 'NICEIC certification and BS 7671 compliance for complete peace of mind.',
           },
@@ -161,17 +160,17 @@ export default function CommercialPage() {
         description="Scheduled preventive maintenance keeps your electrical systems running reliably. From emergency repairs to annual inspections, we've got you covered with professional, compliant service."
         features={[
           {
-            icon: Wrench,
+            icon: 'Phone',
             title: '24/7 Emergency Response',
             description: 'Rapid response to electrical faults and emergencies affecting your business.',
           },
           {
-            icon: Wrench,
+            icon: 'Wrench',
             title: 'Planned Maintenance',
             description: 'Annual inspections, repairs, and upgrades on your schedule.',
           },
           {
-            icon: Wrench,
+            icon: 'ClipboardCheck',
             title: 'Compliance Support',
             description: 'Keep all systems certified and compliant with ongoing testing and documentation.',
           },
