@@ -132,7 +132,7 @@ function TimelineNode({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, margin: '-40px' }}
-      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm ${
+      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${
         milestone.highlight
           ? 'border-[var(--electric-cyan)]/50 bg-[var(--electric-cyan)]/5'
           : 'border-border bg-card/40'
@@ -150,63 +150,79 @@ function TimelineNode({
     </motion.div>
   );
 
-  return (
-    <div className="relative flex gap-3 md:gap-0">
-      {/* Timeline spine - left side */}
-      <div className="relative flex flex-col items-center flex-shrink-0 md:w-16">
-        {/* Icon node */}
+  /* ── Shared icon node ─────────────────────────────────────────── */
+  const IconNode = () => (
+    <motion.div
+      variants={nodeVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false }}
+      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+        milestone.highlight
+          ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
+          : 'border-border bg-card'
+      }`}
+    >
+      <Icon
+        size={16}
+        className={`md:size-[18px] ${
+          milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
+        }`}
+      />
+      {milestone.highlight && (
         <motion.div
-          variants={nodeVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-            milestone.highlight
-              ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
-              : 'border-border bg-card'
-          }`}
-        >
-          <Icon
-            size={16}
-            className={`md:size-[18px] ${
-              milestone.highlight ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
-            }`}
-          />
-          {milestone.highlight && (
-            <motion.div
-              className="absolute inset-0 rounded-full border border-[var(--electric-cyan)]/30"
-              animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          )}
-        </motion.div>
+          className="absolute inset-0 rounded-full border border-[var(--electric-cyan)]/30"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+      )}
+    </motion.div>
+  );
 
-        {/* Connecting line */}
-        {!isLast && (
-          <motion.div
-            variants={lineVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="w-px flex-1 min-h-[2rem] md:min-h-[3rem] bg-gradient-to-b from-border to-[var(--electric-cyan)]/20 origin-top mt-2 md:mt-0"
-          />
-        )}
+  /* ── Connecting line ───────────────────────────────────────────── */
+  const ConnectingLine = () =>
+    !isLast ? (
+      <motion.div
+        variants={lineVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false }}
+        className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-border to-[var(--electric-cyan)]/20 origin-top mt-2"
+      />
+    ) : null;
+
+  return (
+    <>
+      {/* ── MOBILE layout (<md): left spine, card on right ─────────── */}
+      <div className="relative flex gap-3 md:hidden">
+        <div className="relative flex flex-col items-center flex-shrink-0">
+          <IconNode />
+          <ConnectingLine />
+        </div>
+        <div className="flex-1 pb-2">
+          <Card />
+        </div>
       </div>
 
-      {/* Card - right side on mobile, alternating on desktop */}
-      <div className="flex-1 md:hidden">
-        <Card />
-      </div>
+      {/* ── DESKTOP layout (md+): centre spine, alternating cards ───── */}
+      <div className="hidden md:flex items-start gap-0">
+        {/* Left slot */}
+        <div className="w-[calc(50%-2rem)] pr-8 flex flex-col items-end text-right">
+          {isEven ? <Card /> : <div className="invisible" />}
+        </div>
 
-      {/* Desktop alternating layout */}
-      <div className="hidden md:flex md:w-[calc(50%-2rem)] md:pr-8 flex-col items-end text-right">
-        {isEven && <Card />}
-      </div>
+        {/* Centre spine */}
+        <div className="relative flex flex-col items-center w-16 flex-shrink-0">
+          <IconNode />
+          <ConnectingLine />
+        </div>
 
-      <div className="hidden md:flex md:w-[calc(50%-2rem)] md:pl-8 flex-col items-start text-left">
-        {!isEven && <Card />}
+        {/* Right slot */}
+        <div className="w-[calc(50%-2rem)] pl-8 flex flex-col items-start text-left">
+          {!isEven ? <Card /> : <div className="invisible" />}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
