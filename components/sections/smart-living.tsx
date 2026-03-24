@@ -333,7 +333,7 @@ export function SmartLiving() {
                 <span className="font-mono text-xs tracking-widest uppercase text-white">
                   Smart Living
                 </span>
-              </motion.div>
+              </motion.div>n, i dont want you to change how the svg render other than changingte colour
 
               {/* Headline */}
               <motion.h2

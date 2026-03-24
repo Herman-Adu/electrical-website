@@ -17,14 +17,14 @@ const milestones = [
     title: 'NICEIC Approved',
     desc: 'Achieved NICEIC Approved Contractor status, cementing our commitment to the highest safety standards.',
     icon: Shield,
-    highlight: false,
+    highlight: true,
   },
   {
     year: '2013',
     title: 'Commercial Expansion',
     desc: 'Expanded into commercial electrical installations, completing our first major office fit-out contract.',
     icon: Building,
-    highlight: false,
+    highlight: true,
   },
   {
     year: '2016',
@@ -95,7 +95,7 @@ function TimelineNode({
   const Icon = milestone.icon;
   const nodeRef = useRef<HTMLDivElement>(null);
   const isInViewport = useInView(nodeRef, { once: false, margin: '-35% 0px -35% 0px' });
-  
+
   // Only highlight nodes with highlight: true when they scroll into view
   const isActive = milestone.highlight && isInViewport;
 
@@ -137,11 +137,10 @@ function TimelineNode({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, margin: '-40px' }}
-      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${
-        milestone.highlight
+      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${milestone.highlight
           ? 'border-[var(--electric-cyan)]/50 bg-[var(--electric-cyan)]/5'
           : 'border-border bg-card/40'
-      } hover:border-[var(--electric-cyan)]/40 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10`}
+        } hover:border-[var(--electric-cyan)]/40 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10`}
     >
       <div className="font-mono text-xs tracking-widest text-[var(--electric-cyan)]/70 mb-2">{milestone.year}</div>
       <h3 className="text-base md:text-lg font-bold text-foreground mb-2 leading-tight">{milestone.title}</h3>
@@ -163,17 +162,15 @@ function TimelineNode({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false }}
-      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
-        isActive
+      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isActive
           ? 'border-[var(--electric-cyan)] bg-[var(--electric-cyan)]/20 shadow-lg shadow-[var(--electric-cyan)]/30'
           : 'border-border bg-card'
-      }`}
+        }`}
     >
       <Icon
         size={16}
-        className={`md:size-[18px] transition-colors duration-500 ${
-          isActive ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
-        }`}
+        className={`md:size-[18px] transition-colors duration-500 ${isActive ? 'text-[var(--electric-cyan)]' : 'text-muted-foreground'
+          }`}
       />
       {isActive && (
         <motion.div
