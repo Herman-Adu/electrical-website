@@ -694,6 +694,32 @@ export function ServicesBento() {
             />
           </div>
 
+          {/* Testing & Certification — lg: col-span-1 */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <TextDetailCard
+              title="Testing & Certification"
+              description="Comprehensive electrical testing and compliance certification — EICR reports, PAT testing, periodic inspections, and all required compliance documentation."
+              icon={ClipboardCheck}
+              specs={testingSpecs}
+              voltage="All V"
+              delay={0.64}
+              index={6}
+            />
+          </div>
+
+          {/* Data & Communications — lg: col-span-1 */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <TextDetailCard
+              title="Data & Communications"
+              description="Structured cabling infrastructure, fiber optics, network installations, and full data centre solutions — future-proofed for growth with enterprise-grade support."
+              icon={Wifi}
+              specs={dataCommunicationsSpecs}
+              voltage="Network"
+              delay={0.68}
+              index={7}
+            />
+          </div>
+
           {/* Energy Management — lg: col-span-2 */}
           <div className="sm:col-span-2 lg:col-span-2">
             <div className="h-full">
@@ -746,32 +772,6 @@ export function ServicesBento() {
                 </div>
               </GlassCard>
             </div>
-          </div>
-
-          {/* Testing & Certification — lg: col-span-1 */}
-          <div className="sm:col-span-1 lg:col-span-1">
-            <TextDetailCard
-              title="Testing & Certification"
-              description="Comprehensive electrical testing and compliance certification — EICR reports, PAT testing, periodic inspections, and all required compliance documentation."
-              icon={ClipboardCheck}
-              specs={testingSpecs}
-              voltage="All V"
-              delay={0.68}
-              index={6}
-            />
-          </div>
-
-          {/* Data & Communications — lg: col-span-1 */}
-          <div className="sm:col-span-1 lg:col-span-1">
-            <TextDetailCard
-              title="Data & Communications"
-              description="Structured cabling infrastructure, fiber optics, network installations, and full data centre solutions — future-proofed for growth with enterprise-grade support."
-              icon={Wifi}
-              specs={dataCommunicationsSpecs}
-              voltage="Network"
-              delay={0.72}
-              index={7}
-            />
           </div>
 
           {/* Row 4: Full-width CTA */}
