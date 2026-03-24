@@ -254,10 +254,19 @@ export function Services() {
             <div className="h-px w-12 bg-border" />
           </div>
 
-          <div className="mt-6">
-            <button className="px-8 py-4 rounded-2xl border border-[var(--electric-cyan)]/30 text-[var(--electric-cyan)] font-bold uppercase tracking-widest hover:bg-[var(--electric-cyan)]/10 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300">
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/services"
+              className="px-8 py-4 rounded-2xl bg-[var(--electric-cyan)]/10 border border-[var(--electric-cyan)]/30 text-[var(--electric-cyan)] font-bold uppercase tracking-widest hover:bg-[var(--electric-cyan)]/20 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300"
+            >
+              View All Services
+            </a>
+            <a
+              href="/contact"
+              className="px-8 py-4 rounded-2xl border border-border text-muted-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
+            >
               Request Consultation
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

@@ -32,6 +32,18 @@ const navLinks = [
       { name: 'Why Choose Us', href: '/about#why-choose-us' },
     ],
   },
+  {
+    name: 'Services',
+    href: '/services',
+    submenu: [
+      { name: 'Commercial', href: '/services#services-grid' },
+      { name: 'Industrial', href: '/services#services-grid' },
+      { name: 'Power Distribution', href: '/services#services-grid' },
+      { name: 'Residential', href: '/services#services-grid' },
+      { name: 'Energy Management', href: '/services#services-grid' },
+      { name: 'Emergency Response', href: '/services#services-grid' },
+    ],
+  },
   { name: 'Contact', href: '/contact' },
 ];
 

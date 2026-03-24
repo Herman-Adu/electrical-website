@@ -6,16 +6,16 @@ import { Zap, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
 
 const footerLinks = {
   services: [
-    { name: 'Commercial Installations', href: '#' },
-    { name: 'Industrial Systems', href: '#' },
-    { name: 'Power Distribution', href: '#' },
-    { name: 'Safety Systems', href: '#' },
-    { name: 'Energy Management', href: '#' },
+    { name: 'Commercial Installations', href: '/services' },
+    { name: 'Industrial Systems', href: '/services' },
+    { name: 'Power Distribution', href: '/services' },
+    { name: 'Safety Systems', href: '/services' },
+    { name: 'Energy Management', href: '/services' },
   ],
   company: [
-    { name: 'About Us', href: '#' },
-    { name: 'Our Team', href: '#' },
-    { name: 'Careers', href: '#' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Our Team', href: '/about#directors' },
+    { name: 'Careers', href: '/contact' },
     { name: 'News & Updates', href: '#' },
     { name: 'Case Studies', href: '#' },
   ],

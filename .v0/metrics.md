@@ -9,7 +9,7 @@
 | **Model** | v0 Max (Auto-Selected) |
 | **Model Budget** | 150k tokens |
 | **Health** | 42% (within normal) |
-| **Phase** | BUILD — About Us Page COMPLETE |
+| **Phase** | BUILD — Services Page COMPLETE |
 | **Mode** | Standard (20 ops) |
 
 ---
