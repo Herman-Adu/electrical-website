@@ -261,7 +261,7 @@ export function SmartLiving() {
   }, []);
 
   return (
-      <section
+    <section
       id="smart-living"
       ref={containerRef}
       className="relative min-h-screen overflow-hidden bg-[var(--deep-black)] section-padding-tall"
@@ -323,14 +323,14 @@ export function SmartLiving() {
             <div className="max-w-xl">
               {/* Badge */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-3 mb-6"
+                className="inline-flex items-center gap-3 mb-6 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20"
               >
-                <div className="h-px w-8 bg-amber-500" />
-                <span className="font-mono text-xs tracking-widest uppercase text-amber-400">
+                <div className="h-px w-8 bg-white" />
+                <span className="font-mono text-xs tracking-widest uppercase text-white">
                   Smart Living
                 </span>
               </motion.div>
