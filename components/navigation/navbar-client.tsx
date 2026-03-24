@@ -40,7 +40,6 @@ const navLinks = [
       { name: 'Industrial & Infrastructure', href: '/services/industrial' },
       { name: 'Residential & Domestic', href: '/services/residential' },
       { name: 'Emergency Response', href: '/services/emergency' },
-      { name: 'Services Grid', href: '/services#services-grid' },
     ],
   },
   { name: 'Contact', href: '/contact' },
