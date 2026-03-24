@@ -17,14 +17,14 @@ const milestones = [
     title: 'NICEIC Approved',
     desc: 'Achieved NICEIC Approved Contractor status, cementing our commitment to the highest safety standards.',
     icon: Shield,
-    highlight: true,
+    highlight: false,
   },
   {
     year: '2013',
     title: 'Commercial Expansion',
     desc: 'Expanded into commercial electrical installations, completing our first major office fit-out contract.',
     icon: Building,
-    highlight: true,
+    highlight: false,
   },
   {
     year: '2016',
