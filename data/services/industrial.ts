@@ -28,6 +28,38 @@ export const industrialPageData: ServicePageData = {
       priority: true,
     },
   },
+  intro: {
+    sectionId: 'our-expertise',
+    label: 'Our Expertise',
+    headlineWords: [
+      'Powering',
+      'Manufacturing',
+      'Excellence',
+    ],
+    leadParagraph:
+      'Industrial electrical systems aren\'t just about power — they\'re about uptime, safety, and operational efficiency. We specialize in the high-voltage, heavy-duty infrastructure that keeps factories and facilities running.',
+    bodyParagraphs: [
+      'With 15+ years serving industrial facilities, we understand the unique demands of manufacturing environments. From 11kV installations and switchgear management to intelligent power distribution and energy optimization, we deliver systems designed for reliability.',
+      'Our industrial team includes fully qualified electricians, energy engineers, and compliance specialists. We work around your production schedule to minimize disruption, and we maintain your systems to ensure peak performance year-round.',
+    ],
+    pillars: [
+      {
+        number: '01',
+        title: '24/7 Support',
+        description: 'Rapid response and comprehensive maintenance for mission-critical systems.',
+      },
+      {
+        number: '02',
+        title: 'Heavy-Duty Systems',
+        description: 'HV installations, power distribution, and industrial-grade components.',
+      },
+      {
+        number: '03',
+        title: 'Safety First',
+        description: 'Full compliance with industrial safety standards and risk mitigation.',
+      },
+    ],
+  },
   sections: [
     {
       type: 'profile',

@@ -28,6 +28,41 @@ export const commercialPageData: ServicePageData = {
       priority: true,
     },
   },
+  intro: {
+    sectionId: 'our-approach',
+    label: 'Our Approach',
+    headlineWords: [
+      'Enterprise-Grade',
+      'Electrical',
+      'Solutions',
+      'for',
+      'Modern',
+      'Business',
+    ],
+    leadParagraph:
+      'Commercial electrical systems demand precision, reliability, and absolute compliance. We bring 15+ years of experience delivering installations that keep businesses running 24/7.',
+    bodyParagraphs: [
+      'From initial site assessment through final testing and certification, we manage every detail with the expertise your business deserves. Our team specializes in complex commercial environments where downtime costs money and safety is paramount.',
+      'Every installation is backed by comprehensive guarantees and ongoing support. We don\'t just install electrical systems — we partner with your business to ensure they support your growth for decades to come.',
+    ],
+    pillars: [
+      {
+        number: '01',
+        title: 'BS 7671 Certified',
+        description: 'Every installation fully compliant with UK electrical safety standards.',
+      },
+      {
+        number: '02',
+        title: 'Minimal Disruption',
+        description: 'Strategic planning ensures your business operates smoothly during installation.',
+      },
+      {
+        number: '03',
+        title: 'Scalable Infrastructure',
+        description: 'Systems designed to grow with your business demands.',
+      },
+    ],
+  },
   sections: [
     {
       type: 'profile',

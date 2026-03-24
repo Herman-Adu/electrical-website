@@ -28,6 +28,40 @@ export const residentialPageData: ServicePageData = {
       priority: true,
     },
   },
+  intro: {
+    sectionId: 'our-promise',
+    label: 'Our Promise',
+    headlineWords: [
+      'Your',
+      'Home',
+      'Deserves',
+      'Expert',
+      'Care',
+    ],
+    leadParagraph:
+      'Your home\'s electrical system is too important to trust to anyone. We bring certified expertise, transparent pricing, and genuine care to every residential project.',
+    bodyParagraphs: [
+      'Whether you need a full rewire, a new EV charger, smart home automation, or just peace of mind with an EICR safety certificate, we handle it with the same professionalism we\'d use in our own homes. Part P certified, fully insured, and committed to your satisfaction.',
+      'From initial consultation through final inspection, we keep you informed and involved. No hidden costs, no surprises — just honest electrical work done right.',
+    ],
+    pillars: [
+      {
+        number: '01',
+        title: 'Part P Certified',
+        description: 'Fully qualified and registered for all domestic electrical work.',
+      },
+      {
+        number: '02',
+        title: 'Clean & Tidy',
+        description: 'We respect your home and leave every job spotless.',
+      },
+      {
+        number: '03',
+        title: 'Fixed Pricing',
+        description: 'Transparent quotes with no hidden charges or surprise bills.',
+      },
+    ],
+  },
   sections: [
     {
       type: 'profile',

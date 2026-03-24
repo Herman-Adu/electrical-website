@@ -266,6 +266,7 @@ export interface ServicePageData {
     keywords?: string[];
   };
   hero: SectionHeroData;
+  intro?: SectionIntroData;
   sections: PageSection[];
 }
 

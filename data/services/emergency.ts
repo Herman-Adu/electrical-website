@@ -28,6 +28,39 @@ export const emergencyPageData: ServicePageData = {
       priority: true,
     },
   },
+  intro: {
+    sectionId: 'when-seconds-matter',
+    label: 'When Seconds Matter',
+    headlineWords: [
+      'Electrical',
+      'Emergencies',
+      'Don\'t',
+      'Wait',
+    ],
+    leadParagraph:
+      'When your power fails or a fault puts you at risk, you need help immediately. We maintain a 24/7 rapid-response team ready to diagnose and fix electrical emergencies before they become disasters.',
+    bodyParagraphs: [
+      'Whether a breaker won\'t reset, smoke is visible in a wall, or you\'ve lost power entirely, our emergency electricians respond within minutes. We arrive equipped to diagnose any issue and implement immediate solutions, from temporary power restoration to permanent repairs.',
+      'Our emergency service covers commercial facilities, industrial plants, and residential properties. We\'re available every day of the year, including holidays, with no call-out surcharges — just honest expert help when you need it most.',
+    ],
+    pillars: [
+      {
+        number: '01',
+        title: '60-Min Response',
+        description: 'Rapid dispatch and arrival to stabilize your situation.',
+      },
+      {
+        number: '02',
+        title: '24/7 Availability',
+        description: 'Always on call, including weekends and holidays.',
+      },
+      {
+        number: '03',
+        title: 'No Call-Out Fees',
+        description: 'Transparent pricing with no emergency surcharges.',
+      },
+    ],
+  },
   sections: [
     {
       type: 'profile',

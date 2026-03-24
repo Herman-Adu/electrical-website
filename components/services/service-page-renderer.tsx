@@ -33,6 +33,9 @@ export function ServicePageRenderer({ data }: ServicePageRendererProps) {
       {/* Hero */}
       <ServicePageHero data={data.hero} />
 
+      {/* Intro section - if present */}
+      {data.intro && <SectionIntro data={data.intro} />}
+
       {/* Dynamic sections */}
       {data.sections.map((section, index) => renderSection(section, index))}
 
