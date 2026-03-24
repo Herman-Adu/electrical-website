@@ -381,7 +381,7 @@ function CTACard({ delay }: { delay: number }) {
 
 function EmergencyCard({ delay }: { delay: number }) {
   return (
-    <GlassCard delay={delay} className="relative overflow-hidden min-h-[280px] sm:min-h-[320px]">
+    <GlassCard delay={delay} className="relative overflow-hidden h-full min-h-[320px] sm:min-h-[360px]">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -561,7 +561,7 @@ export function ServicesBento() {
           {/* Row 2 */}
 
           {/* Emergency — lg: col-span-1 */}
-          <div className="sm:col-span-1 lg:col-span-1">
+          <div className="sm:col-span-1 lg:col-span-1 h-full">
             <EmergencyCard delay={0.24} />
           </div>
 
