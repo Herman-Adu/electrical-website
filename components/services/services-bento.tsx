@@ -15,6 +15,7 @@ import {
   Shield,
   CheckCircle2,
   Activity,
+  Lightbulb,
 } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -442,6 +443,12 @@ const residentialSpecs: ServiceSpec[] = [
   { label: 'Cert', value: 'Part P' },
 ];
 
+const lightingSpecs: ServiceSpec[] = [
+  { label: 'Technology', value: 'LED' },
+  { label: 'Energy Saving', value: 'Up to 70%' },
+  { label: 'Warranty', value: '5 Years' },
+];
+
 export function ServicesBento() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -564,17 +571,94 @@ export function ServicesBento() {
 
           {/* Row 3 */}
 
+          {/* Lighting Installation — lg: col-span-2 (featured) */}
+          <div className="sm:col-span-2 lg:col-span-2">
+            <GlassCard delay={0.48} className="relative overflow-hidden h-full min-h-[300px]">
+              {/* Background image */}
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/services-lighting.jpg"
+                  alt="Commercial LED lighting installation"
+                  fill
+                  className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-card/95 via-card/70 to-card/30" />
+              </div>
+
+              <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
+                <div>
+                  <WindowDots />
+                  <div className="flex items-center gap-2 mb-3">
+                    <Lightbulb size={18} className="text-[var(--electric-cyan)]" />
+                    <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--electric-cyan)]/70">
+                      Lighting Installation
+                    </span>
+                    <div className="ml-auto flex gap-2">
+                      <div className="px-2 py-0.5 rounded border border-green-500/25 bg-green-500/10">
+                        <span className="font-mono text-[9px] tracking-widest text-green-400">ECO</span>
+                      </div>
+                      <div className="px-2 py-0.5 rounded border border-[var(--electric-cyan)]/25 bg-[var(--electric-cyan)]/5">
+                        <span className="font-mono text-[9px] tracking-widest text-[var(--electric-cyan)]">LED</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-card-foreground mb-3">
+                    High-Performance Commercial Lighting
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-lg">
+                    Energy-efficient LED lighting solutions for offices, warehouses, retail spaces, and industrial facilities. 
+                    Reduce running costs by up to 70% with professional design, installation, and smart controls — 
+                    delivering superior illumination with minimal environmental impact.
+                  </p>
+                </div>
+
+                {/* Key benefits */}
+                <div className="space-y-4">
+                  <div className="flex flex-wrap gap-3">
+                    {['Office Spaces', 'Warehouses', 'Retail', 'Industrial', 'Emergency Lighting', 'Controls'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-[9px] px-2 py-1 rounded bg-[var(--electric-cyan)]/10 border border-[var(--electric-cyan)]/20 text-[var(--electric-cyan)]/80 tracking-wider"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {/* Stats row */}
+                  <div className="flex flex-wrap gap-6 pt-3 border-t border-[var(--electric-cyan)]/10">
+                    <div className="flex flex-col">
+                      <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">70%</span>
+                      <span className="text-[10px] text-muted-foreground mt-1">Energy Savings</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">50K+</span>
+                      <span className="text-[10px] text-muted-foreground mt-1">Hour Lifespan</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">5yr</span>
+                      <span className="text-[10px] text-muted-foreground mt-1">Warranty</span>
+                    </div>
+                    <button className="ml-auto flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors">
+                      <span className="font-medium">Explore Lighting</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </GlassCard>
+          </div>
+
           {/* Residential — lg: col-span-1 */}
           <div className="sm:col-span-1 lg:col-span-1">
-            <ImageHeroCard
+            <TextDetailCard
               title="Residential Services"
               description="Complete home electrical — new builds, full rewires, EV charger installation, smart home wiring, and solar-ready consumer units."
-              image="/images/services-energy.jpg"
-              voltage="230V"
               icon={Home}
-              specs={['Full rewires', 'EV chargers', 'Smart home', 'Solar-ready', 'Consumer units']}
-              delay={0.48}
-              index={3}
+              specs={residentialSpecs}
+              voltage="230V"
+              delay={0.52}
+              index={4}
             />
           </div>
 
