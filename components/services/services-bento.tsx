@@ -79,14 +79,14 @@ function GlassCard({
       whileHover={glowOnHover ? { scale: 1.015 } : undefined}
       transition={{ type: 'spring', damping: 20, stiffness: 300 }}
       className={`group relative overflow-hidden rounded-2xl
-        dark:border-white/8 dark:bg-card/60 dark:backdrop-blur-md
+        dark:border-white/12 dark:bg-white/8 dark:backdrop-blur-xl dark:shadow-xl dark:shadow-black/40
         border-slate-200/50 bg-white/70 backdrop-blur-md shadow-sm
-        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/8 dark:hover:shadow-[var(--electric-cyan)]/8' : ''}
+        ${glowOnHover ? 'hover:border-[var(--electric-cyan)]/30 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/8 dark:hover:border-[var(--electric-cyan)]/40 dark:hover:shadow-[var(--electric-cyan)]/15' : ''}
         transition-all duration-500 ${className}`}
     >
       {/* Corner accents */}
-      <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/25" aria-hidden />
-      <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/25" aria-hidden />
+      <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/30 dark:group-hover:border-[var(--electric-cyan)]/60" aria-hidden />
+      <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[var(--electric-cyan)]/25 pointer-events-none z-20 group-hover:border-[var(--electric-cyan)]/50 transition-colors dark:border-[var(--electric-cyan)]/30 dark:group-hover:border-[var(--electric-cyan)]/60" aria-hidden />
       {children}
     </motion.div>
   );
