@@ -103,6 +103,7 @@ function ImageHeroCard({
   specs,
   delay,
   index,
+  exploreLink,
 }: {
   title: string;
   description: string;
@@ -112,6 +113,7 @@ function ImageHeroCard({
   specs: string[];
   delay: number;
   index: number;
+  exploreLink?: string;
 }) {
   return (
     <GlassCard delay={delay} className="flex flex-col h-full min-h-[320px]">
@@ -152,7 +154,12 @@ function ImageHeroCard({
             </span>
           ))}
         </div>
-        <button className="group/btn flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors">
+        <button
+          onClick={() => {
+            if (exploreLink) window.location.href = exploreLink;
+          }}
+          className="group/btn flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+        >
           <span className="font-medium">Learn More</span>
           <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
         </button>
@@ -172,6 +179,7 @@ function TextDetailCard({
   delay,
   index,
   accentColor = 'cyan',
+  exploreLink,
 }: {
   title: string;
   description: string;
@@ -181,6 +189,7 @@ function TextDetailCard({
   delay: number;
   index: number;
   accentColor?: 'cyan' | 'amber';
+  exploreLink?: string;
 }) {
   const isAmber = accentColor === 'amber';
   const accentClass = isAmber ? 'text-[var(--amber-warning)]' : 'text-[var(--electric-cyan)]';
@@ -217,7 +226,12 @@ function TextDetailCard({
         ))}
       </div>
 
-      <button className="mt-5 group/btn flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors">
+      <button
+        onClick={() => {
+          if (exploreLink) window.location.href = exploreLink;
+        }}
+        className="mt-5 group/btn flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+      >
         <span className="font-medium">Explore</span>
         <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
       </button>
@@ -412,7 +426,10 @@ function EmergencyCard({ delay }: { delay: number }) {
         <p className="text-xs text-white/70 leading-relaxed mb-4">
           Round-the-clock emergency fault diagnosis and rapid response for critical electrical failures.
         </p>
-        <button className="flex items-center gap-2 text-sm text-[var(--amber-warning)] hover:text-white transition-colors">
+        <button
+          onClick={() => (window.location.href = '/services/emergency')}
+          className="flex items-center gap-2 text-sm text-[var(--amber-warning)] hover:text-white transition-colors cursor-pointer"
+        >
           <span className="font-medium">Get Emergency Help</span>
           <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
         </button>
@@ -539,6 +556,7 @@ export function ServicesBento() {
               specs={['High-rise wiring', 'Emergency systems', 'Data centres', 'LED lighting', 'Fit-out']}
               delay={0}
               index={0}
+              exploreLink="/services/commercial#installations"
             />
           </div>
 
@@ -552,6 +570,7 @@ export function ServicesBento() {
               voltage="11kV"
               delay={0.08}
               index={1}
+              exploreLink="/services/industrial#systems"
             />
           </div>
 
@@ -582,6 +601,7 @@ export function ServicesBento() {
               voltage="33kV"
               delay={0.4}
               index={2}
+              exploreLink="/services/industrial#power-distribution"
             />
           </div>
 
@@ -655,7 +675,10 @@ export function ServicesBento() {
                       <span className="font-mono text-xl font-black text-[var(--electric-cyan)] leading-none">5yr</span>
                       <span className="text-[10px] text-white/60 mt-1">Warranty</span>
                     </div>
-                    <button className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors">
+                    <button
+                      onClick={() => (window.location.href = '/services/commercial#lighting')}
+                      className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+                    >
                       <span className="font-medium">Explore Lighting</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -675,6 +698,7 @@ export function ServicesBento() {
               voltage="230V"
               delay={0.52}
               index={4}
+              exploreLink="/services/residential#electrical"
             />
           </div>
 
@@ -693,6 +717,7 @@ export function ServicesBento() {
               delay={0.56}
               index={5}
               accentColor="amber"
+              exploreLink="/services/emergency"
             />
           </div>
 
@@ -706,6 +731,7 @@ export function ServicesBento() {
               voltage="All V"
               delay={0.64}
               index={6}
+              exploreLink="/services/commercial#testing"
             />
           </div>
 
@@ -719,6 +745,7 @@ export function ServicesBento() {
               voltage="Network"
               delay={0.68}
               index={7}
+              exploreLink="/services/commercial#data-comms"
             />
           </div>
 
@@ -766,7 +793,10 @@ export function ServicesBento() {
                         {tag}
                       </span>
                     ))}
-                    <button className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors">
+                    <button
+                      onClick={() => (window.location.href = '/services/industrial#energy-management')}
+                      className="ml-auto flex items-center gap-2 text-sm text-white/70 hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+                    >
                       <span className="font-medium">Learn More</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
