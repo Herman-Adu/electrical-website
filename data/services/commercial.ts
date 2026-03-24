@@ -77,7 +77,7 @@ export const commercialPageData: ServicePageData = {
         label: 'Data & Communications',
         name: 'Enterprise Network Infrastructure',
         bio: [
-          'Future-proof your business with structured cabling infrastructure designed for today's demands and tomorrow's growth. We install Cat6A, fiber optics, and full data centre solutions to ISO/IEC 11801 standards.',
+          "Future-proof your business with structured cabling infrastructure designed for today's demands and tomorrow's growth. We install Cat6A, fiber optics, and full data centre solutions to ISO/IEC 11801 standards.",
           'From server room fit-outs to desk-to-desk connectivity, we ensure your network is fast, reliable, and scalable. All installations backed by 10-year support agreements.',
         ],
         quote: 'Your network infrastructure should accelerate your business, not hold it back.',

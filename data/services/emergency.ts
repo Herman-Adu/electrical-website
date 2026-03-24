@@ -13,7 +13,7 @@ export const emergencyPageData: ServicePageData = {
     headline: ['Always', 'On', 'Call'],
     headlineHighlight: 'On',
     subheadline:
-      'Electrical emergencies don't keep business hours — and neither do we. Rapid response, expert diagnosis, and immediate solutions when you need them most.',
+      "Electrical emergencies don't keep business hours — and neither do we. Rapid response, expert diagnosis, and immediate solutions when you need them most.",
     stats: [
       { value: '< 2hr', label: 'Response Time' },
       { value: '24/7', label: 'Availability' },
@@ -93,7 +93,7 @@ export const emergencyPageData: ServicePageData = {
         label: 'All Sectors Covered',
         headline: 'Emergency Support for Every Sector',
         headlineHighlight: 'Every Sector',
-        description: 'Whether you're a homeowner, business owner, or facility manager — we're here when you need us.',
+        description: "Whether you're a homeowner, business owner, or facility manager — we're here when you need us.",
         pillars: [
           {
             icon: 'Building2',

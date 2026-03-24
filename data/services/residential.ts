@@ -39,7 +39,7 @@ export const residentialPageData: ServicePageData = {
           'From full house rewires to new consumer units, we handle every aspect of residential electrical work. Our team works cleanly and efficiently, minimizing disruption to your daily life while ensuring the highest safety standards.',
           'All work is completed to BS 7671 standards with full Part P notification and certification. We leave every home safer than we found it.',
         ],
-        quote: 'Your home deserves the same quality electrical work we'd put in our own.',
+        quote: "Your home deserves the same quality electrical work we'd put in our own.",
         credentials: ['Full Rewires', 'Consumer Units', 'New Builds', 'Extensions', 'Part P Certified'],
         image: {
           src: '/images/smart-living-interior.jpg',

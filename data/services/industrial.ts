@@ -39,7 +39,7 @@ export const industrialPageData: ServicePageData = {
           'Purpose-built electrical systems for the demands of modern industry. We design and install complete power infrastructure for manufacturing plants, warehouses, processing facilities, and heavy industrial sites.',
           'Our industrial team brings decades of experience in motor control, variable speed drives, PLC integration, and hazardous area installations. Every system is engineered for maximum reliability and safety.',
         ],
-        quote: 'Industrial electrical isn't just about power — it's about uptime, safety, and operational efficiency.',
+        quote: "Industrial electrical isn't just about power — it's about uptime, safety, and operational efficiency.",
         credentials: ['Motor Control', 'Variable Speed Drives', 'PLC Integration', 'Hazardous Areas', 'ATEX Certified'],
         image: {
           src: '/images/services-industrial.jpg',
