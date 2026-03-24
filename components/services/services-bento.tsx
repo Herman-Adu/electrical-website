@@ -562,9 +562,14 @@ export function ServicesBento() {
 
           {/* Row 2 */}
 
+          {/* Diagnostics — lg: col-span-2 */}
+          <div className="sm:col-span-2 lg:col-span-2">
+            <DiagnosticCard delay={0.24} />
+          </div>
+
           {/* Emergency — lg: col-span-1 */}
           <div className="sm:col-span-1 lg:col-span-1 h-full">
-            <EmergencyCard delay={0.24} />
+            <EmergencyCard delay={0.32} />
           </div>
 
           {/* Power Distribution — lg: col-span-1 */}
@@ -575,14 +580,9 @@ export function ServicesBento() {
               icon={Zap}
               specs={powerSpecs}
               voltage="33kV"
-              delay={0.32}
+              delay={0.4}
               index={2}
             />
-          </div>
-
-          {/* Diagnostics — lg: col-span-2 */}
-          <div className="sm:col-span-2 lg:col-span-2">
-            <DiagnosticCard delay={0.4} />
           </div>
 
           {/* Row 3 */}
