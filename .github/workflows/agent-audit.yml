@@ -36,7 +36,8 @@ jobs:
         run: cd agent && node ../node_modules/.bin/tsc --noEmit
 
       - name: Validate skill registry integrity
-        run: node --input-type=module << 'EOF'
+        run: |
+          node --input-type=module <<'EOF'
           import { readFileSync } from 'fs';
 
           // Validate that all skill files export the required fields
@@ -47,6 +48,8 @@ jobs:
             'send-notification',
             'reasoning-chain',
             'health-check',
+            'nextjs-agent-setup',
+            'skill-builder',
           ];
 
           let allValid = true;
@@ -77,7 +80,7 @@ jobs:
 
           if (!allValid) process.exit(1);
           console.log('\n✓ All skill manifests are structurally valid');
-        EOF
+          EOF
 
       - name: Generate workflow summary
         run: |
@@ -95,6 +98,8 @@ jobs:
           echo "| send-notification | cheap | Yes | resend |" >> $GITHUB_STEP_SUMMARY
           echo "| reasoning-chain | expensive | No | sequentialthinking, memory |" >> $GITHUB_STEP_SUMMARY
           echo "| health-check | cheap | No | (meta — no external servers) |" >> $GITHUB_STEP_SUMMARY
+          echo "| nextjs-agent-setup | cheap | Yes | (none) |" >> $GITHUB_STEP_SUMMARY
+          echo "| skill-builder | medium | Yes | memory |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Sub-Agent Pools" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
