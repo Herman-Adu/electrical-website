@@ -61,7 +61,7 @@ export async function submitContactInquiry(
       .toUpperCase()
       .substring(0, 12);
 
-    if (!checkRateLimit(clientIp, rateLimit, rateLimitWindow)) {
+    if (!(await checkRateLimit(clientIp, rateLimit, rateLimitWindow))) {
       console.warn("[RATE_LIMIT_HIT]", {
         referenceCode,
         emailDomain: getEmailDomain(validatedData.email),

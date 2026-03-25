@@ -555,7 +555,7 @@ export function SectionFeatures({ data }: { data: SectionFeaturesData }) {
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none" />
 
       {/* Borders */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-electric-cyan/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent" />
 
       <div className="section-content">
         {/* Header with animation wrapper */}
