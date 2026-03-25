@@ -34,7 +34,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Check SKILL.md files exist for every registered skill
-        run: node --input-type=module << 'EOF'
+        run: |
+          node --input-type=module <<'EOF'
           import { readFileSync, readdirSync, existsSync } from 'fs';
           import { join } from 'path';
 
@@ -95,7 +96,7 @@ jobs:
 
           console.log(`✓ All ${registeredIds.length} skills have valid SKILL.md files`);
           registeredIds.forEach(id => console.log(`  ✓ ${id}`));
-        EOF
+          EOF
 
       - name: Typecheck agent package
         run: cd agent && node ../node_modules/.bin/tsc --noEmit

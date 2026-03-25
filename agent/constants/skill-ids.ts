@@ -16,4 +16,6 @@ export const SKILLS = {
   SEND_NOTIFICATION: sid("send-notification"),
   REASONING_CHAIN: sid("reasoning-chain"),
   HEALTH_CHECK: sid("health-check"),
+  NEXTJS_AGENT_SETUP: sid("nextjs-agent-setup"),
+  SKILL_BUILDER: sid("skill-builder"),
 } as const satisfies Record<string, SkillId>;

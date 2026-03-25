@@ -49,27 +49,32 @@ const events = await orchestrator.auditQuery({ outcome: "success", limit: 20 });
 
 ## Skills
 
-| Skill ID            | Cost Tier | Dry-Run | Servers                    | Agent Pool              |
-| ------------------- | --------- | ------- | -------------------------- | ----------------------- |
-| `code-search`       | cheap     | No      | ast-grep                   | code-intelligence-agent |
-| `browser-testing`   | expensive | No      | playwright-mcp-server      | browser-agent           |
-| `github-actions`    | medium    | Yes     | github-official            | code-intelligence-agent |
-| `send-notification` | cheap     | Yes     | resend                     | notification-agent      |
-| `reasoning-chain`   | expensive | No      | sequentialthinking, memory | reasoning-agent         |
-| `health-check`      | cheap     | No      | (meta)                     | orchestrator            |
+| Skill ID             | Cost Tier | Dry-Run | Servers                    | Agent Pool              |
+| -------------------- | --------- | ------- | -------------------------- | ----------------------- |
+| `code-search`        | cheap     | No      | ast-grep                   | code-intelligence-agent |
+| `browser-testing`    | expensive | No      | playwright-mcp-server      | browser-agent           |
+| `github-actions`     | medium    | Yes     | github-official            | code-intelligence-agent |
+| `send-notification`  | cheap     | Yes     | resend                     | notification-agent      |
+| `reasoning-chain`    | expensive | No      | sequentialthinking, memory | reasoning-agent         |
+| `health-check`       | cheap     | No      | (meta)                     | orchestrator            |
+| `nextjs-agent-setup` | cheap     | Yes     | (none)                     | devtools-agent ¹        |
+| `skill-builder`      | medium    | Yes     | memory                     | reasoning-agent         |
+
+> ¹ `nextjs-agent-setup` has no server deps. It routes to the smallest eligible pool. Adding a dedicated `utility-agent` pool is a tracked optimisation.
 
 ## Sub-Agent Pools
 
 Each pool has a **hard boundary** — the TypeScript compiler and runtime both prevent scope violations.
 
-| Pool                      | Allowed Servers                          |
-| ------------------------- | ---------------------------------------- |
-| `code-intelligence-agent` | ast-grep, github-official                |
-| `browser-agent`           | playwright-mcp-server                    |
-| `reasoning-agent`         | sequentialthinking, memory               |
-| `notification-agent`      | resend                                   |
-| `content-agent`           | fetch, wikipedia-mcp, youtube_transcript |
-| `devtools-agent`          | next-devtools-mcp, context7              |
+| Pool                      | Allowed Servers                          | Primary Skills                        |
+| ------------------------- | ---------------------------------------- | ------------------------------------- |
+| `code-intelligence-agent` | ast-grep, github-official                | code-search, github-actions           |
+| `browser-agent`           | playwright-mcp-server                    | browser-testing                       |
+| `reasoning-agent`         | sequentialthinking, memory               | reasoning-chain, skill-builder        |
+| `notification-agent`      | resend                                   | send-notification                     |
+| `content-agent`           | fetch, wikipedia-mcp, youtube_transcript | (content-research — planned)          |
+| `devtools-agent`          | next-devtools-mcp, context7              | nextjs-agent-setup (no-server skills) |
+| `orchestrator`            | (meta)                                   | health-check                          |
 
 ## Self-Learning
 

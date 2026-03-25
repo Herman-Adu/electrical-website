@@ -37,7 +37,9 @@ export type IntentCategory =
   | "reasoning"
   | "content-research"
   | "devtools"
-  | "health-check";
+  | "health-check"
+  | "project-setup"
+  | "skill-authoring";
 
 export interface AgentIntent {
   readonly id: string; // UUID v4

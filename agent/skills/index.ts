@@ -25,6 +25,18 @@ export type {
 export { healthCheckSkill } from "./health-check.skill";
 export type { HealthCheckInput, HealthCheckOutput } from "./health-check.skill";
 
+export { nextjsAgentSetupSkill } from "./nextjs-agent-setup.skill";
+export type {
+  NextjsAgentSetupInput,
+  NextjsAgentSetupOutput,
+} from "./nextjs-agent-setup.skill";
+
+export { skillBuilderSkill } from "./skill-builder.skill";
+export type {
+  SkillBuilderInput,
+  SkillBuilderOutput,
+} from "./skill-builder.skill";
+
 import { skillRegistry } from "../registry";
 import { codeSearchSkill } from "./code-search.skill";
 import { browserTestSkill } from "./browser-test.skill";
@@ -32,6 +44,8 @@ import { githubActionsSkill } from "./github-actions.skill";
 import { sendNotificationSkill } from "./send-notification.skill";
 import { reasoningChainSkill } from "./reasoning-chain.skill";
 import { healthCheckSkill } from "./health-check.skill";
+import { nextjsAgentSetupSkill } from "./nextjs-agent-setup.skill";
+import { skillBuilderSkill } from "./skill-builder.skill";
 
 /**
  * Register all built-in skills into the global registry.
@@ -44,4 +58,6 @@ export function registerAllSkills(): void {
   skillRegistry.register(sendNotificationSkill);
   skillRegistry.register(reasoningChainSkill);
   skillRegistry.register(healthCheckSkill);
+  skillRegistry.register(nextjsAgentSetupSkill);
+  skillRegistry.register(skillBuilderSkill);
 }
