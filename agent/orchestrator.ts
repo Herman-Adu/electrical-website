@@ -1,4 +1,6 @@
 import { randomUUID } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type {
   AgentIntent,
   AgentOutput,
@@ -30,6 +32,9 @@ import {
 import type { McpClient } from "./agents/agent-pool.ts";
 import { ALL_MCP_SERVERS, MCP } from "./constants/mcp-servers";
 import type { PreFlightReport } from "./types/health.ts";
+import type { SkillBuilderOutput } from "./skills/skill-builder.skill";
+import type { SkillManifest } from "./types/skill";
+import type { HeuristicSnapshot } from "./types/heuristics";
 
 // ─── Orchestrator Config ──────────────────────────────────────────────────────
 
@@ -44,6 +49,18 @@ export interface OrchestratorConfig {
    * The default implementation calls a lightweight tool on the target server.
    */
   pingFn?: PingFn;
+}
+
+export interface ProductionSkillAuditOptions {
+  dryRun?: boolean;
+  persistObservation?: boolean;
+}
+
+export interface ProductionSkillAuditResult {
+  audit: AgentOutput<SkillBuilderOutput>;
+  optimise: AgentOutput<SkillBuilderOutput>;
+  skillCount: number;
+  generatedAt: string;
 }
 
 // ─── Orchestrator ─────────────────────────────────────────────────────────────
@@ -83,6 +100,141 @@ export class Orchestrator {
     this.#audit = audit;
     this.#health = health;
     this.#heuristics = heuristics;
+  }
+
+  async #buildSkillBuilderMetadata(snapshot: HeuristicSnapshot | null): Promise<
+    Array<{
+      id: string;
+      version: string;
+      costTier: "cheap" | "medium" | "expensive";
+      dryRunCapable: boolean;
+      requiredServers: string[];
+      hasPlaybook: boolean;
+      registeredInIndex: boolean;
+      registeredInConstants: boolean;
+      assignedToPool?: string;
+      hasFitnessSignal: boolean;
+      avgLatencyMs?: number;
+      successRate?: number;
+    }>
+  > {
+    const skills = skillRegistry.all();
+
+    const cwd = process.cwd();
+    const rootPath = existsSync(resolve(cwd, ".github"))
+      ? cwd
+      : resolve(cwd, "..");
+
+    const constantsPath = resolve(rootPath, "agent/constants/skill-ids.ts");
+    const indexPath = resolve(rootPath, "agent/skills/index.ts");
+    const constantsContent = existsSync(constantsPath)
+      ? readFileSync(constantsPath, "utf8")
+      : "";
+    const indexContent = existsSync(indexPath)
+      ? readFileSync(indexPath, "utf8")
+      : "";
+
+    return skills.map((skill) => {
+      const playbookPath = resolve(
+        rootPath,
+        `.github/skills/${skill.id}/SKILL.md`,
+      );
+
+      const weight = snapshot?.weights[skill.id];
+
+      const hasFitnessSignal = this.#hasFitnessSignal(skill);
+
+      return {
+        id: skill.id,
+        version: skill.version,
+        costTier: skill.costTier,
+        dryRunCapable: skill.dryRunCapable,
+        requiredServers: [...skill.requiredServers],
+        hasPlaybook: existsSync(playbookPath),
+        registeredInIndex:
+          indexContent.includes(`\"${skill.id}.skill\"`) ||
+          indexContent.includes(`'${skill.id}.skill'`),
+        registeredInConstants:
+          constantsContent.includes(`\"${skill.id}\"`) ||
+          constantsContent.includes(`'${skill.id}'`),
+        assignedToPool: this.#resolvePoolForRequiredServers(
+          skill.requiredServers,
+        ),
+        hasFitnessSignal,
+        avgLatencyMs: weight?.avgLatencyMs,
+        successRate: weight?.successRate,
+      };
+    });
+  }
+
+  #hasFitnessSignal(skill: SkillManifest): boolean {
+    const categories: IntentCategory[] = [
+      "code-analysis",
+      "browser-test",
+      "github-action",
+      "notification",
+      "reasoning",
+      "content-research",
+      "devtools",
+      "health-check",
+      "project-setup",
+      "skill-authoring",
+    ];
+
+    return categories.some(
+      (category) =>
+        skill.fitness({
+          id: "audit-preview",
+          category,
+          description: `production audit probe for ${skill.id}`,
+          costCap: "expensive",
+          dryRun: true,
+          metadata: {},
+        }) > 0,
+    );
+  }
+
+  #resolvePoolForRequiredServers(
+    requiredServers: ReadonlyArray<McpServerId>,
+  ): string | undefined {
+    if (requiredServers.length === 0) {
+      return AGENT_POOL_IDS.ORCHESTRATOR;
+    }
+
+    const poolCapabilities = [
+      {
+        id: AGENT_POOL_IDS.CODE_INTELLIGENCE,
+        allowed: [MCP.AST_GREP, MCP.GITHUB],
+      },
+      {
+        id: AGENT_POOL_IDS.BROWSER,
+        allowed: [MCP.PLAYWRIGHT],
+      },
+      {
+        id: AGENT_POOL_IDS.REASONING,
+        allowed: [MCP.SEQUENTIAL_THINKING, MCP.MEMORY],
+      },
+      {
+        id: AGENT_POOL_IDS.NOTIFICATION,
+        allowed: [MCP.RESEND],
+      },
+      {
+        id: AGENT_POOL_IDS.CONTENT,
+        allowed: [MCP.FETCH, MCP.WIKIPEDIA, MCP.YOUTUBE],
+      },
+      {
+        id: AGENT_POOL_IDS.DEVTOOLS,
+        allowed: [MCP.NEXT_DEVTOOLS, MCP.CONTEXT7],
+      },
+    ] as const;
+
+    const matches = poolCapabilities
+      .filter((pool) =>
+        requiredServers.every((serverId) => pool.allowed.includes(serverId)),
+      )
+      .sort((a, b) => a.allowed.length - b.allowed.length);
+
+    return matches[0]?.id;
   }
 
   /**
@@ -318,6 +470,67 @@ export class Orchestrator {
       metadata: {},
     };
     return this.#router.preview(intent);
+  }
+
+  /**
+   * Run a one-command production skill audit.
+   *
+   * This method gathers audit inputs directly from live runtime state:
+   * - current SkillRegistry manifests
+   * - playbook/registration parity files on disk
+   * - latest HeuristicEngine snapshot
+   *
+   * Then executes skill-builder in both "audit" and "optimise" modes.
+   */
+  async runProductionSkillAudit(
+    opts: ProductionSkillAuditOptions = {},
+  ): Promise<ProductionSkillAuditResult> {
+    const snapshot = await this.#heuristics.currentSnapshot();
+    const skillMetadata = await this.#buildSkillBuilderMetadata(snapshot);
+    const heuristicSnapshot = Object.entries(snapshot?.weights ?? {}).map(
+      ([skillId, weight]) => ({
+        skillId,
+        score: weight.successRate * weight.costAccuracy,
+        observations: weight.sampleCount,
+        avgLatencyMs: weight.avgLatencyMs,
+      }),
+    );
+
+    const common = {
+      dryRun: opts.dryRun ?? false,
+      costCap: "medium" as TokenCostTier,
+      metadata: { systemAudit: true },
+    };
+
+    const audit = await this.run<SkillBuilderOutput>(
+      "skill-authoring",
+      "Run production skill quality and parity audit",
+      {
+        mode: "audit",
+        skillMetadata,
+        persistObservation: opts.persistObservation ?? true,
+      },
+      common,
+    );
+
+    const optimise = await this.run<SkillBuilderOutput>(
+      "skill-authoring",
+      "Run production skill optimisation analysis",
+      {
+        mode: "optimise",
+        skillMetadata,
+        heuristicSnapshot,
+        persistObservation: opts.persistObservation ?? true,
+      },
+      common,
+    );
+
+    return {
+      audit,
+      optimise,
+      skillCount: skillMetadata.length,
+      generatedAt: new Date().toISOString(),
+    };
   }
 }
 

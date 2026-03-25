@@ -7,7 +7,11 @@
 
 // Top-level orchestrator
 export { Orchestrator } from "./orchestrator";
-export type { OrchestratorConfig } from "./orchestrator.ts";
+export type {
+  OrchestratorConfig,
+  ProductionSkillAuditOptions,
+  ProductionSkillAuditResult,
+} from "./orchestrator.ts";
 
 // Types
 export type {
@@ -48,4 +52,6 @@ export {
   sendNotificationSkill,
   reasoningChainSkill,
   healthCheckSkill,
+  nextjsAgentSetupSkill,
+  skillBuilderSkill,
 } from "./skills/index";

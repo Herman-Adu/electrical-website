@@ -45,6 +45,15 @@ const candidates = await orchestrator.previewRouting(
 
 // Query audit trail
 const events = await orchestrator.auditQuery({ outcome: "success", limit: 20 });
+
+// One-command production skill audit (live registry + heuristics)
+const productionAudit = await orchestrator.runProductionSkillAudit({
+  dryRun: true,
+  persistObservation: false,
+});
+
+console.log(productionAudit.audit.data.auditReport?.summary);
+console.log(productionAudit.optimise.data.optimiseReport?.summary);
 ```
 
 ## Skills
