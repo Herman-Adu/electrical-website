@@ -33,6 +33,7 @@ import type { McpClient } from "./agents/agent-pool.ts";
 import { ALL_MCP_SERVERS, MCP } from "./constants/mcp-servers";
 import type { PreFlightReport } from "./types/health.ts";
 import type { SkillBuilderOutput } from "./skills/skill-builder.skill";
+import type { SkillMeta } from "./skills/skill-builder.skill";
 import type { SkillManifest } from "./types/skill";
 import type { HeuristicSnapshot } from "./types/heuristics";
 
@@ -102,22 +103,9 @@ export class Orchestrator {
     this.#heuristics = heuristics;
   }
 
-  async #buildSkillBuilderMetadata(snapshot: HeuristicSnapshot | null): Promise<
-    Array<{
-      id: string;
-      version: string;
-      costTier: "cheap" | "medium" | "expensive";
-      dryRunCapable: boolean;
-      requiredServers: string[];
-      hasPlaybook: boolean;
-      registeredInIndex: boolean;
-      registeredInConstants: boolean;
-      assignedToPool?: string;
-      hasFitnessSignal: boolean;
-      avgLatencyMs?: number;
-      successRate?: number;
-    }>
-  > {
+  async #buildSkillBuilderMetadata(
+    snapshot: HeuristicSnapshot | null,
+  ): Promise<SkillMeta[]> {
     const skills = skillRegistry.all();
 
     const cwd = process.cwd();
@@ -141,10 +129,13 @@ export class Orchestrator {
       );
 
       const weight = snapshot?.weights[skill.id];
+      const assignedToPool = this.#resolvePoolForRequiredServers(
+        skill.requiredServers,
+      );
 
       const hasFitnessSignal = this.#hasFitnessSignal(skill);
 
-      return {
+      const metadata: SkillMeta = {
         id: skill.id,
         version: skill.version,
         costTier: skill.costTier,
@@ -157,13 +148,17 @@ export class Orchestrator {
         registeredInConstants:
           constantsContent.includes(`\"${skill.id}\"`) ||
           constantsContent.includes(`'${skill.id}'`),
-        assignedToPool: this.#resolvePoolForRequiredServers(
-          skill.requiredServers,
-        ),
         hasFitnessSignal,
-        avgLatencyMs: weight?.avgLatencyMs,
-        successRate: weight?.successRate,
+        ...(assignedToPool !== undefined ? { assignedToPool } : {}),
+        ...(weight?.avgLatencyMs !== undefined
+          ? { avgLatencyMs: weight.avgLatencyMs }
+          : {}),
+        ...(weight?.successRate !== undefined
+          ? { successRate: weight.successRate }
+          : {}),
       };
+
+      return metadata;
     });
   }
 
