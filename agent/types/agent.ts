@@ -4,8 +4,8 @@ import type {
   AgentPoolId,
   McpServerId,
   SkillId,
-} from "./core.ts";
-import type { SkillManifest } from "./skill.ts";
+} from "./core";
+import type { SkillManifest } from "./skill";
 
 // ─── Agent Pool Contract ──────────────────────────────────────────────────────
 

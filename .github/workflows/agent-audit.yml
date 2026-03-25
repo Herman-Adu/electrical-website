@@ -1,0 +1,108 @@
+name: Agent Audit
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      export_snapshot:
+        description: "Export heuristic snapshot to workflow summary"
+        type: boolean
+        default: true
+
+jobs:
+  health-and-audit:
+    name: Agent system health and audit report
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate agent package types
+        run: cd agent && node ../node_modules/.bin/tsc --noEmit
+
+      - name: Validate skill registry integrity
+        run: node --input-type=module << 'EOF'
+          import { readFileSync } from 'fs';
+
+          // Validate that all skill files export the required fields
+          const skills = [
+            'code-search',
+            'browser-test',
+            'github-actions',
+            'send-notification',
+            'reasoning-chain',
+            'health-check',
+          ];
+
+          let allValid = true;
+          for (const skill of skills) {
+            const path = `agent/skills/${skill}.skill.ts`;
+            const content = readFileSync(path, 'utf8');
+
+            const checks = [
+              { field: 'id:', label: 'id' },
+              { field: 'version:', label: 'version' },
+              { field: 'description:', label: 'description' },
+              { field: 'requiredServers:', label: 'requiredServers' },
+              { field: 'costTier:', label: 'costTier' },
+              { field: 'dryRunCapable:', label: 'dryRunCapable' },
+              { field: 'fitness(', label: 'fitness function' },
+              { field: 'execute(', label: 'execute function' },
+            ];
+
+            for (const check of checks) {
+              if (!content.includes(check.field)) {
+                console.error(`✗ ${skill}.skill.ts missing ${check.label}`);
+                allValid = false;
+              }
+            }
+
+            if (allValid) console.log(`✓ ${skill}.skill.ts`);
+          }
+
+          if (!allValid) process.exit(1);
+          console.log('\n✓ All skill manifests are structurally valid');
+        EOF
+
+      - name: Generate workflow summary
+        run: |
+          echo "## Agent Skill System — Daily Audit" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Registered Skills" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Skill ID | Cost Tier | Dry-Run | Servers |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-----------|---------|---------|" >> $GITHUB_STEP_SUMMARY
+          echo "| code-search | cheap | No | ast-grep |" >> $GITHUB_STEP_SUMMARY
+          echo "| browser-testing | expensive | No | playwright-mcp-server |" >> $GITHUB_STEP_SUMMARY
+          echo "| github-actions | medium | Yes | github-official |" >> $GITHUB_STEP_SUMMARY
+          echo "| send-notification | cheap | Yes | resend |" >> $GITHUB_STEP_SUMMARY
+          echo "| reasoning-chain | expensive | No | sequentialthinking, memory |" >> $GITHUB_STEP_SUMMARY
+          echo "| health-check | cheap | No | (meta — no external servers) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sub-Agent Pools" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Agent Pool | Allowed Servers |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|-----------------|" >> $GITHUB_STEP_SUMMARY
+          echo "| code-intelligence-agent | ast-grep, github-official |" >> $GITHUB_STEP_SUMMARY
+          echo "| browser-agent | playwright-mcp-server |" >> $GITHUB_STEP_SUMMARY
+          echo "| reasoning-agent | sequentialthinking, memory |" >> $GITHUB_STEP_SUMMARY
+          echo "| notification-agent | resend |" >> $GITHUB_STEP_SUMMARY
+          echo "| content-agent | fetch, wikipedia-mcp, youtube_transcript |" >> $GITHUB_STEP_SUMMARY
+          echo "| devtools-agent | next-devtools-mcp, context7 |" >> $GITHUB_STEP_SUMMARY

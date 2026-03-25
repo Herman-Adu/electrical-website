@@ -1,4 +1,4 @@
-import type { McpServerId, SkillId } from "./core.ts";
+import type { McpServerId, SkillId } from "./core";
 
 // ─── Heuristic Types ──────────────────────────────────────────────────────────
 

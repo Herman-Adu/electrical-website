@@ -1,0 +1,102 @@
+name: Skill Sync Check
+
+on:
+  push:
+    paths:
+      - "agent/skills/**"
+      - ".github/skills/**"
+      - "agent/constants/skill-ids.ts"
+  pull_request:
+    paths:
+      - "agent/skills/**"
+      - ".github/skills/**"
+      - "agent/constants/skill-ids.ts"
+
+jobs:
+  sync-check:
+    name: Validate SKILL.md ↔ SkillManifest parity
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check SKILL.md files exist for every registered skill
+        run: node --input-type=module << 'EOF'
+          import { readFileSync, readdirSync, existsSync } from 'fs';
+          import { join } from 'path';
+
+          // Read skill IDs from constants
+          const skillIdsFile = readFileSync('agent/constants/skill-ids.ts', 'utf8');
+          const idMatches = [...skillIdsFile.matchAll(/sid\("([^"]+)"\)/g)];
+          const registeredIds = idMatches.map(m => m[1]);
+
+          const skillsDir = '.github/skills';
+          const errors = [];
+
+          for (const skillId of registeredIds) {
+            const skillFile = join(skillsDir, skillId, 'SKILL.md');
+            if (!existsSync(skillFile)) {
+              errors.push(`Missing SKILL.md for skill "${skillId}" at ${skillFile}`);
+              continue;
+            }
+
+            const content = readFileSync(skillFile, 'utf8');
+
+            // Check frontmatter name matches skill ID
+            const nameMatch = content.match(/^name:\s*(.+)$/m);
+            if (!nameMatch) {
+              errors.push(`SKILL.md for "${skillId}" is missing frontmatter "name" field`);
+              continue;
+            }
+            if (nameMatch[1].trim() !== skillId) {
+              errors.push(
+                `SKILL.md name "${nameMatch[1].trim()}" does not match skill ID "${skillId}"`
+              );
+            }
+
+            // Check description field exists
+            const descMatch = content.match(/^description:/m);
+            if (!descMatch) {
+              errors.push(`SKILL.md for "${skillId}" is missing frontmatter "description" field`);
+            }
+          }
+
+          // Check for SKILL.md files without a corresponding registered skill
+          const skillDirs = readdirSync(skillsDir, { withFileTypes: true })
+            .filter(d => d.isDirectory())
+            .map(d => d.name);
+
+          for (const dir of skillDirs) {
+            if (!registeredIds.includes(dir)) {
+              errors.push(
+                `SKILL.md directory "${dir}" has no corresponding registered skill in skill-ids.ts`
+              );
+            }
+          }
+
+          if (errors.length > 0) {
+            console.error('Skill sync check FAILED:');
+            errors.forEach(e => console.error('  ✗', e));
+            process.exit(1);
+          }
+
+          console.log(`✓ All ${registeredIds.length} skills have valid SKILL.md files`);
+          registeredIds.forEach(id => console.log(`  ✓ ${id}`));
+        EOF
+
+      - name: Typecheck agent package
+        run: cd agent && node ../node_modules/.bin/tsc --noEmit
+        continue-on-error: false

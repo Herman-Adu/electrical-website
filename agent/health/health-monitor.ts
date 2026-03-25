@@ -1,11 +1,11 @@
-import type { McpServerId } from "../types/core.ts";
+import type { McpServerId } from "../types/core";
 import type {
   CircuitBreakerConfig,
   PreFlightReport,
   ServerHealthReport,
   ServerHealthStatus,
-} from "../types/health.ts";
-import { DEFAULT_CIRCUIT_BREAKER } from "../types/health.ts";
+} from "../types/health";
+import { DEFAULT_CIRCUIT_BREAKER } from "../types/health";
 
 // ─── Ping Function Contract ───────────────────────────────────────────────────
 

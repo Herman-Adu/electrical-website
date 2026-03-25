@@ -7,7 +7,7 @@ import type {
   SkillContext,
   SkillId,
   TokenCostTier,
-} from "./core.ts";
+} from "./core";
 
 // ─── Skill Manifest ───────────────────────────────────────────────────────────
 
@@ -28,8 +28,8 @@ export interface SkillManifest<TInput = unknown, TOutput = unknown> {
   readonly requiredServers: ReadonlyArray<McpServerId>;
   readonly costTier: TokenCostTier;
   readonly dryRunCapable: boolean;
-  readonly inputSchema: z.ZodSchema<TInput>;
-  readonly outputSchema: z.ZodSchema<TOutput>;
+  readonly inputSchema: z.ZodType<TInput, z.ZodTypeDef, unknown>;
+  readonly outputSchema: z.ZodType<TOutput, z.ZodTypeDef, unknown>;
 
   /**
    * Pure fitness function. Must be unit-testable with no infrastructure.

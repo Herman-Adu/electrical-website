@@ -1,4 +1,4 @@
-import type { AgentPoolId, SkillId, TokenCostTier } from "./core.ts";
+import type { AgentPoolId, SkillId, TokenCostTier } from "./core";
 
 // ─── Audit Trail Types ────────────────────────────────────────────────────────
 

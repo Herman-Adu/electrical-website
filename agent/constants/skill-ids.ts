@@ -1,4 +1,4 @@
-import type { SkillId } from "../types/core.ts";
+import type { SkillId } from "../types/core";
 
 function sid(s: string): SkillId {
   return s as SkillId;

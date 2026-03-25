@@ -1,4 +1,4 @@
-import type { McpServerId } from "./core.ts";
+import type { McpServerId } from "./core";
 
 // ─── Health Types ─────────────────────────────────────────────────────────────
 

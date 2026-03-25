@@ -13,36 +13,32 @@ export type {
   SkillContext,
   SkillId,
   TokenCostTier,
-} from "./core.ts";
+} from "./core";
 
-export type { AgentPool } from "./agent.ts";
-export { ScopeViolationError } from "./agent.ts";
+export type { AgentPool } from "./agent";
+export { ScopeViolationError } from "./agent";
 
-export type {
-  SkillManifest,
-  SkillRegistryEntry,
-  ScoredSkill,
-} from "./skill.ts";
+export type { SkillManifest, SkillRegistryEntry, ScoredSkill } from "./skill";
 
 export type {
   HeuristicSnapshot,
   OutcomeObservation,
   SkillHeuristicWeight,
   SkillOutcome,
-} from "./heuristics.ts";
+} from "./heuristics";
 
 export type {
   AuditEvent,
   AuditOutcome,
   ValidationIssue,
   ValidationResult,
-} from "./audit.ts";
-export { ValidationError } from "./audit.ts";
+} from "./audit";
+export { ValidationError } from "./audit";
 
 export type {
   CircuitBreakerConfig,
   PreFlightReport,
   ServerHealthReport,
   ServerHealthStatus,
-} from "./health.ts";
-export { DEFAULT_CIRCUIT_BREAKER } from "./health.ts";
+} from "./health";
+export { DEFAULT_CIRCUIT_BREAKER } from "./health";

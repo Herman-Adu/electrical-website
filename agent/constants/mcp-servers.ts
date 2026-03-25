@@ -1,4 +1,4 @@
-import type { McpServerId } from "../types/core.ts";
+import type { McpServerId } from "../types/core";
 
 /**
  * Typed constants for every MCP server in the Docker gateway.

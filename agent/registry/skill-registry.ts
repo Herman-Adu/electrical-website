@@ -1,7 +1,7 @@
-import type { McpServerId, SkillId } from "../types/core.ts";
-import type { SkillManifest, SkillRegistryEntry } from "../types/skill.ts";
-import type { AgentIntent } from "../types/core.ts";
-import type { ScoredSkill } from "../types/skill.ts";
+import type { McpServerId, SkillId } from "../types/core";
+import type { SkillManifest, SkillRegistryEntry } from "../types/skill";
+import type { AgentIntent } from "../types/core";
+import type { ScoredSkill } from "../types/skill";
 
 // ─── Skill Registry ───────────────────────────────────────────────────────────
 
