@@ -182,9 +182,9 @@ export function Contact() {
       className="relative bg-slate-dark py-24 lg:py-32 overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 blueprint-grid opacity-3" />
+      <div className="absolute inset-0 blueprint-grid opacity-3 pointer-events-none" />
       <div
-        className="absolute top-0 left-0 right-0 h-px"
+        className="absolute top-0 left-0 right-0 h-px pointer-events-none"
         style={{
           background:
             "linear-gradient(to right, transparent, var(--electric-cyan), transparent)",
