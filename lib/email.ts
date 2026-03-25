@@ -1,37 +1,16 @@
 import { Resend } from "resend";
+import { env } from "@/app/env";
 
 /**
  * Email service for contact form notifications
  * Uses Resend for reliable email delivery
  */
 
-// Validate environment variables
-const validateEmailConfig = () => {
-  const required = [
-    "RESEND_API_KEY",
-    "CONTACT_ADMIN_EMAIL",
-    "CONTACT_FROM_EMAIL",
-  ];
-  const missing = required.filter((key) => !process.env[key]);
-
-  if (missing.length > 0) {
-    throw new Error(
-      `Missing required environment variables: ${missing.join(", ")}`,
-    );
-  }
-};
-
 /**
  * Initialize Resend client with API key validation
  */
 function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
-
-  if (!apiKey) {
-    throw new Error("RESEND_API_KEY environment variable is not set");
-  }
-
-  return new Resend(apiKey);
+  return new Resend(env.RESEND_API_KEY);
 }
 
 export interface ContactEmailData {
@@ -52,12 +31,10 @@ export async function sendUserConfirmation(
   referenceCode: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    validateEmailConfig();
-
     const resend = getResendClient();
 
     const result = await resend.emails.send({
-      from: `${process.env.CONTACT_FROM_NAME || "Nexgen Electrical"} <${process.env.CONTACT_FROM_EMAIL || "noreply@nexgen.com.au"}>`,
+      from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
       to,
       subject: `Your Inquiry Received - Reference ${referenceCode}`,
       html: `
@@ -82,7 +59,7 @@ export async function sendUserConfirmation(
             <h3 style="color: #222; margin-top: 30px;">Next steps</h3>
             <ol style="color: #666;">
               <li>Our team will review your project details</li>
-              <li>You'll receive a detailed response within ${process.env.CONTACT_RESPONSE_TIME_HOURS || 2} hours</li>
+              <li>You'll receive a detailed response within ${env.CONTACT_RESPONSE_TIME_HOURS} hours</li>
               <li>Keep your reference code handy for future correspondence</li>
             </ol>
 
@@ -120,13 +97,11 @@ export async function sendAdminNotification(
   data: ContactEmailData,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    validateEmailConfig();
-
     const resend = getResendClient();
 
     const result = await resend.emails.send({
-      from: `${process.env.CONTACT_FROM_NAME || "Nexgen Electrical"} <${process.env.CONTACT_FROM_EMAIL || "noreply@nexgen.com.au"}>`,
-      to: process.env.CONTACT_ADMIN_EMAIL!,
+      from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
+      to: env.CONTACT_ADMIN_EMAIL,
       subject: `New Contact Inquiry - ${data.projectType} - REF: ${data.referenceCode}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">

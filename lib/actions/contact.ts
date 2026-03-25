@@ -6,6 +6,7 @@ import {
   type ContactFormData,
   type ContactResponse,
 } from "@/lib/schemas/contact";
+import { env } from "@/app/env";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendUserConfirmation, sendAdminNotification } from "@/lib/email";
 import { ZodError } from "zod";
@@ -69,9 +70,8 @@ export async function submitContactInquiry(
     const clientIp = await getClientIp();
 
     // Rate limit configuration from env
-    const rateLimitWindow =
-      parseInt(process.env.CONTACT_RATE_LIMIT_WINDOW_HOURS || "1") * 3600000;
-    const rateLimit = parseInt(process.env.CONTACT_RATE_LIMIT || "3");
+    const rateLimitWindow = env.CONTACT_RATE_LIMIT_WINDOW_HOURS * 3600000;
+    const rateLimit = env.CONTACT_RATE_LIMIT;
 
     // Generate reference code for tracking
     const timestamp = Date.now().toString(36);
@@ -137,7 +137,7 @@ export async function submitContactInquiry(
     return {
       success: true,
       referenceCode,
-      message: `Your inquiry has been received. Reference: ${referenceCode}. Our team will respond within ${process.env.CONTACT_RESPONSE_TIME_HOURS || 2} hours.`,
+      message: `Your inquiry has been received. Reference: ${referenceCode}. Our team will respond within ${env.CONTACT_RESPONSE_TIME_HOURS} hours.`,
     };
   } catch (error) {
     // Handle Zod validation errors with field-level detail

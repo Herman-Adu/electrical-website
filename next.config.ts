@@ -1,7 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+import { env } from "./app/env";
+
+const nextConfig: NextConfig = {
   images: {
-    unoptimized: process.env.NEXT_IMAGE_UNOPTIMIZED === "true",
+    unoptimized: env.NEXT_IMAGE_UNOPTIMIZED ?? false,
   },
   headers: async () => {
     return [
@@ -21,9 +23,6 @@ const nextConfig = {
             value: "1; mode=block",
           },
           {
-            // Restrictive baseline CSP for XSS protection.
-            // Next.js hydration/runtime currently needs inline scripts.
-            // Dev mode additionally needs eval-based scripts for Turbopack/HMR.
             key: "Content-Security-Policy",
             value:
               process.env.NODE_ENV === "development"
@@ -44,7 +43,6 @@ const nextConfig = {
           },
         ],
       },
-      // Security headers specifically for contact form
       {
         source: "/contact",
         headers: [
