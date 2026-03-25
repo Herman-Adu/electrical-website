@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import React from "react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export interface ServiceCTABlockProps {
   title: string;
@@ -20,7 +20,7 @@ export interface ServiceCTABlockProps {
   delay?: number;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -28,12 +28,12 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', damping: 25, stiffness: 120 },
+    transition: { type: "spring" as const, damping: 25, stiffness: 120 },
   },
 };
 
@@ -49,15 +49,18 @@ export function ServiceCTABlock({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: true, margin: "-60px" }}
       transition={{ delay }}
       className="section-container section-padding relative overflow-hidden"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 dark:bg-gradient-to-r dark:from-[var(--electric-cyan)]/5 dark:via-transparent dark:to-[var(--electric-cyan)]/5 bg-gradient-to-r from-[var(--electric-cyan)]/3 via-transparent to-[var(--electric-cyan)]/3 rounded-3xl" />
+      <div className="absolute inset-0 -z-10 dark:bg-linear-to-r dark:from-electric-cyan/5 dark:via-transparent dark:to-electric-cyan/5 bg-linear-to-r from-electric-cyan/3 via-transparent to-electric-cyan/3 rounded-3xl" />
 
       <div className="section-content max-w-3xl mx-auto text-center">
-        <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold mb-4">
+        <motion.h2
+          variants={itemVariants}
+          className="text-4xl sm:text-5xl font-bold mb-4"
+        >
           {title}
         </motion.h2>
 
@@ -74,22 +77,28 @@ export function ServiceCTABlock({
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href={primaryCTA.href || '#'}
+            href={primaryCTA.href || "#"}
             onClick={primaryCTA.onClick}
-            className="px-8 py-4 rounded-2xl bg-[var(--electric-cyan)] text-black font-bold uppercase tracking-widest hover:bg-[var(--electric-cyan)]/90 transition-all duration-300 flex items-center gap-2 group"
+            className="px-8 py-4 rounded-2xl bg-electric-cyan text-black font-bold uppercase tracking-widest hover:bg-(--electric-cyan)/90 transition-all duration-300 flex items-center gap-2 group"
           >
             {primaryCTA.label}
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight
+              size={18}
+              className="group-hover:translate-x-1 transition-transform"
+            />
           </a>
 
           {secondaryCTA && (
             <a
-              href={secondaryCTA.href || '#'}
+              href={secondaryCTA.href || "#"}
               onClick={secondaryCTA.onClick}
-              className="px-8 py-4 rounded-2xl border border-[var(--electric-cyan)]/30 text-[var(--electric-cyan)] font-bold uppercase tracking-widest hover:bg-[var(--electric-cyan)]/10 hover:border-[var(--electric-cyan)]/50 transition-all duration-300 flex items-center gap-2 group"
+              className="px-8 py-4 rounded-2xl border border-electric-cyan/30 text-electric-cyan font-bold uppercase tracking-widest hover:bg-electric-cyan/10 hover:border-electric-cyan/50 transition-all duration-300 flex items-center gap-2 group"
             >
               {secondaryCTA.label}
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight
+                size={18}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </a>
           )}
         </motion.div>

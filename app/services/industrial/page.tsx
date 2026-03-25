@@ -1,12 +1,9 @@
-import type { Metadata } from 'next';
-import { industrialPageData } from '@/data/services/industrial';
-import { ServicePageRenderer } from '@/components/services';
+import type { Metadata } from "next";
+import { industrialPageData } from "@/data/services/industrial";
+import { ServicePageRenderer } from "@/components/services";
+import { createServicePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: industrialPageData.meta.title,
-  description: industrialPageData.meta.description,
-  keywords: industrialPageData.meta.keywords,
-};
+export const metadata: Metadata = createServicePageMetadata(industrialPageData);
 
 export default function IndustrialPage() {
   return <ServicePageRenderer data={industrialPageData} />;

@@ -1,10 +1,18 @@
-'use client';
+"use client";
 
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import type { SectionIntroData } from '@/types/sections';
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import type { SectionIntroData } from "@/types/sections";
 
-function AnimatedWord({ word, index, inView }: { word: string; index: number; inView: boolean }) {
+function AnimatedWord({
+  word,
+  index,
+  inView,
+}: {
+  word: string;
+  index: number;
+  inView: boolean;
+}) {
   return (
     <motion.span
       initial={{ opacity: 0.15, y: 8 }}
@@ -22,7 +30,15 @@ interface SectionIntroProps {
 }
 
 export function SectionIntro({ data }: SectionIntroProps) {
-  const { sectionId, label, headlineWords, headline, leadParagraph, bodyParagraphs = [], pillars = [] } = data;
+  const {
+    sectionId,
+    label,
+    headlineWords,
+    headline,
+    leadParagraph,
+    bodyParagraphs = [],
+    pillars = [],
+  } = data;
 
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -34,33 +50,40 @@ export function SectionIntro({ data }: SectionIntroProps) {
 
   const { scrollYProgress } = useScroll({
     target: mounted ? sectionRef : undefined,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  const lineLeft = useTransform(scrollYProgress, [0.1, 0.4], ['0%', '100%']);
-  const lineRight = useTransform(scrollYProgress, [0.1, 0.4], ['0%', '100%']);
+  const lineLeft = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
+  const lineRight = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.25 });
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.25 },
+    );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id={sectionId} ref={sectionRef} className="section-container section-padding bg-background">
+    <section
+      id={sectionId}
+      ref={sectionRef}
+      className="section-container section-padding bg-background"
+    >
       {/* Blueprint grid overlay */}
       <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />
 
       {/* Animated border lines */}
       <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/60 to-transparent"
+          className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
           style={{ width: lineLeft }}
         />
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/60 to-transparent"
+          className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
           style={{ width: lineRight }}
         />
       </div>
@@ -74,8 +97,10 @@ export function SectionIntro({ data }: SectionIntroProps) {
           viewport={{ once: true }}
           className="flex items-center gap-3 mb-12"
         >
-          <div className="h-px w-8 bg-[var(--electric-cyan)]" />
-          <span className="font-mono text-xs tracking-widest uppercase text-[var(--electric-cyan)]">{label}</span>
+          <div className="h-px w-8 bg-electric-cyan" />
+          <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+            {label}
+          </span>
         </motion.div>
 
         {/* Animated headline words or static headline */}
@@ -136,17 +161,21 @@ export function SectionIntro({ data }: SectionIntroProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 viewport={{ once: true }}
-                className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-[var(--electric-cyan)]/40 transition-all duration-400 group"
+                className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-400 group"
               >
                 {/* Corner brackets */}
-                <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[var(--electric-cyan)]/30 group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
-                <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[var(--electric-cyan)]/30 group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
+                <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
 
-                <div className="font-mono text-4xl font-bold text-[var(--electric-cyan)]/20 mb-4 group-hover:text-[var(--electric-cyan)]/30 transition-colors">
+                <div className="font-mono text-4xl font-bold text-electric-cyan/20 mb-4 group-hover:text-electric-cyan/30 transition-colors">
                   {pillar.num}
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-3">{pillar.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{pillar.description}</p>
+                <h3 className="text-lg font-bold text-foreground mb-3">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {pillar.description}
+                </p>
               </motion.div>
             ))}
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
   Zap,
@@ -144,16 +145,15 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--electric-cyan)]/20 mb-6">
-            <div className="w-2 h-2 bg-[var(--electric-cyan)] animate-pulse" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-[var(--electric-cyan)]/80 uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 border border-electric-cyan/20 mb-6">
+            <div className="w-2 h-2 bg-electric-cyan animate-pulse" />
+            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
               Core Services
             </span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4">
-            Engineering{" "}
-            <span className="text-[var(--electric-cyan)]">Excellence</span>
+            Engineering <span className="text-electric-cyan">Excellence</span>
           </h2>
 
           <p className="text-muted-foreground max-w-2xl mx-auto text-base lg:text-lg font-light">
@@ -173,14 +173,14 @@ export function Services() {
             <motion.div
               key={service.title}
               variants={itemVariants}
-              className="group relative flex flex-col bg-card/50 border border-border rounded-2xl p-6 lg:p-8 hover:border-[var(--electric-cyan)]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/5"
+              className="group relative flex flex-col bg-card/50 border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 transition-all duration-300 hover:shadow-xl hover:shadow-(--electric-cyan)/5"
             >
               {/* Corner accent — inset to respect border-radius */}
-              <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-[var(--electric-cyan)]/20 rounded-tr-xl group-hover:border-[var(--electric-cyan)]/40 transition-colors" />
+              <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-electric-cyan/20 rounded-tr-xl group-hover:border-electric-cyan/40 transition-colors" />
 
               {/* Voltage badge */}
               <div className="absolute top-4 right-4">
-                <span className="font-mono text-[9px] text-[var(--electric-cyan)]/40 group-hover:text-[var(--electric-cyan)]/80 tracking-widest transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)]">
+                <span className="font-mono text-[9px] text-electric-cyan/40 group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)]">
                   {service.voltage}
                 </span>
               </div>
@@ -189,13 +189,13 @@ export function Services() {
               <div className="relative mb-6">
                 <service.icon
                   size={32}
-                  className="text-[var(--electric-cyan)] group-hover:text-white transition-colors"
+                  className="text-electric-cyan group-hover:text-white transition-colors"
                 />
-                <div className="absolute -inset-2 bg-[var(--electric-cyan)]/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -inset-2 bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
 
               {/* Content */}
-              <h3 className="text-lg lg:text-xl font-bold text-card-foreground mb-3 group-hover:text-[var(--electric-cyan)] transition-colors">
+              <h3 className="text-lg lg:text-xl font-bold text-card-foreground mb-3 group-hover:text-electric-cyan transition-colors">
                 {service.title}
               </h3>
 
@@ -204,7 +204,7 @@ export function Services() {
               </p>
 
               {/* Specs — 2 rows */}
-              <div className="flex flex-wrap gap-2 mb-6 min-h-[52px] content-start">
+              <div className="flex flex-wrap gap-2 mb-6 min-h-13 content-start">
                 {service.specs.map((spec) => (
                   <span
                     key={spec}
@@ -217,7 +217,7 @@ export function Services() {
 
               {/* Learn More — pinned to bottom */}
               <div className="mt-auto flex items-end justify-between">
-                <button className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-[var(--electric-cyan)] transition-colors px-3 py-2 rounded-lg hover:bg-[var(--electric-cyan)]/5">
+                <button className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-electric-cyan transition-colors px-3 py-2 rounded-lg hover:bg-electric-cyan/5">
                   <span className="font-medium">Learn More</span>
                   <ArrowRight
                     size={14}
@@ -226,7 +226,7 @@ export function Services() {
                 </button>
 
                 {/* Index number */}
-                <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-[var(--electric-cyan)]/40 leading-none select-none transition-colors duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,242,255,0.5)]">
+                <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,242,255,0.5)]">
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </div>
@@ -247,7 +247,7 @@ export function Services() {
               <span className="relative z-10">Need a custom solution?</span>
               {/* Shimmer sweep animation */}
               <span
-                className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/30 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]"
+                className="absolute inset-0 z-20 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]"
                 style={{ backgroundSize: "200% 100%" }}
               />
             </span>
@@ -255,18 +255,18 @@ export function Services() {
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
+            <Link
               href="/services"
-              className="px-8 py-4 rounded-2xl bg-[var(--electric-cyan)]/10 border border-[var(--electric-cyan)]/30 text-[var(--electric-cyan)] font-bold uppercase tracking-widest hover:bg-[var(--electric-cyan)]/20 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300"
+              className="px-8 py-4 rounded-2xl bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-bold uppercase tracking-widest hover:bg-electric-cyan/20 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300"
             >
               View All Services
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
-              className="px-8 py-4 rounded-2xl border border-border text-muted-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
+              className="px-8 py-4 rounded-2xl border border-border text-muted-foreground font-bold uppercase tracking-widest hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300"
             >
               Request Consultation
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -1,12 +1,9 @@
-import type { Metadata } from 'next';
-import { emergencyPageData } from '@/data/services/emergency';
-import { ServicePageRenderer } from '@/components/services';
+import type { Metadata } from "next";
+import { emergencyPageData } from "@/data/services/emergency";
+import { ServicePageRenderer } from "@/components/services";
+import { createServicePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: emergencyPageData.meta.title,
-  description: emergencyPageData.meta.description,
-  keywords: emergencyPageData.meta.keywords,
-};
+export const metadata: Metadata = createServicePageMetadata(emergencyPageData);
 
 export default function EmergencyPage() {
   return <ServicePageRenderer data={emergencyPageData} />;

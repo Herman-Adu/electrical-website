@@ -35,15 +35,15 @@ export function SchedulerCard() {
 
   return (
     <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-[var(--electric-cyan)]/40 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/10"
+      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-electric-cyan/10"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.3 }}
       viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[var(--electric-cyan)]/40" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[var(--electric-cyan)]/40 rounded-br-lg" />
+        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />
+        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-electric-cyan/40 rounded-br-lg" />
       </div>
 
       <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
@@ -55,17 +55,17 @@ export function SchedulerCard() {
           src="/images/maintenance-engineer.jpg"
           alt="Maintenance Engineer"
           fill
-          loading="eager"
+          sizes="(min-width: 768px) 33vw, 100vw"
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
 
       <div className="p-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-[var(--electric-cyan)]/60">
+          <span className="text-[10px] font-mono tracking-widest uppercase text-electric-cyan/60">
             Preventive Protocol
           </span>
-          <div className="w-2 h-2 rounded-full bg-[var(--electric-cyan)] animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
         </div>
         <h3 className="text-xl font-bold text-card-foreground mb-2">
           Maintenance Scheduler
@@ -80,10 +80,11 @@ export function SchedulerCard() {
               <button
                 key={day.id}
                 onClick={() => handleDaySelect(index)}
-                className={`w-full py-3 rounded text-xs font-mono font-bold transition-all duration-300 ${selectedIndex === index
-                    ? "bg-[var(--electric-cyan)]/20 border border-[var(--electric-cyan)]/80 text-[var(--electric-cyan)]"
-                    : "bg-transparent border border-slate-700/40 text-slate-400 hover:border-[var(--electric-cyan)]/40 hover:text-[var(--electric-cyan)]/60"
-                  }`}
+                className={`w-full py-3 rounded text-xs font-mono font-bold transition-all duration-300 ${
+                  selectedIndex === index
+                    ? "bg-electric-cyan/20 border border-electric-cyan/80 text-electric-cyan"
+                    : "bg-transparent border border-slate-700/40 text-slate-400 hover:border-electric-cyan/40 hover:text-electric-cyan/60"
+                }`}
               >
                 {day.label}
               </button>
@@ -94,7 +95,7 @@ export function SchedulerCard() {
         <button
           onClick={handleScheduleClick}
           disabled={selectedIndex === null || isScheduled}
-          className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-slate-700/50 text-sm font-mono tracking-widest uppercase text-[var(--electric-cyan)]/80 hover:border-[var(--electric-cyan)]/80 hover:shadow-lg hover:shadow-[var(--electric-cyan)]/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-slate-700/50 text-sm font-mono tracking-widest uppercase text-electric-cyan/80 hover:border-electric-cyan/80 hover:shadow-lg hover:shadow-electric-cyan/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isScheduled ? "Confirmed" : "Schedule Service"}
         </button>

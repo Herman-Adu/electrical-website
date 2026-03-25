@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
-import { Footer } from '@/components/sections';
+import { Metadata } from "next";
+import { Footer } from "@/components/sections";
 import {
   AboutHero,
   CompanyTimeline,
@@ -8,26 +8,29 @@ import {
   Certifications,
   CommunitySection,
   AboutCTA,
-} from '@/components/about';
-import { SectionIntro, SectionProfile, SectionValues } from '@/components/shared';
+} from "@/components/about";
+import {
+  SectionIntro,
+  SectionProfile,
+  SectionValues,
+} from "@/components/shared";
 import {
   companyIntroData,
   director1Data,
   director2Data,
   coreValuesData,
-} from '@/data/about';
+} from "@/data/about";
+import { createStandardPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: 'About Us | Intact Electrical Innovations',
+export const metadata: Metadata = createStandardPageMetadata({
+  title: "About Us | Nexgen Electrical Innovations",
   description:
-    'Meet the team behind Intact Electrical Innovations. NICEIC Approved Contractors delivering gold-standard electrical engineering across London and the Home Counties since 2009.',
-  openGraph: {
-    title: 'About Intact Electrical Innovations',
-    description:
-      'Gold-standard electrical engineering, community commitment, and 15 years of excellence.',
-    type: 'website',
-  },
-};
+    "Meet the team behind Nexgen Electrical Innovations. NICEIC Approved Contractors delivering gold-standard electrical engineering across London and the Home Counties since 2009.",
+  path: "/about",
+  openGraphTitle: "About Nexgen Electrical Innovations",
+  openGraphDescription:
+    "Gold-standard electrical engineering, community commitment, and 15 years of excellence.",
+});
 
 export default function AboutPage() {
   return (
