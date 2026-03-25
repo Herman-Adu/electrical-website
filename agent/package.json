@@ -1,0 +1,23 @@
+{
+  "name": "@electrical-website/agent",
+  "version": "0.1.0",
+  "description": "MCP Orchestration Runtime — composable agent skill system",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-vm-modules ../../node_modules/.bin/jest --config jest.config.js",
+    "test:ci": "node --experimental-vm-modules ../../node_modules/.bin/jest --config jest.config.js --ci --coverage"
+  },
+  "dependencies": {
+    "zod": "^3.23.8",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.4.5"
+  }
+}
