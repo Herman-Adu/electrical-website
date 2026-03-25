@@ -1,43 +1,41 @@
-'use client';
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Zap, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { Zap, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
-    { name: 'Commercial Installations', href: '#' },
-    { name: 'Industrial Systems', href: '#' },
-    { name: 'Power Distribution', href: '#' },
-    { name: 'Safety Systems', href: '#' },
-    { name: 'Energy Management', href: '#' },
+    { name: "Commercial Installations", href: "/services" },
+    { name: "Industrial Systems", href: "/services" },
+    { name: "Power Distribution", href: "/services" },
+    { name: "Safety Systems", href: "/services" },
+    { name: "Energy Management", href: "/services" },
   ],
   company: [
-    { name: 'About Us', href: '#' },
-    { name: 'Our Team', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'News & Updates', href: '#' },
-    { name: 'Case Studies', href: '#' },
+    { name: "About Us", href: "/about" },
+    { name: "Our Team", href: "/about#directors" },
+    { name: "Careers", href: "/contact" },
+    { name: "News & Updates", href: "#" },
+    { name: "Case Studies", href: "#" },
   ],
   support: [
-    { name: 'Contact', href: '#contact' },
-    { name: 'Emergency Services', href: '#' },
-    { name: 'Maintenance Plans', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'FAQs', href: '#' },
+    { name: "Contact", href: "#contact" },
+    { name: "Emergency Services", href: "#" },
+    { name: "Maintenance Plans", href: "#" },
+    { name: "Documentation", href: "#" },
+    { name: "FAQs", href: "#" },
   ],
   legal: [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Licensing', href: '#' },
+    { name: "Privacy Policy", href: "#" },
+    { name: "Terms of Service", href: "#" },
+    { name: "Licensing", href: "#" },
   ],
 };
 
 const socialLinks = [
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Instagram, href: "#", label: "Instagram" },
 ];
 
 export function Footer() {
@@ -46,10 +44,11 @@ export function Footer() {
   return (
     <footer className="relative bg-background overflow-hidden">
       {/* Top border */}
-      <div 
+      <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
-          background: 'linear-gradient(to right, transparent, var(--electric-cyan), transparent)',
+          background:
+            "linear-gradient(to right, transparent, var(--electric-cyan), transparent)",
           opacity: 0.2,
         }}
       />
@@ -59,27 +58,27 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">
-            <a href="#" className="flex items-center gap-2 group mb-6">
+            <Link href="/" className="flex items-center gap-2 group mb-6">
               <div className="relative">
-                <Zap 
-                  size={28} 
-                  className="text-[var(--electric-cyan)] group-hover:animate-pulse transition-all" 
+                <Zap
+                  size={28}
+                  className="text-electric-cyan group-hover:animate-pulse transition-all"
                 />
-                <div className="absolute inset-0 bg-[var(--electric-cyan)]/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-col">
                 <span className="text-foreground font-bold text-lg tracking-tight leading-none">
                   NEXGEN
                 </span>
-                <span className="font-mono text-[9px] text-[var(--electric-cyan)]/60 tracking-[0.2em] uppercase">
+                <span className="font-mono text-[9px] text-electric-cyan/60 tracking-[0.2em] uppercase">
                   Electrical Innovations
                 </span>
               </div>
-            </a>
+            </Link>
 
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
-              Powering the next generation of commercial and industrial innovation with 
-              precision-engineered electrical solutions.
+              Powering the next generation of commercial and industrial
+              innovation with precision-engineered electrical solutions.
             </p>
 
             {/* Social Links */}
@@ -89,7 +88,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 flex items-center justify-center border border-border text-muted-foreground hover:border-[var(--electric-cyan)]/30 hover:text-[var(--electric-cyan)] transition-all duration-300"
+                  className="w-9 h-9 flex items-center justify-center border border-border text-muted-foreground hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300"
                 >
                   <social.icon size={16} />
                 </a>
@@ -99,18 +98,18 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Services
             </h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <a 
+                  <Link
                     href={link.href}
                     className="text-muted-foreground text-sm hover:text-foreground transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -118,18 +117,27 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Company
             </h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href}
-                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      href={link.href}
+                      className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -137,13 +145,13 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Support
             </h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a 
+                  <a
                     href={link.href}
                     className="text-muted-foreground text-sm hover:text-foreground transition-colors"
                   >
@@ -156,17 +164,19 @@ export function Footer() {
 
           {/* Contact Card */}
           <div className="col-span-2 md:col-span-1">
-            <h4 className="font-mono text-[10px] text-[var(--electric-cyan)] tracking-[0.2em] uppercase mb-4">
+            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
             </h4>
             <div className="p-4 border border-border bg-card/50">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
-                <span className="font-mono text-[9px] text-emerald-500 tracking-widest">ONLINE</span>
+                <span className="font-mono text-[9px] text-emerald-500 tracking-widest">
+                  ONLINE
+                </span>
               </div>
-              <a 
+              <a
                 href="tel:1800639436"
-                className="text-foreground font-bold text-lg hover:text-[var(--electric-cyan)] transition-colors"
+                className="text-foreground font-bold text-lg hover:text-electric-cyan transition-colors"
               >
                 1800 NEX GEN
               </a>
@@ -193,7 +203,7 @@ export function Footer() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-mono text-[10px] text-muted-foreground/60 tracking-widest hover:text-[var(--electric-cyan)] transition-colors"
+                  className="font-mono text-[10px] text-muted-foreground/60 tracking-widest hover:text-electric-cyan transition-colors"
                 >
                   {link.name.toUpperCase()}
                 </a>

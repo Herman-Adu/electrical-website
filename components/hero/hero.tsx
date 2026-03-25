@@ -208,12 +208,9 @@ export function Hero() {
           variants={flickerVariants}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <div className="flex items-center gap-3 border-l-2 border-[var(--electric-cyan)] pl-4">
-            <Activity
-              size={14}
-              className="text-[var(--electric-cyan)] animate-pulse"
-            />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-[var(--electric-cyan)]/80 uppercase">
+          <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <Activity size={14} className="text-electric-cyan animate-pulse" />
+            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
               Status // {statusText}
             </span>
           </div>
@@ -225,7 +222,7 @@ export function Hero() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
         >
           <span className="block">Powering the</span>
-          <span className="block text-electric text-transparent bg-clip-text bg-gradient-to-r from-[var(--electric-cyan)] via-cyan-400 to-blue-500">
+          <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-500">
             Next Generation
           </span>
           <span className="block">of Innovation</span>
@@ -248,7 +245,7 @@ export function Hero() {
         >
           <button
             onClick={triggerSurge}
-            className="group relative px-8 py-4 bg-[var(--electric-cyan)] text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] active:scale-95"
+            className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] active:scale-95"
           >
             <span className="relative z-10 flex items-center gap-2 text-sm">
               Initiate System
@@ -258,7 +255,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
           </button>
 
-          <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-[var(--electric-cyan)] hover:text-[var(--electric-cyan)] transition-all duration-300 text-sm">
+          <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
             Our Solutions
           </button>
         </motion.div>
@@ -282,7 +279,7 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
         onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-[var(--electric-cyan)] transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
           Scroll
@@ -293,7 +290,7 @@ export function Hero() {
       {/* Power Surge Overlay */}
       <div
         ref={surgeOverlayRef}
-        className="fixed inset-0 bg-[var(--electric-cyan)] opacity-0 z-50 pointer-events-none mix-blend-overlay"
+        className="fixed inset-0 bg-electric-cyan opacity-0 z-50 pointer-events-none mix-blend-overlay"
       />
     </section>
   );
