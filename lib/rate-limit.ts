@@ -11,6 +11,111 @@
 
 import { kv } from "@vercel/kv";
 
+type RateLimitMode = "kv" | "memory" | "off";
+
+const hasKvConfig = Boolean(
+  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
+);
+
+const configuredMode =
+  (process.env.CONTACT_RATE_LIMIT_MODE as RateLimitMode | undefined) ??
+  (process.env.NODE_ENV === "production" ? "kv" : "memory");
+
+const rateLimitMode: RateLimitMode =
+  configuredMode === "off" ||
+  configuredMode === "memory" ||
+  configuredMode === "kv"
+    ? configuredMode
+    : "kv";
+
+let kvDisabledWarned = false;
+let modeWarned = false;
+
+const blockedUntilByIpHash = new Map<string, number>();
+const memoryCounters = new Map<string, { count: number; resetAt: number }>();
+
+function canUseRateLimit(): boolean {
+  if (rateLimitMode === "off") {
+    if (!modeWarned) {
+      console.warn("[RATE_LIMIT_DISABLED]", {
+        message:
+          "CONTACT_RATE_LIMIT_MODE=off. Contact form rate limiting is disabled.",
+        timestamp: new Date().toISOString(),
+      });
+      modeWarned = true;
+    }
+    return false;
+  }
+
+  return true;
+}
+
+function canUseKv(): boolean {
+  if (rateLimitMode !== "kv") {
+    return false;
+  }
+
+  if (hasKvConfig) {
+    return true;
+  }
+
+  if (!kvDisabledWarned) {
+    console.warn("[RATE_LIMIT_KV_DISABLED]", {
+      message:
+        "KV_REST_API_URL and KV_REST_API_TOKEN are not configured. " +
+        "Rate limiting will run in fail-open mode.",
+      timestamp: new Date().toISOString(),
+    });
+    kvDisabledWarned = true;
+  }
+
+  return false;
+}
+
+function checkMemoryRateLimit(
+  ipHash: string,
+  limit: number,
+  windowMs: number,
+): boolean {
+  const now = Date.now();
+
+  const blockedUntil = blockedUntilByIpHash.get(ipHash);
+  if (blockedUntil && blockedUntil > now) {
+    return false;
+  }
+
+  const current = memoryCounters.get(ipHash);
+  if (!current || current.resetAt <= now) {
+    memoryCounters.set(ipHash, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  const nextCount = current.count + 1;
+  current.count = nextCount;
+
+  if (nextCount > limit) {
+    blockedUntilByIpHash.set(ipHash, current.resetAt);
+    return false;
+  }
+
+  return true;
+}
+
+function getMemoryRemaining(ipHash: string, limit: number): number {
+  const now = Date.now();
+  const blockedUntil = blockedUntilByIpHash.get(ipHash);
+  if (blockedUntil && blockedUntil > now) {
+    return 0;
+  }
+
+  const current = memoryCounters.get(ipHash);
+  if (!current || current.resetAt <= now) {
+    return limit;
+  }
+
+  return Math.max(0, limit - current.count);
+}
+
 /**
  * Hash IP to shorter key for KV storage
  * Reduces storage footprint and obfuscates IPs in logs
@@ -44,14 +149,32 @@ export async function checkRateLimit(
   limit: number = 3,
   windowMs: number = 3600000, // 1 hour default
 ): Promise<boolean> {
+  if (!canUseRateLimit()) {
+    return true;
+  }
+
   if (!ip || ip === "unknown") {
     // Fallback: allow submission if IP unknown (fail-open)
     // Better to serve users than to block due to missing IP detection
     return true;
   }
 
+  const ipHash = hashIp(ip);
+
+  if (rateLimitMode === "memory") {
+    return checkMemoryRateLimit(ipHash, limit, windowMs);
+  }
+
+  const blockedUntil = blockedUntilByIpHash.get(ipHash);
+  if (blockedUntil && blockedUntil > Date.now()) {
+    return false;
+  }
+
+  if (!canUseKv()) {
+    return true;
+  }
+
   try {
-    const ipHash = hashIp(ip);
     const key = `rate:submit:${ipHash}`;
     const ttlSeconds = Math.ceil(windowMs / 1000);
 
@@ -64,7 +187,12 @@ export async function checkRateLimit(
     }
 
     // Check if limit exceeded
-    return count <= limit;
+    const allowed = count <= limit;
+    if (!allowed) {
+      blockedUntilByIpHash.set(ipHash, Date.now() + windowMs);
+    }
+
+    return allowed;
   } catch (error) {
     // KV unavailable: fail-open for better availability
     // Log error for monitoring but don't block user
@@ -92,12 +220,25 @@ export async function getRemainingSubmissions(
   limit: number = 3,
   windowMs: number = 3600000,
 ): Promise<number> {
+  if (!canUseRateLimit()) {
+    return limit;
+  }
+
   if (!ip || ip === "unknown") {
     return limit;
   }
 
+  const ipHash = hashIp(ip);
+
+  if (rateLimitMode === "memory") {
+    return getMemoryRemaining(ipHash, limit);
+  }
+
+  if (!canUseKv()) {
+    return limit;
+  }
+
   try {
-    const ipHash = hashIp(ip);
     const key = `rate:submit:${ipHash}`;
 
     const count = (await kv.get<number>(key)) || 0;

@@ -35,9 +35,13 @@ export const env = createEnv({
       process.env.CONTACT_RATE_LIMIT_WINDOW_HOURS,
     CONTACT_RATE_LIMIT: process.env.CONTACT_RATE_LIMIT,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
-    KV_REST_API_URL: process.env.KV_REST_API_URL,
-    KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
-    KV_REST_API_READ_ONLY_TOKEN: process.env.KV_REST_API_READ_ONLY_TOKEN,
+    KV_REST_API_URL:
+      process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
+    KV_REST_API_TOKEN:
+      process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN,
+    KV_REST_API_READ_ONLY_TOKEN:
+      process.env.KV_REST_API_READ_ONLY_TOKEN ??
+      process.env.UPSTASH_REDIS_REST_READ_ONLY_TOKEN,
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
