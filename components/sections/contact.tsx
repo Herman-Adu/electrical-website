@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   MapPin,
@@ -13,7 +13,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { submitContactInquiry } from "@/lib/actions/contact";
-import { type ContactFormData } from "@/lib/schemas/contact";
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas/contact";
+import { ZodError } from "zod";
 
 const contactInfo = [
   {
@@ -49,60 +50,130 @@ export function Contact() {
   const [isLoading, setIsLoading] = useState(false);
   const [refCode, setRefCode] = useState("------");
   const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [serverError, setServerError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<
+    Record<string, string | undefined>
+  >({});
+
+  // Form state with proper initial values
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
-    projectType: "",
+    projectType: "" as
+      | ""
+      | "commercial"
+      | "industrial"
+      | "maintenance"
+      | "consultation"
+      | "other",
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
-
-    try {
-      const result = await submitContactInquiry(formData);
-
-      if (result.success) {
-        setRefCode(result.referenceCode);
-        setSuccessMessage(result.message);
-        setIsSubmitted(true);
-
-        // Clear form
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          projectType: "",
-          message: "",
-        });
-
-        // Auto-clear success state after 5 seconds
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setSuccessMessage("");
-        }, 5000);
-      } else {
-        setErrorMessage(result.error);
+  // Clean, explicit input handler
+  const handleInputChange = useCallback(
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
+    ) => {
+      const { name, value } = e.currentTarget; // Use currentTarget instead of target
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value, // Direct assignment without type checking in handler
+      }));
+      // Clear field error when user starts typing
+      if (fieldErrors[name]) {
+        setFieldErrors((prev) => ({
+          ...prev,
+          [name]: undefined,
+        }));
       }
-    } catch (error) {
-      setErrorMessage("An unexpected error occurred. Please try again.");
-      console.error("Contact form error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    },
+    [fieldErrors],
+  );
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  // Client-side validation using Zod
+  const validateForm = useCallback((): boolean => {
+    try {
+      contactFormSchema.parse(formData);
+      setFieldErrors({}); // Clear all errors on successful validation
+      return true;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const newErrors: Record<string, string> = {};
+        error.errors.forEach((err) => {
+          const field = err.path[0] as string;
+          newErrors[field] = err.message;
+        });
+        setFieldErrors(newErrors);
+      }
+      return false;
+    }
+  }, [formData]);
+
+  // Form submission handler
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setServerError("");
+      setFieldErrors({});
+
+      // Validate before submission
+      if (!validateForm()) {
+        return; // Stop if validation fails
+      }
+
+      setIsLoading(true);
+
+      try {
+        const result = await submitContactInquiry(formData);
+
+        if (result.success) {
+          setRefCode(result.referenceCode);
+          setSuccessMessage(result.message);
+          setIsSubmitted(true);
+
+          // Reset form after successful submission
+          setFormData({
+            name: "",
+            email: "",
+            company: "",
+            projectType: "" as any,
+            message: "",
+          });
+
+          // Auto-clear success state after 8 seconds
+          const timer = setTimeout(() => {
+            setIsSubmitted(false);
+            setSuccessMessage("");
+            setRefCode("------");
+          }, 8000);
+
+          return () => clearTimeout(timer);
+        } else {
+          // Handle field-specific errors from server
+          if (result.field) {
+            setFieldErrors((prev) => ({
+              ...prev,
+              [result.field!]: result.error,
+            }));
+          } else {
+            // Generic server error
+            setServerError(result.error);
+          }
+        }
+      } catch (error) {
+        setServerError(
+          "Unexpected error occurred. Please check your connection and try again.",
+        );
+        console.error("Contact form error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [formData, validateForm],
+  );
 
   return (
     <section
@@ -215,6 +286,7 @@ export function Contact() {
             <form
               onSubmit={handleSubmit}
               className="border border-slate-800 bg-deep-slate/50 p-6 lg:p-8"
+              noValidate
             >
               {/* Form Header */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
@@ -232,88 +304,8 @@ export function Contact() {
                 )}
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none"
-                    placeholder="John Smith"
-                  />
-                </div>
-                <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none"
-                    placeholder="john@company.com"
-                  />
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="w-full border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none"
-                    placeholder="Company Name"
-                  />
-                </div>
-                <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
-                    Project Type
-                  </label>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full cursor-pointer appearance-none border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none"
-                  >
-                    <option value="">Select Type</option>
-                    <option value="commercial">Commercial Installation</option>
-                    <option value="industrial">Industrial Systems</option>
-                    <option value="maintenance">Maintenance & Repair</option>
-                    <option value="consultation">Consultation</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
-                  Project Details *
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="w-full resize-none border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none"
-                  placeholder="Describe your project requirements, timeline, and any specific needs..."
-                />
-              </div>
-
-              {/* Error Message */}
-              {errorMessage && (
+              {/* Server Error Alert */}
+              {serverError && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -323,9 +315,132 @@ export function Contact() {
                     size={18}
                     className="mt-0.5 shrink-0 text-red-500"
                   />
-                  <p className="text-red-300 text-sm">{errorMessage}</p>
+                  <p className="text-red-300 text-sm">{serverError}</p>
                 </motion.div>
               )}
+
+              {/* Name Field */}
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                    className={`w-full border ${
+                      fieldErrors.name
+                        ? "border-red-500 focus:border-red-400"
+                        : "border-slate-700"
+                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                    placeholder="John Smith"
+                  />
+                  {fieldErrors.name && (
+                    <p className="mt-1 text-red-400 text-xs">
+                      {fieldErrors.name}
+                    </p>
+                  )}
+                </div>
+
+                {/* Email Field */}
+                <div>
+                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                    className={`w-full border ${
+                      fieldErrors.email
+                        ? "border-red-500 focus:border-red-400"
+                        : "border-slate-700"
+                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                    placeholder="john@company.com"
+                  />
+                  {fieldErrors.email && (
+                    <p className="mt-1 text-red-400 text-xs">
+                      {fieldErrors.email}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Company & Project Type */}
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                    Company
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                    className="w-full border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50"
+                    placeholder="Company Name"
+                  />
+                </div>
+                <div>
+                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                    Project Type *
+                  </label>
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                    className={`w-full cursor-pointer appearance-none border ${
+                      fieldErrors.projectType
+                        ? "border-red-500 focus:border-red-400"
+                        : "border-slate-700"
+                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                  >
+                    <option value="">Select Type</option>
+                    <option value="commercial">Commercial Installation</option>
+                    <option value="industrial">Industrial Systems</option>
+                    <option value="maintenance">Maintenance & Repair</option>
+                    <option value="consultation">Consultation</option>
+                    <option value="other">Other</option>
+                  </select>
+                  {fieldErrors.projectType && (
+                    <p className="mt-1 text-red-400 text-xs">
+                      {fieldErrors.projectType}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Message Field */}
+              <div className="mb-6">
+                <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                  Project Details *
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  disabled={isLoading}
+                  rows={4}
+                  className={`w-full resize-none border ${
+                    fieldErrors.message
+                      ? "border-red-500 focus:border-red-400"
+                      : "border-slate-700"
+                  } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                  placeholder="Describe your project requirements, timeline, and any specific needs..."
+                />
+                {fieldErrors.message && (
+                  <p className="mt-1 text-red-400 text-xs">
+                    {fieldErrors.message}
+                  </p>
+                )}
+              </div>
 
               {/* Submit Button */}
               <button
@@ -335,7 +450,7 @@ export function Contact() {
                   isSubmitted
                     ? "bg-emerald-500 text-white"
                     : isLoading
-                      ? "cursor-not-allowed bg-(--electric-cyan)/50 text-deep-slate"
+                      ? "cursor-not-allowed bg-electric-cyan/50 text-deep-slate"
                       : "bg-electric-cyan text-deep-slate hover:shadow-[0_0_30px_rgba(0,242,255,0.3)]"
                 }`}
               >
