@@ -58,7 +58,7 @@ export function GradientBorderLine({
   opacity = 0.5,
 }: GradientBorderLineProps) {
   const colorConfig = {
-    cyan: "via-[var(--electric-cyan)]/60",
+    cyan: "via-electric-cyan/60",
     amber: "via-[var(--amber-warning)]/60",
     both: "via-[var(--electric-cyan)]/40 via-[var(--amber-warning)]/40",
   };
@@ -68,7 +68,7 @@ export function GradientBorderLine({
       className={`absolute inset-x-0 ${position === "top" ? "top-0" : "bottom-0"} h-px overflow-hidden`}
     >
       <motion.div
-        className={`h-full bg-gradient-to-r from-transparent ${colorConfig[variant]} to-transparent`}
+        className={`h-full bg-linear-to-r from-transparent ${colorConfig[variant]} to-transparent`}
         style={{ width: animated ? motionStyle : "100%", opacity }}
       />
     </div>
@@ -92,7 +92,7 @@ export function GradientBorderLine({
   {[...Array(5)].map((_, i) => (
     <motion.div
       key={i}
-      className="absolute size-1 rounded-full bg-(--electric-cyan)/20"
+      className="absolute size-1 rounded-full bg-electric-cyan/20"
       style={{ left: `${15 + i * 18}%`, top: `${20 + (i % 3) * 25}%` }}
       animate={{ y: [0, -20, 0], opacity: [0.1, 0.4, 0.1] }}
       transition={{
@@ -139,7 +139,7 @@ export function FloatingParticleField({
         <motion.div
           key={i}
           className={`absolute ${sizeMap[particleSize]} rounded-full 
-            ${color === "cyan" ? "bg-[var(--electric-cyan)]/20" : "bg-[var(--amber-warning)]/15"}`}
+            ${color === "cyan" ? "bg-electric-cyan/20" : "bg-(--amber-warning)/15"}`}
           style={{
             left: `${15 + (i % gridCols) * (85 / gridCols)}%`,
             top: `${20 + Math.floor(i / gridCols) * 25}%`,
@@ -308,8 +308,8 @@ export function SectionHero({
 
 ```tsx
 {/* Corner brackets */}
-<div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-[var(--electric-cyan)]/30 group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
-<div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[var(--electric-cyan)]/30 group-hover:border-[var(--electric-cyan)]/60 transition-colors" />
+<div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+<div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
 ```
 
 #### Proposed Component: `CornerBracketsOverlay`
@@ -707,7 +707,7 @@ export function useAnimatedCounter(
 #### Current Duplication:
 
 ```tsx
-className="h-full bg-gradient-to-r from-transparent via-[var(--electric-cyan)]/60 to-transparent"
+className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
 // or inline styles
 style={{ background: 'linear-gradient(to right, transparent, var(--electric-cyan), transparent)', opacity: 0.2 }}
 ```
@@ -735,7 +735,7 @@ style={{ background: 'linear-gradient(to right, transparent, var(--electric-cyan
   {headlineHighlight ? (
     <>
       {headline.replace(headlineHighlight, '')}
-      <span className="text-[var(--electric-cyan)]">{headlineHighlight}</span>
+      <span className="text-electric-cyan">{headlineHighlight}</span>
     </>
   ) : (
     headline
@@ -851,8 +851,8 @@ useEffect(() => {
 #### Pattern:
 
 ```tsx
-<div className="absolute inset-0 bg-gradient-to-t from-[var(--deep-black)] via-[var(--deep-black)]/60 to-transparent" />
-<div className="absolute inset-0 bg-gradient-to-r from-[var(--deep-black)]/80 via-transparent to-[var(--deep-black)]/40" />
+<div className="absolute inset-0 bg-linear-to-t from-(--deep-black) via-(--deep-black)/60 to-transparent" />
+<div className="absolute inset-0 bg-linear-to-r from-(--deep-black)/80 via-transparent to-(--deep-black)/40" />
 ```
 
 **Consolidation:** Extract → Utility or component `<GradientOverlay />`
@@ -886,8 +886,8 @@ tl.to(labels, { ... }, "-=0.3");
 **Severity:** 🟡 **MEDIUM** | **Instances:** 20+  
 **Example Duplications:**
 
-- `bg-gradient-to-r from-transparent via-electric-cyan/60 to-transparent` (5+ instances)
-- `bg-gradient-to-t from-background/60 via-transparent to-transparent` (4+ instances)
+- `bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent` (5+ instances)
+- `bg-linear-to-t from-background/60 via-transparent to-transparent` (4+ instances)
 - `from-[var(--electric-cyan)]/10 to-transparent` (6+ instances)
 
 **Consolidation:** Create Tailwind plugin or component library variants

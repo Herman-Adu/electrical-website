@@ -21,8 +21,8 @@ Resume prompt:
 
 - Branch objective: full branch remediation with architect-level discipline + Phase 9 deep optimization review
 - Current phase: Phase 9 - Deep Architectural Review & Optimization
-- Current batch: P9-B4 optional follow-up complete (A+B+C+D+E+F+G validated)
-- Overall status: Phase 8 complete (branch accepted); Phase 9 Wave 2 split implementation and P9-B3 Wave 3 hardening complete/validated; optional P9-B4 hygiene batches A+B+C+D+E+F+G completed and validated
+- Current batch: P9-B4.H tracker reconciliation + rate-limit enforcement fix (completed)
+- Overall status: Phase 8 complete (branch accepted); Phase 9 Wave 2 split implementation and P9-B3 Wave 3 hardening complete/validated; optional P9-B4 hygiene batches A+B+C+D+E+F+G completed and validated; P9-B4.H reconciliation finalized with validated `submitContactInquiry()` rate-limit enforcement; current app/component diagnostics remain clean and active Tailwind suggestions remain documentation-focused
 - Last updated: 2026-03-25
 
 ## Previous Batch - P5-B4
@@ -88,8 +88,10 @@ Validation plan:
 ## Next Planned Action
 
 - Optional follow-up only (if desired):
-  - continue deferred Tailwind-v4 backlog reduction in additional non-critical clusters
-  - preserve P9-B3 + P9-B4 (A+B+C+D+E+F+G) baseline (no rollback/rework)
+  - keep current local WIP classification as **keep+commit** and split commit scopes for safer rollback (`components/ui/*` + runtime fix, then docs)
+  - run one focused UI smoke pass for `command/dropdown/contact` interaction states before commit
+  - continue deferred Tailwind-v4 backlog reduction in additional non-critical clusters only if explicitly desired
+  - preserve P9-B3 + P9-B4 baseline (no rollback/rework)
   - keep validation gates (`get_errors` baseline comparison + `pnpm build`) after each future batch
 
 P9-B4 proposed batches (optional):
@@ -988,6 +990,131 @@ Execution status (completed):
 - Transition gate: approved to proceed to Phase 6 planning and implementation
 
 ## Latest Validation Log
+
+### 2026-03-25 - P9-B4.H Final Reconciliation, Rate-Limit Enforcement Fix, and WIP Classification (checkpoint)
+
+Type of validation:
+
+- tracker reconciliation closeout for unlogged local changes
+- functional remediation for contact-form rate-limit enforcement
+- post-fix diagnostics + production build gates
+- explicit WIP classification decision (`keep+commit` vs `revert`)
+
+Before state (baseline at start of this checkpoint):
+
+- prior tracker checkpoint identified async enforcement defect in `lib/actions/contact.ts` (`checkRateLimit(...)` not awaited)
+- user-provided local WIP baseline: 20 modified files (primarily `components/ui/*`, `components/sections/contact.tsx`, `components/sections/illumination/scan-effects.tsx`, docs)
+- diagnostics/build baseline: clean (`get_errors` no issues, `pnpm build` passes)
+
+Implementation performed:
+
+- `lib/actions/contact.ts`
+  - fixed rate-limit enforcement by awaiting limiter result in `submitContactInquiry()`:
+    - `if (!(await checkRateLimit(clientIp, rateLimit, rateLimitWindow))) { ... }`
+- `components/sections/contact.tsx`
+  - corrected local WIP class-token corruption in form container (`bg-deep-slate/50` retained without stray character)
+- `components/ui/dropdown-menu.tsx`
+  - corrected local WIP class-token corruption in label utility string (`data-inset:pl-8` retained without stray character)
+
+Validation gates (post-fix):
+
+- `get_errors`: ✓ pass (0 errors)
+- `pnpm build`: ✓ pass (Next.js 16.1.6; all 11 routes generated; proxy recognized)
+- `git status --short`: working tree still intentionally non-clean and now reflects 22 modified files (includes prior local WIP plus this checkpoint updates to `lib/actions/contact.ts` and tracker edits)
+
+WIP classification decision:
+
+- classification: **keep+commit**
+- rationale:
+  - local changes materially reduce Tailwind-v4 migration noise across UI primitives and section surfaces
+  - no TypeScript/build regressions introduced
+  - identified local token-corruption defects were corrected in this checkpoint
+
+Remaining items only:
+
+- no blocking diagnostics or build issues remain
+- optional pre-commit UI smoke is still recommended for selector-sensitive surfaces (`components/ui/command.tsx`, `components/ui/dropdown-menu.tsx`, `components/sections/contact.tsx`)
+
+Outcome:
+
+- P9-B4.H objectives completed with strict validation discipline
+- contact rate-limit enforcement is now functionally aligned with async limiter contract
+- tracker is reconciled with current local state and explicit keep+commit direction
+
+---
+
+### 2026-03-25 - P9-B4.H Tracker Reconciliation, Local WIP Audit, and Tailwind Diagnostic Sync (checkpoint)
+
+Type of validation:
+
+- post-acceptance tracker reconciliation against current git/workspace state
+- fresh Tailwind-focused diagnostics baseline capture
+- full production build validation on current local workspace
+- operational commit audit (`main` merge + Vercel deploy trigger follow-up)
+
+Checks performed:
+
+- reviewed `docs/remediation-status.md` current phase/batch state before proceeding
+- git working tree audit (`git status --short`)
+- workspace diagnostics check (`get_errors`)
+- scoped diagnostics check on `app`, `components`, `lib`, and `types`
+- `pnpm build`
+- recent commit/history audit for post-acceptance activity
+
+Findings:
+
+- working tree is **not clean**; current local WIP spans 19 modified files:
+  - `CODE_QUALITY_AUDIT.md`
+  - `components/sections/contact.tsx`
+  - `components/sections/illumination/scan-effects.tsx`
+  - `components/ui/calendar.tsx`
+  - `components/ui/command.tsx`
+  - `components/ui/drawer.tsx`
+  - `components/ui/dropdown-menu.tsx`
+  - `components/ui/field.tsx`
+  - `components/ui/kbd.tsx`
+  - `components/ui/menubar.tsx`
+  - `components/ui/navigation-menu.tsx`
+  - `components/ui/select.tsx`
+  - `components/ui/sidebar.tsx`
+  - `components/ui/slider.tsx`
+  - `components/ui/table.tsx`
+  - `components/ui/tabs.tsx`
+  - `components/ui/toast.tsx`
+  - `components/ui/tooltip.tsx`
+  - `docs/IMPLEMENTATION-GUIDE.md`
+- scoped diagnostics for `app`, `components`, `lib`, and `types`: **0 errors / 0 active diagnostics**
+- current active Tailwind diagnostics are reduced from prior tracked code-level backlog to **17 documentation-only suggestions** in `CODE_QUALITY_AUDIT.md`
+- remaining active suggestions are all Tailwind v4 migration recommendations in markdown code examples only (for example `bg-gradient-to-*` → `bg-linear-to-*`, `text-[var(--electric-cyan)]` → `text-electric-cyan`)
+- production build: ✓ passes cleanly on current local workspace (Next.js 16.1.6; all 11 routes generated; proxy recognized)
+- post-acceptance operational commits audited:
+  - merge to `main`: completed
+  - Vercel trigger commits: completed
+  - these follow-up commits are operational/bookkeeping only and do not represent additional content-tree changes beyond the accepted Phase 9 work
+- direct code review identified one verified functional follow-up outside Tailwind diagnostics:
+  - `lib/actions/contact.ts` currently calls async `checkRateLimit(...)` without `await`
+  - `lib/rate-limit.ts` exports `checkRateLimit()` as `Promise<boolean>`
+  - implication: contact-form rate-limit enforcement should be re-verified/fixed before considering the system fully finalized
+
+Interpretation:
+
+- the previously documented residual Tailwind backlog is now materially lower than the tracker’s older 79/110-suggestion baselines
+- production code surfaces are currently clean in diagnostics; remaining Problems-panel Tailwind output is isolated to documentation artifacts rather than app/runtime code
+- the current uncommitted 19-file local WIP appears to be an optional Tailwind/shadcn token/style normalization sweep and should not be marked complete until it is either reverted or validated and committed as its own follow-up slice
+- one non-Tailwind follow-up remains verified from direct code inspection: async rate-limit enforcement in the contact server action should be corrected or explicitly re-validated
+
+Outcome:
+
+- tracker reconciled with current repository reality
+- validated current statement that app/runtime code is build-clean and diagnostics-clean
+- confirmed that Tailwind warnings are **not fully zero** yet, but are now confined to `CODE_QUALITY_AUDIT.md` documentation snippets
+- identified one concrete functional follow-up not captured in prior tracker summaries: missing `await` on contact rate-limit enforcement
+- next action is to classify the current 19-file local WIP as either:
+  1. discard/revert if exploratory only, or
+  2. continue as a new optional Phase 9 follow-up slice with file-level validation and checkpoint logging
+- alongside that choice, re-verify/fix `submitContactInquiry()` rate-limit enforcement in `lib/actions/contact.ts`
+
+---
 
 ### 2026-03-24 - P7-B2 Kickoff Baseline and Remaining Media Policy Audit (checkpoint)
 

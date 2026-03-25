@@ -23,7 +23,7 @@ export function ScanEffects() {
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-(--electric-cyan)/40"
+            className="absolute w-1 h-1 rounded-full bg-electric-cyan/40"
             style={{
               left: `${15 + i * 15}%`,
               top: `${20 + (i % 3) * 25}%`,

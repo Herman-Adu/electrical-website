@@ -214,7 +214,7 @@ export function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="border border-slate-800 bg-(--deep-slate)/50 p-6 lg:p-8"
+              className="border border-slate-800 bg-deep-slate/50 p-6 lg:p-8"
             >
               {/* Form Header */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
