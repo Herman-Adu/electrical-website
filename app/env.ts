@@ -38,7 +38,8 @@ export const env = createEnv({
     KV_REST_API_URL: process.env.KV_REST_API_URL,
     KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
     KV_REST_API_READ_ONLY_TOKEN: process.env.KV_REST_API_READ_ONLY_TOKEN,
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SITE_URL:
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
   emptyStringAsUndefined: true,
   skipValidation: process.env.SKIP_ENV_VALIDATION === "true",

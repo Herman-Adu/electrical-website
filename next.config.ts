@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import { env } from "./app/env";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
+  transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
   images: {
     unoptimized: env.NEXT_IMAGE_UNOPTIMIZED ?? false,
   },

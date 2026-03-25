@@ -11,7 +11,12 @@
     "validate:wave2": "node scripts/validate-wave2.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "docker:build": "docker compose build web",
+    "docker:up": "docker compose up -d web",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f web",
+    "docker:start": "docker compose up --build web"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
