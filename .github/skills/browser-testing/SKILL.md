@@ -1,11 +1,6 @@
 ---
 name: browser-testing
-description: >
-  Execute browser automation and UI tests using Playwright. Can navigate pages,
-  click elements, fill forms, take screenshots, evaluate JavaScript, and
-  collect console errors. Use this when asked to run browser tests, verify UI
-  behaviour, take screenshots, test navigation flows, or automate web interactions
-  on the electrical-website or any URL.
+description: "Execute browser automation and UI tests using Playwright. Can navigate pages, click elements, fill forms, take screenshots, evaluate JavaScript, and collect console errors. Use this when asked to run browser tests, verify UI behaviour, take screenshots, test navigation flows, or automate web interactions on the electrical-website or any URL."
 ---
 
 # Browser Testing Skill

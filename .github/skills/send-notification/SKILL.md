@@ -1,10 +1,6 @@
 ---
 name: send-notification
-description: >
-  Send an email notification via Resend. Supports plain text and HTML email
-  bodies, optional scheduling, and dry-run mode. Use this when asked to send
-  an email, notify a recipient, deliver an alert, or schedule a message. Always
-  confirm recipients and content before sending when not in dry-run mode.
+description: "Send an email notification via Resend. Supports plain text and HTML email bodies, optional scheduling, and dry-run mode. Use this when asked to send an email, notify a recipient, deliver an alert, or schedule a message. Always confirm recipients and content before sending when not in dry-run mode."
 ---
 
 # Send Notification Skill

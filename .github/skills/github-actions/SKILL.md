@@ -1,12 +1,6 @@
 ---
 name: github-actions
-description: >
-  Trigger and inspect GitHub Actions workflows as callable skills. Supports:
-  triggering e2e tests, deploying preview environments, requesting Copilot
-  code review on pull requests, running dependency audits, listing recent
-  workflow runs, and summarising CI failures. Use this when asked to run CI,
-  trigger workflows, deploy a preview, audit dependencies, or review a PR
-  on the Herman-Adu/electrical-website repository.
+description: "Trigger and inspect GitHub Actions workflows as callable skills. Supports: triggering e2e tests, deploying preview environments, requesting Copilot code review on pull requests, running dependency audits, listing recent workflow runs, and summarising CI failures. Use this when asked to run CI, trigger workflows, deploy a preview, audit dependencies, or review a PR on the Herman-Adu/electrical-website repository."
 ---
 
 # GitHub Actions Skill

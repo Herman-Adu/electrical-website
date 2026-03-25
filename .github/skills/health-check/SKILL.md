@@ -1,11 +1,6 @@
 ---
 name: health-check
-description: >
-  Check the health and availability of all Docker MCP gateway servers before
-  dispatching other skills. Returns per-server status (healthy/degraded/unavailable),
-  latency, and circuit-breaker state. Use this when asked to verify MCP server
-  connectivity, check tool availability, diagnose a failing agent skill, or
-  run a pre-flight check before a complex multi-skill workflow.
+description: "Check the health and availability of all Docker MCP gateway servers before dispatching other skills. Returns per-server status (healthy/degraded/unavailable), latency, and circuit-breaker state. Use this when asked to verify MCP server connectivity, check tool availability, diagnose a failing agent skill, or run a pre-flight check before a complex multi-skill workflow."
 ---
 
 # Health Check Skill

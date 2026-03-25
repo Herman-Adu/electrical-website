@@ -1,11 +1,6 @@
 ---
 name: code-intelligence
-description: >
-  Search the codebase for AST patterns, symbols, function usages, class
-  references, or import chains using ast-grep. Optionally extends to remote
-  GitHub code search. Use this when asked to find, locate, analyse, or
-  trace code patterns, symbol usage, or structural patterns across the
-  electrical-website repository.
+description: "Search the codebase for AST patterns, symbols, function usages, class references, or import chains using ast-grep. Optionally extends to remote GitHub code search. Use this when asked to find, locate, analyse, or trace code patterns, symbol usage, or structural patterns across the electrical-website repository."
 ---
 
 # Code Intelligence Skill
