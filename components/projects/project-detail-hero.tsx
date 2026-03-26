@@ -148,41 +148,9 @@ export function ProjectDetailHero({
           </motion.span>
         </div>
 
-        {/* Centered content overlay */}
+        {/* Centered content overlay — no breadcrumb */}
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4 text-center">
           <div className="section-content max-w-3xl">
-            {/* Breadcrumb */}
-            <motion.nav
-              aria-label="Breadcrumb"
-              className="mb-6 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60 flex-wrap"
-              initial={shouldReduce ? {} : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-            >
-              <Link
-                href="/projects"
-                className="hover:text-electric-cyan transition-colors"
-              >
-                Projects
-              </Link>
-              <span className="text-white/30">/</span>
-              <Link
-                href="/projects/category"
-                className="hover:text-electric-cyan transition-colors"
-              >
-                Categories
-              </Link>
-              <span className="text-white/30">/</span>
-              <Link
-                href={`/projects/category/${categorySlug}`}
-                className="hover:text-electric-cyan transition-colors"
-              >
-                {project.categoryLabel}
-              </Link>
-              <span className="text-white/30">/</span>
-              <span className="text-electric-cyan">{project.title}</span>
-            </motion.nav>
-
             {/* Title */}
             <motion.h1
               className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-[1.1]"
@@ -229,6 +197,40 @@ export function ProjectDetailHero({
           </div>
         </div>
       </section>
+
+      {/* Breadcrumb section — below hero */}
+      <div className="section-content max-w-6xl py-8">
+        <motion.nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground flex-wrap"
+          initial={shouldReduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          <Link
+            href="/projects"
+            className="hover:text-electric-cyan transition-colors"
+          >
+            Projects
+          </Link>
+          <span className="text-muted-foreground/40">/</span>
+          <Link
+            href="/projects/category"
+            className="hover:text-electric-cyan transition-colors"
+          >
+            Categories
+          </Link>
+          <span className="text-muted-foreground/40">/</span>
+          <Link
+            href={`/projects/category/${categorySlug}`}
+            className="hover:text-electric-cyan transition-colors"
+          >
+            {project.categoryLabel}
+          </Link>
+          <span className="text-muted-foreground/40">/</span>
+          <span className="text-electric-cyan">{project.title}</span>
+        </motion.nav>
+      </div>
     </>
   );
 }
