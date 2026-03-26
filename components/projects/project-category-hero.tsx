@@ -155,7 +155,7 @@ export function ProjectCategoryHero({
         <motion.nav
           variants={itemVariants}
           aria-label="Breadcrumb"
-          className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-6"
+          className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60 mb-6"
         >
           <Link
             href="/projects"
@@ -163,14 +163,14 @@ export function ProjectCategoryHero({
           >
             Projects
           </Link>
-          <span className="text-muted-foreground/40">/</span>
+          <span className="text-white/30">/</span>
           <Link
             href="/projects/category"
             className="hover:text-electric-cyan transition-colors"
           >
             Categories
           </Link>
-          <span className="text-muted-foreground/40">/</span>
+          <span className="text-white/30">/</span>
           <span className="text-electric-cyan">{category.label}</span>
         </motion.nav>
 
@@ -210,7 +210,7 @@ export function ProjectCategoryHero({
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-base sm:text-lg text-white/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed drop-shadow-md"
         >
           {category.description}
         </motion.p>
@@ -222,7 +222,7 @@ export function ProjectCategoryHero({
         >
           <Link
             href="/projects"
-            className="px-5 py-2.5 rounded-full border border-border bg-background/50 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-muted-foreground hover:border-electric-cyan/40 hover:text-electric-cyan transition-all duration-300"
+            className="px-5 py-2.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-white hover:border-electric-cyan/60 hover:text-electric-cyan transition-all duration-300"
           >
             All Projects
           </Link>
@@ -237,12 +237,12 @@ export function ProjectCategoryHero({
         {/* Meta */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase"
         >
           <span>NICEIC Approved</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline text-white/25">|</span>
           <span>Part P Certified</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline text-white/25">|</span>
           <span>Quality Assured</span>
         </motion.div>
       </motion.div>
@@ -271,7 +271,7 @@ export function ProjectCategoryHero({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
         onClick={scrollToProjects}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-white/60 hover:text-electric-cyan transition-colors cursor-pointer"
         aria-label="Scroll to projects"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
