@@ -61,7 +61,7 @@ Checkpoint: GATE-7 REACHED
 2. Check metrics.md for operation count
 3. Review task breakdown above
 4. Continue from first unchecked item
-5. Validate with `npm run build` when task complete
+5. Validate with `pnpm run build` when task complete
 
 ---
 
@@ -77,7 +77,7 @@ Checkpoint: GATE-7 REACHED
 
 1. ~~Complete remaining framework files~~ DONE
 2. Review framework with user
-3. Validate framework in next session (npm run build)
+3. Validate framework in next session (pnpm run build)
 4. Test framework workflow on real task
 
 ---

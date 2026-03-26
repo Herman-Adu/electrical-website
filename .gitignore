@@ -20,3 +20,7 @@ node_modules/
 build-output.log
 playwright-report/
 test-results/
+package-lock.json
+yarn.lock
+bun.lockb
+npm-shrinkwrap.json

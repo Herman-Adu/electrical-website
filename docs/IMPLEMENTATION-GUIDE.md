@@ -449,8 +449,8 @@ After completing all 3 tasks:
 - [ ] `services/` folder has 4 files (layout, grid, card, wrapper)
 - [ ] All client islands marked with ⚠️ `"use client"` at top
 - [ ] `components/sections/index.ts` exports `Services` (from layout)
-- [ ] App builds without errors: `npm run build`
-- [ ] E2E tests pass: `npm run test:e2e`
+- [ ] App builds without errors: `pnpm run build`
+- [ ] E2E tests pass: `pnpm run test:e2e`
 - [ ] Services page renders correctly
 - [ ] No hydration warnings in browser console
 - [ ] No visual regressions (animations still smooth)
@@ -789,8 +789,8 @@ test("services section renders with animations", async ({ page }) => {
 
 ```bash
 # Run before/after bundle analysis
-npm run build
-npm run analyze
+pnpm run build
+pnpm run analyze
 
 # Expected: -18 KB on phase 1, -40 KB on phase 2
 ```
@@ -804,8 +804,8 @@ npm run analyze
 - [ ] ✅ `icon-map.tsx` — "use client" removed
 - [ ] ✅ `service-page-renderer.tsx` — "use client" removed
 - [ ] ✅ `services/` — Split into 4 files (layout, grid, card, wrapper)
-- [ ] ✅ Build passes: `npm run build`
-- [ ] ✅ Tests pass: `npm run test:e2e`
+- [ ] ✅ Build passes: `pnpm run build`
+- [ ] ✅ Tests pass: `pnpm run test:e2e`
 - [ ] ✅ No hydration warnings
 - [ ] ✅ No visual regressions
 - [ ] ✅ Create PR for review
@@ -817,8 +817,8 @@ npm run analyze
 - [ ] ✅ `shared/section-cta.tsx` — Split into RSC + Island
 - [ ] ✅ `shared/section-profile.tsx` — Split into RSC + Island
 - [ ] ✅ `shared/section-values.tsx` — Split into RSC + Island
-- [ ] ✅ Build passes: `npm run build`
-- [ ] ✅ Tests pass: `npm run test:e2e`
+- [ ] ✅ Build passes: `pnpm run build`
+- [ ] ✅ Tests pass: `pnpm run test:e2e`
 - [ ] ✅ Create micro-component library doc
 - [ ] ✅ Create PR for review
 

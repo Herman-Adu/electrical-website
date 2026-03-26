@@ -14,7 +14,7 @@
 - I announce: Phase, Task, Model, Budget, Health
 - I checkpoint at ops 7-8 and 15
 - I update state files after each change batch
-- I run `npm run build` before declaring completion
+- I run `pnpm run build` before declaring completion
 
 ---
 
@@ -119,13 +119,13 @@ import { Button } from '@/components/ui/button'
 ## Validation Protocol
 
 ### 3-Axis Review (Before "Done")
-1. **TypeScript** - No type errors (`npm run build`)
+1. **TypeScript** - No type errors (`pnpm run build`)
 2. **ESLint** - No lint warnings
 3. **Visual** - Matches design intent, responsive
 
 ### Build Command
 ```bash
-npm run build
+pnpm run build
 ```
 Must pass with 0 errors before any completion claim.
 
@@ -143,7 +143,7 @@ Must pass with 0 errors before any completion claim.
 | 7 | Semantic tokens only, no hardcoded colors | Styling |
 | 8 | 3-axis validation before completion | Quality |
 | 9 | Update state.json after changes | State |
-| 10 | Run npm run build before done | Quality |
+| 10 | Run pnpm run build before done | Quality |
 | 11 | No shortcuts - full validation always | Platinum |
 | 12 | Health-first model selection | Model |
 | 13 | Model change = metrics update | Model |

@@ -91,7 +91,7 @@ START
 ### GATE 15: End-of-Budget
 **Trigger:** Operations 14-15
 **Checks:**
-- [ ] `npm run build` passes
+- [ ] `pnpm run build` passes
 - [ ] All state files updated
 - [ ] Changelog entry added
 - [ ] Next session handoff documented
@@ -109,7 +109,7 @@ START
 3. Update: components/sections/index.ts (barrel)
 4. Import in: app/page.tsx or target page
 5. Update: state.json (components.sections.files)
-6. Verify: npm run build
+6. Verify: pnpm run build
 ```
 
 ### Pattern: New Page
@@ -118,7 +118,7 @@ START
 2. Import sections via barrel
 3. Update: state.json (pages)
 4. Update: navigation if needed
-5. Verify: npm run build
+5. Verify: pnpm run build
 ```
 
 ### Pattern: Styling Update
@@ -135,7 +135,7 @@ START
 1. Identify root cause file(s)
 2. Read current implementation
 3. Fix with minimal changes
-4. Verify: npm run build
+4. Verify: pnpm run build
 5. Document in changelog
 ```
 
