@@ -28,10 +28,12 @@ export function AnimatedBorders({
   shouldReduce,
   lineLeft,
   lineRight,
+  showBottom = true,
 }: {
   shouldReduce: boolean | null;
   lineLeft: any;
   lineRight: any;
+  showBottom?: boolean;
 }) {
   if (shouldReduce) return null;
 
@@ -43,12 +45,14 @@ export function AnimatedBorders({
           style={{ width: lineLeft }}
         />
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-transparent via-electric-cyan/60 to-transparent"
-          style={{ width: lineRight }}
-        />
-      </div>
+      {showBottom && (
+        <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-transparent via-electric-cyan/60 to-transparent"
+            style={{ width: lineRight }}
+          />
+        </div>
+      )}
     </>
   );
 }
