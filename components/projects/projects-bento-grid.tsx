@@ -1,29 +1,166 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import { ProjectCardShell } from "@/components/projects/project-card-shell";
 import type { ProjectBentoItem } from "@/types/projects";
 
-export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
+// Extract numeric value and prefix/suffix from a string
+function parseNumericValue(value: string): {
+  prefix: string;
+  number: number | null;
+  suffix: string;
+} {
+  const match = value.match(/^(\D*)([\d.]+)(\D*)$/);
+  if (match) {
+    return {
+      prefix: match[1],
+      number: parseFloat(match[2]),
+      suffix: match[3],
+    };
+  }
+  return { prefix: "", number: null, suffix: value };
+}
+
+// Count-up animation hook
+function useCountUp(
+  target: number | null,
+  duration: number,
+  isInView: boolean,
+  shouldReduce: boolean | null
+) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView || target === null || shouldReduce) {
+      if (target !== null) setCount(target);
+      return;
+    }
+
+    const startTime = Date.now();
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(target * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setCount(target);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [target, duration, isInView, shouldReduce]);
+
+  return count;
+}
+
+const tileVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  }),
+};
+
+function BentoTile({
+  item,
+  index,
+}: {
+  item: ProjectBentoItem;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const shouldReduce = useReducedMotion();
+
+  const { prefix, number, suffix } = parseNumericValue(item.value);
+  const animatedNumber = useCountUp(number, 1200, isInView, shouldReduce);
+
+  const displayValue =
+    number !== null
+      ? `${prefix}${Number.isInteger(number) ? Math.round(animatedNumber) : animatedNumber.toFixed(1)}${suffix}`
+      : item.value;
+
   return (
-    <section className="section-container py-8" aria-label="Project highlights">
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={shouldReduce ? {} : tileVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      whileHover={shouldReduce ? {} : { scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="group"
+    >
+      <ProjectCardShell className="relative min-h-[180px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,242,255,0.08)] group-hover:border-electric-cyan/50">
+        {/* Corner bracket */}
+        <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-electric-cyan/20 rounded-tr transition-colors duration-300 group-hover:border-electric-cyan/50" />
+
+        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
+          {item.title}
+        </p>
+
+        <motion.p
+          className="mt-4 text-3xl sm:text-4xl font-black tracking-tight text-electric-cyan"
+          initial={shouldReduce ? {} : { opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 0.8, duration: 0.3 }}
+        >
+          {displayValue}
+        </motion.p>
+
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          {item.description}
+        </p>
+
+        {/* Subtle glow effect on hover */}
+        <motion.div
+          className="absolute inset-0 rounded-xl bg-electric-cyan/5 opacity-0 transition-opacity duration-300 pointer-events-none group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      </ProjectCardShell>
+    </motion.div>
+  );
+}
+
+export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
+  const shouldReduce = useReducedMotion();
+
+  return (
+    <section className="section-container py-10" aria-label="Project highlights">
       <div className="section-content max-w-6xl">
-        <div className="mb-5">
+        {/* Section header */}
+        <motion.div
+          className="mb-6 flex items-center gap-4"
+          initial={shouldReduce ? {} : { opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="h-px w-8 bg-electric-cyan/50" />
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/80">
             Performance Snapshot
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {items.map((item) => (
-            <ProjectCardShell key={item.id} className="min-h-[180px]">
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                {item.title}
-              </p>
-              <p className="mt-3 text-3xl font-black tracking-tight text-electric-cyan">
-                {item.value}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-            </ProjectCardShell>
+        {/* Grid */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, index) => (
+            <BentoTile key={item.id} item={item} index={index} />
           ))}
         </div>
       </div>
