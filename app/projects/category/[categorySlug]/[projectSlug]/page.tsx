@@ -139,7 +139,7 @@ export default async function CategoryProjectDetailPage({
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
 
       {detail?.intro && (
-        <section className="section-container section-padding-sm bg-background">
+        <section className="section-container py-2 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectDetailIntro data={detail.intro} />
           </div>
