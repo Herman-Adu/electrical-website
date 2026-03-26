@@ -29,11 +29,15 @@ const iconMap = {
 interface ProjectScopeGridProps {
   items: ProjectScope[];
   heading?: string;
+  title?: string;
+  description?: string;
 }
 
 export function ProjectScopeGrid({
   items,
   heading = "Scope of Work",
+  title = "Precision Engineering, Comprehensive Delivery.",
+  description = "Every project demands a tailored approach. Our scope encompasses the full spectrum of electrical infrastructure — from initial assessment through final commissioning — ensuring seamless integration and long-term reliability.",
 }: ProjectScopeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -46,9 +50,9 @@ export function ProjectScopeGrid({
     <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
       <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
       <div className="section-content max-w-6xl" ref={containerRef}>
-        {/* Header */}
+        {/* Eyebrow */}
         <motion.div
-          className="flex items-center gap-4 mb-12"
+          className="flex items-center gap-4 mb-6"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}
@@ -58,6 +62,26 @@ export function ProjectScopeGrid({
             {heading}
           </h2>
         </motion.div>
+
+        {/* Title */}
+        <motion.h3
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6 max-w-3xl"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {title}
+        </motion.h3>
+
+        {/* Description */}
+        <motion.p
+          className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-4xl mb-12"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {description}
+        </motion.p>
 
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
