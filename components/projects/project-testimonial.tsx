@@ -21,7 +21,7 @@ export function ProjectTestimonialCard({
 
   return (
     <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
-      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
+      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
       <div className="section-content max-w-4xl" ref={containerRef}>
         <motion.div
           initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
