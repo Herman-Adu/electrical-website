@@ -1,38 +1,47 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import {
-  motion,
-  useReducedMotion,
-  type Variants,
-} from "framer-motion";
-import { Activity, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion, type Variants } from "framer-motion";
+import { Activity, ChevronDown, FolderOpen } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
-import type { ProjectCategory, ProjectCategorySlug } from "@/types/projects";
+import type { ProjectCategory } from "@/types/projects";
+
+interface ProjectCategoryHeroProps {
+  category: ProjectCategory;
+  projectCount: number;
+}
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: { type: "spring", damping: 25, stiffness: 120 },
   },
 };
 
-export function ProjectsHero({
-  categories,
-  activeCategory,
-}: ProjectsHeroProps) {
+const flickerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 1, 0.6, 1, 0.8, 1],
+    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
+  },
+};
+
+export function ProjectCategoryHero({
+  category,
+  projectCount,
+}: ProjectCategoryHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
 
@@ -40,9 +49,9 @@ export function ProjectsHero({
     setIsLoaded(true);
     const statuses = [
       "INITIALIZING",
-      "LOADING_PROJECTS",
-      "SCANNING_PORTFOLIO",
-      "SYSTEMS_READY",
+      "LOADING_CATEGORY",
+      "FETCHING_PROJECTS",
+      "CATEGORY_READY",
     ];
     let idx = 0;
     const interval = setInterval(() => {
@@ -56,13 +65,13 @@ export function ProjectsHero({
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToGrid = () => {
-    const el = document.getElementById("projects-grid");
+  const scrollToProjects = () => {
+    const el = document.getElementById("category-projects");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center">
+    <section className="section-container section-safe-top section-safe-bottom relative min-h-[60vh] w-full flex flex-col items-center justify-center">
       <BlueprintBackground />
 
       {/* Circuit overlay */}
@@ -127,24 +136,57 @@ export function ProjectsHero({
         {/* Status label */}
         <motion.div
           variants={flickerVariants}
-          className="flex items-center justify-center gap-3 mb-8"
+          className="flex items-center justify-center gap-3 mb-6"
         >
           <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
             <Activity size={14} className="text-electric-cyan animate-pulse" />
             <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-              Projects // {statusText}
+              Category // {statusText}
             </span>
           </div>
         </motion.div>
 
-        {/* Eyebrow */}
+        {/* Breadcrumb */}
+        <motion.nav
+          variants={itemVariants}
+          aria-label="Breadcrumb"
+          className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-6"
+        >
+          <Link
+            href="/projects"
+            className="hover:text-electric-cyan transition-colors"
+          >
+            Projects
+          </Link>
+          <span className="text-muted-foreground/40">/</span>
+          <Link
+            href="/projects/category"
+            className="hover:text-electric-cyan transition-colors"
+          >
+            Categories
+          </Link>
+          <span className="text-muted-foreground/40">/</span>
+          <span className="text-electric-cyan">{category.label}</span>
+        </motion.nav>
+
+        {/* Category icon */}
         <motion.div
           variants={itemVariants}
-          className="flex items-center justify-center gap-4 mb-6"
+          className="flex justify-center mb-6"
+        >
+          <div className="w-16 h-16 rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 flex items-center justify-center">
+            <FolderOpen className="w-8 h-8 text-electric-cyan" />
+          </div>
+        </motion.div>
+
+        {/* Project count */}
+        <motion.div
+          variants={itemVariants}
+          className="flex items-center justify-center gap-4 mb-4"
         >
           <span className="h-px w-12 bg-electric-cyan/60" />
           <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
-            Our Portfolio
+            {projectCount} Project{projectCount !== 1 ? "s" : ""}
           </span>
           <span className="h-px w-12 bg-electric-cyan/60" />
         </motion.div>
@@ -152,61 +194,38 @@ export function ProjectsHero({
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
+          className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
         >
-          <span className="block">Engineered</span>
           <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-500">
-            Delivery
+            {category.label}
           </span>
-          <span className="block">Proven Results</span>
         </motion.h1>
 
-        {/* Subline */}
+        {/* Description */}
         <motion.p
           variants={itemVariants}
           className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
         >
-          A data-driven portfolio of industrial, commercial, and critical
-          infrastructure electrical projects delivered with strict safety,
-          quality, and performance standards.
+          {category.description}
         </motion.p>
 
-        {/* Category pills */}
+        {/* Action buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10"
+          className="flex flex-wrap items-center justify-center gap-4 mb-10"
         >
           <Link
             href="/projects"
-            className={cn(
-              "px-4 py-2 rounded-full border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-              activeCategory === "all"
-                ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,242,255,0.15)]"
-                : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan"
-            )}
+            className="px-5 py-2.5 rounded-full border border-border bg-background/50 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-muted-foreground hover:border-electric-cyan/40 hover:text-electric-cyan transition-all duration-300"
           >
             All Projects
           </Link>
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.slug}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
-            >
-              <Link
-                href={`/projects?category=${category.slug}`}
-                className={cn(
-                  "px-4 py-2 rounded-full border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                  activeCategory === category.slug
-                    ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,242,255,0.15)]"
-                    : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan"
-                )}
-              >
-                {category.label}
-              </Link>
-            </motion.div>
-          ))}
+          <Link
+            href="/contact"
+            className="px-5 py-2.5 rounded-full border border-electric-cyan/30 bg-electric-cyan/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-electric-cyan hover:bg-electric-cyan/20 transition-all duration-300"
+          >
+            Start a Project
+          </Link>
         </motion.div>
 
         {/* Meta */}
@@ -218,9 +237,7 @@ export function ProjectsHero({
           <span className="hidden sm:inline">|</span>
           <span>Part P Certified</span>
           <span className="hidden sm:inline">|</span>
-          <span>24/7 Emergency</span>
-          <span className="hidden sm:inline">|</span>
-          <span>4 Active Projects</span>
+          <span>Quality Assured</span>
         </motion.div>
       </motion.div>
 
@@ -247,23 +264,15 @@ export function ProjectsHero({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
-        onClick={scrollToGrid}
+        onClick={scrollToProjects}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
         aria-label="Scroll to projects"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
-          Explore Projects
+          View Projects
         </span>
         <ChevronDown size={20} className="animate-bounce" />
       </motion.button>
     </section>
   );
 }
-
-const flickerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: [0, 1, 0.6, 1, 0.8, 1],
-    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
-  },
-};

@@ -8,6 +8,7 @@ import {
 } from "@/data/projects";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import {
+  ProjectCategoryHero,
   ProjectCardShell,
   ProjectStatusBadge,
   ProjectMetaRow,
@@ -52,40 +53,29 @@ export default async function CategoryProjectsPage({
 
   return (
     <main className="relative">
-      <section className="section-container section-safe-top section-safe-bottom bg-background">
-        <div className="section-content max-w-5xl">
-          {/* Breadcrumb */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
-          >
-            <Link
-              href="/projects"
-              className="hover:text-electric-cyan transition-colors"
-            >
-              Projects
-            </Link>
-            <span className="text-muted-foreground/40">/</span>
-            <Link
-              href="/projects/category"
-              className="hover:text-electric-cyan transition-colors"
-            >
-              Categories
-            </Link>
-            <span className="text-muted-foreground/40">/</span>
-            <span className="text-electric-cyan">{category.label}</span>
-          </nav>
+      {/* Hero Section */}
+      <ProjectCategoryHero category={category} projectCount={projects.length} />
 
-          {/* Header */}
+      {/* Projects Section */}
+      <section
+        id="category-projects"
+        className="section-container section-safe-bottom bg-background"
+      >
+        <div className="section-content max-w-5xl">
+          {/* Section Header */}
           <div className="mb-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan mb-3">
-              {projects.length} Project{projects.length !== 1 ? "s" : ""}
-            </p>
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              {category.label}
-            </h1>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="h-px w-10 bg-electric-cyan/50" />
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-electric-cyan/70">
+                Project Catalogue
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              {category.label} Projects
+            </h2>
             <p className="text-muted-foreground max-w-lg">
-              {category.description}
+              Browse our portfolio of {category.label.toLowerCase()} electrical
+              projects delivered to the highest standards.
             </p>
           </div>
 
