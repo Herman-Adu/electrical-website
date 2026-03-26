@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
+  useScroll,
+  useTransform,
   type Variants,
 } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
@@ -35,6 +37,15 @@ export function ProjectsHero({
 }: ProjectsHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
+  const shouldReduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "25%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "-8%"]);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -62,8 +73,14 @@ export function ProjectsHero({
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center">
-      <BlueprintBackground />
+    <section
+      ref={sectionRef}
+      className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Blueprint background with parallax */}
+      <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: bgY }}>
+        <BlueprintBackground />
+      </motion.div>
 
       {/* Circuit overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -117,8 +134,9 @@ export function ProjectsHero({
         />
       </div>
 
-      {/* Main content */}
+      {/* Main content with counter-parallax */}
       <motion.div
+        style={{ y: contentY }}
         variants={containerVariants}
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
@@ -164,7 +182,7 @@ export function ProjectsHero({
         {/* Subline */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-base sm:text-lg text-foreground/70 dark:text-white/70 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
         >
           A data-driven portfolio of industrial, commercial, and critical
           infrastructure electrical projects delivered with strict safety,
@@ -212,14 +230,14 @@ export function ProjectsHero({
         {/* Meta */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/40 dark:text-white/40 uppercase"
         >
           <span>NICEIC Approved</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>Part P Certified</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>24/7 Emergency</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>4 Active Projects</span>
         </motion.div>
       </motion.div>
@@ -248,7 +266,7 @@ export function ProjectsHero({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
         onClick={scrollToGrid}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-foreground/50 dark:text-white/50 hover:text-electric-cyan transition-colors cursor-pointer"
         aria-label="Scroll to projects"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

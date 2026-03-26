@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion";
 import { Activity, ChevronDown, Layers } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 
@@ -41,6 +47,15 @@ export function ProjectsCategoriesHero({
 }: ProjectsCategoriesHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
+  const shouldReduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "25%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "-8%"]);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -68,8 +83,14 @@ export function ProjectsCategoriesHero({
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[65vh] w-full flex flex-col items-center justify-center">
-      <BlueprintBackground />
+    <section
+      ref={sectionRef}
+      className="section-container section-safe-top section-safe-bottom relative min-h-[65vh] w-full flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Blueprint background with parallax */}
+      <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: bgY }}>
+        <BlueprintBackground />
+      </motion.div>
 
       {/* Circuit overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -168,8 +189,9 @@ export function ProjectsCategoriesHero({
         />
       </div>
 
-      {/* Main content */}
+      {/* Main content with counter-parallax */}
       <motion.div
+        style={{ y: contentY }}
         variants={containerVariants}
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
@@ -192,7 +214,7 @@ export function ProjectsCategoriesHero({
         <motion.nav
           variants={itemVariants}
           aria-label="Breadcrumb"
-          className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-8"
+          className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/60 dark:text-white/60 mb-8"
         >
           <Link
             href="/projects"
@@ -200,7 +222,7 @@ export function ProjectsCategoriesHero({
           >
             Projects
           </Link>
-          <span className="text-muted-foreground/40">/</span>
+          <span className="opacity-30">/</span>
           <span className="text-electric-cyan">Categories</span>
         </motion.nav>
 
@@ -248,7 +270,7 @@ export function ProjectsCategoriesHero({
         {/* Subline */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg text-muted-foreground mb-10 max-w-xl mx-auto font-light leading-relaxed"
+          className="text-base sm:text-lg text-foreground/70 dark:text-white/70 mb-10 max-w-xl mx-auto font-light leading-relaxed"
         >
           Each sector represents a distinct area of electrical engineering
           expertise. Explore our project portfolio by the type of environment
@@ -262,7 +284,7 @@ export function ProjectsCategoriesHero({
         >
           <Link
             href="/projects"
-            className="px-5 py-2.5 rounded-full border border-border bg-background/50 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-muted-foreground hover:border-electric-cyan/40 hover:text-electric-cyan transition-all duration-300"
+            className="px-5 py-2.5 rounded-full border border-foreground/20 dark:border-white/20 bg-foreground/5 dark:bg-white/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-foreground dark:text-white hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300"
           >
             ← All Projects
           </Link>
@@ -277,14 +299,14 @@ export function ProjectsCategoriesHero({
         {/* Meta bar */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/40 dark:text-white/40 uppercase"
         >
           <span>NICEIC Approved</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>Part P Certified</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>24/7 Emergency</span>
-          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline opacity-40">|</span>
           <span>15+ Years Experience</span>
         </motion.div>
       </motion.div>
@@ -316,7 +338,7 @@ export function ProjectsCategoriesHero({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.2, duration: 0.5 }}
         onClick={scrollToCategories}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-foreground/50 dark:text-white/50 hover:text-electric-cyan transition-colors cursor-pointer"
         aria-label="Scroll to categories"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

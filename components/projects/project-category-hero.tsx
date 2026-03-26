@@ -1,9 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion";
 import { Activity, ChevronDown, Home, Lightbulb, Zap, FolderOpen } from "lucide-react";
 import type { ProjectCategory } from "@/types/projects";
 
@@ -72,9 +78,19 @@ export function ProjectCategoryHero({
 }: ProjectCategoryHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
+  const shouldReduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
 
   const config = categoryConfig[category.slug] ?? fallbackConfig;
   const hasImage = Boolean(config.image);
+
+  // Parallax — background moves slower than scroll, content moves slightly faster
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "-10%"]);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -102,11 +118,16 @@ export function ProjectCategoryHero({
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center overflow-hidden">
-
-      {/* Photo background */}
+    <section
+      ref={sectionRef}
+      className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Photo background with parallax */}
       {hasImage && (
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          className="absolute inset-0 z-0 scale-110"
+          style={{ y: bgY }}
+        >
           <Image
             src={config.image}
             alt={`${category.label} category hero`}
@@ -115,24 +136,24 @@ export function ProjectCategoryHero({
             className="object-cover object-center"
             sizes="100vw"
           />
-          {/* Dark gradient overlay — heavier at top/bottom, lighter at centre so photo detail shows */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/30 to-black/75" />
-          {/* Cyan accent wash at bottom edge */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 to-transparent" />
-        </div>
+          {/* Multi-stop gradient: clear centre, dark at top/bottom */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/80" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
+        </motion.div>
       )}
 
-      {/* Clean vignette overlay — deepens edges so text pops */}
+      {/* Vignette — deepens edges without obscuring centre detail */}
       <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
+            "radial-gradient(ellipse 85% 75% at 50% 50%, transparent 25%, rgba(0,0,0,0.60) 100%)",
         }}
       />
 
-      {/* Main content */}
+      {/* Main content with subtle counter-parallax */}
       <motion.div
+        style={{ y: contentY }}
         variants={containerVariants}
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
@@ -157,17 +178,11 @@ export function ProjectCategoryHero({
           aria-label="Breadcrumb"
           className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60 mb-6"
         >
-          <Link
-            href="/projects"
-            className="hover:text-electric-cyan transition-colors"
-          >
+          <Link href="/projects" className="hover:text-electric-cyan transition-colors">
             Projects
           </Link>
           <span className="text-white/30">/</span>
-          <Link
-            href="/projects/category"
-            className="hover:text-electric-cyan transition-colors"
-          >
+          <Link href="/projects/category" className="hover:text-electric-cyan transition-colors">
             Categories
           </Link>
           <span className="text-white/30">/</span>
@@ -175,10 +190,7 @@ export function ProjectCategoryHero({
         </motion.nav>
 
         {/* Category icon */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center mb-6"
-        >
+        <motion.div variants={itemVariants} className="flex justify-center mb-6">
           <div className="w-16 h-16 rounded-xl border border-electric-cyan/40 bg-black/40 backdrop-blur-sm flex items-center justify-center shadow-[0_0_24px_rgba(0,242,255,0.15)]">
             {config.icon}
           </div>
@@ -190,7 +202,7 @@ export function ProjectCategoryHero({
           className="flex items-center justify-center gap-4 mb-4"
         >
           <span className="h-px w-12 bg-electric-cyan/60" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/80">
             {projectCount} Project{projectCount !== 1 ? "s" : ""}
           </span>
           <span className="h-px w-12 bg-electric-cyan/60" />
@@ -228,7 +240,7 @@ export function ProjectCategoryHero({
           </Link>
           <Link
             href="/contact"
-            className="px-5 py-2.5 rounded-full border border-electric-cyan/30 bg-electric-cyan/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-electric-cyan hover:bg-electric-cyan/20 transition-all duration-300"
+            className="px-5 py-2.5 rounded-full border border-electric-cyan/40 bg-electric-cyan/15 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-electric-cyan hover:bg-electric-cyan/25 transition-all duration-300"
           >
             Start a Project
           </Link>
