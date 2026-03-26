@@ -58,6 +58,7 @@ export function ProjectGallery({
   return (
     <>
       <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
+        <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
         <div className="section-content max-w-6xl" ref={containerRef}>
           {/* Header */}
           <motion.div
