@@ -1,4 +1,4 @@
-# v0 Build Guide — Projects (SSR + Slug + Metadata + Data-Driven)
+# v0 Build Guide — Projects (SSR + Category Routes + Slug + Metadata + Data-Driven)
 
 ## Purpose
 
@@ -18,35 +18,64 @@ This guide tells **v0.dev** how to build a new Projects experience that follows 
 1. **SSR-first**
 
 - `app/projects/page.tsx` must be a Server Component.
-- `app/projects/[slug]/page.tsx` must be a Server Component.
+- `app/projects/category/[categorySlug]/page.tsx` must be a Server Component.
+- `app/projects/category/[categorySlug]/[projectSlug]/page.tsx` must be a Server Component.
 - No page-level `"use client"`.
 
-2. **Slug route required**
+2. **Category + Slug nested routes required**
 
-- Detail page route must be `app/projects/[slug]/page.tsx`.
-- Each project record must contain a unique `slug`.
+- `/projects` — all-projects list page (SSR, dynamic — uses `searchParams`)
+- `/projects/category` — static category index (SSG)
+- `/projects/category/[categorySlug]` — per-category list (SSG, 3 routes)
+- `/projects/category/[categorySlug]/[projectSlug]` — project detail (SSG, all pairs)
+- The legacy `/projects/[slug]` remains for direct backward-compatible slug links.
 
 3. **Metadata best practices**
 
-- Use page-level metadata for list route.
-- Use `generateMetadata()` for slug route.
-- Canonical and OpenGraph URLs should be slug-aware.
-- Reuse helper approach aligned with `lib/metadata.ts`.
+- Use page-level `metadata` constant for fully-static routes.
+- Use `generateMetadata({ params })` for dynamic slug routes — must `await params` (Next.js 15+ pattern).
+- Canonical and OpenGraph URLs must be category+slug-aware.
 
-4. **Purely data-driven**
+4. **`params` is always a `Promise<...>` in Next.js 15+**
+
+- All `params` props in Server Components must be typed as `Promise<{ ... }>` and awaited.
+- In Client Components use `React.use(params)` — never `async/await` on client.
+
+5. **`dynamicParams = false` on leaf slug pages**
+
+- Set `export const dynamicParams = false` on `[projectSlug]/page.tsx`.
+- Unknown category+slug combos return 404 — no on-demand fallback.
+
+6. **Purely data-driven**
 
 - No hardcoded card content in component JSX.
 - All project cards, bento tiles, featured module, and list items come from typed data.
+- `projectCategories` array is the single source of truth for all category data.
 
-5. **Shared component architecture**
+7. **`generateStaticParams` uses flat-pairs approach**
 
-- Build reusable components (`ProjectCardShell`, `ProjectBadge`, `ProjectMetaRow`, etc.) used by both list and slug pages.
+- Child `[projectSlug]/page.tsx` generates all `{ categorySlug, projectSlug }` pairs:
 
-6. **Loading + Error UX required**
+```ts
+export async function generateStaticParams() {
+  return getAllProjects().map((p) => ({
+    categorySlug: p.category,
+    projectSlug: p.slug,
+  }));
+}
+```
 
-- Add route-level skeleton loading states.
-- Add route-level error boundaries with retry actions.
-- Keep loading/error UI consistent with project card design language.
+- Parent `[categorySlug]/page.tsx` only generates `{ categorySlug }` pairs.
+
+8. **Shared component architecture**
+
+- Build reusable components (`ProjectCardShell`, `ProjectStatusBadge`, `ProjectMetaRow`, etc.) used across all route levels.
+
+9. **Loading + Error UX required**
+
+- Route-level skeleton loading states for each segment.
+- Route-level error boundaries with retry — must be `"use client"`.
+- `not-found.tsx` at both `[categorySlug]` and `[projectSlug]` segments.
 
 ---
 
@@ -77,175 +106,259 @@ This guide tells **v0.dev** how to build a new Projects experience that follows 
 
 ## Required File Structure
 
-- `app/projects/page.tsx` (SSR list page)
-- `app/projects/loading.tsx` (list skeleton state)
-- `app/projects/error.tsx` (list error boundary, client component)
-- `app/projects/[slug]/page.tsx` (SSR detail page)
-- `app/projects/[slug]/loading.tsx` (detail skeleton state)
-- `app/projects/[slug]/error.tsx` (detail error boundary, client component)
-- `app/projects/[slug]/not-found.tsx` (optional but recommended)
-- `components/projects/projects-hero.tsx`
-- `components/projects/projects-featured-card.tsx`
-- `components/projects/projects-bento-grid.tsx`
-- `components/projects/projects-optimistic-list.tsx` (client)
-- `components/projects/project-card-shell.tsx` (shared)
-- `components/projects/project-meta-row.tsx` (shared)
-- `components/projects/project-status-badge.tsx` (shared)
-- `components/projects/index.ts`
-- `data/projects/index.ts`
-- `types/projects.ts`
-- `lib/metadata-projects.ts` (or extend existing metadata helper)
-- `lib/actions/projects.ts` (server actions for optimistic updates)
+```
+app/projects/
+  page.tsx                                       ← SSR list, dynamic (searchParams)
+  loading.tsx                                    ← list skeleton
+  error.tsx                                      ← list error boundary ("use client")
+  [slug]/                                        ← legacy direct-slug detail
+    page.tsx
+    loading.tsx
+    error.tsx
+    not-found.tsx
+  category/
+    page.tsx                                     ← static category index (SSG ○)
+    [categorySlug]/
+      page.tsx                                   ← category list (SSG ●, 3 routes)
+      loading.tsx
+      error.tsx
+      not-found.tsx
+      [projectSlug]/
+        page.tsx                                 ← project detail (SSG ●, all pairs)
+        loading.tsx
+        error.tsx
+        not-found.tsx
+
+components/projects/
+  projects-hero.tsx                              ← hero with category chip filters
+  projects-featured-card.tsx                     ← flagship project card
+  projects-bento-grid.tsx                        ← 4-tile metrics bento
+  projects-optimistic-list.tsx                   ← "use client" interactive list
+  project-card-shell.tsx                         ← shared card wrapper primitive
+  project-meta-row.tsx                           ← shared label/value row
+  project-status-badge.tsx                       ← shared status chip
+  index.ts                                       ← barrel export
+
+data/projects/index.ts                           ← all data + helpers
+types/projects.ts                                ← typed contract
+lib/metadata-projects.ts                         ← metadata helpers
+lib/actions/projects.ts                          ← server actions (optimistic)
+```
 
 ---
 
 ## Data Model Requirements
 
-Define a strict `Project` type (and supporting unions) in `types/projects.ts`:
+Define typed contracts in `types/projects.ts`:
 
-- `id`
-- `slug`
-- `title`
-- `clientSector`
-- `status` (`planned` | `in-progress` | `completed`)
-- `description`
-- `coverImage` (`src`, `alt`)
-- `kpis` (budget/timeline/location/capacity)
-- `tags`
-- `progress` (0–100)
-- `isFeatured`
-- `publishedAt`
-- `updatedAt`
+```ts
+export type ProjectCategorySlug =
+  | "all"
+  | "residential"
+  | "commercial-lighting"
+  | "power-boards";
 
-`data/projects/index.ts` should export helpers such as:
+export interface ProjectCategory {
+  slug: Exclude<ProjectCategorySlug, "all">;
+  label: string;
+  description: string;
+}
 
-- `allProjects`
-- `featuredProject`
-- `projectsBySlug`
-- `getProjectBySlug(slug)`
-- `getProjectSlugs()`
+export interface Project {
+  id: string;
+  slug: string;
+  category: Exclude<ProjectCategorySlug, "all">;
+  categoryLabel: string;
+  title: string;
+  clientSector: string;
+  status: "planned" | "in-progress" | "completed";
+  description: string;
+  coverImage: { src: string; alt: string };
+  kpis: {
+    budget: string;
+    timeline: string;
+    capacity: string;
+    location: string;
+  };
+  tags: string[];
+  progress: number; // 0–100
+  isFeatured: boolean;
+  publishedAt: string; // ISO 8601
+  updatedAt: string;
+}
+```
+
+`data/projects/index.ts` must export:
+
+- `allProjects: Project[]`
+- `projectCategories: ProjectCategory[]`
+- `featuredProject: Project`
+- `projectsBySlug: Record<string, Project>`
+- `getProjectBySlug(slug: string): Project | undefined`
+- `getProjectSlugs(): string[]`
+- `getCategoryBySlug(slug: string): ProjectCategory | undefined`
+- `getCategorySlugs(): string[]`
+- `getProjectsByCategory(category: ProjectCategorySlug): Project[]`
+- `getProjectByCategoryAndSlug(categorySlug, projectSlug): Project | undefined`
+- `getProjectSlugsByCategory(categorySlug): string[]`
+- `isProjectCategorySlug(value: string): value is Exclude<ProjectCategorySlug, "all">`
 
 ---
 
-## SSR + Slug + Metadata Implementation Rules
+## SSR + Category + Slug + Metadata Implementation Rules
 
-### `/projects` page
+### `/projects` — All-projects list page
 
-- SSR render from `allProjects`.
-- Export static metadata via helper (`createProjectsListMetadata`).
-- Provide `app/projects/loading.tsx` skeletons matching list layout.
-- Provide `app/projects/error.tsx` boundary with `reset()` retry.
+- Dynamic SSR (has `searchParams` for `?category=` filter).
+- Export static `metadata` via helper.
+- Resolve `activeCategory` from `searchParams`, call `getProjectListItemsByCategory()`.
+- Provide `loading.tsx` + `error.tsx`.
 
-### `/projects/[slug]` page
+### `/projects/category` — Category index
 
-- Resolve data by slug using shared data helper.
-- Use `notFound()` if slug does not exist.
-- Implement `generateMetadata({ params })` using slug data (`createProjectDetailMetadata(project)`).
-- Implement `generateStaticParams()` from `getProjectSlugs()` if prerendering desired.
-- Provide `app/projects/[slug]/loading.tsx` skeletons matching detail layout.
-- Provide `app/projects/[slug]/error.tsx` boundary with `reset()` retry + safe fallback CTA.
+- Pure SSG (`○` static). No dynamic params.
+- Export static `metadata`.
+- Render 3 category cards linking to `/projects/category/[categorySlug]`.
+
+### `/projects/category/[categorySlug]` — Category list page
+
+- SSG via `generateStaticParams()` returning `getCategorySlugs()`.
+- `params` typed as `Promise<{ categorySlug: string }>` — always `await params`.
+- `generateMetadata({ params })` uses `getCategoryBySlug()` output.
+- Call `notFound()` if category not found.
+- Provide `loading.tsx` + `error.tsx` + `not-found.tsx`.
+
+### `/projects/category/[categorySlug]/[projectSlug]` — Project detail
+
+- SSG via flat-pairs `generateStaticParams()` on the **child only**:
+
+```ts
+export async function generateStaticParams() {
+  return getCategorySlugs().flatMap((categorySlug) =>
+    getProjectSlugsByCategory(categorySlug).map((projectSlug) => ({
+      categorySlug,
+      projectSlug,
+    })),
+  );
+}
+export const dynamicParams = false;
+```
+
+- `params` typed as `Promise<{ categorySlug: string; projectSlug: string }>`.
+- Resolve `category` first, then `project` — each gets its own `notFound()` guard.
+- `generateMetadata()` reuses `createProjectDetailMetadata(project)`.
+- Provide `loading.tsx` + `error.tsx` + `not-found.tsx`.
 
 ### Metadata quality bar
 
-- Title + description specific to each project.
-- Canonical URL `/projects/[slug]`.
+- Title + description specific to each route segment.
+- Canonical URL uses full nested path `/projects/category/[categorySlug]/[projectSlug]`.
 - OpenGraph title/description/url aligned with project data.
 
 ---
 
 ## UI Requirements
 
-### A) Professional grid layout
+### A) Category filter chips (hero)
+
+- Category chips are data-driven from `projectCategories`.
+- "All" chip always first.
+- Active chip highlighted with `text-electric-cyan` + border.
+- Chips are `<Link>` components pointing to `?category=` or category route.
+- Props: `{ categories: ProjectCategory[], activeCategory: ProjectCategorySlug }`.
+
+### B) Professional grid layout
 
 - Balanced top-level spacing and enterprise visual rhythm.
 - Use shared card primitives consistently.
 
-### B) Full-featured project card
+### C) Full-featured project card
 
-- Image, status badge, sector, description, KPI chips, progress bar, CTA.
+- Image, status badge, category chip, sector, description, KPI chips, progress bar, tags, CTA.
 
-### C) Small bento grid
+### D) Small bento grid
 
 - 4–6 compact data-driven tiles with controlled visual hierarchy.
 
-### D) Optimistic project list
+### E) Optimistic project list
 
-- Client island only.
+- Client island only (`"use client"`).
 - Optimistic updates with pending state + rollback on failure.
 - Wire actions through Server Actions (`lib/actions/projects.ts`).
 
+### F) Breadcrumb on nested routes
+
+- Projects → Categories → [Category label] → [Project title]
+- Each segment is a `<Link>` except the last (current).
+
 ---
 
-## v0 Prompt (copy/paste)
+## v0 Prompt (copy/paste into v0.dev)
 
-Use this exact prompt in v0:
+> **NOTE:** This prompt assumes the scaffold is already in place. Use it to layer creative animated design on top — do NOT rebuild from scratch. All types, data, routes, and components described below already exist.
 
-Build a new Projects feature for an existing Next.js App Router production codebase.
+---
 
-Hard constraints:
+```
+I have an existing Next.js 16 App Router codebase (electrical-website) with a fully scaffolded /projects section. I need you to design a highly creative, visually stunning, animated UI layer on top of the existing scaffold — without changing any route structure, data contracts, or TypeScript types.
 
-- SSR-first only. `app/projects/page.tsx` and `app/projects/[slug]/page.tsx` must be Server Components.
-- Add slug detail route at `app/projects/[slug]/page.tsx`.
-- Add route-level loading and error files:
-  - `app/projects/loading.tsx`
-  - `app/projects/error.tsx`
-  - `app/projects/[slug]/loading.tsx`
-  - `app/projects/[slug]/error.tsx`
-- Implement metadata best practices:
-  - list page metadata
-  - `generateMetadata()` for slug page
-  - canonical + OpenGraph URLs using slug
-- Keep implementation purely data-driven: no hardcoded project card content in JSX.
-- Build shared reusable project components and use them across list/detail pages.
-- Use client components only for optimistic interactions and animations.
+The scaffold already includes:
+- app/projects/page.tsx — SSR list page with ?category= filter via searchParams
+- app/projects/category/page.tsx — static categories index
+- app/projects/category/[categorySlug]/page.tsx — per-category list (SSG)
+- app/projects/category/[categorySlug]/[projectSlug]/page.tsx — project detail (SSG)
+- All loading.tsx, error.tsx, not-found.tsx files for each segment
+- types/projects.ts — ProjectCategorySlug, ProjectCategory, Project, ProjectListItem
+- data/projects/index.ts — allProjects (4 projects), projectCategories (3 categories), all helper functions
+- components/projects/ — ProjectCardShell, ProjectStatusBadge, ProjectMetaRow, ProjectsHero, ProjectsFeaturedCard, ProjectsBentoGrid, ProjectsOptimisticList
 
-Create these files/components:
+DO NOT change:
+- Route structure or page.tsx composition logic
+- TypeScript types (types/projects.ts)
+- Data helpers (data/projects/index.ts)
+- SSR/SSG patterns — params must remain Promise<{...}> and awaited
+- Server Action wiring in lib/actions/projects.ts
 
-- `app/projects/page.tsx`
-- `app/projects/loading.tsx`
-- `app/projects/error.tsx` (must be `"use client"` for reset handler)
-- `app/projects/[slug]/page.tsx`
-- `app/projects/[slug]/loading.tsx`
-- `app/projects/[slug]/error.tsx` (must be `"use client"` for reset handler)
-- `components/projects/projects-hero.tsx`
-- `components/projects/projects-featured-card.tsx`
-- `components/projects/projects-bento-grid.tsx`
-- `components/projects/projects-optimistic-list.tsx` (client)
-- shared primitives: `project-card-shell.tsx`, `project-meta-row.tsx`, `project-status-badge.tsx`
-- `types/projects.ts`
-- `data/projects/index.ts`
-- metadata helper for projects (`lib/metadata-projects.ts`)
-- server actions for optimistic list (`lib/actions/projects.ts`)
+DO redesign with highly creative animated visual design:
+1. ProjectsHero — dark glassmorphism hero with animated electric grid background, scanline effect, category chips with glowing active state, stagger-in reveal
+2. ProjectsFeaturedCard — large dark card with parallax cover image, glowing cyan border on hover, KPI chips that count up on mount, animated progress bar fill on scroll, holographic gradient badge
+3. ProjectsBentoGrid — dark bento tiles with animated number counters, electric cyan accent, subtle hover lift effect
+4. ProjectsOptimisticList — dark list rows with status indicator dots (animated pulse for in-progress), quick slide-in optimistic animation, row hover scanline
+5. Category list page ([categorySlug]/page.tsx) — project cards with hover reveal, staggered grid entry
+6. Project detail page ([projectSlug]/page.tsx) — full-width parallax cover, sticky breadcrumb, KPI grid with count-up, animated tags, related projects carousel
 
-UI requirements:
+Design system:
+- Dark default theme (bg: hsl(var(--background)) = ~#0a0a0a)
+- Primary accent: var(--electric-cyan) = #00e5ff
+- Warning: var(--amber-warning)
+- Font: Inter for body, IBM Plex Mono for labels/badges (var(--font-ibm-plex-mono))
+- Tailwind v4 + Framer Motion 12 for all animations
+- No new color tokens — use existing CSS custom properties only
 
-- Professional project grid layout
-- One full-featured project card
-- Small bento grid (4–6 tiles)
-- Optimistic project list with pending + rollback
-- Skeleton loading states for both list and slug routes
-- Error boundaries for both list and slug routes with clear recovery actions
-- Subtle Framer Motion animations only where useful
-- Tailwind + existing tokenized theme style; no new color system
-
-Output requirements:
-
-- Strong typing for all project data and props
-- Data-driven rendering for all project UI modules
-- Shared components reused across list/detail
-- Clean, production-ready folder structure
+Output:
+- Updated component files only (not route page.tsx files)
+- All animations use Framer Motion (not CSS keyframes)
+- Components remain purely presentational — all data props passed in from SSR pages
+- Strong TypeScript — no `any`, no loosely typed props
+```
 
 ---
 
 ## Acceptance Checklist
 
-- `/projects` is SSR and data-driven
-- `/projects/[slug]` exists and resolves by slug
-- `generateMetadata()` implemented on slug page
-- Metadata canonical/OG is slug-specific
-- List and slug routes each have `loading.tsx` skeleton states
-- List and slug routes each have `error.tsx` boundaries with retry
-- Featured card + bento + optimistic list all implemented
-- Optimistic list has pending and rollback states
-- Shared project components are reused (not duplicated)
-- No page-level `"use client"` on SSR routes
+- `/projects` is SSR and data-driven, filters by `?category=`
+- `/projects/category` is static, renders 3 category cards
+- `/projects/category/[categorySlug]` is SSG, renders projects in that category
+- `/projects/category/[categorySlug]/[projectSlug]` is SSG, renders full project detail
+- Legacy `/projects/[slug]` still resolves (backward compatibility)
+- `generateMetadata()` implemented on all dynamic routes
+- All `params` typed as `Promise<{...}>` and awaited
+- `dynamicParams = false` set on `[projectSlug]` page
+- `generateStaticParams()` uses flat-pairs approach on child segment
+- Category chips are data-driven from `projectCategories`
+- Breadcrumbs on category list and project detail pages
+- Each route segment has `loading.tsx`, `error.tsx`, and `not-found.tsx`
+- All 4 projects use real available images from `/public/images/`
+- No page-level `"use client"` on SSR/SSG routes
+- Typecheck (`tsc --noEmit`) passes clean
+- Production build passes clean (`pnpm run build`)

@@ -44,6 +44,20 @@ const navLinks = [
       { name: "Emergency Response", href: "/services/emergency" },
     ],
   },
+  {
+    name: "Projects",
+    href: "/projects",
+    submenu: [
+      { name: "All Projects", href: "/projects" },
+      { name: "Browse Categories", href: "/projects/category" },
+      { name: "Residential", href: "/projects/category/residential" },
+      {
+        name: "Commercial Lighting",
+        href: "/projects/category/commercial-lighting",
+      },
+      { name: "Power Boards", href: "/projects/category/power-boards" },
+    ],
+  },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -147,6 +161,12 @@ export function NavbarClient() {
     if (targetPath === "/services") {
       return (
         currentPath === "/services" || currentPath.startsWith("/services/")
+      );
+    }
+
+    if (targetPath === "/projects") {
+      return (
+        currentPath === "/projects" || currentPath.startsWith("/projects/")
       );
     }
 
