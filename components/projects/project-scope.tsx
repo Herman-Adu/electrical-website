@@ -12,7 +12,6 @@ import {
   CheckCircle,
   Award,
 } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectScope } from "@/types/projects";
 
 const iconMap = {
@@ -38,13 +37,11 @@ export function ProjectScopeGrid({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   if (items.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
-      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
+    <section className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div
