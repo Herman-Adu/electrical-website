@@ -137,7 +137,7 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-lg text-muted-foreground max-w-3xl leading-relaxed"
+            className="text-lg text-muted-foreground leading-relaxed"
           >
             {leadParagraph}
           </motion.p>
@@ -150,7 +150,7 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl"
+            className="grid md:grid-cols-2 gap-8 mb-20"
           >
             {bodyParagraphs.map((para, idx) => (
               <p key={idx} className="text-muted-foreground leading-relaxed">
