@@ -7,6 +7,18 @@
 - **Deployment:** Vercel (production), Docker Desktop (local development)
 - **MCP Gateway:** Docker MCP gateway with 16 enabled servers
 
+## Next.js Documentation Resolution
+
+Before changing Next.js behavior, resolve docs in this order:
+
+1. `node_modules/next/dist/docs/`
+2. `node_modules/next/docs/`
+3. `node_modules/next/README.md`
+
+Use `pnpm run status:next-docs` to detect available local docs paths.
+If local packaged docs are missing, use Context7/library documentation tooling before implementation.
+Use sequential reasoning for complex, multi-step, or ambiguous decisions.
+
 ## Agent Skill System
 
 This repository has a production-grade agent skill system in `agent/`. Before writing automation or agentic code, understand the system:

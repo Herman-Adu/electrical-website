@@ -2,8 +2,15 @@
 
 # Next.js: ALWAYS read docs before coding
 
-Before any Next.js work, find and read the relevant doc in `node_modules/next/dist/docs/`.
-Your training data is outdated — the bundled docs are the source of truth.
+Before any Next.js work, resolve local docs in this order:
+
+1. `node_modules/next/dist/docs/` (preferred when present)
+2. `node_modules/next/docs/`
+3. `node_modules/next/README.md` (minimum local fallback)
+
+Run `pnpm run status:next-docs` to discover which source exists in this workspace.
+If packaged docs are unavailable locally, use a docs lookup source (Context7/library docs tooling) before coding.
+For multi-step ambiguity, use sequential reasoning before implementation.
 
 <!-- END:nextjs-agent-rules -->
 
