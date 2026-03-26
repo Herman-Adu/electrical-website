@@ -31,3 +31,10 @@ Uses **sequentialthinking** for chain-of-thought reasoning and **memory** for pe
 - Chain confidence levels: `high` = well-supported; `medium` = reasonable; `low` = speculative.
 - When confidence is `low`, explicitly flag this to the user and suggest follow-up.
 - Never fabricate context facts — use only verified information from the workspace.
+
+## Secret Safety (Non-Negotiable)
+
+- Never print, echo, summarize, or quote secret values from `.env*`, terminal output, logs, screenshots, or tool results.
+- Always mask sensitive tokens in all outputs (for example: `re_***`, `gQAA***`).
+- Use secret variable names only (for example: `RESEND_API_KEY`) when discussing configuration.
+- If credentials are exposed during a session, recommend immediate credential rotation before continuing.

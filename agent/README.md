@@ -94,6 +94,14 @@ The `HeuristicEngine` records every skill execution outcome and adjusts future r
 - `skill-sync-check.yml` — Validates every registered skill has a matching SKILL.md (runs on skill file changes)
 - `agent-audit.yml` — Daily audit report + typecheck (runs at 06:00 UTC)
 
+## Secret Handling (Non-Negotiable)
+
+- Never print, echo, summarize, or quote real secret values from `.env*`, terminal output, logs, screenshots, or tool results.
+- If a secret appears in context, mask it in all outputs (for example: `re_***`, `gQAA***`).
+- Never commit `.env`, `.env.local`, or any secret-bearing file. Only `.env.example` may contain placeholders.
+- During debugging, reference secret variable names only (for example: `RESEND_API_KEY`) and never their values.
+- If credentials are exposed during a session, treat them as compromised and recommend immediate rotation.
+
 ## Adding a New Skill
 
 See `.github/copilot-instructions.md` → "When Adding a New Skill".

@@ -37,3 +37,10 @@ A **meta-skill** — uses the internal HealthMonitor, not an external MCP server
 - Include latency in milliseconds — values > 2000ms indicate a slow server.
 - If all servers are unavailable, advise checking Docker Desktop is running.
 - Circuit resets automatically after the `recoveryWindowMs` window (default: 30s).
+
+## Secret Safety (Non-Negotiable)
+
+- Never print, echo, summarize, or quote secret values from `.env*`, terminal output, logs, screenshots, or tool results.
+- Always mask sensitive tokens in all outputs (for example: `re_***`, `gQAA***`).
+- Use secret variable names only (for example: `RESEND_API_KEY`) when discussing configuration.
+- If credentials are exposed during a session, recommend immediate credential rotation before continuing.

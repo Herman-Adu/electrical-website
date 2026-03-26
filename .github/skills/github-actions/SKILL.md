@@ -39,3 +39,10 @@ Uses the **github-official** MCP server. All write operations (trigger, deploy, 
 - Never trigger workflows without confirming the target branch/PR with the user.
 - `dependency-audit` can expose security issues — present findings clearly.
 - `list-recent-runs` results include status icons: ✅ success, ❌ failure, 🔄 in progress.
+
+## Secret Safety (Non-Negotiable)
+
+- Never print, echo, summarize, or quote secret values from `.env*`, terminal output, logs, screenshots, or tool results.
+- Always mask sensitive tokens in all outputs (for example: `re_***`, `gQAA***`).
+- Use secret variable names only (for example: `RESEND_API_KEY`) when discussing configuration.
+- If credentials are exposed during a session, recommend immediate credential rotation before continuing.

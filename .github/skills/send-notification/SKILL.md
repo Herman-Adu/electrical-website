@@ -29,3 +29,10 @@ Uses the **resend** MCP server. This is a **destructive skill** — it sends rea
 - Subject lines should be clear and actionable — maximum 60 characters.
 - HTML bodies must be valid — avoid inline `<script>` tags.
 - `scheduledAt` uses natural language via Resend (e.g. "tomorrow at 10am").
+
+## Secret Safety (Non-Negotiable)
+
+- Never print, echo, summarize, or quote secret values from `.env*`, terminal output, logs, screenshots, or tool results.
+- Always mask sensitive tokens in all outputs (for example: `re_***`, `gQAA***`).
+- Use secret variable names only (for example: `RESEND_API_KEY`) when discussing configuration.
+- If credentials are exposed during a session, recommend immediate credential rotation before continuing.
