@@ -15,7 +15,7 @@ export default function ProjectCategoriesPage() {
       {/* Categories grid */}
       <section
         id="categories-grid"
-        className="section-container section-safe-bottom bg-background"
+        className="section-standard bg-background"
       >
         <div className="section-content max-w-5xl">
           {/* Section header */}

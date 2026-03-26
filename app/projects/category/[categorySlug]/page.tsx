@@ -59,7 +59,7 @@ export default async function CategoryProjectsPage({
       {/* Projects Section */}
       <section
         id="category-projects"
-        className="section-container section-safe-bottom bg-background"
+        className="section-standard bg-background"
       >
         <div className="section-content max-w-5xl">
           {/* Section Header */}

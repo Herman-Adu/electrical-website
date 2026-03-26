@@ -140,57 +140,91 @@ export default async function CategoryProjectDetailPage({
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
 
       {/* KPI Grid */}
-      <section className="py-12 bg-background">
+      <section className="section-standard bg-background">
         <div className="section-content max-w-6xl">
           <ProjectKpiGrid kpis={project.kpis} />
         </div>
       </section>
 
       {/* Project-Specific Intro Section */}
-      {detail?.intro && <ProjectDetailIntro data={detail.intro} />}
+      {detail?.intro && (
+        <section className="section-standard bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectDetailIntro data={detail.intro} />
+          </div>
+        </section>
+      )}
 
       {/* Scope of Work */}
       {detail?.scope && detail.scope.length > 0 && (
-        <ProjectScopeGrid items={detail.scope} />
+        <section className="section-standard bg-card/50">
+          <div className="section-content max-w-6xl">
+            <ProjectScopeGrid items={detail.scope} />
+          </div>
+        </section>
       )}
 
       {/* Challenge & Solution */}
       {detail?.challenge && detail?.solution && (
-        <ProjectChallengeSolution
-          challenge={detail.challenge}
-          solution={detail.solution}
-        />
+        <section className="section-standard bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectChallengeSolution
+              challenge={detail.challenge}
+              solution={detail.solution}
+            />
+          </div>
+        </section>
       )}
 
       {/* Project Timeline */}
       {detail?.timeline && detail.timeline.length > 0 && (
-        <ProjectTimeline phases={detail.timeline} />
+        <section className="section-standard bg-card/50">
+          <div className="section-content max-w-6xl">
+            <ProjectTimeline phases={detail.timeline} />
+          </div>
+        </section>
       )}
 
       {/* Project Gallery */}
       {detail?.gallery && detail.gallery.length > 0 && (
-        <ProjectGallery images={detail.gallery} />
+        <section className="section-standard bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectGallery images={detail.gallery} />
+          </div>
+        </section>
       )}
 
       {/* Client Testimonial */}
       {detail?.testimonial && (
-        <ProjectTestimonialCard testimonial={detail.testimonial} />
+        <section className="section-standard bg-card/50">
+          <div className="section-content max-w-6xl">
+            <ProjectTestimonialCard testimonial={detail.testimonial} />
+          </div>
+        </section>
       )}
 
       {/* Related Projects Carousel */}
       {relatedProjects.length > 0 && (
-        <ProjectRelatedCarousel
-          projects={relatedProjects}
-          categorySlug={categorySlug}
-          heading={`More ${category.label} Projects`}
-        />
+        <section className="section-standard bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectRelatedCarousel
+              projects={relatedProjects}
+              categorySlug={categorySlug}
+              heading={`More ${category.label} Projects`}
+            />
+          </div>
+        </section>
       )}
 
       {/* Social Links & CTA */}
-      <ProjectSocialCTA
-        projectTitle={project.title}
-        categorySlug={categorySlug}
-      />
+      <section className="section-standard bg-card/50">
+        <div className="section-content max-w-6xl">
+          <ProjectSocialCTA
+            projectTitle={project.title}
+            categorySlug={categorySlug}
+          />
+        </div>
+      </section>
 
       <Footer />
     </main>
