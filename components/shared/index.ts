@@ -7,3 +7,4 @@ export { SectionValues } from './section-values';
 export { SectionCTA } from './section-cta';
 export { SectionIntro } from './section-intro';
 export { getIcon, iconMap } from './icon-map';
+export { SectionDivider } from './section-divider';
