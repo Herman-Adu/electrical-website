@@ -89,7 +89,6 @@ const kpiConfig: Record<
 function KpiTile({
   label,
   value,
-  icon: Icon,
   index,
   isInView,
 }: {
@@ -114,27 +113,22 @@ function KpiTile({
       variants={shouldReduce ? {} : tileVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="group relative rounded-lg border-t-2 border-electric-cyan bg-card/60 backdrop-blur-sm p-5 transition-all duration-300 hover:bg-card/80"
+      className="flex flex-col items-center gap-1 px-4 py-3 rounded-lg border border-white/10 bg-black/30 backdrop-blur-sm"
     >
-      {/* Icon */}
-      <div className="mb-3 inline-flex items-center justify-center w-8 h-8 rounded-md border border-electric-cyan/20 bg-electric-cyan/5 transition-all duration-300 group-hover:border-electric-cyan/40">
-        <Icon className="h-4 w-4 text-electric-cyan/70 transition-colors duration-300 group-hover:text-electric-cyan" />
-      </div>
-
-      {/* Label */}
-      <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground mb-2">
-        {label}
-      </p>
-
       {/* Value */}
       <motion.p
-        className="text-xl sm:text-2xl font-black text-foreground tracking-tight"
+        className="text-lg sm:text-2xl font-black text-electric-cyan tracking-tight"
         initial={shouldReduce ? {} : { opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.6, duration: 0.3 }}
+        transition={{ delay: 0.4 + index * 0.1, duration: 0.3 }}
       >
         {displayValue}
       </motion.p>
+
+      {/* Label */}
+      <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/60">
+        {label}
+      </p>
     </motion.div>
   );
 }
