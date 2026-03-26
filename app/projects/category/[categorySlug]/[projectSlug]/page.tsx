@@ -10,12 +10,14 @@ import {
   allProjects,
 } from "@/data/projects";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
+import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectCardShell,
   ProjectMetaRow,
   ProjectStatusBadge,
 } from "@/components/projects";
 import { Footer } from "@/components/sections/footer";
+import { siteConfig } from "@/lib/site-config";
 
 /**
  * Generate all [categorySlug] + [projectSlug] pairs at build time.
@@ -88,8 +90,45 @@ export default async function CategoryProjectDetailPage({
     .filter((p) => p.slug !== project.slug && p.category === categorySlug)
     .slice(0, 3);
 
+  // Build breadcrumb for JSON-LD
+  const breadcrumbItems = [
+    { name: "Home", url: siteConfig.getUrl(siteConfig.routes.home) },
+    { name: "Projects", url: siteConfig.getUrl(siteConfig.routes.projects) },
+    {
+      name: "Categories",
+      url: siteConfig.getUrl(siteConfig.routes.projectsCategory),
+    },
+    {
+      name: category.label,
+      url: siteConfig.getUrl(
+        `${siteConfig.routes.projectsCategory}/${categorySlug}`,
+      ),
+    },
+    {
+      name: project.title,
+      url: siteConfig.getUrl(
+        `/projects/category/${categorySlug}/${projectSlug}`,
+      ),
+    },
+  ];
+
+  const articleSchema = getArticleSchema(project);
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
+
   return (
     <main className="relative">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       <section className="section-container section-safe-top section-safe-bottom bg-background">
         <div className="section-content max-w-6xl">
           {/* Breadcrumb */}

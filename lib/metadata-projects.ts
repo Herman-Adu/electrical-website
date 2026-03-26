@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createStandardPageMetadata } from "@/lib/metadata";
 import type { Project, ProjectCategory } from "@/types/projects";
+import { SITE_URL } from "@/lib/site-config";
 
 export function createProjectsListMetadata(): Metadata {
   return createStandardPageMetadata({
@@ -46,6 +47,9 @@ export function createProjectDetailMetadata(
   const title = `${project.title} | Projects | Nexgen Electrical Innovations`;
   const description = `${project.description} Sector: ${project.clientSector}. Location: ${project.kpis.location}.`;
 
+  // Generate OG image URL with query parameters
+  const ogImageUrl = `${SITE_URL}/api/og?title=${encodeURIComponent(project.title)}&category=${encodeURIComponent(project.categoryLabel)}&location=${encodeURIComponent(project.kpis.location)}`;
+
   return createStandardPageMetadata({
     title,
     description,
@@ -53,5 +57,6 @@ export function createProjectDetailMetadata(
     openGraphTitle: title,
     openGraphDescription: description,
     keywords: [...project.tags, project.clientSector, "electrical project"],
+    ogImage: ogImageUrl,
   });
 }
