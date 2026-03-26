@@ -10,18 +10,22 @@ import {
   allProjects,
 } from "@/data/projects";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
+import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectCardShell,
   ProjectMetaRow,
   ProjectStatusBadge,
 } from "@/components/projects";
 import { Footer } from "@/components/sections/footer";
+import { siteConfig } from "@/lib/site-config";
 
 /**
  * Generate all [categorySlug] + [projectSlug] pairs at build time.
  * Using the flat approach: child generates full pairs in one call.
  */
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<
+  { categorySlug: string; projectSlug: string }[]
+> {
   const pairs: { categorySlug: string; projectSlug: string }[] = [];
 
   for (const categorySlug of getCategorySlugs()) {
@@ -35,13 +39,26 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
+type CategoryProjectParams = Awaited<
+  ReturnType<typeof generateStaticParams>
+>[number];
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ categorySlug: string; projectSlug: string }>;
+  params: Promise<CategoryProjectParams>;
 }): Promise<Metadata> {
   const { categorySlug, projectSlug } = await params;
-  const project = getProjectByCategoryAndSlug(categorySlug, projectSlug);
+  const category = getCategoryBySlug(categorySlug);
+
+  if (!category) {
+    return {
+      title: "Category Not Found | Nexgen Electrical Innovations",
+      description: "The requested project category could not be found.",
+    };
+  }
+
+  const project = getProjectByCategoryAndSlug(category.slug, projectSlug);
 
   if (!project) {
     return {
@@ -50,28 +67,68 @@ export async function generateMetadata({
     };
   }
 
-  return createProjectDetailMetadata(project);
+  return createProjectDetailMetadata(
+    project,
+    `/projects/category/${categorySlug}/${projectSlug}`,
+  );
 }
 
 export default async function CategoryProjectDetailPage({
   params,
 }: {
-  params: Promise<{ categorySlug: string; projectSlug: string }>;
+  params: Promise<CategoryProjectParams>;
 }) {
   const { categorySlug, projectSlug } = await params;
 
   const category = getCategoryBySlug(categorySlug);
   if (!category) notFound();
 
-  const project = getProjectByCategoryAndSlug(categorySlug, projectSlug);
+  const project = getProjectByCategoryAndSlug(category.slug, projectSlug);
   if (!project) notFound();
 
   const relatedProjects = allProjects
     .filter((p) => p.slug !== project.slug && p.category === categorySlug)
     .slice(0, 3);
 
+  // Build breadcrumb for JSON-LD
+  const breadcrumbItems = [
+    { name: "Home", url: siteConfig.getUrl(siteConfig.routes.home) },
+    { name: "Projects", url: siteConfig.getUrl(siteConfig.routes.projects) },
+    {
+      name: "Categories",
+      url: siteConfig.getUrl(siteConfig.routes.projectsCategory),
+    },
+    {
+      name: category.label,
+      url: siteConfig.getUrl(
+        `${siteConfig.routes.projectsCategory}/${categorySlug}`,
+      ),
+    },
+    {
+      name: project.title,
+      url: siteConfig.getUrl(
+        `/projects/category/${categorySlug}/${projectSlug}`,
+      ),
+    },
+  ];
+
+  const articleSchema = getArticleSchema(project);
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
+
   return (
     <main className="relative">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       <section className="section-container section-safe-top section-safe-bottom bg-background">
         <div className="section-content max-w-6xl">
           {/* Breadcrumb */}

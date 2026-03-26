@@ -3,7 +3,7 @@ import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
-import { env } from "@/app/env";
+import { SITE_URL, siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,22 +19,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "Nexgen Electrical Innovations | Powering the Future",
-  description:
-    "Expert electrical engineering and installations for commercial and industrial frontiers. High-voltage solutions delivered with precision.",
-  generator: "v0.app",
-  keywords: [
-    "electrical engineering",
-    "industrial installations",
-    "commercial electrical",
-    "power systems",
-    "electrical innovations",
-  ],
-  authors: [{ name: "Nexgen Electrical Innovations" }],
+  metadataBase: new URL(SITE_URL),
+  title: `${siteConfig.org.name} | ${siteConfig.org.tagline}`,
+  description: siteConfig.org.description,
+  generator: "Next.js 16",
+  keywords: siteConfig.metadata.keywords,
+  authors: [{ name: siteConfig.metadata.author }],
   icons: {
     icon: [
       {
@@ -55,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: siteConfig.metadata.themeColor,
   width: "device-width",
   initialScale: 1,
 };

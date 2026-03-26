@@ -13,6 +13,19 @@ function getResendClient() {
   return new Resend(env.RESEND_API_KEY);
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function sanitizeHeaderValue(value: string): string {
+  return value.replace(/[\r\n\u0000-\u001F\u007F]+/g, " ").trim();
+}
+
 export interface ContactEmailData {
   name: string;
   email: string;
@@ -33,10 +46,14 @@ export async function sendUserConfirmation(
   try {
     const resend = getResendClient();
 
+    const safeReferenceCode = sanitizeHeaderValue(referenceCode);
+
     const result = await resend.emails.send({
       from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
       to,
-      subject: `Your Inquiry Received - Reference ${referenceCode}`,
+      subject: sanitizeHeaderValue(
+        `Your Inquiry Received - Reference ${safeReferenceCode}`,
+      ),
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">
@@ -98,35 +115,45 @@ export async function sendAdminNotification(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     const resend = getResendClient();
+    const safeReferenceCode = escapeHtml(data.referenceCode);
+    const safeName = escapeHtml(data.name);
+    const safeEmail = escapeHtml(data.email);
+    const safeCompany = escapeHtml(data.company || "Not provided");
+    const safeProjectType = escapeHtml(data.projectType);
+    const safeMessage = escapeHtml(data.message);
+    const safeIpAddress = data.ipAddress ? escapeHtml(data.ipAddress) : "";
+    const replyToHref = `mailto:${encodeURIComponent(data.email)}`;
 
     const result = await resend.emails.send({
       from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
       to: env.CONTACT_ADMIN_EMAIL,
-      subject: `New Contact Inquiry - ${data.projectType} - REF: ${data.referenceCode}`,
+      subject: sanitizeHeaderValue(
+        `New Contact Inquiry - ${safeProjectType} - REF: ${safeReferenceCode}`,
+      ),
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">
             <div style="background-color: #f5f5f5; padding: 20px; border-left: 4px solid #00f2ff; margin-bottom: 20px;">
               <h2 style="margin-top: 0; color: #222;">New Contact Inquiry</h2>
-              <p style="margin: 0; font-size: 12px; color: #999;">Reference: <strong>${data.referenceCode}</strong></p>
+              <p style="margin: 0; font-size: 12px; color: #999;">Reference: <strong>${safeReferenceCode}</strong></p>
             </div>
 
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
               <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px 0; font-weight: bold; width: 30%; color: #666;">Name</td>
-                <td style="padding: 10px 0;">${data.name}</td>
+                <td style="padding: 10px 0;">${safeName}</td>
               </tr>
               <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Email</td>
-                <td style="padding: 10px 0;"><a href="mailto:${data.email}">${data.email}</a></td>
+                <td style="padding: 10px 0;"><a href="${replyToHref}">${safeEmail}</a></td>
               </tr>
               <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Company</td>
-                <td style="padding: 10px 0;">${data.company || "Not provided"}</td>
+                <td style="padding: 10px 0;">${safeCompany}</td>
               </tr>
               <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Project Type</td>
-                <td style="padding: 10px 0;"><strong style="color: #00f2ff;">${data.projectType}</strong></td>
+                <td style="padding: 10px 0;"><strong style="color: #00f2ff;">${safeProjectType}</strong></td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Submitted</td>
@@ -136,18 +163,18 @@ export async function sendAdminNotification(
 
             <h3 style="color: #222; margin-top: 20px;">Project Details</h3>
             <div style="background-color: #fafafa; padding: 15px; border: 1px solid #eee; white-space: pre-wrap; word-break: break-word;">
-${data.message}
+${safeMessage}
             </div>
 
             ${
               data.ipAddress
-                ? `<p style="margin-top: 20px; font-size: 12px; color: #999;">IP Address: ${data.ipAddress}</p>`
+                ? `<p style="margin-top: 20px; font-size: 12px; color: #999;">IP Address: ${safeIpAddress}</p>`
                 : ""
             }
 
             <div style="border-top: 1px solid #eee; margin-top: 40px; padding-top: 20px;">
-              <a href="mailto:${data.email}" style="display: inline-block; background-color: #00f2ff; color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold;">
-                Reply to ${data.name}
+              <a href="${replyToHref}" style="display: inline-block; background-color: #00f2ff; color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold;">
+                Reply to ${safeName}
               </a>
             </div>
           </div>

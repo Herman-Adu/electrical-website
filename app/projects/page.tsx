@@ -21,10 +21,13 @@ export const metadata: Metadata = createProjectsListMetadata();
 export default async function ProjectsPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ category?: string }>;
+  searchParams?: Promise<{ category?: string | string[] }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const categoryParam = resolvedSearchParams?.category;
+  const categoryParamValue = resolvedSearchParams?.category;
+  const categoryParam = Array.isArray(categoryParamValue)
+    ? categoryParamValue[0]
+    : categoryParamValue;
 
   const activeCategory: ProjectCategorySlug =
     categoryParam && isProjectCategorySlug(categoryParam)

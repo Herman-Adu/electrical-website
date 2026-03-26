@@ -6,15 +6,20 @@ import {
   getCategorySlugs,
   getProjectsByCategory,
 } from "@/data/projects";
+import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import {
   ProjectCardShell,
   ProjectStatusBadge,
   ProjectMetaRow,
 } from "@/components/projects";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<
+  { categorySlug: string }[]
+> {
   return getCategorySlugs().map((categorySlug) => ({ categorySlug }));
 }
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -30,14 +35,7 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: `${category.label} Projects | Nexgen Electrical Innovations`,
-    description: category.description,
-    openGraph: {
-      title: `${category.label} Projects | Nexgen Electrical Innovations`,
-      description: category.description,
-    },
-  };
+  return createProjectCategoryMetadata(category);
 }
 
 export default async function CategoryProjectsPage({

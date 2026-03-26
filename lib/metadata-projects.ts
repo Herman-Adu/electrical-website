@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createStandardPageMetadata } from "@/lib/metadata";
-import type { Project } from "@/types/projects";
+import type { Project, ProjectCategory } from "@/types/projects";
+import { SITE_URL } from "@/lib/site-config";
 
 export function createProjectsListMetadata(): Metadata {
   return createStandardPageMetadata({
@@ -18,17 +19,44 @@ export function createProjectsListMetadata(): Metadata {
   });
 }
 
-export function createProjectDetailMetadata(project: Project): Metadata {
+export function createProjectCategoriesMetadata(): Metadata {
+  return createStandardPageMetadata({
+    title: "Project Categories | Nexgen Electrical Innovations",
+    description:
+      "Browse our electrical project portfolio by category — residential, commercial lighting, and power board infrastructure.",
+    path: "/projects/category",
+  });
+}
+
+export function createProjectCategoryMetadata(
+  category: ProjectCategory,
+): Metadata {
+  return createStandardPageMetadata({
+    title: `${category.label} Projects | Nexgen Electrical Innovations`,
+    description: category.description,
+    path: `/projects/category/${category.slug}`,
+    openGraphTitle: `${category.label} Projects | Nexgen Electrical Innovations`,
+    openGraphDescription: category.description,
+  });
+}
+
+export function createProjectDetailMetadata(
+  project: Project,
+  canonicalPath = `/projects/category/${project.category}/${project.slug}`,
+): Metadata {
   const title = `${project.title} | Projects | Nexgen Electrical Innovations`;
   const description = `${project.description} Sector: ${project.clientSector}. Location: ${project.kpis.location}.`;
-  const path = `/projects/${project.slug}`;
+
+  // Generate OG image URL with query parameters
+  const ogImageUrl = `${SITE_URL}/api/og?title=${encodeURIComponent(project.title)}&category=${encodeURIComponent(project.categoryLabel)}&location=${encodeURIComponent(project.kpis.location)}`;
 
   return createStandardPageMetadata({
     title,
     description,
-    path,
+    path: canonicalPath,
     openGraphTitle: title,
     openGraphDescription: description,
     keywords: [...project.tags, project.clientSector, "electrical project"],
+    ogImage: ogImageUrl,
   });
 }

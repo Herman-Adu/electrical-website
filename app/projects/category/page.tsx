@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { projectCategories } from "@/data/projects";
+import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 
-export const metadata: Metadata = {
-  title: "Project Categories | Nexgen Electrical Innovations",
-  description:
-    "Browse our electrical project portfolio by category — residential, commercial lighting, and power board infrastructure.",
-  openGraph: {
-    title: "Project Categories | Nexgen Electrical Innovations",
-    description:
-      "Explore Nexgen Electrical projects by sector: residential, commercial lighting, and power boards.",
-  },
-};
+export const metadata: Metadata = createProjectCategoriesMetadata();
 
 export default function ProjectCategoriesPage() {
   return (

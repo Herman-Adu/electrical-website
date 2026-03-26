@@ -64,7 +64,7 @@ console.log(productionAudit.optimise.data.optimiseReport?.summary);
 | `browser-testing`    | expensive | No      | playwright-mcp-server      | browser-agent           |
 | `github-actions`     | medium    | Yes     | github-official            | code-intelligence-agent |
 | `send-notification`  | cheap     | Yes     | resend                     | notification-agent      |
-| `reasoning-chain`    | expensive | No      | sequentialthinking, memory | reasoning-agent         |
+| `reasoning-chain`    | expensive | Yes     | sequentialthinking, memory | reasoning-agent         |
 | `health-check`       | cheap     | No      | (meta)                     | orchestrator            |
 | `nextjs-agent-setup` | cheap     | Yes     | (none)                     | devtools-agent ¹        |
 | `skill-builder`      | medium    | Yes     | memory                     | reasoning-agent         |

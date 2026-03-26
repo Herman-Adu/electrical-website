@@ -37,6 +37,16 @@ export interface RoutingDecision {
 export type RouterError =
   | { readonly kind: "no_eligible_skills"; intent: AgentIntent }
   | {
+      readonly kind: "input_validation_failed";
+      skillId: string;
+      issues: ReadonlyArray<{
+        path: ReadonlyArray<string>;
+        message: string;
+        code: string;
+      }>;
+    }
+  | { readonly kind: "dry_run_not_capable"; skillId: string }
+  | {
       readonly kind: "servers_unavailable";
       servers: ReadonlyArray<McpServerId>;
     }
@@ -48,9 +58,20 @@ export class RoutingError extends Error {
     super(
       detail.kind === "no_eligible_skills"
         ? `No eligible skills found for intent category "${detail.intent.category}"`
-        : detail.kind === "servers_unavailable"
-          ? `Required MCP servers unavailable: [${detail.servers.join(", ")}]`
-          : `No agent pool found for skill "${detail.skillId}"`,
+        : detail.kind === "input_validation_failed"
+          ? `Input validation failed for skill "${detail.skillId}": ${detail.issues
+              .slice(0, 3)
+              .map((issue) =>
+                issue.path.length > 0
+                  ? `${issue.path.join(".")}: ${issue.message}`
+                  : issue.message,
+              )
+              .join("; ")}`
+          : detail.kind === "dry_run_not_capable"
+            ? `Skill "${detail.skillId}" is not dry-run capable`
+            : detail.kind === "servers_unavailable"
+              ? `Required MCP servers unavailable: [${detail.servers.join(", ")}]`
+              : `No agent pool found for skill "${detail.skillId}"`,
     );
     this.name = "RoutingError";
     this.detail = detail;
@@ -131,7 +152,29 @@ export class ToolRouter {
 
     const selected = filtered[0] as ScoredSkill;
 
-    // Step 3: pre-flight health check
+    // Step 3: pre-dispatch input validation (typed parse)
+    const inputParse = selected.skill.inputSchema.safeParse(input);
+    if (!inputParse.success) {
+      throw new RoutingError({
+        kind: "input_validation_failed",
+        skillId: selected.skill.id,
+        issues: inputParse.error.issues.map((issue) => ({
+          path: issue.path.map(String),
+          message: issue.message,
+          code: issue.code,
+        })),
+      });
+    }
+    const parsedInput = inputParse.data;
+
+    if (intent.dryRun && !selected.skill.dryRunCapable) {
+      throw new RoutingError({
+        kind: "dry_run_not_capable",
+        skillId: selected.skill.id,
+      });
+    }
+
+    // Step 4: pre-flight health check
     const preFlightReport = await this.#health.preFlight(
       selected.skill.requiredServers,
     );
@@ -145,7 +188,7 @@ export class ToolRouter {
       });
     }
 
-    // Step 4: find agent pool
+    // Step 5: find agent pool
     const pool = this.#findPool(selected.skill);
     if (!pool) {
       throw new RoutingError({
@@ -154,14 +197,14 @@ export class ToolRouter {
       });
     }
 
-    // Step 5: dispatch
+    // Step 6: dispatch
     const result = await (pool as AgentPool).dispatch(
       selected.skill as SkillManifest,
       intent,
-      input,
+      parsedInput,
     );
 
-    // Step 6: record observation for self-learning
+    // Step 7: record observation for self-learning
     await this.#heuristics.recordObservation({
       skillId: selected.skill.id,
       outcome: "success",

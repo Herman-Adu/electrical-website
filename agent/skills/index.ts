@@ -1,8 +1,11 @@
 export { codeSearchSkill } from "./code-search.skill";
 export type { CodeSearchInput, CodeSearchOutput } from "./code-search.skill";
 
-export { browserTestSkill } from "./browser-test.skill";
-export type { BrowserTestInput, BrowserTestOutput } from "./browser-test.skill";
+export { browserTestSkill } from "./browser-testing.skill";
+export type {
+  BrowserTestInput,
+  BrowserTestOutput,
+} from "./browser-testing.skill";
 
 export { githubActionsSkill } from "./github-actions.skill";
 export type {
@@ -39,7 +42,7 @@ export type {
 
 import { skillRegistry } from "../registry";
 import { codeSearchSkill } from "./code-search.skill";
-import { browserTestSkill } from "./browser-test.skill";
+import { browserTestSkill } from "./browser-testing.skill";
 import { githubActionsSkill } from "./github-actions.skill";
 import { sendNotificationSkill } from "./send-notification.skill";
 import { reasoningChainSkill } from "./reasoning-chain.skill";

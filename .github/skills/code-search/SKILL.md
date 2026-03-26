@@ -1,11 +1,11 @@
 ---
-name: code-intelligence
-description: "Search the codebase for AST patterns, symbols, function usages, class references, or import chains using ast-grep. Optionally extends to remote GitHub code search. Use this when asked to find, locate, analyse, or trace code patterns, symbol usage, or structural patterns across the electrical-website repository."
+name: code-search
+description: "Search the codebase for AST patterns, symbols, function usages, class references, or import chains using ast-grep. Use this when asked to find, locate, analyse, or trace code patterns, symbol usage, or structural patterns across the electrical-website repository."
 ---
 
-# Code Intelligence Skill
+# Code Search Skill
 
-Uses the **ast-grep** MCP server to perform structural code search, and optionally **github-official** for remote repository search.
+Uses the **ast-grep** MCP server to perform structural code search.
 
 ## When to use
 
@@ -22,7 +22,6 @@ Uses the **ast-grep** MCP server to perform structural code search, and optional
 3. Identify the language if not obvious from context (`typescript`, `tsx`, etc.).
 4. Use the `code-search` skill via the orchestrator with the extracted pattern.
 5. Present matches grouped by file, with line numbers and surrounding context.
-6. If no matches found locally and the user mentions a remote repo, enable `searchRemote: true` with the `repo` field.
 
 ## Guidelines
 

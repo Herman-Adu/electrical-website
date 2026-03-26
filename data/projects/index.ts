@@ -139,9 +139,6 @@ export const allProjects: Project[] = [
   },
 ];
 
-export const featuredProject: Project =
-  allProjects.find((project) => project.isFeatured) ?? allProjects[0];
-
 export const projectBentoItems: ProjectBentoItem[] = [
   {
     id: "metric-1",
@@ -173,29 +170,26 @@ export const projectBentoItems: ProjectBentoItem[] = [
   },
 ];
 
-export const projectListItems: ProjectListItem[] = allProjects.map(
-  (project) => ({
-    id: project.id,
-    title: project.title,
-    slug: project.slug,
-    category: project.category,
-    categoryLabel: project.categoryLabel,
-    status: project.status,
-    isFeatured: project.isFeatured,
-    location: project.kpis.location,
-    updatedAt: project.updatedAt,
-  }),
-);
+const projectListItems: ProjectListItem[] = allProjects.map((project) => ({
+  id: project.id,
+  title: project.title,
+  slug: project.slug,
+  category: project.category,
+  categoryLabel: project.categoryLabel,
+  status: project.status,
+  isFeatured: project.isFeatured,
+  location: project.kpis.location,
+  updatedAt: project.updatedAt,
+}));
 
-export const projectsBySlug: Record<string, Project> = Object.fromEntries(
-  allProjects.map((project) => [project.slug, project]),
-);
+const projectsBySlug: Partial<Record<Project["slug"], Project>> =
+  Object.fromEntries(allProjects.map((project) => [project.slug, project]));
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projectsBySlug[slug];
 }
 
-export function getProjectSlugs(): string[] {
+export function getProjectSlugs(): Project["slug"][] {
   return allProjects.map((project) => project.slug);
 }
 
@@ -224,13 +218,13 @@ export function getCategoryBySlug(slug: string): ProjectCategory | undefined {
   return projectCategories.find((category) => category.slug === slug);
 }
 
-export function getCategorySlugs(): string[] {
+export function getCategorySlugs(): Exclude<ProjectCategorySlug, "all">[] {
   return projectCategories.map((category) => category.slug);
 }
 
 export function getProjectByCategoryAndSlug(
-  categorySlug: string,
-  projectSlug: string,
+  categorySlug: Exclude<ProjectCategorySlug, "all">,
+  projectSlug: Project["slug"],
 ): Project | undefined {
   return allProjects.find(
     (project) =>
@@ -238,7 +232,9 @@ export function getProjectByCategoryAndSlug(
   );
 }
 
-export function getProjectSlugsByCategory(categorySlug: string): string[] {
+export function getProjectSlugsByCategory(
+  categorySlug: Exclude<ProjectCategorySlug, "all">,
+): Project["slug"][] {
   return allProjects
     .filter((project) => project.category === categorySlug)
     .map((project) => project.slug);

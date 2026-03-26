@@ -71,7 +71,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href={`/projects/${project.slug}`}
+              href={`/projects/category/${project.category}/${project.slug}`}
               className="rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-electric-cyan transition-colors hover:bg-electric-cyan/20"
             >
               View Details

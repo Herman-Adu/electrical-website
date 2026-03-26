@@ -19,11 +19,11 @@ Resume prompt:
 
 ## Program Status
 
-- Branch objective: full branch remediation with architect-level discipline + Phase 9 deep optimization review
-- Current phase: Phase 9 - Deep Architectural Review & Optimization
-- Current batch: P9-B4.H tracker reconciliation + rate-limit enforcement fix (completed)
-- Overall status: Phase 8 complete (branch accepted); Phase 9 Wave 2 split implementation and P9-B3 Wave 3 hardening complete/validated; optional P9-B4 hygiene batches A+B+C+D+E+F+G completed and validated; P9-B4.H reconciliation finalized with validated `submitContactInquiry()` rate-limit enforcement; current app/component diagnostics remain clean and active Tailwind suggestions remain documentation-focused
-- Last updated: 2026-03-25
+- Branch objective: full branch remediation with architect-level discipline + Phase 9 deep optimization review + Phase 10 final polish 4-axis closure
+- Current phase: Phase 10 - Final Polish Review (4-axis closure)
+- Current batch: P10-B1 — 4-axis closure pass (completed)
+- Overall status: Phase 8 complete (branch accepted); Phase 9 complete (all waves + hygiene batches A–H validated); Phase 10 complete — all 4-axis findings closed (Architecture, Security, TypeScript/Quality, Skill-System); build/smoke/CSP validated; branch pushed
+- Last updated: 2026-03-26
 
 ## Previous Batch - P5-B4
 
@@ -990,6 +990,99 @@ Execution status (completed):
 - Transition gate: approved to proceed to Phase 6 planning and implementation
 
 ## Latest Validation Log
+
+### 2026-03-26 - P10-B1 4-Axis Closure Pass: Architecture, Security, TypeScript/Quality, Skill-System (checkpoint)
+
+Type of validation:
+
+- 4 SME sub-agents dispatched in parallel (Architecture, Security, TypeScript/Quality, Skill-System)
+- all findings triaged to minimal-safe patch set via sequential reasoning
+- implementation applied in 3 multi-replace batches + 1 file rename
+- full validation chain: `pnpm run build`, `pnpm dlx tsx spin-test-skills.ts`, Playwright e2e smoke, CSP header check
+
+Before state (baseline at start of this checkpoint):
+
+- branch `feature/final-polish-review`; 6 pre-existing unstaged files from prior session
+- `pnpm run build` passing; diagnostics clean except pre-existing Tailwind v4 suggestion hints in 2 project page files
+- No prior P10 work logged; all Phase 9 batches validated and closed
+
+Axis findings and implementation:
+
+**ARCHITECTURE**
+
+- `app/projects/category/[categorySlug]/[projectSlug]/page.tsx`
+  - removed merge-artifact duplicate bare `generateStaticParams` function head
+  - added `CategoryProjectParams` derived type alias; both `generateMetadata` and page component use it
+- `next-env.d.ts`
+  - corrected import path from `.next/dev/types/routes.d.ts` → `.next/types/routes.d.ts` (was drifted to dev-only path)
+- `lib/metadata-projects.ts`
+  - added `createProjectCategoriesMetadata()` and `createProjectCategoryMetadata(category)` helpers
+- `app/projects/category/page.tsx` and `app/projects/category/[categorySlug]/page.tsx`
+  - now use the new metadata helpers instead of inline metadata objects
+
+**SECURITY**
+
+- `app/env.ts`
+  - added `CONTACT_RATE_LIMIT_MODE: z.enum(["kv","memory","off"]).optional()` to server schema and runtimeEnv
+- `lib/rate-limit.ts`
+  - reads `env.CONTACT_RATE_LIMIT_MODE` (schema-validated; no raw `process.env`)
+  - production fail-closed: mode `off` in production throws instead of bypassing
+  - `normalizeClientKey` returns `string | null`; unknown IP returns `null` in production (reject) and `"dev-unknown-client"` in dev
+- `proxy.ts`
+  - `extractClientIp` now uses trusted-header priority list (`x-vercel-forwarded-for`, `cf-connecting-ip`, `x-real-ip`); only trusts `x-forwarded-for` when `x-vercel-id` is present (Vercel edge only)
+- `next.config.ts`
+  - CSP `script-src` extended with `https://va.vercel-scripts.com`
+  - CSP `connect-src` extended with `https://vitals.vercel-insights.com`
+- `lib/email.ts`
+  - added `sanitizeHeaderValue(value: string): string` (strips CR/LF and control chars)
+  - applied to both email subjects in `sendUserConfirmation` and `sendAdminNotification`
+
+**TYPESCRIPT/QUALITY**
+
+- `types/projects.ts`
+  - `Project.categoryLabel` and `ProjectListItem.categoryLabel` tightened from `string` to `ProjectCategory["label"]`
+- `data/projects/index.ts`
+  - `projectListItems` changed from `export const` to `const` (dead export; only used internally)
+
+**SKILL-SYSTEM**
+
+- `agent/skills/browser-test.skill.ts` → renamed to `agent/skills/browser-testing.skill.ts`
+  - aligns file name with skill ID `browser-testing` (SKILL.md name: frontmatter, `SKILLS.BROWSER_TEST` constant, parity CI check)
+- `agent/skills/index.ts`
+  - import and registration paths updated from `./browser-test.skill` to `./browser-testing.skill`
+- `agent/skills/reasoning-chain.skill.ts`
+  - `memoryKey` schema changed from `z.string().optional()` to `z.string().regex(/^agent:v1:reasoning:[a-zA-Z0-9:_-]+$/).optional()` (namespace enforcement)
+- `agent/router/tool-router.ts`
+  - added `{ readonly kind: "dry_run_not_capable"; skillId: string }` to `RouterError` union
+  - added matching case to `RoutingError` super() message chain
+  - added **pre-dispatch dry-run capability guard**: rejects before pool dispatch when `intent.dryRun && !selected.skill.dryRunCapable`
+- `spin-test-skills.ts` (new root-level file)
+  - re-export wrapper enabling `pnpm dlx tsx spin-test-skills.ts` from workspace root
+
+Validation gates (post-fix):
+
+- `get_errors` (17 changed files): ✓ pass — zero compile/type errors; only 7 pre-existing Tailwind v4 suggestion hints in 2 project page files (out of scope, not introduced by this batch)
+- `pnpm run build`: ✓ pass — Next.js 16.1.6; 24/24 static pages generated; all 4 category/project pairs SSG'd correctly; TypeScript clean
+- `pnpm dlx tsx spin-test-skills.ts`: ✓ pass — 10/10 skill paths healthy
+- Playwright e2e smoke: ✓ pass — 8/8 tests passed (Contact Form render/submit, rate-limit message, Command Palette, Dropdown Menu, Select, Navigation, Hero Section, Responsive layout)
+- `Invoke-WebRequest` CSP header: ✓ confirmed — `script-src` includes `va.vercel-scripts.com`; `connect-src` includes `vitals.vercel-insights.com`
+
+Commit:
+
+- `b9db08d` — `feat(p10-closure): 4-axis closure pass — routing fix, security hardening, type tightening, skill-system guards`
+- pushed to `origin/feature/final-polish-review`
+
+Residual (non-blocking, pre-existing, out of scope):
+
+- 7 Tailwind v4 suggestion hints across `app/projects/[slug]/page.tsx` and `app/projects/category/[categorySlug]/[projectSlug]/page.tsx` (e.g., `min-h-[280px]` → `min-h-70`, `bg-gradient-to-t` → `bg-linear-to-t`) — present before this batch; not introduced; deferred
+
+Outcome:
+
+- all 4-axis findings closed
+- branch clean, validated, and pushed
+- Phase 10 complete
+
+---
 
 ### 2026-03-25 - P9-B4.H Final Reconciliation, Rate-Limit Enforcement Fix, and WIP Classification (checkpoint)
 

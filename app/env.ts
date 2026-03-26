@@ -14,6 +14,7 @@ export const env = createEnv({
       .positive()
       .default(1),
     CONTACT_RATE_LIMIT: z.coerce.number().int().positive().default(3),
+    CONTACT_RATE_LIMIT_MODE: z.enum(["kv", "memory", "off"]).optional(),
     NEXT_IMAGE_UNOPTIMIZED: z
       .enum(["true", "false"])
       .optional()
@@ -34,6 +35,7 @@ export const env = createEnv({
     CONTACT_RATE_LIMIT_WINDOW_HOURS:
       process.env.CONTACT_RATE_LIMIT_WINDOW_HOURS,
     CONTACT_RATE_LIMIT: process.env.CONTACT_RATE_LIMIT,
+    CONTACT_RATE_LIMIT_MODE: process.env.CONTACT_RATE_LIMIT_MODE,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
     KV_REST_API_URL:
       process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
@@ -46,5 +48,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
   emptyStringAsUndefined: true,
-  skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
+  skipValidation:
+    process.env.NODE_ENV !== "production" &&
+    process.env.SKIP_ENV_VALIDATION === "true",
 });

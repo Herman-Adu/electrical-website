@@ -9,7 +9,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
-ARG SKIP_ENV_VALIDATION=true
+ARG SKIP_ENV_VALIDATION=false
 ENV SKIP_ENV_VALIDATION=$SKIP_ENV_VALIDATION
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

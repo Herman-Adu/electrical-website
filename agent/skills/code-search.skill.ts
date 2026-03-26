@@ -13,10 +13,6 @@ const InputSchema = z.object({
   pathGlob: z.string().optional(),
   /** Language hint for ast-grep (e.g. "typescript", "javascript") */
   language: z.string().optional(),
-  /** Whether to also search GitHub remote (requires github-official) */
-  searchRemote: z.boolean().default(false),
-  /** Repository to search on GitHub. Required if searchRemote = true. */
-  repo: z.string().optional(),
 });
 
 const OutputSchema = z.object({
@@ -65,7 +61,6 @@ export const codeSearchSkill: SkillManifest<CodeSearchInput, CodeSearchOutput> =
     version: "1.0.0",
     description:
       "Search the codebase for AST patterns or symbols using ast-grep. " +
-      "Optionally extends to remote GitHub search. " +
       "Use this when asked to find, locate, or analyse code patterns, function usages, or symbol references.",
     requiredServers: [MCP.AST_GREP],
     costTier: "cheap",

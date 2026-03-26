@@ -15,9 +15,11 @@ import {
 } from "@/data/projects";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -34,7 +36,10 @@ export async function generateMetadata({
     };
   }
 
-  return createProjectDetailMetadata(project);
+  return createProjectDetailMetadata(
+    project,
+    `/projects/category/${project.category}/${project.slug}`,
+  );
 }
 
 export default async function ProjectDetailPage({
@@ -154,7 +159,7 @@ export default async function ProjectDetailPage({
                     {item.kpis.location}
                   </p>
                   <Link
-                    href={`/projects/${item.slug}`}
+                    href={`/projects/category/${item.category}/${item.slug}`}
                     className="mt-4 inline-block text-sm font-semibold text-electric-cyan hover:underline"
                   >
                     View details

@@ -16,7 +16,10 @@ const InputSchema = z.object({
   /** Whether to persist the conclusion to the memory MCP server */
   persistConclusion: z.boolean().default(true),
   /** Memory key to write final conclusion under (agent:v1:reasoning:<key>) */
-  memoryKey: z.string().optional(),
+  memoryKey: z
+    .string()
+    .regex(/^agent:v1:reasoning:[a-zA-Z0-9:_-]+$/)
+    .optional(),
 });
 
 const OutputSchema = z.object({
@@ -63,7 +66,7 @@ export const reasoningChainSkill: SkillManifest<
     "Use this when asked to reason, analyse, plan, evaluate trade-offs, or make decisions.",
   requiredServers: [MCP.SEQUENTIAL_THINKING, MCP.MEMORY],
   costTier: "expensive",
-  dryRunCapable: false,
+  dryRunCapable: true,
 
   inputSchema: InputSchema,
   outputSchema: OutputSchema,
@@ -103,8 +106,9 @@ export const reasoningChainSkill: SkillManifest<
 
     let memoryKey: string | undefined;
     let persisted = false;
+    const shouldPersistConclusion = input.persistConclusion && !ctx.dryRun;
 
-    if (input.persistConclusion) {
+    if (shouldPersistConclusion) {
       memoryKey = input.memoryKey ?? `agent:v1:reasoning:${ctx.intent.id}`;
 
       await ctx.callMcp(MCP.MEMORY, "create_entities", {
