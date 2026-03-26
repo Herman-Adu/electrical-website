@@ -72,7 +72,7 @@ test.describe("UI Smoke Tests", () => {
 
     // Find a button that likely opens a dropdown (in nav area)
     const navArea = page.locator("nav").first();
-    const buttons = navArea.locator("button");
+    const buttons = navArea.locator("button:visible");
     const buttonCount = await buttons.count();
 
     if (buttonCount > 0) {
