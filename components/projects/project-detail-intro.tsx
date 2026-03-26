@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import type { ProjectIntroData } from "@/types/projects";
 
 function AnimatedWord({
@@ -38,7 +43,13 @@ interface ProjectDetailIntroProps {
 }
 
 export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
-  const { label, headlineWords, leadParagraph, bodyParagraphs = [], pillars = [] } = data;
+  const {
+    label,
+    headlineWords,
+    leadParagraph,
+    bodyParagraphs = [],
+    pillars = [],
+  } = data;
 
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -60,7 +71,7 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -69,26 +80,26 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+      className="relative py-16 bg-background overflow-hidden"
     >
       {/* Blueprint grid overlay */}
-      <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" />
+      {/* <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" /> */}
 
       {/* Animated border lines */}
       {!shouldReduce && (
         <>
           <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-transparent via-electric-cyan/60 to-transparent"
+              className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
               style={{ width: lineLeft }}
             />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+          {/* <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-transparent via-electric-cyan/60 to-transparent"
+              className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
               style={{ width: lineRight }}
             />
-          </div>
+          </div> */}
         </>
       )}
 
