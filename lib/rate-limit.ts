@@ -10,6 +10,7 @@
  */
 
 import { kv } from "@vercel/kv";
+import { createHash } from "node:crypto";
 
 type RateLimitMode = "kv" | "memory" | "off";
 
@@ -63,7 +64,7 @@ function canUseKv(): boolean {
     console.warn("[RATE_LIMIT_KV_DISABLED]", {
       message:
         "KV_REST_API_URL and KV_REST_API_TOKEN are not configured. " +
-        "Rate limiting will run in fail-open mode.",
+        "Rate limiting will use in-memory fallback.",
       timestamp: new Date().toISOString(),
     });
     kvDisabledWarned = true;
@@ -121,18 +122,19 @@ function getMemoryRemaining(ipHash: string, limit: number): number {
  * Reduces storage footprint and obfuscates IPs in logs
  *
  * @param ip Client IP address
- * @returns 5-character hash
+ * @returns 12-character hash derived from SHA-256
  */
 function hashIp(ip: string): string {
-  let hash = 0;
+  return createHash("sha256").update(ip).digest("hex").substring(0, 12);
+}
 
-  for (let i = 0; i < ip.length; i++) {
-    const char = ip.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash; // Convert to 32-bit integer
+function normalizeClientKey(ip: string): string {
+  const trimmed = ip.trim();
+  if (!trimmed || trimmed === "unknown") {
+    return "unknown-client";
   }
 
-  return Math.abs(hash).toString(36).substring(0, 5);
+  return trimmed;
 }
 
 /**
@@ -153,13 +155,8 @@ export async function checkRateLimit(
     return true;
   }
 
-  if (!ip || ip === "unknown") {
-    // Fallback: allow submission if IP unknown (fail-open)
-    // Better to serve users than to block due to missing IP detection
-    return true;
-  }
-
-  const ipHash = hashIp(ip);
+  const clientKey = normalizeClientKey(ip);
+  const ipHash = hashIp(clientKey);
 
   if (rateLimitMode === "memory") {
     return checkMemoryRateLimit(ipHash, limit, windowMs);
@@ -171,7 +168,7 @@ export async function checkRateLimit(
   }
 
   if (!canUseKv()) {
-    return true;
+    return checkMemoryRateLimit(ipHash, limit, windowMs);
   }
 
   try {
@@ -194,15 +191,13 @@ export async function checkRateLimit(
 
     return allowed;
   } catch (error) {
-    // KV unavailable: fail-open for better availability
-    // Log error for monitoring but don't block user
-    console.error("[RATE_LIMIT_KV_ERROR]", {
+    console.error("[RATE_LIMIT_KV_FALLBACK]", {
       message: error instanceof Error ? error.message : "Unknown error",
-      ip: ip === "unknown" ? undefined : ip.substring(0, 4), // Log first octet only
+      ipHash,
       timestamp: new Date().toISOString(),
     });
 
-    return true; // Allow submission when KV fails
+    return checkMemoryRateLimit(ipHash, limit, windowMs);
   }
 }
 
@@ -224,18 +219,15 @@ export async function getRemainingSubmissions(
     return limit;
   }
 
-  if (!ip || ip === "unknown") {
-    return limit;
-  }
-
-  const ipHash = hashIp(ip);
+  const clientKey = normalizeClientKey(ip);
+  const ipHash = hashIp(clientKey);
 
   if (rateLimitMode === "memory") {
     return getMemoryRemaining(ipHash, limit);
   }
 
   if (!canUseKv()) {
-    return limit;
+    return getMemoryRemaining(ipHash, limit);
   }
 
   try {
@@ -244,12 +236,12 @@ export async function getRemainingSubmissions(
     const count = (await kv.get<number>(key)) || 0;
     return Math.max(0, limit - count);
   } catch (error) {
-    // KV unavailable: return limit pessimistically
-    console.error("[RATE_LIMIT_KV_ERROR]", {
+    console.error("[RATE_LIMIT_KV_FALLBACK]", {
       message: error instanceof Error ? error.message : "Unknown error",
+      ipHash,
       timestamp: new Date().toISOString(),
     });
 
-    return 0; // Conservative: assume limit reached
+    return getMemoryRemaining(ipHash, limit);
   }
 }

@@ -46,5 +46,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
   emptyStringAsUndefined: true,
-  skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
+  skipValidation:
+    process.env.NODE_ENV !== "production" &&
+    process.env.SKIP_ENV_VALIDATION === "true",
 });

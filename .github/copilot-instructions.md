@@ -19,11 +19,11 @@ This repository has a production-grade agent skill system in `agent/`. Before wr
 
 ## Available Skills
 
-Use `/code-intelligence` — find code patterns, symbols, AST search  
+Use `/code-search` — find code patterns, symbols, AST search  
 Use `/browser-testing` — Playwright browser automation, screenshots, UI tests  
 Use `/github-actions` — trigger CI, deploy preview, Copilot review, dependency audit  
 Use `/send-notification` — send/schedule emails via Resend (always dry-run first)  
-Use `/reasoning-audit` — chain-of-thought analysis, architectural decisions  
+Use `/reasoning-chain` — chain-of-thought analysis, architectural decisions  
 Use `/health-check` — verify MCP server connectivity and circuit-breaker state
 
 ## Coding Standards

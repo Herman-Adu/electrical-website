@@ -1,9 +1,9 @@
 ---
-name: reasoning-audit
+name: reasoning-chain
 description: "Work through a complex question or decision using sequential chain-of-thought reasoning. Optionally persists the final conclusion to the memory MCP server for future sessions. Use this when asked to reason, analyse, plan, evaluate trade-offs, compare approaches, or make an architectural or engineering decision for the electrical-website project."
 ---
 
-# Reasoning & Audit Skill
+# Reasoning Chain Skill
 
 Uses **sequentialthinking** for chain-of-thought reasoning and **memory** for persisting conclusions.
 

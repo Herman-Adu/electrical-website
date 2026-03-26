@@ -41,7 +41,16 @@ export async function generateMetadata({
   params: Promise<{ categorySlug: string; projectSlug: string }>;
 }): Promise<Metadata> {
   const { categorySlug, projectSlug } = await params;
-  const project = getProjectByCategoryAndSlug(categorySlug, projectSlug);
+  const category = getCategoryBySlug(categorySlug);
+
+  if (!category) {
+    return {
+      title: "Category Not Found | Nexgen Electrical Innovations",
+      description: "The requested project category could not be found.",
+    };
+  }
+
+  const project = getProjectByCategoryAndSlug(category.slug, projectSlug);
 
   if (!project) {
     return {
@@ -50,7 +59,10 @@ export async function generateMetadata({
     };
   }
 
-  return createProjectDetailMetadata(project);
+  return createProjectDetailMetadata(
+    project,
+    `/projects/category/${categorySlug}/${projectSlug}`,
+  );
 }
 
 export default async function CategoryProjectDetailPage({
@@ -63,7 +75,7 @@ export default async function CategoryProjectDetailPage({
   const category = getCategoryBySlug(categorySlug);
   if (!category) notFound();
 
-  const project = getProjectByCategoryAndSlug(categorySlug, projectSlug);
+  const project = getProjectByCategoryAndSlug(category.slug, projectSlug);
   if (!project) notFound();
 
   const relatedProjects = allProjects

@@ -63,7 +63,7 @@ export const reasoningChainSkill: SkillManifest<
     "Use this when asked to reason, analyse, plan, evaluate trade-offs, or make decisions.",
   requiredServers: [MCP.SEQUENTIAL_THINKING, MCP.MEMORY],
   costTier: "expensive",
-  dryRunCapable: false,
+  dryRunCapable: true,
 
   inputSchema: InputSchema,
   outputSchema: OutputSchema,
@@ -103,8 +103,9 @@ export const reasoningChainSkill: SkillManifest<
 
     let memoryKey: string | undefined;
     let persisted = false;
+    const shouldPersistConclusion = input.persistConclusion && !ctx.dryRun;
 
-    if (input.persistConclusion) {
+    if (shouldPersistConclusion) {
       memoryKey = input.memoryKey ?? `agent:v1:reasoning:${ctx.intent.id}`;
 
       await ctx.callMcp(MCP.MEMORY, "create_entities", {

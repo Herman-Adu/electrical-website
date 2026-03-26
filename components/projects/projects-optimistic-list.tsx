@@ -113,7 +113,7 @@ export function ProjectsOptimisticList({
                 <div>
                   <div className="flex items-center gap-2">
                     <Link
-                      href={`/projects/${item.slug}`}
+                      href={`/projects/category/${item.category}/${item.slug}`}
                       className="text-base font-semibold text-foreground hover:text-electric-cyan"
                     >
                       {item.title}

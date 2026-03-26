@@ -95,9 +95,9 @@ async function main(): Promise<void> {
     fail("inputSchema parse", String(e));
   }
 
-  // ─── PATH 2: code-intelligence (code-search) ──────────────────────────────────
+  // ─── PATH 2: code-search ─────────────────────────────────────────────────────
 
-  console.log("\n[2] code-intelligence path");
+  console.log("\n[2] code-search path");
 
   try {
     const score = codeSearchSkill.fitness(
@@ -128,9 +128,9 @@ async function main(): Promise<void> {
     fail("inputSchema parse", String(e));
   }
 
-  // ─── PATH 3: reasoning-audit (reasoning-chain) ────────────────────────────────
+  // ─── PATH 3: reasoning-chain ─────────────────────────────────────────────────
 
-  console.log("\n[3] reasoning-audit path");
+  console.log("\n[3] reasoning-chain path");
 
   try {
     const highScore = reasoningChainSkill.fitness(

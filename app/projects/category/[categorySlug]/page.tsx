@@ -16,6 +16,8 @@ export async function generateStaticParams() {
   return getCategorySlugs().map((categorySlug) => ({ categorySlug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {

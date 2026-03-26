@@ -19,6 +19,8 @@ export async function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -34,7 +36,10 @@ export async function generateMetadata({
     };
   }
 
-  return createProjectDetailMetadata(project);
+  return createProjectDetailMetadata(
+    project,
+    `/projects/category/${project.category}/${project.slug}`,
+  );
 }
 
 export default async function ProjectDetailPage({

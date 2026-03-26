@@ -18,15 +18,17 @@ export function createProjectsListMetadata(): Metadata {
   });
 }
 
-export function createProjectDetailMetadata(project: Project): Metadata {
+export function createProjectDetailMetadata(
+  project: Project,
+  canonicalPath = `/projects/category/${project.category}/${project.slug}`,
+): Metadata {
   const title = `${project.title} | Projects | Nexgen Electrical Innovations`;
   const description = `${project.description} Sector: ${project.clientSector}. Location: ${project.kpis.location}.`;
-  const path = `/projects/${project.slug}`;
 
   return createStandardPageMetadata({
     title,
     description,
-    path,
+    path: canonicalPath,
     openGraphTitle: title,
     openGraphDescription: description,
     keywords: [...project.tags, project.clientSector, "electrical project"],
