@@ -22,7 +22,7 @@ v0's only job is to redesign/create the **component files** listed below with hi
 
 ## Absolute Constraints (Never Violate)
 
-1. **Do NOT edit any `app/projects/**/page.tsx` files.** Routes are complete and correct.
+1. **Do NOT edit any `app/projects/**/page.tsx` files.\*\* Routes are complete and correct.
 2. **Do NOT change `types/projects.ts`.** All interfaces are final.
 3. **Do NOT change `data/projects/index.ts`.** Data and helpers are final.
 4. **Do NOT change `lib/actions/projects.ts`.** Server Action wiring is final.
@@ -446,21 +446,21 @@ Standalone IntersectionObserver wrapper that slices `items` and passes to `Proje
 
 Output **complete** file contents — no elisions, no `// ...existing code` placeholder comments.
 
-| File | Action |
-|------|--------|
-| `components/projects/projects-hero.tsx` | Full redesign |
-| `components/projects/projects-featured-card.tsx` | Full redesign |
-| `components/projects/projects-bento-grid.tsx` | Full redesign |
+| File                                               | Action                                                   |
+| -------------------------------------------------- | -------------------------------------------------------- |
+| `components/projects/projects-hero.tsx`            | Full redesign                                            |
+| `components/projects/projects-featured-card.tsx`   | Full redesign                                            |
+| `components/projects/projects-bento-grid.tsx`      | Full redesign                                            |
 | `components/projects/projects-optimistic-list.tsx` | Full redesign (keep all hook logic, add infinite scroll) |
-| `components/projects/project-card-shell.tsx` | Full redesign (dark glass primitive) |
-| `components/projects/project-status-badge.tsx` | Full redesign (animated pulse) |
-| `components/projects/project-meta-row.tsx` | Improve or keep minimal |
-| `components/projects/projects-infinite-scroll.tsx` | **NEW FILE** |
-| `components/projects/project-category-card.tsx` | **NEW FILE** |
-| `components/projects/project-detail-hero.tsx` | **NEW FILE** |
-| `components/projects/project-kpi-grid.tsx` | **NEW FILE** |
-| `components/projects/project-related-carousel.tsx` | **NEW FILE** |
-| `components/projects/index.ts` | Add exports for all 5 new components |
+| `components/projects/project-card-shell.tsx`       | Full redesign (dark glass primitive)                     |
+| `components/projects/project-status-badge.tsx`     | Full redesign (animated pulse)                           |
+| `components/projects/project-meta-row.tsx`         | Improve or keep minimal                                  |
+| `components/projects/projects-infinite-scroll.tsx` | **NEW FILE**                                             |
+| `components/projects/project-category-card.tsx`    | **NEW FILE**                                             |
+| `components/projects/project-detail-hero.tsx`      | **NEW FILE**                                             |
+| `components/projects/project-kpi-grid.tsx`         | **NEW FILE**                                             |
+| `components/projects/project-related-carousel.tsx` | **NEW FILE**                                             |
+| `components/projects/index.ts`                     | Add exports for all 5 new components                     |
 
 **Files to NOT output:** Anything in `app/`, `data/`, `lib/`, `types/`, `hooks/`.
 
@@ -610,5 +610,3 @@ Some projects may warrant fully bespoke page designs. The recommended pattern:
 
 The components built in this guide form the **template baseline** all project pages use by default.
 Custom components extend this template — they do not replace it wholesale.
-
-
