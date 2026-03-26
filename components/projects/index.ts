@@ -13,6 +13,7 @@ export { ProjectStatusBadge } from "./project-status-badge";
 // Category components
 export { ProjectCategoryCard } from "./project-category-card";
 export { ProjectCategoryHero } from "./project-category-hero";
+export { ProjectsCategoriesHero } from "./projects-categories-hero";
 
 // Detail page components
 export { ProjectDetailHero } from "./project-detail-hero";
