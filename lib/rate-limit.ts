@@ -11,16 +11,17 @@
 
 import { kv } from "@vercel/kv";
 import { createHash } from "node:crypto";
+import { env } from "@/app/env";
 
 type RateLimitMode = "kv" | "memory" | "off";
 
 const hasKvConfig = Boolean(
   process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
 );
+const isProduction = process.env.NODE_ENV === "production";
 
-const configuredMode =
-  (process.env.CONTACT_RATE_LIMIT_MODE as RateLimitMode | undefined) ??
-  (process.env.NODE_ENV === "production" ? "kv" : "memory");
+const configuredMode: RateLimitMode =
+  env.CONTACT_RATE_LIMIT_MODE ?? (isProduction ? "kv" : "memory");
 
 const rateLimitMode: RateLimitMode =
   configuredMode === "off" ||
@@ -28,6 +29,10 @@ const rateLimitMode: RateLimitMode =
   configuredMode === "kv"
     ? configuredMode
     : "kv";
+
+if (isProduction && rateLimitMode === "off") {
+  throw new Error("CONTACT_RATE_LIMIT_MODE=off is not allowed in production");
+}
 
 let kvDisabledWarned = false;
 let modeWarned = false;
@@ -40,7 +45,7 @@ function canUseRateLimit(): boolean {
     if (!modeWarned) {
       console.warn("[RATE_LIMIT_DISABLED]", {
         message:
-          "CONTACT_RATE_LIMIT_MODE=off. Contact form rate limiting is disabled.",
+          "CONTACT_RATE_LIMIT_MODE=off. Contact form rate limiting is disabled for non-production environments.",
         timestamp: new Date().toISOString(),
       });
       modeWarned = true;
@@ -128,10 +133,10 @@ function hashIp(ip: string): string {
   return createHash("sha256").update(ip).digest("hex").substring(0, 12);
 }
 
-function normalizeClientKey(ip: string): string {
+function normalizeClientKey(ip: string): string | null {
   const trimmed = ip.trim();
   if (!trimmed || trimmed === "unknown") {
-    return "unknown-client";
+    return null;
   }
 
   return trimmed;
@@ -156,6 +161,18 @@ export async function checkRateLimit(
   }
 
   const clientKey = normalizeClientKey(ip);
+  if (!clientKey) {
+    if (isProduction) {
+      console.warn("[RATE_LIMIT_CLIENT_KEY_MISSING]", {
+        message: "Missing client key in production; rejecting submission.",
+        timestamp: new Date().toISOString(),
+      });
+      return false;
+    }
+
+    return checkMemoryRateLimit("dev-unknown-client", limit, windowMs);
+  }
+
   const ipHash = hashIp(clientKey);
 
   if (rateLimitMode === "memory") {
@@ -220,6 +237,10 @@ export async function getRemainingSubmissions(
   }
 
   const clientKey = normalizeClientKey(ip);
+  if (!clientKey) {
+    return isProduction ? 0 : getMemoryRemaining("dev-unknown-client", limit);
+  }
+
   const ipHash = hashIp(clientKey);
 
   if (rateLimitMode === "memory") {

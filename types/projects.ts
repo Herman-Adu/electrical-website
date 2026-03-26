@@ -28,7 +28,7 @@ export interface Project {
   id: string;
   slug: string;
   category: Exclude<ProjectCategorySlug, "all">;
-  categoryLabel: string;
+  categoryLabel: ProjectCategory["label"];
   title: string;
   clientSector: string;
   status: ProjectStatus;
@@ -54,7 +54,7 @@ export interface ProjectListItem {
   title: string;
   slug: string;
   category: Exclude<ProjectCategorySlug, "all">;
-  categoryLabel: string;
+  categoryLabel: ProjectCategory["label"];
   status: ProjectStatus;
   isFeatured: boolean;
   location: string;

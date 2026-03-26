@@ -170,19 +170,17 @@ export const projectBentoItems: ProjectBentoItem[] = [
   },
 ];
 
-export const projectListItems: ProjectListItem[] = allProjects.map(
-  (project) => ({
-    id: project.id,
-    title: project.title,
-    slug: project.slug,
-    category: project.category,
-    categoryLabel: project.categoryLabel,
-    status: project.status,
-    isFeatured: project.isFeatured,
-    location: project.kpis.location,
-    updatedAt: project.updatedAt,
-  }),
-);
+const projectListItems: ProjectListItem[] = allProjects.map((project) => ({
+  id: project.id,
+  title: project.title,
+  slug: project.slug,
+  category: project.category,
+  categoryLabel: project.categoryLabel,
+  status: project.status,
+  isFeatured: project.isFeatured,
+  location: project.kpis.location,
+  updatedAt: project.updatedAt,
+}));
 
 const projectsBySlug: Partial<Record<Project["slug"], Project>> =
   Object.fromEntries(allProjects.map((project) => [project.slug, project]));

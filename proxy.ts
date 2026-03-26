@@ -40,28 +40,27 @@ export function proxy(request: NextRequest) {
  * @returns Client IP address, or 'unknown' if unable to determine
  */
 function extractClientIp(request: NextRequest): string {
-  // 1. Check x-forwarded-for (standard header from reverse proxies)
-  // Format: "client, proxy1, proxy2" - rightmost is oldest
-  const xForwardedFor = request.headers.get("x-forwarded-for");
-  if (xForwardedFor) {
-    // Split by comma and take the first IP (client)
-    const ips = xForwardedFor.split(",");
-    const clientIp = ips[0]?.trim();
-    if (clientIp && isValidIp(clientIp)) {
-      return clientIp;
+  const trustedHeaders = [
+    request.headers.get("x-vercel-forwarded-for"),
+    request.headers.get("cf-connecting-ip"),
+    request.headers.get("x-real-ip"),
+  ];
+
+  for (const candidate of trustedHeaders) {
+    if (candidate && isValidIp(candidate)) {
+      return candidate.trim();
     }
   }
 
-  // 2. Check cf-connecting-ip (Cloudflare specific)
-  const cfConnectingIp = request.headers.get("cf-connecting-ip");
-  if (cfConnectingIp && isValidIp(cfConnectingIp)) {
-    return cfConnectingIp;
-  }
-
-  // 3. Check x-real-ip (nginx, Apache, other reverse proxies)
-  const xRealIp = request.headers.get("x-real-ip");
-  if (xRealIp && isValidIp(xRealIp)) {
-    return xRealIp;
+  // Only trust x-forwarded-for when on Vercel edge
+  if (request.headers.has("x-vercel-id")) {
+    const xForwardedFor = request.headers.get("x-forwarded-for");
+    if (xForwardedFor) {
+      const clientIp = xForwardedFor.split(",")[0]?.trim();
+      if (clientIp && isValidIp(clientIp)) {
+        return clientIp;
+      }
+    }
   }
 
   // 4. Fallback to socket/connection context (development/direct)

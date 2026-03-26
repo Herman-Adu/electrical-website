@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { createStandardPageMetadata } from "@/lib/metadata";
-import type { Project } from "@/types/projects";
+import type { Project, ProjectCategory } from "@/types/projects";
 
 export function createProjectsListMetadata(): Metadata {
   return createStandardPageMetadata({
@@ -15,6 +15,27 @@ export function createProjectsListMetadata(): Metadata {
       "commercial electrical",
       "critical infrastructure",
     ],
+  });
+}
+
+export function createProjectCategoriesMetadata(): Metadata {
+  return createStandardPageMetadata({
+    title: "Project Categories | Nexgen Electrical Innovations",
+    description:
+      "Browse our electrical project portfolio by category — residential, commercial lighting, and power board infrastructure.",
+    path: "/projects/category",
+  });
+}
+
+export function createProjectCategoryMetadata(
+  category: ProjectCategory,
+): Metadata {
+  return createStandardPageMetadata({
+    title: `${category.label} Projects | Nexgen Electrical Innovations`,
+    description: category.description,
+    path: `/projects/category/${category.slug}`,
+    openGraphTitle: `${category.label} Projects | Nexgen Electrical Innovations`,
+    openGraphDescription: category.description,
   });
 }
 

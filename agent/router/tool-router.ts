@@ -45,6 +45,7 @@ export type RouterError =
         code: string;
       }>;
     }
+  | { readonly kind: "dry_run_not_capable"; skillId: string }
   | {
       readonly kind: "servers_unavailable";
       servers: ReadonlyArray<McpServerId>;
@@ -66,9 +67,11 @@ export class RoutingError extends Error {
                   : issue.message,
               )
               .join("; ")}`
-          : detail.kind === "servers_unavailable"
-            ? `Required MCP servers unavailable: [${detail.servers.join(", ")}]`
-            : `No agent pool found for skill "${detail.skillId}"`,
+          : detail.kind === "dry_run_not_capable"
+            ? `Skill "${detail.skillId}" is not dry-run capable`
+            : detail.kind === "servers_unavailable"
+              ? `Required MCP servers unavailable: [${detail.servers.join(", ")}]`
+              : `No agent pool found for skill "${detail.skillId}"`,
     );
     this.name = "RoutingError";
     this.detail = detail;
@@ -163,6 +166,13 @@ export class ToolRouter {
       });
     }
     const parsedInput = inputParse.data;
+
+    if (intent.dryRun && !selected.skill.dryRunCapable) {
+      throw new RoutingError({
+        kind: "dry_run_not_capable",
+        skillId: selected.skill.id,
+      });
+    }
 
     // Step 4: pre-flight health check
     const preFlightReport = await this.#health.preFlight(

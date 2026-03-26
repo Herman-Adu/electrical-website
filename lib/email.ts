@@ -22,6 +22,10 @@ function escapeHtml(value: string): string {
     .replaceAll("'", "&#39;");
 }
 
+function sanitizeHeaderValue(value: string): string {
+  return value.replace(/[\r\n\u0000-\u001F\u007F]+/g, " ").trim();
+}
+
 export interface ContactEmailData {
   name: string;
   email: string;
@@ -42,10 +46,14 @@ export async function sendUserConfirmation(
   try {
     const resend = getResendClient();
 
+    const safeReferenceCode = sanitizeHeaderValue(referenceCode);
+
     const result = await resend.emails.send({
       from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
       to,
-      subject: `Your Inquiry Received - Reference ${referenceCode}`,
+      subject: sanitizeHeaderValue(
+        `Your Inquiry Received - Reference ${safeReferenceCode}`,
+      ),
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">
@@ -119,7 +127,9 @@ export async function sendAdminNotification(
     const result = await resend.emails.send({
       from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
       to: env.CONTACT_ADMIN_EMAIL,
-      subject: `New Contact Inquiry - ${data.projectType} - REF: ${data.referenceCode}`,
+      subject: sanitizeHeaderValue(
+        `New Contact Inquiry - ${safeProjectType} - REF: ${safeReferenceCode}`,
+      ),
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">

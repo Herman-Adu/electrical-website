@@ -16,7 +16,10 @@ const InputSchema = z.object({
   /** Whether to persist the conclusion to the memory MCP server */
   persistConclusion: z.boolean().default(true),
   /** Memory key to write final conclusion under (agent:v1:reasoning:<key>) */
-  memoryKey: z.string().optional(),
+  memoryKey: z
+    .string()
+    .regex(/^agent:v1:reasoning:[a-zA-Z0-9:_-]+$/)
+    .optional(),
 });
 
 const OutputSchema = z.object({

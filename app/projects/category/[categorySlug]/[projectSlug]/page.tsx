@@ -21,7 +21,9 @@ import { Footer } from "@/components/sections/footer";
  * Generate all [categorySlug] + [projectSlug] pairs at build time.
  * Using the flat approach: child generates full pairs in one call.
  */
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<
+  { categorySlug: string; projectSlug: string }[]
+> {
   const pairs: { categorySlug: string; projectSlug: string }[] = [];
 
   for (const categorySlug of getCategorySlugs()) {
@@ -35,10 +37,14 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
+type CategoryProjectParams = Awaited<
+  ReturnType<typeof generateStaticParams>
+>[number];
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ categorySlug: string; projectSlug: string }>;
+  params: Promise<CategoryProjectParams>;
 }): Promise<Metadata> {
   const { categorySlug, projectSlug } = await params;
   const category = getCategoryBySlug(categorySlug);
@@ -68,7 +74,7 @@ export async function generateMetadata({
 export default async function CategoryProjectDetailPage({
   params,
 }: {
-  params: Promise<{ categorySlug: string; projectSlug: string }>;
+  params: Promise<CategoryProjectParams>;
 }) {
   const { categorySlug, projectSlug } = await params;
 
