@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
+import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
 
 interface ProjectDetailHeroProps {
   project: Project;
@@ -209,6 +210,16 @@ export function ProjectDetailHero({
           >
             {project.description}
           </motion.p>
+
+          {/* KPI stats — part of hero, not a separate section */}
+          <motion.div
+            className="mt-10 pt-8 border-t border-border/20"
+            initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <ProjectKpiGrid kpis={project.kpis} />
+          </motion.div>
         </div>
       </section>
     </>

@@ -17,7 +17,6 @@ import {
   ProjectChallengeSolution,
   ProjectGallery,
   ProjectTestimonialCard,
-  ProjectKpiSection,
   ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
@@ -136,11 +135,8 @@ export default async function CategoryProjectDetailPage({
         }}
       />
 
-      {/* Hero Section with Parallax Image */}
+      {/* Hero Section with Parallax Image + KPIs */}
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
-
-      {/* KPI Grid */}
-      <ProjectKpiSection kpis={project.kpis} />
 
       {detail?.intro && (
         <section className="section-container section-padding-sm bg-background">
