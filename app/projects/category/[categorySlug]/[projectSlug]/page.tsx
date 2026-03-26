@@ -73,7 +73,7 @@ export async function generateMetadata({
 
   return createProjectDetailMetadata(
     project,
-    `/projects/category/${categorySlug}/${projectSlug}`,
+    `/projects/category/${categorySlug}/${projectSlug}`
   );
 }
 
@@ -105,13 +105,13 @@ export default async function CategoryProjectDetailPage({
     {
       name: category.label,
       url: siteConfig.getUrl(
-        `${siteConfig.routes.projectsCategory}/${categorySlug}`,
+        `${siteConfig.routes.projectsCategory}/${categorySlug}`
       ),
     },
     {
       name: project.title,
       url: siteConfig.getUrl(
-        `/projects/category/${categorySlug}/${projectSlug}`,
+        `/projects/category/${categorySlug}/${projectSlug}`
       ),
     },
   ];
@@ -139,7 +139,7 @@ export default async function CategoryProjectDetailPage({
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
 
       {detail?.intro && (
-        <section className="section-container py-2 bg-background">
+        <section className="section-container section-padding-sm bg-background">
           <div className="section-content max-w-6xl">
             <ProjectDetailIntro data={detail.intro} />
           </div>
@@ -147,7 +147,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.scope && detail.scope.length > 0 && (
-        <section className="section-container py-12 bg-background">
+        <section className="section-container section-padding-sm bg-background">
           <div className="section-content max-w-6xl">
             <ProjectScopeGrid items={detail.scope} />
           </div>
