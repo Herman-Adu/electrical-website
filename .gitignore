@@ -20,6 +20,7 @@ node_modules/
 build-output.log
 playwright-report/
 test-results/
+*.tsbuildinfo
 package-lock.json
 yarn.lock
 bun.lockb

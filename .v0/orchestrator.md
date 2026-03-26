@@ -3,6 +3,7 @@
 ## Session Initialization Protocol
 
 ### Mandatory Sequence (Non-Negotiable)
+
 ```
 1. READ  .v0/metrics.md     → Health check FIRST
 2. READ  .v0/state.json     → Project state
@@ -14,6 +15,7 @@
 ```
 
 ### Announcement Template
+
 ```
 SESSION START
 Phase: BUILD | Task: [description] | Complexity: M
@@ -27,14 +29,16 @@ Status: READY
 ## Model Matrix (Single Source of Truth)
 
 ### Complexity Scoring
-| Score | Label | Characteristics | Op Budget |
-|-------|-------|-----------------|-----------|
-| S | Simple | Single file, styling, copy, bug fix | 5 |
-| M | Medium | Multi-file, new component, feature | 10 |
-| L | Large | Architecture, integration, multi-section | 15 |
-| XL | Extra Large | Full feature with DB/Auth | 20+ (multi-session) |
+
+| Score | Label       | Characteristics                          | Op Budget           |
+| ----- | ----------- | ---------------------------------------- | ------------------- |
+| S     | Simple      | Single file, styling, copy, bug fix      | 5                   |
+| M     | Medium      | Multi-file, new component, feature       | 10                  |
+| L     | Large       | Architecture, integration, multi-section | 15                  |
+| XL    | Extra Large | Full feature with DB/Auth                | 20+ (multi-session) |
 
 ### Model Selection Decision Tree
+
 ```
 START
   │
@@ -54,20 +58,23 @@ START
 ```
 
 ### Model Specifications
-| Model | Context | Ops Budget | Best For |
-|-------|---------|------------|----------|
-| v0 Mini | 50k | 5 | Styling, single file, quick fixes |
-| v0 Pro | 100k | 15 | Features, refactoring, components |
-| v0 Max | 150k | 20 | Architecture, complex integrations |
-| v0 Max Fast | 100k | 10 | Analysis, planning (no implementation) |
+
+| Model       | Context | Ops Budget | Best For                               |
+| ----------- | ------- | ---------- | -------------------------------------- |
+| v0 Mini     | 50k     | 5          | Styling, single file, quick fixes      |
+| v0 Pro      | 100k    | 15         | Features, refactoring, components      |
+| v0 Max      | 150k    | 20         | Architecture, complex integrations     |
+| v0 Max Fast | 100k    | 10         | Analysis, planning (no implementation) |
 
 ---
 
 ## Gate System
 
 ### GATE 1: Session Initialization
+
 **Trigger:** Session start
 **Checks:**
+
 - [ ] All .v0/ files readable
 - [ ] state.json matches expected structure
 - [ ] Health >= 20% (or acknowledge critical mode)
@@ -76,21 +83,26 @@ START
 **On Fail:** Announce issue, request guidance
 
 ### GATE 7: Mid-Session Checkpoint
+
 **Trigger:** Operations 7-8
 **Checks:**
+
 - [ ] Current progress vs. planned
 - [ ] Token burn rate acceptable
 - [ ] No blockers accumulated
 - [ ] Build still passing (quick check)
 
 **Actions:**
+
 - Update metrics.md
 - Decide: continue / pause / pivot
 - Announce checkpoint status
 
 ### GATE 15: End-of-Budget
+
 **Trigger:** Operations 14-15
 **Checks:**
+
 - [ ] `pnpm run build` passes
 - [ ] All state files updated
 - [ ] Changelog entry added
@@ -103,6 +115,7 @@ START
 ## Workflow Patterns
 
 ### Pattern: New Section
+
 ```
 1. Check rules.md for styling patterns
 2. Create: components/sections/[name].tsx
@@ -113,6 +126,7 @@ START
 ```
 
 ### Pattern: New Page
+
 ```
 1. Create: app/[route]/page.tsx
 2. Import sections via barrel
@@ -122,6 +136,7 @@ START
 ```
 
 ### Pattern: Styling Update
+
 ```
 1. Check globals.css for existing utilities
 2. Use semantic tokens from rules.md
@@ -131,6 +146,7 @@ START
 ```
 
 ### Pattern: Bug Fix
+
 ```
 1. Identify root cause file(s)
 2. Read current implementation
@@ -144,6 +160,7 @@ START
 ## Recovery Protocol
 
 ### Session Crash Recovery
+
 ```
 1. Read PHASE_STATE.md → Get last known state
 2. Read metrics.md → Get operation count
@@ -153,6 +170,7 @@ START
 ```
 
 ### Drift Detection
+
 ```
 If state.json components don't match filesystem:
 1. STOP implementation
@@ -166,15 +184,17 @@ If state.json components don't match filesystem:
 ## Context Preloading
 
 ### Hot Files by Task Type
-| Task Type | Auto-Load |
-|-----------|-----------|
-| Styling | globals.css, rules.md |
-| New Section | sections/index.ts, page.tsx, rules.md |
-| Navigation | navigation/*, layout.tsx |
-| Hero Changes | hero/*, page.tsx |
-| New Page | layout.tsx, existing page example |
+
+| Task Type    | Auto-Load                             |
+| ------------ | ------------------------------------- |
+| Styling      | globals.css, rules.md                 |
+| New Section  | sections/index.ts, page.tsx, rules.md |
+| Navigation   | navigation/\*, layout.tsx             |
+| Hero Changes | hero/\*, page.tsx                     |
+| New Page     | layout.tsx, existing page example     |
 
 ### Skip-Read Files (Use State Instead)
+
 - Component list → state.json
 - Color tokens → rules.md
 - Animation classes → rules.md
@@ -185,6 +205,7 @@ If state.json components don't match filesystem:
 ## Cost Projections
 
 ### Estimation Formula
+
 ```
 Est. Cost = (input_tokens * $0.003/1k) + (output_tokens * $0.015/1k)
 
@@ -197,8 +218,9 @@ Session Average: ~$0.15-0.50 depending on complexity
 ```
 
 ### Budget Alerts
-| Burn Rate | Status | Action |
-|-----------|--------|--------|
-| < $0.03/op | Efficient | Continue |
-| $0.03-0.05/op | Normal | Monitor |
-| > $0.05/op | High | Review approach |
+
+| Burn Rate     | Status    | Action          |
+| ------------- | --------- | --------------- |
+| < $0.03/op    | Efficient | Continue        |
+| $0.03-0.05/op | Normal    | Monitor         |
+| > $0.05/op    | High      | Review approach |
