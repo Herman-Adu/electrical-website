@@ -115,74 +115,21 @@ export function ProjectCategoryHero({
             className="object-cover object-center"
             sizes="100vw"
           />
-          {/* Dark gradient overlay — keeps text legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
-          {/* Cyan tint strip at bottom */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-electric-cyan/5 to-transparent" />
+          {/* Dark gradient overlay — heavier at top/bottom, lighter at centre so photo detail shows */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/30 to-black/75" />
+          {/* Cyan accent wash at bottom edge */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
       )}
 
-      {/* Subtle grid texture over photo */}
+      {/* Clean vignette overlay — deepens edges so text pops */}
       <div
-        className="absolute inset-0 z-10 pointer-events-none opacity-10"
+        className="absolute inset-0 z-10 pointer-events-none"
         style={{
-          backgroundImage:
-            "linear-gradient(var(--electric-cyan) 1px, transparent 1px), linear-gradient(90deg, var(--electric-cyan) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+          background:
+            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
         }}
       />
-
-      {/* Animated circuit lines */}
-      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <svg
-          className="absolute inset-0 w-full h-full opacity-20"
-          viewBox="0 0 1440 700"
-          fill="none"
-        >
-          <motion.path
-            d="M0 350 H350 L400 300 H750 L800 350 H1440"
-            stroke="var(--electric-cyan)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.5, delay: 0.6, ease: "easeOut" }}
-          />
-          <motion.path
-            d="M0 450 H250 L300 400 H600 L700 500 H1440"
-            stroke="var(--electric-cyan)"
-            strokeWidth="0.5"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.5, delay: 1, ease: "easeOut" }}
-          />
-          {([
-            [400, 300],
-            [800, 350],
-            [300, 400],
-            [600, 500],
-          ] as [number, number][]).map(([cx, cy], i) => (
-            <motion.circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r="3"
-              fill="var(--electric-cyan)"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.6 }}
-              transition={{ delay: 1.4 + i * 0.1, duration: 0.3 }}
-            />
-          ))}
-        </svg>
-
-        {/* Scan line */}
-        <motion.div
-          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/25 to-transparent"
-          animate={{ top: ["0%", "100%"] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
 
       {/* Main content */}
       <motion.div
