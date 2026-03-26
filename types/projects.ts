@@ -24,6 +24,75 @@ export interface ProjectImage {
   alt: string;
 }
 
+// =============================================================================
+// PROJECT DETAIL CONTENT TYPES
+// =============================================================================
+
+export interface ProjectIntroData {
+  /** Label above headline (e.g., "Project Overview") */
+  label: string;
+  /** Animated headline words */
+  headlineWords: string[];
+  /** Lead paragraph */
+  leadParagraph: string;
+  /** Two-column body paragraphs */
+  bodyParagraphs?: string[];
+  /** Three pillars with numbered highlights */
+  pillars?: {
+    num: string;
+    title: string;
+    description: string;
+  }[];
+}
+
+export interface ProjectTimelinePhase {
+  phase: string;
+  title: string;
+  description: string;
+  duration: string;
+  status: "completed" | "in-progress" | "upcoming";
+}
+
+export interface ProjectGalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface ProjectTestimonial {
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  image?: ProjectImage;
+}
+
+export interface ProjectScope {
+  icon: "Zap" | "Shield" | "Settings" | "Lightbulb" | "Gauge" | "Wrench" | "CheckCircle" | "Award";
+  title: string;
+  description: string;
+}
+
+export interface ProjectDetailContent {
+  /** Project-specific intro section */
+  intro: ProjectIntroData;
+  /** Timeline phases */
+  timeline?: ProjectTimelinePhase[];
+  /** Gallery images */
+  gallery?: ProjectGalleryImage[];
+  /** Client testimonial */
+  testimonial?: ProjectTestimonial;
+  /** Scope of work items */
+  scope?: ProjectScope[];
+  /** Challenge and solution narrative */
+  challenge?: string;
+  solution?: string;
+}
+
+// =============================================================================
+// MAIN PROJECT INTERFACE
+// =============================================================================
+
 export interface Project {
   id: string;
   slug: string;
@@ -40,6 +109,8 @@ export interface Project {
   isFeatured: boolean;
   publishedAt: string;
   updatedAt: string;
+  /** Extended detail content for project pages */
+  detail?: ProjectDetailContent;
 }
 
 export interface ProjectBentoItem {

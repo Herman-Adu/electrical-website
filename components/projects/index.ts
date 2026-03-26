@@ -15,5 +15,12 @@ export { ProjectCategoryCard } from "./project-category-card";
 
 // Detail page components
 export { ProjectDetailHero } from "./project-detail-hero";
+export { ProjectDetailIntro } from "./project-detail-intro";
+export { ProjectTimeline } from "./project-timeline";
+export { ProjectScopeGrid } from "./project-scope";
+export { ProjectChallengeSolution } from "./project-challenge-solution";
+export { ProjectGallery } from "./project-gallery";
+export { ProjectTestimonialCard } from "./project-testimonial";
 export { ProjectKpiGrid } from "./project-kpi-grid";
 export { ProjectRelatedCarousel } from "./project-related-carousel";
+export { ProjectSocialCTA } from "./project-social-cta";
