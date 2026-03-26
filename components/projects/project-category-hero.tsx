@@ -1,11 +1,39 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import { Activity, ChevronDown, FolderOpen } from "lucide-react";
-import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import { Activity, ChevronDown, Home, Lightbulb, Zap, FolderOpen } from "lucide-react";
 import type { ProjectCategory } from "@/types/projects";
+
+// Map each category slug to its dedicated hero image and icon
+const categoryConfig: Record<
+  string,
+  { image: string; icon: React.ReactNode; accentWord: string }
+> = {
+  residential: {
+    image: "/images/hero-residential.jpg",
+    icon: <Home className="w-8 h-8 text-electric-cyan" />,
+    accentWord: "Living",
+  },
+  "commercial-lighting": {
+    image: "/images/hero-commercial-lighting.jpg",
+    icon: <Lightbulb className="w-8 h-8 text-electric-cyan" />,
+    accentWord: "Illuminated",
+  },
+  "power-boards": {
+    image: "/images/hero-power-boards.jpg",
+    icon: <Zap className="w-8 h-8 text-electric-cyan" />,
+    accentWord: "Powered",
+  },
+};
+
+const fallbackConfig = {
+  image: "",
+  icon: <FolderOpen className="w-8 h-8 text-electric-cyan" />,
+  accentWord: "Delivered",
+};
 
 interface ProjectCategoryHeroProps {
   category: ProjectCategory;
@@ -45,6 +73,9 @@ export function ProjectCategoryHero({
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
 
+  const config = categoryConfig[category.slug] ?? fallbackConfig;
+  const hasImage = Boolean(config.image);
+
   useEffect(() => {
     setIsLoaded(true);
     const statuses = [
@@ -71,13 +102,40 @@ export function ProjectCategoryHero({
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[60vh] w-full flex flex-col items-center justify-center">
-      <BlueprintBackground />
+    <section className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center overflow-hidden">
 
-      {/* Circuit overlay */}
+      {/* Photo background */}
+      {hasImage && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={config.image}
+            alt={`${category.label} category hero`}
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          {/* Dark gradient overlay — keeps text legible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
+          {/* Cyan tint strip at bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-electric-cyan/5 to-transparent" />
+        </div>
+      )}
+
+      {/* Subtle grid texture over photo */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none opacity-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--electric-cyan) 1px, transparent 1px), linear-gradient(90deg, var(--electric-cyan) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Animated circuit lines */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         <svg
-          className="absolute inset-0 w-full h-full opacity-15"
+          className="absolute inset-0 w-full h-full opacity-20"
           viewBox="0 0 1440 700"
           fill="none"
         >
@@ -99,12 +157,12 @@ export function ProjectCategoryHero({
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 2.5, delay: 1, ease: "easeOut" }}
           />
-          {[
+          {([
             [400, 300],
             [800, 350],
             [300, 400],
             [600, 500],
-          ].map(([cx, cy], i) => (
+          ] as [number, number][]).map(([cx, cy], i) => (
             <motion.circle
               key={i}
               cx={cx}
@@ -112,7 +170,7 @@ export function ProjectCategoryHero({
               r="3"
               fill="var(--electric-cyan)"
               initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.5 }}
+              animate={{ scale: 1, opacity: 0.6 }}
               transition={{ delay: 1.4 + i * 0.1, duration: 0.3 }}
             />
           ))}
@@ -120,9 +178,9 @@ export function ProjectCategoryHero({
 
         {/* Scan line */}
         <motion.div
-          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
+          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/25 to-transparent"
           animate={{ top: ["0%", "100%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
@@ -174,8 +232,8 @@ export function ProjectCategoryHero({
           variants={itemVariants}
           className="flex justify-center mb-6"
         >
-          <div className="w-16 h-16 rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 flex items-center justify-center">
-            <FolderOpen className="w-8 h-8 text-electric-cyan" />
+          <div className="w-16 h-16 rounded-xl border border-electric-cyan/40 bg-black/40 backdrop-blur-sm flex items-center justify-center shadow-[0_0_24px_rgba(0,242,255,0.15)]">
+            {config.icon}
           </div>
         </motion.div>
 
@@ -194,10 +252,11 @@ export function ProjectCategoryHero({
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
+          className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white drop-shadow-lg"
         >
-          <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-500">
-            {category.label}
+          <span className="block">{category.label}</span>
+          <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-400">
+            {config.accentWord}
           </span>
         </motion.h1>
 
