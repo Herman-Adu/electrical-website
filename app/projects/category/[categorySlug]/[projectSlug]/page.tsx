@@ -155,7 +155,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.challenge && detail?.solution && (
-        <section className="section-container section-padding-sm bg-background">
+        <section className="section-container py-12 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectChallengeSolution
               challenge={detail.challenge}
@@ -166,7 +166,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.timeline && detail.timeline.length > 0 && (
-        <section className="section-container section-padding-sm bg-background">
+        <section className="section-container py-12 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectTimeline phases={detail.timeline} />
           </div>
@@ -174,7 +174,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.gallery && detail.gallery.length > 0 && (
-        <section className="section-container section-padding-sm bg-background">
+        <section className="section-container py-12 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectGallery images={detail.gallery} />
           </div>
@@ -182,7 +182,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.testimonial && (
-        <section className="section-container section-padding-sm bg-background">
+        <section className="section-container py-12 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectTestimonialCard testimonial={detail.testimonial} />
           </div>
