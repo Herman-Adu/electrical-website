@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { AlertTriangle, Lightbulb } from "lucide-react";
+import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 
 interface ProjectChallengeSolutionProps {
   challenge: string;
@@ -16,9 +17,11 @@ export function ProjectChallengeSolution({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
+  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   return (
-    <section className="py-16 sm:py-24 bg-background">
+    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
+      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div

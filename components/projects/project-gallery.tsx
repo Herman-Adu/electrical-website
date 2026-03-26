@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectGalleryImage } from "@/types/projects";
 
 interface ProjectGalleryProps {
@@ -18,6 +19,7 @@ export function ProjectGallery({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
+  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,7 +57,8 @@ export function ProjectGallery({
 
   return (
     <>
-      <section className="py-16 sm:py-24 bg-card/30">
+      <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
+        <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
         <div className="section-content max-w-6xl" ref={containerRef}>
           {/* Header */}
           <motion.div

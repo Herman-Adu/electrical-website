@@ -10,6 +10,7 @@ import {
   type PanInfo,
 } from "framer-motion";
 import { ArrowRight, MapPin, GripHorizontal } from "lucide-react";
+import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
 
@@ -39,6 +40,7 @@ export function ProjectRelatedCarousel({
 }: ProjectRelatedCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
+  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [showHint, setShowHint] = useState(true);
 
@@ -82,7 +84,8 @@ export function ProjectRelatedCarousel({
   };
 
   return (
-    <section className="py-12" aria-label="Related projects">
+    <section ref={sectionRef} className="relative py-12 bg-background overflow-hidden" aria-label="Related projects">
+      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
       {/* Header */}
       <div className="section-content max-w-6xl mb-6">
         <div className="flex items-center justify-between gap-4">

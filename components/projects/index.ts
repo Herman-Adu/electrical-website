@@ -24,5 +24,6 @@ export { ProjectChallengeSolution } from "./project-challenge-solution";
 export { ProjectGallery } from "./project-gallery";
 export { ProjectTestimonialCard } from "./project-testimonial";
 export { ProjectKpiGrid } from "./project-kpi-grid";
+export { ProjectKpiSection } from "./project-kpi-section";
 export { ProjectRelatedCarousel } from "./project-related-carousel";
 export { ProjectSocialCTA } from "./project-social-cta";

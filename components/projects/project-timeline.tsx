@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { CheckCircle, Clock, Circle } from "lucide-react";
+import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectTimelinePhase } from "@/types/projects";
 
 interface ProjectTimelineProps {
@@ -41,11 +42,13 @@ export function ProjectTimeline({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
+  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   if (phases.length === 0) return null;
 
   return (
-    <section className="py-16 sm:py-24 bg-background">
+    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
+      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div

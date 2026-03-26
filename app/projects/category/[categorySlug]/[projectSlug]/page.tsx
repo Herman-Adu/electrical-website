@@ -17,11 +17,10 @@ import {
   ProjectChallengeSolution,
   ProjectGallery,
   ProjectTestimonialCard,
-  ProjectKpiGrid,
+  ProjectKpiSection,
   ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
-import { SectionDivider } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 
@@ -141,97 +140,71 @@ export default async function CategoryProjectDetailPage({
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
 
       {/* KPI Grid */}
-      <section className="section-container section-padding-sm bg-background">
-        <div className="section-content max-w-6xl">
-          <ProjectKpiGrid kpis={project.kpis} />
-        </div>
-      </section>
+      <ProjectKpiSection kpis={project.kpis} />
 
       {detail?.intro && (
-        <>
-          <SectionDivider label="Project Overview" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectDetailIntro data={detail.intro} />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectDetailIntro data={detail.intro} />
+          </div>
+        </section>
       )}
 
       {detail?.scope && detail.scope.length > 0 && (
-        <>
-          <SectionDivider label="Scope of Work" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectScopeGrid items={detail.scope} />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectScopeGrid items={detail.scope} />
+          </div>
+        </section>
       )}
 
       {detail?.challenge && detail?.solution && (
-        <>
-          <SectionDivider label="Challenge & Solution" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectChallengeSolution
-                challenge={detail.challenge}
-                solution={detail.solution}
-              />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectChallengeSolution
+              challenge={detail.challenge}
+              solution={detail.solution}
+            />
+          </div>
+        </section>
       )}
 
       {detail?.timeline && detail.timeline.length > 0 && (
-        <>
-          <SectionDivider label="Project Timeline" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectTimeline phases={detail.timeline} />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectTimeline phases={detail.timeline} />
+          </div>
+        </section>
       )}
 
       {detail?.gallery && detail.gallery.length > 0 && (
-        <>
-          <SectionDivider label="Project Gallery" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectGallery images={detail.gallery} />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectGallery images={detail.gallery} />
+          </div>
+        </section>
       )}
 
       {detail?.testimonial && (
-        <>
-          <SectionDivider label="Client Testimonial" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectTestimonialCard testimonial={detail.testimonial} />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectTestimonialCard testimonial={detail.testimonial} />
+          </div>
+        </section>
       )}
 
       {relatedProjects.length > 0 && (
-        <>
-          <SectionDivider label="Related Projects" />
-          <section className="section-container section-padding-sm bg-background">
-            <div className="section-content max-w-6xl">
-              <ProjectRelatedCarousel
-                projects={relatedProjects}
-                categorySlug={categorySlug}
-                heading={`More ${category.label} Projects`}
-              />
-            </div>
-          </section>
-        </>
+        <section className="section-container section-padding-sm bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectRelatedCarousel
+              projects={relatedProjects}
+              categorySlug={categorySlug}
+              heading={`More ${category.label} Projects`}
+            />
+          </div>
+        </section>
       )}
 
-      <SectionDivider />
       <section className="section-container section-padding-sm bg-background">
         <div className="section-content max-w-6xl">
           <ProjectSocialCTA

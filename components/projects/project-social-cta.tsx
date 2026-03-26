@@ -13,6 +13,7 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
+import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 
 const socialLinks = [
   {
@@ -59,9 +60,11 @@ export function ProjectSocialCTA({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
+  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   return (
-    <section className="py-16 sm:py-24 bg-card/30">
+    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
+      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} />
       <div className="section-content max-w-6xl" ref={containerRef}>
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Social Links */}
