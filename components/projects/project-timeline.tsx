@@ -48,7 +48,7 @@ export function ProjectTimeline({
 
   return (
     <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
-      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
+      {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div
