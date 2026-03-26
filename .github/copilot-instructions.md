@@ -48,6 +48,15 @@ Use `/health-check` — verify MCP server connectivity and circuit-breaker state
 - **Audit:** Every agent action is logged via `AuditLogger` with structured `AuditEvent`
 - **Single responsibility:** One skill = one concern. No multi-concern skills.
 
+## Secret Handling Protocol (Non-Negotiable)
+
+- Never print, echo, summarize, or quote real secret values from `.env*`, terminal output, screenshots, logs, or tool results.
+- If a secret appears in context, treat it as sensitive and mask it in all outputs (example: `re_***`, `gQAA***`).
+- Never commit `.env`, `.env.local`, or any secret-bearing file. Only `.env.example` may contain placeholders.
+- When providing examples, use placeholder tokens only (never realistic credential formats beyond masked stubs).
+- If a user accidentally exposes credentials, immediately recommend rotation and continue using masked values only.
+- During debugging and brainstorming, refer to secret variable names (e.g., `RESEND_API_KEY`) only — never values.
+
 ## File Naming Conventions
 
 - Skills: `<skill-id>.skill.ts`

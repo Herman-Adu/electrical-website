@@ -3,6 +3,7 @@
 ## Platinum Agreement
 
 ### Core Principles
+
 1. **No Hallucination** - If unknown, I state "I don't know" and research
 2. **No Shortcuts** - Build validates or we don't commit
 3. **Transparent Costs** - Real token/cost tracking, not estimates
@@ -10,35 +11,40 @@
 5. **Validation-First** - 3-axis review (TypeScript, ESLint, Visual) before "done"
 
 ### Session Contract
+
 - I load `.v0/` framework before any work
 - I announce: Phase, Task, Model, Budget, Health
 - I checkpoint at ops 7-8 and 15
 - I update state files after each change batch
 - I run `pnpm run build` before declaring completion
+- I never expose secret values from `.env*`, terminal logs, screenshots, or tool output; I use masked values and variable names only
 
 ---
 
 ## Quick Reference
 
 ### Brand Colors (Semantic Tokens)
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `electric-cyan` | #00f2ff | CTAs, highlights, glows |
-| `deep-slate` | #020617 | Main background |
-| `pylon-grey` | #1e293b | Cards, panels, surfaces |
-| `amber-warning` | #f59e0b | Alerts, warnings only |
-| `foreground` | #f8fafc | Primary text |
-| `muted-foreground` | #94a3b8 | Secondary text |
+
+| Token              | Hex     | Usage                   |
+| ------------------ | ------- | ----------------------- |
+| `electric-cyan`    | #00f2ff | CTAs, highlights, glows |
+| `deep-slate`       | #020617 | Main background         |
+| `pylon-grey`       | #1e293b | Cards, panels, surfaces |
+| `amber-warning`    | #f59e0b | Alerts, warnings only   |
+| `foreground`       | #f8fafc | Primary text            |
+| `muted-foreground` | #94a3b8 | Secondary text          |
 
 ### Typography
-| Element | Class | Font |
-|---------|-------|------|
-| Headings | `font-sans` | Inter |
-| Body | `font-sans` | Inter |
-| Technical/Labels | `font-mono` | IBM Plex Mono |
+
+| Element           | Class              | Font                  |
+| ----------------- | ------------------ | --------------------- |
+| Headings          | `font-sans`        | Inter                 |
+| Body              | `font-sans`        | Inter                 |
+| Technical/Labels  | `font-mono`        | IBM Plex Mono         |
 | Industrial Labels | `industrial-label` | Mono, 10px, uppercase |
 
 ### Animation Utilities (Pre-defined in globals.css)
+
 ```css
 .blueprint-grid         /* Large grid overlay */
 .blueprint-grid-fine    /* Small grid overlay */
@@ -57,6 +63,7 @@
 ## Architecture Patterns
 
 ### File Structure
+
 ```
 app/
   layout.tsx           # Root layout, fonts, Navbar
@@ -73,21 +80,23 @@ components/
 ```
 
 ### Import Patterns (Mandatory)
+
 ```typescript
 // Sections - ALWAYS barrel export
-import { Services, Features, Dashboard } from '@/components/sections'
+import { Services, Features, Dashboard } from "@/components/sections";
 
 // Hero - ALWAYS barrel export
-import { Hero } from '@/components/hero'
+import { Hero } from "@/components/hero";
 
 // Navigation - ALWAYS barrel export
-import { Navbar } from '@/components/navigation'
+import { Navbar } from "@/components/navigation";
 
 // UI - Direct import
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 ```
 
 ### New Component Checklist
+
 1. Create in correct directory
 2. Add to barrel export (`index.ts`)
 3. Import via barrel in consumer
@@ -99,6 +108,7 @@ import { Button } from '@/components/ui/button'
 ## Coding Standards
 
 ### DO
+
 - Use semantic tokens (`bg-background`, `text-foreground`)
 - Use custom brand colors (`text-electric-cyan`, `bg-pylon-grey`)
 - Follow barrel export pattern for all non-UI components
@@ -107,6 +117,7 @@ import { Button } from '@/components/ui/button'
 - Test responsiveness at 375px, 768px, 1024px, 1440px
 
 ### DON'T
+
 - Hardcode hex colors in components
 - Create inline keyframes (use globals.css)
 - Skip barrel exports
@@ -119,42 +130,47 @@ import { Button } from '@/components/ui/button'
 ## Validation Protocol
 
 ### 3-Axis Review (Before "Done")
+
 1. **TypeScript** - No type errors (`pnpm run build`)
 2. **ESLint** - No lint warnings
 3. **Visual** - Matches design intent, responsive
 
 ### Build Command
+
 ```bash
 pnpm run build
 ```
+
 Must pass with 0 errors before any completion claim.
 
 ---
 
 ## Rule Index
-| # | Rule | Category |
-|---|------|----------|
-| 1 | Load .v0/ framework at session start | Session |
-| 2 | Announce phase/task/model/budget/health | Session |
-| 3 | Checkpoint at ops 7-8 | Session |
-| 4 | Checkpoint at ops 15 | Session |
-| 5 | Use barrel exports for sections/hero/nav | Architecture |
-| 6 | Mobile-first responsive design | Styling |
-| 7 | Semantic tokens only, no hardcoded colors | Styling |
-| 8 | 3-axis validation before completion | Quality |
-| 9 | Update state.json after changes | State |
-| 10 | Run pnpm run build before done | Quality |
-| 11 | No shortcuts - full validation always | Platinum |
-| 12 | Health-first model selection | Model |
-| 13 | Model change = metrics update | Model |
-| 14 | **STOP = STOP immediately. No code changes, no recommendations, no continuations.** | **Critical** |
-| 15 | Use SectionWrapper for ALL page sections | Architecture |
+
+| #   | Rule                                                                                | Category     |
+| --- | ----------------------------------------------------------------------------------- | ------------ |
+| 1   | Load .v0/ framework at session start                                                | Session      |
+| 2   | Announce phase/task/model/budget/health                                             | Session      |
+| 3   | Checkpoint at ops 7-8                                                               | Session      |
+| 4   | Checkpoint at ops 15                                                                | Session      |
+| 5   | Use barrel exports for sections/hero/nav                                            | Architecture |
+| 6   | Mobile-first responsive design                                                      | Styling      |
+| 7   | Semantic tokens only, no hardcoded colors                                           | Styling      |
+| 8   | 3-axis validation before completion                                                 | Quality      |
+| 9   | Update state.json after changes                                                     | State        |
+| 10  | Run pnpm run build before done                                                      | Quality      |
+| 11  | No shortcuts - full validation always                                               | Platinum     |
+| 12  | Health-first model selection                                                        | Model        |
+| 13  | Model change = metrics update                                                       | Model        |
+| 14  | **STOP = STOP immediately. No code changes, no recommendations, no continuations.** | **Critical** |
+| 15  | Use SectionWrapper for ALL page sections                                            | Architecture |
 
 ---
 
 ## RULE 15: Section Container System (v3.0)
 
 ### The Problem We Solved
+
 Inconsistent vertical alignment across sections. Each component had its own padding values, breakpoint jumps, and centering logic. This violated SOLID principles and created a maintenance nightmare.
 
 ### The Solution: SectionWrapper Component
@@ -162,6 +178,7 @@ Inconsistent vertical alignment across sections. Each component had its own padd
 **Location:** `components/ui/section-wrapper.tsx`
 
 **Architecture:**
+
 ```
 <SectionWrapper>
   ├── Background layer (absolute, z-0) - images, videos, gradients
@@ -172,18 +189,21 @@ Inconsistent vertical alignment across sections. Each component had its own padd
 ```
 
 **Fluid Spacing (CSS clamp):**
+
 ```css
 .section-fluid {
   padding-top: clamp(3rem, 8vh, 10rem);
   padding-bottom: clamp(3rem, 8vh, 10rem);
 }
 ```
+
 - MIN: 3rem (48px) - mobile minimum
 - PREFERRED: 8vh - scales with viewport
 - MAX: 10rem (160px) - desktop maximum
 - SAME top AND bottom = ALWAYS centered
 
 ### Usage
+
 ```tsx
 import { SectionWrapper } from "@/components/ui/section-wrapper"
 
@@ -198,13 +218,15 @@ import { SectionWrapper } from "@/components/ui/section-wrapper"
 ```
 
 ### Single Responsibility
-| Layer | Responsibility | Handles |
-|-------|---------------|---------|
-| SectionWrapper | External layout | Height, centering, padding |
+
+| Layer           | Responsibility         | Handles                       |
+| --------------- | ---------------------- | ----------------------------- |
+| SectionWrapper  | External layout        | Height, centering, padding    |
 | section-content | Horizontal containment | max-width, horizontal gutters |
-| Component | Internal content | Its own data and presentation |
+| Component       | Internal content       | Its own data and presentation |
 
 ### Rules
+
 1. ALL page sections MUST use SectionWrapper
 2. Components MUST NOT add external margins/padding
 3. Background images go in the `background` prop

@@ -16,6 +16,9 @@ For multi-step ambiguity, use sequential reasoning before implementation.
 
 # Project-specific rules
 
+- Secrets safety first: never output secret values from `.env*`, terminal logs, or screenshots; use masked values only and reference variable names instead of values.
+- If credentials are exposed during a session, treat them as compromised and instruct immediate rotation.
+
 - This project uses Next.js 16 App Router and strict TypeScript.
 - Default to Server Components.
 - Use `"use client"` only for browser interactivity.
