@@ -14,14 +14,19 @@ export const env = createEnv({
       .positive()
       .default(1),
     CONTACT_RATE_LIMIT: z.coerce.number().int().positive().default(3),
-    CONTACT_RATE_LIMIT_MODE: z.enum(["kv", "memory", "off"]).optional(),
+    CONTACT_RATE_LIMIT_MODE: z.enum(["redis", "memory", "off"]).optional(),
     NEXT_IMAGE_UNOPTIMIZED: z
       .enum(["true", "false"])
       .optional()
       .transform((value) => value === "true"),
+    // Production: Vercel KV
     KV_REST_API_URL: z.string().url().optional(),
     KV_REST_API_TOKEN: z.string().min(1).optional(),
     KV_REST_API_READ_ONLY_TOKEN: z.string().min(1).optional(),
+    // Development: Docker Redis
+    REDIS_URL: z.string().url().optional(),
+    REDIS_REST_URL: z.string().url().optional(),
+    REDIS_USE_REST_API: z.enum(["true", "false"]).optional(),
   },
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
@@ -37,6 +42,7 @@ export const env = createEnv({
     CONTACT_RATE_LIMIT: process.env.CONTACT_RATE_LIMIT,
     CONTACT_RATE_LIMIT_MODE: process.env.CONTACT_RATE_LIMIT_MODE,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
+    // Production: Vercel KV
     KV_REST_API_URL:
       process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
     KV_REST_API_TOKEN:
@@ -44,6 +50,10 @@ export const env = createEnv({
     KV_REST_API_READ_ONLY_TOKEN:
       process.env.KV_REST_API_READ_ONLY_TOKEN ??
       process.env.UPSTASH_REDIS_REST_READ_ONLY_TOKEN,
+    // Development: Docker Redis
+    REDIS_URL: process.env.REDIS_URL,
+    REDIS_REST_URL: process.env.REDIS_REST_URL,
+    REDIS_USE_REST_API: process.env.REDIS_USE_REST_API,
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },

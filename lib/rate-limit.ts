@@ -1,40 +1,37 @@
 /**
  * Redis-based rate limiter for contact form submissions
  *
- * Uses Vercel KV (Redis-compatible) for distributed rate limiting.
- * Automatically expires entries after the window period.
- * Supports both local development (with fallback) and Vercel production.
+ * Uses:
+ * - Production: Vercel KV (Redis-compatible) for distributed rate limiting
+ * - Development: Docker Redis or fallback (in-memory)
+ * - Fallback: In-memory cache if Redis unavailable
  *
  * Key format: rate:submit:{ip-hash}
  * TTL: Set to window duration for automatic cleanup
  */
 
-import { kv } from "@vercel/kv";
 import { createHash } from "node:crypto";
 import { env } from "@/app/env";
+import { getRedisAdapter } from "@/lib/redis-adapter";
 
-type RateLimitMode = "kv" | "memory" | "off";
+type RateLimitMode = "redis" | "memory" | "off";
 
-const hasKvConfig = Boolean(
-  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
-);
 const isProduction = process.env.NODE_ENV === "production";
 
 const configuredMode: RateLimitMode =
-  env.CONTACT_RATE_LIMIT_MODE ?? (isProduction ? "kv" : "memory");
+  env.CONTACT_RATE_LIMIT_MODE ?? (isProduction ? "redis" : "memory");
 
 const rateLimitMode: RateLimitMode =
   configuredMode === "off" ||
   configuredMode === "memory" ||
-  configuredMode === "kv"
+  configuredMode === "redis"
     ? configuredMode
-    : "kv";
+    : "redis";
 
-if (isProduction && rateLimitMode === "off") {
-  throw new Error("CONTACT_RATE_LIMIT_MODE=off is not allowed in production");
+if (isProduction && rateLimitMode !== "redis") {
+  throw new Error("CONTACT_RATE_LIMIT_MODE must be redis in production");
 }
 
-let kvDisabledWarned = false;
 let modeWarned = false;
 
 const blockedUntilByIpHash = new Map<string, number>();
@@ -54,28 +51,6 @@ function canUseRateLimit(): boolean {
   }
 
   return true;
-}
-
-function canUseKv(): boolean {
-  if (rateLimitMode !== "kv") {
-    return false;
-  }
-
-  if (hasKvConfig) {
-    return true;
-  }
-
-  if (!kvDisabledWarned) {
-    console.warn("[RATE_LIMIT_KV_DISABLED]", {
-      message:
-        "KV_REST_API_URL and KV_REST_API_TOKEN are not configured. " +
-        "Rate limiting will use in-memory fallback.",
-      timestamp: new Date().toISOString(),
-    });
-    kvDisabledWarned = true;
-  }
-
-  return false;
 }
 
 function checkMemoryRateLimit(
@@ -123,7 +98,7 @@ function getMemoryRemaining(ipHash: string, limit: number): number {
 }
 
 /**
- * Hash IP to shorter key for KV storage
+ * Hash IP to shorter key for Redis storage
  * Reduces storage footprint and obfuscates IPs in logs
  *
  * @param ip Client IP address
@@ -175,29 +150,28 @@ export async function checkRateLimit(
 
   const ipHash = hashIp(clientKey);
 
+  // Memory-only mode
   if (rateLimitMode === "memory") {
     return checkMemoryRateLimit(ipHash, limit, windowMs);
   }
 
+  // Check ephemeral block (applies to both memory and redis modes)
   const blockedUntil = blockedUntilByIpHash.get(ipHash);
   if (blockedUntil && blockedUntil > Date.now()) {
     return false;
   }
 
-  if (!canUseKv()) {
-    return checkMemoryRateLimit(ipHash, limit, windowMs);
-  }
-
   try {
+    const redis = await getRedisAdapter();
     const key = `rate:submit:${ipHash}`;
     const ttlSeconds = Math.ceil(windowMs / 1000);
 
     // Increment counter atomically
-    const count = await kv.incr(key);
+    const count = await redis.incr(key);
 
-    // Set TTL on first request from this IP
+    // Set TTL on first request from this IP in this window
     if (count === 1) {
-      await kv.expire(key, ttlSeconds);
+      await redis.expire(key, ttlSeconds);
     }
 
     // Check if limit exceeded
@@ -208,11 +182,19 @@ export async function checkRateLimit(
 
     return allowed;
   } catch (error) {
-    console.error("[RATE_LIMIT_KV_FALLBACK]", {
+    const logKey = isProduction
+      ? "[RATE_LIMIT_PRODUCTION_ERROR]"
+      : "[RATE_LIMIT_REDIS_FALLBACK]";
+
+    console.error(logKey, {
       message: error instanceof Error ? error.message : "Unknown error",
       ipHash,
       timestamp: new Date().toISOString(),
     });
+
+    if (isProduction) {
+      return false;
+    }
 
     return checkMemoryRateLimit(ipHash, limit, windowMs);
   }
@@ -220,7 +202,7 @@ export async function checkRateLimit(
 
 /**
  * Get remaining submissions for an IP
- * Returns 0 if limit exceeded or KV unavailable (conservative estimate)
+ * Returns 0 if limit exceeded or Redis unavailable (conservative estimate)
  *
  * @param ip Client IP address
  * @param limit Max submissions allowed
@@ -243,25 +225,32 @@ export async function getRemainingSubmissions(
 
   const ipHash = hashIp(clientKey);
 
+  // Memory-only mode
   if (rateLimitMode === "memory") {
     return getMemoryRemaining(ipHash, limit);
   }
 
-  if (!canUseKv()) {
-    return getMemoryRemaining(ipHash, limit);
-  }
-
   try {
+    const redis = await getRedisAdapter();
     const key = `rate:submit:${ipHash}`;
 
-    const count = (await kv.get<number>(key)) || 0;
+    const countStr = await redis.get(key);
+    const count = countStr ? parseInt(countStr, 10) : 0;
     return Math.max(0, limit - count);
   } catch (error) {
-    console.error("[RATE_LIMIT_KV_FALLBACK]", {
+    const logKey = isProduction
+      ? "[RATE_LIMIT_PRODUCTION_ERROR]"
+      : "[RATE_LIMIT_REDIS_FALLBACK]";
+
+    console.error(logKey, {
       message: error instanceof Error ? error.message : "Unknown error",
       ipHash,
       timestamp: new Date().toISOString(),
     });
+
+    if (isProduction) {
+      return 0;
+    }
 
     return getMemoryRemaining(ipHash, limit);
   }
