@@ -147,7 +147,7 @@ export default async function CategoryProjectDetailPage({
       )}
 
       {detail?.scope && detail.scope.length > 0 && (
-        <section className="section-container py-2 bg-background">
+        <section className="section-container py-8 bg-background">
           <div className="section-content max-w-6xl">
             <ProjectScopeGrid items={detail.scope} />
           </div>
