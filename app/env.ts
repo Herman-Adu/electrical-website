@@ -41,6 +41,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1),
+    NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
   },
   runtimeEnv: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
@@ -70,6 +71,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+    NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
   },
   emptyStringAsUndefined: true,
   skipValidation:

@@ -1,10 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import * as Sentry from "@sentry/nextjs";
 import { Navbar } from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SITE_URL, siteConfig } from "@/lib/site-config";
+import { env } from "./env";
 import "./globals.css";
+
+// Initialize Sentry for server-side error tracking
+if (env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: env.NEXT_PUBLIC_SENTRY_DSN,
+    environment: process.env.NODE_ENV,
+    enabled: process.env.NODE_ENV === "production",
+    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,
+  });
+}
 
 const inter = Inter({
   subsets: ["latin"],
