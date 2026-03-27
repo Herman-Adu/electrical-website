@@ -158,37 +158,39 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Card */}
+          {/* Emergency Contact Card - Vertical Stack */}
           <div className="col-span-2 md:col-span-1">
             <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
             </h4>
-            <div className="p-4 border border-electric-cyan/20 bg-card/50 rounded-lg">
-              <div className="flex items-center gap-2 mb-3">
+            <div className="p-5 border border-electric-cyan/20 bg-gradient-to-b from-card/80 to-card/40 rounded-lg">
+              {/* Online Status */}
+              <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
-                <span className="font-mono text-[9px] text-emerald-500 tracking-widest">
-                  ONLINE
+                <span className="font-mono text-[9px] text-emerald-500 tracking-widest uppercase">
+                  Online
                 </span>
               </div>
-              {/* Logo mark for emergency branding */}
-              <div className="flex items-center gap-3 mb-3">
-                <div className="relative w-8 h-8 flex-shrink-0">
-                  <Image
-                    src="/images/nexgen-logo-round.png"
-                    alt=""
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div>
-                  <a
-                    href="tel:+442012345678"
-                    className="text-foreground font-bold text-base hover:text-electric-cyan transition-colors block"
-                  >
-                    +44 (0) 20 1234 5678
-                  </a>
-                </div>
+              
+              {/* Brand Mark */}
+              <div className="relative w-10 h-10 mb-4">
+                <Image
+                  src="/images/nexgen-logo-round.png"
+                  alt=""
+                  fill
+                  className="object-contain"
+                />
               </div>
+              
+              {/* Phone Number - Prominent */}
+              <a
+                href="tel:+442012345678"
+                className="block text-electric-cyan font-bold text-lg md:text-xl hover:text-foreground transition-colors mb-2"
+              >
+                +44 (0) 20 1234 5678
+              </a>
+              
+              {/* Subtext */}
               <p className="text-muted-foreground/60 text-xs">
                 Rapid response team ready
               </p>
