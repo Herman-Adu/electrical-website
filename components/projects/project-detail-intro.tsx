@@ -80,7 +80,7 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 bg-background overflow-hidden"
+      className="relative py-18 bg-background overflow-hidden"
     >
       {/* Blueprint grid overlay */}
       {/* <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" /> */}

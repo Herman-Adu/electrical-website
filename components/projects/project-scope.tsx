@@ -47,7 +47,7 @@ export function ProjectScopeGrid({
   if (items.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-18 bg-card/30 overflow-hidden">
+    <section ref={sectionRef} className="relative py-18 bg-card/30 overflow-hidden">
       <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Eyebrow */}
