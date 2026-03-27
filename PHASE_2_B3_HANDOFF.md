@@ -475,6 +475,7 @@ After completing P2-B3:
 ## HANDOFF COMPLETE
 
 Claude can now proceed with **EITHER**:
+
 1. **Sub-agent dispatch** (faster): Use `runSubagent()` to dispatch all 4 tickets in parallel (see prompts above)
 2. **Direct implementation** (stable): Use code-search + direct file edits
 
