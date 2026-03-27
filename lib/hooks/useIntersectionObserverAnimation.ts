@@ -14,10 +14,14 @@ export interface UseIntersectionObserverAnimationReturn {
 }
 
 /**
- * useIntersectionObserverAnimation - Consolidates mounted state + scroll detection
+ * Custom React hook: Intersection observer for scroll-triggered animations
  *
- * Replaces common pattern of:
- * ```
+ * Consolidates the common pattern of mounting state detection + visibility tracking.
+ * Replaces boilerplate code for scroll animations.
+ *
+ * **What it replaces:**
+ * ```typescript
+ * // Old pattern (replaced by this hook)
  * const [mounted, setMounted] = useState(false);
  * const [inView, setInView] = useState(false);
  * useEffect(() => setMounted(true), []);
@@ -27,11 +31,29 @@ export interface UseIntersectionObserverAnimationReturn {
  * }, []);
  * ```
  *
- * Returns:
- * - inView: Current visibility state
- * - hasAnimated: True after first animation (for "once" animations)
+ * **Returns:**
+ * - inView: Current visibility state (true if element is visible in viewport)
+ * - hasAnimated: True after first animation (for "animate once" patterns);
+ *
+ * **Performance:**
+ * - Only one IntersectionObserver instance per component
+ * - Automatic cleanup on unmount
+ * - Respects threshold and margin configurations
+ *
+ * @param props - Configuration object
+ * @param props.ref - React ref to the element to observe
+ * @param props.threshold - Fraction of element that must be visible (0-1, default: 0.3)
+ * @param props.margin - CSS margin around observer bounds (default: '0px')
+ *
+ * @returns Object with:
+ *   - inView: Boolean indicating if element is currently visible
+ *   - hasAnimated: Boolean indicating if element has been animated at least once
+ *
+ * @throws Never. Uses internal error boundaries.
  *
  * @example
+ * ```typescript
+ * const containerRef = useRef<HTMLDivElement>(null);
  * const { inView, hasAnimated } = useIntersectionObserverAnimation({
  *   ref: containerRef,
  *   threshold: 0.3,
@@ -40,10 +62,12 @@ export interface UseIntersectionObserverAnimationReturn {
  *
  * return (
  *   <motion.div
+ *     ref={containerRef}
  *     initial={{ opacity: 0 }}
  *     animate={inView ? { opacity: 1 } : { opacity: 0 }}
  *   />
  * );
+ * ```
  */
 export function useIntersectionObserverAnimation({
   ref,

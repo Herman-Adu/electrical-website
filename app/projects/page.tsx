@@ -14,6 +14,7 @@ import {
   projectCategories,
 } from "@/data/projects";
 import { createProjectsListMetadata } from "@/lib/metadata-projects";
+import { safeValidateProjectsParams } from "@/lib/actions/validate-search-params";
 import type { ProjectCategorySlug } from "@/types/projects";
 
 export const metadata: Metadata = createProjectsListMetadata();
@@ -24,10 +25,13 @@ export default async function ProjectsPage({
   searchParams?: Promise<{ category?: string | string[] }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const categoryParamValue = resolvedSearchParams?.category;
-  const categoryParam = Array.isArray(categoryParamValue)
-    ? categoryParamValue[0]
-    : categoryParamValue;
+
+  // Validate search params with Zod schema
+  const validatedParams = await safeValidateProjectsParams(
+    resolvedSearchParams || {},
+  );
+
+  const categoryParam = validatedParams.category;
 
   const activeCategory: ProjectCategorySlug =
     categoryParam && isProjectCategorySlug(categoryParam)
