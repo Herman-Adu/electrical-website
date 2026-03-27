@@ -20,13 +20,19 @@ import {
   director2Data,
   coreValuesData,
 } from "@/data/about";
-import { createStandardPageMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = createStandardPageMetadata({
+export const metadata: Metadata = createPageMetadata({
   title: "About Us | Nexgen Electrical Innovations",
   description:
     "Meet the team behind Nexgen Electrical Innovations. NICEIC Approved Contractors delivering gold-standard electrical engineering across London and the Home Counties since 2009.",
   path: "/about",
+  keywords: [
+    "about Nexgen Electrical",
+    "NICEIC approved contractors",
+    "electrical engineering team",
+    "London electrical contractor",
+  ],
   openGraphTitle: "About Nexgen Electrical Innovations",
   openGraphDescription:
     "Gold-standard electrical engineering, community commitment, and 15 years of excellence.",

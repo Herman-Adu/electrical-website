@@ -38,7 +38,7 @@ export const openGraphSchema = z.object({
     .string()
     .max(160, "OG description should be under 160 characters"),
   url: z.string().url("Invalid OG URL"),
-  type: z.enum(["website", "article", "product", "article"]).default("website"),
+  type: z.enum(["website", "article"]).default("website"),
   images: z.array(ogImageSchema).optional(),
   siteName: z.string().optional(),
   locale: z.string().default("en_GB"),
@@ -68,6 +68,26 @@ export const twitterCardSchema = z.object({
 });
 
 export type TwitterCard = z.infer<typeof twitterCardSchema>;
+
+/**
+ * Page Metadata Input Schema
+ * Validates user-supplied input to createPageMetadata helper
+ * Enforces SEO best-practice character limits
+ */
+export const pageMetadataInputSchema = z.object({
+  title: z
+    .string()
+    .min(10, "Title should be at least 10 characters")
+    .max(60, "Title should be under 60 characters"),
+  description: z
+    .string()
+    .min(50, "Description should be at least 50 characters")
+    .max(160, "Description should be under 160 characters"),
+  keywords: z.array(z.string()).optional(),
+  ogImage: z.string().url("Invalid OG image URL").optional(),
+});
+
+export type PageMetadataInput = z.infer<typeof pageMetadataInputSchema>;
 
 /**
  * Page Metadata Schema

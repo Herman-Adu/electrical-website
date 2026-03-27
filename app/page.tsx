@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
-import { createStandardPageMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import {
   Services,
   Features,
@@ -12,11 +12,20 @@ import {
   Footer,
 } from "@/components/sections";
 
-export const metadata: Metadata = createStandardPageMetadata({
+export const metadata: Metadata = createPageMetadata({
   title: "Nexgen Electrical Innovations | Powering the Future",
   description:
     "Expert electrical engineering and installations for commercial and industrial frontiers. High-voltage solutions delivered with precision.",
   path: "/",
+  keywords: [
+    "electrical engineering",
+    "commercial electrical",
+    "industrial electrical",
+    "power solutions",
+    "electrical contractor London",
+    "NICEIC approved",
+  ],
+  ogType: "website",
 });
 
 export default function Home() {

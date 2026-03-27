@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesBento } from "@/components/services/services-bento";
 import { Footer } from "@/components/sections/footer";
-import { createStandardPageMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = createStandardPageMetadata({
+export const metadata: Metadata = createPageMetadata({
   title: "Services | Nexgen Electrical Innovations",
   description:
     "Comprehensive electrical solutions — commercial installations, industrial systems, power distribution, residential services, energy management, and 24/7 emergency response.",
