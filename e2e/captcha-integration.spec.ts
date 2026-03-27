@@ -3,10 +3,8 @@ import { test, expect } from "@playwright/test";
 test.describe("Turnstile CAPTCHA Integration", () => {
   test("Contact form loads with Turnstile widget", async ({ page }) => {
     // Navigate directly to contact page (contact form is not on homepage)
-    await page.goto("/contact", { waitUntil: "networkidle" });
-
-    // Wait a moment for the page to settle
-    await page.waitForTimeout(1000);
+    await page.goto("/contact", { waitUntil: "load" });
+    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
 
     // Verify form exists
     const form = page.locator("form").first();
@@ -42,7 +40,10 @@ test.describe("Turnstile CAPTCHA Integration", () => {
   });
 
   test("Contact form validation requires CAPTCHA", async ({ page }) => {
-    await page.goto("/contact", { waitUntil: "networkidle" });
+    // Use "load" not "networkidle" — Turnstile loads Cloudflare scripts that
+    // keep the network active indefinitely, preventing networkidle from firing.
+    await page.goto("/contact", { waitUntil: "load" });
+    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
 
     // Fill form fields
     await page.locator('input[name="name"]').fill("Test User");
@@ -68,7 +69,8 @@ test.describe("Turnstile CAPTCHA Integration", () => {
   });
 
   test("Form fields render and accept input", async ({ page }) => {
-    await page.goto("/contact", { waitUntil: "networkidle" });
+    await page.goto("/contact", { waitUntil: "load" });
+    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
 
     // Test name field
     const nameInput = page.locator('input[name="name"]');
@@ -98,7 +100,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // by verifying the contact action exists and makes calls to verify tokens
 
     // Navigate to contact page to trigger the client-side code
-    await page.goto("/contact", { waitUntil: "networkidle" });
+    await page.goto("/contact", { waitUntil: "load" });
 
     // Verify the page has the form
     const form = page.locator("form").first();

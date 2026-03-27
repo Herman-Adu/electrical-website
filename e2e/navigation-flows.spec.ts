@@ -19,7 +19,8 @@ test.describe("core page availability", () => {
   test("homepage responds with HTTP 200 and title contains Nexgen or Electrical", async ({
     page,
   }) => {
-    const response = await page.goto("/");
+    // Use domcontentloaded to avoid blocking on animated assets under parallel load
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBe(200);
 
     const title = await page.title();
@@ -81,17 +82,19 @@ test.describe("in-page navigation", () => {
     page,
   }) => {
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
 
-    // The top-level nav About item is a CSS hover dropdown group; use the
-    // footer's plain "About Us" anchor which always navigates directly.
+    // Scroll to footer and find the About Us link
     const footer = page.locator("footer");
     await footer.scrollIntoViewIfNeeded();
     const aboutLink = footer.locator("a[href='/about']").first();
     await expect(aboutLink).toBeVisible({ timeout: 5000 });
-    await aboutLink.click();
 
-    await page.waitForLoadState("networkidle");
+    // Use Promise.all to capture the navigation event triggered by the click
+    await Promise.all([
+      page.waitForURL(/\/about/, { timeout: 10000 }),
+      aboutLink.click(),
+    ]);
+
     expect(page.url()).toMatch(/\/about/);
   });
 
