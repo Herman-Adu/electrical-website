@@ -14,6 +14,11 @@ import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import type { ProjectCategory, ProjectCategorySlug } from "@/types/projects";
 
+interface ProjectsHeroProps {
+  categories: ProjectCategory[];
+  activeCategory: ProjectCategorySlug;
+}
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -44,8 +49,16 @@ export function ProjectsHero({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "25%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0%", "0%"] : ["0%", "-8%"]);
+  const bgY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduce ? ["0%", "0%"] : ["0%", "25%"],
+  );
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduce ? ["0%", "0%"] : ["0%", "-8%"],
+  );
 
   useEffect(() => {
     setIsLoaded(true);
@@ -200,7 +213,7 @@ export function ProjectsHero({
               "px-4 py-2 rounded-full border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
               activeCategory === "all"
                 ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,242,255,0.15)]"
-                : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan"
+                : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
             )}
           >
             All Projects
@@ -218,7 +231,7 @@ export function ProjectsHero({
                   "px-4 py-2 rounded-full border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
                   activeCategory === category.slug
                     ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,242,255,0.15)]"
-                    : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan"
+                    : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
                 )}
               >
                 {category.label}
