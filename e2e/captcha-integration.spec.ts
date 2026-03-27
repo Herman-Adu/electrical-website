@@ -2,16 +2,11 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Turnstile CAPTCHA Integration", () => {
   test("Contact form loads with Turnstile widget", async ({ page }) => {
-    // Navigate to home page
-    await page.goto("/", { waitUntil: "networkidle" });
-
-    // Find and scroll to contact section
-    const contactSection = page.locator("#contact");
-    await expect(contactSection).toBeVisible();
-    await contactSection.scrollIntoViewIfNeeded();
+    // Navigate directly to contact page (contact form is not on homepage)
+    await page.goto("/contact", { waitUntil: "networkidle" });
 
     // Wait a moment for the page to settle
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
 
     // Verify form exists
     const form = page.locator("form").first();
@@ -47,12 +42,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
   });
 
   test("Contact form validation requires CAPTCHA", async ({ page }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
-
-    // Navigate to contact section
-    const contactSection = page.locator("#contact");
-    await contactSection.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1000);
+    await page.goto("/contact", { waitUntil: "networkidle" });
 
     // Fill form fields
     await page.locator('input[name="name"]').fill("Test User");
@@ -78,12 +68,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
   });
 
   test("Form fields render and accept input", async ({ page }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
-
-    // Navigate to contact section
-    const contactSection = page.locator("#contact");
-    await contactSection.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1000);
+    await page.goto("/contact", { waitUntil: "networkidle" });
 
     // Test name field
     const nameInput = page.locator('input[name="name"]');

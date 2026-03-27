@@ -29,7 +29,8 @@ test.describe("static SEO endpoints", () => {
     expect(contentType).toMatch(/text\/plain/i);
 
     const body = await response.text();
-    expect(body).toContain("User-agent");
+    // robots.txt uses "User-Agent" (capital A per RFC spec)
+    expect(body).toMatch(/User-[Aa]gent/);
   });
 
   test("/sitemap.xml returns 200 with XML content-type", async ({

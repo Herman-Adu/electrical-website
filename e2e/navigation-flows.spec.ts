@@ -77,16 +77,17 @@ test.describe("core page availability", () => {
 // 2. In-page navigation
 // ---------------------------------------------------------------------------
 test.describe("in-page navigation", () => {
-  test("clicking About link from homepage navigates to /about", async ({
+  test("clicking About link from footer navigates to /about", async ({
     page,
   }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    // Find an anchor pointing to /about anywhere on the page
-    const aboutLink = page
-      .locator("a[href='/about'], a[href*='/about']")
-      .first();
+    // The top-level nav About item is a CSS hover dropdown group; use the
+    // footer's plain "About Us" anchor which always navigates directly.
+    const footer = page.locator("footer");
+    await footer.scrollIntoViewIfNeeded();
+    const aboutLink = footer.locator("a[href='/about']").first();
     await expect(aboutLink).toBeVisible({ timeout: 5000 });
     await aboutLink.click();
 
