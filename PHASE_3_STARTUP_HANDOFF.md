@@ -1,4 +1,5 @@
 # PHASE 3 STARTUP HANDOFF
+
 **For:** Next Claude Session  
 **Date Prepared:** 2026-03-27  
 **Status:** Ready to delegate — no blockers  
@@ -21,6 +22,7 @@
 ### Recommendation: A (E2E Playwright Tests) — PRIMARY
 
 **Why:**
+
 - Validates all Phase 2 deliverables in real browser environment
 - Highest deployment risk mitigation (catches integration issues)
 - Zero dependencies; can start immediately
@@ -28,6 +30,7 @@
 - Confirms staging readiness with end-to-end coverage
 
 **Scope:**
+
 - Navigation flows (header, footer, internal links)
 - Form submissions (contact, newsletter signup if present)
 - API routes (metadata endpoints, search params validation)
@@ -36,6 +39,7 @@
 - Responsive design breakpoints (mobile, tablet, desktop)
 
 **Deliverables:**
+
 - e2e/smoke-test.spec.ts enhanced with 12-15 new test cases
 - CI integration: GitHub Actions workflow for E2E on PR
 - Coverage report with critical path matrix
@@ -46,18 +50,21 @@
 ### Secondary: D (Performance Monitoring) — AFTER A PASSES
 
 **Why:**
+
 - Establishes baseline metrics post-E2E validation
 - Essential for production support
 - Only 2h implementation
 - Enables early detection of regressions
 
 **Scope:**
+
 - Vercel Analytics integration (Web Vitals dashboard)
 - Sentry error tracking setup (JavaScript errors, 404s, CSP violations)
 - CI perf regression detection (Lighthouse in GH Actions)
 - Monitoring dashboard (Vercel + Sentry)
 
 **Deliverables:**
+
 - Monitoring config in next.config.ts
 - Sentry project setup + DSN in env
 - GitHub Actions perf check workflow
@@ -68,12 +75,14 @@
 ### Optional Parallel: C (Accessibility Audit) — INDEPENDENT
 
 **Why:**
+
 - WCAG 2.1 AA compliance requirement
 - No dependency on A or D
 - Only 3h effort
 - High quality impact for users
 
 **If You Have Bandwidth:**
+
 - Run axe-core automated scan
 - Manual testing with NVDA/JAWS
 - Fix contrast issues, ARIA labels, keyboard navigation
@@ -109,24 +118,28 @@ pnpm exec playwright test e2e/smoke-test.spec.ts --reporter=list
 ### To Avoid Rate Limiting: STAGED APPROACH
 
 **Stage 1: Planning Agent (LIGHT)**
+
 - Query existing test structure
 - Analyze OG route auth (TICKET-004)
 - Map critical user flows
 - Generate test plan doc
 
 **Stage 2: Browser Testing (HEAVY)**
+
 - Use `browser-testing` skill from .github/skills/browser-testing/SKILL.md
 - Delegate all Playwright execution to skill
 - Skill provides browser automation, screenshots, error collection
 - No direct playwright invocations from main Claude thread
 
 **Stage 3: CI Integration (LIGHT)**
-- Use `github-actions` skill  
+
+- Use `github-actions` skill
 - Trigger workflow runs
 - Collect results
 - No manual GitHub API calls
 
 **Stage 4: Monitoring Setup (LIGHT)**
+
 - Env-based configuration
 - No API calls (Sentry/Vercel DSN via .env)
 
@@ -135,11 +148,13 @@ pnpm exec playwright test e2e/smoke-test.spec.ts --reporter=list
 ## Key Files to Know (Reference)
 
 ### E2E Test Foundation
+
 - `e2e/smoke-test.spec.ts` — Main smoke test (build on this)
 - `e2e/og-route-auth.spec.ts` — OG route auth (Reference for pattern)
 - `playwright.config.ts` — Webserver config
 
 ### Routes to Test
+
 - `app/page.tsx` — Homepage
 - `app/about/page.tsx` — About page
 - `app/projects/page.tsx` — Projects listing
@@ -147,12 +162,14 @@ pnpm exec playwright test e2e/smoke-test.spec.ts --reporter=list
 - `app/api/og` — OG image generation with CORS auth
 
 ### Components to Validate
+
 - `components/hero/hero.tsx` — Animation rendering
 - `components/projects/project-card.tsx` — Responsive design
 - `components/navigation/header.tsx` — Navigation links
 - `components/shared/section-values.tsx` — Content display
 
 ### Performance Baseline (for Phase 3D)
+
 - `lib/site-config.ts` — Site metadata
 - `next.config.ts` — ISR config
 - `vercel.json` — Deployment config
@@ -177,6 +194,7 @@ No need to read PHASE_2_B3_HANDOFF.md again; memory is source of truth.
 ## Skills to Delegate To (Avoid Direct Invocation)
 
 ### Primary Skill: browser-testing
+
 ```
 skill: browser-testing (from .github/skills/browser-testing/SKILL.md)
 capabilities:
@@ -194,7 +212,8 @@ Usage:
   3. Each action is logged + error-collected
 ```
 
-### Secondary Skill: github-actions  
+### Secondary Skill: github-actions
+
 ```
 skill: github-actions (from .github/skills/github-actions/SKILL.md)
 capabilities:
@@ -210,6 +229,7 @@ Usage:
 ```
 
 ### Tertiary Skill: code-search
+
 ```
 skill: code-search (if need to analyze test patterns)
 capabilities:
@@ -227,11 +247,13 @@ Usage:
 ## Rate Limiting Mitigation Strategy
 
 **Why likely to hit limits:**
+
 - 5+ sequential browser navigations
 - Multiple API calls to GitHub Actions
 - Full codebase search
 
 **How to avoid:**
+
 1. ✅ Use sub-agent for planning (1 atomic call, not 10 small ones)
 2. ✅ Delegate all browser actions to browser-testing SKILL
 3. ✅ Batch GitHub Actions calls (list runs, then filter locally)
@@ -239,6 +261,7 @@ Usage:
 5. ✅ Parallel read-only operations (git log, file structure) in single tool call
 
 **Fallback if rate limited:**
+
 - Write .mjs script to execute tests locally (vitest + playwright)
 - Run in background terminal
 - Check results in next session
@@ -270,6 +293,7 @@ Usage:
 ## Success Criteria
 
 ### Phase 3A Complete When:
+
 1. E2E test suite: 12+ new test cases added
 2. All critical routes covered (home, about, projects, contact, /api/og)
 3. GitHub Actions: E2E workflow added to CI
@@ -278,6 +302,7 @@ Usage:
 6. Deployable: Production-ready based on E2E results
 
 ### Phase 3D Complete When (If Pursued):
+
 1. Vercel Analytics: Web Vitals dashboard visible
 2. Sentry: Error tracking capturing real events
 3. Lighthouse: CI regression check running on PRs
@@ -288,6 +313,7 @@ Usage:
 ## Next Session Workflow
 
 **On startup:**
+
 1. ✅ Read THIS FILE (you are here)
 2. ✅ Run: `git log --oneline -3` (confirm on main)
 3. ✅ Query: `agent:v1:phase2_full_project_state` (refresh context if needed)
@@ -303,4 +329,3 @@ Usage:
 **Preparation Date:** 2026-03-27  
 **MCP Gateway Status:** All servers healthy (16 enabled)  
 **Ready to Start:** YES ✅
-

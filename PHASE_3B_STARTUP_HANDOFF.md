@@ -1,4 +1,5 @@
 # PHASE 3B STARTUP HANDOFF
+
 **For:** Next Claude Session  
 **Date Prepared:** 2026-03-27  
 **Status:** Ready (Phase 3A ✅ 54/54 tests passing, staging approved)  
@@ -28,6 +29,7 @@
 ### Scope
 
 #### 1. Vercel Analytics Integration (30min)
+
 Add Web Vitals tracking to production environment:
 
 ```typescript
@@ -49,6 +51,7 @@ Add Web Vitals tracking to production environment:
 **Deliverable:** Vercel Analytics dashboard visible in Vercel UI showing 7-day baseline
 
 #### 2. Sentry Error Tracking (30min)
+
 Set up error tracking for JavaScript errors, CSP violations, 404s:
 
 ```typescript
@@ -66,6 +69,7 @@ SENTRY_AUTH_TOKEN=***  // For release upload
 **Deliverable:** Sentry project dashboard with error ingestion verified via test error
 
 #### 3. Lighthouse CI Regression Detection (20min)
+
 Add GitHub Actions workflow for performance regression detection:
 
 ```yaml
@@ -82,22 +86,26 @@ Steps:
 **Deliverable:** GitHub Actions workflow runs on PR; reports performance deltas
 
 #### 4. Monitoring Ops Playbook (40min)
+
 Document alert thresholds and incident response:
 
 ```markdown
 # Production Monitoring Runbook
 
 ## Vercel Analytics Thresholds
+
 - LCP > 2.5s: Investigate image optimization, server latency
 - CLS > 0.1: Check for layout shift bugs in animations, ads
 - TTFB > 800ms: Check ISR revalidation frequency, server load
 
 ## Sentry Alerts
+
 - JavaScript Error Rate > 1%: Page issues + visual regression
 - 404 Rate > 10/min: Broken link crawl or misconfigured redirects
 - CSP Violations > 5/min: Third-party script injection or config drift
 
 ## Escalation Procedure
+
 1. Alert fires (Slack notification)
 2. Open Vercel or Sentry dashboard
 3. Check git log for recent deploys
@@ -172,18 +180,21 @@ pnpm build 2>&1 | Select-Object -Last 5
 ### To Avoid Rate Limiting: SAME PATTERN AS 3A
 
 **Stage 1: Planning Agent (LIGHT)**
+
 - Query existing monitoring setup
 - Analyze current env vars
 - Map Sentry vs Vercel capabilities
 - Generate implementation checklist
 
 **Stage 2: Implementation Agent (LIGHT)**
+
 - Update env.ts with Sentry DSN
 - Update next.config.ts with analytics flag
 - Generate .github/workflows/lighthouse-ci.yml
 - Create monitoring runbook
 
 **Stage 3: Verification (LIGHT)**
+
 - Verify Sentry event ingestion
 - Check Vercel Analytics dashboard
 - Test Lighthouse workflow on dummy PR
@@ -200,11 +211,13 @@ pnpm build 2>&1 | Select-Object -Last 5
 - `middleware.ts` — CSP headers (Sentry endpoint whitelisting)
 
 ### Error Handling Foundation
+
 - `app/layout.tsx` — Layout error boundary
 - `app/error.tsx` — Error UI component (already present from Phase 2)
 - `app/not-found.tsx` — 404 page
 
 ### Performance Context
+
 - `lib/site-config.ts` — Site metadata (ISR revalidation)
 - `next.config.ts` — Image optimization, ISR strategy
 - `vitest.config.ts` — Performance test patterns (if monitoring tests added)
@@ -226,6 +239,7 @@ agent:v1:phase3_to_phase3b_handoff           → Phase 3B options + recommendati
 ## Success Criteria
 
 ### Phase 3B Complete When:
+
 1. Vercel Analytics: 7-day Web Vitals baseline captured
 2. Sentry: Error tracking active, dashboard showing ingested event
 3. Lighthouse CI: Workflow added to .github/workflows/, runs on PRs
@@ -233,6 +247,7 @@ agent:v1:phase3_to_phase3b_handoff           → Phase 3B options + recommendati
 5. Approval: Baseline metrics documented in PHASE_3B_PERFORMANCE_BASELINE.md
 
 ### Phase 3C Complete When (If Pursued):
+
 1. Automated scan: axe-core report generated
 2. Manual testing: Screen reader + keyboard nav verified
 3. Fixes: Critical/high issues resolved
@@ -243,6 +258,7 @@ agent:v1:phase3_to_phase3b_handoff           → Phase 3B options + recommendati
 ## Next Session Workflow
 
 **On startup:**
+
 1. ✅ Read THIS FILE (you are here)
 2. ✅ Verify: `git log --oneline -3` (confirm 1e2a9e9 on main)
 3. ✅ Sanity: `pnpm exec playwright test --reporter=list` (54/54 passing)
@@ -260,7 +276,7 @@ agent:v1:phase3_to_phase3b_handoff           → Phase 3B options + recommendati
 ✅ Batch env var updates in single file edit  
 ✅ Register workflow in one commit  
 ✅ Verify via Sentry/Vercel API (not recursive polling)  
-✅ Fallback: Manual setup if APIs slow  
+✅ Fallback: Manual setup if APIs slow
 
 **No sequential small tool calls = no rate-limit risk**
 
@@ -290,12 +306,12 @@ docs(phase3b): stage handoff with monitoring setup plan
 
 ## Phase 3B + 3C Timeline
 
-| Phase | Duration | Type | Priority |
-|-------|----------|------|----------|
-| **3B** | 2h | Sequential | 🔴 Critical path to production |
-| **3C** | 3h | Parallel | 🟡 Quality gate, not blocker |
-| **Sequential** | 5h | B then C | Production-ready + WCAG 2.1 AA |
-| **Parallel** | 3.5h | B + C simultaneous | Faster if capacity available |
+| Phase          | Duration | Type               | Priority                       |
+| -------------- | -------- | ------------------ | ------------------------------ |
+| **3B**         | 2h       | Sequential         | 🔴 Critical path to production |
+| **3C**         | 3h       | Parallel           | 🟡 Quality gate, not blocker   |
+| **Sequential** | 5h       | B then C           | Production-ready + WCAG 2.1 AA |
+| **Parallel**   | 3.5h     | B + C simultaneous | Faster if capacity available   |
 
 **Recommendation:** Do B (blocking) → C (quality) → Production ready in ~3.5h total
 
@@ -306,5 +322,4 @@ docs(phase3b): stage handoff with monitoring setup plan
 **Build Status:** ✅ PASSING  
 **Test Status:** ✅ 54/54 PASSING  
 **Staging Status:** 🟢 APPROVED (Phase 3A)  
-**Production Status:** 🟡 AWAITING MONITORING (Phase 3B)  
-
+**Production Status:** 🟡 AWAITING MONITORING (Phase 3B)
