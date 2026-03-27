@@ -23,6 +23,7 @@ export function ProjectDetailHero({
   categorySlug,
 }: ProjectDetailHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const staticBreadcrumbRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
   const [showStickyBreadcrumb, setShowStickyBreadcrumb] = useState(false);
 
@@ -33,31 +34,42 @@ export function ProjectDetailHero({
 
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
-  // Show sticky breadcrumb after scrolling past hero
+  // Show sticky breadcrumb only when static breadcrumb scrolls out of viewport
   useEffect(() => {
-    const handleScroll = () => {
-      setShowStickyBreadcrumb(window.scrollY > 100);
-    };
+    const staticBreadcrumb = staticBreadcrumbRef.current;
+    if (!staticBreadcrumb) return;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Show sticky when static breadcrumb is NOT intersecting (scrolled out)
+        setShowStickyBreadcrumb(!entry.isIntersecting);
+      },
+      {
+        // Account for navbar height (~80px) - trigger when breadcrumb goes behind nav
+        rootMargin: "-80px 0px 0px 0px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(staticBreadcrumb);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <>
-      {/* Sticky breadcrumb strip */}
+      {/* Sticky breadcrumb bar — docks BELOW navbar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30"
-        initial={{ y: -100, opacity: 0 }}
+        className="fixed top-16 lg:top-20 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-electric-cyan/20 shadow-sm"
+        initial={{ y: -60, opacity: 0 }}
         animate={{
-          y: showStickyBreadcrumb ? 0 : -100,
+          y: showStickyBreadcrumb ? 0 : -60,
           opacity: showStickyBreadcrumb ? 1 : 0,
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
       >
         <nav
           aria-label="Breadcrumb"
-          className="section-content max-w-6xl py-3 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground overflow-x-auto scrollbar-none"
+          className="section-content max-w-6xl py-2.5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground overflow-x-auto scrollbar-none"
         >
           <Link
             href="/projects"
@@ -80,7 +92,7 @@ export function ProjectDetailHero({
             {project.categoryLabel}
           </Link>
           <span className="shrink-0 text-muted-foreground/40">/</span>
-          <span className="text-electric-cyan truncate max-w-[200px]">
+          <span className="text-electric-cyan font-medium truncate max-w-[200px]">
             {project.title}
           </span>
         </nav>
@@ -211,8 +223,8 @@ export function ProjectDetailHero({
         </div>
       </section>
 
-      {/* Breadcrumb section — below hero */}
-      <div className="section-content max-w-6xl py-8">
+      {/* Breadcrumb section — below hero (tracked for sticky trigger) */}
+      <div ref={staticBreadcrumbRef} className="section-content max-w-6xl py-8">
         <motion.nav
           aria-label="Breadcrumb"
           className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground flex-wrap"
