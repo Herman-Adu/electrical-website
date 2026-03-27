@@ -128,7 +128,7 @@ export async function sendAdminNotification(
 
     const result = await resend.emails.send({
       from: `${env.CONTACT_FROM_NAME} <${env.CONTACT_FROM_EMAIL}>`,
-      to: env.CONTACT_ADMIN_EMAIL,
+      to: env.CONTACT_FROM_EMAIL,
       subject: sanitizeHeaderValue(
         `New Contact Inquiry - ${safeProjectType} - REF: ${safeReferenceCode}`,
       ),

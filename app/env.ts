@@ -3,8 +3,8 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    RESEND_API_KEY: z.string().min(1),
-    CONTACT_ADMIN_EMAIL: z.string().email(),
+    RESEND_API_KEY: z.string().min(1).optional(),
+    CONTACT_ADMIN_EMAIL: z.string().email().optional(),
     CONTACT_FROM_EMAIL: z.string().email().default("noreply@nexgen.com.au"),
     CONTACT_FROM_NAME: z.string().min(1).default("Nexgen Electrical"),
     CONTACT_RESPONSE_TIME_HOURS: z.coerce.number().int().positive().default(2),
@@ -28,7 +28,7 @@ export const env = createEnv({
       .optional()
       .transform((value) => value === "true"),
     // Turnstile CAPTCHA
-    TURNSTILE_SECRET_KEY: z.string().min(1),
+    TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
     // Production: Vercel KV
     KV_REST_API_URL: z.string().url().optional(),
     KV_REST_API_TOKEN: z.string().min(1).optional(),
@@ -40,7 +40,7 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
-    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1),
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
     NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
   },
   runtimeEnv: {
@@ -55,7 +55,7 @@ export const env = createEnv({
     CONTACT_RATE_LIMIT_MODE: process.env.CONTACT_RATE_LIMIT_MODE,
     OG_ROUTE_ALLOWED_ORIGINS: process.env.OG_ROUTE_ALLOWED_ORIGINS,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
-    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY ?? undefined,
     // Production: Vercel KV
     KV_REST_API_URL:
       process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
@@ -78,3 +78,4 @@ export const env = createEnv({
     process.env.NODE_ENV !== "production" &&
     process.env.SKIP_ENV_VALIDATION === "true",
 });
+
