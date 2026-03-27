@@ -79,7 +79,7 @@ export function SectionValues({ data }: SectionValuesProps) {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
                   style={{
-                    background: `radial-gradient(circle at 30% 30%, ${isCyan ? "rgba(0,242,255,0.04)" : "rgba(245,158,11,0.04)"}, transparent 70%)`,
+                    background: `radial-gradient(circle at 30% 30%, ${isCyan ? "rgba(0,243,189,0.04)" : "rgba(245,158,11,0.04)"}, transparent 70%)`,
                   }}
                 />
 

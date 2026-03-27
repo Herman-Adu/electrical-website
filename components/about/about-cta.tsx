@@ -271,7 +271,7 @@ export function AboutCTA() {
               <button
                 ref={surgeRef}
                 onClick={handleCTA}
-                className="group relative overflow-hidden rounded-sm bg-electric-cyan px-10 py-5 text-sm font-bold uppercase tracking-widest text-background transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,242,255,0.4)] active:scale-95"
+                className="group relative overflow-hidden rounded-sm bg-electric-cyan px-10 py-5 text-sm font-bold uppercase tracking-widest text-background transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,243,189,0.4)] active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   Start Your Project

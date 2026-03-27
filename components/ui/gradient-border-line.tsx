@@ -27,7 +27,7 @@ export interface GradientBorderLineProps {
 const variantClassMap: Record<GradientBorderLineVariant, string> = {
   "electric-cyan": "from-transparent via-electric-cyan/70 to-transparent",
   amber: "from-transparent via-amber-400/70 to-transparent",
-  gradient: "from-electric-cyan/0 via-cyan-300/70 to-amber-400/70",
+  gradient: "from-electric-cyan/0 via-ring/70 to-amber-400/70",
 };
 
 const positionClassMap: Record<

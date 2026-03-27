@@ -7,6 +7,8 @@ import { Zap, Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "./blueprint-background";
 import { MouseGlow } from "./mouse-glow";
 import { CircuitSVG } from "./circuit-svg";
+import { HeroParallaxShell } from "./hero-parallax-shell";
+import { useHeroParallax } from "./use-hero-parallax";
 
 const isClient = typeof window !== "undefined";
 
@@ -51,7 +53,8 @@ const flickerVariants = {
 };
 
 export function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
+  const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
+    useHeroParallax({ size: "screen" });
   const surgeOverlayRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -66,6 +69,12 @@ export function Hero() {
       "CALIBRATING",
       "SYSTEM_READY",
     ];
+
+    if (shouldReduceMotion) {
+      setStatusText(statuses.at(-1) ?? "SYSTEM_READY");
+      return;
+    }
+
     let index = 0;
     const interval = setInterval(() => {
       index++;
@@ -78,46 +87,31 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // GSAP ScrollTrigger for parallax - dynamically imported to avoid SSR
+  // GSAP circuit draw-in animation only (parallax handled by shared Framer system)
   useEffect(() => {
-    if (!isClient || !containerRef.current || !heroContentRef.current) return;
+    if (!isClient || !sectionRef.current) return;
 
     let ctx: gsap.Context | null = null;
 
-    import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-      gsap.registerPlugin(ScrollTrigger);
-      ctx = gsap.context(() => {
-        // Parallax effect on scroll - y only, never touch opacity (Framer Motion owns that)
-        gsap.to(heroContentRef.current, {
-          y: 80,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.5,
-          },
+    ctx = gsap.context(() => {
+      const circuitPaths =
+        sectionRef.current?.querySelectorAll(".circuit-path");
+      circuitPaths?.forEach((path) => {
+        const length = (path as SVGPathElement).getTotalLength?.() || 1000;
+        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        gsap.to(path, {
+          strokeDashoffset: 0,
+          duration: 2,
+          delay: 0.5,
+          ease: "power2.out",
         });
-
-        // Circuit lines draw-in animation
-        const circuitPaths =
-          containerRef.current?.querySelectorAll(".circuit-path");
-        circuitPaths?.forEach((path) => {
-          const length = (path as SVGPathElement).getTotalLength?.() || 1000;
-          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-          gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 2,
-            delay: 0.5,
-            ease: "power2.out",
-          });
-        });
-      }, containerRef);
-    });
+      });
+    }, sectionRef);
 
     return () => {
       ctx?.revert();
     };
-  }, []);
+  }, [sectionRef]);
 
   // Power Surge Animation
   const triggerSurge = () => {
@@ -145,7 +139,8 @@ export function Hero() {
       tl.to(
         electricText,
         {
-          textShadow: "0 0 30px #00f2ff, 0 0 60px #00f2ff",
+          textShadow:
+            "0 0 30px var(--electric-cyan), 0 0 60px var(--electric-cyan)",
           duration: 0.1,
         },
         "<",
@@ -170,7 +165,7 @@ export function Hero() {
       tl.to(
         electricText,
         {
-          textShadow: "0 0 10px rgba(0, 242, 255, 0.5)",
+          textShadow: "0 0 10px var(--electric-cyan-glow-subtle)",
           duration: 0.5,
         },
         "-=0.3",
@@ -186,112 +181,121 @@ export function Hero() {
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden"
-    >
-      {/* Background Layers */}
-      <BlueprintBackground />
-      <MouseGlow />
-      <CircuitSVG />
-
-      {/* Main Content */}
-      <motion.div
-        ref={heroContentRef}
-        variants={containerVariants}
-        initial="hidden"
-        animate={isLoaded ? "visible" : "hidden"}
-        className="relative z-30 text-center px-4 max-w-5xl mx-auto"
-      >
-        {/* Status Label */}
+    <HeroParallaxShell
+      sectionRef={sectionRef}
+      size="screen"
+      safeArea="immersive"
+      background={<BlueprintBackground showScanLine={!shouldReduceMotion} />}
+      backgroundFrameStyle={backgroundFrameStyle}
+      decor={
+        <>
+          {!shouldReduceMotion ? <MouseGlow /> : null}
+          <CircuitSVG />
+          <div
+            ref={surgeOverlayRef}
+            className="fixed inset-0 z-50 pointer-events-none bg-electric-cyan opacity-0 mix-blend-overlay"
+          />
+        </>
+      }
+      content={
         <motion.div
-          variants={flickerVariants}
-          className="flex items-center justify-center gap-3 mb-8"
+          ref={heroContentRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isLoaded ? "visible" : "hidden"}
+          className="mx-auto max-w-5xl px-4 text-center"
         >
-          <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
-            <Activity size={14} className="text-electric-cyan animate-pulse" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-              Status // {statusText}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Main Headline */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
-        >
-          <span className="block">Powering the</span>
-          <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-500">
-            Next Generation
-          </span>
-          <span className="block">of Innovation</span>
-        </motion.h1>
-
-        {/* Subheadline */}
-        <motion.p
-          variants={itemVariants}
-          className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
-        >
-          Expert electrical engineering and installations for commercial and
-          industrial frontiers. Precision-engineered power solutions delivered
-          with absolute excellence.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <button
-            onClick={triggerSurge}
-            className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.5)] active:scale-95"
+          {/* Status Label */}
+          <motion.div
+            variants={flickerVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <span className="relative z-10 flex items-center gap-2 text-sm">
-              Initiate System
-              <Zap size={18} className="group-hover:animate-pulse" />
+            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+              <Activity
+                size={14}
+                className="text-electric-cyan animate-pulse"
+              />
+              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+                Status // {statusText}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
+          >
+            <span className="block">Powering the</span>
+            <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+              Next Generation
             </span>
-            {/* Hover sweep effect */}
-            <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
-          </button>
+            <span className="block">of Innovation</span>
+          </motion.h1>
 
-          <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
-            Our Solutions
-          </button>
+          {/* Subheadline */}
+          <motion.p
+            variants={itemVariants}
+            className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          >
+            Expert electrical engineering and installations for commercial and
+            industrial frontiers. Precision-engineered power solutions delivered
+            with absolute excellence.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <button
+              onClick={triggerSurge}
+              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_var(--electric-cyan-glow-subtle)] active:scale-95"
+            >
+              <span className="relative z-10 flex items-center gap-2 text-sm">
+                Initiate System
+                <Zap size={18} className="group-hover:animate-pulse" />
+              </span>
+              {/* Hover sweep effect */}
+              <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+            </button>
+
+            <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
+              Our Solutions
+            </button>
+          </motion.div>
+
+          {/* Technical Metadata */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-muted-foreground/60 uppercase"
+          >
+            <span>Est. 2024</span>
+            <span className="hidden sm:inline">|</span>
+            <span>Commercial & Industrial</span>
+            <span className="hidden sm:inline">|</span>
+            <span>24/7 Operations</span>
+          </motion.div>
         </motion.div>
-
-        {/* Technical Metadata */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-muted-foreground/60 uppercase"
+      }
+      contentStyle={contentStyle}
+      scrollIndicator={
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.5 }}
+          onClick={scrollToContent}
+          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
         >
-          <span>Est. 2024</span>
-          <span className="hidden sm:inline">|</span>
-          <span>Commercial & Industrial</span>
-          <span className="hidden sm:inline">|</span>
-          <span>24/7 Operations</span>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.5 }}
-        onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
-      >
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
-          Scroll
-        </span>
-        <ChevronDown size={20} className="animate-bounce" />
-      </motion.button>
-
-      {/* Power Surge Overlay */}
-      <div
-        ref={surgeOverlayRef}
-        className="fixed inset-0 bg-electric-cyan opacity-0 z-50 pointer-events-none mix-blend-overlay"
-      />
-    </section>
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Scroll
+          </span>
+          <ChevronDown
+            size={20}
+            className={shouldReduceMotion ? "" : "animate-bounce"}
+          />
+        </motion.button>
+      }
+    />
   );
 }

@@ -12,7 +12,10 @@ import {
   CheckCircle,
   Award,
 } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import type { ProjectScope } from "@/types/projects";
 
 const iconMap = {
@@ -47,8 +50,16 @@ export function ProjectScopeGrid({
   if (items.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative py-18 bg-card/30 overflow-hidden">
-      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
+    <section
+      ref={sectionRef}
+      className="relative py-18 bg-card/30 overflow-hidden"
+    >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineLeft={lineLeft}
+        lineRight={lineRight}
+        showBottom={false}
+      />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
@@ -94,7 +105,7 @@ export function ProjectScopeGrid({
                 initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative p-6 rounded-xl bg-background/60 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.06)]"
+                className="group relative p-6 rounded-xl bg-background/60 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
               >
                 {/* Top accent line */}
                 <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-electric-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

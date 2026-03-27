@@ -2,10 +2,24 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-export function BlueprintBackground() {
+interface BlueprintBackgroundProps {
+  className?: string;
+  showScanLine?: boolean;
+}
+
+export function BlueprintBackground({
+  className,
+  showScanLine = true,
+}: BlueprintBackgroundProps) {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-background">
+    <div
+      className={cn(
+        "absolute inset-0 z-0 overflow-hidden bg-background",
+        className,
+      )}
+    >
       {/* Primary Grid - 40px */}
       <div
         className="absolute inset-0 h-full w-full opacity-20 dark:opacity-20"
@@ -40,16 +54,18 @@ export function BlueprintBackground() {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-linear-to-t from-background to-transparent" />
 
       {/* Animated scan line effect */}
-      <motion.div
-        initial={{ y: "-100%" }}
-        animate={{ y: "100vh" }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
-      />
+      {showScanLine ? (
+        <motion.div
+          initial={{ y: "-100%" }}
+          animate={{ y: "100vh" }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
+        />
+      ) : null}
 
       {/* Corner technical markers */}
       <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-electric-cyan/20" />

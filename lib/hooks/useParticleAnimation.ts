@@ -32,7 +32,7 @@ export interface UseParticleAnimationReturn {
  * const { glowOpacity, animationStyle } = useParticleAnimation({
  *   position: { top: '20%', left: '40%' },
  *   size: { width: '300px', height: '300px' },
- *   color: '#00f2ff',
+ *   color: '#00f3bd',
  *   blurIntensity: '100px'
  * });
  *
@@ -48,7 +48,7 @@ export interface UseParticleAnimationReturn {
 export function useParticleAnimation({
   position,
   size,
-  color = "#00f2ff",
+  color = "#00f3bd",
   blurIntensity = "80px",
   animationDuration = 8,
 }: UseParticleAnimationProps): UseParticleAnimationReturn {

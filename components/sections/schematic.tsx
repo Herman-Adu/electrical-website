@@ -82,7 +82,7 @@ export function Schematic() {
             <FeaturesList features={features} isInView={isInView} />
 
             {/* CTA */}
-            <button className="group flex items-center gap-3 px-6 py-3 bg-electric-cyan text-deep-slate font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(0,242,255,0.3)] transition-all duration-300">
+            <button className="group flex items-center gap-3 px-6 py-3 bg-electric-cyan text-deep-slate font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(0,243,189,0.3)] transition-all duration-300">
               Start Your Project
               <ArrowRight
                 size={16}

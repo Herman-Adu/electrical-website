@@ -10,7 +10,10 @@ import {
   type PanInfo,
 } from "framer-motion";
 import { ArrowRight, MapPin, GripHorizontal } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
 
@@ -78,13 +81,17 @@ export function ProjectRelatedCarousel({
 
   const handleDragEnd = (
     _event: MouseEvent | TouchEvent | PointerEvent,
-    _info: PanInfo
+    _info: PanInfo,
   ) => {
     setShowHint(false);
   };
 
   return (
-    <section ref={sectionRef} className="relative py-12 bg-background overflow-hidden" aria-label="Related projects">
+    <section
+      ref={sectionRef}
+      className="relative py-12 bg-background overflow-hidden"
+      aria-label="Related projects"
+    >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       {/* Header */}
       <div className="section-content max-w-6xl mb-6">
@@ -137,7 +144,7 @@ export function ProjectRelatedCarousel({
             >
               <Link
                 href={`/projects/category/${categorySlug}/${project.slug}`}
-                className="group block rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan/40 hover:shadow-[0_0_20px_rgba(0,242,255,0.06)]"
+                className="group block rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan/40 hover:shadow-[0_0_20px_rgba(0,243,189,0.06)]"
                 onClick={(e) => e.stopPropagation()}
                 draggable={false}
               >

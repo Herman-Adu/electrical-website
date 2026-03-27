@@ -32,7 +32,7 @@ function useCountUp(
   target: number | null,
   duration: number,
   isInView: boolean,
-  shouldReduce: boolean | null
+  shouldReduce: boolean | null,
 ) {
   const [count, setCount] = useState(0);
 
@@ -76,13 +76,7 @@ const tileVariants: Variants = {
   }),
 };
 
-function BentoTile({
-  item,
-  index,
-}: {
-  item: ProjectBentoItem;
-  index: number;
-}) {
+function BentoTile({ item, index }: { item: ProjectBentoItem; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
   const shouldReduce = useReducedMotion();
@@ -106,7 +100,7 @@ function BentoTile({
       transition={{ duration: 0.2 }}
       className="group"
     >
-      <ProjectCardShell className="relative min-h-[180px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,242,255,0.08)] group-hover:border-electric-cyan/50">
+      <ProjectCardShell className="relative min-h-[180px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,243,189,0.08)] group-hover:border-electric-cyan/50">
         {/* Corner bracket */}
         <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-electric-cyan/20 rounded-tr transition-colors duration-300 group-hover:border-electric-cyan/50" />
 
@@ -141,7 +135,10 @@ export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
   const shouldReduce = useReducedMotion();
 
   return (
-    <section className="section-container py-10" aria-label="Project highlights">
+    <section
+      className="section-container py-10"
+      aria-label="Project highlights"
+    >
       <div className="section-content max-w-6xl">
         {/* Section header */}
         <motion.div

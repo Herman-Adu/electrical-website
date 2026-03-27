@@ -255,7 +255,7 @@ export function SectionCTA({ data }: SectionCTAProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={finalCTA.primaryCTA.href}
-                className="group relative px-10 py-5 bg-electric-cyan text-background font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,242,255,0.4)] active:scale-95 rounded-sm"
+                className="group relative px-10 py-5 bg-electric-cyan text-background font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,243,189,0.4)] active:scale-95 rounded-sm"
               >
                 <span className="relative z-10 flex items-center justify-center gap-3">
                   {finalCTA.primaryCTA.label}
