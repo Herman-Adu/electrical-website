@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Zap, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import Image from "next/image";
+import { Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -58,21 +59,16 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 group mb-6">
-              <div className="relative">
-                <Zap
-                  size={28}
-                  className="text-electric-cyan group-hover:animate-pulse transition-all"
+            <Link href="/" className="inline-block group mb-6">
+              <div className="relative h-10 sm:h-12 w-auto">
+                <Image
+                  src="/images/nexgen-logo-full.png"
+                  alt="NEXGEN Electrical Innovations"
+                  width={200}
+                  height={48}
+                  className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
                 />
-                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-foreground font-bold text-lg tracking-tight leading-none">
-                  NEXGEN
-                </span>
-                <span className="font-mono text-[9px] text-electric-cyan/60 tracking-[0.2em] uppercase">
-                  Electrical Innovations
-                </span>
               </div>
             </Link>
 
@@ -167,20 +163,33 @@ export function Footer() {
             <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
             </h4>
-            <div className="p-4 border border-border bg-card/50">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="p-4 border border-electric-cyan/20 bg-card/50 rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
                 <span className="font-mono text-[9px] text-emerald-500 tracking-widest">
                   ONLINE
                 </span>
               </div>
-              <a
-                href="tel:1800639436"
-                className="text-foreground font-bold text-lg hover:text-electric-cyan transition-colors"
-              >
-                1800 NEX GEN
-              </a>
-              <p className="text-muted-foreground/60 text-xs mt-1">
+              {/* Logo mark for emergency branding */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative w-8 h-8 flex-shrink-0">
+                  <Image
+                    src="/images/nexgen-logo-round.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <a
+                    href="tel:+442012345678"
+                    className="text-foreground font-bold text-base hover:text-electric-cyan transition-colors block"
+                  >
+                    +44 (0) 20 1234 5678
+                  </a>
+                </div>
+              </div>
+              <p className="text-muted-foreground/60 text-xs">
                 Rapid response team ready
               </p>
             </div>
