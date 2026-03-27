@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useAnimatedCounter } from "@/hooks/use-animated-counter";
 
 interface AnimatedCounterProps {
   value: number;
@@ -15,28 +15,12 @@ export function AnimatedCounter({
   suffix,
   inView,
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-
-    const duration = 2000;
-    const steps = 60;
-    const increment = value / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current * 10) / 10);
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [value, inView]);
+  const { count } = useAnimatedCounter({
+    value,
+    shouldAnimate: inView,
+    duration: 2000,
+    steps: 60,
+  });
 
   return (
     <span className="tabular-nums">
