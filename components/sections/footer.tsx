@@ -172,13 +172,14 @@ export function Footer() {
                 </span>
               </div>
               
-              {/* Brand Mark */}
-              <div className="relative w-10 h-10 mb-4">
+              {/* Brand Wordmark */}
+              <div className="w-24 h-auto mb-4">
                 <Image
-                  src="/images/nexgen-logo-round.png"
-                  alt=""
-                  fill
-                  className="object-contain"
+                  src="/images/nexgen-wordmark.png"
+                  alt="NEXGEN"
+                  width={200}
+                  height={40}
+                  className="w-full h-auto object-contain"
                 />
               </div>
               
