@@ -15,10 +15,20 @@ export const env = createEnv({
       .default(1),
     CONTACT_RATE_LIMIT: z.coerce.number().int().positive().default(3),
     CONTACT_RATE_LIMIT_MODE: z.enum(["redis", "memory", "off"]).optional(),
+    OG_ROUTE_ALLOWED_ORIGINS: z
+      .string()
+      .default(
+        "http://localhost:3000,https://nexgen-electrical-innovations.co.uk,https://cdn.nexgen-electrical-innovations.co.uk,https://api.nexgen-electrical-innovations.co.uk",
+      )
+      .transform((val) =>
+        val.split(",").map((origin) => origin.trim().toLowerCase()),
+      ),
     NEXT_IMAGE_UNOPTIMIZED: z
       .enum(["true", "false"])
       .optional()
       .transform((value) => value === "true"),
+    // Turnstile CAPTCHA
+    TURNSTILE_SECRET_KEY: z.string().min(1),
     // Production: Vercel KV
     KV_REST_API_URL: z.string().url().optional(),
     KV_REST_API_TOKEN: z.string().min(1).optional(),
@@ -30,6 +40,7 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1),
   },
   runtimeEnv: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
@@ -41,7 +52,9 @@ export const env = createEnv({
       process.env.CONTACT_RATE_LIMIT_WINDOW_HOURS,
     CONTACT_RATE_LIMIT: process.env.CONTACT_RATE_LIMIT,
     CONTACT_RATE_LIMIT_MODE: process.env.CONTACT_RATE_LIMIT_MODE,
+    OG_ROUTE_ALLOWED_ORIGINS: process.env.OG_ROUTE_ALLOWED_ORIGINS,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
+    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
     // Production: Vercel KV
     KV_REST_API_URL:
       process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
@@ -56,6 +69,7 @@ export const env = createEnv({
     REDIS_USE_REST_API: process.env.REDIS_USE_REST_API,
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   },
   emptyStringAsUndefined: true,
   skipValidation:

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import gsap from "gsap";
 
@@ -32,7 +32,16 @@ function resetSchematicAnimation(svgElement: SVGSVGElement | null) {
 export function useSchematicAnimation() {
   const sectionRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const rawIsInView = useInView(sectionRef, { once: false, amount: 0.3 });
+
+  // Ensure hydration match by only using isInView after mount
+  const isInView = isMounted ? rawIsInView : false;
 
   useEffect(() => {
     if (!svgRef.current || !isInView) {

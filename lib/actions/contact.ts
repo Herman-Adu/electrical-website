@@ -15,20 +15,64 @@ import { ZodError } from "zod";
  * Server Action: Submit Contact Form
  *
  * Flow:
- * 1. Extract client IP from headers (set by middleware)
- * 2. Validate data with Zod (schema includes sanitization via .trim())
- * 3. Check rate limit (IP-based)
- * 4. Send confirmation email to user
- * 5. Send admin notification email
- * 6. Return success/error response
+ * 1. Verify Turnstile CAPTCHA token
+ * 2. Extract client IP from headers (set by middleware)
+ * 3. Validate data with Zod (schema includes sanitization via .trim())
+ * 4. Check rate limit (IP-based)
+ * 5. Send confirmation email to user
+ * 6. Send admin notification email
+ * 7. Return success/error response
  *
  * Security:
+ * - Turnstile CAPTCHA verification prevents spam bots
  * - Zod validation with trim() sanitizes inputs
  * - Rate limiting prevents spam
  * - CSRF protected by Next.js server action mechanism
  * - No sensitive data in logs
  * - IP validation via middleware
  */
+
+/**
+ * Verify Turnstile CAPTCHA token with Cloudflare
+ */
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: token,
+        }),
+      },
+    );
+
+    const data = (await response.json()) as {
+      success: boolean;
+      error_codes?: string[];
+    };
+
+    if (!data.success) {
+      console.warn("[TURNSTILE_VERIFICATION_FAILED]", {
+        errors: data.error_codes,
+        timestamp: new Date().toISOString(),
+      });
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("[TURNSTILE_VERIFICATION_ERROR]", {
+      error: error instanceof Error ? error.message : String(error),
+      timestamp: new Date().toISOString(),
+    });
+    return false;
+  }
+}
 
 /**
  * Extract client IP from request headers set by middleware
@@ -61,8 +105,17 @@ function getFirstZodFieldError(error: ZodError): {
 
 export async function submitContactInquiry(
   formData: unknown,
+  turnstileToken: string,
 ): Promise<ContactResponse> {
   try {
+    // Verify Turnstile token first
+    if (!turnstileToken || !(await verifyTurnstileToken(turnstileToken))) {
+      return {
+        success: false,
+        error: "CAPTCHA verification failed. Please try again.",
+      };
+    }
+
     // Validate form data - Zod handles trimming and type coercion
     const validatedData = contactFormSchema.parse(formData);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Zap, Gauge, History, Share2, Activity, Shield } from "lucide-react";
 import {
@@ -20,14 +20,23 @@ const metrics: Omit<EnergyMetricProps, "delay">[] = [
 
 export function Dashboard() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+
+  // Ensure animation matches on server/client by using mounted state
+  const shouldAnimate = isMounted && isInView;
 
   return (
     <SectionShell sectionRef={sectionRef}>
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.6 }}
         className="mb-16"
       >

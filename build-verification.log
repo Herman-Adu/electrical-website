@@ -1,0 +1,26 @@
+
+> my-project@0.1.0 build C:\Users\herma\source\repository\electrical-website
+> next build
+
+Γ¥î Invalid environment variables: [
+  {
+    code: 'invalid_type',
+    expected: 'string',
+    received: 'undefined',
+    path: [ 'TURNSTILE_SECRET_KEY' ],
+    message: 'Required'
+  },
+  {
+    code: 'invalid_type',
+    expected: 'string',
+    received: 'undefined',
+    path: [ 'NEXT_PUBLIC_TURNSTILE_SITE_KEY' ],
+    message: 'Required'
+  }
+]
+Γ¿» Failed to load next.config.ts, see more info here https://nextjs.org/docs/messages/next-config-error
+
+> Build error occurred
+Error: Invalid environment variables
+    at Object.<anonymous> (C:\Users\herma\source\repository\electrical-website\app\env.ts:13:38)
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.

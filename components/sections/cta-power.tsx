@@ -11,14 +11,16 @@ import { CTAActions } from "./cta-power/cta-actions";
 const CTAPowerClient = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setIsMounted(true);
   }, []);
 
-  // Intersection observer for animation trigger — toggles both ways for reanimate
+  // Only set up intersection observer after mounting
   useEffect(() => {
+    if (!isMounted) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
@@ -31,10 +33,10 @@ const CTAPowerClient = () => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [isMounted]);
 
   const { scrollYProgress } = useScroll({
-    target: mounted ? containerRef : undefined,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
 

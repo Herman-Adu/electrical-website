@@ -83,16 +83,16 @@ function GlassCard({
       className={`group relative overflow-hidden rounded-2xl
         dark:border-white/12 dark:bg-white/8 dark:backdrop-blur-xl dark:shadow-xl dark:shadow-black/40
         border-slate-200/50 bg-white/70 backdrop-blur-md shadow-sm
-        ${glowOnHover ? "hover:border-electric-cyan/30 hover:shadow-2xl hover:shadow-(--electric-cyan)/10 dark:hover:border-electric-cyan/40 dark:hover:shadow-2xl dark:hover:shadow-(--electric-cyan)/20" : ""}
+        ${glowOnHover ? "hover:border-electric-cyan/30 hover:shadow-2xl hover:shadow-electric-cyan/10 dark:hover:border-electric-cyan/40 dark:hover:shadow-2xl dark:hover:shadow-electric-cyan/20" : ""}
         transition-all duration-300 ease-out ${className}`}
     >
       {/* Corner accents */}
       <div
-        className="absolute top-3 left-3 w-4 h-4 border-t border-l border-(--electric-cyan)/25 pointer-events-none z-20 group-hover:border-electric-cyan/50 transition-colors dark:border-electric-cyan/30 dark:group-hover:border-electric-cyan/60"
+        className="absolute top-3 left-3 w-4 h-4 border-t border-l border-electric-cyan/25 pointer-events-none z-20 group-hover:border-electric-cyan/50 transition-colors dark:border-electric-cyan/30 dark:group-hover:border-electric-cyan/60"
         aria-hidden
       />
       <div
-        className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-(--electric-cyan)/25 pointer-events-none z-20 group-hover:border-electric-cyan/50 transition-colors dark:border-electric-cyan/30 dark:group-hover:border-electric-cyan/60"
+        className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-electric-cyan/25 pointer-events-none z-20 group-hover:border-electric-cyan/50 transition-colors dark:border-electric-cyan/30 dark:group-hover:border-electric-cyan/60"
         aria-hidden
       />
       {children}
@@ -217,7 +217,7 @@ function TextDetailCard({
   const accentClass = isAmber ? "text-amber-warning" : "text-electric-cyan";
   const borderClass = isAmber
     ? "border-amber-warning/20"
-    : "border-(--electric-cyan)/20";
+    : "border-electric-cyan/20";
 
   return (
     <GlassCard delay={delay} className="flex flex-col h-full p-5">
@@ -373,7 +373,7 @@ function DiagnosticCard({ delay }: { delay: number }) {
         active installations.
       </p>
 
-      <div className="flex-1 min-h-25 p-3 rounded-xl dark:bg-black/40 bg-white border dark:border-(--electric-cyan)/10 border-slate-200/70 font-mono text-[11px] leading-5 overflow-hidden hover:border-(--electric-cyan)/25 transition-colors">
+      <div className="flex-1 min-h-25 p-3 rounded-xl dark:bg-black/40 bg-white border dark:border-electric-cyan/10 border-slate-200/70 font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/25 transition-colors">
         <div className="dark:text-electric-cyan/80 text-slate-700 whitespace-pre-line">
           {displayText}
         </div>
@@ -385,7 +385,7 @@ function DiagnosticCard({ delay }: { delay: number }) {
         )}
       </div>
 
-      <button className="mt-4 w-full py-2.5 px-4 rounded-lg bg-transparent border border-electric-cyan/20 text-xs font-mono tracking-widest uppercase text-electric-cyan/70 hover:border-electric-cyan/60 hover:text-electric-cyan hover:shadow-sm hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+      <button className="mt-4 w-full py-2.5 px-4 rounded-lg bg-transparent border border-electric-cyan/20 text-xs font-mono tracking-widest uppercase text-electric-cyan/70 hover:border-electric-cyan/60 hover:text-electric-cyan hover:shadow-sm hover:shadow-electric-cyan/10 transition-all duration-300">
         View Full Report
       </button>
     </GlassCard>
@@ -402,7 +402,7 @@ function CTACard({ delay }: { delay: number }) {
       className="relative overflow-hidden p-6 sm:p-8"
     >
       {/* Background shimmer */}
-      <div className="absolute inset-0 bg-linear-to-br from-(--electric-cyan)/5 via-transparent to-electric-cyan/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
 
       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
@@ -427,7 +427,7 @@ function CTACard({ delay }: { delay: number }) {
         <div className="flex flex-col sm:flex-row gap-3 shrink-0">
           <Link
             href="/contact"
-            className="px-6 py-3 rounded-xl bg-electric-cyan text-primary-foreground font-bold text-sm tracking-wide hover:shadow-lg hover:shadow-(--electric-cyan)/30 hover:scale-[1.03] transition-all duration-300"
+            className="px-6 py-3 rounded-xl bg-electric-cyan text-primary-foreground font-bold text-sm tracking-wide hover:shadow-lg hover:shadow-electric-cyan/30 hover:scale-[1.03] transition-all duration-300"
           >
             Request Consultation
           </Link>
@@ -560,7 +560,7 @@ export function ServicesBento() {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, var(--electric-cyan), transparent)",
+            "linear-gradient(to right, transparent, hsl(174 100% 50%), transparent)",
           opacity: 0.2,
         }}
       />

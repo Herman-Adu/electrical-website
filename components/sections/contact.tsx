@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
+import { Turnstile } from "react-turnstile";
 import {
   MapPin,
   Phone,
@@ -51,6 +52,8 @@ export function Contact() {
   const [refCode, setRefCode] = useState("------");
   const [successMessage, setSuccessMessage] = useState("");
   const [serverError, setServerError] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
   const [fieldErrors, setFieldErrors] = useState<
     Record<string, string | undefined>
   >({});
@@ -112,22 +115,35 @@ export function Contact() {
     }
   }, [formData]);
 
+  // Turnstile captcha callback
+  const handleCaptchaChange = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setCaptchaError(""); // Clear captcha error when user completes it
+  }, []);
+
   // Form submission handler
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setServerError("");
       setFieldErrors({});
+      setCaptchaError("");
 
       // Validate before submission
       if (!validateForm()) {
         return; // Stop if validation fails
       }
 
+      // Check for captcha token
+      if (!turnstileToken) {
+        setCaptchaError("Please complete the CAPTCHA verification");
+        return;
+      }
+
       setIsLoading(true);
 
       try {
-        const result = await submitContactInquiry(formData);
+        const result = await submitContactInquiry(formData, turnstileToken);
 
         if (result.success) {
           setRefCode(result.referenceCode);
@@ -142,6 +158,7 @@ export function Contact() {
             projectType: "" as any,
             message: "",
           });
+          setTurnstileToken("");
 
           // Auto-clear success state after 8 seconds
           const timer = setTimeout(() => {
@@ -172,7 +189,7 @@ export function Contact() {
         setIsLoading(false);
       }
     },
-    [formData, validateForm],
+    [formData, validateForm, turnstileToken],
   );
 
   return (
@@ -187,7 +204,7 @@ export function Contact() {
         className="absolute top-0 left-0 right-0 h-px pointer-events-none"
         style={{
           background:
-            "linear-gradient(to right, transparent, var(--electric-cyan), transparent)",
+            "linear-gradient(to right, transparent, hsl(174 100% 50%), transparent)",
           opacity: 0.2,
         }}
       />
@@ -441,6 +458,31 @@ export function Contact() {
                   </p>
                 )}
               </div>
+
+              {/* Turnstile CAPTCHA */}
+              <div className="mb-6 flex justify-center">
+                <Turnstile
+                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                  onSuccess={handleCaptchaChange}
+                  theme="dark"
+                  size="normal"
+                />
+              </div>
+
+              {/* Captcha Error Alert */}
+              {captchaError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded flex gap-3"
+                >
+                  <AlertCircle
+                    size={18}
+                    className="mt-0.5 shrink-0 text-red-500"
+                  />
+                  <p className="text-red-300 text-sm">{captchaError}</p>
+                </motion.div>
+              )}
 
               {/* Submit Button */}
               <button

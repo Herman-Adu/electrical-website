@@ -1,4 +1,7 @@
+import { env } from "@/app/env";
+import { parseOGQueryParams } from "@/lib/schemas/og";
 import { siteConfig } from "@/lib/site-config";
+import { z } from "zod";
 
 export const runtime = "edge";
 
@@ -8,16 +11,101 @@ export const runtime = "edge";
  * Usage: Set in project page metadata
  *
  * Simple SVG-based approach that works across all runtimes
+ * Includes origin validation to prevent unauthorized OG image generation
  */
+
+/**
+ * Validate if the request origin is allowed
+ * Prevents unauthorized OG image generation from external sources
+ */
+function validateOrigin(request: Request): boolean {
+  const origin =
+    request.headers.get("origin") || request.headers.get("referer");
+
+  if (!origin) {
+    // Allow requests without origin (e.g., direct browser visits, SEO crawlers)
+    // These are legitimate use cases
+    return true;
+  }
+
+  try {
+    // Extract origin from referer if needed
+    const requestOrigin = origin.startsWith("http")
+      ? new URL(origin).origin.toLowerCase()
+      : origin.toLowerCase();
+
+    // Check against whitelist
+    const allowedOrigins = env.OG_ROUTE_ALLOWED_ORIGINS;
+    return allowedOrigins.some((allowed) => {
+      // Direct origin match
+      if (requestOrigin === allowed) {
+        return true;
+      }
+
+      // Subdomain match: extract domain and check if request is from subdomain
+      try {
+        const allowedUrl = new URL(allowed);
+        const allowedDomain = allowedUrl.hostname;
+
+        const requestUrl = new URL(requestOrigin);
+        const requestDomain = requestUrl.hostname;
+
+        // Exact hostname match or subdomain of allowed domain
+        return (
+          requestDomain === allowedDomain ||
+          requestDomain.endsWith("." + allowedDomain)
+        );
+      } catch {
+        // Invalid URL format, no match
+        return false;
+      }
+    });
+  } catch {
+    // Invalid origin header, reject
+    return false;
+  }
+}
+
 export async function GET(request: Request) {
+  // 1. Validate origin
+  if (!validateOrigin(request)) {
+    return new Response("Forbidden", {
+      status: 403,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        // Prevent caching of 403 responses
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+      },
+    });
+  }
+
   const { searchParams } = new URL(request.url);
 
-  const BRAND_COLOR_HEX = "#00f3bd";
-  const BRAND_COLOR_RGB = "0, 243, 189";
+  // 2. Validate query parameters
+  let params;
+  try {
+    params = parseOGQueryParams(searchParams);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return new Response("Bad Request: Invalid parameters", {
+        status: 400,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        },
+      });
+    }
+    throw error;
+  }
 
-  const title = searchParams.get("title")?.slice(0, 100) || "Project";
-  const category = searchParams.get("category")?.slice(0, 50) || "Electrical";
-  const location = searchParams.get("location")?.slice(0, 50) || "";
+  const BRAND_COLOR_HEX = params.accentColor || "#00f3bd";
+  const BRAND_COLOR_RGB = params.accentColor
+    ? hexToRgb(BRAND_COLOR_HEX)
+    : "0, 243, 189";
+
+  const title = params.title || "Project";
+  const category = params.category || "Electrical";
+  const location = params.location || "";
 
   // Generate SVG dynamically
   const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
@@ -79,8 +167,27 @@ export async function GET(request: Request) {
     headers: {
       "Content-Type": "image/svg+xml; charset=utf-8",
       "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=172800",
+      // CSP: Only allow inline SVG content
+      "Content-Security-Policy":
+        "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'",
     },
   });
+}
+
+/**
+ * Convert hex color to RGB string
+ * @param hex - Hex color in format #RRGGBB
+ * @returns RGB string in format "r, g, b"
+ */
+function hexToRgb(hex: string): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return "0, 243, 189"; // fallback
+
+  return [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16),
+  ].join(", ");
 }
 
 function escapeXmlText(text: string): string {

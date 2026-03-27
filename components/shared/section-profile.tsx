@@ -46,14 +46,14 @@ export function SectionProfile({ data }: SectionProfileProps) {
   } = data;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setIsMounted(true);
   }, []);
 
   const { scrollYProgress } = useScroll({
-    target: mounted ? sectionRef : undefined,
+    target: sectionRef,
     offset: ["start end", "end start"],
   });
 
@@ -100,8 +100,8 @@ export function SectionProfile({ data }: SectionProfileProps) {
           >
             <div className="relative">
               {/* Outer frame decoration */}
-              <div className="absolute -inset-3 border border-(--electric-cyan)/15 rounded-2xl" />
-              <div className="absolute -inset-6 border border-(--electric-cyan)/08 rounded-3xl" />
+              <div className="absolute -inset-3 border border-[--electric-cyan]/15 rounded-2xl" />
+              <div className="absolute -inset-6 border border-[--electric-cyan]/08 rounded-3xl" />
 
               {/* Corner brackets */}
               <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-electric-cyan/60 rounded-tl-sm z-10" />
@@ -134,7 +134,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
                 <div className="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent" />
 
                 {/* Electric-cyan ambient glow at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-(--electric-cyan)/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-[--electric-cyan]/10 to-transparent" />
               </div>
 
               {/* Credential badges below image */}

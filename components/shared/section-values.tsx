@@ -64,8 +64,8 @@ export function SectionValues({ data }: SectionValuesProps) {
             const Icon = getIcon(value.icon);
             const isCyan = value.color === "cyan" || !value.color;
             const accentColor = isCyan
-              ? "var(--electric-cyan)"
-              : "var(--amber-warning)";
+              ? "hsl(174 100% 50%)"
+              : "hsl(37 100% 49%)";
             return (
               <motion.div
                 key={value.title}

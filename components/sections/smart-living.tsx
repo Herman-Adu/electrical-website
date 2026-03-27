@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useTransform } from "framer-motion";
 import { useParallaxImage } from "@/lib/hooks/useParallaxImage";
 import { useIntersectionObserverAnimation } from "@/lib/hooks/useIntersectionObserverAnimation";
@@ -9,6 +9,12 @@ import { ContentPanel } from "./smart-living/content-panel";
 
 export function SmartLiving() {
   const containerRef = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,
     threshold: 0.2,

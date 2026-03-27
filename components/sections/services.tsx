@@ -132,7 +132,7 @@ export function Services() {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, var(--electric-cyan), transparent)",
+            "linear-gradient(to right, transparent, hsl(174 100% 50%), transparent)",
           opacity: 0.3,
         }}
       />

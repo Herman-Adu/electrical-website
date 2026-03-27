@@ -79,7 +79,7 @@ export function ServiceCTABlock({
           <a
             href={primaryCTA.href || "#"}
             onClick={primaryCTA.onClick}
-            className="px-8 py-4 rounded-2xl bg-electric-cyan text-black font-bold uppercase tracking-widest hover:bg-(--electric-cyan)/90 transition-all duration-300 flex items-center gap-2 group"
+            className="px-8 py-4 rounded-2xl bg-electric-cyan text-black font-bold uppercase tracking-widest hover:bg-electric-cyan/90 transition-all duration-300 flex items-center gap-2 group"
           >
             {primaryCTA.label}
             <ArrowRight

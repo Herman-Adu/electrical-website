@@ -139,8 +139,7 @@ export function Hero() {
       tl.to(
         electricText,
         {
-          textShadow:
-            "0 0 30px var(--electric-cyan), 0 0 60px var(--electric-cyan)",
+          textShadow: "0 0 30px hsl(174 100% 50%), 0 0 60px hsl(174 100% 50%)",
           duration: 0.1,
         },
         "<",
@@ -165,7 +164,7 @@ export function Hero() {
       tl.to(
         electricText,
         {
-          textShadow: "0 0 10px var(--electric-cyan-glow-subtle)",
+          textShadow: "0 0 10px hsl(174 80% 45%)",
           duration: 0.5,
         },
         "-=0.3",
@@ -227,7 +226,7 @@ export function Hero() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
           >
             <span className="block">Powering the</span>
-            <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-[hsl(174_80%_45%)] to-[hsl(174_100%_35%)]">
               Next Generation
             </span>
             <span className="block">of Innovation</span>
@@ -250,7 +249,7 @@ export function Hero() {
           >
             <button
               onClick={triggerSurge}
-              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_var(--electric-cyan-glow-subtle)] active:scale-95"
+              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)] active:scale-95"
             >
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Initiate System

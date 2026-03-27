@@ -89,7 +89,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           >
             <motion.path
               d="M0 450 H400 L450 400 H800 L850 450 H1440"
-              stroke="var(--electric-cyan)"
+              stroke="hsl(174 100% 50%)"
               strokeWidth="1"
               fill="none"
               initial={
@@ -104,7 +104,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
             />
             <motion.path
               d="M0 550 H300 L350 500 H700 L800 600 H1440"
-              stroke="var(--electric-cyan)"
+              stroke="hsl(174 100% 50%)"
               strokeWidth="0.5"
               fill="none"
               initial={

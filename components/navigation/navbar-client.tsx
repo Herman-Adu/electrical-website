@@ -203,7 +203,7 @@ export function NavbarClient() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative w-9 h-9 lg:w-10 lg:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
                 <Image
                   src="/images/brand-assets/nexgen-logo-round.png"
                   alt="Nexgen round logo"

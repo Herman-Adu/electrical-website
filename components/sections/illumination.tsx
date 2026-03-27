@@ -16,18 +16,19 @@ const stats: IlluminationStat[] = [
 
 export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,
     threshold: 0.3,
   });
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const { scrollYProgress } = useScroll({
-    target: mounted ? containerRef : undefined,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
 
