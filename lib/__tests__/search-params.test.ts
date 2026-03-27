@@ -172,7 +172,7 @@ describe("Search Params Schemas", () => {
         parse: () => {
           throw new Error("Unexpected error");
         },
-      } as z.ZodSchema;
+      } as unknown as z.ZodSchema;
 
       expect(() => safeValidateSearchParams(params, brokenSchema)).toThrow(
         "Unexpected error",

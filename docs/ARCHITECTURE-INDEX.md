@@ -1,5 +1,7 @@
 # Architectural Review Index
 
+> **👉 New to the project?** Start with [ARCHITECTURE-INTRO.md](./ARCHITECTURE-INTRO.md) — A beginner-friendly guide to project structure, common tasks, and development patterns.
+
 ## electrical-website | Next.js 16 + React 19 | Phase 8 Complete
 
 **Generated:** March 25, 2026  

@@ -161,65 +161,6 @@ function getFirstZodFieldError(error: ZodError): {
  * }
  */
 
-async function verifyTurnstileToken(token: string): Promise<boolean> {
-  try {
-    const response = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          secret: env.TURNSTILE_SECRET_KEY,
-          response: token,
-        }),
-      },
-    );
-
-    const data = (await response.json()) as {
-      success: boolean;
-      error_codes?: string[];
-    };
-
-    if (!data.success) {
-      console.warn("[TURNSTILE_VERIFICATION_FAILED]", {
-        errors: data.error_codes,
-        timestamp: new Date().toISOString(),
-      });
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("[TURNSTILE_VERIFICATION_ERROR]", {
-      error: error instanceof Error ? error.message : String(error),
-      timestamp: new Date().toISOString(),
-    });
-    return false;
-  }
-}
-
-async function getClientIp(): Promise<string> {
-  const headersList = await headers();
-  return headersList.get("x-client-ip") || "unknown";
-}
-
-function getEmailDomain(email: string): string {
-  return email.split("@")[1]?.toLowerCase() || "unknown";
-}
-
-function getFirstZodFieldError(error: ZodError): {
-  field: keyof ContactFormData;
-  message: string;
-} | null {
-  if (error.errors.length === 0) return null;
-
-  const firstError = error.errors[0];
-  const field = firstError.path[0] as keyof ContactFormData;
-  return { field, message: firstError.message };
-}
-
 export async function submitContactInquiry(
   formData: unknown,
   turnstileToken: string,
