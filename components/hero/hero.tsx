@@ -52,6 +52,67 @@ const flickerVariants = {
   },
 };
 
+/**
+ * Slide-in animation for hero text elements
+ * - Uses translateX/Y for smooth entrance from sides
+ * - Combines with opacity for elegant appearance
+ * - Staggered for visual rhythm
+ */
+const slideInVariants = {
+  hidden: {
+    opacity: 0,
+    x: -30,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring" as const,
+      damping: 25,
+      stiffness: 120,
+    },
+  },
+};
+
+/**
+ * Scale and glow animation for CTA buttons
+ * - Minimal scale for professional feel (1 → 1.05)
+ * - Uses will-change for GPU acceleration
+ * - Paired with shadow glow effect
+ */
+const buttonHoverVariants = {
+  rest: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.2,
+      type: "spring" as const,
+      stiffness: 400,
+      damping: 25,
+    },
+  },
+};
+
+/**
+ * Animated stats container variant
+ * - Fades in after main content
+ * - Staggered children for individual counter animations
+ */
+const statsContainerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.8,
+    },
+  },
+};
+
+
 export function Hero() {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "screen" });
@@ -222,7 +283,7 @@ export function Hero() {
 
           {/* Main Headline */}
           <motion.h1
-            variants={itemVariants}
+            variants={slideInVariants}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
           >
             <span className="block">Powering the</span>
@@ -247,9 +308,13 @@ export function Hero() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button
+            <motion.button
               onClick={triggerSurge}
-              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)] active:scale-95"
+              variants={buttonHoverVariants}
+              initial="rest"
+              whileHover="hover"
+              whileTap={{ scale: 0.97 }}
+              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Initiate System
@@ -257,7 +322,7 @@ export function Hero() {
               </span>
               {/* Hover sweep effect */}
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
-            </button>
+            </motion.button>
 
             <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
               Our Solutions
@@ -266,7 +331,7 @@ export function Hero() {
 
           {/* Technical Metadata */}
           <motion.div
-            variants={itemVariants}
+            variants={statsContainerVariants}
             className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-muted-foreground/60 uppercase"
           >
             <span>Est. 2024</span>
