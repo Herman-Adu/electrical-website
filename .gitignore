@@ -25,3 +25,6 @@ package-lock.json
 yarn.lock
 bun.lockb
 npm-shrinkwrap.json
+
+# Local agent worktrees
+.claude/worktrees/
