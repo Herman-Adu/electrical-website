@@ -12,9 +12,9 @@ export function ProjectCardShell({
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border/60 bg-card/50 p-5 shadow-sm backdrop-blur-sm",
-        "transition-colors hover:border-electric-cyan/30",
-        className,
+        "rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm p-5",
+        "transition-all duration-300",
+        className
       )}
     >
       {children}

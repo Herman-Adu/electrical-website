@@ -2,35 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { projectCategories } from "@/data/projects";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
+import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
 
 export default function ProjectCategoriesPage() {
   return (
     <main className="relative">
-      <section className="section-container section-safe-top section-safe-bottom bg-background">
-        <div className="section-content max-w-5xl">
-          {/* Breadcrumb */}
-          <div className="mb-6">
-            <Link
-              href="/projects"
-              className="font-mono text-[10px] uppercase tracking-[0.14em] text-electric-cyan/80 hover:text-electric-cyan"
-            >
-              ← All Projects
-            </Link>
-          </div>
+      {/* Hero */}
+      <ProjectsCategoriesHero categoryCount={projectCategories.length} />
 
-          {/* Header */}
-          <div className="mb-12">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan mb-3">
-              Browse by Sector
-            </p>
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Project Categories
-            </h1>
+      {/* Categories grid */}
+      <section
+        id="categories-grid"
+        className="section-standard bg-background"
+      >
+        <div className="section-content max-w-5xl">
+          {/* Section header */}
+          <div className="mb-10">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="h-px w-10 bg-electric-cyan/50" />
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-electric-cyan/70">
+                Specialist Sectors
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              Choose a Category
+            </h2>
             <p className="text-muted-foreground max-w-lg">
-              Explore our portfolio organised by sector. Each category
-              represents a distinct area of electrical expertise.
+              Each sector represents a distinct area of electrical expertise.
+              Select a category to explore the projects we&apos;ve delivered.
             </p>
           </div>
 

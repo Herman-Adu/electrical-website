@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Zap, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import Image from "next/image";
+import { Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -58,21 +59,16 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 group mb-6">
-              <div className="relative">
-                <Zap
-                  size={28}
-                  className="text-electric-cyan group-hover:animate-pulse transition-all"
+            <Link href="/" className="inline-block group mb-6">
+              <div className="relative h-10 sm:h-12 w-auto">
+                <Image
+                  src="/images/brand-assets/nexgen-logo-full.png"
+                  alt="NEXGEN Electrical Innovations"
+                  width={300}
+                  height={48}
+                  className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
                 />
-                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-foreground font-bold text-lg tracking-tight leading-none">
-                  NEXGEN
-                </span>
-                <span className="font-mono text-[9px] text-electric-cyan/60 tracking-[0.2em] uppercase">
-                  Electrical Innovations
-                </span>
               </div>
             </Link>
 
@@ -162,25 +158,41 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Card */}
+          {/* Emergency Contact Card - Vertical Stack */}
           <div className="col-span-2 md:col-span-1">
             <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
             </h4>
-            <div className="p-4 border border-border bg-card/50">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="p-5 border border-electric-cyan/20 bg-gradient-to-b from-card/80 to-card/40 rounded-lg">
+              {/* Online Status */}
+              <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
-                <span className="font-mono text-[9px] text-emerald-500 tracking-widest">
-                  ONLINE
+                <span className="font-mono text-[9px] text-emerald-500 tracking-widest uppercase">
+                  Online
                 </span>
               </div>
+
+              {/* Brand Wordmark */}
+              <div className="w-24 h-auto mb-4">
+                <Image
+                  src="/images/brand-assets/nexgen-transparent-banner.png"
+                  alt="NEXGEN"
+                  width={200}
+                  height={40}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* Phone Number - Prominent */}
               <a
-                href="tel:1800639436"
-                className="text-foreground font-bold text-lg hover:text-electric-cyan transition-colors"
+                href="tel:+442012345678"
+                className="block text-electric-cyan font-bold text-lg md:text-xs hover:text-foreground transition-colors mb-2"
               >
-                1800 NEX GEN
+                +44 (0) 20 1234 5678
               </a>
-              <p className="text-muted-foreground/60 text-xs mt-1">
+
+              {/* Subtext */}
+              <p className="text-muted-foreground/60 text-xs">
                 Rapid response team ready
               </p>
             </div>
@@ -212,7 +224,7 @@ export function Footer() {
 
             {/* Technical Badge */}
             <div className="font-mono text-[9px] text-muted-foreground/40 tracking-widest">
-              POWERED BY NEXGEN_CORE v4.2.1
+              POWERED BY ADU-DEV SOLUTIONS
             </div>
           </div>
         </div>

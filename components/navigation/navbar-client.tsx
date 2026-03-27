@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navLinks = [
@@ -201,13 +202,16 @@ export function NavbarClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative">
-                <Zap
-                  size={24}
-                  className="text-electric-cyan group-hover:animate-pulse transition-all"
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative w-9 h-9 lg:w-10 lg:h-10 flex-shrink-0">
+                <Image
+                  src="/images/brand-assets/nexgen-logo-round.png"
+                  alt="Nexgen round logo"
+                  fill
+                  className="object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
                 />
-                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
               </div>
               <div className="flex flex-col">
                 <span className="text-foreground font-bold text-sm lg:text-base tracking-tight leading-none">

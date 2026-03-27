@@ -43,15 +43,23 @@ export default async function ProjectsPage({
         categories={projectCategories}
         activeCategory={activeCategory}
       />
-      <section className="section-container py-8">
+      <section id="projects-grid" className="section-standard bg-background">
         <div className="section-content max-w-6xl">
           {featuredProject ? (
             <ProjectsFeaturedCard project={featuredProject} />
           ) : null}
         </div>
       </section>
-      <ProjectsBentoGrid items={projectBentoItems} />
-      <ProjectsOptimisticList items={projectListItems} />
+      <section className="section-container section-padding-sm bg-background">
+        <div className="section-content max-w-6xl">
+          <ProjectsBentoGrid items={projectBentoItems} />
+        </div>
+      </section>
+      <section className="section-container section-padding bg-background">
+        <div className="section-content max-w-6xl">
+          <ProjectsOptimisticList items={projectListItems} />
+        </div>
+      </section>
       <Footer />
     </main>
   );
