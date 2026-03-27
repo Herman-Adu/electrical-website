@@ -8,6 +8,8 @@ import {
   allProjects,
 } from "@/data/projects";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
+
+export const revalidate = 259200; // 72 hours
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectDetailHero,
@@ -73,7 +75,7 @@ export async function generateMetadata({
 
   return createProjectDetailMetadata(
     project,
-    `/projects/category/${categorySlug}/${projectSlug}`
+    `/projects/category/${categorySlug}/${projectSlug}`,
   );
 }
 
@@ -105,13 +107,13 @@ export default async function CategoryProjectDetailPage({
     {
       name: category.label,
       url: siteConfig.getUrl(
-        `${siteConfig.routes.projectsCategory}/${categorySlug}`
+        `${siteConfig.routes.projectsCategory}/${categorySlug}`,
       ),
     },
     {
       name: project.title,
       url: siteConfig.getUrl(
-        `/projects/category/${categorySlug}/${projectSlug}`
+        `/projects/category/${categorySlug}/${projectSlug}`,
       ),
     },
   ];

@@ -6,6 +6,8 @@ import { ProjectsCategoriesHero } from "@/components/projects/projects-categorie
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
 
+export const revalidate = 86400; // 24 hours
+
 export default function ProjectCategoriesPage() {
   return (
     <main className="relative">
@@ -13,10 +15,7 @@ export default function ProjectCategoriesPage() {
       <ProjectsCategoriesHero categoryCount={projectCategories.length} />
 
       {/* Categories grid */}
-      <section
-        id="categories-grid"
-        className="section-standard bg-background"
-      >
+      <section id="categories-grid" className="section-standard bg-background">
         <div className="section-content max-w-5xl">
           {/* Section header */}
           <div className="mb-10">

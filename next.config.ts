@@ -7,6 +7,20 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: env.NEXT_IMAGE_UNOPTIMIZED ?? false,
   },
+  cacheLife: {
+    default: {
+      revalidate: 3600, // 1 hour default
+      stale: 86400, // serve stale for 24h
+    },
+    categories: {
+      revalidate: 86400, // 24 hours
+      stale: 604800, // serve stale for 7 days
+    },
+    projects: {
+      revalidate: 259200, // 72 hours
+      stale: 2592000, // serve stale for 30 days
+    },
+  },
   headers: async () => {
     return [
       {

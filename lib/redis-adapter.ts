@@ -307,8 +307,16 @@ export async function getRedisAdapter(): Promise<RedisAdapter> {
   }
 
   if (isProduction) {
-    adapterInstance = await createVercelKvAdapter();
-    console.log("[RedisAdapter] Using Vercel KV (production)");
+    try {
+      adapterInstance = await createVercelKvAdapter();
+      console.log("[RedisAdapter] Using Vercel KV (production)");
+    } catch (error) {
+      console.warn(
+        "[RedisAdapter] Vercel KV unavailable, using memory cache as fallback",
+        error,
+      );
+      adapterInstance = createMemoryAdapter();
+    }
   } else if (isDevelopment) {
     try {
       adapterInstance = await createDockerRedisAdapter();

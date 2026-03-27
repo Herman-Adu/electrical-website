@@ -7,6 +7,8 @@ import {
   getProjectsByCategory,
 } from "@/data/projects";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
+
+export const revalidate = 86400; // 24 hours
 import {
   ProjectCategoryHero,
   ProjectCardShell,
