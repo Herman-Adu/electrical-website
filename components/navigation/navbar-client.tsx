@@ -205,8 +205,8 @@ export function NavbarClient() {
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="relative w-9 h-9 lg:w-10 lg:h-10 flex-shrink-0">
                 <Image
-                  src="/images/nexgen-logo-round.png"
-                  alt="NEXGEN"
+                  src="/images/brand-assets/nexgen-logo-round.png"
+                  alt="Nexgen round logo"
                   fill
                   className="object-contain group-hover:scale-105 transition-transform duration-300"
                   priority

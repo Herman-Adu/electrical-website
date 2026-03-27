@@ -62,9 +62,9 @@ export function Footer() {
             <Link href="/" className="inline-block group mb-6">
               <div className="relative h-10 sm:h-12 w-auto">
                 <Image
-                  src="/images/nexgen-logo-full.png"
+                  src="/images/brand-assets/nexgen-logo-full.png"
                   alt="NEXGEN Electrical Innovations"
-                  width={200}
+                  width={300}
                   height={48}
                   className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                   priority
@@ -171,26 +171,26 @@ export function Footer() {
                   Online
                 </span>
               </div>
-              
+
               {/* Brand Wordmark */}
               <div className="w-24 h-auto mb-4">
                 <Image
-                  src="/images/nexgen-wordmark.png"
+                  src="/images/brand-assets/nexgen-transparent-banner.png"
                   alt="NEXGEN"
                   width={200}
                   height={40}
                   className="w-full h-auto object-contain"
                 />
               </div>
-              
+
               {/* Phone Number - Prominent */}
               <a
                 href="tel:+442012345678"
-                className="block text-electric-cyan font-bold text-lg md:text-xl hover:text-foreground transition-colors mb-2"
+                className="block text-electric-cyan font-bold text-lg md:text-xs hover:text-foreground transition-colors mb-2"
               >
                 +44 (0) 20 1234 5678
               </a>
-              
+
               {/* Subtext */}
               <p className="text-muted-foreground/60 text-xs">
                 Rapid response team ready
@@ -224,7 +224,7 @@ export function Footer() {
 
             {/* Technical Badge */}
             <div className="font-mono text-[9px] text-muted-foreground/40 tracking-widest">
-              POWERED BY NEXGEN_CORE v4.2.1
+              POWERED BY ADU-DEV SOLUTIONS
             </div>
           </div>
         </div>
