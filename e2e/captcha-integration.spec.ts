@@ -8,7 +8,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // Find and scroll to contact section
     const contactSection = page.locator("#contact");
     await expect(contactSection).toBeVisible();
-    await contactSection.scrollIntoView();
+    await contactSection.scrollIntoViewIfNeeded();
 
     // Wait a moment for the page to settle
     await page.waitForTimeout(2000);
@@ -51,7 +51,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
 
     // Navigate to contact section
     const contactSection = page.locator("#contact");
-    await contactSection.scrollIntoView();
+    await contactSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
 
     // Fill form fields
@@ -82,7 +82,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
 
     // Navigate to contact section
     const contactSection = page.locator("#contact");
-    await contactSection.scrollIntoView();
+    await contactSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
 
     // Test name field
