@@ -40,7 +40,7 @@ function ResponsiveBreadcrumb({
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex items-center gap-2 font-mono ${textSize} uppercase ${tracking} text-muted-foreground`}
+      className={`flex items-center gap-2 font-mono ${textSize} uppercase ${tracking} text-muted-foreground overflow-hidden`}
     >
       {/* First link — always visible */}
       <Link
@@ -122,8 +122,8 @@ function ResponsiveBreadcrumb({
         <span className="shrink-0 text-muted-foreground/40">/</span>
       </div>
 
-      {/* Last link — always visible */}
-      <span className={`text-electric-cyan ${isSticky ? "font-medium truncate max-w-[140px] sm:max-w-[200px]" : ""}`}>
+      {/* Last link — always visible, truncated to one line */}
+      <span className={`text-electric-cyan truncate min-w-0 ${isSticky ? "font-medium" : ""}`}>
         {projectTitle}
       </span>
     </nav>
