@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -16,6 +17,117 @@ import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
 interface ProjectDetailHeroProps {
   project: Project;
   categorySlug: string;
+}
+
+/** Responsive breadcrumb with expandable middle links on mobile */
+function ResponsiveBreadcrumb({
+  categorySlug,
+  categoryLabel,
+  projectTitle,
+  variant = "default",
+}: {
+  categorySlug: string;
+  categoryLabel: string;
+  projectTitle: string;
+  variant?: "default" | "sticky";
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const isSticky = variant === "sticky";
+
+  const textSize = isSticky ? "text-[9px]" : "text-[10px]";
+  const tracking = isSticky ? "tracking-[0.14em]" : "tracking-[0.14em]";
+
+  return (
+    <nav
+      aria-label="Breadcrumb"
+      className={`flex items-center gap-2 font-mono ${textSize} uppercase ${tracking} text-muted-foreground`}
+    >
+      {/* First link — always visible */}
+      <Link
+        href="/projects"
+        className="shrink-0 hover:text-electric-cyan transition-colors"
+      >
+        Projects
+      </Link>
+      <span className="shrink-0 text-muted-foreground/40">/</span>
+
+      {/* Desktop: show all middle links */}
+      <div className="hidden sm:contents">
+        <Link
+          href="/projects/category"
+          className="shrink-0 hover:text-electric-cyan transition-colors"
+        >
+          Categories
+        </Link>
+        <span className="shrink-0 text-muted-foreground/40">/</span>
+        <Link
+          href={`/projects/category/${categorySlug}`}
+          className="shrink-0 hover:text-electric-cyan transition-colors"
+        >
+          {categoryLabel}
+        </Link>
+        <span className="shrink-0 text-muted-foreground/40">/</span>
+      </div>
+
+      {/* Mobile: expandable ellipsis */}
+      <div className="sm:hidden flex items-center gap-2">
+        <AnimatePresence mode="wait">
+          {!expanded ? (
+            <motion.button
+              key="collapsed"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.15 }}
+              onClick={() => setExpanded(true)}
+              className="shrink-0 px-2.5 py-1.5 rounded-md bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan hover:bg-electric-cyan/20 transition-colors min-h-[32px] flex items-center"
+              aria-label="Show full breadcrumb path"
+            >
+              <span className="text-[10px] tracking-wider">•••</span>
+            </motion.button>
+          ) : (
+            <motion.div
+              key="expanded"
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              exit={{ opacity: 0, width: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex items-center gap-2 overflow-hidden"
+            >
+              <Link
+                href="/projects/category"
+                className="shrink-0 hover:text-electric-cyan transition-colors"
+              >
+                Categories
+              </Link>
+              <span className="shrink-0 text-muted-foreground/40">/</span>
+              <Link
+                href={`/projects/category/${categorySlug}`}
+                className="shrink-0 hover:text-electric-cyan transition-colors"
+              >
+                {categoryLabel}
+              </Link>
+              <button
+                onClick={() => setExpanded(false)}
+                className="shrink-0 ml-1 p-1 rounded text-muted-foreground/60 hover:text-electric-cyan transition-colors"
+                aria-label="Collapse breadcrumb"
+              >
+                <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+                  <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <span className="shrink-0 text-muted-foreground/40">/</span>
+      </div>
+
+      {/* Last link — always visible */}
+      <span className={`text-electric-cyan ${isSticky ? "font-medium truncate max-w-[140px] sm:max-w-[200px]" : ""}`}>
+        {projectTitle}
+      </span>
+    </nav>
+  );
 }
 
 export function ProjectDetailHero({
@@ -67,35 +179,14 @@ export function ProjectDetailHero({
         }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        <nav
-          aria-label="Breadcrumb"
-          className="section-content max-w-6xl py-2.5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground overflow-x-auto scrollbar-none"
-        >
-          <Link
-            href="/projects"
-            className="shrink-0 hover:text-electric-cyan transition-colors"
-          >
-            Projects
-          </Link>
-          <span className="shrink-0 text-muted-foreground/40">/</span>
-          <Link
-            href="/projects/category"
-            className="shrink-0 hover:text-electric-cyan transition-colors"
-          >
-            Categories
-          </Link>
-          <span className="shrink-0 text-muted-foreground/40">/</span>
-          <Link
-            href={`/projects/category/${categorySlug}`}
-            className="shrink-0 hover:text-electric-cyan transition-colors"
-          >
-            {project.categoryLabel}
-          </Link>
-          <span className="shrink-0 text-muted-foreground/40">/</span>
-          <span className="text-electric-cyan font-medium truncate max-w-[200px]">
-            {project.title}
-          </span>
-        </nav>
+        <div className="section-content max-w-6xl py-2.5">
+          <ResponsiveBreadcrumb
+            categorySlug={categorySlug}
+            categoryLabel={project.categoryLabel}
+            projectTitle={project.title}
+            variant="sticky"
+          />
+        </div>
       </motion.div>
 
       {/* Hero section — full viewport height */}
@@ -225,36 +316,18 @@ export function ProjectDetailHero({
 
       {/* Breadcrumb section — below hero (tracked for sticky trigger) */}
       <div ref={staticBreadcrumbRef} className="section-content max-w-6xl py-8">
-        <motion.nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground flex-wrap"
+        <motion.div
           initial={shouldReduce ? {} : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
-          <Link
-            href="/projects"
-            className="hover:text-electric-cyan transition-colors"
-          >
-            Projects
-          </Link>
-          <span className="text-muted-foreground/40">/</span>
-          <Link
-            href="/projects/category"
-            className="hover:text-electric-cyan transition-colors"
-          >
-            Categories
-          </Link>
-          <span className="text-muted-foreground/40">/</span>
-          <Link
-            href={`/projects/category/${categorySlug}`}
-            className="hover:text-electric-cyan transition-colors"
-          >
-            {project.categoryLabel}
-          </Link>
-          <span className="text-muted-foreground/40">/</span>
-          <span className="text-electric-cyan">{project.title}</span>
-        </motion.nav>
+          <ResponsiveBreadcrumb
+            categorySlug={categorySlug}
+            categoryLabel={project.categoryLabel}
+            projectTitle={project.title}
+            variant="default"
+          />
+        </motion.div>
       </div>
     </>
   );
