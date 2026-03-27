@@ -100,16 +100,24 @@ function BentoTile({ item, index }: { item: ProjectBentoItem; index: number }) {
       transition={{ duration: 0.2 }}
       className="group"
     >
-      <ProjectCardShell className="relative min-h-[180px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,243,189,0.08)] group-hover:border-electric-cyan/50">
-        {/* Corner bracket */}
-        <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-electric-cyan/20 rounded-tr transition-colors duration-300 group-hover:border-electric-cyan/50" />
+      {/*
+       * Bento tile with responsive sizing
+       * Mobile: min-h-[160px], compact padding
+       * Tablet: min-h-[180px], increased padding
+       * Desktop: min-h-[200px], generous spacing
+       */}
+      <ProjectCardShell className="relative min-h-[160px] sm:min-h-[180px] md:min-h-[200px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,243,189,0.08)] group-hover:border-electric-cyan/50">
+        {/* Corner bracket - responsive sizing */}
+        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 w-3 sm:w-4 h-3 sm:h-4 border-t border-r border-electric-cyan/20 rounded-tr transition-colors duration-300 group-hover:border-electric-cyan/50" />
 
-        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
+        {/* Title - responsive text sizing */}
+        <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-muted-foreground">
           {item.title}
         </p>
 
+        {/* Metric value - full responsive scaling */}
         <motion.p
-          className="mt-4 text-3xl sm:text-4xl font-black tracking-tight text-electric-cyan"
+          className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-electric-cyan"
           initial={shouldReduce ? {} : { opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.8, duration: 0.3 }}
@@ -117,7 +125,8 @@ function BentoTile({ item, index }: { item: ProjectBentoItem; index: number }) {
           {displayValue}
         </motion.p>
 
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        {/* Description - responsive sizing */}
+        <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground">
           {item.description}
         </p>
 
@@ -136,26 +145,26 @@ export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
 
   return (
     <section
-      className="section-container py-10"
+      className="section-container py-8 sm:py-10 md:py-12 lg:py-14"
       aria-label="Project highlights"
     >
       <div className="section-content max-w-6xl">
-        {/* Section header */}
+        {/* Section header - responsive spacing */}
         <motion.div
-          className="mb-6 flex items-center gap-4"
+          className="mb-6 sm:mb-7 md:mb-8 flex items-center gap-3 sm:gap-4"
           initial={shouldReduce ? {} : { opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <div className="h-px w-8 bg-electric-cyan/50" />
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/80">
+          <div className="h-px w-6 sm:w-8 bg-electric-cyan/50" />
+          <p className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-electric-cyan/80">
             Performance Snapshot
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Grid - responsive column layout */}
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 2xl:gap-6 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4">
           {items.map((item, index) => (
             <BentoTile key={item.id} item={item} index={index} />
           ))}
