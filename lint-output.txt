@@ -1,0 +1,200 @@
+
+> my-project@0.1.0 lint C:\Users\herma\source\repository\electrical-website
+> eslint .
+
+(node:18596) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/herma/source/repository/electrical-website/eslint.config.js?mtime=1774644092671 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\herma\source\repository\electrical-website\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+C:\Users\herma\source\repository\electrical-website\agent\audit\audit-logger.ts
+  3:3  warning  'AgentOutput' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  3:3  warning  'AgentOutput' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\agent\router\tool-router.ts
+   10:1   warning  All imports in the declaration are only used as types. Use `import type`          @typescript-eslint/consistent-type-imports
+   11:1   warning  All imports in the declaration are only used as types. Use `import type`          @typescript-eslint/consistent-type-imports
+   12:1   warning  All imports in the declaration are only used as types. Use `import type`          @typescript-eslint/consistent-type-imports
+  130:11  warning  'start' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  130:11  warning  'start' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\agent\types\heuristics.ts
+  1:15  warning  'McpServerId' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  1:15  warning  'McpServerId' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\app\about\page.tsx
+  1:1  warning  All imports in the declaration are only used as types. Use `import type`  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\app\api\og\route.ts
+  3:10  warning  'siteConfig' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  3:10  warning  'siteConfig' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\app\sitemap.ts
+  2:22  warning  'SITE_URL' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:22  warning  'SITE_URL' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\components\about\company-timeline.tsx
+  94:3  warning  'scrollDirection' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  94:3  warning  'scrollDirection' is defined but never used. Allowed unused args must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-detail-intro.tsx
+  69:9  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  69:9  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-kpi-section.tsx
+  3:10  warning  'useRef' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  3:10  warning  'useRef' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-related-carousel.tsx
+  15:3   warning  'AnimatedBorders' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  15:3   warning  'AnimatedBorders' is defined but never used                                           unused-imports/no-unused-imports
+  46:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  46:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   unused-imports/no-unused-vars
+  46:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  46:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-social-cta.tsx
+  16:30  warning  'AnimatedBorders' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  16:30  warning  'AnimatedBorders' is defined but never used                                           unused-imports/no-unused-imports
+  57:3   warning  'projectTitle' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  57:3   warning  'projectTitle' is defined but never used. Allowed unused args must match /^_/u        unused-imports/no-unused-vars
+  63:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  63:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   unused-imports/no-unused-vars
+  63:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  63:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-testimonial.tsx
+   7:30  warning  'AnimatedBorders' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   7:30  warning  'AnimatedBorders' is defined but never used                                           unused-imports/no-unused-imports
+  20:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  20:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   unused-imports/no-unused-vars
+  20:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  20:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\project-timeline.tsx
+   6:30  warning  'AnimatedBorders' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   6:30  warning  'AnimatedBorders' is defined but never used                                           unused-imports/no-unused-imports
+  45:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  45:23  warning  'lineLeft' is assigned a value but never used. Allowed unused vars must match /^_/u   unused-imports/no-unused-vars
+  45:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  45:33  warning  'lineRight' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\projects\projects-featured-card.tsx
+  18:10  warning  'ProjectMetaRow' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  18:10  warning  'ProjectMetaRow' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\components\sections\contact.tsx
+   17:34  warning  'ContactFormData' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   17:34  warning  'ContactFormData' is defined but never used                                        unused-imports/no-unused-imports
+  158:32  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+
+C:\Users\herma\source\repository\electrical-website\components\sections\illumination.tsx
+  19:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  19:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\sections\smart-living.tsx
+  12:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  12:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\services\services-bento.tsx
+    6:18  warning  'useInView' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+    6:18  warning  'useInView' is defined but never used                                                       unused-imports/no-unused-imports
+  504:7   warning  'commercialSpecs' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  504:7   warning  'commercialSpecs' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+  528:7   warning  'lightingSpecs' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  528:7   warning  'lightingSpecs' is assigned a value but never used. Allowed unused vars must match /^_/u    unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\shared\section-profile.tsx
+  17:35  warning  'SocialLink' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  17:35  warning  'SocialLink' is defined but never used                                                unused-imports/no-unused-imports
+  49:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  49:10  warning  'isMounted' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\ui\calendar.tsx
+  9:1  warning  Imports "DayButton" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\components\ui\form.tsx
+  4:1  warning  All imports in the declaration are only used as types. Use `import type`  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\components\ui\pagination.tsx
+  9:1  warning  Imports "Button" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\components\ui\sidebar.tsx
+  5:1  warning  Imports "VariantProps" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\components\ui\sonner.tsx
+  4:1  warning  Imports "ToasterProps" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\components\ui\theme-toggle.tsx
+  9:11  warning  'theme' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  9:11  warning  'theme' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\components\ui\use-toast.ts
+  18:7  warning  'actionTypes' is assigned a value but only used as a type. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  18:7  warning  'actionTypes' is assigned a value but only used as a type. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\e2e\captcha-integration.spec.ts
+   30:11  warning  'turnstileIframe' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   30:11  warning  'turnstileIframe' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+  124:25  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+
+C:\Users\herma\source\repository\electrical-website\e2e\smoke-test.spec.ts
+  83:13  warning  'initialAriaExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  83:13  warning  'initialAriaExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\hooks\use-toast.ts
+  18:7  warning  'actionTypes' is assigned a value but only used as a type. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  18:7  warning  'actionTypes' is assigned a value but only used as a type. Allowed unused vars must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\lib\actions\contact.ts
+  152:5  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\herma\source\repository\electrical-website\lib\hooks\useAnimatedCounter.ts
+  70:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  70:14  warning  'e' is defined but never used  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\lib\hooks\useIntersectionObserverAnimation.ts
+  3:1  warning  Imports "RefObject" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\lib\hooks\useParallaxImage.ts
+  3:1   warning  Imports "RefObject" are only used as type                                 @typescript-eslint/consistent-type-imports
+  3:32  warning  'useRef' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  3:32  warning  'useRef' is defined but never used                                        unused-imports/no-unused-imports
+  4:1   warning  Imports "MotionValue" are only used as type                               @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\lib\hooks\useParticleAnimation.ts
+  3:1  warning  Imports "MotionValue" are only used as type                               @typescript-eslint/consistent-type-imports
+  4:1  warning  All imports in the declaration are only used as types. Use `import type`  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\lib\metadata.ts
+  23:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\herma\source\repository\electrical-website\lib\rate-limit.ts
+  215:3  warning  'windowMs' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  215:3  warning  'windowMs' is assigned a value but never used. Allowed unused args must match /^_/u  unused-imports/no-unused-vars
+
+C:\Users\herma\source\repository\electrical-website\lib\redis-adapter.ts
+  311:5  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  315:7  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  325:5  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\herma\source\repository\electrical-website\lib\structured-data.ts
+  7:24  warning  'ProjectCategory' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  7:24  warning  'ProjectCategory' is defined but never used                                        unused-imports/no-unused-imports
+
+C:\Users\herma\source\repository\electrical-website\lib\use-animated-borders.tsx
+   1:18  warning  'useEffect' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   1:18  warning  'useEffect' is defined but never used                                        unused-imports/no-unused-imports
+  34:13  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  35:14  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+C:\Users\herma\source\repository\electrical-website\proxy.ts
+  1:1  warning  Imports "NextRequest" are only used as type  @typescript-eslint/consistent-type-imports
+
+C:\Users\herma\source\repository\electrical-website\scripts\check-context.mjs
+  17:3  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  19:5  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  31:1  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  35:5  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  38:3  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  42:3  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
