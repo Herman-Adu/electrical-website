@@ -208,6 +208,7 @@ export function NavbarClient() {
                   src="/images/brand-assets/nexgen-logo-round.png"
                   alt="Nexgen round logo"
                   fill
+                  sizes="(max-width: 1024px) 36px, 40px"
                   className="object-contain group-hover:scale-105 transition-transform duration-300"
                   priority
                 />
@@ -324,6 +325,10 @@ export function NavbarClient() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation-menu"
               className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -349,7 +354,7 @@ export function NavbarClient() {
             />
 
             {/* Menu Content */}
-            <div className="relative pt-20 px-6">
+            <div id="mobile-navigation-menu" className="relative pt-20 px-6">
               <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => {
                   const topLevelActive =
@@ -386,6 +391,9 @@ export function NavbarClient() {
                                   openDropdown === link.name ? null : link.name,
                                 )
                               }
+                              type="button"
+                              aria-label={`${openDropdown === link.name ? "Collapse" : "Expand"} ${link.name} menu`}
+                              aria-expanded={openDropdown === link.name}
                               className="p-1 text-muted-foreground hover:text-electric-cyan transition-colors"
                             >
                               <ChevronDown

@@ -14,8 +14,16 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { submitContactInquiry } from "@/lib/actions/contact";
-import { contactFormSchema, type ContactFormData } from "@/lib/schemas/contact";
+import { contactFormSchema } from "@/lib/schemas/contact";
 import { ZodError } from "zod";
+
+type ProjectType =
+  | ""
+  | "commercial"
+  | "industrial"
+  | "maintenance"
+  | "consultation"
+  | "other";
 
 const contactInfo = [
   {
@@ -45,6 +53,8 @@ const contactInfo = [
 ];
 
 export function Contact() {
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,13 +73,7 @@ export function Contact() {
     name: "",
     email: "",
     company: "",
-    projectType: "" as
-      | ""
-      | "commercial"
-      | "industrial"
-      | "maintenance"
-      | "consultation"
-      | "other",
+    projectType: "" as ProjectType,
     message: "",
   });
 
@@ -155,7 +159,7 @@ export function Contact() {
             name: "",
             email: "",
             company: "",
-            projectType: "" as any,
+            projectType: "" as ProjectType,
             message: "",
           });
           setTurnstileToken("");
@@ -180,11 +184,10 @@ export function Contact() {
             setServerError(result.error);
           }
         }
-      } catch (error) {
+      } catch {
         setServerError(
           "Unexpected error occurred. Please check your connection and try again.",
         );
-        console.error("Contact form error:", error);
       } finally {
         setIsLoading(false);
       }
@@ -224,11 +227,11 @@ export function Contact() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-4">
             Start Your <span className="text-electric-cyan">Project</span>
-          </h2>
+          </h1>
 
-          <p className="text-slate-400 max-w-2xl mx-auto text-base lg:text-lg font-light">
+          <p className="text-slate-300 max-w-2xl mx-auto text-base lg:text-lg font-light">
             Ready to power your next innovation? Get in touch with our
             engineering team for a comprehensive consultation.
           </p>
@@ -258,13 +261,13 @@ export function Contact() {
                   <div className="absolute -inset-2 bg-electric-cyan/10 blur-lg opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] text-slate-600 tracking-widest uppercase block mb-1">
+                  <span className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-1">
                     {item.label}
                   </span>
                   <span className="text-white font-medium block">
                     {item.value}
                   </span>
-                  <span className="text-slate-500 text-sm">
+                  <span className="text-slate-300 text-sm">
                     {item.subvalue}
                   </span>
                 </div>
@@ -284,7 +287,7 @@ export function Contact() {
                   Emergency Services
                 </span>
               </div>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-300 text-sm">
                 Electrical emergency? Our rapid response team is available 24/7.
               </p>
               <button className="mt-3 text-red-400 font-bold text-sm hover:text-red-300 transition-colors">
@@ -339,10 +342,14 @@ export function Contact() {
               {/* Name Field */}
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                  <label
+                    htmlFor="contact-name"
+                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                  >
                     Full Name *
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     value={formData.name}
@@ -364,10 +371,14 @@ export function Contact() {
 
                 {/* Email Field */}
                 <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                  <label
+                    htmlFor="contact-email"
+                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                  >
                     Email Address *
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -391,10 +402,14 @@ export function Contact() {
               {/* Company & Project Type */}
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                  <label
+                    htmlFor="contact-company"
+                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                  >
                     Company
                   </label>
                   <input
+                    id="contact-company"
                     type="text"
                     name="company"
                     value={formData.company}
@@ -405,10 +420,14 @@ export function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                  <label
+                    htmlFor="contact-project-type"
+                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                  >
                     Project Type *
                   </label>
                   <select
+                    id="contact-project-type"
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
@@ -436,10 +455,14 @@ export function Contact() {
 
               {/* Message Field */}
               <div className="mb-6">
-                <label className="font-mono text-[10px] text-slate-500 tracking-widest uppercase block mb-2">
+                <label
+                  htmlFor="contact-message"
+                  className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                >
                   Project Details *
                 </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
@@ -461,12 +484,18 @@ export function Contact() {
 
               {/* Turnstile CAPTCHA */}
               <div className="mb-6 flex justify-center">
-                <Turnstile
-                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-                  onSuccess={handleCaptchaChange}
-                  theme="dark"
-                  size="normal"
-                />
+                {turnstileSiteKey ? (
+                  <Turnstile
+                    sitekey={turnstileSiteKey}
+                    onSuccess={handleCaptchaChange}
+                    theme="dark"
+                    size="normal"
+                  />
+                ) : (
+                  <p className="text-center text-sm text-slate-300">
+                    CAPTCHA will load automatically in configured environments.
+                  </p>
+                )}
               </div>
 
               {/* Captcha Error Alert */}
@@ -544,7 +573,7 @@ export function Contact() {
 
               {/* Form Footer */}
               <div className="mt-4 text-center">
-                <span className="font-mono text-[9px] text-slate-600 tracking-widest">
+                <span className="font-mono text-[9px] text-slate-400 tracking-widest">
                   ENCRYPTED TRANSMISSION // RESPONSE TIME: 2HRS
                 </span>
               </div>

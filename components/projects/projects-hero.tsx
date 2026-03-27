@@ -288,8 +288,9 @@ export function ProjectsHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToGrid}
+          type="button"
           className="flex cursor-pointer flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-electric-cyan dark:text-white/50"
-          aria-label="Scroll to projects"
+          aria-label="Explore Projects"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
             Explore Projects

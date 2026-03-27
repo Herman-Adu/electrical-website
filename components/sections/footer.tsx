@@ -67,7 +67,6 @@ export function Footer() {
                   width={300}
                   height={48}
                   className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                  priority
                 />
               </div>
             </Link>
@@ -94,9 +93,9 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
+            <h3 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Services
-            </h4>
+            </h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
@@ -113,9 +112,9 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
+            <h3 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Company
-            </h4>
+            </h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -141,9 +140,9 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
+            <h3 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               Support
-            </h4>
+            </h3>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
@@ -160,10 +159,10 @@ export function Footer() {
 
           {/* Emergency Contact Card - Vertical Stack */}
           <div className="col-span-2 md:col-span-1">
-            <h4 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
+            <h3 className="font-mono text-[10px] text-electric-cyan tracking-[0.2em] uppercase mb-4">
               24/7 Emergency
-            </h4>
-            <div className="p-5 border border-electric-cyan/20 bg-gradient-to-b from-card/80 to-card/40 rounded-lg">
+            </h3>
+            <div className="p-5 border border-electric-cyan/20 bg-linear-to-b from-card/80 to-card/40 rounded-lg">
               {/* Online Status */}
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 bg-emerald-500 animate-pulse rounded-full" />
@@ -192,7 +191,7 @@ export function Footer() {
               </a>
 
               {/* Subtext */}
-              <p className="text-muted-foreground/60 text-xs">
+              <p className="text-muted-foreground text-xs">
                 Rapid response team ready
               </p>
             </div>
@@ -205,7 +204,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
-            <div className="font-mono text-[10px] text-muted-foreground/60 tracking-widest">
+            <div className="font-mono text-[10px] text-muted-foreground tracking-widest">
               {currentYear} NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
             </div>
 
@@ -215,7 +214,7 @@ export function Footer() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-mono text-[10px] text-muted-foreground/60 tracking-widest hover:text-electric-cyan transition-colors"
+                  className="font-mono text-[10px] text-muted-foreground tracking-widest hover:text-electric-cyan transition-colors"
                 >
                   {link.name.toUpperCase()}
                 </a>
@@ -223,7 +222,7 @@ export function Footer() {
             </div>
 
             {/* Technical Badge */}
-            <div className="font-mono text-[9px] text-muted-foreground/40 tracking-widest">
+            <div className="font-mono text-[9px] text-muted-foreground tracking-widest">
               POWERED BY ADU-DEV SOLUTIONS
             </div>
           </div>

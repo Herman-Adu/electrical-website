@@ -93,8 +93,8 @@ export function CommunitySection() {
           src="/images/community-hero.jpg"
           alt="Intact Electrical team volunteering in the community"
           fill
+          sizes="100vw"
           className="object-cover"
-          priority
         />
       </motion.div>
 
