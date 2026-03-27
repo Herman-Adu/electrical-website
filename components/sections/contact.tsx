@@ -451,7 +451,7 @@ export function Contact() {
                     ? "bg-emerald-500 text-white"
                     : isLoading
                       ? "cursor-not-allowed bg-electric-cyan/50 text-deep-slate"
-                      : "bg-electric-cyan text-deep-slate hover:shadow-[0_0_30px_rgba(0,242,255,0.3)]"
+                      : "bg-electric-cyan text-deep-slate hover:shadow-[0_0_30px_rgba(0,243,189,0.3)]"
                 }`}
               >
                 {isSubmitted ? (

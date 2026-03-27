@@ -26,6 +26,8 @@ function sanitizeHeaderValue(value: string): string {
   return value.replace(/[\r\n\u0000-\u001F\u007F]+/g, " ").trim();
 }
 
+const BRAND_COLOR_HEX = "#00f3bd";
+
 export interface ContactEmailData {
   name: string;
   email: string;
@@ -57,8 +59,8 @@ export async function sendUserConfirmation(
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">
-            <div style="border-bottom: 2px solid #00f2ff; padding-bottom: 20px; margin-bottom: 20px;">
-              <h1 style="color: #00f2ff; margin: 0;">Nexgen Electrical</h1>
+            <div style="border-bottom: 2px solid ${BRAND_COLOR_HEX}; padding-bottom: 20px; margin-bottom: 20px;">
+              <h1 style="color: ${BRAND_COLOR_HEX}; margin: 0;">Nexgen Electrical</h1>
               <p style="color: #666; margin: 5px 0 0 0; font-size: 14px;">Electrical Innovations</p>
             </div>
 
@@ -66,9 +68,9 @@ export async function sendUserConfirmation(
             
             <p>We've received your project inquiry and our engineering team is reviewing it now.</p>
             
-            <div style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #00f2ff; margin: 20px 0;">
+            <div style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid ${BRAND_COLOR_HEX}; margin: 20px 0;">
               <p style="margin: 0 0 10px 0; font-weight: bold; color: #666;">Reference Code</p>
-              <p style="margin: 0; font-size: 18px; font-family: monospace; color: #00f2ff; font-weight: bold;">
+              <p style="margin: 0; font-size: 18px; font-family: monospace; color: ${BRAND_COLOR_HEX}; font-weight: bold;">
                 ${referenceCode}
               </p>
             </div>
@@ -133,7 +135,7 @@ export async function sendAdminNotification(
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto;">
-            <div style="background-color: #f5f5f5; padding: 20px; border-left: 4px solid #00f2ff; margin-bottom: 20px;">
+            <div style="background-color: #f5f5f5; padding: 20px; border-left: 4px solid ${BRAND_COLOR_HEX}; margin-bottom: 20px;">
               <h2 style="margin-top: 0; color: #222;">New Contact Inquiry</h2>
               <p style="margin: 0; font-size: 12px; color: #999;">Reference: <strong>${safeReferenceCode}</strong></p>
             </div>
@@ -153,7 +155,7 @@ export async function sendAdminNotification(
               </tr>
               <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Project Type</td>
-                <td style="padding: 10px 0;"><strong style="color: #00f2ff;">${safeProjectType}</strong></td>
+                <td style="padding: 10px 0;"><strong style="color: ${BRAND_COLOR_HEX};">${safeProjectType}</strong></td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; font-weight: bold; color: #666;">Submitted</td>
@@ -173,7 +175,7 @@ ${safeMessage}
             }
 
             <div style="border-top: 1px solid #eee; margin-top: 40px; padding-top: 20px;">
-              <a href="${replyToHref}" style="display: inline-block; background-color: #00f2ff; color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold;">
+              <a href="${replyToHref}" style="display: inline-block; background-color: ${BRAND_COLOR_HEX}; color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold;">
                 Reply to ${safeName}
               </a>
             </div>

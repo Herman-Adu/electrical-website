@@ -56,18 +56,20 @@ const positionMap: Record<GradientOverlayPosition, string> = {
   right: "right-0 top-0 bottom-0",
 };
 
+type ColorStopValue = [number, number, number] | string;
+
 const presetRgbStops: Record<
   Exclude<GradientOverlayColors, "custom">,
   {
-    from: [number, number, number];
-    via: [number, number, number];
-    to: [number, number, number];
+    from: ColorStopValue;
+    via: ColorStopValue;
+    to: ColorStopValue;
   }
 > = {
   "electric-cyan": {
-    from: [0, 242, 255],
-    via: [34, 211, 238],
-    to: [14, 165, 233],
+    from: "var(--electric-cyan)",
+    via: "var(--electric-cyan-mid)",
+    to: "var(--electric-cyan-strong)",
   },
   amber: {
     from: [251, 191, 36],
@@ -80,8 +82,12 @@ function clampIntensity(intensity: number): number {
   return Math.max(0, Math.min(100, intensity));
 }
 
-function toRgba(rgb: [number, number, number], alpha: number): string {
-  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
+function withAlpha(color: ColorStopValue, alpha: number): string {
+  if (Array.isArray(color)) {
+    return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
+  }
+
+  return `color-mix(in srgb, ${color} ${Math.round(alpha * 100)}%, transparent)`;
 }
 
 /**
@@ -102,17 +108,17 @@ export function GradientOverlay({
   const colorStops =
     colors === "custom"
       ? (customStops ?? {
-          from: [0, 242, 255] as [number, number, number],
-          via: [34, 211, 238] as [number, number, number],
-          to: [14, 165, 233] as [number, number, number],
+          from: [0, 243, 189] as [number, number, number],
+          via: [0, 201, 157] as [number, number, number],
+          to: [0, 110, 86] as [number, number, number],
         })
       : presetRgbStops[colors];
 
   const style: React.CSSProperties = {
-    backgroundImage: `linear-gradient(${directionMap[direction]}, ${toRgba(
+    backgroundImage: `linear-gradient(${directionMap[direction]}, ${withAlpha(
       colorStops.from,
       normalizedIntensity * 0.75,
-    )} 0%, ${toRgba(colorStops.via, normalizedIntensity * 0.4)} 50%, ${toRgba(
+    )} 0%, ${withAlpha(colorStops.via, normalizedIntensity * 0.4)} 50%, ${withAlpha(
       colorStops.to,
       normalizedIntensity * 0.1,
     )} 100%)`,

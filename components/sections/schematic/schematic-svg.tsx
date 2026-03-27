@@ -14,7 +14,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
       <svg
         ref={svgRef}
         viewBox="0 0 500 500"
-        className="w-full h-full drop-shadow-[0_0_20px_rgba(0,242,255,0.15)]"
+        className="w-full h-full drop-shadow-[0_0_20px_rgba(0,243,189,0.15)]"
       >
         <g className="schematic-lines">
           <path

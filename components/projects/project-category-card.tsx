@@ -16,7 +16,7 @@ export function ProjectCategoryCard({
   return (
     <Link
       href={href}
-      className="group block rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm p-6 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-card/80 hover:shadow-[0_0_30px_rgba(0,242,255,0.06)]"
+      className="group block rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm p-6 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-card/80 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
     >
       {/* Corner accent */}
       <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-electric-cyan/10 rounded-tr-xl transition-colors duration-300 group-hover:border-electric-cyan/30" />

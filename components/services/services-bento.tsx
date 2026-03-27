@@ -402,7 +402,7 @@ function CTACard({ delay }: { delay: number }) {
       className="relative overflow-hidden p-6 sm:p-8"
     >
       {/* Background shimmer */}
-      <div className="absolute inset-0 bg-linear-to-br from-(--electric-cyan)/5 via-transparent to-blue-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-(--electric-cyan)/5 via-transparent to-electric-cyan/5 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
 
       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">

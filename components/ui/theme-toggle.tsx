@@ -40,7 +40,7 @@ export function ThemeToggle() {
           >
             <Sun
               size={18}
-              className="text-electric-cyan group-hover:text-amber-400 transition-colors"
+              className="text-primary dark:text-electric-cyan group-hover:text-amber-400 transition-colors"
             />
           </motion.div>
         ) : (
@@ -53,14 +53,14 @@ export function ThemeToggle() {
           >
             <Moon
               size={18}
-              className="text-electric-cyan group-hover:text-slate-700 transition-colors"
+              className="text-primary dark:text-electric-cyan group-hover:text-slate-700 transition-colors"
             />
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Glow effect on hover (dark mode only) */}
-      <div className="absolute inset-0 rounded-lg bg-electric-cyan/0 group-hover:bg-electric-cyan/10 transition-colors dark:group-hover:shadow-[0_0_12px_rgba(0,242,255,0.3)]" />
+      <div className="absolute inset-0 rounded-lg bg-electric-cyan/0 group-hover:bg-electric-cyan/10 transition-colors dark:group-hover:shadow-[0_0_12px_var(--electric-cyan-border-glow)]" />
     </button>
   );
 }

@@ -67,7 +67,7 @@ export function AnimatedProgressRing({
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#00f2ff" />
+            <stop offset="100%" stopColor="#00f3bd" />
           </linearGradient>
         </defs>
       </svg>

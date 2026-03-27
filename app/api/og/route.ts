@@ -12,6 +12,9 @@ export const runtime = "edge";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
+  const BRAND_COLOR_HEX = "#00f3bd";
+  const BRAND_COLOR_RGB = "0, 243, 189";
+
   const title = searchParams.get("title")?.slice(0, 100) || "Project";
   const category = searchParams.get("category")?.slice(0, 50) || "Electrical";
   const location = searchParams.get("location")?.slice(0, 50) || "";
@@ -27,7 +30,7 @@ export async function GET(request: Request) {
       </linearGradient>
       <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-        <stop offset="50%" style="stop-color:#00f2ff;stop-opacity:0.6" />
+        <stop offset="50%" style="stop-color:${BRAND_COLOR_HEX};stop-opacity:0.6" />
         <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
       </linearGradient>
     </defs>
@@ -40,7 +43,7 @@ export async function GET(request: Request) {
 
     <!-- Category badge -->
     <text x="60" y="100" font-family="monospace" font-size="24" font-weight="600" 
-          fill="#00f2ff" text-transform="uppercase" letter-spacing="2">
+          fill="${BRAND_COLOR_HEX}" text-transform="uppercase" letter-spacing="2">
       ${escapeXmlText(category)}
     </text>
 
@@ -59,11 +62,11 @@ export async function GET(request: Request) {
     }
 
     <!-- Footer divider -->
-    <line x1="60" y1="420" x2="1140" y2="420" stroke="rgba(0, 242, 255, 0.1)" stroke-width="1" />
+    <line x1="60" y1="420" x2="1140" y2="420" stroke="rgba(${BRAND_COLOR_RGB}, 0.1)" stroke-width="1" />
 
     <!-- Footer branding -->
     <text x="60" y="470" font-family="monospace" font-size="16" font-weight="700"
-          fill="#00f2ff" letter-spacing="2">⚡ NEXGEN</text>
+          fill="${BRAND_COLOR_HEX}" letter-spacing="2">⚡ NEXGEN</text>
     <text x="250" y="470" font-family="monospace" font-size="16"
           fill="#666b78">Electrical Innovations</text>
 

@@ -194,7 +194,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href={`/projects/category/${project.category}/${project.slug}`}
-              className="group inline-flex items-center gap-2 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-electric-cyan transition-all duration-300 hover:bg-electric-cyan/20 hover:shadow-[0_0_15px_rgba(0,242,255,0.15)]"
+              className="group inline-flex items-center gap-2 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-electric-cyan transition-all duration-300 hover:bg-electric-cyan/20 hover:shadow-[0_0_15px_rgba(0,243,189,0.15)]"
             >
               View Details
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

@@ -19,7 +19,8 @@ export function CTAActions({ isInView }: CTAActionsProps) {
           <motion.button
             className="relative px-8 py-4 font-semibold uppercase tracking-wider text-sm rounded-lg overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, #00f2ff 0%, #00f2ff 100%)",
+              background:
+                "linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-cyan) 100%)",
               color: "#020617",
             }}
             variants={{

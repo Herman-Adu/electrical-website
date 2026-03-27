@@ -180,7 +180,7 @@ export function Services() {
 
               {/* Voltage badge */}
               <div className="absolute top-4 right-4">
-                <span className="font-mono text-[9px] text-electric-cyan/40 group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)]">
+                <span className="font-mono text-[9px] text-electric-cyan/40 group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,243,189,0.4)]">
                   {service.voltage}
                 </span>
               </div>
@@ -226,7 +226,7 @@ export function Services() {
                 </button>
 
                 {/* Index number */}
-                <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,242,255,0.5)]">
+                <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,243,189,0.5)]">
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </div>

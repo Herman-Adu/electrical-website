@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
+import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -41,6 +43,9 @@ const serviceCategories = [
 export function ServicesHero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
+  const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
+    useHeroParallax({ size: "tall" });
+  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -50,6 +55,12 @@ export function ServicesHero() {
       "SCANNING_CAPABILITIES",
       "SYSTEMS_READY",
     ];
+
+    if (shouldReduce) {
+      setStatusText(statuses.at(-1) ?? "SYSTEMS_READY");
+      return;
+    }
+
     let idx = 0;
     const interval = setInterval(() => {
       idx++;
@@ -68,179 +79,211 @@ export function ServicesHero() {
   };
 
   return (
-    <section className="section-container section-safe-top section-safe-bottom relative min-h-[70vh] w-full flex flex-col items-center justify-center">
-      <BlueprintBackground />
-
-      {/* Circuit overlay */}
-      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <svg
-          className="absolute inset-0 w-full h-full opacity-15"
-          viewBox="0 0 1440 700"
-          fill="none"
-        >
-          <motion.path
-            d="M0 350 H350 L400 300 H750 L800 350 H1440"
-            stroke="var(--electric-cyan)"
-            strokeWidth="1"
+    <HeroParallaxShell
+      sectionRef={sectionRef}
+      size="tall"
+      safeArea="page"
+      background={<BlueprintBackground showScanLine={false} />}
+      backgroundFrameStyle={backgroundFrameStyle}
+      decor={
+        <>
+          <svg
+            className="absolute inset-0 h-full w-full opacity-15"
+            viewBox="0 0 1440 700"
             fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.5, delay: 0.6, ease: "easeOut" }}
-          />
-          <motion.path
-            d="M0 450 H250 L300 400 H600 L700 500 H1440"
-            stroke="var(--electric-cyan)"
-            strokeWidth="0.5"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.5, delay: 1, ease: "easeOut" }}
-          />
-          {[
-            [400, 300],
-            [800, 350],
-            [300, 400],
-            [600, 500],
-          ].map(([cx, cy], i) => (
-            <motion.circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r="3"
-              fill="var(--electric-cyan)"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.5 }}
-              transition={{ delay: 1.4 + i * 0.1, duration: 0.3 }}
+          >
+            <motion.path
+              d="M0 350 H350 L400 300 H750 L800 350 H1440"
+              stroke="var(--electric-cyan)"
+              strokeWidth="1"
+              fill="none"
+              initial={
+                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
+              }
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 2.5, delay: 0.6, ease: "easeOut" }
+              }
             />
-          ))}
-        </svg>
+            <motion.path
+              d="M0 450 H250 L300 400 H600 L700 500 H1440"
+              stroke="var(--electric-cyan)"
+              strokeWidth="0.5"
+              fill="none"
+              initial={
+                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
+              }
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 2.5, delay: 1, ease: "easeOut" }
+              }
+            />
+            {[
+              [400, 300],
+              [800, 350],
+              [300, 400],
+              [600, 500],
+            ].map(([cx, cy], i) => (
+              <motion.circle
+                key={i}
+                cx={cx}
+                cy={cy}
+                r="3"
+                fill="var(--electric-cyan)"
+                initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.5 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { delay: 1.4 + i * 0.1, duration: 0.3 }
+                }
+              />
+            ))}
+          </svg>
 
-        {/* Scan line */}
+          {!shouldReduceMotion ? (
+            <motion.div
+              className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
+              animate={{ top: ["0%", "100%"] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            />
+          ) : null}
+
+          {!shouldReduceMotion ? (
+            <div className="absolute inset-0">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute size-1 rounded-full bg-electric-cyan/30"
+                  style={{
+                    left: `${12 + i * 14}%`,
+                    top: `${20 + (i % 3) * 20}%`,
+                  }}
+                  animate={{ y: [0, -20, 0], opacity: [0.15, 0.45, 0.15] }}
+                  transition={{
+                    duration: 3 + i * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.3,
+                  }}
+                />
+              ))}
+            </div>
+          ) : null}
+        </>
+      }
+      content={
         <motion.div
-          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
-          animate={{ top: ["0%", "100%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
-
-      {/* Main content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isLoaded ? "visible" : "hidden"}
-        className="relative z-30 text-center px-4 max-w-5xl mx-auto"
-      >
-        {/* Status label */}
-        <motion.div
-          variants={flickerVariants}
-          className="flex items-center justify-center gap-3 mb-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isLoaded ? "visible" : "hidden"}
+          className="mx-auto max-w-5xl px-4 text-center"
         >
-          <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
-            <Activity size={14} className="text-electric-cyan animate-pulse" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-              Services // {statusText}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Eyebrow */}
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center justify-center gap-4 mb-6"
-        >
-          <span className="h-px w-12 bg-electric-cyan/60" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
-            What We Do
-          </span>
-          <span className="h-px w-12 bg-electric-cyan/60" />
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
-        >
-          <span className="block">Engineering</span>
-          <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-cyan-400 to-blue-500">
-            Excellence
-          </span>
-          <span className="block">Delivered</span>
-        </motion.h1>
-
-        {/* Subline */}
-        <motion.p
-          variants={itemVariants}
-          className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
-        >
-          Comprehensive electrical solutions from high-voltage industrial
-          systems to intelligent residential installations — all backed by 15+
-          years of precision engineering.
-        </motion.p>
-
-        {/* Category pills */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10"
-        >
-          {serviceCategories.map((cat) => (
-            <div
-              key={cat.label}
-              className="px-4 py-2 rounded-full border border-(--electric-cyan)/25 bg-electric-cyan/5 backdrop-blur-sm"
-            >
-              <span className="font-mono text-[11px] tracking-widest uppercase text-electric-cyan/70">
-                {cat.label}
+          {/* Status label */}
+          <motion.div
+            variants={flickerVariants}
+            className="flex items-center justify-center gap-3 mb-8"
+          >
+            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+              <Activity
+                size={14}
+                className="text-electric-cyan animate-pulse"
+              />
+              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+                Services // {statusText}
               </span>
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
 
-        {/* Meta */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
-        >
-          <span>NICEIC Approved</span>
-          <span className="hidden sm:inline">|</span>
-          <span>Part P Certified</span>
-          <span className="hidden sm:inline">|</span>
-          <span>24/7 Emergency</span>
-          <span className="hidden sm:inline">|</span>
-          <span>6 Service Lines</span>
-        </motion.div>
-      </motion.div>
-
-      {/* Floating particles */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+          {/* Eyebrow */}
           <motion.div
-            key={i}
-            className="absolute size-1 rounded-full bg-electric-cyan/30"
-            style={{ left: `${12 + i * 14}%`, top: `${20 + (i % 3) * 20}%` }}
-            animate={{ y: [0, -20, 0], opacity: [0.15, 0.45, 0.15] }}
-            transition={{
-              duration: 3 + i * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-          />
-        ))}
-      </div>
+            variants={itemVariants}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
+            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+              What We Do
+            </span>
+            <span className="h-px w-12 bg-electric-cyan/60" />
+          </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.5 }}
-        onClick={scrollToGrid}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-muted-foreground hover:text-electric-cyan transition-colors cursor-pointer"
-        aria-label="Scroll to services"
-      >
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
-          Explore Services
-        </span>
-        <ChevronDown size={20} className="animate-bounce" />
-      </motion.button>
-    </section>
+          {/* Headline */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
+          >
+            <span className="block">Engineering</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+              Excellence
+            </span>
+            <span className="block">Delivered</span>
+          </motion.h1>
+
+          {/* Subline */}
+          <motion.p
+            variants={itemVariants}
+            className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          >
+            Comprehensive electrical solutions from high-voltage industrial
+            systems to intelligent residential installations — all backed by 15+
+            years of precision engineering.
+          </motion.p>
+
+          {/* Category pills */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap items-center justify-center gap-3 mb-10"
+          >
+            {serviceCategories.map((cat) => (
+              <div
+                key={cat.label}
+                className="px-4 py-2 rounded-full border border-(--electric-cyan)/25 bg-electric-cyan/5 backdrop-blur-sm"
+              >
+                <span className="font-mono text-[11px] tracking-widest uppercase text-electric-cyan/70">
+                  {cat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Meta */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+          >
+            <span>NICEIC Approved</span>
+            <span className="hidden sm:inline">|</span>
+            <span>Part P Certified</span>
+            <span className="hidden sm:inline">|</span>
+            <span>24/7 Emergency</span>
+            <span className="hidden sm:inline">|</span>
+            <span>6 Service Lines</span>
+          </motion.div>
+        </motion.div>
+      }
+      contentStyle={contentStyle}
+      scrollIndicator={
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.5 }}
+          onClick={scrollToGrid}
+          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to services"
+        >
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Explore Services
+          </span>
+          <ChevronDown
+            size={20}
+            className={shouldReduceMotion ? "" : "animate-bounce"}
+          />
+        </motion.button>
+      }
+    />
   );
 }

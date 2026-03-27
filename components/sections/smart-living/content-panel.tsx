@@ -47,7 +47,7 @@ export function ContentPanel({
             >
               Intelligent Lighting
               <br />
-              <span className="bg-linear-to-r from-amber-400 to-[#00f2ff] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-amber-400 to-[#00f3bd] bg-clip-text text-transparent">
                 For Modern Living
               </span>
             </motion.h2>

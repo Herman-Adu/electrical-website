@@ -3,16 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
 import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
+import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 
 interface ProjectDetailHeroProps {
   project: Project;
@@ -113,7 +108,12 @@ function ResponsiveBreadcrumb({
                 aria-label="Collapse breadcrumb"
               >
                 <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
-                  <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path
+                    d="M9 3L3 9M3 3l6 6"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
             </motion.div>
@@ -123,7 +123,9 @@ function ResponsiveBreadcrumb({
       </div>
 
       {/* Last link — always visible, truncated to one line */}
-      <span className={`text-electric-cyan truncate min-w-0 ${isSticky ? "font-medium" : ""}`}>
+      <span
+        className={`text-electric-cyan truncate min-w-0 ${isSticky ? "font-medium" : ""}`}
+      >
         {projectTitle}
       </span>
     </nav>
@@ -134,17 +136,13 @@ export function ProjectDetailHero({
   project,
   categorySlug,
 }: ProjectDetailHeroProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const staticBreadcrumbRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
-  const [showStickyBreadcrumb, setShowStickyBreadcrumb] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
+  const { sectionRef, backgroundFrameStyle } = useHeroParallax({
+    size: "screen",
+    contentTravel: { desktop: 0, mobile: 0 },
   });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const staticBreadcrumbRef = useRef<HTMLDivElement>(null);
+  const [showStickyBreadcrumb, setShowStickyBreadcrumb] = useState(false);
 
   // Show sticky breadcrumb only when static breadcrumb scrolls out of viewport
   useEffect(() => {
@@ -160,7 +158,7 @@ export function ProjectDetailHero({
         // Account for navbar height (~80px) - trigger when breadcrumb goes behind nav
         rootMargin: "-80px 0px 0px 0px",
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(staticBreadcrumb);
@@ -190,12 +188,12 @@ export function ProjectDetailHero({
       </motion.div>
 
       {/* Hero section — full viewport height */}
-      <section ref={containerRef} className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center">
+      <section
+        ref={sectionRef}
+        className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center"
+      >
         {/* Full-bleed image with parallax */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ y: shouldReduce ? 0 : imageY }}
-        >
+        <motion.div className="absolute" style={backgroundFrameStyle}>
           <Image
             src={project.coverImage.src}
             alt={project.coverImage.alt}
@@ -209,7 +207,10 @@ export function ProjectDetailHero({
         {/* Dark blue tint overlay — matches reference */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to bottom, rgba(2,12,28,0.65) 0%, rgba(2,12,28,0.75) 60%, rgba(2,12,28,0.9) 100%)" }}
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(2,12,28,0.65) 0%, rgba(2,12,28,0.75) 60%, rgba(2,12,28,0.9) 100%)",
+          }}
         />
 
         {/* Top-left: status badge */}
@@ -250,7 +251,6 @@ export function ProjectDetailHero({
         {/* Centered content overlay */}
         <div className="relative z-10 w-full flex flex-col items-center justify-center px-4 text-center py-32">
           <div className="max-w-4xl w-full mx-auto">
-
             {/* Eyebrow — sector label */}
             <motion.div
               className="mb-6 flex items-center justify-center gap-3"

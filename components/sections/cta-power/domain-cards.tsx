@@ -29,7 +29,7 @@ export function DomainCards({ domains, isInView }: DomainCardsProps) {
           transition={{ delay: 0.15 + idx * 0.1, duration: 0.5 }}
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 20px rgba(0, 242, 255, 0.4)",
+            boxShadow: "0 0 20px rgba(0, 243, 189, 0.4)",
           }}
           className="px-6 py-3 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:border-electric-cyan transition-colors cursor-pointer"
         >
