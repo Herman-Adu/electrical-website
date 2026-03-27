@@ -1,0 +1,94 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  lighthouse-ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: "10"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build production
+        run: pnpm build
+
+      - name: Start production server
+        run: pnpm start &
+        env:
+          NODE_ENV: production
+
+      - name: Wait for server
+        run: |
+          npx wait-on http://localhost:3000 --timeout 30000
+
+      - name: Run Lighthouse CI
+        run: npx @lhci/cli@latest autorun
+        env:
+          LHCI_SERVER_URL: "http://localhost:3000"
+
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: |
+            .lighthouseci/
+            lighthouse-results.json
+          if-no-files-found: ignore
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = '.lighthouseci/lhr.json';
+            if (fs.existsSync(path)) {
+              const lhr = JSON.parse(fs.readFileSync(path, 'utf-8'));
+              const scores = lhr.categories;
+              const comment = `
+            # ⚡ Lighthouse CI Results
+
+            | Category | Score |
+            |----------|-------|
+            | Performance | ${scores.performance?.score * 100 || 0}/100 |
+            | Accessibility | ${scores.accessibility?.score * 100 || 0}/100 |
+            | Best Practices | ${(scores['best-practices']?.score || 0) * 100}/100 |
+            | SEO | ${scores.seo?.score * 100 || 0}/100 |
+
+            **Key Metrics:**
+            - LCP: ${lhr.audits['largest-contentful-paint']?.displayValue || 'N/A'}
+            - CLS: ${lhr.audits['cumulative-layout-shift']?.displayValue || 'N/A'}
+            - FID: ${lhr.audits['first-input-delay']?.displayValue || 'N/A'}
+              `;
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
