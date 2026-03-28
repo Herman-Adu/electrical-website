@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: ""
 
     steps:
       - uses: actions/checkout@v4
