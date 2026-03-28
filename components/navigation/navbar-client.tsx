@@ -354,7 +354,11 @@ export function NavbarClient() {
             />
 
             {/* Menu Content */}
-            <div id="mobile-navigation-menu" className="relative pt-20 px-6">
+            <div
+              id="mobile-navigation-menu"
+              data-slot="mobile-nav"
+              className="relative pt-20 px-6"
+            >
               <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => {
                   const topLevelActive =

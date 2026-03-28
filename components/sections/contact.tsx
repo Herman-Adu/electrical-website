@@ -89,6 +89,12 @@ export function Contact() {
         ...prev,
         [name]: value, // Direct assignment without type checking in handler
       }));
+      if (turnstileToken) {
+        setTurnstileToken("");
+      }
+      if (captchaError) {
+        setCaptchaError("");
+      }
       // Clear field error when user starts typing
       if (fieldErrors[name]) {
         setFieldErrors((prev) => ({
@@ -97,7 +103,7 @@ export function Contact() {
         }));
       }
     },
-    [fieldErrors],
+    [captchaError, fieldErrors, turnstileToken],
   );
 
   // Client-side validation using Zod
@@ -329,6 +335,7 @@ export function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  role="alert"
                   className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded flex gap-3"
                 >
                   <AlertCircle
@@ -503,6 +510,7 @@ export function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  role="alert"
                   className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded flex gap-3"
                 >
                   <AlertCircle
@@ -516,7 +524,7 @@ export function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitted || isLoading}
+                disabled={isSubmitted || isLoading || !turnstileToken}
                 className={`w-full py-4 font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all duration-300 ${
                   isSubmitted
                     ? "bg-emerald-500 text-white"
