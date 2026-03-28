@@ -500,7 +500,7 @@ export function Contact() {
                   />
                 ) : (
                   <p className="text-center text-sm text-slate-300">
-                    CAPTCHA will load automatically in configured environments.
+                    Verification widget loads automatically in configured environments.
                   </p>
                 )}
               </div>
