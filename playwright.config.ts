@@ -36,14 +36,12 @@ export default defineConfig({
     },
   ],
 
-  /**
-   * Optional: uncomment to let Playwright start the dev server automatically.
-   * By default, local runs use an already-running server.
-   */
-  // webServer: {
-  //   command: "pnpm dev",
-  //   url: "http://localhost:3000",
-  //   reuseExistingServer: true,
-  //   timeout: 120_000,
-  // },
+  webServer: process.env.CI
+    ? undefined
+    : {
+        command: "pnpm dev",
+        url: BASE_URL,
+        reuseExistingServer: true,
+        timeout: 120_000,
+      },
 });

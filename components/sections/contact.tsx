@@ -524,7 +524,7 @@ export function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitted || isLoading || !turnstileToken}
+                disabled={isSubmitted || isLoading}
                 className={`w-full py-4 font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all duration-300 ${
                   isSubmitted
                     ? "bg-emerald-500 text-white"
