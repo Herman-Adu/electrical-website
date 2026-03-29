@@ -11,13 +11,14 @@ import { defineConfig, devices } from "@playwright/test";
  *   pnpm test:e2e:ui              (opens Playwright UI mode)
  */
 
-const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000";
+const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
 
 export default defineConfig({
   testDir: "./e2e",
   timeout: 30_000,
   expect: { timeout: 10_000 },
-  fullyParallel: true,
+  fullyParallel: !!process.env.CI,
+  workers: process.env.CI ? 2 : 1,
   reporter: [
     ["list"],
     ["html", { open: "never", outputFolder: "playwright-report" }],
@@ -39,9 +40,16 @@ export default defineConfig({
   webServer: process.env.CI
     ? undefined
     : {
-        command: "pnpm dev",
+        command:
+          "pnpm build && pnpm exec next start --hostname 127.0.0.1 --port 3000",
         url: BASE_URL,
-        reuseExistingServer: true,
-        timeout: 120_000,
+        reuseExistingServer: false,
+        timeout: 300_000,
+        env: {
+          ...process.env,
+          NEXT_IMAGE_UNOPTIMIZED: "true",
+          HOSTNAME: "127.0.0.1",
+          PORT: "3000",
+        },
       },
 });

@@ -84,7 +84,6 @@ test.describe("services segment error boundary", () => {
     const retryButton = page.getByRole("button", { name: /^retry$/i });
     await expect(retryButton).toBeVisible();
     await retryButton.click();
-    // After retry the page resets — services nav link must remain visible.
     await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
   });
 
@@ -112,7 +111,7 @@ test.describe("services segment loading boundary", () => {
     // In a full SSR/static response the final content should be present.
     // We verify the route loads successfully — the boundary is wired correctly
     // if no fallback skeleton is stuck on screen.
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // Page title should contain services-related metadata (not error/loading stuck)
     const title = await page.title();
