@@ -1,0 +1,14 @@
+{
+  "[playwright]": {
+    "editor.defaultFormatter": "ms-playwright.playwright"
+  },
+  "playwright.reuseBrowser": false,
+  "playwright.showBrowser": true,
+  "playwright.launchOptions": {
+    "headless": false
+  },
+  "files.exclude": {
+    ".playwright": true,
+    "playwright-report": true
+  }
+}

@@ -23,7 +23,7 @@ export default defineConfig({
     ["list"],
     ["html", { open: "never", outputFolder: "playwright-report" }],
   ],
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
 
   use: {
     baseURL: BASE_URL,
@@ -37,6 +37,8 @@ export default defineConfig({
     },
   ],
 
+  // Local: Playwright auto-manages server lifecycle (spawns, waits, stops).
+  // CI: Undefined — GitHub Actions manages server separately to avoid double-spawn conflicts.
   webServer: process.env.CI
     ? undefined
     : {
@@ -45,6 +47,10 @@ export default defineConfig({
         url: BASE_URL,
         reuseExistingServer: false,
         timeout: 300_000,
+        // Environment for spawned server: only used by Playwright's local webServer spawner.
+        // NEXT_IMAGE_UNOPTIMIZED=true disables image optimization for faster test runs locally.
+        // Note: This is injected AFTER build, so build uses default image optimization.
+        // CI builds separately before webServer is spawned, so CI always uses default.
         env: {
           ...process.env,
           NEXT_IMAGE_UNOPTIMIZED: "true",
