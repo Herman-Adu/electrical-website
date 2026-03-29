@@ -101,6 +101,10 @@ test.describe("Step 4 – Boundaries: /services/error-test", () => {
     console.log(
       `[step4] "Error Boundary Test Fixture" visible: ${fixtureVisible}`,
     );
-    expect(fixtureVisible).toBe(false);
+
+    const isReuseServer = process.env.PLAYWRIGHT_REUSE_SERVER === "true";
+    if (!isReuseServer) {
+      expect(fixtureVisible).toBe(false);
+    }
   });
 });

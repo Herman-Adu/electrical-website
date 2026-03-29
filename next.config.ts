@@ -2,7 +2,12 @@ import type { NextConfig } from "next";
 import { env } from "./app/env";
 
 const nextConfig: NextConfig = {
-  output: process.env.PLAYWRIGHT_TEST ? undefined : "standalone",
+  // Windows local builds can hit standalone traced-file copy failures (Failed to copy traced files / EINVAL) for node:inspector-style names,
+  // so standalone output is disabled on win32 locally while CI/Linux and production remain standalone-capable.
+  output:
+    process.platform === "win32" || process.env.PLAYWRIGHT_TEST
+      ? undefined
+      : "standalone",
   transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
   images: {
     unoptimized: env.NEXT_IMAGE_UNOPTIMIZED ?? false,
