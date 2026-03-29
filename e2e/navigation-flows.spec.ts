@@ -33,7 +33,7 @@ test.describe("core page availability", () => {
     const response = await page.goto("/about");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     const h1 = page.locator("h1").first();
     await expect(h1).toBeVisible({ timeout: 5000 });
   });
@@ -44,7 +44,7 @@ test.describe("core page availability", () => {
     const response = await page.goto("/projects");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     // Projects page renders a main element with project sections
     const main = page.locator("main");
     await expect(main).toBeVisible();
@@ -68,7 +68,7 @@ test.describe("core page availability", () => {
     const response = await page.goto("/services");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     const main = page.locator("main");
     await expect(main).toBeVisible();
   });
@@ -102,7 +102,7 @@ test.describe("in-page navigation", () => {
     page,
   }) => {
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // Scroll to footer and find the About Us link
     const footer = page.locator("footer");
@@ -128,7 +128,7 @@ test.describe("projects category filter", () => {
     const response = await page.goto("/projects?category=industrial");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     const main = page.locator("main");
     await expect(main).toBeVisible();
   });
@@ -139,7 +139,7 @@ test.describe("projects category filter", () => {
     const response = await page.goto("/projects?category=commercial");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     const main = page.locator("main");
     await expect(main).toBeVisible();
   });
@@ -151,7 +151,7 @@ test.describe("projects category filter", () => {
     const response = await page.goto("/projects?category=invalid");
     expect(response?.status()).toBe(200);
 
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
     const main = page.locator("main");
     await expect(main).toBeVisible();
   });
