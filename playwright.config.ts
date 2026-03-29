@@ -12,6 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
+const REUSE_EXISTING_SERVER = process.env.PLAYWRIGHT_REUSE_SERVER === "true";
 
 export default defineConfig({
   testDir: "./e2e",
@@ -45,7 +46,9 @@ export default defineConfig({
         command:
           "pnpm build && pnpm exec next start --hostname 127.0.0.1 --port 3000",
         url: BASE_URL,
-        reuseExistingServer: false,
+        // Set PLAYWRIGHT_REUSE_SERVER=true when you manually run `pnpm dev`
+        // and want Playwright to reuse that server instead of spawning another one.
+        reuseExistingServer: REUSE_EXISTING_SERVER,
         timeout: 300_000,
         // Environment for spawned server: only used by Playwright's local webServer spawner.
         // NEXT_IMAGE_UNOPTIMIZED=true disables image optimization for faster test runs locally.

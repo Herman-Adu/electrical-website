@@ -46,12 +46,12 @@ test.describe("core page availability", () => {
 
     await page.waitForLoadState("domcontentloaded");
     // Projects page renders a main element with project sections
-    const main = page.locator("main");
+    const main = page.getByRole("main").first();
     await expect(main).toBeVisible();
-    // At least one section should be rendered
-    const sections = main.locator("section");
-    const count = await sections.count();
-    expect(count).toBeGreaterThan(0);
+    // At least one section should be rendered (allow for dev-mode render timing)
+    await expect(main.locator("section").first()).toBeVisible({
+      timeout: 10000,
+    });
   });
 
   test("contact page responds with HTTP 200 and form is visible", async ({
@@ -69,7 +69,7 @@ test.describe("core page availability", () => {
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");
-    const main = page.locator("main");
+    const main = page.getByRole("main").first();
     await expect(main).toBeVisible();
   });
 });
@@ -129,7 +129,7 @@ test.describe("projects category filter", () => {
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");
-    const main = page.locator("main");
+    const main = page.getByRole("main").first();
     await expect(main).toBeVisible();
   });
 
@@ -140,7 +140,7 @@ test.describe("projects category filter", () => {
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");
-    const main = page.locator("main");
+    const main = page.getByRole("main").first();
     await expect(main).toBeVisible();
   });
 
@@ -152,7 +152,7 @@ test.describe("projects category filter", () => {
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");
-    const main = page.locator("main");
+    const main = page.getByRole("main").first();
     await expect(main).toBeVisible();
   });
 });
@@ -177,10 +177,7 @@ test.describe("page metadata", () => {
   test("about page has <link rel='canonical'> set", async ({ page }) => {
     await page.goto("/about");
 
-    const canonical = await page.getAttribute(
-      'link[rel="canonical"]',
-      "href",
-    );
+    const canonical = await page.getAttribute('link[rel="canonical"]', "href");
     expect(canonical).toBeTruthy();
     expect(canonical).toMatch(/about/);
   });

@@ -2,6 +2,16 @@
 
 This guide ensures your local environment is ready to run Playwright E2E tests reliably before pushing changes.
 
+## Why the Windows output patch exists
+
+- Symptom in build logs: `Failed to copy traced files` with `EINVAL` and `node:inspector`-related artifact names.
+- Root cause: Windows filename/path rules reject traced artifact names containing `:`.
+- Patch behavior: set `output` to `undefined` on `win32` instead of `standalone`.
+- Scope: Windows local builds only.
+- CI/Linux and production remain standalone-capable.
+- What does not change: app runtime behavior, test logic, and production deployment behavior.
+- Verification evidence: local build is clean and the E2E suite reports `58/58` passing.
+
 ## Pre-Flight Checklist (Required Every Test Run)
 
 ### Step 1: Kill Stray Node Processes

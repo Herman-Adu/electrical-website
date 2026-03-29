@@ -2,6 +2,53 @@
 
 This guide outlines the recommended workflows for different testing scenarios in the electrical-website repository.
 
+## Local green run (exact commands)
+
+### Flow A (recommended pre-push, auto-managed server)
+
+```bash
+# 1) Kill stray node/next processes
+Get-Process | Where-Object { $_.Name -like '*node*' -or $_.Name -like '*next*' } | Stop-Process -Force -ErrorAction SilentlyContinue
+
+# 2) Build
+pnpm run build
+
+# 3) Run full Playwright suite (auto-managed server)
+pnpm exec playwright test --reporter=list
+
+# 4) Optional: check image warning noise
+pnpm exec playwright test --reporter=list 2>&1 | Select-String "isn't a valid image"
+```
+
+Success criteria: `58 passed` and `isn't a valid image` warning count is `0`.
+
+### Flow B (plugin/manual dev server flow)
+
+Terminal A:
+
+```bash
+# 1) Start dev server
+pnpm dev
+```
+
+Terminal B:
+
+```bash
+# 2) Reuse the already-running dev server and run full suite
+# Windows PowerShell:
+$env:PLAYWRIGHT_REUSE_SERVER = "true"
+pnpm exec playwright test --reporter=list
+
+# macOS/Linux:
+PLAYWRIGHT_REUSE_SERVER=true pnpm exec playwright test --reporter=list
+```
+
+Then stop Terminal A (`Ctrl+C`).
+
+Success criteria: full suite passes (`58 passed`) and no `isn't a valid image` warnings.
+
+Note: `Invalid category` logs are expected validation noise from negative tests and are not test failures.
+
 ## Quick Reference
 
 | Goal                        | Command                                | Time           | Environment         |
