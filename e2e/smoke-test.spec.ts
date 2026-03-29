@@ -1,8 +1,17 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Locator } from "@playwright/test";
+
+const clickWhenReady = async (locator: Locator) => {
+  await locator.waitFor({ state: "visible" });
+  await locator.scrollIntoViewIfNeeded();
+  await expect(locator).toBeVisible();
+  await expect(locator).toBeEnabled();
+  await locator.click({ trial: true });
+  await locator.click();
+};
 
 test.describe("UI Smoke Tests", () => {
   test("Contact Form renders and submits", async ({ page }) => {
-    await page.goto("http://localhost:3000/contact");
+    await page.goto("/contact");
 
     // Verify form is visible
     const form = page.locator("form").first();
@@ -26,7 +35,7 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Contact Form displays rate limit message", async ({ page }) => {
-    await page.goto("http://localhost:3000/contact");
+    await page.goto("/contact");
 
     // Verify rate-limit error handling UI elements exist
     const form = page.locator("form");
@@ -41,7 +50,7 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Command Palette opens and responds to input", async ({ page }) => {
-    await page.goto("http://localhost:3000");
+    await page.goto("/");
 
     // Open command palette with keyboard shortcut (Cmd/Ctrl + K)
     await page.keyboard.press("Control+K");
@@ -68,33 +77,32 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Dropdown Menu toggles visibility", async ({ page }) => {
-    await page.goto("http://localhost:3000");
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
 
-    // Find a button that likely opens a dropdown (in nav area)
-    const navArea = page.locator("nav").first();
-    const buttons = navArea.locator("button:visible");
-    const buttonCount = await buttons.count();
+    const mobileMenuToggle = page.getByRole("button", {
+      name: /open menu|close menu/i,
+    });
+    await clickWhenReady(mobileMenuToggle);
+    await expect(mobileMenuToggle).toHaveAttribute("aria-expanded", "true");
+    await expect(page.locator("[data-slot='mobile-nav']")).toBeVisible();
 
-    if (buttonCount > 0) {
-      const firstButton = buttons.first();
-      await expect(firstButton).toBeVisible();
+    const servicesDropdownToggle = page.getByRole("button", {
+      name: /services menu/i,
+    });
+    await clickWhenReady(servicesDropdownToggle);
+    await expect(servicesDropdownToggle).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
 
-      // Get initial state
-      const initialAriaExpanded =
-        await firstButton.getAttribute("aria-expanded");
-
-      // Click button
-      await firstButton.click();
-      await page.waitForTimeout(200);
-
-      // Verify state changed or content appeared nearby
-      const ariaExpanded = await firstButton.getAttribute("aria-expanded");
-      expect(ariaExpanded).toBeDefined();
-    }
+    await expect(
+      page.getByRole("button", { name: "Commercial & Retail" }),
+    ).toBeVisible();
   });
 
   test("Select component renders and opens", async ({ page }) => {
-    await page.goto("http://localhost:3000/contact");
+    await page.goto("/contact");
 
     // Find select/dropdown in form
     const selectTrigger = page.locator("[role='combobox']").first();
@@ -118,7 +126,7 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Navigation links render with correct styling", async ({ page }) => {
-    await page.goto("http://localhost:3000");
+    await page.goto("/");
 
     // Check navbar exists
     const navbar = page.locator("nav");
@@ -135,7 +143,7 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Hero Section displays with proper styling", async ({ page }) => {
-    await page.goto("http://localhost:3000");
+    await page.goto("/");
 
     // Check hero section exists
     const hero = page.locator("section").first();
@@ -156,28 +164,29 @@ test.describe("UI Smoke Tests", () => {
   test("Responsive layout adapts to viewport", async ({ page }) => {
     // Test mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("http://localhost:3000");
+    await page.goto("/");
 
     const navbar = page.locator("nav");
     await expect(navbar).toBeVisible();
 
     // Mobile menu should be accessible
-    const mobileMenu = page
-      .locator("button[aria-label*='menu'], button[aria-label*='Menu']")
-      .first();
-    if (await mobileMenu.isVisible()) {
-      await mobileMenu.click();
-      const mobileNav = page.locator(
-        "[data-slot='mobile-nav'], [role='navigation']",
-      );
-      await expect(mobileNav).toBeVisible({ timeout: 500 });
-    }
+    const mobileMenu = page.getByRole("button", {
+      name: /open menu|close menu/i,
+    });
+    await clickWhenReady(mobileMenu);
+    await expect(mobileMenu).toHaveAttribute("aria-expanded", "true");
+
+    const mobileNav = page.locator("[data-slot='mobile-nav']");
+    await expect(mobileNav).toBeVisible();
 
     // Test desktop viewport
     await page.setViewportSize({ width: 1920, height: 1080 });
-    await page.goto("http://localhost:3000");
+    await page.goto("/");
 
     const desktopNav = page.locator("nav");
     await expect(desktopNav).toBeVisible();
+    await expect(
+      desktopNav.getByRole("link", { name: "Services" }).first(),
+    ).toBeVisible();
   });
 });

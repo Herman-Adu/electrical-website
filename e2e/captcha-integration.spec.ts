@@ -41,29 +41,37 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // Use "load" not "networkidle" — Turnstile loads Cloudflare scripts that
     // keep the network active indefinitely, preventing networkidle from firing.
     await page.goto("/contact", { waitUntil: "load" });
-    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
+    const form = page.locator("form").first();
+    await expect(form).toBeVisible({ timeout: 10000 });
 
     // Fill form fields
-    await page.locator('input[name="name"]').fill("Test User");
-    await page.locator('input[name="email"]').fill("test@example.com");
-    await page.locator('textarea[name="message"]').fill("Test message");
-    await page.locator('select[name="projectType"]').selectOption("commercial");
+    const nameInput = form.locator('input[name="name"]');
+    const emailInput = form.locator('input[name="email"]');
+    const messageInput = form.locator('textarea[name="message"]');
+    const projectTypeSelect = form.locator('select[name="projectType"]');
 
-    // Try to submit without CAPTCHA - should show error
-    const submitButton = page.locator('button[type="submit"]');
+    await nameInput.fill("Test User");
+    await emailInput.fill("test@example.com");
+    await messageInput.fill("Test message");
+    await projectTypeSelect.selectOption("commercial");
+
+    // Try to submit without CAPTCHA. A blocked submission should keep the form
+    // on the page, preserve the entered values, and surface a visible form alert.
+    const submitButton = form.getByRole("button", { name: /submit inquiry/i });
     await submitButton.click();
 
-    // Wait for error message
-    await page.waitForTimeout(1000);
+    const formAlert = form.getByRole("alert");
+    await expect(formAlert).toBeVisible({ timeout: 15000 });
 
-    // Check if CAPTCHA error message appears
-    const captchaErrorElement = page.locator("text=/CAPTCHA|captcha/i");
-    const hasError = await captchaErrorElement.isVisible().catch(() => false);
+    await expect(submitButton).toBeEnabled();
+    await expect(
+      form.getByRole("button", { name: /submitting|inquiry submitted/i }),
+    ).toHaveCount(0);
 
-    // Either there's an error message or the form state indicates CAPTCHA is required
-    expect(
-      hasError || (await submitButton.isDisabled().catch(() => true)),
-    ).toBeTruthy();
+    await expect(nameInput).toHaveValue("Test User");
+    await expect(emailInput).toHaveValue("test@example.com");
+    await expect(messageInput).toHaveValue("Test message");
+    await expect(projectTypeSelect).toHaveValue("commercial");
   });
 
   test("Form fields render and accept input", async ({ page }) => {

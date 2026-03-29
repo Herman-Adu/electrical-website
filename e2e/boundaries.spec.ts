@@ -53,27 +53,26 @@ test.describe("services segment error boundary", () => {
     page,
   }) => {
     const response = await page.goto("/services/error-test");
-    // Without the trigger param, the page renders normally
     expect(response?.status()).toBe(200);
-    await expect(page.getByText("Error Boundary Test Fixture")).toBeVisible();
+    await expect(page).toHaveURL(/\/services\/error-test$/);
+    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
+    // The fixture page renders its informational label when no trigger param is set.
+    await expect(page.getByText(/error boundary test fixture/i)).toBeVisible();
   });
 
   test("error boundary surface activates when a render error is thrown", async ({
     page,
   }) => {
     // Navigate to the fixture with the controlled throw trigger.
-    // The error.tsx boundary catches the render error and renders the recovery UI.
-    await page.goto("/services/error-test?trigger=error");
+    // The ErrorThrower component throws during render; the services error boundary
+    // catches it and renders the recovery surface.
+    const response = await page.goto("/services/error-test?trigger=error");
 
-    // Recovery surface markers (from app/services/error.tsx)
-    await expect(page.getByText("Services Segment Error")).toBeVisible();
-    await expect(
-      page.getByText("Unable to Load This Service View"),
-    ).toBeVisible();
-
-    // Retry button must be present and interactive
-    const retryButton = page.getByRole("button", { name: /retry/i });
-    await expect(retryButton).toBeVisible();
+    expect(response?.status()).toBe(200);
+    await expect(page).toHaveURL(/\/services\/error-test\?trigger=error/);
+    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
+    // Error boundary recovery surface must be visible.
+    await expect(page.getByText(/services segment error/i)).toBeVisible();
   });
 
   test("error boundary retry button is present and clickable", async ({
@@ -81,24 +80,19 @@ test.describe("services segment error boundary", () => {
   }) => {
     await page.goto("/services/error-test?trigger=error");
 
-    const retryButton = page.getByRole("button", { name: /retry/i });
+    // The error boundary renders a Retry button — verify it is present and clickable.
+    const retryButton = page.getByRole("button", { name: /^retry$/i });
     await expect(retryButton).toBeVisible();
-
-    // Click retry — without a persistent error source the page may recover
-    // or re-throw; either outcome is observable without hard-coding the result.
     await retryButton.click();
-
-    // After retry, the button or the recovery surface should still be in the DOM
-    // (re-throw) OR the page should no longer show the error surface (recovery).
-    // We only assert that the click does not cause a fatal browser crash.
-    // A more precise assertion requires a stateful error source.
-    await page.waitForLoadState("networkidle");
+    // After retry the page resets — services nav link must remain visible.
+    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
   });
 
   test("Back to Services link navigates to /services", async ({ page }) => {
     await page.goto("/services/error-test?trigger=error");
 
-    const backLink = page.getByRole("link", { name: /back to services/i });
+    // The error boundary renders a "Back to Services" link — verify it is present.
+    const backLink = page.getByRole("link", { name: /^back to services$/i });
     await expect(backLink).toBeVisible();
     await expect(backLink).toHaveAttribute("href", "/services");
   });
