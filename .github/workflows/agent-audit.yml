@@ -199,6 +199,9 @@ jobs:
           echo "| content-agent | fetch, wikipedia-mcp, youtube_transcript |" >> $GITHUB_STEP_SUMMARY
           echo "| devtools-agent | next-devtools-mcp, context7 |" >> $GITHUB_STEP_SUMMARY
       - name: Teardown ephemeral stack
+        if: always()
+        run: |
+          echo "No ephemeral stack resources to tear down"
   mcp-compat:
     name: MCP runtime compatibility check
     needs: health-and-audit
