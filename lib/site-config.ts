@@ -63,6 +63,8 @@ export const siteConfig = {
     services: "/services",
     projects: "/projects",
     projectsCategory: "/projects/category",
+    newsHub: "/news-hub",
+    newsHubCategory: "/news-hub/category",
     contact: "/contact",
     notFound: "/not-found",
   },

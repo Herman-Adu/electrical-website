@@ -9,10 +9,16 @@ import { ContentPanel } from "./smart-living/content-panel";
 
 export function SmartLiving() {
   const containerRef = useRef<HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const updateViewportMode = () => setIsDesktop(mediaQuery.matches);
+
+    updateViewportMode();
+    mediaQuery.addEventListener("change", updateViewportMode);
+
+    return () => mediaQuery.removeEventListener("change", updateViewportMode);
   }, []);
 
   const { inView } = useIntersectionObserverAnimation({
@@ -44,7 +50,7 @@ export function SmartLiving() {
   const uiY2 = useTransform(scrollProgress, [0, 1], ["30%", "-10%"]);
   const uiY3 = useTransform(scrollProgress, [0, 1], ["15%", "-25%"]);
 
-  const contentY = useTransform(scrollProgress, [0, 1], ["0%", "10%"]);
+  const contentY = useTransform(scrollProgress, [0, 1], ["0%", "6%"]);
 
   const glowOpacity = useTransform(scrollProgress, [0.2, 0.5], [0, 1]);
 
@@ -52,7 +58,7 @@ export function SmartLiving() {
     <section
       id="smart-living"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-(--deep-black) section-padding-tall"
+      className="section-fluid relative min-h-[100svh] overflow-x-hidden bg-(--deep-black) lg:min-h-screen"
       style={{ position: "relative" }}
     >
       <BackgroundLayer imageFilter={imageFilter} glowOpacity={glowOpacity} />
@@ -62,6 +68,7 @@ export function SmartLiving() {
         uiY2={uiY2}
         uiY3={uiY3}
         inView={inView}
+        enableParallaxMotion={isDesktop}
       />
 
       <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-amber-500/30 to-transparent" />

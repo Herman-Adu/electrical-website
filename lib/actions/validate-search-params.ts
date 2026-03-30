@@ -1,10 +1,13 @@
 "use server";
 
 import { z } from "zod";
+import { isNewsCategorySlug } from "@/data/news";
 import { isProjectCategorySlug } from "@/data/projects";
 import {
+  newsHubSearchParamsSchema,
   projectsSearchParamsSchema,
   errorTestSearchParamsSchema,
+  type NewsHubSearchParams,
   type ProjectsSearchParams,
   type ErrorTestSearchParams,
 } from "@/lib/schemas/search-params";
@@ -30,6 +33,27 @@ export async function validateProjectsSearchParams(
       {
         code: "custom",
         message: `Invalid category: ${validated.category}. Must be one of: all, residential, commercial-lighting, power-boards`,
+        path: ["category"],
+      },
+    ]);
+  }
+
+  return validated;
+}
+
+/**
+ * Server Action: Validate News Hub Search Params
+ */
+export async function validateNewsHubSearchParams(
+  params: Record<string, string | string[] | undefined>,
+): Promise<NewsHubSearchParams> {
+  const validated = newsHubSearchParamsSchema.parse(params);
+
+  if (validated.category && !isNewsCategorySlug(validated.category)) {
+    throw new z.ZodError([
+      {
+        code: "custom",
+        message: `Invalid news category: ${validated.category}. Must be one of: all, residential, industrial, partners, case-studies, insights, reviews`,
         path: ["category"],
       },
     ]);
@@ -69,6 +93,26 @@ export async function safeValidateProjectsParams(
         error.flatten(),
       );
       // Return params with defaults applied
+      return { category: undefined };
+    }
+    throw error;
+  }
+}
+
+/**
+ * Safe wrapper: Validates news hub params or returns empty object on error
+ */
+export async function safeValidateNewsHubParams(
+  params: Record<string, string | string[] | undefined>,
+): Promise<NewsHubSearchParams> {
+  try {
+    return await validateNewsHubSearchParams(params);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      console.warn(
+        "[SearchParams] Validation error in news hub params:",
+        error.flatten(),
+      );
       return { category: undefined };
     }
     throw error;

@@ -28,3 +28,6 @@ npm-shrinkwrap.json
 
 # Local agent worktrees
 .claude/worktrees/
+
+# Temporary orchestrator / agent scratch files
+.tmp/
