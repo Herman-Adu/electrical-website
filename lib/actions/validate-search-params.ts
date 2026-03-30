@@ -49,7 +49,11 @@ export async function validateNewsHubSearchParams(
 ): Promise<NewsHubSearchParams> {
   const validated = newsHubSearchParamsSchema.parse(params);
 
-  if (validated.category && !isNewsCategorySlug(validated.category)) {
+  if (
+    validated.category &&
+    validated.category !== "all" &&
+    !isNewsCategorySlug(validated.category)
+  ) {
     throw new z.ZodError([
       {
         code: "custom",

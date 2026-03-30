@@ -16,9 +16,16 @@ export function SmartLiving() {
     const updateViewportMode = () => setIsDesktop(mediaQuery.matches);
 
     updateViewportMode();
-    mediaQuery.addEventListener("change", updateViewportMode);
 
-    return () => mediaQuery.removeEventListener("change", updateViewportMode);
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateViewportMode);
+
+      return () => mediaQuery.removeEventListener("change", updateViewportMode);
+    }
+
+    mediaQuery.addListener(updateViewportMode);
+
+    return () => mediaQuery.removeListener(updateViewportMode);
   }, []);
 
   const { inView } = useIntersectionObserverAnimation({
