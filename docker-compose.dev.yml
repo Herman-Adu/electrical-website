@@ -27,6 +27,163 @@ services:
       PORT: "3000"
       WATCHPACK_POLLING: "true" # reliable file-watching on Windows / WSL2
 
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./docker/Caddyfile.local:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      github-official:
+        condition: service_healthy
+      openapi-schema:
+        condition: service_healthy
+      playwright:
+        condition: service_healthy
+      sequential-thinking:
+        condition: service_healthy
+      memory-reference:
+        condition: service_healthy
+      nextjs-devtools:
+        condition: service_healthy
+      executor-playwright:
+        condition: service_healthy
+      wikipedia:
+        condition: service_healthy
+    restart: unless-stopped
+
+  github-official:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/github-official/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  openapi-schema:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/openapi-schema/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  playwright:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/playwright/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  sequential-thinking:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/sequential-thinking/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  memory-reference:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/memory-reference/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  nextjs-devtools:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/nextjs-devtools/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  executor-playwright:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/executor-playwright/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  wikipedia:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/wikipedia/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
 volumes:
+  caddy_data:
+  caddy_config:
   nm_dev:
   next_dev:

@@ -3,13 +3,16 @@ import type {
   AgentOutput,
   AgentPoolId,
   McpServerId,
+  SkillId,
 } from "../types/core.ts";
 import type { ScoredSkill, SkillManifest } from "../types/skill.ts";
 import type { AgentPool } from "../types/agent.ts";
 import type { PreFlightReport } from "../types/health.ts";
-import { SkillRegistry } from "../registry/skill-registry";
-import { HeuristicEngine } from "../heuristics/heuristic-engine";
-import { HealthMonitor } from "../health/health-monitor";
+import type { SkillRegistry } from "../registry/skill-registry";
+import type { HeuristicEngine } from "../heuristics/heuristic-engine";
+import type { HealthMonitor } from "../health/health-monitor";
+import { AGENT_POOL_IDS } from "../agents/agent-pool";
+import { SKILLS } from "../constants/skill-ids";
 
 // ─── Router Config ────────────────────────────────────────────────────────────
 
@@ -33,6 +36,16 @@ export interface RoutingDecision {
   readonly preFlightReport: PreFlightReport;
   readonly agentPoolId: AgentPoolId;
 }
+
+export interface RoutingExecution<TOutput = unknown> {
+  readonly output: AgentOutput<TOutput>;
+  readonly decision: RoutingDecision;
+}
+
+const NO_SERVER_SKILL_POOL: Readonly<Partial<Record<SkillId, AgentPoolId>>> = {
+  [SKILLS.HEALTH_CHECK]: AGENT_POOL_IDS.CODE_INTELLIGENCE,
+  [SKILLS.NEXTJS_AGENT_SETUP]: AGENT_POOL_IDS.DEVTOOLS,
+};
 
 export type RouterError =
   | { readonly kind: "no_eligible_skills"; intent: AgentIntent }
@@ -126,9 +139,7 @@ export class ToolRouter {
   async route<TOutput = unknown>(
     intent: AgentIntent,
     input: unknown,
-  ): Promise<AgentOutput<TOutput>> {
-    const start = Date.now();
-
+  ): Promise<RoutingExecution<TOutput>> {
     // Step 1 + 2: fitness scores → heuristic-adjusted ranking
     const rawCandidates = this.#registry.rankByFitness(intent, {
       limit: this.#config.topK,
@@ -198,22 +209,32 @@ export class ToolRouter {
     }
 
     // Step 6: dispatch
-    const result = await (pool as AgentPool).dispatch(
+    const output = await (pool as AgentPool).dispatch(
       selected.skill as SkillManifest,
       intent,
       parsedInput,
     );
 
+    const decision: RoutingDecision = {
+      selected,
+      candidates: filtered,
+      preFlightReport,
+      agentPoolId: pool.id,
+    };
+
     // Step 7: record observation for self-learning
     await this.#heuristics.recordObservation({
       skillId: selected.skill.id,
       outcome: "success",
-      latencyMs: result.latencyMs,
+      latencyMs: output.latencyMs,
       costTierUsed: selected.skill.costTier,
       observedAt: new Date().toISOString(),
     });
 
-    return result as AgentOutput<TOutput>;
+    return {
+      output: output as AgentOutput<TOutput>,
+      decision,
+    };
   }
 
   /**
@@ -230,13 +251,21 @@ export class ToolRouter {
 
   /**
    * Find the pool whose allowedServers is a superset of skill.requiredServers.
-   * Prefers the pool with the smallest allowed set (principle of least privilege).
+   * For zero-server meta-skills, uses deterministic static mapping.
+   * Otherwise prefers the pool with the smallest allowed set (least privilege).
    */
   #findPool(skill: SkillManifest): AgentPool | undefined {
     const required = new Set(skill.requiredServers);
 
+    if (required.size === 0) {
+      const mappedPoolId = NO_SERVER_SKILL_POOL[skill.id];
+      if (mappedPoolId) {
+        return this.#pools.get(mappedPoolId);
+      }
+      return this.#pools.get(AGENT_POOL_IDS.CODE_INTELLIGENCE);
+    }
+
     const candidates = [...this.#pools.values()].filter((pool) => {
-      if (required.size === 0) return true; // health-check meta-skill
       return [...required].every((s) => pool.allowedServers.has(s));
     });
 

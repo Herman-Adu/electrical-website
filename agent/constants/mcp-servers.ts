@@ -16,7 +16,9 @@ function id(s: string): McpServerId {
 
 export const MCP = {
   GITHUB: id("github-official"),
+  OPENAPI_SCHEMA: id("openapi-schema"),
   PLAYWRIGHT: id("playwright-mcp-server"),
+  EXECUTOR_PLAYWRIGHT: id("executor-playwright"),
   SEQUENTIAL_THINKING: id("sequentialthinking"),
   MEMORY: id("memory"),
   RESEND: id("resend"),
@@ -27,6 +29,7 @@ export const MCP = {
   NEXT_DEVTOOLS: id("next-devtools-mcp"),
   CONTEXT7: id("context7"),
   EXCALIDRAW: id("excalidraw-remote"),
+  HEALTH_MONITOR: id("__health_monitor"),
 } as const satisfies Record<string, McpServerId>;
 
 /** Ordered list of all registered MCP servers — used by HealthMonitor */

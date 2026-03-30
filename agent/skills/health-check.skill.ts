@@ -1,7 +1,7 @@
 import { z } from "zod";
 import type { AgentIntent, SkillContext } from "../types/core";
 import type { SkillManifest } from "../types/skill";
-import { ALL_MCP_SERVERS } from "../constants/mcp-servers";
+import { ALL_MCP_SERVERS, MCP } from "../constants/mcp-servers";
 import { SKILLS } from "../constants/skill-ids";
 
 // ─── Schemas ─────────────────────────────────────────────────────────────────
@@ -81,7 +81,7 @@ export const healthCheckSkill: SkillManifest<
     const serverIds = input.serverIds ?? ALL_MCP_SERVERS;
     const result = await ctx.callMcp<HealthCheckOutput>(
       // sentinel value — the orchestrator intercepts this call
-      "__health_monitor" as Parameters<typeof ctx.callMcp>[0],
+      MCP.HEALTH_MONITOR,
       "preFlight",
       { serverIds },
     );

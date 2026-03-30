@@ -1,6 +1,6 @@
-export { ToolRouter, RoutingError } from "./tool-router.ts";
+export { ToolRouter, RoutingError } from "./tool-router";
 export type {
   ToolRouterConfig,
   RoutingDecision,
   RouterError,
-} from "./tool-router.ts";
+} from "./tool-router";

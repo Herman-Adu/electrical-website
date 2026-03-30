@@ -7,6 +7,7 @@ import type {
 } from "../types/index.ts";
 import type { SkillManifest } from "../types/skill.ts";
 import { ScopeViolationError } from "../types/agent";
+import { MCP } from "../constants/mcp-servers";
 
 // ─── MCP Client Contract ──────────────────────────────────────────────────────
 
@@ -53,9 +54,7 @@ export abstract class BaseAgentPool implements AgentPool {
   ): Promise<AgentOutput<TOutput>> {
     // ── Scope Guard ── runtime enforcement of bounded MCP allocation
     const disallowed = skill.requiredServers.filter(
-      (s) =>
-        s !== ("__health_monitor" as McpServerId) &&
-        !this.allowedServers.has(s),
+      (s) => s !== MCP.HEALTH_MONITOR && !this.allowedServers.has(s),
     );
     if (disallowed.length > 0) {
       throw new ScopeViolationError({
@@ -77,7 +76,7 @@ export abstract class BaseAgentPool implements AgentPool {
       callMcp: <T>(serverId: McpServerId, tool: string, args: unknown) => {
         // Secondary runtime check inside callMcp — belt-and-suspenders
         if (
-          serverId !== ("__health_monitor" as McpServerId) &&
+          serverId !== MCP.HEALTH_MONITOR &&
           !this.allowedServers.has(serverId)
         ) {
           throw new ScopeViolationError({

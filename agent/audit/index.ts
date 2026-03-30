@@ -1,2 +1,2 @@
-export { AuditLogger, MemoryAuditStore } from "./audit-logger.ts";
-export type { AuditStore, AuditQueryFilter } from "./audit-logger.ts";
+export { AuditLogger, MemoryAuditStore } from "./audit-logger";
+export type { AuditStore, AuditQueryFilter } from "./audit-logger";

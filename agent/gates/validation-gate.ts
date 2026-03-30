@@ -1,5 +1,10 @@
 import { createHash } from "node:crypto";
-import type { AgentIntent, AgentOutput, SkillId } from "../types/core.ts";
+import type {
+  AgentIntent,
+  AgentOutput,
+  AgentPoolId,
+  SkillId,
+} from "../types/core.ts";
 import type { ValidationIssue, ValidationResult } from "../types/audit.ts";
 import { ValidationError } from "../types/audit";
 import type { SkillManifest } from "../types/skill.ts";
@@ -14,7 +19,7 @@ import type { SkillManifest } from "../types/skill.ts";
  * 1. Output must satisfy SkillManifest.outputSchema (Zod parse)
  * 2. If skill is not dryRunCapable but was invoked with dryRun=true → error
  * 3. AgentOutput.skillId must match the dispatched skill's id
- * 4. AgentOutput.agentPoolId must match the dispatching pool's id
+ * 4. AgentOutput.agentPoolId must match the dispatching pool's id (when provided)
  *
  * On failure: throws ValidationError (never swallows).
  * On success: returns the validated, typed output unchanged.
@@ -28,6 +33,7 @@ export class ValidationGate {
     raw: AgentOutput<TOutput>,
     skill: SkillManifest<unknown, TOutput>,
     intent: AgentIntent,
+    expectedAgentPoolId?: AgentPoolId,
   ): AgentOutput<TOutput> {
     const issues: ValidationIssue[] = [];
 
@@ -61,6 +67,18 @@ export class ValidationGate {
       });
     }
 
+    // Rule 4: agent pool ID integrity
+    if (
+      expectedAgentPoolId !== undefined &&
+      raw.agentPoolId !== expectedAgentPoolId
+    ) {
+      issues.push({
+        path: ["agentPoolId"],
+        message: `Output agentPoolId "${raw.agentPoolId}" does not match dispatching pool "${expectedAgentPoolId}"`,
+        code: "agent_pool_id_mismatch",
+      });
+    }
+
     if (issues.length > 0) {
       const result: ValidationResult = {
         ok: false,
@@ -81,9 +99,10 @@ export class ValidationGate {
     raw: AgentOutput<TOutput>,
     skill: SkillManifest<unknown, TOutput>,
     intent: AgentIntent,
+    expectedAgentPoolId?: AgentPoolId,
   ): ValidationResult {
     try {
-      this.validate(raw, skill, intent);
+      this.validate(raw, skill, intent, expectedAgentPoolId);
       return { ok: true };
     } catch (err) {
       if (err instanceof ValidationError) {

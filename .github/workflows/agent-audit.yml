@@ -242,6 +242,7 @@ jobs:
             'sequential-thinking': 8104,
             'playwright':         8105,
             'executor-playwright': 8106,
+            'wikipedia':          8107,
           };
 
           const services = [];

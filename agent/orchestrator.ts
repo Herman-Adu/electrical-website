@@ -31,6 +31,7 @@ import {
 } from "./agents/index";
 import type { McpClient } from "./agents/agent-pool.ts";
 import { ALL_MCP_SERVERS, MCP } from "./constants/mcp-servers";
+import { assertMcpCanonicalMapping } from "./constants/mcp-canonical";
 import type { PreFlightReport } from "./types/health.ts";
 import type { SkillBuilderOutput } from "./skills/skill-builder.skill";
 import type { SkillMeta } from "./skills/skill-builder.skill";
@@ -239,6 +240,9 @@ export class Orchestrator {
   static async create(config: OrchestratorConfig): Promise<Orchestrator> {
     const { mcpClient } = config;
 
+    // Phase 2: strict canonical mapping drift gate
+    assertMcpCanonicalMapping();
+
     // Step 1: Register all skills
     registerAllSkills();
 
@@ -344,11 +348,17 @@ export class Orchestrator {
     const start = Date.now();
 
     try {
-      const output = await this.#router.route<TOutput>(intent, input);
+      const routed = await this.#router.route<TOutput>(intent, input);
+      const output = routed.output;
 
       // Validate after execution — hard stop on failure
       const skill = skillRegistry.getOrThrow(output.skillId);
-      this.#validation.validate(output as AgentOutput, skill, intent);
+      this.#validation.validate(
+        output as AgentOutput,
+        skill,
+        intent,
+        routed.decision.agentPoolId,
+      );
 
       await this.#audit.log({
         skillId: output.skillId,
@@ -545,10 +555,7 @@ function buildHealthInterceptedClient(
     tool: string,
     args: unknown,
   ): Promise<T> => {
-    if (
-      serverId === ("__health_monitor" as McpServerId) &&
-      tool === "preFlight"
-    ) {
+    if (serverId === MCP.HEALTH_MONITOR && tool === "preFlight") {
       const { serverIds } = args as { serverIds: McpServerId[] };
       const report = await health.preFlight(serverIds);
       return report as T;

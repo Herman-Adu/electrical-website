@@ -1,0 +1,50 @@
+# Local Caddy router for MCP services.
+# Uses a stock Caddy image, so plugin-only directives are intentionally omitted.
+
+:3100 {
+  handle /health {
+    respond "OK" 200
+  }
+
+  handle /github/* {
+    uri strip_prefix /github
+    reverse_proxy github-official:8000
+  }
+
+  handle /openapi/* {
+    uri strip_prefix /openapi
+    reverse_proxy openapi-schema:8000
+  }
+
+  handle /playwright/* {
+    uri strip_prefix /playwright
+    reverse_proxy playwright:8000
+  }
+
+  handle /sequential/* {
+    uri strip_prefix /sequential
+    reverse_proxy sequential-thinking:8000
+  }
+
+  handle /memory/* {
+    uri strip_prefix /memory
+    reverse_proxy memory-reference:8000
+  }
+
+  handle /nextjs/* {
+    uri strip_prefix /nextjs
+    reverse_proxy nextjs-devtools:8000
+  }
+
+  handle /executor/* {
+    uri strip_prefix /executor
+    reverse_proxy executor-playwright:8000
+  }
+
+  handle /wikipedia/* {
+    uri strip_prefix /wikipedia
+    reverse_proxy wikipedia:8000
+  }
+
+  respond "Service not found" 404
+}
