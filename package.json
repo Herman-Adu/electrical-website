@@ -24,6 +24,7 @@
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f web",
     "docker:start": "docker compose up --build web",
+    "docker:mcp:smoke": "node scripts/mcp-smoke.mjs",
     "docker:dev": "docker compose -f docker-compose.dev.yml up web-dev",
     "docker:dev:build": "docker compose -f docker-compose.dev.yml build web-dev",
     "docker:dev:down": "docker compose -f docker-compose.dev.yml down"

@@ -55,12 +55,20 @@ import { skillBuilderSkill } from "./skill-builder.skill";
  * This file is the single entry point — import it once in orchestrator.ts.
  */
 export function registerAllSkills(): void {
-  skillRegistry.register(codeSearchSkill);
-  skillRegistry.register(browserTestSkill);
-  skillRegistry.register(githubActionsSkill);
-  skillRegistry.register(sendNotificationSkill);
-  skillRegistry.register(reasoningChainSkill);
-  skillRegistry.register(healthCheckSkill);
-  skillRegistry.register(nextjsAgentSetupSkill);
-  skillRegistry.register(skillBuilderSkill);
+  const manifests = [
+    codeSearchSkill,
+    browserTestSkill,
+    githubActionsSkill,
+    sendNotificationSkill,
+    reasoningChainSkill,
+    healthCheckSkill,
+    nextjsAgentSetupSkill,
+    skillBuilderSkill,
+  ] as const;
+
+  for (const manifest of manifests) {
+    if (!skillRegistry.get(manifest.id)) {
+      skillRegistry.register(manifest);
+    }
+  }
 }

@@ -220,6 +220,7 @@ function runAudit(
   skills: SkillMeta[],
 ): NonNullable<SkillBuilderOutput["auditReport"]> {
   const findings: AuditFinding[] = [];
+  const destructiveServers = new Set([MCP.GITHUB, MCP.RESEND, MCP.MEMORY]);
 
   for (const skill of skills) {
     // ── Parity checks ──────────────────────────────────────
@@ -255,9 +256,8 @@ function runAudit(
     // ── Best-practice checks ───────────────────────────────
     if (
       !skill.dryRunCapable &&
-      skill.requiredServers.some(
-        (s) =>
-          s.includes("github") || s.includes("resend") || s.includes("memory"),
+      skill.requiredServers.some((serverId) =>
+        destructiveServers.has(serverId as typeof MCP.GITHUB),
       )
     ) {
       findings.push({
@@ -361,18 +361,19 @@ function runOptimise(
   heuristics: HeuristicEntry[] = [],
 ): NonNullable<SkillBuilderOutput["optimiseReport"]> {
   const findings: OptimiseFinding[] = [];
+  const writeServerIds = new Set<string>([MCP.RESEND, MCP.GITHUB, MCP.MEMORY]);
 
-  // ── Skills with no server deps land on arbitrary smallest pool ─────────────
+  // ── Skills with no server deps should remain explicitly mapped ─────────────
   const noServerSkills = skills.filter(
-    (s) => s.requiredServers.length === 0 && s.id !== "health-check",
+    (s) => s.requiredServers.length === 0 && s.id !== SKILLS.HEALTH_CHECK,
   );
   if (noServerSkills.length > 0) {
     findings.push({
       area: "pool-assignment",
-      severity: "medium",
-      current: `${noServerSkills.map((s) => s.id).join(", ")} have requiredServers: [] and will land on whichever pool has the fewest entries`,
+      severity: "low",
+      current: `${noServerSkills.map((s) => s.id).join(", ")} have requiredServers: [] and rely on static no-server pool mapping`,
       recommendation:
-        "Add a dedicated 'utility-agent' pool or mark these skills as orchestrator-level meta-skills (like health-check) so routing is deterministic.",
+        "Keep no-server skill-to-pool mapping explicit in ToolRouter to preserve deterministic routing as new skills are added.",
     });
   }
 
@@ -407,7 +408,7 @@ function runOptimise(
 
   // ── Skills sharing MEMORY server — potential sequencing conflicts ───────────
   const memorySkills = skills.filter((s) =>
-    s.requiredServers.includes("memory"),
+    s.requiredServers.includes(MCP.MEMORY),
   );
   if (memorySkills.length > 3) {
     findings.push({
@@ -440,9 +441,7 @@ function runOptimise(
   const writeSkillsWithoutDryRun = skills.filter(
     (s) =>
       !s.dryRunCapable &&
-      s.requiredServers.some((srv) =>
-        ["resend", "github-official", "memory"].includes(srv),
-      ),
+      s.requiredServers.some((srv) => writeServerIds.has(srv)),
   );
   if (writeSkillsWithoutDryRun.length > 0) {
     findings.push({

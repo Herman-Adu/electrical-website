@@ -1,0 +1,148 @@
+# Caddy Router Configuration for MCP Infrastructure
+# Central routing for all Tier-1 services on mcp-core network
+# Batch 4.1: Rate limiting with graceful queueing per service
+
+:3000 {
+  # Health check endpoint for router itself
+  handle /health {
+    respond "OK" 200
+  }
+
+  # GitHub Official Service: 40 tools for research and client work
+  # Rate limit: 60 requests/min
+  handle /github/* {
+    rate_limit {
+      zone github {
+        key {remote_host}
+        events 60
+        window 1m
+      }
+    }
+    uri strip_prefix /github
+    reverse_proxy github-official:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # OpenAPI Schema Service: Schema analysis
+  # Rate limit: 100 requests/min
+  handle /openapi/* {
+    rate_limit {
+      zone openapi {
+        key {remote_host}
+        events 100
+        window 1m
+      }
+    }
+    uri strip_prefix /openapi
+    reverse_proxy openapi-schema:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Playwright Service: Web automation (resource intensive)
+  # Rate limit: 30 requests/min
+  handle /playwright/* {
+    rate_limit {
+      zone playwright {
+        key {remote_host}
+        events 30
+        window 1m
+      }
+    }
+    uri strip_prefix /playwright
+    reverse_proxy playwright:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Sequential Thinking Service: Complex reasoning (computationally expensive)
+  # Rate limit: 10 requests/min
+  handle /sequential/* {
+    rate_limit {
+      zone sequential {
+        key {remote_host}
+        events 10
+        window 1m
+      }
+    }
+    uri strip_prefix /sequential
+    reverse_proxy sequential-thinking:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Memory Reference Service: Knowledge base
+  # Rate limit: 100 requests/min
+  handle /memory/* {
+    rate_limit {
+      zone memory {
+        key {remote_host}
+        events 100
+        window 1m
+      }
+    }
+    uri strip_prefix /memory
+    reverse_proxy memory-reference:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Next.js DevTools Service: Development tools
+  # Rate limit: 50 requests/min
+  handle /nextjs/* {
+    rate_limit {
+      zone nextjs {
+        key {remote_host}
+        events 50
+        window 1m
+      }
+    }
+    uri strip_prefix /nextjs
+    reverse_proxy nextjs-devtools:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Executor Playwright Service: Complex automation (resource intensive)
+  # Rate limit: 20 requests/min
+  handle /executor/* {
+    rate_limit {
+      zone executor {
+        key {remote_host}
+        events 20
+        window 1m
+      }
+    }
+    uri strip_prefix /executor
+    reverse_proxy executor-playwright:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Wikipedia Service: Reference context
+  # Rate limit: 80 requests/min
+  handle /wikipedia/* {
+    rate_limit {
+      zone wikipedia {
+        key {remote_host}
+        events 80
+        window 1m
+      }
+    }
+    uri strip_prefix /wikipedia
+    reverse_proxy wikipedia:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
+  # Catch-all: return 404 for undefined routes
+  respond "Service not found" 404
+
+  # Log all rate limit violations
+  log {
+    output stdout
+    format json
+    level info
+  }
+}

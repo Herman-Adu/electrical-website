@@ -1,1 +1,1 @@
-export { ValidationGate, hashIntent } from "./validation-gate.ts";
+export { ValidationGate, hashIntent } from "./validation-gate";
