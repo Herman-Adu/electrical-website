@@ -10,7 +10,7 @@
  * - Type inference
  */
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { z } from "zod";
 import {
   projectsSearchParamsSchema,
@@ -20,6 +20,10 @@ import {
   type ProjectsSearchParams,
   type ErrorTestSearchParams,
 } from "@/lib/schemas/search-params";
+import {
+  validateNewsHubSearchParams,
+  safeValidateNewsHubParams,
+} from "@/lib/actions/validate-search-params";
 
 describe("Search Params Schemas", () => {
   describe("projectsSearchParamsSchema", () => {
@@ -270,6 +274,18 @@ describe("Search Params Schemas", () => {
 
       expect(result1.category).toBe("residential");
       expect(result2.trigger).toBe("error");
+    });
+
+    it("should allow news hub category=all", async () => {
+      await expect(
+        validateNewsHubSearchParams({ category: "all" }),
+      ).resolves.toEqual({ category: "all" });
+    });
+
+    it("should preserve category=all in safe news hub validation", async () => {
+      await expect(
+        safeValidateNewsHubParams({ category: "all" }),
+      ).resolves.toEqual({ category: "all" });
     });
   });
 });

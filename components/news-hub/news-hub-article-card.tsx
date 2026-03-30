@@ -62,11 +62,14 @@ export function NewsHubArticleCard({
           <button
             type="button"
             onClick={onToggleSave}
+            aria-disabled={isPending}
+            aria-pressed={isSaved}
+            disabled={isPending}
             className={`rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors ${
               isSaved
                 ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan"
                 : "border-border/60 bg-background/60 text-muted-foreground hover:text-foreground"
-            }`}
+            } ${isPending ? "cursor-not-allowed opacity-60" : ""}`}
           >
             {isSaved ? "Saved" : "Save story"}
           </button>
