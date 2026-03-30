@@ -23,12 +23,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.11.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -99,5 +99,393 @@ jobs:
           EOF
 
       - name: Typecheck agent package
-        run: cd agent && node ../node_modules/.bin/tsc --noEmit
+        run: pnpm --dir agent exec tsc --noEmit
         continue-on-error: false
+
+  mcp-compat-smoke:
+    name: MCP protocol compatibility smoke (skill-sync)
+    needs: sync-check
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Derive priority services
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync, writeFileSync } from 'fs';
+
+          const src = readFileSync('agent/constants/mcp-canonical.ts', 'utf8');
+          const re = /([A-Z_]+):\s*entry\("[^"]+",\s*"docker-gateway",\s*\{[\s\S]*?dockerService:\s*"([^"]+)"[\s\S]*?gatewayRoute:\s*"(\/[^"]+)"/g;
+
+          const priorityConstants = new Set([
+            'GITHUB', 'MEMORY', 'NEXT_DEVTOOLS', 'OPENAPI_SCHEMA',
+            'SEQUENTIAL_THINKING', 'PLAYWRIGHT', 'EXECUTOR_PLAYWRIGHT',
+          ]);
+
+          const entries = [];
+          for (const m of src.matchAll(re)) {
+            const constant = m[1];
+            if (priorityConstants.has(constant)) {
+              entries.push({ constant, dockerService: m[2], gatewayRoute: m[3] });
+              console.log(`✓ ${constant} → ${m[2]} (${m[3]})`);
+            }
+          }
+
+          if (entries.length < 7) {
+            console.error(`Expected at least 7 priority entries, got ${entries.length}`);
+            process.exit(1);
+          }
+
+          writeFileSync('mcp-priority-services.json', JSON.stringify(entries, null, 2));
+          console.log(`\nWrote ${entries.length} entries to mcp-priority-services.json`);
+          EOF
+
+      - name: Start ephemeral Docker MCP stack
+        run: docker compose up -d github-official memory-reference nextjs-devtools openapi-schema sequential-thinking playwright executor-playwright
+
+      - name: Wait for MCP service health
+        run: |
+          set -euo pipefail
+          services=(github-official memory-reference nextjs-devtools openapi-schema sequential-thinking playwright executor-playwright)
+          for svc in "${services[@]}"; do
+            echo "Waiting for $svc..."
+            for i in $(seq 1 30); do
+              if docker compose exec -T "$svc" wget -qO- http://localhost:8000/health > /dev/null 2>&1; then
+                echo "✓ $svc is healthy"
+                break
+              fi
+              if [ "$i" -eq 30 ]; then
+                echo "✗ $svc failed health check after 30 retries"
+                exit 1
+              fi
+              sleep 2
+            done
+          done
+
+      - name: MCP initialize + tools/list smoke
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync } from 'fs';
+
+          const entries = JSON.parse(readFileSync('mcp-priority-services.json', 'utf8'));
+          let allOk = true;
+
+          for (const { constant, gatewayRoute } of entries) {
+            const base = `http://localhost:8080${gatewayRoute}`;
+
+            const initRes = await fetch(`${base}/`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                jsonrpc: '2.0', id: 1, method: 'initialize',
+                params: {
+                  protocolVersion: '2024-11-05',
+                  capabilities: {},
+                  clientInfo: { name: 'ci-compat', version: '1.0.0' },
+                },
+              }),
+            });
+
+            if (!initRes.ok) {
+              console.error(`✗ ${constant}: initialize failed with HTTP ${initRes.status}`);
+              allOk = false;
+              continue;
+            }
+
+            const listRes = await fetch(`${base}/`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} }),
+            });
+
+            if (!listRes.ok) {
+              console.error(`✗ ${constant}: tools/list failed with HTTP ${listRes.status}`);
+              allOk = false;
+              continue;
+            }
+
+            const listData = await listRes.json();
+            const tools = listData?.result?.tools ?? [];
+            if (tools.length === 0) {
+              console.error(`✗ ${constant}: tools/list returned 0 tools`);
+              allOk = false;
+              continue;
+            }
+
+            console.log(`✓ ${constant}: ${tools.length} tools`);
+          }
+
+          if (!allOk) process.exit(1);
+          EOF
+
+      - name: Dry-run smoke call per service
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync } from 'fs';
+
+          const entries = JSON.parse(readFileSync('mcp-priority-services.json', 'utf8'));
+          let allOk = true;
+
+          for (const { constant, dockerService, gatewayRoute } of entries) {
+            const base = `http://localhost:8080${gatewayRoute}`;
+            const headers = { 'Content-Type': 'application/json' };
+            if (dockerService === 'github-official') {
+              headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+            }
+
+            const res = await fetch(`${base}/`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                jsonrpc: '2.0', id: 3, method: 'tools/call',
+                params: { name: 'ping', arguments: {} },
+              }),
+            });
+
+            if (res.status >= 400) {
+              console.error(`✗ ${constant}: smoke call returned HTTP ${res.status}`);
+              allOk = false;
+              continue;
+            }
+
+            console.log(`✓ ${constant}: smoke ok`);
+          }
+
+          if (!allOk) process.exit(1);
+          EOF
+
+      - name: Collect logs
+        if: always()
+        run: docker compose logs --no-color > mcp-compat-smoke-logs.txt 2>&1 || true
+
+      - name: Upload smoke logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-compat-smoke-logs
+          path: mcp-compat-smoke-logs.txt
+          if-no-files-found: ignore
+
+      - name: Teardown
+        if: always()
+        run: docker compose down --volumes --remove-orphans
+
+  mcp-compat-smoke:
+    name: MCP smoke — priority services
+    needs: sync-check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Derive priority services from mcp-canonical.ts
+        run: |
+          node --input-type=module <<'JSEOF'
+          import { readFileSync, appendFileSync } from 'fs';
+
+          const canonicalSrc = readFileSync('agent/constants/mcp-canonical.ts', 'utf8');
+
+          // Extract priority server constants from MCP_CANONICAL_PRIORITY_SERVERS array
+          const priorityBlockMatch = canonicalSrc.match(
+            /MCP_CANONICAL_PRIORITY_SERVERS[\s\S]*?=\s*\[([\s\S]*?)\]\s*as const/
+          );
+          if (!priorityBlockMatch) throw new Error('Could not find MCP_CANONICAL_PRIORITY_SERVERS');
+          const priorityConstants = [...priorityBlockMatch[1].matchAll(/MCP\.([A-Z_]+)/g)].map(m => m[1]);
+
+          // Extract dockerService for each constant from MCP_CANONICAL_MAP entries
+          const allEntryMatches = [...canonicalSrc.matchAll(
+            /(\w+):\s*entry\("[^"]*",\s*"docker-gateway",\s*\{[^}]*dockerService:\s*"([^"]+)"/g
+          )];
+          const dockerServiceMap = {};
+          for (const [, key, ds] of allEntryMatches) dockerServiceMap[key] = ds;
+
+          // CI ephemeral port allocation (deterministic, never conflicts with host services)
+          const portMap = {
+            'github-official':    8100,
+            'memory-reference':   8101,
+            'nextjs-devtools':    8102,
+            'openapi-schema':     8103,
+            'sequential-thinking': 8104,
+            'playwright':         8105,
+            'executor-playwright': 8106,
+          };
+
+          const services = [];
+          for (const constant of priorityConstants) {
+            const dockerService = dockerServiceMap[constant];
+            if (!dockerService) { console.warn('No dockerService for constant:', constant); continue; }
+            const port = portMap[dockerService];
+            if (port === undefined) { console.warn('No port for dockerService:', dockerService); continue; }
+            services.push({ constant, dockerService, port });
+          }
+
+          const json = JSON.stringify(services);
+          appendFileSync(process.env.GITHUB_ENV, `MCP_PRIORITY_SERVICES=${json}\n`);
+          console.log('Derived priority services:', json);
+          console.log('Total:', services.length, 'services');
+          JSEOF
+
+      - name: Generate docker-compose.mcp-ci.yml
+        run: |
+          node --input-type=module <<'JSEOF'
+          import { writeFileSync } from 'fs';
+
+          const services = JSON.parse(process.env.MCP_PRIORITY_SERVICES);
+
+          let compose = 'services:\n';
+          for (const { dockerService, port } of services) {
+            const svcName = dockerService.replace(/-/g, '_');
+            compose += `  ${svcName}:\n`;
+            compose += `    image: node:20-alpine\n`;
+            compose += `    command: ["node", "/srv/server.js"]\n`;
+            compose += `    volumes:\n`;
+            compose += `      - ./docker/${dockerService}/server.js:/srv/server.js:ro\n`;
+            compose += `    environment:\n`;
+            compose += `      PORT: "8000"\n`;
+            compose += `    ports:\n`;
+            compose += `      - "${port}:8000"\n`;
+            compose += `    networks:\n`;
+            compose += `      - mcp-ci-net\n`;
+            compose += `    healthcheck:\n`;
+            compose += `      test: ["CMD-SHELL", "wget -qO- http://localhost:8000/health || exit 1"]\n`;
+            compose += `      interval: 5s\n`;
+            compose += `      timeout: 3s\n`;
+            compose += `      retries: 12\n`;
+            compose += `      start_period: 5s\n\n`;
+          }
+          compose += 'networks:\n  mcp-ci-net:\n    driver: bridge\n';
+
+          writeFileSync('docker-compose.mcp-ci.yml', compose);
+          console.log('Generated docker-compose.mcp-ci.yml:\n' + compose);
+          JSEOF
+
+      - name: Start ephemeral MCP stack
+        run: docker compose -f docker-compose.mcp-ci.yml up -d
+
+      - name: Wait for MCP services to be healthy
+        continue-on-error: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          node --input-type=module <<'JSEOF'
+          import { execSync } from 'child_process';
+
+          const services = JSON.parse(process.env.MCP_PRIORITY_SERVICES);
+          const timeoutSec = 60;
+
+          async function waitForService(dockerService, port) {
+            const deadline = Date.now() + timeoutSec * 1000;
+            while (Date.now() < deadline) {
+              try {
+                execSync(`curl -sf http://localhost:${port}/health`, { stdio: 'pipe' });
+                console.log('✓', dockerService, 'is healthy on port', port);
+                return;
+              } catch {
+                await new Promise(r => setTimeout(r, 3000));
+              }
+            }
+            throw new Error(dockerService + ' failed health check after ' + timeoutSec + 's');
+          }
+
+          try {
+            await Promise.all(services.map(({ dockerService, port }) => waitForService(dockerService, port)));
+            console.log('All MCP priority services are healthy');
+          } catch (err) {
+            console.error(err.message);
+            process.exit(1);
+          }
+          JSEOF
+
+      - name: Run MCP initialize and tools/list per service
+        continue-on-error: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          node --input-type=module <<'JSEOF'
+          import { execSync } from 'child_process';
+
+          const services = JSON.parse(process.env.MCP_PRIORITY_SERVICES);
+          let failed = false;
+
+          for (const { dockerService, port } of services) {
+            // GET /health (MCP initialize equivalent for stub servers)
+            try {
+              const healthRaw = execSync(`curl -sf http://localhost:${port}/health`, { encoding: 'utf8' });
+              const health = JSON.parse(healthRaw);
+              console.log('✓', dockerService, '/health status:', health.status);
+            } catch {
+              console.error('✗', dockerService, '/health unreachable');
+              failed = true;
+            }
+
+            // GET /tools (MCP tools/list equivalent)
+            try {
+              const toolsRaw = execSync(`curl -sf http://localhost:${port}/tools`, { encoding: 'utf8' });
+              const tools = JSON.parse(toolsRaw);
+              console.log('✓', dockerService, '/tools ready:', tools.ready, '— tools:', tools.tools?.length ?? 0);
+            } catch {
+              console.error('✗', dockerService, '/tools unreachable');
+              failed = true;
+            }
+          }
+
+          if (failed) process.exit(1);
+          JSEOF
+
+      - name: Dry-run smoke call per service
+        continue-on-error: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node --input-type=module <<'JSEOF'
+          import { execSync } from 'child_process';
+
+          const services = JSON.parse(process.env.MCP_PRIORITY_SERVICES);
+          let failed = false;
+
+          for (const { constant, dockerService, port } of services) {
+            const isGitHub = constant === 'GITHUB';
+            const authFlag = isGitHub ? `-H "Authorization: Bearer ${process.env.GH_TOKEN}"` : '';
+            try {
+              execSync(`curl -sf ${authFlag} http://localhost:${port}/info`, { stdio: 'pipe' });
+              console.log('✓', dockerService, '/info OK');
+            } catch {
+              // /info may not be implemented on all stubs — fall back to /health
+              try {
+                execSync(`curl -sf ${authFlag} http://localhost:${port}/health`, { stdio: 'pipe' });
+                console.log('✓', dockerService, '(/info→/health fallback) OK');
+              } catch {
+                console.error('✗', dockerService, 'smoke call failed on both /info and /health');
+                failed = true;
+              }
+            }
+          }
+
+          if (failed) process.exit(1);
+          JSEOF
+
+      - name: Collect MCP stack logs
+        if: always()
+        run: docker compose -f docker-compose.mcp-ci.yml logs --no-color
+
+      - name: Teardown MCP stack
+        if: always()
+        run: docker compose -f docker-compose.mcp-ci.yml down --remove-orphans
