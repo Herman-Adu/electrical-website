@@ -48,20 +48,23 @@ export default async function NewsHubPage({
       />
 
       {featuredArticle ? (
-        <section className="section-container bg-background">
+        <section className="section-standard bg-background">
           <div className="section-content max-w-6xl">
             <NewsHubFeaturedCard article={featuredArticle} />
           </div>
         </section>
       ) : null}
 
-      <section className="section-container bg-background">
+      <section className="section-container section-padding-sm bg-background">
         <div className="section-content max-w-6xl">
           <NewsHubBentoGrid items={newsHubMetricItems} />
         </div>
       </section>
 
-      <section className="section-container bg-background pb-24">
+      <section
+        id="news-hub-feed"
+        className="section-container section-padding bg-background"
+      >
         <div className="section-content max-w-6xl">
           <NewsHubFeed items={listItems} sidebarCards={sidebarCards} />
         </div>

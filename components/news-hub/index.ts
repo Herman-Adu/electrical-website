@@ -8,3 +8,5 @@ export { NewsArticleCardShell } from "./news-article-card-shell";
 export { NewsCategoryCard } from "./news-category-card";
 export { NewsDetailHero } from "./news-detail-hero";
 export { NewsRelatedArticles } from "./news-related-articles";
+export { NewsHubCategoriesHero } from "./news-hub-categories-hero";
+export { NewsCategoryHero } from "./news-category-hero";

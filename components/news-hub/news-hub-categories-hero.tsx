@@ -1,34 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { Activity, ChevronDown } from "lucide-react";
+import { Activity, ChevronDown, Layers } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
-import { cn } from "@/lib/utils";
-import type { NewsCategory, NewsCategorySlug } from "@/types/news";
 
-interface NewsHubHeroProps {
-  categories: NewsCategory[];
-  activeCategory: NewsCategorySlug;
-  totalArticles: number;
+interface NewsHubCategoriesHeroProps {
+  categoryCount: number;
 }
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.3 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: { type: "spring", damping: 25, stiffness: 120 },
   },
 };
@@ -41,23 +38,21 @@ const flickerVariants: Variants = {
   },
 };
 
-export function NewsHubHero({
-  categories,
-  activeCategory,
-  totalArticles,
-}: NewsHubHeroProps) {
+export function NewsHubCategoriesHero({
+  categoryCount,
+}: NewsHubCategoriesHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
-    useHeroParallax({ size: "tall" });
+    useHeroParallax({ size: "compact" });
   const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     setIsLoaded(true);
     const statuses = [
       "INITIALIZING",
-      "LOADING_EDITORIAL",
-      "INDEXING_STORIES",
+      "LOADING_LANES",
+      "SCANNING_CATEGORIES",
       "SYSTEMS_READY",
     ];
 
@@ -75,19 +70,18 @@ export function NewsHubHero({
         clearInterval(interval);
       }
     }, 380);
-
     return () => clearInterval(interval);
   }, [shouldReduce]);
 
-  const scrollToFeed = () => {
-    const feed = document.getElementById("news-hub-feed");
-    if (feed) feed.scrollIntoView({ behavior: "smooth" });
+  const scrollToCategories = () => {
+    const el = document.getElementById("categories-grid");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <HeroParallaxShell
       sectionRef={sectionRef}
-      size="tall"
+      size="compact"
       safeArea="page"
       background={<BlueprintBackground showScanLine={false} />}
       backgroundFrameStyle={backgroundFrameStyle}
@@ -99,7 +93,7 @@ export function NewsHubHero({
             fill="none"
           >
             <motion.path
-              d="M0 320 H320 L420 230 H740 L840 320 H1160 L1260 250 H1440"
+              d="M0 280 H300 L380 200 H700 L780 280 H1100 L1180 200 H1440"
               stroke="var(--electric-cyan)"
               strokeWidth="1"
               fill="none"
@@ -110,11 +104,11 @@ export function NewsHubHero({
               transition={
                 shouldReduceMotion
                   ? { duration: 0 }
-                  : { duration: 2.6, delay: 0.5, ease: "easeOut" }
+                  : { duration: 2.8, delay: 0.5, ease: "easeOut" }
               }
             />
             <motion.path
-              d="M0 470 H260 L360 390 H620 L760 510 H980 L1120 430 H1440"
+              d="M0 480 H200 L280 420 H560 L640 480 H900 L980 420 H1440"
               stroke="var(--electric-cyan)"
               strokeWidth="0.5"
               fill="none"
@@ -125,29 +119,52 @@ export function NewsHubHero({
               transition={
                 shouldReduceMotion
                   ? { duration: 0 }
-                  : { duration: 2.6, delay: 0.95, ease: "easeOut" }
+                  : { duration: 2.8, delay: 0.9, ease: "easeOut" }
               }
             />
+            {[380, 780, 1180].map((x, index) => (
+              <motion.line
+                key={index}
+                x1={x}
+                y1={200}
+                x2={x}
+                y2={160}
+                stroke="var(--electric-cyan)"
+                strokeWidth="0.5"
+                initial={
+                  shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
+                }
+                animate={{ pathLength: 1, opacity: 0.6 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.4, delay: 2 + index * 0.15 }
+                }
+              />
+            ))}
             {[
-              [420, 230],
-              [840, 320],
-              [1260, 250],
-              [360, 390],
-              [760, 510],
-              [1120, 430],
+              [380, 200],
+              [700, 280],
+              [780, 280],
+              [1100, 280],
+              [280, 420],
+              [640, 480],
+              [980, 420],
             ].map(([cx, cy], index) => (
               <motion.circle
                 key={index}
                 cx={cx}
                 cy={cy}
-                r="3"
-                fill="var(--electric-cyan)"
+                r="3.5"
+                fill="none"
+                stroke="var(--electric-cyan)"
+                strokeWidth="1"
                 initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 0.5 }}
                 transition={
                   shouldReduceMotion
                     ? { duration: 0 }
-                    : { delay: 1.5 + index * 0.09, duration: 0.3 }
+                    : { delay: 1.6 + index * 0.1, duration: 0.3 }
                 }
               />
             ))}
@@ -160,28 +177,6 @@ export function NewsHubHero({
               transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
             />
           ) : null}
-
-          {!shouldReduceMotion ? (
-            <div className="absolute inset-0">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute size-1 rounded-full bg-electric-cyan/30"
-                  style={{
-                    left: `${10 + i * 15}%`,
-                    top: `${22 + (i % 3) * 20}%`,
-                  }}
-                  animate={{ y: [0, -18, 0], opacity: [0.15, 0.45, 0.15] }}
-                  transition={{
-                    duration: 3 + i * 0.45,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.3,
-                  }}
-                />
-              ))}
-            </div>
-          ) : null}
         </>
       }
       content={
@@ -189,7 +184,7 @@ export function NewsHubHero({
           variants={containerVariants}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
-          className="mx-auto max-w-5xl px-4 text-center"
+          className="mx-auto max-w-4xl px-4 text-center"
         >
           <motion.div
             variants={flickerVariants}
@@ -198,7 +193,7 @@ export function NewsHubHero({
             <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
               <Activity
                 size={14}
-                className="animate-pulse text-electric-cyan"
+                className="text-electric-cyan animate-pulse"
               />
               <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
                 News Hub // {statusText}
@@ -206,91 +201,86 @@ export function NewsHubHero({
             </div>
           </motion.div>
 
+          <motion.nav
+            variants={itemVariants}
+            aria-label="Breadcrumb"
+            className="mb-8 flex items-center justify-center gap-2 font-mono text-[10px] tracking-[0.14em] text-foreground/60 uppercase dark:text-white/60"
+          >
+            <Link
+              href="/news-hub"
+              className="transition-colors hover:text-electric-cyan"
+            >
+              News Hub
+            </Link>
+            <span className="opacity-30">/</span>
+            <span className="text-electric-cyan">Categories</span>
+          </motion.nav>
+
           <motion.div
             variants={itemVariants}
-            className="mb-6 flex items-center justify-center gap-4"
+            className="mb-6 flex justify-center"
+          >
+            <div className="relative">
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-electric-cyan/30 bg-electric-cyan/5 backdrop-blur-sm">
+                <Layers className="h-9 w-9 text-electric-cyan" />
+              </div>
+              <motion.div
+                className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="mb-5 flex items-center justify-center gap-4"
           >
             <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
-              Editorial Systems
+            <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/70 uppercase">
+              {categoryCount} Content Lanes
             </span>
             <span className="h-px w-12 bg-electric-cyan/60" />
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="mb-6 text-5xl leading-[0.9] font-black tracking-tight text-foreground uppercase sm:text-6xl md:text-7xl"
+            className="mb-6 text-5xl leading-[0.92] font-black tracking-tight text-foreground uppercase sm:text-6xl md:text-7xl"
           >
-            <span className="block">Campaigns</span>
+            <span className="block">Browse by</span>
             <span className="block bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong) bg-clip-text text-transparent">
-              Proof & Insights
+              Category
             </span>
-            <span className="block">For Every Sector</span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-foreground/70 dark:text-white/70 sm:text-lg"
+            className="mx-auto mb-10 max-w-xl text-base leading-relaxed font-light text-foreground/70 dark:text-white/70 sm:text-lg"
           >
-            A structured newsroom for stories, campaigns, partner updates, and
-            operational proof built on typed content models and category-first
-            routes.
+            Each lane is a dedicated route designed for editorial growth, fast
+            discovery, and long-term CMS migration.
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mb-10 flex flex-wrap items-center justify-center gap-3"
+            className="mb-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Link
               href="/news-hub"
-              className={cn(
-                "rounded-full border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
-                activeCategory === "all"
-                  ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,243,189,0.15)]"
-                  : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
-              )}
+              className="rounded-full border border-foreground/20 bg-foreground/5 px-5 py-2.5 font-mono text-[11px] tracking-widest text-foreground uppercase backdrop-blur-sm transition-all duration-300 hover:border-electric-cyan/50 hover:text-electric-cyan dark:border-white/20 dark:bg-white/10 dark:text-white"
             >
-              All Stories
+              ← All News
             </Link>
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.slug}
-                initial={
-                  shouldReduceMotion ? undefined : { opacity: 0, scale: 0.92 }
-                }
-                animate={
-                  shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }
-                }
-                transition={
-                  shouldReduceMotion
-                    ? undefined
-                    : { delay: 0.4 + index * 0.08, duration: 0.3 }
-                }
-              >
-                <Link
-                  href={`/news-hub?category=${category.slug}`}
-                  className={cn(
-                    "rounded-full border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
-                    activeCategory === category.slug
-                      ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,243,189,0.15)]"
-                      : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
-                  )}
-                >
-                  {category.label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/40 uppercase dark:text-white/40"
-          >
-            <span>{totalArticles} Seeded Stories</span>
-            <span className="hidden opacity-40 sm:inline">|</span>
-            <span>Category-first Routing</span>
-            <span className="hidden opacity-40 sm:inline">|</span>
-            <span>SSR + SSG Delivery</span>
+            <Link
+              href="/contact"
+              className="rounded-full border border-electric-cyan/30 bg-electric-cyan/10 px-5 py-2.5 font-mono text-[11px] tracking-widest text-electric-cyan uppercase backdrop-blur-sm transition-all duration-300 hover:bg-electric-cyan/20"
+            >
+              Start a Campaign
+            </Link>
           </motion.div>
         </motion.div>
       }
@@ -299,14 +289,14 @@ export function NewsHubHero({
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.5 }}
-          onClick={scrollToFeed}
-          type="button"
+          transition={{ delay: 2.2, duration: 0.5 }}
+          onClick={scrollToCategories}
           className="flex cursor-pointer flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-electric-cyan dark:text-white/50"
-          aria-label="Explore News Hub"
+          aria-label="Scroll to categories"
+          type="button"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
-            Explore Stories
+            Browse Categories
           </span>
           <ChevronDown
             size={20}

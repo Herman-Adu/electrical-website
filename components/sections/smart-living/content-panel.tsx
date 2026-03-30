@@ -11,6 +11,7 @@ export interface ContentPanelProps {
   uiY2: MotionValue<string>;
   uiY3: MotionValue<string>;
   inView: boolean;
+  enableParallaxMotion: boolean;
 }
 
 export function ContentPanel({
@@ -19,9 +20,13 @@ export function ContentPanel({
   uiY2,
   uiY3,
   inView,
+  enableParallaxMotion,
 }: ContentPanelProps) {
   return (
-    <motion.div className="relative z-20 w-full" style={{ y: contentY }}>
+    <motion.div
+      className="relative z-20 w-full"
+      style={{ y: enableParallaxMotion ? contentY : "0%" }}
+    >
       <div className="section-content w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-xl">
@@ -120,7 +125,7 @@ export function ContentPanel({
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
               className="lg:absolute lg:top-1/3 lg:-left-8 lg:w-52"
-              style={{ y: uiY3 }}
+              style={{ y: enableParallaxMotion ? uiY3 : "0%" }}
             >
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20">
                 <div className="flex items-center gap-3 mb-4">
@@ -165,7 +170,7 @@ export function ContentPanel({
 
             <motion.div
               className="space-y-3 lg:absolute lg:top-0 lg:right-0 lg:w-64"
-              style={{ y: uiY1 }}
+              style={{ y: enableParallaxMotion ? uiY1 : "0%" }}
             >
               <DimmerSlider
                 label="Living Room"
@@ -189,7 +194,7 @@ export function ContentPanel({
 
             <motion.div
               className="lg:absolute lg:bottom-20 lg:right-8 lg:w-56"
-              style={{ y: uiY2 }}
+              style={{ y: enableParallaxMotion ? uiY2 : "0%" }}
             >
               <EnergyGraph delay={0.8} inView={inView} />
             </motion.div>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { NewsHubArticleCard } from "@/components/news-hub";
+import { NewsCategoryHero, NewsHubArticleCard } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
 import {
   getNewsArticleListItemsByCategory,
@@ -50,32 +49,12 @@ export default async function NewsCategoryPage({
 
   return (
     <main className="relative bg-background">
-      <section className="section-standard border-b border-border/40 bg-background">
-        <div className="section-content max-w-6xl space-y-5">
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
-            {category.label} news
-          </div>
-          <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl">
-            {category.label} stories and updates.
-          </h1>
-          <p className="max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-            {category.description}
-          </p>
-          <div className="flex flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            <Link href="/news-hub" className="hover:text-electric-cyan">
-              Back to hub
-            </Link>
-            <Link
-              href="/news-hub/category"
-              className="hover:text-electric-cyan"
-            >
-              All categories
-            </Link>
-          </div>
-        </div>
-      </section>
+      <NewsCategoryHero category={category} articleCount={items.length} />
 
-      <section className="section-container bg-background pb-24">
+      <section
+        id="category-articles"
+        className="section-standard bg-background"
+      >
         <div className="section-content max-w-6xl space-y-4">
           {items.length === 0 ? (
             <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">

@@ -107,7 +107,7 @@ export default async function NewsArticlePage({
 
       <NewsDetailHero article={article} />
 
-      <section className="section-container bg-background">
+      <section id="article-content" className="section-standard bg-background">
         <div className="section-content grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.55fr)]">
           <div className="space-y-10">
             <div className="space-y-4">
@@ -170,7 +170,7 @@ export default async function NewsArticlePage({
         </div>
       </section>
 
-      <section className="section-container bg-background pb-24">
+      <section className="section-container section-padding bg-background">
         <div className="section-content max-w-6xl">
           <NewsRelatedArticles articles={relatedArticles} />
         </div>
