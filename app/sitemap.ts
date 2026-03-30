@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
-import { siteConfig, SITE_URL } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
+import {
+  getNewsArticleSlugsByCategory,
+  getNewsCategorySlugs,
+} from "@/data/news";
 import { getCategorySlugs, getProjectSlugsByCategory } from "@/data/projects";
 
 export const dynamic = "force-static";
@@ -43,6 +47,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: siteConfig.getUrl(siteConfig.routes.newsHub),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: siteConfig.getUrl(siteConfig.routes.newsHubCategory),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
       url: siteConfig.getUrl(siteConfig.routes.contact),
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -81,6 +97,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Flatten project routes array
   const flatProjectRoutes = projectRoutes.flat();
 
+  const newsCategorySlugs = await getNewsCategorySlugs();
+  const newsCategoryRoutes: MetadataRoute.Sitemap = newsCategorySlugs.map(
+    (categorySlug) => ({
+      url: siteConfig.getUrl(
+        `${siteConfig.routes.newsHubCategory}/${categorySlug}`,
+      ),
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }),
+  );
+
+  const newsArticleRoutes: MetadataRoute.Sitemap[] = await Promise.all(
+    newsCategorySlugs.map(async (categorySlug) => {
+      const articleSlugs = await getNewsArticleSlugsByCategory(categorySlug);
+      return articleSlugs.map((articleSlug) => ({
+        url: siteConfig.getUrl(
+          `${siteConfig.routes.newsHubCategory}/${categorySlug}/${articleSlug}`,
+        ),
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.65,
+      }));
+    }),
+  );
+
+  const flatNewsArticleRoutes = newsArticleRoutes.flat();
+
   // Combine all routes
-  return [...staticRoutes, ...categoryRoutes, ...flatProjectRoutes];
+  return [
+    ...staticRoutes,
+    ...categoryRoutes,
+    ...flatProjectRoutes,
+    ...newsCategoryRoutes,
+    ...flatNewsArticleRoutes,
+  ];
 }

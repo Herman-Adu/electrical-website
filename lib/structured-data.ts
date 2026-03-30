@@ -4,7 +4,8 @@
  */
 
 import { siteConfig } from "@/lib/site-config";
-import type { Project, ProjectCategory } from "@/types/projects";
+import type { NewsArticle } from "@/types/news";
+import type { Project } from "@/types/projects";
 
 /**
  * Article schema for project detail pages
@@ -31,6 +32,34 @@ export function getArticleSchema(project: Project) {
     datePublished: project.publishedAt || new Date().toISOString(),
     dateModified: project.updatedAt || new Date().toISOString(),
     keywords: project.tags?.join(", "),
+  };
+}
+
+/**
+ * Article schema for news hub detail pages
+ */
+export function getNewsArticleSchema(article: NewsArticle) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    image: article.featuredImage?.src || undefined,
+    url: siteConfig.getUrl(
+      `/news-hub/category/${article.category}/${article.slug}`,
+    ),
+    author: {
+      "@type": "Person",
+      name: article.author.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.org.name,
+      url: siteConfig.getUrl(siteConfig.routes.home),
+    },
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    keywords: article.tags.join(", "),
   };
 }
 

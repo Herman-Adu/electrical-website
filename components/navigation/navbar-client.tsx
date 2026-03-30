@@ -59,6 +59,20 @@ const navLinks = [
       { name: "Power Boards", href: "/projects/category/power-boards" },
     ],
   },
+  {
+    name: "News Hub",
+    href: "/news-hub",
+    submenu: [
+      { name: "Latest News", href: "/news-hub" },
+      { name: "Browse Categories", href: "/news-hub/category" },
+      { name: "Residential", href: "/news-hub/category/residential" },
+      { name: "Industrial", href: "/news-hub/category/industrial" },
+      { name: "Partners", href: "/news-hub/category/partners" },
+      { name: "Case Studies", href: "/news-hub/category/case-studies" },
+      { name: "Insights", href: "/news-hub/category/insights" },
+      { name: "Reviews", href: "/news-hub/category/reviews" },
+    ],
+  },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -168,6 +182,12 @@ export function NavbarClient() {
     if (targetPath === "/projects") {
       return (
         currentPath === "/projects" || currentPath.startsWith("/projects/")
+      );
+    }
+
+    if (targetPath === "/news-hub") {
+      return (
+        currentPath === "/news-hub" || currentPath.startsWith("/news-hub/")
       );
     }
 

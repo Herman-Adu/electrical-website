@@ -15,8 +15,8 @@ const footerLinks = {
     { name: "About Us", href: "/about" },
     { name: "Our Team", href: "/about#directors" },
     { name: "Careers", href: "/contact" },
-    { name: "News & Updates", href: "#" },
-    { name: "Case Studies", href: "#" },
+    { name: "News & Updates", href: "/news-hub" },
+    { name: "Case Studies", href: "/news-hub/category/case-studies" },
   ],
   support: [
     { name: "Contact", href: "#contact" },

@@ -18,23 +18,30 @@ export const projectsSearchParamsSchema = z.object({
     .optional(),
 });
 
-export type ProjectsSearchParams = z.infer<
-  typeof projectsSearchParamsSchema
->;
+export type ProjectsSearchParams = z.infer<typeof projectsSearchParamsSchema>;
+
+/**
+ * News Hub Page Search Params
+ * - category: Optional news category filter (validated against allowed categories)
+ */
+export const newsHubSearchParamsSchema = z.object({
+  category: z
+    .string()
+    .max(50, "Category must be less than 50 characters")
+    .optional(),
+});
+
+export type NewsHubSearchParams = z.infer<typeof newsHubSearchParamsSchema>;
 
 /**
  * Error Test Page Search Params
  * - trigger: Optional error trigger flag for testing error boundaries
  */
 export const errorTestSearchParamsSchema = z.object({
-  trigger: z
-    .enum(["error"])
-    .optional(),
+  trigger: z.enum(["error"]).optional(),
 });
 
-export type ErrorTestSearchParams = z.infer<
-  typeof errorTestSearchParamsSchema
->;
+export type ErrorTestSearchParams = z.infer<typeof errorTestSearchParamsSchema>;
 
 /**
  * Generic search params validator
@@ -44,9 +51,10 @@ export function validateSearchParams<T extends z.ZodSchema>(
   params: Record<string, string | string[] | undefined> | URLSearchParams,
   schema: T,
 ): z.infer<T> {
-  const paramsObject = params instanceof URLSearchParams
-    ? Object.fromEntries(params.entries())
-    : params;
+  const paramsObject =
+    params instanceof URLSearchParams
+      ? Object.fromEntries(params.entries())
+      : params;
 
   return schema.parse(paramsObject);
 }
