@@ -3,6 +3,7 @@ import Link from "next/link";
 import { projectCategories } from "@/data/projects";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
+import { Footer } from "@/components/sections/footer";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
 
@@ -61,6 +62,7 @@ export default function ProjectCategoriesPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
