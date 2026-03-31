@@ -34,11 +34,45 @@ export interface NewsQuote {
   role: string;
 }
 
+export interface NewsTimelineItem {
+  phase: string;
+  title: string;
+  description: string;
+  duration?: string;
+}
+
+export interface NewsChallengeItem {
+  title: string;
+  description: string;
+  solution: string;
+}
+
+export interface NewsSpecification {
+  category: string;
+  items: { label: string; value: string }[];
+}
+
+export interface NewsGalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface NewsDetailContent {
   intro: string[];
+  body?: string[];
   takeaways: string[];
   spotlight?: NewsSpotlightMetric[];
   quote?: NewsQuote;
+  scope?: string[];
+  methodology?: string[];
+  challenges?: NewsChallengeItem[];
+  timeline?: NewsTimelineItem[];
+  specifications?: NewsSpecification[];
+  results?: string[];
+  gallery?: NewsGalleryImage[];
+  conclusion?: string[];
+  additionalQuotes?: NewsQuote[];
 }
 
 export interface NewsArticle {
