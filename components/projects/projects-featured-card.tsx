@@ -57,7 +57,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
     <ProjectCardShell className="overflow-hidden p-0">
       <div
         ref={containerRef}
-        className="grid gap-0 md:gap-0 lg:grid-cols-[1.2fr_1fr]"
+        className="grid gap-0 md:gap-0 lg:grid-cols-2"
         id="projects-grid"
       >
         {/* Left: Image with parallax - Responsive height */}
@@ -71,7 +71,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
               alt={project.coverImage.alt}
               fill
               className="object-cover scale-110"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 60vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
               priority
             />
           </motion.div>
