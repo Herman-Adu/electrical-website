@@ -85,6 +85,8 @@ That split must remain intact because it maps cleanly to future Strapi collectio
 - `components/news-hub/news-category-card.tsx`
 - `components/news-hub/news-detail-hero.tsx`
 - `components/news-hub/news-related-articles.tsx`
+- `components/news-hub/news-hub-categories-hero.tsx`
+- `components/news-hub/news-category-hero.tsx`
 - `components/news-hub/index.ts`
 
 ---
@@ -153,6 +155,15 @@ interface NewsCategoryCardProps {
   articleCount: number;
 }
 
+interface NewsHubCategoriesHeroProps {
+  categoryCount: number;
+}
+
+interface NewsCategoryHeroProps {
+  category: NewsCategory;
+  articleCount: number;
+}
+
 interface NewsDetailHeroProps {
   article: NewsArticle;
 }
@@ -201,6 +212,8 @@ Use only these existing files for redesign:
 - components/news-hub/news-category-card.tsx
 - components/news-hub/news-detail-hero.tsx
 - components/news-hub/news-related-articles.tsx
+- components/news-hub/news-hub-categories-hero.tsx
+- components/news-hub/news-category-hero.tsx
 - components/news-hub/index.ts
 
 Design goals:
