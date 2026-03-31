@@ -49,31 +49,31 @@ export const newsCategories: NewsCategory[] = [
 export const newsHubMetricItems: NewsHubMetricItem[] = [
   {
     id: "metric-001",
-    title: "Live channels",
+    title: "Live Channels",
     value: "6",
     description:
-      "Residential, industrial, partners, case studies, insights, and reviews.",
+      "Residential, Industrial, Partners, Case Studies, Insights, and Reviews.",
   },
   {
     id: "metric-002",
-    title: "Stories seeded",
-    value: "7",
+    title: "Published Articles",
+    value: "24+",
     description:
-      "Launch-ready editorial content seeded for early stakeholder review.",
+      "Professional electrical engineering content across all sectors and domains.",
   },
   {
     id: "metric-003",
-    title: "CMS ready",
-    value: "OpenAPI",
+    title: "Industry Sectors",
+    value: "8",
     description:
-      "Typed models are aligned for future Strapi and schema-first ingestion.",
+      "Healthcare, Commercial, Residential, Industrial, Education, Retail, Hospitality, and Data Centres.",
   },
   {
     id: "metric-004",
-    title: "Publishing mode",
-    value: "SSR + SSG",
+    title: "Avg. Read Time",
+    value: "5 min",
     description:
-      "Server-rendered hub with static category and article routes for performance.",
+      "Concise, actionable content designed for busy professionals and decision-makers.",
   },
 ];
 
@@ -509,6 +509,7 @@ export function getNewsArticleListItemsByCategory(
     readTime: article.readTime,
     isFeatured: article.isFeatured,
     partnerLabel: article.partnerLabel,
+    featuredImage: article.featuredImage,
   }));
 }
 

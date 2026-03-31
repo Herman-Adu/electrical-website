@@ -73,6 +73,7 @@ export interface NewsArticleListItem {
   readTime: string;
   isFeatured: boolean;
   partnerLabel?: string;
+  featuredImage?: NewsImage;
 }
 
 export interface NewsHubMetricItem {
