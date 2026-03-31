@@ -36,6 +36,7 @@ export function ServicePageRenderer({ data }: ServicePageRendererProps) {
       {/* Sticky Breadcrumb - CSS sticky below navbar */}
       <ContentBreadcrumb
         items={[
+          { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
           { label: data.hero.eyebrow ?? data.slug, href: `/services/${data.slug}`, isCurrent: true },
         ]}
