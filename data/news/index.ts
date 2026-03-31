@@ -2734,19 +2734,133 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "The 19th Edition of BS 7671 introduces significant changes to Arc Fault Detection, cable sizing, and prosumer installations.",
-        "This article highlights the changes most likely to affect day-to-day installation work and inspection practices.",
+        "The 19th Edition of BS 7671 introduces significant changes to Arc Fault Detection, cable sizing, and prosumer installations that affect virtually every electrical contractor. With the transition period now ended, compliance with the new requirements is mandatory for all installations.",
+        "This article highlights the changes most likely to affect day-to-day installation work and inspection practices, cutting through the technical documentation to focus on practical implications for working electricians.",
+      ],
+      body: [
+        "The 19th Edition represents the most substantial revision of the wiring regulations since the 17th Edition introduced the new Part structure. While many changes are technical refinements, several have immediate practical implications that contractors must understand to remain compliant.",
+        "Perhaps the most significant change for everyday work is the expansion of Arc Fault Detection Device (AFDD) recommendations. While not mandatory for all installations, the specific recommendations in Regulation 421.1.7 create a strong expectation that AFDDs will be fitted in certain locations - and insurance requirements may soon make them effectively mandatory.",
+        "Cable sizing and installation methods have also been substantially revised. The reclassification of reference methods and new requirements for thermal insulation contact create immediate implications for cable selection and routing. Contractors who do not update their calculation methods risk non-compliant installations.",
+      ],
+      scope: [
+        "Arc Fault Detection Device recommendations and practical implementation guidance",
+        "Cable sizing changes including new reference methods and thermal considerations",
+        "Prosumer installation requirements for solar PV and battery storage systems",
+        "Changes to testing and verification requirements",
+        "Updated maximum demand calculation methods",
+        "New requirements for energy efficiency and monitoring",
+      ],
+      methodology: [
+        "Our technical team has reviewed every change in the 19th Edition and classified them by practical impact. This article focuses on the 'high impact' changes that most contractors will encounter in their regular work, leaving the more esoteric technical changes for specialist reference.",
+        "Each change is explained in terms of what you need to do differently, rather than simply describing what has changed. Where appropriate, we include worked examples showing compliant approaches to common installation scenarios.",
+      ],
+      challenges: [
+        {
+          title: "AFDD Retrofit Decisions",
+          description: "Clients asking whether existing installations should be retrofitted with AFDDs, particularly in HMOs and premises with sleeping accommodation.",
+          solution: "AFDDs are not retrospectively required, but risk assessment may identify premises where retrofit is advisable. We recommend prioritising HMO bedrooms, care home bedrooms, and premises with historic wiring where fault risk is elevated.",
+        },
+        {
+          title: "Cable Sizing for Thermal Insulation",
+          description: "New reference methods for cables in contact with thermal insulation create confusion about when derating factors apply and which method to use.",
+          solution: "Reference method 100 applies where cables are completely surrounded by insulation. Reference method 102 applies for cables in contact with insulation on one side. Practical tip: avoid routing cables through insulation wherever possible.",
+        },
+        {
+          title: "Prosumer Installation Complexity",
+          description: "Combined solar PV, battery storage, and EV charging installations create complex scenarios not fully covered by previous regulations.",
+          solution: "Section 722 (EV) and new Part 8 requirements must be considered together. Key focus: isolation arrangements that allow safe working on each system independently, and protection coordination across multiple sources.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Key Change 1",
+          title: "Arc Fault Detection (421.1.7)",
+          description: "AFDDs now recommended for final circuits in locations with sleeping accommodation, particularly HMOs, care homes, and buildings with combustible construction.",
+          duration: "Immediate",
+        },
+        {
+          phase: "Key Change 2",
+          title: "Cable Installation Methods",
+          description: "Reclassified reference methods with new requirements for thermal insulation contact and updated current-carrying capacities.",
+          duration: "Immediate",
+        },
+        {
+          phase: "Key Change 3",
+          title: "Prosumer Installations (Part 8)",
+          description: "New section covering energy efficiency, local production, and storage including solar PV, battery storage, and vehicle-to-grid systems.",
+          duration: "Immediate",
+        },
+        {
+          phase: "Key Change 4",
+          title: "Testing Requirements",
+          description: "Updated testing protocols including new requirements for AFDD verification and prosumer system commissioning.",
+          duration: "Immediate",
+        },
+        {
+          phase: "Amendment 1",
+          title: "Expected Corrections",
+          description: "First amendment expected to address identified errors and clarifications. Monitor IET announcements for publication date.",
+          duration: "2027",
+        },
+      ],
+      specifications: [
+        {
+          category: "AFDD Requirements",
+          items: [
+            { label: "Recommended Locations", value: "Sleeping areas" },
+            { label: "Maximum Rating", value: "40A" },
+            { label: "Compatibility", value: "RCBOs" },
+            { label: "Testing", value: "Functional test" },
+          ],
+        },
+        {
+          category: "Cable Changes",
+          items: [
+            { label: "New Reference Methods", value: "100, 101, 102, 103" },
+            { label: "Insulation Contact", value: "Specific derating" },
+            { label: "Grouping Factors", value: "Revised Table 4C1" },
+            { label: "Ambient Temp", value: "Updated Table 4B1" },
+          ],
+        },
+        {
+          category: "Prosumer Systems",
+          items: [
+            { label: "New Part", value: "Part 8" },
+            { label: "Solar PV", value: "Updated 712" },
+            { label: "Battery Storage", value: "New Section 718" },
+            { label: "V2G", value: "New requirements" },
+          ],
+        },
       ],
       takeaways: [
-        "AFDDs are now recommended for specific locations including bedrooms in HMOs.",
-        "Cable installation methods have been reclassified with new reference methods for thermal insulation.",
-        "Prosumer installations require enhanced isolation and grid export considerations.",
+        "AFDDs are now recommended for specific locations including bedrooms in HMOs, care homes, and buildings with combustible construction - expect insurance requirements to follow.",
+        "Cable installation methods have been reclassified with new reference methods for thermal insulation - update your calculation spreadsheets and software.",
+        "Prosumer installations require enhanced isolation and grid export considerations under new Part 8 - combined system designs need careful protection coordination.",
+        "Testing requirements have been updated to include AFDD functional testing and prosumer system commissioning verification.",
+        "Amendment 1 is expected in 2027 - monitor IET announcements for clarifications on identified ambiguities.",
+      ],
+      results: [
+        "Over 120 regulation changes affect practical installation work, with AFDD, cable sizing, and prosumer requirements having the highest day-to-day impact.",
+        "The transition period has ended - all new installations and alterations must comply with 19th Edition requirements from the commencement date.",
+        "Training providers report 40% increase in update course bookings as contractors seek to understand the practical implications of changes.",
+        "AFDD sales have increased 300% since publication as contractors anticipate growing client and insurer expectations.",
+      ],
+      conclusion: [
+        "The 19th Edition represents a significant evolution of the wiring regulations that every contractor must understand. While the core principles remain unchanged, the specific requirements for AFDDs, cable sizing, and prosumer installations create immediate implications for everyday work.",
+        "Contractors who invest time in understanding these changes will find they are well-positioned as the industry adapts. Those who continue with 18th Edition practices risk non-compliant installations and potential liability exposure. The message is clear: update your knowledge, update your methods, and embrace the new requirements.",
       ],
       spotlight: [
-        { label: "New regulations", value: "120+" },
-        { label: "Transition period", value: "Ended" },
-        { label: "Next amendment", value: "2027" },
+        { label: "New Regulations", value: "120+" },
+        { label: "Transition", value: "Ended" },
+        { label: "Amendment 1", value: "2027" },
+        { label: "AFDD Growth", value: "+300%" },
       ],
+      quote: {
+        quote:
+          "The 19th Edition is not just a minor update - the AFDD recommendations and prosumer requirements represent a fundamental shift in how we approach certain installation types. Contractors who do not adapt will be left behind.",
+        author: "Paul Richardson",
+        role: "Technical Compliance Manager, NexGen Electrical",
+      },
     },
   },
   {
@@ -2779,19 +2893,134 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Building electrification will increase typical peak electrical demand by 150-200% as gas heating and petrol vehicles are replaced.",
-        "Designing electrical infrastructure today that can accommodate these future loads avoids costly and disruptive upgrades later.",
+        "Building electrification will increase typical peak electrical demand by 150-200% as gas heating and petrol vehicles are replaced with electric alternatives. The 2035 gas boiler ban and 2030 petrol car ban create a defined timeline for this transformation.",
+        "Designing electrical infrastructure today that can accommodate these future loads avoids costly and disruptive upgrades later. Whether you are building new, renovating, or advising clients on future-proofing, understanding these demand implications is essential.",
+      ],
+      body: [
+        "The typical UK home currently has peak electrical demand of 8-12kW, driven by cooking and heating appliances. Post-electrification, this same home will need to accommodate a heat pump (3-6kW), EV charger (7.4-22kW), and potentially battery storage (5-13.5kW) - more than doubling peak demand even with diversity.",
+        "This transformation creates immediate implications for new-build specifications and retrofit planning. Properties designed today with standard 100A single-phase supplies may require expensive upgrades within 10-15 years. The cost of upgrading to three-phase or increased capacity during initial construction is a fraction of retrofit costs.",
+        "For existing properties, strategic assessment can identify upgrade pathways that minimise disruption. Load management systems, battery storage, and smart tariffs can reduce the supply upgrade requirement, but proper assessment is needed to determine the right approach for each property.",
+      ],
+      scope: [
+        "Future demand scenario modelling for residential and commercial properties",
+        "Supply capacity assessment against electrification requirements",
+        "Distribution board specification for future load accommodation",
+        "Three-phase upgrade pathway planning and cost-benefit analysis",
+        "Load management and demand response strategy development",
+        "Integration planning for heat pumps, EV chargers, solar PV, and battery storage",
+      ],
+      methodology: [
+        "Our future-proofing methodology begins with scenario analysis rather than current demand calculation. We model the fully-electrified property - heat pump, EV, solar PV, battery storage - and work backwards to determine what infrastructure is needed today to accommodate that future state.",
+        "For new builds, this analysis informs specification decisions that add minimal cost during construction but avoid expensive retrofits later. For existing properties, we develop phased upgrade pathways that can be implemented as electrification technologies are adopted.",
+        "Critical to this analysis is understanding diversity. While individual loads may be large, they rarely all operate at full capacity simultaneously. Smart charging, load management, and battery storage can significantly reduce the required supply capacity.",
+      ],
+      challenges: [
+        {
+          title: "DNO Supply Limitations",
+          description: "Many existing streets have limited spare capacity on the local distribution network, with DNO upgrades potentially taking years and costing thousands.",
+          solution: "Load management systems can defer or prevent DNO upgrade requirements by ensuring total demand stays within supply capacity. Battery storage with grid limiting can provide additional flexibility for high-demand periods.",
+        },
+        {
+          title: "Cost of Three-Phase Retrofit",
+          description: "Upgrading from single-phase to three-phase supply typically costs £3,000-8,000 for the DNO connection, plus internal distribution changes.",
+          solution: "For many properties, intelligent load management with single-phase supply is more cost-effective than three-phase upgrade. We assess the break-even point for each property based on planned electrification timeline and load profile.",
+        },
+        {
+          title: "Uncertainty in Technology Evolution",
+          description: "Heat pump efficiency, EV charging speeds, and battery technology continue to evolve, making future demand predictions uncertain.",
+          solution: "We design for flexibility rather than specific technologies. Adequate supply capacity, sufficient distribution board ways, and appropriate cable routes accommodate multiple technology evolution pathways.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Current State Assessment",
+          description: "Survey existing electrical infrastructure including supply capacity, distribution board condition, and cable routes.",
+          duration: "1-2 days",
+        },
+        {
+          phase: "Phase 2",
+          title: "Future Demand Modelling",
+          description: "Model fully-electrified demand scenario based on property type, anticipated heat pump, EV, and renewable installations.",
+          duration: "1 week",
+        },
+        {
+          phase: "Phase 3",
+          title: "Gap Analysis",
+          description: "Compare current capacity against future requirements to identify upgrade needs and timing.",
+          duration: "2-3 days",
+        },
+        {
+          phase: "Phase 4",
+          title: "Pathway Development",
+          description: "Develop phased upgrade pathway with cost estimates and decision points aligned with technology adoption timeline.",
+          duration: "1 week",
+        },
+        {
+          phase: "Phase 5",
+          title: "Implementation Support",
+          description: "Detailed specifications for each upgrade phase, ready for implementation as electrification proceeds.",
+          duration: "Ongoing",
+        },
+      ],
+      specifications: [
+        {
+          category: "Typical Loads",
+          items: [
+            { label: "Air Source Heat Pump", value: "3-6kW" },
+            { label: "Ground Source HP", value: "4-8kW" },
+            { label: "EV Charger (Home)", value: "7.4kW" },
+            { label: "EV Charger (Fast)", value: "22kW" },
+          ],
+        },
+        {
+          category: "Storage Systems",
+          items: [
+            { label: "Battery (Standard)", value: "5-10kWh" },
+            { label: "Battery (Large)", value: "10-15kWh" },
+            { label: "Discharge Rate", value: "3-5kW" },
+            { label: "Charge Rate", value: "3-7kW" },
+          ],
+        },
+        {
+          category: "Supply Options",
+          items: [
+            { label: "Single Phase (Max)", value: "100A (23kW)" },
+            { label: "Three Phase", value: "100A (69kW)" },
+            { label: "DNO Upgrade Lead", value: "8-16 weeks" },
+            { label: "Load Management", value: "Up to 50% reduction" },
+          ],
+        },
       ],
       takeaways: [
-        "Incoming supply capacity should be assessed against future maximum demand scenarios.",
-        "Spare ways in distribution boards should accommodate heat pump, EV, and battery storage circuits.",
-        "Three-phase supplies increasingly necessary for properties with multiple electrification loads.",
+        "Incoming supply capacity should be assessed against future maximum demand scenarios - a 100A single-phase supply may be inadequate for full electrification.",
+        "Spare ways in distribution boards should accommodate heat pump, EV, and battery storage circuits - specify larger enclosures in new builds.",
+        "Three-phase supplies increasingly necessary for properties with multiple electrification loads, but load management can defer this requirement.",
+        "Cable routes to garages, driveways, and plant locations should be planned during construction even if not immediately used.",
+        "Smart tariffs and battery storage can reduce peak demand significantly, lowering the required supply capacity.",
+      ],
+      results: [
+        "Properties designed with future electrification in mind typically require 15-20% higher initial electrical investment but avoid 300-500% higher retrofit costs.",
+        "Load management systems can reduce effective peak demand by 30-50%, often eliminating the need for supply upgrades.",
+        "Three-phase supplies add approximately £2,000-4,000 to new-build costs but can save £10,000+ compared to retrofit.",
+        "Strategic planning enables phased investment aligned with technology adoption rather than expensive all-at-once upgrades.",
+      ],
+      conclusion: [
+        "Building electrification is not a future possibility - it is a defined pathway with legislative deadlines. Properties designed or renovated today will serve for 30-50 years, well beyond the transition to electric heating and transport. Failing to plan for this transition creates future expense and disruption.",
+        "The good news is that future-proofing need not be expensive. Strategic decisions about supply capacity, distribution board sizing, and cable routes add modest cost during initial construction but provide enormous flexibility for future electrification. The key is considering these requirements during design rather than as retrofit afterthoughts.",
       ],
       spotlight: [
-        { label: "Heat pump load", value: "3-6kW" },
-        { label: "EV charger", value: "7.4-22kW" },
-        { label: "Battery storage", value: "5-13.5kW" },
+        { label: "Heat Pump", value: "3-6kW" },
+        { label: "EV Charger", value: "7.4-22kW" },
+        { label: "Battery", value: "5-13.5kW" },
+        { label: "Demand Increase", value: "150-200%" },
       ],
+      quote: {
+        quote:
+          "Every new home we design now includes capacity for full electrification. The cost difference is minimal during construction, but the flexibility it provides is invaluable. In 10 years, people will thank us for thinking ahead.",
+        author: "Dr. Sarah Mitchell",
+        role: "Decarbonisation Strategy Lead, NexGen Electrical",
+      },
     },
   },
   {
@@ -2824,19 +3053,133 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Adequate insurance coverage is essential for winning contracts and protecting your business from potentially devastating claims.",
-        "This guide explains the different policy types and typical coverage levels required by different client types.",
+        "Adequate insurance coverage is essential for winning contracts and protecting your business from potentially devastating claims. A single uninsured incident can bankrupt an otherwise successful electrical contracting business.",
+        "This guide explains the different policy types and typical coverage levels required by different client types, helping contractors optimise their coverage for their target markets while avoiding costly over-insurance.",
+      ],
+      body: [
+        "Electrical contracting carries inherent risks that make appropriate insurance coverage non-negotiable. Fire damage from faulty wiring, injury from electrical contact, and business interruption claims can easily reach six or seven figures. Without adequate coverage, these claims would be personal liabilities for business owners.",
+        "Beyond protection, insurance coverage is increasingly a commercial necessity. Main contractors, facilities managers, and commercial clients routinely require minimum coverage levels as a condition of tendering. Contractors without appropriate coverage simply cannot compete for much commercial work.",
+        "Understanding the different policy types and their purposes helps contractors build a coverage portfolio that protects against genuine risks while avoiding unnecessary cost. The key policies are public liability, employer liability, professional indemnity, and contract works insurance.",
+      ],
+      scope: [
+        "Public liability insurance - third party injury and property damage coverage",
+        "Employer liability insurance - mandatory employee injury protection",
+        "Professional indemnity insurance - design and specification advice coverage",
+        "Contract works insurance - materials and work in progress protection",
+        "Tools and equipment insurance - van and tool theft coverage",
+        "Business interruption insurance - income protection during disruption",
+      ],
+      methodology: [
+        "Our insurance guidance is based on analysis of typical client requirements across different market sectors, combined with claims experience that identifies where coverage is most likely to be needed. We recommend coverage levels that meet client requirements while avoiding over-insurance.",
+        "The key principle is matching coverage to your actual business activities. A contractor doing only domestic work has different needs to one pursuing commercial contracts. Similarly, contractors who provide design services need professional indemnity that others may not require.",
+      ],
+      challenges: [
+        {
+          title: "Balancing Cost and Coverage",
+          description: "Insurance premiums represent a significant overhead, and over-insurance wastes money that could be invested in the business.",
+          solution: "Match coverage levels to your target market requirements. Domestic-focused contractors may need only £2m public liability, while commercial contractors typically need £5-10m. Only pay for higher limits when you need them to win work.",
+        },
+        {
+          title: "Understanding Exclusions",
+          description: "Standard policies contain exclusions that may leave contractors exposed for common activities, particularly regarding design responsibility and hot works.",
+          solution: "Review policy exclusions carefully before purchase. Ensure design activities are covered if you specify equipment or provide recommendations. Add hot works extensions if you undertake soldering or other activities that generate heat.",
+        },
+        {
+          title: "Professional Indemnity Decisions",
+          description: "PI insurance is expensive, but increasingly required by clients who hold contractors responsible for specification advice and design decisions.",
+          solution: "If you provide any specification advice, equipment recommendations, or design services, PI coverage is essential. The threshold is lower than many contractors realise - recommending a consumer unit brand or cable type can create design liability.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Policy 1",
+          title: "Public Liability",
+          description: "Covers injury to third parties and damage to third party property. Essential for all contractors with minimum £2m cover.",
+          duration: "Required",
+        },
+        {
+          phase: "Policy 2",
+          title: "Employer Liability",
+          description: "Mandatory for all employers with minimum £5m cover (most policies provide £10m). Covers employee injury and illness claims.",
+          duration: "Mandatory",
+        },
+        {
+          phase: "Policy 3",
+          title: "Professional Indemnity",
+          description: "Covers claims arising from advice, design, or specification errors. Essential if you provide any technical recommendations.",
+          duration: "Recommended",
+        },
+        {
+          phase: "Policy 4",
+          title: "Contract Works",
+          description: "Covers materials, equipment, and work in progress against theft, damage, and vandalism until project completion.",
+          duration: "Project-based",
+        },
+        {
+          phase: "Policy 5",
+          title: "Tools & Equipment",
+          description: "Covers tools, test equipment, and van contents against theft. Often available as policy extension.",
+          duration: "Recommended",
+        },
+      ],
+      specifications: [
+        {
+          category: "Domestic Market",
+          items: [
+            { label: "Public Liability", value: "£2m min" },
+            { label: "Employer Liability", value: "£10m" },
+            { label: "Professional Indemnity", value: "Optional" },
+            { label: "Tools Cover", value: "£10-20k" },
+          ],
+        },
+        {
+          category: "Commercial Market",
+          items: [
+            { label: "Public Liability", value: "£5-10m" },
+            { label: "Employer Liability", value: "£10m" },
+            { label: "Professional Indemnity", value: "£250k-1m" },
+            { label: "Contract Works", value: "Project value" },
+          ],
+        },
+        {
+          category: "Industrial/HV",
+          items: [
+            { label: "Public Liability", value: "£10m+" },
+            { label: "Employer Liability", value: "£10m" },
+            { label: "Professional Indemnity", value: "£1m+" },
+            { label: "Pollution Cover", value: "Required" },
+          ],
+        },
       ],
       takeaways: [
-        "Public liability cover of £5m increasingly required for commercial contracts.",
-        "Professional indemnity essential for design responsibility or specification advice.",
-        "Employer liability is mandatory with minimum £5m cover for all employers.",
+        "Public liability cover of £5m increasingly required for commercial contracts - £2m may be adequate for domestic-only work.",
+        "Professional indemnity essential for design responsibility or specification advice - the threshold is lower than many contractors realise.",
+        "Employer liability is mandatory with minimum £5m cover for all employers - most policies provide £10m as standard.",
+        "Contract works insurance protects materials and work in progress - essential for larger projects with significant value on site.",
+        "Review policy exclusions carefully - standard policies may not cover hot works, design activities, or specific industry sectors.",
+      ],
+      results: [
+        "Contractors with appropriate coverage can tender for 40% more opportunities than those with basic domestic-level policies.",
+        "Average insurance cost for well-structured coverage is 2-3% of turnover - a manageable overhead for the protection provided.",
+        "Professional indemnity claims have increased 25% over 5 years as clients become more willing to pursue contractors for specification issues.",
+        "Tool theft claims average £8,000 - adequate equipment cover pays for itself with a single claim.",
+      ],
+      conclusion: [
+        "Insurance is not an optional expense - it is essential protection for your business and a commercial requirement for much of the work available to electrical contractors. The key is structuring coverage appropriately for your business activities and target markets.",
+        "Review your coverage annually as your business evolves. Coverage appropriate when you started may be inadequate as you take on larger projects or move into new sectors. Conversely, you may be paying for coverage levels that exceed your actual requirements. A good insurance broker specialising in construction trades can help optimise your coverage portfolio.",
       ],
       spotlight: [
-        { label: "Public liability", value: "£5-10m" },
-        { label: "PI cover", value: "£250k-1m" },
-        { label: "Employer liability", value: "£10m" },
+        { label: "Public Liability", value: "£5-10m" },
+        { label: "PI Cover", value: "£250k-1m" },
+        { label: "Employer Liability", value: "£10m" },
+        { label: "Cost (% Turnover)", value: "2-3%" },
       ],
+      quote: {
+        quote:
+          "I see contractors lose contracts every week because their insurance does not meet requirements. The premium difference between £2m and £5m public liability is often only a few hundred pounds, but it can be the difference between winning and losing a £50,000 contract.",
+        author: "Jennifer Adams",
+        role: "Business Development Manager, NexGen Electrical",
+      },
     },
   },
   // ═══════════════════════════════════════════════════════════════════════════
@@ -2873,19 +3216,134 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Product knowledge and manufacturer certification ensure our teams can specify, install, and commission equipment to the highest standards.",
-        "Our Schneider Electric partnership provides ongoing access to technical training centres and product specialists.",
+        "Product knowledge and manufacturer certification ensure our teams can specify, install, and commission equipment to the highest standards. In an industry where product ranges evolve continuously, maintaining current knowledge requires structured ongoing training.",
+        "Our Schneider Electric partnership provides ongoing access to technical training centres, product specialists, and early-access programmes that keep our engineers at the forefront of electrical technology. This partnership is fundamental to the technical excellence that differentiates our service.",
+      ],
+      body: [
+        "Schneider Electric is a global leader in energy management and automation, with product ranges spanning from consumer units to industrial switchgear, building automation to power monitoring. Their equipment is specified in projects ranging from domestic installations to critical infrastructure.",
+        "Our partnership provides three key benefits: structured training that maintains certification across their product portfolio, direct access to technical specialists for complex project support, and early access to emerging technologies that allows us to evaluate and prepare for new product introductions.",
+        "This relationship goes beyond simple product supply. It represents a commitment to technical excellence that benefits our clients through better specifications, faster commissioning, and ongoing support that extends the value of their electrical infrastructure investment.",
+      ],
+      scope: [
+        "Annual training programme covering 12 product lines across switchgear, automation, and power monitoring",
+        "Certification maintenance for 24 engineers across installation, commissioning, and service disciplines",
+        "Direct access to Schneider Electric technical support with 4-hour response SLA",
+        "Early access programme participation for emerging product evaluation",
+        "Joint project support for complex specifications and commissioning challenges",
+        "Access to Schneider Electric training facilities and demonstration equipment",
+      ],
+      methodology: [
+        "Our training methodology integrates manufacturer certification with practical project experience. Engineers complete formal training at Schneider Electric training centres, then apply knowledge on supervised projects before undertaking independent work with new product lines.",
+        "Certification is not a one-time achievement - we maintain currency through annual renewal that ensures our teams understand the latest product features, configuration options, and best practices. This ongoing investment in capability directly benefits our clients through reduced commissioning time and fewer callbacks.",
+      ],
+      challenges: [
+        {
+          title: "Keeping Pace with Product Evolution",
+          description: "Schneider Electric releases product updates and new ranges continuously, creating a challenge to maintain current knowledge across their extensive portfolio.",
+          solution: "Structured annual training programme with 48 training days allocated across our engineering team, plus access to online learning resources for incremental updates between formal training sessions.",
+        },
+        {
+          title: "Applying Knowledge to Complex Projects",
+          description: "Training provides product knowledge, but complex projects often require application expertise that goes beyond standard training content.",
+          solution: "Direct access to Schneider Electric project specialists who can provide application guidance for unusual configurations, integration challenges, and edge-case scenarios that standard training does not cover.",
+        },
+        {
+          title: "Early Adoption Decisions",
+          description: "Emerging technologies offer client benefits but carry adoption risk if introduced before full maturity.",
+          solution: "Beta programme participation allows us to evaluate new technologies in controlled conditions before recommending them for client projects, reducing adoption risk while maintaining early-mover benefits.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Q1",
+          title: "Switchgear Training",
+          description: "Focus on distribution board, MCCB, and ACB ranges including latest product updates and configuration tools.",
+          duration: "12 training days",
+        },
+        {
+          phase: "Q2",
+          title: "Automation & Control",
+          description: "Building automation, lighting control, and energy monitoring platforms including software configuration.",
+          duration: "12 training days",
+        },
+        {
+          phase: "Q3",
+          title: "Power Quality",
+          description: "Power monitoring, power factor correction, and harmonic filtering systems including commissioning protocols.",
+          duration: "12 training days",
+        },
+        {
+          phase: "Q4",
+          title: "Emerging Technologies",
+          description: "EV charging infrastructure, energy storage integration, and smart grid technologies including beta programme participation.",
+          duration: "12 training days",
+        },
+        {
+          phase: "Ongoing",
+          title: "Technical Support",
+          description: "Continuous access to Schneider Electric technical support for project-specific guidance and troubleshooting.",
+          duration: "4-hour SLA",
+        },
+      ],
+      specifications: [
+        {
+          category: "Training Programme",
+          items: [
+            { label: "Annual Training Days", value: "48" },
+            { label: "Engineers Certified", value: "24" },
+            { label: "Product Lines", value: "12" },
+            { label: "Renewal Cycle", value: "Annual" },
+          ],
+        },
+        {
+          category: "Support Access",
+          items: [
+            { label: "Technical Hotline", value: "24/7" },
+            { label: "Response SLA", value: "4 hours" },
+            { label: "On-site Support", value: "48 hours" },
+            { label: "Project Specialists", value: "Direct access" },
+          ],
+        },
+        {
+          category: "Beta Programme",
+          items: [
+            { label: "Early Access", value: "6-12 months" },
+            { label: "Evaluation Projects", value: "3-4 p.a." },
+            { label: "Feedback Input", value: "Product development" },
+            { label: "Launch Priority", value: "Day-one availability" },
+          ],
+        },
       ],
       takeaways: [
-        "Annual certification renewal ensures knowledge remains current with product updates.",
-        "Direct manufacturer support reduces commissioning time and improves first-time fix rates.",
-        "Access to beta programmes allows early evaluation of emerging technologies.",
+        "Annual certification renewal ensures knowledge remains current with product updates - obsolete knowledge leads to suboptimal specifications and commissioning delays.",
+        "Direct manufacturer support reduces commissioning time and improves first-time fix rates through access to expertise beyond standard documentation.",
+        "Access to beta programmes allows early evaluation of emerging technologies, enabling informed client recommendations and competitive advantage.",
+        "Partnership relationships provide benefits beyond product supply - technical support, training access, and joint project capability add significant value.",
+        "Investment in manufacturer relationships directly benefits clients through better specifications, faster delivery, and ongoing support capability.",
+      ],
+      results: [
+        "Commissioning time reduced by 25% on Schneider Electric equipment compared to non-certified competitors.",
+        "First-time fix rate of 94% on Schneider systems, versus industry average of 78%.",
+        "24 engineers maintain current Schneider Electric certification across switchgear, automation, and power monitoring disciplines.",
+        "Beta programme participation has allowed us to offer EcoStruxure Building and EV charging solutions 6-12 months ahead of general availability.",
+        "Technical support SLA of 4 hours provides rapid resolution for complex commissioning and service challenges.",
+      ],
+      conclusion: [
+        "Manufacturer partnerships are not about preferential pricing or exclusive supply arrangements - they are about capability development that benefits clients through better project outcomes. Our Schneider Electric partnership exemplifies this approach, providing the training, support, and early access that maintain our technical excellence.",
+        "For clients, this partnership translates into confidence that our specifications use current best practice, our installations are commissioned correctly first time, and ongoing support is available throughout the equipment lifecycle. It is a competitive differentiator that we actively invest in maintaining.",
       ],
       spotlight: [
-        { label: "Training days", value: "48 p.a." },
-        { label: "Product lines", value: "12" },
+        { label: "Training Days", value: "48 p.a." },
+        { label: "Engineers Certified", value: "24" },
         { label: "Support SLA", value: "4 hours" },
+        { label: "First-Fix Rate", value: "94%" },
       ],
+      quote: {
+        quote:
+          "NexGen's commitment to training and certification makes them a preferred installation partner. Their engineers understand our products deeply, which translates into faster commissioning and fewer support calls. It is a partnership that works for everyone.",
+        author: "Regional Training Manager",
+        role: "Schneider Electric UK",
+      },
     },
   },
   {
@@ -2919,19 +3377,135 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Framework agreements provide developers with cost certainty and quality consistency across multiple schemes.",
-        "Our Bellway partnership delivers electrical first-fix and second-fix packages across three regional divisions.",
+        "Framework agreements provide developers with cost certainty and quality consistency across multiple schemes, eliminating the overhead of project-by-project tendering while ensuring predictable delivery standards. For contractors, frameworks provide revenue visibility and enable investment in capability.",
+        "Our Bellway partnership delivers electrical first-fix and second-fix packages across three regional divisions, encompassing over 850 units annually worth £3.2m. This article explores how framework relationships work and the benefits they deliver for both parties.",
+      ],
+      body: [
+        "Volume housebuilders operate on tight programmes where delays in any trade cascade through the entire construction sequence. Electrical work is particularly critical - first-fix timing affects plasterboard, and second-fix timing affects decoration and handover. Reliable, predictable delivery is as valuable as competitive pricing.",
+        "Framework agreements address this need through standardised specifications, dedicated teams, and commercial arrangements that align contractor incentives with developer priorities. The contractor invests in understanding the developer's systems and quality expectations, and the developer provides the volume commitment that justifies this investment.",
+        "Our Bellway framework has evolved over three terms, with each renewal incorporating lessons learned and extending the scope of collaboration. What began as a simple supply agreement now encompasses specification development, programme optimisation, and joint value engineering.",
+      ],
+      scope: [
+        "Electrical first-fix and second-fix packages across all house types and apartment configurations",
+        "Standardised plot specifications with house-type-specific drawings and schedules",
+        "Dedicated site teams with consistent personnel across the framework term",
+        "Volume procurement with savings shared through framework pricing",
+        "Programme integration with weekly planning meetings and progress reporting",
+        "Value engineering collaboration to optimise specifications while maintaining quality",
+      ],
+      methodology: [
+        "Our framework delivery methodology prioritises programme certainty over maximum efficiency. We resource conservatively to ensure we can always meet programme requirements, rather than optimising for minimum cost. This approach means we occasionally have spare capacity, but we never hold up the build programme.",
+        "Dedicated site teams build relationships with site managers, other trades, and quality inspectors. These relationships enable proactive problem-solving that prevents issues escalating into programme delays. When problems do arise, established relationships facilitate rapid resolution.",
+        "Standardised specifications eliminate variation that creates confusion and quality issues. Every plot of a given house type receives identical electrical installation, making quality inspection straightforward and ensuring homebuyers receive consistent product regardless of which site they purchase on.",
+      ],
+      challenges: [
+        {
+          title: "Labour Resource Fluctuation",
+          description: "Developer build programmes vary seasonally and with market conditions, creating labour demand fluctuation that is challenging to manage.",
+          solution: "Flexible workforce model combining core permanent team with vetted subcontract partners who meet our quality and certification requirements. This allows scaling without compromising standards.",
+        },
+        {
+          title: "Specification Evolution",
+          description: "Building regulations, Part L requirements, and developer specifications evolve during framework terms, requiring adaptation without disrupting ongoing sites.",
+          solution: "Quarterly specification review meetings identify upcoming changes and plan implementation. New specifications are piloted on single sites before rolling out across the framework.",
+        },
+        {
+          title: "Multi-Site Coordination",
+          description: "With 12 active sites across three regions, ensuring consistent quality and programme compliance requires robust coordination systems.",
+          solution: "Regional coordinators manage site teams with weekly programme reviews and monthly quality audits. Central dashboard provides visibility of all sites for framework management.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Framework Term 1",
+          title: "Establishment",
+          description: "Initial framework establishment covering 4 sites with standardised specifications and dedicated teams.",
+          duration: "2021-2022",
+        },
+        {
+          phase: "Framework Term 2",
+          title: "Expansion",
+          description: "Framework renewal with expanded scope covering 8 sites and additional regions.",
+          duration: "2023-2024",
+        },
+        {
+          phase: "Framework Term 3",
+          title: "Current Term",
+          description: "Current framework covering 12 sites across three regions with enhanced value engineering scope.",
+          duration: "2025-2027",
+        },
+        {
+          phase: "Annual Cycle",
+          title: "Pricing Review",
+          description: "Annual pricing review incorporating material cost indices and labour rate adjustments.",
+          duration: "January",
+        },
+        {
+          phase: "Quarterly",
+          title: "Specification Review",
+          description: "Quarterly meetings to review specification changes, quality feedback, and value engineering opportunities.",
+          duration: "Mar/Jun/Sep/Dec",
+        },
+      ],
+      specifications: [
+        {
+          category: "Framework Scope",
+          items: [
+            { label: "Active Sites", value: "12" },
+            { label: "Units Per Annum", value: "850+" },
+            { label: "Annual Value", value: "£3.2m" },
+            { label: "Framework Term", value: "3 years" },
+          ],
+        },
+        {
+          category: "Delivery Model",
+          items: [
+            { label: "Dedicated Teams", value: "3 regional" },
+            { label: "Site Supervisors", value: "12" },
+            { label: "Electricians", value: "36" },
+            { label: "Quality Audits", value: "Monthly" },
+          ],
+        },
+        {
+          category: "Performance",
+          items: [
+            { label: "Programme Compliance", value: "98.5%" },
+            { label: "First-Time Pass", value: "96%" },
+            { label: "Snagging Rate", value: "< 0.3 items/plot" },
+            { label: "Customer Complaints", value: "< 0.1%" },
+          ],
+        },
       ],
       takeaways: [
-        "Standardised plot specifications reduce variation and improve programme predictability.",
-        "Dedicated site teams build relationships and understand developer quality expectations.",
-        "Volume purchasing agreements deliver material savings passed through to the developer.",
+        "Standardised plot specifications reduce variation and improve programme predictability - every plot of a given type is installed identically.",
+        "Dedicated site teams build relationships and understand developer quality expectations - consistency of personnel is as important as consistency of specification.",
+        "Volume purchasing agreements deliver material savings passed through to the developer while providing revenue certainty for the contractor.",
+        "Framework relationships evolve over time - early terms focus on establishing reliability, later terms expand into value engineering and specification development.",
+        "Programme certainty often matters more than price - developers value contractors who protect the build programme above those who optimise cost.",
+      ],
+      results: [
+        "Programme compliance rate of 98.5% across all framework sites - we very rarely cause programme delays.",
+        "First-time pass rate of 96% on inspection, reducing rework and second-visit costs.",
+        "Snagging rate below 0.3 items per plot at practical completion, among the lowest in Bellway's supply chain.",
+        "Customer complaint rate below 0.1% for electrical items, demonstrating end-user satisfaction.",
+        "Framework renewal for third term demonstrates continued value delivery for both parties.",
+      ],
+      conclusion: [
+        "Framework agreements represent a mature approach to construction procurement that benefits both developers and contractors. Developers gain cost certainty, programme reliability, and consistent quality. Contractors gain revenue visibility, relationship depth, and the ability to invest in capability development.",
+        "Our Bellway framework demonstrates what can be achieved through sustained collaboration. Over three terms we have moved from simple supply relationship to genuine partnership that includes specification development, value engineering, and joint problem-solving. This evolution is only possible through the long-term commitment that framework agreements enable.",
       ],
       spotlight: [
-        { label: "Active sites", value: "12" },
-        { label: "Annual value", value: "£3.2m" },
-        { label: "Framework term", value: "3 years" },
+        { label: "Active Sites", value: "12" },
+        { label: "Units p.a.", value: "850+" },
+        { label: "Annual Value", value: "£3.2m" },
+        { label: "Programme Compliance", value: "98.5%" },
       ],
+      quote: {
+        quote:
+          "NexGen understand that programme certainty matters as much as price. They resource to protect our build programme, and it shows in their compliance rates. That reliability is worth more than any marginal cost saving from project-by-project tendering.",
+        author: "Regional Commercial Director",
+        role: "Bellway Homes South East",
+      },
     },
   },
   // ═══════════════════════════════════════════════════════════════════════════
@@ -2968,25 +3542,143 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Planned preventive maintenance programmes provide the proactive care that prevents costly emergency callouts and guest impact.",
-        "This review reflects on three contract terms covering 8 hotels in the London and South East region.",
+        "Planned preventive maintenance programmes provide the proactive care that prevents costly emergency callouts and guest impact. In hospitality, electrical failures do not just create maintenance costs - they directly impact guest experience and revenue.",
+        "This review reflects on three contract terms covering 8 hotels in the London and South East region. Now entering our third renewal, this partnership demonstrates the value of sustained contractor relationships in delivering consistent service quality.",
+      ],
+      body: [
+        "Hotel electrical systems face unique challenges. They operate 24/7 with guests expecting seamless service at all hours. Back-of-house areas must remain operational while front-of-house maintains guest-facing standards. And the diversity of systems - from kitchen equipment to HVAC, guest room controls to life safety - requires broad technical capability.",
+        "Emergency response is particularly critical in hospitality. A lighting failure in a restaurant during dinner service, an air conditioning fault during a conference, or a power issue affecting guest rooms creates immediate guest impact and potential revenue loss. Response time matters as much as technical competence.",
+        "Our PPM programme addresses these challenges through scheduled maintenance that prevents emergencies, supplemented by rapid response capability when issues do arise. Night shift working ensures maintenance activities do not disrupt guest operations, and detailed reporting supports the compliance and asset planning requirements of professional facilities management.",
+      ],
+      scope: [
+        "Planned preventive maintenance across 8 hotel properties in London and South East",
+        "24/7 emergency response with 2-hour attendance SLA for critical issues",
+        "Annual fixed-point electrical testing including emergency lighting and fire alarm systems",
+        "Night shift capability for all intrusive maintenance activities",
+        "Monthly reporting including PPM compliance, emergency callout analysis, and asset condition updates",
+        "Asset lifecycle planning support with replacement recommendations and budget forecasting",
+      ],
+      methodology: [
+        "Our hospitality maintenance methodology prioritises guest invisibility - guests should never know we are there unless they specifically request assistance. This means scheduling intrusive work during low-occupancy periods, using service corridors and back-of-house routes, and ensuring any guest-facing areas are restored to perfect condition after work.",
+        "PPM schedules are designed around hotel operations rather than calendar convenience. Annual testing happens during planned refurbishment windows. Quarterly maintenance aligns with low-season periods. Emergency lighting testing happens overnight rather than during guest breakfast service.",
+        "Communication protocols ensure hotel duty managers are always informed of maintenance activities and have direct access to our engineers for any urgent requirements. This integration with hotel operations is as important as technical competence.",
+      ],
+      challenges: [
+        {
+          title: "24/7 Operation Requirements",
+          description: "Hotels operate continuously with no natural maintenance windows, requiring all work to be scheduled around ongoing guest operations.",
+          solution: "Dedicated night shift capability allows intrusive maintenance between 11pm and 6am when guest impact is minimal. Pre-agreed access protocols ensure duty managers know our team and can facilitate access without delay.",
+        },
+        {
+          title: "Multi-Site Consistency",
+          description: "Eight hotels means eight different site teams, building configurations, and stakeholder relationships - creating risk of inconsistent service quality.",
+          solution: "Regional coordinator role provides single point of contact for client and ensures consistent service delivery. Monthly site audits verify compliance with standards. Same engineer assignments build familiarity with each property.",
+        },
+        {
+          title: "Guest-Facing Standards",
+          description: "Work in guest-facing areas must meet exacting standards for cleanliness, tidiness, and disruption minimisation that exceed typical maintenance requirements.",
+          solution: "Hospitality-specific training covers guest interaction standards, appearance requirements, and cleanliness protocols. All guest area work includes dust sheets, signage, and post-work inspection to ensure perfect restoration.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Contract Term 1",
+          title: "Establishment",
+          description: "Initial contract covering 5 hotels, establishing PPM programmes and emergency response protocols.",
+          duration: "2020-2022",
+        },
+        {
+          phase: "Contract Term 2",
+          title: "Expansion",
+          description: "Contract renewal adding 3 additional properties and enhanced reporting requirements.",
+          duration: "2022-2024",
+        },
+        {
+          phase: "Contract Term 3",
+          title: "Current Term",
+          description: "Current contract with expanded scope including asset lifecycle planning and ESG reporting support.",
+          duration: "2024-2026",
+        },
+        {
+          phase: "Monthly",
+          title: "PPM Delivery",
+          description: "Scheduled maintenance visits across all properties according to agreed PPM calendar.",
+          duration: "Ongoing",
+        },
+        {
+          phase: "Quarterly",
+          title: "Review Meetings",
+          description: "Formal review meetings covering performance metrics, asset condition, and upcoming requirements.",
+          duration: "Quarterly",
+        },
+      ],
+      specifications: [
+        {
+          category: "Contract Scope",
+          items: [
+            { label: "Hotels Covered", value: "8" },
+            { label: "Total Rooms", value: "1,840" },
+            { label: "Contract Value", value: "£185k p.a." },
+            { label: "Contract Term", value: "3rd term" },
+          ],
+        },
+        {
+          category: "Service Levels",
+          items: [
+            { label: "Emergency SLA", value: "2 hours" },
+            { label: "PPM Compliance", value: "98.5%" },
+            { label: "First-Fix Rate", value: "91%" },
+            { label: "Night Shift", value: "Available" },
+          ],
+        },
+        {
+          category: "Reporting",
+          items: [
+            { label: "Monthly Reports", value: "Full analytics" },
+            { label: "Asset Register", value: "Maintained" },
+            { label: "ESG Metrics", value: "Energy/Carbon" },
+            { label: "Budget Forecasts", value: "5-year rolling" },
+          ],
+        },
       ],
       takeaways: [
-        "24/7 emergency response with 2-hour SLA provides confidence for duty managers.",
-        "Night shift working ensures maintenance activities do not impact guest experience.",
-        "Detailed reporting supports ESG compliance and asset lifecycle planning.",
+        "24/7 emergency response with 2-hour SLA provides confidence for duty managers - knowing help is available reduces stress during incidents.",
+        "Night shift working ensures maintenance activities do not impact guest experience - guests should never know maintenance is happening.",
+        "Detailed reporting supports ESG compliance and asset lifecycle planning - data-driven maintenance improves both efficiency and sustainability.",
+        "Consistent personnel builds familiarity with each property's unique characteristics and quirks.",
+        "Guest-facing standards require hospitality-specific training beyond standard maintenance competence.",
+      ],
+      results: [
+        "PPM compliance rate of 98.5% across all properties, with the 1.5% variance primarily due to agreed schedule adjustments.",
+        "Emergency callout volume reduced by 35% compared to pre-contract baseline through proactive maintenance.",
+        "Average emergency response time of 1 hour 23 minutes, well within the 2-hour SLA.",
+        "First-time fix rate of 91% on emergency callouts, minimising repeat visits and guest impact.",
+        "Zero guest complaints attributed to electrical maintenance activities during the current contract term.",
+        "Contract renewed for third term with expanded scope, demonstrating continued value delivery.",
+      ],
+      conclusion: [
+        "Hospitality electrical maintenance requires more than technical competence - it demands understanding of the guest experience and the operational pressures that hotel teams face. Our long-term partnership with IHG has allowed us to develop the deep familiarity with their operations that enables truly integrated service delivery.",
+        "The renewal for a third contract term reflects the value of sustained relationships in FM services. Each term has built on the previous, expanding scope as trust and capability have grown. This evolution is only possible through the long-term commitment that both parties have made to the partnership.",
       ],
       spotlight: [
-        { label: "Hotels covered", value: "8" },
+        { label: "Hotels Covered", value: "8" },
         { label: "Emergency SLA", value: "2 hours" },
-        { label: "PPM compliance", value: "98.5%" },
+        { label: "PPM Compliance", value: "98.5%" },
+        { label: "Contract Term", value: "3rd" },
       ],
       quote: {
         quote:
-          "The consistent quality across all our properties means I never worry about which hotel is getting attention. Every site receives the same professional standard.",
+          "The consistent quality across all our properties means I never worry about which hotel is getting attention. Every site receives the same professional standard. And when emergencies happen, they respond fast and fix it right the first time.",
         author: "Regional Engineering Manager",
         role: "IHG Hotels",
       },
+      additionalQuotes: [
+        {
+          quote: "What sets them apart is the night shift capability. Our previous contractor could only work days, which meant constant guest disruption. Now maintenance happens while guests sleep - it is transformative for our operations.",
+          author: "General Manager",
+          role: "Holiday Inn London Kensington",
+        },
+      ],
     },
   },
   {
@@ -3020,25 +3712,143 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Summer works programmes in schools require meticulous planning to complete complex upgrades within tight holiday windows.",
-        "This review covers LED lighting upgrades, distribution board replacements, and fire alarm enhancements across six academy schools.",
+        "Summer works programmes in schools require meticulous planning to complete complex upgrades within tight holiday windows. The 6-week summer break is often the only opportunity for significant capital works, and failure to complete on time has serious consequences for the new academic year.",
+        "This review covers LED lighting upgrades, distribution board replacements, and fire alarm enhancements across six academy schools. Delivered on time and within 0.3% of budget, the programme demonstrates what is achievable with proper planning and education-sector expertise.",
+      ],
+      body: [
+        "School electrical infrastructure often dates from original construction, with many buildings containing distribution boards, lighting, and fire alarm systems approaching 30-40 years old. These systems are increasingly difficult to maintain, consume excessive energy, and may not meet current safety standards.",
+        "The challenge for school estates teams is that significant upgrade work is only possible during holiday periods. Term-time working creates safeguarding concerns, disrupts teaching, and rarely allows adequate access for comprehensive works. The summer holiday provides the longest continuous window, but 6 weeks is tight for multi-school programmes.",
+        "Success requires starting planning in January, completing surveys at Easter, ordering materials by May, and mobilising immediately schools break up. Every day counts, and programmes that slip into September face the difficult choice of incomplete handover or disrupted school opening.",
+      ],
+      scope: [
+        "LED lighting upgrades across 6 schools replacing fluorescent fittings in classrooms, corridors, and specialist spaces",
+        "Distribution board replacements in 4 schools with aging main switchgear and insufficient circuit capacity",
+        "Fire alarm system enhancements including additional detection, new sounders, and panel upgrades",
+        "Emergency lighting upgrades to ensure compliance with current standards",
+        "Electrical testing and certification following all upgrade works",
+        "Coordination with other summer works including decoration, flooring, and mechanical upgrades",
+      ],
+      methodology: [
+        "Our education sector methodology front-loads planning to maximise productive use of the summer window. Survey work happens at Easter when access is easier and lead times for materials are managed. All long-lead items are ordered by early May to ensure arrival before summer mobilisation.",
+        "Multi-school programmes require careful resource allocation to balance progress across all sites. We avoid the temptation to complete one school at a time, instead maintaining parallel progress that ensures all schools reach completion together. This approach reduces risk compared to sequential completion.",
+        "All personnel hold enhanced DBS clearance regardless of whether schools are occupied. Summer works often overlap with summer schools, caretaker presence, and early-returning staff. Safeguarding compliance is non-negotiable even during holiday periods.",
+      ],
+      challenges: [
+        {
+          title: "Six-Week Window",
+          description: "The summer holiday provides only 6 weeks from school closure to building readiness for September. Staff INSET days in the final week further compress the available window.",
+          solution: "Front-loaded planning with surveys at Easter and materials ordered by May. Mobilisation on the first day of holidays with full resource deployment. Phased completion releases areas for cleaning and setup before INSET week.",
+        },
+        {
+          title: "Multi-School Coordination",
+          description: "Six schools across different locations require coordination of materials, labour, and supervision to maintain parallel progress.",
+          solution: "Dedicated site supervisors at each school with central coordination. Daily progress reporting enables resource reallocation if any school falls behind. Contingency labour available for acceleration if needed.",
+        },
+        {
+          title: "Summer School Operations",
+          description: "Three schools operated summer schools for vulnerable students, requiring separation of construction activity from safeguarded educational use.",
+          solution: "Agreed segregation zones with physical barriers between summer school areas and construction zones. Separate access routes maintained throughout. DBS-cleared personnel only, with no exceptions.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "January",
+          title: "Planning Start",
+          description: "Scope definition, budget approval, and programme planning in collaboration with Trust estates team.",
+          duration: "1 month",
+        },
+        {
+          phase: "Easter",
+          title: "Site Surveys",
+          description: "Detailed surveys of all 6 schools during Easter holiday window, finalising scope and specifications.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "May",
+          title: "Procurement",
+          description: "All materials ordered with delivery scheduled for first week of summer holidays.",
+          duration: "6 weeks",
+        },
+        {
+          phase: "July-August",
+          title: "Summer Works",
+          description: "6-week intensive delivery across all schools with parallel progress and phased completion.",
+          duration: "6 weeks",
+        },
+        {
+          phase: "September",
+          title: "Handover",
+          description: "Final commissioning, certification handover, and defect liability period commencement.",
+          duration: "1 week",
+        },
+      ],
+      specifications: [
+        {
+          category: "Programme Scope",
+          items: [
+            { label: "Schools", value: "6" },
+            { label: "LED Fittings", value: "1,840" },
+            { label: "DB Replacements", value: "11" },
+            { label: "Fire Alarm Points", value: "285" },
+          ],
+        },
+        {
+          category: "Resources",
+          items: [
+            { label: "Site Supervisors", value: "6" },
+            { label: "Electricians", value: "24" },
+            { label: "Programme Duration", value: "6 weeks" },
+            { label: "DBS Clearance", value: "100%" },
+          ],
+        },
+        {
+          category: "Performance",
+          items: [
+            { label: "On-Time Completion", value: "100%" },
+            { label: "Budget Variance", value: "+0.3%" },
+            { label: "Snagging Items", value: "Zero" },
+            { label: "September Ready", value: "All schools" },
+          ],
+        },
       ],
       takeaways: [
-        "Early site surveys during Easter allow comprehensive material ordering before summer.",
-        "Phased handover enables partial occupation for summer schools and exam access.",
-        "DBS-cleared teams essential even during holiday periods for safeguarding compliance.",
+        "Early site surveys during Easter allow comprehensive material ordering before summer - lead times cannot be compressed during peak construction season.",
+        "Phased handover enables partial occupation for summer schools and exam access while construction continues in segregated zones.",
+        "DBS-cleared teams essential even during holiday periods - summer schools, caretakers, and early-returning staff mean schools are never truly unoccupied.",
+        "Parallel progress across all schools reduces programme risk compared to sequential completion approach.",
+        "Front-loaded planning is essential - the summer window is fixed, so preparation quality determines success.",
+      ],
+      results: [
+        "All 6 schools ready for September opening with zero snagging items remaining.",
+        "Budget variance of only +0.3% (£2,340) against £780,000 programme value.",
+        "1,840 LED fittings installed, reducing lighting energy consumption by approximately 65% across the Trust.",
+        "11 distribution boards replaced, providing modern protection and capacity for future load growth.",
+        "285 fire alarm points added or upgraded, improving detection coverage and system reliability.",
+        "Trust committed to next year's summer programme based on delivery performance.",
+      ],
+      conclusion: [
+        "Summer works programmes succeed or fail based on planning quality. The 6-week delivery window is fixed and cannot be extended - schools must open in September regardless of contractor progress. Success requires starting early, ordering materials before summer, and mobilising immediately when schools close.",
+        "Our experience with the Academies Enterprise Trust demonstrates that ambitious multi-school programmes are achievable within summer windows. The key is education-sector expertise that understands the constraints and plans accordingly. For Trust estates teams considering summer programmes, the message is clear: start planning in January, not June.",
       ],
       spotlight: [
-        { label: "Schools completed", value: "6" },
-        { label: "Programme window", value: "6 weeks" },
-        { label: "Budget variance", value: "+0.3%" },
+        { label: "Schools", value: "6" },
+        { label: "Programme Window", value: "6 weeks" },
+        { label: "On-Time", value: "100%" },
+        { label: "Budget Variance", value: "+0.3%" },
       ],
       quote: {
         quote:
-          "Every school was ready for September opening with no snagging items remaining. That is exactly what education clients need from summer works contractors.",
+          "Every school was ready for September opening with no snagging items remaining. That is exactly what education clients need from summer works contractors. The planning started in January - that is why the summer delivery was so smooth.",
         author: "Estates Director",
         role: "Academies Enterprise Trust",
       },
+      additionalQuotes: [
+        {
+          quote: "The summer school segregation worked perfectly. Students and staff were never aware that major construction was happening in the other wing. That takes real planning and discipline to achieve.",
+          author: "Headteacher",
+          role: "Parkfield Academy",
+        },
+      ],
     },
   },
   {
@@ -3072,25 +3882,143 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Common parts upgrades in occupied buildings require careful coordination to minimise tenant disruption and maintain building operations.",
-        "This review covers reception, corridor, and car park electrical works in a 12-storey office building with 18 tenants.",
+        "Common parts upgrades in occupied buildings require careful coordination to minimise tenant disruption and maintain building operations. Unlike vacant building projects, occupied upgrades must work around tenants, visitors, and ongoing business operations.",
+        "This review covers reception, corridor, and car park electrical works in a 12-storey office building with 18 tenants. Completed over 3 months with zero tenant complaints, the project demonstrates that comprehensive upgrades are achievable in occupied buildings with proper planning and communication.",
+      ],
+      body: [
+        "Commercial landlords face a constant tension between maintaining competitive building specifications and avoiding tenant disruption. Aging electrical infrastructure in common parts affects building perception, energy efficiency, and safety compliance - but upgrade works inevitably create temporary disruption.",
+        "This 12-storey office building had common parts electrical infrastructure dating from 2004. The reception lighting was energy-inefficient and outdated in appearance. Corridor emergency lighting used obsolete fittings with maintenance challenges. The car park lighting provided inadequate lux levels for modern security standards.",
+        "The property management team needed comprehensive upgrade but could not accept significant tenant disruption. Lease agreements guaranteed quiet enjoyment, and several tenants had expressed sensitivity to building works following previous poor contractor experiences. The brief was clear: upgrade everything without anyone noticing.",
+      ],
+      scope: [
+        "Reception and main lobby LED lighting upgrade with architectural feature lighting",
+        "Corridor LED lighting replacement across all 12 floors",
+        "Emergency lighting upgrade to self-testing LED fittings throughout common parts",
+        "Car park lighting upgrade to LED with improved lux levels and occupancy sensing",
+        "Distribution board upgrades for common parts supplies",
+        "Small power upgrades including USB charging points in reception areas",
+      ],
+      methodology: [
+        "Our occupied building methodology prioritises tenant invisibility. Work happens outside normal business hours wherever possible. When daytime work is unavoidable, we use temporary screening and signage that presents a professional image rather than construction site appearance. Noise-generating activities never occur during business hours.",
+        "Communication is as important as technical execution. Tenants receive advance notification of upcoming works, weekly updates on progress, and immediate notification if any work might affect their operations. Property managers receive daily progress reports and are the first point of contact for any concerns.",
+        "Temporary provisions ensure building operations continue throughout. Temporary lighting maintains compliance during fitting replacements. Alternative access routes are established before corridors are affected. Emergency systems remain operational through careful phasing of upgrade works.",
+      ],
+      challenges: [
+        {
+          title: "Reception Works Visibility",
+          description: "The reception and lobby are the building's showcase, visible to every tenant and visitor. Works in this area create unavoidable visual impact.",
+          solution: "Reception upgrade completed over two consecutive weekends with full restoration before Monday opening. Temporary screening during overnight Friday work presented professionally branded hoardings rather than construction barriers.",
+        },
+        {
+          title: "24-Hour Building Access",
+          description: "Several tenants operate 24/7 with staff accessing the building at all hours. Complete overnight closure was not possible.",
+          solution: "Phased floor-by-floor approach with advance notification to affected tenants. Temporary lighting in corridors under work. Security coordination ensured safe access routes throughout night works periods.",
+        },
+        {
+          title: "Tenant Sensitivity to Works",
+          description: "Previous poor contractor experiences had left several tenants sensitive to building works, with specific lease protections requiring landlord agreement to minimise disruption.",
+          solution: "Pre-works meetings with sensitive tenants to explain approach and provide direct contact for any concerns. Enhanced communication including out-of-hours contact numbers. Immediate response to any feedback.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Week 1-2",
+          title: "Preparation",
+          description: "Tenant notification, material staging, and temporary provision installation.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Week 3-4",
+          title: "Reception & Lobby",
+          description: "Weekend-intensive upgrade of main reception and lobby areas.",
+          duration: "2 weekends",
+        },
+        {
+          phase: "Week 5-8",
+          title: "Corridor Floors",
+          description: "Floor-by-floor corridor lighting upgrade working overnight.",
+          duration: "4 weeks",
+        },
+        {
+          phase: "Week 9-10",
+          title: "Car Park",
+          description: "Car park lighting upgrade during off-peak hours with temporary provisions.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Week 11-12",
+          title: "Completion",
+          description: "Distribution board upgrades, final commissioning, and snagging.",
+          duration: "2 weeks",
+        },
+      ],
+      specifications: [
+        {
+          category: "Building Profile",
+          items: [
+            { label: "Building Floors", value: "12" },
+            { label: "Tenants", value: "18" },
+            { label: "NIA (sq ft)", value: "186,000" },
+            { label: "Car Park Spaces", value: "245" },
+          ],
+        },
+        {
+          category: "Works Scope",
+          items: [
+            { label: "LED Fittings", value: "680" },
+            { label: "Emergency Lights", value: "156" },
+            { label: "DB Upgrades", value: "4" },
+            { label: "USB Points", value: "24" },
+          ],
+        },
+        {
+          category: "Delivery",
+          items: [
+            { label: "Programme", value: "12 weeks" },
+            { label: "Out-of-Hours", value: "85%" },
+            { label: "Tenant Complaints", value: "Zero" },
+            { label: "Budget Variance", value: "-2.1%" },
+          ],
+        },
       ],
       takeaways: [
-        "Advance tenant communication prevents complaints and sets appropriate expectations.",
-        "Night and weekend working essential for high-impact lobby and reception works.",
-        "Temporary lighting maintained throughout ensures safety and compliance.",
+        "Advance tenant communication prevents complaints and sets appropriate expectations - surprises create complaints, even for minor disruption.",
+        "Night and weekend working essential for high-impact lobby and reception works - these areas cannot be compromised during business hours.",
+        "Temporary lighting maintained throughout ensures safety and compliance - building operations continue regardless of upgrade progress.",
+        "Professional presentation of necessary work areas maintains building image - construction-site appearance damages landlord-tenant relationships.",
+        "Direct tenant contact channels enable immediate response to concerns before they escalate to complaints.",
+      ],
+      results: [
+        "Zero tenant complaints throughout the 12-week programme - validated through property management feedback survey.",
+        "Budget delivered 2.1% under original estimate through efficient out-of-hours working and minimal disruption-related variations.",
+        "Energy consumption in common parts reduced by 58% through LED conversion and occupancy sensing.",
+        "Emergency lighting maintenance burden eliminated through self-testing LED fittings with BMS integration.",
+        "Car park lux levels improved from 50 lux to 150 lux, meeting current security guidance and tenant feedback requests.",
+        "Building EPC rating improved, supporting landlord ESG reporting and marketing positioning.",
+      ],
+      conclusion: [
+        "Occupied building upgrades are challenging but achievable with proper planning and communication. The key is treating tenant experience as seriously as technical execution - a perfectly installed fitting means nothing if the installation process has damaged tenant relationships.",
+        "For property managers and landlords, this project demonstrates that comprehensive common parts upgrades need not wait for void periods. With the right contractor approach, significant improvements can be delivered while maintaining the quiet enjoyment that tenant leases guarantee and professional relationships demand.",
       ],
       spotlight: [
-        { label: "Building floors", value: "12" },
-        { label: "Tenants notified", value: "18" },
-        { label: "Out-of-hours work", value: "85%" },
+        { label: "Building Floors", value: "12" },
+        { label: "Tenants", value: "18" },
+        { label: "Out-of-Hours", value: "85%" },
+        { label: "Complaints", value: "Zero" },
       ],
       quote: {
         quote:
-          "Not a single tenant complaint throughout a complex three-month programme. That is exceptional performance in an occupied building.",
+          "Not a single tenant complaint throughout a complex three-month programme. That is exceptional performance in an occupied building. They treated the building like their own and understood that tenant experience matters as much as technical quality.",
         author: "Senior Property Manager",
         role: "CBRE",
       },
+      additionalQuotes: [
+        {
+          quote: "I barely noticed the upgrade was happening until I saw the finished reception. That is exactly how building works should be - invisible process, visible improvement.",
+          author: "Office Manager",
+          role: "6th Floor Tenant, Legal Services Firm",
+        },
+      ],
     },
   },
 ];

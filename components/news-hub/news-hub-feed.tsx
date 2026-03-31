@@ -122,9 +122,9 @@ export function NewsHubFeed({
           ))}
         </div>
 
-        {isLoadingMore ? (
+        {isLoadingMore && visibleCount < items.length ? (
           <div className="grid gap-4">
-            {Array.from({ length: 3 }).map((_, index) => (
+            {Array.from({ length: Math.min(3, items.length - visibleCount) }).map((_, index) => (
               <div
                 key={`news-skeleton-${index}`}
                 className="h-32 animate-pulse rounded-2xl border border-electric-cyan/20 bg-electric-cyan/5"
@@ -133,11 +133,13 @@ export function NewsHubFeed({
           </div>
         ) : null}
 
-        <div ref={sentinelRef} className="h-4" />
+        {visibleCount < items.length ? (
+          <div ref={sentinelRef} className="h-4" />
+        ) : null}
 
         {visibleCount >= items.length ? (
           <div className="py-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-            ✓ All stories loaded
+            All stories loaded
           </div>
         ) : null}
       </div>
