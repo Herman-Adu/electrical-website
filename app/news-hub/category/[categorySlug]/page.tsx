@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { NewsCategoryHero, NewsHubArticleCard } from "@/components/news-hub";
+import { NewsCategoryHero } from "@/components/news-hub";
+import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
 import { Footer } from "@/components/sections/footer";
 import {
   getNewsArticleListItemsByCategory,
   getNewsCategoryBySlug,
   getNewsCategorySlugs,
+  getSidebarCardsByCategory,
 } from "@/data/news";
 import { createNewsHubCategoryMetadata } from "@/lib/metadata-news";
 
@@ -46,6 +48,7 @@ export default async function NewsCategoryPage({
   }
 
   const items = getNewsArticleListItemsByCategory(category.slug);
+  const sidebarCards = getSidebarCardsByCategory(category.slug);
 
   return (
     <main className="relative bg-background">
@@ -55,16 +58,15 @@ export default async function NewsCategoryPage({
         id="category-articles"
         className="section-standard bg-background"
       >
-        <div className="section-content max-w-6xl space-y-4">
-          {items.length === 0 ? (
-            <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">
-              No stories are seeded in this category yet.
-            </div>
-          ) : (
-            items.map((item) => (
-              <NewsHubArticleCard key={item.id} item={item} />
-            ))
-          )}
+        <div className="section-content max-w-6xl">
+          <NewsGridLayout
+            items={items}
+            sidebarCards={sidebarCards}
+            title={category.label}
+            initialCount={4}
+            batchSize={3}
+            emptyMessage={`No stories are available in the ${category.label} category yet.`}
+          />
         </div>
       </section>
 

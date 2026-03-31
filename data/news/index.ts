@@ -4024,6 +4024,9 @@ export const allNewsArticles: NewsArticle[] = [
 ];
 
 export const newsSidebarCards: NewsSidebarCard[] = [
+  // ═══════════════════════════════════════════════════════════════════════════
+  // GLOBAL CARDS (shown on main hub and all categories)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     id: "sidebar-001",
     type: "campaign",
@@ -4033,6 +4036,7 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "Free download: Planning electrical infrastructure for heat pumps, EV charging, and solar PV integration.",
     ctaLabel: "Download Guide",
     href: "/news-hub/category/insights/future-proofing-electrical-infrastructure-electrification",
+    targetCategories: [], // Empty = shows on all pages
   },
   {
     id: "sidebar-002",
@@ -4043,6 +4047,7 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "24 engineers certified on the latest switchgear and automation technologies through our manufacturer partnership.",
     ctaLabel: "Read More",
     href: "/news-hub/category/partners/manufacturer-partnership-schneider-electric-training",
+    targetCategories: [], // Global
   },
   {
     id: "sidebar-003",
@@ -4053,9 +4058,77 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "98.5% PPM compliance across 8 hotel properties. Read why our hospitality clients keep coming back.",
     ctaLabel: "Read Review",
     href: "/news-hub/category/reviews/hotel-group-electrical-maintenance-contract-review",
+    targetCategories: [], // Global
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // RESIDENTIAL CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "sidebar-res-001",
+    type: "campaign",
+    eyebrow: "Residential Campaign",
+    title: "Home Electrification Assessment",
+    description:
+      "Free assessment for homeowners planning heat pump, EV charger, or solar PV installation. Future-proof your home.",
+    ctaLabel: "Book Assessment",
+    href: "/contact?service=residential-assessment",
+    targetCategories: ["residential"],
   },
   {
-    id: "sidebar-004",
+    id: "sidebar-res-002",
+    type: "social",
+    eyebrow: "Customer Story",
+    title: "Taplow Whole-Home Upgrade",
+    description:
+      "See how we transformed a 1960s property with LED lighting, smart controls, and EV charging infrastructure.",
+    ctaLabel: "View Project",
+    href: "/news-hub/category/residential/taplow-residential-energy-refresh",
+    targetCategories: ["residential"],
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INDUSTRIAL CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "sidebar-ind-001",
+    type: "campaign",
+    eyebrow: "Industrial Solutions",
+    title: "Switchgear Health Check",
+    description:
+      "Comprehensive assessment of your HV/LV switchgear condition with thermal imaging and partial discharge testing.",
+    ctaLabel: "Request Survey",
+    href: "/contact?service=switchgear-survey",
+    targetCategories: ["industrial"],
+  },
+  {
+    id: "sidebar-ind-002",
+    type: "partner",
+    eyebrow: "Technical Whitepaper",
+    title: "Real-Time Monitoring ROI",
+    description:
+      "Download our analysis of monitoring system payback periods across different industrial facility types.",
+    ctaLabel: "Download PDF",
+    href: "/news-hub/category/industrial/docklands-switchgear-monitoring-upgrade",
+    targetCategories: ["industrial"],
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PARTNERS CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "sidebar-part-001",
+    type: "campaign",
+    eyebrow: "Partner Programme",
+    title: "Become a Framework Partner",
+    description:
+      "Developers, contractors, and facilities managers - explore our framework partnership opportunities.",
+    ctaLabel: "Learn More",
+    href: "/contact?service=partnership-enquiry",
+    targetCategories: ["partners"],
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CASE STUDIES CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "sidebar-cs-001",
     type: "social",
     eyebrow: "Case Study",
     title: "Hospital Theatre Upgrade: Zero Downtime",
@@ -4063,9 +4136,13 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "How we upgraded 4 operating theatres while maintaining full clinical operations throughout.",
     ctaLabel: "View Case Study",
     href: "/news-hub/category/case-studies/private-hospital-theatre-electrical-upgrade",
+    targetCategories: ["case-studies"],
   },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSIGHTS CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: "sidebar-005",
+    id: "sidebar-ins-001",
     type: "campaign",
     eyebrow: "Regulations Update",
     title: "BS 7671 19th Edition Changes",
@@ -4073,9 +4150,13 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "Essential updates on AFDDs, cable sizing, and prosumer installations. Stay compliant with the latest wiring regulations.",
     ctaLabel: "Read Insights",
     href: "/news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors",
+    targetCategories: ["insights"],
   },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // REVIEWS CATEGORY CARDS
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: "sidebar-006",
+    id: "sidebar-rev-001",
     type: "review",
     eyebrow: "Education Sector",
     title: "Academy Trust Summer Works Complete",
@@ -4083,6 +4164,7 @@ export const newsSidebarCards: NewsSidebarCard[] = [
       "6 schools upgraded on time and on budget during the summer holiday window.",
     ctaLabel: "Read Review",
     href: "/news-hub/category/reviews/school-academy-trust-summer-works-review",
+    targetCategories: ["reviews"],
   },
 ];
 
@@ -4163,14 +4245,26 @@ export function getNewsArticleSlugsByCategory(
 export function getSidebarCardsByCategory(
   category: NewsCategorySlug,
 ): NewsSidebarCard[] {
+  // Global cards (empty targetCategories) show everywhere
+  const globalCards = newsSidebarCards.filter(
+    (card) => !card.targetCategories || card.targetCategories.length === 0,
+  );
+
   if (category === "all") {
-    return newsSidebarCards;
+    return globalCards;
   }
 
-  const scoped = newsSidebarCards.filter((card) =>
-    card.href.includes(`/${category}`),
+  // Category-specific cards
+  const categoryCards = newsSidebarCards.filter(
+    (card) =>
+      card.targetCategories &&
+      card.targetCategories.length > 0 &&
+      card.targetCategories.includes(category),
   );
-  return scoped.length > 0 ? scoped : newsSidebarCards.slice(0, 3);
+
+  // Return category-specific cards first, then fill with global cards (max 4 total)
+  const combined = [...categoryCards, ...globalCards];
+  return combined.slice(0, 4);
 }
 
 export function getRelatedNewsArticles(

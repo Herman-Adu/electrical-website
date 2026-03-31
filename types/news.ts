@@ -127,4 +127,6 @@ export interface NewsSidebarCard {
   description: string;
   ctaLabel: string;
   href: string;
+  /** Categories this card should appear on. If undefined/empty, shows on all pages including main hub */
+  targetCategories?: NewsCategorySlug[];
 }
