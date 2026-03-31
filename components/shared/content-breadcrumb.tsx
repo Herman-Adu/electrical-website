@@ -6,7 +6,7 @@ interface ContentBreadcrumbProps {
   /** Breadcrumb items - last item is current page */
   items: BreadcrumbItem[];
   /** Section identifier for styling */
-  section: "projects" | "news";
+  section: "projects" | "news" | "services";
 }
 
 /**
