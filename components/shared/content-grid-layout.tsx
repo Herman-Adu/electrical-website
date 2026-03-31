@@ -1,20 +1,26 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-import type { ContentListItem, SidebarCard } from "@/types/shared-content";
+import type { ContentListItem, SidebarCard, NewsArticleListItem, ProjectListItemExtended } from "@/types/shared-content";
 import { usePagination } from "@/hooks/use-pagination";
 import { ContentSidebar } from "./content-sidebar";
 import { ContentPulseIndicator } from "./content-pulse-indicator";
 import { LoadMoreButton } from "./load-more-button";
+
+// Import card components directly - these are client components
+import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
+import { ProjectListCard } from "@/components/projects/project-list-card";
+
+/** Supported card types */
+type CardType = "article" | "project";
 
 interface ContentGridLayoutProps<T extends ContentListItem> {
   /** Items to display in the feed */
   items: T[];
   /** Sidebar cards - filtered by section/category from data layer */
   sidebarCards: SidebarCard[];
-  /** Render function for each card */
-  renderCard: (item: T, index: number) => ReactNode;
+  /** Card type to render - determines which card component to use */
+  cardType: CardType;
   /** Header title */
   title: string;
   /** Initial number of visible items */
@@ -36,6 +42,21 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
 }
 
 /**
+ * Render the appropriate card component based on cardType.
+ * Type-safe rendering with proper item casting.
+ */
+function renderCardByType(item: ContentListItem, cardType: CardType): React.ReactNode {
+  switch (cardType) {
+    case "article":
+      return <NewsHubArticleCard item={item as NewsArticleListItem} />;
+    case "project":
+      return <ProjectListCard item={item as ProjectListItemExtended} />;
+    default:
+      return null;
+  }
+}
+
+/**
  * Generic two-column grid layout with pagination, sidebar, and Load More.
  * Used for both News Hub and Projects list pages.
  * 
@@ -43,7 +64,7 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
  * <ContentGridLayout
  *   items={articles}
  *   sidebarCards={sidebarCards}
- *   renderCard={(item) => <ArticleCard item={item} />}
+ *   cardType="article"
  *   title="Latest Articles"
  *   itemLabel="story"
  *   itemLabelPlural="stories"
@@ -52,7 +73,7 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
 export function ContentGridLayout<T extends ContentListItem>({
   items,
   sidebarCards,
-  renderCard,
+  cardType,
   title,
   initialCount = 4,
   batchSize = 3,
