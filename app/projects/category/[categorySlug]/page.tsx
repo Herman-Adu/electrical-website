@@ -8,7 +8,6 @@ import {
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import { ProjectCategoryHero } from "@/components/projects";
-import { ProjectListCard } from "@/components/projects/project-list-card";
 import { ContentGridLayout } from "@/components/shared";
 
 export const revalidate = 86400; // 24 hours
@@ -68,7 +67,7 @@ export default async function CategoryProjectsPage({
           <ContentGridLayout
             items={projectListItems}
             sidebarCards={sidebarCards}
-            renderCard={(item) => <ProjectListCard item={item} />}
+            cardType="project"
             title={`${category.label} Projects`}
             itemLabel="project"
             itemLabelPlural="projects"

@@ -5,7 +5,6 @@ import {
   ProjectsFeaturedCard,
   ProjectsBentoGrid,
 } from "@/components/projects";
-import { ProjectListCard } from "@/components/projects/project-list-card";
 import { ContentGridLayout } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
@@ -67,7 +66,7 @@ export default async function ProjectsPage({
           <ContentGridLayout
             items={projectListItems}
             sidebarCards={sidebarCards}
-            renderCard={(item) => <ProjectListCard item={item} />}
+            cardType="project"
             title="All Projects"
             itemLabel="project"
             itemLabelPlural="projects"

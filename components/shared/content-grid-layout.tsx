@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ContentListItem, SidebarCard, NewsArticleListItem, ProjectListItemExtended } from "@/types/shared-content";
+import type { ContentListItem, SidebarCard, ProjectListItemExtended } from "@/types/shared-content";
+import type { NewsArticleListItem } from "@/types/news";
 import { usePagination } from "@/hooks/use-pagination";
 import { ContentSidebar } from "./content-sidebar";
 import { ContentPulseIndicator } from "./content-pulse-indicator";
@@ -145,7 +146,7 @@ export function ContentGridLayout<T extends ContentListItem>({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
             >
-              {renderCard(item, index)}
+              {renderCardByType(item, cardType)}
             </motion.div>
           ))}
         </div>
