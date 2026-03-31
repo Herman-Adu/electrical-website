@@ -190,8 +190,8 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             variants={itemVariants}
             className="flex flex-wrap justify-center gap-3"
           >
-            <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 backdrop-blur-sm">
-              <div className="font-mono text-[10px] tracking-[0.18em] text-white/65 uppercase">
+            <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm">
+              <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                 Author
               </div>
               <div className="mt-1 font-semibold text-white">
@@ -199,15 +199,25 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
               </div>
             </div>
             {article.spotlightMetric ? (
-              <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 backdrop-blur-sm">
-                <div className="font-mono text-[10px] tracking-[0.18em] text-white/65 uppercase">
+              <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm shadow-[0_0_20px_rgba(0,243,189,0.15)]">
+                <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                   {article.spotlightMetric.label}
                 </div>
-                <div className="mt-1 font-semibold text-white">
+                <div className="mt-1 font-semibold text-electric-cyan">
                   {article.spotlightMetric.value}
                 </div>
               </div>
             ) : null}
+            {article.location && (
+              <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
+                <div className="font-mono text-[10px] tracking-[0.18em] text-white/60 uppercase">
+                  Location
+                </div>
+                <div className="mt-1 font-semibold text-white">
+                  {article.location}
+                </div>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       }

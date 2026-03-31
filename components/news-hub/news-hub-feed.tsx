@@ -7,9 +7,11 @@ import {
   useState,
   useTransition,
 } from "react";
+import { motion } from "framer-motion";
 import type { NewsArticleListItem, NewsSidebarCard } from "@/types/news";
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
 import { NewsHubSidebar } from "@/components/news-hub/news-hub-sidebar";
+import { NewsPulseIndicator } from "./news-pulse-indicator";
 
 interface NewsHubFeedProps {
   items: NewsArticleListItem[];
@@ -83,31 +85,40 @@ export function NewsHubFeed({
       <div className="space-y-4">
         <div className="flex items-center justify-between gap-4 px-1">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
-              📰 Latest Editorial
-            </p>
+            <NewsPulseIndicator label="Live Feed" variant="live" />
             <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
-              Article Feed with Save Interactions
+              Latest Articles
             </h2>
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-            {items.length} Stories
+          <div className="flex flex-col items-end gap-1">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+              {items.length} Stories
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/60">
+              Save enabled
+            </span>
           </div>
         </div>
 
         <div className="space-y-4">
-          {visibleItems.map((item) => (
-            <NewsHubArticleCard
+          {visibleItems.map((item, index) => (
+            <motion.div
               key={item.id}
-              item={item}
-              isPending={isPending}
-              isSaved={optimisticSavedIds.includes(item.id)}
-              onToggleSave={() => {
-                startTransition(() => {
-                  toggleSavedOptimistically(item.id);
-                });
-              }}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
+            >
+              <NewsHubArticleCard
+                item={item}
+                isPending={isPending}
+                isSaved={optimisticSavedIds.includes(item.id)}
+                onToggleSave={() => {
+                  startTransition(() => {
+                    toggleSavedOptimistically(item.id);
+                  });
+                }}
+              />
+            </motion.div>
           ))}
         </div>
 
