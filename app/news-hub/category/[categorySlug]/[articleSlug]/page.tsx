@@ -8,6 +8,7 @@ import {
   type TocItem,
 } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
+import { ContentBreadcrumb } from "@/components/shared";
 import {
   getNewsArticleByCategoryAndSlug,
   getNewsArticleSlugsByCategory,
@@ -167,13 +168,24 @@ export default async function NewsArticlePage({
 
       <NewsDetailHero article={article} />
 
+      {/* Sticky Breadcrumb - CSS sticky below navbar */}
+      <ContentBreadcrumb
+        items={[
+          { label: "News Hub", href: "/news-hub" },
+          { label: "Categories", href: "/news-hub/category" },
+          { label: category.label, href: `/news-hub/category/${categorySlug}` },
+          { label: article.title, href: "#", isCurrent: true },
+        ]}
+        section="news"
+      />
+
       <section id="article-content" className="section-standard bg-background !overflow-visible">
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
           <NewsArticleContent detail={article.detail} categorySlug={categorySlug} />
 
           {/* Sticky Sidebar */}
-          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[88px] self-start">
+          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start">
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
@@ -129,33 +128,6 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
               </span>
             </div>
           </motion.div>
-
-          <motion.nav
-            variants={itemVariants}
-            aria-label="Breadcrumb"
-            className="mb-6 flex flex-wrap items-center justify-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/70 uppercase"
-          >
-            <Link
-              href="/news-hub"
-              className="transition-colors hover:text-electric-cyan"
-            >
-              News Hub
-            </Link>
-            <span className="text-white/30">/</span>
-            <Link
-              href="/news-hub/category"
-              className="transition-colors hover:text-electric-cyan"
-            >
-              Categories
-            </Link>
-            <span className="text-white/30">/</span>
-            <Link
-              href={`/news-hub/category/${article.category}`}
-              className="transition-colors hover:text-electric-cyan"
-            >
-              {article.categoryLabel}
-            </Link>
-          </motion.nav>
 
           <motion.div
             variants={itemVariants}

@@ -124,6 +124,20 @@ export interface TocItem {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// SHARED BREADCRUMB ITEM
+// Generic breadcrumb item for article and project detail pages
+// ═══════════════════════════════════════════════════════════════════════════
+
+export interface BreadcrumbItem {
+  /** Display label */
+  label: string;
+  /** Link destination */
+  href: string;
+  /** Whether this is the current page (last item) */
+  isCurrent?: boolean;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // GRID LAYOUT CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════
 

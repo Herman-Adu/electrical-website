@@ -21,7 +21,8 @@ import {
   ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
-import { ContentToc, ContentSidebar } from "@/components/shared";
+import { ContentToc, ContentSidebar, ContentBreadcrumb } from "@/components/shared";
+import type { BreadcrumbItem } from "@/types/shared-content";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 import type { Project } from "@/types/projects";
@@ -178,7 +179,18 @@ export default async function CategoryProjectDetailPage({
       />
 
       {/* Hero Section with Parallax Image + KPIs */}
-      <ProjectDetailHero project={project} categorySlug={categorySlug} />
+      <ProjectDetailHero project={project} />
+
+      {/* Sticky Breadcrumb - CSS sticky below navbar */}
+      <ContentBreadcrumb
+        items={[
+          { label: "Projects", href: "/projects" },
+          { label: "Categories", href: "/projects/category" },
+          { label: category.label, href: `/projects/category/${categorySlug}` },
+          { label: project.title, href: "#", isCurrent: true },
+        ]}
+        section="projects"
+      />
 
       {/* Main Content with Sticky Sidebar */}
       <section
@@ -189,19 +201,19 @@ export default async function CategoryProjectDetailPage({
           {/* Main Content Column */}
           <div className="space-y-0">
             {detail?.intro && (
-              <div id="overview" className="scroll-mt-24">
+              <div id="overview" className="scroll-mt-36">
                 <ProjectDetailIntro data={detail.intro} />
               </div>
             )}
 
             {detail?.scope && detail.scope.length > 0 && (
-              <div id="scope" className="scroll-mt-24 py-2">
+              <div id="scope" className="scroll-mt-36 py-2">
                 <ProjectScopeGrid items={detail.scope} />
               </div>
             )}
 
             {detail?.challenge && detail?.solution && (
-              <div id="challenge" className="scroll-mt-24">
+              <div id="challenge" className="scroll-mt-36">
                 <ProjectChallengeSolution
                   challenge={detail.challenge}
                   solution={detail.solution}
@@ -210,25 +222,25 @@ export default async function CategoryProjectDetailPage({
             )}
 
             {detail?.timeline && detail.timeline.length > 0 && (
-              <div id="timeline" className="scroll-mt-24">
+              <div id="timeline" className="scroll-mt-36">
                 <ProjectTimeline phases={detail.timeline} />
               </div>
             )}
 
             {detail?.gallery && detail.gallery.length > 0 && (
-              <div id="gallery" className="scroll-mt-24">
+              <div id="gallery" className="scroll-mt-36">
                 <ProjectGallery images={detail.gallery} />
               </div>
             )}
 
             {detail?.testimonial && (
-              <div id="testimonial" className="scroll-mt-24">
+              <div id="testimonial" className="scroll-mt-36">
                 <ProjectTestimonialCard testimonial={detail.testimonial} />
               </div>
             )}
 
             {relatedProjects.length > 0 && (
-              <div id="related" className="scroll-mt-24">
+              <div id="related" className="scroll-mt-36">
                 <ProjectRelatedCarousel
                   projects={relatedProjects}
                   categorySlug={categorySlug}
@@ -239,7 +251,7 @@ export default async function CategoryProjectDetailPage({
           </div>
 
           {/* Sticky Sidebar */}
-          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[88px] self-start">
+          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start">
             {/* Table of Contents */}
             <ContentToc items={tocItems} title="Project Contents" />
 
