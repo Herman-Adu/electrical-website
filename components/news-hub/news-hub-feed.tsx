@@ -84,14 +84,14 @@ export function NewsHubFeed({
         <div className="flex items-center justify-between gap-4 px-1">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
-              Latest stories
+              📰 Latest Editorial
             </p>
-            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-              Article cards with optimistic save interactions
+            <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+              Article Feed with Save Interactions
             </h2>
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            {items.length} seeded stories
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+            {items.length} Stories
           </div>
         </div>
 
@@ -116,7 +116,7 @@ export function NewsHubFeed({
             {Array.from({ length: 3 }).map((_, index) => (
               <div
                 key={`news-skeleton-${index}`}
-                className="h-32 animate-pulse rounded-3xl border border-border/40 bg-card/50"
+                className="h-32 animate-pulse rounded-2xl border border-electric-cyan/20 bg-electric-cyan/5"
               />
             ))}
           </div>
@@ -125,8 +125,8 @@ export function NewsHubFeed({
         <div ref={sentinelRef} className="h-4" />
 
         {visibleCount >= items.length ? (
-          <div className="py-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            All stories loaded
+          <div className="py-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+            ✓ All stories loaded
           </div>
         ) : null}
       </div>

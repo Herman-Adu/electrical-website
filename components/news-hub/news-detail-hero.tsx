@@ -174,7 +174,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
           <motion.h1
             variants={itemVariants}
-            className="mx-auto mb-6 max-w-4xl text-4xl leading-[0.94] font-black tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="mx-auto mb-6 max-w-4xl text-4xl leading-tight font-black tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-lg"
           >
             {article.title}
           </motion.h1>

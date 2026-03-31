@@ -25,59 +25,61 @@ export function NewsHubArticleCard({
 }: NewsHubArticleCardProps) {
   return (
     <NewsArticleCardShell
-      className={`p-5 transition-colors ${isPending ? "opacity-70" : "hover:border-electric-cyan/40"}`}
+      className={`p-5 transition-all ${
+        isPending ? "opacity-60" : "hover:border-electric-cyan/50 hover:shadow-[0_0_25px_rgba(0,243,189,0.1)]"
+      }`}
     >
       <div className="flex h-full flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            <span className="rounded-full border border-border/60 bg-background/60 px-2.5 py-1 text-foreground">
+        <div className="space-y-4 flex-1">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
+            <span className="rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2.5 py-1 text-electric-cyan">
               {item.categoryLabel}
             </span>
             {item.isFeatured ? (
-              <span className="rounded-full border border-electric-cyan/30 bg-electric-cyan/10 px-2.5 py-1 text-electric-cyan">
-                Featured
+              <span className="rounded-md border border-electric-cyan/40 bg-electric-cyan/15 px-2.5 py-1 text-electric-cyan font-semibold">
+                ⚡ Featured
               </span>
             ) : null}
-            <span>{formatDate(item.publishedAt)}</span>
-            <span>{item.readTime}</span>
+            <span className="text-foreground/50">{formatDate(item.publishedAt)}</span>
+            <span className="text-foreground/50">{item.readTime}</span>
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold tracking-tight text-foreground">
+            <h3 className="text-lg font-bold tracking-tight text-white leading-snug">
               {item.title}
             </h3>
-            <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="max-w-2xl text-sm leading-6 text-foreground/70">
               {item.excerpt}
             </p>
           </div>
 
           {item.partnerLabel ? (
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan/80">
-              Partner: {item.partnerLabel}
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan/70">
+              → {item.partnerLabel}
             </div>
           ) : null}
         </div>
 
-        <div className="flex shrink-0 flex-row gap-3 lg:flex-col lg:items-end">
+        <div className="flex shrink-0 flex-row gap-2 lg:flex-col lg:items-end">
           <button
             type="button"
             onClick={onToggleSave}
             aria-disabled={isPending}
             aria-pressed={isSaved}
             disabled={isPending}
-            className={`rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors ${
+            className={`rounded-lg border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-all ${
               isSaved
-                ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan"
-                : "border-border/60 bg-background/60 text-muted-foreground hover:text-foreground"
+                ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,243,189,0.2)]"
+                : "border-border/40 bg-background/60 text-foreground/70 hover:border-electric-cyan/30 hover:text-electric-cyan"
             } ${isPending ? "cursor-not-allowed opacity-60" : ""}`}
           >
-            {isSaved ? "Saved" : "Save story"}
+            {isSaved ? "💾 Saved" : "Save"}
           </button>
           <Link
             href={`/news-hub/category/${item.category}/${item.slug}`}
-            className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground transition-colors hover:border-electric-cyan/30 hover:text-electric-cyan"
+            className="inline-flex items-center gap-1 rounded-lg border border-border/40 bg-background/60 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 transition-all hover:border-electric-cyan/40 hover:text-electric-cyan"
           >
-            Open article
+            Read
             <span aria-hidden>→</span>
           </Link>
         </div>

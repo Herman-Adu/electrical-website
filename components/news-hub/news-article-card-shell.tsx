@@ -12,7 +12,7 @@ export function NewsArticleCardShell({
   return (
     <article
       className={cn(
-        "rounded-3xl border border-border/50 bg-card/70 backdrop-blur-sm shadow-[0_20px_80px_-40px_rgba(0,242,255,0.25)]",
+        "rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm shadow-[0_20px_60px_-40px_rgba(0,242,255,0.2)]",
         className,
       )}
     >
