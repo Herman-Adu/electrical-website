@@ -25,3 +25,6 @@ export { NewsCategoryChip } from "./news-category-chip";
 export { NewsTicker } from "./news-ticker";
 export { NewsGridBackground } from "./news-grid-background";
 export { NewsContentBody } from "./news-content-body";
+export { NewsArticleToc } from "./news-article-toc";
+export type { TocItem } from "./news-article-toc";
+export { NewsArticleContent } from "./news-article-content";
