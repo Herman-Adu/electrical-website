@@ -9,6 +9,7 @@ import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import { ProjectCategoryHero } from "@/components/projects";
 import { ContentGridLayout } from "@/components/shared";
+import { Footer } from "@/components/sections/footer";
 
 export const revalidate = 86400; // 24 hours
 
@@ -77,6 +78,7 @@ export default async function CategoryProjectsPage({
           />
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
