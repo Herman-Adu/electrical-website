@@ -18,13 +18,13 @@ function formatDate(value: string) {
 export function NewsHubFeaturedCard({ article }: NewsHubFeaturedCardProps) {
   return (
     <NewsArticleCardShell className="overflow-hidden border-electric-cyan/30 shadow-[0_0_40px_rgba(0,243,189,0.15)]">
-      <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid gap-0 lg:grid-cols-2">
         <div className="relative min-h-72 border-b border-electric-cyan/20 lg:min-h-96 lg:border-b-0 lg:border-r">
           <Image
             src={article.featuredImage.src}
             alt={article.featuredImage.alt}
             fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
             priority
           />
