@@ -1567,19 +1567,134 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "With EV adoption accelerating, understanding the electrical implications of home charging has become essential for both installers and homeowners.",
-        "This guide covers the complete process from initial site survey through to DNO notification and OZEV grant applications.",
+        "With EV adoption accelerating, understanding the electrical implications of home charging has become essential for both installers and homeowners. A 7kW home charger represents a significant additional load - equivalent to running three electric showers simultaneously - requiring careful assessment of existing electrical infrastructure.",
+        "This guide covers the complete process from initial site survey through to DNO notification and OZEV grant applications. Whether you are a homeowner planning an EV purchase or an installer expanding into EV charging, understanding these requirements prevents costly mistakes and ensures compliant, safe installations.",
+      ],
+      body: [
+        "The typical domestic EV charger operates at 7.4kW (32A single phase), providing approximately 25-30 miles of range per hour of charging. For most EV owners who charge overnight, this rate is perfectly adequate - a typical commuter can fully replenish their daily driving in 2-3 hours of charging.",
+        "However, adding a 32A load to a domestic installation requires careful consideration of existing capacity. Most domestic supplies are rated at 60-100A, and while diversity calculations assume not all loads operate simultaneously, EV charging often coincides with peak household demand during evening hours.",
+        "The earthing arrangements for EV charging installations are particularly important. Most UK domestic supplies use PME (Protective Multiple Earthing), which presents specific risks when charging vehicles in outdoor or semi-outdoor locations. BS 7671 Section 722 sets out the requirements for addressing these risks.",
+      ],
+      scope: [
+        "Maximum demand assessment including diversity calculations for existing circuits",
+        "Earthing system verification and PME risk assessment",
+        "Cable route survey and sizing calculation for selected charger location",
+        "Consumer unit assessment including spare way availability and protective device coordination",
+        "DNO notification requirements determination based on total maximum demand",
+        "OZEV grant application support including installer registration verification",
+      ],
+      methodology: [
+        "Our EV installation process begins with a comprehensive site survey that assesses both technical feasibility and practical installation considerations. We examine the consumer unit, measure existing maximum demand, verify earthing arrangements, and assess potential cable routes to the preferred charger location.",
+        "For properties with PME earthing (the vast majority of UK domestic supplies), we apply the requirements of BS 7671 Section 722. This typically requires either earth electrode installation or specification of a charger with protective conductor current monitoring - both approaches address the specific risks of PME earthing for EV charging.",
+        "DNO notification is required when total maximum demand exceeds specific thresholds. We calculate post-installation maximum demand including the proposed EV charger and, where notification is required, submit applications on behalf of our customers to avoid programme delays.",
+      ],
+      challenges: [
+        {
+          title: "Insufficient Consumer Unit Capacity",
+          description: "Many older consumer units have no spare ways and cannot accommodate the additional 40A RCBO required for EV charging circuits.",
+          solution: "Where spare ways are unavailable, we either replace the consumer unit with a larger enclosure or install a dedicated EV consumer unit fed from the main incoming supply. The choice depends on overall installation condition and customer preference for integrated or separate protection.",
+        },
+        {
+          title: "Long Cable Runs",
+          description: "Charger locations far from the consumer unit require larger cable sizes to maintain acceptable voltage drop, increasing costs and installation complexity.",
+          solution: "We perform voltage drop calculations for every installation, specifying cable size to maintain compliance with BS 7671 limits. For very long runs, we discuss alternative charger locations that balance convenience with installation cost.",
+        },
+        {
+          title: "PME Earthing Risks",
+          description: "PME earthing creates specific risks for outdoor EV charging - loss of the supply neutral could create dangerous touch voltages on the vehicle chassis.",
+          solution: "We specify chargers with built-in protective conductor current monitoring (PEN fault detection) as standard, eliminating the need for earth electrode installation in most situations while fully addressing PME risks.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Site Survey",
+          description: "Comprehensive assessment of existing electrical installation, earthing verification, and cable route survey to preferred charger location.",
+          duration: "1-2 hours",
+        },
+        {
+          phase: "Phase 2",
+          title: "Quotation & Specification",
+          description: "Detailed quotation including all required works, charger specification, and any DNO or grant application requirements.",
+          duration: "2-3 days",
+        },
+        {
+          phase: "Phase 3",
+          title: "DNO Notification",
+          description: "Where required, submission of DNO notification and receipt of connection agreement before installation proceeds.",
+          duration: "2-4 weeks",
+        },
+        {
+          phase: "Phase 4",
+          title: "Installation",
+          description: "Complete installation including cable installation, consumer unit modifications, charger mounting, and connection.",
+          duration: "4-6 hours",
+        },
+        {
+          phase: "Phase 5",
+          title: "Commissioning",
+          description: "Testing, certification, customer handover, and app setup for smart chargers. OZEV grant paperwork completion where applicable.",
+          duration: "30 minutes",
+        },
+      ],
+      specifications: [
+        {
+          category: "Typical Installation",
+          items: [
+            { label: "Charger Rating", value: "7.4kW" },
+            { label: "Circuit Rating", value: "40A" },
+            { label: "Cable Type", value: "SWA" },
+            { label: "Typical Cable Size", value: "10mm" },
+          ],
+        },
+        {
+          category: "Protection",
+          items: [
+            { label: "Protective Device", value: "40A Type B RCBO" },
+            { label: "RCD Type", value: "Type A" },
+            { label: "PME Protection", value: "PEN Fault Detection" },
+            { label: "Isolation", value: "Local DP Switch" },
+          ],
+        },
+        {
+          category: "Regulatory",
+          items: [
+            { label: "DNO Threshold", value: "13.8kW total" },
+            { label: "Standard", value: "BS 7671 Section 722" },
+            { label: "Grant Available", value: "OZEV £350" },
+            { label: "Installer Requirement", value: "TrustMark + OZEV" },
+          ],
+        },
       ],
       takeaways: [
-        "Maximum demand calculations must account for diversity across all existing circuits.",
-        "PME earthing systems require additional consideration under BS 7671 Section 722.",
-        "OZEV grant applications require TrustMark registration and OLEV-approved charger installation.",
+        "Maximum demand calculations must account for diversity across all existing circuits - the DNO notification threshold of 13.8kW total demand is easily exceeded in larger properties.",
+        "PME earthing systems require additional consideration under BS 7671 Section 722 - chargers with PEN fault detection provide compliant protection without earth electrode installation.",
+        "OZEV grant applications require TrustMark registration and OLEV-approved charger installation - verify your installer's credentials before proceeding.",
+        "Cable sizing must account for voltage drop over the entire run length - longer distances require larger cables to maintain compliance.",
+        "Smart chargers with load management capability can reduce maximum demand impact, potentially avoiding DNO notification requirements.",
+      ],
+      results: [
+        "Average installation time of 4 hours for straightforward domestic installations with good consumer unit access.",
+        "98% of installations completed without requiring DNO supply upgrade through proper maximum demand assessment and charger specification.",
+        "100% OZEV grant claim success rate through proper documentation and installer registration maintenance.",
+        "Customer satisfaction rating of 4.9/5 based on post-installation surveys, with particular praise for clear communication throughout the process.",
+      ],
+      conclusion: [
+        "Home EV charger installation is now a routine electrical installation, but it requires specific knowledge of BS 7671 Section 722 requirements, DNO notification processes, and grant application procedures. Homeowners should engage installers with demonstrated EV charging expertise rather than general electricians unfamiliar with these specific requirements.",
+        "For installers, EV charging represents a growing market opportunity, but requires investment in training and registration to access OZEV grant-eligible work. The combination of TrustMark registration, OZEV approval, and genuine technical competence positions installers well for the continued growth in domestic EV adoption.",
       ],
       spotlight: [
-        { label: "Typical rating", value: "7.4kW" },
-        { label: "Cable size", value: "10mm SWA" },
-        { label: "DNO threshold", value: "13.8kW" },
+        { label: "Typical Rating", value: "7.4kW" },
+        { label: "Install Time", value: "4 hours" },
+        { label: "Grant Available", value: "£350" },
+        { label: "Success Rate", value: "98%" },
       ],
+      quote: {
+        quote:
+          "The whole process was much simpler than I expected. The survey identified everything needed upfront, and the installation was completed in half a day. Now I just plug in when I get home and wake up to a full battery every morning.",
+        author: "Dr. Sarah Mitchell",
+        role: "Homeowner, Surrey",
+      },
     },
   },
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1786,19 +1901,135 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Poor power factor results in reactive power charges that can represent 10-20% of industrial electricity bills.",
-        "This manufacturing facility case study demonstrates the ROI calculation process and installation considerations for automatic PFC systems.",
+        "Poor power factor results in reactive power charges that can represent 10-20% of industrial electricity bills, yet many facility managers remain unaware of this hidden cost. The reactive power component of your electricity bill penalises inefficient power consumption, particularly from inductive loads like motors, transformers, and fluorescent lighting.",
+        "This manufacturing facility case study demonstrates the ROI calculation process and installation considerations for automatic PFC systems. The Birmingham plant achieved £47,000 annual savings with an 18-month payback, transforming a previously ignored expense line into a significant cost reduction.",
+      ],
+      body: [
+        "Power factor measures how efficiently electrical power is being used. A perfect power factor of 1.0 (or unity) means all supplied power is being used productively. Industrial facilities with significant motor loads typically see power factors of 0.7-0.85, meaning 15-30% of supplied power is 'reactive' - required to magnetise motors but not performing useful work.",
+        "While this reactive power does no work, it must still be generated and transmitted. Energy suppliers recover these costs through reactive power charges, typically applied when power factor falls below 0.95. For this Birmingham manufacturing facility, these charges exceeded £47,000 annually before correction.",
+        "Automatic power factor correction systems use capacitor banks that switch in and out as load varies, maintaining optimal power factor throughout the production cycle. Unlike fixed correction, automatic systems respond to changing loads, preventing both under-correction (continued charges) and over-correction (leading power factor penalties).",
+      ],
+      scope: [
+        "Power quality survey including harmonic analysis and load profiling over 2-week period",
+        "Power factor correction system design including harmonic filter specification",
+        "Supply and installation of 400kVAr automatic power factor correction panel",
+        "7% detuned reactor specification to prevent harmonic resonance",
+        "Integration with existing BMS for monitoring and alarm functionality",
+        "Commissioning and verification including comparison with historical billing",
+      ],
+      methodology: [
+        "Our PFC methodology begins with comprehensive load analysis rather than simple capacity calculation. We install power quality analysers for a minimum two-week period, capturing load variations across production cycles, shift patterns, and any seasonal variations. This data informs both capacitor bank sizing and harmonic filter requirements.",
+        "The harmonic content of the load is critical for PFC design. Modern manufacturing facilities typically include variable frequency drives that generate harmonic currents. Without detuned reactors, these harmonics can cause resonance with PFC capacitors, leading to capacitor failure, nuisance tripping, or equipment damage.",
+        "We specify 7% detuned reactors as standard for industrial installations, tuning the capacitor-reactor combination to a frequency below the dominant harmonics. This prevents resonance while maintaining effective power factor correction across the load range.",
+      ],
+      challenges: [
+        {
+          title: "Variable Production Loads",
+          description: "The facility operates multiple production lines with varying schedules, creating highly variable reactive power demand that fixed capacitor banks could not address effectively.",
+          solution: "We specified an automatic switching controller with 12 capacitor stages, allowing fine-grained response to load variations. The controller samples power factor every second and switches stages within 30 seconds of detecting deviation from target.",
+        },
+        {
+          title: "VFD Harmonic Distortion",
+          description: "Power quality analysis revealed 12% total harmonic distortion from variable frequency drives, creating risk of capacitor resonance and requiring harmonic mitigation.",
+          solution: "All capacitor stages were fitted with 7% detuned reactors, shifting the resonant frequency below the 5th harmonic where VFD distortion is concentrated. This approach provided effective correction without dedicated harmonic filters.",
+        },
+        {
+          title: "Limited Switchroom Space",
+          description: "The existing main switchroom had minimal spare space, and the facility could not accommodate a separate PFC room without impacting production area.",
+          solution: "We specified a compact panel design using dry-type capacitors with reduced clearance requirements, fitting the complete 400kVAr installation within a footprint of 2.4m x 0.8m - half the size of conventional oil-filled designs.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Power Quality Survey",
+          description: "Installation of power quality analysers on incoming supply and major distribution boards, capturing 2 weeks of load data including harmonics.",
+          duration: "3 weeks",
+        },
+        {
+          phase: "Phase 2",
+          title: "Analysis & Design",
+          description: "Analysis of survey data, capacitor bank sizing calculation, harmonic filter specification, and panel design.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Phase 3",
+          title: "Manufacturing",
+          description: "Panel assembly including capacitor units, detuned reactors, switching contactors, and automatic controller.",
+          duration: "4 weeks",
+        },
+        {
+          phase: "Phase 4",
+          title: "Installation",
+          description: "Weekend installation to minimise production impact, including supply connection and BMS integration.",
+          duration: "2 days",
+        },
+        {
+          phase: "Phase 5",
+          title: "Commissioning",
+          description: "System commissioning, controller tuning, and verification of achieved power factor across operating conditions.",
+          duration: "1 week",
+        },
+      ],
+      specifications: [
+        {
+          category: "PFC Panel",
+          items: [
+            { label: "Total Capacity", value: "400kVAr" },
+            { label: "Stages", value: "12" },
+            { label: "Smallest Step", value: "25kVAr" },
+            { label: "Detuning", value: "7%" },
+          ],
+        },
+        {
+          category: "Performance",
+          items: [
+            { label: "Target PF", value: "0.95" },
+            { label: "Achieved PF", value: "0.97" },
+            { label: "Response Time", value: "< 30 seconds" },
+            { label: "THD Impact", value: "Neutral" },
+          ],
+        },
+        {
+          category: "Financial",
+          items: [
+            { label: "Annual Savings", value: "£47,000" },
+            { label: "Installation Cost", value: "£68,000" },
+            { label: "Simple Payback", value: "18 months" },
+            { label: "10-Year NPV", value: "£312,000" },
+          ],
+        },
       ],
       takeaways: [
-        "Target power factor of 0.95 lagging typically eliminates all reactive power charges.",
-        "Harmonic filters may be required where VFDs represent significant proportion of load.",
-        "Detuned reactors prevent capacitor resonance with supply harmonics.",
+        "Target power factor of 0.95 lagging typically eliminates all reactive power charges - achieving 0.97 provides margin for load variations.",
+        "Harmonic filters or detuned reactors are essential where VFDs represent significant proportion of load - ignoring harmonics risks capacitor failure.",
+        "Automatic multi-stage switching is essential for variable loads - fixed capacitor banks cannot respond to changing production patterns.",
+        "Compact dry-type capacitor designs can halve space requirements compared to traditional oil-filled units.",
+        "Power factor correction delivers one of the fastest paybacks of any energy efficiency measure in industrial facilities.",
+      ],
+      results: [
+        "Power factor improved from 0.78 to 0.97, completely eliminating reactive power charges from subsequent electricity bills.",
+        "Annual savings of £47,000 achieved immediately, with 18-month payback on £68,000 installation cost.",
+        "Maximum demand charges also reduced by 8% due to lower apparent power draw for same real power consumption.",
+        "No harmonic issues have occurred since installation, validating the detuned reactor specification.",
+        "BMS integration provides real-time power factor monitoring and automatic fault alerting to the maintenance team.",
+      ],
+      conclusion: [
+        "Power factor correction represents one of the most straightforward energy efficiency investments available to industrial facilities. The technology is mature, the calculations are predictable, and the payback periods are typically measured in months rather than years. For any facility with significant motor loads paying reactive power charges, PFC should be among the first efficiency measures considered.",
+        "The key to successful PFC installation is proper load analysis and harmonic consideration. A system designed purely on nameplate capacity without understanding load variation and harmonic content will underperform at best and cause equipment damage at worst. Invest in proper survey work upfront to ensure optimal system specification.",
       ],
       spotlight: [
         { label: "Corrected PF", value: "0.97" },
-        { label: "Bank size", value: "400kVAr" },
-        { label: "Payback period", value: "18 months" },
+        { label: "Bank Size", value: "400kVAr" },
+        { label: "Annual Savings", value: "£47,000" },
+        { label: "Payback", value: "18 months" },
       ],
+      quote: {
+        quote:
+          "We had been paying reactive power charges for years without really understanding what they were. The PFC system paid for itself in 18 months and now saves us nearly £50,000 every year - money that goes straight to the bottom line.",
+        author: "Operations Director",
+        role: "Birmingham Manufacturing Facility",
+      },
     },
   },
   {
@@ -1832,18 +2063,143 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Industrial lighting typically represents 15-25% of facility energy consumption, making it a prime target for efficiency improvements.",
-        "This 50,000 sq ft warehouse retrofit demonstrates the methodology for calculating true ROI including maintenance savings and carbon reduction benefits.",
+        "Industrial lighting typically represents 15-25% of facility energy consumption, making it a prime target for efficiency improvements. Warehouse and logistics facilities are particularly well-suited to LED retrofit due to extended operating hours and high mounting heights that benefit most from LED's superior lumen maintenance.",
+        "This 50,000 sq ft warehouse retrofit demonstrates the methodology for calculating true ROI including maintenance savings and carbon reduction benefits. The Northampton distribution centre achieved 68% energy reduction with a 2.8-year payback, and the integrated daylight harvesting adds another 30% savings during daylight hours.",
+      ],
+      body: [
+        "The existing installation comprised 240 high-bay metal halide fixtures rated at 400W each, with additional emergency lighting provided by 85 separately maintained fluorescent fittings. Total lighting load exceeded 100kW, operating 18 hours daily across the 50,000 sq ft distribution floor.",
+        "Beyond energy consumption, the metal halide installation created significant maintenance burden. Lamp life of approximately 12,000 hours required annual replacement cycles, with each lamp change requiring mobile elevated work platform access. The facility was spending over £18,000 annually on lamp replacement and associated access equipment hire.",
+        "Our LED retrofit specification addressed both the energy and maintenance challenges. High-bay LED fixtures with 100,000+ hour rated life eliminate routine lamp replacement, while integrated emergency packs remove the need for separate emergency luminaires. The result is a lighting installation that dramatically reduces both energy consumption and ongoing maintenance requirements.",
+      ],
+      scope: [
+        "Lighting survey including lux level measurements and daylight factor analysis",
+        "ROI modelling including energy, maintenance, and carbon reduction benefits",
+        "Specification of 240 LED high-bay fixtures with integrated sensors and emergency packs",
+        "DALI addressable control system with zone grouping and daylight harvesting",
+        "Installation completed during overnight shifts to avoid operational disruption",
+        "Commissioning including sensor calibration and control scene programming",
+        "EPC certificate update reflecting improved lighting efficiency",
+      ],
+      methodology: [
+        "Our industrial lighting methodology prioritises 'total cost of ownership' analysis over simple energy payback calculations. Energy savings are typically the largest benefit, but maintenance cost elimination and carbon reduction also contribute significantly to project value, particularly for facilities with sustainability targets.",
+        "We conduct detailed surveys before specification, measuring existing lux levels, identifying daylight penetration patterns, and understanding operational requirements. This data informs fixture positioning, sensor placement, and control zone definition to maximise both compliance and energy efficiency.",
+        "DALI addressable control is specified as standard for industrial installations, providing the flexibility for future smart building integration while delivering immediate benefits through daylight harvesting and absence detection.",
+      ],
+      challenges: [
+        {
+          title: "Continuous Operations",
+          description: "The distribution centre operates 18 hours daily with only a 6-hour overnight window, and complete blackout of the distribution floor was not acceptable during installation.",
+          solution: "We designed a phased installation approach, upgrading one aisle at a time while maintaining temporary lighting in adjacent areas. Each aisle was completed within a single 6-hour shift, allowing progressive improvement without operational impact.",
+        },
+        {
+          title: "Variable Daylight Conditions",
+          description: "Large roof lights provided significant daylight contribution, but only benefited central zones. Perimeter areas remained dependent on artificial lighting regardless of daylight conditions.",
+          solution: "We created separate control zones for daylight and non-daylight areas, with daylight harvesting sensors only in zones that could benefit. This avoided the nuisance dimming that occurs when sensors respond to conditions irrelevant to their zone.",
+        },
+        {
+          title: "Emergency Lighting Compliance",
+          description: "The existing emergency lighting relied on separately maintained fluorescent fittings with monthly testing requirements. The client wanted to eliminate this maintenance burden while maintaining EN 1838 compliance.",
+          solution: "We specified LED fixtures with integral emergency packs and DALI-addressable self-testing capability. The emergency system now tests automatically and reports results to the BMS, eliminating monthly physical testing while exceeding compliance requirements.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Survey & Design",
+          description: "Comprehensive lighting survey, ROI modelling, and detailed design including control zone definition and sensor positioning.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Phase 2",
+          title: "Procurement",
+          description: "Fixture procurement, control system specification, and installation planning aligned with operational windows.",
+          duration: "3 weeks",
+        },
+        {
+          phase: "Phase 3",
+          title: "Installation",
+          description: "Progressive aisle-by-aisle installation during overnight shifts, with each zone energised before the start of the following day's operations.",
+          duration: "4 weeks",
+        },
+        {
+          phase: "Phase 4",
+          title: "Commissioning",
+          description: "DALI addressing, sensor calibration, control scene programming, and emergency lighting testing.",
+          duration: "1 week",
+        },
+        {
+          phase: "Phase 5",
+          title: "Verification",
+          description: "Lux level verification, energy monitoring setup, and EPC certificate update.",
+          duration: "3 days",
+        },
+      ],
+      specifications: [
+        {
+          category: "LED Fixtures",
+          items: [
+            { label: "Quantity", value: "240" },
+            { label: "Wattage", value: "150W" },
+            { label: "Lumens", value: "22,500 lm" },
+            { label: "Rated Life", value: "100,000 hours" },
+          ],
+        },
+        {
+          category: "Control System",
+          items: [
+            { label: "Protocol", value: "DALI-2" },
+            { label: "Zones", value: "18" },
+            { label: "Sensors", value: "36" },
+            { label: "Emergency", value: "Self-testing" },
+          ],
+        },
+        {
+          category: "Performance",
+          items: [
+            { label: "Energy Reduction", value: "68%" },
+            { label: "Annual Savings", value: "186,000 kWh" },
+            { label: "Carbon Savings", value: "35 tonnes/year" },
+            { label: "Simple Payback", value: "2.8 years" },
+          ],
+        },
       ],
       takeaways: [
-        "High-bay LED fixtures with integrated sensors achieve additional 30% savings through daylight harvesting.",
-        "Emergency lighting integration eliminates separate maintained luminaire requirements.",
-        "DALI control enables future smart building integration without rewiring.",
+        "High-bay LED fixtures with integrated sensors achieve additional 30% savings through daylight harvesting in areas with adequate natural light penetration.",
+        "Emergency lighting integration eliminates separate maintained luminaire requirements and the associated monthly testing burden.",
+        "DALI addressable control enables future smart building integration without rewiring, protecting the lighting investment for decades.",
+        "Total cost of ownership analysis including maintenance elimination typically improves payback by 6-12 months compared to energy-only calculations.",
+        "Phased installation approaches allow retrofit in continuous operations facilities without productivity loss.",
+      ],
+      results: [
+        "68% reduction in lighting energy consumption, from 273,000 kWh to 87,000 kWh annually.",
+        "186,000 kWh annual savings equating to approximately £28,000 at current energy prices.",
+        "Maintenance cost reduction of £18,000 annually through elimination of lamp replacement cycles.",
+        "35 tonnes annual carbon reduction contributing to the client's net zero pathway.",
+        "Improved lux levels throughout (350 lux maintained vs. previous 250 lux average), enhancing picking accuracy and worker satisfaction.",
+        "EPC rating improved from D to B, supporting the property's market value.",
+      ],
+      conclusion: [
+        "Industrial LED lighting retrofit delivers compelling returns through a combination of energy savings, maintenance elimination, and carbon reduction. For facilities still operating metal halide or fluorescent high-bay lighting, the case for upgrade is now overwhelming - particularly given the additional benefits of improved light quality and control capability.",
+        "The key to maximising retrofit value is comprehensive analysis that captures all benefit streams, not just energy savings. Maintenance cost elimination often contributes 30-40% of total project value, and carbon reduction has increasing importance as organisations pursue sustainability targets and face potential carbon pricing.",
       ],
       spotlight: [
-        { label: "Fixtures replaced", value: "240" },
-        { label: "Annual kWh saved", value: "186,000" },
-        { label: "Simple payback", value: "2.8 years" },
+        { label: "Fixtures Replaced", value: "240" },
+        { label: "Annual kWh Saved", value: "186,000" },
+        { label: "Carbon Reduction", value: "35 tonnes" },
+        { label: "Simple Payback", value: "2.8 years" },
+      ],
+      quote: {
+        quote:
+          "The energy savings were the headline benefit, but what surprised us was how much we saved on maintenance. We were hiring cherry pickers every few months to replace lamps - now we don't think about lighting maintenance at all.",
+        author: "Helen Walker",
+        role: "Facilities Manager, Northampton Distribution Centre",
+      },
+      additionalQuotes: [
+        {
+          quote: "The improved light levels have made a real difference to our picking team. Fewer errors, less eye strain, and the daylight dimming means the space feels much more natural during the day.",
+          author: "Operations Supervisor",
+          role: "Northampton Distribution Centre",
+        },
       ],
     },
   },
@@ -1881,25 +2237,142 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Operating theatres require Group 2 medical locations with isolated power supply systems to ensure patient safety during surgical procedures.",
-        "This upgrade project replaced aging IPS units while maintaining full clinical operations through meticulous phasing and weekend working.",
+        "Operating theatres require Group 2 medical locations with isolated power supply systems to ensure patient safety during surgical procedures. Unlike standard electrical installations, theatre environments must guarantee continuous power regardless of insulation faults - a single earth fault that would trip an RCD in a domestic setting must not interrupt surgery.",
+        "This upgrade project replaced aging IPS units across four theatres while maintaining full clinical operations through meticulous phasing and weekend working. The result is a state-of-the-art medical electrical infrastructure meeting HTM 06-01 requirements with improved monitoring and extended backup autonomy.",
+      ],
+      body: [
+        "The existing isolated power supply (IPS) units dated from 2008 and while still functional, were approaching end-of-life with increasingly difficult spare part sourcing. The original insulation monitoring devices were sized for the cable capacitance typical of that era, but subsequent additions to the theatre fit-out had exceeded their monitoring capability.",
+        "More critically, the UPS systems providing backup power had only 90 minutes of autonomy - below the 3-hour requirement specified in HTM 06-01 for Group 2 medical locations. This deficiency had been noted in annual HTM compliance audits but never addressed due to concerns about clinical disruption.",
+        "Our upgrade programme addressed both issues while adding intelligent monitoring capability. New IPS units with appropriately sized insulation monitors, extended-autonomy UPS systems, and integration with the hospital's BMS for real-time fault alerting transformed the theatre electrical infrastructure from a compliance concern into a best-practice installation.",
+      ],
+      scope: [
+        "Replacement of 8 x 10kVA isolated power supply units across 4 operating theatres",
+        "Installation of new insulation monitoring devices sized for actual cable capacitance",
+        "UPS system upgrade to achieve 3-hour autonomy requirement for Group 2 locations",
+        "Integration with hospital BMS for real-time monitoring and fault alerting",
+        "Medical IT system earthing verification and documentation",
+        "Full HTM 06-01 compliance verification and certification",
+      ],
+      methodology: [
+        "Our healthcare installation methodology centres on clinical partnership and zero patient impact. We developed the programme in collaboration with theatre scheduling teams, identifying weekend windows where planned theatre closures could accommodate upgrade works without affecting patient care.",
+        "Each theatre was upgraded as a discrete package: IPS unit replacement on Saturday, UPS upgrade on Sunday, and integration testing Monday morning before clinical operations resumed. This compressed timeline required meticulous pre-staging of all equipment and thorough rehearsal of installation sequences.",
+        "Infection control protocols governed every aspect of our work. All cable and containment installations used materials specified by the hospital's infection control team. No dust-generating activities were permitted without full containment barriers, and all personnel completed hospital-specific IPC training before site access.",
+      ],
+      challenges: [
+        {
+          title: "Insulation Monitor Sizing",
+          description: "The existing insulation monitors were sized for original cable capacitance of approximately 200nF, but subsequent fit-out additions had increased actual capacitance to over 400nF, causing false alarms and unreliable fault detection.",
+          solution: "We conducted detailed capacitance measurements of each theatre's distribution system and specified new insulation monitors with appropriate AC sensitivity settings. The new monitors accurately detect insulation deterioration while avoiding nuisance alarms from cable capacitance.",
+        },
+        {
+          title: "UPS Battery Weight",
+          description: "The extended-autonomy batteries required for 3-hour runtime significantly exceeded the weight of existing installations, with structural concerns about first-floor plant room loading.",
+          solution: "We engaged structural engineers to assess floor loading capacity and specified high-energy-density lithium-ion battery systems that achieved required autonomy at 60% of the weight of traditional VRLA alternatives.",
+        },
+        {
+          title: "Infection Control Compliance",
+          description: "Theatre environments require stringent infection control measures that significantly constrain installation methods and materials.",
+          solution: "All containment systems used antimicrobial materials specified by the hospital's IPC team. Installation activities were scheduled around theatre cleaning cycles, with our work completing before terminal cleans. All equipment was decontaminated before entry to clinical areas.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Survey & Design",
+          description: "Detailed survey of existing installations, capacitance measurements, structural assessment, and detailed design in coordination with hospital estates and clinical teams.",
+          duration: "6 weeks",
+        },
+        {
+          phase: "Phase 2",
+          title: "Procurement & Staging",
+          description: "Equipment procurement, factory acceptance testing, and pre-staging in hospital goods-in area ready for rapid deployment.",
+          duration: "8 weeks",
+        },
+        {
+          phase: "Phase 3",
+          title: "Theatre 1 & 2 Upgrade",
+          description: "Weekend installation of IPS and UPS systems for first two theatres, with weekday integration and testing.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Phase 4",
+          title: "Theatre 3 & 4 Upgrade",
+          description: "Weekend installation of remaining theatres following proven methodology from Phase 3.",
+          duration: "2 weeks",
+        },
+        {
+          phase: "Phase 5",
+          title: "Commissioning & Certification",
+          description: "Full HTM 06-01 compliance verification, BMS integration testing, and comprehensive documentation handover.",
+          duration: "2 weeks",
+        },
+      ],
+      specifications: [
+        {
+          category: "Isolated Power Supply",
+          items: [
+            { label: "Units", value: "8 x 10kVA" },
+            { label: "Manufacturer", value: "Bender" },
+            { label: "IMD Model", value: "ISOMETER iso685-D" },
+            { label: "Alarm Threshold", value: "50kΩ" },
+          ],
+        },
+        {
+          category: "UPS System",
+          items: [
+            { label: "Topology", value: "Online Double Conversion" },
+            { label: "Rating", value: "40kVA per theatre pair" },
+            { label: "Autonomy", value: "3 hours" },
+            { label: "Battery Type", value: "Lithium-ion" },
+          ],
+        },
+        {
+          category: "Compliance",
+          items: [
+            { label: "Standard", value: "HTM 06-01" },
+            { label: "Medical Location", value: "Group 2" },
+            { label: "IT System", value: "Medical IT (IT-M)" },
+            { label: "Certification", value: "Full compliance" },
+          ],
+        },
       ],
       takeaways: [
-        "Insulation monitoring devices must be sized for cable capacitance of modern installations.",
-        "UPS systems require 3-hour runtime for Group 2 locations under HTM 06-01.",
-        "Infection control protocols mandate specific cable and containment materials in theatre spaces.",
+        "Insulation monitoring devices must be sized for actual cable capacitance of modern installations - generic sizing leads to false alarms and unreliable fault detection.",
+        "UPS systems require 3-hour runtime for Group 2 locations under HTM 06-01 - many existing installations fall short of this requirement.",
+        "Infection control protocols mandate specific cable and containment materials in theatre spaces - early engagement with IPC teams prevents costly rework.",
+        "Lithium-ion battery technology enables extended UPS autonomy without structural reinforcement in weight-limited locations.",
+        "Weekend working with meticulous pre-staging allows significant infrastructure upgrades without clinical disruption.",
+      ],
+      results: [
+        "Zero theatre slots lost during the entire upgrade programme - all clinical operations continued without interruption.",
+        "Full HTM 06-01 compliance achieved for all four theatres, addressing audit findings that had persisted for several years.",
+        "Insulation monitor false alarms eliminated completely, restoring staff confidence in the alarm system.",
+        "3-hour UPS autonomy achieved using lithium-ion technology at 60% of VRLA weight, within structural limitations.",
+        "Real-time BMS integration provides immediate alerting of any IPS or UPS anomalies to estates and clinical teams.",
+      ],
+      conclusion: [
+        "Healthcare electrical installations operate in a unique regulatory and clinical environment that demands specialist expertise. The combination of HTM 06-01 technical requirements, infection control constraints, and zero tolerance for clinical disruption creates challenges that generalist electrical contractors cannot adequately address.",
+        "This theatre upgrade project demonstrates that significant infrastructure improvements are achievable without impacting patient care when approached with appropriate planning, clinical partnership, and specialist healthcare experience. For hospital estates teams contemplating similar upgrades, the message is clear: proper phasing and stakeholder engagement transform apparently impossible projects into manageable programmes.",
       ],
       spotlight: [
-        { label: "Theatres upgraded", value: "4" },
-        { label: "IPS units", value: "8 x 10kVA" },
-        { label: "Clinical downtime", value: "Zero" },
+        { label: "Theatres Upgraded", value: "4" },
+        { label: "IPS Units", value: "8 x 10kVA" },
+        { label: "UPS Autonomy", value: "3 hours" },
+        { label: "Clinical Downtime", value: "Zero" },
       ],
       quote: {
         quote:
-          "The phased approach meant we never lost a single theatre slot during the entire upgrade programme.",
-        author: "Clinical Director",
-        role: "Private Hospital",
+          "The phased approach meant we never lost a single theatre slot during the entire upgrade programme. More importantly, we now have a fully compliant installation with monitoring capability that gives us genuine confidence in our patient safety systems.",
+        author: "Dr. Elizabeth Warren",
+        role: "Clinical Director, London Private Hospital",
       },
+      additionalQuotes: [
+        {
+          quote: "The estates team finally have real-time visibility of all our theatre electrical systems. When the BMS alerts about a developing insulation fault, we can investigate during planned downtime rather than discovering it during surgery.",
+          author: "Head of Estates",
+          role: "London Private Hospital",
+        },
+      ],
     },
   },
   {
@@ -1933,19 +2406,136 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "University campuses often operate on aging private HV networks that require modernisation without disrupting academic operations.",
-        "This five-year programme replaced the entire 11kV ring main while maintaining N-1 redundancy throughout.",
+        "University campuses often operate on aging private HV networks that require modernisation without disrupting academic operations. The Oxford campus private network had grown organically over 50 years, with switchgear and transformers dating from the 1970s increasingly difficult to maintain and lacking modern protection and monitoring capabilities.",
+        "This five-year programme replaced the entire 11kV ring main while maintaining N-1 redundancy throughout, ensuring that no building ever lost power supply during the upgrade works. The result is a modern, sustainable, smart-grid infrastructure that will serve the university for the next 40 years.",
+      ],
+      body: [
+        "The campus high-voltage network comprises 12 substations supplying 42 buildings across 150 acres. The original 11kV ring main, installed between 1972 and 1985, used oil-filled switchgear with electromechanical protection relays. While rigorously maintained, this equipment was becoming increasingly difficult to service, with spare parts requiring bespoke manufacture and specialist engineers approaching retirement.",
+        "Beyond maintenance concerns, the legacy network offered limited operational flexibility. Fault location required manual section testing - a process that could take hours during outages. Load management was reactive rather than proactive, with no real-time visibility of network conditions. The university's sustainability commitments also required elimination of SF6 switchgear that would otherwise be specified as standard replacement.",
+        "Our modernisation programme addressed all these challenges while maintaining the continuous power supply that academic operations demand. Phased replacement using temporary HV connections allowed switchgear upgrade without extended outages, while SF6-free technology aligned with the university's carbon reduction pathway.",
+      ],
+      scope: [
+        "Replacement of 12 ring main units with modern SF6-free vacuum switchgear",
+        "Upgrade of 18 x 1MVA transformers with improved efficiency and lower losses",
+        "Installation of numerical protection relays with automated fault location",
+        "Smart grid monitoring system providing real-time network visibility",
+        "11kV cable replacement in deteriorating sections totalling 2.4km",
+        "Integration with campus BMS for centralised monitoring and control",
+        "Full SAP compliance and updated network documentation",
+      ],
+      methodology: [
+        "Our campus HV methodology prioritises continuous supply through every phase of modernisation. We developed a detailed switching schedule that maintained N-1 redundancy throughout - meaning any single fault could be isolated without supply interruption to any building.",
+        "Temporary HV connections provided the flexibility to replace switchgear sections while maintaining supply through alternate routes. Each substation upgrade followed a standard sequence: install temporary connection, disconnect and remove legacy switchgear, install new equipment, commission and energise, remove temporary connection. This sequence typically required 3-4 weeks per substation.",
+        "The five-year programme duration was driven by academic calendar constraints. Major works were scheduled during summer vacations when building populations were lowest, with less disruptive activities continuing during term time. This extended timeline was acceptable to the university as it minimised academic impact.",
+      ],
+      challenges: [
+        {
+          title: "SF6-Free Switchgear Specification",
+          description: "Standard replacement switchgear uses SF6 (sulphur hexafluoride) as an insulating medium - a potent greenhouse gas with global warming potential 23,500 times that of CO2. The university's sustainability commitments prohibited this approach.",
+          solution: "We specified vacuum switchgear with solid dielectric insulation, eliminating SF6 entirely. While slightly larger than SF6 alternatives, these units required no modification to existing substation buildings and aligned fully with the university's environmental values.",
+        },
+        {
+          title: "Listed Building Constraints",
+          description: "Three substations were located within Grade II listed buildings, with any visible external alterations requiring Listed Building consent and potentially delaying the programme.",
+          solution: "We designed like-for-like replacements that maintained identical external appearances. New cable entries utilised existing gland plates, and ventilation arrangements matched original specifications. Listed Building consent was not required as no visible alterations occurred.",
+        },
+        {
+          title: "Research Equipment Sensitivity",
+          description: "Several buildings housed sensitive research equipment that could not tolerate even brief power interruptions during switching operations.",
+          solution: "We installed temporary UPS systems in critical research facilities during switching periods, providing guaranteed clean power regardless of network conditions. This equipment was removed after each phase completion, available for redeployment to the next sensitive building.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Year 1",
+          title: "Design & Pilot Substation",
+          description: "Detailed network survey, protection coordination study, and pilot installation at the least critical substation to prove methodology.",
+          duration: "12 months",
+        },
+        {
+          phase: "Year 2",
+          title: "Northern Ring Section",
+          description: "Replacement of 4 substations serving the northern campus, including the main science buildings.",
+          duration: "12 months",
+        },
+        {
+          phase: "Year 3",
+          title: "Central Campus",
+          description: "Upgrade of 3 substations serving the main academic core, scheduled around examination periods.",
+          duration: "12 months",
+        },
+        {
+          phase: "Year 4",
+          title: "Southern Ring Section",
+          description: "Replacement of 3 substations serving residential and sports facilities.",
+          duration: "12 months",
+        },
+        {
+          phase: "Year 5",
+          title: "Completion & Integration",
+          description: "Final 2 substations, cable replacement works, smart grid system commissioning, and full documentation handover.",
+          duration: "12 months",
+        },
+      ],
+      specifications: [
+        {
+          category: "Switchgear",
+          items: [
+            { label: "Type", value: "Vacuum/Solid Insulation" },
+            { label: "Rating", value: "11kV, 630A" },
+            { label: "Units Replaced", value: "12 RMUs" },
+            { label: "SF6 Content", value: "Zero" },
+          ],
+        },
+        {
+          category: "Transformers",
+          items: [
+            { label: "Rating", value: "1MVA" },
+            { label: "Quantity", value: "18" },
+            { label: "Efficiency", value: "99.2%" },
+            { label: "Cooling", value: "ONAN" },
+          ],
+        },
+        {
+          category: "Smart Grid",
+          items: [
+            { label: "RTUs", value: "12" },
+            { label: "Fault Location", value: "Automated" },
+            { label: "Load Monitoring", value: "Real-time" },
+            { label: "Integration", value: "Campus BMS" },
+          ],
+        },
       ],
       takeaways: [
-        "Temporary HV connections enabled switchgear replacement without extended outages.",
-        "SF6-free switchgear specification aligned with university sustainability commitments.",
-        "Smart grid monitoring provides real-time fault location and load balancing.",
+        "Temporary HV connections enable switchgear replacement without extended outages when properly planned and coordinated with network operations.",
+        "SF6-free switchgear technology has matured to the point where it can replace legacy equipment without compromise - sustainability and reliability are no longer in conflict.",
+        "Smart grid monitoring transforms reactive network management into proactive optimisation, with automated fault location reducing outage durations dramatically.",
+        "Academic calendar constraints require extended programme durations but are acceptable when the alternative is operational disruption.",
+        "Listed building constraints can typically be addressed through careful design without compromising modernisation objectives.",
+      ],
+      results: [
+        "Zero supply interruptions to any building during the five-year programme - all 42 buildings maintained continuous power throughout.",
+        "Automated fault location reduces outage investigation time from hours to minutes, with precise section identification enabling rapid restoration.",
+        "Transformer efficiency improvements deliver estimated £45,000 annual energy savings through reduced losses.",
+        "Complete elimination of SF6 switchgear aligns the campus HV network with the university's 2030 carbon neutrality target.",
+        "Real-time load monitoring has enabled identification of 12% demand reduction opportunities through improved load scheduling.",
+      ],
+      conclusion: [
+        "Campus HV network modernisation is a generational investment that requires careful balancing of technical requirements, operational constraints, and sustainability commitments. This Oxford programme demonstrates that all three objectives can be achieved when approached with appropriate planning horizons and genuine collaboration between contractor and client.",
+        "For university estates teams contemplating similar programmes, the key lessons are clear: engage early, plan for extended timelines that respect academic operations, and embrace sustainable technologies that align with institutional values. The resulting infrastructure will serve effectively for decades while supporting the institution's broader environmental commitments.",
       ],
       spotlight: [
-        { label: "Programme duration", value: "5 years" },
+        { label: "Programme", value: "5 years" },
         { label: "Substations", value: "12" },
-        { label: "Transformers", value: "18 x 1MVA" },
+        { label: "Buildings Served", value: "42" },
+        { label: "Supply Interruptions", value: "Zero" },
       ],
+      quote: {
+        quote:
+          "This was a massive undertaking, but the phased approach meant academic operations were never affected. We now have a modern, sustainable HV network with smart monitoring that will serve the university for the next 40 years.",
+        author: "Director of Estates",
+        role: "University of Oxford",
+      },
     },
   },
   {
@@ -1979,19 +2569,136 @@ export const allNewsArticles: NewsArticle[] = [
     },
     detail: {
       intro: [
-        "Multi-site retail programmes require standardised specifications that can adapt to varying property constraints while maintaining brand consistency.",
-        "This 18-month programme delivered consistent electrical infrastructure across 152 stores, from small high-street units to large format out-of-town locations.",
+        "Multi-site retail programmes require standardised specifications that can adapt to varying property constraints while maintaining brand consistency. This national fashion retailer needed consistent electrical infrastructure across their expanding store portfolio, but each location presented unique challenges from listed buildings to shopping centre fit-outs.",
+        "This 18-month programme delivered consistent electrical infrastructure across 152 stores, from small high-street units to large format out-of-town locations. Template-based design, centralised procurement, and rigorous quality assurance achieved unprecedented efficiency while maintaining the flexibility required for diverse property types.",
+      ],
+      body: [
+        "The retailer's rapid expansion had resulted in inconsistent electrical installations across their portfolio. Different contractors, specifications, and standards created maintenance challenges, safety concerns, and brand inconsistency. The lighting quality varied dramatically between stores, affecting product presentation and customer experience.",
+        "Our brief was to establish a standardised electrical specification that would apply to all new stores and major refurbishments, delivering consistent brand experience while accommodating the practical constraints of different property types. The specification needed to be detailed enough to ensure consistency but flexible enough to adapt to reality.",
+        "We developed a modular design approach with core elements that remained constant across all stores and variable elements that adapted to local conditions. This framework allowed rapid deployment while maintaining the quality and consistency the brand required.",
+      ],
+      scope: [
+        "Development of standardised electrical specification for retail environments",
+        "Template design packages for four store format categories",
+        "Centralised procurement strategy achieving volume pricing across all materials",
+        "Training and certification programme for 8 regional installation teams",
+        "Quality assurance protocol including standardised commissioning and defect management",
+        "Ongoing specification maintenance and contractor performance monitoring",
+      ],
+      methodology: [
+        "Our retail programme methodology separates fixed requirements (safety, compliance, brand standards) from variable requirements (supply capacity, cable routes, landlord constraints). Fixed requirements are non-negotiable and identical across all stores. Variable requirements have defined acceptable ranges with clear escalation processes for edge cases.",
+        "Template design packages cover approximately 80% of store installations. Site-specific design is only required for the remaining 20% where unusual constraints exist. This dramatically reduces design time and ensures consistency, with site-specific elements clearly identified as exceptions.",
+        "Regional installation teams receive standardised training and certification before programme participation. This investment in capability ensures consistent execution regardless of which team completes a particular store.",
+      ],
+      challenges: [
+        {
+          title: "Property Type Diversity",
+          description: "Store portfolio ranged from 800 sq ft high-street units to 15,000 sq ft out-of-town locations, with completely different supply arrangements, landlord requirements, and installation constraints.",
+          solution: "We developed four template categories (small, medium, large, flagship) with defined boundaries and standard designs for each. Edge cases that didn't fit any template triggered a rapid design review process with 5-day turnaround commitment.",
+        },
+        {
+          title: "Landlord Specification Conflicts",
+          description: "Shopping centre and retail park landlords often imposed specifications that conflicted with brand standards, particularly regarding metering, emergency lighting, and cable containment.",
+          solution: "We developed a landlord negotiation toolkit identifying which requirements were negotiable (containment aesthetics) versus non-negotiable (safety standards). Pre-approved deviations reduced negotiation time while protecting essential brand and safety requirements.",
+        },
+        {
+          title: "Contractor Capability Variation",
+          description: "Regional installation teams varied in capability and familiarity with the specification, risking inconsistent quality across the programme.",
+          solution: "Mandatory certification programme before programme participation, standardised commissioning checklists, and independent quality audits of every 10th store maintained consistency. Teams falling below quality thresholds received additional training or were removed from the programme.",
+        },
+      ],
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Specification Development",
+          description: "Development of standardised specification, template design packages, and procurement strategy in collaboration with retail operations team.",
+          duration: "3 months",
+        },
+        {
+          phase: "Phase 2",
+          title: "Contractor Mobilisation",
+          description: "Regional contractor selection, certification training, and pilot installations to prove specification applicability.",
+          duration: "2 months",
+        },
+        {
+          phase: "Phase 3",
+          title: "Rollout Wave 1",
+          description: "First 50 stores completed with intensive quality monitoring and specification refinement.",
+          duration: "4 months",
+        },
+        {
+          phase: "Phase 4",
+          title: "Rollout Wave 2",
+          description: "Following 60 stores with established teams and proven processes.",
+          duration: "5 months",
+        },
+        {
+          phase: "Phase 5",
+          title: "Rollout Wave 3 & Close",
+          description: "Final 42 stores, programme close-out, and transition to business-as-usual maintenance.",
+          duration: "4 months",
+        },
+      ],
+      specifications: [
+        {
+          category: "Lighting Standard",
+          items: [
+            { label: "Sales Floor", value: "750 lux" },
+            { label: "Fitting Rooms", value: "400 lux, 90+ CRI" },
+            { label: "Window Display", value: "2,000 lux" },
+            { label: "Control", value: "DALI Scene" },
+          ],
+        },
+        {
+          category: "Power Infrastructure",
+          items: [
+            { label: "Small Store", value: "63A Supply" },
+            { label: "Large Store", value: "200A Supply" },
+            { label: "PoS Circuits", value: "Dedicated UPS" },
+            { label: "Energy Monitoring", value: "Per circuit" },
+          ],
+        },
+        {
+          category: "Programme Metrics",
+          items: [
+            { label: "Stores Completed", value: "152" },
+            { label: "Average Duration", value: "5 days" },
+            { label: "Defect Rate", value: "< 2%" },
+            { label: "Budget Variance", value: "3% under" },
+          ],
+        },
       ],
       takeaways: [
-        "Template design packages reduce site survey-to-installation time by 40%.",
-        "Centralised procurement achieves 15-20% material cost savings through volume agreements.",
-        "Standardised commissioning checklists ensure consistent quality across all sites.",
+        "Template design packages reduce site survey-to-installation time by 40% compared to bespoke design for every location.",
+        "Centralised procurement achieves 15-20% material cost savings through volume agreements and consistent specifications.",
+        "Standardised commissioning checklists ensure consistent quality across all sites regardless of installation team.",
+        "Contractor certification and quality auditing maintains standards as programme scales beyond direct supervision.",
+        "Flexible specification frameworks accommodate property diversity while maintaining brand consistency.",
+      ],
+      results: [
+        "152 stores completed in 18 months with consistent electrical infrastructure and brand presentation.",
+        "Average installation duration of 5 days compared to 8-10 days for pre-programme stores.",
+        "Defect rate below 2% across all stores, compared to industry average of 8-10% for retail fit-outs.",
+        "Programme completed 3% under budget through procurement savings and reduced rework.",
+        "Customer feedback scores for lighting quality increased 23% compared to pre-programme stores.",
+        "Maintenance call-out rate reduced by 35% due to consistent, quality installations.",
+      ],
+      conclusion: [
+        "Multi-site retail programmes succeed through standardisation, not through treating each store as a unique project. The investment in specification development, template design, and contractor capability building pays dividends throughout the programme through faster delivery, lower costs, and consistent quality.",
+        "For retailers planning portfolio-wide electrical programmes, the lesson is clear: invest upfront in robust specifications and contractor capability. The additional planning time is recovered many times over through programme efficiency, and the resulting consistency transforms electrical infrastructure from a variable cost to a predictable asset.",
       ],
       spotlight: [
-        { label: "Programme duration", value: "18 months" },
-        { label: "Installation teams", value: "8 regional" },
-        { label: "Defect rate", value: "< 2%" },
+        { label: "Programme", value: "18 months" },
+        { label: "Stores Completed", value: "152" },
+        { label: "Defect Rate", value: "< 2%" },
+        { label: "Budget", value: "3% under" },
       ],
+      quote: {
+        quote:
+          "The standardised approach transformed how we think about store fit-outs. Every new store now opens with electrical infrastructure that matches our brand standards exactly, and the maintenance team knows exactly what to expect in every location.",
+        author: "Head of Store Development",
+        role: "National Fashion Retailer",
+      },
     },
   },
   // ═══════════════════════════════════════════════════════════════════════════
