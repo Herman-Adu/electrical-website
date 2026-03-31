@@ -97,7 +97,7 @@ export function NewsArticleToc({ items, title = "Contents" }: NewsArticleTocProp
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="sticky top-24 rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 backdrop-blur-sm"
+            className="sticky top-[88px] rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 backdrop-blur-sm"
             aria-label="Table of contents"
           >
             <div className="mb-4 flex items-center gap-2">
