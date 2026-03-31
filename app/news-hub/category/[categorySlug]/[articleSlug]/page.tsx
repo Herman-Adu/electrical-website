@@ -108,32 +108,35 @@ export default async function NewsArticlePage({
       <NewsDetailHero article={article} />
 
       <section id="article-content" className="section-standard bg-background">
-        <div className="section-content grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.55fr)]">
+        <div className="section-content grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.55fr)]">
           <div className="space-y-10">
-            <div className="space-y-4">
+            <div className="space-y-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
-                Story overview
+                Story Overview
               </p>
               {article.detail.intro.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="text-base leading-8 text-muted-foreground"
+                  className="text-base leading-8 text-foreground/80"
                 >
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-foreground">
-                Key takeaways
+            <div className="space-y-5">
+              <h2 className="text-2xl font-bold text-white">
+                Key Takeaways
               </h2>
               <ul className="space-y-3">
-                {article.detail.takeaways.map((takeaway) => (
+                {article.detail.takeaways.map((takeaway, index) => (
                   <li
                     key={takeaway}
-                    className="rounded-2xl border border-border/50 bg-card/60 px-4 py-4 text-sm leading-6 text-muted-foreground"
+                    className="rounded-xl border-l-4 border-l-electric-cyan/40 border border-electric-cyan/20 bg-electric-cyan/5 px-5 py-4 text-sm leading-7 text-foreground/80 hover:border-l-electric-cyan/60 hover:bg-electric-cyan/10 transition-all"
                   >
+                    <span className="font-mono text-[10px] text-electric-cyan/60 mr-3">
+                      0{index + 1}
+                    </span>
                     {takeaway}
                   </li>
                 ))}
@@ -145,24 +148,24 @@ export default async function NewsArticlePage({
             {article.detail.spotlight?.map((metric) => (
               <div
                 key={metric.label}
-                className="rounded-3xl border border-border/50 bg-card/60 p-5"
+                className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/10 to-transparent p-5"
               >
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">
                   {metric.label}
                 </div>
-                <div className="mt-2 text-2xl font-bold text-foreground">
+                <div className="mt-2 text-2xl font-bold text-electric-cyan">
                   {metric.value}
                 </div>
               </div>
             ))}
 
             {article.detail.quote ? (
-              <blockquote className="rounded-3xl border border-electric-cyan/20 bg-electric-cyan/10 p-5">
-                <p className="text-base leading-7 text-foreground">
-                  “{article.detail.quote.quote}”
+              <blockquote className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 p-5 shadow-[0_0_25px_rgba(0,243,189,0.1)]">
+                <p className="text-base leading-7 text-white italic">
+                  &ldquo;{article.detail.quote.quote}&rdquo;
                 </p>
                 <footer className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan/80">
-                  {article.detail.quote.author} · {article.detail.quote.role}
+                  {article.detail.quote.author} &middot; {article.detail.quote.role}
                 </footer>
               </blockquote>
             ) : null}

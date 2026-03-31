@@ -34,8 +34,8 @@ export function NewsHubArticleCard({
       {/* Desktop: Row layout (image left, content right) */}
       <div className="flex flex-col md:flex-row">
         {/* Image Section */}
-        {item.featuredImage && (
-          <div className="relative h-48 w-full shrink-0 md:h-auto md:w-56 lg:w-64">
+        <div className="relative h-48 w-full shrink-0 md:h-auto md:min-h-[180px] md:w-56 lg:w-64">
+          {item.featuredImage ? (
             <Image
               src={item.featuredImage.src}
               alt={item.featuredImage.alt}
@@ -43,14 +43,20 @@ export function NewsHubArticleCard({
               sizes="(max-width: 768px) 100vw, 256px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-background/40" />
-            {item.isFeatured && (
-              <div className="absolute left-3 top-3 rounded-md border border-electric-cyan/40 bg-electric-cyan/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan backdrop-blur-sm">
-                Featured
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/20 via-electric-cyan/10 to-background flex items-center justify-center">
+              <div className="text-electric-cyan/40 font-mono text-[10px] uppercase tracking-widest">
+                {item.categoryLabel}
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-background/40" />
+          {item.isFeatured && (
+            <div className="absolute left-3 top-3 rounded-md border border-electric-cyan/40 bg-electric-cyan/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan backdrop-blur-sm">
+              Featured
+            </div>
+          )}
+        </div>
 
         {/* Content Section */}
         <div className="flex flex-1 flex-col justify-between gap-4 p-5">
