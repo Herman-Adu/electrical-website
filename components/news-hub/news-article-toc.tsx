@@ -87,19 +87,18 @@ export function NewsArticleToc({ items, title = "Contents" }: NewsArticleTocProp
     visible: { opacity: 1, x: 0 },
   };
 
-  // Hidden on mobile/tablet, visible on xl+ screens (desktop)
+  // Visibility controlled by parent container
   return (
-    <div className="hidden xl:block">
-      <AnimatePresence>
-        {isVisible && (
-          <motion.nav
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="sticky top-[88px] rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 backdrop-blur-sm"
-            aria-label="Table of contents"
-          >
+    <AnimatePresence>
+      {isVisible && (
+        <motion.nav
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 backdrop-blur-sm"
+          aria-label="Table of contents"
+        >
             <div className="mb-4 flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-electric-cyan animate-pulse" />
               <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
@@ -195,10 +194,9 @@ export function NewsArticleToc({ items, title = "Contents" }: NewsArticleTocProp
             <div className="mt-4 pt-4 border-t border-electric-cyan/10">
               <ReadingProgress />
             </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }
 

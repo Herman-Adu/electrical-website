@@ -173,7 +173,7 @@ export default async function NewsArticlePage({
           <NewsArticleContent detail={article.detail} categorySlug={categorySlug} />
 
           {/* Sticky Sidebar */}
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <aside className="hidden xl:block space-y-6 xl:sticky xl:top-[88px] xl:self-start">
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 
