@@ -46,7 +46,7 @@ export function NewsHubFeed({
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] lg:items-start">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] lg:items-start">
       {/* Main Feed Column */}
       <div className="space-y-4">
         {/* Header */}
