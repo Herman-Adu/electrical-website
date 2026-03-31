@@ -167,7 +167,7 @@ export default async function NewsArticlePage({
 
       <NewsDetailHero article={article} />
 
-      <section id="article-content" className="section-standard bg-background">
+      <section id="article-content" className="section-standard bg-background [overflow:visible]">
         <div className="section-content grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
           <NewsArticleContent detail={article.detail} categorySlug={categorySlug} />
