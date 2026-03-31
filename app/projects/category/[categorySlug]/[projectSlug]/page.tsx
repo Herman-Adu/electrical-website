@@ -7,9 +7,8 @@ import {
   getProjectSlugsByCategory,
   allProjects,
 } from "@/data/projects";
+import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
-
-export const revalidate = 259200; // 72 hours
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectDetailHero,
@@ -22,12 +21,16 @@ import {
   ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
+import { ContentToc, ContentSidebar } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
+import type { Project } from "@/types/projects";
+import type { TocItem } from "@/types/shared-content";
+
+export const revalidate = 259200; // 72 hours
 
 /**
  * Generate all [categorySlug] + [projectSlug] pairs at build time.
- * Using the flat approach: child generates full pairs in one call.
  */
 export async function generateStaticParams(): Promise<
   { categorySlug: string; projectSlug: string }[]
@@ -79,6 +82,40 @@ export async function generateMetadata({
   );
 }
 
+// Generate TOC items based on available content sections
+function generateTocItems(project: Project): TocItem[] {
+  const items: TocItem[] = [];
+  const detail = project.detail;
+
+  if (detail?.intro) {
+    items.push({ id: "overview", label: "Overview" });
+  }
+
+  if (detail?.scope && detail.scope.length > 0) {
+    items.push({ id: "scope", label: "Scope of Work" });
+  }
+
+  if (detail?.challenge && detail?.solution) {
+    items.push({ id: "challenge", label: "Challenge & Solution" });
+  }
+
+  if (detail?.timeline && detail.timeline.length > 0) {
+    items.push({ id: "timeline", label: "Project Timeline" });
+  }
+
+  if (detail?.gallery && detail.gallery.length > 0) {
+    items.push({ id: "gallery", label: "Gallery" });
+  }
+
+  if (detail?.testimonial) {
+    items.push({ id: "testimonial", label: "Client Testimonial" });
+  }
+
+  items.push({ id: "related", label: "Related Projects" });
+
+  return items;
+}
+
 export default async function CategoryProjectDetailPage({
   params,
 }: {
@@ -95,6 +132,9 @@ export default async function CategoryProjectDetailPage({
   const relatedProjects = allProjects
     .filter((p) => p.slug !== project.slug && p.category === categorySlug)
     .slice(0, 4);
+
+  const sidebarCards = getProjectsSidebarCards(category.slug);
+  const tocItems = generateTocItems(project);
 
   // Build breadcrumb for JSON-LD
   const breadcrumbItems = [
@@ -140,69 +180,167 @@ export default async function CategoryProjectDetailPage({
       {/* Hero Section with Parallax Image + KPIs */}
       <ProjectDetailHero project={project} categorySlug={categorySlug} />
 
-      {detail?.intro && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectDetailIntro data={detail.intro} />
-          </div>
-        </section>
-      )}
+      {/* Main Content with Sticky Sidebar */}
+      <section
+        id="project-content"
+        className="section-standard bg-background !overflow-visible"
+      >
+        <div className="section-content grid max-w-7xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
+          {/* Main Content Column */}
+          <div className="space-y-0">
+            {detail?.intro && (
+              <div id="overview" className="scroll-mt-24">
+                <ProjectDetailIntro data={detail.intro} />
+              </div>
+            )}
 
-      {detail?.scope && detail.scope.length > 0 && (
-        <section className="section-container py-2 bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectScopeGrid items={detail.scope} />
-          </div>
-        </section>
-      )}
+            {detail?.scope && detail.scope.length > 0 && (
+              <div id="scope" className="scroll-mt-24 py-2">
+                <ProjectScopeGrid items={detail.scope} />
+              </div>
+            )}
 
-      {detail?.challenge && detail?.solution && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectChallengeSolution
-              challenge={detail.challenge}
-              solution={detail.solution}
-            />
-          </div>
-        </section>
-      )}
+            {detail?.challenge && detail?.solution && (
+              <div id="challenge" className="scroll-mt-24">
+                <ProjectChallengeSolution
+                  challenge={detail.challenge}
+                  solution={detail.solution}
+                />
+              </div>
+            )}
 
-      {detail?.timeline && detail.timeline.length > 0 && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectTimeline phases={detail.timeline} />
-          </div>
-        </section>
-      )}
+            {detail?.timeline && detail.timeline.length > 0 && (
+              <div id="timeline" className="scroll-mt-24">
+                <ProjectTimeline phases={detail.timeline} />
+              </div>
+            )}
 
-      {detail?.gallery && detail.gallery.length > 0 && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectGallery images={detail.gallery} />
-          </div>
-        </section>
-      )}
+            {detail?.gallery && detail.gallery.length > 0 && (
+              <div id="gallery" className="scroll-mt-24">
+                <ProjectGallery images={detail.gallery} />
+              </div>
+            )}
 
-      {detail?.testimonial && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectTestimonialCard testimonial={detail.testimonial} />
-          </div>
-        </section>
-      )}
+            {detail?.testimonial && (
+              <div id="testimonial" className="scroll-mt-24">
+                <ProjectTestimonialCard testimonial={detail.testimonial} />
+              </div>
+            )}
 
-      {relatedProjects.length > 0 && (
-        <section className="section-container bg-background">
-          <div className="section-content max-w-6xl">
-            <ProjectRelatedCarousel
-              projects={relatedProjects}
-              categorySlug={categorySlug}
-              heading={`More ${category.label} Projects`}
-            />
+            {relatedProjects.length > 0 && (
+              <div id="related" className="scroll-mt-24">
+                <ProjectRelatedCarousel
+                  projects={relatedProjects}
+                  categorySlug={categorySlug}
+                  heading={`More ${category.label} Projects`}
+                />
+              </div>
+            )}
           </div>
-        </section>
-      )}
 
+          {/* Sticky Sidebar */}
+          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[88px] self-start">
+            {/* Table of Contents */}
+            <ContentToc items={tocItems} title="Project Contents" />
+
+            {/* Project KPIs Card */}
+            <div className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 space-y-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
+                Project Details
+              </h3>
+              <dl className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Status</dt>
+                  <dd className="font-medium text-electric-cyan capitalize">
+                    {project.status.replace("-", " ")}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Budget</dt>
+                  <dd className="font-medium text-white">
+                    {project.kpis.budget}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Timeline</dt>
+                  <dd className="font-medium text-white">
+                    {project.kpis.timeline}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Location</dt>
+                  <dd className="font-medium text-white">
+                    {project.kpis.location}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Capacity</dt>
+                  <dd className="font-medium text-white">
+                    {project.kpis.capacity}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Sector</dt>
+                  <dd className="font-medium text-white">
+                    {project.clientSector}
+                  </dd>
+                </div>
+              </dl>
+
+              {/* Progress bar for in-progress projects */}
+              {project.status === "in-progress" && (
+                <div className="pt-2 border-t border-electric-cyan/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
+                      Progress
+                    </span>
+                    <span className="font-mono text-[10px] text-electric-cyan">
+                      {project.progress}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-electric-cyan/10">
+                    <div
+                      className="h-full bg-gradient-to-r from-electric-cyan/60 to-electric-cyan transition-all"
+                      style={{ width: `${project.progress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Tags */}
+            {project.tags && project.tags.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
+                  Project Tags
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-electric-cyan/20 bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Sidebar Cards (marketing, consultation CTAs) */}
+            {sidebarCards.length > 0 && (
+              <ContentSidebar
+                cards={sidebarCards.slice(0, 2)}
+                title="Get Started"
+                description="Ready to discuss your project requirements?"
+                showLiveIndicator={false}
+              />
+            )}
+          </aside>
+        </div>
+      </section>
+
+      {/* Social CTA - Full Width */}
       <section className="section-container bg-background">
         <div className="section-content max-w-6xl">
           <ProjectSocialCTA

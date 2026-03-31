@@ -756,3 +756,45 @@ export function getProjectSlugsByCategory(
     .filter((project) => project.category === categorySlug)
     .map((project) => project.slug);
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHARED CONTENT GRID SUPPORT
+// Extended list items for ContentGridLayout compatibility
+// ═══════════════════════════════════════════════════════════════════════════
+
+import type { ProjectListItemExtended } from "@/types/shared-content";
+
+/**
+ * Convert a Project to ProjectListItemExtended for ContentGridLayout.
+ */
+function projectToExtendedListItem(project: Project): ProjectListItemExtended {
+  return {
+    id: project.id,
+    slug: project.slug,
+    category: project.category,
+    categoryLabel: project.categoryLabel,
+    title: project.title,
+    excerpt: project.description,
+    publishedAt: project.publishedAt,
+    isFeatured: project.isFeatured,
+    featuredImage: project.coverImage,
+    contentType: "project",
+    status: project.status,
+    location: project.kpis.location,
+    budget: project.kpis.budget,
+    clientSector: project.clientSector,
+  };
+}
+
+/**
+ * Get extended project list items for ContentGridLayout.
+ */
+export function getProjectListItemsExtended(
+  category: ProjectCategorySlug = "all",
+): ProjectListItemExtended[] {
+  const projects =
+    category === "all"
+      ? allProjects
+      : allProjects.filter((p) => p.category === category);
+  return projects.map(projectToExtendedListItem);
+}
