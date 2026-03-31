@@ -3,6 +3,7 @@ export { Features } from "./features";
 export { Schematic } from "./schematic";
 export { Dashboard } from "./dashboard";
 export { Contact } from "./contact";
+export { ContactHero } from "./contact-hero";
 export { Footer } from "./footer";
 export { CTAPower } from "./cta-power";
 export { Illumination } from "./illumination";

@@ -9,7 +9,6 @@ import {
   Mail,
   Clock,
   Send,
-  Zap,
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
@@ -219,30 +218,6 @@ export function Contact() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="mb-6 inline-flex items-center gap-2 border border-electric-cyan/20 px-4 py-2">
-            <Zap size={12} className="text-electric-cyan" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-              Get Connected
-            </span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mb-4">
-            Start Your <span className="text-electric-cyan">Project</span>
-          </h1>
-
-          <p className="text-slate-300 max-w-2xl mx-auto text-base lg:text-lg font-light">
-            Ready to power your next innovation? Get in touch with our
-            engineering team for a comprehensive consultation.
-          </p>
-        </motion.div>
-
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Contact Info */}
           <motion.div
