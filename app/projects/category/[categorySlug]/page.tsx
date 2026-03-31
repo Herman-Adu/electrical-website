@@ -8,7 +8,7 @@ import {
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import { ProjectCategoryHero } from "@/components/projects";
-import { ContentGridLayout } from "@/components/shared";
+import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 
 export const revalidate = 86400; // 24 hours
@@ -57,6 +57,16 @@ export default async function CategoryProjectsPage({
       <ProjectCategoryHero
         category={category}
         projectCount={projectListItems.length}
+      />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects" },
+          { label: "Categories", href: "/projects/category" },
+          { label: category.label, href: `/projects/category/${categorySlug}`, isCurrent: true },
+        ]}
+        section="projects"
       />
 
       {/* Projects Grid Section */}

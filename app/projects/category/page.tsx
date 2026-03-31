@@ -3,6 +3,7 @@ import Link from "next/link";
 import { projectCategories } from "@/data/projects";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
+import { ContentBreadcrumb } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
@@ -14,6 +15,15 @@ export default function ProjectCategoriesPage() {
     <main className="relative">
       {/* Hero */}
       <ProjectsCategoriesHero categoryCount={projectCategories.length} />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects" },
+          { label: "Categories", href: "/projects/category", isCurrent: true },
+        ]}
+        section="projects"
+      />
 
       {/* Categories grid */}
       <section id="categories-grid" className="section-standard bg-background">

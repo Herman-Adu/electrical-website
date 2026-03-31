@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NewsCategoryHero } from "@/components/news-hub";
 import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
+import { ContentBreadcrumb } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import {
   getNewsArticleListItemsByCategory,
@@ -53,6 +54,16 @@ export default async function NewsCategoryPage({
   return (
     <main className="relative bg-background">
       <NewsCategoryHero category={category} articleCount={items.length} />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "News Hub", href: "/news-hub" },
+          { label: "Categories", href: "/news-hub/category" },
+          { label: category.label, href: `/news-hub/category/${categorySlug}`, isCurrent: true },
+        ]}
+        section="news"
+      />
 
       <section
         id="category-articles"

@@ -5,7 +5,7 @@ import {
   ProjectsFeaturedCard,
   ProjectsBentoGrid,
 } from "@/components/projects";
-import { ContentGridLayout } from "@/components/shared";
+import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
   getProjectListItemsExtended,
@@ -49,6 +49,15 @@ export default async function ProjectsPage({
         categories={projectCategories}
         activeCategory={activeCategory}
       />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects", isCurrent: true },
+        ]}
+        section="projects"
+      />
+
       <section id="projects-grid" className="section-standard bg-background">
         <div className="section-content max-w-6xl">
           {featuredProject ? (

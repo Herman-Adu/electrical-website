@@ -6,6 +6,7 @@ import {
   NewsHubHero,
 } from "@/components/news-hub";
 import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
+import { ContentBreadcrumb } from "@/components/shared";
 import {
   getFeaturedNewsArticleByCategory,
   getNewsArticleListItemsByCategory,
@@ -45,6 +46,14 @@ export default async function NewsHubPage({
         categories={newsCategories}
         activeCategory={activeCategory}
         totalArticles={listItems.length}
+      />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "News Hub", href: "/news-hub", isCurrent: true },
+        ]}
+        section="news"
       />
 
       {featuredArticle ? (
