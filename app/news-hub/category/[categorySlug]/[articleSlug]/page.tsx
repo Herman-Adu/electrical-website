@@ -167,13 +167,13 @@ export default async function NewsArticlePage({
 
       <NewsDetailHero article={article} />
 
-      <section id="article-content" className="section-standard bg-background [overflow:visible]">
-        <div className="section-content grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
+      <section id="article-content" className="section-standard bg-background !overflow-visible">
+        <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
           <NewsArticleContent detail={article.detail} categorySlug={categorySlug} />
 
           {/* Sticky Sidebar */}
-          <aside className="hidden xl:block space-y-6 xl:sticky xl:top-[88px] xl:self-start">
+          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[88px] self-start">
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 
