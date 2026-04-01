@@ -173,6 +173,9 @@
   body {
     position: relative;
   }
+  html {
+    scrollbar-gutter: stable;
+  }
   body {
     @apply bg-background text-foreground;
   }

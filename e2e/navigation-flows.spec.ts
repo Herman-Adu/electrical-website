@@ -122,10 +122,10 @@ test.describe("in-page navigation", () => {
 // 3. Projects category filter
 // ---------------------------------------------------------------------------
 test.describe("projects category filter", () => {
-  test("?category=industrial loads and shows main content", async ({
+  test("?category=commercial-lighting loads and shows main content", async ({
     page,
   }) => {
-    const response = await page.goto("/projects?category=industrial");
+    const response = await page.goto("/projects?category=commercial-lighting");
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");
@@ -133,10 +133,10 @@ test.describe("projects category filter", () => {
     await expect(main).toBeVisible();
   });
 
-  test("?category=commercial loads and shows main content", async ({
+  test("?category=power-boards loads and shows main content", async ({
     page,
   }) => {
-    const response = await page.goto("/projects?category=commercial");
+    const response = await page.goto("/projects?category=power-boards");
     expect(response?.status()).toBe(200);
 
     await page.waitForLoadState("domcontentloaded");

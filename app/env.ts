@@ -5,7 +5,7 @@ export const env = createEnv({
   server: {
     RESEND_API_KEY: z.string().min(1).optional(),
     CONTACT_ADMIN_EMAIL: z.string().email().optional(),
-    CONTACT_FROM_EMAIL: z.string().email().default("noreply@nexgen.com.au"),
+    CONTACT_FROM_EMAIL: z.string().email().default("noreply@adudev.co.uk"),
     CONTACT_FROM_NAME: z.string().min(1).default("Nexgen Electrical"),
     CONTACT_RESPONSE_TIME_HOURS: z.coerce.number().int().positive().default(2),
     CONTACT_RATE_LIMIT_WINDOW_HOURS: z.coerce
@@ -78,4 +78,3 @@ export const env = createEnv({
     process.env.NODE_ENV !== "production" &&
     process.env.SKIP_ENV_VALIDATION === "true",
 });
-

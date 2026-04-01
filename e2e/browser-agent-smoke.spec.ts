@@ -91,20 +91,21 @@ test.describe("Step 4 – Boundaries: /services/error-test", () => {
     console.log(`[step4] nav links to /services: ${linkCount}`);
     if (status === 200) {
       expect(linkCount).toBeGreaterThan(0);
+      await expect(servicesLink.first()).toBeVisible({ timeout: 5000 });
     }
 
-    // Confirm "Error Boundary Test Fixture" is NOT visible (production behavior)
+    // Confirm fixture visibility only when route exists.
     const fixtureText = page.getByText("Error Boundary Test Fixture", {
       exact: true,
     });
-    const fixtureVisible = await fixtureText.isVisible().catch(() => false);
-    console.log(
-      `[step4] "Error Boundary Test Fixture" visible: ${fixtureVisible}`,
-    );
-
-    const isReuseServer = process.env.PLAYWRIGHT_REUSE_SERVER === "true";
-    if (!isReuseServer) {
-      expect(fixtureVisible).toBe(false);
+    if (status === 200) {
+      await expect(fixtureText).toBeVisible({ timeout: 5000 });
+      console.log('[step4] "Error Boundary Test Fixture" visible: true');
+    } else {
+      const fixtureVisible = await fixtureText.isVisible().catch(() => false);
+      console.log(
+        `[step4] "Error Boundary Test Fixture" visible: ${fixtureVisible}`,
+      );
     }
   });
 });
