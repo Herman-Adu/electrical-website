@@ -1,14 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { NewsDetailContent, NewsSpotlightMetric, NewsQuote } from "@/types/news";
+import { motion, type Variants } from "framer-motion";
+import type {
+  NewsDetailContent,
+  NewsSpotlightMetric,
+  NewsQuote,
+} from "@/types/news";
 import { NewsArticleCardShell } from "./news-article-card-shell";
 
 interface NewsContentBodyProps {
   detail: NewsDetailContent;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -16,7 +20,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -76,10 +80,7 @@ export function NewsContentBody({ detail }: NewsContentBodyProps) {
             Story Overview
           </p>
           {detail.intro.map((paragraph, index) => (
-            <p
-              key={index}
-              className="text-base leading-8 text-foreground/80"
-            >
+            <p key={index} className="text-base leading-8 text-foreground/80">
               {paragraph}
             </p>
           ))}

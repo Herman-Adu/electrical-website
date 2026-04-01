@@ -169,8 +169,7 @@ export const allProjects: Project[] = [
         {
           src: "/images/power-distribution.jpg",
           alt: "Distribution panel upgrade",
-          caption:
-            "Modernised distribution boards with integrated monitoring",
+          caption: "Modernised distribution boards with integrated monitoring",
         },
         {
           src: "/images/warehouse-lighting.jpg",
@@ -476,13 +475,13 @@ export const allProjects: Project[] = [
           caption: "Smart lighting and integrated switches in the show home",
         },
         {
-          src: "/images/smart-living-room.jpg",
+          src: "/images/hero-residential.jpg",
           alt: "Living area electrical",
           caption:
             "Premium finishes with concealed wiring and smart switch points",
         },
         {
-          src: "/images/services-residential.jpg",
+          src: "/images/services-energy.jpg",
           alt: "Consumer unit installation",
           caption: "Future-ready consumer unit with EV and solar provision",
         },
@@ -636,8 +635,7 @@ export const allProjects: Project[] = [
         {
           src: "/images/services-industrial.jpg",
           alt: "Generator specification",
-          caption:
-            "2MVA generator units specified for the project",
+          caption: "2MVA generator units specified for the project",
         },
         {
           src: "/images/services-commercial.jpg",
@@ -948,7 +946,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/power-distribution.jpg",
           alt: "Riser installation",
-          caption: "New busbar trunking installed alongside legacy rising mains",
+          caption:
+            "New busbar trunking installed alongside legacy rising mains",
         },
         {
           src: "/images/services-industrial.jpg",

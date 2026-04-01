@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ContentListItem, SidebarCard, ProjectListItemExtended } from "@/types/shared-content";
+import type {
+  ContentListItem,
+  SidebarCard,
+  ProjectListItemExtended,
+} from "@/types/shared-content";
 import type { NewsArticleListItem } from "@/types/news";
 import { usePagination } from "@/hooks/use-pagination";
 import { ContentSidebar } from "./content-sidebar";
@@ -46,10 +50,15 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
  * Render the appropriate card component based on cardType.
  * Type-safe rendering with proper item casting.
  */
-function renderCardByType(item: ContentListItem, cardType: CardType): React.ReactNode {
+function renderCardByType(
+  item: ContentListItem,
+  cardType: CardType,
+): React.ReactNode {
   switch (cardType) {
     case "article":
-      return <NewsHubArticleCard item={item as NewsArticleListItem} />;
+      return (
+        <NewsHubArticleCard item={item as unknown as NewsArticleListItem} />
+      );
     case "project":
       return <ProjectListCard item={item as ProjectListItemExtended} />;
     default:
@@ -60,7 +69,7 @@ function renderCardByType(item: ContentListItem, cardType: CardType): React.Reac
 /**
  * Generic two-column grid layout with pagination, sidebar, and Load More.
  * Used for both News Hub and Projects list pages.
- * 
+ *
  * @example
  * <ContentGridLayout
  *   items={articles}

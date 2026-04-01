@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type { NewsHubMetricItem } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
 import { NewsStatCounter } from "./news-stat-counter";
@@ -9,7 +9,7 @@ interface NewsHubBentoGridProps {
   items: NewsHubMetricItem[];
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -48,7 +48,11 @@ export function NewsHubBentoGrid({ items }: NewsHubBentoGridProps) {
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">
                 {item.title}
               </div>
-              <NewsStatCounter value={item.value} label="" duration={1.5 + index * 0.3} />
+              <NewsStatCounter
+                value={item.value}
+                label=""
+                duration={1.5 + index * 0.3}
+              />
               <p className="text-sm leading-6 text-foreground/70">
                 {item.description}
               </p>

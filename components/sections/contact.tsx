@@ -9,6 +9,7 @@ import {
   Mail,
   Clock,
   Send,
+  Zap,
   CheckCircle,
   AlertCircle,
 } from "lucide-react";

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import type { NewsDetailContent, NewsQuote } from "@/types/news";
 import { NewsArticleCardShell } from "./news-article-card-shell";
@@ -11,7 +11,7 @@ interface NewsArticleContentProps {
   categorySlug: string;
 }
 
-const sectionVariants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -33,7 +33,10 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentProps) {
+export function NewsArticleContent({
+  detail,
+  categorySlug,
+}: NewsArticleContentProps) {
   return (
     <div className="space-y-16">
       {/* Introduction Section */}
@@ -75,7 +78,10 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
         >
           <h2 className="text-2xl font-bold text-white">Project Details</h2>
           {detail.body.map((paragraph, index) => (
-            <p key={`body-${index}`} className="text-base leading-8 text-foreground/75">
+            <p
+              key={`body-${index}`}
+              className="text-base leading-8 text-foreground/75"
+            >
               {paragraph}
             </p>
           ))}
@@ -93,7 +99,10 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
           className="space-y-6"
         >
           <h2 className="text-2xl font-bold text-white">Project Scope</h2>
-          <motion.ul variants={staggerContainer} className="grid gap-3 sm:grid-cols-2">
+          <motion.ul
+            variants={staggerContainer}
+            className="grid gap-3 sm:grid-cols-2"
+          >
             {detail.scope.map((item, index) => (
               <motion.li
                 key={`scope-${index}`}
@@ -103,7 +112,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                 <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-electric-cyan/20 font-mono text-[9px] text-electric-cyan">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="text-sm leading-6 text-foreground/80">{item}</span>
+                <span className="text-sm leading-6 text-foreground/80">
+                  {item}
+                </span>
               </motion.li>
             ))}
           </motion.ul>
@@ -120,10 +131,15 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Methodology & Approach</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Methodology & Approach
+          </h2>
           <div className="space-y-4">
             {detail.methodology.map((paragraph, index) => (
-              <p key={`method-${index}`} className="text-base leading-8 text-foreground/75">
+              <p
+                key={`method-${index}`}
+                className="text-base leading-8 text-foreground/75"
+              >
                 {paragraph}
               </p>
             ))}
@@ -141,7 +157,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Challenges & Solutions</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Challenges & Solutions
+          </h2>
           <motion.div variants={staggerContainer} className="space-y-4">
             {detail.challenges.map((challenge, index) => (
               <motion.div
@@ -154,7 +172,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                     <span className="flex h-6 w-6 items-center justify-center rounded-md bg-electric-cyan/20 font-mono text-[10px] text-electric-cyan">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-semibold text-white">{challenge.title}</h3>
+                    <h3 className="font-semibold text-white">
+                      {challenge.title}
+                    </h3>
                   </div>
                 </div>
                 <div className="p-5 space-y-4">
@@ -162,13 +182,17 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                     <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/50 mb-2">
                       Challenge
                     </p>
-                    <p className="text-sm leading-6 text-foreground/75">{challenge.description}</p>
+                    <p className="text-sm leading-6 text-foreground/75">
+                      {challenge.description}
+                    </p>
                   </div>
                   <div className="border-t border-electric-cyan/10 pt-4">
                     <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70 mb-2">
                       Solution
                     </p>
-                    <p className="text-sm leading-6 text-foreground/80">{challenge.solution}</p>
+                    <p className="text-sm leading-6 text-foreground/80">
+                      {challenge.solution}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -191,7 +215,7 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
           <div className="relative">
             {/* Timeline line */}
             <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-electric-cyan/40 via-electric-cyan/20 to-transparent" />
-            
+
             <motion.div variants={staggerContainer} className="space-y-6">
               {detail.timeline.map((phase, index) => (
                 <motion.div
@@ -203,14 +227,16 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                   <div className="absolute left-0 top-1 flex h-10 w-10 items-center justify-center">
                     <div className="h-3 w-3 rounded-full bg-electric-cyan shadow-[0_0_12px_rgba(0,243,189,0.5)]" />
                   </div>
-                  
+
                   <NewsArticleCardShell className="p-5">
                     <div className="flex items-start justify-between gap-4 mb-3">
                       <div>
                         <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
                           {phase.phase}
                         </p>
-                        <h3 className="mt-1 font-semibold text-white">{phase.title}</h3>
+                        <h3 className="mt-1 font-semibold text-white">
+                          {phase.title}
+                        </h3>
                       </div>
                       {phase.duration && (
                         <span className="shrink-0 rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-electric-cyan">
@@ -218,7 +244,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                         </span>
                       )}
                     </div>
-                    <p className="text-sm leading-6 text-foreground/75">{phase.description}</p>
+                    <p className="text-sm leading-6 text-foreground/75">
+                      {phase.description}
+                    </p>
                   </NewsArticleCardShell>
                 </motion.div>
               ))}
@@ -237,7 +265,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Technical Specifications</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Technical Specifications
+          </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {detail.specifications.map((spec, specIndex) => (
               <NewsArticleCardShell key={`spec-${specIndex}`} className="p-5">
@@ -250,8 +280,12 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
                       key={`spec-item-${itemIndex}`}
                       className="flex items-center justify-between gap-4 border-b border-electric-cyan/10 pb-2 last:border-0 last:pb-0"
                     >
-                      <dt className="text-sm text-foreground/60">{item.label}</dt>
-                      <dd className="font-mono text-sm font-medium text-white">{item.value}</dd>
+                      <dt className="text-sm text-foreground/60">
+                        {item.label}
+                      </dt>
+                      <dd className="font-mono text-sm font-medium text-white">
+                        {item.value}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -302,7 +336,9 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
             {detail.results.map((result, index) => (
               <div key={`result-${index}`} className="flex items-start gap-3">
                 <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-electric-cyan shadow-[0_0_8px_rgba(0,243,189,0.5)]" />
-                <p className="text-base leading-7 text-foreground/80">{result}</p>
+                <p className="text-base leading-7 text-foreground/80">
+                  {result}
+                </p>
               </div>
             ))}
           </div>
@@ -357,7 +393,10 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
         >
           <h2 className="text-2xl font-bold text-white">Conclusion</h2>
           {detail.conclusion.map((paragraph, index) => (
-            <p key={`conclusion-${index}`} className="text-base leading-8 text-foreground/80">
+            <p
+              key={`conclusion-${index}`}
+              className="text-base leading-8 text-foreground/80"
+            >
               {paragraph}
             </p>
           ))}
@@ -379,7 +418,10 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
 
       {/* Additional Quotes */}
       {detail.additionalQuotes && detail.additionalQuotes.length > 0 && (
-        <motion.div variants={staggerContainer} className="grid gap-4 sm:grid-cols-2">
+        <motion.div
+          variants={staggerContainer}
+          className="grid gap-4 sm:grid-cols-2"
+        >
           {detail.additionalQuotes.map((quote, index) => (
             <motion.div key={`quote-${index}`} variants={itemVariants}>
               <QuoteCard quote={quote} variant="secondary" />
@@ -391,7 +433,13 @@ export function NewsArticleContent({ detail, categorySlug }: NewsArticleContentP
   );
 }
 
-function QuoteCard({ quote, variant }: { quote: NewsQuote; variant: "primary" | "secondary" }) {
+function QuoteCard({
+  quote,
+  variant,
+}: {
+  quote: NewsQuote;
+  variant: "primary" | "secondary";
+}) {
   const isPrimary = variant === "primary";
 
   return (
@@ -407,7 +455,9 @@ function QuoteCard({ quote, variant }: { quote: NewsQuote; variant: "primary" | 
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
         </svg>
       </div>
-      <p className={`leading-7 text-white ${isPrimary ? "text-lg italic" : "text-base"}`}>
+      <p
+        className={`leading-7 text-white ${isPrimary ? "text-lg italic" : "text-base"}`}
+      >
         {quote.quote}
       </p>
       <footer className="mt-4 flex items-center gap-3">
