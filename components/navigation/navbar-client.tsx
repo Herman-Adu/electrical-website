@@ -215,6 +215,7 @@ export function NavbarClient() {
   return (
     <>
       <motion.nav
+        aria-label="Primary"
         className={`fixed top-0 left-0 right-0 z-50 border-b border-border/60 backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 transition-all duration-300 ${
           isScrolled ? "shadow-md" : "shadow-none"
         }`}
