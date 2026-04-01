@@ -219,22 +219,21 @@ export function NewsHubHero({
 
           <motion.h1
             variants={itemVariants}
-            className="mb-6 text-5xl leading-[0.9] font-black tracking-tight text-foreground uppercase sm:text-6xl md:text-7xl"
+            className="mb-6 text-5xl leading-[1.0] font-black tracking-tight text-white uppercase drop-shadow-lg sm:text-6xl md:text-7xl"
           >
-            <span className="block">Campaigns</span>
-            <span className="block bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong) bg-clip-text text-transparent">
-              Proof & Insights
+            <span className="block">Editorial</span>
+            <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
+              Command Centre
             </span>
-            <span className="block">For Every Sector</span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-foreground/70 dark:text-white/70 sm:text-lg"
+            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-white/75 sm:text-lg drop-shadow-md"
           >
-            A structured newsroom for stories, campaigns, partner updates, and
-            operational proof built on typed content models and category-first
-            routes.
+            Live editorial hub for campaigns, case studies, insights, and partner
+            updates. Powered by typed content models ready for scalable CMS
+            integration.
           </motion.p>
 
           <motion.div

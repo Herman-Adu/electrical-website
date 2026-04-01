@@ -13,6 +13,7 @@ import {
   SectionIntro,
   SectionProfile,
   SectionValues,
+  ContentBreadcrumb,
 } from "@/components/shared";
 import {
   companyIntroData,
@@ -43,6 +44,14 @@ export default function AboutPage() {
     <main className="relative">
       {/* Section 1: Cinematic Hero */}
       <AboutHero />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "About", href: "/about", isCurrent: true },
+        ]}
+        section="about"
+      />
 
       {/* Section 2: Company Introduction (shared component) */}
       <SectionIntro data={companyIntroData} />

@@ -2,16 +2,20 @@
 
 ## Purpose
 
-This guide tells **v0.dev** exactly how to visually redesign the Projects section of this repo.
-All routes, data contracts, TypeScript types, and Server Action wiring are **already scaffolded and working**.
-v0's only job is to redesign/create the **component files** listed below with highly animated, visually stunning dark UI.
+This guide documents the Projects section architecture and implementation. It covers all routes, data contracts, TypeScript types, component organization, and integration with shared components and breadcrumb system.
+
+**Cross-references**:
+- For shared components used across sections, see `V0_SHARED_COMPONENTS_GUIDE.md`
+- For breadcrumb system, see `V0_BREADCRUMB_SYSTEM_GUIDE.md`
+
+All routes, data contracts, and Server Action wiring are **already scaffolded and working**. Component implementations follow the shared component patterns for consistency across sections.
 
 ---
 
 ## Repo Context
 
 - **Stack:** Next.js 16, TypeScript (strict), Tailwind CSS v4, Framer Motion `^12.38.0`, shadcn/ui
-- **Design tokens:** CSS custom properties in `app/globals.css`
+- **Design tokens:** CSS custom properties in `/globals.css`
 - **Primary accent:** `var(--electric-cyan)` → dark mode `#00f2ff`, light mode `#0891b2`
 - **Warning accent:** `var(--amber-warning)` → dark mode `#f59e0b`, light mode `#d97706`
 - **Mono font:** `var(--font-ibm-plex-mono)` → mapped to `font-mono` Tailwind class
@@ -22,70 +26,211 @@ v0's only job is to redesign/create the **component files** listed below with hi
 
 ## Absolute Constraints (Never Violate)
 
-1. **Do NOT edit any `app/projects/**/page.tsx` files.\*\* Routes are complete and correct.
-2. **Do NOT change `types/projects.ts`.** All interfaces are final.
-3. **Do NOT change `data/projects/index.ts`.** Data and helpers are final.
-4. **Do NOT change `lib/actions/projects.ts`.** Server Action wiring is final.
-5. **Do NOT change `lib/metadata-projects.ts`.** Metadata helpers are final.
-6. **Do NOT add new named exports to `components/projects/index.ts`** unless you are adding a new component file — if you do, also add the export to `index.ts`.
-7. **All props passed to redesigned components must keep the same TypeScript signatures** — the page files depend on them.
-8. **No `any` types, no loosely typed props.**
-9. **All animations use Framer Motion**, not CSS keyframes — import from `"framer-motion"`.
-10. **Components that receive data props must stay purely presentational** — no fetching inside components.
+1. **Do NOT edit route architecture** without updating breadcrumb implementations
+2. **Do NOT change `types/projects.ts`** — All interfaces including `ProjectListItemExtended` are final
+3. **Do NOT change `data/projects/index.ts`** — Data and helpers are final
+4. **Do NOT change `lib/actions/projects.ts`** — Server Action wiring is final
+5. **Do NOT change `lib/metadata-projects.ts`** — Metadata helpers are final
+6. **Do NOT add new named exports** to `components/projects/index.ts` unless adding a new component
+7. **All props passed to components must keep the same TypeScript signatures**
+8. **No `any` types, no loosely typed props** — Full type safety enforced
+9. **All animations use Framer Motion**, not CSS keyframes
+10. **Components that receive data props stay purely presentational** — no fetching inside components
+11. **Maintain sidebar offset `top-[132px]`** and scroll margins `scroll-mt-36` on detail pages
+12. **Update breadcrumb items** when changing route structure
 
 ---
 
-## What Already Exists (Full Scaffold)
+## Route Architecture
 
-### Routes — all working, do not edit:
+All routes fully implemented and wired:
 
 ```
-app/projects/page.tsx                                  ← SSR list, ?category= filter
+app/projects/page.tsx                                  ← SSR list with ?category= filter + breadcrumb
 app/projects/loading.tsx
 app/projects/error.tsx
-app/projects/[slug]/page.tsx                           ← legacy direct-slug (backward compat)
+app/projects/[slug]/page.tsx                           ← Legacy direct-slug (backward compat)
 app/projects/[slug]/loading.tsx
 app/projects/[slug]/error.tsx
 app/projects/[slug]/not-found.tsx
-app/projects/category/page.tsx                         ← static category index (SSG)
-app/projects/category/[categorySlug]/page.tsx          ← per-category list (SSG)
+app/projects/category/page.tsx                         ← Static category index (SSG) + breadcrumb
+app/projects/category/[categorySlug]/page.tsx          ← Per-category list (SSG) + breadcrumb
 app/projects/category/[categorySlug]/loading.tsx
 app/projects/category/[categorySlug]/error.tsx
 app/projects/category/[categorySlug]/not-found.tsx
-app/projects/category/[categorySlug]/[projectSlug]/page.tsx   ← project detail (SSG)
+app/projects/category/[categorySlug]/[projectSlug]/page.tsx   ← Project detail (SSG) + breadcrumb
 app/projects/category/[categorySlug]/[projectSlug]/loading.tsx
 app/projects/category/[categorySlug]/[projectSlug]/error.tsx
 app/projects/category/[categorySlug]/[projectSlug]/not-found.tsx
 ```
 
-### Components — functional stubs, need full visual redesign:
+---
+
+## Breadcrumb Implementation
+
+All Projects pages render `<ContentBreadcrumb>` below the hero section. See `V0_BREADCRUMB_SYSTEM_GUIDE.md` for complete documentation.
+
+### Main Page (`/projects`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects", isCurrent: true },
+  ]}
+  section="projects"
+/>
+```
+
+### Category Index (`/projects/category`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: "Categories", href: "/projects/category", isCurrent: true },
+  ]}
+  section="projects"
+/>
+```
+
+### Category Page (`/projects/category/[categorySlug]`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: "Categories", href: "/projects/category" },
+    { label: category.label, href: `/projects/category/${categorySlug}`, isCurrent: true },
+  ]}
+  section="projects"
+/>
+```
+
+### Project Detail (`/projects/category/[categorySlug]/[projectSlug]`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Projects", href: "/projects" },
+    { label: "Categories", href: "/projects/category" },
+    { label: category.label, href: `/projects/category/${categorySlug}` },
+    { label: project.title, href: "#", isCurrent: true },
+  ]}
+  section="projects"
+/>
+```
+
+---
+
+## What Already Exists (Full Scaffold)
+
+All component files exist and are functional. The section has been updated to use shared components.
+
+### Routes — all working, do not edit:
+
+See Route Architecture section above.
+
+### Shared Components Integration
+
+Projects section uses shared components from `components/shared/`:
+
+#### ContentGridLayout (Category Pages)
+
+Used on `/projects/category/[categorySlug]` to display project list with pagination:
+
+```typescript
+<ContentGridLayout
+  items={projectListItems}
+  sidebarCards={sidebarCards}
+  cardType="project"
+  title={`${category.label} Projects`}
+  itemLabel="project"
+  itemLabelPlural="projects"
+  sidebarTitle="Other Categories"
+  sidebarDescription="Browse more project types"
+/>
+```
+
+**Features**:
+- Generic grid with 50/50 image/content split on featured card
+- Load More pagination (4 initial + 3 per batch)
+- Sidebar with category cards
+- Fully typed with `ProjectListItemExtended` extending `ContentListItem`
+
+See `V0_SHARED_COMPONENTS_GUIDE.md` for complete documentation.
+
+#### ContentToc (Project Detail Pages)
+
+Used on project detail page to show scrollable table of contents:
+
+```typescript
+<aside className="sticky top-[132px] self-start">
+  <ContentToc
+    items={[
+      { num: "01", title: "Overview", description: "..." },
+      { num: "02", title: "Challenge & Solution", description: "..." },
+      { num: "03", title: "Project Timeline", description: "..." },
+    ]}
+  />
+</aside>
+```
+
+**Features**:
+- Sticky positioning at `top: 132px` (below navbar + breadcrumb)
+- Scroll tracking via `IntersectionObserver`
+- Mobile expandable on screens < 640px
+- Smooth scroll-to-section navigation
+- Sections use `scroll-mt-36` for proper scroll target offset
+
+#### ProjectListCard
+
+New card component matching `NewsHubArticleCard` design for use in `ContentGridLayout`:
+
+```typescript
+<ProjectListCard item={project} />
+```
+
+**Features**:
+- Consistent layout with news cards (50/50 image/content)
+- Category badge and status indicator
+- KPI highlights
+- Project meta information
+- Link to detail page
+
+### Project-Specific Components
+
+These remain project-only and are not shared:
 
 ```
-components/projects/projects-hero.tsx            ← REDESIGN (plain Tailwind, no animation)
-components/projects/projects-featured-card.tsx   ← REDESIGN (plain Tailwind, no animation)
-components/projects/projects-bento-grid.tsx      ← REDESIGN (plain Tailwind, no animation)
-components/projects/projects-optimistic-list.tsx ← REDESIGN + add infinite scroll
-components/projects/project-card-shell.tsx       ← REDESIGN (dark glass wrapper)
-components/projects/project-meta-row.tsx         ← keep or improve
-components/projects/project-status-badge.tsx     ← REDESIGN (animated pulse for in-progress)
-components/projects/index.ts                     ← ADD new exports alongside existing ones
-```
-
-### New components to CREATE (do not exist yet):
-
-```
-components/projects/projects-infinite-scroll.tsx  ← NEW: scroll-triggered load-more list
-components/projects/project-category-card.tsx     ← NEW: category index card
-components/projects/project-detail-hero.tsx       ← NEW: full-width parallax hero for detail page
-components/projects/project-kpi-grid.tsx          ← NEW: KPI grid with count-up on scroll
-components/projects/project-related-carousel.tsx  ← NEW: related projects row/carousel
+components/projects/projects-hero.tsx            ← Landing page hero
+components/projects/projects-featured-card.tsx   ← Featured project on landing
+components/projects/projects-bento-grid.tsx      ← Stats/metrics grid
+components/projects/project-detail-hero.tsx      ← Detail page parallax hero
+components/projects/project-category-hero.tsx    ← Category page hero
+components/projects/projects-categories-hero.tsx ← Category index hero
 ```
 
 ---
 
 ## Data Model (read-only reference)
 
-```ts
+See `types/projects.ts` and `types/shared-content.ts` for the final source of truth.
+
+### Type Hierarchy
+
+```
+Project (full detail with content sections)
+  └─ ProjectListItemExtended (project in list view — extends ContentListItem)
+      ├─ Used in ContentGridLayout for category pages
+      └─ Also available on detail pages
+```
+
+### Core Interfaces
+
+```typescript
 // types/projects.ts — DO NOT MODIFY
 
 export type ProjectStatus = "planned" | "in-progress" | "completed";
@@ -102,24 +247,51 @@ export interface ProjectCategory {
   description: string;
 }
 
-export interface ProjectKpis {
-  budget: string;
-  timeline: string;
-  capacity: string;
-  location: string;
-}
-
-export interface Project {
-  id: string;
-  slug: string;
+export interface ProjectListItemExtended extends ContentListItem {
   category: Exclude<ProjectCategorySlug, "all">;
   categoryLabel: string;
-  title: string;
   clientSector: string;
   status: ProjectStatus;
-  description: string;
-  coverImage: { src: string; alt: string };
-  kpis: ProjectKpis;
+  isFeatured: boolean;
+  kpis: Record<string, string>;
+  progress: number;
+}
+```
+
+### Type-Safe Integration
+
+Projects types are integrated with shared types:
+
+```typescript
+// types/shared-content.ts
+export interface ProjectListItemExtended extends ContentListItem {
+  // Guarantees ProjectListItemExtended can be used in ContentGridLayout
+  // with cardType="project"
+}
+```
+
+### Data Fetching Functions
+
+All data fetching functions are type-safe and return proper extended types:
+
+```typescript
+// data/projects/index.ts
+
+export function getProjectListItemsExtended(): ProjectListItemExtended[]
+export function getProjectListItemsExtendedByCategory(
+  categorySlug: string
+): ProjectListItemExtended[]
+export function getCategoryBySlug(slug: string): ProjectCategory
+export function getProjectBySlug(slug: string): Project
+```
+
+---
+
+## Components Reference
+
+### All Project Components
+
+```  kpis: ProjectKpis;
   tags: string[];
   progress: number; // 0–100
   isFeatured: boolean;

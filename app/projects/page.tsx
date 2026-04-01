@@ -4,15 +4,16 @@ import {
   ProjectsHero,
   ProjectsFeaturedCard,
   ProjectsBentoGrid,
-  ProjectsOptimisticList,
 } from "@/components/projects";
+import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
-  getProjectListItemsByCategory,
+  getProjectListItemsExtended,
   isProjectCategorySlug,
   projectBentoItems,
   projectCategories,
 } from "@/data/projects";
+import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectsListMetadata } from "@/lib/metadata-projects";
 import { safeValidateProjectsParams } from "@/lib/actions/validate-search-params";
 import type { ProjectCategorySlug } from "@/types/projects";
@@ -39,7 +40,8 @@ export default async function ProjectsPage({
       : "all";
 
   const featuredProject = getFeaturedProjectByCategory(activeCategory);
-  const projectListItems = getProjectListItemsByCategory(activeCategory);
+  const projectListItems = getProjectListItemsExtended(activeCategory);
+  const sidebarCards = getProjectsSidebarCards(activeCategory);
 
   return (
     <main className="relative">
@@ -47,6 +49,15 @@ export default async function ProjectsPage({
         categories={projectCategories}
         activeCategory={activeCategory}
       />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects", isCurrent: true },
+        ]}
+        section="projects"
+      />
+
       <section id="projects-grid" className="section-standard bg-background">
         <div className="section-content max-w-6xl">
           {featuredProject ? (
@@ -60,8 +71,18 @@ export default async function ProjectsPage({
         </div>
       </section>
       <section className="section-container section-padding bg-background">
-        <div className="section-content max-w-6xl">
-          <ProjectsOptimisticList items={projectListItems} />
+        <div className="section-content max-w-7xl">
+          <ContentGridLayout
+            items={projectListItems}
+            sidebarCards={sidebarCards}
+            cardType="project"
+            title="All Projects"
+            itemLabel="project"
+            itemLabelPlural="projects"
+            emptyMessage="No projects available in this category yet."
+            sidebarTitle="Project Resources"
+            sidebarDescription="Consultations, guides, and client testimonials for your project needs."
+          />
         </div>
       </section>
       <Footer />

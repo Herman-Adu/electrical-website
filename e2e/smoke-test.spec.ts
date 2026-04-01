@@ -129,7 +129,7 @@ test.describe("UI Smoke Tests", () => {
     await page.goto("/");
 
     // Check navbar exists
-    const navbar = page.locator("nav");
+    const navbar = page.getByRole("navigation", { name: /primary/i });
     await expect(navbar).toBeVisible();
 
     // Verify navbar has proper Tailwind styling
@@ -166,7 +166,7 @@ test.describe("UI Smoke Tests", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/");
 
-    const navbar = page.locator("nav");
+    const navbar = page.getByRole("navigation", { name: /primary/i });
     await expect(navbar).toBeVisible();
 
     // Mobile menu should be accessible
@@ -183,7 +183,7 @@ test.describe("UI Smoke Tests", () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto("/");
 
-    const desktopNav = page.locator("nav");
+    const desktopNav = page.getByRole("navigation", { name: /primary/i });
     await expect(desktopNav).toBeVisible();
     await expect(
       desktopNav.getByRole("link", { name: "Services" }).first(),

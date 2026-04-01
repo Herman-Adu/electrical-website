@@ -3,6 +3,7 @@ import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesBento } from "@/components/services/services-bento";
 import { Footer } from "@/components/sections/footer";
 import { createPageMetadata } from "@/lib/metadata";
+import { ContentBreadcrumb } from "@/components/shared";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Services | Nexgen Electrical Innovations",
@@ -25,6 +26,13 @@ export default function ServicesPage() {
   return (
     <main>
       <ServicesHero />
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services", isCurrent: true },
+        ]}
+        section="services"
+      />
       <ServicesBento />
       <Footer />
     </main>

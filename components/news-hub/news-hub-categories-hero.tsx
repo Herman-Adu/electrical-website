@@ -249,20 +249,20 @@ export function NewsHubCategoriesHero({
 
           <motion.h1
             variants={itemVariants}
-            className="mb-6 text-5xl leading-[0.92] font-black tracking-tight text-foreground uppercase sm:text-6xl md:text-7xl"
+            className="mb-6 text-5xl leading-[1.0] font-black tracking-tight text-white uppercase drop-shadow-lg sm:text-6xl md:text-7xl"
           >
-            <span className="block">Browse by</span>
-            <span className="block bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong) bg-clip-text text-transparent">
-              Category
+            <span className="block">Browse</span>
+            <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
+              All Categories
             </span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-xl text-base leading-relaxed font-light text-foreground/70 dark:text-white/70 sm:text-lg"
+            className="mx-auto mb-10 max-w-xl text-base leading-relaxed font-light text-white/75 drop-shadow-md sm:text-lg"
           >
-            Each lane is a dedicated route designed for editorial growth, fast
-            discovery, and long-term CMS migration.
+            Six dedicated editorial lanes built for growth, fast discovery, and
+            seamless CMS migration. Each category is a full publishing route.
           </motion.p>
 
           <motion.div

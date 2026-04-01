@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
@@ -130,33 +129,6 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             </div>
           </motion.div>
 
-          <motion.nav
-            variants={itemVariants}
-            aria-label="Breadcrumb"
-            className="mb-6 flex flex-wrap items-center justify-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/70 uppercase"
-          >
-            <Link
-              href="/news-hub"
-              className="transition-colors hover:text-electric-cyan"
-            >
-              News Hub
-            </Link>
-            <span className="text-white/30">/</span>
-            <Link
-              href="/news-hub/category"
-              className="transition-colors hover:text-electric-cyan"
-            >
-              Categories
-            </Link>
-            <span className="text-white/30">/</span>
-            <Link
-              href={`/news-hub/category/${article.category}`}
-              className="transition-colors hover:text-electric-cyan"
-            >
-              {article.categoryLabel}
-            </Link>
-          </motion.nav>
-
           <motion.div
             variants={itemVariants}
             className="mb-4 flex flex-wrap items-center justify-center gap-3"
@@ -174,7 +146,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
           <motion.h1
             variants={itemVariants}
-            className="mx-auto mb-6 max-w-4xl text-4xl leading-[0.94] font-black tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="mx-auto mb-6 max-w-4xl text-4xl leading-tight font-black tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-lg"
           >
             {article.title}
           </motion.h1>
@@ -190,8 +162,8 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             variants={itemVariants}
             className="flex flex-wrap justify-center gap-3"
           >
-            <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 backdrop-blur-sm">
-              <div className="font-mono text-[10px] tracking-[0.18em] text-white/65 uppercase">
+            <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm">
+              <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                 Author
               </div>
               <div className="mt-1 font-semibold text-white">
@@ -199,15 +171,25 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
               </div>
             </div>
             {article.spotlightMetric ? (
-              <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 backdrop-blur-sm">
-                <div className="font-mono text-[10px] tracking-[0.18em] text-white/65 uppercase">
+              <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm shadow-[0_0_20px_rgba(0,243,189,0.15)]">
+                <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                   {article.spotlightMetric.label}
                 </div>
-                <div className="mt-1 font-semibold text-white">
+                <div className="mt-1 font-semibold text-electric-cyan">
                   {article.spotlightMetric.value}
                 </div>
               </div>
             ) : null}
+            {article.location && (
+              <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
+                <div className="font-mono text-[10px] tracking-[0.18em] text-white/60 uppercase">
+                  Location
+                </div>
+                <div className="mt-1 font-semibold text-white">
+                  {article.location}
+                </div>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       }

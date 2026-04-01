@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ServicePageHero } from './service-page-hero';
-import { SectionProfile, SectionFeatures, SectionValues, SectionIntro, SectionCTA } from '@/components/shared';
+import { SectionProfile, SectionFeatures, SectionValues, SectionIntro, SectionCTA, ContentBreadcrumb } from '@/components/shared';
 import { Footer } from '@/components/sections/footer';
 import type { ServicePageData, PageSection, SectionProfileData, SectionFeaturesData, SectionValuesData, SectionIntroData, SectionCTAData } from '@/types/sections';
 
@@ -32,6 +32,16 @@ export function ServicePageRenderer({ data }: ServicePageRendererProps) {
     <main className="min-h-screen bg-background">
       {/* Hero */}
       <ServicePageHero data={data.hero} />
+
+      {/* Sticky Breadcrumb - CSS sticky below navbar */}
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: data.hero.eyebrow ?? data.slug, href: `/services/${data.slug}`, isCurrent: true },
+        ]}
+        section="services"
+      />
 
       {/* Intro section - if present */}
       {data.intro && <SectionIntro data={data.intro} />}

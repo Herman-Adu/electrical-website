@@ -2,7 +2,11 @@
 
 ## Purpose
 
-This guide gives v0.dev a strict contract for redesigning the new `news-hub` feature without touching its route architecture, typed data layer, or metadata wiring.
+This guide documents the News Hub feature architecture, design patterns, and implementation details. It covers the complete system from routing through component rendering, data fetching, and the shared component integrations.
+
+**Cross-references**:
+- For shared components used across sections, see `V0_SHARED_COMPONENTS_GUIDE.md`
+- For breadcrumb system, see `V0_BREADCRUMB_SYSTEM_GUIDE.md`
 
 The scaffold is intentionally modelled after the projects section:
 
@@ -11,38 +15,106 @@ The scaffold is intentionally modelled after the projects section:
 - Static category article routes
 - Typed mock data ready to map to Strapi later
 - Reusable presentational components in `components/news-hub/`
+- Shared grid and breadcrumb components from `components/shared/`
 
 ---
 
 ## Absolute constraints
 
-1. Do **not** edit any `app/news-hub/**/page.tsx` files.
-2. Do **not** change `types/news.ts`.
-3. Do **not** change `data/news/index.ts`.
-4. Do **not** change `lib/metadata-news.ts`.
-5. Do **not** change `lib/actions/validate-search-params.ts` or `lib/schemas/search-params.ts` for news-hub contracts.
-6. Keep all component prop signatures identical.
-7. No `any` types.
-8. Components receiving content props stay presentational.
-9. Use Framer Motion for animation work.
-10. Do not add new npm packages.
+1. Do **not** edit any route architecture in `app/news-hub/**/page.tsx` without updating breadcrumb implementation
+2. Do **not** change `types/news.ts` — extends base `NewsArticleListItem`
+3. Do **not** change `data/news/index.ts` — maintains typed mock data
+4. Do **not** change `lib/metadata-news.ts` — SEO metadata generation
+5. Do **not** change `lib/actions/validate-search-params.ts` or `lib/schemas/search-params.ts`
+6. Keep all component prop signatures identical
+7. No `any` types — maintain full type safety
+8. Components receiving content props stay presentational
+9. Use Framer Motion for animation work
+10. Do not add new npm packages
+11. Update breadcrumb items when changing route structure
+12. Maintain sidebar offset `top-[132px]` on detail pages (navbar + breadcrumb + gap)
 
 ---
 
-## Route architecture already wired
+## Route architecture
 
-- `app/news-hub/page.tsx` — SSR list with `?category=` filter
+## Route architecture
+
+All routes properly implemented and wired:
+
+- `app/news-hub/page.tsx` — SSR list with `?category=` filter + Home/News Hub breadcrumb
 - `app/news-hub/loading.tsx`
 - `app/news-hub/error.tsx`
-- `app/news-hub/category/page.tsx` — SSG category index
-- `app/news-hub/category/[categorySlug]/page.tsx` — per-category list
+- `app/news-hub/category/page.tsx` — SSG category index + Home/News Hub/Categories breadcrumb
+- `app/news-hub/category/[categorySlug]/page.tsx` — per-category list + Home/News Hub/Categories/{Category} breadcrumb
 - `app/news-hub/category/[categorySlug]/loading.tsx`
 - `app/news-hub/category/[categorySlug]/error.tsx`
 - `app/news-hub/category/[categorySlug]/not-found.tsx`
-- `app/news-hub/category/[categorySlug]/[articleSlug]/page.tsx` — article detail
+- `app/news-hub/category/[categorySlug]/[articleSlug]/page.tsx` — article detail + full breadcrumb trail
 - `app/news-hub/category/[categorySlug]/[articleSlug]/loading.tsx`
 - `app/news-hub/category/[categorySlug]/[articleSlug]/error.tsx`
 - `app/news-hub/category/[categorySlug]/[articleSlug]/not-found.tsx`
+
+---
+
+## Breadcrumb Implementation
+
+All News Hub pages render `<ContentBreadcrumb>` below the hero section:
+
+### Main Page (`/news-hub`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "News Hub", href: "/news-hub", isCurrent: true },
+  ]}
+  section="news"
+/>
+```
+
+### Category Index (`/news-hub/category`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "News Hub", href: "/news-hub" },
+    { label: "Categories", href: "/news-hub/category", isCurrent: true },
+  ]}
+  section="news"
+/>
+```
+
+### Category Page (`/news-hub/category/[categorySlug]`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "News Hub", href: "/news-hub" },
+    { label: "Categories", href: "/news-hub/category" },
+    { label: category.label, href: `/news-hub/category/${categorySlug}`, isCurrent: true },
+  ]}
+  section="news"
+/>
+```
+
+### Article Detail (`/news-hub/category/[categorySlug]/[articleSlug]`)
+
+```typescript
+<ContentBreadcrumb
+  items={[
+    { label: "News Hub", href: "/news-hub" },
+    { label: "Categories", href: "/news-hub/category" },
+    { label: category.label, href: `/news-hub/category/${categorySlug}` },
+    { label: article.title, href: "#", isCurrent: true },
+  ]}
+  section="news"
+/>
+```
+
+See `V0_BREADCRUMB_SYSTEM_GUIDE.md` for complete breadcrumb documentation and styling.
 
 ---
 
@@ -50,26 +122,119 @@ The scaffold is intentionally modelled after the projects section:
 
 See `types/news.ts` for the final source of truth.
 
+### Hierarchy
+
+```
+NewsCategory (category metadata)
+  └─ NewsArticle (article detail with full content)
+      ├─ NewsArticleListItem (article in list view — extends ArticleListItem)
+      └─ Also used in detail pages with full content sections
+```
+
 ### Category slugs
 
 `all | residential | industrial | partners | case-studies | insights | reviews`
 
-### Core entities
+### Core entity types
 
-- `NewsCategory`
-- `NewsArticle`
-- `NewsArticleListItem`
-- `NewsHubMetricItem`
-- `NewsSidebarCard`
+- `NewsCategory` — Category metadata (slug, label, description)
+- `NewsArticle` — Full article with sections, timeline, gallery, testimonials
+- `NewsArticleListItem` — List-view card (extends `ArticleListItem` with category, author, readTime, tags)
+- `NewsHubMetricItem` — Stats for landing page bento grid
+- `NewsSidebarCard` — Campaign/social proof cards for right rail
+
+### Type-Safe Integration
+
+News Hub types are integrated with shared types:
+
+```typescript
+// types/news.ts
+export interface NewsArticleListItem extends ArticleListItem {
+  category: string;
+  categoryLabel: string;
+  author: string;
+  readTime: string;
+  tags: string[];
+}
+
+// types/shared-content.ts
+export interface ArticleListItem extends ContentListItem {
+  // Guarantees NewsArticleListItem can be used in ContentGridLayout
+}
+```
 
 ### Important implementation note
 
 The landing page uses **two data streams**:
 
-1. article list content
-2. right-rail sidebar cards for campaigns, social proof, partner stories, and reviews
+1. Article list content (handled by `ContentGridLayout`)
+2. Right-rail sidebar cards for campaigns, social proof, partner stories, reviews (handled by `ContentSidebar`)
 
-That split must remain intact because it maps cleanly to future Strapi collections and OpenAPI schemas.
+That split mirrors future Strapi collections and OpenAPI schemas.
+
+---
+
+## Shared Components Integration
+
+News Hub uses shared components from `components/shared/`:
+
+### ContentGridLayout (News Category Pages)
+
+Used on `/news-hub/category/[categorySlug]` to display article list with pagination:
+
+```typescript
+<ContentGridLayout
+  items={articles}
+  sidebarCards={sidebarCards}
+  cardType="article"
+  title={`${category.label} Articles`}
+  itemLabel="article"
+  itemLabelPlural="articles"
+  sidebarTitle="Other Categories"
+  sidebarDescription="Browse more news topics"
+/>
+```
+
+**Features**:
+- Generic grid with 50/50 image/content split on featured card
+- Load More pagination (4 initial + 3 per batch)
+- Sidebar with category cards
+- Fully typed with `NewsArticleListItem` extending `ArticleListItem`
+
+See `V0_SHARED_COMPONENTS_GUIDE.md` for complete documentation.
+
+### ContentToc (Article Detail Pages)
+
+Used on article detail page to show scrollable table of contents:
+
+```typescript
+<aside className="sticky top-[132px] self-start">
+  <ContentToc
+    items={[
+      { num: "01", title: "Overview", description: "..." },
+      { num: "02", title: "Impact", description: "..." },
+    ]}
+  />
+</aside>
+```
+
+**Features**:
+- Sticky positioning at `top: 132px` (below navbar + breadcrumb)
+- Scroll tracking via `IntersectionObserver`
+- Mobile expandable on screens < 640px
+- Smooth scroll-to-section navigation
+
+### ContentSidebar (Landing + Category Pages)
+
+Used to display filtered sidebar cards:
+
+```typescript
+<ContentSidebar
+  cards={sidebarCards}
+  title="Related Content"
+  description="Explore more stories"
+/>
+```
 
 ---
 

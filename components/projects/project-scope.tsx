@@ -11,6 +11,17 @@ import {
   Wrench,
   CheckCircle,
   Award,
+  Battery,
+  Network,
+  Building,
+  Layers,
+  LayoutGrid,
+  Car,
+  Building2,
+  Cable,
+  Warehouse,
+  Thermometer,
+  type LucideIcon,
 } from "lucide-react";
 import {
   useAnimatedBorders,
@@ -18,7 +29,7 @@ import {
 } from "@/lib/use-animated-borders";
 import type { ProjectScope } from "@/types/projects";
 
-const iconMap = {
+const iconMap: Record<ProjectScope["icon"], LucideIcon> = {
   Zap,
   Shield,
   Settings,
@@ -27,6 +38,16 @@ const iconMap = {
   Wrench,
   CheckCircle,
   Award,
+  Battery,
+  Network,
+  Building,
+  Layers,
+  LayoutGrid,
+  Car,
+  Building2,
+  Cable,
+  Warehouse,
+  Thermometer,
 };
 
 interface ProjectScopeGridProps {

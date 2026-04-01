@@ -68,7 +68,25 @@ export interface ProjectTestimonial {
 }
 
 export interface ProjectScope {
-  icon: "Zap" | "Shield" | "Settings" | "Lightbulb" | "Gauge" | "Wrench" | "CheckCircle" | "Award";
+  icon:
+    | "Zap"
+    | "Shield"
+    | "Settings"
+    | "Lightbulb"
+    | "Gauge"
+    | "Wrench"
+    | "CheckCircle"
+    | "Award"
+    | "Battery"
+    | "Network"
+    | "Building"
+    | "Layers"
+    | "LayoutGrid"
+    | "Car"
+    | "Building2"
+    | "Cable"
+    | "Warehouse"
+    | "Thermometer";
   title: string;
   description: string;
 }

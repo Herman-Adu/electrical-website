@@ -169,8 +169,7 @@ export const allProjects: Project[] = [
         {
           src: "/images/power-distribution.jpg",
           alt: "Distribution panel upgrade",
-          caption:
-            "Modernised distribution boards with integrated monitoring",
+          caption: "Modernised distribution boards with integrated monitoring",
         },
         {
           src: "/images/warehouse-lighting.jpg",
@@ -476,13 +475,13 @@ export const allProjects: Project[] = [
           caption: "Smart lighting and integrated switches in the show home",
         },
         {
-          src: "/images/smart-living-room.jpg",
+          src: "/images/hero-residential.jpg",
           alt: "Living area electrical",
           caption:
             "Premium finishes with concealed wiring and smart switch points",
         },
         {
-          src: "/images/services-residential.jpg",
+          src: "/images/services-energy.jpg",
           alt: "Consumer unit installation",
           caption: "Future-ready consumer unit with EV and solar provision",
         },
@@ -636,8 +635,7 @@ export const allProjects: Project[] = [
         {
           src: "/images/services-industrial.jpg",
           alt: "Generator specification",
-          caption:
-            "2MVA generator units specified for the project",
+          caption: "2MVA generator units specified for the project",
         },
         {
           src: "/images/services-commercial.jpg",
@@ -651,6 +649,472 @@ export const allProjects: Project[] = [
         author: "Dr. Helen Wright",
         role: "Chief Operating Officer",
         company: "Central London Hospital NHS Trust",
+      },
+    },
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ADDITIONAL POWER-BOARDS PROJECTS (Load More Testing)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-005",
+    slug: "thames-gateway-data-centre-power",
+    category: "power-boards",
+    categoryLabel: "Power Boards",
+    title: "Thames Gateway Data Centre Power Infrastructure",
+    clientSector: "Data Centres",
+    status: "completed",
+    description:
+      "Tier III compliant power distribution infrastructure for a new 15MW data centre facility, featuring redundant power paths, UPS systems, and automated switchgear.",
+    coverImage: {
+      src: "/images/services-industrial.jpg",
+      alt: "Data centre power distribution systems",
+    },
+    kpis: {
+      budget: "£4.8M",
+      timeline: "18 months",
+      capacity: "15MW",
+      location: "Thames Gateway",
+    },
+    tags: ["Data Centre", "Tier III", "UPS Systems", "Redundancy"],
+    progress: 100,
+    isFeatured: false,
+    publishedAt: "2024-06-15T09:00:00.000Z",
+    updatedAt: "2025-12-10T16:30:00.000Z",
+    detail: {
+      intro: {
+        label: "Mission Critical",
+        headlineWords: [
+          "Powering",
+          "the",
+          "Digital",
+          "Economy",
+          "with",
+          "Unbreakable",
+          "Infrastructure.",
+        ],
+        leadParagraph:
+          "When CloudFirst approached us to deliver the electrical infrastructure for their new Thames Gateway facility, they needed a partner who understood that downtime isn't measured in hours — it's measured in millions.",
+        bodyParagraphs: [
+          "Modern data centres are the backbone of the digital economy. Every millisecond of downtime translates to lost transactions, broken SLAs, and damaged reputations. CloudFirst's new facility needed to achieve Tier III certification, demanding 99.982% availability and concurrent maintainability across all power systems.",
+          "Our team designed and delivered a complete 2N redundant power architecture from 33kV intake through to rack-level distribution. The installation includes four 4MVA transformers in an N+1 configuration, 30 minutes of UPS runtime across 12 modular units, and intelligent switchgear that enables any component to be maintained without impacting live operations.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "2N Redundancy",
+            description:
+              "Fully redundant power paths from utility intake to rack PDUs, eliminating any single point of failure.",
+          },
+          {
+            num: "02",
+            title: "Concurrent Maintainability",
+            description:
+              "Every component can be isolated and maintained while the facility remains fully operational.",
+          },
+          {
+            num: "03",
+            title: "Scalable Architecture",
+            description:
+              "Modular design supporting expansion from 15MW to 45MW without disruption to existing operations.",
+          },
+        ],
+      },
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "HV Infrastructure",
+          description:
+            "33kV switchgear installation, transformer compound construction, and primary distribution.",
+          duration: "20 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "UPS & Battery Systems",
+          description:
+            "Installation of 12 modular UPS units with lithium-ion battery strings providing 30-minute runtime.",
+          duration: "16 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "LV Distribution",
+          description:
+            "Row-level power distribution, busway installation, and intelligent PDU deployment.",
+          duration: "14 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Testing & Certification",
+          description:
+            "Integrated systems testing, load bank testing, and Uptime Institute Tier III certification.",
+          duration: "8 weeks",
+          status: "completed",
+        },
+      ],
+      scope: [
+        {
+          icon: "Zap",
+          title: "HV Systems",
+          description:
+            "33kV ring main unit, four 4MVA transformers, and automated switchgear with 8-cycle fault clearance.",
+        },
+        {
+          icon: "Battery",
+          title: "UPS Infrastructure",
+          description:
+            "12x 1.5MVA modular UPS units with lithium-ion batteries and 30-minute autonomy.",
+        },
+        {
+          icon: "Network",
+          title: "Distribution",
+          description:
+            "Redundant busway systems, 2N PDU architecture, and intelligent branch circuit monitoring.",
+        },
+        {
+          icon: "Shield",
+          title: "Protection",
+          description:
+            "Arc flash mitigation, selective coordination, and comprehensive earthing system.",
+        },
+      ],
+      challenge:
+        "Delivering Tier III compliant infrastructure on an aggressive 18-month timeline while coordinating with mechanical, civil, and IT infrastructure contractors in a brownfield location.",
+      solution:
+        "We deployed an integrated project delivery model with our design team embedded on-site throughout construction. Prefabricated switchgear assemblies reduced installation time by 40%, and our BIM coordination eliminated clashes before they reached the field. The facility achieved Tier III certification on first submission.",
+      gallery: [
+        {
+          src: "/images/services-industrial.jpg",
+          alt: "HV switchgear installation",
+          caption: "33kV ring main unit installation during Phase 1",
+        },
+        {
+          src: "/images/power-distribution.jpg",
+          alt: "UPS room",
+          caption: "Modular UPS installation with lithium-ion battery strings",
+        },
+        {
+          src: "/images/services-commercial.jpg",
+          alt: "Data hall distribution",
+          caption: "Overhead busway and PDU distribution in live data hall",
+        },
+      ],
+      testimonial: {
+        quote:
+          "Nexgen delivered infrastructure that exceeded our Tier III requirements. Their understanding of data centre criticality and their ability to coordinate complex installations without impacting our go-live schedule was exceptional.",
+        author: "Marcus Chen",
+        role: "VP Infrastructure",
+        company: "CloudFirst UK",
+      },
+    },
+  },
+  {
+    id: "proj-006",
+    slug: "canary-wharf-tower-mains-upgrade",
+    category: "power-boards",
+    categoryLabel: "Power Boards",
+    title: "Canary Wharf Tower Mains Upgrade",
+    clientSector: "Commercial Property",
+    status: "in-progress",
+    description:
+      "Complete mains intake and distribution board replacement for a 42-storey commercial tower, upgrading 1980s infrastructure to modern standards while maintaining full building occupancy.",
+    coverImage: {
+      src: "/images/services-commercial.jpg",
+      alt: "Commercial tower electrical upgrade",
+    },
+    kpis: {
+      budget: "£3.2M",
+      timeline: "14 months",
+      capacity: "6.3MVA",
+      location: "Canary Wharf",
+    },
+    tags: ["High Rise", "Live Upgrade", "Distribution", "Commercial"],
+    progress: 45,
+    isFeatured: false,
+    publishedAt: "2025-09-01T09:00:00.000Z",
+    updatedAt: "2026-03-25T11:20:00.000Z",
+    detail: {
+      intro: {
+        label: "Urban Engineering",
+        headlineWords: [
+          "Rewiring",
+          "a",
+          "Landmark",
+          "Without",
+          "Missing",
+          "a",
+          "Beat.",
+        ],
+        leadParagraph:
+          "One Canada Square's sister tower needed a complete electrical overhaul. The challenge? Do it while 4,000 people continue working inside, with zero tolerance for unplanned outages.",
+        bodyParagraphs: [
+          "The tower's original 1980s electrical infrastructure had served admirably for 40 years, but was now operating at 92% capacity with no room for tenant expansion or EV charging infrastructure. The distribution boards showed signs of thermal stress, and spare parts for the legacy switchgear were becoming impossible to source.",
+          "Our engineering team developed a revolutionary 'shadow infrastructure' approach — installing new parallel distribution alongside existing systems, then migrating circuits floor-by-floor during weekend windows. Each switchover takes less than 30 minutes, scheduled months in advance with individual tenants.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Shadow Infrastructure",
+            description:
+              "Parallel new systems installed alongside existing infrastructure before any disruption to tenants.",
+          },
+          {
+            num: "02",
+            title: "Floor-by-Floor Migration",
+            description:
+              "Controlled switchovers during scheduled windows, with each floor taking less than 30 minutes.",
+          },
+          {
+            num: "03",
+            title: "40% Capacity Increase",
+            description:
+              "New infrastructure provides 40% additional capacity for tenant densification and EV charging.",
+          },
+        ],
+      },
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Basement Infrastructure",
+          description:
+            "New HV switchgear, transformers, and main distribution boards in basement plant rooms.",
+          duration: "16 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "Riser Installation",
+          description:
+            "New rising mains and floor distribution boards installed in parallel with existing.",
+          duration: "24 weeks",
+          status: "in-progress",
+        },
+        {
+          phase: "Phase 3",
+          title: "Floor Migration",
+          description:
+            "Phased migration of each floor from legacy to new distribution during weekend windows.",
+          duration: "12 weeks",
+          status: "upcoming",
+        },
+        {
+          phase: "Phase 4",
+          title: "Legacy Removal",
+          description:
+            "Safe removal of decommissioned infrastructure and final testing and certification.",
+          duration: "8 weeks",
+          status: "upcoming",
+        },
+      ],
+      scope: [
+        {
+          icon: "Building",
+          title: "HV Switchgear",
+          description:
+            "New 11kV ring main unit and three 2.1MVA transformers with OLTC capability.",
+        },
+        {
+          icon: "Layers",
+          title: "Rising Mains",
+          description:
+            "6300A busbar trunking system with tap-off units at every floor.",
+        },
+        {
+          icon: "LayoutGrid",
+          title: "Distribution",
+          description:
+            "42 new floor distribution boards with RCBO protection and energy monitoring.",
+        },
+        {
+          icon: "Car",
+          title: "EV Ready",
+          description:
+            "Dedicated 800A EV charging infrastructure serving 200 parking spaces.",
+        },
+      ],
+      challenge:
+        "Replacing the entire electrical backbone of an occupied 42-storey building without any unplanned disruption to the 4,000 daily occupants or the building's critical systems.",
+      solution:
+        "The shadow infrastructure approach transforms what would typically be a disruptive strip-out into a controlled migration. New systems are fully tested and commissioned before any tenant circuit is transferred, and every switchover window includes automatic rollback capability if any issue is detected.",
+      gallery: [
+        {
+          src: "/images/services-commercial.jpg",
+          alt: "New basement switchgear",
+          caption: "11kV switchgear installation in basement plant room",
+        },
+        {
+          src: "/images/power-distribution.jpg",
+          alt: "Riser installation",
+          caption:
+            "New busbar trunking installed alongside legacy rising mains",
+        },
+        {
+          src: "/images/services-industrial.jpg",
+          alt: "Floor distribution board",
+          caption: "Modern floor distribution board with smart monitoring",
+        },
+      ],
+      testimonial: {
+        quote:
+          "We were sceptical that such a major upgrade could be done without significant disruption. Nexgen's shadow infrastructure approach has proven us wrong — our tenants have experienced zero unplanned outages throughout the project.",
+        author: "Sarah Mitchell",
+        role: "Building Manager",
+        company: "Canary Wharf Management Ltd",
+      },
+    },
+  },
+  {
+    id: "proj-007",
+    slug: "heathrow-cargo-substation-expansion",
+    category: "power-boards",
+    categoryLabel: "Power Boards",
+    title: "Heathrow Cargo Substation Expansion",
+    clientSector: "Aviation",
+    status: "completed",
+    description:
+      "New 33/11kV primary substation and distribution network expansion for Heathrow's cargo handling facilities, supporting automated warehousing and cold chain operations.",
+    coverImage: {
+      src: "/images/power-distribution.jpg",
+      alt: "Aviation cargo facility electrical infrastructure",
+    },
+    kpis: {
+      budget: "£5.6M",
+      timeline: "22 months",
+      capacity: "33kV/20MVA",
+      location: "Heathrow Airport",
+    },
+    tags: ["Aviation", "Substation", "Cold Chain", "Automation"],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2023-11-01T09:00:00.000Z",
+    updatedAt: "2025-09-15T14:45:00.000Z",
+    detail: {
+      intro: {
+        label: "Aviation Infrastructure",
+        headlineWords: [
+          "Keeping",
+          "the",
+          "World's",
+          "Cargo",
+          "Moving",
+          "Through",
+          "Heathrow.",
+        ],
+        leadParagraph:
+          "Heathrow handles 1.6 million tonnes of cargo annually. When their existing electrical infrastructure couldn't support planned automation and cold chain expansion, they needed a partner who could deliver complex infrastructure in one of the world's most security-sensitive environments.",
+        bodyParagraphs: [
+          "The cargo handling facilities at Heathrow operate around the clock, processing time-critical shipments ranging from pharmaceuticals to automotive parts. The planned introduction of automated handling systems and expanded temperature-controlled warehousing required a 60% increase in electrical capacity.",
+          "Working within the airport's strict security protocols and airside access restrictions, our team designed and delivered a new 33/11kV primary substation with 20MVA capacity. The project included 4km of new HV cable routes, six new secondary substations, and integration with the airport's existing SCADA systems.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Airside Delivery",
+            description:
+              "Full compliance with CAA and airport security requirements for airside construction operations.",
+          },
+          {
+            num: "02",
+            title: "Zero Flight Impact",
+            description:
+              "All works scheduled and executed without any impact on flight operations or cargo handling.",
+          },
+          {
+            num: "03",
+            title: "Future Capacity",
+            description:
+              "Infrastructure designed with 50% spare capacity for future automation phases.",
+          },
+        ],
+      },
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Primary Substation",
+          description:
+            "Construction of new 33/11kV primary substation with 2x10MVA transformers.",
+          duration: "32 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "HV Cable Network",
+          description:
+            "Installation of 4km of 11kV cable routes to new secondary substations.",
+          duration: "20 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Secondary Substations",
+          description:
+            "Six new 11kV/400V substations serving cargo handling and cold chain facilities.",
+          duration: "24 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "SCADA Integration",
+          description:
+            "Integration with airport SCADA systems and commissioning of automated load management.",
+          duration: "12 weeks",
+          status: "completed",
+        },
+      ],
+      scope: [
+        {
+          icon: "Building2",
+          title: "Primary Substation",
+          description:
+            "New 33/11kV substation with 2x10MVA transformers and SF6-free switchgear.",
+        },
+        {
+          icon: "Cable",
+          title: "HV Network",
+          description:
+            "4km of 11kV XLPE cable in dedicated routes with full redundancy.",
+        },
+        {
+          icon: "Warehouse",
+          title: "Distribution",
+          description:
+            "Six secondary substations with combined 12MVA capacity serving cargo facilities.",
+        },
+        {
+          icon: "Thermometer",
+          title: "Cold Chain",
+          description:
+            "Dedicated supplies for 8,000m² of temperature-controlled warehousing.",
+        },
+      ],
+      challenge:
+        "Delivering major electrical infrastructure in an operational airside environment with strict security protocols, limited working windows, and zero tolerance for any impact on flight operations.",
+      solution:
+        "Every aspect of this project was planned around airport operations. We obtained permanent airside passes for 40 operatives, established a dedicated compound within the cargo area, and scheduled all HV works during the airport's quieter night-time periods. Crane lifts for transformer installation required coordination with air traffic control and were completed in a single 4-hour window.",
+      gallery: [
+        {
+          src: "/images/power-distribution.jpg",
+          alt: "Primary substation",
+          caption: "New 33/11kV primary substation at Heathrow cargo",
+        },
+        {
+          src: "/images/services-industrial.jpg",
+          alt: "Cable installation",
+          caption: "HV cable pulling in dedicated service corridor",
+        },
+        {
+          src: "/images/services-commercial.jpg",
+          alt: "Secondary substation",
+          caption: "Compact secondary substation serving cold chain facility",
+        },
+      ],
+      testimonial: {
+        quote:
+          "Working airside at Heathrow presents unique challenges that most contractors struggle with. Nexgen's team integrated seamlessly with our operations, delivered on an aggressive timeline, and did so without a single security or safety incident.",
+        author: "James Patterson",
+        role: "Head of Infrastructure",
+        company: "Heathrow Airport Holdings",
       },
     },
   },
@@ -755,4 +1219,46 @@ export function getProjectSlugsByCategory(
   return allProjects
     .filter((project) => project.category === categorySlug)
     .map((project) => project.slug);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHARED CONTENT GRID SUPPORT
+// Extended list items for ContentGridLayout compatibility
+// ═══════════════════════════════════════════════════════════════════════════
+
+import type { ProjectListItemExtended } from "@/types/shared-content";
+
+/**
+ * Convert a Project to ProjectListItemExtended for ContentGridLayout.
+ */
+function projectToExtendedListItem(project: Project): ProjectListItemExtended {
+  return {
+    id: project.id,
+    slug: project.slug,
+    category: project.category,
+    categoryLabel: project.categoryLabel,
+    title: project.title,
+    excerpt: project.description,
+    publishedAt: project.publishedAt,
+    isFeatured: project.isFeatured,
+    featuredImage: project.coverImage,
+    contentType: "project",
+    status: project.status,
+    location: project.kpis.location,
+    budget: project.kpis.budget,
+    clientSector: project.clientSector,
+  };
+}
+
+/**
+ * Get extended project list items for ContentGridLayout.
+ */
+export function getProjectListItemsExtended(
+  category: ProjectCategorySlug = "all",
+): ProjectListItemExtended[] {
+  const projects =
+    category === "all"
+      ? allProjects
+      : allProjects.filter((p) => p.category === category);
+  return projects.map(projectToExtendedListItem);
 }

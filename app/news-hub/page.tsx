@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import {
   NewsHubBentoGrid,
-  NewsHubFeed,
   NewsHubFeaturedCard,
   NewsHubHero,
 } from "@/components/news-hub";
+import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
+import { ContentBreadcrumb } from "@/components/shared";
 import {
   getFeaturedNewsArticleByCategory,
   getNewsArticleListItemsByCategory,
@@ -47,6 +48,14 @@ export default async function NewsHubPage({
         totalArticles={listItems.length}
       />
 
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "News Hub", href: "/news-hub", isCurrent: true },
+        ]}
+        section="news"
+      />
+
       {featuredArticle ? (
         <section className="section-standard bg-background">
           <div className="section-content max-w-6xl">
@@ -66,7 +75,13 @@ export default async function NewsHubPage({
         className="section-container section-padding bg-background"
       >
         <div className="section-content max-w-6xl">
-          <NewsHubFeed items={listItems} sidebarCards={sidebarCards} />
+          <NewsGridLayout
+            items={listItems}
+            sidebarCards={sidebarCards}
+            title="Latest Articles"
+            initialCount={4}
+            batchSize={3}
+          />
         </div>
       </section>
 
