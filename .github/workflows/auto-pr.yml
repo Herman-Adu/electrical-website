@@ -71,43 +71,41 @@ jobs:
       - name: Comment when ready-to-merge is present
         if: contains(github.event.pull_request.labels.*.name, 'ready-to-merge')
         run: |
+          body="$(printf '%s\n' \
+            "**Auto-PR automation active** on commit \`${{ github.sha }}\`" \
+            "" \
+            "| Step | Status |" \
+            "|------|--------|" \
+            "| Copilot review requested | ✅ |" \
+            "| Auto-merge enabled (squash) | ✅ |" \
+            "| E2E Tests | ⏳ running |" \
+            "| Lighthouse CI | ⏳ running |" \
+            "" \
+            "Protected branch rules on \`main\` still control merging." \
+            "Auto-merge will wait for any required reviews, resolved conversations, and checks configured there.")"
           gh pr comment "${{ github.event.pull_request.number }}" \
             --repo "${{ github.repository }}" \
-            --body "$(cat <<'EOF'
-          **Auto-PR automation active** on commit \`${{ github.sha }}\`
-
-          | Step | Status |
-          |------|--------|
-          | Copilot review requested | ✅ |
-          | Auto-merge enabled (squash) | ✅ |
-          | E2E Tests | ⏳ running |
-          | Lighthouse CI | ⏳ running |
-
-          PR will merge automatically only after all protected-branch requirements pass.
-          Required approval and resolved conversations are still enforced on main.
-          EOF
-          )"
+            --body "$body"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment when ready-to-merge is missing
         if: ${{ !contains(github.event.pull_request.labels.*.name, 'ready-to-merge') }}
         run: |
+          body="$(printf '%s\n' \
+            "**Auto-PR automation active** on commit \`${{ github.sha }}\`" \
+            "" \
+            "| Step | Status |" \
+            "|------|--------|" \
+            "| Copilot review requested | ✅ |" \
+            "| Auto-merge enabled (squash) | ⏸ waiting for \`ready-to-merge\` label |" \
+            "| E2E Tests | ⏳ running |" \
+            "| Lighthouse CI | ⏳ running |" \
+            "" \
+            "Protected branch rules on \`main\` still control merging." \
+            "Add the \`ready-to-merge\` label only after checks pass and review comments are resolved.")"
           gh pr comment "${{ github.event.pull_request.number }}" \
             --repo "${{ github.repository }}" \
-            --body "$(cat <<'EOF'
-          **Auto-PR automation active** on commit \`${{ github.sha }}\`
-
-          | Step | Status |
-          |------|--------|
-          | Copilot review requested | ✅ |
-          | Auto-merge enabled (squash) | ⏸ waiting for `ready-to-merge` label |
-          | E2E Tests | ⏳ running |
-          | Lighthouse CI | ⏳ running |
-
-          Protected-branch rules are enabled on main.
-          Add the `ready-to-merge` label only after checks pass and review comments are resolved.
-          EOF
-          )"
+            --body "$body"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

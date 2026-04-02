@@ -49,6 +49,27 @@ Success criteria: full suite passes (`58 passed`) and no `isn't a valid image` w
 
 Note: `Invalid category` logs are expected validation noise from negative tests and are not test failures.
 
+## Selector & Wait-State Policy for Playwright
+
+Use these rules before changing E2E tests:
+
+- Prefer route-owned selectors over shared shell selectors.
+  - Good: `getByRole("button", { name: /^retry$/i })`, `getByRole("link", { name: /^back to services$/i })`, route-specific headings/text.
+  - Avoid for boundary tests: asserting shared navbar/footer links unless the test is explicitly about global navigation.
+- Prefer accessible selectors first:
+  - `getByRole()` for buttons, links, headings, dialogs, alerts.
+  - `getByLabel()` / `getByPlaceholder()` for form controls.
+  - `getByText()` only for stable content markers owned by the route.
+- Use destination selectors like `a[href="/services"]` only when destination matters more than label.
+- Default navigation wait strategy for this repo is `waitUntil: "domcontentloaded"` plus explicit UI assertions.
+  - Do not use `networkidle` for standard route checks in this Next.js app; background activity can make it flaky.
+  - Do not rely on `load`/`networkidle` when a visible route-owned UI marker is available.
+- After navigation, assert the UI that proves the route state you actually care about.
+  - Fixture page: route-specific heading/content.
+  - Error boundary: boundary heading/message + recovery controls.
+  - Loading/state transitions: a stable marker for the final rendered state.
+- If a test keeps failing across builds, inspect implementation first using browser automation and code search before patching waits.
+
 ## Quick Reference
 
 | Goal                        | Command                                | Time           | Environment         |
