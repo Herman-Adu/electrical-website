@@ -10,10 +10,7 @@ import {
   type PanInfo,
 } from "framer-motion";
 import { ArrowRight, MapPin, GripHorizontal } from "lucide-react";
-import {
-  useAnimatedBorders,
-  AnimatedBorders,
-} from "@/lib/use-animated-borders";
+import { useAnimatedBorders } from "@/lib/use-animated-borders";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
 
@@ -21,6 +18,7 @@ interface ProjectRelatedCarouselProps {
   projects: Project[];
   categorySlug: string;
   heading?: string;
+  anchorId?: string;
 }
 
 const cardVariants: Variants = {
@@ -40,10 +38,11 @@ export function ProjectRelatedCarousel({
   projects,
   categorySlug,
   heading = "Related Projects",
+  anchorId,
 }: ProjectRelatedCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef } = useAnimatedBorders();
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [showHint, setShowHint] = useState(true);
 
@@ -94,7 +93,7 @@ export function ProjectRelatedCarousel({
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       {/* Header */}
-      <div className="section-content max-w-6xl mb-6">
+      <div id={anchorId} className="section-content max-w-6xl mb-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="h-px w-8 bg-electric-cyan/50" />

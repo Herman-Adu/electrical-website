@@ -3,16 +3,21 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { AlertTriangle, Lightbulb } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 interface ProjectChallengeSolutionProps {
   challenge: string;
   solution: string;
+  anchorId?: string;
 }
 
 export function ProjectChallengeSolution({
   challenge,
   solution,
+  anchorId,
 }: ProjectChallengeSolutionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
@@ -20,11 +25,20 @@ export function ProjectChallengeSolution({
   const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
-      <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+    >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineLeft={lineLeft}
+        lineRight={lineRight}
+        showBottom={false}
+      />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div
+          id={anchorId}
           className="flex items-center gap-4 mb-12"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}

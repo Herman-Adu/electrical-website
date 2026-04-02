@@ -21,8 +21,11 @@ import {
   ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
-import { ContentToc, ContentSidebar, ContentBreadcrumb } from "@/components/shared";
-import type { BreadcrumbItem } from "@/types/shared-content";
+import {
+  ContentToc,
+  ContentSidebar,
+  ContentBreadcrumb,
+} from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 import type { Project } from "@/types/projects";
@@ -201,50 +204,55 @@ export default async function CategoryProjectDetailPage({
           {/* Main Content Column */}
           <div className="space-y-0">
             {detail?.intro && (
-              <div id="overview" className="scroll-mt-36">
-                <ProjectDetailIntro data={detail.intro} />
+              <div>
+                <ProjectDetailIntro data={detail.intro} anchorId="overview" />
               </div>
             )}
 
             {detail?.scope && detail.scope.length > 0 && (
-              <div id="scope" className="scroll-mt-36 py-2">
-                <ProjectScopeGrid items={detail.scope} />
+              <div className="py-2">
+                <ProjectScopeGrid items={detail.scope} anchorId="scope" />
               </div>
             )}
 
             {detail?.challenge && detail?.solution && (
-              <div id="challenge" className="scroll-mt-36">
+              <div>
                 <ProjectChallengeSolution
                   challenge={detail.challenge}
                   solution={detail.solution}
+                  anchorId="challenge"
                 />
               </div>
             )}
 
             {detail?.timeline && detail.timeline.length > 0 && (
-              <div id="timeline" className="scroll-mt-36">
-                <ProjectTimeline phases={detail.timeline} />
+              <div>
+                <ProjectTimeline phases={detail.timeline} anchorId="timeline" />
               </div>
             )}
 
             {detail?.gallery && detail.gallery.length > 0 && (
-              <div id="gallery" className="scroll-mt-36">
-                <ProjectGallery images={detail.gallery} />
+              <div>
+                <ProjectGallery images={detail.gallery} anchorId="gallery" />
               </div>
             )}
 
             {detail?.testimonial && (
-              <div id="testimonial" className="scroll-mt-36">
-                <ProjectTestimonialCard testimonial={detail.testimonial} />
+              <div>
+                <ProjectTestimonialCard
+                  testimonial={detail.testimonial}
+                  anchorId="testimonial"
+                />
               </div>
             )}
 
             {relatedProjects.length > 0 && (
-              <div id="related" className="scroll-mt-36">
+              <div>
                 <ProjectRelatedCarousel
                   projects={relatedProjects}
                   categorySlug={categorySlug}
                   heading={`More ${category.label} Projects`}
+                  anchorId="related"
                 />
               </div>
             )}

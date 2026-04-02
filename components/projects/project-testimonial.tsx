@@ -4,25 +4,31 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import { useAnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectTestimonial } from "@/types/projects";
 
 interface ProjectTestimonialCardProps {
   testimonial: ProjectTestimonial;
+  anchorId?: string;
 }
 
 export function ProjectTestimonialCard({
   testimonial,
+  anchorId,
 }: ProjectTestimonialCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef } = useAnimatedBorders();
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+    >
       <div className="section-content max-w-4xl" ref={containerRef}>
         <motion.div
+          id={anchorId}
           initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
