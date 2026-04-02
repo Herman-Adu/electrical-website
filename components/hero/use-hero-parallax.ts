@@ -71,6 +71,7 @@ export function useHeroParallax({
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion() ?? false;
   const [isMobile, setIsMobile] = useState(false);
+  const [contentTravelScale, setContentTravelScale] = useState(1);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`(max-width: ${mobileBreakpoint}px)`);
@@ -85,6 +86,70 @@ export function useHeroParallax({
       mediaQuery.removeEventListener("change", updateMatch);
     };
   }, [mobileBreakpoint]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const sectionElement = sectionRef.current;
+    if (!sectionElement) return;
+
+    const contentElement = sectionElement.querySelector<HTMLElement>(
+      '[data-hero-parallax-content="true"]',
+    );
+
+    if (!contentElement) {
+      setContentTravelScale(1);
+      return;
+    }
+
+    const measure = () => {
+      const sectionHeight = sectionElement.clientHeight;
+      const contentHeight = contentElement.clientHeight;
+
+      if (sectionHeight <= 0 || contentHeight <= 0) {
+        setContentTravelScale(1);
+        return;
+      }
+
+      const currentPreset = PARALLAX_PRESETS[size];
+      const targetTravel = isMobile
+        ? (contentTravel?.mobile ?? currentPreset.content.mobile)
+        : (contentTravel?.desktop ?? currentPreset.content.desktop);
+
+      const requestedTravelPx = (Math.abs(targetTravel) / 100) * sectionHeight;
+
+      if (requestedTravelPx <= 0) {
+        setContentTravelScale(1);
+        return;
+      }
+
+      const availableTravelPx = Math.max(sectionHeight - contentHeight, 0);
+      const nextScale = Math.min(1, availableTravelPx / requestedTravelPx);
+
+      setContentTravelScale(Number.isFinite(nextScale) ? nextScale : 1);
+    };
+
+    measure();
+
+    let resizeObserver: ResizeObserver | null = null;
+
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        measure();
+      });
+      resizeObserver.observe(sectionElement);
+      resizeObserver.observe(contentElement);
+    }
+
+    window.addEventListener("resize", measure);
+    window.addEventListener("orientationchange", measure);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("orientationchange", measure);
+    };
+  }, [isMobile, size, contentTravel]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -110,7 +175,9 @@ export function useHeroParallax({
 
   const parallaxDisabled = disabled || shouldReduceMotion;
   const activeBackgroundTravel = parallaxDisabled ? 0 : currentBackgroundTravel;
-  const activeContentTravel = parallaxDisabled ? 0 : currentContentTravel;
+  const activeContentTravel = parallaxDisabled
+    ? 0
+    : currentContentTravel * contentTravelScale;
   const activeOverscan = parallaxDisabled ? 0 : currentOverscan;
 
   const backgroundY = useTransform(

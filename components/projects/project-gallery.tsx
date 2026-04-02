@@ -2,19 +2,29 @@
 
 import Image from "next/image";
 import { useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import type { ProjectGalleryImage } from "@/types/projects";
 
 interface ProjectGalleryProps {
   images: ProjectGalleryImage[];
   heading?: string;
+  anchorId?: string;
 }
 
 export function ProjectGallery({
   images,
   heading = "Project Gallery",
+  anchorId,
 }: ProjectGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -50,19 +60,28 @@ export function ProjectGallery({
       if (e.key === "ArrowRight") goToNext();
       if (e.key === "ArrowLeft") goToPrev();
     },
-    [closeLightbox, goToNext, goToPrev]
+    [closeLightbox, goToNext, goToPrev],
   );
 
   if (images.length === 0) return null;
 
   return (
     <>
-      <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
-        <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} />
+      <section
+        ref={sectionRef}
+        className="relative py-16 sm:py-24 bg-card/30 overflow-hidden"
+      >
+        <AnimatedBorders
+          shouldReduce={shouldReduce}
+          lineLeft={lineLeft}
+          lineRight={lineRight}
+          showBottom={false}
+        />
         <div className="section-content max-w-6xl" ref={containerRef}>
           {/* Header */}
           <motion.div
-            className="flex items-center gap-4 mb-12"
+            id={anchorId}
+            className="flex items-center gap-4 mb-12 scroll-mt-36"
             initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}

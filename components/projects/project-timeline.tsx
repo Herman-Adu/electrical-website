@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { CheckCircle, Clock, Circle } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import { useAnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectTimelinePhase } from "@/types/projects";
 
 interface ProjectTimelineProps {
   phases: ProjectTimelinePhase[];
   heading?: string;
+  anchorId?: string;
 }
 
 const statusConfig = {
@@ -38,21 +39,26 @@ const statusConfig = {
 export function ProjectTimeline({
   phases,
   heading = "Project Timeline",
+  anchorId,
 }: ProjectTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef } = useAnimatedBorders();
 
   if (phases.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+    >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Header */}
         <motion.div
-          className="flex items-center gap-4 mb-12"
+          id={anchorId}
+          className="flex items-center gap-4 mb-12 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}

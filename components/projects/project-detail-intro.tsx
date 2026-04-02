@@ -40,9 +40,13 @@ function AnimatedWord({
 
 interface ProjectDetailIntroProps {
   data: ProjectIntroData;
+  anchorId?: string;
 }
 
-export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
+export function ProjectDetailIntro({
+  data,
+  anchorId,
+}: ProjectDetailIntroProps) {
   const {
     label,
     headlineWords,
@@ -66,7 +70,6 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
   });
 
   const lineLeft = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
-  const lineRight = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -106,11 +109,12 @@ export function ProjectDetailIntro({ data }: ProjectDetailIntroProps) {
       <div className="section-content max-w-6xl">
         {/* Section label */}
         <motion.div
+          id={anchorId}
+          className="flex items-center gap-3 mb-12 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex items-center gap-3 mb-12"
         >
           <div className="h-px w-8 bg-electric-cyan" />
           <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">

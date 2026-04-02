@@ -30,7 +30,11 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
   const isSingleItem = items.length === 1;
 
   return (
-    <div className="sticky top-16 lg:top-20 z-40 bg-background/95 backdrop-blur-md border-b border-electric-cyan/20">
+    <div
+      data-section={section}
+      data-sticky-breadcrumb="true"
+      className="sticky top-16 lg:top-20 z-40 bg-background/95 backdrop-blur-md border-b border-electric-cyan/20"
+    >
       <div className="section-content max-w-7xl py-3">
         <nav
           aria-label="Breadcrumb"

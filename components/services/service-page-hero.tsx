@@ -7,6 +7,8 @@ import { ChevronDown, Activity } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_TALL_IMAGE } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { SectionHeroData } from "@/types/sections";
 
 const containerVariants: Variants = {
@@ -51,7 +53,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
       ? document.getElementById(scrollTargetId)
       : document.querySelector("section[id]");
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      scrollToElementWithOffset(target);
     }
   };
 
@@ -180,10 +182,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           )}
 
           {/* Main headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_TALL_IMAGE}>
             {headlineHighlight ? (
               <>
                 {headlineText.split(headlineHighlight)[0]}

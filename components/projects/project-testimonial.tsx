@@ -4,29 +4,35 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import { useAnimatedBorders } from "@/lib/use-animated-borders";
 import type { ProjectTestimonial } from "@/types/projects";
 
 interface ProjectTestimonialCardProps {
   testimonial: ProjectTestimonial;
+  anchorId?: string;
 }
 
 export function ProjectTestimonialCard({
   testimonial,
+  anchorId,
 }: ProjectTestimonialCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef } = useAnimatedBorders();
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-background overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+    >
       <div className="section-content max-w-4xl" ref={containerRef}>
         <motion.div
+          id={anchorId}
           initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="relative p-8 sm:p-12 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
+          className="relative scroll-mt-36 p-8 sm:p-12 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
         >
           {/* Decorative corners */}
           <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />

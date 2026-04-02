@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { SCROLL_GAP, scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { TocItem } from "@/types/shared-content";
 
 interface ContentTocProps {
@@ -43,7 +44,7 @@ export function ContentToc({
       {
         rootMargin: "-20% 0% -60% 0%",
         threshold: 0,
-      }
+      },
     );
 
     // Observe all section elements
@@ -67,13 +68,8 @@ export function ContentToc({
 
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
+      scrollToElementWithOffset(element, {
+        baseGap: SCROLL_GAP.toc,
       });
     }
   }, []);
@@ -131,7 +127,7 @@ export function ContentToc({
                     <motion.div
                       className={cn(
                         "absolute bottom-1 left-0 top-1 w-0.5 rounded-full transition-colors duration-200",
-                        isActive ? "bg-electric-cyan" : "bg-electric-cyan/20"
+                        isActive ? "bg-electric-cyan" : "bg-electric-cyan/20",
                       )}
                       animate={{
                         backgroundColor: isActive
@@ -152,7 +148,7 @@ export function ContentToc({
                       isSubItem && "pl-4",
                       isActive
                         ? "bg-electric-cyan/15 text-electric-cyan"
-                        : "text-foreground/60 hover:bg-electric-cyan/5 hover:text-foreground/90"
+                        : "text-foreground/60 hover:bg-electric-cyan/5 hover:text-foreground/90",
                     )}
                   >
                     {/* Progress indicator */}
@@ -162,7 +158,7 @@ export function ContentToc({
                         isSubItem && "h-4 w-4 text-[8px]",
                         isActive
                           ? "border-electric-cyan/40 bg-electric-cyan/20 text-electric-cyan"
-                          : "border-border/40 bg-background/50 text-foreground/40 group-hover:border-electric-cyan/20"
+                          : "border-border/40 bg-background/50 text-foreground/40 group-hover:border-electric-cyan/20",
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -173,7 +169,7 @@ export function ContentToc({
                       className={cn(
                         "flex-1 truncate transition-all",
                         isActive && "font-medium",
-                        isSubItem && "text-xs"
+                        isSubItem && "text-xs",
                       )}
                     >
                       {item.label}

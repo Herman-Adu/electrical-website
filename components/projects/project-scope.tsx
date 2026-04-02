@@ -55,6 +55,7 @@ interface ProjectScopeGridProps {
   heading?: string;
   title?: string;
   description?: string;
+  anchorId?: string;
 }
 
 export function ProjectScopeGrid({
@@ -62,6 +63,7 @@ export function ProjectScopeGrid({
   heading = "Scope of Work",
   title = "Precision Engineering, Comprehensive Delivery.",
   description = "Every project demands a tailored approach. Our scope encompasses the full spectrum of electrical infrastructure — from initial assessment through final commissioning — ensuring seamless integration and long-term reliability.",
+  anchorId,
 }: ProjectScopeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -84,7 +86,8 @@ export function ProjectScopeGrid({
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
-          className="flex items-center gap-4 mb-6"
+          id={anchorId}
+          className="flex items-center gap-4 mb-6 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}

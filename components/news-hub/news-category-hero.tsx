@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsCategory } from "@/types/news";
 
 const categoryConfig: Record<
@@ -137,7 +139,7 @@ export function NewsCategoryHero({
 
   const scrollToArticles = () => {
     const el = document.getElementById("category-articles");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) scrollToElementWithOffset(el);
   };
 
   return (
@@ -256,10 +258,7 @@ export function NewsCategoryHero({
             <span className="h-px w-12 bg-electric-cyan/60" />
           </motion.div>
 
-          <motion.h1
-            variants={itemVariants}
-            className="mb-6 text-4xl leading-tight font-black tracking-tight text-white uppercase drop-shadow-lg sm:text-5xl md:text-6xl"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
             <span className="block">{category.label}</span>
             <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
               {config.accentWord}

@@ -101,10 +101,7 @@ test.describe("homepage Open Graph tags", () => {
   test("og:url is present and non-empty", async ({ page }) => {
     await page.goto("/");
 
-    const ogUrl = await page.getAttribute(
-      'meta[property="og:url"]',
-      "content",
-    );
+    const ogUrl = await page.getAttribute('meta[property="og:url"]', "content");
     expect(ogUrl).toBeTruthy();
     expect(ogUrl!.trim().length).toBeGreaterThan(0);
   });
@@ -133,8 +130,8 @@ test.describe("about page Open Graph tags", () => {
 // ---------------------------------------------------------------------------
 test.describe("projects page metadata", () => {
   test("page title contains 'Project' or 'Nexgen'", async ({ page }) => {
-    await page.goto("/projects");
-    await page.waitForLoadState("networkidle");
+    await page.goto("/projects", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("domcontentloaded");
 
     const title = await page.title();
     expect(title).toMatch(/project|nexgen/i);

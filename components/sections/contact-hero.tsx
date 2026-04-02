@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Activity, Mail } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -49,25 +50,39 @@ export function ContactHero() {
               stroke="var(--electric-cyan)"
               strokeWidth="1"
               fill="none"
-              initial={shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }}
+              initial={
+                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
+              }
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={shouldReduceMotion ? { duration: 0 } : { duration: 2, delay: 0.5, ease: "easeOut" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 2, delay: 0.5, ease: "easeOut" }
+              }
             />
             <motion.path
               d="M0 380 H300 L340 340 H700 L780 420 H1440"
               stroke="var(--electric-cyan)"
               strokeWidth="0.5"
               fill="none"
-              initial={shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }}
+              initial={
+                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
+              }
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={shouldReduceMotion ? { duration: 0 } : { duration: 2, delay: 0.9, ease: "easeOut" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 2, delay: 0.9, ease: "easeOut" }
+              }
             />
-            {([
-              [540, 260],
-              [940, 300],
-              [340, 340],
-              [700, 420],
-            ] as [number, number][]).map(([cx, cy], i) => (
+            {(
+              [
+                [540, 260],
+                [940, 300],
+                [340, 340],
+                [700, 420],
+              ] as [number, number][]
+            ).map(([cx, cy], i) => (
               <motion.circle
                 key={i}
                 cx={cx}
@@ -76,7 +91,11 @@ export function ContactHero() {
                 fill="var(--electric-cyan)"
                 initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 0.5 }}
-                transition={shouldReduceMotion ? { duration: 0 } : { delay: 1.2 + i * 0.1, duration: 0.3 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { delay: 1.2 + i * 0.1, duration: 0.3 }
+                }
               />
             ))}
           </svg>
@@ -104,7 +123,10 @@ export function ContactHero() {
             className="flex items-center justify-center gap-3 mb-6"
           >
             <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
-              <Activity size={12} className="text-electric-cyan animate-pulse" />
+              <Activity
+                size={12}
+                className="text-electric-cyan animate-pulse"
+              />
               <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
                 Contact // Ready
               </span>
@@ -126,7 +148,7 @@ export function ContactHero() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9] mb-5 text-foreground text-balance"
+            className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Start Your</span>
             <span className="block text-electric-cyan">Project</span>

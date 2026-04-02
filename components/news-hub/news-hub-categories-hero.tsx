@@ -7,6 +7,8 @@ import { Activity, ChevronDown, Layers } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 interface NewsHubCategoriesHeroProps {
   categoryCount: number;
@@ -75,7 +77,7 @@ export function NewsHubCategoriesHero({
 
   const scrollToCategories = () => {
     const el = document.getElementById("categories-grid");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) scrollToElementWithOffset(el);
   };
 
   return (
@@ -249,7 +251,7 @@ export function NewsHubCategoriesHero({
 
           <motion.h1
             variants={itemVariants}
-            className="mb-6 text-5xl leading-[1.0] font-black tracking-tight text-white uppercase drop-shadow-lg sm:text-6xl md:text-7xl"
+            className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Browse</span>
             <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
@@ -259,7 +261,7 @@ export function NewsHubCategoriesHero({
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-xl text-base leading-relaxed font-light text-white/75 drop-shadow-md sm:text-lg"
+            className="mx-auto mb-10 max-w-xl text-base leading-relaxed font-light text-muted-foreground sm:text-lg"
           >
             Six dedicated editorial lanes built for growth, fast discovery, and
             seamless CMS migration. Each category is a full publishing route.

@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { ProjectCategory, ProjectCategorySlug } from "@/types/projects";
 
 interface ProjectsHeroProps {
@@ -70,7 +72,7 @@ export function ProjectsHero({
 
   const scrollToGrid = () => {
     const el = document.getElementById("projects-grid");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) scrollToElementWithOffset(el);
   };
 
   return (
@@ -207,10 +209,7 @@ export function ProjectsHero({
           </motion.div>
 
           {/* Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineered</span>
             <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               Delivery
