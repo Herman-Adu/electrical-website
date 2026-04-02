@@ -1,19 +1,22 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+const getContactForm = (page: Page) =>
+  page
+    .getByRole("main")
+    .locator("form")
+    .filter({ hasText: "Project Inquiry Form" });
 
 test.describe("Turnstile CAPTCHA Integration", () => {
   test("Contact form loads with Turnstile widget", async ({ page }) => {
     // Navigate directly to contact page (contact form is not on homepage)
     await page.goto("/contact", { waitUntil: "load" });
-    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
-
-    // Verify form exists
-    const form = page.locator("form").first();
-    await expect(form).toBeVisible();
+    const form = getContactForm(page);
+    await expect(form).toBeVisible({ timeout: 10000 });
 
     // Verify form fields exist
-    const nameInput = page.locator('input[name="name"]');
-    const emailInput = page.locator('input[name="email"]');
-    const messageInput = page.locator('textarea[name="message"]');
+    const nameInput = form.getByLabel(/full name/i);
+    const emailInput = form.getByLabel(/email address/i);
+    const messageInput = form.getByLabel(/^project details/i);
 
     await expect(nameInput).toBeVisible();
     await expect(emailInput).toBeVisible();
@@ -23,32 +26,32 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // The iframe only renders when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set and
     // Cloudflare's script loads — skip the iframe count in environments without
     // a valid sitekey (CI, local dev without .env.local).
-    const allFrames = page.locator("iframe");
+    const allFrames = form.locator("iframe");
     const frameCount = await allFrames.count();
     if (frameCount > 0) {
       // Full environment (sitekey present): verify it looks like a Turnstile frame
-      const turnstileFrame = page.locator(
+      const turnstileFrame = form.locator(
         'iframe[src*="challenges.cloudflare.com"], iframe[title*="turnstile"], iframe[title*="Turnstile"]',
       );
       const hasTurnstileFrame = await turnstileFrame.count();
       expect(hasTurnstileFrame).toBeGreaterThan(0);
     }
     // Whether or not the iframe loaded, the form must still be functional
-    await expect(page.locator('input[name="name"]')).toBeVisible();
+    await expect(nameInput).toBeVisible();
   });
 
   test("Contact form validation requires CAPTCHA", async ({ page }) => {
     // Use "load" not "networkidle" — Turnstile loads Cloudflare scripts that
     // keep the network active indefinitely, preventing networkidle from firing.
     await page.goto("/contact", { waitUntil: "load" });
-    const form = page.locator("form").first();
+    const form = getContactForm(page);
     await expect(form).toBeVisible({ timeout: 10000 });
 
     // Fill form fields
-    const nameInput = form.locator('input[name="name"]');
-    const emailInput = form.locator('input[name="email"]');
-    const messageInput = form.locator('textarea[name="message"]');
-    const projectTypeSelect = form.locator('select[name="projectType"]');
+    const nameInput = form.getByLabel(/full name/i);
+    const emailInput = form.getByLabel(/email address/i);
+    const messageInput = form.getByLabel(/^project details/i);
+    const projectTypeSelect = form.getByLabel(/^project type/i);
 
     await nameInput.fill("Test User");
     await emailInput.fill("test@example.com");
@@ -76,25 +79,26 @@ test.describe("Turnstile CAPTCHA Integration", () => {
 
   test("Form fields render and accept input", async ({ page }) => {
     await page.goto("/contact", { waitUntil: "load" });
-    await expect(page.locator("form").first()).toBeVisible({ timeout: 10000 });
+    const form = getContactForm(page);
+    await expect(form).toBeVisible({ timeout: 10000 });
 
     // Test name field
-    const nameInput = page.locator('input[name="name"]');
+    const nameInput = form.getByLabel(/full name/i);
     await nameInput.fill("John Doe");
     await expect(nameInput).toHaveValue("John Doe");
 
     // Test email field
-    const emailInput = page.locator('input[name="email"]');
+    const emailInput = form.getByLabel(/email address/i);
     await emailInput.fill("john@example.com");
     await expect(emailInput).toHaveValue("john@example.com");
 
     // Test message field
-    const messageInput = page.locator('textarea[name="message"]');
+    const messageInput = form.getByLabel(/^project details/i);
     await messageInput.fill("This is a test message");
     await expect(messageInput).toHaveValue("This is a test message");
 
     // Test project type dropdown
-    const projectSelect = page.locator('select[name="projectType"]');
+    const projectSelect = form.getByLabel(/^project type/i);
     await projectSelect.selectOption("industrial");
     await expect(projectSelect).toHaveValue("industrial");
   });
@@ -109,7 +113,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     await page.goto("/contact", { waitUntil: "load" });
 
     // Verify the page has the form
-    const form = page.locator("form").first();
+    const form = getContactForm(page);
     await expect(form).toBeVisible();
 
     // No runtime errors should occur during load
