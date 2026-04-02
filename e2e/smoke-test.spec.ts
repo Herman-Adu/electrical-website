@@ -1,4 +1,4 @@
-import { test, expect, type Locator } from "@playwright/test";
+import { test, expect, type Locator, type Page } from "@playwright/test";
 
 const clickWhenReady = async (locator: Locator) => {
   await locator.waitFor({ state: "visible" });
@@ -9,12 +9,18 @@ const clickWhenReady = async (locator: Locator) => {
   await locator.click();
 };
 
+const getContactForm = (page: Page) =>
+  page
+    .getByRole("main")
+    .locator("form")
+    .filter({ hasText: "Project Inquiry Form" });
+
 test.describe("UI Smoke Tests", () => {
   test("Contact Form renders and submits", async ({ page }) => {
-    await page.goto("/contact");
+    await page.goto("/contact", { waitUntil: "domcontentloaded" });
 
     // Verify form is visible
-    const form = page.locator("form").first();
+    const form = getContactForm(page);
     await expect(form).toBeVisible();
 
     // Check form styling (verify Tailwind utilities are applied)
@@ -22,27 +28,27 @@ test.describe("UI Smoke Tests", () => {
     expect(formClass).toBeDefined();
     expect(formClass).toContain("border");
 
-    // Verify form has input fields
-    const inputs = form.locator("input");
-    const inputCount = await inputs.count();
-    expect(inputCount).toBeGreaterThan(0);
+    // Verify route-owned, labeled form fields
+    await expect(form.getByLabel(/full name/i)).toBeVisible();
+    await expect(form.getByLabel(/email address/i)).toBeVisible();
+    await expect(form.getByLabel(/^project type/i)).toBeVisible();
+    await expect(form.getByLabel(/^project details/i)).toBeVisible();
 
     // Verify form has submit button
-    const submitBtn = form.locator(
-      "button[type='submit'], button:has-text('Send')",
-    );
-    await expect(submitBtn.or(form.locator("button").last())).toBeVisible();
+    await expect(
+      form.getByRole("button", { name: /submit inquiry/i }),
+    ).toBeVisible();
   });
 
   test("Contact Form displays rate limit message", async ({ page }) => {
-    await page.goto("/contact");
+    await page.goto("/contact", { waitUntil: "domcontentloaded" });
 
     // Verify rate-limit error handling UI elements exist
-    const form = page.locator("form");
+    const form = getContactForm(page);
     await expect(form).toBeVisible();
 
     // Check for error alert styling
-    const errorAlert = page.locator("[role='alert']");
+    const errorAlert = form.getByRole("alert");
     if (await errorAlert.isVisible()) {
       const alertClass = await errorAlert.getAttribute("class");
       expect(alertClass).toBeDefined();
@@ -50,29 +56,23 @@ test.describe("UI Smoke Tests", () => {
   });
 
   test("Command Palette opens and responds to input", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Open command palette with keyboard shortcut (Cmd/Ctrl + K)
     await page.keyboard.press("Control+K");
 
-    // Wait a bit for dialog to render
-    await page.waitForTimeout(300);
-
-    // Verify dialog or command component is visible
-    const commandContainer = page
-      .locator("[data-slot='command'], div[cmdk-root], [role='dialog']")
-      .first();
-    const isVisible = await commandContainer
+    const commandDialog = page.getByRole("dialog", {
+      name: /command palette/i,
+    });
+    const isVisible = await commandDialog
       .isVisible({ timeout: 1000 })
       .catch(() => false);
 
     if (isVisible) {
-      // Try typing in search
-      await page.keyboard.type("about", { delay: 50 });
-      await page.waitForTimeout(200);
-
-      // Just verify command container is still visible
-      await expect(commandContainer).toBeVisible();
+      const commandInput = commandDialog.locator("[data-slot='command-input']");
+      await expect(commandInput).toBeVisible();
+      await commandInput.fill("about");
+      await expect(commandDialog).toBeVisible();
     }
   });
 
@@ -85,7 +85,7 @@ test.describe("UI Smoke Tests", () => {
     });
     await clickWhenReady(mobileMenuToggle);
     await expect(mobileMenuToggle).toHaveAttribute("aria-expanded", "true");
-    await expect(page.locator("[data-slot='mobile-nav']")).toBeVisible();
+    await expect(page.locator("#mobile-navigation-menu")).toBeVisible();
 
     const servicesDropdownToggle = page.getByRole("button", {
       name: /services menu/i,
@@ -97,36 +97,23 @@ test.describe("UI Smoke Tests", () => {
     );
 
     await expect(
-      page.getByRole("button", { name: "Commercial & Retail" }),
+      page.getByRole("button", { name: /commercial & retail/i }),
     ).toBeVisible();
   });
 
   test("Select component renders and opens", async ({ page }) => {
-    await page.goto("/contact");
+    await page.goto("/contact", { waitUntil: "domcontentloaded" });
 
-    // Find select/dropdown in form
-    const selectTrigger = page.locator("[role='combobox']").first();
+    const form = getContactForm(page);
+    const selectTrigger = form.getByLabel(/^project type/i);
+    await expect(selectTrigger).toBeVisible();
 
-    if (await selectTrigger.isVisible()) {
-      await selectTrigger.click();
-
-      // Verify options menu appears
-      const options = page.locator("[role='option']");
-      const count = await options.count();
-      expect(count).toBeGreaterThan(0);
-
-      // Click an option
-      const firstOption = options.first();
-      await firstOption.click();
-
-      // Verify selection
-      const selectedValue = await selectTrigger.textContent();
-      expect(selectedValue).toBeTruthy();
-    }
+    await selectTrigger.selectOption("industrial");
+    await expect(selectTrigger).toHaveValue("industrial");
   });
 
   test("Navigation links render with correct styling", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Check navbar exists
     const navbar = page.getByRole("navigation", { name: /primary/i });
@@ -137,28 +124,26 @@ test.describe("UI Smoke Tests", () => {
     expect(navClass).toBeDefined();
 
     // Check for key navigation links
-    const links = page.locator("a[href*='/']");
+    const links = navbar.getByRole("link");
     const linkCount = await links.count();
     expect(linkCount).toBeGreaterThan(0);
+    await expect(
+      navbar.getByRole("link", { name: /navigate to services/i }),
+    ).toBeVisible();
   });
 
   test("Hero Section displays with proper styling", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
-    // Check hero section exists
-    const hero = page.locator("section").first();
-    await expect(hero).toBeVisible();
-
-    // Verify hero has expected structure
-    const heading = page.locator("h1");
+    const main = page.getByRole("main");
+    const heading = main.getByRole("heading", {
+      level: 1,
+      name: /powering the next generation of innovation/i,
+    });
     await expect(heading).toBeVisible();
 
     // Check for critical elements
-    const heroBg = page.locator("[data-slot='hero']");
-    if (await heroBg.isVisible()) {
-      const bgClass = await heroBg.getAttribute("class");
-      expect(bgClass).toBeDefined();
-    }
+    await expect(main.getByText(/commercial & industrial/i)).toBeVisible();
   });
 
   test("Responsive layout adapts to viewport", async ({ page }) => {
@@ -176,7 +161,7 @@ test.describe("UI Smoke Tests", () => {
     await clickWhenReady(mobileMenu);
     await expect(mobileMenu).toHaveAttribute("aria-expanded", "true");
 
-    const mobileNav = page.locator("[data-slot='mobile-nav']");
+    const mobileNav = page.locator("#mobile-navigation-menu");
     await expect(mobileNav).toBeVisible();
 
     // Test desktop viewport
@@ -186,7 +171,7 @@ test.describe("UI Smoke Tests", () => {
     const desktopNav = page.getByRole("navigation", { name: /primary/i });
     await expect(desktopNav).toBeVisible();
     await expect(
-      desktopNav.getByRole("link", { name: "Services" }).first(),
+      desktopNav.getByRole("link", { name: /navigate to services/i }),
     ).toBeVisible();
   });
 });
