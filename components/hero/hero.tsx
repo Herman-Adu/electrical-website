@@ -245,7 +245,7 @@ export function Hero() {
     <HeroParallaxShell
       sectionRef={sectionRef}
       size="screen"
-      safeArea="immersive"
+      safeArea="page"
       background={<BlueprintBackground showScanLine={!shouldReduceMotion} />}
       backgroundFrameStyle={backgroundFrameStyle}
       decor={
