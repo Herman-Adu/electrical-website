@@ -19,9 +19,9 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: write        # needed for merge
-  pull-requests: write   # needed for review request + auto-merge
-  checks: read           # needed to read check statuses
+  contents: write # needed for merge
+  pull-requests: write # needed for review request + auto-merge
+  checks: read # needed to read check statuses
 
 jobs:
   # ─────────────────────────────────────────────────────────────────────────
