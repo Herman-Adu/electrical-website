@@ -33,6 +33,7 @@ Use the package scripts as the default MCP lifecycle entrypoint. This avoids ad-
 
 1. Start MCP gateway + services:
    - `pnpm docker:mcp:up`
+   - This also runs `scripts/bootstrap-mcp-playwright.mjs` to install Chromium binaries in Playwright MCP containers.
 
 2. Confirm containers are healthy:
    - `pnpm docker:mcp:ps`

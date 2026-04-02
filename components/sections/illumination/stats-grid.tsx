@@ -21,7 +21,7 @@ export function StatsGrid({ stats, inView }: StatsGridProps) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
       viewport={{ once: true }}
-      className="mt-auto pt-12 md:pt-16 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6"
+      className="mt-auto pt-16 md:pt-16 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6"
     >
       {stats.map((stat) => (
         <div
