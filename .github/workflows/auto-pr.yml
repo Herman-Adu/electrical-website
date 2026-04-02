@@ -1,15 +1,16 @@
 name: Auto PR — Review, Fix Gates, Merge
 
-# Triggers on every PR targeting main.
+# Triggers on PR activity targeting main.
 # Loop:
 #   1. Request Copilot PR review (advisory — COMMENTED only, not APPROVED).
-#   2. Enable auto-merge (squash) so GitHub merges as soon as required checks pass.
-#   3. No human approval required because no branch-protection rule enforces one.
-#      If you later add a required-approval rule, auto-merge will wait for it.
+#   2. Enable auto-merge (squash) only when the PR is explicitly labeled
+#      `ready-to-merge`.
+#   3. Protected-branch requirements still apply: required checks, required
+#      approval, and resolved conversations must all pass before merge.
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, labeled, unlabeled, ready_for_review]
     branches:
       - main
 
@@ -28,7 +29,7 @@ jobs:
   # 1. Request Copilot PR review + enable auto-merge in parallel.
   # ─────────────────────────────────────────────────────────────────────────
   setup-pr:
-    name: Request review + enable auto-merge
+    name: Request review
     runs-on: ubuntu-latest
     steps:
       - name: Request Copilot PR review
@@ -40,9 +41,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  enable-auto-merge:
+    name: Enable auto-merge when ready
+    needs: setup-pr
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'ready-to-merge')
+    steps:
       - name: Enable auto-merge (squash)
-        # PR merges automatically once all required status checks pass.
-        # Works even if Copilot review is still in progress.
+        # PR merges automatically once all required status checks pass,
+        # required review is present, and all required conversations are resolved.
         run: |
           gh pr merge "${{ github.event.pull_request.number }}" \
             --auto \
@@ -57,11 +64,12 @@ jobs:
   # ─────────────────────────────────────────────────────────────────────────
   status-comment:
     name: Post automation status
-    needs: setup-pr
+    needs: [setup-pr, enable-auto-merge]
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - name: Comment on PR
+      - name: Comment when ready-to-merge is present
+        if: contains(github.event.pull_request.labels.*.name, 'ready-to-merge')
         run: |
           gh pr comment "${{ github.event.pull_request.number }}" \
             --repo "${{ github.repository }}" \
@@ -75,8 +83,30 @@ jobs:
           | E2E Tests | ⏳ running |
           | Lighthouse CI | ⏳ running |
 
-          PR will merge automatically once all required checks pass.
-          No manual approval needed (no branch protection rule currently enforces one).
+          PR will merge automatically only after all protected-branch requirements pass.
+          Required approval and resolved conversations are still enforced on main.
+          EOF
+          )"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment when ready-to-merge is missing
+        if: ${{ !contains(github.event.pull_request.labels.*.name, 'ready-to-merge') }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "$(cat <<'EOF'
+          **Auto-PR automation active** on commit \`${{ github.sha }}\`
+
+          | Step | Status |
+          |------|--------|
+          | Copilot review requested | ✅ |
+          | Auto-merge enabled (squash) | ⏸ waiting for `ready-to-merge` label |
+          | E2E Tests | ⏳ running |
+          | Lighthouse CI | ⏳ running |
+
+          Protected-branch rules are enabled on main.
+          Add the `ready-to-merge` label only after checks pass and review comments are resolved.
           EOF
           )"
         env:

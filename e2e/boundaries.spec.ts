@@ -57,9 +57,11 @@ test.describe("services segment error boundary", () => {
     });
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(/\/services\/error-test$/);
-    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
     // The fixture page renders its informational label when no trigger param is set.
     await expect(page.getByText(/error boundary test fixture/i)).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /services error boundary fixture/i }),
+    ).toBeVisible();
   });
 
   test("error boundary surface activates when a render error is thrown", async ({
@@ -74,9 +76,12 @@ test.describe("services segment error boundary", () => {
 
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(/\/services\/error-test\?trigger=error/);
-    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
     // Error boundary recovery surface must be visible.
     await expect(page.getByText(/services segment error/i)).toBeVisible();
+    await expect(page.getByRole("button", { name: /^retry$/i })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /^back to services$/i }),
+    ).toBeVisible();
   });
 
   test("error boundary retry button is present and clickable", async ({
@@ -90,7 +95,11 @@ test.describe("services segment error boundary", () => {
     const retryButton = page.getByRole("button", { name: /^retry$/i });
     await expect(retryButton).toBeVisible();
     await retryButton.click();
-    await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
+    await expect(page).toHaveURL(/\/services\/error-test\?trigger=error/);
+    await expect(page.getByText(/services segment error/i)).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /^back to services$/i }),
+    ).toBeVisible();
   });
 
   test("Back to Services link navigates to /services", async ({ page }) => {
