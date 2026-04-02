@@ -110,11 +110,11 @@ export function ProjectDetailIntro({
         {/* Section label */}
         <motion.div
           id={anchorId}
+          className="flex items-center gap-3 mb-12 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex items-center gap-3 mb-12"
         >
           <div className="h-px w-8 bg-electric-cyan" />
           <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">

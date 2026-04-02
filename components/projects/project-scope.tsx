@@ -87,7 +87,7 @@ export function ProjectScopeGrid({
         {/* Eyebrow */}
         <motion.div
           id={anchorId}
-          className="flex items-center gap-4 mb-6"
+          className="flex items-center gap-4 mb-6 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}

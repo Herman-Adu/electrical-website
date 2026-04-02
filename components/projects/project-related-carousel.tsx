@@ -93,7 +93,10 @@ export function ProjectRelatedCarousel({
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       {/* Header */}
-      <div id={anchorId} className="section-content max-w-6xl mb-6">
+      <div
+        id={anchorId}
+        className="section-content max-w-6xl mb-6 scroll-mt-36"
+      >
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="h-px w-8 bg-electric-cyan/50" />

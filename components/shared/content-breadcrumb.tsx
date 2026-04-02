@@ -18,10 +18,7 @@ interface ContentBreadcrumbProps {
  * - CSS sticky handles docking below navbar automatically
  * - Sidebar sticky offset should be 128px (80px nav + 40px breadcrumb + 8px gap)
  */
-export function ContentBreadcrumb({
-  items,
-  section: _section,
-}: ContentBreadcrumbProps) {
+export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
   // Guard: need at least one item
   if (!items.length) return null;
 
@@ -34,6 +31,7 @@ export function ContentBreadcrumb({
 
   return (
     <div
+      data-section={section}
       data-sticky-breadcrumb="true"
       className="sticky top-16 lg:top-20 z-40 bg-background/95 backdrop-blur-md border-b border-electric-cyan/20"
     >

@@ -32,7 +32,7 @@ export function ProjectTestimonialCard({
           initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="relative p-8 sm:p-12 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
+          className="relative scroll-mt-36 p-8 sm:p-12 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
         >
           {/* Decorative corners */}
           <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />
