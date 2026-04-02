@@ -52,7 +52,9 @@ test.describe("services segment error boundary", () => {
   test("error fixture page renders informational content without trigger param", async ({
     page,
   }) => {
-    const response = await page.goto("/services/error-test");
+    const response = await page.goto("/services/error-test", {
+      waitUntil: "domcontentloaded",
+    });
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(/\/services\/error-test$/);
     await expect(page.getByRole("link", { name: /^services$/i })).toBeVisible();
@@ -66,7 +68,9 @@ test.describe("services segment error boundary", () => {
     // Navigate to the fixture with the controlled throw trigger.
     // The ErrorThrower component throws during render; the services error boundary
     // catches it and renders the recovery surface.
-    const response = await page.goto("/services/error-test?trigger=error");
+    const response = await page.goto("/services/error-test?trigger=error", {
+      waitUntil: "domcontentloaded",
+    });
 
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(/\/services\/error-test\?trigger=error/);
@@ -78,7 +82,9 @@ test.describe("services segment error boundary", () => {
   test("error boundary retry button is present and clickable", async ({
     page,
   }) => {
-    await page.goto("/services/error-test?trigger=error");
+    await page.goto("/services/error-test?trigger=error", {
+      waitUntil: "domcontentloaded",
+    });
 
     // The error boundary renders a Retry button — verify it is present and clickable.
     const retryButton = page.getByRole("button", { name: /^retry$/i });
