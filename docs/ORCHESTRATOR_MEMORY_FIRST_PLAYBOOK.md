@@ -129,6 +129,10 @@ Shared expectation:
 
 ## 8) Copy/paste kickoff prompt for future chats
 
+Primary handoff file for new window chats:
+
+- `docs/NEW_WINDOW_CHAT_HANDOFF_ORCHESTRATED_SUBAGENTS_2026-04-02.md`
+
 Use this at the top of new sessions:
 
 "Start in orchestrator mode. Hydrate memory first using:
