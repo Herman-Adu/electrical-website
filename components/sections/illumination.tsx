@@ -58,7 +58,7 @@ export function Illumination() {
     >
       {/* Content */}
       <motion.div
-        className="relative z-20 w-full flex flex-col min-h-svh pb-40 md:min-h-0 md:pb-0"
+        className="relative z-20 w-full flex flex-col min-h-svh pb-20 md:min-h-0 md:pb-0"
         style={{ y: contentY, opacity }}
       >
         <div className="max-w-2xl pt-10 md:pt-0">
