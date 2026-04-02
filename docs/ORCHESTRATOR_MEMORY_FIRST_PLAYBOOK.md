@@ -152,3 +152,39 @@ A task is complete when:
 - protected-main flow is respected (if code/docs changed)
 - memory handoff is updated when session-level policy/process changed
 - local `main` is clean after merge (or explicitly documented if not)
+
+## 10) E2E selector refactor checklist
+
+Use this checklist whenever touching Playwright selectors:
+
+1. Scope first
+
+- Anchor to route-owned containers (`main`, named `navigation`, dialog, form section).
+- Avoid page-wide selectors unless shell behavior is the explicit test goal.
+
+2. Pick the strongest accessible locator
+
+- Interactive: `getByRole(role, { name })`
+- Form controls: `getByLabel()` first, then `getByPlaceholder()` if no label
+- Static copy/assertions: `getByText()`
+- Explicit contract fallback: `getByTestId()`
+
+3. Disambiguate semantically
+
+- Prefer chaining/filtering (`filter({ has, hasText })`) over index-based targeting.
+- Use `first()`/`last()`/`nth()` only if no stable semantic contract exists.
+
+4. Replace brittle patterns
+
+- Replace CSS/XPath chains, `[role='...']` string selectors, and broad `a[href*='/']` patterns where possible.
+- Keep selectors aligned with user-visible behavior and assistive-tech semantics.
+
+5. Validate in two gates
+
+- Gate 1 (targeted): run only changed specs first.
+- Gate 2 (broader): run project build and/or broader suite relevant to risk.
+
+6. Document rationale
+
+- If a positional selector remains, add a short reason in test comments.
+- Capture findings/evidence/pass-fail/risks/next recommendation in SME format.
