@@ -309,7 +309,7 @@ export async function getRedisAdapter(): Promise<RedisAdapter> {
   if (isProduction) {
     try {
       adapterInstance = await createVercelKvAdapter();
-      console.log("[RedisAdapter] Using Vercel KV (production)");
+      console.warn("[RedisAdapter] Using Vercel KV (production)");
     } catch (error) {
       console.warn(
         "[RedisAdapter] Vercel KV unavailable, using memory cache as fallback",
@@ -320,7 +320,7 @@ export async function getRedisAdapter(): Promise<RedisAdapter> {
   } else if (isDevelopment) {
     try {
       adapterInstance = await createDockerRedisAdapter();
-      console.log("[RedisAdapter] Using local Redis (development)");
+      console.warn("[RedisAdapter] Using local Redis (development)");
     } catch (error) {
       console.warn(
         "[RedisAdapter] Local Redis unavailable, using memory cache",
@@ -330,7 +330,7 @@ export async function getRedisAdapter(): Promise<RedisAdapter> {
     }
   } else {
     adapterInstance = createMemoryAdapter();
-    console.log("[RedisAdapter] Using memory cache (fallback)");
+    console.warn("[RedisAdapter] Using memory cache (fallback)");
   }
 
   return adapterInstance;

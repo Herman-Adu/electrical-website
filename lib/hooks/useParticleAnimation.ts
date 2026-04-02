@@ -1,7 +1,8 @@
 "use client";
 
-import { useTransform, useTime, MotionValue } from "framer-motion";
-import { CSSProperties } from "react";
+import type { MotionValue } from "framer-motion";
+import { useTransform, useTime } from "framer-motion";
+import type { CSSProperties } from "react";
 
 export interface UseParticleAnimationProps {
   position: { top: string; left: string };

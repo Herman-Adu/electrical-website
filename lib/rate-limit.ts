@@ -212,7 +212,7 @@ export async function checkRateLimit(
 export async function getRemainingSubmissions(
   ip: string,
   limit: number = 3,
-  windowMs: number = 3600000,
+  _windowMs: number = 3600000,
 ): Promise<number> {
   if (!canUseRateLimit()) {
     return limit;

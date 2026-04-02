@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import type { ServicePageData } from "@/types/sections";
 import { SITE_URL, siteConfig } from "@/lib/site-config";
 import type {
-  OpenGraph,
-  TwitterCard,
   OrganizationSchema,
   BreadcrumbListSchema,
 } from "@/lib/schemas/metadata-validation";
@@ -101,8 +99,8 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
     twitterCard = "summary_large_image",
     twitterCreator,
     robots,
-    structuredData,
-    breadcrumbs,
+    structuredData: _structuredData,
+    breadcrumbs: _breadcrumbs,
     locale = "en_GB",
   } = options;
 

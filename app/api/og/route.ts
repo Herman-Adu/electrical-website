@@ -1,6 +1,5 @@
 import { env } from "@/app/env";
 import { parseOGQueryParams } from "@/lib/schemas/og";
-import { siteConfig } from "@/lib/site-config";
 import { z } from "zod";
 
 export const runtime = "edge";

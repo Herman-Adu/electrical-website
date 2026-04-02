@@ -1,7 +1,9 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
+import type { RefObject } from "react";
+import { useEffect, useState } from "react";
+import type { MotionValue } from "framer-motion";
+import { useScroll, useTransform, useSpring } from "framer-motion";
 
 export interface UseParallaxImageProps {
   targetRef: RefObject<HTMLElement | null>;
