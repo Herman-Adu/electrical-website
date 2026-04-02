@@ -95,7 +95,7 @@ export function useAnimatedCounter({
       unsubscribe = springValue.on("change", (latest: number) => {
         setDisplayValue(parseFloat(format(latest)));
       });
-    } catch (e) {
+    } catch {
       // Fallback if motion library not fully hydrated
       setDisplayValue(parseFloat(format(motionValue.get())));
     }

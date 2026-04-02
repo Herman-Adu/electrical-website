@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
 import { BackgroundParallax } from "./illumination/background-parallax";
@@ -16,11 +16,6 @@ const stats: IlluminationStat[] = [
 
 export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,

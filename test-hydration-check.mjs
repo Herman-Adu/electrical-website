@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { chromium } from "playwright";
 
 const pages = [

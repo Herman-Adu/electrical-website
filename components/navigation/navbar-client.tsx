@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { BrandSection } from "@/components/navigation/brand-section";
+import { DesktopNav } from "@/components/navigation/desktop-nav";
+import { ActionBar } from "@/components/navigation/action-bar";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 const navLinks = [
   {
@@ -79,15 +82,10 @@ const navLinks = [
 export function NavbarClient() {
   const router = useRouter();
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [currentHash, setCurrentHash] = useState("");
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,7 +132,7 @@ export function NavbarClient() {
         const selector = `#${hashPart}`;
         const element = document.querySelector(selector);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          scrollToElementWithOffset(element);
           window.history.pushState(null, "", `${targetPath}${selector}`);
           setCurrentHash(selector);
           closeMenus();
@@ -222,125 +220,19 @@ export function NavbarClient() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
-                <Image
-                  src="/images/brand-assets/nexgen-logo-round.png"
-                  alt="Nexgen round logo"
-                  fill
-                  sizes="(max-width: 1024px) 36px, 40px"
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  priority
-                />
-                <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-foreground font-bold text-sm lg:text-base tracking-tight leading-none">
-                  NEXGEN
-                </span>
-                <span className="font-mono text-[8px] lg:text-[9px] text-electric-cyan/60 tracking-[0.2em] uppercase">
-                  Electrical
-                </span>
-              </div>
-            </Link>
+            {/* Left: Brand */}
+            <BrandSection />
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => {
-                const topLevelActive =
-                  isTopLevelActive(link.href, Boolean(link.submenu)) ||
-                  Boolean(
-                    link.submenu?.some((item) => isSubmenuActive(item.href)),
-                  );
+            {/* Center: Desktop Nav */}
+            <DesktopNav
+              navLinks={navLinks}
+              onScroll={scrollToSection}
+              onNavigate={navigateTo}
+            />
 
-                return (
-                  <div key={link.name} className="relative group">
-                    {link.submenu ? (
-                      <>
-                        <div className="flex items-center gap-0.5">
-                          <Link
-                            href={link.href}
-                            aria-current={getAriaCurrent(link.href)}
-                            className={`relative text-sm transition-colors font-medium tracking-wide ${
-                              topLevelActive
-                                ? "text-electric-cyan"
-                                : "text-muted-foreground dark:text-foreground/90 hover:text-foreground"
-                            }`}
-                          >
-                            {link.name}
-                            <span
-                              className={`absolute -bottom-1 left-0 z-10 h-px bg-electric-cyan transition-all duration-300 ${
-                                topLevelActive
-                                  ? "w-full"
-                                  : "w-0 group-hover:w-full"
-                              }`}
-                            />
-                          </Link>
-                          <ChevronDown
-                            size={14}
-                            className={`group-hover:rotate-180 transition-transform duration-300 mt-0.5 ${
-                              topLevelActive
-                                ? "text-electric-cyan"
-                                : "text-muted-foreground dark:text-foreground/90"
-                            }`}
-                          />
-                        </div>
-
-                        {/* Desktop Dropdown - render only after mount to avoid hydration mismatch */}
-                        {mounted && (
-                          <div className="absolute left-0 top-full mt-4 w-48 backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 border border-electric-cyan/20 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 shadow-lg">
-                            {link.submenu.map((item) =>
-                              (() => {
-                                const submenuActive = isSubmenuActive(
-                                  item.href,
-                                );
-                                return (
-                                  <button
-                                    key={item.name}
-                                    onClick={() => scrollToSection(item.href)}
-                                    aria-current={getAriaCurrent(item.href)}
-                                    className={`w-full text-left px-4 py-2 text-sm transition-all border-b border-border/50 last:border-b-0 ${
-                                      submenuActive
-                                        ? "text-electric-cyan bg-electric-cyan/10"
-                                        : "text-popover-foreground/80 hover:text-electric-cyan hover:bg-electric-cyan/10"
-                                    }`}
-                                  >
-                                    {item.name}
-                                  </button>
-                                );
-                              })(),
-                            )}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => navigateTo(link.href)}
-                        aria-current={getAriaCurrent(link.href)}
-                        className={`relative text-sm transition-colors font-medium tracking-wide ${
-                          topLevelActive
-                            ? "text-electric-cyan"
-                            : "text-muted-foreground dark:text-foreground/90 hover:text-foreground"
-                        }`}
-                      >
-                        {link.name}
-                        <span
-                          className={`absolute -bottom-1 left-0 z-10 h-px bg-electric-cyan transition-all duration-300 ${
-                            topLevelActive ? "w-full" : "w-0 group-hover:w-full"
-                          }`}
-                        />
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
-
-              <button className="px-5 py-2 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan text-sm font-medium tracking-wide hover:bg-electric-cyan/20 hover:border-electric-cyan/50 transition-all duration-300">
-                Get Quote
-              </button>
-
-              <ThemeToggle />
+            {/* Right: Actions */}
+            <div className="hidden lg:flex items-center h-full">
+              <ActionBar />
             </div>
 
             {/* Mobile Menu Button */}

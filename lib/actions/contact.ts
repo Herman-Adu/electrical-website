@@ -207,7 +207,7 @@ export async function submitContactInquiry(
     }
 
     // Log submission received
-    console.log("[CONTACT_INQUIRY_RECEIVED]", {
+    console.warn("[CONTACT_INQUIRY_RECEIVED]", {
       referenceCode,
       projectType: validatedData.projectType,
       emailDomain: getEmailDomain(validatedData.email),

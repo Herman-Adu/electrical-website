@@ -1,4 +1,4 @@
-import type { McpServerId, SkillId } from "./core";
+import type { SkillId } from "./core";
 
 // ─── Heuristic Types ──────────────────────────────────────────────────────────
 

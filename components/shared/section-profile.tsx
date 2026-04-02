@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import {
@@ -14,7 +14,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
-import type { SectionProfileData, SocialLink } from "@/types/sections";
+import type { SectionProfileData } from "@/types/sections";
 
 const socialIcons = {
   linkedin: Linkedin,
@@ -46,11 +46,6 @@ export function SectionProfile({ data }: SectionProfileProps) {
   } = data;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

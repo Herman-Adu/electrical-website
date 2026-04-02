@@ -13,7 +13,7 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import { useAnimatedBorders } from "@/lib/use-animated-borders";
 
 const socialLinks = [
   {
@@ -54,16 +54,19 @@ interface ProjectSocialCTAProps {
 }
 
 export function ProjectSocialCTA({
-  projectTitle,
+  projectTitle: _projectTitle,
   categorySlug,
 }: ProjectSocialCTAProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef } = useAnimatedBorders();
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-24 bg-card/30 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-24 bg-card/30 overflow-hidden"
+    >
       <div className="section-content max-w-6xl" ref={containerRef}>
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Social Links */}
@@ -132,8 +135,9 @@ export function ProjectSocialCTA({
             </h3>
 
             <p className="text-muted-foreground mb-6">
-              Whether you&apos;re planning an infrastructure upgrade, retrofit, or
-              new installation, our team would love to discuss how we can help.
+              Whether you&apos;re planning an infrastructure upgrade, retrofit,
+              or new installation, our team would love to discuss how we can
+              help.
             </p>
 
             {/* Contact options */}

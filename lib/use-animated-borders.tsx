@@ -1,5 +1,11 @@
-import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import type { MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 
 /**
  * Hook that provides animated top/bottom border line transforms
@@ -31,8 +37,8 @@ export function AnimatedBorders({
   showBottom = true,
 }: {
   shouldReduce: boolean | null;
-  lineLeft: any;
-  lineRight: any;
+  lineLeft: MotionValue<string>;
+  lineRight: MotionValue<string>;
   showBottom?: boolean;
 }) {
   if (shouldReduce) return null;

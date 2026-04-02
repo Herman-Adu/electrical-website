@@ -2,6 +2,7 @@
  * Browser-agent smoke tests – run against production server at localhost:3000
  * These tests are driven by the browser-testing sub-agent mission.
  */
+/* eslint-disable no-console */
 import { test, expect } from "@playwright/test";
 
 const BASE = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
