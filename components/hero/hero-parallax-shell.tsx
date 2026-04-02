@@ -19,6 +19,21 @@ const HERO_SAFE_AREA_CLASSES: Record<HeroSafeArea, string> = {
   page: "section-safe-top section-safe-bottom",
 };
 
+const HERO_CONTENT_INDICATOR_CLEARANCE_CLASSES: Record<
+  HeroParallaxSize,
+  string
+> = {
+  screen: "pb-28 sm:pb-24 md:pb-20",
+  tall: "pb-24 sm:pb-22 md:pb-16",
+  compact: "pb-22 sm:pb-20 md:pb-16",
+};
+
+const HERO_SCROLL_INDICATOR_INSET_CLASSES: Record<HeroParallaxSize, string> = {
+  screen: "bottom-6 sm:bottom-8",
+  tall: "bottom-5 sm:bottom-7 md:bottom-8",
+  compact: "bottom-5 sm:bottom-7 md:bottom-8",
+};
+
 export interface HeroParallaxShellProps {
   sectionRef: RefObject<HTMLElement | null>;
   size?: HeroParallaxSize;
@@ -34,6 +49,7 @@ export interface HeroParallaxShellProps {
   contentClassName?: string;
   scrollIndicator?: ReactNode;
   scrollIndicatorClassName?: string;
+  indicatorClearanceClassName?: string;
 }
 
 export function HeroParallaxShell({
@@ -51,6 +67,7 @@ export function HeroParallaxShell({
   contentClassName,
   scrollIndicator,
   scrollIndicatorClassName,
+  indicatorClearanceClassName,
 }: HeroParallaxShellProps) {
   return (
     <section
@@ -88,8 +105,16 @@ export function HeroParallaxShell({
 
       {content ? (
         <motion.div
+          data-hero-parallax-content="true"
           style={contentStyle}
-          className={cn("relative z-30 w-full", contentClassName)}
+          className={cn(
+            "relative z-30 w-full",
+            scrollIndicator
+              ? HERO_CONTENT_INDICATOR_CLEARANCE_CLASSES[size]
+              : "",
+            indicatorClearanceClassName,
+            contentClassName,
+          )}
         >
           {content}
         </motion.div>
@@ -98,7 +123,8 @@ export function HeroParallaxShell({
       {scrollIndicator ? (
         <div
           className={cn(
-            "absolute inset-x-0 bottom-8 z-40 flex justify-center",
+            "absolute inset-x-0 z-40 flex justify-center",
+            HERO_SCROLL_INDICATOR_INSET_CLASSES[size],
             scrollIndicatorClassName,
           )}
         >
