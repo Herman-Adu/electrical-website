@@ -27,6 +27,25 @@ Tier-2 on-demand services are not enabled in the default runtime stack. If neede
 - Check logs: `docker compose logs -f <service>`
 - Router health endpoint: `http://localhost:3100/health`
 
+## MCP quick start (orchestrator default)
+
+Use the package scripts as the default MCP lifecycle entrypoint. This avoids ad-hoc package installs and keeps startup consistent across sessions.
+
+1. Start MCP gateway + services:
+   - `pnpm docker:mcp:up`
+
+2. Confirm containers are healthy:
+   - `pnpm docker:mcp:ps`
+
+3. Run end-to-end MCP endpoint checks:
+   - `pnpm docker:mcp:smoke`
+
+4. One-command readiness check:
+   - `pnpm docker:mcp:ready`
+
+5. Stop MCP services:
+   - `pnpm docker:mcp:down`
+
 ## Local port model
 
 - Next.js app: `http://localhost:3000`
@@ -65,3 +84,5 @@ See [Caddyfile](Caddyfile) for authoritative routing.
 - [ERROR-CATALOG.md](ERROR-CATALOG.md)
 - [ERROR-RECOVERY.md](ERROR-RECOVERY.md)
 - [DEPLOYMENT-CHECKLIST.md](DEPLOYMENT-CHECKLIST.md)
+- [../docs/LOCAL_TESTING_SETUP.md](../docs/LOCAL_TESTING_SETUP.md)
+- [../docs/ORCHESTRATOR_MEMORY_FIRST_PLAYBOOK.md](../docs/ORCHESTRATOR_MEMORY_FIRST_PLAYBOOK.md)

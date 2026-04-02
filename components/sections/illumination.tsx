@@ -53,14 +53,15 @@ export function Illumination() {
       sectionRef={containerRef}
       background={BackgroundLayer}
       variant="full"
+      className="min-h-[120svh] md:min-h-screen"
       style={{ position: "relative" }}
     >
       {/* Content */}
       <motion.div
-        className="relative z-20 w-full"
+        className="relative z-20 w-full flex flex-col min-h-svh pb-8 md:min-h-0 md:pb-0"
         style={{ y: contentY, opacity }}
       >
-        <div className="max-w-2xl">
+        <div className="max-w-2xl pt-8 md:pt-0">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
