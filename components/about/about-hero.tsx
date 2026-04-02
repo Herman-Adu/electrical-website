@@ -6,6 +6,8 @@ import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -75,7 +77,7 @@ export function AboutHero() {
 
   const scrollToContent = () => {
     const next = document.getElementById("company-intro");
-    if (next) next.scrollIntoView({ behavior: "smooth" });
+    if (next) scrollToElementWithOffset(next);
   };
 
   return (
@@ -246,10 +248,7 @@ export function AboutHero() {
           </motion.div>
 
           {/* Main headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-foreground"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Built on</span>
             <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               Trust &amp; Craft

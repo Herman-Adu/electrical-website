@@ -5,6 +5,8 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_DETAIL_ARTICLE } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsArticle } from "@/types/news";
 
 interface NewsDetailHeroProps {
@@ -52,7 +54,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
   const scrollToArticle = () => {
     const articleContent = document.getElementById("article-content");
-    if (articleContent) articleContent.scrollIntoView({ behavior: "smooth" });
+    if (articleContent) scrollToElementWithOffset(articleContent);
   };
 
   return (
@@ -144,10 +146,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             </span>
           </motion.div>
 
-          <motion.h1
-            variants={itemVariants}
-            className="mx-auto mb-6 max-w-4xl text-4xl leading-tight font-black tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-lg"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_DETAIL_ARTICLE}>
             {article.title}
           </motion.h1>
 

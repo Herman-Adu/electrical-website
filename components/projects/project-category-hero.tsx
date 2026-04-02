@@ -15,6 +15,8 @@ import {
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { ProjectCategory } from "@/types/projects";
 
 // Map each category slug to its dedicated hero image and icon
@@ -117,7 +119,7 @@ export function ProjectCategoryHero({
 
   const scrollToProjects = () => {
     const el = document.getElementById("category-projects");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) scrollToElementWithOffset(el);
   };
 
   return (
@@ -245,10 +247,7 @@ export function ProjectCategoryHero({
           </motion.div>
 
           {/* Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white drop-shadow-lg"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
             <span className="block">{category.label}</span>
             <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               {config.accentWord}

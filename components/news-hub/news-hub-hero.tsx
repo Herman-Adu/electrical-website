@@ -7,6 +7,8 @@ import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
+import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { cn } from "@/lib/utils";
 import type { NewsCategory, NewsCategorySlug } from "@/types/news";
 
@@ -81,7 +83,7 @@ export function NewsHubHero({
 
   const scrollToFeed = () => {
     const feed = document.getElementById("news-hub-feed");
-    if (feed) feed.scrollIntoView({ behavior: "smooth" });
+    if (feed) scrollToElementWithOffset(feed);
   };
 
   return (
@@ -217,10 +219,7 @@ export function NewsHubHero({
             <span className="h-px w-12 bg-electric-cyan/60" />
           </motion.div>
 
-          <motion.h1
-            variants={itemVariants}
-            className="mb-6 text-5xl leading-[1.0] font-black tracking-tight text-white uppercase drop-shadow-lg sm:text-6xl md:text-7xl"
-          >
+          <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Editorial</span>
             <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
               Command Centre
@@ -231,9 +230,9 @@ export function NewsHubHero({
             variants={itemVariants}
             className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-white/75 sm:text-lg drop-shadow-md"
           >
-            Live editorial hub for campaigns, case studies, insights, and partner
-            updates. Powered by typed content models ready for scalable CMS
-            integration.
+            Live editorial hub for campaigns, case studies, insights, and
+            partner updates. Powered by typed content models ready for scalable
+            CMS integration.
           </motion.p>
 
           <motion.div

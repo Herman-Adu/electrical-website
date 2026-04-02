@@ -9,6 +9,8 @@ import { MouseGlow } from "./mouse-glow";
 import { CircuitSVG } from "./circuit-svg";
 import { HeroParallaxShell } from "./hero-parallax-shell";
 import { useHeroParallax } from "./use-hero-parallax";
+import { HERO_H1_SCREEN } from "./hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 const isClient = typeof window !== "undefined";
 
@@ -111,7 +113,6 @@ const statsContainerVariants = {
     },
   },
 };
-
 
 export function Hero() {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
@@ -236,7 +237,7 @@ export function Hero() {
   const scrollToContent = () => {
     const servicesSection = document.getElementById("services");
     if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: "smooth" });
+      scrollToElementWithOffset(servicesSection);
     }
   };
 
@@ -282,10 +283,7 @@ export function Hero() {
           </motion.div>
 
           {/* Main Headline */}
-          <motion.h1
-            variants={slideInVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6"
-          >
+          <motion.h1 variants={slideInVariants} className={HERO_H1_SCREEN}>
             <span className="block">Powering the</span>
             <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-[hsl(174_80%_45%)] to-[hsl(174_100%_35%)]">
               Next Generation
