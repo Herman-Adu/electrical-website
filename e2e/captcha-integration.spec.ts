@@ -114,7 +114,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
 
     // No runtime errors should occur during load
     const errorMessages = await page.evaluate(() => {
-      return (window as any).errors || [];
+      return (window as { errors?: unknown[] }).errors ?? [];
     });
 
     expect(errorMessages.length).toBe(0);
