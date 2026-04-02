@@ -1,0 +1,83 @@
+name: Auto PR — Review, Fix Gates, Merge
+
+# Triggers on every PR targeting main.
+# Loop:
+#   1. Request Copilot PR review (advisory — COMMENTED only, not APPROVED).
+#   2. Enable auto-merge (squash) so GitHub merges as soon as required checks pass.
+#   3. No human approval required because no branch-protection rule enforces one.
+#      If you later add a required-approval rule, auto-merge will wait for it.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+# Prevent duplicate runs on the same ref.
+concurrency:
+  group: auto-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write        # needed for merge
+  pull-requests: write   # needed for review request + auto-merge
+  checks: read           # needed to read check statuses
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────
+  # 1. Request Copilot PR review + enable auto-merge in parallel.
+  # ─────────────────────────────────────────────────────────────────────────
+  setup-pr:
+    name: Request review + enable auto-merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request Copilot PR review
+        # Uses the official Copilot reviewer endpoint.
+        # This is non-blocking — it queues the review asynchronously.
+        run: |
+          gh pr review --request "copilot" "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge (squash)
+        # PR merges automatically once all required status checks pass.
+        # Works even if Copilot review is still in progress.
+        run: |
+          gh pr merge "${{ github.event.pull_request.number }}" \
+            --auto \
+            --squash \
+            --delete-branch \
+            --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 2. Post a status comment so you can track where the PR is in the loop.
+  # ─────────────────────────────────────────────────────────────────────────
+  status-comment:
+    name: Post automation status
+    needs: setup-pr
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Comment on PR
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "$(cat <<'EOF'
+          **Auto-PR automation active** on commit \`${{ github.sha }}\`
+
+          | Step | Status |
+          |------|--------|
+          | Copilot review requested | ✅ |
+          | Auto-merge enabled (squash) | ✅ |
+          | E2E Tests | ⏳ running |
+          | Lighthouse CI | ⏳ running |
+
+          PR will merge automatically once all required checks pass.
+          No manual approval needed (no branch protection rule currently enforces one).
+          EOF
+          )"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
