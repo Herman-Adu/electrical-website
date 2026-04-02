@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 /**
  * MCP Smoke Test — Probe all 8 MCP services via Caddy gateway
  *

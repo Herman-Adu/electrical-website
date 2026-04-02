@@ -3,6 +3,8 @@
  * Run: npx tsx scripts/spin-test-skills.ts
  */
 
+/* eslint-disable no-console */
+
 import { healthCheckSkill } from "../agent/skills/health-check.skill";
 import { codeSearchSkill } from "../agent/skills/code-search.skill";
 import { reasoningChainSkill } from "../agent/skills/reasoning-chain.skill";

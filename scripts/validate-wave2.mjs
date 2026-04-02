@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 import { readdirSync, statSync, existsSync } from "node:fs";
 import path from "node:path";
