@@ -91,7 +91,7 @@ function TimelineNode({
   milestone,
   index,
   isLast,
-  scrollDirection,
+  scrollDirection: _scrollDirection,
 }: {
   milestone: (typeof milestones)[0];
   index: number;

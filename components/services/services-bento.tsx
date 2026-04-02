@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   Building2,
@@ -501,12 +501,6 @@ function EmergencyCard({ delay }: { delay: number }) {
 
 // ─── Main Bento Grid ────────────────────────────────────────────────────────
 
-const commercialSpecs: ServiceSpec[] = [
-  { label: "Max Voltage", value: "440V" },
-  { label: "Systems", value: "High-Rise + Retail" },
-  { label: "Response", value: "< 2h" },
-];
-
 const industrialSpecs: ServiceSpec[] = [
   { label: "Max Voltage", value: "11kV" },
   { label: "Systems", value: "PLC + Motor Ctrl" },
@@ -523,12 +517,6 @@ const residentialSpecs: ServiceSpec[] = [
   { label: "Voltage", value: "230V" },
   { label: "Smart", value: "EV + Solar Ready" },
   { label: "Cert", value: "Part P" },
-];
-
-const lightingSpecs: ServiceSpec[] = [
-  { label: "Technology", value: "LED" },
-  { label: "Energy Saving", value: "Up to 70%" },
-  { label: "Warranty", value: "5 Years" },
 ];
 
 const testingSpecs: ServiceSpec[] = [

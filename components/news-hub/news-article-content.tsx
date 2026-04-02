@@ -4,7 +4,6 @@ import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import type { NewsDetailContent, NewsQuote } from "@/types/news";
 import { NewsArticleCardShell } from "./news-article-card-shell";
-import { NewsStatCounter } from "./news-stat-counter";
 
 interface NewsArticleContentProps {
   detail: NewsDetailContent;
@@ -35,7 +34,7 @@ const itemVariants = {
 
 export function NewsArticleContent({
   detail,
-  categorySlug,
+  categorySlug: _categorySlug,
 }: NewsArticleContentProps) {
   return (
     <div className="space-y-16">

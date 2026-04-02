@@ -15,7 +15,6 @@ import { ArrowRight } from "lucide-react";
 import type { Project } from "@/types/projects";
 import { ProjectCardShell } from "@/components/projects/project-card-shell";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
-import { ProjectMetaRow } from "@/components/projects/project-meta-row";
 
 const tagVariants: Variants = {
   hidden: { opacity: 0, y: 5 },

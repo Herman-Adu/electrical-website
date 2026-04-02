@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import { ProjectKpiGrid } from "@/components/projects";
