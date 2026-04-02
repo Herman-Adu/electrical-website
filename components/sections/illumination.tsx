@@ -30,7 +30,7 @@ export function Illumination() {
 
   // Parallax transforms
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const brightness = useTransform(
     scrollYProgress,
     [0, 0.3, 0.5],
@@ -53,15 +53,15 @@ export function Illumination() {
       sectionRef={containerRef}
       background={BackgroundLayer}
       variant="full"
-      className="min-h-[120svh] md:min-h-screen"
+      className="min-h-[140svh] md:min-h-screen"
       style={{ position: "relative" }}
     >
       {/* Content */}
       <motion.div
-        className="relative z-20 w-full flex flex-col min-h-svh pb-8 md:min-h-0 md:pb-0"
+        className="relative z-20 w-full flex flex-col min-h-svh pb-40 md:min-h-0 md:pb-0"
         style={{ y: contentY, opacity }}
       >
-        <div className="max-w-2xl pt-8 md:pt-0">
+        <div className="max-w-2xl pt-10 md:pt-0">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}

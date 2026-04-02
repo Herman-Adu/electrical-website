@@ -76,6 +76,8 @@ pnpm docker:mcp:ps
 pnpm docker:mcp:smoke
 ```
 
+`pnpm docker:mcp:up` now automatically runs a Playwright MCP bootstrap that installs Chromium binaries into detected `mcp/playwright` containers, including the compatibility cache path used by some MCP runtimes.
+
 Quick one-command readiness check:
 
 ```bash
