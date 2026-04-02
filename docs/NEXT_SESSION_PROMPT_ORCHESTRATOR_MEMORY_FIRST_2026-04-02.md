@@ -74,6 +74,11 @@ Use Docker MCP tools and research-oriented context before broad static patching:
 For Playwright and runtime test work:
 
 - Prefer route-owned accessible selectors over shared shell selectors
+- Prefer locator priority: `getByRole(name)` → `getByLabel`/`getByPlaceholder` (forms) → `getByText` (non-interactive content) → `getByTestId` (explicit contract)
+- Scope selectors to route-owned containers (`main`, named region, dialog, section) before targeting descendants
+- Use locator chaining/filtering (`filter({ has, hasText })`) to make selectors unique before reaching for positional APIs
+- Treat `first()`/`last()`/`nth()` as last resort; if used, document why no stable semantic selector exists
+- Avoid brittle CSS/XPath and shell-wide fallback selectors unless the test goal is specifically shell behavior
 - Prefer `waitUntil: "domcontentloaded"` plus explicit UI assertions
 - Avoid defaulting to `networkidle` for this repo unless proven necessary
 - Investigate implementation and runtime behavior before changing waits or assertions
