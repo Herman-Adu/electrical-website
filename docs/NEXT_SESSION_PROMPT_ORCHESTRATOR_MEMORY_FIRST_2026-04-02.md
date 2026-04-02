@@ -11,6 +11,12 @@ Before reading workspace files broadly, hydrate Docker memory first:
 Treat those memory entities as the primary session context.
 Only re-read files that are directly relevant to the active task.
 
+Policy source of truth for this rollout:
+
+- `agent:v1:orchestrator:policy:current`
+- `agent:v1:orchestrator:routing-matrix:current`
+- `agent:v1:orchestrator:sme-report-template:current`
+
 ## Operating mode
 
 You are the Orchestrator.
@@ -78,6 +84,62 @@ For Playwright and runtime test work:
 The target post-merge baseline is a clean `main` branch with no unrelated local artifacts.
 
 If the workspace is not clean when the next chat starts, report the dirty files in the hydration summary before any new work.
+
+## Rollout objective (this next chat)
+
+Complete the **orchestrator workflow rollout** so future chats default to memory-first orchestration without repeated user prompting.
+
+Priorities:
+
+1. Make Docker memory the single source of truth for startup policy and routing behavior.
+2. Standardize tool dispatch to Docker-first research/runtime flow.
+3. Enforce SME reporting + validation discipline as an operational contract.
+4. Leave `main` clean and protected after rollout updates.
+
+## Rollout deliverables
+
+Deliver all of the following in one focused rollout batch:
+
+1. **Policy memory contract**
+
+- Ensure/update `agent:v1:orchestrator:policy:current`
+- Ensure/update `agent:v1:orchestrator:routing-matrix:current`
+- Ensure/update `agent:v1:orchestrator:sme-report-template:current`
+
+2. **Prompt and handoff alignment**
+
+- Keep this prompt aligned to the `:current` policy entities.
+- Ensure next-chat startup always hydrates memory first and reports hydration summary before broad reads.
+
+3. **Operational guardrails**
+
+- Explicitly require: Docker MCP tools first, Next.js docs resolution first for framework work, runtime/browser inspection before flaky test patching, and protected-main PR flow.
+
+4. **Validation policy**
+
+- Require validation after each implementation batch (targeted first, broader second).
+- SME outputs must include: findings, evidence, pass/fail, risks, next recommendation.
+
+5. **Memory write-back at session close**
+
+- Persist final rollout status snapshot under a dated heuristic key.
+- Persist a reasoning handoff key for the next chat with updated routing/policy conclusions.
+
+## Acceptance criteria
+
+The rollout is complete only if all conditions are true:
+
+- New chat can start with this prompt and run memory-first orchestration without additional behavioral reminders.
+- Routing order is explicit and followed: memory → sequential thinking → docs/runtime tools → targeted code reads.
+- SME format and one-line Orchestrator decision are consistently applied.
+- Protected-main workflow is preserved (feature branch, PR, required checks green, `ready-to-merge` label, then merge).
+- Final memory entities are updated and referenced in the closing summary.
+
+## Non-goals
+
+- Do not implement unrelated product features during rollout.
+- Do not perform broad refactors or style sweeps.
+- Do not bypass validation gates for speed.
 
 ## Next-chat behavior requirements
 
