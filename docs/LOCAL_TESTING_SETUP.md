@@ -61,6 +61,33 @@ pnpm exec playwright install chromium
 
 This downloads the Chromium browser profile needed by Playwright. Run once per machine.
 
+### Step 4: Start MCP Core Services (No Package Install Required)
+
+Use the Docker-backed MCP stack directly instead of ad-hoc `npm`/`pnpm install` attempts.
+
+```bash
+# Start MCP gateway + all MCP services
+pnpm docker:mcp:up
+
+# Check service status
+pnpm docker:mcp:ps
+
+# Run health/tools smoke checks
+pnpm docker:mcp:smoke
+```
+
+Quick one-command readiness check:
+
+```bash
+pnpm docker:mcp:ready
+```
+
+Stop MCP services when done:
+
+```bash
+pnpm docker:mcp:down
+```
+
 ---
 
 ## Testing Workflows
@@ -291,5 +318,12 @@ Your local config differs slightly from GitHub Actions to optimize for developer
 This means:
 
 - ✅ Local runs faster (less resource-intensive)
+
+---
+
+## Related MCP/Orchestrator Docs
+
+- MCP runtime + gateway operations: [`docker/README.md`](../docker/README.md)
+- Memory-first orchestration workflow: [`docs/ORCHESTRATOR_MEMORY_FIRST_PLAYBOOK.md`](ORCHESTRATOR_MEMORY_FIRST_PLAYBOOK.md)
 - ✅ CI retries transients (more forgiving)
 - ✅ If a test passes locally, it should pass in CI (same test logic)

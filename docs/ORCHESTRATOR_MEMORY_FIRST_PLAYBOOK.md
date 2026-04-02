@@ -39,6 +39,30 @@ Use this order unless there is a strong reason not to:
 
 Rule: do not start with broad repo scans.
 
+## 2.1) MCP quick start (default runtime path)
+
+Use Docker MCP scripts as the standard entrypoint to avoid install/revert drift:
+
+1. Start MCP gateway + services
+
+- `pnpm docker:mcp:up`
+
+2. Confirm container health/status
+
+- `pnpm docker:mcp:ps`
+
+3. Verify MCP endpoints/tools via gateway smoke test
+
+- `pnpm docker:mcp:smoke`
+
+4. One-command readiness flow
+
+- `pnpm docker:mcp:ready`
+
+5. Stop MCP services when finished
+
+- `pnpm docker:mcp:down`
+
 ## 3) What each SME report must contain
 
 Every SME output must include exactly:
@@ -192,3 +216,8 @@ Use this checklist whenever touching Playwright selectors:
 
 - If a positional selector remains, add a short reason in test comments.
 - Capture findings/evidence/pass-fail/risks/next recommendation in SME format.
+
+## 11) Related docs
+
+- Docker MCP runtime + quick start: [`docker/README.md`](../docker/README.md)
+- Local test pre-flight + MCP startup checklist: [`docs/LOCAL_TESTING_SETUP.md`](LOCAL_TESTING_SETUP.md)
