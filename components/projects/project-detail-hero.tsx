@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
 import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { HERO_H1_DETAIL_PROJECT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 interface ProjectDetailHeroProps {
   project: Project;
@@ -23,6 +25,11 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
     size: "tall",
     contentTravel: { desktop: 0, mobile: 0 },
   });
+
+  const scrollToProjectContent = () => {
+    const target = document.getElementById("project-content");
+    if (target) scrollToElementWithOffset(target);
+  };
 
   return (
     <HeroParallaxShell
@@ -153,6 +160,25 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
         </div>
       }
       contentStyle={contentStyle}
+      scrollIndicator={
+        <motion.button
+          initial={shouldReduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.4 }}
+          onClick={scrollToProjectContent}
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/60 transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to project details"
+          type="button"
+        >
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Project Details
+          </span>
+          <ChevronDown
+            size={20}
+            className={shouldReduce ? "" : "animate-bounce"}
+          />
+        </motion.button>
+      }
     />
   );
 }
