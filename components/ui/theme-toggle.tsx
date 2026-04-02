@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative w-9 h-9 flex items-center justify-center rounded-lg border border-border bg-background hover:bg-muted transition-colors group"
+      className="relative w-9 h-9 flex items-center justify-center rounded-lg border border-border bg-background hover:bg-electric-cyan/10 transition-colors group"
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
