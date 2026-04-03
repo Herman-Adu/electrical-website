@@ -11,6 +11,7 @@
  *   - Each service at /SERVICE_ID/health
  *   - Each service at /SERVICE_ID/tools
  *   - GitHub service at /github/info with mock token (auth test)
+ *   - Memory protocol contract via /memory/tools/call (search_nodes/open_nodes/read_graph)
  *   - Caddy gateway at /health
  *
  * Exit codes:
@@ -35,20 +36,20 @@ const SERVICES = [
   { id: "wikipedia", path: "/wikipedia", name: "Wikipedia" },
 ];
 
-function makeRequest(url, headers = {}) {
+function makeRequest(url, method = "GET", headers = {}, body) {
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
     const client = urlObj.protocol === "https:" ? https : http;
 
     const options = {
-      method: "GET",
+      method,
       headers: {
         "User-Agent": "mcp-smoke-test/1.0",
         ...headers,
       },
     };
 
-    const req = client.get(url, options, (res) => {
+    const req = client.request(url, options, (res) => {
       let data = "";
       res.on("data", (chunk) => (data += chunk));
       res.on("end", () => {
@@ -61,12 +62,18 @@ function makeRequest(url, headers = {}) {
       req.destroy();
       reject(new Error("Request timeout"));
     });
+
+    if (body !== undefined) {
+      req.write(body);
+    }
+
+    req.end();
   });
 }
 
-async function testEndpoint(url, label, headers = {}) {
+async function testEndpoint(url, label, method = "GET", headers = {}, body) {
   try {
-    const { status, data } = await makeRequest(url, headers);
+    const { status, data } = await makeRequest(url, method, headers, body);
     if (status !== 200) {
       console.log(`  ✗ ${label} [HTTP ${status}]`);
       return false;
@@ -83,6 +90,82 @@ async function testEndpoint(url, label, headers = {}) {
     console.log(`  ✗ ${label} [${err.message}]`);
     return false;
   }
+}
+
+async function runMemoryProtocolChecks() {
+  console.log("📍 Memory Protocol Contract:");
+
+  const calls = [
+    {
+      label: "POST /memory/tools/call search_nodes",
+      body: {
+        name: "search_nodes",
+        arguments: { query: "agent:v1:" },
+      },
+      validator: (parsed) => Array.isArray(parsed?.content),
+    },
+    {
+      label: "POST /memory/tools/call open_nodes",
+      body: {
+        name: "open_nodes",
+        arguments: { names: ["agent:v1:bootstrap"] },
+      },
+      validator: (parsed) => Array.isArray(parsed?.content),
+    },
+    {
+      label: "POST /memory/tools/call read_graph",
+      body: {
+        name: "read_graph",
+        arguments: {},
+      },
+      validator: (parsed) => Array.isArray(parsed?.content),
+    },
+  ];
+
+  let allPassed = true;
+
+  for (const call of calls) {
+    try {
+      const payload = JSON.stringify(call.body);
+      const { status, data } = await makeRequest(
+        `${GATEWAY_URL}/memory/tools/call`,
+        "POST",
+        {
+          "Content-Type": "application/json",
+        },
+        payload,
+      );
+
+      if (status !== 200) {
+        console.log(`  ✗ ${call.label} [HTTP ${status}]`);
+        allPassed = false;
+        continue;
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(data);
+      } catch {
+        console.log(`  ✗ ${call.label} [invalid JSON response]`);
+        allPassed = false;
+        continue;
+      }
+
+      if (!call.validator(parsed)) {
+        console.log(`  ✗ ${call.label} [invalid tool contract]`);
+        allPassed = false;
+        continue;
+      }
+
+      console.log(`  ✓ ${call.label}`);
+    } catch (err) {
+      console.log(`  ✗ ${call.label} [${err.message}]`);
+      allPassed = false;
+    }
+  }
+
+  console.log();
+  return allPassed;
 }
 
 async function runTests() {
@@ -125,6 +208,7 @@ async function runTests() {
       const infoPassed = await testEndpoint(
         `${GATEWAY_URL}${service.path}/info`,
         `GET ${service.path}/info (with auth header)`,
+        "GET",
         authHeaders,
       );
       if (!infoPassed) allPassed = false;
@@ -136,6 +220,15 @@ async function runTests() {
     });
     console.log();
   }
+
+  const memoryProtocolPassed = await runMemoryProtocolChecks();
+  if (!memoryProtocolPassed) {
+    allPassed = false;
+  }
+  results.push({
+    service: "Memory Protocol Contract",
+    passed: memoryProtocolPassed,
+  });
 
   // Summary
   console.log("📊 Test Summary:\n");

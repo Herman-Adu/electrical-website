@@ -38,6 +38,7 @@ export type {
 export { ScopeViolationError } from "./types/agent";
 export { ValidationError } from "./types/audit";
 export { RoutingError } from "./router/tool-router";
+export { SensitiveContentError } from "./gates/sensitive-content-gate";
 
 // Constants (for external consumers that need typed IDs)
 export { MCP, ALL_MCP_SERVERS } from "./constants/mcp-servers";

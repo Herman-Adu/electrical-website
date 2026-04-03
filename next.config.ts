@@ -48,9 +48,9 @@ const nextConfig: NextConfig = {
             value:
               process.env.NODE_ENV === "development"
                 ? // Development: Allow more for dev tools and HMR
-                  "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://challenges.cloudflare.com https: ws: wss:; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'"
+                  "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://challenges.cloudflare.com https: ws: wss:; frame-src https://challenges.cloudflare.com https://www.openstreetmap.org; frame-ancestors 'none'"
                 : // Production: Strict CSP with minimal external access
-                  "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'",
+                  "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com https://www.openstreetmap.org; frame-ancestors 'none'",
           },
           {
             key: "Referrer-Policy",

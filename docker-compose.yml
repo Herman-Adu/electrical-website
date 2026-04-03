@@ -109,8 +109,11 @@ services:
     image: node:22-alpine
     working_dir: /srv
     command: ["node", "/srv/server.js"]
+    environment:
+      MEMORY_FILE_PATH: /data/memory-graph.json
     volumes:
       - ./docker/memory-reference/server.js:/srv/server.js:ro
+      - memory_data:/data
     expose:
       - "8000"
     healthcheck:
@@ -172,3 +175,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  memory_data:

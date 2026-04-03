@@ -19,6 +19,10 @@ import { MemoryHeuristicStore } from "./heuristics/memory-heuristic-store";
 import { ToolRouter } from "./router/tool-router";
 import { RoutingError } from "./router/tool-router";
 import { ValidationGate, hashIntent } from "./gates/validation-gate";
+import {
+  SensitiveContentError,
+  SensitiveContentGate,
+} from "./gates/sensitive-content-gate";
 import { AuditLogger, MemoryAuditStore } from "./audit/audit-logger";
 import {
   CodeIntelligenceAgent,
@@ -85,6 +89,7 @@ export interface ProductionSkillAuditResult {
 export class Orchestrator {
   readonly #router: ToolRouter;
   readonly #validation: ValidationGate;
+  readonly #sensitiveContent: SensitiveContentGate;
   readonly #audit: AuditLogger;
   readonly #health: HealthMonitor;
   readonly #heuristics: HeuristicEngine;
@@ -93,12 +98,14 @@ export class Orchestrator {
   private constructor(
     router: ToolRouter,
     validation: ValidationGate,
+    sensitiveContent: SensitiveContentGate,
     audit: AuditLogger,
     health: HealthMonitor,
     heuristics: HeuristicEngine,
   ) {
     this.#router = router;
     this.#validation = validation;
+    this.#sensitiveContent = sensitiveContent;
     this.#audit = audit;
     this.#health = health;
     this.#heuristics = heuristics;
@@ -267,6 +274,7 @@ export class Orchestrator {
     const heuristics = new HeuristicEngine(heuristicStore);
 
     const validation = new ValidationGate();
+    const sensitiveContent = new SensitiveContentGate();
     const auditStore = new MemoryAuditStore(mcpClient);
     const audit = new AuditLogger(auditStore);
 
@@ -292,6 +300,7 @@ export class Orchestrator {
     const orchestrator = new Orchestrator(
       router,
       validation,
+      sensitiveContent,
       audit,
       health,
       heuristics,
@@ -348,8 +357,14 @@ export class Orchestrator {
     const start = Date.now();
 
     try {
+      this.#sensitiveContent.validate(intent.description, "intent_description");
+      this.#sensitiveContent.validate(input, "intent_input");
+      this.#sensitiveContent.validate(intent.metadata, "intent_metadata");
+
       const routed = await this.#router.route<TOutput>(intent, input);
       const output = routed.output;
+
+      this.#sensitiveContent.validate(output.data, "assistant_output");
 
       // Validate after execution — hard stop on failure
       const skill = skillRegistry.getOrThrow(output.skillId);
@@ -374,6 +389,23 @@ export class Orchestrator {
       return output;
     } catch (err) {
       const latencyMs = Date.now() - start;
+
+      if (err instanceof SensitiveContentError) {
+        await this.#audit.log({
+          skillId: "" as ReturnType<typeof skillRegistry.getOrThrow>["id"],
+          agentPoolId: AGENT_POOL_IDS.ORCHESTRATOR,
+          costTier: "cheap",
+          dryRun: intent.dryRun,
+          intentHash,
+          outcome:
+            err.boundary === "assistant_output"
+              ? "sensitive_output_blocked"
+              : "sensitive_input_blocked",
+          validationResult: err.result,
+          latencyMs,
+        });
+        throw err;
+      }
 
       if (err instanceof ValidationError) {
         await this.#audit.log({

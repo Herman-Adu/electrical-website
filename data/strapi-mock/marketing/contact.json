@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "badge": {
+      "icon": "Mail",
+      "text": "Get In Touch"
+    },
+    "title": "Contact Us",
+    "description": "Have a question, need support, or want to discuss a project? We're here to help. Fill out the form below or use our quick contact options."
+  },
+  "trustIndicators": [
+    {
+      "icon": "Shield",
+      "title": "Secure & Private",
+      "description": "Your information is encrypted and never shared"
+    },
+    {
+      "icon": "Clock",
+      "title": "Quick Response",
+      "description": "We respond to all inquiries within 24-48 hours"
+    },
+    {
+      "icon": "MessageSquare",
+      "title": "Expert Support",
+      "description": "Our team is here to help with any questions"
+    },
+    {
+      "icon": "Mail",
+      "title": "Confirmation Email",
+      "description": "Receive instant confirmation of your inquiry"
+    }
+  ],
+  "faqTeaser": {
+    "title": "Frequently Asked Questions",
+    "description": "Find quick answers to common questions about our services, pricing, and processes.",
+    "items": [
+      {
+        "question": "What areas do you cover?",
+        "answer": "We provide services across London and the surrounding areas within the M25."
+      },
+      {
+        "question": "How quickly can you respond?",
+        "answer": "Emergency calls are prioritized. Standard inquiries receive a response within 24-48 hours."
+      },
+      {
+        "question": "Do you offer free quotes?",
+        "answer": "Yes, we provide free, no-obligation quotes for all residential and commercial projects."
+      },
+      {
+        "question": "Are you certified?",
+        "answer": "All our electricians are NICEIC registered and fully insured for your peace of mind."
+      }
+    ]
+  }
+}
