@@ -100,7 +100,9 @@ test.describe("UI Smoke Tests", () => {
       .getByPlaceholder("john.smith@example.com")
       .fill("test@example.com");
     await form.getByPlaceholder("07700 900000").fill("07700900000");
-    await expect(form.getByRole("button", { name: /continue/i })).toBeDisabled();
+    await expect(
+      form.getByRole("button", { name: /continue/i }),
+    ).toBeDisabled();
   });
 
   test("Navigation links render with correct styling", async ({ page }) => {

@@ -60,7 +60,9 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     const continueButton = form.getByRole("button", { name: /continue/i });
     await expect(continueButton).toBeDisabled();
     await expect(
-      page.getByRole("heading", { name: /your contact details|personal details/i }),
+      page.getByRole("heading", {
+        name: /your contact details|personal details/i,
+      }),
     ).toBeVisible({ timeout: 10000 });
 
     await expect(

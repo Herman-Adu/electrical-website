@@ -55,7 +55,9 @@ test.describe("Step 3 – Smoke: contact form + CAPTCHA gate", () => {
     await expect(continueButton).toBeDisabled();
 
     await expect(
-      page.getByRole("heading", { name: /your contact details|personal details/i }),
+      page.getByRole("heading", {
+        name: /your contact details|personal details/i,
+      }),
     ).toBeVisible({ timeout: 5000 });
 
     // Check for alert / error / success feedback
