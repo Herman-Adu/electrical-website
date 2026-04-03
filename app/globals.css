@@ -526,20 +526,28 @@
   }
 }
 
-/* Safe area for fixed-height sections (accounts for navbar) */
+/* Safe area for fixed-height sections (accounts for navbar + breathing room)
+   Navbar heights: h-16 (64px) on mobile/tablet, h-20 (80px) on lg+
+   Values = navbar height + generous breathing space above hero content */
 .section-safe-top {
-  padding-top: 5rem;
+  padding-top: 7rem; /* 64px nav + 48px breathing */
 }
 
 @media (min-width: 640px) {
   .section-safe-top {
-    padding-top: 6rem;
+    padding-top: 8rem; /* 64px nav + 64px breathing */
   }
 }
 
 @media (min-width: 768px) {
   .section-safe-top {
-    padding-top: 7rem;
+    padding-top: 9rem; /* 64px nav + 80px breathing */
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-safe-top {
+    padding-top: 10rem; /* 80px nav + 80px breathing — nav grows to h-20 at lg */
   }
 }
 
