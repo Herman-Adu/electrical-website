@@ -530,7 +530,7 @@
    Navbar heights: h-16 (64px) on mobile/tablet, h-20 (80px) on lg+
    Values = navbar height + generous breathing space above hero content */
 .section-safe-top {
-  padding-top: 7rem; /* 64px nav + 48px breathing */
+  padding-top: 8rem; /* 64px nav + 48px breathing */
 }
 
 @media (min-width: 640px) {
@@ -553,7 +553,7 @@
 
 /* Safe area bottom (prevents content cut-off) */
 .section-safe-bottom {
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
 @media (min-width: 640px) {
