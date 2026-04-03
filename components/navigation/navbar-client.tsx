@@ -270,7 +270,7 @@ export function NavbarClient() {
             <div
               id="mobile-navigation-menu"
               data-slot="mobile-nav"
-              className="relative px-4 xs:px-6 h-full overflow-y-auto"
+              className="relative pt-3 xs:pt-4 px-4 xs:px-6 h-full overflow-y-auto"
             >
               <div className="flex flex-col gap-2 xs:gap-4">
                 {navLinks.map((link, index) => {
