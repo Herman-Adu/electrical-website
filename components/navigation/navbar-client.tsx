@@ -258,7 +258,7 @@ export function NavbarClient() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-50 lg:hidden"
           >
             {/* Backdrop */}
             <div
