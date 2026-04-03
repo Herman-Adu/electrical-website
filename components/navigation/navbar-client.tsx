@@ -270,9 +270,9 @@ export function NavbarClient() {
             <div
               id="mobile-navigation-menu"
               data-slot="mobile-nav"
-              className="relative pt-20 px-6"
+              className="relative pt-16 xs:pt-20 px-4 xs:px-6 h-screen overflow-y-auto"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2 xs:gap-4">
                 {navLinks.map((link, index) => {
                   const topLevelActive =
                     isTopLevelActive(link.href, Boolean(link.submenu)) ||
@@ -288,13 +288,13 @@ export function NavbarClient() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
-                            className="flex items-center justify-between py-2 border-b border-border w-full"
+                            className="flex items-center justify-between py-2 xs:py-3 border-b border-border w-full"
                           >
                             <Link
                               href={link.href}
                               onClick={closeMenus}
                               aria-current={getAriaCurrent(link.href)}
-                              className={`text-2xl font-bold transition-colors ${
+                              className={`text-lg xs:text-xl sm:text-2xl font-bold transition-colors flex-1 ${
                                 topLevelActive
                                   ? "text-electric-cyan"
                                   : "text-foreground hover:text-electric-cyan"
@@ -311,7 +311,7 @@ export function NavbarClient() {
                               type="button"
                               aria-label={`${openDropdown === link.name ? "Collapse" : "Expand"} ${link.name} menu`}
                               aria-expanded={openDropdown === link.name}
-                              className="p-1 text-muted-foreground hover:text-electric-cyan transition-colors"
+                              className="p-1 ml-2 text-muted-foreground hover:text-electric-cyan transition-colors flex-shrink-0"
                             >
                               <ChevronDown
                                 size={20}
@@ -339,7 +339,7 @@ export function NavbarClient() {
                                       key={item.name}
                                       onClick={() => scrollToSection(item.href)}
                                       aria-current={getAriaCurrent(item.href)}
-                                      className={`w-full text-left text-lg transition-colors py-2 pl-4 border-b border-border/50 ${
+                                      className={`w-full text-left text-sm xs:text-base sm:text-lg transition-colors py-2 xs:py-2.5 pl-6 xs:pl-8 border-b border-border/50 ${
                                         submenuActive
                                           ? "text-electric-cyan"
                                           : "text-muted-foreground hover:text-electric-cyan"
@@ -360,7 +360,7 @@ export function NavbarClient() {
                           transition={{ delay: index * 0.1 }}
                           onClick={() => navigateTo(link.href)}
                           aria-current={getAriaCurrent(link.href)}
-                          className={`text-left text-2xl font-bold transition-colors py-2 border-b border-border w-full ${
+                          className={`text-left text-lg xs:text-xl sm:text-2xl font-bold transition-colors py-2 xs:py-3 border-b border-border w-full ${
                             topLevelActive
                               ? "text-electric-cyan"
                               : "text-foreground hover:text-electric-cyan"
@@ -377,7 +377,7 @@ export function NavbarClient() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
-                  className="mt-4 w-full py-4 bg-electric-cyan text-primary-foreground font-bold text-lg tracking-wide"
+                  className="mt-4 w-full py-3 xs:py-4 bg-electric-cyan text-primary-foreground font-bold text-base xs:text-lg tracking-wide rounded-md"
                 >
                   Get Quote
                 </motion.button>
@@ -397,8 +397,8 @@ export function NavbarClient() {
               </div>
 
               {/* Mobile Menu Footer */}
-              <div className="absolute bottom-8 left-6 right-6">
-                <div className="font-mono text-[10px] text-muted-foreground tracking-widest text-center">
+              <div className="mt-6 xs:mt-8 pt-4 xs:pt-6 border-t border-border">
+                <div className="font-mono text-[10px] xs:text-xs text-muted-foreground tracking-widest text-center pb-4">
                   24/7 EMERGENCY SERVICES AVAILABLE
                 </div>
               </div>
