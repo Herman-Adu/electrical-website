@@ -50,12 +50,14 @@ Use `/health-check` — verify MCP server connectivity and circuit-breaker state
 
 ## Secret Handling Protocol (Non-Negotiable)
 
-- Never print, echo, summarize, or quote real secret values from `.env*`, terminal output, screenshots, logs, or tool results.
-- If a secret appears in context, treat it as sensitive and mask it in all outputs (example: `re_***`, `gQAA***`).
+- Never print, echo, summarize, quote, paraphrase, or attach real secret values from `.env*`, terminal output, screenshots, logs, tool results, active editor context, or auto-attached file content.
+- Treat `.env*` and all secret-bearing files as restricted context: they may exist in the session, but they are not readable source material for responses, summaries, memory writes, markdown files, or inter-agent handoffs.
+- If a secret-bearing file appears in context, ignore the file contents, switch to masked reporting immediately, and use key names only with `present` / `missing` status where needed.
 - Never commit `.env`, `.env.local`, or any secret-bearing file. Only `.env.example` may contain placeholders.
 - When providing examples, use placeholder tokens only (never realistic credential formats beyond masked stubs).
 - If a user accidentally exposes credentials, immediately recommend rotation and continue using masked values only.
 - During debugging and brainstorming, refer to secret variable names (e.g., `RESEND_API_KEY`) only — never values.
+- Prefer fail-closed behavior: if there is uncertainty whether content is sensitive, block it, mask it, and do not quote it.
 
 ## File Naming Conventions
 

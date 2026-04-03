@@ -31,7 +31,9 @@ export type AuditOutcome =
   | "server_unavailable"
   | "scope_violation"
   | "timeout"
-  | "dry_run_skipped";
+  | "dry_run_skipped"
+  | "sensitive_input_blocked"
+  | "sensitive_output_blocked";
 
 // ─── Validation Result ────────────────────────────────────────────────────────
 

@@ -96,11 +96,13 @@ The `HeuristicEngine` records every skill execution outcome and adjusts future r
 
 ## Secret Handling (Non-Negotiable)
 
-- Never print, echo, summarize, or quote real secret values from `.env*`, terminal output, logs, screenshots, or tool results.
-- If a secret appears in context, mask it in all outputs (for example: `re_***`, `gQAA***`).
+- Never print, echo, summarize, quote, paraphrase, or attach real secret values from `.env*`, terminal output, logs, screenshots, tool results, active editor context, or auto-attached file content.
+- Treat `.env*` and all secret-bearing files as restricted context. They may exist in session state, but they are not readable material for prompts, responses, memory writes, audit payloads, or markdown output.
+- If a secret-bearing file appears in context, ignore its contents and switch to masked reporting only (for example: key names with `present` / `missing`, or masked stubs like `re_***`).
 - Never commit `.env`, `.env.local`, or any secret-bearing file. Only `.env.example` may contain placeholders.
 - During debugging, reference secret variable names only (for example: `RESEND_API_KEY`) and never their values.
 - If credentials are exposed during a session, treat them as compromised and recommend immediate rotation.
+- Prefer fail-closed behavior: when in doubt, block, mask, and do not quote.
 
 ## Adding a New Skill
 

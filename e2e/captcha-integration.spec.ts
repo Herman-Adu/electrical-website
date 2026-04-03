@@ -1,26 +1,29 @@
 import { test, expect, type Page } from "@playwright/test";
 
-const getContactForm = (page: Page) =>
-  page
-    .getByRole("main")
-    .locator("form")
-    .filter({ hasText: "Project Inquiry Form" });
+const resetContactStorage = async (page: Page) => {
+  await page.addInitScript(() => {
+    window.localStorage.removeItem("contact-form-storage");
+  });
+};
+
+const getContactForm = (page: Page) => page.locator("main form").first();
 
 test.describe("Turnstile CAPTCHA Integration", () => {
   test("Contact form loads with Turnstile widget", async ({ page }) => {
+    await resetContactStorage(page);
     // Navigate directly to contact page (contact form is not on homepage)
     await page.goto("/contact", { waitUntil: "load" });
     const form = getContactForm(page);
     await expect(form).toBeVisible({ timeout: 10000 });
 
-    // Verify form fields exist
-    const nameInput = form.getByLabel(/full name/i);
-    const emailInput = form.getByLabel(/email address/i);
-    const messageInput = form.getByLabel(/^project details/i);
+    // Verify step 1 fields exist
+    const nameInput = form.getByPlaceholder("John Smith");
+    const emailInput = form.getByPlaceholder("john.smith@example.com");
+    const phoneInput = form.getByPlaceholder("07700 900000");
 
     await expect(nameInput).toBeVisible();
     await expect(emailInput).toBeVisible();
-    await expect(messageInput).toBeVisible();
+    await expect(phoneInput).toBeVisible();
 
     // Verify Turnstile widget container is present in the DOM.
     // The iframe only renders when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set and
@@ -41,66 +44,52 @@ test.describe("Turnstile CAPTCHA Integration", () => {
   });
 
   test("Contact form validation requires CAPTCHA", async ({ page }) => {
+    await resetContactStorage(page);
     // Use "load" not "networkidle" — Turnstile loads Cloudflare scripts that
     // keep the network active indefinitely, preventing networkidle from firing.
     await page.goto("/contact", { waitUntil: "load" });
     const form = getContactForm(page);
     await expect(form).toBeVisible({ timeout: 10000 });
 
-    // Fill form fields
-    const nameInput = form.getByLabel(/full name/i);
-    const emailInput = form.getByLabel(/email address/i);
-    const messageInput = form.getByLabel(/^project details/i);
-    const projectTypeSelect = form.getByLabel(/^project type/i);
+    await form.getByPlaceholder("John Smith").fill("Test User");
+    await form
+      .getByPlaceholder("john.smith@example.com")
+      .fill("test@example.com");
+    await form.getByPlaceholder("07700 900000").fill("07700 900000");
 
-    await nameInput.fill("Test User");
-    await emailInput.fill("test@example.com");
-    await messageInput.fill("Test message");
-    await projectTypeSelect.selectOption("commercial");
+    const continueButton = form.getByRole("button", { name: /continue/i });
+    await expect(continueButton).toBeDisabled();
+    await expect(
+      page.getByRole("heading", {
+        name: /your contact details|personal details/i,
+      }),
+    ).toBeVisible({ timeout: 10000 });
 
-    // Try to submit without CAPTCHA. A blocked submission should keep the form
-    // on the page, preserve the entered values, and surface a visible form alert.
-    const submitButton = form.getByRole("button", { name: /submit inquiry/i });
-    await submitButton.click();
-
-    const formAlert = form.getByRole("alert");
-    await expect(formAlert).toBeVisible({ timeout: 15000 });
-
-    await expect(submitButton).toBeEnabled();
     await expect(
       form.getByRole("button", { name: /submitting|inquiry submitted/i }),
     ).toHaveCount(0);
-
-    await expect(nameInput).toHaveValue("Test User");
-    await expect(emailInput).toHaveValue("test@example.com");
-    await expect(messageInput).toHaveValue("Test message");
-    await expect(projectTypeSelect).toHaveValue("commercial");
   });
 
   test("Form fields render and accept input", async ({ page }) => {
+    await resetContactStorage(page);
     await page.goto("/contact", { waitUntil: "load" });
     const form = getContactForm(page);
     await expect(form).toBeVisible({ timeout: 10000 });
 
     // Test name field
-    const nameInput = form.getByLabel(/full name/i);
+    const nameInput = form.getByPlaceholder("John Smith");
     await nameInput.fill("John Doe");
     await expect(nameInput).toHaveValue("John Doe");
 
     // Test email field
-    const emailInput = form.getByLabel(/email address/i);
+    const emailInput = form.getByPlaceholder("john.smith@example.com");
     await emailInput.fill("john@example.com");
     await expect(emailInput).toHaveValue("john@example.com");
 
-    // Test message field
-    const messageInput = form.getByLabel(/^project details/i);
-    await messageInput.fill("This is a test message");
-    await expect(messageInput).toHaveValue("This is a test message");
-
-    // Test project type dropdown
-    const projectSelect = form.getByLabel(/^project type/i);
-    await projectSelect.selectOption("industrial");
-    await expect(projectSelect).toHaveValue("industrial");
+    // Test phone field
+    const phoneInput = form.getByPlaceholder("07700 900000");
+    await phoneInput.fill("07700 900000");
+    await expect(phoneInput).toHaveValue("07700 900000");
   });
 
   test("Server action is defined and contact.ts has verification", async ({
@@ -112,9 +101,9 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // Navigate to contact page to trigger the client-side code
     await page.goto("/contact", { waitUntil: "load" });
 
-    // Verify the page has the form
+    await resetContactStorage(page);
     const form = getContactForm(page);
-    await expect(form).toBeVisible();
+    await expect(form).toBeVisible({ timeout: 10000 });
 
     // No runtime errors should occur during load
     const errorMessages = await page.evaluate(() => {

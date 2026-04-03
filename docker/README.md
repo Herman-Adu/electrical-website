@@ -14,6 +14,24 @@ This Docker folder contains the runtime used by the project’s MCP gateway and 
 - `wikipedia`
 - `Caddy` router (gateway)
 
+## Memory backend contract
+
+The `memory-reference` service is a graph-capable persistent memory backend.
+
+Required tool contract exposed through the gateway route `http://localhost:3100/memory/tools/call`:
+
+- `open_nodes`
+- `search_nodes`
+- `create_entities`
+- `create_relations`
+- `add_observations`
+- `delete_observations`
+- `delete_relations`
+- `delete_entities`
+- `read_graph`
+
+Persistence is backed by a Docker named volume (`memory_data`).
+
 ## Not included
 
 The repository does not include bundled Prometheus/Grafana/Loki services.
@@ -40,6 +58,7 @@ Use the package scripts as the default MCP lifecycle entrypoint. This avoids ad-
 
 3. Run end-to-end MCP endpoint checks:
    - `pnpm docker:mcp:smoke`
+   - This now includes protocol checks for `search_nodes`, `open_nodes`, and `read_graph` via `/memory/tools/call`.
 
 4. One-command readiness check:
    - `pnpm docker:mcp:ready`

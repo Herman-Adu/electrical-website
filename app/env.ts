@@ -5,6 +5,7 @@ export const env = createEnv({
   server: {
     RESEND_API_KEY: z.string().min(1).optional(),
     CONTACT_ADMIN_EMAIL: z.string().email().optional(),
+    CONTACT_TO_EMAIL: z.string().email().optional(),
     CONTACT_FROM_EMAIL: z.string().email().default("noreply@adudev.co.uk"),
     CONTACT_FROM_NAME: z.string().min(1).default("Nexgen Electrical"),
     CONTACT_RESPONSE_TIME_HOURS: z.coerce.number().int().positive().default(2),
@@ -28,6 +29,9 @@ export const env = createEnv({
       .optional()
       .transform((value) => value === "true"),
     // Turnstile CAPTCHA
+    // CSRF
+    CSRF_SECRET: z.string().min(32).optional(),
+    // Turnstile CAPTCHA
     TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
     // Production: Vercel KV
     KV_REST_API_URL: z.string().url().optional(),
@@ -46,6 +50,7 @@ export const env = createEnv({
   runtimeEnv: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CONTACT_ADMIN_EMAIL: process.env.CONTACT_ADMIN_EMAIL,
+    CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL,
     CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL,
     CONTACT_FROM_NAME: process.env.CONTACT_FROM_NAME,
     CONTACT_RESPONSE_TIME_HOURS: process.env.CONTACT_RESPONSE_TIME_HOURS,
@@ -56,6 +61,7 @@ export const env = createEnv({
     OG_ROUTE_ALLOWED_ORIGINS: process.env.OG_ROUTE_ALLOWED_ORIGINS,
     NEXT_IMAGE_UNOPTIMIZED: process.env.NEXT_IMAGE_UNOPTIMIZED,
     TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY ?? undefined,
+    CSRF_SECRET: process.env.CSRF_SECRET ?? undefined,
     // Production: Vercel KV
     KV_REST_API_URL:
       process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL,
