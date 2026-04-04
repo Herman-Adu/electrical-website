@@ -4,6 +4,7 @@ export { Schematic } from "./schematic";
 export { Dashboard } from "./dashboard";
 export { Contact } from "./contact";
 export { ContactHero } from "./contact-hero";
+export { ContactIntro } from "./contact-intro";
 export { ContactCTA } from "./contact-cta";
 export { Footer } from "./footer";
 export { CTAPower } from "./cta-power";
