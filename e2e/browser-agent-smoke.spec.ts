@@ -28,7 +28,12 @@ test.describe("Step 2 – Smoke: mobile nav", () => {
     const burger = page.locator('button[aria-label="Open menu"]');
     await expect(burger).toBeVisible({ timeout: 5000 });
     await burger.click({ force: true });
-    await expect(burger).toBeVisible({ timeout: 5000 });
+
+    const closeButton = page.locator('button[aria-label="Close menu"]');
+    await expect(closeButton).toBeVisible({ timeout: 5000 });
+    await expect(page.locator("#mobile-navigation-menu")).toBeVisible({
+      timeout: 5000,
+    });
   });
 });
 
