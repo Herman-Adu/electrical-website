@@ -1,11 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Mail } from "lucide-react";
+import {
+  Activity,
+  ChevronDown,
+  Clock,
+  Mail,
+  MessageSquare,
+  Shield,
+} from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import type {
+  MarketingContactContent,
+  MarketingIconName,
+} from "@/types/marketing";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,9 +37,31 @@ const itemVariants = {
   },
 };
 
-export function ContactHero() {
+const iconMap = {
+  Mail,
+  MessageSquare,
+  Shield,
+  Clock,
+} as const;
+
+type HeroIconName = keyof typeof iconMap;
+
+interface ContactHeroProps {
+  hero: MarketingContactContent["hero"];
+  trustIndicators: MarketingContactContent["trustIndicators"];
+}
+
+const getIcon = (name?: MarketingIconName) =>
+  name ? iconMap[name as HeroIconName] : undefined;
+
+export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "compact" });
+
+  const scrollToContactForm = () => {
+    const element = document.getElementById("contact-form-section");
+    if (element) scrollToElementWithOffset(element);
+  };
 
   return (
     <HeroParallaxShell
@@ -136,13 +170,19 @@ export function ContactHero() {
           {/* Eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center justify-center gap-4 mb-4"
+            className="mb-4 flex items-center justify-center"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
-              Get in Touch
-            </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <div className="inline-flex items-center gap-2 border border-electric-cyan/25 bg-electric-cyan/10 px-4 py-2">
+              {(() => {
+                const BadgeIcon = getIcon(hero.badge.icon);
+                return BadgeIcon ? (
+                  <BadgeIcon className="h-4 w-4 text-electric-cyan" />
+                ) : null;
+              })()}
+              <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase">
+                {hero.badge.text}
+              </span>
+            </div>
           </motion.div>
 
           {/* Headline */}
@@ -150,53 +190,64 @@ export function ContactHero() {
             variants={itemVariants}
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
-            <span className="block">Start Your</span>
-            <span className="block text-electric-cyan">Project</span>
+            {hero.title}
           </motion.h1>
 
           {/* Sub */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto font-light leading-relaxed text-pretty"
+            className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg"
           >
-            Ready to power your next innovation? Our engineering team is on hand
-            for a comprehensive consultation — commercial, industrial, or
-            residential.
+            {hero.description}
           </motion.p>
 
-          {/* Quick contact chips */}
+          {/* Trust indicators */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+            className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4"
           >
-            <div className="flex items-center gap-2 border border-electric-cyan/20 px-4 py-2">
-              <Mail size={12} className="text-electric-cyan/60" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                contact@nexgen.com.au
-              </span>
-            </div>
-            <div className="flex items-center gap-2 border border-red-500/30 px-4 py-2">
-              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                Emergency 24/7
-              </span>
-            </div>
-          </motion.div>
+            {trustIndicators.map((item) => {
+              const Icon = getIcon(item.icon);
 
-          {/* Technical metadata */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-8 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/40 uppercase"
-          >
-            <span>NICEIC Approved</span>
-            <span className="hidden sm:inline">|</span>
-            <span>Response within 2hrs</span>
-            <span className="hidden sm:inline">|</span>
-            <span>Part P Certified</span>
+              return (
+                <div
+                  key={item.title}
+                  className="border border-electric-cyan/20 bg-background/60 p-4 text-center backdrop-blur-sm"
+                >
+                  {Icon ? (
+                    <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan" />
+                  ) : null}
+                  <p className="text-sm font-medium text-foreground">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 hidden text-xs text-muted-foreground sm:block">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </motion.div>
         </motion.div>
       }
       contentStyle={contentStyle}
+      scrollIndicator={
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.45 }}
+          onClick={scrollToContactForm}
+          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to contact form"
+        >
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Start Enquiry
+          </span>
+          <ChevronDown
+            size={20}
+            className={shouldReduceMotion ? "" : "animate-bounce"}
+          />
+        </motion.button>
+      }
     />
   );
 }
