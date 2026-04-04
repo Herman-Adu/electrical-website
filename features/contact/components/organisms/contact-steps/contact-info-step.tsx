@@ -147,7 +147,7 @@ export function ContactInfoStep() {
           <Button
             type="submit"
             className="min-w-[140px]"
-            disabled={!isValid || !captchaToken}
+            disabled={!isValid || (turnstileSiteKey ? !captchaToken : false)}
           >
             Continue
           </Button>
