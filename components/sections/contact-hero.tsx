@@ -1,11 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Clock, Mail, MessageSquare, Shield } from "lucide-react";
+import {
+  Activity,
+  ChevronDown,
+  Clock,
+  Mail,
+  MessageSquare,
+  Shield,
+} from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type {
   MarketingContactContent,
   MarketingIconName,
@@ -49,6 +57,11 @@ const getIcon = (name?: MarketingIconName) =>
 export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "compact" });
+
+  const scrollToContactForm = () => {
+    const element = document.getElementById("contact-form-section");
+    if (element) scrollToElementWithOffset(element);
+  };
 
   return (
     <HeroParallaxShell
@@ -217,6 +230,24 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
         </motion.div>
       }
       contentStyle={contentStyle}
+      scrollIndicator={
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.45 }}
+          onClick={scrollToContactForm}
+          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to contact form"
+        >
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Start Enquiry
+          </span>
+          <ChevronDown
+            size={20}
+            className={shouldReduceMotion ? "" : "animate-bounce"}
+          />
+        </motion.button>
+      }
     />
   );
 }

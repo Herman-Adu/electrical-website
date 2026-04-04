@@ -12,7 +12,7 @@ import { ContactFormContainer } from "@/features/contact";
 import { OfficeHoursCard } from "@/components/molecules/office-hours-card";
 import { LocationMapCard } from "@/components/molecules/location-map-card";
 import { QuickContactCard } from "@/components/molecules/quick-contact-card";
-import { ContactHero, Footer } from "@/components/sections";
+import { ContactCTA, ContactHero, Footer } from "@/components/sections";
 import contactData from "@/data/strapi-mock/marketing/contact.json";
 import type { MarketingContactContent } from "@/types/marketing";
 
@@ -29,9 +29,13 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-background">
       <ContactHero hero={hero} trustIndicators={trustIndicators} />
+      <ContactCTA />
 
       {/* Main Content */}
-      <section className="section-container py-8 sm:py-12">
+      <section
+        id="contact-form-section"
+        className="section-container py-8 sm:py-12"
+      >
         <div className="section-content">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Form - Takes 2 columns */}
