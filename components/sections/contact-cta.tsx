@@ -1,7 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Phone, Zap } from "lucide-react";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
 export function ContactCTA() {
+  const scrollToContactForm = () => {
+    const element = document.getElementById("contact-form-section");
+    if (element) scrollToElementWithOffset(element);
+  };
   return (
     <section className="section-container section-padding bg-background">
       <div className="section-content">
@@ -31,13 +38,13 @@ export function ContactCTA() {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link
-                href="#contact-form-section"
+              <button
+                onClick={scrollToContactForm}
                 className="inline-flex items-center justify-center gap-2 rounded-sm bg-electric-cyan px-8 py-4 text-xs font-bold tracking-[0.16em] text-background uppercase transition-all hover:shadow-[0_0_30px_rgba(0,243,189,0.35)]"
               >
                 Start Your Enquiry
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
 
               <Link
                 href="tel:+442079460958"
