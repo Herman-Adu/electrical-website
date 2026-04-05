@@ -10,7 +10,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useQuotationStore } from "../../hooks/use-quotation-store";
-import { submitQuotationRequest } from "../../api/quotation-request";
 import { MultiStepFormWrapper } from "@/components/organisms/multi-step-form-wrapper";
 import { ContactInfoStep } from "@/components/organisms/shared-steps/contact-info-step";
 import { AddressInfoStep } from "@/components/organisms/shared-steps/address-info-step";
@@ -59,7 +58,6 @@ export function QuotationFormContainer() {
     additional,
     turnstileToken,
     turnstileError,
-    isSubmitting,
     updateContact,
     updateProjectType,
     updateScope,
@@ -69,7 +67,6 @@ export function QuotationFormContainer() {
     nextStep,
     previousStep,
     goToStep,
-    setSubmitting,
     setTurnstileToken,
     setTurnstileError,
     resetForm,
@@ -145,34 +142,6 @@ export function QuotationFormContainer() {
       }
     };
   }, [successData, resetForm]);
-
-  const handleSubmit = async () => {
-    setSubmitError(null);
-    setSubmitting(true);
-
-    try {
-      if (!turnstileToken) {
-        setSubmitError("Please complete verification before submitting.");
-        setTurnstileError("Verification required before submission.");
-        goToStep(0);
-        return;
-      }
-
-      const formData = getCompleteFormData();
-      const result = await submitQuotationRequest(formData);
-
-      if (result.success) {
-        setSuccessData(result.data);
-        resetForm();
-      } else {
-        setSubmitError(result.error);
-      }
-    } catch (error) {
-      setSubmitError("An unexpected error occurred. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   const handleStartNew = () => {
     if (successTimerRef.current !== null) {
@@ -297,10 +266,16 @@ export function QuotationFormContainer() {
         return (
           <QuotationReviewStep
             formData={getCompleteFormData()}
-            onSubmit={handleSubmit}
+            turnstileToken={turnstileToken}
+            onSubmitSuccess={(requestId) => {
+              setSubmitError(null);
+              setTurnstileError(null);
+              setSuccessData({ requestId });
+              resetForm();
+            }}
+            onSubmitError={setSubmitError}
             onPrevious={previousStep}
             onEdit={goToStep}
-            isSubmitting={isSubmitting}
           />
         );
       default:
