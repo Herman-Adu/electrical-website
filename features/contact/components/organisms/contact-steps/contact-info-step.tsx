@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
@@ -54,17 +54,12 @@ export function ContactInfoStep() {
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors, isSubmitting, isValid },
   } = useForm<ContactInfoInput>({
     resolver: zodResolver(contactInfoSchema),
     defaultValues: contactInfo,
-    mode: "onChange",
+    mode: "onTouched",
   });
-
-  useEffect(() => {
-    trigger();
-  }, [trigger]);
 
   const onSubmit = (data: ContactInfoInput) => {
     updateContactInfo(data);
