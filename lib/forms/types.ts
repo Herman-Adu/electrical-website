@@ -31,6 +31,32 @@ export interface FormStepState {
   isComplete: boolean;
 }
 
+export type FormFieldErrors<TField extends string = string> = Partial<
+  Record<TField, string[]>
+>;
+
+export interface TurnstileFormState {
+  turnstileToken: string | null;
+  turnstileError: string | null;
+}
+
+export interface MultiStepActionState<
+  TSuccessData = { referenceId: string },
+  TField extends string = string,
+> {
+  success: boolean;
+  error?: string;
+  fieldErrors?: FormFieldErrors<TField>;
+  data?: TSuccessData;
+}
+
+export interface MultiStepFormDefinition<TStepId extends string = string> {
+  id: string;
+  title: string;
+  description?: string;
+  steps: Array<FormStepConfig & { id: TStepId }>;
+}
+
 // Step component props interface
 export interface StepComponentProps<T = Record<string, unknown>> {
   onNext: () => void;
@@ -51,6 +77,16 @@ export interface FormSubmissionResult {
     message: string;
   };
 }
+
+export type MultiStepSubmissionResult<
+  TData = FormSubmissionResult["data"],
+  TField extends string = string,
+> = {
+  success: boolean;
+  error?: string;
+  fieldErrors?: FormFieldErrors<TField>;
+  data?: TData;
+};
 
 // Contact information - shared across forms
 export interface ContactInfo {
