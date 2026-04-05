@@ -39,6 +39,43 @@ interface TurnstileVerifyResponse {
 
 const TURNSTILE_VERIFY_TIMEOUT_MS = 8000;
 
+function normalizeHostname(value: string | null): string | null {
+  if (!value) {
+    return null;
+  }
+
+  const firstValue = value
+    .split(",")
+    .map((part) => part.trim())
+    .find((part) => part.length > 0);
+
+  if (!firstValue) {
+    return null;
+  }
+
+  return firstValue.split(":")[0]?.toLowerCase() ?? null;
+}
+
+function resolveExpectedTurnstileHostnames(headersList: Headers): string[] {
+  const expectedHostnames = new Set<string>();
+  const forwardedHost = normalizeHostname(headersList.get("x-forwarded-host"));
+  const host = normalizeHostname(headersList.get("host"));
+
+  if (forwardedHost) {
+    expectedHostnames.add(forwardedHost);
+  }
+
+  if (host) {
+    expectedHostnames.add(host);
+  }
+
+  expectedHostnames.add(
+    new URL(env.NEXT_PUBLIC_SITE_URL).hostname.toLowerCase(),
+  );
+
+  return Array.from(expectedHostnames);
+}
+
 function mapTurnstileFailure(errorCodes: string[]): string {
   if (errorCodes.includes("timeout-or-duplicate")) {
     return "Verification expired. Please complete verification again.";
@@ -57,6 +94,7 @@ function mapTurnstileFailure(errorCodes: string[]): string {
 async function verifyTurnstileToken(
   token: string,
   clientId: string,
+  expectedHostnames: string[],
 ): Promise<{ success: true } | { success: false; error: string }> {
   if (!env.TURNSTILE_SECRET_KEY) {
     return {
@@ -104,11 +142,12 @@ async function verifyTurnstileToken(
       };
     }
 
-    const expectedHostname = new URL(env.NEXT_PUBLIC_SITE_URL).hostname;
-    if (payload.hostname && payload.hostname !== expectedHostname) {
+    const receivedHostname = payload.hostname?.toLowerCase();
+
+    if (receivedHostname && !expectedHostnames.includes(receivedHostname)) {
       console.warn("[contact] Turnstile hostname mismatch", {
-        expectedHostname,
-        receivedHostname: payload.hostname,
+        expectedHostnames,
+        receivedHostname,
       });
 
       return {
@@ -161,6 +200,7 @@ export async function submitContactRequest(
     // Rate limiting
     const headersList = await headers();
     const clientId = getClientIdentifier(headersList);
+    const expectedHostnames = resolveExpectedTurnstileHostnames(headersList);
     const rateLimitResult = rateLimiters.contactForm.check(clientId);
 
     if (!rateLimitResult.allowed) {
@@ -173,6 +213,7 @@ export async function submitContactRequest(
     const turnstileResult = await verifyTurnstileToken(
       data.turnstileToken,
       clientId,
+      expectedHostnames,
     );
 
     if (!turnstileResult.success) {
