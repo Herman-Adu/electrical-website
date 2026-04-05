@@ -20,6 +20,20 @@ import {
   type ContactInfoInput,
 } from "../../../schemas/contact-schemas";
 
+function mapTurnstileClientError(errorCode?: string | number): string {
+  const code = String(errorCode ?? "");
+
+  if (code === "110200") {
+    return "Verification unavailable for this domain. Please retry shortly.";
+  }
+
+  if (code === "400020" || code === "110100" || code === "110110") {
+    return "Verification configuration is invalid. Please retry shortly.";
+  }
+
+  return "Verification failed. Please retry.";
+}
+
 export function ContactInfoStep() {
   const turnstileRef = useRef<TurnstileInstance | null>(null);
 
@@ -96,9 +110,9 @@ export function ContactInfoStep() {
                 setTurnstileToken(null);
                 setTurnstileError("Verification expired. Please try again.");
               }}
-              onError={() => {
+              onError={(errorCode) => {
                 setTurnstileToken(null);
-                setTurnstileError("Verification failed. Please retry.");
+                setTurnstileError(mapTurnstileClientError(errorCode));
               }}
             />
           ) : (
