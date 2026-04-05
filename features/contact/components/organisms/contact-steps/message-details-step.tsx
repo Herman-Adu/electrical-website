@@ -6,7 +6,6 @@
 
 "use client";
 
-import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
@@ -44,17 +43,12 @@ export function MessageDetailsStep() {
     control,
     handleSubmit,
     watch,
-    trigger,
     formState: { errors, isValid, isSubmitting },
   } = useForm<MessageDetailsInput>({
     resolver: zodResolver(messageDetailsSchema),
     defaultValues: messageDetails,
     mode: "onChange",
   });
-
-  useEffect(() => {
-    trigger();
-  }, [trigger]);
 
   const messageText = watch("message") || "";
   const characterCount = messageText.length;
