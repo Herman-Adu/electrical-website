@@ -1,20 +1,39 @@
-export { ServiceRequestFormContainer } from "./components/organisms/service-request-form-container";
-export { ServiceRequestSuccessMessage } from "./components/molecules/service-request-success-message";
-export { ServiceDetailsStep } from "./components/organisms/service-request-steps/service-details-step";
-export { PropertyInfoStep } from "./components/organisms/service-request-steps/property-info-step";
-export { ServiceReviewStep } from "./components/organisms/service-request-steps/service-review-step";
+/**
+ * Service Request Feature - Public API
+ *
+ * All imports from this feature should go through this barrel file.
+ * Internal implementation details are hidden behind this API.
+ */
 
-export { useServiceRequestStore } from "./hooks/use-service-request-store";
-
+// Components (Atomic Design Structure)
 export {
-  serviceContactSchema,
+  MultiStepFormContainer,
+  MultiStepFormContainer as ServiceRequestFormContainer,
+} from "./components/organisms/multi-step-form-container";
+export { PersonalInfoStep } from "./components/organisms/personal-info-step";
+export { ServiceDetailsStep } from "./components/organisms/service-details-step";
+export { PropertyInfoStep } from "./components/organisms/property-info-step";
+export { ScheduleStep } from "./components/organisms/schedule-step";
+export { ReviewStep } from "./components/organisms/review-step";
+export { ReviewStepDisplay } from "./components/organisms/review-step-display";
+
+// Hooks
+export { useFormStore } from "./hooks/use-form-store";
+
+// API / Server Actions
+export { submitServiceRequest } from "./api/service-request";
+export { sendServiceRequestEmails } from "./api/email-service";
+
+// Schemas & Types
+export {
+  personalInfoSchema,
   serviceDetailsSchema,
   propertyInfoSchema,
-  completeServiceRequestSchema,
-  type ServiceContactInput,
+  schedulePreferencesSchema,
+  type PersonalInfoInput,
   type ServiceDetailsInput,
   type PropertyInfoInput,
-  type CompleteServiceRequestInput,
-} from "./schemas/service-request-schemas";
-
-export { submitServiceRequest } from "./api/service-request";
+  type SchedulePreferencesInput,
+  type ServiceRequestData,
+  type CompleteFormInput,
+} from "./schemas/schemas";
