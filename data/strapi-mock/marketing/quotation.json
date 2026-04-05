@@ -1,0 +1,32 @@
+{
+  "header": {
+    "title": "Request a Quotation",
+    "description": "Tell us about your project and receive a detailed, no-obligation quote from our experienced team."
+  },
+  "trustIndicators": [
+    { "value": "15+", "label": "Years of Experience" },
+    { "value": "500+", "label": "Projects Completed" },
+    { "value": "100%", "label": "Certified Electricians" }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How long does it take to receive a quotation?",
+        "answer": "We typically respond within 2-5 business days with a detailed quotation. Urgent projects may receive faster responses."
+      },
+      {
+        "question": "Is the quotation free?",
+        "answer": "Yes, all quotations are completely free and come with no obligation. Complex projects may require a site visit."
+      },
+      {
+        "question": "What information do you need from me?",
+        "answer": "The more detail you can provide about your project, the more accurate our quotation will be. Include scope, timeline, and any specific requirements."
+      },
+      {
+        "question": "Do you handle all types of electrical work?",
+        "answer": "Yes, we handle residential, commercial, and industrial projects of all sizes, from simple installations to complete electrical systems."
+      }
+    ]
+  }
+}
