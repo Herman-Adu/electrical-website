@@ -150,10 +150,23 @@ export const useContactStore = create<ContactFormState>()(
       setSubmitting: (isSubmitting) => set({ isSubmitting }),
 
       setSubmitted: (isSubmitted, referenceId) =>
-        set({
-          isSubmitted,
-          contactReferenceId: referenceId || null,
-        }),
+        set(
+          isSubmitted
+            ? {
+                // On success: persist reset so navigating away and back shows a blank form
+                isSubmitted: true,
+                contactReferenceId: referenceId || null,
+                currentStep: 1,
+                contactInfo: initialState.contactInfo,
+                inquiryType: initialState.inquiryType,
+                referenceLinking: initialState.referenceLinking,
+                messageDetails: initialState.messageDetails,
+              }
+            : {
+                isSubmitted: false,
+                contactReferenceId: referenceId || null,
+              },
+        ),
 
       setSubmissionError: (error) => set({ submissionError: error }),
 
