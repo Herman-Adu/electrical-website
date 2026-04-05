@@ -45,6 +45,22 @@ export interface QuotationFormActionState {
   fieldErrors?: Record<string, string[]>;
 }
 
+// -- Service request --------------------------------------------------------
+
+export interface ServiceRequestSubmissionResult {
+  success: boolean;
+  requestId?: string;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
+}
+
+export interface ServiceRequestFormActionState {
+  success: boolean;
+  requestId?: string;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
+}
+
 // -- Email admin ------------------------------------------------------------
 
 export interface EnvVarStatus {

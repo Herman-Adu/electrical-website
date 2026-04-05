@@ -14,7 +14,7 @@ export interface VerifyTurnstileTokenParams {
   headersList: Headers;
   secretKey?: string;
   siteUrl: string;
-  logContext: "contact" | "quotation";
+  logContext: "contact" | "quotation" | "service";
   timeoutMs?: number;
 }
 
