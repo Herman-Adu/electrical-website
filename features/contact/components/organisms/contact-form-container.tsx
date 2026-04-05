@@ -6,7 +6,9 @@
 
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useContactStore } from "../../hooks/use-contact-store";
 import { ContactInfoStep } from "./contact-steps/contact-info-step";
 import { InquiryTypeStep } from "./contact-steps/inquiry-type-step";
@@ -27,12 +29,17 @@ export function ContactFormContainer() {
   const { currentStep, isSubmitted, contactReferenceId, setCurrentStep } =
     useContactStore();
 
+  useEffect(() => {
+    const el = document.getElementById("contact-form-section");
+    if (el) scrollToElementWithOffset(el);
+  }, [currentStep]);
+
   if (isSubmitted) {
     return <ContactSuccessMessage referenceId={contactReferenceId} />;
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-1 sm:px-0">
+    <div className="w-full max-w-3xl px-1 sm:px-0">
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
@@ -81,7 +88,7 @@ export function ContactFormContainer() {
                       step.number
                     )}
                   </div>
-                  <span className="text-xs mt-2 text-center hidden sm:block max-w-17.5">
+                  <span className="text-xs mt-2 text-center hidden sm:block whitespace-nowrap">
                     <span
                       className={
                         step.number === currentStep
