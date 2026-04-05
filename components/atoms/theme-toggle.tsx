@@ -1,14 +1,12 @@
-"use client";
+"use client"
 
-import { Moon, Sun } from "lucide-react";
-import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import { Moon, Sun } from "lucide-react"
+import { motion } from "framer-motion"
+import { useTheme } from "@/components/providers/theme-provider"
+import { cn } from "@/lib/utils"
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const theme = resolvedTheme ?? "light";
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <button
@@ -45,19 +43,9 @@ export function ThemeToggle() {
 
       {/* Background icons */}
       <div className="absolute inset-0 flex items-center justify-between px-2">
-        <Sun
-          className={cn(
-            "w-3 h-3 transition-opacity",
-            theme === "dark" ? "opacity-30" : "opacity-0",
-          )}
-        />
-        <Moon
-          className={cn(
-            "w-3 h-3 transition-opacity",
-            theme === "dark" ? "opacity-0" : "opacity-30",
-          )}
-        />
+        <Sun className={cn("w-3 h-3 transition-opacity", theme === "dark" ? "opacity-30" : "opacity-0")} />
+        <Moon className={cn("w-3 h-3 transition-opacity", theme === "dark" ? "opacity-0" : "opacity-30")} />
       </div>
     </button>
-  );
+  )
 }

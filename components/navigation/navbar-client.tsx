@@ -46,6 +46,7 @@ const navLinks = [
       { name: "Industrial & Infrastructure", href: "/services/industrial" },
       { name: "Residential & Domestic", href: "/services/residential" },
       { name: "Emergency Response", href: "/services/emergency" },
+      { name: "Quotation", href: "/quotation" },
     ],
   },
   {
@@ -173,7 +174,9 @@ export function NavbarClient() {
 
     if (targetPath === "/services") {
       return (
-        currentPath === "/services" || currentPath.startsWith("/services/")
+        currentPath === "/services" ||
+        currentPath.startsWith("/services/") ||
+        currentPath === "/quotation"
       );
     }
 
