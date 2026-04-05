@@ -8,7 +8,8 @@
 
 import React from "react";
 
-import { useState } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
+import { useFormStatus } from "react-dom";
 import { motion } from "framer-motion";
 import {
   CheckCircle2,
@@ -22,7 +23,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactStore } from "../../../hooks/use-contact-store";
-import { submitContactRequest } from "../../../api/contact-request";
+import { submitContactRequestForm } from "../../../api/contact-request";
+import type { ContactFormActionState } from "@/lib/actions/action.types";
+import { resolveStepFromFieldPath } from "./contact-review-step.utils";
 
 const inquiryTypeLabels: Record<string, string> = {
   "general-inquiry": "General Inquiry",
@@ -109,8 +112,35 @@ function ReviewItem({
   );
 }
 
+const initialActionState: ContactFormActionState = {
+  success: false,
+};
+
+function SubmitInquiryButton({ tokenMissing }: { tokenMissing: boolean }) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      type="submit"
+      disabled={pending || tokenMissing}
+      className="min-w-40"
+    >
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Submitting...
+        </>
+      ) : (
+        <>
+          <Send className="mr-2 h-4 w-4" />
+          Submit Inquiry
+        </>
+      )}
+    </Button>
+  );
+}
+
 export function ContactReviewStep() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -118,29 +148,57 @@ export function ContactReviewStep() {
     inquiryType,
     referenceLinking,
     messageDetails,
+    turnstileToken,
     setCurrentStep,
     setSubmitted,
     getCompleteFormData,
     prevStep,
   } = useContactStore();
 
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    setError(null);
+  const [actionState, formAction, isPending] = useActionState(
+    submitContactRequestForm,
+    initialActionState,
+  );
 
-    try {
-      const formData = getCompleteFormData();
-      const result = await submitContactRequest(formData);
+  const payload = useMemo(() => {
+    return JSON.stringify(getCompleteFormData());
+  }, [
+    getCompleteFormData,
+    contactInfo,
+    inquiryType,
+    referenceLinking,
+    messageDetails,
+    turnstileToken,
+  ]);
 
-      if (result.success) {
-        setSubmitted(true, result.referenceId);
-      } else {
-        setError(result.error || "Failed to submit. Please try again.");
-      }
-    } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+  useEffect(() => {
+    if (actionState.success) {
+      setSubmitted(true, actionState.referenceId);
+      return;
+    }
+
+    if (actionState.error) {
+      setError(actionState.error);
+    }
+
+    const fieldPaths = Object.keys(actionState.fieldErrors ?? {});
+    if (fieldPaths.length > 0) {
+      setCurrentStep(resolveStepFromFieldPath(fieldPaths[0]));
+    }
+  }, [actionState, setCurrentStep, setSubmitted]);
+
+  const handleBeforeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!turnstileToken) {
+      event.preventDefault();
+      setError(
+        "Verification expired. Return to Step 1 and complete verification.",
+      );
+      setCurrentStep(1);
+      return;
+    }
+
+    if (error) {
+      setError(null);
     }
   };
 
@@ -151,7 +209,11 @@ export function ContactReviewStep() {
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="space-y-6">
+      <form
+        className="space-y-6"
+        action={formAction}
+        onSubmit={handleBeforeSubmit}
+      >
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
@@ -277,6 +339,7 @@ export function ContactReviewStep() {
             <p className="text-sm text-destructive">{error}</p>
           </div>
         )}
+        <input type="hidden" name="payload" value={payload} />
 
         {/* Navigation */}
         <div className="flex justify-between pt-4">
@@ -284,30 +347,13 @@ export function ContactReviewStep() {
             type="button"
             variant="outline"
             onClick={prevStep}
-            disabled={isSubmitting}
+            disabled={isPending}
           >
             Back
           </Button>
-          <Button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="min-w-40"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Submitting...
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 h-4 w-4" />
-                Submit Inquiry
-              </>
-            )}
-          </Button>
+          <SubmitInquiryButton tokenMissing={!turnstileToken} />
         </div>
-      </div>
+      </form>
     </motion.div>
   );
 }

@@ -1,66 +1,114 @@
 /**
  * ORGANISM: InquiryTypeStep (Step 2 of 5)
- * 
+ *
  * Categorizes the type of inquiry and sector
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { MessageSquare, Building, Factory, Home, AlertTriangle } from "lucide-react"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { Button } from "@/components/ui/button"
-import { useContactStore } from "../../../hooks/use-contact-store"
-import { inquiryTypeSchema, type InquiryTypeInput } from "../../../schemas/contact-schemas"
+import { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import {
+  MessageSquare,
+  Building,
+  Factory,
+  Home,
+  AlertTriangle,
+} from "lucide-react";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { Button } from "@/components/ui/button";
+import { useContactStore } from "../../../hooks/use-contact-store";
+import {
+  inquiryTypeSchema,
+  type InquiryTypeInput,
+} from "../../../schemas/contact-schemas";
 
 const inquiryTypeOptions = [
-  { value: "general-inquiry", label: "General Inquiry", description: "Questions about our services" },
-  { value: "service-follow-up", label: "Service Follow-up", description: "Regarding an existing service request" },
-  { value: "quote-follow-up", label: "Quote Follow-up", description: "Questions about a quotation" },
-  { value: "complaint", label: "Complaint", description: "Report an issue or concern" },
-  { value: "feedback", label: "Feedback", description: "Share your experience" },
-  { value: "partnership", label: "Partnership", description: "Business collaboration opportunities" },
-  { value: "media-press", label: "Media & Press", description: "Press inquiries and interviews" },
-  { value: "careers", label: "Careers", description: "Employment opportunities" },
-]
+  {
+    value: "general-inquiry",
+    label: "General Inquiry",
+    description: "Questions about our services",
+  },
+  {
+    value: "service-follow-up",
+    label: "Service Follow-up",
+    description: "Regarding an existing service request",
+  },
+  {
+    value: "quote-follow-up",
+    label: "Quote Follow-up",
+    description: "Questions about a quotation",
+  },
+  {
+    value: "complaint",
+    label: "Complaint",
+    description: "Report an issue or concern",
+  },
+  {
+    value: "feedback",
+    label: "Feedback",
+    description: "Share your experience",
+  },
+  {
+    value: "partnership",
+    label: "Partnership",
+    description: "Business collaboration opportunities",
+  },
+  {
+    value: "media-press",
+    label: "Media & Press",
+    description: "Press inquiries and interviews",
+  },
+  {
+    value: "careers",
+    label: "Careers",
+    description: "Employment opportunities",
+  },
+];
 
 const sectorOptions = [
   { value: "residential", label: "Residential", icon: Home },
   { value: "commercial", label: "Commercial", icon: Building },
   { value: "industrial", label: "Industrial", icon: Factory },
   { value: "not-applicable", label: "Not Applicable", icon: MessageSquare },
-]
+];
 
 const priorityOptions = [
   { value: "low", label: "Low", description: "Response within 5-7 days" },
   { value: "normal", label: "Normal", description: "Response within 2-3 days" },
   { value: "high", label: "High", description: "Response within 24 hours" },
   { value: "urgent", label: "Urgent", description: "Same day response" },
-]
+];
 
 export function InquiryTypeStep() {
-  const { inquiryType, updateInquiryType, nextStep, prevStep } = useContactStore()
+  const { inquiryType, updateInquiryType, nextStep, prevStep } =
+    useContactStore();
 
   const {
     control,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    trigger,
+    formState: { errors, isValid, isSubmitting },
   } = useForm<InquiryTypeInput>({
     resolver: zodResolver(inquiryTypeSchema),
     defaultValues: inquiryType,
     mode: "onChange",
-  })
+  });
 
-  const selectedInquiry = watch("inquiryType")
-  const selectedPriority = watch("priority")
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
+  const selectedInquiry = watch("inquiryType");
+  const selectedPriority = watch("priority");
 
   const onSubmit = (data: InquiryTypeInput) => {
-    updateInquiryType(data)
-    nextStep()
-  }
+    updateInquiryType(data);
+    nextStep();
+  };
 
   return (
     <motion.div
@@ -74,7 +122,9 @@ export function InquiryTypeStep() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-accent" />
-            <h2 className="text-xl font-semibold text-foreground">Type of Inquiry</h2>
+            <h2 className="text-xl font-semibold text-foreground">
+              Type of Inquiry
+            </h2>
           </div>
           <p className="text-muted-foreground text-sm">
             Help us direct your inquiry to the right team.
@@ -84,7 +134,8 @@ export function InquiryTypeStep() {
         {/* Inquiry Type Selection */}
         <div className="space-y-3">
           <label className="text-sm font-medium text-foreground">
-            What can we help you with? <span className="text-destructive">*</span>
+            What can we help you with?{" "}
+            <span className="text-destructive">*</span>
           </label>
           <Controller
             name="inquiryType"
@@ -102,15 +153,21 @@ export function InquiryTypeStep() {
                         : "border-border hover:border-accent/50 hover:bg-accent/5"
                     }`}
                   >
-                    <p className="font-medium text-sm text-foreground">{option.label}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
+                    <p className="font-medium text-sm text-foreground">
+                      {option.label}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {option.description}
+                    </p>
                   </button>
                 ))}
               </div>
             )}
           />
           {errors.inquiryType && (
-            <p className="text-sm text-destructive">{errors.inquiryType.message}</p>
+            <p className="text-sm text-destructive">
+              {errors.inquiryType.message}
+            </p>
           )}
         </div>
 
@@ -125,7 +182,7 @@ export function InquiryTypeStep() {
             render={({ field }) => (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {sectorOptions.map((option) => {
-                  const Icon = option.icon
+                  const Icon = option.icon;
                   return (
                     <button
                       key={option.value}
@@ -137,12 +194,18 @@ export function InquiryTypeStep() {
                           : "border-border hover:border-accent/50 hover:bg-accent/5"
                       }`}
                     >
-                      <Icon className={`h-6 w-6 mx-auto mb-2 ${
-                        field.value === option.value ? "text-accent" : "text-muted-foreground"
-                      }`} />
-                      <p className="font-medium text-sm text-foreground">{option.label}</p>
+                      <Icon
+                        className={`h-6 w-6 mx-auto mb-2 ${
+                          field.value === option.value
+                            ? "text-accent"
+                            : "text-muted-foreground"
+                        }`}
+                      />
+                      <p className="font-medium text-sm text-foreground">
+                        {option.label}
+                      </p>
                     </button>
-                  )
+                  );
                 })}
               </div>
             )}
@@ -172,8 +235,9 @@ export function InquiryTypeStep() {
               <div className="flex items-start gap-2">
                 <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-amber-600 dark:text-amber-400">
-                  Urgent inquiries are prioritized. For emergencies requiring immediate electrical assistance, 
-                  please call us directly or use our emergency service request form.
+                  Urgent inquiries are prioritized. For emergencies requiring
+                  immediate electrical assistance, please call us directly or
+                  use our emergency service request form.
                 </p>
               </div>
             </div>
@@ -182,22 +246,18 @@ export function InquiryTypeStep() {
 
         {/* Navigation */}
         <div className="flex justify-between pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={prevStep}
-          >
+          <Button type="button" variant="outline" onClick={prevStep}>
             Back
           </Button>
           <Button
             type="submit"
             className="min-w-[140px]"
-            disabled={!isValid}
+            disabled={!isValid || isSubmitting}
           >
             Continue
           </Button>
         </div>
       </form>
     </motion.div>
-  )
+  );
 }

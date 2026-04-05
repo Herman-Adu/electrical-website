@@ -4,51 +4,181 @@ import type { SkillManifest } from "../types/skill";
 import { MCP } from "../constants/mcp-servers";
 import { SKILLS } from "../constants/skill-ids";
 
-// ─── Schemas ─────────────────────────────────────────────────────────────────
+// --- Routing Decision Reference -----------------------------------------------
+//
+//  Two Playwright MCP servers are available via the Caddy gateway:
+//
+//  playwright (inspect mode)
+//    Gateway: /playwright/*
+//    Use when: single-page inspection --- navigate, screenshot, extract-text
+//    Tools:    navigate     -> page title + final URL
+//              screenshot   -> PNG to /tmp, returns path + bytes
+//              extract-text -> full DOM text dump (HTML tags stripped)
+//    Do NOT use for: multi-page flows, click/type/form interaction
+//
+//  executor-playwright (workflow mode)
+//    Gateway: /executor/*
+//    Use when: ordered multi-step sequences --- goto/wait across multiple pages
+//    Tools:    run-workflow -> executes steps[], returns executed[], finalUrl, title
+//    Supported step actions:
+//              goto  -> navigate to URL, dumps DOM for title
+//              wait  -> pause ms (default 500)
+//    Do NOT use for: screenshots, text extraction, click/type
+//
+//  Routing is determined by the `mode` field (or auto-detected from `steps`):
+//    mode="inspect"  (or url present, no steps)  -> MCP.PLAYWRIGHT
+//    mode="workflow" (or steps present)           -> MCP.EXECUTOR_PLAYWRIGHT
+//
+// ------------------------------------------------------------------------------
 
-const InputSchema = z.object({
-  /** URL to navigate to */
-  url: z.string().url(),
-  /** Steps to perform after navigation */
-  steps: z.array(
-    z.discriminatedUnion("action", [
-      z.object({ action: z.literal("click"), selector: z.string() }),
-      z.object({
-        action: z.literal("fill"),
-        selector: z.string(),
-        value: z.string(),
-      }),
-      z.object({
-        action: z.literal("screenshot"),
-        filename: z.string().optional(),
-      }),
-      z.object({ action: z.literal("evaluate"), script: z.string() }),
-      z.object({ action: z.literal("waitForSelector"), selector: z.string() }),
-      z.object({ action: z.literal("navigate"), url: z.string().url() }),
-    ]),
-  ),
-  /** Whether to capture a final screenshot */
-  captureScreenshot: z.boolean().default(false),
-  /** Timeout per step in milliseconds */
-  stepTimeoutMs: z.number().int().positive().default(10_000),
+// --- Workflow step types -------------------------------------------------------
+
+const GotoStep = z.object({
+  action: z.literal("goto"),
+  url: z.string().url("goto step requires a valid URL"),
+  timeoutMs: z.number().int().positive().optional(),
 });
 
+const WaitStep = z.object({
+  action: z.literal("wait"),
+  /** Duration in ms. Defaults to 500. */
+  ms: z.number().int().positive().default(500),
+});
+
+const WorkflowStep = z.discriminatedUnion("action", [GotoStep, WaitStep]);
+
+// --- Input schema -------------------------------------------------------------
+
+/**
+ * BrowserTestInput - unified input for both Playwright MCP servers.
+ *
+ * The orchestrator selects the correct server based on `mode`
+ * (auto-detected from the presence of `steps` when omitted):
+ *
+ * - mode="inspect"  -> MCP.PLAYWRIGHT           (navigate / screenshot / extract-text)
+ * - mode="workflow" -> MCP.EXECUTOR_PLAYWRIGHT   (run-workflow with goto/wait steps)
+ */
+const InputSchema = z
+  .object({
+    /**
+     * Server routing mode.
+     * Omit to auto-detect: `steps` present -> "workflow", otherwise "inspect".
+     */
+    mode: z.enum(["inspect", "workflow"]).optional(),
+
+    /** Target URL (required for inspect mode) */
+    url: z.string().url().optional(),
+    /**
+     * Tool to invoke in inspect mode.
+     * - navigate      -> returns page title + final URL
+     * - screenshot    -> captures PNG, returns path + bytes
+     * - extract-text  -> returns stripped DOM text
+     * Default: "navigate"
+     */
+    tool: z
+      .enum(["navigate", "screenshot", "extract-text"])
+      .default("navigate"),
+    /** Capture full-page screenshot (screenshot only). Default: false */
+    fullPage: z.boolean().default(false),
+    /** File path for screenshot output (screenshot only). Auto-generated if absent. */
+    outputPath: z.string().optional(),
+    /** CSS selector for text extraction (extract-text only). Default: body */
+    selector: z.string().optional(),
+
+    /**
+     * Ordered workflow steps (workflow mode).
+     * Supported: "goto" (navigate to URL) | "wait" (pause ms)
+     */
+    steps: z.array(WorkflowStep).optional(),
+
+    /** Timeout in ms for the overall MCP call. Default: 30 000 */
+    timeoutMs: z.number().int().positive().default(30_000),
+  })
+  .refine(
+    (d) => {
+      const effective =
+        d.mode ?? (d.steps && d.steps.length > 0 ? "workflow" : "inspect");
+      if (effective === "inspect")
+        return typeof d.url === "string" && d.url.length > 0;
+      return Array.isArray(d.steps) && d.steps.length > 0;
+    },
+    {
+      message:
+        'inspect mode requires "url"; workflow mode requires at least one step in "steps"',
+    },
+  );
+
+// --- Output schema ------------------------------------------------------------
+
 const OutputSchema = z.object({
-  success: z.boolean(),
-  stepsCompleted: z.number().int().nonnegative(),
-  stepsFailed: z.number().int().nonnegative(),
-  consoleErrors: z.array(z.string()),
+  ok: z.boolean(),
+  server: z.enum(["playwright", "executor-playwright"]),
+  tool: z.string(),
+  engine: z.string().optional(),
+  title: z.string().optional(),
+  url: z.string().optional(),
+  text: z.string().optional(),
   screenshotPath: z.string().optional(),
-  evaluationResults: z.array(z.unknown()),
-  failureReason: z.string().optional(),
+  screenshotBytes: z.number().optional(),
+  stepsExecuted: z.number().int().nonnegative().optional(),
+  error: z.string().optional(),
 });
 
 export type BrowserTestInput = z.infer<typeof InputSchema>;
 export type BrowserTestOutput = z.infer<typeof OutputSchema>;
 
-// ─── Fitness keywords ─────────────────────────────────────────────────────────
+// --- MCP response shapes ------------------------------------------------------
 
-const BROWSER_KEYWORDS = [
+interface NavigateResult {
+  title: string;
+  url: string;
+}
+interface ScreenshotResult {
+  path: string;
+  bytes: number;
+}
+interface ExtractTextResult {
+  text: string;
+  selector: string;
+}
+interface WorkflowResult {
+  executed: Array<{ action: string; url?: string; durationMs?: number }>;
+  finalUrl: string | null;
+  title: string;
+  engine: string;
+}
+
+// --- Fitness keywords ---------------------------------------------------------
+
+const INSPECT_KEYWORDS = [
+  "screenshot",
+  "navigate",
+  "extract",
+  "what does",
+  "page title",
+  "page content",
+  "text on",
+  "verify page",
+  "check page",
+  "smoke test",
+  "page renders",
+  "after build",
+  "post-deploy",
+] as const;
+
+const WORKFLOW_KEYWORDS = [
+  "workflow",
+  "sequence",
+  "multi-step",
+  "multiple pages",
+  "then navigate",
+  "page flow",
+  "visit each",
+  "route suite",
+  "ordered steps",
+] as const;
+
+const ALL_BROWSER_KEYWORDS = [
   "browser",
   "playwright",
   "click",
@@ -60,25 +190,37 @@ const BROWSER_KEYWORDS = [
   "page",
   "ui test",
   "web test",
-  "selenium",
   "automation",
   "crawl",
-  "scrape",
+  ...INSPECT_KEYWORDS,
+  ...WORKFLOW_KEYWORDS,
 ] as const;
 
-// ─── Skill Manifest ───────────────────────────────────────────────────────────
+// --- Internal routing helper --------------------------------------------------
+
+function resolveMode(input: BrowserTestInput): "inspect" | "workflow" {
+  if (input.mode) return input.mode;
+  return input.steps && input.steps.length > 0 ? "workflow" : "inspect";
+}
+
+// --- Skill Manifest -----------------------------------------------------------
 
 export const browserTestSkill: SkillManifest<
   BrowserTestInput,
   BrowserTestOutput
 > = {
   id: SKILLS.BROWSER_TEST,
-  version: "1.0.0",
+  version: "2.0.0",
   description:
-    "Execute browser automation steps using Playwright. " +
-    "Can navigate, click, fill forms, take screenshots, and evaluate JavaScript. " +
-    "Use this when asked to run browser tests, UI automation, screenshots, or web scraping tasks.",
-  requiredServers: [MCP.PLAYWRIGHT],
+    "Execute browser automation using the Docker MCP Playwright runtime. " +
+    "Two modes: " +
+    '"inspect" (default) - single-page navigate/screenshot/extract-text via playwright server; ' +
+    '"workflow" - multi-step goto/wait sequences via executor-playwright server. ' +
+    "The orchestrator auto-selects the correct server based on task analysis. " +
+    "Use inspect for: post-deploy smoke, page content verification, screenshots. " +
+    "Use workflow for: multi-page flows, ordered navigation sequences.",
+
+  requiredServers: [MCP.PLAYWRIGHT, MCP.EXECUTOR_PLAYWRIGHT],
   costTier: "expensive",
   dryRunCapable: false,
 
@@ -87,91 +229,93 @@ export const browserTestSkill: SkillManifest<
 
   fitness(intent: AgentIntent): number {
     if (intent.category === "browser-test") return 0.98;
-
     const desc = intent.description.toLowerCase();
-    const hits = BROWSER_KEYWORDS.filter((kw) => desc.includes(kw)).length;
+    const hits = ALL_BROWSER_KEYWORDS.filter((kw) => desc.includes(kw)).length;
     if (hits === 0) return 0;
-
-    return Math.min(0.9, 0.3 + hits * 0.15);
+    return Math.min(0.92, 0.3 + hits * 0.15);
   },
 
   async execute(
     input: BrowserTestInput,
     ctx: SkillContext,
   ): Promise<BrowserTestOutput> {
-    // Navigate to starting URL
-    await ctx.callMcp(MCP.PLAYWRIGHT, "navigate", { url: input.url });
+    const mode = resolveMode(input);
 
-    let stepsCompleted = 0;
-    let stepsFailed = 0;
-    const evaluationResults: unknown[] = [];
-    let screenshotPath: string | undefined;
-    let failureReason: string | undefined;
-
-    for (const step of input.steps) {
-      try {
-        if (step.action === "click") {
-          await ctx.callMcp(MCP.PLAYWRIGHT, "click", {
-            selector: step.selector,
-          });
-        } else if (step.action === "fill") {
-          await ctx.callMcp(MCP.PLAYWRIGHT, "fill", {
-            selector: step.selector,
-            value: step.value,
-          });
-        } else if (step.action === "screenshot") {
-          const result = await ctx.callMcp<{ path: string }>(
-            MCP.PLAYWRIGHT,
-            "screenshot",
-            {
-              filename: step.filename,
-            },
-          );
-          screenshotPath = result.path;
-        } else if (step.action === "evaluate") {
-          const result = await ctx.callMcp(MCP.PLAYWRIGHT, "evaluate", {
-            script: step.script,
-          });
-          evaluationResults.push(result);
-        } else if (step.action === "waitForSelector") {
-          await ctx.callMcp(MCP.PLAYWRIGHT, "waitForSelector", {
-            selector: step.selector,
-          });
-        } else if (step.action === "navigate") {
-          await ctx.callMcp(MCP.PLAYWRIGHT, "navigate", { url: step.url });
-        }
-        stepsCompleted++;
-      } catch (err) {
-        stepsFailed++;
-        failureReason = err instanceof Error ? err.message : String(err);
-      }
+    if (mode === "workflow") {
+      const result = await ctx.callMcp<WorkflowResult>(
+        MCP.EXECUTOR_PLAYWRIGHT,
+        "run-workflow",
+        { steps: input.steps },
+      );
+      return {
+        ok: true,
+        server: "executor-playwright",
+        tool: "run-workflow",
+        engine: result.engine,
+        stepsExecuted: result.executed.length,
+        title: result.title || undefined,
+        url: result.finalUrl ?? undefined,
+      };
     }
 
-    if (input.captureScreenshot && screenshotPath === undefined) {
-      const result = await ctx.callMcp<{ path: string }>(
+    const tool = input.tool ?? "navigate";
+
+    if (tool === "navigate") {
+      const result = await ctx.callMcp<NavigateResult>(
+        MCP.PLAYWRIGHT,
+        "navigate",
+        { url: input.url!, timeoutMs: input.timeoutMs },
+      );
+      return {
+        ok: true,
+        server: "playwright",
+        tool: "navigate",
+        engine: "chromium-cli",
+        title: result.title,
+        url: result.url,
+      };
+    }
+
+    if (tool === "screenshot") {
+      const args: Record<string, unknown> = {
+        url: input.url!,
+        fullPage: input.fullPage,
+      };
+      if (input.outputPath) args["outputPath"] = input.outputPath;
+      const result = await ctx.callMcp<ScreenshotResult>(
         MCP.PLAYWRIGHT,
         "screenshot",
-        {},
+        args,
       );
-      screenshotPath = result.path;
+      return {
+        ok: true,
+        server: "playwright",
+        tool: "screenshot",
+        engine: "chromium-cli",
+        screenshotPath: result.path,
+        screenshotBytes: result.bytes,
+        url: input.url,
+      };
     }
 
-    const consoleMessages = await ctx
-      .callMcp<{
-        messages: Array<{ level: string; text: string }>;
-      }>(MCP.PLAYWRIGHT, "console_messages", { level: "error" })
-      .catch(() => ({ messages: [] }));
+    if (tool === "extract-text") {
+      const args: Record<string, unknown> = { url: input.url! };
+      if (input.selector) args["selector"] = input.selector;
+      const result = await ctx.callMcp<ExtractTextResult>(
+        MCP.PLAYWRIGHT,
+        "extract-text",
+        args,
+      );
+      return {
+        ok: true,
+        server: "playwright",
+        tool: "extract-text",
+        engine: "chromium-cli",
+        text: result.text,
+        url: input.url,
+      };
+    }
 
-    return {
-      success: stepsFailed === 0,
-      stepsCompleted,
-      stepsFailed,
-      consoleErrors: consoleMessages.messages
-        .filter((m) => m.level === "error")
-        .map((m) => m.text),
-      screenshotPath,
-      evaluationResults,
-      failureReason,
-    };
+    throw new Error(`Unsupported tool in inspect mode: ${tool}`);
   },
 };

@@ -36,7 +36,13 @@ const SERVICES = [
   { id: "wikipedia", path: "/wikipedia", name: "Wikipedia" },
 ];
 
-function makeRequest(url, method = "GET", headers = {}, body) {
+function makeRequest(
+  url,
+  method = "GET",
+  headers = {},
+  body,
+  timeoutMs = 5000,
+) {
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
     const client = urlObj.protocol === "https:" ? https : http;
@@ -58,7 +64,7 @@ function makeRequest(url, method = "GET", headers = {}, body) {
     });
 
     req.on("error", (err) => reject(err));
-    req.setTimeout(5000, () => {
+    req.setTimeout(timeoutMs, () => {
       req.destroy();
       reject(new Error("Request timeout"));
     });
@@ -168,6 +174,94 @@ async function runMemoryProtocolChecks() {
   return allPassed;
 }
 
+async function runPlaywrightExecutionChecks() {
+  console.log("📍 Playwright Execution Contract:");
+
+  const checks = [
+    {
+      label: "POST /playwright/tools/call list_tools",
+      url: `${GATEWAY_URL}/playwright/tools/call`,
+      body: {
+        name: "list_tools",
+        arguments: {},
+      },
+      validator: (parsed) =>
+        parsed?.ok === true && Array.isArray(parsed?.result?.tools),
+    },
+    {
+      label: "POST /playwright/tools/call navigate",
+      url: `${GATEWAY_URL}/playwright/tools/call`,
+      body: {
+        name: "navigate",
+        arguments: { url: "https://example.com" },
+      },
+      validator: (parsed) =>
+        parsed?.ok === true &&
+        typeof parsed?.result?.title === "string" &&
+        typeof parsed?.result?.url === "string",
+    },
+    {
+      label: "POST /executor/tools/call run-workflow",
+      url: `${GATEWAY_URL}/executor/tools/call`,
+      body: {
+        name: "run-workflow",
+        arguments: {
+          steps: [{ action: "goto", url: "https://example.com" }],
+        },
+      },
+      validator: (parsed) =>
+        parsed?.ok === true &&
+        Array.isArray(parsed?.result?.executed) &&
+        typeof parsed?.result?.finalUrl === "string",
+    },
+  ];
+
+  let allPassed = true;
+
+  for (const check of checks) {
+    try {
+      const payload = JSON.stringify(check.body);
+      // Playwright execution checks invoke real Chromium — allow up to 40 s.
+      const { status, data } = await makeRequest(
+        check.url,
+        "POST",
+        { "Content-Type": "application/json" },
+        payload,
+        40_000,
+      );
+
+      if (status !== 200) {
+        console.log(`  ✗ ${check.label} [HTTP ${status}]`);
+        allPassed = false;
+        continue;
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(data);
+      } catch {
+        console.log(`  ✗ ${check.label} [invalid JSON response]`);
+        allPassed = false;
+        continue;
+      }
+
+      if (!check.validator(parsed)) {
+        console.log(`  ✗ ${check.label} [invalid execution contract]`);
+        allPassed = false;
+        continue;
+      }
+
+      console.log(`  ✓ ${check.label}`);
+    } catch (err) {
+      console.log(`  ✗ ${check.label} [${err.message}]`);
+      allPassed = false;
+    }
+  }
+
+  console.log();
+  return allPassed;
+}
+
 async function runTests() {
   console.log("🔍 MCP Smoke Test\n");
   console.log(`Gateway: ${GATEWAY_URL}\n`);
@@ -228,6 +322,15 @@ async function runTests() {
   results.push({
     service: "Memory Protocol Contract",
     passed: memoryProtocolPassed,
+  });
+
+  const playwrightExecutionPassed = await runPlaywrightExecutionChecks();
+  if (!playwrightExecutionPassed) {
+    allPassed = false;
+  }
+  results.push({
+    service: "Playwright Execution Contract",
+    passed: playwrightExecutionPassed,
   });
 
   // Summary

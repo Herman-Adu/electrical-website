@@ -1,41 +1,46 @@
 /**
  * ORGANISM: ReferenceLinkingStep (Step 3 of 5)
- * 
+ *
  * Allows users to link their inquiry to existing service requests or quotes
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion, AnimatePresence } from "framer-motion"
-import { Link2, FileText, Receipt, Info } from "lucide-react"
-import { FormInput } from "@/components/atoms/form-input"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { Button } from "@/components/ui/button"
-import { useContactStore } from "../../../hooks/use-contact-store"
-import { referenceLinkingSchema, type ReferenceLinkingInput } from "../../../schemas/contact-schemas"
+import { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link2, FileText, Receipt, Info } from "lucide-react";
+import { FormInput } from "@/components/atoms/form-input";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { Button } from "@/components/ui/button";
+import { useContactStore } from "../../../hooks/use-contact-store";
+import {
+  referenceLinkingSchema,
+  type ReferenceLinkingInput,
+} from "../../../schemas/contact-schemas";
 
 const referenceTypeOptions = [
-  { 
-    value: "service-request", 
-    label: "Service Request", 
+  {
+    value: "service-request",
+    label: "Service Request",
     icon: FileText,
     pattern: "SR-XXXXXXXXXXXXX-XXXXXX",
-    description: "Reference from a previous service request"
+    description: "Reference from a previous service request",
   },
-  { 
-    value: "quote-request", 
-    label: "Quote Request", 
+  {
+    value: "quote-request",
+    label: "Quote Request",
     icon: Receipt,
     pattern: "QR-XXXXXXXXXXXXX-XXXXXX",
-    description: "Reference from a quotation"
+    description: "Reference from a quotation",
   },
-]
+];
 
 export function ReferenceLinkingStep() {
-  const { referenceLinking, updateReferenceLinking, nextStep, prevStep } = useContactStore()
+  const { referenceLinking, updateReferenceLinking, nextStep, prevStep } =
+    useContactStore();
 
   const {
     register,
@@ -43,29 +48,34 @@ export function ReferenceLinkingStep() {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    trigger,
+    formState: { errors, isValid, isSubmitting },
   } = useForm<ReferenceLinkingInput>({
     resolver: zodResolver(referenceLinkingSchema),
     defaultValues: referenceLinking,
     mode: "onChange",
-  })
+  });
 
-  const hasExistingReference = watch("hasExistingReference")
-  const selectedReferenceType = watch("referenceType")
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
+  const hasExistingReference = watch("hasExistingReference");
+  const selectedReferenceType = watch("referenceType");
 
   const onSubmit = (data: ReferenceLinkingInput) => {
-    updateReferenceLinking(data)
-    nextStep()
-  }
+    updateReferenceLinking(data);
+    nextStep();
+  };
 
   const handleToggleReference = (checked: boolean) => {
-    setValue("hasExistingReference", checked)
+    setValue("hasExistingReference", checked);
     if (!checked) {
-      setValue("referenceType", "none")
-      setValue("referenceId", "")
-      setValue("referenceDescription", "")
+      setValue("referenceType", "none");
+      setValue("referenceId", "");
+      setValue("referenceDescription", "");
     }
-  }
+  };
 
   return (
     <motion.div
@@ -79,10 +89,13 @@ export function ReferenceLinkingStep() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Link2 className="h-5 w-5 text-accent" />
-            <h2 className="text-xl font-semibold text-foreground">Reference Linking</h2>
+            <h2 className="text-xl font-semibold text-foreground">
+              Reference Linking
+            </h2>
           </div>
           <p className="text-muted-foreground text-sm">
-            Link your inquiry to an existing service request or quote for faster resolution.
+            Link your inquiry to an existing service request or quote for faster
+            resolution.
           </p>
         </div>
 
@@ -121,7 +134,7 @@ export function ReferenceLinkingStep() {
                   render={({ field }) => (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {referenceTypeOptions.map((option) => {
-                        const Icon = option.icon
+                        const Icon = option.icon;
                         return (
                           <button
                             key={option.value}
@@ -134,19 +147,27 @@ export function ReferenceLinkingStep() {
                             }`}
                           >
                             <div className="flex items-start gap-3">
-                              <Icon className={`h-5 w-5 shrink-0 ${
-                                field.value === option.value ? "text-accent" : "text-muted-foreground"
-                              }`} />
+                              <Icon
+                                className={`h-5 w-5 shrink-0 ${
+                                  field.value === option.value
+                                    ? "text-accent"
+                                    : "text-muted-foreground"
+                                }`}
+                              />
                               <div>
-                                <p className="font-medium text-sm text-foreground">{option.label}</p>
-                                <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
+                                <p className="font-medium text-sm text-foreground">
+                                  {option.label}
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  {option.description}
+                                </p>
                                 <code className="text-xs text-accent/70 mt-2 block font-mono">
                                   {option.pattern}
                                 </code>
                               </div>
                             </div>
                           </button>
-                        )
+                        );
                       })}
                     </div>
                   )}
@@ -162,7 +183,11 @@ export function ReferenceLinkingStep() {
                 >
                   <FormInput
                     label="Reference ID"
-                    placeholder={selectedReferenceType === "service-request" ? "SR-1234567890123-ABC123" : "QR-1234567890123-XYZ789"}
+                    placeholder={
+                      selectedReferenceType === "service-request"
+                        ? "SR-1234567890123-ABC123"
+                        : "QR-1234567890123-XYZ789"
+                    }
                     error={errors.referenceId?.message}
                     helperText="Enter the reference ID from your confirmation email"
                     {...register("referenceId")}
@@ -187,10 +212,13 @@ export function ReferenceLinkingStep() {
           <div className="flex items-start gap-3">
             <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <p className="text-sm font-medium text-foreground">Where to find your reference?</p>
+              <p className="text-sm font-medium text-foreground">
+                Where to find your reference?
+              </p>
               <p className="text-xs text-muted-foreground">
-                Your reference number can be found in the confirmation email you received after submitting 
-                a service request or quote. It starts with SR- or QR- followed by numbers and letters.
+                Your reference number can be found in the confirmation email you
+                received after submitting a service request or quote. It starts
+                with SR- or QR- followed by numbers and letters.
               </p>
             </div>
           </div>
@@ -198,21 +226,18 @@ export function ReferenceLinkingStep() {
 
         {/* Navigation */}
         <div className="flex justify-between pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={prevStep}
-          >
+          <Button type="button" variant="outline" onClick={prevStep}>
             Back
           </Button>
           <Button
             type="submit"
             className="min-w-[140px]"
+            disabled={!isValid || isSubmitting}
           >
             Continue
           </Button>
         </div>
       </form>
     </motion.div>
-  )
+  );
 }
