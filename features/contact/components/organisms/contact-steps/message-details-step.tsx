@@ -1,59 +1,69 @@
 /**
  * ORGANISM: MessageDetailsStep (Step 4 of 5)
- * 
+ *
  * Collects the actual message and communication preferences
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { MessageCircle, Mail, Phone, Clock } from "lucide-react"
-import { FormInput } from "@/components/atoms/form-input"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { Button } from "@/components/ui/button"
-import { useContactStore } from "../../../hooks/use-contact-store"
-import { messageDetailsSchema, type MessageDetailsInput } from "../../../schemas/contact-schemas"
+import { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { MessageCircle, Mail, Phone, Clock } from "lucide-react";
+import { FormInput } from "@/components/atoms/form-input";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { Button } from "@/components/ui/button";
+import { useContactStore } from "../../../hooks/use-contact-store";
+import {
+  messageDetailsSchema,
+  type MessageDetailsInput,
+} from "../../../schemas/contact-schemas";
 
 const contactMethodOptions = [
   { value: "email", label: "Email", description: "Respond via email" },
   { value: "phone", label: "Phone", description: "Call me back" },
   { value: "either", label: "Either", description: "No preference" },
-]
+];
 
 const bestTimeOptions = [
   { value: "morning", label: "Morning", description: "9am - 12pm" },
   { value: "afternoon", label: "Afternoon", description: "12pm - 5pm" },
   { value: "evening", label: "Evening", description: "5pm - 8pm" },
   { value: "anytime", label: "Anytime", description: "No preference" },
-]
+];
 
 export function MessageDetailsStep() {
-  const { messageDetails, updateMessageDetails, nextStep, prevStep } = useContactStore()
+  const { messageDetails, updateMessageDetails, nextStep, prevStep } =
+    useContactStore();
 
   const {
     register,
     control,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    trigger,
+    formState: { errors, isValid, isSubmitting },
   } = useForm<MessageDetailsInput>({
     resolver: zodResolver(messageDetailsSchema),
     defaultValues: messageDetails,
     mode: "onChange",
-  })
+  });
 
-  const messageText = watch("message") || ""
-  const characterCount = messageText.length
-  const maxCharacters = 2000
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
+  const messageText = watch("message") || "";
+  const characterCount = messageText.length;
+  const maxCharacters = 2000;
 
   const onSubmit = (data: MessageDetailsInput) => {
-    updateMessageDetails(data)
-    nextStep()
-  }
+    updateMessageDetails(data);
+    nextStep();
+  };
 
   return (
     <motion.div
@@ -67,10 +77,13 @@ export function MessageDetailsStep() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <MessageCircle className="h-5 w-5 text-accent" />
-            <h2 className="text-xl font-semibold text-foreground">Your Message</h2>
+            <h2 className="text-xl font-semibold text-foreground">
+              Your Message
+            </h2>
           </div>
           <p className="text-muted-foreground text-sm">
-            Tell us how we can help you. The more detail you provide, the better we can assist.
+            Tell us how we can help you. The more detail you provide, the better
+            we can assist.
           </p>
         </div>
 
@@ -94,9 +107,13 @@ export function MessageDetailsStep() {
             {...register("message")}
           />
           <div className="flex justify-end">
-            <span className={`text-xs ${
-              characterCount > maxCharacters ? "text-destructive" : "text-muted-foreground"
-            }`}>
+            <span
+              className={`text-xs ${
+                characterCount > maxCharacters
+                  ? "text-destructive"
+                  : "text-muted-foreground"
+              }`}
+            >
               {characterCount} / {maxCharacters} characters
             </span>
           </div>
@@ -156,22 +173,18 @@ export function MessageDetailsStep() {
 
         {/* Navigation */}
         <div className="flex justify-between pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={prevStep}
-          >
+          <Button type="button" variant="outline" onClick={prevStep}>
             Back
           </Button>
           <Button
             type="submit"
             className="min-w-[140px]"
-            disabled={!isValid}
+            disabled={!isValid || isSubmitting}
           >
             Review
           </Button>
         </div>
       </form>
     </motion.div>
-  )
+  );
 }

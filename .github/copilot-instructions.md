@@ -47,6 +47,9 @@ Use `/health-check` — verify MCP server connectivity and circuit-breaker state
 - **Dry-run:** Always implement for destructive operations (`dryRunCapable: true`)
 - **Audit:** Every agent action is logged via `AuditLogger` with structured `AuditEvent`
 - **Single responsibility:** One skill = one concern. No multi-concern skills.
+- **Future multistep forms:** Follow `docs/standards/NEXTJS16_SERVER_ACTIONS_FORM_VALIDATION_APP_ROUTER.md` for Next.js 16 App Router, Server Actions, validation parity, and pending/error UX standards.
+- **Form mutation path:** Prefer native final `<form action={serverAction}>` plus `useActionState` / `useFormStatus` when implementing new multistep form submissions.
+- **Anti-bot state:** Never persist CAPTCHA or Turnstile tokens in local storage or other durable client state.
 
 ## Secret Handling Protocol (Non-Negotiable)
 

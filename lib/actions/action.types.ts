@@ -11,46 +11,53 @@
 
 export type ActionResult<T> =
   | { success: true; data: T }
-  | { success: false; error: string; fieldErrors?: Record<string, string[]> }
+  | { success: false; error: string; fieldErrors?: Record<string, string[]> };
 
 // -- Contact request --------------------------------------------------------
 
 export interface ContactSubmissionResult {
-  success: boolean
-  referenceId?: string
-  error?: string
-  fieldErrors?: Record<string, string[]>
+  success: boolean;
+  referenceId?: string;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
+}
+
+export interface ContactFormActionState {
+  success: boolean;
+  referenceId?: string;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
 }
 
 // -- Email admin ------------------------------------------------------------
 
 export interface EnvVarStatus {
-  key: string
-  label: string
-  description: string
-  isSet: boolean
-  preview: string
-  required: boolean
-  secret: boolean
-  fallback?: string
+  key: string;
+  label: string;
+  description: string;
+  isSet: boolean;
+  preview: string;
+  required: boolean;
+  secret: boolean;
+  fallback?: string;
 }
 
 export interface ResendHealth {
-  connected: boolean
-  error?: string
-  domainVerified?: boolean
+  connected: boolean;
+  error?: string;
+  domainVerified?: boolean;
 }
 
 export interface EmailHealthReport {
-  envVars: EnvVarStatus[]
-  resend: ResendHealth
-  timestamp: string
+  envVars: EnvVarStatus[];
+  resend: ResendHealth;
+  timestamp: string;
 }
 
 export interface TestSendResult {
-  success: boolean
-  messageId?: string
-  error?: string
+  success: boolean;
+  messageId?: string;
+  error?: string;
 }
 
 // -- Render email -----------------------------------------------------------
@@ -61,15 +68,15 @@ export type EmailTemplate =
   | "contact-customer"
   | "contact-business"
   | "quotation-customer"
-  | "quotation-business"
+  | "quotation-business";
 
 // -- Security audit ---------------------------------------------------------
 
-export type SecurityStatus = "pass" | "warn" | "fail"
-export type CheckType = "runtime" | "static"
+export type SecurityStatus = "pass" | "warn" | "fail";
+export type CheckType = "runtime" | "static";
 
 export interface SecurityCheck {
-  id: string
+  id: string;
   category:
     | "rate-limiting"
     | "csrf"
@@ -78,22 +85,22 @@ export interface SecurityCheck {
     | "email"
     | "honeypot"
     | "error-handling"
-    | "env-security"
-  label: string
-  description: string
-  status: SecurityStatus
-  detail: string
-  recommendation?: string
-  checkType: CheckType
+    | "env-security";
+  label: string;
+  description: string;
+  status: SecurityStatus;
+  detail: string;
+  recommendation?: string;
+  checkType: CheckType;
 }
 
 export interface SecurityAuditResult {
-  timestamp: string
-  overallStatus: SecurityStatus
-  passCount: number
-  warnCount: number
-  failCount: number
-  totalChecks: number
-  checks: SecurityCheck[]
-  score: number
+  timestamp: string;
+  overallStatus: SecurityStatus;
+  passCount: number;
+  warnCount: number;
+  failCount: number;
+  totalChecks: number;
+  checks: SecurityCheck[];
+  score: number;
 }

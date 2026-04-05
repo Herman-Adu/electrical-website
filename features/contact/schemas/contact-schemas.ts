@@ -133,6 +133,7 @@ export const completeContactFormSchema = z.object({
   inquiryType: inquiryTypeSchema,
   referenceLinking: referenceLinkingSchema,
   messageDetails: messageDetailsSchema,
+  turnstileToken: z.string().min(1, "Verification token is required"),
 });
 
 export type CompleteContactFormInput = z.infer<
@@ -200,6 +201,7 @@ export const serverContactFormSchema = z.object({
     bestTimeToContact: z.enum(["morning", "afternoon", "evening", "anytime"]),
     newsletterOptIn: z.boolean().optional(),
   }),
+  turnstileToken: z.string().min(1),
 });
 
 export type ServerContactFormInput = z.infer<typeof serverContactFormSchema>;

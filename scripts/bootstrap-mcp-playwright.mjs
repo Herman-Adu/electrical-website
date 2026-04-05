@@ -62,12 +62,35 @@ function hasPlaywrightCli(containerName) {
   return result.stdout.includes("yes");
 }
 
+function hasChromiumBinary(containerName) {
+  const result = run(
+    "docker",
+    [
+      "exec",
+      containerName,
+      "sh",
+      "-lc",
+      "if command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1 || [ -x /usr/bin/chromium ] || [ -x /usr/bin/chromium-browser ] || ls -1d /ms-playwright/chromium-* >/dev/null 2>&1 || ls -1d /ms-playwright/chromium_headless_shell-* >/dev/null 2>&1; then echo yes; else echo no; fi",
+    ],
+    { capture: true },
+  );
+
+  return result.stdout.includes("yes");
+}
+
 function bootstrapContainer(containerName) {
   if (!hasPlaywrightCli(containerName)) {
+    if (hasChromiumBinary(containerName)) {
+      console.log(
+        `[mcp:playwright:bootstrap] ${containerName} has Chromium available (no CLI install needed).`,
+      );
+      return "ready";
+    }
+
     console.log(
-      `[mcp:playwright:bootstrap] Skipping ${containerName} (no Playwright CLI in container).`,
+      `[mcp:playwright:bootstrap] ${containerName} is not browser-capable (missing Playwright CLI and Chromium).`,
     );
-    return false;
+    return "mismatch";
   }
 
   const script = [
@@ -85,7 +108,7 @@ function bootstrapContainer(containerName) {
   ].join("; ");
 
   run("docker", ["exec", "-u", "0", containerName, "sh", "-lc", script]);
-  return true;
+  return "bootstrapped";
 }
 
 function main() {
@@ -106,25 +129,52 @@ function main() {
     );
 
     let installedCount = 0;
+    let readyCount = 0;
+    const mismatchedContainers = [];
 
     for (const { name } of containers) {
       console.log(`[mcp:playwright:bootstrap] Bootstrapping ${name} ...`);
-      if (bootstrapContainer(name)) {
+      const status = bootstrapContainer(name);
+
+      if (status === "bootstrapped") {
         installedCount += 1;
         console.log(`[mcp:playwright:bootstrap] ${name} ready.`);
+        continue;
+      }
+
+      if (status === "ready") {
+        readyCount += 1;
+        continue;
+      }
+
+      if (status === "mismatch") {
+        mismatchedContainers.push(name);
       }
     }
 
-    if (installedCount === 0) {
+    if (mismatchedContainers.length > 0) {
+      throw new Error(
+        `Non-browser-capable runtime detected: ${mismatchedContainers.join(", ")}. Ensure Playwright MCP services use a browser-capable image.`,
+      );
+    }
+
+    if (installedCount > 0) {
+      console.log(
+        `[mcp:playwright:bootstrap] Browser binaries installed successfully in ${installedCount} container(s).`,
+      );
+    }
+
+    if (readyCount > 0) {
+      console.log(
+        `[mcp:playwright:bootstrap] ${readyCount} container(s) already had a browser runtime available.`,
+      );
+    }
+
+    if (installedCount === 0 && readyCount === 0) {
       console.log(
         "[mcp:playwright:bootstrap] No MCP Playwright runtime containers required bootstrapping.",
       );
-      return;
     }
-
-    console.log(
-      `[mcp:playwright:bootstrap] Browser binaries installed successfully in ${installedCount} container(s).`,
-    );
   } catch (error) {
     console.error(`[mcp:playwright:bootstrap] Failed: ${error.message}`);
     process.exit(1);

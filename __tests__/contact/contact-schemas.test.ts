@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   contactInfoSchema,
+  completeContactFormSchema,
   isValidUkPhoneNumber,
+  serverContactFormSchema,
 } from "../../features/contact/schemas/contact-schemas";
 
 describe("contact phone validation", () => {
@@ -51,6 +53,90 @@ describe("contact phone validation", () => {
       email: "herman@adudev.co.uk",
       phone: "07012345678",
       company: "Adu Dev",
+    });
+
+    expect(result.success).toBe(false);
+  });
+
+  it("requires turnstile token in complete schema", () => {
+    const result = completeContactFormSchema.safeParse({
+      contactInfo: {
+        fullName: "Herman Adu",
+        email: "herman@adudev.co.uk",
+        phone: "07850153097",
+      },
+      inquiryType: {
+        inquiryType: "general-inquiry",
+        sector: "not-applicable",
+        priority: "normal",
+      },
+      referenceLinking: {
+        hasExistingReference: false,
+        referenceType: "none",
+      },
+      messageDetails: {
+        subject: "Project follow-up",
+        message: "I would like to discuss my project in more detail.",
+        preferredContactMethod: "either",
+        bestTimeToContact: "anytime",
+      },
+      turnstileToken: "",
+    });
+
+    expect(result.success).toBe(false);
+  });
+
+  it("accepts complete schema when turnstile token exists", () => {
+    const result = completeContactFormSchema.safeParse({
+      contactInfo: {
+        fullName: "Herman Adu",
+        email: "herman@adudev.co.uk",
+        phone: "07850153097",
+      },
+      inquiryType: {
+        inquiryType: "general-inquiry",
+        sector: "not-applicable",
+        priority: "normal",
+      },
+      referenceLinking: {
+        hasExistingReference: false,
+        referenceType: "none",
+      },
+      messageDetails: {
+        subject: "Project follow-up",
+        message: "I would like to discuss my project in more detail.",
+        preferredContactMethod: "either",
+        bestTimeToContact: "anytime",
+      },
+      turnstileToken: "token-ok",
+    });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("requires turnstile token in server schema", () => {
+    const result = serverContactFormSchema.safeParse({
+      contactInfo: {
+        fullName: "Herman Adu",
+        email: "herman@adudev.co.uk",
+        phone: "07850153097",
+      },
+      inquiryType: {
+        inquiryType: "general-inquiry",
+        sector: "not-applicable",
+        priority: "normal",
+      },
+      referenceLinking: {
+        hasExistingReference: false,
+        referenceType: "none",
+      },
+      messageDetails: {
+        subject: "Project follow-up",
+        message: "I would like to discuss my project in more detail.",
+        preferredContactMethod: "either",
+        bestTimeToContact: "anytime",
+      },
+      turnstileToken: "",
     });
 
     expect(result.success).toBe(false);

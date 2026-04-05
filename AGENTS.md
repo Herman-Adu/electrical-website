@@ -27,5 +27,8 @@ For multi-step ambiguity, use sequential reasoning before implementation.
 - Use `"use client"` only for browser interactivity.
 - Prefer Server Actions for in-app mutations.
 - Validate external input with Zod.
+- For any new multi-step form, follow [docs/standards/NEXTJS16_SERVER_ACTIONS_FORM_VALIDATION_APP_ROUTER.md](docs/standards/NEXTJS16_SERVER_ACTIONS_FORM_VALIDATION_APP_ROUTER.md) as the required implementation standard.
+- For any new multi-step form, use a server page shell with a client form island, authoritative server-side `safeParse`, and native final `<form action={serverAction}>` submission where practical.
+- Never persist CAPTCHA or anti-bot tokens for multi-step forms; keep them ephemeral and reset on expiry, retry, and uncertain verification outcomes.
 - Run typecheck and production build before commit.
 - Follow repository skill conventions in `.github/copilot-instructions.md`.

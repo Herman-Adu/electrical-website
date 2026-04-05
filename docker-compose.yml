@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
 
   playwright:
-    image: node:22-alpine
+    image: mcr.microsoft.com/playwright:v1.58.2-noble
     working_dir: /srv
     command: ["node", "/srv/server.js"]
     volumes:
@@ -82,7 +82,13 @@ services:
     expose:
       - "8000"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('node:http').get('http://127.0.0.1:8000/health', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -141,7 +147,7 @@ services:
     restart: unless-stopped
 
   executor-playwright:
-    image: node:22-alpine
+    image: mcr.microsoft.com/playwright:v1.58.2-noble
     working_dir: /srv
     command: ["node", "/srv/server.js"]
     volumes:
@@ -149,7 +155,13 @@ services:
     expose:
       - "8000"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('node:http').get('http://127.0.0.1:8000/health', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
       interval: 10s
       timeout: 3s
       retries: 5

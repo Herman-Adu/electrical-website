@@ -26,13 +26,13 @@ export const COMPANY = {
     local: "020 7123 4567",
   },
   email: {
-    support: "support@electricalservices.com",
-    info: "info@electricalservices.com",
-    noreply: "noreply@electricalservices.com",
+    support: "support@adudev.co.uk",
+    info: "info@adudev.co.uk",
+    noreply: "noreply@adudev.co.uk",
   },
-  website: "www.electricalservices.com",
+  website: "www.adudev.co.uk",
   copyrightYear: new Date().getFullYear().toString(),
-} as const
+} as const;
 
 // ---------------------------------------------------------------------------
 // Brand Colors
@@ -72,7 +72,7 @@ export const BRAND_COLORS = {
   infoBlueBg: "#eff6ff",
   infoBlueText: "#1e40af",
   infoBlueDark: "#1e3a8a",
-} as const
+} as const;
 
 // ---------------------------------------------------------------------------
 // Urgency Color Schemes
@@ -111,9 +111,9 @@ export const URGENCY_COLORS = {
     bannerTitle: "#dc2626",
     bannerText: "#991b1b",
   },
-} as const
+} as const;
 
-export type UrgencyLevel = keyof typeof URGENCY_COLORS
+export type UrgencyLevel = keyof typeof URGENCY_COLORS;
 
 // ---------------------------------------------------------------------------
 // SLA Response Times
@@ -127,7 +127,8 @@ export const SLA = {
     },
     urgent: {
       time: "2 hours",
-      description: "Our team will prioritise your request and call within 2 hours",
+      description:
+        "Our team will prioritise your request and call within 2 hours",
       businessAction: "Contact customer within 2 hours (URGENT)",
     },
     emergency: {
@@ -143,17 +144,20 @@ export const SLA = {
   },
   quotation: {
     response: "2-5 business days",
-    description: "You will receive a detailed quotation within 2-5 business days",
-    businessAction: "This quotation request requires follow-up within 2 business days",
+    description:
+      "You will receive a detailed quotation within 2-5 business days",
+    businessAction:
+      "This quotation request requires follow-up within 2 business days",
   },
-} as const
+} as const;
 
 // ---------------------------------------------------------------------------
 // Template-specific Configuration
 // ---------------------------------------------------------------------------
 export const TEMPLATE_CONFIG = {
   serviceCustomer: {
-    subject: (requestId: string) => `Service Request Confirmation - ${requestId}`,
+    subject: (requestId: string) =>
+      `Service Request Confirmation - ${requestId}`,
     fromName: COMPANY.name,
     replyTo: COMPANY.email.support,
     signOff: `The ${COMPANY.name} Team`,
@@ -169,7 +173,8 @@ export const TEMPLATE_CONFIG = {
     replyTo: COMPANY.email.noreply,
   },
   contactCustomer: {
-    subject: (referenceId: string) => `Contact Inquiry Received - ${referenceId}`,
+    subject: (referenceId: string) =>
+      `Contact Inquiry Received - ${referenceId}`,
     fromName: COMPANY.name,
     replyTo: COMPANY.email.support,
     signOff: `The ${COMPANY.name} Team`,
@@ -196,7 +201,7 @@ export const TEMPLATE_CONFIG = {
     fromName: `${COMPANY.name} System`,
     replyTo: COMPANY.email.noreply,
   },
-} as const
+} as const;
 
 // ---------------------------------------------------------------------------
 // Shared HTML Helpers
@@ -204,40 +209,42 @@ export const TEMPLATE_CONFIG = {
 
 /** Returns the header gradient CSS based on urgency */
 export function getHeaderGradient(urgency: UrgencyLevel): string {
-  const colors = URGENCY_COLORS[urgency].headerGradient
-  return `linear-gradient(135deg, ${colors.start} 0%, ${colors.end} 100%)`
+  const colors = URGENCY_COLORS[urgency].headerGradient;
+  return `linear-gradient(135deg, ${colors.start} 0%, ${colors.end} 100%)`;
 }
 
 /** Returns the standard header gradient for non-urgency templates */
 export function getDefaultHeaderGradient(): string {
-  return `linear-gradient(135deg, ${BRAND_COLORS.headerGradient.start} 0%, ${BRAND_COLORS.headerGradient.end} 100%)`
+  return `linear-gradient(135deg, ${BRAND_COLORS.headerGradient.start} 0%, ${BRAND_COLORS.headerGradient.end} 100%)`;
 }
 
 /** Returns urgency badge inline styles */
 export function getUrgencyBadgeStyle(urgency: UrgencyLevel): string {
-  const c = URGENCY_COLORS[urgency]
-  return `display: inline-block; background-color: ${c.badgeBg}; color: ${c.badgeText}; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;`
+  const c = URGENCY_COLORS[urgency];
+  return `display: inline-block; background-color: ${c.badgeBg}; color: ${c.badgeText}; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;`;
 }
 
 /** Returns card background and border for urgency-aware sections */
 export function getUrgencyCardStyle(urgency: UrgencyLevel): string {
-  const c = URGENCY_COLORS[urgency]
-  return `background-color: ${c.cardBg}; border: ${urgency === "routine" ? "1px" : "2px"} solid ${c.cardBorder}`
+  const c = URGENCY_COLORS[urgency];
+  return `background-color: ${c.cardBg}; border: ${urgency === "routine" ? "1px" : "2px"} solid ${c.cardBorder}`;
 }
 
 /** Standard footer HTML */
-export function getFooterHtml(variant: "customer" | "business" = "customer"): string {
+export function getFooterHtml(
+  variant: "customer" | "business" = "customer",
+): string {
   if (variant === "business") {
     return `
       <td style="padding: 32px 40px; background-color: ${BRAND_COLORS.bgCardMuted}; border-radius: 0 0 12px 12px; border-top: 1px solid ${BRAND_COLORS.borderDefault}; text-align: center;">
         <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLight}; font-size: 12px;">${COMPANY.name} Business System</p>
-      </td>`
+      </td>`;
   }
   return `
       <td style="padding: 32px 40px; background-color: ${BRAND_COLORS.bgCardMuted}; border-radius: 0 0 12px 12px; border-top: 1px solid ${BRAND_COLORS.borderDefault}; text-align: center;">
         <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLight}; font-size: 12px;">&copy; ${COMPANY.copyrightYear} ${COMPANY.legalName}. All rights reserved.</p>
         <p style="margin: 0; color: ${BRAND_COLORS.textLight}; font-size: 12px;">${COMPANY.tagline} Electrical Solutions</p>
-      </td>`
+      </td>`;
 }
 
 /** Standard contact info block */
@@ -247,5 +254,5 @@ export function getContactInfoHtml(): string {
           Phone: ${COMPANY.phone.primary}<br>
           Email: ${COMPANY.email.support}<br>
           Website: ${COMPANY.website}
-        </p>`
+        </p>`;
 }

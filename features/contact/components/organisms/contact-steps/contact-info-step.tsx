@@ -2,17 +2,16 @@
  * ORGANISM: ContactInfoStep (Step 1 of 5)
  *
  * Collects basic contact information from the user.
- * Requires Cloudflare Turnstile CAPTCHA verification before proceeding.
  */
 
 "use client";
 
-import { useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { User, Mail } from "lucide-react";
-import { Turnstile } from "react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { FormInput } from "@/components/atoms/form-input";
 import { Button } from "@/components/ui/button";
 import { useContactStore } from "../../../hooks/use-contact-store";
@@ -22,30 +21,46 @@ import {
 } from "../../../schemas/contact-schemas";
 
 export function ContactInfoStep() {
-  const { contactInfo, updateContactInfo, nextStep } = useContactStore();
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
+
+  const {
+    contactInfo,
+    updateContactInfo,
+    nextStep,
+    turnstileToken,
+    turnstileError,
+    setTurnstileToken,
+    setTurnstileError,
+  } = useContactStore();
 
   const turnstileSiteKey =
     process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
-
-  const [captchaToken, setCaptchaToken] = useState("");
-
-  const handleCaptchaSuccess = useCallback((token: string) => {
-    setCaptchaToken(token);
-  }, []);
+  const isTurnstileVerified = Boolean(turnstileToken);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    trigger,
+    formState: { errors, isSubmitting, isValid },
   } = useForm<ContactInfoInput>({
     resolver: zodResolver(contactInfoSchema),
     defaultValues: contactInfo,
     mode: "onChange",
   });
 
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
   const onSubmit = (data: ContactInfoInput) => {
     updateContactInfo(data);
     nextStep();
+  };
+
+  const retryVerification = () => {
+    setTurnstileToken(null);
+    setTurnstileError(null);
+    turnstileRef.current?.reset();
   };
 
   return (
@@ -68,6 +83,46 @@ export function ContactInfoStep() {
             Please provide your contact information so we can respond to your
             inquiry.
           </p>
+        </div>
+
+        <div className="space-y-2" data-testid="turnstile-widget">
+          {turnstileSiteKey ? (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={turnstileSiteKey}
+              options={{ theme: "auto", size: "normal" }}
+              onSuccess={setTurnstileToken}
+              onExpire={() => {
+                setTurnstileToken(null);
+                setTurnstileError("Verification expired. Please try again.");
+              }}
+              onError={() => {
+                setTurnstileToken(null);
+                setTurnstileError("Verification failed. Please retry.");
+              }}
+            />
+          ) : (
+            <div className="rounded-md border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
+              Turnstile key missing. Verification cannot be completed.
+            </div>
+          )}
+
+          {turnstileError && (
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-muted/20 p-3">
+              <p className="text-xs text-muted-foreground" role="status">
+                {turnstileError}
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={retryVerification}
+                className="h-7 px-2 text-xs"
+              >
+                Retry
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Form Fields */}
@@ -125,29 +180,12 @@ export function ContactInfoStep() {
           </div>
         </div>
 
-        {/* Turnstile CAPTCHA */}
-        <div className="flex justify-center">
-          {turnstileSiteKey ? (
-            <Turnstile
-              sitekey={turnstileSiteKey}
-              onSuccess={handleCaptchaSuccess}
-              theme="auto"
-              size="normal"
-            />
-          ) : (
-            <p className="text-center text-xs text-muted-foreground">
-              Verification widget loads automatically in configured
-              environments.
-            </p>
-          )}
-        </div>
-
         {/* Navigation */}
         <div className="flex justify-end pt-4">
           <Button
             type="submit"
-            className="min-w-[140px]"
-            disabled={!isValid || (turnstileSiteKey ? !captchaToken : false)}
+            className="min-w-35"
+            disabled={!isValid || isSubmitting || !isTurnstileVerified}
           >
             Continue
           </Button>
