@@ -136,6 +136,12 @@ export const rateLimiters = {
     windowMs: 5 * 60 * 1000, // 5 minutes
   }),
 
+  /** Service requests: 3 requests per 5 minutes */
+  serviceRequest: createRateLimiter({
+    maxRequests: 3,
+    windowMs: 5 * 60 * 1000, // 5 minutes
+  }),
+
   /** Email verification: 3 requests per 10 minutes */
   emailVerification: createRateLimiter({
     maxRequests: 3,
