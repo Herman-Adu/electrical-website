@@ -4,7 +4,7 @@ import process from "node:process";
 
 const gatewayUrl = process.env.MCP_GATEWAY_URL || "http://127.0.0.1:3100";
 
-// SYNC_VERSION: 2026-04-05-v3 — Playwright MCP runtime pinned to browser-capable image + deterministic preflight
+// SYNC_VERSION: 2026-04-05-v4 — added contact migration complete snapshot + next-migration blueprint nodes
 // To update: edit observations here and re-run pnpm migration:contact:hydrate:strict
 const REQUIRED_NODES = [
   {
@@ -96,6 +96,51 @@ const REQUIRED_NODES = [
       "MCP memory write-back uses direct HTTP to gateway, not VS Code MCP tool layer (encoding issues with tool layer).",
     ],
   },
+  {
+    name: "agent:v1:heuristic_snapshots:2026-04-05-contact-form-migration-complete",
+    entityType: "heuristic_snapshot",
+    observations: [
+      "DATE: 2026-04-05. Status: COMPLETE. Merged to main as PR #39 commit 4e1f517. Branch fix/contact-validation-on-load deleted.",
+      "FILE MAP: features/contact/ — schemas/, api/, hooks/, components/organisms/contact-steps/ (5 steps), components/organisms/contact-form.tsx.",
+      "ZUSTAND STORE: use-contact-store.ts — partialize excludes isSubmitted, isSubmitting, turnstileToken. setSubmitted resets all slices + currentStep:1.",
+      "STEP 1 (contact-info-step.tsx): mode onTouched, no trigger() useEffect, isTurnstileVerified = Boolean(turnstileToken), mapTurnstileClientError() for error codes.",
+      "STEP 5 (contact-review-step.tsx): useActionState (React 19, NOT useFormState), native form action={serverAction}, SubmitButton uses useFormStatus.",
+      "SERVER ACTION (contact-request.ts): use server, AbortController 8000ms on Siteverify, idempotency_key crypto.randomUUID(), reference CR-{timestamp36}-{uuid6}.",
+      "SCHEMAS: contact-schemas.ts — one Zod schema per step + completeContactFormSchema + serverContactFormSchema. UK phone via isValidUkPhoneNumber().",
+      "BUG FIXED THIS MIGRATION: react-hook-form isValid never true on mount with mode onChange + Zustand defaultValues — fix: add trigger() to useForm destructure and call in useEffect.",
+      "BUG FIXED: trigger() useEffect removed from contact-info-step.tsx in final pass — mode onTouched makes it unnecessary and it caused hydration mismatch warnings.",
+      "ENV VARS REQUIRED: NEXT_PUBLIC_TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, CONTACT_EMAIL_TO, CONTACT_EMAIL_FROM, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS.",
+      "TEST GATE: pnpm test __tests__/contact — 3 files, 16 tests must pass before any PR. pnpm build must pass.",
+      "DOCKER WORKFLOW: pnpm docker:dev:up starts web-dev-1 on port 3000. pnpm docker:mcp:playwright:bootstrap ensures browser binaries. E2E via pnpm test:e2e.",
+      "BRANCH PROTECTION: all work on feature branches. PR to main only. Copilot review requested via GitHub Actions skill before merge.",
+      "RATE LIMITING: lib/rate-limit.ts — in-memory LRU, keyed on IP. Applied before email dispatch in server action.",
+      "SANITISATION: lib/sanitise.ts — DOMPurify-style strip on all string inputs before email template render.",
+      "EMAILS: lib/emails/ — ContactRequestEmail and ContactConfirmationEmail React Email components. Sent via Resend API in parallel (Promise.all).",
+      "NEXT SESSION POINTER: next task is small contact section refinements, then 7-step quote form migration using the blueprint node.",
+    ],
+  },
+  {
+    name: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    entityType: "reasoning",
+    observations: [
+      "PURPOSE: Blueprint for migrating any multi-step form (e.g. quote request) following the contact form pattern. Version: 2026-04-05.",
+      "FOLDER STRUCTURE: features/<form-id>/ with schemas/, api/, hooks/, components/organisms/<form-id>-steps/, components/organisms/<form-id>-form.tsx.",
+      "STEP PATTERN: each step is a client component island. Props: onNext(data), onBack(), defaultValues from Zustand, isLastDataStep flag.",
+      "ZUSTAND PATTERN: one store per form. persist() with partialize to exclude volatile tokens. setSubmitted() resets all slices. resetForm() for new inquiry.",
+      "ZOD PATTERN: one schema per step exported from schemas file. completeSchema = merge of all step schemas + turnstileToken. serverSchema adds honeypot.",
+      "REACT HOOK FORM PATTERN: useForm with zodResolver and defaultValues from Zustand. mode: onTouched. trigger() only if needed for non-touched default population.",
+      "SERVER ACTION PATTERN: use server file. Zod safeParse (authoritative). Honeypot check. Rate limit. Turnstile verify. Sanitise. Send emails. Return typed ActionResult.",
+      "TURNSTILE INTEGRATION STEPS: (1) add widget to Step 1 client island, (2) store token in ephemeral Zustand slice, (3) gate Continue on isTurnstileVerified, (4) include in completeSchema, (5) server verify before rate limit.",
+      "EMAIL PATTERN: two React Email templates (request to admin, confirmation to user). Send in Promise.all via Resend. Reference ID in both subjects.",
+      "SECURITY CHECKLIST: honeypot field, rate limit (IP-keyed), Turnstile server verify, input sanitisation, idempotency_key on Siteverify, AbortController timeout.",
+      "DOCKER E2E WORKFLOW: pnpm docker:dev:up → pnpm docker:mcp:playwright:bootstrap → pnpm test:e2e. If browser mismatch: force-recreate playwright services.",
+      "PRE-COMMIT GATE: pnpm typecheck && pnpm build && pnpm test __tests__/<form-id> must all pass before push.",
+      "PR WORKFLOW: feature branch → PR to main → Copilot review (github-actions skill) → merge → branch delete.",
+      "NEXT FORM TARGET: 7-step quote request form. Steps: QuoteInfoStep, ServiceTypeStep, PropertyStep, ProjectDetailsStep, TimescaleStep, BudgetStep, ReviewStep. Reference: QR-{timestamp36}-{uuid6}.",
+      "MEMORY WRITE-BACK: at session close run pnpm migration:contact:hydrate:strict, then write new heuristic_snapshot node to memory via direct HTTP POST to MCP gateway.",
+      "ANTI-PATTERN WARNING: never use mode onChange with Zustand defaultValues without trigger() on mount — isValid will never be true and Continue button stays disabled.",
+    ],
+  },
 ];
 
 const REQUIRED_RELATIONS = [
@@ -123,6 +168,36 @@ const REQUIRED_RELATIONS = [
     from: "agent:v1:project:electrical-website",
     to: "agent:v1:reasoning:2026-04-04-turnstile-react19-next16-best-practices",
     relationType: "stores",
+  },
+  {
+    from: "agent:v1:heuristic_snapshots:2026-04-05-contact-form-migration-complete",
+    to: "agent:v1:project:electrical-website",
+    relationType: "records_state_for",
+  },
+  {
+    from: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    to: "agent:v1:project:electrical-website",
+    relationType: "informs",
+  },
+  {
+    from: "agent:v1:heuristic_snapshots:2026-04-05-contact-form-migration-complete",
+    to: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    relationType: "hands_off_to",
+  },
+  {
+    from: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    to: "agent:v1:heuristic_snapshots:2026-04-05-contact-form-migration-complete",
+    relationType: "references",
+  },
+  {
+    from: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    to: "agent:v1:heuristic_snapshots:2026-04-04-contact-form-migration-learnings",
+    relationType: "references",
+  },
+  {
+    from: "agent:v1:reasoning:2026-04-05-multistep-form-migration-blueprint",
+    to: "agent:v1:reasoning:2026-04-04-multistep-form-architecture-standard",
+    relationType: "references",
   },
 ];
 
