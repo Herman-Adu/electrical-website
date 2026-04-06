@@ -2,7 +2,14 @@ import "server-only";
 
 import { getCompanySettings } from "@/lib/strapi/global/company-settings/company-settings";
 import { getEmailSettings } from "@/lib/strapi/global/email-settings/email-settings";
-import { COMPANY, BRAND_COLORS, SLA, URGENCY_COLORS, type UrgencyLevel } from "./email-config";
+import { SITE_URL } from "@/lib/site-config";
+import {
+  COMPANY,
+  BRAND_COLORS,
+  SLA,
+  URGENCY_COLORS,
+  type UrgencyLevel,
+} from "./email-config";
 
 /**
  * Email Config Builder
@@ -72,6 +79,16 @@ export interface ResolvedEmailConfig {
   urgency: Record<UrgencyLevel, UrgencyColorSet>;
 }
 
+const FALLBACK_LOGO_URL = "/images/brand-assets/nexgen-logo-full.png";
+
+function resolveAbsoluteUrl(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  return new URL(path, SITE_URL).toString();
+}
+
 // Derive lighter/darker variants from a base hex — avoids storing every shade in Strapi
 function lighten(hex: string): string {
   const n = parseInt(hex.replace("#", ""), 16);
@@ -89,7 +106,9 @@ function darken(hex: string): string {
   return "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
 }
 
-function parseUrgencyColors(json: string | null | undefined): Record<UrgencyLevel, UrgencyColorSet> {
+function parseUrgencyColors(
+  json: string | null | undefined,
+): Record<UrgencyLevel, UrgencyColorSet> {
   const defaults: Record<UrgencyLevel, UrgencyColorSet> = {
     routine: {
       gradientStart: URGENCY_COLORS.routine.headerGradient.start,
@@ -114,7 +133,9 @@ function parseUrgencyColors(json: string | null | undefined): Record<UrgencyLeve
   if (!json) return defaults;
 
   try {
-    const parsed = JSON.parse(json) as Partial<Record<UrgencyLevel, Partial<UrgencyColorSet>>>;
+    const parsed = JSON.parse(json) as Partial<
+      Record<UrgencyLevel, Partial<UrgencyColorSet>>
+    >;
     return {
       routine: { ...defaults.routine, ...parsed.routine },
       urgent: { ...defaults.urgent, ...parsed.urgent },
@@ -138,7 +159,9 @@ function parseSlaValues(json: string | null | undefined): ResolvedSla {
     try {
       const parsed = JSON.parse(json) as Partial<typeof t>;
       Object.assign(t, parsed);
-    } catch { /* fall through to defaults */ }
+    } catch {
+      /* fall through to defaults */
+    }
   }
 
   return {
@@ -188,29 +211,41 @@ export async function buildEmailConfig(): Promise<ResolvedEmailConfig> {
   cachedConfig = {
     company: {
       name: company?.businessName ?? COMPANY.name,
-      tagline: "Professional & Reliable",
+      tagline: COMPANY.tagline,
       legalName: company?.businessName ?? COMPANY.legalName,
       address: company?.businessAddress ?? COMPANY.address.full,
       phone: company?.businessPhone ?? COMPANY.phone.primary,
       email: {
-        support: emailSettings?.replyToEmail ?? company?.businessEmail ?? COMPANY.email.support,
+        support:
+          emailSettings?.replyToEmail ??
+          company?.businessEmail ??
+          COMPANY.email.support,
         noreply: emailSettings?.fromEmail ?? COMPANY.email.noreply,
       },
       website: company?.website ?? COMPANY.website,
       logoUrl: company?.logoUrl ?? null,
-      copyrightYear: new Date().getFullYear().toString(),
+      copyrightYear: COMPANY.copyrightYear,
     },
     brand: {
       primary,
       primaryLight: lighten(primary),
       primaryDark: darken(primary),
-      headerGradientStart: company?.brandSecondaryColor ?? BRAND_COLORS.headerGradient.start,
-      headerGradientEnd: darken(company?.brandSecondaryColor ?? BRAND_COLORS.headerGradient.start),
+      headerGradientStart:
+        company?.brandSecondaryColor ?? BRAND_COLORS.headerGradient.start,
+      headerGradientEnd: darken(
+        company?.brandSecondaryColor ?? BRAND_COLORS.headerGradient.start,
+      ),
     },
     email: {
       fromEmail: emailSettings?.fromEmail ?? COMPANY.email.noreply,
-      contactFromEmail: emailSettings?.contactFromEmail ?? emailSettings?.fromEmail ?? COMPANY.email.noreply,
-      quotationFromEmail: emailSettings?.quotationFromEmail ?? emailSettings?.fromEmail ?? COMPANY.email.noreply,
+      contactFromEmail:
+        emailSettings?.contactFromEmail ??
+        emailSettings?.fromEmail ??
+        COMPANY.email.noreply,
+      quotationFromEmail:
+        emailSettings?.quotationFromEmail ??
+        emailSettings?.fromEmail ??
+        COMPANY.email.noreply,
       replyToEmail: emailSettings?.replyToEmail ?? COMPANY.email.support,
       slaResponseHours: emailSettings?.slaResponseHours ?? 24,
       slaUrgentHours: emailSettings?.slaUrgentHours ?? 4,
@@ -233,20 +268,9 @@ export async function buildEmailConfig(): Promise<ResolvedEmailConfig> {
  */
 export function getLogoHtml(config: ResolvedEmailConfig): string {
   const { logoUrl, name } = config.company;
-  const { primary } = config.brand;
+  const resolvedLogoUrl = resolveAbsoluteUrl(logoUrl ?? FALLBACK_LOGO_URL);
 
-  if (logoUrl) {
-    return `<img src="${logoUrl}" alt="${name}" style="height:56px;width:auto;max-width:200px;object-fit:contain;display:block;margin:0 auto;" />`;
-  }
-
-  const initials = name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-
-  return `<div style="display:inline-flex;align-items:center;justify-content:center;background:${primary};width:56px;height:56px;border-radius:12px;font-size:22px;font-weight:700;color:#ffffff;margin:0 auto;">${initials}</div>`;
+  return `<img src="${resolvedLogoUrl}" alt="${name}" style="height:56px;width:auto;max-width:200px;object-fit:contain;display:block;margin:0;" />`;
 }
 
 /**
@@ -259,32 +283,62 @@ export function getSharedHeaderHtml(
   config: ResolvedEmailConfig,
   gradientStart?: string,
   gradientEnd?: string,
+  meta?: {
+    title: string;
+    reference: string;
+    referenceLabel?: string;
+    status?: string;
+    brandTitle?: string;
+  },
 ): string {
   const start = gradientStart ?? config.brand.headerGradientStart;
   const end = gradientEnd ?? config.brand.headerGradientEnd;
+  const brandTitle = meta?.brandTitle ?? config.company.name;
+  const referenceLabel = meta?.referenceLabel ?? "Reference";
+  const statusHtml = meta?.status
+    ? `<span style="display:inline-block;background-color:#ffffff;color:${config.brand.primaryDark};border:1px solid ${config.brand.primary};padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.4px;">${meta.status}</span>`
+    : "";
+  const metaRow = meta
+    ? `
+    <tr>
+      <td style="padding:20px 40px;background-color:${BRAND_COLORS.bgCard};border-bottom:1px solid ${BRAND_COLORS.borderDefault};">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="vertical-align:top;">
+              <h2 style="margin:0;color:${BRAND_COLORS.textDark};font-size:22px;font-weight:700;line-height:1.25;">${meta.title}</h2>
+              <p style="margin:8px 0 0;color:${BRAND_COLORS.textLight};font-size:14px;line-height:1.5;">${referenceLabel}: ${meta.reference}</p>
+            </td>
+            ${meta.status ? `<td style="vertical-align:top;text-align:right;padding-left:16px;">${statusHtml}</td>` : ""}
+          </tr>
+        </table>
+      </td>
+    </tr>`
+    : "";
 
   return `
     <tr>
-      <td style="background:linear-gradient(135deg,${start} 0%,${end} 100%);padding:28px 40px;border-radius:12px 12px 0 0;">
+      <td style="background:linear-gradient(135deg,${start} 0%,${end} 100%);padding:36px 40px;border-radius:12px 12px 0 0;">
         <style>
           @media only screen and (max-width:600px) {
-            .email-header-logo { display:block!important; width:100%!important; text-align:center!important; padding-bottom:14px!important; padding-right:0!important; }
-            .email-header-text  { display:block!important; width:100%!important; text-align:center!important; }
+            .email-header-text  { display:block!important; width:100%!important; text-align:center!important; padding-bottom:16px!important; }
+            .email-header-logo { display:block!important; width:100%!important; text-align:center!important; padding-left:0!important; }
           }
         </style>
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width:100%;">
           <tr>
-            <td class="email-header-logo" style="vertical-align:middle;padding-right:20px;width:1%;">
-              ${getLogoHtml(config)}
+            <td class="email-header-text" style="vertical-align:middle;width:100%;text-align:left;">
+              <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;letter-spacing:-0.4px;line-height:1.2;">${brandTitle}</h1>
+              <p style="margin:8px 0 0;color:${BRAND_COLORS.accentGreen};font-size:12px;line-height:1.5;letter-spacing:0.35px;text-transform:uppercase;font-weight:600;opacity:0.95;">${config.company.tagline}</p>
             </td>
-            <td class="email-header-text" style="vertical-align:middle;">
-              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;line-height:1.2;">${config.company.name}</h1>
-              <p style="margin:5px 0 0;color:${config.brand.primaryLight};font-size:13px;line-height:1.4;">${config.company.tagline}</p>
+            <td class="email-header-logo" style="vertical-align:middle;padding-left:24px;width:1%;text-align:right;white-space:nowrap;">
+              ${getLogoHtml(config)}
             </td>
           </tr>
         </table>
       </td>
-    </tr>`;
+    </tr>
+    ${meta ? `<tr><td style="height:3px;background-color:${BRAND_COLORS.accentGreen};font-size:0;line-height:0;">&nbsp;</td></tr>` : ""}
+    ${metaRow}`;
 }
 
 /**
@@ -294,6 +348,8 @@ export function getSharedFooterHtml(
   config: ResolvedEmailConfig,
   variant: "customer" | "business" = "customer",
 ): string {
+  const { name, legalName, address, phone, copyrightYear } = config.company;
+
   const disclaimer =
     config.email.footerDisclaimer ??
     "This email was sent as part of your interaction with us. Please do not reply directly to this message.";
@@ -302,10 +358,10 @@ export function getSharedFooterHtml(
     return `
     <tr>
       <td style="padding:24px 40px;background-color:#f9fafb;border-top:1px solid #e5e7eb;border-radius:0 0 12px 12px;text-align:center;">
-        <p style="margin:0 0 6px;color:#374151;font-size:12px;font-weight:600;line-height:1.6;">${config.company.name} — Internal Notification</p>
+        <p style="margin:0 0 6px;color:#374151;font-size:12px;font-weight:600;line-height:1.6;">${name} — Internal Notification</p>
         ${disclaimer ? `<p style="margin:0 0 6px;color:#6b7280;font-size:11px;line-height:1.6;">${disclaimer}</p>` : ""}
-        <p style="margin:0;color:#9ca3af;font-size:11px;">${config.company.legalName} | ${config.company.address}</p>
-        <p style="margin:4px 0 0;color:#9ca3af;font-size:11px;">Tel: ${config.company.phone}</p>
+        <p style="margin:0;color:#9ca3af;font-size:11px;">${legalName} | ${address}</p>
+        <p style="margin:4px 0 0;color:#9ca3af;font-size:11px;">Tel: ${phone}</p>
       </td>
     </tr>`;
   }
@@ -314,7 +370,7 @@ export function getSharedFooterHtml(
     <tr>
       <td style="padding:24px 40px;background-color:#f9fafb;border-top:1px solid #e5e7eb;border-radius:0 0 12px 12px;text-align:center;">
         <p style="margin:0 0 8px;color:#6b7280;font-size:11px;line-height:1.6;">${disclaimer}</p>
-        <p style="margin:0;color:#9ca3af;font-size:11px;">&copy; ${config.company.copyrightYear} ${config.company.legalName} | ${config.company.address}</p>
+        <p style="margin:0;color:#9ca3af;font-size:11px;">&copy; ${copyrightYear} ${legalName} | ${address}</p>
       </td>
     </tr>`;
 }
@@ -323,7 +379,10 @@ export function getSharedFooterHtml(
  * Config-aware urgency badge inline styles.
  * Uses Strapi-sourced urgency colors from config instead of the static URGENCY_COLORS const.
  */
-export function getUrgencyBadgeStyleFromConfig(urgency: UrgencyLevel, config: ResolvedEmailConfig): string {
+export function getUrgencyBadgeStyleFromConfig(
+  urgency: UrgencyLevel,
+  config: ResolvedEmailConfig,
+): string {
   const c = config.urgency[urgency];
   return `display: inline-block; background-color: ${c.badgeBg}; color: ${c.badgeText}; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;`;
 }
