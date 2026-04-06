@@ -1,41 +1,53 @@
 import {
   BRAND_COLORS,
   type UrgencyLevel,
-} from "@/lib/email/config/email-config"
+} from "@/lib/email/config/email-config";
 import {
   type ResolvedEmailConfig,
   getSharedHeaderHtml,
   getSharedFooterHtml,
   getUrgencyBadgeStyleFromConfig,
-} from "@/lib/email/config/email-config-builder"
+} from "@/lib/email/config/email-config-builder";
 
 interface CustomerConfirmationEmailProps {
-  customerName: string
-  requestId: string
-  serviceType: string
-  urgency: UrgencyLevel
-  preferredDate: string
-  preferredTimeSlot: string
-  address: string
-  city: string
-  postcode: string
-  config: ResolvedEmailConfig
+  customerName: string;
+  requestId: string;
+  serviceType: string;
+  urgency: UrgencyLevel;
+  preferredDate: string;
+  preferredTimeSlot: string;
+  address: string;
+  city: string;
+  postcode: string;
+  config: ResolvedEmailConfig;
 }
 
-export function generateCustomerConfirmationEmail(props: CustomerConfirmationEmailProps): string {
-  const { customerName, requestId, serviceType, urgency, preferredDate, preferredTimeSlot, address, city, postcode, config } =
-    props
+export function generateCustomerConfirmationEmail(
+  props: CustomerConfirmationEmailProps,
+): string {
+  const {
+    customerName,
+    requestId,
+    serviceType,
+    urgency,
+    preferredDate,
+    preferredTimeSlot,
+    address,
+    city,
+    postcode,
+    config,
+  } = props;
 
-  const isEmergency = urgency === "emergency"
-  const isUrgent = urgency === "urgent"
+  const isEmergency = urgency === "emergency";
+  const isUrgent = urgency === "urgent";
   const formattedDate = new Date(preferredDate).toLocaleDateString("en-GB", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
+  });
 
-  const sla = config.sla.service[urgency]
+  const sla = config.sla.service[urgency];
 
   return `
 <!DOCTYPE html>
@@ -49,9 +61,15 @@ export function generateCustomerConfirmationEmail(props: CustomerConfirmationEma
   <table role="presentation" style="width: 100%; border-collapse: collapse;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse; background-color: ${BRAND_COLORS.bgCard}; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table role="presentation" style="width: 100%; max-width: 700px; border-collapse: collapse; background-color: ${BRAND_COLORS.bgCard}; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
-          ${getSharedHeaderHtml(config, config.urgency[urgency].gradientStart, config.urgency[urgency].gradientEnd)}
+          ${getSharedHeaderHtml(config, undefined, undefined, {
+            brandTitle: "Service Request",
+            title: "Request Confirmed",
+            reference: requestId,
+            referenceLabel: "Request ID",
+            status: "Received",
+          })}
 
           <!-- Main Content -->
           <tr>
@@ -167,5 +185,5 @@ export function generateCustomerConfirmationEmail(props: CustomerConfirmationEma
   </table>
 </body>
 </html>
-  `.trim()
+  `.trim();
 }
