@@ -3,18 +3,19 @@
  * Pure HTML string generator - no React Email dependency
  */
 
-import type { CompleteQuotationInput } from "../../schemas/quotation-schemas"
+import type { CompleteQuotationInput } from "../../schemas/quotation-schemas";
+import { BRAND_COLORS, SLA } from "@/lib/email/config/email-config";
 import {
-  BRAND_COLORS,
-  SLA,
-} from "@/lib/email/config/email-config"
-import { type ResolvedEmailConfig, getSharedHeaderHtml, getSharedFooterHtml } from "@/lib/email/config/email-config-builder"
+  type ResolvedEmailConfig,
+  getSharedHeaderHtml,
+  getSharedFooterHtml,
+} from "@/lib/email/config/email-config-builder";
 
 interface QuotationBusinessEmailProps {
-  requestId: string
-  submittedAt: string
-  formData: CompleteQuotationInput
-  config: ResolvedEmailConfig
+  requestId: string;
+  submittedAt: string;
+  formData: CompleteQuotationInput;
+  config: ResolvedEmailConfig;
 }
 
 const formatBudgetRange = (value: string) => {
@@ -26,9 +27,9 @@ const formatBudgetRange = (value: string) => {
     "100k-250k": "\u00A3100,000 - \u00A3250,000",
     "over-250k": "Over \u00A3250,000",
     unsure: "Not sure / Need guidance",
-  }
-  return labels[value] || value
-}
+  };
+  return labels[value] || value;
+};
 
 const formatTimeline = (value: string) => {
   const labels: Record<string, string> = {
@@ -38,9 +39,9 @@ const formatTimeline = (value: string) => {
     "3-6-months": "3-6 Months",
     "6-12-months": "6-12 Months",
     flexible: "Flexible",
-  }
-  return labels[value] || value
-}
+  };
+  return labels[value] || value;
+};
 
 const formatProjectSize = (value: string) => {
   const labels: Record<string, string> = {
@@ -48,21 +49,25 @@ const formatProjectSize = (value: string) => {
     medium: "Medium",
     large: "Large",
     "very-large": "Very Large",
-  }
-  return labels[value] || value
-}
+  };
+  return labels[value] || value;
+};
 
-export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProps): string {
-  const { requestId, submittedAt, formData, config } = props
-  const { contact, projectType, scope, site, budget, additional } = formData
+export function generateQuotationBusinessEmail(
+  props: QuotationBusinessEmailProps,
+): string {
+  const { requestId, submittedAt, formData, config } = props;
+  const { contact, projectType, scope, site, budget, additional } = formData;
 
-  const isUrgent = budget.timeline === "urgent"
-  const headerText = isUrgent ? "URGENT QUOTATION REQUEST" : "New Quotation Request"
+  const isUrgent = budget.timeline === "urgent";
+  const headerText = isUrgent
+    ? "URGENT QUOTATION REQUEST"
+    : "New Quotation Request";
 
   const formattedDate = new Date(submittedAt).toLocaleString("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
-  })
+  });
 
   return `
 <!DOCTYPE html>
@@ -78,15 +83,13 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
       <td align="center">
         <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; background-color: ${BRAND_COLORS.bgCard}; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 
-          ${getSharedHeaderHtml(config)}
-
-          <!-- Title row -->
-          <tr>
-            <td style="padding: 32px 40px 0; text-align: center;">
-              <h2 style="margin: 0; color: #1a1a1a; font-size: 22px; font-weight: 700;">${headerText}</h2>
-              <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">Request ID: ${requestId}</p>
-            </td>
-          </tr>
+          ${getSharedHeaderHtml(config, undefined, undefined, {
+            brandTitle: "Quotation Request",
+            title: headerText,
+            reference: requestId,
+            referenceLabel: "Request ID",
+            status: isUrgent ? "Urgent" : "New",
+          })}
 
           <!-- Body -->
           <tr>
@@ -118,12 +121,16 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Phone:</td>
                         <td style="padding: 6px 0; color: #27272a; font-size: 14px;">${contact.phone}</td>
                       </tr>
-                      ${contact.company ? `
+                      ${
+                        contact.company
+                          ? `
                       <tr>
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Company:</td>
                         <td style="padding: 6px 0; color: #27272a; font-size: 14px;">${contact.company}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                       <tr>
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Contact Pref:</td>
                         <td style="padding: 6px 0; color: #27272a; font-size: 14px; text-transform: capitalize;">${additional.preferredContactMethod}</td>
@@ -209,11 +216,15 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
                       ${site.city}${site.county ? `, ${site.county}` : ""}<br>
                       ${site.postcode}
                     </p>
-                    ${site.siteAccessNotes ? `
+                    ${
+                      site.siteAccessNotes
+                        ? `
                     <p style="margin: 12px 0 0; padding: 8px; background-color: #fef3c7; border-radius: 4px; color: #92400e; font-size: 12px;">
                       <strong>Access Notes:</strong> ${site.siteAccessNotes}
                     </p>
-                    ` : ""}
+                    `
+                        : ""
+                    }
                   </td>
                 </tr>
               </table>
@@ -236,12 +247,16 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Timeline:</td>
                         <td style="padding: 6px 0; color: ${isUrgent ? "#dc2626" : "#27272a"}; font-size: 14px; font-weight: ${isUrgent ? "700" : "600"};">${formatTimeline(budget.timeline)}</td>
                       </tr>
-                      ${budget.preferredStartDate ? `
+                      ${
+                        budget.preferredStartDate
+                          ? `
                       <tr>
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Start Date:</td>
                         <td style="padding: 6px 0; color: #27272a; font-size: 14px;">${new Date(budget.preferredStartDate).toLocaleDateString("en-GB")}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                       <tr>
                         <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 14px;">Flexible Budget:</td>
                         <td style="padding: 6px 0; color: #27272a; font-size: 14px;">${budget.flexibleOnBudget ? "Yes" : "No"}</td>
@@ -256,7 +271,10 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
               </table>
 
               <!-- Additional Info -->
-              ${additional.complianceRequirements.length > 0 || additional.specialRequirements ? `
+              ${
+                additional.complianceRequirements.length > 0 ||
+                additional.specialRequirements
+                  ? `
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px; border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px; overflow: hidden;">
                 <tr>
                   <td style="background-color: ${BRAND_COLORS.bgCardMutedAlt}; padding: 12px 16px; border-bottom: 1px solid ${BRAND_COLORS.borderLight};">
@@ -265,18 +283,28 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
                 </tr>
                 <tr>
                   <td style="padding: 16px;">
-                    ${additional.complianceRequirements.length > 0 ? `
+                    ${
+                      additional.complianceRequirements.length > 0
+                        ? `
                     <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLighter}; font-size: 12px;">Compliance Requirements:</p>
                     <p style="margin: 0 0 12px; color: #27272a; font-size: 14px; text-transform: uppercase;">${additional.complianceRequirements.join(", ")}</p>
-                    ` : ""}
-                    ${additional.specialRequirements ? `
+                    `
+                        : ""
+                    }
+                    ${
+                      additional.specialRequirements
+                        ? `
                     <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLighter}; font-size: 12px;">Special Requirements:</p>
                     <p style="margin: 0; color: #27272a; font-size: 14px; line-height: 1.5;">${additional.specialRequirements}</p>
-                    ` : ""}
+                    `
+                        : ""
+                    }
                   </td>
                 </tr>
               </table>
-              ` : ""}
+              `
+                  : ""
+              }
 
               <!-- Marketing & Source -->
               <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px; overflow: hidden;">
@@ -287,12 +315,16 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
                         <td style="padding: 4px 0; color: ${BRAND_COLORS.textLighter}; font-size: 12px; width: 140px;">Marketing Consent:</td>
                         <td style="padding: 4px 0; color: #27272a; font-size: 12px;">${additional.marketingConsent ? "Yes" : "No"}</td>
                       </tr>
-                      ${additional.howDidYouHear ? `
+                      ${
+                        additional.howDidYouHear
+                          ? `
                       <tr>
                         <td style="padding: 4px 0; color: ${BRAND_COLORS.textLighter}; font-size: 12px;">Source:</td>
                         <td style="padding: 4px 0; color: #27272a; font-size: 12px; text-transform: capitalize;">${additional.howDidYouHear.replace(/-/g, " ")}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                     </table>
                   </td>
                 </tr>
@@ -316,5 +348,5 @@ export function generateQuotationBusinessEmail(props: QuotationBusinessEmailProp
   </table>
 </body>
 </html>
-`
+`;
 }
