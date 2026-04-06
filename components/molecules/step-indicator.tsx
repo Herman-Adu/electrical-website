@@ -71,7 +71,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="absolute inset-[-12px] min-[460px]:inset-[-20px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.85 0.22 60 / 0.5) 0%, oklch(0.8 0.2 60 / 0.3) 40%, transparent 70%)",
+                            "radial-gradient(circle, oklch(0.85 0.22 168 / 0.5) 0%, oklch(0.8 0.2 168 / 0.3) 40%, transparent 70%)",
                           filter: "blur(12px)",
                         }}
                         initial={{ scale: 0.5, opacity: 0 }}
@@ -90,7 +90,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="absolute inset-[-8px] min-[460px]:inset-[-12px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.9 0.24 60 / 0.6) 0%, oklch(0.85 0.22 60 / 0.4) 50%, transparent 70%)",
+                            "radial-gradient(circle, oklch(0.9 0.24 168 / 0.6) 0%, oklch(0.85 0.22 168 / 0.4) 50%, transparent 70%)",
                           filter: "blur(8px)",
                         }}
                         initial={{ scale: 0.3, opacity: 0 }}
@@ -108,7 +108,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                       <motion.div
                         className="absolute inset-[-4px] min-[460px]:inset-[-6px] rounded-full"
                         style={{
-                          background: "radial-gradient(circle, oklch(0.95 0.25 60 / 0.8) 0%, transparent 60%)",
+                          background: "radial-gradient(circle, oklch(0.95 0.25 168 / 0.8) 0%, transparent 60%)",
                           filter: "blur(4px)",
                         }}
                         initial={{ scale: 0.2, opacity: 0 }}
@@ -161,9 +161,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         isCurrent
                           ? {
                               fill: [
-                                "oklch(0.85 0.22 60 / 0.3)",
-                                "oklch(0.9 0.24 60 / 0.6)",
-                                "oklch(0.85 0.22 60 / 0.3)",
+                                "oklch(0.85 0.22 168 / 0.3)",
+                                "oklch(0.9 0.24 168 / 0.6)",
+                                "oklch(0.85 0.22 168 / 0.3)",
                               ],
                             }
                           : {}
@@ -181,16 +181,16 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="stroke-accent"
                         strokeWidth={isCurrent ? "3" : "2"}
                         strokeLinecap="round"
-                        initial={{ opacity: 0, filter: "drop-shadow(0 0 0px oklch(0.9 0.24 60))" }}
+                        initial={{ opacity: 0, filter: "drop-shadow(0 0 0px oklch(0.9 0.24 168))" }}
                         animate={{
                           opacity: isCompleted ? 1 : [0.6, 1, 0.6],
                           filter: isCurrent
                             ? [
-                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
-                                "drop-shadow(0 0 8px oklch(0.95 0.25 60)) drop-shadow(0 0 12px oklch(0.9 0.24 60 / 0.8))",
-                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 168)) drop-shadow(0 0 6px oklch(0.85 0.22 168 / 0.6))",
+                                "drop-shadow(0 0 8px oklch(0.95 0.25 168)) drop-shadow(0 0 12px oklch(0.9 0.24 168 / 0.8))",
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 168)) drop-shadow(0 0 6px oklch(0.85 0.22 168 / 0.6))",
                               ]
-                            : "drop-shadow(0 0 3px oklch(0.9 0.24 60))",
+                            : "drop-shadow(0 0 3px oklch(0.9 0.24 168))",
                         }}
                         transition={{
                           duration: isCurrent ? 1.5 : 0.5,
