@@ -3,21 +3,22 @@
  * Pure HTML string generator - no React Email dependency
  */
 
+import { BRAND_COLORS, SLA } from "@/lib/email/config/email-config";
 import {
-  BRAND_COLORS,
-  SLA,
-} from "@/lib/email/config/email-config"
-import { type ResolvedEmailConfig, getSharedHeaderHtml, getSharedFooterHtml } from "@/lib/email/config/email-config-builder"
+  type ResolvedEmailConfig,
+  getSharedHeaderHtml,
+  getSharedFooterHtml,
+} from "@/lib/email/config/email-config-builder";
 
 interface QuotationCustomerEmailProps {
-  customerName: string
-  company?: string
-  requestId: string
-  projectCategory: string
-  projectType: string
-  budgetRange: string
-  timeline: string
-  config: ResolvedEmailConfig
+  customerName: string;
+  company?: string;
+  requestId: string;
+  projectCategory: string;
+  projectType: string;
+  budgetRange: string;
+  timeline: string;
+  config: ResolvedEmailConfig;
 }
 
 const formatBudgetRange = (value: string) => {
@@ -29,9 +30,9 @@ const formatBudgetRange = (value: string) => {
     "100k-250k": "\u00A3100,000 - \u00A3250,000",
     "over-250k": "Over \u00A3250,000",
     unsure: "To be discussed",
-  }
-  return labels[value] || value
-}
+  };
+  return labels[value] || value;
+};
 
 const formatTimeline = (value: string) => {
   const labels: Record<string, string> = {
@@ -41,12 +42,23 @@ const formatTimeline = (value: string) => {
     "3-6-months": "3-6 Months",
     "6-12-months": "6-12 Months",
     flexible: "Flexible",
-  }
-  return labels[value] || value
-}
+  };
+  return labels[value] || value;
+};
 
-export function generateQuotationCustomerEmail(props: QuotationCustomerEmailProps): string {
-  const { customerName, company, requestId, projectCategory, projectType, budgetRange, timeline, config } = props
+export function generateQuotationCustomerEmail(
+  props: QuotationCustomerEmailProps,
+): string {
+  const {
+    customerName,
+    company,
+    requestId,
+    projectCategory,
+    projectType,
+    budgetRange,
+    timeline,
+    config,
+  } = props;
 
   return `
 <!DOCTYPE html>
@@ -60,17 +72,15 @@ export function generateQuotationCustomerEmail(props: QuotationCustomerEmailProp
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color: ${BRAND_COLORS.bgBodyAlt}; padding: 40px 20px;">
     <tr>
       <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: ${BRAND_COLORS.bgCard}; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; background-color: ${BRAND_COLORS.bgCard}; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 
-          ${getSharedHeaderHtml(config)}
-
-          <!-- Title row after header -->
-          <tr>
-            <td style="padding: 32px 40px 0; text-align: center;">
-              <h2 style="margin: 0; color: #1a1a1a; font-size: 22px; font-weight: 700;">Quotation Request Received</h2>
-              <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">Reference: ${requestId}</p>
-            </td>
-          </tr>
+          ${getSharedHeaderHtml(config, undefined, undefined, {
+            brandTitle: "Quotation Request",
+            title: "Quotation Request Received",
+            reference: requestId,
+            referenceLabel: "Reference",
+            status: "Received",
+          })}
 
           <!-- Body -->
           <tr>
@@ -132,5 +142,5 @@ export function generateQuotationCustomerEmail(props: QuotationCustomerEmailProp
   </table>
 </body>
 </html>
-`
+`;
 }
