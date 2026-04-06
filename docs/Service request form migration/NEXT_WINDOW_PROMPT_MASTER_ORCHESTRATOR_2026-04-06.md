@@ -50,7 +50,9 @@ STEP 1 — MEMORY SYNC (always second):
   Query Docker memory for keys:
   - agent:v1:project:electrical-website
   - agent:v1:heuristic_snapshots:2026-04-06-post-merge-clean-start
+  - agent:v1:heuristic_snapshots:2026-04-06-service-request-form-width-alignment
   - agent:v1:next-task:orchestrator:next-chat-bootstrap-2026-04-06
+  - agent:v1:next-task:service-request:form-width-alignment-pr-2026-04-06
   This is your single source of truth for where work stands
 
 STEP 2 — PLAN (before any code changes):
@@ -101,16 +103,21 @@ PR #51: merged at 2026-04-06T14:43:25Z
 WHAT IS DONE:
   ✅ Service-request 5-step flow completed and merged
   ✅ Step-indicator + validation follow-up fixes merged (PR #51)
+  ✅ Quick width-alignment patch applied: form container constrained to `max-w-4xl` to match light-bulb visual span in single-column layout
+  ✅ Typecheck passed after width-alignment patch (`pnpm exec tsc --noEmit`)
   ✅ Local gates previously verified: tsc, unit tests, e2e, build
   ✅ Stale branches pruned (feature/docs stale refs removed local+remote)
   ✅ Post-merge memory snapshot written:
      agent:v1:heuristic_snapshots:2026-04-06-post-merge-clean-start
+  ✅ Width-alignment snapshot written:
+     agent:v1:heuristic_snapshots:2026-04-06-service-request-form-width-alignment
 
 WHAT IS PENDING (NEXT CHAT BOOTSTRAP):
   1. Re-run /health-check and memory sync using post-merge keys above
   2. Confirm branch baseline and git cleanliness
-  3. Start next scoped task from feat/next-clean-start-2026-04-06
-  4. After next significant work, write fresh heuristic snapshot and next-task key
+  3. Validate `/services#service-request` visual alignment in browser screenshot (green-line reference)
+  4. Open PR for width-alignment patch from feat/next-clean-start-2026-04-06 and merge on green
+  5. After merge, write fresh heuristic snapshot and next-task key
 
 ═══════════════════════════════════════════════════════════
 IMMEDIATE FIRST ACTIONS WHEN YOU START
@@ -120,7 +127,9 @@ IMMEDIATE FIRST ACTIONS WHEN YOU START
 2. Query memory:
    - agent:v1:project:electrical-website
    - agent:v1:heuristic_snapshots:2026-04-06-post-merge-clean-start
+  - agent:v1:heuristic_snapshots:2026-04-06-service-request-form-width-alignment
    - agent:v1:next-task:orchestrator:next-chat-bootstrap-2026-04-06
+  - agent:v1:next-task:service-request:form-width-alignment-pr-2026-04-06
 3. Verify current git baseline:
    - git branch --show-current
    - git status --short --branch
