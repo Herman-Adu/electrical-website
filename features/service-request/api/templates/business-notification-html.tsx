@@ -2,37 +2,39 @@ import {
   BRAND_COLORS,
   getUrgencyCardStyle,
   type UrgencyLevel,
-} from "@/lib/email/config/email-config"
+} from "@/lib/email/config/email-config";
 import {
   type ResolvedEmailConfig,
   getSharedHeaderHtml,
   getSharedFooterHtml,
   getUrgencyBadgeStyleFromConfig,
-} from "@/lib/email/config/email-config-builder"
+} from "@/lib/email/config/email-config-builder";
 
 interface BusinessNotificationEmailProps {
-  requestId: string
-  customerName: string
-  customerEmail: string
-  customerPhone: string
-  serviceType: string
-  urgency: UrgencyLevel
-  description: string
-  preferredDate: string
-  preferredTimeSlot: string
-  alternativeDate?: string
-  address: string
-  city: string
-  county?: string
-  postcode: string
-  propertyType: string
-  accessInstructions?: string
-  flexibleScheduling: boolean
-  submittedAt: string
-  config: ResolvedEmailConfig
+  requestId: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  serviceType: string;
+  urgency: UrgencyLevel;
+  description: string;
+  preferredDate: string;
+  preferredTimeSlot: string;
+  alternativeDate?: string;
+  address: string;
+  city: string;
+  county?: string;
+  postcode: string;
+  propertyType: string;
+  accessInstructions?: string;
+  flexibleScheduling: boolean;
+  submittedAt: string;
+  config: ResolvedEmailConfig;
 }
 
-export function generateBusinessNotificationEmail(props: BusinessNotificationEmailProps): string {
+export function generateBusinessNotificationEmail(
+  props: BusinessNotificationEmailProps,
+): string {
   const {
     requestId,
     customerName,
@@ -53,19 +55,19 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
     flexibleScheduling,
     submittedAt,
     config,
-  } = props
+  } = props;
 
-  const isEmergency = urgency === "emergency"
-  const isUrgent = urgency === "urgent"
+  const isEmergency = urgency === "emergency";
+  const isUrgent = urgency === "urgent";
   const formattedDate = new Date(preferredDate).toLocaleDateString("en-GB", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
-  const formattedSubmitted = new Date(submittedAt).toLocaleString("en-GB")
-  const sla = config.sla.service[urgency]
-  const cardStyle = getUrgencyCardStyle(urgency)
+  });
+  const formattedSubmitted = new Date(submittedAt).toLocaleString("en-GB");
+  const sla = config.sla.service[urgency];
+  const cardStyle = getUrgencyCardStyle(urgency);
 
   return `
 <!DOCTYPE html>
@@ -79,19 +81,19 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
   <table role="presentation" style="width: 100%; border-collapse: collapse;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" style="width: 100%; max-width: 680px; border-collapse: collapse; background-color: ${BRAND_COLORS.bgCard}; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table role="presentation" style="width: 100%; max-width: 700px; border-collapse: collapse; background-color: ${BRAND_COLORS.bgCard}; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
-          ${getSharedHeaderHtml(config, config.urgency[urgency].gradientStart, config.urgency[urgency].gradientEnd)}
-
-          <!-- Request ID / Title row -->
-          <tr>
-            <td style="padding: 32px 40px 0; text-align: center;">
-              <h2 style="margin: 0; color: #1a1a1a; font-size: 22px; font-weight: 700;">
-                ${isEmergency ? "EMERGENCY SERVICE REQUEST" : isUrgent ? "URGENT SERVICE REQUEST" : "New Service Request"}
-              </h2>
-              <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">Request ID: ${requestId}</p>
-            </td>
-          </tr>
+          ${getSharedHeaderHtml(config, undefined, undefined, {
+            brandTitle: "Service Request",
+            title: isEmergency
+              ? "Emergency Service Request"
+              : isUrgent
+                ? "Urgent Service Request"
+                : "New Service Request",
+            reference: requestId,
+            referenceLabel: "Request ID",
+            status: "Action Required",
+          })}
 
           <!-- Main Content -->
           <tr>
@@ -193,12 +195,16 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">City:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${city}</td>
                       </tr>
-                      ${county ? `
+                      ${
+                        county
+                          ? `
                       <tr>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">County:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${county}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                       <tr>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">Postcode:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${postcode}</td>
@@ -207,12 +213,16 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">Property Type:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${propertyType}</td>
                       </tr>
-                      ${accessInstructions ? `
+                      ${
+                        accessInstructions
+                          ? `
                       <tr>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600; vertical-align: top;">Access:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${accessInstructions}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                     </table>
                   </td>
                 </tr>
@@ -232,12 +242,16 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">Preferred Time:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${preferredTimeSlot}</td>
                       </tr>
-                      ${alternativeDate ? `
+                      ${
+                        alternativeDate
+                          ? `
                       <tr>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">Alternative Date:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${new Date(alternativeDate).toLocaleDateString("en-GB")}</td>
                       </tr>
-                      ` : ""}
+                      `
+                          : ""
+                      }
                       <tr>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textLight}; font-size: 14px; font-weight: 600;">Flexible Scheduling:</td>
                         <td style="padding: 8px 0; color: ${BRAND_COLORS.textDark}; font-size: 14px;">${flexibleScheduling ? "Yes" : "No"}</td>
@@ -286,5 +300,5 @@ export function generateBusinessNotificationEmail(props: BusinessNotificationEma
   </table>
 </body>
 </html>
-  `.trim()
+  `.trim();
 }

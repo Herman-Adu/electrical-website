@@ -42,6 +42,7 @@ export const BRAND_COLORS = {
   primary: "#f59e0b",
   primaryLight: "#fbbf24",
   primaryDark: "#d97706",
+  accentGreen: "#00f3bd",
 
   // Header gradients
   headerGradient: {
