@@ -42,6 +42,9 @@
     "migration:quotation:ready": "pnpm docker:mcp:ready",
     "migration:quotation:hydrate": "node scripts/migration-quotation-hydrate.mjs",
     "migration:quotation:hydrate:strict": "node scripts/migration-quotation-hydrate.mjs --strict",
+    "migration:service-request:ready": "pnpm docker:mcp:ready",
+    "migration:service-request:hydrate": "node scripts/migration-service-request-hydrate.mjs",
+    "migration:service-request:hydrate:strict": "node scripts/migration-service-request-hydrate.mjs --strict",
     "docker:dev": "docker compose -f docker-compose.dev.yml up web-dev",
     "docker:dev:build": "docker compose -f docker-compose.dev.yml build web-dev",
     "docker:dev:down": "docker compose -f docker-compose.dev.yml down"

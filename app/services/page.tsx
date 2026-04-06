@@ -4,7 +4,7 @@ import { ServicesBento } from "@/components/services/services-bento";
 import { Footer } from "@/components/sections/footer";
 import { createPageMetadata } from "@/lib/metadata";
 import { ContentBreadcrumb } from "@/components/shared";
-import { ServiceRequestFormContainer } from "@/features/service-request";
+import { MultiStepFormContainer } from "@/features/service-request";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Services | Nexgen Electrical Innovations",
@@ -54,7 +54,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <ServiceRequestFormContainer />
+          <MultiStepFormContainer />
         </div>
       </section>
 
