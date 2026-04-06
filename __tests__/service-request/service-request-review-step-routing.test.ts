@@ -15,7 +15,7 @@ function resolveStepFromFieldPath(fieldPath: string): number {
 
 describe("resolveStepFromFieldPath (service-request)", () => {
   it("maps contact fields to step 0", () => {
-    expect(resolveStepFromFieldPath("contact.email")).toBe(0);
+    expect(resolveStepFromFieldPath("personalInfo.email")).toBe(0);
     expect(resolveStepFromFieldPath("turnstileToken")).toBe(0);
   });
 

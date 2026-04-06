@@ -1,37 +1,47 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface Step {
-  number: number
-  label: string
-  description?: string
+  number: number;
+  label: string;
+  description?: string;
 }
 
 interface StepIndicatorProps {
-  steps: Step[]
-  currentStep: number
-  completedSteps: number[]
-  onStepClick?: (step: number) => void
+  steps: Step[];
+  currentStep: number;
+  completedSteps: number[];
+  onStepClick?: (step: number) => void;
 }
 
-export function StepIndicator({ steps, currentStep, completedSteps, onStepClick }: StepIndicatorProps) {
+export function StepIndicator({
+  steps,
+  currentStep,
+  completedSteps,
+  onStepClick,
+}: StepIndicatorProps) {
   return (
-    <nav aria-label="Progress" className="w-full px-2 sm:px-0">
+    <nav aria-label="Progress" className="w-full">
       <ol className="flex items-start justify-between">
         {steps.map((step, index) => {
-          const isCompleted = completedSteps.includes(step.number)
-          const isCurrent = currentStep === step.number
-          const isClickable = isCompleted || isCurrent
+          const isCompleted = completedSteps.includes(step.number);
+          const isCurrent = currentStep === step.number;
+          const isClickable = isCompleted || isCurrent;
           const nextStepCompleted =
-            index < steps.length - 1 && (completedSteps.includes(steps[index + 1].number) || currentStep > step.number)
+            index < steps.length - 1 &&
+            (completedSteps.includes(steps[index + 1].number) ||
+              currentStep > step.number);
 
           return (
-            <li key={step.number} className="relative flex-1 flex flex-col items-center">
+            <li
+              key={step.number}
+              className="relative flex-1 flex flex-col items-center"
+            >
               {/* Connector line between steps - positioned to connect bulbs edge to edge */}
               {index < steps.length - 1 && (
-                <div 
+                <div
                   className="absolute h-[2px] z-0"
                   style={{
                     top: "18px", // Center of the bulb (36px/2 on mobile, scales with bulb)
@@ -71,7 +81,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="absolute inset-[-12px] min-[460px]:inset-[-20px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.85 0.22 60 / 0.5) 0%, oklch(0.8 0.2 60 / 0.3) 40%, transparent 70%)",
+                            "radial-gradient(circle, oklch(0.85 0.22 168 / 0.5) 0%, oklch(0.8 0.2 168 / 0.3) 40%, transparent 70%)",
                           filter: "blur(12px)",
                         }}
                         initial={{ scale: 0.5, opacity: 0 }}
@@ -90,7 +100,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="absolute inset-[-8px] min-[460px]:inset-[-12px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.9 0.24 60 / 0.6) 0%, oklch(0.85 0.22 60 / 0.4) 50%, transparent 70%)",
+                            "radial-gradient(circle, oklch(0.9 0.24 168 / 0.6) 0%, oklch(0.85 0.22 168 / 0.4) 50%, transparent 70%)",
                           filter: "blur(8px)",
                         }}
                         initial={{ scale: 0.3, opacity: 0 }}
@@ -108,7 +118,8 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                       <motion.div
                         className="absolute inset-[-4px] min-[460px]:inset-[-6px] rounded-full"
                         style={{
-                          background: "radial-gradient(circle, oklch(0.95 0.25 60 / 0.8) 0%, transparent 60%)",
+                          background:
+                            "radial-gradient(circle, oklch(0.95 0.25 168 / 0.8) 0%, transparent 60%)",
                           filter: "blur(4px)",
                         }}
                         initial={{ scale: 0.2, opacity: 0 }}
@@ -129,7 +140,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                     viewBox="0 0 48 48"
                     className={cn(
                       "relative z-10 w-full h-full transition-all duration-300",
-                      isClickable && "group-hover:scale-110"
+                      isClickable && "group-hover:scale-110",
                     )}
                   >
                     {/* Bulb base/socket */}
@@ -141,7 +152,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                       rx="1"
                       className={cn(
                         "transition-colors duration-500",
-                        isCompleted || isCurrent ? "fill-accent/80" : "fill-muted",
+                        isCompleted || isCurrent
+                          ? "fill-accent/80"
+                          : "fill-muted",
                       )}
                     />
 
@@ -161,9 +174,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         isCurrent
                           ? {
                               fill: [
-                                "oklch(0.85 0.22 60 / 0.3)",
-                                "oklch(0.9 0.24 60 / 0.6)",
-                                "oklch(0.85 0.22 60 / 0.3)",
+                                "oklch(0.85 0.22 168 / 0.3)",
+                                "oklch(0.9 0.24 168 / 0.6)",
+                                "oklch(0.85 0.22 168 / 0.3)",
                               ],
                             }
                           : {}
@@ -181,16 +194,19 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="stroke-accent"
                         strokeWidth={isCurrent ? "3" : "2"}
                         strokeLinecap="round"
-                        initial={{ opacity: 0, filter: "drop-shadow(0 0 0px oklch(0.9 0.24 60))" }}
+                        initial={{
+                          opacity: 0,
+                          filter: "drop-shadow(0 0 0px oklch(0.9 0.24 168))",
+                        }}
                         animate={{
                           opacity: isCompleted ? 1 : [0.6, 1, 0.6],
                           filter: isCurrent
                             ? [
-                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
-                                "drop-shadow(0 0 8px oklch(0.95 0.25 60)) drop-shadow(0 0 12px oklch(0.9 0.24 60 / 0.8))",
-                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 168)) drop-shadow(0 0 6px oklch(0.85 0.22 168 / 0.6))",
+                                "drop-shadow(0 0 8px oklch(0.95 0.25 168)) drop-shadow(0 0 12px oklch(0.9 0.24 168 / 0.8))",
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 168)) drop-shadow(0 0 6px oklch(0.85 0.22 168 / 0.6))",
                               ]
-                            : "drop-shadow(0 0 3px oklch(0.9 0.24 60))",
+                            : "drop-shadow(0 0 3px oklch(0.9 0.24 168))",
                         }}
                         transition={{
                           duration: isCurrent ? 1.5 : 0.5,
@@ -278,7 +294,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                   <motion.div
                     className={cn(
                       "text-[10px] min-[460px]:text-xs sm:text-sm font-medium transition-colors duration-300 leading-tight",
-                      isCompleted || isCurrent ? "text-foreground" : "text-muted-foreground",
+                      isCompleted || isCurrent
+                        ? "text-foreground"
+                        : "text-muted-foreground",
                     )}
                   >
                     {step.label}
@@ -291,9 +309,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 </div>
               </button>
             </li>
-          )
+          );
         })}
       </ol>
     </nav>
-  )
+  );
 }
