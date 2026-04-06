@@ -1,41 +1,51 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface Step {
-  number: number
-  label: string
-  description?: string
+  number: number;
+  label: string;
+  description?: string;
 }
 
 interface StepIndicatorProps {
-  steps: Step[]
-  currentStep: number
-  completedSteps: number[]
-  onStepClick?: (step: number) => void
+  steps: Step[];
+  currentStep: number;
+  completedSteps: number[];
+  onStepClick?: (step: number) => void;
 }
 
-export function StepIndicator({ steps, currentStep, completedSteps, onStepClick }: StepIndicatorProps) {
+export function StepIndicator({
+  steps,
+  currentStep,
+  completedSteps,
+  onStepClick,
+}: StepIndicatorProps) {
   return (
     <nav aria-label="Progress" className="w-full">
       <ol className="flex items-start justify-between">
         {steps.map((step, index) => {
-          const isCompleted = completedSteps.includes(step.number)
-          const isCurrent = currentStep === step.number
-          const isClickable = isCompleted || isCurrent
+          const isCompleted = completedSteps.includes(step.number);
+          const isCurrent = currentStep === step.number;
+          const isClickable = isCompleted || isCurrent;
           const nextStepCompleted =
-            index < steps.length - 1 && (completedSteps.includes(steps[index + 1].number) || currentStep > step.number)
+            index < steps.length - 1 &&
+            (completedSteps.includes(steps[index + 1].number) ||
+              currentStep > step.number);
 
           return (
-            <li key={step.number} className={cn("relative flex-1 flex flex-col", index === 0 ? "items-start" : index === steps.length - 1 ? "items-end" : "items-center")}>
+            <li
+              key={step.number}
+              className="relative flex-1 flex flex-col items-center"
+            >
               {/* Connector line between steps - positioned to connect bulbs edge to edge */}
               {index < steps.length - 1 && (
-                <div 
+                <div
                   className="absolute h-[2px] z-0"
                   style={{
                     top: "18px", // Center of the bulb (36px/2 on mobile, scales with bulb)
-                    left: index === 0 ? "36px" : "calc(50% + 18px)", // Start from right edge of current bulb
+                    left: "calc(50% + 18px)", // Start from right edge of current bulb
                     right: "calc(-50% + 18px)", // End at left edge of next bulb
                   }}
                 >
@@ -56,8 +66,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 onClick={() => isClickable && onStepClick?.(step.number)}
                 disabled={!isClickable}
                 className={cn(
-                  "relative z-10 flex flex-col w-full",
-                  index === 0 ? "items-start" : index === steps.length - 1 ? "items-end" : "items-center",
+                  "relative z-10 flex flex-col items-center w-full",
                   "transition-all duration-200",
                   isClickable && "cursor-pointer group",
                   !isClickable && "cursor-not-allowed opacity-60",
@@ -109,7 +118,8 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                       <motion.div
                         className="absolute inset-[-4px] min-[460px]:inset-[-6px] rounded-full"
                         style={{
-                          background: "radial-gradient(circle, oklch(0.95 0.25 168 / 0.8) 0%, transparent 60%)",
+                          background:
+                            "radial-gradient(circle, oklch(0.95 0.25 168 / 0.8) 0%, transparent 60%)",
                           filter: "blur(4px)",
                         }}
                         initial={{ scale: 0.2, opacity: 0 }}
@@ -130,7 +140,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                     viewBox="0 0 48 48"
                     className={cn(
                       "relative z-10 w-full h-full transition-all duration-300",
-                      isClickable && "group-hover:scale-110"
+                      isClickable && "group-hover:scale-110",
                     )}
                   >
                     {/* Bulb base/socket */}
@@ -142,7 +152,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                       rx="1"
                       className={cn(
                         "transition-colors duration-500",
-                        isCompleted || isCurrent ? "fill-accent/80" : "fill-muted",
+                        isCompleted || isCurrent
+                          ? "fill-accent/80"
+                          : "fill-muted",
                       )}
                     />
 
@@ -182,7 +194,10 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                         className="stroke-accent"
                         strokeWidth={isCurrent ? "3" : "2"}
                         strokeLinecap="round"
-                        initial={{ opacity: 0, filter: "drop-shadow(0 0 0px oklch(0.9 0.24 168))" }}
+                        initial={{
+                          opacity: 0,
+                          filter: "drop-shadow(0 0 0px oklch(0.9 0.24 168))",
+                        }}
                         animate={{
                           opacity: isCompleted ? 1 : [0.6, 1, 0.6],
                           filter: isCurrent
@@ -275,11 +290,13 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 </div>
 
                 {/* Step label - hidden on very small screens */}
-                <div className={cn("mt-2 w-full max-w-[50px] min-[460px]:max-w-[80px] sm:max-w-[120px]", index === 0 ? "text-left" : index === steps.length - 1 ? "text-right" : "text-center")}>
+                <div className="text-center mt-2 w-full max-w-[50px] min-[460px]:max-w-[80px] sm:max-w-[120px]">
                   <motion.div
                     className={cn(
                       "text-[10px] min-[460px]:text-xs sm:text-sm font-medium transition-colors duration-300 leading-tight",
-                      isCompleted || isCurrent ? "text-foreground" : "text-muted-foreground",
+                      isCompleted || isCurrent
+                        ? "text-foreground"
+                        : "text-muted-foreground",
                     )}
                   >
                     {step.label}
@@ -292,9 +309,9 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 </div>
               </button>
             </li>
-          )
+          );
         })}
       </ol>
     </nav>
-  )
+  );
 }

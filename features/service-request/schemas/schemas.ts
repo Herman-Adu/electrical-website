@@ -30,7 +30,8 @@ export const personalInfoSchema = z.object({
   phone: z
     .string()
     .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number is too long"),
+    .max(15, "Phone number is too long")
+    .regex(/^[+\d\s()-]+$/, "Please enter a valid phone number"),
 });
 
 // Step 2: Service Details Schema
