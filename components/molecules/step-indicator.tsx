@@ -18,7 +18,7 @@ interface StepIndicatorProps {
 
 export function StepIndicator({ steps, currentStep, completedSteps, onStepClick }: StepIndicatorProps) {
   return (
-    <nav aria-label="Progress" className="w-full px-2 sm:px-0">
+    <nav aria-label="Progress" className="w-full">
       <ol className="flex items-start justify-between">
         {steps.map((step, index) => {
           const isCompleted = completedSteps.includes(step.number)
@@ -28,14 +28,14 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
             index < steps.length - 1 && (completedSteps.includes(steps[index + 1].number) || currentStep > step.number)
 
           return (
-            <li key={step.number} className="relative flex-1 flex flex-col items-center">
+            <li key={step.number} className={cn("relative flex-1 flex flex-col", index === 0 ? "items-start" : index === steps.length - 1 ? "items-end" : "items-center")}>
               {/* Connector line between steps - positioned to connect bulbs edge to edge */}
               {index < steps.length - 1 && (
                 <div 
                   className="absolute h-[2px] z-0"
                   style={{
                     top: "18px", // Center of the bulb (36px/2 on mobile, scales with bulb)
-                    left: "calc(50% + 18px)", // Start from right edge of current bulb
+                    left: index === 0 ? "36px" : "calc(50% + 18px)", // Start from right edge of current bulb
                     right: "calc(-50% + 18px)", // End at left edge of next bulb
                   }}
                 >
@@ -56,7 +56,8 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 onClick={() => isClickable && onStepClick?.(step.number)}
                 disabled={!isClickable}
                 className={cn(
-                  "relative z-10 flex flex-col items-center w-full",
+                  "relative z-10 flex flex-col w-full",
+                  index === 0 ? "items-start" : index === steps.length - 1 ? "items-end" : "items-center",
                   "transition-all duration-200",
                   isClickable && "cursor-pointer group",
                   !isClickable && "cursor-not-allowed opacity-60",
@@ -274,7 +275,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                 </div>
 
                 {/* Step label - hidden on very small screens */}
-                <div className="text-center mt-2 w-full max-w-[50px] min-[460px]:max-w-[80px] sm:max-w-[120px]">
+                <div className={cn("mt-2 w-full max-w-[50px] min-[460px]:max-w-[80px] sm:max-w-[120px]", index === 0 ? "text-left" : index === steps.length - 1 ? "text-right" : "text-center")}>
                   <motion.div
                     className={cn(
                       "text-[10px] min-[460px]:text-xs sm:text-sm font-medium transition-colors duration-300 leading-tight",
