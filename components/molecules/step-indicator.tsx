@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { LightBulb } from "@/components/animations/light-bulb"
-import { ElectricBorder } from "@/components/animations/electric-border"
-import { LightningArc } from "@/components/animations/lightning-arc"
 
 interface Step {
   number: number
@@ -27,31 +24,33 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
           const isCompleted = completedSteps.includes(step.number)
           const isCurrent = currentStep === step.number
           const isClickable = isCompleted || isCurrent
-          const nextStepActive =
-            index < steps.length - 1 &&
-            (completedSteps.includes(steps[index + 1]!.number) || currentStep > step.number)
-
-          // Progress drives bulb brightness: dim for pending, glowing for current, fully lit for completed
-          const bulbProgress = isCompleted ? 100 : isCurrent ? 72 : 8
+          const nextStepCompleted =
+            index < steps.length - 1 && (completedSteps.includes(steps[index + 1].number) || currentStep > step.number)
 
           return (
             <li key={step.number} className="relative flex-1 flex flex-col items-center">
-              {/* Lightning arc connector between steps */}
+              {/* Connector line between steps - positioned to connect bulbs edge to edge */}
               {index < steps.length - 1 && (
-                <div
-                  className="absolute z-0"
+                <div 
+                  className="absolute h-[2px] z-0"
                   style={{
-                    top: "16px",
-                    left: "calc(50% + 22px)",
-                    right: "calc(-50% + 22px)",
-                    height: "20px",
+                    top: "18px", // Center of the bulb (36px/2 on mobile, scales with bulb)
+                    left: "calc(50% + 18px)", // Start from right edge of current bulb
+                    right: "calc(-50% + 18px)", // End at left edge of next bulb
                   }}
                 >
-                  <LightningArc isActive={nextStepActive} delay={index * 0.15} />
+                  <div className="h-full w-full bg-border">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-accent to-accent/40"
+                      initial={{ width: "0%" }}
+                      animate={{ width: nextStepCompleted ? "100%" : "0%" }}
+                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                    />
+                  </div>
                 </div>
               )}
 
-              {/* Step button */}
+              {/* Step button with light bulb */}
               <button
                 type="button"
                 onClick={() => isClickable && onStepClick?.(step.number)}
@@ -63,25 +62,199 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                   !isClickable && "cursor-not-allowed opacity-60",
                 )}
               >
-                {/* Light bulb + electric border container */}
-                <div className="relative flex items-center justify-center w-10 h-12 min-[460px]:w-14 min-[460px]:h-16">
-                  {/* Electric spinning border for active step */}
-                  <ElectricBorder isActive={isCurrent} />
+                {/* Light bulb container with responsive sizing */}
+                <div className="relative w-9 h-9 min-[460px]:w-12 min-[460px]:h-12">
+                  {isCurrent && (
+                    <>
+                      {/* Outer glow ring - scaled for mobile */}
+                      <motion.div
+                        className="absolute inset-[-12px] min-[460px]:inset-[-20px] rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, oklch(0.85 0.22 60 / 0.5) 0%, oklch(0.8 0.2 60 / 0.3) 40%, transparent 70%)",
+                          filter: "blur(12px)",
+                        }}
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{
+                          scale: [1, 1.4, 1],
+                          opacity: [0.7, 1, 0.7],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      {/* Middle glow layer */}
+                      <motion.div
+                        className="absolute inset-[-8px] min-[460px]:inset-[-12px] rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, oklch(0.9 0.24 60 / 0.6) 0%, oklch(0.85 0.22 60 / 0.4) 50%, transparent 70%)",
+                          filter: "blur(8px)",
+                        }}
+                        initial={{ scale: 0.3, opacity: 0 }}
+                        animate={{
+                          scale: [0.8, 1.2, 0.8],
+                          opacity: [0.8, 1, 0.8],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      {/* Inner bright core glow */}
+                      <motion.div
+                        className="absolute inset-[-4px] min-[460px]:inset-[-6px] rounded-full"
+                        style={{
+                          background: "radial-gradient(circle, oklch(0.95 0.25 60 / 0.8) 0%, transparent 60%)",
+                          filter: "blur(4px)",
+                        }}
+                        initial={{ scale: 0.2, opacity: 0 }}
+                        animate={{
+                          scale: [0.6, 1, 0.6],
+                          opacity: [0.9, 1, 0.9],
+                        }}
+                        transition={{
+                          duration: 1,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </>
+                  )}
 
-                  {/* Scaled LightBulb - 80x100 SVG scaled to fit the container */}
-                  <div
+                  <motion.svg
+                    viewBox="0 0 48 48"
                     className={cn(
-                      "relative transition-transform duration-200",
+                      "relative z-10 w-full h-full transition-all duration-300",
                       isClickable && "group-hover:scale-110"
                     )}
-                    style={{ overflow: "hidden", width: 40, height: 50 }}
                   >
-                    <div style={{ transform: "scale(0.5)", transformOrigin: "0 0", width: 80 }}>
-                      <LightBulb progress={bulbProgress} showPercent={false} />
-                    </div>
-                  </div>
+                    {/* Bulb base/socket */}
+                    <rect
+                      x="18"
+                      y="32"
+                      width="12"
+                      height="8"
+                      rx="1"
+                      className={cn(
+                        "transition-colors duration-500",
+                        isCompleted || isCurrent ? "fill-accent/80" : "fill-muted",
+                      )}
+                    />
 
-                  {/* Step number badge for non-completed steps */}
+                    <motion.path
+                      d="M24 8C19.5817 8 16 11.5817 16 16C16 18.7614 17.3433 21.1845 19.4 22.6V28C19.4 29.3255 20.4745 30.4 21.8 30.4H26.2C27.5255 30.4 28.6 29.3255 28.6 28V22.6C30.6567 21.1845 32 18.7614 32 16C32 11.5817 28.4183 8 24 8Z"
+                      className={cn(
+                        "transition-all duration-500",
+                        isCompleted
+                          ? "fill-accent/40 stroke-accent"
+                          : isCurrent
+                            ? "fill-accent/50 stroke-accent"
+                            : "fill-background stroke-muted-foreground/50",
+                      )}
+                      strokeWidth="1.5"
+                      initial={false}
+                      animate={
+                        isCurrent
+                          ? {
+                              fill: [
+                                "oklch(0.85 0.22 60 / 0.3)",
+                                "oklch(0.9 0.24 60 / 0.6)",
+                                "oklch(0.85 0.22 60 / 0.3)",
+                              ],
+                            }
+                          : {}
+                      }
+                      transition={{
+                        duration: 2,
+                        repeat: isCurrent ? Number.POSITIVE_INFINITY : 0,
+                        ease: "easeInOut",
+                      }}
+                    />
+
+                    {(isCompleted || isCurrent) && (
+                      <motion.path
+                        d="M24 14V22M21 18H27"
+                        className="stroke-accent"
+                        strokeWidth={isCurrent ? "3" : "2"}
+                        strokeLinecap="round"
+                        initial={{ opacity: 0, filter: "drop-shadow(0 0 0px oklch(0.9 0.24 60))" }}
+                        animate={{
+                          opacity: isCompleted ? 1 : [0.6, 1, 0.6],
+                          filter: isCurrent
+                            ? [
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
+                                "drop-shadow(0 0 8px oklch(0.95 0.25 60)) drop-shadow(0 0 12px oklch(0.9 0.24 60 / 0.8))",
+                                "drop-shadow(0 0 3px oklch(0.9 0.24 60)) drop-shadow(0 0 6px oklch(0.85 0.22 60 / 0.6))",
+                              ]
+                            : "drop-shadow(0 0 3px oklch(0.9 0.24 60))",
+                        }}
+                        transition={{
+                          duration: isCurrent ? 1.5 : 0.5,
+                          repeat: isCurrent ? Number.POSITIVE_INFINITY : 0,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    )}
+
+                    {isCurrent && (
+                      <motion.circle
+                        cx="24"
+                        cy="18"
+                        r="10"
+                        className="fill-accent/40"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{
+                          scale: [0.9, 1.3, 0.9],
+                          opacity: [0.5, 0.8, 0.5],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    )}
+
+                    {isCompleted && (
+                      <motion.circle
+                        cx="24"
+                        cy="18"
+                        r="12"
+                        className="fill-accent/30"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0.4, 0.7, 0.4],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    )}
+
+                    {/* Check mark for completed steps */}
+                    {isCompleted && (
+                      <motion.path
+                        d="M20 18L23 21L28 16"
+                        className="stroke-accent"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      />
+                    )}
+                  </motion.svg>
+
+                  {/* Active step number badge - scaled for mobile */}
                   {!isCompleted && (
                     <div
                       className={cn(
@@ -100,7 +273,7 @@ export function StepIndicator({ steps, currentStep, completedSteps, onStepClick 
                   )}
                 </div>
 
-                {/* Step label */}
+                {/* Step label - hidden on very small screens */}
                 <div className="text-center mt-2 w-full max-w-[50px] min-[460px]:max-w-[80px] sm:max-w-[120px]">
                   <motion.div
                     className={cn(
