@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface LightBulbProps {
-  progress: number // 0-100
-  className?: string
+  progress: number; // 0-100
+  className?: string;
+  showPercent?: boolean;
 }
 
 /**
@@ -13,21 +14,25 @@ interface LightBulbProps {
  * Brightness increases with form progress
  * Flickers and surges when progress changes
  */
-export function LightBulb({ progress, className = "" }: LightBulbProps) {
-  const [isFlickering, setIsFlickering] = useState(false)
+export function LightBulb({
+  progress,
+  className = "",
+  showPercent = true,
+}: LightBulbProps) {
+  const [isFlickering, setIsFlickering] = useState(false);
 
   // Trigger flicker effect when progress changes
   useEffect(() => {
     if (progress > 0) {
-      setIsFlickering(true)
-      const timer = setTimeout(() => setIsFlickering(false), 600)
-      return () => clearTimeout(timer)
+      setIsFlickering(true);
+      const timer = setTimeout(() => setIsFlickering(false), 600);
+      return () => clearTimeout(timer);
     }
-  }, [progress])
+  }, [progress]);
 
   // Calculate brightness based on progress
-  const brightness = Math.max(0.2, progress / 100)
-  const glowIntensity = Math.max(0, (progress / 100) * 20)
+  const brightness = Math.max(0.2, progress / 100);
+  const glowIntensity = Math.max(0, (progress / 100) * 20);
 
   return (
     <div className={`relative ${className}`}>
@@ -110,24 +115,55 @@ export function LightBulb({ progress, className = "" }: LightBulbProps) {
           strokeLinecap="round"
           fill="none"
           animate={{
-            opacity: isFlickering ? [brightness, brightness * 1.5, brightness] : brightness,
+            opacity: isFlickering
+              ? [brightness, brightness * 1.5, brightness]
+              : brightness,
             strokeWidth: isFlickering ? [2, 2.5, 2] : 2,
           }}
           transition={{ duration: 0.2 }}
         />
 
         {/* Base threading */}
-        <rect x="30" y="55" width="20" height="4" fill="oklch(0.4 0.05 85)" rx="1" />
-        <rect x="30" y="60" width="20" height="4" fill="oklch(0.35 0.05 85)" rx="1" />
-        <rect x="30" y="65" width="20" height="4" fill="oklch(0.4 0.05 85)" rx="1" />
+        <rect
+          x="30"
+          y="55"
+          width="20"
+          height="4"
+          fill="oklch(0.4 0.05 85)"
+          rx="1"
+        />
+        <rect
+          x="30"
+          y="60"
+          width="20"
+          height="4"
+          fill="oklch(0.35 0.05 85)"
+          rx="1"
+        />
+        <rect
+          x="30"
+          y="65"
+          width="20"
+          height="4"
+          fill="oklch(0.4 0.05 85)"
+          rx="1"
+        />
 
         {/* Base contact */}
-        <rect x="32" y="70" width="16" height="8" fill="oklch(0.3 0.05 85)" rx="2" />
+        <rect
+          x="32"
+          y="70"
+          width="16"
+          height="8"
+          fill="oklch(0.3 0.05 85)"
+          rx="2"
+        />
       </motion.svg>
 
       {/* Progress percentage */}
       <motion.div
         className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold"
+        style={{ display: showPercent ? undefined : "none" }}
         animate={{
           color: `oklch(${0.6 + brightness * 0.3} 0.2 85)`,
           textShadow: `0 0 ${glowIntensity / 2}px oklch(0.9 0.25 85)`,
@@ -136,5 +172,5 @@ export function LightBulb({ progress, className = "" }: LightBulbProps) {
         {Math.round(progress)}%
       </motion.div>
     </div>
-  )
+  );
 }
