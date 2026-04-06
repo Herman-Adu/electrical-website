@@ -86,30 +86,28 @@ export function MultiStepFormContainer() {
       />
 
       {/* Step Content with Animation */}
-      <div className="max-w-4xl mx-auto w-full">
-        <div className="bg-card border border-border rounded-lg p-6 sm:p-8 min-h-[500px] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-5 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent/20" />
-          </div>
-
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <div key={currentStep}>{renderStep()}</div>
-            </AnimatePresence>
-          </div>
+      <div className="bg-card border border-border rounded-lg p-6 sm:p-8 min-h-[500px] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent/20" />
         </div>
 
-        <div className="p-4 bg-accent/10 border border-accent/30 rounded-lg mt-6">
-          <p className="text-sm font-semibold text-foreground mb-2">Electric Animation System</p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>• Light bulb powers up as you progress through steps</li>
-            <li>• Lightning arcs flow between completed steps</li>
-            <li>• Electric current animates around active step border</li>
-            <li>• Small sparks burst when current completes the circuit</li>
-            <li>• Power surge flash effect on step completion</li>
-            <li>• All animations respect prefers-reduced-motion</li>
-          </ul>
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <div key={currentStep}>{renderStep()}</div>
+          </AnimatePresence>
         </div>
+      </div>
+
+      <div className="p-4 bg-accent/10 border border-accent/30 rounded-lg">
+        <p className="text-sm font-semibold text-foreground mb-2">Electric Animation System</p>
+        <ul className="text-sm text-muted-foreground space-y-1">
+          <li>• Light bulb powers up as you progress through steps</li>
+          <li>• Lightning arcs flow between completed steps</li>
+          <li>• Electric current animates around active step border</li>
+          <li>• Small sparks burst when current completes the circuit</li>
+          <li>• Power surge flash effect on step completion</li>
+          <li>• All animations respect prefers-reduced-motion</li>
+        </ul>
       </div>
     </div>
   )
