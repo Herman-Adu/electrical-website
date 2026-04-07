@@ -273,7 +273,7 @@ export function ReviewStep() {
           )}
         </div>
 
-  <div
+        <div
           className={cn(
             "rounded-lg border bg-muted/30 p-4 transition-colors",
             data.gdprConsent ? "border-accent/40" : "border-destructive/50",
@@ -301,7 +301,9 @@ export function ReviewStep() {
         <div
           className={cn(
             "rounded-lg border bg-muted/30 p-4 transition-colors",
-            data.privacyTermsAccepted ? "border-accent/40" : "border-destructive/50",
+            data.privacyTermsAccepted
+              ? "border-accent/40"
+              : "border-destructive/50",
           )}
         >
           <label className="flex items-start gap-3 text-sm text-foreground cursor-pointer">
