@@ -89,6 +89,7 @@ export function generateQuotationBusinessEmail(
             reference: requestId,
             referenceLabel: "Request ID",
             status: isUrgent ? "Urgent" : "New",
+            statusTone: isUrgent ? "urgent" : "normal",
           })}
 
           <!-- Body -->

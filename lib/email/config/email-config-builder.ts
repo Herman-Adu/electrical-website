@@ -79,6 +79,8 @@ export interface ResolvedEmailConfig {
   urgency: Record<UrgencyLevel, UrgencyColorSet>;
 }
 
+type HeaderStatusTone = "normal" | "urgent" | "emergency";
+
 const FALLBACK_LOGO_URL = "/images/brand-assets/nexgen-logo-full.png";
 
 function resolveAbsoluteUrl(path: string): string {
@@ -288,6 +290,7 @@ export function getSharedHeaderHtml(
     reference: string;
     referenceLabel?: string;
     status?: string;
+    statusTone?: HeaderStatusTone;
     brandTitle?: string;
   },
 ): string {
@@ -295,8 +298,30 @@ export function getSharedHeaderHtml(
   const end = gradientEnd ?? config.brand.headerGradientEnd;
   const brandTitle = meta?.brandTitle ?? config.company.name;
   const referenceLabel = meta?.referenceLabel ?? "Reference";
+  const statusTone = meta?.statusTone ?? "normal";
+  const statusStyleByTone: Record<
+    HeaderStatusTone,
+    { bg: string; text: string; border: string }
+  > = {
+    normal: {
+      bg: BRAND_COLORS.accentGreen,
+      text: BRAND_COLORS.headerGradient.start,
+      border: BRAND_COLORS.accentGreen,
+    },
+    urgent: {
+      bg: URGENCY_COLORS.urgent.badgeBg,
+      text: URGENCY_COLORS.urgent.badgeText,
+      border: URGENCY_COLORS.urgent.bannerBorder,
+    },
+    emergency: {
+      bg: URGENCY_COLORS.emergency.badgeBg,
+      text: URGENCY_COLORS.emergency.badgeText,
+      border: URGENCY_COLORS.emergency.bannerBorder,
+    },
+  };
+  const statusStyle = statusStyleByTone[statusTone];
   const statusHtml = meta?.status
-    ? `<span style="display:inline-block;background-color:#ffffff;color:${config.brand.primaryDark};border:1px solid ${config.brand.primary};padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.4px;">${meta.status}</span>`
+    ? `<span style="display:inline-block;background-color:${statusStyle.bg};color:${statusStyle.text};border:1px solid ${statusStyle.border};padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.4px;">${meta.status}</span>`
     : "";
   const metaRow = meta
     ? `

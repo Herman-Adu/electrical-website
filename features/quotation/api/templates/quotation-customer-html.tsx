@@ -59,6 +59,12 @@ export function generateQuotationCustomerEmail(
     timeline,
     config,
   } = props;
+  const statusTone =
+    timeline === "emergency"
+      ? "emergency"
+      : timeline === "urgent"
+        ? "urgent"
+        : "normal";
 
   return `
 <!DOCTYPE html>
@@ -80,6 +86,7 @@ export function generateQuotationCustomerEmail(
             reference: requestId,
             referenceLabel: "Reference",
             status: "Received",
+            statusTone,
           })}
 
           <!-- Body -->

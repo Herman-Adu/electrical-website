@@ -16,6 +16,7 @@ interface ContactCustomerEmailProps {
   referenceId: string;
   subject: string;
   inquiryType: string;
+  priority?: string;
   config: ResolvedEmailConfig;
 }
 
@@ -35,10 +36,19 @@ export function generateContactCustomerEmail({
   referenceId,
   subject,
   inquiryType,
+  priority,
   config,
 }: ContactCustomerEmailProps): string {
   const firstName = customerName.split(" ")[0];
   const inquiryLabel = inquiryTypeLabels[inquiryType] || inquiryType;
+  const statusTone =
+    priority === "emergency"
+      ? "emergency"
+      : priority === "urgent" || priority === "high"
+        ? "urgent"
+        : "normal";
+  const supportPhone = config.company.phone;
+  const supportPhoneHref = supportPhone.replace(/[^\d+]/g, "");
 
   return `
 <!DOCTYPE html>
@@ -60,6 +70,7 @@ export function generateContactCustomerEmail({
             reference: referenceId,
             referenceLabel: "Reference",
             status: "Received",
+            statusTone,
           })}
 
           <!-- Content -->
@@ -87,33 +98,26 @@ export function generateContactCustomerEmail({
                 </tr>
               </table>
 
-              <!-- Summary/Detail Grid (2-column max) -->
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 16px;">
+              <!-- Summary + Next Steps (single-column stack) -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 16px; background-color: ${BRAND_COLORS.bgBodyAlt}; border-radius: 8px; border: 1px solid ${BRAND_COLORS.borderLight};">
                 <tr>
-                  <td style="width: 50%; vertical-align: top; padding: 0 8px 0 0;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: ${BRAND_COLORS.bgBodyAlt}; border-radius: 8px; border: 1px solid ${BRAND_COLORS.borderLight};">
-                      <tr>
-                        <td style="padding: 16px;">
-                          <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Inquiry Summary</p>
-                          <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLighter}; font-size: 12px;">Subject</p>
-                          <p style="margin: 0; color: ${BRAND_COLORS.textDark}; font-size: 14px; font-weight: 500; line-height: 1.6;">${subject}</p>
-                        </td>
-                      </tr>
-                    </table>
+                  <td style="padding: 16px;">
+                    <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Inquiry Summary</p>
+                    <p style="margin: 0 0 8px; color: ${BRAND_COLORS.textLighter}; font-size: 12px;">Subject</p>
+                    <p style="margin: 0; color: ${BRAND_COLORS.textDark}; font-size: 14px; font-weight: 500; line-height: 1.6;">${subject}</p>
                   </td>
-                  <td style="width: 50%; vertical-align: top; padding: 0 0 0 8px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #fffbeb; border-radius: 8px; border: 1px solid #fcd34d;">
-                      <tr>
-                        <td style="padding: 16px;">
-                          <p style="margin: 0 0 12px; color: #92400e; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Next Steps</p>
-                          <ul style="margin: 0; padding: 0 0 0 18px; color: #78350f; font-size: 13px; line-height: 1.7;">
-                            <li>${SLA.contact.description}</li>
-                            <li>We'll respond via your preferred contact method</li>
-                            <li>Keep your reference number handy for follow-ups</li>
-                          </ul>
-                        </td>
-                      </tr>
-                    </table>
+                </tr>
+              </table>
+
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 16px; background-color: #fffbeb; border-radius: 8px; border: 1px solid #fcd34d;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <p style="margin: 0 0 12px; color: #92400e; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Next Steps</p>
+                    <ul style="margin: 0; padding: 0 0 0 18px; color: #78350f; font-size: 13px; line-height: 1.7;">
+                      <li>${SLA.contact.description}</li>
+                      <li>We'll respond via your preferred contact method</li>
+                      <li>Keep your reference number handy for follow-ups</li>
+                    </ul>
                   </td>
                 </tr>
               </table>
@@ -131,7 +135,7 @@ export function generateContactCustomerEmail({
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="contact-customer-cta-table" style="margin: 0 0 0 auto;">
                       <tr>
                         <td style="border-radius: 6px; background-color: ${config.brand.primary}; text-align: center;">
-                          <a href="tel:${config.company.phone}" style="display: inline-block; padding: 10px 18px; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600; line-height: 1;">Call ${config.company.phone}</a>
+                          <a href="tel:${supportPhoneHref}" style="display: inline-block; padding: 10px 18px; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600; line-height: 1;">Call ${supportPhone}</a>
                         </td>
                       </tr>
                     </table>
@@ -140,7 +144,7 @@ export function generateContactCustomerEmail({
               </table>
 
               <p style="margin: 24px 0 0; color: #52525b; font-size: 14px; line-height: 1.6;">
-                If you have any urgent questions, please don't hesitate to call us at <strong>${config.company.phone}</strong>.
+                If you have any urgent questions, please don't hesitate to call us at <strong>${supportPhone}</strong>.
               </p>
 
               <p style="margin: 24px 0 0; color: #52525b; font-size: 16px; line-height: 1.6;">

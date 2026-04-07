@@ -49,16 +49,6 @@ const sectorLabels: Record<string, string> = {
   "not-applicable": "Not Applicable",
 };
 
-const priorityColors: Record<
-  string,
-  { bg: string; text: string; border: string }
-> = {
-  low: { bg: "#dcfce7", text: "#166534", border: "#22c55e" },
-  normal: { bg: "#dbeafe", text: "#1e40af", border: "#3b82f6" },
-  high: { bg: "#fed7aa", text: "#c2410c", border: "#f97316" },
-  urgent: { bg: "#fecaca", text: "#dc2626", border: "#ef4444" },
-};
-
 const contactMethodLabels: Record<string, string> = {
   email: "Email",
   phone: "Phone",
@@ -91,7 +81,12 @@ export function generateContactBusinessEmail({
   newsletterOptIn,
   config,
 }: ContactBusinessEmailProps): string {
-  const priorityStyle = priorityColors[priority] || priorityColors.normal;
+  const statusTone =
+    priority === "emergency"
+      ? "emergency"
+      : priority === "urgent" || priority === "high"
+        ? "urgent"
+        : "normal";
   const submittedAt = new Date().toLocaleString("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
@@ -122,6 +117,7 @@ export function generateContactBusinessEmail({
             reference: referenceId,
             referenceLabel: "Reference",
             status: `${priority} Priority`,
+            statusTone,
           })}
 
           <!-- Content -->
