@@ -45,11 +45,11 @@ export function PersonalInfoStep() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<PersonalInfoInput>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: data.personalInfo,
-    mode: "onSubmit",
+    mode: "onChange",
     reValidateMode: "onChange",
   });
 
@@ -134,6 +134,7 @@ export function PersonalInfoStep() {
         <div className="flex justify-end pt-4">
           <button
             type="submit"
+            disabled={!isValid}
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue

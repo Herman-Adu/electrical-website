@@ -60,6 +60,7 @@ export interface FormData {
   propertyInfo: PropertyInfo;
   schedulePreferences: SchedulePreferences;
   gdprConsent: boolean;
+  privacyTermsAccepted: boolean;
 }
 
 // Store state interface
@@ -76,6 +77,7 @@ interface FormStore {
   updatePropertyInfo: (data: Partial<PropertyInfo>) => void;
   updateSchedulePreferences: (data: Partial<SchedulePreferences>) => void;
   updateGdprConsent: (accepted: boolean) => void;
+  updatePrivacyTermsAccepted: (accepted: boolean) => void;
 
   // Navigation
   nextStep: () => void;
@@ -115,6 +117,7 @@ const initialData: FormData = {
     flexibleScheduling: false,
   },
   gdprConsent: false,
+  privacyTermsAccepted: false,
 };
 
 /**
@@ -166,6 +169,14 @@ export const useFormStore = create<FormStore>()(
           data: {
             ...state.data,
             gdprConsent: accepted,
+          },
+        })),
+
+      updatePrivacyTermsAccepted: (accepted) =>
+        set((state) => ({
+          data: {
+            ...state.data,
+            privacyTermsAccepted: accepted,
           },
         })),
 

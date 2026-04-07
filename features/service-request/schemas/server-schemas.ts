@@ -119,6 +119,11 @@ export const serverCompleteFormSchema = z.object({
       message: "GDPR consent is required",
     }),
   }),
+  privacyTermsAccepted: z.literal(true, {
+    errorMap: () => ({
+      message: "Privacy Policy and Terms acknowledgment is required",
+    }),
+  }),
 });
 
 // Business rule validations

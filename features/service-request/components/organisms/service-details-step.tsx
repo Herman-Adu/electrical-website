@@ -77,11 +77,11 @@ export function ServiceDetailsStep() {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<ServiceDetailsInput>({
     resolver: zodResolver(serviceDetailsSchema),
     defaultValues: data.serviceDetails,
-    mode: "onSubmit",
+    mode: "onChange",
     reValidateMode: "onChange",
   });
 
@@ -174,7 +174,8 @@ export function ServiceDetailsStep() {
 
           <button
             type="submit"
-            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 electric-glow-sm"
+            disabled={!isValid}
+            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
             <svg
