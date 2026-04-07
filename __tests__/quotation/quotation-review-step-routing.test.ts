@@ -4,7 +4,7 @@ import { resolveStepFromFieldPath } from "../../features/quotation/components/or
 describe("resolveStepFromFieldPath (quotation)", () => {
   it("maps contact fields to step 0", () => {
     expect(resolveStepFromFieldPath("contact.email")).toBe(0);
-    expect(resolveStepFromFieldPath("turnstileToken")).toBe(0);
+    expect(resolveStepFromFieldPath("turnstileToken")).toBe(6);
   });
 
   it("maps project type fields to step 1", () => {

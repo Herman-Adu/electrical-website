@@ -4,7 +4,7 @@ import { resolveStepFromFieldPath } from "../../features/contact/components/orga
 describe("resolveStepFromFieldPath", () => {
   it("maps contact fields to step 1", () => {
     expect(resolveStepFromFieldPath("contactInfo.email")).toBe(1);
-    expect(resolveStepFromFieldPath("turnstileToken")).toBe(1);
+    expect(resolveStepFromFieldPath("turnstileToken")).toBe(5);
   });
 
   it("maps inquiry fields to step 2", () => {
