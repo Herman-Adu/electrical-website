@@ -152,13 +152,13 @@ export function UnifiedSuccessMessage({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="w-full"
     >
-      <div className="mx-auto space-y-8 border-2 border-accent/30 rounded-lg p-8 bg-background/50">
+      <div className="mx-auto space-y-8 border-2 border-cyan-500/30 rounded-lg p-8 bg-background/50">
         {/* Header Section with Glassmorphic Effect */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative rounded-xl border border-accent/30 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md p-8 text-center"
+          className="relative rounded-xl border border-cyan-500/30 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md p-8 text-center"
         >
           {/* Success Icon */}
           <motion.div
