@@ -1,22 +1,25 @@
 /**
  * QUOTATION STEP: AdditionalRequirementsStep
- * 
+ *
  * Collects compliance requirements, special needs,
  * contact preferences, and terms acceptance.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Settings } from "lucide-react"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { FormSelect } from "@/components/atoms/form-select"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { FormStepContainer } from "@/components/molecules/form-step-container"
-import { quotationAdditionalSchema, type QuotationAdditionalInput } from "../../../schemas/quotation-schemas"
-import { cn } from "@/lib/utils"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Settings } from "lucide-react";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { FormSelect } from "@/components/atoms/form-select";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { FormStepContainer } from "@/components/molecules/form-step-container";
+import {
+  quotationAdditionalSchema,
+  type QuotationAdditionalInput,
+} from "../../../schemas/quotation-schemas";
+import { cn } from "@/lib/utils";
 
 const complianceOptions = [
   { value: "bs7671", label: "BS 7671 (18th Edition)" },
@@ -26,25 +29,25 @@ const complianceOptions = [
   { value: "health-safety", label: "Health & Safety Compliance" },
   { value: "environmental", label: "Environmental Standards" },
   { value: "none", label: "None / Not Sure" },
-]
+];
 
 const contactMethodOptions = [
-  { 
-    value: "email", 
+  {
+    value: "email",
     label: "Email",
-    description: "Prefer to be contacted by email"
+    description: "Prefer to be contacted by email",
   },
-  { 
-    value: "phone", 
+  {
+    value: "phone",
     label: "Phone",
-    description: "Prefer to be contacted by phone"
+    description: "Prefer to be contacted by phone",
   },
-  { 
-    value: "either", 
+  {
+    value: "either",
     label: "Either",
-    description: "Happy to be contacted by email or phone"
+    description: "Happy to be contacted by email or phone",
   },
-]
+];
 
 const howDidYouHearOptions = [
   { value: "", label: "Please select..." },
@@ -54,15 +57,15 @@ const howDidYouHearOptions = [
   { value: "repeat-customer", label: "I'm a Repeat Customer" },
   { value: "advertisement", label: "Advertisement" },
   { value: "other", label: "Other" },
-]
+];
 
 interface AdditionalRequirementsStepProps {
-  defaultValues?: Partial<QuotationAdditionalInput>
-  onSubmit: (data: QuotationAdditionalInput) => void
-  onPrevious?: () => void
-  isFirstStep?: boolean
-  isLastStep?: boolean
-  isSubmitting?: boolean
+  defaultValues?: Partial<QuotationAdditionalInput>;
+  onSubmit: (data: QuotationAdditionalInput) => void;
+  onPrevious?: () => void;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
+  isSubmitting?: boolean;
 }
 
 export function AdditionalRequirementsStep({
@@ -89,17 +92,22 @@ export function AdditionalRequirementsStep({
       ...defaultValues,
     },
     mode: "onChange",
-  })
+  });
 
-  const selectedCompliance = watch("complianceRequirements") || []
+  const selectedCompliance = watch("complianceRequirements") || [];
 
   const toggleCompliance = (value: string) => {
-    const current = selectedCompliance
-    const updated = current.includes(value as QuotationAdditionalInput["complianceRequirements"][number])
+    const current = selectedCompliance;
+    const updated = current.includes(
+      value as QuotationAdditionalInput["complianceRequirements"][number],
+    )
       ? current.filter((c) => c !== value)
-      : [...current, value as QuotationAdditionalInput["complianceRequirements"][number]]
-    setValue("complianceRequirements", updated, { shouldValidate: true })
-  }
+      : [
+          ...current,
+          value as QuotationAdditionalInput["complianceRequirements"][number],
+        ];
+    setValue("complianceRequirements", updated, { shouldValidate: true });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -131,21 +139,31 @@ export function AdditionalRequirementsStep({
                   onClick={() => toggleCompliance(option.value)}
                   className={cn(
                     "flex items-center gap-2 p-3 rounded-lg border text-left text-sm transition-all",
-                    selectedCompliance.includes(option.value as QuotationAdditionalInput["complianceRequirements"][number])
+                    selectedCompliance.includes(
+                      option.value as QuotationAdditionalInput["complianceRequirements"][number],
+                    )
                       ? "border-accent bg-accent/10 text-foreground"
-                      : "border-input hover:border-accent/50 text-muted-foreground hover:text-foreground"
+                      : "border-input hover:border-accent/50 text-muted-foreground hover:text-foreground",
                   )}
                 >
                   <div
                     className={cn(
                       "w-4 h-4 rounded border flex items-center justify-center",
-                      selectedCompliance.includes(option.value as QuotationAdditionalInput["complianceRequirements"][number])
+                      selectedCompliance.includes(
+                        option.value as QuotationAdditionalInput["complianceRequirements"][number],
+                      )
                         ? "bg-accent border-accent"
-                        : "border-input"
+                        : "border-input",
                     )}
                   >
-                    {selectedCompliance.includes(option.value as QuotationAdditionalInput["complianceRequirements"][number]) && (
-                      <svg className="w-3 h-3 text-accent-foreground" fill="currentColor" viewBox="0 0 20 20">
+                    {selectedCompliance.includes(
+                      option.value as QuotationAdditionalInput["complianceRequirements"][number],
+                    ) && (
+                      <svg
+                        className="w-3 h-3 text-accent-foreground"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -207,15 +225,24 @@ export function AdditionalRequirementsStep({
               {...register("marketingConsent")}
             />
 
-            <FormCheckbox
-              label="I accept the terms and conditions"
-              description="By submitting this form, you agree to our terms of service and privacy policy"
-              error={errors.termsAccepted?.message}
-              {...register("termsAccepted")}
-            />
+            <div
+              className={cn(
+                "rounded-lg border p-3 transition-colors",
+                watch("termsAccepted")
+                  ? "border-accent/40"
+                  : "border-destructive/50",
+              )}
+            >
+              <FormCheckbox
+                label="I accept the terms and conditions"
+                description="By submitting this form, you agree to our terms of service and privacy policy"
+                error={errors.termsAccepted?.message}
+                {...register("termsAccepted")}
+              />
+            </div>
           </div>
         </div>
       </FormStepContainer>
     </form>
-  )
+  );
 }

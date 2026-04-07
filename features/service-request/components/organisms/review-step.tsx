@@ -11,6 +11,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useFormStore } from "../../hooks/use-form-store";
@@ -83,6 +84,8 @@ export function ReviewStep() {
       setIsSubmitted(false);
       setRequestId(null);
       setError(null);
+      resetForm();
+      useFormStore.persist.clearStorage();
 
       const progressAnchor = document.getElementById(
         SERVICE_PROGRESS_ANCHOR_ID,
@@ -134,8 +137,6 @@ export function ReviewStep() {
 
       if (result.success) {
         setRequestId(result.data.requestId);
-        resetForm();
-        useFormStore.persist.clearStorage();
         setIsSubmitted(true);
       } else {
         setError(result.error);
@@ -272,7 +273,12 @@ export function ReviewStep() {
           )}
         </div>
 
-        <div className="rounded-lg border border-border bg-muted/30 p-4">
+  <div
+          className={cn(
+            "rounded-lg border bg-muted/30 p-4 transition-colors",
+            data.gdprConsent ? "border-accent/40" : "border-destructive/50",
+          )}
+        >
           <label className="flex items-start gap-3 text-sm text-foreground cursor-pointer">
             <input
               type="checkbox"
@@ -283,15 +289,22 @@ export function ReviewStep() {
                   setError(null);
                 }
               }}
-              className="mt-0.5 h-4 w-4 rounded border-border accent-accent"
+              className="mt-0.5 h-4 w-4 rounded accent-accent"
             />
             <span>
               I consent to the processing of my personal data for handling this
               service request in line with the Privacy Policy.
             </span>
           </label>
+        </div>
 
-          <label className="mt-3 flex items-start gap-3 text-sm text-foreground cursor-pointer">
+        <div
+          className={cn(
+            "rounded-lg border bg-muted/30 p-4 transition-colors",
+            data.privacyTermsAccepted ? "border-accent/40" : "border-destructive/50",
+          )}
+        >
+          <label className="flex items-start gap-3 text-sm text-foreground cursor-pointer">
             <input
               type="checkbox"
               checked={data.privacyTermsAccepted}
@@ -301,7 +314,7 @@ export function ReviewStep() {
                   setError(null);
                 }
               }}
-              className="mt-0.5 h-4 w-4 rounded border-border accent-accent"
+              className="mt-0.5 h-4 w-4 rounded accent-accent"
             />
             <span>I have read the Privacy Policy and Terms.</span>
           </label>

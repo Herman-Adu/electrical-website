@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * ATOMIC COMPONENT: RadioGroup
@@ -6,31 +6,46 @@
  * Custom radio buttons with label and description support.
  */
 
-import { forwardRef, type InputHTMLAttributes } from "react"
-import { cn } from "@/lib/utils"
+import { forwardRef, type InputHTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
 interface RadioOption {
-  value: string
-  label: string
-  description?: string
+  value: string;
+  label: string;
+  description?: string;
 }
 
-interface RadioGroupProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
-  label?: string
-  options: RadioOption[]
-  error?: string
-  value?: string
-  onValueChange?: (value: string) => void
+interface RadioGroupProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
+  label?: string;
+  options: RadioOption[];
+  error?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
-  ({ label, options, error, value, onValueChange, className, ...props }, ref) => {
+  (
+    {
+      label,
+      options,
+      error,
+      value,
+      onValueChange,
+      className,
+      required,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div className="space-y-3">
         {label && (
           <label className="text-sm font-medium text-foreground">
             {label}
-            {props.required && <span className="text-destructive ml-1">*</span>}
+            {required && <span className="text-destructive ml-1">*</span>}
           </label>
         )}
 
@@ -41,7 +56,9 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
               className={cn(
                 "flex items-start gap-3 p-4 rounded-lg border cursor-pointer",
                 "transition-all duration-200",
-                value === option.value ? "border-accent bg-accent/5" : "border-input hover:border-accent/50",
+                value === option.value
+                  ? "border-accent bg-accent/5"
+                  : "border-input hover:border-accent/50",
                 className,
               )}
             >
@@ -55,8 +72,14 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                 {...props}
               />
               <div className="flex-1">
-                <div className="font-medium text-foreground">{option.label}</div>
-                {option.description && <div className="text-sm text-muted-foreground mt-1">{option.description}</div>}
+                <div className="font-medium text-foreground">
+                  {option.label}
+                </div>
+                {option.description && (
+                  <div className="text-sm text-muted-foreground mt-1">
+                    {option.description}
+                  </div>
+                )}
               </div>
             </label>
           ))}
@@ -64,8 +87,8 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
 
         {error && <p className="text-sm text-destructive">{error}</p>}
       </div>
-    )
+    );
   },
-)
+);
 
-RadioGroup.displayName = "RadioGroup"
+RadioGroup.displayName = "RadioGroup";
