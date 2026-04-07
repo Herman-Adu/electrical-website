@@ -112,8 +112,11 @@ export function ReviewStepDisplay({ data, onEdit }: ReviewStepDisplayProps) {
             <dd className="text-foreground font-medium">
               {data.propertyInfo.address}
               <br />
-              {data.propertyInfo.city}, {data.propertyInfo.state}{" "}
-              {data.propertyInfo.zipCode}
+              {data.propertyInfo.city}
+              {data.propertyInfo.county
+                ? `, ${data.propertyInfo.county}`
+                : ""}{" "}
+              {data.propertyInfo.postcode}
             </dd>
           </div>
           {data.propertyInfo.accessInstructions && (

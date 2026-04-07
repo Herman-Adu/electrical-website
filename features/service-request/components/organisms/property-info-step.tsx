@@ -5,16 +5,19 @@
  * Follows the same pattern as previous steps.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { FormInput } from "@/components/atoms/form-input"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { useFormStore } from "../../hooks/use-form-store"
-import { propertyInfoSchema, type PropertyInfoInput } from "../../schemas/schemas"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { FormInput } from "@/components/atoms/form-input";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { useFormStore } from "../../hooks/use-form-store";
+import {
+  propertyInfoSchema,
+  type PropertyInfoInput,
+} from "../../schemas/schemas";
 
 const PROPERTY_TYPE_OPTIONS = [
   {
@@ -27,10 +30,10 @@ const PROPERTY_TYPE_OPTIONS = [
     label: "Commercial",
     description: "Office, retail, or industrial property",
   },
-]
+];
 
 export function PropertyInfoStep() {
-  const { data, updatePropertyInfo, nextStep, prevStep } = useFormStore()
+  const { data, updatePropertyInfo, nextStep, prevStep } = useFormStore();
 
   const {
     register,
@@ -39,19 +42,22 @@ export function PropertyInfoStep() {
     formState: { errors, isValid },
   } = useForm<PropertyInfoInput>({
     resolver: zodResolver(propertyInfoSchema),
-    defaultValues: data.propertyInfo,
+    defaultValues: {
+      ...data.propertyInfo,
+      propertyType: data.propertyInfo.propertyType || undefined,
+    },
     mode: "onChange",
     reValidateMode: "onChange",
-  })
+  });
 
   const onSubmit = (formData: PropertyInfoInput) => {
-    updatePropertyInfo(formData)
-    nextStep()
-  }
+    updatePropertyInfo(formData);
+    nextStep();
+  };
 
   const onError = (_errors: Record<string, unknown>) => {
     // Validation errors are displayed inline by react-hook-form
-  }
+  };
 
   return (
     <motion.div
@@ -62,8 +68,12 @@ export function PropertyInfoStep() {
     >
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">Property Information</h2>
-          <p className="text-muted-foreground">Where should our electrician meet you?</p>
+          <h2 className="text-2xl font-semibold text-foreground">
+            Property Information
+          </h2>
+          <p className="text-muted-foreground">
+            Where should our electrician meet you?
+          </p>
         </div>
 
         {/* Property Type */}
@@ -139,8 +149,18 @@ export function PropertyInfoStep() {
             onClick={prevStep}
             className="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-secondary/80"
           >
-            <svg className="inline-block mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="inline-block mr-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             Previous
           </button>
@@ -151,12 +171,22 @@ export function PropertyInfoStep() {
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
-            <svg className="inline-block ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="inline-block ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
       </form>
     </motion.div>
-  )
+  );
 }

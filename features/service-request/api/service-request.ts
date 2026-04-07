@@ -5,10 +5,12 @@ import {
   serverCompleteFormSchema,
   validateBusinessRules,
 } from "../schemas/server-schemas";
+import { env } from "@/app/env";
 import { sanitizeInput } from "@/lib/sanitize/input-sanitizer";
 import { sendServiceRequestEmails } from "./email-service";
 import { rateLimiters, getClientIdentifier } from "@/lib/security/rate-limiter";
 import { securityCheck } from "@/lib/security/csrf";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
 import type { ActionResult } from "@/lib/actions/action.types";
 
 export async function submitServiceRequest(
@@ -70,6 +72,22 @@ export async function submitServiceRequest(
             .map((i) => `${i.path.join(".")}: ${i.message}`)
             .join(", "),
         fieldErrors,
+      };
+    }
+
+    const turnstileResult = await verifyTurnstileToken({
+      token: validationResult.data.turnstileToken,
+      clientId,
+      headersList,
+      secretKey: env.TURNSTILE_SECRET_KEY,
+      siteUrl: env.NEXT_PUBLIC_SITE_URL,
+      logContext: "service",
+    });
+
+    if (!turnstileResult.success) {
+      return {
+        success: false,
+        error: turnstileResult.error,
       };
     }
 
@@ -149,6 +167,10 @@ function sanitizeFormData(data: unknown): unknown {
         formData.schedulePreferences?.flexibleScheduling,
       ),
     },
+    turnstileToken:
+      typeof formData.turnstileToken === "string"
+        ? formData.turnstileToken
+        : "",
     gdprConsent: Boolean(formData.gdprConsent),
     privacyTermsAccepted: Boolean(formData.privacyTermsAccepted),
   };

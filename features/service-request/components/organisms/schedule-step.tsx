@@ -5,18 +5,20 @@
  * Demonstrates date picker components with minimum date constraints.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { DatePicker } from "@/components/atoms/date-picker"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { useFormStore } from "../../hooks/use-form-store"
-import { schedulePreferencesSchema, type SchedulePreferencesInput } from "../../schemas/schemas"
-import { FormInput } from "@/components/atoms/form-input" // Import FormInput here
-import { minDate } from "@/lib/utils/date-utils" // Declare the minDate variable here
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { DatePicker } from "@/components/atoms/date-picker";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { useFormStore } from "../../hooks/use-form-store";
+import {
+  schedulePreferencesSchema,
+  type SchedulePreferencesInput,
+} from "../../schemas/schemas";
+import { getUrgencyScheduleValidationError } from "../../lib/urgency-schedule";
 
 const TIME_SLOT_OPTIONS = [
   {
@@ -34,10 +36,12 @@ const TIME_SLOT_OPTIONS = [
     label: "Evening",
     description: "5:00 PM - 8:00 PM",
   },
-]
+];
 
 export function ScheduleStep() {
-  const { data, updateSchedulePreferences, nextStep, prevStep } = useFormStore()
+  const { data, updateSchedulePreferences, nextStep, prevStep } =
+    useFormStore();
+  const urgency = data.serviceDetails.urgency;
 
   const {
     register,
@@ -47,25 +51,38 @@ export function ScheduleStep() {
     formState: { errors, isValid },
   } = useForm<SchedulePreferencesInput>({
     resolver: zodResolver(schedulePreferencesSchema),
-    defaultValues: data.schedulePreferences,
+    defaultValues: {
+      ...data.schedulePreferences,
+      preferredTimeSlot:
+        data.schedulePreferences.preferredTimeSlot || undefined,
+    },
     mode: "onChange",
     reValidateMode: "onChange",
-  })
+  });
 
-  const flexibleScheduling = watch("flexibleScheduling")
+  const flexibleScheduling = watch("flexibleScheduling");
+  const preferredDate = watch("preferredDate");
+  const urgencyDateError = getUrgencyScheduleValidationError({
+    urgency,
+    preferredDate,
+  });
 
   const onSubmit = (formData: SchedulePreferencesInput) => {
-    updateSchedulePreferences(formData)
-    nextStep()
-  }
+    if (urgencyDateError) {
+      return;
+    }
+
+    updateSchedulePreferences(formData);
+    nextStep();
+  };
 
   const onError = (_errors: unknown) => {
     // Validation errors are displayed inline by react-hook-form
-  }
+  };
 
   // Get minimum date (today) - users can't select past dates
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   return (
     <motion.div
@@ -76,8 +93,12 @@ export function ScheduleStep() {
     >
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">Schedule Preferences</h2>
-          <p className="text-muted-foreground">When would you like us to visit?</p>
+          <h2 className="text-2xl font-semibold text-foreground">
+            Schedule Preferences
+          </h2>
+          <p className="text-muted-foreground">
+            When would you like us to visit?
+          </p>
         </div>
 
         {/* Preferred Date */}
@@ -88,9 +109,13 @@ export function ScheduleStep() {
             <DatePicker
               label="Preferred Date"
               value={field.value ? new Date(field.value) : undefined}
-              onChange={(date) => field.onChange(date ? date.toISOString().split("T")[0] : "")}
+              onChange={(date) =>
+                field.onChange(date ? date.toISOString().split("T")[0] : "")
+              }
               minDate={today}
-              error={errors.preferredDate?.message}
+              error={
+                errors.preferredDate?.message ?? urgencyDateError ?? undefined
+              }
               helperText="Select your first choice date"
               required
             />
@@ -141,7 +166,9 @@ export function ScheduleStep() {
                 <DatePicker
                   label="Alternative Date (Optional)"
                   value={field.value ? new Date(field.value) : undefined}
-                  onChange={(date) => field.onChange(date ? date.toISOString().split("T")[0] : "")}
+                  onChange={(date) =>
+                    field.onChange(date ? date.toISOString().split("T")[0] : "")
+                  }
                   minDate={today}
                   error={errors.alternativeDate?.message}
                   helperText="Provide a backup date option"
@@ -154,7 +181,12 @@ export function ScheduleStep() {
         {/* Info Box */}
         <div className="bg-accent/10 border border-accent/30 rounded-lg p-4">
           <div className="flex gap-3">
-            <svg className="h-5 w-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="h-5 w-5 text-accent shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -165,7 +197,8 @@ export function ScheduleStep() {
             <div className="text-sm text-foreground">
               <p className="font-semibold mb-1">Scheduling Note</p>
               <p className="text-muted-foreground">
-                We'll confirm your appointment within 24 hours. Emergency requests will be processed immediately.
+                We'll confirm your appointment within 24 hours. Emergency
+                requests will be processed immediately.
               </p>
             </div>
           </div>
@@ -178,24 +211,44 @@ export function ScheduleStep() {
             onClick={prevStep}
             className="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-secondary/80"
           >
-            <svg className="inline-block mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="inline-block mr-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             Previous
           </button>
 
           <button
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || Boolean(urgencyDateError)}
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
-            <svg className="inline-block ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="inline-block ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
       </form>
     </motion.div>
-  )
+  );
 }
