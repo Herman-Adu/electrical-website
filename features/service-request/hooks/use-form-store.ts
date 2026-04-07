@@ -39,16 +39,16 @@ export interface ServiceDetails {
 export interface PropertyInfo {
   address: string;
   city: string;
-  state: string;
-  zipCode: string;
-  propertyType: "residential" | "commercial";
+  county?: string;
+  postcode: string;
+  propertyType: "residential" | "commercial" | "";
   accessInstructions?: string;
 }
 
 // Step 4: Schedule Preferences
 export interface SchedulePreferences {
   preferredDate: string;
-  preferredTimeSlot: "morning" | "afternoon" | "evening";
+  preferredTimeSlot: "morning" | "afternoon" | "evening" | "";
   alternativeDate?: string;
   flexibleScheduling: boolean;
 }
@@ -71,6 +71,10 @@ interface FormStore {
   // Form data for each step
   data: FormData;
 
+  // Turnstile state (ephemeral, never persisted)
+  turnstileToken: string | null;
+  turnstileError: string | null;
+
   // Actions
   updatePersonalInfo: (data: Partial<PersonalInfo>) => void;
   updateServiceDetails: (data: Partial<ServiceDetails>) => void;
@@ -78,6 +82,8 @@ interface FormStore {
   updateSchedulePreferences: (data: Partial<SchedulePreferences>) => void;
   updateGdprConsent: (accepted: boolean) => void;
   updatePrivacyTermsAccepted: (accepted: boolean) => void;
+  setTurnstileToken: (token: string | null) => void;
+  setTurnstileError: (error: string | null) => void;
 
   // Navigation
   nextStep: () => void;
@@ -90,7 +96,7 @@ interface FormStore {
 }
 
 // Initial state
-const initialData: FormData = {
+const createInitialData = (): FormData => ({
   personalInfo: {
     firstName: "",
     lastName: "",
@@ -105,20 +111,20 @@ const initialData: FormData = {
   propertyInfo: {
     address: "",
     city: "",
-    state: "",
-    zipCode: "",
-    propertyType: "residential",
+    county: "",
+    postcode: "",
+    propertyType: "",
     accessInstructions: "",
   },
   schedulePreferences: {
     preferredDate: "",
-    preferredTimeSlot: "morning",
+    preferredTimeSlot: "",
     alternativeDate: "",
     flexibleScheduling: false,
   },
   gdprConsent: false,
   privacyTermsAccepted: false,
-};
+});
 
 /**
  * ZUSTAND STORE CREATION
@@ -130,7 +136,9 @@ export const useFormStore = create<FormStore>()(
   persist(
     (set, get) => ({
       currentStep: 1,
-      data: initialData,
+      data: createInitialData(),
+      turnstileToken: null,
+      turnstileError: null,
 
       updatePersonalInfo: (data) =>
         set((state) => ({
@@ -180,6 +188,17 @@ export const useFormStore = create<FormStore>()(
           },
         })),
 
+      setTurnstileToken: (token) =>
+        set({
+          turnstileToken: token,
+          turnstileError: null,
+        }),
+
+      setTurnstileError: (error) =>
+        set({
+          turnstileError: error,
+        }),
+
       nextStep: () =>
         set((state) => ({
           currentStep: Math.min(
@@ -207,7 +226,9 @@ export const useFormStore = create<FormStore>()(
       resetForm: () =>
         set(() => ({
           currentStep: 1,
-          data: initialData,
+          data: createInitialData(),
+          turnstileToken: null,
+          turnstileError: null,
         })),
 
       /**
@@ -233,8 +254,8 @@ export const useFormStore = create<FormStore>()(
             return !!(
               data.propertyInfo.address &&
               data.propertyInfo.city &&
-              data.propertyInfo.state &&
-              data.propertyInfo.zipCode
+              data.propertyInfo.postcode &&
+              data.propertyInfo.propertyType
             );
           case 4:
             return !!(
@@ -251,6 +272,10 @@ export const useFormStore = create<FormStore>()(
     }),
     {
       name: "electrical-service-form", // localStorage key
+      partialize: (state) => ({
+        currentStep: state.currentStep,
+        data: state.data,
+      }),
     },
   ),
 );

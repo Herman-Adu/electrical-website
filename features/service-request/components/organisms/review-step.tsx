@@ -12,6 +12,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useFormStore } from "../../hooks/use-form-store";
 import { PulseCircle } from "@/components/animations/pulse-circle";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
@@ -23,6 +24,20 @@ const SUCCESS_VISIBILITY_MS = 5000;
 const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
 const SERVICE_SCROLL_TOP_GAP = 28;
 
+function mapTurnstileClientError(errorCode?: string | number): string {
+  const code = String(errorCode ?? "");
+
+  if (code === "110200") {
+    return "Verification unavailable for this domain. Please retry shortly.";
+  }
+
+  if (code === "400020" || code === "110100" || code === "110110") {
+    return "Verification configuration is invalid. Please retry shortly.";
+  }
+
+  return "Verification failed. Please retry.";
+}
+
 export function ReviewStep() {
   const {
     data,
@@ -31,12 +46,20 @@ export function ReviewStep() {
     resetForm,
     updateGdprConsent,
     updatePrivacyTermsAccepted,
+    turnstileToken,
+    turnstileError,
+    setTurnstileToken,
+    setTurnstileError,
   } = useFormStore();
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [requestId, setRequestId] = useState<string | null>(null);
   const successTimerRef = useRef<number | null>(null);
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
+  const isTurnstileVerified = Boolean(turnstileToken);
   const isSubmissionReady = completeFormSchema.safeParse(data).success;
 
   useEffect(() => {
@@ -46,6 +69,7 @@ export function ReviewStep() {
 
     successTimerRef.current = window.setTimeout(() => {
       resetForm();
+      useFormStore.persist.clearStorage();
       setIsSubmitted(false);
       setRequestId(null);
       setError(null);
@@ -72,6 +96,16 @@ export function ReviewStep() {
   }, [isSubmitted, resetForm]);
 
   const handleSubmit = async () => {
+    if (!turnstileSiteKey) {
+      setError("Verification is unavailable. Please try again shortly.");
+      return;
+    }
+
+    if (!isTurnstileVerified) {
+      setError("Please complete verification before submitting.");
+      return;
+    }
+
     if (!isSubmissionReady) {
       setError(
         "Please complete all required fields and accept GDPR, Privacy Policy, and Terms before submitting.",
@@ -83,7 +117,10 @@ export function ReviewStep() {
     setError(null);
 
     try {
-      const result = await submitServiceRequest(data);
+      const result = await submitServiceRequest({
+        ...data,
+        turnstileToken: turnstileToken ?? "",
+      });
 
       if (result.success) {
         setRequestId(result.data.requestId);
@@ -105,6 +142,8 @@ export function ReviewStep() {
     }
 
     resetForm();
+    useFormStore.persist.clearStorage();
+    turnstileRef.current?.reset();
     setIsSubmitted(false);
     setRequestId(null);
     setError(null);
@@ -118,6 +157,12 @@ export function ReviewStep() {
         });
       });
     }
+  };
+
+  const retryVerification = () => {
+    setTurnstileToken(null);
+    setTurnstileError(null);
+    turnstileRef.current?.reset();
   };
 
   if (isSubmitted) {
@@ -230,6 +275,44 @@ export function ReviewStep() {
 
         <ReviewStepDisplay data={data} onEdit={goToStep} />
 
+        <div className="space-y-2" data-testid="service-turnstile-widget">
+          {turnstileSiteKey ? (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={turnstileSiteKey}
+              options={{ theme: "auto", size: "normal" }}
+              onSuccess={setTurnstileToken}
+              onExpire={() => {
+                setTurnstileToken(null);
+                setTurnstileError("Verification expired. Please try again.");
+              }}
+              onError={(errorCode) => {
+                setTurnstileToken(null);
+                setTurnstileError(mapTurnstileClientError(errorCode));
+              }}
+            />
+          ) : (
+            <div className="rounded-md border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
+              Turnstile key missing. Verification cannot be completed.
+            </div>
+          )}
+
+          {turnstileError && (
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-muted/20 p-3">
+              <p className="text-xs text-muted-foreground" role="status">
+                {turnstileError}
+              </p>
+              <button
+                type="button"
+                onClick={retryVerification}
+                className="h-7 rounded-md border border-border px-2 text-xs text-foreground hover:bg-muted/40"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+        </div>
+
         <div className="rounded-lg border border-border bg-muted/30 p-4">
           <label className="flex items-start gap-3 text-sm text-foreground cursor-pointer">
             <input
@@ -292,7 +375,12 @@ export function ReviewStep() {
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={isSubmitting || !isSubmissionReady}
+            disabled={
+              isSubmitting ||
+              !isSubmissionReady ||
+              !isTurnstileVerified ||
+              !turnstileSiteKey
+            }
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             {isSubmitting ? (

@@ -44,7 +44,7 @@ const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
 const SERVICE_SCROLL_TOP_GAP = 28;
 
 export function MultiStepFormContainer() {
-  const { currentStep, goToStep, isStepComplete } = useFormStore();
+  const { currentStep, goToStep, resetForm } = useFormStore();
   const [previousStep, setPreviousStep] = useState(currentStep);
   const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
@@ -52,6 +52,11 @@ export function MultiStepFormContainer() {
   const completedSteps = STEPS.filter((step) => step.number < currentStep).map(
     (step) => step.number,
   );
+
+  useEffect(() => {
+    resetForm();
+    useFormStore.persist.clearStorage();
+  }, [resetForm]);
 
   useEffect(() => {
     if (currentStep > previousStep) {

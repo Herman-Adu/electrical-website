@@ -12,6 +12,7 @@
  */
 
 import { z } from "zod";
+import { getUrgencyScheduleValidationError } from "../lib/urgency-schedule";
 
 // Step 1: Personal Information Schema
 export const personalInfoSchema = z.object({
@@ -81,22 +82,37 @@ export const schedulePreferencesSchema = z.object({
 });
 
 // Combined schema for final validation (Step 5: Review)
-export const completeFormSchema = z.object({
-  personalInfo: personalInfoSchema,
-  serviceDetails: serviceDetailsSchema,
-  propertyInfo: propertyInfoSchema,
-  schedulePreferences: schedulePreferencesSchema,
-  gdprConsent: z.literal(true, {
-    errorMap: () => ({
-      message: "You must consent to data processing before submitting",
+export const completeFormSchema = z
+  .object({
+    personalInfo: personalInfoSchema,
+    serviceDetails: serviceDetailsSchema,
+    propertyInfo: propertyInfoSchema,
+    schedulePreferences: schedulePreferencesSchema,
+    gdprConsent: z.literal(true, {
+      errorMap: () => ({
+        message: "You must consent to data processing before submitting",
+      }),
     }),
-  }),
-  privacyTermsAccepted: z.literal(true, {
-    errorMap: () => ({
-      message: "You must confirm Privacy Policy and Terms before submitting",
+    privacyTermsAccepted: z.literal(true, {
+      errorMap: () => ({
+        message: "You must confirm Privacy Policy and Terms before submitting",
+      }),
     }),
-  }),
-});
+  })
+  .superRefine((data, context) => {
+    const urgencyDateError = getUrgencyScheduleValidationError({
+      urgency: data.serviceDetails.urgency,
+      preferredDate: data.schedulePreferences.preferredDate,
+    });
+
+    if (urgencyDateError) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["schedulePreferences", "preferredDate"],
+        message: urgencyDateError,
+      });
+    }
+  });
 
 // Export types inferred from schemas
 export type PersonalInfoInput = z.infer<typeof personalInfoSchema>;

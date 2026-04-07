@@ -6,6 +6,7 @@
  */
 
 import { z } from "zod";
+import { getUrgencyScheduleValidationError } from "../lib/urgency-schedule";
 
 // UK Phone validation - accepts mobile and landline
 // Mobile: 07xxx xxx xxx or +44 7xxx xxx xxx
@@ -114,6 +115,7 @@ export const serverCompleteFormSchema = z.object({
   serviceDetails: serverServiceDetailsSchema,
   propertyInfo: serverPropertyInfoSchema,
   schedulePreferences: serverSchedulePreferencesSchema,
+  turnstileToken: z.string().min(1, "Verification token is required"),
   gdprConsent: z.literal(true, {
     errorMap: () => ({
       message: "GDPR consent is required",
@@ -132,16 +134,13 @@ export const validateBusinessRules = (
 ) => {
   const errors: string[] = [];
 
-  // Rule: Emergency services can't be scheduled for future dates
-  if (data.serviceDetails.urgency === "emergency") {
-    const preferredDate = new Date(data.schedulePreferences.preferredDate);
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+  const urgencyDateError = getUrgencyScheduleValidationError({
+    urgency: data.serviceDetails.urgency,
+    preferredDate: data.schedulePreferences.preferredDate,
+  });
 
-    if (preferredDate >= tomorrow) {
-      errors.push("Emergency services must be scheduled within 24 hours");
-    }
+  if (urgencyDateError) {
+    errors.push(urgencyDateError);
   }
 
   // Rule: Commercial properties require additional verification (placeholder for future)
