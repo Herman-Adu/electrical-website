@@ -80,8 +80,6 @@ export function ReviewStep() {
     }
 
     successTimerRef.current = window.setTimeout(() => {
-      resetForm();
-      useFormStore.persist.clearStorage();
       setIsSubmitted(false);
       setRequestId(null);
       setError(null);
@@ -136,6 +134,8 @@ export function ReviewStep() {
 
       if (result.success) {
         setRequestId(result.data.requestId);
+        resetForm();
+        useFormStore.persist.clearStorage();
         setIsSubmitted(true);
       } else {
         setError(result.error);

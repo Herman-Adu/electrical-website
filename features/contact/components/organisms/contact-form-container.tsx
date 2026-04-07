@@ -23,6 +23,7 @@ const CONTACT_PROGRESS_ANCHOR_ID = "contact-form-progress-anchor";
 const CONTACT_SCROLL_TOP_GAP = 28;
 const CONTACT_SUCCESS_ANCHOR_ID = "contact-success-anchor";
 const CONTACT_SUCCESS_SCROLL_TOP_GAP = 8;
+const CONTACT_SUCCESS_VISIBILITY_MS = 5000;
 
 const CONTACT_STEPS: FormStepConfig[] = [
   { id: "contact-info", title: "Contact Info", description: "Your details" },
@@ -47,6 +48,7 @@ export function ContactFormContainer() {
   };
   const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
+  const successTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     resetForm();
@@ -91,7 +93,20 @@ export function ContactFormContainer() {
         });
       });
     }
-  }, [isSubmitted]);
+
+    successTimerRef.current = window.setTimeout(() => {
+      useContactStore.getState().setSubmitted(false);
+      resetForm();
+      useContactStore.persist.clearStorage();
+    }, CONTACT_SUCCESS_VISIBILITY_MS);
+
+    return () => {
+      if (successTimerRef.current !== null) {
+        window.clearTimeout(successTimerRef.current);
+        successTimerRef.current = null;
+      }
+    };
+  }, [isSubmitted, resetForm]);
 
   if (isSubmitted) {
     return (
@@ -99,7 +114,7 @@ export function ContactFormContainer() {
         <UnifiedSuccessMessage
           referenceId={contactReferenceId || ""}
           formType="contact"
-          onStartNew={resetForm}
+          onStartNew={handleStartNew}
         />
       </div>
     );
