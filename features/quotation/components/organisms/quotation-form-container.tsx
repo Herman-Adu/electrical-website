@@ -197,12 +197,6 @@ export function QuotationFormContainer() {
             showCompany={true}
             title="Contact Information"
             description="Please provide your contact details so we can reach you about your quotation."
-            showTurnstile={true}
-            turnstileSiteKey={turnstileSiteKey}
-            turnstileToken={turnstileToken}
-            turnstileError={turnstileError}
-            onTurnstileTokenChange={setTurnstileToken}
-            onTurnstileErrorChange={setTurnstileError}
           />
         );
       case 1:
@@ -273,7 +267,11 @@ export function QuotationFormContainer() {
         return (
           <QuotationReviewStep
             formData={getCompleteFormData()}
+            turnstileSiteKey={turnstileSiteKey}
             turnstileToken={turnstileToken}
+            turnstileError={turnstileError}
+            onTurnstileTokenChange={setTurnstileToken}
+            onTurnstileErrorChange={setTurnstileError}
             onSubmitSuccess={(requestId) => {
               setSubmitError(null);
               setTurnstileError(null);

@@ -6,12 +6,10 @@
 
 "use client";
 
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { User, Mail } from "lucide-react";
-import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { FormInput } from "@/components/atoms/form-input";
 import { Button } from "@/components/ui/button";
 import { useContactStore } from "../../../hooks/use-contact-store";
@@ -20,36 +18,8 @@ import {
   type ContactInfoInput,
 } from "../../../schemas/contact-schemas";
 
-function mapTurnstileClientError(errorCode?: string | number): string {
-  const code = String(errorCode ?? "");
-
-  if (code === "110200") {
-    return "Verification unavailable for this domain. Please retry shortly.";
-  }
-
-  if (code === "400020" || code === "110100" || code === "110110") {
-    return "Verification configuration is invalid. Please retry shortly.";
-  }
-
-  return "Verification failed. Please retry.";
-}
-
 export function ContactInfoStep() {
-  const turnstileRef = useRef<TurnstileInstance | null>(null);
-
-  const {
-    contactInfo,
-    updateContactInfo,
-    nextStep,
-    turnstileToken,
-    turnstileError,
-    setTurnstileToken,
-    setTurnstileError,
-  } = useContactStore();
-
-  const turnstileSiteKey =
-    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
-  const isTurnstileVerified = Boolean(turnstileToken);
+  const { contactInfo, updateContactInfo, nextStep } = useContactStore();
 
   const {
     register,
@@ -64,12 +34,6 @@ export function ContactInfoStep() {
   const onSubmit = (data: ContactInfoInput) => {
     updateContactInfo(data);
     nextStep();
-  };
-
-  const retryVerification = () => {
-    setTurnstileToken(null);
-    setTurnstileError(null);
-    turnstileRef.current?.reset();
   };
 
   return (
@@ -92,46 +56,6 @@ export function ContactInfoStep() {
             Please provide your contact information so we can respond to your
             inquiry.
           </p>
-        </div>
-
-        <div className="space-y-2" data-testid="turnstile-widget">
-          {turnstileSiteKey ? (
-            <Turnstile
-              ref={turnstileRef}
-              siteKey={turnstileSiteKey}
-              options={{ theme: "auto", size: "normal" }}
-              onSuccess={setTurnstileToken}
-              onExpire={() => {
-                setTurnstileToken(null);
-                setTurnstileError("Verification expired. Please try again.");
-              }}
-              onError={(errorCode) => {
-                setTurnstileToken(null);
-                setTurnstileError(mapTurnstileClientError(errorCode));
-              }}
-            />
-          ) : (
-            <div className="rounded-md border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
-              Turnstile key missing. Verification cannot be completed.
-            </div>
-          )}
-
-          {turnstileError && (
-            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-muted/20 p-3">
-              <p className="text-xs text-muted-foreground" role="status">
-                {turnstileError}
-              </p>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={retryVerification}
-                className="h-7 px-2 text-xs"
-              >
-                Retry
-              </Button>
-            </div>
-          )}
         </div>
 
         {/* Form Fields */}
@@ -194,7 +118,7 @@ export function ContactInfoStep() {
           <Button
             type="submit"
             className="min-w-35"
-            disabled={!isValid || isSubmitting || !isTurnstileVerified}
+            disabled={!isValid || isSubmitting}
           >
             Continue
           </Button>

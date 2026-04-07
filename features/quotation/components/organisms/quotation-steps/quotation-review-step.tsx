@@ -10,6 +10,7 @@
 import React from "react";
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 import { CheckCircle, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -72,7 +73,11 @@ type QuotationReviewData = {
 
 interface QuotationReviewStepProps {
   formData: QuotationReviewData;
+  turnstileSiteKey: string;
   turnstileToken: string | null;
+  turnstileError: string | null;
+  onTurnstileTokenChange: (token: string | null) => void;
+  onTurnstileErrorChange: (error: string | null) => void;
   onSubmitSuccess: (requestId: string) => void;
   onSubmitError: (error: string | null) => void;
   onPrevious?: () => void;
@@ -82,6 +87,20 @@ interface QuotationReviewStepProps {
 const initialActionState: QuotationFormActionState = {
   success: false,
 };
+
+function mapTurnstileClientError(errorCode?: string | number): string {
+  const code = String(errorCode ?? "");
+
+  if (code === "110200") {
+    return "Verification unavailable for this domain. Please retry shortly.";
+  }
+
+  if (code === "400020" || code === "110100" || code === "110110") {
+    return "Verification configuration is invalid. Please retry shortly.";
+  }
+
+  return "Verification failed. Please retry.";
+}
 
 function SubmitQuotationButton({ tokenMissing }: { tokenMissing: boolean }) {
   const { pending } = useFormStatus();
@@ -95,12 +114,17 @@ function SubmitQuotationButton({ tokenMissing }: { tokenMissing: boolean }) {
 
 export function QuotationReviewStep({
   formData,
+  turnstileSiteKey,
   turnstileToken,
+  turnstileError,
+  onTurnstileTokenChange,
+  onTurnstileErrorChange,
   onSubmitSuccess,
   onSubmitError,
   onPrevious,
   onEdit,
 }: QuotationReviewStepProps) {
+  const turnstileRef = React.useRef<TurnstileInstance | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
   const [actionState, formAction, isPending] = useActionState(
     submitQuotationRequestForm,
@@ -131,13 +155,20 @@ export function QuotationReviewStep({
   }, [actionState, onEdit, onSubmitError, onSubmitSuccess]);
 
   const handleBeforeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!turnstileSiteKey) {
+      event.preventDefault();
+      const verificationUnavailable =
+        "Verification is unavailable. Please try again shortly.";
+      onSubmitError(verificationUnavailable);
+      setLocalError(verificationUnavailable);
+      return;
+    }
+
     if (!turnstileToken) {
       event.preventDefault();
-      const verificationError =
-        "Verification expired. Return to Contact step and complete verification.";
+      const verificationError = "Please complete verification before submitting.";
       onSubmitError(verificationError);
       setLocalError(verificationError);
-      onEdit(0);
       return;
     }
 
@@ -317,6 +348,55 @@ export function QuotationReviewStep({
               <p className="text-sm text-destructive/80 mt-1">{localError}</p>
             </div>
           )}
+
+          <div className="space-y-2" data-testid="quotation-turnstile-widget">
+            {turnstileSiteKey ? (
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                options={{ theme: "auto", size: "normal" }}
+                onSuccess={(token) => {
+                  onTurnstileTokenChange(token);
+                  onTurnstileErrorChange(null);
+                }}
+                onExpire={() => {
+                  onTurnstileTokenChange(null);
+                  onTurnstileErrorChange(
+                    "Verification expired. Please try again.",
+                  );
+                }}
+                onError={(errorCode) => {
+                  onTurnstileTokenChange(null);
+                  onTurnstileErrorChange(mapTurnstileClientError(errorCode));
+                }}
+              />
+            ) : (
+              <div className="rounded-md border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
+                Turnstile key missing. Verification cannot be completed.
+              </div>
+            )}
+
+            {turnstileError && (
+              <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-xs text-muted-foreground" role="status">
+                  {turnstileError}
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    onTurnstileTokenChange(null);
+                    onTurnstileErrorChange(null);
+                    turnstileRef.current?.reset();
+                  }}
+                  className="h-7 px-2 text-xs"
+                >
+                  Retry
+                </Button>
+              </div>
+            )}
+          </div>
           <input type="hidden" name="payload" value={payload} />
         </div>
       </FormStepContainer>
