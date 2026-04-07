@@ -14,15 +14,17 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useFormStore } from "../../hooks/use-form-store";
-import { PulseCircle } from "@/components/animations/pulse-circle";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { submitServiceRequest } from "../../api/service-request";
 import { ReviewStepDisplay } from "./review-step-display";
+import { UnifiedSuccessMessage } from "@/components/molecules/unified-success-message";
 import { completeFormSchema } from "../../schemas/schemas";
 
 const SUCCESS_VISIBILITY_MS = 5000;
 const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
 const SERVICE_SCROLL_TOP_GAP = 28;
+const SERVICE_SUCCESS_ANCHOR_ID = "service-success-anchor";
+const SERVICE_SUCCESS_SCROLL_TOP_GAP = 8;
 
 function mapTurnstileClientError(errorCode?: string | number): string {
   const code = String(errorCode ?? "");
@@ -65,6 +67,16 @@ export function ReviewStep() {
   useEffect(() => {
     if (!isSubmitted) {
       return;
+    }
+
+    const successAnchor = document.getElementById(SERVICE_SUCCESS_ANCHOR_ID);
+    if (successAnchor) {
+      requestAnimationFrame(() => {
+        scrollToElementWithOffset(successAnchor, {
+          baseGap: SERVICE_SUCCESS_SCROLL_TOP_GAP,
+          extraOffset: 0,
+        });
+      });
     }
 
     successTimerRef.current = window.setTimeout(() => {
@@ -128,7 +140,7 @@ export function ReviewStep() {
       } else {
         setError(result.error);
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -167,66 +179,13 @@ export function ReviewStep() {
 
   if (isSubmitted) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
-      >
-        <div className="mb-6 relative">
-          <motion.div
-            className="mx-auto w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center electric-glow relative"
-            animate={{
-              boxShadow: [
-                "0 0 20px rgba(var(--accent), 0.3)",
-                "0 0 40px rgba(var(--accent), 0.5)",
-                "0 0 20px rgba(var(--accent), 0.3)",
-              ],
-            }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          >
-            <PulseCircle size={64} />
-            <motion.svg
-              className="w-8 h-8 text-accent relative z-10"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <motion.path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </motion.svg>
-          </motion.div>
-        </div>
-
-        <h2 className="text-3xl font-bold text-foreground mb-2">
-          Request Submitted!
-        </h2>
-        <p className="text-muted-foreground mb-2">
-          We've received your electrical service request and will contact you
-          shortly.
-        </p>
-        {requestId && (
-          <p className="text-sm text-muted-foreground mb-8">
-            Reference:{" "}
-            <span className="font-mono font-semibold text-foreground">
-              {requestId}
-            </span>
-          </p>
-        )}
-
-        <button
-          onClick={handleStartOver}
-          className="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-secondary/80"
-        >
-          Submit Another Request
-        </button>
-      </motion.div>
+      <div id={SERVICE_SUCCESS_ANCHOR_ID}>
+        <UnifiedSuccessMessage
+          referenceId={requestId || ""}
+          formType="service"
+          onStartNew={handleStartOver}
+        />
+      </div>
     );
   }
 
@@ -251,7 +210,7 @@ export function ReviewStep() {
           <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
             <div className="flex items-start gap-3">
               <svg
-                className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 text-red-500 shrink-0 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

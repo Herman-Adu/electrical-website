@@ -18,7 +18,7 @@ import { ProjectScopeStep } from "./quotation-steps/project-scope-step";
 import { BudgetTimelineStep } from "./quotation-steps/budget-timeline-step";
 import { AdditionalRequirementsStep } from "./quotation-steps/additional-requirements-step";
 import { QuotationReviewStep } from "./quotation-steps/quotation-review-step";
-import { QuotationSuccessMessage } from "../molecules/quotation-success-message";
+import { UnifiedSuccessMessage } from "@/components/molecules/unified-success-message";
 import { PowerSurge } from "@/components/animations/power-surge";
 import type { FormStepConfig } from "@/lib/forms/types";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
@@ -35,6 +35,7 @@ const QUOTATION_STEPS: FormStepConfig[] = [
 
 const SUCCESS_VISIBILITY_MS = 5000;
 const SUCCESS_ANCHOR_ID = "quotation-success-anchor";
+const SUCCESS_SCROLL_TOP_GAP = 8;
 const FORM_SECTION_ID = "quotation-form-section";
 const QUOTATION_SCROLL_TOP_GAP = 28;
 
@@ -121,7 +122,7 @@ export function QuotationFormContainer() {
     if (successAnchor) {
       requestAnimationFrame(() => {
         scrollToElementWithOffset(successAnchor, {
-          baseGap: 8,
+          baseGap: SUCCESS_SCROLL_TOP_GAP,
           extraOffset: 0,
         });
       });
@@ -178,8 +179,9 @@ export function QuotationFormContainer() {
   if (successData) {
     return (
       <div id={SUCCESS_ANCHOR_ID}>
-        <QuotationSuccessMessage
-          requestId={successData.requestId}
+        <UnifiedSuccessMessage
+          referenceId={successData.requestId}
+          formType="quotation"
           onStartNew={handleStartNew}
         />
       </div>
