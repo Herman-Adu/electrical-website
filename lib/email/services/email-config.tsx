@@ -8,29 +8,33 @@
  * via API call, replacing these static defaults.
  */
 
+import { count } from "console";
+
 // ---------------------------------------------------------------------------
 // Company Details
 // ---------------------------------------------------------------------------
 export const COMPANY = {
-  name: "Electrical Services",
-  tagline: "Professional & Reliable",
-  legalName: "Electrical Services Ltd",
+  name: "Nexgen Electrical Innovations",
+  tagline: "Powering the next generation of innovation",
+  legalName: "Nexgen Electrical Innovations Ltd",
   address: {
-    line1: "123 Electrical House",
-    city: "London",
-    postcode: "EC1A 1BB",
-    full: "123 Electrical House, London EC1A 1BB",
+    line1: "46 Nursery Road",
+    city: "Taplow, Madienhead",
+    postcode: "SL6 0JZ",
+    county: "Buckinghamshire",
+    country: "United Kingdom",
+    full: "46 Nursery Road, Taplow, Madienhead, SL6 0JZ, Buckinghamshire, United Kingdom",
   },
   phone: {
-    primary: "0800 123 4567",
-    local: "020 7123 4567",
+    primary: "03333 356 037",
+    local: "03333 356 037",
   },
   email: {
-    support: "support@adudev.co.uk",
-    info: "info@adudev.co.uk",
-    noreply: "noreply@adudev.co.uk",
+    support: "support@nexgen-electrical-innovations.co.uk",
+    info: "info@nexgen-electrical-innovations.co.uk",
+    noreply: "noreply@nexgen-electrical-innovations.co.uk",
   },
-  website: "www.adudev.co.uk",
+  website: "www.nexgen-electrical-innovations.co.uk",
   copyrightYear: new Date().getFullYear().toString(),
 } as const;
 
