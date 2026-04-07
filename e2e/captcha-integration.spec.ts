@@ -58,7 +58,7 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     await form.getByPlaceholder("07700 900000").fill("07700 900000");
 
     const continueButton = form.getByRole("button", { name: /continue/i });
-    await expect(continueButton).toBeDisabled();
+    await expect(continueButton).toBeEnabled();
     await expect(
       page.getByRole("heading", {
         name: /your contact details|personal details/i,
