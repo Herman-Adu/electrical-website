@@ -23,16 +23,19 @@
  * - Different form fields (but same atomic components)
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { FormSelect } from "@/components/atoms/form-select"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { useFormStore } from "../../hooks/use-form-store"
-import { serviceDetailsSchema, type ServiceDetailsInput } from "../../schemas/schemas"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { FormSelect } from "@/components/atoms/form-select";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { useFormStore } from "../../hooks/use-form-store";
+import {
+  serviceDetailsSchema,
+  type ServiceDetailsInput,
+} from "../../schemas/schemas";
 
 // Service type options for the select dropdown
 const SERVICE_TYPE_OPTIONS = [
@@ -44,7 +47,7 @@ const SERVICE_TYPE_OPTIONS = [
   { value: "lighting", label: "Lighting Installation" },
   { value: "wiring", label: "Rewiring" },
   { value: "other", label: "Other Service" },
-]
+];
 
 // Urgency options for radio group
 const URGENCY_OPTIONS = [
@@ -63,11 +66,11 @@ const URGENCY_OPTIONS = [
     label: "Emergency",
     description: "Immediate response, same-day service",
   },
-]
+];
 
 export function ServiceDetailsStep() {
   // Get data and actions from Zustand store
-  const { data, updateServiceDetails, nextStep, prevStep } = useFormStore()
+  const { data, updateServiceDetails, nextStep, prevStep } = useFormStore();
 
   // Setup react-hook-form with Zod validation
   const {
@@ -80,17 +83,17 @@ export function ServiceDetailsStep() {
     defaultValues: data.serviceDetails,
     mode: "onSubmit",
     reValidateMode: "onChange",
-  })
+  });
 
   // Handle form submission
   const onSubmit = (formData: ServiceDetailsInput) => {
-    updateServiceDetails(formData)
-    nextStep()
-  }
+    updateServiceDetails(formData);
+    nextStep();
+  };
 
   const onError = (_errors: Record<string, unknown>) => {
     // Validation errors are displayed inline by react-hook-form
-  }
+  };
 
   return (
     <motion.div
@@ -102,8 +105,12 @@ export function ServiceDetailsStep() {
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         {/* Form Header */}
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">Service Details</h2>
-          <p className="text-muted-foreground">Tell us about the electrical service you need</p>
+          <h2 className="text-2xl font-semibold text-foreground">
+            Service Details
+          </h2>
+          <p className="text-muted-foreground">
+            Tell us about the electrical service you need
+          </p>
         </div>
 
         {/* Service Type Select - FormSelect Atom */}
@@ -149,8 +156,18 @@ export function ServiceDetailsStep() {
             onClick={prevStep}
             className="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-secondary/80"
           >
-            <svg className="inline-block mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="inline-block mr-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             Previous
           </button>
@@ -160,26 +177,22 @@ export function ServiceDetailsStep() {
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 electric-glow-sm"
           >
             Continue
-            <svg className="inline-block ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="inline-block ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
-
-        {/* Pattern Documentation */}
-        <div className="mt-8 p-4 bg-muted/50 border border-border rounded-lg">
-          <p className="text-xs font-semibold text-foreground mb-2">
-            Pattern Documentation - Different Atoms, Same Pattern
-          </p>
-          <ul className="text-xs text-muted-foreground space-y-1">
-            <li>• FormSelect atom for service type dropdown</li>
-            <li>• RadioGroup atom for urgency with descriptions</li>
-            <li>• FormTextarea atom for multi-line descriptions</li>
-            <li>• Controller from react-hook-form for controlled components</li>
-            <li>• Same validation and navigation pattern as Step 1</li>
-          </ul>
-        </div>
       </form>
     </motion.div>
-  )
+  );
 }

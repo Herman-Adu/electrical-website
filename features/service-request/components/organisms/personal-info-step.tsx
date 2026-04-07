@@ -25,18 +25,21 @@
  * - Keep the same validation and navigation pattern
  */
 
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { FormInput } from "@/components/atoms/form-input"
-import { useFormStore } from "../../hooks/use-form-store"
-import { personalInfoSchema, type PersonalInfoInput } from "../../schemas/schemas"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { FormInput } from "@/components/atoms/form-input";
+import { useFormStore } from "../../hooks/use-form-store";
+import {
+  personalInfoSchema,
+  type PersonalInfoInput,
+} from "../../schemas/schemas";
 
 export function PersonalInfoStep() {
   // Get data and actions from Zustand store
-  const { data, updatePersonalInfo, nextStep } = useFormStore()
+  const { data, updatePersonalInfo, nextStep } = useFormStore();
 
   // Setup react-hook-form with Zod validation
   const {
@@ -48,19 +51,19 @@ export function PersonalInfoStep() {
     defaultValues: data.personalInfo,
     mode: "onSubmit",
     reValidateMode: "onChange",
-  })
+  });
 
   // Handle form submission
   const onSubmit = (formData: PersonalInfoInput) => {
     // Update Zustand store with new data
-    updatePersonalInfo(formData)
+    updatePersonalInfo(formData);
     // Move to next step
-    nextStep()
-  }
+    nextStep();
+  };
 
   const onError = (_errors: Record<string, unknown>) => {
     // Validation errors are displayed inline via form field error states
-  }
+  };
 
   return (
     <motion.div
@@ -72,8 +75,12 @@ export function PersonalInfoStep() {
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         {/* Form Header */}
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">Personal Information</h2>
-          <p className="text-muted-foreground">Let's start with your basic contact information</p>
+          <h2 className="text-2xl font-semibold text-foreground">
+            Personal Information
+          </h2>
+          <p className="text-muted-foreground">
+            Let's start with your basic contact information
+          </p>
         </div>
 
         {/* Form Fields - Using Atoms */}
@@ -130,24 +137,22 @@ export function PersonalInfoStep() {
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
-            <svg className="inline-block ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="inline-block ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
-
-        {/* Pattern Documentation */}
-        <div className="mt-8 p-4 bg-muted/50 border border-border rounded-lg">
-          <p className="text-xs font-semibold text-foreground mb-2">Pattern Documentation</p>
-          <ul className="text-xs text-muted-foreground space-y-1">
-            <li>• Uses FormInput atoms for consistent styling</li>
-            <li>• Zustand store manages state with updatePersonalInfo()</li>
-            <li>• Zod validation via react-hook-form with zodResolver</li>
-            <li>• Framer Motion provides entry/exit animations</li>
-            <li>• Form submission updates store and calls nextStep()</li>
-          </ul>
-        </div>
       </form>
     </motion.div>
-  )
+  );
 }

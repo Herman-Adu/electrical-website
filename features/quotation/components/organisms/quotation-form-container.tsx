@@ -19,6 +19,7 @@ import { BudgetTimelineStep } from "./quotation-steps/budget-timeline-step";
 import { AdditionalRequirementsStep } from "./quotation-steps/additional-requirements-step";
 import { QuotationReviewStep } from "./quotation-steps/quotation-review-step";
 import { QuotationSuccessMessage } from "../molecules/quotation-success-message";
+import { PowerSurge } from "@/components/animations/power-surge";
 import type { FormStepConfig } from "@/lib/forms/types";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 
@@ -35,12 +36,14 @@ const QUOTATION_STEPS: FormStepConfig[] = [
 const SUCCESS_VISIBILITY_MS = 5000;
 const SUCCESS_ANCHOR_ID = "quotation-success-anchor";
 const FORM_SECTION_ID = "quotation-form-section";
+const QUOTATION_SCROLL_TOP_GAP = 28;
 
 export function QuotationFormContainer() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<{ requestId: string } | null>(
     null,
   );
+  const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
   const successTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
@@ -80,11 +83,15 @@ export function QuotationFormContainer() {
     }
 
     if (previousStepRef.current !== currentStep) {
+      if (currentStep > previousStepRef.current) {
+        setSurgeTrigger((prev) => prev + 1);
+      }
+
       const progressAnchor = document.getElementById(progressAnchorId);
       if (progressAnchor) {
         requestAnimationFrame(() => {
           scrollToElementWithOffset(progressAnchor, {
-            baseGap: 8,
+            baseGap: QUOTATION_SCROLL_TOP_GAP,
             extraOffset: 0,
           });
         });
@@ -285,6 +292,8 @@ export function QuotationFormContainer() {
 
   return (
     <div className="space-y-6">
+      <PowerSurge trigger={surgeTrigger} />
+
       <MultiStepFormWrapper
         title=""
         description=""

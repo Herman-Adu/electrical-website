@@ -40,6 +40,9 @@ const STEPS = [
   },
 ];
 
+const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
+const SERVICE_SCROLL_TOP_GAP = 28;
+
 export function MultiStepFormContainer() {
   const { currentStep, goToStep, isStepComplete } = useFormStore();
   const [previousStep, setPreviousStep] = useState(currentStep);
@@ -64,11 +67,13 @@ export function MultiStepFormContainer() {
     }
 
     if (previousStepRef.current !== currentStep) {
-      const formSection = document.getElementById("service-request");
-      if (formSection) {
+      const progressAnchor = document.getElementById(
+        SERVICE_PROGRESS_ANCHOR_ID,
+      );
+      if (progressAnchor) {
         requestAnimationFrame(() => {
-          scrollToElementWithOffset(formSection, {
-            baseGap: 8,
+          scrollToElementWithOffset(progressAnchor, {
+            baseGap: SERVICE_SCROLL_TOP_GAP,
             extraOffset: 0,
           });
         });
@@ -99,16 +104,18 @@ export function MultiStepFormContainer() {
     <div className="space-y-8">
       <PowerSurge trigger={surgeTrigger} />
 
-      <StepIndicator
-        steps={STEPS}
-        currentStep={currentStep}
-        completedSteps={completedSteps}
-        onStepClick={(step) => {
-          if (step <= currentStep) {
-            goToStep(step);
-          }
-        }}
-      />
+      <div id={SERVICE_PROGRESS_ANCHOR_ID}>
+        <StepIndicator
+          steps={STEPS}
+          currentStep={currentStep}
+          completedSteps={completedSteps}
+          onStepClick={(step) => {
+            if (step <= currentStep) {
+              goToStep(step);
+            }
+          }}
+        />
+      </div>
 
       {/* Step Content with Animation */}
       <div className="bg-card border border-border rounded-lg p-6 sm:p-8  relative overflow-hidden">
