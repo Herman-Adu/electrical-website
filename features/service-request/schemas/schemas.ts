@@ -91,6 +91,11 @@ export const completeFormSchema = z.object({
       message: "You must consent to data processing before submitting",
     }),
   }),
+  privacyTermsAccepted: z.literal(true, {
+    errorMap: () => ({
+      message: "You must confirm Privacy Policy and Terms before submitting",
+    }),
+  }),
 });
 
 // Export types inferred from schemas

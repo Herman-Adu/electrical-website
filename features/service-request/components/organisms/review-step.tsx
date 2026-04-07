@@ -17,19 +17,27 @@ import { PulseCircle } from "@/components/animations/pulse-circle";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { submitServiceRequest } from "../../api/service-request";
 import { ReviewStepDisplay } from "./review-step-display";
+import { completeFormSchema } from "../../schemas/schemas";
 
 const SUCCESS_VISIBILITY_MS = 5000;
 const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
 const SERVICE_SCROLL_TOP_GAP = 28;
 
 export function ReviewStep() {
-  const { data, prevStep, goToStep, resetForm, updateGdprConsent } =
-    useFormStore();
+  const {
+    data,
+    prevStep,
+    goToStep,
+    resetForm,
+    updateGdprConsent,
+    updatePrivacyTermsAccepted,
+  } = useFormStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [requestId, setRequestId] = useState<string | null>(null);
   const successTimerRef = useRef<number | null>(null);
+  const isSubmissionReady = completeFormSchema.safeParse(data).success;
 
   useEffect(() => {
     if (!isSubmitted) {
@@ -64,8 +72,10 @@ export function ReviewStep() {
   }, [isSubmitted, resetForm]);
 
   const handleSubmit = async () => {
-    if (!data.gdprConsent) {
-      setError("Please confirm GDPR consent before submitting your request.");
+    if (!isSubmissionReady) {
+      setError(
+        "Please complete all required fields and accept GDPR, Privacy Policy, and Terms before submitting.",
+      );
       return;
     }
 
@@ -227,10 +237,7 @@ export function ReviewStep() {
               checked={data.gdprConsent}
               onChange={(event) => {
                 updateGdprConsent(event.target.checked);
-                if (
-                  event.target.checked &&
-                  error?.toLowerCase().includes("gdpr")
-                ) {
+                if (event.target.checked && error) {
                   setError(null);
                 }
               }}
@@ -240,6 +247,21 @@ export function ReviewStep() {
               I consent to the processing of my personal data for handling this
               service request in line with the Privacy Policy.
             </span>
+          </label>
+
+          <label className="mt-3 flex items-start gap-3 text-sm text-foreground cursor-pointer">
+            <input
+              type="checkbox"
+              checked={data.privacyTermsAccepted}
+              onChange={(event) => {
+                updatePrivacyTermsAccepted(event.target.checked);
+                if (event.target.checked && error) {
+                  setError(null);
+                }
+              }}
+              className="mt-0.5 h-4 w-4 rounded border-border accent-accent"
+            />
+            <span>I have read the Privacy Policy and Terms.</span>
           </label>
         </div>
 
@@ -270,8 +292,8 @@ export function ReviewStep() {
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 electric-glow-sm"
+            disabled={isSubmitting || !isSubmissionReady}
+            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             {isSubmitting ? (
               <>

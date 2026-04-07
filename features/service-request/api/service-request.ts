@@ -150,5 +150,6 @@ function sanitizeFormData(data: unknown): unknown {
       ),
     },
     gdprConsent: Boolean(formData.gdprConsent),
+    privacyTermsAccepted: Boolean(formData.privacyTermsAccepted),
   };
 }
