@@ -20,7 +20,6 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { PulseCircle } from "@/components/animations/pulse-circle";
 
 export type FormType = "service" | "contact" | "quotation";
 
@@ -153,55 +152,16 @@ export function UnifiedSuccessMessage({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="w-full"
     >
-      <div className="mx-auto space-y-8">
+      <div className="mx-auto space-y-8 border-2 border-accent/30 rounded-lg p-8 bg-background/50">
         {/* Success Icon */}
-        {formType === "service" ? (
-          <motion.div
-            className="flex justify-center mb-6"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-          >
-            <motion.div
-              className="mx-auto w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center electric-glow relative"
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(var(--accent), 0.3)",
-                  "0 0 40px rgba(var(--accent), 0.5)",
-                  "0 0 20px rgba(var(--accent), 0.3)",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            >
-              <PulseCircle size={64} />
-              <motion.svg
-                className="w-8 h-8 text-accent absolute"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <motion.path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </motion.svg>
-            </motion.div>
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-            className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center"
-          >
-            <CheckCircle2 className="w-10 h-10 text-green-500" />
-          </motion.div>
-        )}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+          className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center"
+        >
+          <CheckCircle2 className="w-10 h-10 text-green-500" />
+        </motion.div>
 
         {/* Title & Subtitle */}
         <div className="text-center space-y-2">
@@ -252,14 +212,14 @@ export function UnifiedSuccessMessage({
             <h3 className="text-lg font-semibold text-foreground text-center mb-4">
               What Happens Next?
             </h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
               {finalDetails.map((detail, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + idx * 0.1 }}
-                  className="flex flex-col items-center text-left p-4 rounded-lg bg-card/50 border border-border/50"
+                  className="flex flex-col items-center text-center p-4 rounded-lg bg-card/50 border border-border/50 w-full"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-3">
                     {detail.icon}
