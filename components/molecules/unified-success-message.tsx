@@ -153,25 +153,33 @@ export function UnifiedSuccessMessage({
       className="w-full"
     >
       <div className="mx-auto space-y-8 border-2 border-accent/30 rounded-lg p-8 bg-background/50">
-        {/* Success Icon */}
+        {/* Header Section with Glassmorphic Effect */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-          className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative rounded-xl border border-accent/30 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md p-8 text-center"
         >
-          <CheckCircle2 className="w-10 h-10 text-green-500" />
-        </motion.div>
+          {/* Success Icon */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="w-20 h-20 mx-auto mb-4 rounded-full bg-green-500/20 flex items-center justify-center"
+          >
+            <CheckCircle2 className="w-10 h-10 text-green-500" />
+          </motion.div>
 
-        {/* Title & Subtitle */}
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+          {/* Title */}
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
             {finalTitle}
           </h2>
+
+          {/* Subtitle */}
           <p className="text-muted-foreground text-sm sm:text-base">
             {finalSubtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Reference ID Card */}
         <div className="max-w-sm mx-auto">
@@ -208,30 +216,32 @@ export function UnifiedSuccessMessage({
 
         {/* What Happens Next Details */}
         {finalDetails && finalDetails.length > 0 && (
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-lg font-semibold text-foreground text-center mb-4">
-              What Happens Next?
-            </h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-              {finalDetails.map((detail, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + idx * 0.1 }}
-                  className="flex flex-col items-center text-center p-4 rounded-lg bg-card/50 border border-border/50 w-full"
-                >
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-3">
-                    {detail.icon}
-                  </div>
-                  <h4 className="font-medium text-foreground text-sm mb-1">
-                    {detail.title}
-                  </h4>
-                  <p className="text-xs text-muted-foreground text-center">
-                    {detail.description}
-                  </p>
-                </motion.div>
-              ))}
+          <div className="flex justify-center">
+            <div className="w-full max-w-2xl">
+              <h3 className="text-lg font-semibold text-foreground text-center mb-4">
+                What Happens Next?
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mx-auto">
+                {finalDetails.map((detail, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + idx * 0.1 }}
+                    className="flex flex-col items-center text-center p-4 rounded-lg bg-card/50 border border-border/50"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-3">
+                      {detail.icon}
+                    </div>
+                    <h4 className="font-medium text-foreground text-sm mb-1">
+                      {detail.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground text-center">
+                      {detail.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         )}
