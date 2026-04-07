@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { MultiStepFormWrapper } from "@/components/organisms/multi-step-form-wrapper";
 import { PowerSurge } from "@/components/animations/power-surge";
+import { UnifiedSuccessMessage } from "@/components/molecules/unified-success-message";
 import type { FormStepConfig } from "@/lib/forms/types";
 import { useContactStore } from "../../hooks/use-contact-store";
 import { ContactInfoStep } from "./contact-steps/contact-info-step";
@@ -17,10 +18,12 @@ import { InquiryTypeStep } from "./contact-steps/inquiry-type-step";
 import { ReferenceLinkingStep } from "./contact-steps/reference-linking-step";
 import { MessageDetailsStep } from "./contact-steps/message-details-step";
 import { ContactReviewStep } from "./contact-steps/contact-review-step";
-import { ContactSuccessMessage } from "../molecules/contact-success-message";
 
 const CONTACT_PROGRESS_ANCHOR_ID = "contact-form-progress-anchor";
 const CONTACT_SCROLL_TOP_GAP = 28;
+const CONTACT_SUCCESS_ANCHOR_ID = "contact-success-anchor";
+const CONTACT_SUCCESS_SCROLL_TOP_GAP = 8;
+const CONTACT_SUCCESS_VISIBILITY_MS = 5000;
 
 const CONTACT_STEPS: FormStepConfig[] = [
   { id: "contact-info", title: "Contact Info", description: "Your details" },
@@ -31,10 +34,26 @@ const CONTACT_STEPS: FormStepConfig[] = [
 ];
 
 export function ContactFormContainer() {
-  const { currentStep, isSubmitted, contactReferenceId, setCurrentStep } =
-    useContactStore();
+  const {
+    currentStep,
+    isSubmitted,
+    contactReferenceId,
+    setCurrentStep,
+    resetForm,
+  } = useContactStore();
+
+  const handleStartNew = () => {
+    resetForm();
+    useContactStore.persist.clearStorage();
+  };
   const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
+  const successTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    resetForm();
+    useContactStore.persist.clearStorage();
+  }, [resetForm]);
 
   useEffect(() => {
     if (previousStepRef.current === null) {
@@ -44,7 +63,9 @@ export function ContactFormContainer() {
 
     if (currentStep > previousStepRef.current) {
       setSurgeTrigger((prev) => prev + 1);
-      const progressAnchor = document.getElementById(CONTACT_PROGRESS_ANCHOR_ID);
+      const progressAnchor = document.getElementById(
+        CONTACT_PROGRESS_ANCHOR_ID,
+      );
       if (progressAnchor) {
         requestAnimationFrame(() => {
           scrollToElementWithOffset(progressAnchor, {
@@ -58,8 +79,45 @@ export function ContactFormContainer() {
     previousStepRef.current = currentStep;
   }, [currentStep]);
 
+  useEffect(() => {
+    if (!isSubmitted) {
+      return;
+    }
+
+    const successAnchor = document.getElementById(CONTACT_SUCCESS_ANCHOR_ID);
+    if (successAnchor) {
+      requestAnimationFrame(() => {
+        scrollToElementWithOffset(successAnchor, {
+          baseGap: CONTACT_SUCCESS_SCROLL_TOP_GAP,
+          extraOffset: 0,
+        });
+      });
+    }
+
+    successTimerRef.current = window.setTimeout(() => {
+      useContactStore.getState().setSubmitted(false);
+      resetForm();
+      useContactStore.persist.clearStorage();
+    }, CONTACT_SUCCESS_VISIBILITY_MS);
+
+    return () => {
+      if (successTimerRef.current !== null) {
+        window.clearTimeout(successTimerRef.current);
+        successTimerRef.current = null;
+      }
+    };
+  }, [isSubmitted, resetForm]);
+
   if (isSubmitted) {
-    return <ContactSuccessMessage referenceId={contactReferenceId} />;
+    return (
+      <div id={CONTACT_SUCCESS_ANCHOR_ID}>
+        <UnifiedSuccessMessage
+          referenceId={contactReferenceId || ""}
+          formType="contact"
+          onStartNew={handleStartNew}
+        />
+      </div>
+    );
   }
 
   return (

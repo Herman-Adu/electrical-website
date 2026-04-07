@@ -51,7 +51,7 @@ test.describe("UI Smoke Tests", () => {
       .getByPlaceholder("john.smith@example.com")
       .fill("test@example.com");
     await form.getByPlaceholder("07700 900000").fill("07700900000");
-    await expect(continueButton).toBeDisabled();
+    await expect(continueButton).toBeEnabled();
   });
 
   test("Command Palette opens and responds to input", async ({ page }) => {
@@ -100,9 +100,7 @@ test.describe("UI Smoke Tests", () => {
       .getByPlaceholder("john.smith@example.com")
       .fill("test@example.com");
     await form.getByPlaceholder("07700 900000").fill("07700900000");
-    await expect(
-      form.getByRole("button", { name: /continue/i }),
-    ).toBeDisabled();
+    await expect(form.getByRole("button", { name: /continue/i })).toBeEnabled();
   });
 
   test("Navigation links render with correct styling", async ({ page }) => {

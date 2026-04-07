@@ -102,7 +102,6 @@ export function InquiryTypeStep() {
     trigger();
   }, [trigger]);
 
-  const selectedInquiry = watch("inquiryType");
   const selectedPriority = watch("priority");
 
   const onSubmit = (data: InquiryTypeInput) => {
@@ -110,6 +109,7 @@ export function InquiryTypeStep() {
     nextStep();
   };
 
+  const selectedSector = watch("sector");
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -210,6 +210,9 @@ export function InquiryTypeStep() {
               </div>
             )}
           />
+          {!selectedSector && (
+            <p className="text-xs text-destructive">Required</p>
+          )}
         </div>
 
         {/* Priority Selection */}

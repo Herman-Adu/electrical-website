@@ -6,11 +6,12 @@
 
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { motion } from "framer-motion";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import {
   CheckCircle2,
   User,
@@ -116,6 +117,20 @@ const initialActionState: ContactFormActionState = {
   success: false,
 };
 
+function mapTurnstileClientError(errorCode?: string | number): string {
+  const code = String(errorCode ?? "");
+
+  if (code === "110200") {
+    return "Verification unavailable for this domain. Please retry shortly.";
+  }
+
+  if (code === "400020" || code === "110100" || code === "110110") {
+    return "Verification configuration is invalid. Please retry shortly.";
+  }
+
+  return "Verification failed. Please retry.";
+}
+
 function SubmitInquiryButton({ tokenMissing }: { tokenMissing: boolean }) {
   const { pending } = useFormStatus();
 
@@ -141,7 +156,10 @@ function SubmitInquiryButton({ tokenMissing }: { tokenMissing: boolean }) {
 }
 
 export function ContactReviewStep() {
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 
   const {
     contactInfo,
@@ -149,6 +167,9 @@ export function ContactReviewStep() {
     referenceLinking,
     messageDetails,
     turnstileToken,
+    turnstileError,
+    setTurnstileToken,
+    setTurnstileError,
     setCurrentStep,
     setSubmitted,
     getCompleteFormData,
@@ -188,12 +209,15 @@ export function ContactReviewStep() {
   }, [actionState, setCurrentStep, setSubmitted]);
 
   const handleBeforeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!turnstileSiteKey) {
+      event.preventDefault();
+      setError("Verification is unavailable. Please try again shortly.");
+      return;
+    }
+
     if (!turnstileToken) {
       event.preventDefault();
-      setError(
-        "Verification expired. Return to Step 1 and complete verification.",
-      );
-      setCurrentStep(1);
+      setError("Please complete verification before submitting.");
       return;
     }
 
@@ -339,6 +363,53 @@ export function ContactReviewStep() {
             <p className="text-sm text-destructive">{error}</p>
           </div>
         )}
+
+        <div className="space-y-2" data-testid="contact-turnstile-widget">
+          {turnstileSiteKey ? (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={turnstileSiteKey}
+              options={{ theme: "auto", size: "normal" }}
+              onSuccess={(token) => {
+                setTurnstileToken(token);
+                setTurnstileError(null);
+              }}
+              onExpire={() => {
+                setTurnstileToken(null);
+                setTurnstileError("Verification expired. Please try again.");
+              }}
+              onError={(errorCode) => {
+                setTurnstileToken(null);
+                setTurnstileError(mapTurnstileClientError(errorCode));
+              }}
+            />
+          ) : (
+            <div className="rounded-md border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
+              Turnstile key missing. Verification cannot be completed.
+            </div>
+          )}
+
+          {turnstileError && (
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-muted/20 p-3">
+              <p className="text-xs text-muted-foreground" role="status">
+                {turnstileError}
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setTurnstileToken(null);
+                  setTurnstileError(null);
+                  turnstileRef.current?.reset();
+                }}
+                className="h-7 px-2 text-xs"
+              >
+                Retry
+              </Button>
+            </div>
+          )}
+        </div>
         <input type="hidden" name="payload" value={payload} />
 
         {/* Navigation */}

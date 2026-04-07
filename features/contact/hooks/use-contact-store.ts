@@ -57,21 +57,12 @@ interface ContactFormState {
   resetForm: () => void;
 }
 
-const initialState = {
+const createInitialState = () => ({
   currentStep: 1,
   contactInfo: {},
-  inquiryType: {
-    inquiryType: "general-inquiry" as const,
-    sector: "not-applicable" as const,
-    priority: "normal" as const,
-  },
-  referenceLinking: {
-    hasExistingReference: false,
-    referenceType: "none" as const,
-  },
+  inquiryType: {},
+  referenceLinking: {},
   messageDetails: {
-    preferredContactMethod: "either" as const,
-    bestTimeToContact: "anytime" as const,
     newsletterOptIn: false,
   },
   turnstileToken: null,
@@ -80,12 +71,12 @@ const initialState = {
   isSubmitted: false,
   submissionError: null,
   contactReferenceId: null,
-};
+});
 
 export const useContactStore = create<ContactFormState>()(
   persist(
     (set, get) => ({
-      ...initialState,
+      ...createInitialState(),
 
       setCurrentStep: (step) => set({ currentStep: step }),
 
@@ -153,14 +144,10 @@ export const useContactStore = create<ContactFormState>()(
         set(
           isSubmitted
             ? {
+                ...createInitialState(),
                 // On success: persist reset so navigating away and back shows a blank form
                 isSubmitted: true,
                 contactReferenceId: referenceId || null,
-                currentStep: 1,
-                contactInfo: initialState.contactInfo,
-                inquiryType: initialState.inquiryType,
-                referenceLinking: initialState.referenceLinking,
-                messageDetails: initialState.messageDetails,
               }
             : {
                 isSubmitted: false,
@@ -172,7 +159,7 @@ export const useContactStore = create<ContactFormState>()(
 
       resetForm: () =>
         set({
-          ...initialState,
+          ...createInitialState(),
           turnstileToken: null,
           turnstileError: null,
         }),

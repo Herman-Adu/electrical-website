@@ -9,7 +9,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, Phone, Clock } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import { FormInput } from "@/components/atoms/form-input";
 import { FormTextarea } from "@/components/atoms/form-textarea";
 import { FormCheckbox } from "@/components/atoms/form-checkbox";
@@ -51,6 +51,8 @@ export function MessageDetailsStep() {
   });
 
   const messageText = watch("message") || "";
+  const preferredContactMethod = watch("preferredContactMethod");
+  const bestTimeToContact = watch("bestTimeToContact");
   const characterCount = messageText.length;
   const maxCharacters = 2000;
 
@@ -124,14 +126,20 @@ export function MessageDetailsStep() {
             name="preferredContactMethod"
             control={control}
             render={({ field }) => (
-              <RadioGroup
-                name="preferredContactMethod"
-                label="Preferred contact method"
-                options={contactMethodOptions}
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.preferredContactMethod?.message}
-              />
+              <div className="space-y-2">
+                <RadioGroup
+                  name="preferredContactMethod"
+                  label="Preferred contact method"
+                  options={contactMethodOptions}
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.preferredContactMethod?.message}
+                  required
+                />
+                {!preferredContactMethod && (
+                  <p className="text-xs text-destructive">Required</p>
+                )}
+              </div>
             )}
           />
 
@@ -139,14 +147,20 @@ export function MessageDetailsStep() {
             name="bestTimeToContact"
             control={control}
             render={({ field }) => (
-              <RadioGroup
-                name="bestTimeToContact"
-                label="Best time to contact"
-                options={bestTimeOptions}
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.bestTimeToContact?.message}
-              />
+              <div className="space-y-2">
+                <RadioGroup
+                  name="bestTimeToContact"
+                  label="Best time to contact"
+                  options={bestTimeOptions}
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.bestTimeToContact?.message}
+                  required
+                />
+                {!bestTimeToContact && (
+                  <p className="text-xs text-destructive">Required</p>
+                )}
+              </div>
             )}
           />
         </div>
