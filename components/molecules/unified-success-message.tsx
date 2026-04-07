@@ -152,13 +152,13 @@ export function UnifiedSuccessMessage({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="w-full"
     >
-      <div className="mx-auto space-y-8 border-2 border-cyan-500/30 rounded-lg p-8 bg-background/50">
+      <div className="mx-auto space-y-8 border-2 border-green-500 rounded-lg p-8 bg-background/50">
         {/* Header Section with Glassmorphic Effect */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative rounded-xl border border-cyan-500/30 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md p-8 text-center"
+          className="relative rounded-xl border border-green-500 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md p-8 text-center"
         >
           {/* Success Icon */}
           <motion.div
@@ -228,7 +228,7 @@ export function UnifiedSuccessMessage({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + idx * 0.1 }}
-                    className="flex flex-col items-center text-center p-4 rounded-lg bg-card/50 border border-border/50"
+                    className="flex flex-col items-start text-left p-4 rounded-lg bg-card/50 border border-border/50"
                   >
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-3">
                       {detail.icon}
@@ -236,7 +236,7 @@ export function UnifiedSuccessMessage({
                     <h4 className="font-medium text-foreground text-sm mb-1">
                       {detail.title}
                     </h4>
-                    <p className="text-xs text-muted-foreground text-center">
+                    <p className="text-xs text-muted-foreground text-left">
                       {detail.description}
                     </p>
                   </motion.div>
