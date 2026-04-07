@@ -93,6 +93,11 @@ export function generateBusinessNotificationEmail(
             reference: requestId,
             referenceLabel: "Request ID",
             status: "Action Required",
+            statusTone: isEmergency
+              ? "emergency"
+              : isUrgent
+                ? "urgent"
+                : "normal",
           })}
 
           <!-- Main Content -->

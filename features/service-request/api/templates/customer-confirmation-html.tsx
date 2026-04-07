@@ -69,13 +69,16 @@ export function generateCustomerConfirmationEmail(
             reference: requestId,
             referenceLabel: "Request ID",
             status: "Received",
+            statusTone: isEmergency
+              ? "emergency"
+              : isUrgent
+                ? "urgent"
+                : "normal",
           })}
 
           <!-- Main Content -->
           <tr>
             <td style="padding: 40px;">
-              <h2 style="margin: 0 0 24px; color: ${BRAND_COLORS.textDark}; font-size: 24px; font-weight: 700;">Request Confirmed!</h2>
-
               <p style="margin: 0 0 16px; color: ${BRAND_COLORS.textMuted}; font-size: 16px; line-height: 1.6;">Dear ${customerName},</p>
 
               <p style="margin: 0 0 24px; color: ${BRAND_COLORS.textMuted}; font-size: 16px; line-height: 1.6;">
