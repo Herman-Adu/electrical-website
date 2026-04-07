@@ -304,9 +304,9 @@ export function getSharedHeaderHtml(
     { bg: string; text: string; border: string }
   > = {
     normal: {
-      bg: BRAND_COLORS.accentGreen,
-      text: BRAND_COLORS.headerGradient.start,
-      border: BRAND_COLORS.accentGreen,
+      bg: "#d1fae5",
+      text: "#065f46",
+      border: "#10b981",
     },
     urgent: {
       bg: URGENCY_COLORS.urgent.badgeBg,
