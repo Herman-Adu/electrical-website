@@ -86,6 +86,11 @@ export const completeFormSchema = z.object({
   serviceDetails: serviceDetailsSchema,
   propertyInfo: propertyInfoSchema,
   schedulePreferences: schedulePreferencesSchema,
+  gdprConsent: z.literal(true, {
+    errorMap: () => ({
+      message: "You must consent to data processing before submitting",
+    }),
+  }),
 });
 
 // Export types inferred from schemas

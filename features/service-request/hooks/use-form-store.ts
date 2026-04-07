@@ -16,73 +16,75 @@
  * - Reset function clears all data (useful for "start over" functionality)
  */
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
-import { FORM_CONSTANTS } from "@/lib/constants"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { FORM_CONSTANTS } from "@/lib/constants";
 
 // Step 1: Personal Information
 export interface PersonalInfo {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
 }
 
 // Step 2: Service Details
 export interface ServiceDetails {
-  serviceType: string
-  urgency: "routine" | "urgent" | "emergency"
-  description: string
+  serviceType: string;
+  urgency: "routine" | "urgent" | "emergency";
+  description: string;
 }
 
 // Step 3: Property Information
 export interface PropertyInfo {
-  address: string
-  city: string
-  state: string
-  zipCode: string
-  propertyType: "residential" | "commercial"
-  accessInstructions?: string
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  propertyType: "residential" | "commercial";
+  accessInstructions?: string;
 }
 
 // Step 4: Schedule Preferences
 export interface SchedulePreferences {
-  preferredDate: string
-  preferredTimeSlot: "morning" | "afternoon" | "evening"
-  alternativeDate?: string
-  flexibleScheduling: boolean
+  preferredDate: string;
+  preferredTimeSlot: "morning" | "afternoon" | "evening";
+  alternativeDate?: string;
+  flexibleScheduling: boolean;
 }
 
 // Complete form data structure
 export interface FormData {
-  personalInfo: PersonalInfo
-  serviceDetails: ServiceDetails
-  propertyInfo: PropertyInfo
-  schedulePreferences: SchedulePreferences
+  personalInfo: PersonalInfo;
+  serviceDetails: ServiceDetails;
+  propertyInfo: PropertyInfo;
+  schedulePreferences: SchedulePreferences;
+  gdprConsent: boolean;
 }
 
 // Store state interface
 interface FormStore {
   // Current step (1-5)
-  currentStep: number
+  currentStep: number;
 
   // Form data for each step
-  data: FormData
+  data: FormData;
 
   // Actions
-  updatePersonalInfo: (data: Partial<PersonalInfo>) => void
-  updateServiceDetails: (data: Partial<ServiceDetails>) => void
-  updatePropertyInfo: (data: Partial<PropertyInfo>) => void
-  updateSchedulePreferences: (data: Partial<SchedulePreferences>) => void
+  updatePersonalInfo: (data: Partial<PersonalInfo>) => void;
+  updateServiceDetails: (data: Partial<ServiceDetails>) => void;
+  updatePropertyInfo: (data: Partial<PropertyInfo>) => void;
+  updateSchedulePreferences: (data: Partial<SchedulePreferences>) => void;
+  updateGdprConsent: (accepted: boolean) => void;
 
   // Navigation
-  nextStep: () => void
-  prevStep: () => void
-  goToStep: (step: number) => void
+  nextStep: () => void;
+  prevStep: () => void;
+  goToStep: (step: number) => void;
 
   // Utility
-  resetForm: () => void
-  isStepComplete: (step: number) => boolean
+  resetForm: () => void;
+  isStepComplete: (step: number) => boolean;
 }
 
 // Initial state
@@ -112,7 +114,8 @@ const initialData: FormData = {
     alternativeDate: "",
     flexibleScheduling: false,
   },
-}
+  gdprConsent: false,
+};
 
 /**
  * ZUSTAND STORE CREATION
@@ -158,19 +161,36 @@ export const useFormStore = create<FormStore>()(
           },
         })),
 
+      updateGdprConsent: (accepted) =>
+        set((state) => ({
+          data: {
+            ...state.data,
+            gdprConsent: accepted,
+          },
+        })),
+
       nextStep: () =>
         set((state) => ({
-          currentStep: Math.min(state.currentStep + 1, FORM_CONSTANTS.GENERAL_FORM_MAX_STEP),
+          currentStep: Math.min(
+            state.currentStep + 1,
+            FORM_CONSTANTS.GENERAL_FORM_MAX_STEP,
+          ),
         })),
 
       prevStep: () =>
         set((state) => ({
-          currentStep: Math.max(state.currentStep - 1, FORM_CONSTANTS.GENERAL_FORM_MIN_STEP),
+          currentStep: Math.max(
+            state.currentStep - 1,
+            FORM_CONSTANTS.GENERAL_FORM_MIN_STEP,
+          ),
         })),
 
       goToStep: (step) =>
         set(() => ({
-          currentStep: Math.max(FORM_CONSTANTS.GENERAL_FORM_MIN_STEP, Math.min(step, FORM_CONSTANTS.GENERAL_FORM_MAX_STEP)),
+          currentStep: Math.max(
+            FORM_CONSTANTS.GENERAL_FORM_MIN_STEP,
+            Math.min(step, FORM_CONSTANTS.GENERAL_FORM_MAX_STEP),
+          ),
         })),
 
       resetForm: () =>
@@ -184,7 +204,7 @@ export const useFormStore = create<FormStore>()(
        * Used to enable/disable navigation and show completion indicators
        */
       isStepComplete: (step) => {
-        const { data } = get()
+        const { data } = get();
 
         switch (step) {
           case 1:
@@ -193,23 +213,28 @@ export const useFormStore = create<FormStore>()(
               data.personalInfo.lastName &&
               data.personalInfo.email &&
               data.personalInfo.phone
-            )
+            );
           case 2:
-            return !!(data.serviceDetails.serviceType && data.serviceDetails.description)
+            return !!(
+              data.serviceDetails.serviceType && data.serviceDetails.description
+            );
           case 3:
             return !!(
               data.propertyInfo.address &&
               data.propertyInfo.city &&
               data.propertyInfo.state &&
               data.propertyInfo.zipCode
-            )
+            );
           case 4:
-            return !!(data.schedulePreferences.preferredDate && data.schedulePreferences.preferredTimeSlot)
+            return !!(
+              data.schedulePreferences.preferredDate &&
+              data.schedulePreferences.preferredTimeSlot
+            );
           case 5:
             // Review step is always "complete" if reached
-            return true
+            return true;
           default:
-            return false
+            return false;
         }
       },
     }),
@@ -217,4 +242,4 @@ export const useFormStore = create<FormStore>()(
       name: "electrical-service-form", // localStorage key
     },
   ),
-)
+);
