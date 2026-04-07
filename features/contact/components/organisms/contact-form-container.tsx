@@ -6,9 +6,10 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { MultiStepFormWrapper } from "@/components/organisms/multi-step-form-wrapper";
+import { PowerSurge } from "@/components/animations/power-surge";
 import type { FormStepConfig } from "@/lib/forms/types";
 import { useContactStore } from "../../hooks/use-contact-store";
 import { ContactInfoStep } from "./contact-steps/contact-info-step";
@@ -17,6 +18,9 @@ import { ReferenceLinkingStep } from "./contact-steps/reference-linking-step";
 import { MessageDetailsStep } from "./contact-steps/message-details-step";
 import { ContactReviewStep } from "./contact-steps/contact-review-step";
 import { ContactSuccessMessage } from "../molecules/contact-success-message";
+
+const CONTACT_PROGRESS_ANCHOR_ID = "contact-form-progress-anchor";
+const CONTACT_SCROLL_TOP_GAP = 28;
 
 const CONTACT_STEPS: FormStepConfig[] = [
   { id: "contact-info", title: "Contact Info", description: "Your details" },
@@ -29,10 +33,29 @@ const CONTACT_STEPS: FormStepConfig[] = [
 export function ContactFormContainer() {
   const { currentStep, isSubmitted, contactReferenceId, setCurrentStep } =
     useContactStore();
+  const [surgeTrigger, setSurgeTrigger] = useState(0);
+  const previousStepRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const el = document.getElementById("contact-form-section");
-    if (el) scrollToElementWithOffset(el);
+    if (previousStepRef.current === null) {
+      previousStepRef.current = currentStep;
+      return;
+    }
+
+    if (currentStep > previousStepRef.current) {
+      setSurgeTrigger((prev) => prev + 1);
+      const progressAnchor = document.getElementById(CONTACT_PROGRESS_ANCHOR_ID);
+      if (progressAnchor) {
+        requestAnimationFrame(() => {
+          scrollToElementWithOffset(progressAnchor, {
+            baseGap: CONTACT_SCROLL_TOP_GAP,
+            extraOffset: 0,
+          });
+        });
+      }
+    }
+
+    previousStepRef.current = currentStep;
   }, [currentStep]);
 
   if (isSubmitted) {
@@ -40,25 +63,29 @@ export function ContactFormContainer() {
   }
 
   return (
-    <MultiStepFormWrapper
-      title=""
-      description=""
-      steps={CONTACT_STEPS}
-      currentStep={currentStep - 1}
-      className="w-full max-w-3xl px-1 sm:px-0"
-      progressAnchorId="contact-form-progress-anchor"
-      onStepClick={(stepIndex) => {
-        const stepNumber = stepIndex + 1;
-        if (stepNumber <= currentStep) {
-          setCurrentStep(stepNumber);
-        }
-      }}
-    >
-      {currentStep === 1 && <ContactInfoStep key="step-1" />}
-      {currentStep === 2 && <InquiryTypeStep key="step-2" />}
-      {currentStep === 3 && <ReferenceLinkingStep key="step-3" />}
-      {currentStep === 4 && <MessageDetailsStep key="step-4" />}
-      {currentStep === 5 && <ContactReviewStep key="step-5" />}
-    </MultiStepFormWrapper>
+    <>
+      <PowerSurge trigger={surgeTrigger} />
+
+      <MultiStepFormWrapper
+        title=""
+        description=""
+        steps={CONTACT_STEPS}
+        currentStep={currentStep - 1}
+        className="w-full max-w-3xl px-1 sm:px-0"
+        progressAnchorId={CONTACT_PROGRESS_ANCHOR_ID}
+        onStepClick={(stepIndex) => {
+          const stepNumber = stepIndex + 1;
+          if (stepNumber <= currentStep) {
+            setCurrentStep(stepNumber);
+          }
+        }}
+      >
+        {currentStep === 1 && <ContactInfoStep key="step-1" />}
+        {currentStep === 2 && <InquiryTypeStep key="step-2" />}
+        {currentStep === 3 && <ReferenceLinkingStep key="step-3" />}
+        {currentStep === 4 && <MessageDetailsStep key="step-4" />}
+        {currentStep === 5 && <ContactReviewStep key="step-5" />}
+      </MultiStepFormWrapper>
+    </>
   );
 }

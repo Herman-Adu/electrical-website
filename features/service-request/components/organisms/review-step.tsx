@@ -19,6 +19,8 @@ import { submitServiceRequest } from "../../api/service-request";
 import { ReviewStepDisplay } from "./review-step-display";
 
 const SUCCESS_VISIBILITY_MS = 5000;
+const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
+const SERVICE_SCROLL_TOP_GAP = 28;
 
 export function ReviewStep() {
   const { data, prevStep, goToStep, resetForm, updateGdprConsent } =
@@ -40,11 +42,13 @@ export function ReviewStep() {
       setRequestId(null);
       setError(null);
 
-      const formSection = document.getElementById("service-request");
-      if (formSection) {
+      const progressAnchor = document.getElementById(
+        SERVICE_PROGRESS_ANCHOR_ID,
+      );
+      if (progressAnchor) {
         requestAnimationFrame(() => {
-          scrollToElementWithOffset(formSection, {
-            baseGap: 8,
+          scrollToElementWithOffset(progressAnchor, {
+            baseGap: SERVICE_SCROLL_TOP_GAP,
             extraOffset: 0,
           });
         });
@@ -95,11 +99,11 @@ export function ReviewStep() {
     setRequestId(null);
     setError(null);
 
-    const formSection = document.getElementById("service-request");
-    if (formSection) {
+    const progressAnchor = document.getElementById(SERVICE_PROGRESS_ANCHOR_ID);
+    if (progressAnchor) {
       requestAnimationFrame(() => {
-        scrollToElementWithOffset(formSection, {
-          baseGap: 8,
+        scrollToElementWithOffset(progressAnchor, {
+          baseGap: SERVICE_SCROLL_TOP_GAP,
           extraOffset: 0,
         });
       });
