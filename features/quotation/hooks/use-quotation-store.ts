@@ -64,7 +64,7 @@ interface QuotationFormState {
   };
 }
 
-const initialState = {
+const createInitialState = () => ({
   contact: {},
   projectType: {},
   scope: { services: [] },
@@ -76,12 +76,12 @@ const initialState = {
   isComplete: false,
   turnstileToken: null,
   turnstileError: null,
-};
+});
 
 export const useQuotationStore = create<QuotationFormState>()(
   persist(
     (set, get) => ({
-      ...initialState,
+      ...createInitialState(),
 
       updateContact: (data) =>
         set((state) => ({
@@ -152,7 +152,7 @@ export const useQuotationStore = create<QuotationFormState>()(
           turnstileError: error,
         }),
 
-      resetForm: () => set(initialState),
+      resetForm: () => set(createInitialState()),
 
       getCompleteFormData: () => {
         const state = get();

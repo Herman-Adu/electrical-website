@@ -31,10 +31,20 @@ const CONTACT_STEPS: FormStepConfig[] = [
 ];
 
 export function ContactFormContainer() {
-  const { currentStep, isSubmitted, contactReferenceId, setCurrentStep } =
-    useContactStore();
+  const {
+    currentStep,
+    isSubmitted,
+    contactReferenceId,
+    setCurrentStep,
+    resetForm,
+  } = useContactStore();
   const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    resetForm();
+    useContactStore.persist.clearStorage();
+  }, [resetForm]);
 
   useEffect(() => {
     if (previousStepRef.current === null) {
@@ -44,7 +54,9 @@ export function ContactFormContainer() {
 
     if (currentStep > previousStepRef.current) {
       setSurgeTrigger((prev) => prev + 1);
-      const progressAnchor = document.getElementById(CONTACT_PROGRESS_ANCHOR_ID);
+      const progressAnchor = document.getElementById(
+        CONTACT_PROGRESS_ANCHOR_ID,
+      );
       if (progressAnchor) {
         requestAnimationFrame(() => {
           scrollToElementWithOffset(progressAnchor, {

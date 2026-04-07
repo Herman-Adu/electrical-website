@@ -13,7 +13,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link2, FileText, Receipt, Info } from "lucide-react";
 import { FormInput } from "@/components/atoms/form-input";
 import { FormTextarea } from "@/components/atoms/form-textarea";
-import { FormCheckbox } from "@/components/atoms/form-checkbox";
 import { Button } from "@/components/ui/button";
 import { useContactStore } from "../../../hooks/use-contact-store";
 import {
@@ -68,12 +67,14 @@ export function ReferenceLinkingStep() {
     nextStep();
   };
 
-  const handleToggleReference = (checked: boolean) => {
-    setValue("hasExistingReference", checked);
-    if (!checked) {
-      setValue("referenceType", "none");
-      setValue("referenceId", "");
-      setValue("referenceDescription", "");
+  const handleReferenceChoice = (hasReference: boolean) => {
+    setValue("hasExistingReference", hasReference, { shouldValidate: true });
+    if (!hasReference) {
+      setValue("referenceType", "none", { shouldValidate: true });
+      setValue("referenceId", "", { shouldValidate: true });
+      setValue("referenceDescription", "", { shouldValidate: true });
+    } else {
+      setValue("referenceType", undefined, { shouldValidate: true });
     }
   };
 
@@ -104,12 +105,47 @@ export function ReferenceLinkingStep() {
           name="hasExistingReference"
           control={control}
           render={({ field }) => (
-            <FormCheckbox
-              label="I have an existing reference number"
-              description="Check this if you're following up on a previous request or quote"
-              checked={field.value}
-              onChange={(e) => handleToggleReference(e.target.checked)}
-            />
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-foreground">
+                Do you have an existing reference number?{" "}
+                <span className="text-destructive">*</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleReferenceChoice(true)}
+                  className={`p-4 rounded-lg border text-left transition-all ${
+                    field.value === true
+                      ? "border-accent bg-accent/10 ring-1 ring-accent"
+                      : "border-border hover:border-accent/50 hover:bg-accent/5"
+                  }`}
+                >
+                  <p className="font-medium text-sm text-foreground">Yes</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    I want to link this inquiry to an existing request or quote
+                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReferenceChoice(false)}
+                  className={`p-4 rounded-lg border text-left transition-all ${
+                    field.value === false
+                      ? "border-accent bg-accent/10 ring-1 ring-accent"
+                      : "border-border hover:border-accent/50 hover:bg-accent/5"
+                  }`}
+                >
+                  <p className="font-medium text-sm text-foreground">No</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    This is a new inquiry without a previous reference
+                  </p>
+                </button>
+              </div>
+              {errors.hasExistingReference && (
+                <p className="text-sm text-destructive">
+                  {errors.hasExistingReference.message}
+                </p>
+              )}
+            </div>
           )}
         />
 

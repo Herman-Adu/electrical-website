@@ -1,37 +1,47 @@
 /**
  * MOLECULE: ContactSuccessMessage
- * 
+ *
  * Displayed after successful contact form submission
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { CheckCircle2, Mail, Clock, ArrowRight, Copy, Check } from "lucide-react"
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { useContactStore } from "../../hooks/use-contact-store"
+import { motion } from "framer-motion";
+import {
+  CheckCircle2,
+  Mail,
+  Clock,
+  ArrowRight,
+  Copy,
+  Check,
+} from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useContactStore } from "../../hooks/use-contact-store";
 
 interface ContactSuccessMessageProps {
-  referenceId?: string | null
+  referenceId?: string | null;
 }
 
-export function ContactSuccessMessage({ referenceId }: ContactSuccessMessageProps) {
-  const [copied, setCopied] = useState(false)
-  const { resetForm } = useContactStore()
+export function ContactSuccessMessage({
+  referenceId,
+}: ContactSuccessMessageProps) {
+  const [copied, setCopied] = useState(false);
+  const { resetForm } = useContactStore();
 
   const handleCopy = async () => {
     if (referenceId) {
-      await navigator.clipboard.writeText(referenceId)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(referenceId);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
-  }
+  };
 
   const handleNewInquiry = () => {
-    resetForm()
-  }
+    resetForm();
+    useContactStore.persist.clearStorage();
+  };
 
   return (
     <motion.div
@@ -56,13 +66,16 @@ export function ContactSuccessMessage({ referenceId }: ContactSuccessMessageProp
           Message Sent Successfully!
         </h2>
         <p className="text-muted-foreground mb-6">
-          Thank you for contacting us. We&apos;ve received your inquiry and will respond as soon as possible.
+          Thank you for contacting us. We&apos;ve received your inquiry and will
+          respond as soon as possible.
         </p>
 
         {/* Reference ID */}
         {referenceId && (
           <div className="mb-6 p-4 rounded-lg bg-accent/10 border border-accent/20">
-            <p className="text-sm text-muted-foreground mb-2">Your Reference Number</p>
+            <p className="text-sm text-muted-foreground mb-2">
+              Your Reference Number
+            </p>
             <div className="flex items-center justify-center gap-2">
               <code className="text-lg font-mono font-bold text-accent">
                 {referenceId}
@@ -88,11 +101,14 @@ export function ContactSuccessMessage({ referenceId }: ContactSuccessMessageProp
 
         {/* What Happens Next */}
         <div className="mb-6 p-4 rounded-lg bg-muted/50 text-left space-y-3">
-          <h3 className="font-medium text-foreground text-sm">What happens next?</h3>
+          <h3 className="font-medium text-foreground text-sm">
+            What happens next?
+          </h3>
           <div className="flex items-start gap-3">
             <Mail className="h-4 w-4 text-accent shrink-0 mt-0.5" />
             <p className="text-sm text-muted-foreground">
-              You&apos;ll receive a confirmation email shortly with your reference number.
+              You&apos;ll receive a confirmation email shortly with your
+              reference number.
             </p>
           </div>
           <div className="flex items-start gap-3">
@@ -121,5 +137,5 @@ export function ContactSuccessMessage({ referenceId }: ContactSuccessMessageProp
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

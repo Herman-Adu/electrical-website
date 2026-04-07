@@ -166,7 +166,8 @@ export function QuotationReviewStep({
 
     if (!turnstileToken) {
       event.preventDefault();
-      const verificationError = "Please complete verification before submitting.";
+      const verificationError =
+        "Please complete verification before submitting.";
       onSubmitError(verificationError);
       setLocalError(verificationError);
       return;
