@@ -30,11 +30,11 @@ export const COMPANY = {
     local: "03333 356 037",
   },
   email: {
-    support: "support@nexgen-electrical-innovations.co.uk",
-    info: "info@nexgen-electrical-innovations.co.uk",
-    noreply: "noreply@nexgen-electrical-innovations.co.uk",
+    support: "support@adudev.co.uk",
+    info: "info@adudev.co.uk",
+    noreply: "noreply@adudev.co.uk",
   },
-  website: "www.nexgen-electrical-innovations.co.uk",
+  website: "www.adudev.co.uk",
   copyrightYear: new Date().getFullYear().toString(),
 } as const;
 

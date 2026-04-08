@@ -10,22 +10,14 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useFormStore } from "../../hooks/use-form-store";
-import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { submitServiceRequest } from "../../api/service-request";
 import { ReviewStepDisplay } from "./review-step-display";
-import { UnifiedSuccessMessage } from "@/components/molecules/unified-success-message";
 import { completeFormSchema } from "../../schemas/schemas";
-
-const SUCCESS_VISIBILITY_MS = 5000;
-const SERVICE_PROGRESS_ANCHOR_ID = "service-form-progress-anchor";
-const SERVICE_SCROLL_TOP_GAP = 28;
-const SERVICE_SUCCESS_ANCHOR_ID = "service-success-anchor";
-const SERVICE_SUCCESS_SCROLL_TOP_GAP = 8;
 
 function mapTurnstileClientError(errorCode?: string | number): string {
   const code = String(errorCode ?? "");
@@ -41,12 +33,15 @@ function mapTurnstileClientError(errorCode?: string | number): string {
   return "Verification failed. Please retry.";
 }
 
-export function ReviewStep() {
+interface ReviewStepProps {
+  onSubmitSuccess: (requestId: string) => void;
+}
+
+export function ReviewStep({ onSubmitSuccess }: ReviewStepProps) {
   const {
     data,
     prevStep,
     goToStep,
-    resetForm,
     updateGdprConsent,
     updatePrivacyTermsAccepted,
     turnstileToken,
@@ -56,57 +51,11 @@ export function ReviewStep() {
   } = useFormStore();
   const turnstileRef = useRef<TurnstileInstance | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [requestId, setRequestId] = useState<string | null>(null);
-  const successTimerRef = useRef<number | null>(null);
   const turnstileSiteKey =
     process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
   const isTurnstileVerified = Boolean(turnstileToken);
   const isSubmissionReady = completeFormSchema.safeParse(data).success;
-
-  useEffect(() => {
-    if (!isSubmitted) {
-      return;
-    }
-
-    const successAnchor = document.getElementById(SERVICE_SUCCESS_ANCHOR_ID);
-    if (successAnchor) {
-      requestAnimationFrame(() => {
-        scrollToElementWithOffset(successAnchor, {
-          baseGap: SERVICE_SUCCESS_SCROLL_TOP_GAP,
-          extraOffset: 0,
-        });
-      });
-    }
-
-    successTimerRef.current = window.setTimeout(() => {
-      setIsSubmitted(false);
-      setRequestId(null);
-      setError(null);
-      resetForm();
-      useFormStore.persist.clearStorage();
-
-      const progressAnchor = document.getElementById(
-        SERVICE_PROGRESS_ANCHOR_ID,
-      );
-      if (progressAnchor) {
-        requestAnimationFrame(() => {
-          scrollToElementWithOffset(progressAnchor, {
-            baseGap: SERVICE_SCROLL_TOP_GAP,
-            extraOffset: 0,
-          });
-        });
-      }
-    }, SUCCESS_VISIBILITY_MS);
-
-    return () => {
-      if (successTimerRef.current !== null) {
-        window.clearTimeout(successTimerRef.current);
-        successTimerRef.current = null;
-      }
-    };
-  }, [isSubmitted, resetForm]);
 
   const handleSubmit = async () => {
     if (!turnstileSiteKey) {
@@ -136,8 +85,8 @@ export function ReviewStep() {
       });
 
       if (result.success) {
-        setRequestId(result.data.requestId);
-        setIsSubmitted(true);
+        setError(null);
+        onSubmitSuccess(result.data.requestId);
       } else {
         setError(result.error);
       }
@@ -148,47 +97,11 @@ export function ReviewStep() {
     }
   };
 
-  const handleStartOver = () => {
-    if (successTimerRef.current !== null) {
-      window.clearTimeout(successTimerRef.current);
-      successTimerRef.current = null;
-    }
-
-    resetForm();
-    useFormStore.persist.clearStorage();
-    turnstileRef.current?.reset();
-    setIsSubmitted(false);
-    setRequestId(null);
-    setError(null);
-
-    const progressAnchor = document.getElementById(SERVICE_PROGRESS_ANCHOR_ID);
-    if (progressAnchor) {
-      requestAnimationFrame(() => {
-        scrollToElementWithOffset(progressAnchor, {
-          baseGap: SERVICE_SCROLL_TOP_GAP,
-          extraOffset: 0,
-        });
-      });
-    }
-  };
-
   const retryVerification = () => {
     setTurnstileToken(null);
     setTurnstileError(null);
     turnstileRef.current?.reset();
   };
-
-  if (isSubmitted) {
-    return (
-      <div id={SERVICE_SUCCESS_ANCHOR_ID}>
-        <UnifiedSuccessMessage
-          referenceId={requestId || ""}
-          formType="service"
-          onStartNew={handleStartOver}
-        />
-      </div>
-    );
-  }
 
   return (
     <motion.div

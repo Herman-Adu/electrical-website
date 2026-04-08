@@ -224,7 +224,7 @@ export function UnifiedSuccessMessage({
                 <h3 className="text-lg font-semibold text-foreground text-center mb-4">
                   What Happens Next?
                 </h3>
-                <div className="grid gap-4 sm:grid-cols-2 mx-auto w-fill justify-center">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mx-auto w-fill justify-center">
                   {finalDetails.map((detail, idx) => (
                     <motion.div
                       key={idx}

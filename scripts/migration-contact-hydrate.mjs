@@ -205,6 +205,13 @@ function hasStrictFlag() {
   return process.argv.includes("--strict");
 }
 
+function shouldSkipPreflight() {
+  return (
+    process.argv.includes("--skip-preflight") ||
+    process.env.MCP_PREFLIGHT_DONE === "1"
+  );
+}
+
 function runPnpm(args) {
   const result = spawnSync(`pnpm ${args.join(" ")}`, {
     stdio: "inherit",
@@ -383,11 +390,18 @@ async function hydrateAndPrintSummary() {
 
 async function main() {
   const strictMode = hasStrictFlag();
+  const skipPreflight = shouldSkipPreflight();
 
-  console.log(
-    "[hydrate] Step 1/3: Running preflight (migration:contact:ready)...",
-  );
-  runPnpm(["migration:contact:ready"]);
+  if (skipPreflight) {
+    console.log(
+      "[hydrate] Step 1/3: Skipping preflight (MCP_PREFLIGHT_DONE=1 or --skip-preflight).",
+    );
+  } else {
+    console.log(
+      "[hydrate] Step 1/3: Running preflight (migration:contact:ready)...",
+    );
+    runPnpm(["migration:contact:ready"]);
+  }
 
   console.log(
     `[hydrate] Step 2/3: ${strictMode ? "Verifying" : "Ensuring"} required memory nodes and relations...`,

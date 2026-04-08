@@ -131,6 +131,7 @@ export function ScheduleStep() {
               label="Preferred Time Slot"
               options={TIME_SLOT_OPTIONS}
               error={errors.preferredTimeSlot?.message}
+              showRequiredHelper
               required
               value={field.value}
               onValueChange={field.onChange}

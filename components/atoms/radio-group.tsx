@@ -22,6 +22,8 @@ interface RadioGroupProps extends Omit<
   label?: string;
   options: RadioOption[];
   error?: string;
+  helperText?: string;
+  showRequiredHelper?: boolean;
   value?: string;
   onValueChange?: (value: string) => void;
 }
@@ -32,6 +34,8 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       label,
       options,
       error,
+      helperText,
+      showRequiredHelper = false,
       value,
       onValueChange,
       className,
@@ -40,6 +44,8 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
     },
     ref,
   ) => {
+    const shouldShowRequiredHelper = showRequiredHelper && !error && !value;
+
     return (
       <div className="space-y-3">
         {label && (
@@ -86,6 +92,14 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
         </div>
 
         {error && <p className="text-sm text-destructive">{error}</p>}
+
+        {shouldShowRequiredHelper && (
+          <p className="text-xs text-destructive">Required</p>
+        )}
+
+        {helperText && !error && !shouldShowRequiredHelper && (
+          <p className="text-sm text-muted-foreground">{helperText}</p>
+        )}
       </div>
     );
   },

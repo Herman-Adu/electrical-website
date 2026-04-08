@@ -1,44 +1,47 @@
 /**
  * QUOTATION STEP: ProjectScopeStep
- * 
+ *
  * Collects detailed project requirements including description,
  * estimated size, required services, and design needs.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ClipboardList } from "lucide-react"
-import { FormTextarea } from "@/components/atoms/form-textarea"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { FormStepContainer } from "@/components/molecules/form-step-container"
-import { quotationScopeSchema, type QuotationScopeInput } from "../../../schemas/quotation-schemas"
-import { cn } from "@/lib/utils"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ClipboardList } from "lucide-react";
+import { FormTextarea } from "@/components/atoms/form-textarea";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { FormStepContainer } from "@/components/molecules/form-step-container";
+import {
+  quotationScopeSchema,
+  type QuotationScopeInput,
+} from "../../../schemas/quotation-schemas";
+import { cn } from "@/lib/utils";
 
 const projectSizeOptions = [
-  { 
-    value: "small", 
+  {
+    value: "small",
     label: "Small",
-    description: "Single room or minor works"
+    description: "Single room or minor works",
   },
-  { 
-    value: "medium", 
+  {
+    value: "medium",
     label: "Medium",
-    description: "Multiple rooms or moderate scope"
+    description: "Multiple rooms or moderate scope",
   },
-  { 
-    value: "large", 
+  {
+    value: "large",
     label: "Large",
-    description: "Whole property or significant works"
+    description: "Whole property or significant works",
   },
-  { 
-    value: "very-large", 
+  {
+    value: "very-large",
     label: "Very Large",
-    description: "Major project or multiple properties"
+    description: "Major project or multiple properties",
   },
-]
+];
 
 const serviceOptions = [
   { value: "electrical-installation", label: "Electrical Installation" },
@@ -54,14 +57,14 @@ const serviceOptions = [
   { value: "testing-certification", label: "Testing & Certification" },
   { value: "maintenance-contract", label: "Maintenance Contract" },
   { value: "other", label: "Other Services" },
-]
+];
 
 interface ProjectScopeStepProps {
-  defaultValues?: Partial<QuotationScopeInput>
-  onSubmit: (data: QuotationScopeInput) => void
-  onPrevious?: () => void
-  isFirstStep?: boolean
-  isLastStep?: boolean
+  defaultValues?: Partial<QuotationScopeInput>;
+  onSubmit: (data: QuotationScopeInput) => void;
+  onPrevious?: () => void;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
 }
 
 export function ProjectScopeStep({
@@ -87,17 +90,19 @@ export function ProjectScopeStep({
       ...defaultValues,
     },
     mode: "onChange",
-  })
+  });
 
-  const selectedServices = watch("services") || []
+  const selectedServices = watch("services") || [];
 
   const toggleService = (service: string) => {
-    const current = selectedServices
-    const updated = current.includes(service as QuotationScopeInput["services"][number])
+    const current = selectedServices;
+    const updated = current.includes(
+      service as QuotationScopeInput["services"][number],
+    )
       ? current.filter((s) => s !== service)
-      : [...current, service as QuotationScopeInput["services"][number]]
-    setValue("services", updated, { shouldValidate: true })
-  }
+      : [...current, service as QuotationScopeInput["services"][number]];
+    setValue("services", updated, { shouldValidate: true });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,6 +122,7 @@ export function ProjectScopeStep({
             placeholder="Please describe your project in detail. Include any specific requirements, constraints, or goals you have in mind..."
             rows={5}
             error={errors.projectDescription?.message}
+            helperText="Required field"
             required
             {...register("projectDescription")}
           />
@@ -132,6 +138,7 @@ export function ProjectScopeStep({
                 value={field.value}
                 onValueChange={field.onChange}
                 error={errors.estimatedSize?.message}
+                showRequiredHelper
                 required
               />
             )}
@@ -153,21 +160,31 @@ export function ProjectScopeStep({
                   onClick={() => toggleService(option.value)}
                   className={cn(
                     "flex items-center gap-2 p-3 rounded-lg border text-left text-sm transition-all",
-                    selectedServices.includes(option.value as QuotationScopeInput["services"][number])
+                    selectedServices.includes(
+                      option.value as QuotationScopeInput["services"][number],
+                    )
                       ? "border-accent bg-accent/10 text-foreground"
-                      : "border-input hover:border-accent/50 text-muted-foreground hover:text-foreground"
+                      : "border-input hover:border-accent/50 text-muted-foreground hover:text-foreground",
                   )}
                 >
                   <div
                     className={cn(
                       "w-4 h-4 rounded border flex items-center justify-center",
-                      selectedServices.includes(option.value as QuotationScopeInput["services"][number])
+                      selectedServices.includes(
+                        option.value as QuotationScopeInput["services"][number],
+                      )
                         ? "bg-accent border-accent"
-                        : "border-input"
+                        : "border-input",
                     )}
                   >
-                    {selectedServices.includes(option.value as QuotationScopeInput["services"][number]) && (
-                      <svg className="w-3 h-3 text-accent-foreground" fill="currentColor" viewBox="0 0 20 20">
+                    {selectedServices.includes(
+                      option.value as QuotationScopeInput["services"][number],
+                    ) && (
+                      <svg
+                        className="w-3 h-3 text-accent-foreground"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -181,7 +198,12 @@ export function ProjectScopeStep({
               ))}
             </div>
             {errors.services && (
-              <p className="text-sm text-destructive">{errors.services.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.services.message}
+              </p>
+            )}
+            {!selectedServices.length && (
+              <p className="text-xs text-destructive">Required</p>
             )}
           </div>
 
@@ -202,5 +224,5 @@ export function ProjectScopeStep({
         </div>
       </FormStepContainer>
     </form>
-  )
+  );
 }
