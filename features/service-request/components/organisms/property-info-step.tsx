@@ -85,6 +85,7 @@ export function PropertyInfoStep() {
               label="Property Type"
               options={PROPERTY_TYPE_OPTIONS}
               error={errors.propertyType?.message}
+              showRequiredHelper
               required
               value={field.value}
               onValueChange={field.onChange}

@@ -1,37 +1,40 @@
 /**
  * QUOTATION STEP: ProjectTypeStep
- * 
+ *
  * Collects project category (residential/commercial/industrial),
  * specific project type, and property type.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Building2 } from "lucide-react"
-import { FormSelect } from "@/components/atoms/form-select"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { FormStepContainer } from "@/components/molecules/form-step-container"
-import { quotationProjectTypeSchema, type QuotationProjectTypeInput } from "../../../schemas/quotation-schemas"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Building2 } from "lucide-react";
+import { FormSelect } from "@/components/atoms/form-select";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { FormStepContainer } from "@/components/molecules/form-step-container";
+import {
+  quotationProjectTypeSchema,
+  type QuotationProjectTypeInput,
+} from "../../../schemas/quotation-schemas";
 
 const projectCategoryOptions = [
-  { 
-    value: "residential", 
+  {
+    value: "residential",
     label: "Residential",
-    description: "Homes, flats, and domestic properties"
+    description: "Homes, flats, and domestic properties",
   },
-  { 
-    value: "commercial", 
+  {
+    value: "commercial",
     label: "Commercial",
-    description: "Offices, shops, restaurants, and business premises"
+    description: "Offices, shops, restaurants, and business premises",
   },
-  { 
-    value: "industrial", 
+  {
+    value: "industrial",
     label: "Industrial",
-    description: "Factories, warehouses, and manufacturing facilities"
+    description: "Factories, warehouses, and manufacturing facilities",
   },
-]
+];
 
 const residentialProjectTypes = [
   { value: "new-build", label: "New Build" },
@@ -40,7 +43,7 @@ const residentialProjectTypes = [
   { value: "rewire", label: "Full Rewire" },
   { value: "smart-home", label: "Smart Home Installation" },
   { value: "other", label: "Other" },
-]
+];
 
 const commercialProjectTypes = [
   { value: "office-fit-out", label: "Office Fit-Out" },
@@ -48,7 +51,7 @@ const commercialProjectTypes = [
   { value: "warehouse-electrical", label: "Warehouse Electrical" },
   { value: "lighting-upgrade", label: "Lighting Upgrade" },
   { value: "other", label: "Other" },
-]
+];
 
 const industrialProjectTypes = [
   { value: "factory-installation", label: "Factory Installation" },
@@ -56,14 +59,14 @@ const industrialProjectTypes = [
   { value: "power-distribution", label: "Power Distribution" },
   { value: "safety-systems", label: "Safety Systems" },
   { value: "other", label: "Other" },
-]
+];
 
 const residentialPropertyTypes = [
   { value: "house", label: "House" },
   { value: "flat", label: "Flat / Apartment" },
   { value: "bungalow", label: "Bungalow" },
   { value: "other", label: "Other" },
-]
+];
 
 const commercialPropertyTypes = [
   { value: "office", label: "Office" },
@@ -71,20 +74,20 @@ const commercialPropertyTypes = [
   { value: "restaurant", label: "Restaurant / Cafe" },
   { value: "hotel", label: "Hotel / Hospitality" },
   { value: "other", label: "Other" },
-]
+];
 
 const industrialPropertyTypes = [
   { value: "warehouse", label: "Warehouse" },
   { value: "factory", label: "Factory" },
   { value: "other", label: "Other" },
-]
+];
 
 interface ProjectTypeStepProps {
-  defaultValues?: Partial<QuotationProjectTypeInput>
-  onSubmit: (data: QuotationProjectTypeInput) => void
-  onPrevious?: () => void
-  isFirstStep?: boolean
-  isLastStep?: boolean
+  defaultValues?: Partial<QuotationProjectTypeInput>;
+  onSubmit: (data: QuotationProjectTypeInput) => void;
+  onPrevious?: () => void;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
 }
 
 export function ProjectTypeStep({
@@ -103,37 +106,37 @@ export function ProjectTypeStep({
     resolver: zodResolver(quotationProjectTypeSchema),
     defaultValues,
     mode: "onChange",
-  })
+  });
 
-  const projectCategory = watch("projectCategory")
+  const projectCategory = watch("projectCategory");
 
   // Get project types based on category
   const getProjectTypes = () => {
     switch (projectCategory) {
       case "residential":
-        return residentialProjectTypes
+        return residentialProjectTypes;
       case "commercial":
-        return commercialProjectTypes
+        return commercialProjectTypes;
       case "industrial":
-        return industrialProjectTypes
+        return industrialProjectTypes;
       default:
-        return []
+        return [];
     }
-  }
+  };
 
   // Get property types based on category
   const getPropertyTypes = () => {
     switch (projectCategory) {
       case "residential":
-        return residentialPropertyTypes
+        return residentialPropertyTypes;
       case "commercial":
-        return commercialPropertyTypes
+        return commercialPropertyTypes;
       case "industrial":
-        return industrialPropertyTypes
+        return industrialPropertyTypes;
       default:
-        return []
+        return [];
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -158,6 +161,7 @@ export function ProjectTypeStep({
                 value={field.value}
                 onValueChange={field.onChange}
                 error={errors.projectCategory?.message}
+                showRequiredHelper
                 required
               />
             )}
@@ -179,6 +183,7 @@ export function ProjectTypeStep({
                     value={field.value || ""}
                     onChange={field.onChange}
                     error={errors.projectType?.message}
+                    helperText="Required field"
                     required
                   />
                 )}
@@ -197,6 +202,7 @@ export function ProjectTypeStep({
                     value={field.value || ""}
                     onChange={field.onChange}
                     error={errors.propertyType?.message}
+                    helperText="Required field"
                     required
                   />
                 )}
@@ -206,5 +212,5 @@ export function ProjectTypeStep({
         </div>
       </FormStepContainer>
     </form>
-  )
+  );
 }

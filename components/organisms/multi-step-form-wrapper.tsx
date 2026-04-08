@@ -26,6 +26,7 @@ interface MultiStepFormWrapperProps {
   className?: string;
   onStepClick?: (stepIndex: number) => void;
   progressAnchorId?: string;
+  showRequiredFieldsNote?: boolean;
 }
 
 export function MultiStepFormWrapper({
@@ -37,6 +38,7 @@ export function MultiStepFormWrapper({
   className,
   onStepClick,
   progressAnchorId,
+  showRequiredFieldsNote = true,
 }: MultiStepFormWrapperProps) {
   const hasHeader = Boolean(title || description);
 
@@ -70,6 +72,12 @@ export function MultiStepFormWrapper({
 
       {/* Form Content */}
       <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-lg">
+        {showRequiredFieldsNote && (
+          <p className="mb-6 text-xs text-muted-foreground">
+            Fields marked <span className="text-destructive">*</span> are
+            required.
+          </p>
+        )}
         <AnimatePresence mode="wait">{children}</AnimatePresence>
       </div>
     </div>

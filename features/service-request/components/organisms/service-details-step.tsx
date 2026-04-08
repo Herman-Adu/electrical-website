@@ -118,6 +118,7 @@ export function ServiceDetailsStep() {
           label="Service Type"
           options={SERVICE_TYPE_OPTIONS}
           error={errors.serviceType?.message}
+          helperText="Required field"
           required
           {...register("serviceType")}
         />
@@ -131,6 +132,7 @@ export function ServiceDetailsStep() {
               label="Service Urgency"
               options={URGENCY_OPTIONS}
               error={errors.urgency?.message}
+              showRequiredHelper
               required
               value={field.value}
               onValueChange={field.onChange}
@@ -144,7 +146,7 @@ export function ServiceDetailsStep() {
           placeholder="Please describe the electrical issue or service you need in detail..."
           rows={5}
           error={errors.description?.message}
-          helperText="Minimum 10 characters"
+          helperText="Required field • Minimum 10 characters"
           required
           {...register("description")}
         />

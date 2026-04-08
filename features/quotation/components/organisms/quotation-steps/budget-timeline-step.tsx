@@ -1,21 +1,24 @@
 /**
  * QUOTATION STEP: BudgetTimelineStep
- * 
+ *
  * Collects budget range, timeline expectations,
  * and flexibility preferences.
  */
 
-"use client"
+"use client";
 
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { PoundSterling } from "lucide-react"
-import { FormSelect } from "@/components/atoms/form-select"
-import { FormCheckbox } from "@/components/atoms/form-checkbox"
-import { DatePicker } from "@/components/atoms/date-picker"
-import { RadioGroup } from "@/components/atoms/radio-group"
-import { FormStepContainer } from "@/components/molecules/form-step-container"
-import { quotationBudgetSchema, type QuotationBudgetInput } from "../../../schemas/quotation-schemas"
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PoundSterling } from "lucide-react";
+import { FormSelect } from "@/components/atoms/form-select";
+import { FormCheckbox } from "@/components/atoms/form-checkbox";
+import { DatePicker } from "@/components/atoms/date-picker";
+import { RadioGroup } from "@/components/atoms/radio-group";
+import { FormStepContainer } from "@/components/molecules/form-step-container";
+import {
+  quotationBudgetSchema,
+  type QuotationBudgetInput,
+} from "../../../schemas/quotation-schemas";
 
 const budgetRangeOptions = [
   { value: "under-5k", label: "Under £5,000" },
@@ -25,47 +28,47 @@ const budgetRangeOptions = [
   { value: "100k-250k", label: "£100,000 - £250,000" },
   { value: "over-250k", label: "Over £250,000" },
   { value: "unsure", label: "Not sure / Need guidance" },
-]
+];
 
 const timelineOptions = [
-  { 
-    value: "urgent", 
+  {
+    value: "urgent",
     label: "Urgent",
-    description: "Need to start as soon as possible"
+    description: "Need to start as soon as possible",
   },
-  { 
-    value: "1-month", 
+  {
+    value: "1-month",
     label: "Within 1 Month",
-    description: "Looking to start within the next few weeks"
+    description: "Looking to start within the next few weeks",
   },
-  { 
-    value: "1-3-months", 
+  {
+    value: "1-3-months",
     label: "1-3 Months",
-    description: "Planning for the near future"
+    description: "Planning for the near future",
   },
-  { 
-    value: "3-6-months", 
+  {
+    value: "3-6-months",
     label: "3-6 Months",
-    description: "Part of a larger project timeline"
+    description: "Part of a larger project timeline",
   },
-  { 
-    value: "6-12-months", 
+  {
+    value: "6-12-months",
     label: "6-12 Months",
-    description: "Long-term planning"
+    description: "Long-term planning",
   },
-  { 
-    value: "flexible", 
+  {
+    value: "flexible",
     label: "Flexible",
-    description: "No fixed timeline, open to suggestions"
+    description: "No fixed timeline, open to suggestions",
   },
-]
+];
 
 interface BudgetTimelineStepProps {
-  defaultValues?: Partial<QuotationBudgetInput>
-  onSubmit: (data: QuotationBudgetInput) => void
-  onPrevious?: () => void
-  isFirstStep?: boolean
-  isLastStep?: boolean
+  defaultValues?: Partial<QuotationBudgetInput>;
+  onSubmit: (data: QuotationBudgetInput) => void;
+  onPrevious?: () => void;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
 }
 
 export function BudgetTimelineStep({
@@ -88,11 +91,11 @@ export function BudgetTimelineStep({
       ...defaultValues,
     },
     mode: "onChange",
-  })
+  });
 
   // Get minimum date (today)
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -120,6 +123,7 @@ export function BudgetTimelineStep({
                 value={field.value || ""}
                 onChange={field.onChange}
                 error={errors.budgetRange?.message}
+                helperText="Required field"
                 required
               />
             )}
@@ -142,6 +146,7 @@ export function BudgetTimelineStep({
                 value={field.value}
                 onValueChange={field.onChange}
                 error={errors.timeline?.message}
+                showRequiredHelper
                 required
               />
             )}
@@ -155,7 +160,9 @@ export function BudgetTimelineStep({
               <DatePicker
                 label="Preferred Start Date (Optional)"
                 value={field.value ? new Date(field.value) : undefined}
-                onChange={(date) => field.onChange(date ? date.toISOString().split("T")[0] : "")}
+                onChange={(date) =>
+                  field.onChange(date ? date.toISOString().split("T")[0] : "")
+                }
                 minDate={today}
                 helperText="When would you ideally like work to begin?"
               />
@@ -170,5 +177,5 @@ export function BudgetTimelineStep({
         </div>
       </FormStepContainer>
     </form>
-  )
+  );
 }

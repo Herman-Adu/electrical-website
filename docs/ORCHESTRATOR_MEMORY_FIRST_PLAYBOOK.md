@@ -63,6 +63,62 @@ Use Docker MCP scripts as the standard entrypoint to avoid install/revert drift:
 
 - `pnpm docker:mcp:down`
 
+## 2.2) MCP browser startup contract (Windows + Docker)
+
+Use this rule to prevent browser-start token waste:
+
+1. Do not treat `mcp_mcp_docker_browser_eval start` failure as a project runtime failure on Windows.
+
+- Known host-level failure mode: `spawn /bin/sh ENOENT`.
+- This indicates the top-level browser-eval bootstrap path attempted a POSIX shell on the Windows host.
+
+2. Browser validation for this repository must run through Docker MCP routes first.
+
+- Primary routes: `/playwright/tools/call` and `/executor/tools/call` via Caddy `http://127.0.0.1:3100`.
+- Verify contracts with `pnpm docker:mcp:smoke`.
+
+3. Always run `pnpm docker:mcp:playwright:bootstrap` after `docker:mcp:up` and before browser workflows.
+
+- This ensures Chromium availability in `playwright` and `executor-playwright` containers.
+
+4. If browser calls still fail after bootstrap:
+
+- Recreate Playwright containers: `docker compose up -d --force-recreate --pull always playwright executor-playwright`
+- Re-run `pnpm docker:mcp:playwright:bootstrap`
+- Re-run `pnpm docker:mcp:smoke`
+
+5. Escalation policy:
+
+- If Docker MCP browser contracts pass, continue using Docker MCP browser routes.
+- Do not switch to ad-hoc host browser automation unless explicitly requested for non-MCP testing.
+
+## 2.3) Preflight + hydration optimization policy
+
+Goal: run preflight once per session, not repeatedly per hydration lane.
+
+Session policy:
+
+1. Run one shared preflight at session start:
+
+- `pnpm docker:mcp:ready`
+
+2. Run strict hydrations without re-running full preflight when services are already healthy:
+
+- `pnpm migration:contact:hydrate:strict`
+- `pnpm migration:quotation:hydrate:strict`
+- `pnpm migration:service-request:hydrate:strict`
+
+3. If strict hydration fails due service health:
+
+- run `pnpm docker:mcp:smoke` once
+- recover only failing services
+- retry only the failed hydration lane
+
+Implementation note:
+
+- Current migration hydrate scripts call `migration:*:ready` internally, which duplicates preflight work when running all three lanes.
+- Next implementation phase should add a session-scoped skip flag (for example `MCP_PREFLIGHT_DONE=1`) so strict hydrations can bypass repeated ready checks after a validated session preflight.
+
 ## 3) What each SME report must contain
 
 Every SME output must include exactly:

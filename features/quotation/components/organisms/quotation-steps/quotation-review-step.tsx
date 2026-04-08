@@ -16,6 +16,7 @@ import { CheckCircle, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FormStepContainer } from "@/components/molecules/form-step-container";
 import { submitQuotationRequestForm } from "../../../api/quotation-request";
+import { completeQuotationSchema } from "../../../schemas/quotation-schemas";
 import type { QuotationFormActionState } from "@/lib/actions/action.types";
 import { resolveStepFromFieldPath } from "./quotation-review-step.utils";
 import type {
@@ -102,11 +103,11 @@ function mapTurnstileClientError(errorCode?: string | number): string {
   return "Verification failed. Please retry.";
 }
 
-function SubmitQuotationButton({ tokenMissing }: { tokenMissing: boolean }) {
+function SubmitQuotationButton({ disabled }: { disabled: boolean }) {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" disabled={pending || tokenMissing} className="gap-2">
+    <Button type="submit" disabled={pending || disabled} className="gap-2">
       {pending ? "Processing..." : "Submit Quotation Request"}
     </Button>
   );
@@ -133,6 +134,36 @@ export function QuotationReviewStep({
 
   const payload = useMemo(() => JSON.stringify(formData), [formData]);
 
+  const submitReadiness = useMemo(() => {
+    if (!turnstileSiteKey) {
+      return {
+        isReady: false,
+        errorMessage: "Verification is unavailable. Please try again shortly.",
+      };
+    }
+
+    const validation = completeQuotationSchema.safeParse({
+      ...formData,
+      turnstileToken: turnstileToken ?? "",
+    });
+
+    if (validation.success) {
+      return { isReady: true, errorMessage: null, stepToEdit: null };
+    }
+
+    const firstIssue = validation.error.issues[0];
+    const fieldPath = firstIssue?.path?.join(".");
+    const isTurnstileIssue = fieldPath === "turnstileToken";
+
+    return {
+      isReady: false,
+      errorMessage: isTurnstileIssue
+        ? "Please complete verification before submitting."
+        : "Please complete all required fields before submitting.",
+      stepToEdit: fieldPath ? resolveStepFromFieldPath(fieldPath) : null,
+    };
+  }, [formData, turnstileSiteKey, turnstileToken]);
+
   useEffect(() => {
     if (actionState.success) {
       onSubmitError(null);
@@ -155,21 +186,15 @@ export function QuotationReviewStep({
   }, [actionState, onEdit, onSubmitError, onSubmitSuccess]);
 
   const handleBeforeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (!turnstileSiteKey) {
+    if (!submitReadiness.isReady) {
       event.preventDefault();
-      const verificationUnavailable =
-        "Verification is unavailable. Please try again shortly.";
-      onSubmitError(verificationUnavailable);
-      setLocalError(verificationUnavailable);
-      return;
-    }
+      onSubmitError(submitReadiness.errorMessage);
+      setLocalError(submitReadiness.errorMessage);
 
-    if (!turnstileToken) {
-      event.preventDefault();
-      const verificationError =
-        "Please complete verification before submitting.";
-      onSubmitError(verificationError);
-      setLocalError(verificationError);
+      if (typeof submitReadiness.stepToEdit === "number") {
+        onEdit(submitReadiness.stepToEdit);
+      }
+
       return;
     }
 
@@ -195,6 +220,7 @@ export function QuotationReviewStep({
         isLastStep={true}
         onPrevious={onPrevious}
         isSubmitting={isPending}
+        isValid={submitReadiness.isReady}
         submitLabel="Submit Quotation Request"
       >
         <div className="space-y-6">
@@ -402,7 +428,7 @@ export function QuotationReviewStep({
         </div>
       </FormStepContainer>
       <div className="sr-only" aria-hidden="true">
-        <SubmitQuotationButton tokenMissing={!turnstileToken} />
+        <SubmitQuotationButton disabled={!submitReadiness.isReady} />
       </div>
     </form>
   );

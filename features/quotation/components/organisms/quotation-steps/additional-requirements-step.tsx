@@ -198,6 +198,7 @@ export function AdditionalRequirementsStep({
                 value={field.value}
                 onValueChange={field.onChange}
                 error={errors.preferredContactMethod?.message}
+                showRequiredHelper
                 required
               />
             )}
