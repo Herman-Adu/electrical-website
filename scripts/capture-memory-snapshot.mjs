@@ -79,7 +79,7 @@ const COMPREHENSIVE_MEMORY_ENTITIES = [
     name: `agent:v1:docker_mcp_infrastructure_status_${generateTimestamp()}`,
     entityType: "infrastructure",
     observations: [
-      "All 11 MCP services operational via pnpm migration:contact:hydrate:strict",
+      "All 11 MCP services operational via pnpm mcp:platinum:validate",
       "Services healthy: playwright, executor-playwright, memory-reference, github-official, sequential-thinking, wikipedia, openapi-schema, nextjs-devtools, caddy, (2 more)",
       "Caddy reverse proxy at :3100 with per-service gateway routes",
       "Route mapping: /playwright → playground server (inspect mode), /executor → executor-playwright (workflow mode)",
@@ -152,7 +152,7 @@ const COMPREHENSIVE_MEMORY_ENTITIES = [
     name: `agent:v1:automated_workflow_commands_${generateTimestamp()}`,
     entityType: "automation",
     observations: [
-      "Primary workflow (one command): pnpm migration:contact:hydrate:robust",
+      "Primary workflow (one command): pnpm startup:new-chat:full",
       "Hydration phases: Docker up → Bootstrap → Smoke → Contract → Memory sync",
       "Build validation: pnpm build (TypeScript strict + minification + route pre-generation)",
       "Testing: pnpm test (unit), pnpm test:e2e (Playwright)",
