@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 14:23:52 +01:00
+Last generated: 2026-04-09 15:01:16 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -32,8 +32,8 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: main
-- HEAD: 21a1d60 Merge branch 'main' of https://github.com/Herman-Adu/electrical-website
+- Branch: chore/orchestrator-governance-standards
+- HEAD: 995162c chore(orchestrator): add superpowers-nextjs governance policy, Phase 2 gate checklist, and full asset routing standard
 - Memory nodes loaded: 4
 
 ### Hydrated Memory Nodes
@@ -100,5 +100,6 @@ Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close
 Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Keep tool scope minimal and optimize token usage.
-Current branch: main
-Current HEAD: 21a1d60 Merge branch 'main' of https://github.com/Herman-Adu/electrical-website
+Current branch: chore/orchestrator-governance-standards
+Current HEAD: 995162c chore(orchestrator): add superpowers-nextjs governance policy, Phase 2 gate checklist, and full asset routing standard
+
