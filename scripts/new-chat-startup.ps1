@@ -141,7 +141,7 @@ function Update-MasterPrompt {
         "- nextjs-devtools: runtime diagnostics for Next.js behavior and route/runtime issues.",
         "- github-official: PR/check status, branch and review operations.",
         "- openapi-schema and wikipedia: load only when explicitly required.",
-        "- youtube transcript: use Docker MCP Toolkit youtube_transcript client (external stdio MCP), not Caddy reverse-proxy.",
+        "- youtube transcript: use the routed youtube service in the local Docker MCP stack (/youtube).",
         "",
         "### Playwright Server Split (Use Both Deliberately)",
         "",

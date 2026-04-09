@@ -46,5 +46,10 @@
     reverse_proxy wikipedia:8000
   }
 
+  handle /youtube/* {
+    uri strip_prefix /youtube
+    reverse_proxy youtube-transcript:8000
+  }
+
   respond "Service not found" 404
 }

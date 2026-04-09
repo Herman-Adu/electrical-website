@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 16:46:03 +01:00
+Last generated: 2026-04-09 17:11:46 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -33,15 +33,15 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: main
-- HEAD: 811fcef Merge pull request #69 from Herman-Adu/chore/orchestrator-governance-standards
+- Branch: feat/mcp-platinum-lane-cleanup-2026-04-09
+- HEAD: ea7c186 chore(mcp): platinum lane hardening, active-lane hydration, and validation gate
 - Memory nodes loaded: 3
 
 ### Hydrated Memory Nodes
 
 - agent:v1:project:electrical-website (project, observations: 27)
-- agent:v1:next-task:2026-04-09-agents-and-skills-rebuild (next_task, observations: 2)
-- agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup (next_task, observations: 2)
+- agent:v1:next-task:2026-04-09-agents-and-skills-rebuild (next_task, observations: 4)
+- agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup (next_task, observations: 7)
 
 ## Optimized MCP / Tool Allocation
 
@@ -50,7 +50,7 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 - nextjs-devtools: runtime diagnostics for Next.js behavior and route/runtime issues.
 - github-official: PR/check status, branch and review operations.
 - openapi-schema and wikipedia: load only when explicitly required.
-- youtube transcript: use Docker MCP Toolkit youtube_transcript client (external stdio MCP), not Caddy reverse-proxy.
+- youtube transcript: use the routed youtube service in the local Docker MCP stack (/youtube).
 
 ### Playwright Server Split (Use Both Deliberately)
 
@@ -103,6 +103,5 @@ Use playwright for general browser tasks and executor-playwright for determinist
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
-Current branch: main
-Current HEAD: 811fcef Merge pull request #69 from Herman-Adu/chore/orchestrator-governance-standards
-
+Current branch: feat/mcp-platinum-lane-cleanup-2026-04-09
+Current HEAD: ea7c186 chore(mcp): platinum lane hardening, active-lane hydration, and validation gate

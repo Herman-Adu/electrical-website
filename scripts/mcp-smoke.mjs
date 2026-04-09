@@ -12,7 +12,7 @@
  *   - Each service at /SERVICE_ID/tools
  *   - GitHub service at /github/info with mock token (auth test)
  *   - Memory protocol contract via /memory/tools/call (search_nodes/open_nodes/read_graph)
- *   - External MCP note: youtube_transcript is toolkit/stdio, not Caddy-routed
+ *   - YouTube transcript service via /youtube
  *   - Caddy gateway at /health
  *
  * Exit codes:
@@ -35,6 +35,7 @@ const SERVICES = [
   { id: "nextjs", path: "/nextjs", name: "Next.js DevTools" },
   { id: "executor", path: "/executor", name: "Executor Playwright" },
   { id: "wikipedia", path: "/wikipedia", name: "Wikipedia" },
+  { id: "youtube", path: "/youtube", name: "YouTube Transcript" },
 ];
 
 function makeRequest(
@@ -266,9 +267,6 @@ async function runPlaywrightExecutionChecks() {
 async function runTests() {
   console.log("🔍 MCP Smoke Test\n");
   console.log(`Gateway: ${GATEWAY_URL}\n`);
-  console.log(
-    "ℹ External MCP client note: youtube_transcript is validated via Docker MCP Toolkit client calls, not via Caddy gateway routes.\n",
-  );
 
   let allPassed = true;
   const results = [];
