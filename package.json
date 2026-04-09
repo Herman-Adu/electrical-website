@@ -49,6 +49,9 @@
     "migration:all:hydrate:strict:session:skip": "node scripts/migration-all-hydrate-strict-session.mjs --skip-preflight",
     "startup:new-chat": "pwsh scripts/new-chat-startup.ps1",
     "startup:new-chat:skip": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight",
+    "startup:new-chat:refresh": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight -SkipHydration -SkipPlaywrightBootstrap",
+    "sync:task-close": "pwsh scripts/task-close-sync.ps1",
+    "orchestrator:task": "pwsh scripts/orchestrator-task.ps1",
     "docker:dev": "docker compose -f docker-compose.dev.yml up web-dev",
     "docker:dev:build": "docker compose -f docker-compose.dev.yml build web-dev",
     "docker:dev:down": "docker compose -f docker-compose.dev.yml down"
