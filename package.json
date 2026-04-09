@@ -47,6 +47,8 @@
     "migration:service-request:hydrate:strict": "node scripts/migration-service-request-hydrate.mjs --strict",
     "migration:all:hydrate:strict:session": "node scripts/migration-all-hydrate-strict-session.mjs",
     "migration:all:hydrate:strict:session:skip": "node scripts/migration-all-hydrate-strict-session.mjs --skip-preflight",
+    "startup:new-chat": "pwsh scripts/new-chat-startup.ps1",
+    "startup:new-chat:skip": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight",
     "docker:dev": "docker compose -f docker-compose.dev.yml up web-dev",
     "docker:dev:build": "docker compose -f docker-compose.dev.yml build web-dev",
     "docker:dev:down": "docker compose -f docker-compose.dev.yml down"
