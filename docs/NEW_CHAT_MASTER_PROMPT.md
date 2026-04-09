@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 13:28:09 +01:00
+Last generated: 2026-04-09 14:15:47 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -32,8 +32,8 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
-- HEAD: d250999 docs: clarify orchestrator auto-executes startup on new chat paste
+- Branch: main
+- HEAD: 7aea1a9 chore(claude): scaffold orchestrator contracts and CI parity checks (#67)
 - Memory nodes loaded: 4
 
 ### Hydrated Memory Nodes
@@ -94,6 +94,6 @@ Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close
 Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Keep tool scope minimal and optimize token usage.
-Current branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
-Current HEAD: d250999 docs: clarify orchestrator auto-executes startup on new chat paste
+Current branch: main
+Current HEAD: 7aea1a9 chore(claude): scaffold orchestrator contracts and CI parity checks (#67)
 
