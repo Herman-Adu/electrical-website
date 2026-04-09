@@ -1,6 +1,8 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 13:19:01 +01:00
+Last generated: 2026-04-09 13:30:00 +01:00 (PHASE 3B READY)
+
+**PHASE 3B START:** Platinum Suite — Agents & Skills Rebuild with Orchestrator Delegation
 
 Use this prompt at the start of every new chat window.
 
@@ -32,9 +34,10 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: main
-- HEAD: bdbdd1c feat(orchestrator): add lifecycle infrastructure for orchestrator-only mode
+- Branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
+- Main base: 82b1304 feat(orchestrator): add lifecycle infrastructure for orchestrator-only mode (#66)
 - Memory nodes loaded: 4
+- **PHASE:** 3B (Platinum Suite agents/skills rebuild)
 
 ### Hydrated Memory Nodes
 
@@ -86,14 +89,40 @@ This keeps Docker memory and this master prompt aligned for the next task/chat.
 
 ## New Chat Paste Block
 
+**PHASE 3B CONTEXT:**
+Start with orchestrator-only mode. Use SME delegation + skill-builder audits for all new agents/skills.
+
 Paste this into a fresh chat:
 
+PHASE 3B: Platinum Suite — Agents & Skills Rebuild
 Operate in orchestrator-only mode with SME delegation first.
 Use memory-first context loading from hydrated Docker memory.
-Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close-sync are never skipped.
+Run tasks via: pnpm orchestrator:task -Task "<task-command>"
+Branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
+Base: 82b1304 feat(orchestrator): add lifecycle infrastructure for orchestrator-only mode (#66)
+
+DELIVERABLES FOR THIS PHASE:
+- .claude/agents/[agent-id]/ with AGENT.md + README.md (per agent)
+- .claude/skills/[skill-id]/ with SKILL.md + README.md (per skill)
+- Complete orchestrator delegation architecture
+- Skill-builder audit/optimize workflows
+- GitHub Actions + Docker workflow integration
+
+PRIMARY vs SME ALLOCATION:
+- Main Agent: Orchestrator only (SME delegation, decision coordination, tool scope, memory sync)
+- SME Agents: Architecture, Validation, Security, QA (execute delegated tasks with required skills)
+- Skill-builder: Sub-agent for SKILL.md generation, audit, optimize modes
+
+NEXT STEPS (In New Chat):
+1. Brain-storm architecture using sequential-thinking
+2. Research context with web tools (context7 if needed)
+3. Scaffold directory structure
+4. Define SME pool composition
+5. Wire skill-builder audit/optimize into workflows
+6. Test end-to-end orchestration
+
 Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Keep tool scope minimal and optimize token usage.
-Current branch: main
-Current HEAD: bdbdd1c feat(orchestrator): add lifecycle infrastructure for orchestrator-only mode
+After each task sub-phase: pnpm sync:task-close to align Docker memory and master prompt.
 
