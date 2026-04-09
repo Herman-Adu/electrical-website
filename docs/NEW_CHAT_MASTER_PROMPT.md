@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 14:15:47 +01:00
+Last generated: 2026-04-09 15:09:11 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -32,8 +32,8 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: main
-- HEAD: 7aea1a9 chore(claude): scaffold orchestrator contracts and CI parity checks (#67)
+- Branch: chore/orchestrator-governance-standards
+- HEAD: 49607d0 fix(startup): embed governance references in master-prompt generation template
 - Memory nodes loaded: 4
 
 ### Hydrated Memory Nodes
@@ -65,11 +65,18 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 Then orchestrator consolidates findings into one execution plan with minimal tool usage.
 
+Required governance references for all delegated outputs:
+
+- docs/standards/ORCHESTRATOR_EXTERNAL_TOOLKIT_ADAPTER_POLICY.md
+- docs/standards/ORCHESTRATOR_PHASE2_DELEGATION_GATE_CHECKLIST.md
+- docs/standards/ORCHESTRATOR_SUPERPOWERS_NEXTJS_SKILL_ROUTING.md
+
 ## Token-Use Policy
 
 - Prefer memory hydration + open_nodes over repeated broad file reads.
 - Read only files directly touched by the active task.
 - Run targeted tests first; widen scope only if needed.
+- Local-first enforcement: all required local tests/checks must pass before any GitHub workflow/check trigger or rerun.
 
 ## Memory ↔ Prompt Alignment Protocol (After Every Task)
 
@@ -93,7 +100,8 @@ Use memory-first context loading from hydrated Docker memory.
 Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close-sync are never skipped.
 Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
+Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
-Current branch: main
-Current HEAD: 7aea1a9 chore(claude): scaffold orchestrator contracts and CI parity checks (#67)
+Current branch: chore/orchestrator-governance-standards
+Current HEAD: 49607d0 fix(startup): embed governance references in master-prompt generation template
 
