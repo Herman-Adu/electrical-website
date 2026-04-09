@@ -24,6 +24,10 @@ function runPnpm(commandArgs, env = process.env) {
 }
 
 function main() {
+  console.log(
+    "[hydrate:session] Legacy all-lane mode is deprecated for orchestrator platinum lane. Prefer `pnpm migration:active:hydrate`.",
+  );
+
   if (!skipPreflight) {
     console.log("[hydrate:session] Step 1/2: Running MCP preflight once...");
     runPnpm(["docker:mcp:ready"]);

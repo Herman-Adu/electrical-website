@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /**
- * MCP Smoke Test — Probe all 8 MCP services via Caddy gateway
+ * MCP Smoke Test — Probe all gateway-routed MCP services via Caddy
  *
  * Usage:
  *   node scripts/mcp-smoke.mjs
@@ -12,6 +12,7 @@
  *   - Each service at /SERVICE_ID/tools
  *   - GitHub service at /github/info with mock token (auth test)
  *   - Memory protocol contract via /memory/tools/call (search_nodes/open_nodes/read_graph)
+ *   - External MCP note: youtube_transcript is toolkit/stdio, not Caddy-routed
  *   - Caddy gateway at /health
  *
  * Exit codes:
@@ -265,6 +266,9 @@ async function runPlaywrightExecutionChecks() {
 async function runTests() {
   console.log("🔍 MCP Smoke Test\n");
   console.log(`Gateway: ${GATEWAY_URL}\n`);
+  console.log(
+    "ℹ External MCP client note: youtube_transcript is validated via Docker MCP Toolkit client calls, not via Caddy gateway routes.\n",
+  );
 
   let allPassed = true;
   const results = [];

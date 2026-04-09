@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 15:09:11 +01:00
+Last generated: 2026-04-09 16:46:03 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -24,7 +24,8 @@ If Docker services are already healthy and you need a warm start:
 
 Command: pnpm startup:new-chat:skip
 
-This performs strict hydration, Playwright runtime bootstrap, git baseline capture, and memory-node open.
+This performs MCP readiness checks, Playwright runtime bootstrap, git baseline capture, and active memory-node open.
+Lane hydration is opt-in only (use full startup when lane sync is needed).
 
 No-forget task execution wrapper:
 Command: pnpm orchestrator:task -Task "<your-task-command>"
@@ -32,16 +33,15 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: chore/orchestrator-governance-standards
-- HEAD: 49607d0 fix(startup): embed governance references in master-prompt generation template
-- Memory nodes loaded: 4
+- Branch: main
+- HEAD: 811fcef Merge pull request #69 from Herman-Adu/chore/orchestrator-governance-standards
+- Memory nodes loaded: 3
 
 ### Hydrated Memory Nodes
 
 - agent:v1:project:electrical-website (project, observations: 27)
-- agent:v1:heuristic_snapshots:2026-04-09-service-request-step-reorg-cleanup-complete (heuristic_snapshot, observations: 8)
-- agent:v1:next-task:2026-04-09-orchestrator-phase-next (next_task, observations: 4)
-- agent:v1:handoff:2026-04-09-service-request-cleanup-phase-complete (handoff, observations: 7)
+- agent:v1:next-task:2026-04-09-agents-and-skills-rebuild (next_task, observations: 2)
+- agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup (next_task, observations: 2)
 
 ## Optimized MCP / Tool Allocation
 
@@ -50,6 +50,7 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 - nextjs-devtools: runtime diagnostics for Next.js behavior and route/runtime issues.
 - github-official: PR/check status, branch and review operations.
 - openapi-schema and wikipedia: load only when explicitly required.
+- youtube transcript: use Docker MCP Toolkit youtube_transcript client (external stdio MCP), not Caddy reverse-proxy.
 
 ### Playwright Server Split (Use Both Deliberately)
 
@@ -81,13 +82,13 @@ Required governance references for all delegated outputs:
 ## Memory ↔ Prompt Alignment Protocol (After Every Task)
 
 1. Append/update observations in the relevant memory nodes (project + task-specific keys).
-2. Run strict hydration session to sync Docker memory state:
+2. Refresh startup context and master prompt without rehydrating completed lanes:
 
-Command: pnpm migration:all:hydrate:strict:session:skip
+Command: pnpm startup:new-chat:refresh
 
-3. Regenerate this master prompt with latest branch/HEAD/memory summary:
+3. Run full lane hydration only when lane content changed and needs canonical resync:
 
-Command: pnpm startup:new-chat:skip
+Command: pnpm startup:new-chat:full
 
 This keeps Docker memory and this master prompt aligned for the next task/chat.
 
@@ -102,6 +103,6 @@ Use playwright for general browser tasks and executor-playwright for determinist
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
-Current branch: chore/orchestrator-governance-standards
-Current HEAD: 49607d0 fix(startup): embed governance references in master-prompt generation template
+Current branch: main
+Current HEAD: 811fcef Merge pull request #69 from Herman-Adu/chore/orchestrator-governance-standards
 
