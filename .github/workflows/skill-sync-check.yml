@@ -6,11 +6,13 @@ on:
       - "agent/skills/**"
       - ".github/skills/**"
       - "agent/constants/skill-ids.ts"
+      - ".claude/**"
   pull_request:
     paths:
       - "agent/skills/**"
       - ".github/skills/**"
       - "agent/constants/skill-ids.ts"
+      - ".claude/**"
 
 jobs:
   sync-check:
@@ -102,9 +104,135 @@ jobs:
         run: pnpm --dir agent exec tsc --noEmit
         continue-on-error: false
 
+  claude-scaffold-check:
+    name: Validate .claude agent/skill scaffold
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate required files, frontmatter parity, and local references
+        run: |
+          node --input-type=module <<'EOF'
+          import { readdirSync, readFileSync, existsSync, statSync } from 'fs';
+          import { join } from 'path';
+
+          const root = process.cwd();
+          const errors = [];
+
+          const readDirs = (base) => readdirSync(base, { withFileTypes: true })
+            .filter((entry) => entry.isDirectory())
+            .map((entry) => entry.name);
+
+          const requiredPairs = [
+            { base: '.claude/agents', required: ['AGENT.md', 'README.md'] },
+            { base: '.claude/skills', required: ['SKILL.md', 'README.md'] },
+          ];
+
+          for (const pair of requiredPairs) {
+            if (!existsSync(pair.base)) {
+              errors.push(`Missing required directory: ${pair.base}`);
+              continue;
+            }
+
+            for (const dir of readDirs(pair.base)) {
+              const dirPath = join(pair.base, dir);
+              for (const requiredFile of pair.required) {
+                const filePath = join(dirPath, requiredFile);
+                if (!existsSync(filePath)) {
+                  errors.push(`Missing ${requiredFile} in ${dirPath}`);
+                }
+              }
+
+              const contractFile = pair.base.endsWith('agents') ? 'AGENT.md' : 'SKILL.md';
+              const contractPath = join(dirPath, contractFile);
+              if (!existsSync(contractPath)) continue;
+
+              const content = readFileSync(contractPath, 'utf8');
+              const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+              if (!frontmatterMatch) {
+                errors.push(`Missing frontmatter in ${contractPath}`);
+                continue;
+              }
+
+              const frontmatter = frontmatterMatch[1];
+              const nameMatch = frontmatter.match(/^name:\s*(.+)$/m);
+              const descriptionMatch = frontmatter.match(/^description:\s*(.+)$/m);
+
+              if (!nameMatch) {
+                errors.push(`Missing frontmatter 'name' in ${contractPath}`);
+              } else if (nameMatch[1].trim() !== dir) {
+                errors.push(`Frontmatter name '${nameMatch[1].trim()}' does not match directory '${dir}' in ${contractPath}`);
+              }
+
+              if (!descriptionMatch) {
+                errors.push(`Missing frontmatter 'description' in ${contractPath}`);
+              }
+            }
+          }
+
+          const walkMarkdown = (base) => {
+            const results = [];
+            const walk = (current) => {
+              for (const entry of readdirSync(current, { withFileTypes: true })) {
+                const full = join(current, entry.name);
+                if (entry.isDirectory()) {
+                  walk(full);
+                } else if (entry.isFile() && full.endsWith('.md')) {
+                  results.push(full);
+                }
+              }
+            };
+            walk(base);
+            return results;
+          };
+
+          if (existsSync('.claude')) {
+            const mdFiles = walkMarkdown('.claude');
+            for (const filePath of mdFiles) {
+              const content = readFileSync(filePath, 'utf8');
+              const references = [...content.matchAll(/`(\.claude\/[^`\n]+)`/g)].map((match) => match[1]);
+              for (const ref of references) {
+                if (ref.includes('*') || ref.includes('[') || ref.includes(']')) {
+                  continue;
+                }
+                const normalized = ref.replace(/\/+/g, '/').replace(/\/$/, '');
+                const resolved = join(root, normalized);
+                if (!existsSync(resolved)) {
+                  errors.push(`Broken .claude reference '${ref}' in ${filePath}`);
+                } else {
+                  const info = statSync(resolved);
+                  if (!info.isFile() && !info.isDirectory()) {
+                    errors.push(`Invalid .claude reference '${ref}' in ${filePath}`);
+                  }
+                }
+              }
+            }
+          }
+
+          const guardrails = '.claude/skills/mcp-automation/guardrails.md';
+          if (existsSync(guardrails)) {
+            const guardrailContent = readFileSync(guardrails, 'utf8');
+            const banned = [/(^|\n)\s*git\s+reset\s+--hard\b/im, /(^|\n)\s*rm\s+-rf\b/im];
+            for (const pattern of banned) {
+              if (pattern.test(guardrailContent)) {
+                errors.push(`Forbidden destructive command pattern '${pattern}' found in ${guardrails}`);
+              }
+            }
+          }
+
+          if (errors.length > 0) {
+            console.error('CLAUDE scaffold validation FAILED:');
+            for (const error of errors) console.error('  ✗', error);
+            process.exit(1);
+          }
+
+          console.log('✓ .claude scaffold validation passed');
+          EOF
+
   mcp-compat-smoke:
     name: MCP smoke — priority services
-    needs: sync-check
+    needs: [sync-check, claude-scaffold-check]
     runs-on: ubuntu-latest
 
     steps:

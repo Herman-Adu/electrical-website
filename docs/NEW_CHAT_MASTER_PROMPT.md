@@ -1,11 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 13:30:00 +01:00 (PHASE 3B READY)
-
-**PHASE 3B START:** Platinum Suite — Agents & Skills Rebuild with Orchestrator Delegation
-
-**⚡ AUTOMATIC: When you paste this prompt in a new window, I automatically run `pnpm startup:new-chat`**
-**(No manual execution needed — just like the old preflight.)**
+Last generated: 2026-04-09 13:28:09 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -21,30 +16,15 @@ You are in **orchestrator-only mode**:
 - Use Docker memory as primary context source before repository-wide re-reads.
 - Use sequential reasoning for complex or ambiguous decisions before implementation.
 
-## Startup Contract (Automatic)
+## Startup Contract (Run First)
 
-**ORCHESTRATOR AUTO-EXECUTION:** When you paste this prompt in a new window, I automatically run:
+Command: pnpm startup:new-chat
 
-```
-pnpm startup:new-chat
-```
+If Docker services are already healthy and you need a warm start:
 
-This is now automatic (like preflight used to be). I will:
+Command: pnpm startup:new-chat:skip
 
-1. Execute strict hydration (contact + quotation + service-request)
-2. Bootstrap Playwright MCP services
-3. Capture git baseline (branch/HEAD)
-4. Open memory context nodes (4 nodes with all observations)
-5. Generate fresh master prompt with current state
-6. Report readiness
-
-**If services are already healthy, you can manually skip hydration bootstraps via:**
-
-```
-pnpm startup:new-chat:skip
-```
-
-(This skips preflight + Docker hydration but still opens memory context.)
+This performs strict hydration, Playwright runtime bootstrap, git baseline capture, and memory-node open.
 
 No-forget task execution wrapper:
 Command: pnpm orchestrator:task -Task "<your-task-command>"
@@ -53,9 +33,8 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
-- Main base: 82b1304 feat(orchestrator): add lifecycle infrastructure for orchestrator-only mode (#66)
+- HEAD: d250999 docs: clarify orchestrator auto-executes startup on new chat paste
 - Memory nodes loaded: 4
-- **PHASE:** 3B (Platinum Suite agents/skills rebuild)
 
 ### Hydrated Memory Nodes
 
@@ -107,56 +86,14 @@ This keeps Docker memory and this master prompt aligned for the next task/chat.
 
 ## New Chat Paste Block
 
-**FOR NEW CHAT SESSIONS, SIMPLY PASTE THIS BLOCK AND I WILL AUTO-EXECUTE `pnpm startup:new-chat`**
+Paste this into a fresh chat:
 
----
+Operate in orchestrator-only mode with SME delegation first.
+Use memory-first context loading from hydrated Docker memory.
+Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close-sync are never skipped.
+Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
+Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
+Keep tool scope minimal and optimize token usage.
+Current branch: feat/phase-3b-agents-skills-rebuild-2026-04-09
+Current HEAD: d250999 docs: clarify orchestrator auto-executes startup on new chat paste
 
-ORCHESTRATOR-ONLY MODE: I delegate to SME agents first, coordinate decisions, minimize tool scope.
-
-AUTOMATIC STARTUP: When you paste this prompt, I automatically run `pnpm startup:new-chat`:
-
-- Strict Docker memory hydration (contact + quotation + service-request)
-- Playwright MCP bootstrap (11/11 services)
-- Git baseline capture (branch/HEAD)
-- Memory context open (4 nodes, 46+ observations)
-- Master prompt refresh with live state
-
-PHASE 3B: Platinum Suite — Agents & Skills Rebuild
-
-BRANCH: feat/phase-3b-agents-skills-rebuild-2026-04-09 (from main base 82b1304)
-MEMORY: 4 nodes loaded (project + 3 phase-specific, all observations synced)
-MCP SERVICES: 11/11 healthy
-
-TASK EXECUTION (NO-FORGET LIFECYCLE):
-pnpm orchestrator:task -Task "<your-command>"
-
-END-OF-PHASE MEMORY SYNC:
-pnpm sync:task-close
-
-PHASE 3B DELIVERABLES:
-✓ .claude/agents/[id]/ with AGENT.md + README.md per agent
-✓ .claude/skills/[id]/ with SKILL.md + README.md per skill
-✓ Directory structure: hooks/, rules/, commands/, security/, tests/, reference/, diagrams/, examples/, playbook/, sops/
-✓ Orchestrator delegation: Arch → Validation → Security → QA SME agents
-✓ Skill-builder audit/optimize workflows integrated
-✓ GitHub Actions + Docker workflow wiring complete
-
-SME POOL ALLOCATION:
-
-- Main Agent: Orchestrator (delegate, coordinate, tool scope, memory)
-- Architecture SME: App Router + component boundaries
-- Validation SME: Schema parity + step gating
-- Security SME: Anti-bot + Turnstile + verification
-- QA SME: Minimal verification matrix + targeted tests
-- Skill-builder: SKILL.md generation, audit, optimize, evaluate
-
-RESEARCH TOPICS (starting Phase 3B):
-
-1. Brain-storm architecture (sequential-thinking for multi-factor decisions)
-2. Research context (web tools, context7 for external info)
-3. Scaffold directory structure (.claude/agents, .claude/skills, reference/)
-4. Define SME agent pools and capabilities
-5. Wire skill-builder into orchestration + workflows
-6. Test end-to-end orchestrator delegation flow
-
-READY? DESCRIBE YOUR FIRST PHASE 3B TASK.
