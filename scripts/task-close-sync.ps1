@@ -5,13 +5,18 @@
 
 .USAGE
     pwsh scripts/task-close-sync.ps1
+    pwsh scripts/task-close-sync.ps1 -HydrateLanes
 
 .NOTES
     Sequence:
-      1) strict hydration session (skip preflight)
+      1) optional strict hydration session (skip preflight)
       2) refresh startup context + regenerate docs/NEW_CHAT_MASTER_PROMPT.md
          without rerunning hydration/bootstrap
 #>
+
+param(
+    [switch]$HydrateLanes
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
@@ -33,18 +38,23 @@ Write-Host ("=" * 70) -ForegroundColor Cyan
 Write-Host "  ELECTRICAL-WEBSITE — TASK CLOSE SYNC" -ForegroundColor Cyan
 Write-Host ("=" * 70) -ForegroundColor Cyan
 
-Write-Step "Step 1/2 — Syncing observations via strict hydration session..."
-try {
-    pnpm migration:all:hydrate:strict:session:skip
-    Write-OK "Docker memory sync complete."
-} catch {
-    Write-Fail "Hydration sync failed: $_"
-    exit 1
+if ($HydrateLanes) {
+    Write-Step "Step 1/2 — Syncing observations via strict hydration session..."
+    try {
+        node scripts/migration-active-lanes-hydrate.mjs
+        Write-OK "Active-lane memory sync complete."
+    } catch {
+        Write-Fail "Hydration sync failed: $_"
+        exit 1
+    }
+} else {
+    Write-Step "Step 1/2 — Skipping lane hydration (lean close-sync mode)..."
+    Write-Host "[SKIP] Lane hydration skipped. Use -HydrateLanes when lane content changes." -ForegroundColor DarkYellow
 }
 
 Write-Step "Step 2/2 — Refreshing new-chat master prompt from current state..."
 try {
-    pwsh scripts/new-chat-startup.ps1 -SkipPreflight -SkipHydration -SkipPlaywrightBootstrap
+    pwsh scripts/new-chat-startup.ps1 -SkipPreflight -SkipPlaywrightBootstrap
     Write-OK "Master prompt refresh complete."
 } catch {
     Write-Fail "Master prompt refresh failed: $_"

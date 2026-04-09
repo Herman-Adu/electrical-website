@@ -9,11 +9,13 @@
     Optional:
       -SkipStartup    (skip pnpm startup:new-chat)
       -SkipCloseSync  (skip pnpm sync:task-close)
+            -HydrateLanes   (run full lane hydration during startup)
 #>
 
 param(
     [switch]$SkipStartup,
     [switch]$SkipCloseSync,
+        [switch]$HydrateLanes,
     [string]$Task,
     [Parameter(ValueFromRemainingArguments = $true)]
     [string[]]$TaskCommand
@@ -59,8 +61,13 @@ try {
     if ($SkipStartup) {
         Write-Host "[SKIP] Startup skipped (-SkipStartup)." -ForegroundColor DarkYellow
     } else {
-        Write-Step "Startup lifecycle — full Docker memory rehydration..."
-        pnpm startup:new-chat
+        if ($HydrateLanes) {
+            Write-Step "Startup lifecycle — lean startup with explicit lane hydration..."
+            pwsh scripts/new-chat-startup.ps1 -HydrateLanes
+        } else {
+            Write-Step "Startup lifecycle — lean startup (active lanes only)..."
+            pnpm startup:new-chat
+        }
         Write-OK "Startup lifecycle complete."
     }
 

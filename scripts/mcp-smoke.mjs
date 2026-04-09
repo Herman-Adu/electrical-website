@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /**
- * MCP Smoke Test — Probe all 8 MCP services via Caddy gateway
+ * MCP Smoke Test — Probe all gateway-routed MCP services via Caddy
  *
  * Usage:
  *   node scripts/mcp-smoke.mjs
@@ -12,6 +12,7 @@
  *   - Each service at /SERVICE_ID/tools
  *   - GitHub service at /github/info with mock token (auth test)
  *   - Memory protocol contract via /memory/tools/call (search_nodes/open_nodes/read_graph)
+ *   - YouTube transcript service via /youtube
  *   - Caddy gateway at /health
  *
  * Exit codes:
@@ -34,6 +35,7 @@ const SERVICES = [
   { id: "nextjs", path: "/nextjs", name: "Next.js DevTools" },
   { id: "executor", path: "/executor", name: "Executor Playwright" },
   { id: "wikipedia", path: "/wikipedia", name: "Wikipedia" },
+  { id: "youtube", path: "/youtube", name: "YouTube Transcript" },
 ];
 
 function makeRequest(

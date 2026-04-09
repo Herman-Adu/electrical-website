@@ -39,6 +39,8 @@ services:
         condition: service_healthy
       wikipedia:
         condition: service_healthy
+      youtube-transcript:
+        condition: service_healthy
     restart: unless-stopped
 
   github-official:
@@ -174,6 +176,22 @@ services:
     command: ["node", "/srv/server.js"]
     volumes:
       - ./docker/wikipedia/server.js:/srv/server.js:ro
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  youtube-transcript:
+    image: node:22-alpine
+    working_dir: /srv
+    command: ["node", "/srv/server.js"]
+    volumes:
+      - ./docker/youtube-transcript/server.js:/srv/server.js:ro
     expose:
       - "8000"
     healthcheck:

@@ -12,6 +12,7 @@ This Docker folder contains the runtime used by the project’s MCP gateway and 
 - `playwright`
 - `executor-playwright`
 - `wikipedia`
+- `youtube-transcript`
 - `Caddy` router (gateway)
 
 ## Memory backend contract
@@ -86,6 +87,7 @@ The Caddy router maps service routes under path prefixes:
 - `/nextjs/*`
 - `/executor/*`
 - `/wikipedia/*`
+- `/youtube/*`
 
 See [Caddyfile](Caddyfile) for authoritative routing.
 

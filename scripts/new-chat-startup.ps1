@@ -2,8 +2,8 @@
 <#
 .SYNOPSIS
     One-command startup macro for a new chat session on electrical-website.
-    Runs strict hydration, playwright bootstrap, git status, and opens
-    all current memory nodes in a single pass.
+    Runs MCP readiness, optional active-lane hydration, Playwright bootstrap,
+    git status, and opens active memory nodes in a single pass.
 
 .USAGE
     From repo root:
@@ -12,17 +12,12 @@
     To skip Docker preflight (services already up):
         pwsh scripts/new-chat-startup.ps1 -SkipPreflight
 
-.NOTES
-    Memory keys hydrated:
-      - agent:v1:project:electrical-website
-      - agent:v1:heuristic_snapshots:2026-04-09-service-request-step-reorg-cleanup-complete
-      - agent:v1:handoff:2026-04-09-service-request-cleanup-phase-complete
-      - agent:v1:next-task:2026-04-09-orchestrator-phase-next
 #>
 param(
     [switch]$SkipPreflight,
-    [switch]$SkipHydration,
-    [switch]$SkipPlaywrightBootstrap
+    [switch]$HydrateLanes,
+    [switch]$SkipPlaywrightBootstrap,
+    [string]$MemoryKeysFile = "config/active-memory-lanes.json"
 )
 
 Set-StrictMode -Version Latest
@@ -45,6 +40,29 @@ function Write-OK([string]$Msg) {
 
 function Write-Fail([string]$Msg) {
     Write-Host "[FAIL] $Msg" -ForegroundColor Red
+}
+
+function Get-ActiveMemoryKeys {
+    param(
+        [string]$Path
+    )
+
+    if (-not (Test-Path $Path)) {
+        throw "Active memory keys file not found: $Path"
+    }
+
+    try {
+        $raw = Get-Content -Path $Path -Raw -Encoding UTF8
+        $json = $raw | ConvertFrom-Json
+        $configured = @($json.memoryKeys | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+        if ($configured.Count -eq 0) {
+            throw "Active memory keys file is empty: $Path"
+        }
+
+        return @($configured | Select-Object -Unique)
+    } catch {
+        throw "Failed parsing active memory keys file: $Path"
+    }
 }
 
 function Update-MasterPrompt {
@@ -95,7 +113,8 @@ function Update-MasterPrompt {
         "",
         "Command: pnpm startup:new-chat:skip",
         "",
-        "This performs strict hydration, Playwright runtime bootstrap, git baseline capture, and memory-node open.",
+        "This performs MCP readiness checks, Playwright runtime bootstrap, git baseline capture, and active memory-node open.",
+        "Lane hydration is opt-in only (use full startup when lane sync is needed).",
         "",
         "No-forget task execution wrapper:",
         'Command: pnpm orchestrator:task -Task "<your-task-command>"',
@@ -122,6 +141,7 @@ function Update-MasterPrompt {
         "- nextjs-devtools: runtime diagnostics for Next.js behavior and route/runtime issues.",
         "- github-official: PR/check status, branch and review operations.",
         "- openapi-schema and wikipedia: load only when explicitly required.",
+        "- youtube transcript: use the routed youtube service in the local Docker MCP stack (/youtube).",
         "",
         "### Playwright Server Split (Use Both Deliberately)",
         "",
@@ -153,13 +173,13 @@ function Update-MasterPrompt {
         "## Memory ↔ Prompt Alignment Protocol (After Every Task)",
         "",
         "1. Append/update observations in the relevant memory nodes (project + task-specific keys).",
-        "2. Run strict hydration session to sync Docker memory state:",
+        "2. Refresh startup context and master prompt without rehydrating completed lanes:",
         "",
-        "Command: pnpm migration:all:hydrate:strict:session:skip",
+        "Command: pnpm startup:new-chat:refresh",
         "",
-        "3. Regenerate this master prompt with latest branch/HEAD/memory summary:",
+        "3. Run full lane hydration only when lane content changed and needs canonical resync:",
         "",
-        "Command: pnpm startup:new-chat:skip",
+        "Command: pnpm startup:new-chat:full",
         "",
         "This keeps Docker memory and this master prompt aligned for the next task/chat.",
         "",
@@ -186,23 +206,31 @@ function Update-MasterPrompt {
 # ────────────────────────────────────────────────────────────────────────────
 Write-Banner "ELECTRICAL-WEBSITE — NEW CHAT STARTUP"
 
-# Step 1: Docker MCP strict hydration
+# Step 1: MCP readiness + optional lane hydration
 # ────────────────────────────────────────────────────────────────────────────
-Write-Step "Step 1/4 — Running strict hydration session..."
-if ($SkipHydration) {
-    Write-Host "[SKIP] Hydration skipped (-SkipHydration)." -ForegroundColor DarkYellow
+Write-Step "Step 1/4 — Verifying MCP readiness and optional lane hydration..."
+if ($SkipPreflight) {
+    Write-Host "[SKIP] MCP readiness skipped (-SkipPreflight)." -ForegroundColor DarkYellow
 } else {
     try {
-        if ($SkipPreflight) {
-            pnpm migration:all:hydrate:strict:session:skip
-        } else {
-            pnpm migration:all:hydrate:strict:session
-        }
-        Write-OK "Strict hydration complete."
+        pnpm docker:mcp:ready
+        Write-OK "MCP readiness complete."
     } catch {
-        Write-Fail "Hydration failed: $_"
+        Write-Fail "MCP readiness failed: $_"
         exit 1
     }
+}
+
+if ($HydrateLanes) {
+    try {
+        node scripts/migration-active-lanes-hydrate.mjs $MemoryKeysFile
+        Write-OK "Active-lane hydration complete."
+    } catch {
+        Write-Fail "Active-lane hydration failed: $_"
+        exit 1
+    }
+} else {
+    Write-Host "[SKIP] Lane hydration skipped by default (use -HydrateLanes when needed)." -ForegroundColor DarkYellow
 }
 
 # Step 2: Playwright MCP bootstrap
@@ -234,12 +262,7 @@ Write-Host "  HEAD   : $head"   -ForegroundColor White
 # ────────────────────────────────────────────────────────────────────────────
 Write-Step "Step 4/4 — Opening memory context nodes..."
 
-$memoryKeys = @(
-    "agent:v1:project:electrical-website",
-    "agent:v1:heuristic_snapshots:2026-04-09-service-request-step-reorg-cleanup-complete",
-    "agent:v1:handoff:2026-04-09-service-request-cleanup-phase-complete",
-    "agent:v1:next-task:2026-04-09-orchestrator-phase-next"
-)
+$memoryKeys = Get-ActiveMemoryKeys -Path $MemoryKeysFile
 
 $namesJson = ($memoryKeys | ForEach-Object { '"' + $_ + '"' }) -join ","
 $payload   = '{"names":[' + $namesJson + ']}'
@@ -272,9 +295,13 @@ Write-Host ""
 Write-Host "  Branch  : $branch"  -ForegroundColor White
 Write-Host "  HEAD    : $head"    -ForegroundColor White
 Write-Host ""
-Write-Host "  Hydration: contact + quotation + service-request lanes verified" -ForegroundColor White
-Write-Host "  MCP     : 11/11 services healthy (from hydration run)"           -ForegroundColor White
-Write-Host "  Memory  : $($memoryKeys.Count) nodes loaded"                     -ForegroundColor White
+if ($HydrateLanes) {
+    Write-Host "  Hydration: lane hydration executed" -ForegroundColor White
+} else {
+    Write-Host "  Hydration: skipped (default lean mode)" -ForegroundColor White
+}
+Write-Host "  MCP     : readiness verified"                                  -ForegroundColor White
+Write-Host "  Memory  : $($memoryKeys.Count) active nodes loaded"            -ForegroundColor White
 Write-Host ""
 Write-Host "  Paste summary into new chat, then describe your next task." -ForegroundColor Cyan
 Write-Host ""
