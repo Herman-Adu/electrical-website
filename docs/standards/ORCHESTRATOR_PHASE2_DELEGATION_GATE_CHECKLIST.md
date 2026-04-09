@@ -48,6 +48,7 @@ Then orchestrator synthesizes one execution plan.
 - [ ] Targeted tests are selected for affected surfaces first.
 - [ ] Route/form/action/cache/perf test coverage is mapped to change type.
 - [ ] Typecheck and production build are included in required verification.
+- [ ] Local-first rule is enforced: required local verification is green before any GitHub workflow/check trigger or rerun.
 - [ ] Failure triage and rollback trigger are pre-defined.
 - [ ] Batch Definition of Done is measurable and evidence-backed.
 
@@ -58,8 +59,10 @@ Minimum verification baseline:
 1. Targeted tests for changed domain.
 2. `pnpm exec tsc --noEmit`
 3. `pnpm build`
+4. `pnpm test:e2e`
 
 Widen verification scope only when targeted checks indicate coupling risk.
+Do not trigger/rerun GitHub workflows or check suites until this local baseline is green.
 
 ## Batch Definition of Done
 
