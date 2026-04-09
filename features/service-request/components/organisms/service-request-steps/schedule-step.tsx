@@ -13,12 +13,12 @@ import { motion } from "framer-motion";
 import { DatePicker } from "@/components/atoms/date-picker";
 import { FormCheckbox } from "@/components/atoms/form-checkbox";
 import { RadioGroup } from "@/components/atoms/radio-group";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useFormStore } from "../../../hooks/use-form-store";
 import {
   schedulePreferencesSchema,
   type SchedulePreferencesInput,
-} from "../../schemas/schemas";
-import { getUrgencyScheduleValidationError } from "../../lib/urgency-schedule";
+} from "../../../schemas/schemas";
+import { getUrgencyScheduleValidationError } from "../../../lib/urgency-schedule";
 
 const TIME_SLOT_OPTIONS = [
   {

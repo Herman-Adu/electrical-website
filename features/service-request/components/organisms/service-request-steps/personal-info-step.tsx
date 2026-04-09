@@ -31,11 +31,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { FormInput } from "@/components/atoms/form-input";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useFormStore } from "../../../hooks/use-form-store";
 import {
   personalInfoSchema,
   type PersonalInfoInput,
-} from "../../schemas/schemas";
+} from "../../../schemas/schemas";
 
 export function PersonalInfoStep() {
   // Get data and actions from Zustand store

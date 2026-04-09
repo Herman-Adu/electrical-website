@@ -13,11 +13,11 @@ import { motion } from "framer-motion";
 import { FormInput } from "@/components/atoms/form-input";
 import { FormTextarea } from "@/components/atoms/form-textarea";
 import { RadioGroup } from "@/components/atoms/radio-group";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useFormStore } from "../../../hooks/use-form-store";
 import {
   propertyInfoSchema,
   type PropertyInfoInput,
-} from "../../schemas/schemas";
+} from "../../../schemas/schemas";
 
 const PROPERTY_TYPE_OPTIONS = [
   {

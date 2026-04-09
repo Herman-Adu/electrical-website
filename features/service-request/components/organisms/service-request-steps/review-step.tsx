@@ -14,10 +14,10 @@ import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
-import { useFormStore } from "../../hooks/use-form-store";
-import { submitServiceRequest } from "../../api/service-request";
+import { useFormStore } from "../../../hooks/use-form-store";
+import { submitServiceRequest } from "../../../api/service-request";
 import { ReviewStepDisplay } from "./review-step-display";
-import { completeFormSchema } from "../../schemas/schemas";
+import { completeFormSchema } from "../../../schemas/schemas";
 
 function mapTurnstileClientError(errorCode?: string | number): string {
   const code = String(errorCode ?? "");

@@ -7,11 +7,11 @@ import { StepIndicator } from "@/components/molecules/step-indicator";
 import { PowerSurge } from "@/components/animations/power-surge";
 import { UnifiedSuccessMessage } from "@/components/molecules/unified-success-message";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { PersonalInfoStep } from "./personal-info-step";
-import { ServiceDetailsStep } from "./service-details-step";
-import { PropertyInfoStep } from "./property-info-step";
-import { ScheduleStep } from "./schedule-step";
-import { ReviewStep } from "./review-step";
+import { PersonalInfoStep } from "./service-request-steps/personal-info-step";
+import { ServiceDetailsStep } from "./service-request-steps/service-details-step";
+import { PropertyInfoStep } from "./service-request-steps/property-info-step";
+import { ScheduleStep } from "./service-request-steps/schedule-step";
+import { ReviewStep } from "./service-request-steps/review-step";
 
 const STEPS = [
   {
