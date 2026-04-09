@@ -7,7 +7,7 @@
  * This doesn't need client-side JS - it's just data presentation.
  */
 
-import type { FormData } from "../../hooks/use-form-store";
+import type { FormData } from "../../../hooks/use-form-store";
 
 interface ReviewStepDisplayProps {
   data: FormData;

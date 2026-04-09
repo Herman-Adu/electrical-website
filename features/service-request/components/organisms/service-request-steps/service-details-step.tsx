@@ -31,11 +31,11 @@ import { motion } from "framer-motion";
 import { FormSelect } from "@/components/atoms/form-select";
 import { FormTextarea } from "@/components/atoms/form-textarea";
 import { RadioGroup } from "@/components/atoms/radio-group";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useFormStore } from "../../../hooks/use-form-store";
 import {
   serviceDetailsSchema,
   type ServiceDetailsInput,
-} from "../../schemas/schemas";
+} from "../../../schemas/schemas";
 
 // Service type options for the select dropdown
 const SERVICE_TYPE_OPTIONS = [

@@ -62,24 +62,24 @@ vi.mock("@/lib/scroll-to-section", () => ({
 }));
 
 vi.mock(
-  "../../features/service-request/components/organisms/personal-info-step",
+  "../../features/service-request/components/organisms/service-request-steps/personal-info-step",
   () => ({ PersonalInfoStep: () => <div /> }),
 );
 vi.mock(
-  "../../features/service-request/components/organisms/service-details-step",
+  "../../features/service-request/components/organisms/service-request-steps/service-details-step",
   () => ({ ServiceDetailsStep: () => <div /> }),
 );
 vi.mock(
-  "../../features/service-request/components/organisms/property-info-step",
+  "../../features/service-request/components/organisms/service-request-steps/property-info-step",
   () => ({ PropertyInfoStep: () => <div /> }),
 );
 vi.mock(
-  "../../features/service-request/components/organisms/schedule-step",
+  "../../features/service-request/components/organisms/service-request-steps/schedule-step",
   () => ({ ScheduleStep: () => <div /> }),
 );
 
 vi.mock(
-  "../../features/service-request/components/organisms/review-step",
+  "../../features/service-request/components/organisms/service-request-steps/review-step",
   () => ({
     ReviewStep: ({
       onSubmitSuccess,
