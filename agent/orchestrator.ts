@@ -69,6 +69,35 @@ export interface ProductionSkillAuditResult {
   generatedAt: string;
 }
 
+export interface OrchestratorRunOptions {
+  costCap?: TokenCostTier;
+  dryRun?: boolean;
+  metadata?: Record<string, unknown>;
+}
+
+export interface OrchestratorLifecycleContext {
+  category: IntentCategory;
+  description: string;
+  input: unknown;
+  opts: OrchestratorRunOptions;
+}
+
+export interface OrchestratorAfterRunContext<
+  TOutput = unknown,
+> extends OrchestratorLifecycleContext {
+  output?: AgentOutput<TOutput>;
+  error?: unknown;
+  success: boolean;
+  durationMs: number;
+}
+
+export interface OrchestratorLifecycleHooks<TOutput = unknown> {
+  beforeRun?: (context: OrchestratorLifecycleContext) => void | Promise<void>;
+  afterRun?: (
+    context: OrchestratorAfterRunContext<TOutput>,
+  ) => void | Promise<void>;
+}
+
 // ─── Orchestrator ─────────────────────────────────────────────────────────────
 
 /**
@@ -335,11 +364,7 @@ export class Orchestrator {
     category: IntentCategory,
     description: string,
     input: unknown,
-    opts: {
-      costCap?: TokenCostTier;
-      dryRun?: boolean;
-      metadata?: Record<string, unknown>;
-    } = {},
+    opts: OrchestratorRunOptions = {},
   ): Promise<AgentOutput<TOutput>> {
     if (!this.#started)
       throw new Error("Orchestrator not started. Call Orchestrator.create().");
@@ -466,6 +491,61 @@ export class Orchestrator {
       }
 
       throw err;
+    }
+  }
+
+  /**
+   * Run an intent with optional lifecycle hooks for startup/close-sync workflows.
+   *
+   * `beforeRun` executes before routing and execution.
+   * `afterRun` always executes (success or failure), suitable for cleanup/final sync.
+   */
+  async runWithLifecycle<TOutput = unknown>(
+    category: IntentCategory,
+    description: string,
+    input: unknown,
+    opts: OrchestratorRunOptions = {},
+    hooks: OrchestratorLifecycleHooks<TOutput> = {},
+  ): Promise<AgentOutput<TOutput>> {
+    const startedAt = Date.now();
+    let output: AgentOutput<TOutput> | undefined;
+    let runError: unknown;
+
+    if (hooks.beforeRun) {
+      await hooks.beforeRun({ category, description, input, opts });
+    }
+
+    try {
+      output = await this.run<TOutput>(category, description, input, opts);
+      return output;
+    } catch (error) {
+      runError = error;
+      throw error;
+    } finally {
+      if (hooks.afterRun) {
+        try {
+          const afterRunContext: OrchestratorAfterRunContext<TOutput> = {
+            category,
+            description,
+            input,
+            opts,
+            success: runError === undefined,
+            durationMs: Date.now() - startedAt,
+            ...(output !== undefined ? { output } : {}),
+            ...(runError !== undefined ? { error: runError } : {}),
+          };
+
+          await hooks.afterRun(afterRunContext);
+        } catch (afterRunError) {
+          if (runError === undefined) {
+            throw afterRunError;
+          }
+          console.error(
+            "[Orchestrator] afterRun hook failed after run error:",
+            afterRunError,
+          );
+        }
+      }
     }
   }
 

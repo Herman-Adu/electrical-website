@@ -8,7 +8,11 @@
 // Top-level orchestrator
 export { Orchestrator } from "./orchestrator";
 export type {
+  OrchestratorAfterRunContext,
   OrchestratorConfig,
+  OrchestratorLifecycleContext,
+  OrchestratorLifecycleHooks,
+  OrchestratorRunOptions,
   ProductionSkillAuditOptions,
   ProductionSkillAuditResult,
 } from "./orchestrator.ts";

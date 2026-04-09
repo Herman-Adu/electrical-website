@@ -54,6 +54,23 @@ const productionAudit = await orchestrator.runProductionSkillAudit({
 
 console.log(productionAudit.audit.data.auditReport?.summary);
 console.log(productionAudit.optimise.data.optimiseReport?.summary);
+
+// Enforce lifecycle hooks (startup/close-sync) around a run.
+await orchestrator.runWithLifecycle(
+  "code-analysis",
+  "Find all usages of useToast in the codebase",
+  { pattern: "useToast", language: "typescript" },
+  { costCap: "cheap", dryRun: false },
+  {
+    beforeRun: async () => {
+      // e.g., execute startup:new-chat from your host runner
+    },
+    afterRun: async ({ success, durationMs }) => {
+      // e.g., execute sync:task-close from your host runner
+      console.log({ success, durationMs });
+    },
+  },
+);
 ```
 
 ## Skills
