@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-10 15:53:45 +01:00
+Last generated: 2026-04-10 17:21:41 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -42,10 +42,24 @@ When a fresh chat does not know where to start, execute this exact sequence befo
 Deterministic starter command:
 Command: pnpm orchestrator:task -Task "pnpm startup:new-chat:full"
 
+## Active Lane Next Action Card
+
+- Active lane: agent:v1:next-task:2026-04-10-next-workstream-intake
+- Immediate objective: Active workstream: next workstream intake (orchestrator-only).
+- Execution rule: choose one bounded batch only; no side-lane drift.
+- Validation rule: run tsc + pnpm test + build + MCP smoke before PR merge.
+
+### Lane Backlog Seed (From Memory)
+
+- B1: Active workstream: next workstream intake (orchestrator-only).
+- B2: Purpose: provide a clean successor lane after completion of agents-and-skills-rebuild.
+- B3: Execution contract: bounded batches, deterministic validation gates (tsc/test/build when code changes), and memory checkpoints at preflight, post-merge, and closure.
+- B4: Guardrail: keep closed lane agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup inactive and unchanged unless explicitly requested.
+
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: main
-- HEAD: 29ce118 chore(orchestrator): activate next-task lane for intake (#76)
+- HEAD: 84f1ddd chore(orchestrator): add deterministic first-batch startup guidance (#77)
 - Memory nodes loaded: 2
 
 ### Hydrated Memory Nodes
@@ -114,5 +128,5 @@ Use sequential-thinking for complex decisions and nextjs-devtools for runtime di
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
 Current branch: main
-Current HEAD: 29ce118 chore(orchestrator): activate next-task lane for intake (#76)
+Current HEAD: 84f1ddd chore(orchestrator): add deterministic first-batch startup guidance (#77)
 

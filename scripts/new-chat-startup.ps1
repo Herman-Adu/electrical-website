@@ -86,6 +86,30 @@ function Update-MasterPrompt {
         $memoryLines += "- $($entity.name) ($($entity.entityType), observations: $obsCount)"
     }
 
+    $activeLaneEntity = $Entities | Where-Object { $_.entityType -eq "next_task" } | Select-Object -First 1
+    $activeLaneName = if ($null -ne $activeLaneEntity) {
+        $activeLaneEntity.name
+    } else {
+        "(no active next_task lane found)"
+    }
+
+    $activeLaneObjective = "Restate lane objective from memory and execute the smallest high-impact batch."
+    if ($null -ne $activeLaneEntity -and $null -ne $activeLaneEntity.observations -and $activeLaneEntity.observations.Count -gt 0) {
+        $activeLaneObjective = $activeLaneEntity.observations[0]
+    }
+
+    $laneBacklogLines = @()
+    if ($null -ne $activeLaneEntity -and $null -ne $activeLaneEntity.observations -and $activeLaneEntity.observations.Count -gt 0) {
+        for ($index = 0; $index -lt $activeLaneEntity.observations.Count; $index++) {
+            $item = $activeLaneEntity.observations[$index]
+            $laneBacklogLines += "- B$($index + 1): $item"
+        }
+    } else {
+        $laneBacklogLines += "- B1: Define lane objective and acceptance criteria."
+        $laneBacklogLines += "- B2: Pick smallest high-impact implementation batch."
+        $laneBacklogLines += "- B3: Run gates and record checkpoint evidence."
+    }
+
     $markdown = @(
         "# NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)",
         "",
@@ -130,6 +154,21 @@ function Update-MasterPrompt {
         "",
         "Deterministic starter command:",
         'Command: pnpm orchestrator:task -Task "pnpm startup:new-chat:full"',
+        "",
+        "## Active Lane Next Action Card",
+        "",
+        "- Active lane: $activeLaneName",
+        "- Immediate objective: $activeLaneObjective",
+        "- Execution rule: choose one bounded batch only; no side-lane drift.",
+        "- Validation rule: run tsc + pnpm test + build + MCP smoke before PR merge.",
+        "",
+        "### Lane Backlog Seed (From Memory)",
+        ""
+    )
+
+    $markdown += $laneBacklogLines
+
+    $markdown += @(
         "",
         "## Current Session Baseline (Auto-Generated)",
         "",
