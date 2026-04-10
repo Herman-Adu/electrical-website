@@ -3,11 +3,29 @@
 
 const fs = require("node:fs/promises");
 const http = require("http");
+const crypto = require("node:crypto");
 const { execSync, spawn } = require("node:child_process");
 
 const port = process.env.PORT || 8000;
+const MAX_BODY_BYTES = 1_048_576;
+const activeSessions = new Map();
+
+let playwrightLib = null;
+try {
+  playwrightLib = require("playwright");
+} catch {
+  playwrightLib = null;
+}
 
 const TOOL_DEFINITIONS = [
+  {
+    name: "start_session",
+    description: "Start a browser session for interactive operations.",
+  },
+  {
+    name: "close_session",
+    description: "Close an active browser session by sessionId.",
+  },
   {
     name: "navigate",
     description: "Navigate to a URL and return page title and final URL.",
@@ -24,6 +42,26 @@ const TOOL_DEFINITIONS = [
     name: "fill-form",
     description:
       "Compatibility method for form workflows; requires full Playwright runtime for interactive actions.",
+  },
+  {
+    name: "click",
+    description: "Click an element selector in an active session.",
+  },
+  {
+    name: "type",
+    description: "Type into an element selector in an active session.",
+  },
+  {
+    name: "wait_for",
+    description: "Wait for selector visibility in an active session.",
+  },
+  {
+    name: "evaluate",
+    description: "Evaluate JavaScript in page context in an active session.",
+  },
+  {
+    name: "console_messages",
+    description: "Read captured console messages from an active session.",
   },
   {
     name: "list_tools",
@@ -61,7 +99,7 @@ function readBody(req) {
     let body = "";
     req.on("data", (chunk) => {
       body += chunk;
-      if (body.length > 5_000_000) {
+      if (body.length > MAX_BODY_BYTES) {
         reject(new Error("Request body too large"));
       }
     });
@@ -93,6 +131,76 @@ function resolveChromiumBinary() {
   }
 
   return output;
+}
+
+function ensureSessionId(value) {
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new Error("sessionId is required");
+  }
+  return value.trim();
+}
+
+function requirePlaywrightRuntime() {
+  if (!playwrightLib) {
+    throw new Error("Full Playwright runtime is unavailable in this container");
+  }
+}
+
+function getSession(sessionId) {
+  const session = activeSessions.get(sessionId);
+  if (!session) {
+    throw new Error(`Unknown sessionId: ${sessionId}`);
+  }
+  return session;
+}
+
+async function createSession(args = {}) {
+  requirePlaywrightRuntime();
+  const headless = args.headless !== undefined ? Boolean(args.headless) : true;
+  const browser = await playwrightLib.chromium.launch({ headless });
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const sessionId = `pw_${crypto.randomUUID()}`;
+  const consoleMessages = [];
+
+  page.on("console", (msg) => {
+    consoleMessages.push({
+      type: msg.type(),
+      text: msg.text(),
+      at: new Date().toISOString(),
+    });
+    if (consoleMessages.length > 200) {
+      consoleMessages.shift();
+    }
+  });
+
+  activeSessions.set(sessionId, {
+    browser,
+    context,
+    page,
+    consoleMessages,
+    createdAt: new Date().toISOString(),
+  });
+
+  return {
+    sessionId,
+    headless,
+    runtime: "playwright",
+  };
+}
+
+async function closeSession(args = {}) {
+  const sessionId = ensureSessionId(args.sessionId);
+  const session = getSession(sessionId);
+  await session.browser.close();
+  activeSessions.delete(sessionId);
+  return { sessionId, closed: true };
+}
+
+async function withSessionPage(args, cb) {
+  const sessionId = ensureSessionId(args.sessionId);
+  const session = getSession(sessionId);
+  return cb(session.page, session);
 }
 
 function runChromium(args, timeoutMs = 30000) {
@@ -150,10 +258,36 @@ function htmlToText(html) {
 
 async function callTool(name, args = {}) {
   if (name === "list_tools") {
-    return { tools: TOOL_DEFINITIONS };
+    return {
+      tools: TOOL_DEFINITIONS,
+      runtime: playwrightLib ? "playwright" : "chromium-cli",
+      activeSessions: activeSessions.size,
+    };
+  }
+
+  if (name === "start_session") {
+    return createSession(args);
+  }
+
+  if (name === "close_session") {
+    return closeSession(args);
   }
 
   if (name === "navigate") {
+    if (args.sessionId && playwrightLib) {
+      return withSessionPage(args, async (page) => {
+        await page.goto(ensureHttpUrl(args.url), {
+          timeout: Number.isFinite(args.timeoutMs) ? args.timeoutMs : 30000,
+          waitUntil: "domcontentloaded",
+        });
+        return {
+          title: await page.title(),
+          url: page.url(),
+          sessionId: args.sessionId,
+        };
+      });
+    }
+
     const url = ensureHttpUrl(args.url);
     const timeout = Number.isFinite(args.timeoutMs) ? args.timeoutMs : 30000;
 
@@ -176,6 +310,25 @@ async function callTool(name, args = {}) {
   }
 
   if (name === "screenshot") {
+    if (args.sessionId && playwrightLib) {
+      return withSessionPage(args, async (page) => {
+        const outputPath =
+          typeof args.outputPath === "string" && args.outputPath.length > 0
+            ? args.outputPath
+            : `/tmp/playwright-${Date.now()}.png`;
+        await page.screenshot({
+          path: outputPath,
+          fullPage: Boolean(args.fullPage),
+        });
+        const stat = await fs.stat(outputPath);
+        return {
+          path: outputPath,
+          bytes: stat.size,
+          sessionId: args.sessionId,
+        };
+      });
+    }
+
     const url = ensureHttpUrl(args.url);
     const outputPath =
       typeof args.outputPath === "string" && args.outputPath.length > 0
@@ -204,6 +357,23 @@ async function callTool(name, args = {}) {
   }
 
   if (name === "extract-text") {
+    if (args.sessionId && playwrightLib) {
+      return withSessionPage(args, async (page) => {
+        const selector =
+          typeof args.selector === "string" && args.selector.length > 0
+            ? args.selector
+            : "body";
+        await page.waitForSelector(selector, { timeout: 10000 });
+        const text = await page.locator(selector).innerText();
+        return {
+          selector,
+          text,
+          sessionId: args.sessionId,
+          runtime: "playwright",
+        };
+      });
+    }
+
     const url = ensureHttpUrl(args.url);
     const selector =
       typeof args.selector === "string" && args.selector.length > 0
@@ -233,6 +403,28 @@ async function callTool(name, args = {}) {
   }
 
   if (name === "fill-form") {
+    if (playwrightLib && args.sessionId) {
+      return withSessionPage(args, async (page) => {
+        const fields = Array.isArray(args.fields) ? args.fields : [];
+        if (fields.length === 0) {
+          throw new Error("fields must be a non-empty array");
+        }
+
+        for (const field of fields) {
+          if (!field || typeof field.selector !== "string") {
+            throw new Error("each field requires selector");
+          }
+          await page.fill(field.selector, String(field.value ?? ""));
+        }
+
+        return {
+          sessionId: args.sessionId,
+          fieldsFilled: fields.length,
+          runtime: "playwright",
+        };
+      });
+    }
+
     const url = ensureHttpUrl(args.url);
     const fields = Array.isArray(args.fields) ? args.fields : [];
     if (fields.length === 0) {
@@ -258,6 +450,86 @@ async function callTool(name, args = {}) {
     };
   }
 
+  if (name === "click") {
+    requirePlaywrightRuntime();
+    return withSessionPage(args, async (page) => {
+      if (
+        typeof args.selector !== "string" ||
+        args.selector.trim().length === 0
+      ) {
+        throw new Error("selector is required");
+      }
+      await page.click(args.selector, {
+        timeout: Number.isFinite(args.timeoutMs) ? args.timeoutMs : 30000,
+      });
+      return { sessionId: args.sessionId, clicked: args.selector };
+    });
+  }
+
+  if (name === "type") {
+    requirePlaywrightRuntime();
+    return withSessionPage(args, async (page) => {
+      if (
+        typeof args.selector !== "string" ||
+        args.selector.trim().length === 0
+      ) {
+        throw new Error("selector is required");
+      }
+      if (typeof args.text !== "string") {
+        throw new Error("text is required");
+      }
+      await page.fill(args.selector, args.text);
+      return { sessionId: args.sessionId, typedInto: args.selector };
+    });
+  }
+
+  if (name === "wait_for") {
+    requirePlaywrightRuntime();
+    return withSessionPage(args, async (page) => {
+      if (
+        typeof args.selector !== "string" ||
+        args.selector.trim().length === 0
+      ) {
+        throw new Error("selector is required");
+      }
+      await page.waitForSelector(args.selector, {
+        timeout: Number.isFinite(args.timeoutMs) ? args.timeoutMs : 30000,
+        state: "visible",
+      });
+      return {
+        sessionId: args.sessionId,
+        selector: args.selector,
+        visible: true,
+      };
+    });
+  }
+
+  if (name === "evaluate") {
+    requirePlaywrightRuntime();
+    return withSessionPage(args, async (page) => {
+      if (typeof args.script !== "string" || args.script.trim().length === 0) {
+        throw new Error("script is required");
+      }
+      const value = await page.evaluate(args.script);
+      return { sessionId: args.sessionId, value };
+    });
+  }
+
+  if (name === "console_messages") {
+    requirePlaywrightRuntime();
+    return withSessionPage(args, async (_page, session) => {
+      const level = typeof args.level === "string" ? args.level : null;
+      const messages = level
+        ? session.consoleMessages.filter((entry) => entry.type === level)
+        : session.consoleMessages;
+      return {
+        sessionId: args.sessionId,
+        count: messages.length,
+        messages,
+      };
+    });
+  }
+
   throw new Error(`Unknown tool: ${name}`);
 }
 
@@ -274,7 +546,8 @@ const server = http.createServer(async (req, res) => {
       status: "healthy",
       service: "playwright",
       execution: "enabled",
-      engine: "chromium-cli",
+      engine: playwrightLib ? "playwright" : "chromium-cli",
+      activeSessions: activeSessions.size,
     });
     return;
   }
@@ -283,9 +556,9 @@ const server = http.createServer(async (req, res) => {
     sendJson(res, 200, {
       service: "playwright",
       tools: TOOL_DEFINITIONS.length,
-      examples: ["navigate", "screenshot", "extract-text", "fill-form"],
+      examples: ["start_session", "navigate", "fill-form", "screenshot"],
       executable: true,
-      engine: "chromium-cli",
+      engine: playwrightLib ? "playwright" : "chromium-cli",
     });
     return;
   }
@@ -293,9 +566,9 @@ const server = http.createServer(async (req, res) => {
   if (req.url === "/info" && req.method === "GET") {
     sendJson(res, 200, {
       name: "Playwright MCP Server",
-      version: "2.1.0",
+      version: "3.0.0",
       role: "Web automation, testing, screenshots",
-      runtime: "chromium-cli",
+      runtime: playwrightLib ? "playwright" : "chromium-cli",
       execution: "real-tools-call",
     });
     return;
@@ -334,5 +607,11 @@ const server = http.createServer(async (req, res) => {
 server.listen(port, () => console.log(`Playwright server on port ${port}`));
 
 process.on("SIGTERM", () => {
-  server.close(() => process.exit(0));
+  Promise.all(
+    Array.from(activeSessions.values()).map((session) =>
+      session.browser.close().catch(() => undefined),
+    ),
+  ).finally(() => {
+    server.close(() => process.exit(0));
+  });
 });
