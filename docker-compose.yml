@@ -189,11 +189,8 @@ services:
     restart: unless-stopped
 
   youtube-transcript:
-    image: node:22-alpine
+    build: ./docker/youtube-transcript
     working_dir: /srv
-    command: ["node", "/srv/server.js"]
-    volumes:
-      - ./docker/youtube-transcript/server.js:/srv/server.js:ro
     expose:
       - "8000"
     healthcheck:
