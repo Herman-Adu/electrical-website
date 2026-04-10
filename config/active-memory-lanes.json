@@ -1,7 +1,6 @@
 {
   "memoryKeys": [
     "agent:v1:project:electrical-website",
-    "agent:v1:next-task:2026-04-09-agents-and-skills-rebuild",
-    "agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup"
+    "agent:v1:next-task:2026-04-09-agents-and-skills-rebuild"
   ]
 }

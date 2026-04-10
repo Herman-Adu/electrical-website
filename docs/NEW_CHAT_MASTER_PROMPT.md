@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-09 17:11:46 +01:00
+Last generated: 2026-04-10 14:36:47 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -33,15 +33,15 @@ Command: pnpm orchestrator:task -Task "<your-task-command>"
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: feat/mcp-platinum-lane-cleanup-2026-04-09
-- HEAD: ea7c186 chore(mcp): platinum lane hardening, active-lane hydration, and validation gate
+- Branch: feat/github-mcp-tools-call-2026-04-10
+- HEAD: e7ccfc9 feat(docker): implement full MCP dispatchers for core adapter services
 - Memory nodes loaded: 3
 
 ### Hydrated Memory Nodes
 
 - agent:v1:project:electrical-website (project, observations: 27)
 - agent:v1:next-task:2026-04-09-agents-and-skills-rebuild (next_task, observations: 4)
-- agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup (next_task, observations: 7)
+- agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup (next_task, observations: 26)
 
 ## Optimized MCP / Tool Allocation
 
@@ -103,5 +103,6 @@ Use playwright for general browser tasks and executor-playwright for determinist
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
-Current branch: feat/mcp-platinum-lane-cleanup-2026-04-09
-Current HEAD: ea7c186 chore(mcp): platinum lane hardening, active-lane hydration, and validation gate
+Current branch: feat/github-mcp-tools-call-2026-04-10
+Current HEAD: e7ccfc9 feat(docker): implement full MCP dispatchers for core adapter services
+
