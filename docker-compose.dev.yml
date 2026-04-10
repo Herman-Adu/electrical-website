@@ -58,6 +58,8 @@ services:
     image: node:22-alpine
     working_dir: /srv
     command: ["node", "/srv/server.js"]
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
     volumes:
       - ./docker/github-official/server.js:/srv/server.js:ro
     expose:
