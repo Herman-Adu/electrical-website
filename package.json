@@ -36,7 +36,6 @@
     "docker:mcp:memory:search": "node scripts/mcp-memory-call.mjs search_nodes",
     "docker:mcp:memory:open": "node scripts/mcp-memory-call.mjs open_nodes",
     "docker:mcp:ready": "pnpm docker:mcp:up && pnpm docker:mcp:ps && pnpm docker:mcp:smoke",
-    "mcp:platinum:validate": "pwsh scripts/mcp-platinum-validate.ps1",
     "migration:active:hydrate": "node scripts/migration-active-lanes-hydrate.mjs",
     "startup:new-chat": "pwsh scripts/new-chat-startup.ps1",
     "startup:new-chat:skip": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight",
