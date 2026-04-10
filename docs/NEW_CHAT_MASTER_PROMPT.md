@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-10 17:21:41 +01:00
+Last generated: 2026-04-10 17:30:21 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -56,10 +56,25 @@ Command: pnpm orchestrator:task -Task "pnpm startup:new-chat:full"
 - B3: Execution contract: bounded batches, deterministic validation gates (tsc/test/build when code changes), and memory checkpoints at preflight, post-merge, and closure.
 - B4: Guardrail: keep closed lane agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup inactive and unchanged unless explicitly requested.
 
+## Lane Closure Readiness
+
+Use this map to decide whether the current lane can be closed:
+- COMPLETED: merged bounded batches with validation evidence and memory checkpoints.
+- DEFERRED: items intentionally postponed with explicit rationale.
+- OPEN: remaining in-scope items for this lane.
+
+Closure gate (all required):
+1. Every in-scope backlog item is either COMPLETED or DEFERRED.
+2. Final PR for this lane is merged and local main is clean.
+3. Post-merge and closure checkpoints are written to memory.
+
+Next recommended lane stub:
+agent:v1:next-task:YYYY-MM-DD-<short-workstream-id>
+
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: main
-- HEAD: 84f1ddd chore(orchestrator): add deterministic first-batch startup guidance (#77)
+- HEAD: b9b3504 chore(orchestrator): add active-lane next action card and backlog seed (#78)
 - Memory nodes loaded: 2
 
 ### Hydrated Memory Nodes
@@ -128,5 +143,5 @@ Use sequential-thinking for complex decisions and nextjs-devtools for runtime di
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
 Current branch: main
-Current HEAD: 84f1ddd chore(orchestrator): add deterministic first-batch startup guidance (#77)
+Current HEAD: b9b3504 chore(orchestrator): add active-lane next action card and backlog seed (#78)
 
