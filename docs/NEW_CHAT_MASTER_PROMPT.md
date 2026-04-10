@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-10 15:34:55 +01:00
+Last generated: 2026-04-10 15:53:45 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -31,10 +31,21 @@ No-forget task execution wrapper:
 Command: pnpm orchestrator:task -Task "<your-task-command>"
 (Runs startup lifecycle first, your task second, and sync:task-close in finally.)
 
+## First Bounded Batch (Default Intake)
+
+When a fresh chat does not know where to start, execute this exact sequence before coding:
+1. Run strict preflight: clean git status, active lane hydration, MCP smoke health.
+2. Open active memory nodes and restate the current lane objective.
+3. Produce a concise remaining-work list grouped by impact and dependency.
+4. Implement only the smallest high-impact batch, then run required gates.
+
+Deterministic starter command:
+Command: pnpm orchestrator:task -Task "pnpm startup:new-chat:full"
+
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: main
-- HEAD: 8086dc8 chore(orchestrator): retire legacy mcp-platinum package surface (#75)
+- HEAD: 29ce118 chore(orchestrator): activate next-task lane for intake (#76)
 - Memory nodes loaded: 2
 
 ### Hydrated Memory Nodes
@@ -103,5 +114,5 @@ Use sequential-thinking for complex decisions and nextjs-devtools for runtime di
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
 Current branch: main
-Current HEAD: 8086dc8 chore(orchestrator): retire legacy mcp-platinum package surface (#75)
+Current HEAD: 29ce118 chore(orchestrator): activate next-task lane for intake (#76)
 
