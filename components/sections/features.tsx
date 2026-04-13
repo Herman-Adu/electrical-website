@@ -35,15 +35,15 @@ function LoadMonitorCard() {
 
   return (
     <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
+      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0 }}
       viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-electric-cyan/40 rounded-br-lg" />
+        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
       </div>
 
       <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
@@ -59,9 +59,9 @@ function LoadMonitorCard() {
         />
       </div>
 
-      <div className="p-6 flex flex-col flex-1">
+      <div className="p-6 py-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-electric-cyan/60">
+          <span className="text-[10px] font-mono tracking-widest uppercase dark:text-electric-cyan/60">
             Grid Intelligence
           </span>
           <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -69,7 +69,7 @@ function LoadMonitorCard() {
         <h3 className="text-xl font-bold text-card-foreground mb-2">
           Power Distribution Monitor
         </h3>
-        <p className="text-sm text-muted-foreground mb-6">
+        <p className="text-sm text-foreground/70 mb-6">
           Real-time load balancing across multi-zone distribution networks
         </p>
 
@@ -81,7 +81,7 @@ function LoadMonitorCard() {
             return (
               <div
                 key={card.id}
-                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border backdrop-blur-md transition-all duration-700 bg-white/90 dark:bg-slate-900/95 ${
+                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border border-muted-foreground/10 bg-electric-cyan/10 dark:bg-electric-cyan/10 dark:border-white/25 backdrop-blur-md transition-all duration-700  ${
                   isTop
                     ? "z-30 translate-y-0 scale-100 opacity-100 border-electric-cyan/60 shadow-md"
                     : isMiddle
@@ -93,7 +93,7 @@ function LoadMonitorCard() {
                 }}
               >
                 <div>
-                  <p className="text-xs font-mono text-electric-cyan">
+                  <p className="text-xs font-mono dark:text-electric-cyan font-bold">
                     {card.zone}
                   </p>
                   <p className="text-sm font-bold text-foreground">
@@ -101,10 +101,10 @@ function LoadMonitorCard() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold text-electric-cyan">
+                  <p className="text-lg font-bold dark:text-electric-cyan">
                     {card.capacity}
                   </p>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                  <p className="text-[10px] dark:text-foreground/80 uppercase tracking-wider font-bold">
                     Capacity
                   </p>
                 </div>
@@ -113,7 +113,7 @@ function LoadMonitorCard() {
           })}
         </div>
 
-        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-slate-700/50 text-sm font-mono tracking-widest uppercase text-electric-cyan/80 hover:border-(--electric-cyan)/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border text-sm font-mono tracking-widest uppercase dark:text-electric-cyan/80 hover:border-electric-cyan/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
           Monitor Zones
         </button>
       </div>
@@ -162,8 +162,8 @@ function SystemDiagnosticsCard() {
       viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-electric-cyan/40 rounded-br-lg" />
+        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
       </div>
 
       <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
@@ -181,7 +181,7 @@ function SystemDiagnosticsCard() {
 
       <div className="p-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-electric-cyan/60">
+          <span className="text-[10px] font-mono tracking-widest uppercase dark:text-electric-cyan/60">
             Live Diagnostics
           </span>
           <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -189,20 +189,20 @@ function SystemDiagnosticsCard() {
         <h3 className="text-xl font-bold text-card-foreground mb-2">
           System Diagnostics Feed
         </h3>
-        <p className="text-sm text-muted-foreground mb-6">
+        <p className="text-sm text-foreground/70 mb-6">
           Continuous system health monitoring with predictive fault detection
         </p>
 
-        <div className="h-20 mb-6 p-4 rounded-lg bg-transparent border border-slate-700/40 font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/40 transition-colors duration-300 flex flex-col justify-center">
-          <div className="text-electric-cyan/80 whitespace-pre-line">
+        <div className="h-20 mb-6 p-4 rounded-lg border-muted-foreground/10 bg-electric-cyan/10  font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/40 transition-colors duration-300 flex flex-col justify-center">
+          <div className="dark:text-electric-cyan/80 whitespace-pre-line">
             {displayText}
           </div>
           {isComplete && (
-            <span className="inline-block w-2 h-3 bg-electric-cyan animate-pulse" />
+            <span className="inline-block w-2 h-3 bg-muted-foreground dark:bg-electric-cyan animate-pulse" />
           )}
         </div>
 
-        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-slate-700/50 text-sm font-mono tracking-widest uppercase text-electric-cyan/80 hover:border-(--electric-cyan)/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border text-sm font-mono tracking-widest uppercase dark:text-electric-cyan/80 hover:border-electric-cyan/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
           View Full Report
         </button>
       </div>
@@ -227,16 +227,17 @@ export function Features() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-xs font-mono tracking-widest uppercase text-electric-cyan/60">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
+            <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
               Core Capabilities
             </span>
             <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
           </div>
+
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Intelligent Systems
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-foreground dark:text-foreground/80 max-w-2xl mx-auto">
             Real-time monitoring, diagnostics, and preventive maintenance for
             modern electrical infrastructure.
           </p>

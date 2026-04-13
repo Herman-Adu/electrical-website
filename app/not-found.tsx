@@ -9,7 +9,7 @@ export default function NotFound() {
       <h1 className="mt-4 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
         This Circuit Doesn&apos;t Exist
       </h1>
-      <p className="mt-4 max-w-2xl text-slate-400">
+      <p className="mt-4 max-w-2xl text-foreground/70">
         The page you requested is unavailable or has been moved. Return to a
         known route to continue.
       </p>

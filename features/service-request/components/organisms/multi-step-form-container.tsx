@@ -216,7 +216,7 @@ export function MultiStepFormContainer() {
         </div>
 
         <div className="relative">
-          <p className="mb-6 text-xs text-muted-foreground">
+          <p className="mb-6 text-xs text-foreground/70">
             Fields marked <span className="text-destructive">*</span> are
             required.
           </p>

@@ -224,12 +224,12 @@ export function AboutHero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="text-electric-cyan animate-pulse"
+                className="dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase font-bold">
                 Profile // {statusText}
               </span>
             </div>
@@ -241,7 +241,7 @@ export function AboutHero() {
             className="flex items-center justify-center gap-4 mb-6"
           >
             <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
               Intact Electrical Innovations
             </span>
             <span className="h-px w-12 bg-electric-cyan/60" />
@@ -259,7 +259,7 @@ export function AboutHero() {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl dark:text-foreground/80 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
           >
             Where engineering excellence meets genuine community commitment.
             Delivering gold-standard electrical solutions across commercial,
@@ -274,10 +274,10 @@ export function AboutHero() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="relative p-5 rounded-xl border border-border bg-card/60 backdrop-blur-md hover:border-electric-cyan/50 transition-all duration-300 group"
+                className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300 group"
               >
                 <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-electric-cyan/30 rounded-tr group-hover:border-electric-cyan/60 transition-colors" />
-                <div className="text-2xl font-black font-mono text-electric-cyan mb-1">
+                <div className="text-2xl font-black font-mono dark:text-electric-cyan mb-1">
                   {stat.value}
                 </div>
                 <div className="text-xs text-muted-foreground font-medium tracking-wide">
@@ -290,7 +290,7 @@ export function AboutHero() {
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80 uppercase font-bold"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
@@ -311,12 +311,16 @@ export function AboutHero() {
           onClick={scrollToContent}
           className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
         >
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase dark:text-foreground/80 font-bold">
             Our Story
           </span>
           <ChevronDown
             size={20}
-            className={shouldReduceMotion ? "" : "animate-bounce"}
+            className={
+              shouldReduceMotion
+                ? ""
+                : "animate-bounce dark:text-foreground/80 font-bold"
+            }
           />
         </motion.button>
       }

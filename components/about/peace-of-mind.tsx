@@ -3,6 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Clock, Award, ThumbsUp, CheckCircle, Zap } from "lucide-react";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 const pillars = [
   {
@@ -50,17 +54,21 @@ const checks = [
 ];
 
 export function PeaceOfMind() {
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
+
   return (
     <section
       id="peace-of-mind"
+      ref={sectionRef}
       className="section-container section-padding bg-slate-dark"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       {/* Blueprint grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none" />
-
-      {/* Electric border top */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent" />
 
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">

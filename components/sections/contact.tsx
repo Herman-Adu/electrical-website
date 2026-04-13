@@ -243,7 +243,7 @@ export function Contact() {
                   <div className="absolute -inset-2 bg-electric-cyan/10 blur-lg opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-1">
+                  <span className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-1">
                     {item.label}
                   </span>
                   <span className="text-white font-medium block">
@@ -327,7 +327,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                    className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-2"
                   >
                     Full Name *
                   </label>
@@ -356,7 +356,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                    className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-2"
                   >
                     Email Address *
                   </label>
@@ -387,7 +387,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="contact-company"
-                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                    className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-2"
                   >
                     Company
                   </label>
@@ -405,7 +405,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="contact-project-type"
-                    className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                    className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-2"
                   >
                     Project Type *
                   </label>
@@ -440,7 +440,7 @@ export function Contact() {
               <div className="mb-6">
                 <label
                   htmlFor="contact-message"
-                  className="font-mono text-[10px] text-slate-400 tracking-widest uppercase block mb-2"
+                  className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-2"
                 >
                   Project Details *
                 </label>
@@ -558,7 +558,7 @@ export function Contact() {
 
               {/* Form Footer */}
               <div className="mt-4 text-center">
-                <span className="font-mono text-[9px] text-slate-400 tracking-widest">
+                <span className="font-mono text-[9px] text-foreground/70 tracking-widest">
                   ENCRYPTED TRANSMISSION // RESPONSE TIME: 2HRS
                 </span>
               </div>

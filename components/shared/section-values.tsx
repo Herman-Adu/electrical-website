@@ -4,12 +4,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import { getIcon } from "./icon-map";
 import type { SectionValuesData } from "@/types/sections";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 interface SectionValuesProps {
   data: SectionValuesData;
 }
 
 export function SectionValues({ data }: SectionValuesProps) {
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
+
   const {
     sectionId,
     label,
@@ -23,8 +29,14 @@ export function SectionValues({ data }: SectionValuesProps) {
   return (
     <section
       id={sectionId}
+      ref={sectionRef}
       className="section-container section-padding bg-background"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       <div className="absolute inset-0 blueprint-grid-fine opacity-25 pointer-events-none" />
 
       <div className="section-content">
@@ -37,11 +49,9 @@ export function SectionValues({ data }: SectionValuesProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-electric-cyan" />
             <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
               {label}
             </span>
-            <div className="h-px w-8 bg-electric-cyan" />
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             {headlineHighlight ? (

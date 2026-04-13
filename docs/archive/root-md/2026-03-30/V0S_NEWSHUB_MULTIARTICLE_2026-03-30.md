@@ -1041,7 +1041,7 @@ export function HeroSection({ article, customSubtitle }: HeroSectionProps) {
             {article.description}
           </p>
         )}
-        <div className="flex flex-wrap gap-4 text-sm text-slate-400">
+        <div className="flex flex-wrap gap-4 text-sm text-foreground/70">
           <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
           {article.readTime && <span>•</span>}
           {article.readTime && <span>{article.readTime}</span>}

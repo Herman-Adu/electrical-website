@@ -3,6 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Shield, Award, Star } from "lucide-react";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 const certs = [
   {
@@ -71,13 +75,22 @@ const certs = [
 ];
 
 export function Certifications() {
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
+
   return (
     <section
       id="certifications"
+      ref={sectionRef}
       className="section-container section-padding bg-background"
     >
+      {
+        <AnimatedBorders
+          shouldReduce={shouldReduce}
+          lineScale={lineScale}
+          showBottom={false}
+        />
+      }
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent" />
 
       <div className="section-content">
         {/* Header */}
@@ -121,7 +134,7 @@ export function Certifications() {
               }`}
             >
               {/* Shimmer effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" />
+              {/* <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" /> */}
 
               {/* Corner brackets */}
               <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />

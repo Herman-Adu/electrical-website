@@ -8,53 +8,53 @@ import type {
   SectionIntroData,
   SectionProfileData,
   SectionValuesData,
-} from '@/types/sections';
+} from "@/types/sections";
 
 // =============================================================================
 // COMPANY INTRO DATA
 // =============================================================================
 
 export const companyIntroData: SectionIntroData = {
-  sectionId: 'company-intro',
-  label: 'Our Story',
+  sectionId: "company-intro",
+  label: "Our Story",
   headlineWords: [
-    'Powering',
-    'London',
-    '&',
-    'the',
-    'Home',
-    'Counties',
-    'with',
-    'Gold-Standard',
-    'Electrical',
-    'Engineering',
-    'Since',
-    '2009.',
+    "Powering",
+    "London",
+    "&",
+    "the",
+    "Home",
+    "Counties",
+    "with",
+    "Gold-Standard",
+    "Electrical",
+    "Engineering",
+    "Since",
+    "2009.",
   ],
   leadParagraph:
-    'What started as a one-man operation in South London has grown into a leading electrical contractor serving homes, businesses, and industrial clients across the capital and surrounding counties.',
+    "What started as a one-man operation in South London has grown into a leading electrical contractor serving homes, businesses, and industrial clients across the capital and surrounding counties.",
   bodyParagraphs: [
-    'Intact Electrical Innovations was founded with a simple belief: that electrical work should be done with integrity, precision, and pride. Over fifteen years, we\'ve built a reputation for delivering projects on time, within budget, and to standards that exceed expectations.',
-    'Today, we employ a team of highly qualified electricians, apprentices, and project managers — all committed to the same founding principles. From small domestic repairs to large-scale industrial installations, we bring the same attention to detail and commitment to every job.',
+    "Intact Electrical Innovations was founded with a simple belief: that electrical work should be done with integrity, precision, and pride. Over fifteen years, we've built a reputation for delivering projects on time, within budget, and to standards that exceed expectations.",
+    "Today, we employ a team of highly qualified electricians, apprentices, and project managers — all committed to the same founding principles. From small domestic repairs to large-scale industrial installations, we bring the same attention to detail and commitment to every job.",
   ],
   pillars: [
     {
-      num: '01',
-      title: 'Precision Engineering',
+      num: "01",
+      title: "Precision Engineering",
       description:
-        'Every circuit, every connection, engineered to exacting standards with zero compromise on quality or safety.',
+        "Every circuit, every connection, engineered to exacting standards with zero compromise on quality or safety.",
     },
     {
-      num: '02',
-      title: 'Community First',
+      num: "02",
+      title: "Community First",
       description:
-        'We reinvest in the communities we serve — from apprenticeship programmes to charitable initiatives that power local growth.',
+        "We reinvest in the communities we serve — from apprenticeship programmes to charitable initiatives that power local growth.",
     },
     {
-      num: '03',
-      title: 'Trusted Partnership',
+      num: "03",
+      title: "Trusted Partnership",
       description:
-        'Our clients are partners. We communicate transparently, deliver consistently, and stand behind every job we complete.',
+        "Our clients are partners. We communicate transparently, deliver consistently, and stand behind every job we complete.",
     },
   ],
 };
@@ -64,51 +64,64 @@ export const companyIntroData: SectionIntroData = {
 // =============================================================================
 
 export const director1Data: SectionProfileData = {
-  sectionId: 'directors',
-  label: 'Leadership',
-  name: 'Marcus Johnson',
-  title: 'Managing Director & Master Electrician',
-  credentials: ['NICEIC Approved', 'Part P Certified', 'IEE Member', '18th Edition'],
+  sectionId: "directors",
+  label: "Leadership",
+  name: "Richard Barber",
+  title: "Co-Founder & Managing Director",
+  credentials: [
+    "NICEIC Approved",
+    "Part P Certified",
+    "IEE Member",
+    "18th Edition",
+  ],
   bio: [
-    "Marcus founded Intact Electrical Innovations in 2009 with a single van, a handful of tools, and an uncompromising belief that electrical work should be done right — every single time. What started as a domestic rewiring service in South London has grown into one of the region's most respected multi-disciplinary electrical contractors.",
-    'With over 22 years of hands-on experience spanning domestic, commercial, and industrial sectors, Marcus brings rare depth of knowledge to every project. He holds a Master Electrician qualification and is a registered member of the Institution of Engineering and Technology.',
-    'Beyond the business, Marcus is a passionate advocate for skills development in the electrical trade. He personally mentors apprentices and sits on the advisory board of two local colleges, helping shape the next generation of qualified electricians.',
+    "Richard Barber is the Co-Founder and Managing Director of NEXGEN Electrical Innovations Ltd, bringing over 27 years of experience across the domestic, commercial, and industrial electrical sectors. With a career built on technical expertise, leadership, and a strong client-first mindset, Richard plays a pivotal role in driving the company’s strategic direction and operational excellence.",
+    "Together with co-founder Gavin Little, Richard established NEXGEN with a clear vision: not just to meet industry standards, but to set them. This ethos underpins every aspect of the business, ensuring a consistent focus on quality, reliability, and long-term client relationships.",
+    "Richard leads on strategic planning, operational oversight, and business development, while fostering a culture built on strong communication, accountability, and continuous improvement. His leadership ensures that both clients and strategic partners receive a service that is professional, responsive, and aligned with their needs.",
+    "A firm believer in giving back to the community, Richard is actively involved in supporting local initiatives. NEXGEN proudly sponsors local sports clubs and provides compliance services to charities, helping them allocate their resources where they are needed most.",
   ],
   quote:
     "Integrity is not a policy. It's the only way I know how to work. Every circuit we wire, every panel we install — it has our name on it. That's not a responsibility I take lightly.",
   image: {
-    src: '/images/director-1.jpg',
-    alt: 'Marcus Johnson, Managing Director of Intact Electrical Innovations',
+    src: "/images/director-1.jpg",
+    alt: "Marcus Johnson, Managing Director of Intact Electrical Innovations",
     priority: true,
   },
   socialLinks: [
-    { platform: 'linkedin', url: 'https://linkedin.com' },
-    { platform: 'email', url: 'mailto:marcus@intactelectrical.co.uk' },
+    { platform: "linkedin", url: "https://linkedin.com" },
+    { platform: "email", url: "mailto:marcus@intactelectrical.co.uk" },
   ],
   reversed: false,
 };
 
 export const director2Data: SectionProfileData = {
-  sectionId: 'director-2',
-  label: 'Leadership',
-  name: 'David Clarke',
-  title: 'Technical Director & Systems Engineer',
-  credentials: ['ECS Gold Card', 'ISO 9001 Lead', 'IPAF Licensed', 'CHAS Accredited'],
+  sectionId: "director-2",
+  label: "Leadership",
+  name: "Gavin Little",
+  title: "Co-Founder & Managing Director",
+  credentials: [
+    "ECS Gold Card",
+    "ISO 9001 Lead",
+    "IPAF Licensed",
+    "CHAS Accredited",
+  ],
   bio: [
-    "David joined Marcus as a co-founder in the company's first year, bringing a background in industrial systems engineering and a meticulous approach to technical design. Together, they built the technical foundations that define Intact's reputation for precision and reliability.",
-    "As Technical Director, David leads all engineering design, quality management, and compliance operations. His expertise in high-voltage systems and complex power distribution networks has been pivotal in expanding the company into industrial and large commercial projects.",
-    "A qualified ISO 9001 Lead Auditor, David drives the company's commitment to continuous improvement and quality management — ensuring that every system we design and install meets not just minimum standards, but exceptional ones.",
+    "Gavin Little co-founded NEXGEN Electrical Innovations Ltd alongside Richard Barber, with a clear vision — to deliver high-quality electrical services that combine technical excellence with a genuinely client-focused approach. Together, they have built NEXGEN into a trusted contractor across the FM, commercial, and fit-out sectors.",
+    "Drawing on a strong background in commercial and industrial electrical systems, Gavin leads the business across operations, project delivery, and client relationships. Working closely with Richard, the leadership team ensures every project is delivered to the highest standard, with a shared commitment to quality, accountability, and consistency.",
+    "Gavin’s hands-on approach and attention to detail have been instrumental in establishing NEXGEN’s reputation for reliability, professionalism, and quality workmanship.",
+    "He has also played a key role in securing and maintaining key industry accreditations including NICEIC Approved Contractor, SafeContractor, and Achilles Gold — reinforcing the company’s commitment to compliance, safety, and best practice across all works.",
+    "Beyond project delivery, Gavin is focused on building long-term partnerships with clients by removing common pain points within project management. Through a collaborative, team-led approach, NEXGEN delivers a fully managed service that ensures efficiency, clear communication, and complete transparency from start to finish.",
   ],
   quote:
-    "Technical excellence isn't just about knowing the regulations. It's about understanding why they exist — and then going further. Our clients deserve systems that are safe, efficient, and built to last a generation.",
+    "At NEXGEN, we don’t just deliver electrical installations — we deliver confidence. As a team, we take ownership, solve problems, and provide solutions that stand the test of time.",
   image: {
-    src: '/images/director-2.jpg',
-    alt: 'David Clarke, Technical Director of Intact Electrical Innovations',
+    src: "/images/director-2.jpg",
+    alt: "David Clarke, Technical Director of Intact Electrical Innovations",
     priority: false,
   },
   socialLinks: [
-    { platform: 'linkedin', url: 'https://linkedin.com' },
-    { platform: 'email', url: 'mailto:david@intactelectrical.co.uk' },
+    { platform: "linkedin", url: "https://linkedin.com" },
+    { platform: "email", url: "mailto:david@intactelectrical.co.uk" },
   ],
   reversed: true,
 };
@@ -118,57 +131,57 @@ export const director2Data: SectionProfileData = {
 // =============================================================================
 
 export const coreValuesData: SectionValuesData = {
-  sectionId: 'core-values',
-  label: 'How We Operate',
-  headline: 'Our Core Values',
-  headlineHighlight: 'Core Values',
+  sectionId: "core-values",
+  label: "How We Operate",
+  headline: "Our Core Values",
+  headlineHighlight: "Core Values",
   description:
-    'The principles that guide every decision, every interaction, and every project we undertake.',
+    "The principles that guide every decision, every interaction, and every project we undertake.",
   values: [
     {
-      icon: 'Shield',
-      title: 'Integrity',
+      icon: "Shield",
+      title: "Integrity",
       short: "We don't cut corners. Ever.",
       full: "Our reputation is built on doing the right thing — even when no one's looking. Transparent pricing, honest timelines, and work that stands the test of time.",
-      color: 'cyan',
+      color: "cyan",
     },
     {
-      icon: 'Award',
-      title: 'Excellence',
-      short: 'Gold standard, every time.',
+      icon: "Award",
+      title: "Excellence",
+      short: "Gold standard, every time.",
       full: "We set our bar higher than the regulations require. From cable dressing to final inspection, every detail reflects our commitment to exceptional craftsmanship.",
-      color: 'cyan',
+      color: "cyan",
     },
     {
-      icon: 'Users',
-      title: 'Teamwork',
-      short: 'Our greatest asset is our people.',
-      full: 'A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed.',
-      color: 'amber',
+      icon: "Users",
+      title: "Teamwork",
+      short: "Our greatest asset is our people.",
+      full: "A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed.",
+      color: "amber",
     },
     {
-      icon: 'Lightbulb',
-      title: 'Innovation',
+      icon: "Lightbulb",
+      title: "Innovation",
       short: "We embrace tomorrow's technology today.",
-      full: 'From smart systems to sustainable solutions, we actively invest in emerging electrical technology to deliver better, faster, and more efficient outcomes.',
-      color: 'cyan',
+      full: "From smart systems to sustainable solutions, we actively invest in emerging electrical technology to deliver better, faster, and more efficient outcomes.",
+      color: "cyan",
     },
     {
-      icon: 'Zap',
-      title: 'Reliability',
-      short: 'On time. On budget. Without compromise.',
+      icon: "Zap",
+      title: "Reliability",
+      short: "On time. On budget. Without compromise.",
       full: "We show up when we say we will, complete work when we commit to, and deliver within the agreed price. Reliability isn't a feature — it's our baseline.",
-      color: 'amber',
+      color: "amber",
     },
     {
-      icon: 'Heart',
-      title: 'Community',
-      short: 'We give back to where we came from.',
-      full: 'From apprenticeship programmes to local charity partnerships, we actively invest in the communities we serve — because success means nothing if it isn\'t shared.',
-      color: 'cyan',
+      icon: "Heart",
+      title: "Community",
+      short: "We give back to where we came from.",
+      full: "From apprenticeship programmes to local charity partnerships, we actively invest in the communities we serve — because success means nothing if it isn't shared.",
+      color: "cyan",
     },
   ],
-  tagline: 'THESE ARE NOT JUST WORDS ON A WALL — THEY ARE HOW WE WORK.',
+  tagline: "THESE ARE NOT JUST WORDS ON A WALL — THEY ARE HOW WE WORK.",
 };
 
 // =============================================================================

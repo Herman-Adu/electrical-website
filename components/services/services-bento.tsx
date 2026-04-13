@@ -144,7 +144,7 @@ function ImageHeroCard({
           </span>
         </div>
         {/* Index number */}
-        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold dark:text-white/10 text-slate-900/5 select-none leading-none">
+        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold select-none text-electric-cyan/10 leading-none">
           {String(index + 1).padStart(2, "0")}
         </div>
       </div>
@@ -158,14 +158,14 @@ function ImageHeroCard({
             {title}
           </span>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+        <p className="text-sm text-foreground/70 leading-relaxed mb-4 flex-1">
           {description}
         </p>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {specs.map((spec) => (
             <span
               key={spec}
-              className="font-mono text-[9px] px-2 py-0.5 rounded bg-muted/60 text-muted-foreground tracking-wider"
+              className="font-mono text-[9px] px-2 py-0.5 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider"
             >
               {spec}
             </span>
@@ -223,8 +223,8 @@ function TextDetailCard({
     <GlassCard delay={delay} className="flex flex-col h-full p-5">
       <WindowDots />
       {/* Header row */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2 px-2 py-1.5 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider">
           <Icon size={20} className={`${accentClass} shrink-0`} />
           <span
             className={`font-mono text-[10px] tracking-widest uppercase ${accentClass} opacity-70`}
@@ -232,7 +232,8 @@ function TextDetailCard({
             {voltage}
           </span>
         </div>
-        <div className="font-mono text-5xl font-bold text-muted/20 select-none leading-none">
+
+        <div className="font-mono text-4xl right-5 font-bold text-electric-cyan/20 select-none leading-none">
           {String(index + 1).padStart(2, "0")}
         </div>
       </div>
@@ -240,7 +241,7 @@ function TextDetailCard({
       <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-electric-cyan transition-colors">
         {title}
       </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+      <p className="text-sm text-foreground/70 leading-relaxed mb-5 flex-1">
         {description}
       </p>
 
@@ -248,7 +249,7 @@ function TextDetailCard({
       <div className={`border-t ${borderClass} pt-4 space-y-2`}>
         {specs.map((spec) => (
           <div key={spec.label} className="flex items-center justify-between">
-            <span className="font-mono text-[10px] tracking-wider text-muted-foreground/70 uppercase">
+            <span className="font-mono text-[10px] tracking-wider text-foreground/70 uppercase">
               {spec.label}
             </span>
             <span className={`font-mono text-[11px] font-bold ${accentClass}`}>
@@ -286,6 +287,8 @@ function StatsCard({ delay }: { delay: number }) {
 
   return (
     <GlassCard delay={delay} className="flex flex-col p-5 h-full">
+      <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
       <WindowDots />
       <div className="flex items-center gap-2 mb-5">
         <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -304,7 +307,7 @@ function StatsCard({ delay }: { delay: number }) {
             <span className="font-mono text-2xl font-black text-electric-cyan leading-none mb-1">
               {value}
             </span>
-            <span className="text-[10px] text-muted-foreground leading-tight">
+            <span className="text-[10px] text-foreground/70 leading-tight">
               {label}
             </span>
           </div>
@@ -357,6 +360,8 @@ function DiagnosticCard({ delay }: { delay: number }) {
 
   return (
     <GlassCard delay={delay} className="flex flex-col p-5 h-full">
+      <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
       <WindowDots />
       <div className="flex items-center gap-2 mb-3">
         <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -368,7 +373,7 @@ function DiagnosticCard({ delay }: { delay: number }) {
       <h3 className="text-lg font-bold text-card-foreground mb-2">
         System Status Feed
       </h3>
-      <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+      <p className="text-xs text-foreground/70 leading-relaxed mb-4">
         Continuous health monitoring with real-time fault detection across all
         active installations.
       </p>
@@ -417,7 +422,7 @@ function CTACard({ delay }: { delay: number }) {
           <h3 className="text-2xl sm:text-3xl font-black text-card-foreground mb-2 text-balance">
             Need a Bespoke Electrical Solution?
           </h3>
-          <p className="text-sm text-muted-foreground max-w-lg leading-relaxed">
+          <p className="text-sm text-foreground/70 max-w-lg leading-relaxed">
             Every project is unique. Our engineering team provides tailored
             consultations, site surveys, and full-scope project proposals — from
             concept to commissioning.
@@ -445,7 +450,7 @@ function CTACard({ delay }: { delay: number }) {
 
 // ─── Card F: Emergency Response Card (Wide Image) ──────────────────────────
 
-function EmergencyCard({ delay }: { delay: number }) {
+function EmergencyCard({ delay, index }: { delay: number; index: number }) {
   const router = useRouter();
 
   return (
@@ -465,10 +470,15 @@ function EmergencyCard({ delay }: { delay: number }) {
       </div>
 
       {/* Voltage badge */}
-      <div className="absolute top-12 right-5 z-10 px-2 py-1 rounded bg-amber-warning/20 backdrop-blur-sm border border-amber-warning/40">
-        <span className="font-mono text-[10px] tracking-widest text-amber-warning">
-          24/7
-        </span>
+      <div className="flex items-start justify-between mb-4">
+        <div className="absolute top-12 left-5 z-10 px-2 py-1 rounded bg-amber-warning/20 backdrop-blur-sm border border-amber-warning/40">
+          <span className="font-mono text-[10px] tracking-widest text-amber-warning">
+            24/7
+          </span>
+        </div>
+        <div className="absolute top-12 right-5 z-10 font-mono text-4xl font-bold text-electric-cyan/20 select-none leading-none">
+          {String(index + 1).padStart(2, "0")}
+        </div>
       </div>
 
       {/* Content */}
@@ -479,7 +489,9 @@ function EmergencyCard({ delay }: { delay: number }) {
             Emergency Response
           </span>
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">Always On Call</h3>
+        <h3 className="text-xl font-bold text-white mb-2">
+          Industrial Systems
+        </h3>
         <p className="text-xs text-white/70 leading-relaxed mb-4">
           Round-the-clock emergency fault diagnosis and rapid response for
           critical electrical failures.
@@ -645,7 +657,7 @@ export function ServicesBento() {
 
           {/* Emergency — lg: col-span-1 */}
           <div className="sm:col-span-1 lg:col-span-1 h-full">
-            <EmergencyCard delay={0.32} />
+            <EmergencyCard delay={0.32} index={2} />
           </div>
 
           {/* Power Distribution — lg: col-span-1 */}
@@ -657,7 +669,7 @@ export function ServicesBento() {
               specs={powerSpecs}
               voltage="33kV"
               delay={0.4}
-              index={2}
+              index={3}
               exploreLink="/services/industrial#power-distribution"
             />
           </div>
@@ -865,8 +877,8 @@ export function ServicesBento() {
                       <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan">
                         Energy Management
                       </span>
-                      <div className="ml-auto px-2 py-0.5 rounded border border-electric-cyan/40 bg-electric-cyan/15">
-                        <span className="font-mono text-[9px] tracking-widest text-electric-cyan">
+                      <div className="flex items-center ml-auto px-2 py-1 rounded border border-electric-cyan/40 bg-electric-cyan/15">
+                        <span className="font-mono text-[10px] tracking-widest text-electric-cyan">
                           SMART
                         </span>
                       </div>

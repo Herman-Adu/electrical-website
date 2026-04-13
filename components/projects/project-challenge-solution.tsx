@@ -22,7 +22,7 @@ export function ProjectChallengeSolution({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef, lineScale } = useAnimatedBorders();
 
   return (
     <section
@@ -31,8 +31,7 @@ export function ProjectChallengeSolution({
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
-        lineLeft={lineLeft}
-        lineRight={lineRight}
+        lineScale={lineScale}
         showBottom={false}
       />
       <div className="section-content max-w-6xl" ref={containerRef}>
