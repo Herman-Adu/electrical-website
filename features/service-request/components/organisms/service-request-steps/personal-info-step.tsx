@@ -78,7 +78,7 @@ export function PersonalInfoStep() {
           <h2 className="text-2xl font-semibold text-foreground">
             Personal Information
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-foreground/70">
             Let's start with your basic contact information
           </p>
         </div>

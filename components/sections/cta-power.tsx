@@ -75,7 +75,7 @@ const CTAPowerClient = () => {
         className="absolute top-8 right-8 lg:top-16 lg:right-16 flex items-center gap-2 text-sm"
       >
         <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
-        <span className="text-slate-400 font-mono text-xs uppercase tracking-wide">
+        <span className="text-foreground/70 font-mono text-xs uppercase tracking-wide">
           Systems Ready
         </span>
       </motion.div>
@@ -108,7 +108,7 @@ const CTAPowerClient = () => {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="text-foreground">Ready to Power</span>
             <br />
             <span className="bg-linear-to-r from-electric-cyan to-amber-warning bg-clip-text text-transparent">

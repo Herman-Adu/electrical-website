@@ -14,6 +14,10 @@ import {
   Youtube,
   BookOpen,
 } from "lucide-react";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 const whyUs = [
   "NICEIC Approved Contractor — fully verified and independently audited",
@@ -68,6 +72,7 @@ const article = {
 export function AboutCTA() {
   const router = useRouter();
   const surgeRef = useRef<HTMLButtonElement>(null);
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
 
   const handleCTA = () => {
     router.push("/contact");
@@ -76,10 +81,15 @@ export function AboutCTA() {
   return (
     <section
       id="why-choose-us"
+      ref={sectionRef}
       className="section-container section-padding bg-background"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
-      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent" />
 
       <div className="section-content">
         {/* Why Choose Us */}
@@ -97,11 +107,14 @@ export function AboutCTA() {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-5 text-balance">
-              Why Choose <span className="text-electric-cyan">Intact?</span>
+              Why Choose{" "}
+              <span className="text-electric-cyan">Nexgen Electrical </span>
+              <span className="dark:text-foreground">Innovations?</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              There are thousands of electricians. There are very few Intact
-              Electrical Innovations. Here&apos;s exactly what sets us apart.
+              There are thousands of electricians. There are very few Nexgen
+              Electrical Innovations Electrical Innovations. Here&apos;s exactly
+              what sets us apart.
             </p>
             <div className="space-y-4">
               {whyUs.map((point, idx) => (
@@ -197,7 +210,7 @@ export function AboutCTA() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: idx * 0.06 }}
                   viewport={{ once: false }}
-                  className="group flex items-center gap-3 rounded-xl border border-border bg-card/40 px-5 py-3 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 hover:shadow-lg hover:shadow-electric-cyan/10"
+                  className="group flex items-center gap-2 rounded-xl border border-border bg-card/40 px-3 py-2 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 hover:shadow-lg hover:shadow-electric-cyan/10"
                 >
                   <Icon
                     size={18}
@@ -207,9 +220,9 @@ export function AboutCTA() {
                     <div className="text-xs font-medium text-foreground">
                       {social.name}
                     </div>
-                    <div className="text-[10px] font-mono text-muted-foreground/60">
+                    {/* <div className="text-[10px] font-mono text-muted-foreground/60">
                       {social.handle}
-                    </div>
+                    </div> */}
                   </div>
                 </motion.a>
               );

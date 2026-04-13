@@ -22,7 +22,7 @@ export default function ServicesError({
       <h1 className="mt-4 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
         Unable to Load This Service View
       </h1>
-      <p className="mt-4 max-w-2xl text-slate-400">
+      <p className="mt-4 max-w-2xl text-foreground/70">
         Something interrupted this route segment. Retry to recover, or return to
         the main services overview.
       </p>

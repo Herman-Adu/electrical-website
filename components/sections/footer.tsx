@@ -71,7 +71,7 @@ export function Footer() {
               </div>
             </Link>
 
-            <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Powering the next generation of commercial and industrial
               innovation with precision-engineered electrical solutions.
             </p>
@@ -83,7 +83,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 flex items-center justify-center border border-border text-muted-foreground hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300"
+                  className="w-9 h-9 flex items-center justify-center rounded-xl border border-border text-foreground hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300"
                 >
                   <social.icon size={16} />
                 </a>
@@ -101,7 +101,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                    className="text-foreground text-sm hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300 "
                   >
                     {link.name}
                   </Link>
@@ -121,14 +121,14 @@ export function Footer() {
                   {link.href.startsWith("/") ? (
                     <Link
                       href={link.href}
-                      className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                      className="text-foreground text-sm hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300 "
                     >
                       {link.name}
                     </Link>
                   ) : (
                     <a
                       href={link.href}
-                      className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                      className="text-foreground text-sm hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300 "
                     >
                       {link.name}
                     </a>
@@ -148,7 +148,7 @@ export function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                    className="text-foreground text-sm hover:text-electric-cyan transition-colors"
                   >
                     {link.name}
                   </a>
@@ -185,13 +185,13 @@ export function Footer() {
               {/* Phone Number - Prominent */}
               <a
                 href="tel:+442012345678"
-                className="block text-electric-cyan font-bold text-lg md:text-xs hover:text-foreground transition-colors mb-2"
+                className="block text-electric-cyan font-bold text-lg md:text-xs hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300  mb-2"
               >
                 +44 (0) 20 1234 5678
               </a>
 
               {/* Subtext */}
-              <p className="text-muted-foreground text-xs">
+              <p className="text-foreground text-xs">
                 Rapid response team ready
               </p>
             </div>
@@ -204,7 +204,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
-            <div className="font-mono text-[10px] text-muted-foreground tracking-widest">
+            <div className="font-mono text-[10px] text-foreground tracking-widest">
               {currentYear} NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
             </div>
 
@@ -214,7 +214,7 @@ export function Footer() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-mono text-[10px] text-muted-foreground tracking-widest hover:text-electric-cyan transition-colors"
+                  className="font-mono text-[10px] text-foreground tracking-widest hover:text-electric-cyan transition-colors"
                 >
                   {link.name.toUpperCase()}
                 </a>
@@ -222,7 +222,7 @@ export function Footer() {
             </div>
 
             {/* Technical Badge */}
-            <div className="font-mono text-[9px] text-muted-foreground tracking-widest">
+            <div className="font-mono text-[9px] text-foreground tracking-widest">
               POWERED BY ADU-DEV SOLUTIONS
             </div>
           </div>

@@ -637,12 +637,12 @@ export function CaseStudyHero(props: CaseStudyHeroProps) {
         {/* Client info: Case Study-specific */}
         <div className="mb-6 flex items-center space-x-4 text-slate-200">
           <div>
-            <p className="text-sm text-slate-400">Client</p>
+            <p className="text-sm text-foreground/70">Client</p>
             <p className="font-semibold">{caseStudy.clientName}</p>
           </div>
           <div className="h-8 w-px bg-slate-700" />
           <div>
-            <p className="text-sm text-slate-400">Industry</p>
+            <p className="text-sm text-foreground/70">Industry</p>
             <p className="font-semibold">{caseStudy.industry}</p>
           </div>
         </div>

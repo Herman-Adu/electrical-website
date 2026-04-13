@@ -42,12 +42,12 @@ export function Dashboard() {
       >
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 border border-electric-cyan/20 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
               <Activity
                 size={12}
-                className="text-electric-cyan animate-pulse"
+                className="dark:text-foreground animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono font-bold text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
                 Live Monitoring
               </span>
             </div>
@@ -56,7 +56,7 @@ export function Dashboard() {
               Grid <span className="text-electric-cyan">Intelligence</span>
             </h2>
 
-            <p className="text-muted-foreground max-w-xl text-base lg:text-lg font-light">
+            <p className="text-foreground/70 max-w-xl text-base lg:text-lg font-light">
               Real-time monitoring of Nexgen installed assets across the
               industrial sector. Efficiency is not a goal; it is a constant
               variable.
@@ -65,9 +65,12 @@ export function Dashboard() {
 
           {/* Status indicators */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/30">
-              <Shield size={14} className="text-emerald-500" />
-              <span className="font-mono text-[10px] text-emerald-500 tracking-widest">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl border dark:border-electric-cyan/20">
+              <Shield
+                size={14}
+                className="dark:text-foreground animate-pulse"
+              />
+              <span className="font-mono text-[10px] dark:text-electric-cyan/80 tracking-widest font-bold">
                 ALL SYSTEMS NOMINAL
               </span>
             </div>

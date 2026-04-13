@@ -1,14 +1,23 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
+  useMotionTemplate,
+  useMotionValueEvent,
   useScroll,
   useTransform,
-  useSpring,
-  type Variants,
+  type MotionValue,
 } from "framer-motion";
-import { Zap, Award, Users, Building, Star, Shield } from "lucide-react";
+import { Award, Building, Shield, Star, Users, Zap } from "lucide-react";
+import {
+  AnimatedBorders,
+  useAnimatedBorders,
+} from "@/lib/use-animated-borders";
+import {
+  AnimatedWord,
+  ScrollLinkedAnimatedWord,
+} from "@/components/shared/animated-word";
 
 const milestones = [
   {
@@ -69,208 +78,536 @@ const milestones = [
   },
 ];
 
-// Hook that returns 'up' | 'down' based on scroll direction
-function useScrollDirection() {
-  const [direction, setDirection] = useState<"up" | "down">("down");
-  const lastY = useRef(0);
+type TimelineMilestone = (typeof milestones)[number];
+type NodeState = "upcoming" | "active" | "completed";
+type TimelineScrollOffset = NonNullable<
+  Parameters<typeof useScroll>[0]
+>["offset"];
 
-  useEffect(() => {
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      setDirection(currentY > lastY.current ? "down" : "up");
-      lastY.current = currentY;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return direction;
+function clamp01(value: number) {
+  return Math.min(1, Math.max(0, value));
 }
 
-function TimelineNode({
-  milestone,
-  index,
-  isLast,
-  scrollDirection: _scrollDirection,
-}: {
-  milestone: (typeof milestones)[0];
-  index: number;
-  isLast: boolean;
-  scrollDirection: "up" | "down";
-}) {
-  // Mobile: single column (all on right), Desktop: alternating
-  const isEven = index % 2 === 0;
+function applyTopWeightedActivationBias(normalized: number) {
+  const topWeight = (1 - normalized) ** 2;
+  const bias = 0.16 * topWeight;
+  return clamp01(normalized + bias);
+}
 
-  const Icon = milestone.icon;
+function createThresholds(total: number) {
+  if (total <= 1) {
+    return [0.5];
+  }
 
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 10,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.45,
-        ease: [0.16, 1, 0.3, 1] as const,
-        delay: index * 0.02,
-      },
-    },
-  };
+  return Array.from({ length: total }, (_, index) => index / (total - 1));
+}
 
-  const nodeVariants: Variants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.35,
-        delay: index * 0.02 + 0.06,
-        type: "spring" as const,
-        stiffness: 180,
-      },
-    },
-  };
+function createGeometryThresholds(
+  timelineElement: HTMLUListElement,
+  nodeElements: HTMLDivElement[],
+) {
+  const timelineRect = timelineElement.getBoundingClientRect();
+  const timelineHeight = timelineRect.height;
 
-  const lineVariants: Variants = {
-    hidden: { scaleY: 0 },
-    visible: {
-      scaleY: 1,
-      transition: { duration: 0.4, delay: index * 0.02 + 0.15 },
-    },
-  };
+  if (timelineHeight < 1) {
+    return createThresholds(nodeElements.length);
+  }
 
-  const Card = () => (
+  const centers = nodeElements.map((nodeElement) => {
+    const nodeRect = nodeElement.getBoundingClientRect();
+    return nodeRect.top - timelineRect.top + nodeRect.height / 2;
+  });
+
+  return centers.map((center) => {
+    const normalized = clamp01(center / timelineHeight);
+    return applyTopWeightedActivationBias(normalized);
+  });
+}
+
+function getNodeState(
+  progress: number,
+  trigger: number,
+  nextTrigger?: number,
+): NodeState {
+  if (progress < trigger) {
+    return "upcoming";
+  }
+
+  if (nextTrigger === undefined || progress < nextTrigger) {
+    return "active";
+  }
+
+  return "completed";
+}
+
+function getRowSide(index: number) {
+  return index % 2 === 0 ? "left" : "right";
+}
+
+function TimelineHeader() {
+  return (
     <motion.div
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: "-40px" }}
-      className={`p-4 md:p-6 rounded-lg border transition-all duration-300 group cursor-default w-full md:max-w-sm text-left md:text-inherit ${
-        milestone.highlight
-          ? "border-electric-cyan/50 bg-electric-cyan/5"
-          : "border-border bg-card/40"
-      } hover:border-electric-cyan/40 hover:shadow-lg hover:shadow-electric-cyan/10`}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12%" }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      className="text-center mb-12 md:mb-20"
     >
-      <div className="font-mono text-xs tracking-widest text-electric-cyan/70 mb-2">
-        {milestone.year}
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="h-px w-6 md:w-8 bg-electric-cyan" />
+        <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-electric-cyan">
+          Our Journey
+        </span>
+        <div className="h-px w-6 md:w-8 bg-electric-cyan" />
       </div>
-      <h3 className="text-base md:text-lg font-bold text-foreground mb-2 leading-tight">
-        {milestone.title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {milestone.desc}
+      <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 text-balance">
+        15 Years of{" "}
+        <span className="text-electric-cyan">Powering Progress</span>
+      </h2>
+      <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+        From humble beginnings to industry leadership — every year has been
+        built on the same foundation of quality and community.
       </p>
-      {milestone.highlight && (
-        <div className="mt-3 flex items-center gap-1.5">
-          <Star
-            size={12}
-            className="text-amber-warning fill-amber-warning shrink-0"
-          />
-          <span className="font-mono text-[10px] text-amber-warning tracking-widest uppercase">
-            Milestone
-          </span>
-        </div>
-      )}
     </motion.div>
   );
+}
 
-  /* ── Shared icon node ─────────────────────────────────────────── */
-  const IconNode = () => (
-    <motion.div
-      variants={nodeVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false }}
-      className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center shrink-0 ${
-        milestone.highlight
-          ? "border-electric-cyan bg-electric-cyan/20 shadow-lg shadow-electric-cyan/30"
-          : "border-border bg-card"
-      }`}
-    >
-      <Icon
-        size={16}
-        className={`md:size-4.5 ${
-          milestone.highlight ? "text-electric-cyan" : "text-muted-foreground"
-        }`}
-      />
-      {milestone.highlight && (
-        <motion.div
-          className="absolute inset-0 rounded-full border border-electric-cyan/30"
-          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      )}
-    </motion.div>
-  );
-
-  /* ── Connecting line ───────────────────────────────────────────── */
-  const ConnectingLine = () =>
-    !isLast ? (
-      <motion.div
-        variants={lineVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false }}
-        className="mt-2 min-h-8 w-px flex-1 origin-top bg-linear-to-b from-border to-electric-cyan/20"
-      />
-    ) : null;
+function TimelineCard({
+  milestone,
+  side,
+  emphasis,
+  offset,
+  titlePhase,
+  titleActive,
+  shouldReduceTitle,
+}: {
+  milestone: TimelineMilestone;
+  side: "left" | "right";
+  emphasis?: MotionValue<number>;
+  offset?: MotionValue<number>;
+  titlePhase?: MotionValue<number>;
+  titleActive?: boolean;
+  shouldReduceTitle?: boolean;
+}) {
+  const alignmentClass =
+    side === "left"
+      ? "md:col-start-1 md:justify-end md:text-right"
+      : "md:col-start-3 md:justify-start md:text-left";
+  const titleWords = milestone.title.split(" ");
 
   return (
-    <div>
-      {/* ── MOBILE layout (<md): left spine, card on right ─────────── */}
-      <div className="relative flex gap-3 md:hidden">
-        <div className="relative flex flex-col items-center shrink-0">
-          <IconNode />
-          <ConnectingLine />
+    <motion.div
+      style={emphasis || offset ? { opacity: emphasis, y: offset } : undefined}
+      className={`col-start-2 row-start-1 flex ${alignmentClass}`}
+    >
+      <div
+        className={`relative w-full md:max-w-sm rounded-3xl border p-5 md:p-6 backdrop-blur-sm transition-colors duration-300 ${
+          milestone.highlight
+            ? "border-electric-cyan/30 bg-electric-cyan/[0.07]"
+            : "border-border/70 bg-card/65"
+        }`}
+      >
+        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-electric-cyan/0 via-electric-cyan/50 to-electric-cyan/0" />
+        <div className="font-mono text-xs tracking-[0.28em] text-electric-cyan/70 mb-3">
+          {milestone.year}
         </div>
-        <div className="flex-1 pb-2">
-          <Card />
-        </div>
+        <h3 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-tight text-balance">
+          {titleWords.map((word, wordIndex) =>
+            titlePhase ? (
+              <ScrollLinkedAnimatedWord
+                key={`${milestone.year}-${word}-${wordIndex}`}
+                word={word}
+                index={wordIndex}
+                phase={titlePhase}
+                shouldReduce={shouldReduceTitle}
+                className="inline-block mr-[0.26em] last:mr-0"
+                staggerWindow={0.16}
+              />
+            ) : (
+              <AnimatedWord
+                key={`${milestone.year}-${word}-${wordIndex}`}
+                word={word}
+                index={wordIndex}
+                active={titleActive ?? true}
+                shouldReduce={shouldReduceTitle}
+                className="inline-block mr-[0.26em] last:mr-0"
+                stagger={0.05}
+              />
+            ),
+          )}
+        </h3>
+        <p className="text-sm md:text-[0.95rem] text-muted-foreground leading-relaxed">
+          {milestone.desc}
+        </p>
+        {milestone.highlight && (
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-amber-warning/30 bg-amber-warning/10 px-2.5 py-1">
+            <Star className="size-3 text-amber-warning fill-amber-warning shrink-0" />
+            <span className="font-mono text-[10px] tracking-[0.24em] uppercase text-amber-warning">
+              Milestone
+            </span>
+          </div>
+        )}
       </div>
+    </motion.div>
+  );
+}
 
-      {/* ── DESKTOP layout (md+): centre spine, alternating cards ───── */}
-      <div className="hidden md:flex items-start gap-0">
-        {/* Left slot */}
-        <div className="w-[calc(50%-2rem)] pr-8 flex flex-col items-end text-right">
-          {isEven ? <Card /> : <div className="invisible" />}
-        </div>
+function AnimatedSegment({
+  trigger,
+  nextTrigger,
+  progress,
+}: {
+  trigger: number;
+  nextTrigger: number;
+  progress: MotionValue<number>;
+}) {
+  const segmentProgress = useTransform(
+    progress,
+    [trigger, nextTrigger],
+    [0, 1],
+    { clamp: true },
+  );
 
-        {/* Centre spine */}
-        <div className="relative flex flex-col items-center w-16 shrink-0">
-          <IconNode />
-          <ConnectingLine />
-        </div>
-
-        {/* Right slot */}
-        <div className="w-[calc(50%-2rem)] pl-8 flex flex-col items-start text-left">
-          {!isEven ? <Card /> : <div className="invisible" />}
-        </div>
-      </div>
+  // Single origin-top container: scaleY 0→1 grows from top to bottom when scrolling down.
+  // When scrolling up, scaleY 1→0 shrinks from the bottom upward — correct reversal, no
+  // class-switching required. The MotionValue is inherently bidirectional.
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute left-1/2 top-(--timeline-node) bottom-[calc(var(--timeline-gap)*-1)] w-0.5 -translate-x-1/2 z-10 rounded-full"
+    >
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25"
+        style={{ scaleY: segmentProgress }}
+      />
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-electric-cyan/45 blur-[2px]"
+        style={{ scaleY: segmentProgress }}
+      />
     </div>
   );
 }
 
+function AnimatedTimelineNode({
+  milestone,
+  index,
+  trigger,
+  nextTrigger,
+  progress,
+  nodeRef,
+}: {
+  milestone: TimelineMilestone;
+  index: number;
+  trigger: number;
+  nextTrigger?: number;
+  progress: MotionValue<number>;
+  nodeRef?: (nodeElement: HTMLDivElement | null) => void;
+}) {
+  const side = getRowSide(index);
+  const Icon = milestone.icon;
+  const revealStart = Math.max(0, trigger - 0.12);
+  const settlePoint = nextTrigger ?? 1;
+
+  const cardEmphasis = useTransform(
+    progress,
+    [revealStart, trigger, Math.min(settlePoint + 0.02, 1)],
+    [0.72, 1, 0.9],
+    { clamp: true },
+  );
+  const cardOffset = useTransform(progress, [revealStart, trigger], [14, 0], {
+    clamp: true,
+  });
+  const nodeScale = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.88, 1, 1],
+    {
+      clamp: true,
+    },
+  );
+  const ringOpacity = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.16, 1, 0.54],
+    {
+      clamp: true,
+    },
+  );
+  const fillOpacity = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0, 0.2, 0.28],
+    {
+      clamp: true,
+    },
+  );
+  const iconAccentOpacity = useTransform(
+    progress,
+    [revealStart, trigger],
+    [0, 1],
+    {
+      clamp: true,
+    },
+  );
+  const glowStrength = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0, 1, 0.48],
+    {
+      clamp: true,
+    },
+  );
+  const glowScale = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.9, 1, 1.04],
+    {
+      clamp: true,
+    },
+  );
+  const titleEnd = Math.min(
+    1,
+    trigger + Math.max(0.08, (nextTrigger ?? 1) - trigger),
+  );
+  const titlePhase = useTransform(progress, [trigger, titleEnd], [0, 1], {
+    clamp: true,
+  });
+  const glowShadow = useMotionTemplate`0 0 0 1px rgba(34, 211, 238, ${ringOpacity}), 0 0 34px rgba(34, 211, 238, ${glowStrength})`;
+
+  return (
+    <li className="relative mb-(--timeline-gap) grid grid-cols-[var(--timeline-node)_minmax(0,1fr)] gap-x-4 last:mb-0 md:grid-cols-[minmax(0,1fr)_var(--timeline-node)_minmax(0,1fr)] md:gap-x-8">
+      <div className="relative col-start-1 row-start-1 flex min-h-(--timeline-node) self-stretch justify-center md:col-start-2">
+        <motion.div
+          ref={nodeRef}
+          style={{ scale: nodeScale }}
+          className="relative z-10 flex h-(--timeline-node) w-(--timeline-node) items-center justify-center rounded-full border border-border/70 bg-card/95 shadow-[0_14px_34px_-22px_rgba(2,12,27,0.95)] backdrop-blur-sm"
+        >
+          <motion.div
+            className="absolute inset-0.75 rounded-full bg-electric-cyan/20"
+            style={{ opacity: fillOpacity }}
+          />
+          <motion.div
+            className="absolute inset-0 rounded-full border border-electric-cyan/60"
+            style={{ opacity: ringOpacity, boxShadow: glowShadow }}
+          />
+          <motion.div
+            className="absolute -inset-2.5 rounded-full border border-electric-cyan/35 blur-[0.5px]"
+            style={{ opacity: glowStrength, scale: glowScale }}
+          />
+          <Icon className="relative z-10 size-4 text-muted-foreground md:size-[1.1rem]" />
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center text-electric-cyan"
+            style={{ opacity: iconAccentOpacity }}
+          >
+            <Icon className="size-4 md:size-[1.1rem]" />
+          </motion.div>
+        </motion.div>
+
+        {nextTrigger !== undefined && (
+          <AnimatedSegment
+            trigger={trigger}
+            nextTrigger={nextTrigger}
+            progress={progress}
+          />
+        )}
+      </div>
+
+      <TimelineCard
+        milestone={milestone}
+        side={side}
+        emphasis={cardEmphasis}
+        offset={cardOffset}
+        titlePhase={titlePhase}
+      />
+    </li>
+  );
+}
+
+function ReducedTimelineNode({
+  milestone,
+  index,
+  state,
+  showSegment,
+  nodeRef,
+  shouldReduceTitle,
+}: {
+  milestone: TimelineMilestone;
+  index: number;
+  state: NodeState;
+  showSegment: boolean;
+  nodeRef?: (nodeElement: HTMLDivElement | null) => void;
+  shouldReduceTitle?: boolean;
+}) {
+  const side = getRowSide(index);
+  const Icon = milestone.icon;
+  const isActive = state === "active";
+  const isCompleted = state === "completed";
+
+  return (
+    <li className="relative mb-(--timeline-gap) grid grid-cols-[var(--timeline-node)_minmax(0,1fr)] gap-x-4 last:mb-0 md:grid-cols-[minmax(0,1fr)_var(--timeline-node)_minmax(0,1fr)] md:gap-x-8">
+      <div className="relative col-start-1 row-start-1 flex min-h-(--timeline-node) self-stretch justify-center md:col-start-2">
+        <div
+          ref={nodeRef}
+          className={`relative z-10 flex h-(--timeline-node) w-(--timeline-node) items-center justify-center rounded-full border bg-card/95 shadow-[0_14px_34px_-22px_rgba(2,12,27,0.95)] ${
+            isActive || isCompleted
+              ? "border-electric-cyan/70"
+              : "border-border/70"
+          }`}
+        >
+          <div
+            className={`absolute inset-0.75 rounded-full ${
+              isActive || isCompleted ? "bg-electric-cyan/20" : "bg-transparent"
+            }`}
+          />
+          {isActive && (
+            <div className="absolute inset-0 rounded-full border border-electric-cyan/60 shadow-[0_0_0_1px_rgba(34,211,238,0.5),0_0_28px_rgba(34,211,238,0.24)]" />
+          )}
+          <Icon
+            className={`relative z-10 size-4 md:size-[1.1rem] ${
+              isActive || isCompleted
+                ? "text-electric-cyan"
+                : "text-muted-foreground"
+            }`}
+          />
+        </div>
+
+        {showSegment && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-(--timeline-node) bottom-[calc(var(--timeline-gap)*-1)] w-0.5 -translate-x-1/2 rounded-full bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25 shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+          />
+        )}
+      </div>
+
+      <TimelineCard
+        milestone={milestone}
+        side={side}
+        titleActive={isActive || isCompleted}
+        shouldReduceTitle={shouldReduceTitle}
+      />
+    </li>
+  );
+}
+
+function getFixedHeaderHeight(): number {
+  // Calculate total height of fixed/sticky elements at top (navbar + breadcrumb)
+  if (typeof window === "undefined") return 0;
+
+  let totalHeight = 0;
+
+  // Measure navbar (usually has data-navbar or role="navigation")
+  const navbar = document.querySelector("nav, [data-navbar], header");
+  if (navbar) {
+    const rect = navbar.getBoundingClientRect();
+    if (rect.top === 0) {
+      // Only count if it's at top (fixed/sticky)
+      totalHeight += rect.height;
+    }
+  }
+
+  // Measure breadcrumb (usually has role="navigation" or contains breadcrumb pattern)
+  const breadcrumb = document.querySelector(
+    '[role="navigation"]:not(nav), .breadcrumb, [data-testid="breadcrumb"]',
+  );
+  if (breadcrumb) {
+    const rect = breadcrumb.getBoundingClientRect();
+    if (rect.top <= totalHeight) {
+      // Only count if it's below navbar/at top
+      totalHeight += rect.height;
+    }
+  }
+
+  return totalHeight;
+}
+
+function calculateScrollOffsets(
+  fixedHeaderHeight: number,
+): TimelineScrollOffset {
+  // Adjust offsets to account for fixed header elements
+  // Default: ["start 78%", "end 22%"]
+  // We shift both anchors by the fixed-header share of viewport height,
+  // preserving the same animation window length.
+
+  const viewportHeight =
+    typeof window !== "undefined" ? window.innerHeight : 900;
+  if (viewportHeight <= 0) {
+    return ["start 78%", "end 22%"]; // Fallback
+  }
+
+  const headerShare = fixedHeaderHeight / viewportHeight;
+  const startPercent = Math.min(0.95, 0.78 + headerShare);
+  const endPercent = Math.max(0.05, 0.22 + headerShare);
+
+  return [
+    `start ${Math.round(startPercent * 100)}%`,
+    `end ${Math.round(endPercent * 100)}%`,
+  ];
+}
+
 export function CompanyTimeline() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const scrollDirection = useScrollDirection();
-  const [mounted, setMounted] = useState(false);
+  const timelineRef = useRef<HTMLUListElement>(null);
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
+  const [thresholds, setThresholds] = useState<number[]>(() =>
+    createThresholds(milestones.length),
+  );
+  const isReduced = Boolean(shouldReduce);
+  const [reducedProgress, setReducedProgress] = useState(0);
+  const [scrollOffsets, setScrollOffsets] = useState<TimelineScrollOffset>([
+    "start 78%",
+    "end 22%",
+  ]);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    const timelineElement = timelineRef.current;
+    const nodeElements = nodeRefs.current.filter(
+      (nodeElement): nodeElement is HTMLDivElement => nodeElement !== null,
+    );
+
+    if (!timelineElement || nodeElements.length !== milestones.length) {
+      return;
+    }
+
+    const recalculateThresholds = () => {
+      setThresholds(createGeometryThresholds(timelineElement, nodeElements));
+    };
+
+    const recalculateOffsets = () => {
+      const fixedHeaderHeight = getFixedHeaderHeight();
+      setScrollOffsets(calculateScrollOffsets(fixedHeaderHeight));
+    };
+
+    recalculateThresholds();
+    recalculateOffsets();
+
+    const resizeObserver = new ResizeObserver(() => {
+      recalculateThresholds();
+      recalculateOffsets();
+    });
+    resizeObserver.observe(timelineElement);
+    nodeElements.forEach((nodeElement) => resizeObserver.observe(nodeElement));
+
+    const handleResize = () => {
+      recalculateThresholds();
+      recalculateOffsets();
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isReduced]);
 
   const { scrollYProgress } = useScroll({
-    target: mounted ? timelineRef : undefined,
-    offset: ["start 75%", "end 25%"],
+    target: timelineRef,
+    offset: scrollOffsets,
   });
-  const lineHeightRaw = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const lineHeight = useSpring(lineHeightRaw, {
-    stiffness: 120,
-    damping: 24,
-    mass: 0.35,
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (isReduced) {
+      setReducedProgress(clamp01(latest));
+    }
   });
 
   return (
@@ -279,64 +616,60 @@ export function CompanyTimeline() {
       ref={sectionRef}
       className="section-container section-padding bg-background"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
       <div className="section-content max-w-5xl">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-20"
+        <TimelineHeader />
+
+        <ul
+          ref={timelineRef}
+          className="relative m-0 list-none p-0 [--timeline-node:2.5rem] [--timeline-gap:1.75rem] md:[--timeline-node:3rem] md:[--timeline-gap:2.5rem]"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-6 md:w-8 bg-electric-cyan" />
-            <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-electric-cyan">
-              Our Journey
-            </span>
-            <div className="h-px w-6 md:w-8 bg-electric-cyan" />
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 text-balance">
-            15 Years of{" "}
-            <span className="text-electric-cyan">Powering Progress</span>
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            From humble beginnings to industry leadership — every year has been
-            built on the same foundation of quality and community.
-          </p>
-        </motion.div>
+          {isReduced
+            ? milestones.map((milestone, index) => {
+                const trigger = thresholds[index] ?? 0;
+                const nextTrigger = thresholds[index + 1];
+                const state = getNodeState(
+                  reducedProgress,
+                  trigger,
+                  nextTrigger,
+                );
+                const showSegment =
+                  nextTrigger !== undefined && reducedProgress >= nextTrigger;
 
-        {/* Timeline */}
-        <div className="relative" ref={timelineRef}>
-          {/* Animated progress line - hidden on mobile */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border/40 -translate-x-1/2 overflow-hidden">
-            <motion.div
-              className="w-full bg-linear-to-b from-electric-cyan/60 to-electric-cyan/20"
-              style={{ height: lineHeight }}
-            />
-          </div>
-
-          {/* Mobile progress line - left side */}
-          <div className="absolute top-0 bottom-0 left-4.75 w-px overflow-hidden bg-border/40 md:hidden">
-            <motion.div
-              className="w-full bg-linear-to-b from-electric-cyan/60 to-electric-cyan/20"
-              style={{ height: lineHeight }}
-            />
-          </div>
-
-          <div className="flex flex-col gap-6 md:gap-8">
-            {milestones.map((milestone, idx) => (
-              <TimelineNode
-                key={milestone.year}
-                milestone={milestone}
-                index={idx}
-                isLast={idx === milestones.length - 1}
-                scrollDirection={scrollDirection}
-              />
-            ))}
-          </div>
-        </div>
+                return (
+                  <ReducedTimelineNode
+                    key={milestone.year}
+                    milestone={milestone}
+                    index={index}
+                    state={state}
+                    showSegment={showSegment}
+                    shouldReduceTitle={isReduced}
+                    nodeRef={(nodeElement) => {
+                      nodeRefs.current[index] = nodeElement;
+                    }}
+                  />
+                );
+              })
+            : milestones.map((milestone, index) => (
+                <AnimatedTimelineNode
+                  key={milestone.year}
+                  milestone={milestone}
+                  index={index}
+                  trigger={thresholds[index] ?? 0}
+                  nextTrigger={thresholds[index + 1]}
+                  progress={scrollYProgress}
+                  nodeRef={(nodeElement) => {
+                    nodeRefs.current[index] = nodeElement;
+                  }}
+                />
+              ))}
+        </ul>
       </div>
     </section>
   );

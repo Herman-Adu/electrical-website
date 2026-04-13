@@ -68,7 +68,7 @@ export function ProjectScopeGrid({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef, lineLeft, lineRight } = useAnimatedBorders();
+  const { sectionRef, lineScale } = useAnimatedBorders();
 
   if (items.length === 0) return null;
 
@@ -79,8 +79,7 @@ export function ProjectScopeGrid({
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
-        lineLeft={lineLeft}
-        lineRight={lineRight}
+        lineScale={lineScale}
         showBottom={false}
       />
       <div className="section-content max-w-6xl" ref={containerRef}>

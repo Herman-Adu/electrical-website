@@ -65,15 +65,15 @@ export function SystemTerminal() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       viewport={{ once: true }}
-      className="bg-card border border-border p-4 font-mono overflow-hidden"
+      className=" bg-electric-cyan/10  border-electric-cyan/10 p-4 font-mono overflow-hidden rounded-xl"
     >
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-border">
+      <div className="flex items-center justify-between mb-4 pb-2 border-b border-b-electric-cyan/20">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
         </div>
-        <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
+        <span className="text-[10px] text-foreground/70 uppercase tracking-widest">
           Diagnostics_Console_v4.2.1
         </span>
       </div>
@@ -91,8 +91,10 @@ export function SystemTerminal() {
               key={log.id}
               className="text-xs mb-1 flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-300"
             >
-              <span className="text-slate-700 text-[10px]">[{log.time}]</span>
-              <span className="text-electric-cyan/70 hover:text-electric-cyan transition-colors">
+              <span className="text-foreground/70 text-[10px]">
+                [{log.time}]
+              </span>
+              <span className="dark:text-electric-cyan/70 hover:text-electric-cyan transition-colors">
                 {log.text}
               </span>
             </div>
@@ -106,14 +108,14 @@ export function SystemTerminal() {
         />
       </div>
 
-      <div className="mt-4 pt-2 border-t border-border/50 flex justify-between items-center">
+      <div className="mt-4 pt-2 border-t border-t-electric-cyan/20 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-[9px] text-muted-foreground tracking-widest">
+          <div className="w-1.5 h-1.5 bg-electric-cyan rounded-full animate-pulse" />
+          <span className="text-[9px] text-foreground tracking-widest">
             LIVE
           </span>
         </div>
-        <span className="text-[9px] text-muted-foreground/60 tracking-widest">
+        <span className="text-[9px] text-foreground tracking-widest">
           ENCRYPTION: AES-256 // MQTT_TLS
         </span>
       </div>

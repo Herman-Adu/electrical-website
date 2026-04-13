@@ -8,35 +8,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import type { ProjectIntroData } from "@/types/projects";
-
-function AnimatedWord({
-  word,
-  index,
-  inView,
-  shouldReduce,
-}: {
-  word: string;
-  index: number;
-  inView: boolean;
-  shouldReduce: boolean | null;
-}) {
-  return (
-    <motion.span
-      initial={shouldReduce ? { opacity: 1 } : { opacity: 0.15, y: 8 }}
-      animate={
-        shouldReduce
-          ? { opacity: 1 }
-          : inView
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0.15, y: 8 }
-      }
-      transition={{ duration: 0.4, delay: index * 0.06 }}
-      className="inline-block mr-[0.3em]"
-    >
-      {word}
-    </motion.span>
-  );
-}
+import { AnimatedWord } from "@/components/shared/animated-word";
 
 interface ProjectDetailIntroProps {
   data: ProjectIntroData;
@@ -69,7 +41,11 @@ export function ProjectDetailIntro({
     offset: ["start end", "end start"],
   });
 
-  const lineLeft = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
+  const lineScale = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    [0, 1, 1, 0],
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,8 +69,8 @@ export function ProjectDetailIntro({
         <>
           <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
             <motion.div
-              className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
-              style={{ width: lineLeft }}
+              className="h-full w-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
+              style={{ scaleX: lineScale, transformOrigin: "center" }}
             />
           </div>
           {/* <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
@@ -127,11 +103,12 @@ export function ProjectDetailIntro({
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
             {headlineWords.map((word, i) => (
               <AnimatedWord
-                key={i}
+                key={`${word}-${i}`}
                 word={word}
                 index={i}
-                inView={inView}
+                active={inView}
                 shouldReduce={shouldReduce}
+                className="inline-block mr-[0.3em]"
               />
             ))}
           </h2>

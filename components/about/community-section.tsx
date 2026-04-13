@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Heart, Users, BookOpen, Home, Shield } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 const initiatives = [
   {
@@ -43,15 +47,10 @@ const communityStats = [
  * All external layout (centering, padding) is handled by SectionWrapper.
  */
 export function CommunitySection() {
-  const containerRef = useRef<HTMLElement>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { sectionRef, shouldReduce, lineScale } = useAnimatedBorders();
 
   const { scrollYProgress } = useScroll({
-    target: mounted ? containerRef : undefined,
+    target: sectionRef,
     offset: ["start end", "end start"],
   });
 
@@ -98,6 +97,10 @@ export function CommunitySection() {
         />
       </motion.div>
 
+      <div className="absolute inset-x-0 top-0 z-20">
+        <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} />
+      </div>
+
       {/* Gradient overlays for readability */}
       <div className="absolute inset-0 bg-linear-to-t from-(--deep-black) via-(--deep-black)/50 to-transparent" />
       <div className="absolute inset-0 bg-linear-to-r from-(--deep-black)/40 via-transparent to-(--deep-black)/40" />
@@ -124,7 +127,7 @@ export function CommunitySection() {
   return (
     <SectionWrapper
       id="community"
-      sectionRef={containerRef}
+      sectionRef={sectionRef}
       background={BackgroundLayer}
       variant="full"
     >
@@ -208,9 +211,6 @@ export function CommunitySection() {
           );
         })}
       </div>
-
-      {/* Bottom Border */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent" />
     </SectionWrapper>
   );
 }

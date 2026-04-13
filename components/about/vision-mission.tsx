@@ -3,6 +3,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Eye, Target, ArrowRight } from "lucide-react";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 const visionPoints = [
   {
@@ -72,6 +76,7 @@ function TerminalText({ text, trigger }: { text: string; trigger: boolean }) {
 export function VisionMission() {
   const visionRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
   const [visionTriggered, setVisionTriggered] = useState(false);
   const [missionTriggered, setMissionTriggered] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -80,7 +85,6 @@ export function VisionMission() {
     setMounted(true);
   }, []);
 
-  const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: mounted ? sectionRef : undefined,
     offset: ["start end", "end start"],
@@ -114,6 +118,11 @@ export function VisionMission() {
       ref={sectionRef}
       className="section-container section-padding bg-background"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       <div className="absolute inset-0 blueprint-grid-fine opacity-20 pointer-events-none" />
 
       <div className="section-content">

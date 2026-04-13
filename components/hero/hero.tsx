@@ -271,12 +271,12 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="text-electric-cyan animate-pulse"
+                className="dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
                 Status // {statusText}
               </span>
             </div>
@@ -294,7 +294,7 @@ export function Hero() {
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-muted-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
           >
             Expert electrical engineering and installations for commercial and
             industrial frontiers. Precision-engineered power solutions delivered
@@ -312,7 +312,7 @@ export function Hero() {
               initial="rest"
               whileHover="hover"
               whileTap={{ scale: 0.97 }}
-              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
+              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Initiate System
@@ -322,7 +322,7 @@ export function Hero() {
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             </motion.button>
 
-            <button className="px-8 py-4 border border-border text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
+            <button className="px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground font-bold uppercase tracking-widest hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm">
               Our Solutions
             </button>
           </motion.div>
@@ -330,7 +330,7 @@ export function Hero() {
           {/* Technical Metadata */}
           <motion.div
             variants={statsContainerVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono tracking-[0.2em] text-muted-foreground/60 uppercase"
+            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] text-muted-foreground dark:text-foreground/80 uppercase"
           >
             <span>Est. 2024</span>
             <span className="hidden sm:inline">|</span>
@@ -347,14 +347,18 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/70 transition-colors hover:text-electric-cyan"
         >
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground dark:text-foreground/80 font-bold">
             Scroll
           </span>
           <ChevronDown
             size={20}
-            className={shouldReduceMotion ? "" : "animate-bounce"}
+            className={
+              shouldReduceMotion
+                ? ""
+                : "animate-bounce text-muted-foreground dark:text-foreground/80"
+            }
           />
         </motion.button>
       }

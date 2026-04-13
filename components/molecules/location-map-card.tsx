@@ -86,25 +86,25 @@ export function LocationMapCard({
           {address.line2 && (
             <p className="text-sm text-foreground">{address.line2}</p>
           )}
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground/70">
             {address.city}, {address.county && `${address.county}, `}
             {address.postcode}
           </p>
-          <p className="text-sm text-muted-foreground">{address.country}</p>
+          <p className="text-sm text-foreground/70">{address.country}</p>
         </div>
 
         {/* Contact Details */}
         <div className="space-y-2 pt-2 border-t border-border/50">
           <a
             href={`tel:${phone.replace(/\s/g, "")}`}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm text-foreground/70 hover:text-accent transition-colors"
           >
             <Phone className="h-4 w-4" />
             {phone}
           </a>
           <a
             href={`mailto:${email}`}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm text-foreground/70 hover:text-accent transition-colors"
           >
             <Mail className="h-4 w-4" />
             {email}

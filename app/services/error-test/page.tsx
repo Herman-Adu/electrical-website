@@ -36,7 +36,7 @@ function ErrorThrower() {
       <h1 className="mt-4 text-2xl font-black uppercase tracking-tight text-white">
         Services Error Boundary Fixture
       </h1>
-      <p className="mt-3 max-w-lg text-slate-400">
+      <p className="mt-3 max-w-lg text-foreground/70">
         This route is a test fixture for automated boundary verification. Add{" "}
         <code className="rounded bg-slate-800 px-1 py-0.5 text-sm text-electric-cyan">
           ?trigger=error
