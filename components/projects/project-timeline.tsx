@@ -1,15 +1,232 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { CheckCircle, Clock, Circle } from "lucide-react";
+import {
+  AnimatedWord,
+  ScrollLinkedAnimatedWord,
+} from "@/components/shared/animated-word";
 import { useAnimatedBorders } from "@/lib/use-animated-borders";
-import type { ProjectTimelinePhase } from "@/types/projects";
+import { useTimelineProgressController } from "@/lib/timeline/progress-controller";
+import type { TimelineItem } from "@/types/timeline";
 
 interface ProjectTimelineProps {
-  phases: ProjectTimelinePhase[];
+  items: readonly TimelineItem[];
   heading?: string;
   anchorId?: string;
+}
+
+function ProjectTimelineSegment({
+  trigger,
+  nextTrigger,
+  progress,
+}: {
+  trigger: number;
+  nextTrigger: number;
+  progress: MotionValue<number>;
+}) {
+  const segmentProgress = useTransform(
+    progress,
+    [trigger, nextTrigger],
+    [0, 1],
+    { clamp: true },
+  );
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute top-10 -bottom-8 w-px left-1/2 -translate-x-1/2 rounded-full"
+    >
+      <div className="absolute inset-0 rounded-full bg-electric-cyan/20" />
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25"
+        style={{ scaleY: segmentProgress }}
+      />
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-electric-cyan/45 blur-[2px]"
+        style={{ scaleY: segmentProgress }}
+      />
+    </div>
+  );
+}
+
+function ProjectTimelineRow({
+  item,
+  index,
+  trigger,
+  nextTrigger,
+  shouldReduce,
+  isInView,
+  progress,
+  nodeRef,
+}: {
+  item: TimelineItem;
+  index: number;
+  trigger: number;
+  nextTrigger?: number;
+  shouldReduce: boolean;
+  isInView: boolean;
+  progress: MotionValue<number>;
+  nodeRef?: (nodeElement: HTMLDivElement | null) => void;
+}) {
+  const status = item.status ?? "upcoming";
+  const config = statusConfig[status];
+  const Icon = config.icon;
+  const revealStart = Math.max(0, trigger - 0.12);
+  const settlePoint = nextTrigger ?? 1;
+
+  const cardEmphasis = useTransform(
+    progress,
+    [revealStart, trigger, Math.min(settlePoint + 0.02, 1)],
+    [0.72, 1, 0.92],
+    { clamp: true },
+  );
+  const cardOffset = useTransform(progress, [revealStart, trigger], [14, 0], {
+    clamp: true,
+  });
+  const nodeScale = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.88, 1, 1],
+    {
+      clamp: true,
+    },
+  );
+  const titleEnd = Math.min(
+    1,
+    trigger + Math.max(0.08, (nextTrigger ?? 1) - trigger),
+  );
+  const titlePhase = useTransform(progress, [trigger, titleEnd], [0, 1], {
+    clamp: true,
+  });
+  const titleWords = item.title.split(" ");
+
+  return (
+    <motion.li
+      initial={shouldReduce ? {} : { opacity: 0, x: -30 }}
+      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative grid list-none grid-cols-[40px_minmax(0,1fr)] gap-x-4 gap-y-0 md:flex md:flex-row md:items-stretch md:gap-8"
+      data-timeline-row={item.id}
+    >
+      {/* Desktop-only label column — hidden on mobile */}
+      <div className="hidden md:block md:w-25 shrink-0 pt-2">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          {item.label}
+        </span>
+        <p className="font-mono text-xs text-electric-cyan/70 mt-1">
+          {item.duration}
+        </p>
+      </div>
+
+      {/* Node column — col 1 on mobile, inline on desktop */}
+      <div className="col-start-1 row-start-1 relative z-10 flex flex-col items-center self-stretch">
+        <motion.div
+          ref={nodeRef}
+          data-timeline-node={item.id}
+          className={`relative z-10 w-10 h-10 shrink-0 rounded-full border-2 ${config.borderColor} ${config.bgColor} flex items-center justify-center`}
+          style={shouldReduce ? undefined : { scale: nodeScale }}
+          initial={shouldReduce ? {} : { scale: 0 }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{
+            duration: 0.4,
+            delay: index * 0.1 + 0.18,
+            type: "spring",
+            stiffness: 200,
+          }}
+        >
+          <Icon className={`w-5 h-5 ${config.color}`} />
+        </motion.div>
+
+        {status === "in-progress" && !shouldReduce && (
+          <motion.div
+            className="absolute top-0 left-0 w-10 h-10 rounded-full border-2 border-electric-cyan"
+            animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+          />
+        )}
+
+        {nextTrigger !== undefined && (
+          <ProjectTimelineSegment
+            trigger={trigger}
+            nextTrigger={nextTrigger}
+            progress={progress}
+          />
+        )}
+      </div>
+
+      {/* Content column — col 2 on mobile, flex-1 on desktop */}
+      <motion.div
+        className="col-start-2 row-start-1 flex-1"
+        style={
+          shouldReduce ? undefined : { opacity: cardEmphasis, y: cardOffset }
+        }
+      >
+        {/* Mobile-only label shown above card */}
+        <div className="md:hidden mb-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            {item.label}
+          </span>
+          <p className="font-mono text-xs text-electric-cyan/70 mt-0.5">
+            {item.duration}
+          </p>
+        </div>
+
+        <div
+          className={`p-6 rounded-xl border ${config.borderColor} ${config.bgColor} backdrop-blur-sm transition-all duration-300 hover:border-electric-cyan/40`}
+        >
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <h3 className="text-lg font-bold text-foreground">
+              {titleWords.map((word, wordIndex) =>
+                shouldReduce ? (
+                  <AnimatedWord
+                    key={`${item.id}-${word}-${wordIndex}`}
+                    word={word}
+                    index={wordIndex}
+                    active={true}
+                    shouldReduce={true}
+                    className="inline-block mr-[0.26em] last:mr-0"
+                    stagger={0.05}
+                  />
+                ) : (
+                  <ScrollLinkedAnimatedWord
+                    key={`${item.id}-${word}-${wordIndex}`}
+                    word={word}
+                    index={wordIndex}
+                    phase={titlePhase}
+                    shouldReduce={false}
+                    className="inline-block mr-[0.26em] last:mr-0"
+                    staggerWindow={0.16}
+                  />
+                ),
+              )}
+            </h3>
+            <div
+              className={`flex items-center gap-1.5 px-2 py-1 rounded-full border ${config.borderColor} ${config.bgColor}`}
+            >
+              <Icon className={`w-3 h-3 ${config.color}`} />
+              <span
+                className={`font-mono text-[9px] uppercase tracking-wider ${config.color}`}
+              >
+                {status.replace("-", " ")}
+              </span>
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </motion.div>
+    </motion.li>
+  );
 }
 
 const statusConfig = {
@@ -37,16 +254,30 @@ const statusConfig = {
 };
 
 export function ProjectTimeline({
-  phases,
+  items,
   heading = "Project Timeline",
   anchorId,
 }: ProjectTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLUListElement>(null);
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
   const { sectionRef } = useAnimatedBorders();
+  const { thresholds, scrollOffsets } = useTimelineProgressController({
+    timelineRef,
+    nodeRefs,
+    itemCount: items.length,
+  });
 
-  if (phases.length === 0) return null;
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: scrollOffsets as NonNullable<
+      Parameters<typeof useScroll>[0]
+    >["offset"],
+  });
+
+  if (items.length === 0) return null;
 
   return (
     <section
@@ -71,101 +302,23 @@ export function ProjectTimeline({
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line (desktop) */}
-          <div className="hidden md:block absolute left-[120px] top-0 bottom-0 w-px">
-            <motion.div
-              className="w-full bg-gradient-to-b from-electric-cyan/50 via-electric-cyan/30 to-border"
-              initial={{ height: 0 }}
-              animate={isInView ? { height: "100%" } : {}}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-            />
-          </div>
-
-          {/* Phases */}
-          <div className="space-y-8">
-            {phases.map((phase, index) => {
-              const config = statusConfig[phase.status];
-              const Icon = config.icon;
-
-              return (
-                <motion.div
-                  key={phase.phase}
-                  initial={shouldReduce ? {} : { opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.15 }}
-                  className="relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8"
-                >
-                  {/* Phase label */}
-                  <div className="md:w-[100px] shrink-0">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                      {phase.phase}
-                    </span>
-                    <p className="font-mono text-xs text-electric-cyan/70 mt-1">
-                      {phase.duration}
-                    </p>
-                  </div>
-
-                  {/* Status indicator (desktop) */}
-                  <div className="hidden md:flex relative z-10">
-                    <motion.div
-                      className={`w-10 h-10 rounded-full border-2 ${config.borderColor} ${config.bgColor} flex items-center justify-center`}
-                      initial={shouldReduce ? {} : { scale: 0 }}
-                      animate={isInView ? { scale: 1 } : {}}
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.15 + 0.2,
-                        type: "spring",
-                        stiffness: 200,
-                      }}
-                    >
-                      <Icon className={`w-5 h-5 ${config.color}`} />
-                    </motion.div>
-
-                    {/* Pulse animation for in-progress */}
-                    {phase.status === "in-progress" && !shouldReduce && (
-                      <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-electric-cyan"
-                        animate={{
-                          scale: [1, 1.4],
-                          opacity: [0.6, 0],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeOut",
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Content card */}
-                  <div
-                    className={`flex-1 p-6 rounded-xl border ${config.borderColor} ${config.bgColor} backdrop-blur-sm transition-all duration-300 hover:border-electric-cyan/40`}
-                  >
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <h3 className="text-lg font-bold text-foreground">
-                        {phase.title}
-                      </h3>
-                      {/* Mobile status badge */}
-                      <div
-                        className={`md:hidden flex items-center gap-1.5 px-2 py-1 rounded-full border ${config.borderColor} ${config.bgColor}`}
-                      >
-                        <Icon className={`w-3 h-3 ${config.color}`} />
-                        <span
-                          className={`font-mono text-[9px] uppercase tracking-wider ${config.color}`}
-                        >
-                          {phase.status.replace("-", " ")}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {phase.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+          <ul ref={timelineRef} className="m-0 list-none space-y-8 p-0">
+            {items.map((item, index) => (
+              <ProjectTimelineRow
+                key={item.id}
+                item={item}
+                index={index}
+                trigger={thresholds[index] ?? 0}
+                nextTrigger={thresholds[index + 1]}
+                shouldReduce={Boolean(shouldReduce)}
+                isInView={isInView}
+                progress={scrollYProgress}
+                nodeRef={(nodeElement) => {
+                  nodeRefs.current[index] = nodeElement;
+                }}
+              />
+            ))}
+          </ul>
         </div>
       </div>
     </section>
