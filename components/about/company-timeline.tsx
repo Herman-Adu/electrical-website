@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -9,17 +9,32 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { Award, Building, Shield, Star, Users, Zap } from "lucide-react";
+import {
+  Award,
+  Building,
+  Shield,
+  Star,
+  Users,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import {
   AnimatedBorders,
   useAnimatedBorders,
 } from "@/lib/use-animated-borders";
+import { adaptCompanyTimeline } from "@/lib/timeline/adapters";
 import {
   AnimatedWord,
   ScrollLinkedAnimatedWord,
 } from "@/components/shared/animated-word";
+import {
+  clamp01,
+  getTimelineNodeState,
+  useTimelineProgressController,
+} from "@/lib/timeline/progress-controller";
+import type { CompanyTimelineMilestoneInput } from "@/types/timeline";
 
-const milestones = [
+const companyMilestoneSource = [
   {
     year: "2009",
     title: "Company Founded",
@@ -76,69 +91,40 @@ const milestones = [
     icon: Star,
     highlight: true,
   },
-];
+] as const satisfies readonly (CompanyTimelineMilestoneInput & {
+  icon: LucideIcon;
+})[];
 
-type TimelineMilestone = (typeof milestones)[number];
-type NodeState = "upcoming" | "active" | "completed";
-type TimelineScrollOffset = NonNullable<
-  Parameters<typeof useScroll>[0]
->["offset"];
+type TimelineMilestone = {
+  id: string;
+  year: string;
+  title: string;
+  desc: string;
+  icon: LucideIcon;
+  highlight: boolean;
+};
 
-function clamp01(value: number) {
-  return Math.min(1, Math.max(0, value));
+function buildCompanyTimelineModel() {
+  const canonicalSection = adaptCompanyTimeline(companyMilestoneSource);
+
+  const milestones: TimelineMilestone[] = canonicalSection.items.map(
+    (item, index) => ({
+      id: item.id,
+      year: item.year ?? item.label,
+      title: item.title,
+      desc: item.description,
+      icon: companyMilestoneSource[index]?.icon ?? Star,
+      highlight: item.highlight,
+    }),
+  );
+
+  return {
+    anchorId: canonicalSection.anchorId,
+    milestones,
+  };
 }
 
-function applyTopWeightedActivationBias(normalized: number) {
-  const topWeight = (1 - normalized) ** 2;
-  const bias = 0.16 * topWeight;
-  return clamp01(normalized + bias);
-}
-
-function createThresholds(total: number) {
-  if (total <= 1) {
-    return [0.5];
-  }
-
-  return Array.from({ length: total }, (_, index) => index / (total - 1));
-}
-
-function createGeometryThresholds(
-  timelineElement: HTMLUListElement,
-  nodeElements: HTMLDivElement[],
-) {
-  const timelineRect = timelineElement.getBoundingClientRect();
-  const timelineHeight = timelineRect.height;
-
-  if (timelineHeight < 1) {
-    return createThresholds(nodeElements.length);
-  }
-
-  const centers = nodeElements.map((nodeElement) => {
-    const nodeRect = nodeElement.getBoundingClientRect();
-    return nodeRect.top - timelineRect.top + nodeRect.height / 2;
-  });
-
-  return centers.map((center) => {
-    const normalized = clamp01(center / timelineHeight);
-    return applyTopWeightedActivationBias(normalized);
-  });
-}
-
-function getNodeState(
-  progress: number,
-  trigger: number,
-  nextTrigger?: number,
-): NodeState {
-  if (progress < trigger) {
-    return "upcoming";
-  }
-
-  if (nextTrigger === undefined || progress < nextTrigger) {
-    return "active";
-  }
-
-  return "completed";
-}
+const { anchorId: timelineAnchorId, milestones } = buildCompanyTimelineModel();
 
 function getRowSide(index: number) {
   return index % 2 === 0 ? "left" : "right";
@@ -215,7 +201,7 @@ function TimelineCard({
           {titleWords.map((word, wordIndex) =>
             titlePhase ? (
               <ScrollLinkedAnimatedWord
-                key={`${milestone.year}-${word}-${wordIndex}`}
+                key={`${milestone.id}-${word}-${wordIndex}`}
                 word={word}
                 index={wordIndex}
                 phase={titlePhase}
@@ -225,7 +211,7 @@ function TimelineCard({
               />
             ) : (
               <AnimatedWord
-                key={`${milestone.year}-${word}-${wordIndex}`}
+                key={`${milestone.id}-${word}-${wordIndex}`}
                 word={word}
                 index={wordIndex}
                 active={titleActive ?? true}
@@ -433,7 +419,7 @@ function ReducedTimelineNode({
 }: {
   milestone: TimelineMilestone;
   index: number;
-  state: NodeState;
+  state: ReturnType<typeof getTimelineNodeState>;
   showSegment: boolean;
   nodeRef?: (nodeElement: HTMLDivElement | null) => void;
   shouldReduceTitle?: boolean;
@@ -489,119 +475,23 @@ function ReducedTimelineNode({
   );
 }
 
-function getFixedHeaderHeight(): number {
-  // Calculate total height of fixed/sticky elements at top (navbar + breadcrumb)
-  if (typeof window === "undefined") return 0;
-
-  let totalHeight = 0;
-
-  // Measure navbar (usually has data-navbar or role="navigation")
-  const navbar = document.querySelector("nav, [data-navbar], header");
-  if (navbar) {
-    const rect = navbar.getBoundingClientRect();
-    if (rect.top === 0) {
-      // Only count if it's at top (fixed/sticky)
-      totalHeight += rect.height;
-    }
-  }
-
-  // Measure breadcrumb (usually has role="navigation" or contains breadcrumb pattern)
-  const breadcrumb = document.querySelector(
-    '[role="navigation"]:not(nav), .breadcrumb, [data-testid="breadcrumb"]',
-  );
-  if (breadcrumb) {
-    const rect = breadcrumb.getBoundingClientRect();
-    if (rect.top <= totalHeight) {
-      // Only count if it's below navbar/at top
-      totalHeight += rect.height;
-    }
-  }
-
-  return totalHeight;
-}
-
-function calculateScrollOffsets(
-  fixedHeaderHeight: number,
-): TimelineScrollOffset {
-  // Adjust offsets to account for fixed header elements
-  // Default: ["start 78%", "end 22%"]
-  // We shift both anchors by the fixed-header share of viewport height,
-  // preserving the same animation window length.
-
-  const viewportHeight =
-    typeof window !== "undefined" ? window.innerHeight : 900;
-  if (viewportHeight <= 0) {
-    return ["start 78%", "end 22%"]; // Fallback
-  }
-
-  const headerShare = fixedHeaderHeight / viewportHeight;
-  const startPercent = Math.min(0.95, 0.78 + headerShare);
-  const endPercent = Math.max(0.05, 0.22 + headerShare);
-
-  return [
-    `start ${Math.round(startPercent * 100)}%`,
-    `end ${Math.round(endPercent * 100)}%`,
-  ];
-}
-
 export function CompanyTimeline() {
   const timelineRef = useRef<HTMLUListElement>(null);
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
-  const [thresholds, setThresholds] = useState<number[]>(() =>
-    createThresholds(milestones.length),
-  );
   const isReduced = Boolean(shouldReduce);
   const [reducedProgress, setReducedProgress] = useState(0);
-  const [scrollOffsets, setScrollOffsets] = useState<TimelineScrollOffset>([
-    "start 78%",
-    "end 22%",
-  ]);
-
-  useEffect(() => {
-    const timelineElement = timelineRef.current;
-    const nodeElements = nodeRefs.current.filter(
-      (nodeElement): nodeElement is HTMLDivElement => nodeElement !== null,
-    );
-
-    if (!timelineElement || nodeElements.length !== milestones.length) {
-      return;
-    }
-
-    const recalculateThresholds = () => {
-      setThresholds(createGeometryThresholds(timelineElement, nodeElements));
-    };
-
-    const recalculateOffsets = () => {
-      const fixedHeaderHeight = getFixedHeaderHeight();
-      setScrollOffsets(calculateScrollOffsets(fixedHeaderHeight));
-    };
-
-    recalculateThresholds();
-    recalculateOffsets();
-
-    const resizeObserver = new ResizeObserver(() => {
-      recalculateThresholds();
-      recalculateOffsets();
-    });
-    resizeObserver.observe(timelineElement);
-    nodeElements.forEach((nodeElement) => resizeObserver.observe(nodeElement));
-
-    const handleResize = () => {
-      recalculateThresholds();
-      recalculateOffsets();
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isReduced]);
+  const { thresholds, scrollOffsets } = useTimelineProgressController({
+    timelineRef,
+    nodeRefs,
+    itemCount: milestones.length,
+  });
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: scrollOffsets,
+    offset: scrollOffsets as NonNullable<
+      Parameters<typeof useScroll>[0]
+    >["offset"],
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -612,7 +502,7 @@ export function CompanyTimeline() {
 
   return (
     <section
-      id="timeline"
+      id={timelineAnchorId}
       ref={sectionRef}
       className="section-container section-padding bg-background"
     >
@@ -634,7 +524,7 @@ export function CompanyTimeline() {
             ? milestones.map((milestone, index) => {
                 const trigger = thresholds[index] ?? 0;
                 const nextTrigger = thresholds[index + 1];
-                const state = getNodeState(
+                const state = getTimelineNodeState(
                   reducedProgress,
                   trigger,
                   nextTrigger,
@@ -644,7 +534,7 @@ export function CompanyTimeline() {
 
                 return (
                   <ReducedTimelineNode
-                    key={milestone.year}
+                    key={milestone.id}
                     milestone={milestone}
                     index={index}
                     state={state}
@@ -658,7 +548,7 @@ export function CompanyTimeline() {
               })
             : milestones.map((milestone, index) => (
                 <AnimatedTimelineNode
-                  key={milestone.year}
+                  key={milestone.id}
                   milestone={milestone}
                   index={index}
                   trigger={thresholds[index] ?? 0}

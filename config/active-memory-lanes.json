@@ -1,6 +1,3 @@
 {
-  "memoryKeys": [
-    "agent:v1:project:electrical-website",
-    "agent:v1:next-task:2026-04-10-next-workstream-intake"
-  ]
+  "memoryKeys": ["agent:v1:next-task:2026-04-13-timeline-unification-platform"]
 }

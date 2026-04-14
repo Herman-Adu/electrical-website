@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-04-10 19:21:09 +01:00
+Last generated: 2026-04-14 00:37:54 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -44,18 +44,40 @@ Command: pnpm orchestrator:task -Task "pnpm startup:new-chat:full"
 
 ## Active Lane Next Action Card
 
-- Active lane: agent:v1:next-task:2026-04-10-next-workstream-intake
-- Immediate objective: Active workstream: next workstream intake (orchestrator-only).
+- Active lane: agent:v1:next-task:2026-04-13-timeline-unification-platform
+- Immediate objective: laneObjective: Unify company/project/news timelines into one generic data-driven timeline platform with variant renderers
 - Execution rule: choose one bounded batch only; no side-lane drift.
 - Validation rule: run tsc + pnpm test + build + MCP smoke before PR merge.
 
 ### Lane Backlog Seed (From Memory)
 
-- B1: Active workstream: next workstream intake (orchestrator-only).
-- B2: Purpose: provide a clean successor lane after completion of agents-and-skills-rebuild.
-- B3: Execution contract: bounded batches, deterministic validation gates (tsc/test/build when code changes), and memory checkpoints at preflight, post-merge, and closure.
-- B4: Guardrail: keep closed lane agent:v1:next-task:2026-04-09-mcp-platinum-rebuild-cleanup inactive and unchanged unless explicitly requested.
-- B5: Status: CLOSED on 2026-04-10 after completion of intake lane objectives and successor-lane rotation.
+- B1: laneObjective: Unify company/project/news timelines into one generic data-driven timeline platform with variant renderers
+- B2: scope: R&D complete, implementation staged across adapters, canonical types, and shared renderers
+- B3: canonicalModel: Introduce TimelineSectionData + TimelineItem discriminated union with variants story|status|list
+- B4: validationPlan: Add strict Zod schema for canonical timeline payload and source adapters for project/news/company data
+- B5: securityPlan: Treat CMS timeline content as untrusted; plain-text rendering, strict allowlist validation, bounded field lengths
+- B6: migrationPhase1: Add types/schemas/adapters and shared TimelineSection shell
+- B7: migrationPhase2: Migrate news inline timeline to generic list variant preserving id=timeline
+- B8: migrationPhase3: Migrate project timeline to generic status variant preserving existing visual tokens
+- B9: migrationPhase4: Migrate company timeline to generic story variant preserving reduced-motion behavior
+- B10: qaGates: adapter contract tests + integration variant tests + focused e2e for about/projects/news timeline routes
+- B11: constraints: Keep TOC/deep-link contract stable via anchorId timeline across pages
+- B12: nextAction: Start PR1 with domain contracts and adapters only, no visual changes
+- B13: checkpoint: R&D packet saved at docs/timeline-unification/TIMELINE_UNIFICATION_RND_2026-04-13.md
+- B14: checkpoint: New chat prompt saved at docs/NEW_CHAT_PROMPT_TIMELINE_UNIFICATION_2026-04-13.md
+- B15: checkpoint: Active lane pointer switched in config/active-memory-lanes.json
+- B16: readyState: Next implementation batch is PR1 domain contracts + adapters + adapter contract tests
+- B17: 2026-04-14 PR5 checkpoint: cleaned legacy NewsArticleContent timeline prop surface by removing unused categorySlug pass-through and updating news route caller.
+- B18: 2026-04-14 PR5 verification: added focused timeline integration tests in __tests__/timeline/timeline-route-integration.test.tsx covering about anchor id=timeline, project timeline canonical-item rendering with anchor, and news timeline conditional section rendering.
+- B19: 2026-04-14 validation gates passed: runTests for timeline contract + integration suite (12/12 passed) and pnpm exec tsc --noEmit passed.
+- B20: 2026-04-14 orchestrator follow-up: added focused Playwright route smoke spec e2e/timeline-routes.spec.ts for timeline anchor verification on about, project detail, and news detail routes.
+- B21: 2026-04-14 e2e result: PLAYWRIGHT_REUSE_SERVER=true pnpm exec playwright test e2e/timeline-routes.spec.ts --project=chromium passed 3/3.
+- B22: 2026-04-14 docs checkpoint: added PR5 QA evidence block to docs/timeline-unification/TIMELINE_UNIFICATION_RND_2026-04-13.md including timeline e2e spec e2e/timeline-routes.spec.ts and 3/3 pass result.
+- B23: 2026-04-14 orchestrator fix: migrated news article timeline renderer in components/news-hub/news-article-content.tsx from legacy inline list UI to company-style alternating timeline layout while preserving id=timeline anchor and canonical timelineItems input.
+- B24: 2026-04-14 validation: __tests__/timeline/timeline-route-integration.test.tsx + timeline-adapters.contract.test.ts passed (12/12) and pnpm exec tsc --noEmit passed.
+- B25: 2026-04-14 lane update: PR5-A complete (cleanup + timeline integration/e2e/type gates) and active target moved to PR5-B timeline animation calibration optimization.
+- B26: 2026-04-14 R&D finding: static useScroll offsets and index-based trigger spacing cause end-of-section timeline under-animation in narrow/two-column routes with sticky navbar+breadcrumb.
+- B27: 2026-04-14 continuation docs refreshed: docs/NEW_CHAT_PROMPT_TIMELINE_UNIFICATION_2026-04-13.md and docs/timeline-unification/TIMELINE_UNIFICATION_RND_2026-04-13.md now specify PR5-B shared progress-controller extraction and adaptive offset/threshold verification scope.
 
 ## Lane Closure Readiness
 
@@ -75,13 +97,12 @@ agent:v1:next-task:YYYY-MM-DD-<short-workstream-id>
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: main
-- HEAD: 8ba7979 chore(orchestrator): add lane closure readiness and next-lane stub (#79)
-- Memory nodes loaded: 2
+- HEAD: cbee00e Merge pull request #80 from Herman-Adu/project-theme-polish
+- Memory nodes loaded: 1
 
 ### Hydrated Memory Nodes
 
-- agent:v1:project:electrical-website (project, observations: 27)
-- agent:v1:next-task:2026-04-10-next-workstream-intake (next_task, observations: 5)
+- agent:v1:next-task:2026-04-13-timeline-unification-platform (next_task, observations: 27)
 
 ## Optimized MCP / Tool Allocation
 
@@ -121,7 +142,7 @@ Required governance references for all delegated outputs:
 
 ## Memory ↔ Prompt Alignment Protocol (After Every Task)
 
-1. Append/update observations in the relevant memory nodes (project + task-specific keys).
+1. Append/update observations in the active timeline lane memory keys.
 2. Refresh startup context and master prompt without rehydrating completed lanes:
 
 Command: pnpm startup:new-chat:refresh
@@ -144,5 +165,5 @@ Use sequential-thinking for complex decisions and nextjs-devtools for runtime di
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
 Current branch: main
-Current HEAD: 8ba7979 chore(orchestrator): add lane closure readiness and next-lane stub (#79)
+Current HEAD: cbee00e Merge pull request #80 from Herman-Adu/project-theme-polish
 

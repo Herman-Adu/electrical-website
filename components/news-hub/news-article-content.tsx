@@ -1,13 +1,26 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, type Variants } from "framer-motion";
+import {
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import Image from "next/image";
 import type { NewsDetailContent, NewsQuote } from "@/types/news";
+import type { TimelineItem } from "@/types/timeline";
+import {
+  AnimatedWord,
+  ScrollLinkedAnimatedWord,
+} from "@/components/shared/animated-word";
+import { useTimelineProgressController } from "@/lib/timeline/progress-controller";
 import { NewsArticleCardShell } from "./news-article-card-shell";
 
 interface NewsArticleContentProps {
   detail: NewsDetailContent;
-  categorySlug: string;
+  timelineItems?: readonly TimelineItem[];
 }
 
 const sectionVariants: Variants = {
@@ -32,9 +45,248 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
+function StoryTimelineSegment({
+  trigger,
+  nextTrigger,
+  progress,
+}: {
+  trigger: number;
+  nextTrigger: number;
+  progress: MotionValue<number>;
+}) {
+  const segmentProgress = useTransform(
+    progress,
+    [trigger, nextTrigger],
+    [0, 1],
+    { clamp: true },
+  );
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute left-1/2 top-[28px] bottom-[-2rem] w-0.5 -translate-x-1/2 z-10 rounded-full"
+    >
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25"
+        style={{ scaleY: segmentProgress }}
+      />
+      <motion.div
+        className="absolute inset-0 rounded-full origin-top bg-electric-cyan/45 blur-[2px]"
+        style={{ scaleY: segmentProgress }}
+      />
+    </div>
+  );
+}
+
+function StoryTimelineRow({
+  item,
+  index,
+  trigger,
+  nextTrigger,
+  progress,
+  shouldReduce,
+  nodeRef,
+}: {
+  item: TimelineItem;
+  index: number;
+  trigger: number;
+  nextTrigger?: number;
+  progress: MotionValue<number>;
+  shouldReduce: boolean;
+  nodeRef?: (nodeElement: HTMLDivElement | null) => void;
+}) {
+  const isLeft = index % 2 === 0;
+  const revealStart = Math.max(0, trigger - 0.12);
+  const settlePoint = nextTrigger ?? 1;
+
+  const cardEmphasis = useTransform(
+    progress,
+    [revealStart, trigger, Math.min(settlePoint + 0.02, 1)],
+    [0.72, 1, 0.9],
+    { clamp: true },
+  );
+  const cardOffset = useTransform(progress, [revealStart, trigger], [14, 0], {
+    clamp: true,
+  });
+  const nodeScale = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.88, 1, 1],
+    {
+      clamp: true,
+    },
+  );
+  const nodeRingOpacity = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0.16, 1, 0.54],
+    {
+      clamp: true,
+    },
+  );
+  const nodeFillOpacity = useTransform(
+    progress,
+    [revealStart, trigger, settlePoint],
+    [0, 0.2, 0.28],
+    {
+      clamp: true,
+    },
+  );
+  const titleEnd = Math.min(
+    1,
+    trigger + Math.max(0.08, (nextTrigger ?? 1) - trigger),
+  );
+  const titlePhase = useTransform(progress, [trigger, titleEnd], [0, 1], {
+    clamp: true,
+  });
+  const titleWords = item.title.split(" ");
+
+  return (
+    <li className="relative mb-8 grid grid-cols-[28px_minmax(0,1fr)] gap-4 last:mb-0 md:mb-10 md:grid-cols-[minmax(0,1fr)_28px_minmax(0,1fr)] md:items-start">
+      <div className="relative col-start-1 row-start-1 flex min-h-[28px] self-stretch justify-center md:col-start-2">
+        <motion.div
+          ref={nodeRef}
+          data-timeline-node={item.id}
+          style={shouldReduce ? undefined : { scale: nodeScale }}
+          className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full border border-border/70 bg-card/95 shadow-[0_14px_34px_-22px_rgba(2,12,27,0.95)]"
+        >
+          <motion.div
+            className="absolute inset-0.5 rounded-full bg-electric-cyan/20"
+            style={
+              shouldReduce ? { opacity: 0.24 } : { opacity: nodeFillOpacity }
+            }
+          />
+          <motion.div
+            className="absolute inset-0 rounded-full border border-electric-cyan/60 shadow-[0_0_0_1px_rgba(34,211,238,0.4),0_0_20px_rgba(34,211,238,0.25)]"
+            style={
+              shouldReduce ? { opacity: 0.6 } : { opacity: nodeRingOpacity }
+            }
+          />
+          <div className="relative z-10 h-2.5 w-2.5 rounded-full bg-electric-cyan" />
+        </motion.div>
+
+        {!shouldReduce && nextTrigger !== undefined && (
+          <StoryTimelineSegment
+            trigger={trigger}
+            nextTrigger={nextTrigger}
+            progress={progress}
+          />
+        )}
+      </div>
+
+      <motion.div
+        style={
+          shouldReduce ? undefined : { opacity: cardEmphasis, y: cardOffset }
+        }
+        className={isLeft ? "md:col-start-1 md:pr-8" : "md:col-start-3 md:pl-8"}
+      >
+        <NewsArticleCardShell
+          className={`p-5 ${
+            item.highlight
+              ? "border-electric-cyan/35 bg-electric-cyan/[0.08]"
+              : ""
+          }`}
+        >
+          <div className="mb-3 flex items-start justify-between gap-4">
+            <div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
+                {item.label}
+              </p>
+              <h3 className="mt-1 font-semibold text-white">
+                {titleWords.map((word, wordIndex) =>
+                  shouldReduce ? (
+                    <AnimatedWord
+                      key={`${item.id}-${word}-${wordIndex}`}
+                      word={word}
+                      index={wordIndex}
+                      active={true}
+                      shouldReduce={true}
+                      className="inline-block mr-[0.26em] last:mr-0"
+                      stagger={0.05}
+                    />
+                  ) : (
+                    <ScrollLinkedAnimatedWord
+                      key={`${item.id}-${word}-${wordIndex}`}
+                      word={word}
+                      index={wordIndex}
+                      phase={titlePhase}
+                      shouldReduce={false}
+                      className="inline-block mr-[0.26em] last:mr-0"
+                      staggerWindow={0.16}
+                    />
+                  ),
+                )}
+              </h3>
+            </div>
+            {item.duration && (
+              <span className="shrink-0 rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-electric-cyan">
+                {item.duration}
+              </span>
+            )}
+          </div>
+          <p className="text-sm leading-6 text-foreground/75">
+            {item.description}
+          </p>
+        </NewsArticleCardShell>
+      </motion.div>
+
+      <div
+        className={`hidden md:block ${
+          isLeft ? "md:col-start-3" : "md:col-start-1"
+        }`}
+      />
+    </li>
+  );
+}
+
+function StoryTimeline({ items }: { items: readonly TimelineItem[] }) {
+  const timelineRef = useRef<HTMLUListElement>(null);
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const shouldReduce = useReducedMotion();
+  const { thresholds, scrollOffsets } = useTimelineProgressController({
+    timelineRef,
+    nodeRefs,
+    itemCount: items.length,
+  });
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: scrollOffsets as NonNullable<
+      Parameters<typeof useScroll>[0]
+    >["offset"],
+  });
+
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute left-3.5 top-0 bottom-0 w-px bg-gradient-to-b from-electric-cyan/50 via-electric-cyan/30 to-electric-cyan/10 md:left-1/2 md:-translate-x-px" />
+
+      <motion.ul
+        ref={timelineRef}
+        variants={staggerContainer}
+        className="m-0 list-none p-0"
+      >
+        {items.map((item, index) => (
+          <StoryTimelineRow
+            key={item.id}
+            item={item}
+            index={index}
+            trigger={thresholds[index] ?? 0}
+            nextTrigger={thresholds[index + 1]}
+            progress={scrollYProgress}
+            shouldReduce={Boolean(shouldReduce)}
+            nodeRef={(nodeElement) => {
+              nodeRefs.current[index] = nodeElement;
+            }}
+          />
+        ))}
+      </motion.ul>
+    </div>
+  );
+}
+
 export function NewsArticleContent({
   detail,
-  categorySlug: _categorySlug,
+  timelineItems,
 }: NewsArticleContentProps) {
   return (
     <div className="space-y-16">
@@ -201,7 +453,7 @@ export function NewsArticleContent({
       )}
 
       {/* Timeline Section */}
-      {detail.timeline && detail.timeline.length > 0 && (
+      {timelineItems && timelineItems.length > 0 && (
         <motion.section
           id="timeline"
           variants={sectionVariants}
@@ -211,46 +463,7 @@ export function NewsArticleContent({
           className="space-y-6"
         >
           <h2 className="text-2xl font-bold text-white">Project Timeline</h2>
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-electric-cyan/40 via-electric-cyan/20 to-transparent" />
-
-            <motion.div variants={staggerContainer} className="space-y-6">
-              {detail.timeline.map((phase, index) => (
-                <motion.div
-                  key={`timeline-${index}`}
-                  variants={itemVariants}
-                  className="relative pl-12"
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 top-1 flex h-10 w-10 items-center justify-center">
-                    <div className="h-3 w-3 rounded-full bg-electric-cyan shadow-[0_0_12px_rgba(0,243,189,0.5)]" />
-                  </div>
-
-                  <NewsArticleCardShell className="p-5">
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
-                          {phase.phase}
-                        </p>
-                        <h3 className="mt-1 font-semibold text-white">
-                          {phase.title}
-                        </h3>
-                      </div>
-                      {phase.duration && (
-                        <span className="shrink-0 rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-electric-cyan">
-                          {phase.duration}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm leading-6 text-foreground/75">
-                      {phase.description}
-                    </p>
-                  </NewsArticleCardShell>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          <StoryTimeline items={timelineItems} />
         </motion.section>
       )}
 

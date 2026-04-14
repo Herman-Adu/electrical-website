@@ -55,7 +55,7 @@ jobs:
 
       - name: Install Playwright browsers
         timeout-minutes: 8
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install chromium
 
       - name: Build app
         run: pnpm build
