@@ -237,7 +237,7 @@ function Update-MasterPrompt {
         "",
         "## Memory ↔ Prompt Alignment Protocol (After Every Task)",
         "",
-        "1. Append/update observations in the relevant memory nodes (project + task-specific keys).",
+        "1. Append/update observations in the active timeline lane memory keys.",
         "2. Refresh startup context and master prompt without rehydrating completed lanes:",
         "",
         "Command: pnpm startup:new-chat:refresh",
@@ -327,7 +327,7 @@ Write-Host "  HEAD   : $head"   -ForegroundColor White
 # ────────────────────────────────────────────────────────────────────────────
 Write-Step "Step 4/4 — Opening memory context nodes..."
 
-$memoryKeys = Get-ActiveMemoryKeys -Path $MemoryKeysFile
+$memoryKeys = @(Get-ActiveMemoryKeys -Path $MemoryKeysFile)
 
 $namesJson = ($memoryKeys | ForEach-Object { '"' + $_ + '"' }) -join ","
 $payload   = '{"names":[' + $namesJson + ']}'

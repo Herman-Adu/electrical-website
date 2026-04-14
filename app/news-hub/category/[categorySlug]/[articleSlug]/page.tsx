@@ -21,6 +21,8 @@ import {
   getBreadcrumbSchema,
   getNewsArticleSchema,
 } from "@/lib/structured-data";
+import { adaptNewsTimeline } from "@/lib/timeline/adapters";
+import { TimelineAdapterError } from "@/lib/timeline/adapters";
 import { siteConfig } from "@/lib/site-config";
 import type { NewsArticle } from "@/types/news";
 
@@ -67,10 +69,11 @@ export async function generateMetadata({
 }
 
 // Generate TOC items based on available content sections
-function generateTocItems(article: NewsArticle): TocItem[] {
-  const items: TocItem[] = [
-    { id: "overview", label: "Overview" },
-  ];
+function generateTocItems(
+  article: NewsArticle,
+  hasTimeline: boolean,
+): TocItem[] {
+  const items: TocItem[] = [{ id: "overview", label: "Overview" }];
 
   if (article.detail.body && article.detail.body.length > 0) {
     items.push({ id: "details", label: "Project Details" });
@@ -88,11 +91,14 @@ function generateTocItems(article: NewsArticle): TocItem[] {
     items.push({ id: "challenges", label: "Challenges & Solutions" });
   }
 
-  if (article.detail.timeline && article.detail.timeline.length > 0) {
+  if (hasTimeline) {
     items.push({ id: "timeline", label: "Project Timeline" });
   }
 
-  if (article.detail.specifications && article.detail.specifications.length > 0) {
+  if (
+    article.detail.specifications &&
+    article.detail.specifications.length > 0
+  ) {
     items.push({ id: "specifications", label: "Technical Specs" });
   }
 
@@ -153,7 +159,26 @@ export default async function NewsArticlePage({
     },
   ]);
 
-  const tocItems = generateTocItems(article);
+  let canonicalTimeline: ReturnType<typeof adaptNewsTimeline> | null = null;
+
+  if (article.detail.timeline?.length) {
+    try {
+      canonicalTimeline = adaptNewsTimeline(article.detail.timeline);
+    } catch (error) {
+      if (error instanceof TimelineAdapterError) {
+        console.warn(
+          `News timeline omitted for article ${article.slug} (${category.slug}): ${error.message}`,
+        );
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  const tocItems = generateTocItems(
+    article,
+    (canonicalTimeline?.items.length ?? 0) > 0,
+  );
 
   return (
     <main className="relative bg-background">
@@ -179,10 +204,16 @@ export default async function NewsArticlePage({
         section="news"
       />
 
-      <section id="article-content" className="section-standard bg-background !overflow-visible">
+      <section
+        id="article-content"
+        className="section-standard bg-background !overflow-visible"
+      >
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
-          <NewsArticleContent detail={article.detail} categorySlug={categorySlug} />
+          <NewsArticleContent
+            detail={article.detail}
+            timelineItems={canonicalTimeline?.items}
+          />
 
           {/* Sticky Sidebar */}
           <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start">
@@ -190,26 +221,27 @@ export default async function NewsArticlePage({
             <NewsArticleToc items={tocItems} />
 
             {/* Spotlight Metrics */}
-            {article.detail.spotlight && article.detail.spotlight.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
-                  Key Metrics
-                </h3>
-                {article.detail.spotlight.map((metric) => (
-                  <div
-                    key={metric.label}
-                    className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/10 to-transparent p-4"
-                  >
-                    <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/50">
-                      {metric.label}
+            {article.detail.spotlight &&
+              article.detail.spotlight.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
+                    Key Metrics
+                  </h3>
+                  {article.detail.spotlight.map((metric) => (
+                    <div
+                      key={metric.label}
+                      className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/10 to-transparent p-4"
+                    >
+                      <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/50">
+                        {metric.label}
+                      </div>
+                      <div className="mt-1 text-2xl font-bold text-electric-cyan">
+                        {metric.value}
+                      </div>
                     </div>
-                    <div className="mt-1 text-2xl font-bold text-electric-cyan">
-                      {metric.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
 
             {/* Article Info Card */}
             <div className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 space-y-4">
@@ -219,7 +251,9 @@ export default async function NewsArticlePage({
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Author</dt>
-                  <dd className="font-medium text-white">{article.author.name}</dd>
+                  <dd className="font-medium text-white">
+                    {article.author.name}
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Read Time</dt>
@@ -227,12 +261,16 @@ export default async function NewsArticlePage({
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Category</dt>
-                  <dd className="font-medium text-electric-cyan">{article.categoryLabel}</dd>
+                  <dd className="font-medium text-electric-cyan">
+                    {article.categoryLabel}
+                  </dd>
                 </div>
                 {article.location && (
                   <div className="flex justify-between">
                     <dt className="text-foreground/50">Location</dt>
-                    <dd className="font-medium text-white">{article.location}</dd>
+                    <dd className="font-medium text-white">
+                      {article.location}
+                    </dd>
                   </div>
                 )}
               </dl>

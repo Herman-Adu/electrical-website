@@ -28,6 +28,8 @@ import {
 } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
+import { adaptProjectTimeline } from "@/lib/timeline/adapters";
+import { TimelineAdapterError } from "@/lib/timeline/adapters";
 import type { Project } from "@/types/projects";
 import type { TocItem } from "@/types/shared-content";
 
@@ -87,7 +89,7 @@ export async function generateMetadata({
 }
 
 // Generate TOC items based on available content sections
-function generateTocItems(project: Project): TocItem[] {
+function generateTocItems(project: Project, hasTimeline: boolean): TocItem[] {
   const items: TocItem[] = [];
   const detail = project.detail;
 
@@ -103,7 +105,7 @@ function generateTocItems(project: Project): TocItem[] {
     items.push({ id: "challenge", label: "Challenge & Solution" });
   }
 
-  if (detail?.timeline && detail.timeline.length > 0) {
+  if (hasTimeline) {
     items.push({ id: "timeline", label: "Project Timeline" });
   }
 
@@ -138,7 +140,28 @@ export default async function CategoryProjectDetailPage({
     .slice(0, 4);
 
   const sidebarCards = getProjectsSidebarCards(category.slug);
-  const tocItems = generateTocItems(project);
+  const detail = project.detail;
+
+  let canonicalTimeline: ReturnType<typeof adaptProjectTimeline> | null = null;
+
+  if (detail?.timeline?.length) {
+    try {
+      canonicalTimeline = adaptProjectTimeline(detail.timeline);
+    } catch (error) {
+      if (error instanceof TimelineAdapterError) {
+        console.warn(
+          `Project timeline omitted for project ${project.slug} (${category.slug}): ${error.message}`,
+        );
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  const tocItems = generateTocItems(
+    project,
+    (canonicalTimeline?.items.length ?? 0) > 0,
+  );
 
   // Build breadcrumb for JSON-LD
   const breadcrumbItems = [
@@ -164,8 +187,6 @@ export default async function CategoryProjectDetailPage({
 
   const articleSchema = getArticleSchema(project);
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
-
-  const detail = project.detail;
 
   return (
     <main className="relative">
@@ -225,9 +246,12 @@ export default async function CategoryProjectDetailPage({
               </div>
             )}
 
-            {detail?.timeline && detail.timeline.length > 0 && (
+            {(canonicalTimeline?.items.length ?? 0) > 0 && (
               <div>
-                <ProjectTimeline phases={detail.timeline} anchorId="timeline" />
+                <ProjectTimeline
+                  items={canonicalTimeline?.items ?? []}
+                  anchorId="timeline"
+                />
               </div>
             )}
 
