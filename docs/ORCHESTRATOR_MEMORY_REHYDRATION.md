@@ -20,31 +20,46 @@ Session 1                       Docker Memory Service            Session 2
 
 ## Setup (One-Time)
 
-### 1. Start Docker Compose Stack
+### Quick Setup (Recommended)
+
+One command initializes everything:
+
+```bash
+# macOS/Linux
+pnpm orchestrator:bootstrap
+
+# Windows
+pnpm orchestrator:bootstrap:win
+```
+
+This command:
+1. ✅ Starts Docker Compose stack
+2. ✅ Verifies all services healthy
+3. ✅ Bootstraps animation memory lanes
+4. ✅ Verifies Caddy gateway
+
+### Manual Setup (Advanced)
+
+If you prefer to run steps individually:
+
+**Step 1: Start Docker Compose**
 
 ```bash
 pnpm docker:mcp:up
 ```
 
-Verify all services are healthy:
+**Step 2: Verify Services**
 
 ```bash
 pnpm docker:mcp:ps
 ```
 
-Expected output:
-```
-memory-reference   ✓ healthy
-caddy              ✓ healthy
-[other services]   ✓ healthy
-```
+Expected: All services show as `healthy` or `running`
 
-### 2. Bootstrap Animation Memory Lanes
-
-Load animation project context into Docker memory:
+**Step 3: Bootstrap Memory**
 
 ```bash
-node scripts/bootstrap-memory-animation.mjs
+pnpm docker:mcp:memory:bootstrap
 ```
 
 Output:
@@ -54,15 +69,15 @@ Output:
 ✓ Created entity: Animation Audit - Baseline & Inventory
 ```
 
-### 3. Verify Memory Access
+**Step 4: Verify Memory Access**
 
 ```bash
-curl -X POST http://localhost:3100/memory/tools/call \
+curl -s -X POST http://localhost:3100/memory/tools/call \
   -H "Content-Type: application/json" \
-  -d '{"tool":"read_graph","params":{}}'
+  -d '{"name":"read_graph","arguments":{}}'
 ```
 
-Expected: Returns JSON graph with entities.
+Expected: Returns JSON graph with entities
 
 ## Using in New Sessions
 

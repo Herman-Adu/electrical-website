@@ -84,11 +84,23 @@ const brightnessFilter = useTransform(brightness, (v) => `brightness(${v})`);
 
 ## How to Continue
 
-1. **Verify Docker Memory Setup**
+1. **Bootstrap Orchestrator (One Command)**
    ```bash
-   node scripts/bootstrap-memory-animation.mjs
-   # Should output: "Memory lanes loaded successfully"
+   # On macOS/Linux:
+   pnpm orchestrator:bootstrap
+   
+   # On Windows (PowerShell/CMD):
+   pnpm orchestrator:bootstrap:win
+   
+   # Skip memory bootstrap (if already done):
+   pnpm orchestrator:bootstrap:skip-memory
    ```
+   
+   This single command:
+   - ✅ Starts Docker Compose stack
+   - ✅ Verifies all services healthy
+   - ✅ Bootstraps animation memory lanes
+   - ✅ Readies orchestrator for rehydration
 
 2. **Verify Phase 2 Changes**
    ```bash
