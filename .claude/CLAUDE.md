@@ -260,10 +260,9 @@ User Request
 NEVER create ANY .md file for memory, session state, staging, handoff, rehydration, or seeding purposes — regardless of filename, directory, or rationalization.
 
 Prohibited directories:
-- `.claude/memory/` — never write here
-- `.claude/session-state/` — never create this directory
-- `.claude/archives/` — never write session context here
-- Any non-canonical `.claude/` subdirectory for .md memory/session files
+- Any `.claude/` subdirectory for memory or session-state .md files
+- Do not create: `.claude/session-state/`, `.claude/archives/session-context/`, etc.
+- Policy: Use Docker memory service exclusively for session state persistence
 
 The ONLY .md writes permitted in `.claude/` are:
 - Pre-existing policy documents (`rules/`, `security/`, `reference/`)

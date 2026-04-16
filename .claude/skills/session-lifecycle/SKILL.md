@@ -180,7 +180,7 @@ mcp__MCP_DOCKER__search_nodes("electrical-website-state")
 
 If Docker is unavailable (`localhost:3100/health` unreachable):
 
-- **start**: Attempts Docker; if fails, reads `.claude/CLAUDE.md ## Session State` section and reports fallback state
+- **start**: Attempts Docker; if fails, reads `.claude/CLAUDE.md` section and reports fallback state
 - **sync**: Reports "Docker unavailable; writing fallback note to .claude/CLAUDE.md"
 - **end**: Reports "Docker unavailable; fall back to .claude/CLAUDE.md for session notes"
 

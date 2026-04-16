@@ -3,7 +3,7 @@
 **Effective Date:** 2026-04-16
 **Status:** Active — Authoritative
 **Version:** 1.0
-**Supersedes:** Informal `.claude/memory/*.md` file-based memory practice
+**Supersedes:** Informal file-based memory practice (.md files in any .claude/ subdirectory)
 
 ---
 
@@ -16,9 +16,9 @@ The Docker `memory-reference` MCP service is the **sole authoritative store** fo
 NEVER create ANY .md file for memory, session state, staging, handoff, rehydration, or seeding purposes — regardless of filename, directory, or rationalization.
 
 **Prohibited directories:**
-- `.claude/memory/` — never write here
-- `.claude/session-state/` — never create this directory
-- `.claude/archives/` — never write session context here
+- Any `.claude/` subdirectory for memory or session-state .md files
+- Do not create: `.claude/session-state/`, `.claude/archives/session-context/`, etc.
+- Policy: Use Docker memory service exclusively for session state persistence
 
 **Permitted .md writes in `.claude/` only:**
 - Pre-existing policy documents (`rules/`, `security/`, `reference/`)
@@ -590,7 +590,7 @@ Use at session close to confirm memory hygiene before committing.
 - [ ] Learning entities created for any non-obvious patterns discovered
 - [ ] Decisions recorded for any architectural choices made
 - [ ] Relations wired: new entities linked to existing context
-- [ ] No `.claude/memory/*.md` files written during this session
+- [ ] No memory .md files written to any `.claude/` subdirectory during this session
 - [ ] Fallback note in .claude/CLAUDE.md (## Session State section): present only if Docker was down; deleted if Docker recovered
 - [ ] Git pushed: `git push` confirmed
 

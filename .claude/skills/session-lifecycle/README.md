@@ -248,7 +248,7 @@ Ready for next session!
 
 If Docker is unavailable:
 
-- **start:** Reads `.claude/CLAUDE.md ## Session State` fallback section, reports state
+- **start:** Reads `.claude/CLAUDE.md` fallback section, reports state
 - **sync:** Writes fallback note to `.claude/CLAUDE.md`, confirms saved
 - **end:** Writes fallback note, reports "Docker unavailable; fallback recorded"
 

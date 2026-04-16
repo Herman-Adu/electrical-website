@@ -53,7 +53,7 @@ Also treat as restricted:
 - **Output values:** Never `"DATABASE_URL is mysql://user:password@host"`
 - **Quote from .env files:** Never copy content into markdown or comments
 - **Include in screenshots:** If a secret appears in an IDE screenshot, don't share it
-- **Persist in memory:** Never save secret values to `.claude/memory/`
+- **Persist in memory:** Never save secret values to any memory files or entities
 - **Summarize secrets:** Never say "I read the env file and here's what I found..."
 - **Log secrets to terminal:** Redirect stderr to `/dev/null` if secrets might appear
 
