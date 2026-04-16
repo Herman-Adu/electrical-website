@@ -10,6 +10,7 @@ import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import type { ProjectCategory, ProjectCategorySlug } from "@/types/projects";
 
 interface ProjectsHeroProps {
@@ -39,36 +40,21 @@ export function ProjectsHero({
   activeCategory,
 }: ProjectsHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_PROJECTS",
-      "SCANNING_PORTFOLIO",
-      "SYSTEMS_READY",
-    ];
-
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "SYSTEMS_READY");
-      return;
-    }
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-    return () => clearInterval(interval);
   }, []);
+
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_PROJECTS",
+    "SCANNING_PORTFOLIO",
+    "SYSTEMS_READY",
+  ];
+
+  const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToGrid = () => {
     const el = document.getElementById("projects-grid");
