@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { getIcon } from "./icon-map";
 import type { SectionValuesData } from "@/types/sections";
@@ -15,6 +15,9 @@ interface SectionValuesProps {
 
 export function SectionValues({ data }: SectionValuesProps) {
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
+  const [expandedStates, setExpandedStates] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const {
     sectionId,
@@ -25,6 +28,13 @@ export function SectionValues({ data }: SectionValuesProps) {
     values,
     tagline,
   } = data;
+
+  const toggleExpanded = (title: string) => {
+    setExpandedStates((prev) => ({
+      ...prev,
+      [title]: !prev[title],
+    }));
+  };
 
   return (
     <section
@@ -76,14 +86,30 @@ export function SectionValues({ data }: SectionValuesProps) {
             const accentColor = isCyan
               ? "hsl(174 100% 50%)"
               : "hsl(37 100% 49%)";
+            const isExpanded = expandedStates[value.title] ?? false;
+
+            const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleExpanded(value.title);
+              }
+            };
+
             return (
               <motion.div
                 key={value.title}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isExpanded}
+                aria-describedby={`value-${value.title}`}
+                onKeyDown={handleKeyDown}
+                onClick={() => toggleExpanded(value.title)}
+                data-testid="section-value-card"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-default overflow-hidden"
+                className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
               >
                 {/* Hover background fill */}
                 <div
@@ -118,15 +144,23 @@ export function SectionValues({ data }: SectionValuesProps) {
                   {value.short}
                 </p>
 
-                {/* Full description — revealed on hover */}
-                <p className="text-sm text-muted-foreground leading-relaxed opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-32 overflow-hidden transition-all duration-400">
-                  {value.full}
-                </p>
+                {/* Description container with pre-allocated height (CLS prevention) */}
+                <div className="min-h-[140px]">
+                  {/* Short description — visible by default */}
+                  <p className="text-sm text-muted-foreground leading-relaxed group-hover:hidden transition-opacity duration-200">
+                    {value.full.slice(0, 80)}...
+                  </p>
 
-                {/* Static short description visible when not hovered */}
-                <p className="text-sm text-muted-foreground leading-relaxed group-hover:hidden transition-all duration-200">
-                  {value.full.slice(0, 80)}...
-                </p>
+                  {/* Full description — hidden by default, shown on hover or keyboard expansion */}
+                  <p
+                    id={`value-${value.title}`}
+                    className={`text-sm text-muted-foreground leading-relaxed transition-opacity duration-200 ${
+                      isExpanded ? "block" : "hidden"
+                    } group-hover:block`}
+                  >
+                    {value.full}
+                  </p>
+                </div>
 
                 {/* Bottom accent line */}
                 <div
