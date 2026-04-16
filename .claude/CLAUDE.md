@@ -55,6 +55,30 @@ For **new features, architectural changes, or ambiguous tasks**, follow this seq
 
 ---
 
+## Orchestrator Session Automation (Hooks + Skills)
+
+**SessionStart Hook (Automatic):**  
+Runs preflight on session start via `.claude/settings.json`. Outputs:
+- Docker health check
+- `search_nodes("electrical-website-state")` → `open_nodes([id])`
+- Git status and recent commits
+- If unavailable: fallback to `.claude/CLAUDE.md` (## Session State section)
+
+**CONTEXT MONITOR (Automatic):**  
+UserPromptSubmit hook fires on every prompt. At 70% context:
+- Pauses before response
+- Generates inline continuation prompt
+- Waits for user confirmation to sync
+- Updates Docker entities + WIP commit
+
+**To sync manually:**  
+Use `/session-lifecycle sync` at any time.
+
+**SUB-AGENT DISPATCH (Orchestrator Responsibility):**  
+Always prepend `.claude/reference/ORCHESTRATOR_DISPATCH_PREAMBLE.md` content to all SME agent prompts. Ensures agents use Docker-first approach and available MCP tools.
+
+---
+
 ## Execution Lifecycle
 
 Every task follows this 5-stage lifecycle:
