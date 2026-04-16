@@ -23,6 +23,7 @@ You will receive:
 - `subtask`: the specific memory request
 - `content`: file content or text
 - `context`: existing knowledge or metadata
+- `docker_entity_id` (optional): if provided, format extracted knowledge as a `learning` observation JSON ready for `mcp__MCP_DOCKER__add_observations(docker_entity_id, [observation])`. Caller (skill) executes the write.
 
 ## Process
 

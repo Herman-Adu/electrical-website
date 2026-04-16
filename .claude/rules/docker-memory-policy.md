@@ -208,7 +208,7 @@ properties:
   domain: "Infrastructure & Context Management"
   
   # The decision
-  choice: "Use Docker memory-reference MCP service instead of .claude/memory/*.md files"
+  choice: "Use Docker memory-reference MCP service instead of file-based memory (.md files)"
   
   # Rationale
   context: "Session startup was slow (~2 min) due to large .md files. Token cost was 5,000+ per query."
@@ -1000,7 +1000,7 @@ To activate this policy:
 - [ ] Update session preflight workflow to call `search_nodes("electrical-website-state")`
 - [ ] Train all agents and scripts to use entity naming conventions
 - [ ] Create .claude/CLAUDE.md (## Session State section) section (for fallback)
-- [ ] Migrate initial context from `.claude/memory/` to Docker (one-time)
+- [ ] Migrate initial context from any existing .md memory files to Docker (one-time)
 - [ ] Test Docker service health check in CI/CD
 - [ ] Document fallback procedure in runbooks
 - [ ] Schedule first pruning (Week 1)

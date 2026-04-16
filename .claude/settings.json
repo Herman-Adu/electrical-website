@@ -2,5 +2,43 @@
   "enabledPlugins": {
     "vercel@claude-plugins-official": true
   },
-  "enabledMcpjsonServers": ["MCP_DOCKER", "filesystem", "git"]
+  "enabledMcpjsonServers": ["MCP_DOCKER", "filesystem", "git"],
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \".claude/hooks/session-start.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/context-monitor.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \".claude/hooks/precompact-safety.sh\"",
+            "timeout": 2
+          }
+        ]
+      }
+    ]
+  }
 }
