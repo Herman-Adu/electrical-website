@@ -1,6 +1,6 @@
 ---
 name: knowledge-memory
-description: Use when someone asks to save content to archives, store knowledge in context, retrieve stored files or knowledge, search for information, summarize documents, or manage long-term knowledge.
+description: Use this skill WHENEVER the user wants to persist, retrieve, find, or organize information — even if they don't explicitly ask to "save" or "store" it. Use for: saving decisions to archives, storing knowledge/insights, retrieving prior learnings, searching for past work, summarizing long documents, managing context files, creating knowledge maps. Trigger on: "remember this", "I want to keep track of", "what did we decide", "search my notes", "can you find", "summarize this document", "I need this reference later", or any request to avoid repeating past analysis.
 argument-hint: "[operation and topic or file]"
 disable-model-invocation: true
 ---

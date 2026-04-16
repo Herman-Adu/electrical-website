@@ -104,11 +104,59 @@ Produces:
 
 **Example:** `/code-generation "Refactor this Promise chain to async/await. Improve error handling and reduce nesting."`
 
+## Execution Strategies
+
+### Super Powers Workflow (For Large Features)
+
+Use for substantial features, architectural decisions, or multi-component projects (2–3h+ effort).
+
+**Process:**
+1. **Brainstorm** — Generate spec (500–1000 words) exploring scope, architecture, edge cases
+2. **Plan** — Design component hierarchy, API surface, test structure
+3. **Execute** — Generate tests first (TDD), then implementation code
+4. **Auto-review** — Verify against spec, run tests, validate types
+
+**Benefits:**
+- Specs prevent rework and clarify requirements
+- TDD ensures code correctness
+- 60–70% token savings vs. baseline
+
+**When to use:**
+- New features (2–3h+)
+- Architecture redesign
+- Critical production features
+- Ambiguous requirements
+
+### Standard Workflow (For Quick Tasks)
+
+Use for debugging, refactoring, one-off utilities, or when speed matters more than planning.
+
+**Process:**
+1. Parse request (language, framework, goal)
+2. Fetch latest framework docs (Context7)
+3. Delegate to code-generation agent if needed
+4. Generate output
+
+**When to use:**
+- Bug fixes
+- Quick refactors
+- One-off functions
+- Performance optimizations
+- <2 hour effort
+
+| Scenario | Workflow | Why |
+|----------|----------|-----|
+| New feature (2–3h+) | **Super Powers** | Specs prevent rework; TDD ensures correctness |
+| Bug fix / Quick refactor | **Standard** | Faster feedback, less overhead |
+| Architecture redesign | **Super Powers** | Plan ensures alignment, prevents mistakes |
+| One-off utility | **Standard** | Overhead not justified |
+| Critical production feature | **Super Powers** | TDD + auto-review catches issues early |
+
 ## Integration with Planning Skill
 
 **Recommended workflow:**
 1. **Planning Skill** defines features and architecture
-2. **Code-Generation Skill** implements features from plan
+2. **Code-Generation Skill** implements features from plan (using Super Powers workflow)
 3. **Planning** provides context (tech stack, constraints) to Code-Generation
 4. Code-Generation returns code ready for review and deployment
 

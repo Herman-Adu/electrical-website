@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "WebFetch(domain:github.com)",
+      "Edit(/.claude/skills/framer-motion/**)",
+      "Edit(/.claude/skills/aos-scroll-reveal/**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger"
     ]
   }
 }

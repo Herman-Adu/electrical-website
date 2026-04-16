@@ -1,6 +1,6 @@
 ---
 name: skill-builder
-description: Use when someone asks to scaffold a new skill, audit existing skill quality, optimize skill prompts, or evaluate skill behavior.
+description: Use this skill WHENEVER the user mentions skills, workflows, skill triggers, or prompt optimization — even if they don't explicitly ask for a "new skill" or "audit". Use for: creating new skills, auditing/evaluating existing skills, optimizing skill descriptions for better triggering, improving skill behavior, validating skill structure. Trigger on: "I want to reuse this workflow", "how do I make Claude do X consistently", "this should be a skill", "improve how this triggers", "check my skill", "make this repeatable", or any discussion of automating Claude's behavior.
 argument-hint: "[build|audit|optimize|evaluate] [skill-name or target]"
 disable-model-invocation: true
 ---

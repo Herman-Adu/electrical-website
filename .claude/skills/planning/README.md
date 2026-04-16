@@ -66,15 +66,65 @@ Use Planning when you need to:
 
 Plans are saved to: `archives/plans/[YYYY-MM-DD]-[plan-name].md`
 
-## Context Files
+## Context Files Setup
 
-Planning uses three optional context files (auto-injected):
+Planning uses three optional context files (auto-injected at skill start). **All are optional** — planning works without them — but provide continuity across sessions.
 
-- **`context/current-priorities.md`** — Short-term focus areas
-- **`context/goals.md`** — Quarterly goals
-- **`plans/phases/current.md`** — Active phase state
+### File 1: `context/current-priorities.md`
+**Purpose:** Short-term focus areas (weekly/monthly)
 
-All optional. If missing, planning proceeds unconstrained.
+**When used:** Skill checks this to constrain planning to immediate priorities
+
+**Format:**
+```markdown
+# Current Priorities — [Month/Quarter]
+
+1. **[Priority 1]** — [Why it matters]
+2. **[Priority 2]** — [Why it matters]
+3. **[Priority 3]** — [Why it matters]
+
+**Updated:** YYYY-MM-DD
+```
+
+**Initialize:**
+```bash
+/planning "Define our top 5 priorities for the next month"
+# OR manually: touch context/current-priorities.md
+```
+
+### File 2: `context/goals.md`
+**Purpose:** Long-term goals (quarterly/yearly)
+
+**When used:** Skill aligns plans with strategic direction
+
+**Format:**
+```markdown
+# Quarterly Goals — Q1 2026
+
+## Goal 1: [Name]
+- Target: [Measurable outcome]
+- Timeline: [Target date]
+- Success metric: [How we measure]
+
+**Updated:** YYYY-MM-DD
+```
+
+**Initialize:**
+```bash
+/planning "Define our Q1 2026 goals"
+# OR manually: touch context/goals.md
+```
+
+### File 3: `plans/phases/current.md`
+**Purpose:** Active phase state (cross-conversation continuity)
+
+**When used:** Planning respects current phase if set
+
+**Initialize:** Managed by `/phase-tracker` skill automatically
+
+**Fallback:** If missing, planning proceeds unconstrained.
+
+**Note:** Never overwrite context files without summarizing previous content first.
 
 ## Error Handling
 
