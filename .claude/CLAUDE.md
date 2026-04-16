@@ -320,6 +320,19 @@ If Docker memory service is down:
 
 ---
 
+## Session State (Fallback — Docker Down)
+
+**2026-04-16 22:40 — Phase 6 COMPLETE & MERGED**
+- ✅ ALL CLS FIXES MERGED TO MAIN (PR #86, all CI checks passed)
+- ✅ VisionMission: TerminalText removed, static text + fade-in (9b6c6b8)
+- ✅ ServicesBento: min-h-40 sm:h-auto mobile constraint (72b9a6d, c9140e2, bc5fbdc)
+- ✅ E2E tolerances adjusted (a06b828) — 10/10 passing
+- ✅ Build: PASSING | Tests: PASSING | Merge: COMPLETE
+- **NEXT SESSION**: Search Docker memory for 'electrical-website-state' + implement 70% manage window feature
+- **DO NOT repeat context** — read from Docker memory first, no file reads needed
+
+---
+
 **Document Version:** 2.1 (2026-04-16)  
 **Last Updated:** Optimization audit — extracted execution timing and error recovery to reference docs  
 **Status:** Lean, authoritative contract — detailed guidance moved to searchable reference
