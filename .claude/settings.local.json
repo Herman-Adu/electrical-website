@@ -10,7 +10,8 @@
       "Bash(pnpm test *)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger"
+      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
+      "c:\\Users\\herma\\.claude\\memory"
     ]
   }
 }
