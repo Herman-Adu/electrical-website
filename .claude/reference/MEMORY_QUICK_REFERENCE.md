@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-04-16
 
-Fast lookup for memory operations. See `.claude/rules/docker-memory-policy.md` for full details.
+Fast lookup for memory operations. See `.claude/rules/memory-policy.md` for full details.
 
 ---
 
@@ -229,8 +229,8 @@ curl http://localhost:7777/api/stats
 
 ## More Information
 
-- **Full policy:** `.claude/rules/docker-memory-policy.md`
+- **Full policy:** `.claude/rules/memory-policy.md`
 - **Setup guide:** `.claude/reference/setup/DOCKER_MEMORY_SETUP.md`
 - **Error recovery:** `.claude/reference/ERROR_RECOVERY.md` (if exists)
-- **Entity types:** Part 1 of docker-memory-policy.md
-- **Observation schema:** Part 2 of docker-memory-policy.md
+- **Entity types:** Part 1 of memory-policy.md
+- **Observation schema:** Part 2 of memory-policy.md

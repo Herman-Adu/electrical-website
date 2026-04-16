@@ -255,7 +255,7 @@ Your `.claude` infrastructure demonstrates **sophisticated orchestrator-driven d
 3. **Use Orchestrator Pattern on Next Feature**
    - Follow execution lifecycle from .claude/CLAUDE.md (preflight → delegate → synthesize → implement → verify → sync)
    - Delegate to SME agents in parallel; measure actual timing
-   - Capture learnings to .claude/memory/ for next session
+   - Capture learnings to Docker memory-reference service (via mcp__MCP_DOCKER__create_entities) for next session
    - Document any deviations or improvements needed
 
 4. **Plan Rule File Population**
@@ -289,7 +289,7 @@ Your `.claude` infrastructure demonstrates **sophisticated orchestrator-driven d
 - **Immediate:** Review updated CLAUDE.md files, share SECRETS_POLICY with team
 - **Short-term:** Create rules/naming-conventions.md after 3–5 features
 - **Medium-term:** Create rules/delegation-gates.md after 10+ features
-- **Ongoing:** Document learnings in .claude/memory/ after each feature
+- **Ongoing:** Document learnings in Docker memory service (via mcp__MCP_DOCKER__create_entities) after each feature
 
 ---
 

@@ -565,7 +565,7 @@ create_entities([session])
 
 For full schema definitions, query patterns, and troubleshooting, see:
 
-- `.claude/rules/docker-memory-policy.md` — detailed implementation guide
+- This file (`.claude/rules/memory-policy.md`) — Complete policy and implementation guide
 - `.claude/reference/MEMORY_QUICK_REFERENCE.md` — fast lookup card
 - `.claude/reference/ENTITY_SCHEMA_REFERENCE.md` — JSON schema per entity type
 - `.claude/reference/setup/DOCKER_MEMORY_SETUP.md` — service setup and health checks

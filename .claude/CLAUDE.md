@@ -351,7 +351,7 @@ If Docker memory service is down:
 - ✅ PR #87 merged to main (14 commits, all CI passing)
 - ✅ Fixed 4 SME agent AGENT.md files (added `description` field + sequential-thinking analysis methods)
 - ✅ Created ORCHESTRATOR_DISPATCH_PREAMBLE.md (Docker memory tools + MCP availability reference)
-- ✅ Fixed validation errors: removed `.claude/memory/` backtick references from policy docs
+- ✅ Fixed validation errors: updated policy docs to use generic language instead of specific old directory paths
 - ✅ Resolved merge conflicts: NEXT_SESSION_PROMPT.md and settings.json
 - ✅ Session lifecycle hooks configured: SessionStart (preflight), UserPromptSubmit (context monitor), PreCompact (safety)
 - ✅ All tests passing: 80 e2e + 128 unit/integration (4 skipped)

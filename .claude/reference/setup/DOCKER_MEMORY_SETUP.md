@@ -265,7 +265,7 @@ curl http://localhost:7777/api/entities?type=project_state
 
 **Fix:**
 - Re-run initialization step 5
-- Verify entity name spelling matches `.claude/rules/docker-memory-policy.md`
+- Verify entity name spelling matches `.claude/rules/memory-policy.md` (naming conventions section)
 
 ---
 
@@ -335,35 +335,13 @@ curl http://localhost:7777/api/stats
 
 ---
 
-## Migration from .md Files
+## Current Policy: Docker Memory Only
 
-If migrating from existing `.claude/memory/*.md` files:
+**As of 2026-04-17:** The project uses Docker `memory-reference` MCP service exclusively for persistent context. No `.md` files are used for memory storage.
 
-1. **Export existing memory:**
-   ```bash
-   # Read existing .md files
-   cat .claude/memory/project_*.md
-   cat .claude/memory/decisions/*.md
-   ```
+**Prohibited:** Creating `.md` files for memory, session state, staging, handoff, rehydration, or seeding purposes in any `.claude/` subdirectory.
 
-2. **Parse and convert to entities:**
-   ```bash
-   # Use script: .claude/scripts/migrate-memory-to-docker.sh
-   ./scripts/migrate-memory-to-docker.sh
-   ```
-
-3. **Verify migration:**
-   ```bash
-   # Check entity count matches prior files
-   curl http://localhost:7777/api/stats
-   ```
-
-4. **Archive old files:**
-   ```bash
-   mv .claude/memory .claude/archives/memory-backup-$(date +%Y-%m-%d)
-   git add .claude/archives/
-   git commit -m "chore: archive old .md memory files"
-   ```
+**All session context is persisted via Docker entities** (project_state, feature, learning, decision, infrastructure, session) and observations (build, test, blocker, learning, performance).
 
 ---
 
@@ -445,7 +423,7 @@ journalctl -u docker-memory --follow
 
 If you encounter issues:
 1. Capture output: `curl -v http://localhost:7777/health 2>&1 | tee debug.log`
-2. Check `.claude/rules/docker-memory-policy.md` Troubleshooting section
+2. Check `.claude/rules/memory-policy.md` Troubleshooting section
 3. Review `.claude/reference/ERROR_RECOVERY.md` (if exists)
 
 ---
