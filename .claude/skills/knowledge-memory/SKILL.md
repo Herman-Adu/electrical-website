@@ -31,6 +31,19 @@ It integrates with:
 
 ---
 
+## Docker Memory (Primary Source of Truth)
+
+Before searching file archives, query Docker first:
+
+1. **Search Docker:** `mcp__MCP_DOCKER__search_nodes("[topic keyword]")`
+2. **Load entities:** `mcp__MCP_DOCKER__open_nodes([returned_ids])`
+3. **If no Docker match:** proceed to file archive routing below
+4. **If storing:** create Docker entity first (`learning` or `decision` type), then optionally archive
+
+Entity types for knowledge: `learning` (patterns/insights), `decision` (architectural choices)
+
+---
+
 ## Execution Method
 
 1. **Parse the request**

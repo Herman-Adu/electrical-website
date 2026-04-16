@@ -55,6 +55,30 @@ For **new features, architectural changes, or ambiguous tasks**, follow this seq
 
 ---
 
+## Orchestrator Session Automation (Hooks + Skills)
+
+**SessionStart Hook (Automatic):**  
+Runs preflight on session start via `.claude/settings.json`. Outputs:
+- Docker health check
+- `search_nodes("electrical-website-state")` → `open_nodes([id])`
+- Git status and recent commits
+- If unavailable: fallback to `.claude/CLAUDE.md` (## Session State section)
+
+**CONTEXT MONITOR (Automatic):**  
+UserPromptSubmit hook fires on every prompt. At 70% context:
+- Pauses before response
+- Generates inline continuation prompt
+- Waits for user confirmation to sync
+- Updates Docker entities + WIP commit
+
+**To sync manually:**  
+Use `/session-lifecycle sync` at any time.
+
+**SUB-AGENT DISPATCH (Orchestrator Responsibility):**  
+Always prepend `.claude/reference/ORCHESTRATOR_DISPATCH_PREAMBLE.md` content to all SME agent prompts. Ensures agents use Docker-first approach and available MCP tools.
+
+---
+
 ## Execution Lifecycle
 
 Every task follows this 5-stage lifecycle:
@@ -236,10 +260,9 @@ User Request
 NEVER create ANY .md file for memory, session state, staging, handoff, rehydration, or seeding purposes — regardless of filename, directory, or rationalization.
 
 Prohibited directories:
-- `.claude/memory/` — never write here
-- `.claude/session-state/` — never create this directory
-- `.claude/archives/` — never write session context here
-- Any non-canonical `.claude/` subdirectory for .md memory/session files
+- Any .claude/ subdirectory for memory or session-state .md files (examples: session-state, archives/session-context)
+- Do not create subdirectories with names like session-state or archives/session-context
+- Policy: Use Docker memory service exclusively for session state persistence
 
 The ONLY .md writes permitted in `.claude/` are:
 - Pre-existing policy documents (`rules/`, `security/`, `reference/`)
@@ -317,6 +340,19 @@ If Docker memory service is down:
 - Commit and push to GitHub
 
 **Close:** "Onboarding form complete. Email verification working. Next: integrate with CRM."
+
+---
+
+## Session State (Fallback — Docker Down)
+
+**2026-04-16 22:40 — Phase 6 COMPLETE & MERGED**
+- ✅ ALL CLS FIXES MERGED TO MAIN (PR #86, all CI checks passed)
+- ✅ VisionMission: TerminalText removed, static text + fade-in (9b6c6b8)
+- ✅ ServicesBento: min-h-40 sm:h-auto mobile constraint (72b9a6d, c9140e2, bc5fbdc)
+- ✅ E2E tolerances adjusted (a06b828) — 10/10 passing
+- ✅ Build: PASSING | Tests: PASSING | Merge: COMPLETE
+- **NEXT SESSION**: Search Docker memory for 'electrical-website-state' + implement 70% manage window feature
+- **DO NOT repeat context** — read from Docker memory first, no file reads needed
 
 ---
 
