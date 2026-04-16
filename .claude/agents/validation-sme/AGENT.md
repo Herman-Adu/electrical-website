@@ -1,5 +1,6 @@
 ---
 name: validation-sme
+description: Sub-agent for validation analysis - input schemas, error handling, edge cases, async validation, and user feedback patterns.
 mode: analyze
 role: Analyzes input validation, error handling, edge cases, and constraints for user-facing features
 trigger: When designing forms, API endpoints, user input handling, or any feature accepting external data

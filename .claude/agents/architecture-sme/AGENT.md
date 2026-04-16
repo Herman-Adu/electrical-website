@@ -1,5 +1,6 @@
 ---
 name: architecture-sme
+description: Sub-agent for architecture analysis - component hierarchy, data flow, API contracts, performance implications, and architectural patterns.
 mode: analyze
 role: Analyzes component hierarchy, data flow, API contracts, render efficiency, and architectural trade-offs for new features
 trigger: When designing new features, refactoring components, or making decisions that affect component structure, lifting patterns, or performance

@@ -1,5 +1,6 @@
 ---
 name: security-sme
+description: Sub-agent for security analysis - authentication, authorization, secrets handling, OWASP compliance, and data sensitivity.
 mode: analyze
 role: Analyzes authentication, authorization, secrets handling, OWASP compliance, and data sensitivity for all features
 trigger: When handling user auth, processing PII, managing credentials, or exposing APIs to the internet

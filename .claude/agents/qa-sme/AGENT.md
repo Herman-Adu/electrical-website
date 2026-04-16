@@ -1,5 +1,6 @@
 ---
 name: qa-sme
+description: Sub-agent for QA analysis - test coverage requirements, edge cases, regression risks, and verification strategies.
 mode: analyze
 role: Analyzes test coverage requirements, edge cases, regression risks, and verification strategies for features
 trigger: When implementing features, refactoring components, or making changes that could introduce regressions
