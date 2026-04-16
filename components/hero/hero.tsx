@@ -11,6 +11,7 @@ import { HeroParallaxShell } from "./hero-parallax-shell";
 import { useHeroParallax } from "./use-hero-parallax";
 import { HERO_H1_SCREEN } from "./hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 
 const isClient = typeof window !== "undefined";
 
@@ -120,34 +121,20 @@ export function Hero() {
   const surgeOverlayRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
 
   // Boot sequence effect
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_MODULES",
-      "CALIBRATING",
-      "SYSTEM_READY",
-    ];
-
-    if (shouldReduceMotion) {
-      setStatusText(statuses.at(-1) ?? "SYSTEM_READY");
-      return;
-    }
-
-    let index = 0;
-    const interval = setInterval(() => {
-      index++;
-      if (index < statuses.length) {
-        setStatusText(statuses[index]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 400);
-    return () => clearInterval(interval);
   }, []);
+
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_MODULES",
+    "CALIBRATING",
+    "SYSTEM_READY",
+  ];
+
+  const { currentText: statusText } = useCyclingText(statuses, 400);
 
   // GSAP circuit draw-in animation only (parallax handled by shared Framer system)
   useEffect(() => {
