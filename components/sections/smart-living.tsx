@@ -17,15 +17,10 @@ export function SmartLiving() {
 
     updateViewportMode();
 
-    if (typeof mediaQuery.addEventListener === "function") {
-      mediaQuery.addEventListener("change", updateViewportMode);
+    // Use modern addEventListener API (fully supported in modern browsers)
+    mediaQuery.addEventListener("change", updateViewportMode);
 
-      return () => mediaQuery.removeEventListener("change", updateViewportMode);
-    }
-
-    mediaQuery.addListener(updateViewportMode);
-
-    return () => mediaQuery.removeListener(updateViewportMode);
+    return () => mediaQuery.removeEventListener("change", updateViewportMode);
   }, []);
 
   const { inView } = useIntersectionObserverAnimation({

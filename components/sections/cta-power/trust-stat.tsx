@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useMotionValue, useSpring } from "framer-motion";
 
 type TrustStatProps = {
   value: number;
@@ -19,27 +20,44 @@ export function TrustStat({
   isInView,
 }: TrustStatProps) {
   const [count, setCount] = useState(0);
+  const motionValue = useMotionValue(0);
 
+  // Spring animation for smooth 60fps counter
+  const springValue = useSpring(motionValue, {
+    stiffness: 100,
+    damping: 30,
+    mass: 1,
+  });
+
+  // Listen to spring value changes and update count
   useEffect(() => {
-    if (!isInView) {
-      setCount(0);
-      return;
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = springValue.on("change", (latest: number) => {
+        setCount(Math.round(Math.min(latest, value)));
+      });
+    } catch {
+      // Fallback if motion library not fully hydrated
+      setCount(Math.round(motionValue.get()));
     }
 
-    let current = 0;
-    const increment = Math.ceil(value / 30);
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(current);
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
       }
-    }, 50);
+    };
+  }, [springValue, value, motionValue]);
 
-    return () => clearInterval(timer);
-  }, [isInView, value]);
+  // Trigger animation when isInView changes
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value);
+    } else {
+      motionValue.set(0);
+      setCount(0);
+    }
+  }, [isInView, value, motionValue]);
 
   return (
     <motion.div
