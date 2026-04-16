@@ -145,7 +145,7 @@ Your `.claude` infrastructure demonstrates **sophisticated orchestrator-driven d
 - **What was added:**
   - Unified error recovery table (analysis conflict → document trade-off; ambiguous requirements → ask for clarification; build gate fails → investigate root cause)
   - Incident procedures in security/README.md (secret exposed, suspected vulnerability, suspicious activity)
-- **Future work:** Create `.claude/rules/error-recovery-playbooks.md` with step-by-step procedures for common failures
+- **Future work:** Create error-recovery-playbooks.md in rules/ with step-by-step procedures for common failures
 
 ---
 
