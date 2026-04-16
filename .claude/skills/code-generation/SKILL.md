@@ -1,6 +1,6 @@
 ---
 name: code-generation
-description: Use when someone asks to generate code, refactor code, explain code, create components, write tests, debug errors, or document modules.
+description: Use this skill WHENEVER the user mentions code, files, implementation, or debugging — even if they don't explicitly ask for "code generation". Use for: writing new code, refactoring existing code, explaining logic, implementing features, creating components/functions, writing tests (unit/integration/e2e), debugging errors, documenting code. Trigger on: "how do I", "I'm stuck", "can you fix", "what's wrong with this", "build X", "implement Y", "why does this fail", or any mention of TypeScript, React, API endpoints, database queries, or specific languages/frameworks.
 argument-hint: "[language, goal, or description]"
 disable-model-invocation: true
 ---
@@ -23,111 +23,20 @@ It integrates with:
 
 ## Execution Method
 
-### Super Powers Workflow (Recommended for Large Features)
+Choose your workflow based on task size and requirements:
 
-Use this workflow for substantial features, architectural decisions, or multi-component projects (2–3h+ effort). This pattern combines spec-driven development (TDD) with subagent orchestration.
+→ See [README.md](README.md) for detailed **Super Powers Workflow** (large features) and **Standard Workflow** (quick tasks) including step-by-step instructions and decision matrix.
 
-**Step 0: Brainstorm** (via extended thinking)
-- Goal: Generate a comprehensive spec document before any code
-- Process: Use sequential thinking (mcp__MCP_DOCKER__sequentialthinking) to explore:
-  - Feature scope + boundaries
-  - User stories + acceptance criteria
-  - Component architecture + data flow
-  - Error scenarios + edge cases
-- Output: Structured spec doc (markdown, 500–1000 words)
-- Why: Specs reduce rework, ensure requirements clarity, enable TDD
-- **Live context:** Inject project context (context/work.md, current project stack)
+**Quick reference:**
+- **Super Powers:** Use for features 2–3h+, architecture redesigns, critical features
+- **Standard:** Use for bug fixes, quick refactors, one-off utilities
 
-**Step 1: Write Plan** (via sequential thinking + Context7)
-- Goal: Create an implementation roadmap from the spec
-- Process:
-  - Inject Context7 library docs (resolve framework → get-library-docs)
-  - Use sequential thinking to design component hierarchy, API surface, test structure
-  - Break down into subtasks: setup, core features, error handling, tests, docs
-- Output: Implementation plan with file structure, component signatures, test outline
-- Why: Plans enable parallel work, reduce backtracking, target 60–70% token savings
-- **Live context:** Include framework docs, project style guide, testing patterns
-
-**Step 2: Execute Plan** (via agent delegation + auto-review)
-- Goal: Generate code + tests following the plan
-- Process:
-  - Delegate to code-generation agent for each subtask (components, tests, etc.)
-  - Generate tests FIRST (TDD discipline)
-  - Generate implementation code to make tests pass
-  - Generate docs/exports
-  - Auto-review: Check code against spec, verify tests pass, validate types
-- Output: Production-ready code (components, tests, documentation)
-- Why: Structured execution reduces errors, TDD ensures correctness, auto-review catches issues early
-
-**Metrics:** Super Powers workflow targets 60–70% token savings vs. baseline (3,000–5,000 tokens per 10h feature vs. 8,000 baseline)
-
----
-
-### Standard Workflow (For Small Tasks, Bug Fixes, Refactoring)
-
-Use for debugging, small refactors, one-off code generation, or when speed is more important than comprehensive planning.
-
-1. **Parse the request**
-   - The request is: $ARGUMENTS
-   - Identify the language (JS, TS, Python, Go, Rust, etc.)
-   - Identify the framework (React, Next.js, Node, Express, etc.)
-   - Identify the goal (build, refactor, debug, document)
-
-2. **Fetch context via Context7** (if needed)
-   - Before agent delegation, resolve relevant library documentation:
-   - Identify framework/library involved (e.g., "React", "TypeScript", "Node.js")
-   - Call `mcp__MCP_DOCKER__resolve-library-id [framework-name]` to identify exact library ID
-   - Call `mcp__MCP_DOCKER__get-library-docs [library-id]` to fetch current docs
-   - Inject resolved docs into agent context for accurate, up-to-date patterns
-   - Fallback: If library resolution fails, proceed with agent using cached patterns from training data
-   - **Why:** Ensures code follows latest framework conventions, API changes, and best practices (not stale training data)
-
-3. **If needed, call the Code Generation Agent**
-   - Call `.claude/agents/code-generation/AGENT.md` with:
-     - `subtask`: [the specific technical request: debugging, refactoring, test generation, error explanation, architecture mapping, or language transformation]
-     - `code`: [optional code to analyze]
-     - `context`: [stack preferences, project notes, architectural patterns, + Context7 library docs if resolved]
-   - Use the agent for: code analysis, technical subtasks, pattern identification, refactoring strategies
-   - Do NOT use the agent for: final output polish or documentation (keep at Opus level)
-
-4. **Apply best practices**
-   - Use modern, idiomatic patterns
-   - Follow security and performance guidelines
-   - Respect the user’s preferred stack (stored in context)
-
-5. **Integrate Planning Skill (optional)**
-   - If the request is part of a dev project, update dev tasks
-
-6. **Generate the final output** (ultrathink)
-   - Synthesize all analysis, best practices, and framework knowledge
-   - Clean, readable, production-ready code
-   - Or clear explanations, diagrams, or documentation
-
----
-
-## When to Use Each Workflow
-
-| Scenario | Use | Why |
-|----------|-----|-----|
-| New feature (2–3h+) | **Super Powers** | Specs prevent rework, TDD ensures correctness, 60–70% token savings |
-| Bug fix / Quick refactor | **Standard** | Faster feedback loop, less overhead |
-| Ambiguous requirements | **Super Powers** | Brainstorm step clarifies scope before building |
-| Performance optimization | **Standard** | Quick analysis + targeted fixes; minimal planning needed |
-| Architecture redesign | **Super Powers** | Plan step ensures stakeholder alignment, prevents mistakes |
-| One-off utility function | **Standard** | Overhead not justified |
-| Critical production feature | **Super Powers** | TDD + auto-review catches issues early |
-
----
-
-## Super Powers Subagent Orchestration
-
-When using Super Powers workflow:
-- **Brainstorm** delegate to sequential thinking (built-in)
-- **Plan** step can delegate to planning skill for roadmap synthesis
-- **Execute** step delegates to code-generation agent (Haiku) for fast iterations
-- **Auto-review** returns to Opus level (this skill) for final polish
-- **Main context stays clean:** All heavy lifting delegated; main skill coordinates
-- **Token efficiency:** Specialized agents (Haiku) handle 80% of work; Opus handles 20% (coordination + synthesis)
+**Core steps for both:**
+1. Parse request (language, framework, goal)
+2. Fetch context via Context7 (if needed) for latest framework docs
+3. Delegate to code-generation agent (if needed)
+4. Apply best practices
+5. Generate output and verify
 
 ---
 
