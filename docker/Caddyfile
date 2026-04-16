@@ -136,6 +136,22 @@
     }
   }
 
+  # YouTube Transcript Service: Transcript extraction
+  # Rate limit: 40 requests/min
+  handle /youtube/* {
+    rate_limit {
+      zone youtube {
+        key {remote_host}
+        events 40
+        window 1m
+      }
+    }
+    uri strip_prefix /youtube
+    reverse_proxy youtube-transcript:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
   # Catch-all: return 404 for undefined routes
   respond "Service not found" 404
 
