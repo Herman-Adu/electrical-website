@@ -92,7 +92,8 @@ export function NavbarClient() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    // Use passive flag for better scroll performance (can't prevent scroll anyway)
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

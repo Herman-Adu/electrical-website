@@ -6,13 +6,20 @@ export function MouseGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile on component mount
   useEffect(() => {
-    // Check if mobile on mount
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const checkMobile = () => window.innerWidth < 1024;
+    setIsMobile(checkMobile());
 
-    if (isMobile) return;
+    const handleResize = () => setIsMobile(checkMobile());
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Mouse move handler - only runs on desktop (effect early returns if mobile)
+  useEffect(() => {
+    if (isMobile) return; // Skip on mobile
 
     const handleMouseMove = (e: MouseEvent) => {
       if (glowRef.current) {
@@ -26,12 +33,8 @@ export function MouseGlow() {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", checkMobile);
     };
   }, [isMobile]);
-
-  // Don't render on mobile for performance
-  if (isMobile) return null;
 
   return (
     <div

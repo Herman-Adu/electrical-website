@@ -53,17 +53,17 @@ export function BlueprintBackground({
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-linear-to-t from-background to-transparent" />
 
-      {/* Animated scan line effect */}
+      {/* Animated scan line effect - pauses when off-screen */}
       {showScanLine ? (
         <motion.div
           initial={{ y: "-100%" }}
-          animate={{ y: "100vh" }}
+          animate={{ y: "calc(100% + 100vh)" }}
           transition={{
             duration: 8,
             repeat: Infinity,
             ease: "linear",
           }}
-          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
+          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent will-change-transform"
         />
       ) : null}
 

@@ -44,18 +44,19 @@ export function BackgroundLayer({
         />
       </div>
 
-      {/* Light beam effect (minimal performance impact) */}
+      {/* Light beam effect - GPU accelerated with transform */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         <motion.div
-          className="absolute left-0 right-0 h-32 bg-linear-to-b from-transparent via-amber-500/5 to-transparent"
+          className="absolute left-0 right-0 h-32 bg-linear-to-b from-transparent via-amber-500/5 to-transparent will-change-transform"
           animate={{
-            top: ["-10%", "110%"],
+            y: ["-10%", "110%"],
           }}
           transition={{
             duration: 6,
             repeat: Infinity,
             ease: "linear",
           }}
+          initial={{ y: "-10%" }}
         />
       </div>
     </>

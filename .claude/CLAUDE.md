@@ -60,46 +60,48 @@ For **new features, architectural changes, or ambiguous tasks**, follow this seq
 Every task follows this 5-stage lifecycle:
 
 ```
-┌─────────────────────────────────────────────────┐
-│ 1. PREFLIGHT & MEMORY HYDRATION                  │
-│    ├─ Load project memory from .claude/memory/  │
-│    ├─ Check git status and recent commits       │
-│    ├─ Review project .claude/CLAUDE.md           │
-│    └─ Understand active context (phase, goals)  │
-├─────────────────────────────────────────────────┤
-│ 2. DELEGATED ANALYSIS (Parallel)                 │
-│    ├─ Dispatch Architecture SME agent            │
-│    ├─ Dispatch Validation SME agent              │
-│    ├─ Dispatch Security SME agent                │
-│    ├─ Dispatch QA SME agent                      │
-│    └─ Collect findings → unified requirements   │
-├─────────────────────────────────────────────────┤
-│ 3. SYNTHESIS & PLANNING                          │
-│    ├─ Combine agent findings                     │
-│    ├─ Resolve conflicts (with reasoning)         │
-│    ├─ Create execution plan:                     │
-│    │  ├─ File structure changes                  │
-│    │  ├─ Component signatures                    │
-│    │  ├─ Test outline                            │
-│    │  └─ Security checklist                      │
-│    └─ Validate against standards                 │
-├─────────────────────────────────────────────────┤
-│ 4. IMPLEMENTATION & VERIFICATION                 │
-│    ├─ Execute plan via orchestrator coordination │
-│    ├─ Delegate complex subtasks; implement simple│
-│    ├─ Run verification gates:                    │
-│    │  ├─ pnpm typecheck                          │
-│    │  ├─ pnpm build                              │
-│    │  ├─ pnpm test                               │
-│    │  └─ Security/regression checks              │
-│    └─ Iterate if gates fail                      │
-├─────────────────────────────────────────────────┤
-│ 5. MEMORY SYNC & TASK CLOSE                      │
-│    ├─ Update .claude/memory/ with learnings     │
-│    ├─ Document decisions in decisions/log.md     │
-│    ├─ Close task tracking (GitHub issue, etc.)   │
-│    └─ Report completion + next steps             │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ 1. PREFLIGHT & MEMORY HYDRATION                             │
+│    ├─ mcp__MCP_DOCKER__search_nodes [project/phase name]   │
+│    ├─ mcp__MCP_DOCKER__open_nodes [returned entity IDs]    │
+│    ├─ Check git status and recent commits                   │
+│    ├─ Review project .claude/CLAUDE.md                       │
+│    └─ Understand active context (phase, goals, decisions)   │
+├─────────────────────────────────────────────────────────────┤
+│ 2. DELEGATED ANALYSIS (Parallel)                            │
+│    ├─ Dispatch Architecture SME agent                        │
+│    ├─ Dispatch Validation SME agent                          │
+│    ├─ Dispatch Security SME agent                            │
+│    ├─ Dispatch QA SME agent                                  │
+│    └─ Collect findings → unified requirements               │
+├─────────────────────────────────────────────────────────────┤
+│ 3. SYNTHESIS & PLANNING                                     │
+│    ├─ Combine agent findings                                 │
+│    ├─ Resolve conflicts (with reasoning)                     │
+│    ├─ Create execution plan:                                 │
+│    │  ├─ File structure changes                              │
+│    │  ├─ Component signatures                                │
+│    │  ├─ Test outline                                        │
+│    │  └─ Security checklist                                  │
+│    └─ Validate against standards                             │
+├─────────────────────────────────────────────────────────────┤
+│ 4. IMPLEMENTATION & VERIFICATION                            │
+│    ├─ Execute plan via orchestrator coordination             │
+│    ├─ Delegate complex subtasks; implement simple            │
+│    ├─ Run verification gates:                                │
+│    │  ├─ pnpm typecheck                                      │
+│    │  ├─ pnpm build                                          │
+│    │  ├─ pnpm test                                           │
+│    │  └─ Security/regression checks                          │
+│    └─ Iterate if gates fail                                  │
+├─────────────────────────────────────────────────────────────┤
+│ 5. MEMORY SYNC & TASK CLOSE                                 │
+│    ├─ mcp__MCP_DOCKER__create_entities [new learning/phase] │
+│    ├─ mcp__MCP_DOCKER__add_observations [findings, outcomes]│
+│    ├─ mcp__MCP_DOCKER__create_relations [link to existing]  │
+│    ├─ Close task tracking (GitHub issue, etc.)              │
+│    └─ Report completion + next steps                         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 **Time Allocation (typical feature):**
@@ -169,13 +171,10 @@ Organized by purpose:
 │   ├── pre-deploy-checklist.md # Things to verify before shipping
 │   └── orchestrator-checklist.md # Self-check for orchestrator behavior
 │
-├── memory/                     # Persistent knowledge across sessions
-│   ├── user_*.md              # Your role, preferences, expertise
-│   ├── feedback_*.md          # Rules learned (what works, what doesn't)
-│   ├── project_*.md           # Active work, goals, deadlines
-│   └── reference_*.md         # External doc pointers (Linear, etc.)
+├── rules/memory-policy.md      # Docker memory schema + naming conventions
 │
 └── CLAUDE.md                  # This file: orchestrator contract
+    └── ## Session State        # Emergency fallback notes (Docker down only)
 ```
 
 ---
@@ -229,16 +228,56 @@ User Request
 
 ---
 
-## Memory System (.claude/memory/)
+## Memory System — Docker First
 
-Persistent across sessions. Types:
+**SINGLE SOURCE OF TRUTH:** Docker `memory-reference` service via MCP tools  
 
-| Type | Purpose | When to Save |
-|------|---------|------------|
-| `user_*.md` | Your role, expertise, preferences | When you reveal new context about yourself |
-| `feedback_*.md` | Rules learned: what works, what doesn't | When corrections or validations occur |
-| `project_*.md` | Active work, goals, deadlines, phase | When understanding project state evolves |
-| `reference_*.md` | Pointers to external docs (Linear, Jira, etc.) | When discovering new documentation sources |
+**UNIVERSAL PROHIBITION:**
+NEVER create ANY .md file for memory, session state, staging, handoff, rehydration, or seeding purposes — regardless of filename, directory, or rationalization.
+
+Prohibited directories:
+- `.claude/memory/` — never write here
+- `.claude/session-state/` — never create this directory
+- `.claude/archives/` — never write session context here
+- Any non-canonical `.claude/` subdirectory for .md memory/session files
+
+The ONLY .md writes permitted in `.claude/` are:
+- Pre-existing policy documents (`rules/`, `security/`, `reference/`)
+- Skill/agent definition files (`skills/`, `agents/`)
+- One-line fallback note in CLAUDE.md `## Session State` (Docker down only)
+
+**If Docker entities do not exist yet: CREATE THEM IMMEDIATELY via mcp__MCP_DOCKER__create_entities().**  
+**Never stage entity data in .md files "ready to seed later."**
+
+### Rehydration (Session Start)
+
+1. **Search:** `mcp__MCP_DOCKER__search_nodes("electrical-website")` → finds project entities
+2. **Load:** `mcp__MCP_DOCKER__open_nodes([entity_ids])` → pull entities + relations
+3. **Cost:** ~50 tokens vs ~5,000+ tokens for `.md` files
+
+### Sync (Session End)
+
+1. **Create:** `mcp__MCP_DOCKER__create_entities` → new phases, decisions, learnings
+2. **Observe:** `mcp__MCP_DOCKER__add_observations` → append findings to existing entities
+3. **Link:** `mcp__MCP_DOCKER__create_relations` → connect work to prior context
+
+### Entity Types
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `project_state` | Current branch, build status, next tasks | `"electrical-website-state"` |
+| `feature` | Completed/in-progress work | `"phase5-animation-optimization"` |
+| `learning` | Technical patterns discovered | `"hook-rules-conditional-effects"` |
+| `infrastructure` | Docker services, MCP tools | `"mcp-infrastructure"` |
+| `decision` | Architectural choices + rationale | `"docker-memory-policy"` |
+| `session` | Handoff context for continuation | `"session-2026-04-16"` |
+
+### Fallback (Docker Unavailable)
+
+If Docker memory service is down:
+- Write ONE one-line note into `## Session State` section of this file (e.g., "2026-04-16 10:00 — Phase 5 animation work paused on component X")
+- **Do NOT create `.md` memory files** under any circumstance
+- Priority: Resume work next session by reading Git history + code state
 
 **Principle:** Memory informs decisions; local code is source of truth for implementation details.
 
@@ -273,9 +312,9 @@ Persistent across sessions. Types:
 - ✅ Build passes
 - ✅ Tests pass
 - ✅ Security checklist complete
-- Save plan to `archives/plans/YYYY-MM-DD-onboarding-form.md`
-- Update `decisions/log.md`
-- Update memory with learnings
+- Sync session context: `mcp__MCP_DOCKER__add_observations(project_state_id, [session_end])`
+- Create session entity: `mcp__MCP_DOCKER__create_entities([session])`
+- Commit and push to GitHub
 
 **Close:** "Onboarding form complete. Email verification working. Next: integrate with CRM."
 

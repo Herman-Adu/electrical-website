@@ -136,10 +136,12 @@ services:
 
   nextjs-devtools:
     image: node:22-alpine
-    working_dir: /srv
+    working_dir: /workspace
     command: ["node", "/srv/server.js"]
     volumes:
       - ./docker/nextjs-devtools/server.js:/srv/server.js:ro
+      - .:/workspace:ro
+      - /workspace/node_modules
     expose:
       - "8000"
     healthcheck:
