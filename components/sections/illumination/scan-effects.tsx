@@ -5,17 +5,19 @@ import { motion } from "framer-motion";
 export function ScanEffects() {
   return (
     <>
+      {/* Scan line - GPU accelerated with transform instead of top property */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         <motion.div
           className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent will-change-transform"
           animate={{
-            top: ["0%", "100%"],
+            y: ["0%", "100%"],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
             ease: "linear",
           }}
+          initial={{ y: "0%" }}
         />
       </div>
 
