@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import {
   Activity,
   ChevronDown,
@@ -103,39 +104,23 @@ export function NewsCategoryHero({
   articleCount,
 }: NewsCategoryHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-  const shouldReduce = useReducedMotion();
 
   const config = categoryConfig[category.slug] ?? fallbackConfig;
 
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_CATEGORY",
-      "INDEXING_ARTICLES",
-      "CATEGORY_READY",
-    ];
+  }, []);
 
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "CATEGORY_READY");
-      return;
-    }
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_CATEGORY",
+    "INDEXING_ARTICLES",
+    "CATEGORY_READY",
+  ];
 
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-
-    return () => clearInterval(interval);
-  }, [shouldReduce]);
+  const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToArticles = () => {
     const el = document.getElementById("category-articles");
