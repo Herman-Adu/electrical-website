@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import {
   Activity,
   ChevronDown,
@@ -83,39 +84,24 @@ export function ProjectCategoryHero({
   projectCount,
 }: ProjectCategoryHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-  const shouldReduce = useReducedMotion();
 
   const config = categoryConfig[category.slug] ?? fallbackConfig;
   const hasImage = Boolean(config.image);
 
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_CATEGORY",
-      "FETCHING_PROJECTS",
-      "CATEGORY_READY",
-    ];
-
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "CATEGORY_READY");
-      return;
-    }
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-    return () => clearInterval(interval);
   }, []);
+
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_CATEGORY",
+    "FETCHING_PROJECTS",
+    "CATEGORY_READY",
+  ];
+
+  const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToProjects = () => {
     const el = document.getElementById("category-projects");
