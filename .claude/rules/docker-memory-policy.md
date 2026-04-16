@@ -603,7 +603,7 @@ Every session follows this lifecycle to maintain context and update Docker memor
 
 4. **Load CLAUDE.md:**
    - Read `.claude/CLAUDE.md` for orchestrator contract
-   - Check `.claude/CLAUDE.md## Session State` fallback section (if Docker was down)
+   - Check .claude/CLAUDE.md (## Session State section) fallback section (if Docker was down)
 
 5. **Determine work focus:**
    - If session state indicates active feature: load that feature entity
@@ -715,7 +715,7 @@ Every session follows this lifecycle to maintain context and update Docker memor
 
 6. **Update CLAUDE.md** (if Docker unavailable):
    - **Only if Docker service is down**
-   - Add one-line note to `.claude/CLAUDE.md## Session State` section
+   - Add one-line note to .claude/CLAUDE.md (## Session State section) section
    - Example: `2026-04-16 20:15 — Phase 5 animation work complete. Next: scroll testing.`
 
 7. **Commit and push:**
@@ -960,7 +960,7 @@ Use this checklist at session start and end to maintain memory hygiene.
 - [ ] Docker service is reachable (`curl http://localhost:7777/`)
 - [ ] Load project state: `search_nodes("electrical-website-state")`
 - [ ] Read active phase and next tasks from project state
-- [ ] Check `.claude/CLAUDE.md## Session State` for fallback notes (if any)
+- [ ] Check .claude/CLAUDE.md (## Session State section) for fallback notes (if any)
 - [ ] Load current feature entity (if in-progress work exists)
 - [ ] Check for unresolved blockers in feature observations
 - [ ] Read recent learnings related to current phase
@@ -984,7 +984,7 @@ Use this checklist at session start and end to maintain memory hygiene.
 - [ ] Create learnings: `create_entities([learn-...])`
 - [ ] Create relations: `create_relations([...])`
 - [ ] Verify Docker operations succeeded (check for errors)
-- [ ] If Docker failed: add fallback note to `.claude/CLAUDE.md## Session State`
+- [ ] If Docker failed: add fallback note to .claude/CLAUDE.md (## Session State section)
 - [ ] Push changes: `git push`
 
 ---
@@ -999,7 +999,7 @@ To activate this policy:
 - [ ] Update `.claude/CLAUDE.md` to reference this policy
 - [ ] Update session preflight workflow to call `search_nodes("electrical-website-state")`
 - [ ] Train all agents and scripts to use entity naming conventions
-- [ ] Create `.claude/CLAUDE.md## Session State` section (for fallback)
+- [ ] Create .claude/CLAUDE.md (## Session State section) section (for fallback)
 - [ ] Migrate initial context from `.claude/memory/` to Docker (one-time)
 - [ ] Test Docker service health check in CI/CD
 - [ ] Document fallback procedure in runbooks
@@ -1126,7 +1126,7 @@ Team Meeting:
 1. Confirm docker daemon is running: `docker ps`
 2. Confirm MCP server is listening: `curl http://localhost:7777/health`
 3. If down: restart Docker MCP service (instructions in `.claude/reference/setup/`)
-4. If still down: use fallback (write to `.claude/CLAUDE.md## Session State`)
+4. If still down: use fallback (write to .claude/CLAUDE.md (## Session State section))
 
 ### Entity not found
 

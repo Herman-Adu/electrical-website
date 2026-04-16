@@ -591,7 +591,7 @@ Use at session close to confirm memory hygiene before committing.
 - [ ] Decisions recorded for any architectural choices made
 - [ ] Relations wired: new entities linked to existing context
 - [ ] No `.claude/memory/*.md` files written during this session
-- [ ] Fallback note in `.claude/CLAUDE.md## Session State`: present only if Docker was down; deleted if Docker recovered
+- [ ] Fallback note in .claude/CLAUDE.md (## Session State section): present only if Docker was down; deleted if Docker recovered
 - [ ] Git pushed: `git push` confirmed
 
 ### Policy Compliance Check
