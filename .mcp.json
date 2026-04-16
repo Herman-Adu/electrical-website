@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "MCP_DOCKER": {
+      "type": "http",
+      "url": "http://localhost:3100/mcp"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem",
+               "C:/Users/herma/source/repository/electrical-website"]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git",
+               "--repository", "C:/Users/herma/source/repository/electrical-website"]
+    }
+  }
+}

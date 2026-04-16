@@ -41,6 +41,8 @@ services:
         condition: service_healthy
       youtube-transcript:
         condition: service_healthy
+      mcp-aggregator:
+        condition: service_healthy
     restart: unless-stopped
 
   github-official:
@@ -136,10 +138,12 @@ services:
 
   nextjs-devtools:
     image: node:22-alpine
-    working_dir: /srv
+    working_dir: /workspace
     command: ["node", "/srv/server.js"]
     volumes:
       - ./docker/nextjs-devtools/server.js:/srv/server.js:ro
+      - .:/workspace:ro
+      - /workspace/node_modules
     expose:
       - "8000"
     healthcheck:
@@ -199,6 +203,38 @@ services:
       timeout: 3s
       retries: 5
       start_period: 5s
+    restart: unless-stopped
+
+  mcp-aggregator:
+    build: ./docker/mcp-aggregator
+    working_dir: /srv
+    expose:
+      - "8000"
+    depends_on:
+      github-official:
+        condition: service_healthy
+      openapi-schema:
+        condition: service_healthy
+      playwright:
+        condition: service_healthy
+      sequential-thinking:
+        condition: service_healthy
+      memory-reference:
+        condition: service_healthy
+      nextjs-devtools:
+        condition: service_healthy
+      executor-playwright:
+        condition: service_healthy
+      wikipedia:
+        condition: service_healthy
+      youtube-transcript:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     restart: unless-stopped
 
 volumes:
