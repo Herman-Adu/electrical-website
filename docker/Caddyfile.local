@@ -51,5 +51,10 @@
     reverse_proxy youtube-transcript:8000
   }
 
+  handle /mcp* {
+    uri strip_prefix /mcp
+    reverse_proxy mcp-aggregator:8000
+  }
+
   respond "Service not found" 404
 }
