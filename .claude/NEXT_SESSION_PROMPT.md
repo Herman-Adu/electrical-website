@@ -164,7 +164,7 @@ Review Phase 5 learnings and decisions from Docker memory:
 ## 🛡️ Docker Memory System Rules
 
 **NEVER:**
-- Create .md files in `.claude/memory/` (prohibited by policy)
+- Create .md files for memory in any .claude/ subdirectory (prohibited by policy)
 - Skip Docker rehydration at session start
 - Commit context to git (use Docker only)
 - Manually stage entity data "to seed later" (create immediately via Docker)

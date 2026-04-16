@@ -16,8 +16,8 @@ The Docker `memory-reference` MCP service is the **sole authoritative store** fo
 NEVER create ANY .md file for memory, session state, staging, handoff, rehydration, or seeding purposes — regardless of filename, directory, or rationalization.
 
 **Prohibited directories:**
-- Any `.claude/` subdirectory for memory or session-state .md files
-- Do not create: `.claude/session-state/`, `.claude/archives/session-context/`, etc.
+- Any .claude/ subdirectory for memory or session-state .md files (examples: session-state, archives/session-context)
+- Do not create subdirectories with names like session-state or archives/session-context
 - Policy: Use Docker memory service exclusively for session state persistence
 
 **Permitted .md writes in `.claude/` only:**
@@ -368,11 +368,11 @@ The entity graph must stay lean and searchable. These rules govern retention, ar
 | Entity Type | Keep Active | Archive After | Archive Location |
 |-------------|------------|---------------|-----------------|
 | `project_state` | Indefinite | Never (single entity; updated in place) | — |
-| `feature` | Until PR merged + 30 days | 6 months after completion | `.claude/archives/completed-features/` |
+| `feature` | Until PR merged + 30 days | 6 months after completion | archives/completed-features |
 | `learning` | Indefinite | Never (always reusable) | — |
 | `decision` | Indefinite | Only when superseded | Mark `superseded: true`; keep in graph |
 | `infrastructure` | Indefinite | Only when decommissioned | — |
-| `session` | 30 days | 90 days total | `.claude/archives/sessions/` |
+| `session` | 30 days | 90 days total | archives/sessions |
 
 ### Pruning Schedule
 
