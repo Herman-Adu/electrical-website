@@ -4,7 +4,9 @@
       "Bash(pnpm build:*)",
       "WebFetch(domain:github.com)",
       "Edit(/.claude/skills/framer-motion/**)",
-      "Edit(/.claude/skills/aos-scroll-reveal/**)"
+      "Edit(/.claude/skills/aos-scroll-reveal/**)",
+      "mcp__MCP_DOCKER__create_entities",
+      "Bash(pnpm typecheck *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger"
