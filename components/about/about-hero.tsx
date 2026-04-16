@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { useCyclingText } from "@/lib/hooks/useCyclingText";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,37 +44,13 @@ const stats = [
 ];
 
 export function AboutHero() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-  const shouldReduce = useReducedMotion();
 
-  useEffect(() => {
-    setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_PROFILE",
-      "VERIFYING_RECORDS",
-      "SYSTEM_READY",
-    ];
-
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "SYSTEM_READY");
-      return;
-    }
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-    return () => clearInterval(interval);
-  }, []);
+  const { currentText: statusText } = useCyclingText({
+    items: ["INITIALIZING", "LOADING_PROFILE", "VERIFYING_RECORDS", "SYSTEM_READY"],
+    interval: 380,
+  });
 
   const scrollToContent = () => {
     const next = document.getElementById("company-intro");
@@ -216,7 +193,7 @@ export function AboutHero() {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
+          animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
           {/* Status label */}
