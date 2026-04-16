@@ -378,7 +378,7 @@ function DiagnosticCard({ delay }: { delay: number }) {
         active installations.
       </p>
 
-      <div className="flex-1 min-h-25 p-3 rounded-xl dark:bg-black/40 bg-white border dark:border-electric-cyan/10 border-slate-200/70 font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/25 transition-colors">
+      <div className="flex-1 min-h-25 h-40 sm:h-auto p-3 rounded-xl dark:bg-black/40 bg-white border dark:border-electric-cyan/10 border-slate-200/70 font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/25 transition-colors">
         <div className="dark:text-electric-cyan/80 text-slate-700 whitespace-pre-line">
           {displayText}
         </div>
