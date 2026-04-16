@@ -1,0 +1,98 @@
+{
+  "memoryLanes": {
+    "animation_phase2_complete": {
+      "id": "agent:v1:animation:phase2:2026-04-16-complete",
+      "name": "Animation Phase 2 - Complete",
+      "description": "Phase 2 animation optimization - filter animations replaced with GPU-accelerated opacity overlays",
+      "type": "project_phase",
+      "tags": ["animation", "performance", "gpu-acceleration"],
+      "content": {
+        "phase": "Phase 2",
+        "status": "complete",
+        "commit": "7b1cd46",
+        "date": "2026-04-16",
+        "changes": [
+          "smart-living parallax: brightness/saturation filter → opacity overlay + mix-blend-multiply",
+          "use-animated-counter: Already using Framer Motion animate() with proper cleanup",
+          "Added will-change hints and CSS contain property for optimization"
+        ],
+        "performance_targets": {
+          "desktop_fps": "60",
+          "mobile_fps": "45+",
+          "cpu_reduction": "35-40%"
+        },
+        "files_modified": [
+          "components/sections/smart-living/background-layer.tsx",
+          "components/sections/smart-living.tsx",
+          "hooks/use-animated-counter.ts"
+        ]
+      }
+    },
+    "animation_phase3_queue": {
+      "id": "agent:v1:animation:phase3:2026-04-16-queue",
+      "name": "Animation Phase 3 - Queued Tasks",
+      "description": "Phase 3 optimization tasks - scroll brightness effects, scan line batching, bulk will-change",
+      "type": "project_queue",
+      "tags": ["animation", "phase3", "queued"],
+      "content": {
+        "phase": "Phase 3",
+        "status": "queued",
+        "tasks": [
+          {
+            "priority": 1,
+            "name": "Illumination brightness scroll effect optimization",
+            "description": "Preserve scroll brightness animation (0.3 → 1), replace filter with opacity overlay + mix-blend-multiply",
+            "files": [
+              "components/sections/illumination/background-parallax.tsx",
+              "components/sections/illumination.tsx"
+            ],
+            "pattern": "Same approach as smart-living Phase 2"
+          },
+          {
+            "priority": 2,
+            "name": "Batch scan line animations",
+            "description": "Consolidate staggered animations, add will-change hints",
+            "files": ["components/sections/illumination/scan-effects.tsx"]
+          },
+          {
+            "priority": 3,
+            "name": "Bulk will-change optimization",
+            "description": "Add will-change to all remaining animated elements across codebase"
+          },
+          {
+            "priority": 4,
+            "name": "CSS keyframe consolidation",
+            "description": "Migrate globals.css animations to Framer Motion where applicable"
+          }
+        ]
+      }
+    },
+    "animation_audit_baseline": {
+      "id": "agent:v1:animation:audit:2026-04-16-baseline",
+      "name": "Animation Audit - Baseline & Inventory",
+      "description": "Complete animation audit with 20+ animations, performance baselines, and optimization priorities",
+      "type": "project_reference",
+      "tags": ["audit", "baseline", "performance"],
+      "content": {
+        "audit_date": "2026-04-16",
+        "total_animations": "20+",
+        "components": 15,
+        "baseline_performance": {
+          "desktop": "45-55 fps",
+          "mobile": "25-40 fps"
+        },
+        "critical_issues": 4,
+        "medium_issues": 6,
+        "low_issues": 8,
+        "approach_breakdown": {
+          "Framer Motion": "8+ animations",
+          "CSS Keyframes": "7 animations",
+          "setInterval Hook": "2 animations (FIXED in Phase 2)",
+          "Event Listeners": "1 animation",
+          "Intersection Observer": "2+ animations",
+          "Tailwind transition-all": "5+ animations"
+        }
+      }
+    }
+  }
+}

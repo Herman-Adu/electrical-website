@@ -1,3 +1,8 @@
 {
-  "memoryKeys": ["agent:v1:next-task:2026-04-13-timeline-unification-platform"]
+  "memoryKeys": [
+    "agent:v1:next-task:2026-04-13-timeline-unification-platform",
+    "agent:v1:animation:phase2:2026-04-16-complete",
+    "agent:v1:animation:phase3:2026-04-16-queue",
+    "agent:v1:animation:audit:2026-04-16-baseline"
+  ]
 }
