@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Eye, Target, ArrowRight } from "lucide-react";
 import {
@@ -42,43 +42,9 @@ const missionPillars = [
   },
 ];
 
-function TerminalText({ text, trigger }: { text: string; trigger: boolean }) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (!trigger) return;
-    setDisplayed("");
-    setDone(false);
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        setDisplayed(text.slice(0, i + 1));
-        i++;
-      } else {
-        setDone(true);
-        clearInterval(interval);
-      }
-    }, 22);
-    return () => clearInterval(interval);
-  }, [trigger, text]);
-
-  return (
-    <span>
-      {displayed}
-      {!done && (
-        <span className="inline-block w-0.5 h-[1em] bg-electric-cyan animate-pulse ml-0.5 align-middle" />
-      )}
-    </span>
-  );
-}
 
 export function VisionMission() {
-  const visionRef = useRef<HTMLDivElement>(null);
-  const missionRef = useRef<HTMLDivElement>(null);
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
-  const [visionTriggered, setVisionTriggered] = useState(false);
-  const [missionTriggered, setMissionTriggered] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -91,26 +57,6 @@ export function VisionMission() {
   });
   const dividerScale = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
 
-  useEffect(() => {
-    const visObs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setVisionTriggered(true);
-      },
-      { threshold: 0.4 },
-    );
-    const misObs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setMissionTriggered(true);
-      },
-      { threshold: 0.4 },
-    );
-    if (visionRef.current) visObs.observe(visionRef.current);
-    if (missionRef.current) misObs.observe(missionRef.current);
-    return () => {
-      visObs.disconnect();
-      misObs.disconnect();
-    };
-  }, []);
 
   return (
     <section
@@ -128,7 +74,7 @@ export function VisionMission() {
       <div className="section-content">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* VISION */}
-          <div ref={visionRef}>
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -155,12 +101,12 @@ export function VisionMission() {
                 <div className="text-electric-cyan/50 text-xs mb-2 tracking-widest">
                   {"> VISION_2030.md"}
                 </div>
-                <div className="text-foreground text-base leading-relaxed">
-                  <TerminalText
-                    text="To be the UK's most trusted electrical engineering partner — recognised not just for the quality of our installations, but for the lasting positive impact we create in every community we touch."
-                    trigger={visionTriggered}
-                  />
-                </div>
+                <p className="text-foreground text-base leading-relaxed">
+                  To be the UK&apos;s most trusted electrical engineering
+                  partner — recognised not just for the quality of our
+                  installations, but for the lasting positive impact we create
+                  in every community we touch.
+                </p>
               </div>
 
               {/* Vision points */}
@@ -207,7 +153,7 @@ export function VisionMission() {
           </div>
 
           {/* MISSION */}
-          <div ref={missionRef}>
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -234,12 +180,12 @@ export function VisionMission() {
                 <div className="text-amber-warning/50 text-xs mb-2 tracking-widest">
                   {"> MISSION_STATEMENT.md"}
                 </div>
-                <div className="text-foreground text-base leading-relaxed">
-                  <TerminalText
-                    text="To deliver safe, reliable, and innovative electrical solutions that exceed client expectations — while building stronger communities through honest work, continuous learning, and unwavering integrity."
-                    trigger={missionTriggered}
-                  />
-                </div>
+                <p className="text-foreground text-base leading-relaxed">
+                  To deliver safe, reliable, and innovative electrical
+                  solutions that exceed client expectations — while building
+                  stronger communities through honest work, continuous learning,
+                  and unwavering integrity.
+                </p>
               </div>
 
               {/* Mission pillars */}
