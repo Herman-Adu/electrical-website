@@ -37,7 +37,7 @@ Your orchestrator system is well-structured but has optimization opportunities:
 | Execution Timing & Resource Expectations | 14 | 🗑️ Move | Move entire table to `.claude/reference/EXECUTION_TIMING.md` |
 | Error Recovery & Blockers | 10 | 🗑️ Move | Move to `.claude/reference/ERROR_RECOVERY.md` |
 | Memory System | 12 | ✅ Keep | Brief, essential |
-| Example: Complete Orchestrator Flow | 35 | ✅ Optional | Useful but could be moved to `.claude/reference/WORKED_EXAMPLES.md` |
+| Example: Complete Orchestrator Flow | 35 | ✅ Optional | Useful but could be moved to WORKED_EXAMPLES file |
 | Notes & Future Enhancements | 7 | 🗑️ Delete | All items are already completed or superseded. Clean up. |
 
 ### Recommended Changes
@@ -56,7 +56,7 @@ Core Principles (5) + Delegation (40) + Lifecycle (45) + Locations (45) + Matrix
 **Files to create:**
 1. `.claude/reference/EXECUTION_TIMING.md` — Timing table + resource expectations
 2. `.claude/reference/ERROR_RECOVERY.md` — Error handling strategies
-3. `.claude/reference/WORKED_EXAMPLES.md` — Multi-step orchestration scenarios
+3. WORKED_EXAMPLES file — Multi-step orchestration scenarios
 
 **Action:** Remove "Notes & Future Enhancements" section (all completed).
 
@@ -144,7 +144,7 @@ Core Principles (5) + Delegation (40) + Lifecycle (45) + Locations (45) + Matrix
 
 - Replace with simple, generic: "Check required tools are available (GitHub, Playwright, Context7, etc.)"
 
-- If Docker orchestration becomes relevant later, create a separate `.claude/reference/DOCKER_WORKFLOWS.md` and reference it.
+- If Docker orchestration becomes relevant later, create a separate DOCKER_WORKFLOWS file and reference it.
 
 **Optimization savings:** ~85 lines removed; SKILL.md becomes ~120 lines
 
@@ -265,7 +265,7 @@ Core Principles (5) + Delegation (40) + Lifecycle (45) + Locations (45) + Matrix
 ### Phase 2: Move Content to Reference (30 min)
 - [ ] Create `.claude/reference/EXECUTION_TIMING.md` with timing table + resource expectations from CLAUDE.md
 - [ ] Create `.claude/reference/ERROR_RECOVERY.md` with error handling strategies from CLAUDE.md
-- [ ] Create `.claude/reference/WORKED_EXAMPLES.md` with example orchestration flow + additional scenarios
+- [ ] Create WORKED_EXAMPLES file with example orchestration flow + additional scenarios
 - [ ] Update CLAUDE.md to reference these docs instead of including them
 
 **Impact:** CLAUDE.md becomes ~100 lines shorter, reference docs become searchable
@@ -285,7 +285,7 @@ Core Principles (5) + Delegation (40) + Lifecycle (45) + Locations (45) + Matrix
 
 ### Phase 4: Update .claude/CLAUDE.md References (15 min)
 - [ ] Update "Canonical Locations" to reference `.claude/reference/` for execution timing details
-- [ ] Update "Integration Matrix" section to reference `.claude/reference/WORKED_EXAMPLES.md`
+- [ ] Update "Integration Matrix" section to reference WORKED_EXAMPLES file
 - [ ] Compress directory tree representation (remove verbose explanations)
 
 **Impact:** CLAUDE.md becomes authoritative contract, not documentation dump
@@ -359,7 +359,7 @@ Core Principles (5) + Delegation (40) + Lifecycle (45) + Locations (45) + Matrix
 8. **Compress directory trees & integration matrix in CLAUDE.md** — Use tables instead of wide ASCII art. More compact, same info.
 
 ### 🟢 LOW (Optional, Future)
-9. **Create `.claude/reference/WORKED_EXAMPLES.md`** — Expand current example section, add 2–3 more scenarios. Helps new users understand orchestration.
+9. **Create WORKED_EXAMPLES file** — Expand current example section, add 2–3 more scenarios. Helps new users understand orchestration.
 
 10. **Populate `.claude/rules/delegation-gates.md` and `security-constraints.md`** — Currently TODO; these would support the orchestrator pattern.
 
