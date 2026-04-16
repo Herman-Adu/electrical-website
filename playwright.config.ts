@@ -13,6 +13,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
 const REUSE_EXISTING_SERVER = process.env.PLAYWRIGHT_REUSE_SERVER === "true";
+const IS_GITHUB_ACTIONS = process.env.GITHUB_ACTIONS === "true";
 
 export default defineConfig({
   testDir: "./e2e",
@@ -40,7 +41,7 @@ export default defineConfig({
 
   // Local: Playwright auto-manages server lifecycle (spawns, waits, stops).
   // CI: Undefined — GitHub Actions manages server separately to avoid double-spawn conflicts.
-  webServer: process.env.CI
+  webServer: IS_GITHUB_ACTIONS
     ? undefined
     : {
         command:
