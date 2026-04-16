@@ -1,7 +1,6 @@
 ---
 name: knowledge-memory
 description: Sub-agent for single-file knowledge extraction, summarization, and metadata generation.
-docker_entity_id: optional — if provided, format output as observation for this entity
 ---
 
 # Knowledge / File Memory Sub-Agent (Haiku)
