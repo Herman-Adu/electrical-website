@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { animate, useMotionValue, useTransform } from "framer-motion";
 
 interface UseAnimatedCounterOptions {
   /**
@@ -16,69 +17,59 @@ interface UseAnimatedCounterOptions {
    * @default 2000
    */
   duration?: number;
-  /**
-   * Number of animation steps (frames)
-   * @default 60
-   */
-  steps?: number;
 }
 
 interface UseAnimatedCounterReturn {
   /**
-   * The current animated count value
+   * Framer Motion motion value for the animated count
    */
-  count: number;
+  motionValue: ReturnType<typeof useMotionValue<number>>;
   /**
-   * Whether the animation has completed
+   * Callback ref to check if animation is complete
    */
-  isComplete: boolean;
+  isAnimating: React.MutableRefObject<boolean>;
 }
 
 /**
- * Hook to animate a numeric counter from 0 to a target value
+ * Hook to animate a numeric counter from 0 to a target value using Framer Motion.
+ * Uses requestAnimationFrame internally for smooth 60fps animations without re-render thrashing.
  *
  * @example
- * const { count } = useAnimatedCounter({ value: 100, shouldAnimate: true });
- * return <span>{count}</span>;
+ * const { motionValue } = useAnimatedCounter({ value: 100, shouldAnimate: true });
+ * return <motion.span>{motionValue}</motion.span>;
  */
 export function useAnimatedCounter({
   value,
   shouldAnimate = true,
   duration = 2000,
-  steps = 60,
 }: UseAnimatedCounterOptions): UseAnimatedCounterReturn {
-  const [count, setCount] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const motionValue = useMotionValue<number>(0);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     if (!shouldAnimate) {
-      setCount(0);
-      setIsComplete(false);
+      motionValue.set(0);
+      isAnimating.current = false;
       return;
     }
 
-    const increment = value / steps;
-    let current = 0;
-    let animationActive = true;
+    isAnimating.current = true;
 
-    const timer = setInterval(() => {
-      if (!animationActive) return;
-
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        setIsComplete(true);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current * 10) / 10);
-      }
-    }, duration / steps);
+    // Use Framer Motion's animate function with requestAnimationFrame for smooth updates
+    const animation = animate(motionValue, value, {
+      duration: duration / 1000, // Framer Motion uses seconds
+      ease: "easeOut",
+      onComplete: () => {
+        isAnimating.current = false;
+      },
+    });
 
     return () => {
-      animationActive = false;
-      clearInterval(timer);
+      // Cleanup: stop animation if component unmounts
+      animation.stop();
+      isAnimating.current = false;
     };
-  }, [value, shouldAnimate, duration, steps]);
+  }, [value, shouldAnimate, duration, motionValue]);
 
-  return { count, isComplete };
+  return { motionValue, isAnimating };
 }
