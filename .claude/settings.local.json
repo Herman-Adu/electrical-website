@@ -6,7 +6,8 @@
       "Edit(/.claude/skills/framer-motion/**)",
       "Edit(/.claude/skills/aos-scroll-reveal/**)",
       "mcp__MCP_DOCKER__create_entities",
-      "Bash(pnpm typecheck *)"
+      "Bash(pnpm typecheck *)",
+      "Bash(pnpm test *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger"
