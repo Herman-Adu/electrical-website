@@ -1,14 +1,14 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { useCyclingText } from "@/lib/hooks/useCyclingText";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,13 +44,22 @@ const stats = [
 ];
 
 export function AboutHero() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
 
-  const { currentText: statusText } = useCyclingText({
-    items: ["INITIALIZING", "LOADING_PROFILE", "VERIFYING_RECORDS", "SYSTEM_READY"],
-    interval: 380,
-  });
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_PROFILE",
+    "VERIFYING_RECORDS",
+    "SYSTEM_READY",
+  ];
+
+  const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToContent = () => {
     const next = document.getElementById("company-intro");
@@ -193,7 +202,7 @@ export function AboutHero() {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
           {/* Status label */}

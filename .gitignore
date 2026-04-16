@@ -31,3 +31,4 @@ npm-shrinkwrap.json
 
 # Temporary orchestrator / agent scratch files
 .tmp/
+.vercel

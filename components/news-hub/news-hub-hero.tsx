@@ -10,6 +10,7 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { cn } from "@/lib/utils";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import type { NewsCategory, NewsCategorySlug } from "@/types/news";
 
 interface NewsHubHeroProps {
@@ -49,37 +50,21 @@ export function NewsHubHero({
   totalArticles,
 }: NewsHubHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_EDITORIAL",
-      "INDEXING_STORIES",
-      "SYSTEMS_READY",
-    ];
+  }, []);
 
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "SYSTEMS_READY");
-      return;
-    }
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_EDITORIAL",
+    "INDEXING_STORIES",
+    "SYSTEMS_READY",
+  ];
 
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-
-    return () => clearInterval(interval);
-  }, [shouldReduce]);
+  const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToFeed = () => {
     const feed = document.getElementById("news-hub-feed");
