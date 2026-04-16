@@ -108,8 +108,7 @@ export function useIntersectionObserverAnimation({
     observer.observe(currentElement);
 
     return () => {
-      observer.unobserve(currentElement);
-      observer.disconnect();
+      observer.disconnect(); // Automatically unobserves all elements
     };
   }, [isMounted, threshold, margin, ref]);
 
