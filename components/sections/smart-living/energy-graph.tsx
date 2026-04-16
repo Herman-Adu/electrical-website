@@ -21,7 +21,7 @@ export function EnergyGraph({ delay, inView }: EnergyGraphProps) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
-      className="bg-white/10 backdrop-blur-md rounded-xl p-4 pb-5 border border-white/20"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 pb-5 border border-white/20 will-change-transform will-change-opacity"
     >
       <div className="flex justify-between items-center mb-1">
         <span className="text-sm text-white font-medium">Weekly Usage</span>
@@ -33,7 +33,7 @@ export function EnergyGraph({ delay, inView }: EnergyGraphProps) {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: delay + 0.2 }}
         viewport={{ once: true }}
-        className="mb-3"
+        className="mb-3 will-change-opacity"
       >
         <span className="text-xl font-bold text-white font-mono">{total}</span>
         <span className="text-xs text-white ml-1">kWh this week</span>
@@ -56,12 +56,12 @@ export function EnergyGraph({ delay, inView }: EnergyGraphProps) {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: delay + 0.5 + idx * 0.05 }}
                 viewport={{ once: true }}
-                className={`text-[9px] font-mono mb-1 ${isPeak ? "text-amber-400" : "text-white"}`}
+                className={`text-[9px] font-mono mb-1 will-change-opacity ${isPeak ? "text-amber-400" : "text-white"}`}
               >
                 {value}
               </motion.span>
               <motion.div
-                className={`w-full rounded-t-sm ${
+                className={`w-full rounded-t-sm will-change-transform ${
                   isPeak
                     ? "bg-linear-to-t from-amber-600 to-amber-400 shadow-md shadow-amber-500/30"
                     : "bg-linear-to-t from-electric-cyan/50 to-electric-cyan"

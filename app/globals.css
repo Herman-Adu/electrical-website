@@ -181,21 +181,7 @@
   }
 }
 
-/* Custom Animations for Nexgen */
-@keyframes voltage-pulse {
-  0%,
-  100% {
-    stroke: var(--pylon-grey);
-    stroke-width: 1;
-    filter: drop-shadow(0 0 0px transparent);
-  }
-  50% {
-    stroke: var(--electric-cyan);
-    stroke-width: 2.5;
-    filter: drop-shadow(0 0 8px var(--electric-cyan));
-  }
-}
-
+/* SVG-specific Animation for Nexgen */
 @keyframes glow-hum {
   0%,
   100% {
@@ -208,101 +194,18 @@
   }
 }
 
-@keyframes scan-line {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-@keyframes flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  41% {
-    opacity: 1;
-  }
-  42% {
-    opacity: 0.8;
-  }
-  43% {
-    opacity: 1;
-  }
-  44% {
-    opacity: 0.5;
-  }
-  45% {
-    opacity: 1;
-  }
-}
-
-@keyframes electric-pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 5px var(--electric-cyan),
-      0 0 10px var(--electric-cyan),
-      0 0 15px var(--electric-cyan);
-  }
-  50% {
-    box-shadow:
-      0 0 10px var(--electric-cyan),
-      0 0 20px var(--electric-cyan),
-      0 0 30px var(--electric-cyan);
-  }
-}
-
-@keyframes text-scramble {
-  0% {
-    opacity: 0;
-    filter: blur(10px);
-  }
-  50% {
-    opacity: 0.5;
-    filter: blur(5px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(200%);
-  }
-}
-
 /* Animation Utilities */
-.animate-voltage-pulse {
-  animation: voltage-pulse 4s infinite ease-in-out;
-}
-
 .animate-glow-hum {
   animation: glow-hum 2s infinite ease-in-out;
-}
-
-.animate-scan-line {
-  animation: scan-line 8s linear infinite;
-}
-
-.animate-flicker {
-  animation: flicker 3s infinite;
-}
-
-.animate-electric-pulse {
-  animation: electric-pulse 2s infinite ease-in-out;
 }
 
 /* GPU Acceleration */
 .will-change-transform {
   will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
 }
 
 /* Blueprint Grid Pattern */

@@ -7,7 +7,7 @@ export function ScanEffects() {
     <>
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         <motion.div
-          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent"
+          className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/50 to-transparent will-change-transform"
           animate={{
             top: ["0%", "100%"],
           }}
@@ -23,7 +23,7 @@ export function ScanEffects() {
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-electric-cyan/40"
+            className="absolute w-1 h-1 rounded-full bg-electric-cyan/40 will-change-transform will-change-opacity"
             style={{
               left: `${15 + i * 15}%`,
               top: `${20 + (i % 3) * 25}%`,

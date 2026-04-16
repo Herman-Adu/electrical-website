@@ -5,20 +5,17 @@ import Image from "next/image";
 
 interface BackgroundParallaxProps {
   imageY: MotionValue<string>;
-  brightnessFilter: MotionValue<string>;
+  brightnessOverlayOpacity: MotionValue<number>;
 }
 
 export function BackgroundParallax({
   imageY,
-  brightnessFilter,
+  brightnessOverlayOpacity,
 }: BackgroundParallaxProps) {
   return (
     <>
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
-        <motion.div
-          className="relative w-full h-[120%]"
-          style={{ filter: brightnessFilter }}
-        >
+        <div className="relative w-full h-[120%]">
           <Image
             src="/images/warehouse-lighting.jpg"
             alt="Industrial warehouse lighting installation"
@@ -26,7 +23,12 @@ export function BackgroundParallax({
             className="object-cover"
             sizes="100vw"
           />
-        </motion.div>
+          {/* GPU-accelerated brightness control via opacity overlay instead of filter */}
+          <motion.div
+            className="absolute inset-0 bg-black mix-blend-multiply will-change-opacity"
+            style={{ opacity: brightnessOverlayOpacity }}
+          />
+        </div>
 
         <div className="absolute inset-0 bg-linear-to-t from-(--deep-black) via-(--deep-black)/60 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-r from-(--deep-black)/80 via-transparent to-(--deep-black)/40" />

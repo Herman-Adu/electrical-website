@@ -23,7 +23,7 @@ export function DimmerSlider({
       initial={{ opacity: 0, x: 30 }}
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
       transition={{ duration: 0.6, delay }}
-      className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-amber-500/40 transition-all duration-300"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-amber-500/40 transition-all duration-300 will-change-transform will-change-opacity"
     >
       <div className="flex justify-between items-center mb-3">
         <span className="text-sm text-slate-300 font-medium">{label}</span>
@@ -31,7 +31,7 @@ export function DimmerSlider({
       </div>
       <div className="relative h-2 bg-slate-700/50 rounded-full overflow-hidden">
         <motion.div
-          className="absolute inset-y-0 left-0 rounded-full bg-linear-to-r from-amber-600 to-amber-400"
+          className="absolute inset-y-0 left-0 rounded-full bg-linear-to-r from-amber-600 to-amber-400 will-change-transform"
           initial={{ width: 0 }}
           animate={inView ? { width: `${value}%` } : { width: 0 }}
           transition={{ duration: 1, delay: delay + 0.3 }}

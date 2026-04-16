@@ -37,12 +37,15 @@ export function Illumination() {
     [0.3, 0.7, 1],
   );
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const brightnessFilter = useTransform(brightness, (v) => `brightness(${v})`);
+
+  // Convert brightness to overlay opacity (inverse: darker overlay = lower brightness)
+  // brightness 0.3 -> overlay 0.7 (dark), brightness 1 -> overlay 0 (bright)
+  const brightnessOverlayOpacity = useTransform(brightness, (b) => 1 - b);
 
   // Background layer for SectionWrapper
   const BackgroundLayer = (
     <>
-      <BackgroundParallax imageY={imageY} brightnessFilter={brightnessFilter} />
+      <BackgroundParallax imageY={imageY} brightnessOverlayOpacity={brightnessOverlayOpacity} />
       <ScanEffects />
     </>
   );
