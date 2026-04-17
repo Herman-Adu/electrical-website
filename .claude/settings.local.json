@@ -15,7 +15,21 @@
       "mcp__MCP_DOCKER__search_nodes",
       "mcp__MCP_DOCKER__open_nodes",
       "Bash(pnpm typecheck *)",
-      "Bash(pnpm test *)"
+      "Bash(pnpm test *)",
+      "Bash(curl -s http://localhost:3100/health)",
+      "Bash(xargs grep *)",
+      "Read(//home/herma/source/repository/electrical-website/.claude/security/**)",
+      "Read(//home/herma/source/repository/electrical-website/**)",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__write_file",
+      "mcp__filesystem__edit_file",
+      "Bash(node .claude/hooks/context-monitor.mjs --test)",
+      "Bash(node .claude/hooks/context-monitor-tests.mjs)",
+      "Bash(pnpm run *)",
+      "Bash(pnpm lint *)",
+      "Bash(bash .claude/hooks/session-start.sh)",
+      "Bash(wc -l /c/Users/herma/source/repository/electrical-website/.claude/security/*.md /c/Users/herma/source/repository/electrical-website/.claude/hooks/context-monitor*.mjs)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
