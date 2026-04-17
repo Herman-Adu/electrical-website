@@ -2,6 +2,9 @@
 name: planning
 description: Sub-agent for focused planning subtasks including breakdowns, estimates, dependencies, and risk analysis.
 mode: execute
+role: Breaks down goals into tasks, estimates timelines, maps dependencies, and analyzes risks. Produces detailed implementation roadmaps from high-level requirements.
+trigger: When orchestrator needs to plan a feature, estimate effort, identify dependencies, or analyze project risks before implementation begins.
+return-format: structured
 ---
 
 # Planning Sub-Agent (Haiku)

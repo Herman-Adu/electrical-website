@@ -2,6 +2,9 @@
 name: skill-builder
 description: Sub-agent for skill creation, auditing, and optimization tasks.
 mode: execute
+role: Creates new production-ready skills, audits existing skills against standards, and proposes optimization improvements. Works in three modes: build, audit, and optimize.
+trigger: When orchestrator needs to generate a new skill, audit skill quality and compliance, or optimize an existing skill's design and descriptions.
+return-format: structured
 ---
 
 # Skill Builder Sub-Agent

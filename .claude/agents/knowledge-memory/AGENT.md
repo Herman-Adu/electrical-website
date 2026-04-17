@@ -2,6 +2,9 @@
 name: knowledge-memory
 description: Sub-agent for single-file knowledge extraction, summarization, and metadata generation.
 mode: execute
+role: Extracts insights from single files and generates metadata. Produces learning observations formatted for Docker memory entities to preserve technical patterns and discoveries.
+trigger: When orchestrator needs to capture learnings, summarize code patterns, or extract insights from completed work for memory persistence.
+return-format: structured
 ---
 
 # Knowledge / File Memory Sub-Agent (Haiku)

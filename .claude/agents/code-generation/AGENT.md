@@ -2,6 +2,9 @@
 name: code-generation
 description: Sub-agent for focused code generation, debugging, refactoring, and test-first technical subtasks.
 mode: execute
+role: Executes atomic code subtasks using test-driven development. Completes one task per invocation (tests first, then implementation) with high code quality.
+trigger: When orchestrator needs to generate code, debug issues, refactor components, or write tests. Typically dispatched during implementation phase after planning is complete.
+return-format: structured
 ---
 
 # Code Generation Sub-Agent (Haiku) — Super Powers Enhanced

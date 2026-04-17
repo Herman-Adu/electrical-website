@@ -46,7 +46,10 @@
       "Bash(npm run *)",
       "Bash(node scripts/load-active-memory-lane.mjs)",
       "Bash(chmod +x c:/Users/herma/source/repository/electrical-website/scripts/load-active-memory-lane.mjs)",
-      "Bash(chmod +x c:/Users/herma/source/repository/electrical-website/scripts/lane-lifecycle.mjs c:/Users/herma/source/repository/electrical-website/scripts/validate-memory-lanes.mjs)"
+      "Bash(chmod +x c:/Users/herma/source/repository/electrical-website/scripts/lane-lifecycle.mjs c:/Users/herma/source/repository/electrical-website/scripts/validate-memory-lanes.mjs)",
+      "Bash(mv docs/examples/setup-robust-mcp.ts scripts/)",
+      "Bash(mv docs/examples/validate-mcp-contract-robust.ts scripts/)",
+      "Bash(npm test *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
