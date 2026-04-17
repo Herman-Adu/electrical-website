@@ -20,6 +20,12 @@
     "related_decisions": [
       "decide-docker-mcp-first-approach",
       "decide-memory-lane-config-driven"
-    ]
+    ],
+    "work_snapshot": {
+      "files_modified": 5,
+      "commits_created": 1,
+      "last_updated": "2026-04-17T12:35:01.976Z",
+      "test_coverage": 0
+    }
   }
 }
