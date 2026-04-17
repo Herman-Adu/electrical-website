@@ -43,7 +43,9 @@
       "Bash(grep \"^mode:\" .claude/agents/*/AGENT.md)",
       "Bash(grep -l \"platinum\\\\|validate-build\" scripts/*.ps1 scripts/*.sh)",
       "mcp__filesystem__create_directory",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(node scripts/load-active-memory-lane.mjs)",
+      "Bash(chmod +x c:/Users/herma/source/repository/electrical-website/scripts/load-active-memory-lane.mjs)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",

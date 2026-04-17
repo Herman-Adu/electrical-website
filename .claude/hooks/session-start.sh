@@ -158,14 +158,25 @@ if [ -d "$PROJECT_ROOT/.git" ]; then
     COMMIT=$(sanitizeCommitMessage "$COMMIT")
 fi
 
+# ── Load selective rehydration (memory-lane aware) ─────────────────────────────
+SELECTIVE_LOAD=""
+if command -v node >/dev/null 2>&1; then
+    SELECTIVE_LOAD=$(node "${PROJECT_ROOT}/scripts/load-active-memory-lane.mjs" 2>/dev/null | tail -1)
+fi
+
+# Fallback to default if selective load fails
+if [ -z "$SELECTIVE_LOAD" ]; then
+    SELECTIVE_LOAD='mcp__MCP_DOCKER__search_nodes("electrical-website-state")'
+fi
+
 # ── Build the preflight message ─────────────────────────────────────────────
 if $DOCKER_OK; then
     PREFLIGHT="<session-preflight-required>
 MANDATORY SESSION START — execute all steps before responding to user:
 
-STEP 1 — DOCKER REHYDRATION (~50 tokens, ~5 seconds):
-  a. mcp__MCP_DOCKER__search_nodes(\"electrical-website-state\")
-  b. mcp__MCP_DOCKER__open_nodes([returned_entity_id])
+STEP 1 — DOCKER REHYDRATION (~30-50 tokens, ~5 seconds):
+  a. $SELECTIVE_LOAD
+  b. mcp__MCP_DOCKER__open_nodes([returned_entity_id]) [or selective entities from above]
   c. Read from entity: current_branch, active_phase, next_tasks, blockers
 
 STEP 2 — GIT STATE:
