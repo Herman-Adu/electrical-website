@@ -49,11 +49,14 @@
       "Bash(chmod +x c:/Users/herma/source/repository/electrical-website/scripts/lane-lifecycle.mjs c:/Users/herma/source/repository/electrical-website/scripts/validate-memory-lanes.mjs)",
       "Bash(mv docs/examples/setup-robust-mcp.ts scripts/)",
       "Bash(mv docs/examples/validate-mcp-contract-robust.ts scripts/)",
-      "Bash(npm test *)"
+      "Bash(npm test *)",
+      "mcp__filesystem__search_files",
+      "Bash(grep -E \"\\\\.mjs$|\\\\.sh$\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
-      "c:\\Users\\herma\\.claude\\memory"
+      "c:\\Users\\herma\\.claude\\memory",
+      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude"
     ]
   }
 }

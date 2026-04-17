@@ -38,8 +38,9 @@ function validateLaneConfig(filePath, fileName) {
   }
 
   const ml = config.memoryLane;
+  let hasErrors = false;
 
-  // Check required fields
+  // Check required fields — collect all errors before returning
   const required = [
     'id',
     'name',
@@ -47,25 +48,31 @@ function validateLaneConfig(filePath, fileName) {
     'status',
     'docker_entities',
   ];
+
+  const missingFields = [];
   for (const field of required) {
     if (!ml || !ml[field]) {
-      console.error(
-        `  ❌ Missing required field: ${field} in ${fileName}`
-      );
-      errorCount++;
-      return false;
+      missingFields.push(field);
+      hasErrors = true;
     }
   }
 
+  if (missingFields.length > 0) {
+    console.error(
+      `  ❌ Missing required fields in ${fileName}: ${missingFields.join(', ')}`
+    );
+    errorCount++;
+  }
+
   // Check docker_entities structure
-  if (typeof ml.docker_entities !== 'object') {
+  if (ml && typeof ml.docker_entities !== 'object') {
     console.error(`  ❌ docker_entities must be an object in ${fileName}`);
     errorCount++;
-    return false;
+    hasErrors = true;
   }
 
   // Check entity ID format (should be kebab-case)
-  if (!ml.id.match(/^[a-z0-9-]+$/)) {
+  if (ml && ml.id && !ml.id.match(/^[a-z0-9-]+$/)) {
     console.warn(
       `  ⚠️  Entity ID should use kebab-case: ${ml.id}`
     );
@@ -73,15 +80,18 @@ function validateLaneConfig(filePath, fileName) {
   }
 
   // Check status is valid
-  if (!['active', 'completed', 'paused'].includes(ml.status)) {
+  if (ml && ml.status && !['active', 'completed', 'paused'].includes(ml.status)) {
     console.warn(
       `  ⚠️  Unexpected status: ${ml.status} (expected: active|completed|paused)`
     );
     warningCount++;
   }
 
-  console.log(`  ✓ ${fileName} is valid`);
-  return true;
+  if (!hasErrors) {
+    console.log(`  ✓ ${fileName} is valid`);
+  }
+
+  return !hasErrors;
 }
 
 /**

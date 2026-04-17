@@ -44,6 +44,18 @@ function getCurrentBranch() {
 }
 
 /**
+ * Validate phase name format (kebab-case: a-z, 0-9, hyphens only)
+ */
+function validatePhaseName(phaseName) {
+  if (!phaseName.match(/^[a-z0-9-]+$/)) {
+    console.error(`❌ Invalid phase name: "${phaseName}"`);
+    console.error('   Must use kebab-case (lowercase letters, numbers, hyphens only)');
+    console.error('   Example: phase-7-dark-mode');
+    process.exit(1);
+  }
+}
+
+/**
  * Command: lane:open {phase-name}
  * Creates a new memory lane config and sets up Docker entity
  */
@@ -53,6 +65,8 @@ function commandOpen(phaseName) {
     console.error('   Example: npm run lane:open phase-7-dark-mode');
     process.exit(1);
   }
+
+  validatePhaseName(phaseName);
 
   const configPath = path.join(LANES_DIR, `${phaseName}.json`);
   if (fs.existsSync(configPath)) {
@@ -112,7 +126,7 @@ function commandSync(phaseName) {
   }
 
   const targetLanes = phaseName
-    ? lanes.filter(lane => lane.path.includes(phaseName))
+    ? lanes.filter(lane => lane.name === phaseName)
     : lanes;
 
   if (targetLanes.length === 0) {
@@ -155,6 +169,8 @@ function commandClose(phaseName) {
     process.exit(1);
   }
 
+  validatePhaseName(phaseName);
+
   const configPath = path.join(LANES_DIR, `${phaseName}.json`);
   if (!fs.existsSync(configPath)) {
     console.error(`❌ Memory lane not found: ${phaseName}`);
@@ -165,12 +181,15 @@ function commandClose(phaseName) {
   config.memoryLane.status = 'completed';
   config.memoryLane.completed_date = new Date().toISOString().split('T')[0];
 
-  // Move to archives
+  // Write updated config to archivePath BEFORE renaming
   const archivePath = path.join(
     ARCHIVES_DIR,
     `${phaseName}-${Date.now()}.json`
   );
-  fs.renameSync(configPath, archivePath);
+  fs.writeFileSync(archivePath, JSON.stringify(config, null, 2));
+
+  // Remove original from active lanes
+  fs.unlinkSync(configPath);
 
   console.log(`✅ Closed and archived: ${phaseName}`);
   console.log(`   Archived to: ${path.relative(PROJECT_ROOT, archivePath)}`);
@@ -273,14 +292,25 @@ function getGitStats() {
     });
     const filesModified = modifiedOutput.split('\n').filter(l => l.trim()).length;
 
-    const commitsOutput = execSync('git log --oneline -1', {
-      cwd: PROJECT_ROOT,
-      encoding: 'utf-8',
-    });
+    // Count commits in current branch compared to main
+    let commitsCreated = 0;
+    try {
+      const commitCountOutput = execSync(
+        'git rev-list --count main..HEAD',
+        {
+          cwd: PROJECT_ROOT,
+          encoding: 'utf-8',
+        }
+      ).trim();
+      commitsCreated = parseInt(commitCountOutput, 10) || 0;
+    } catch {
+      // If main doesn't exist or comparison fails, fall back to 0
+      commitsCreated = 0;
+    }
 
     return {
       filesModified,
-      commitsCreated: commitsOutput.trim() ? 1 : 0,
+      commitsCreated,
     };
   } catch {
     return { filesModified: 0, commitsCreated: 0 };
