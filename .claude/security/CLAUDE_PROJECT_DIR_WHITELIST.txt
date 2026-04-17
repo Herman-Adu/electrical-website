@@ -1,0 +1,29 @@
+# CLAUDE_PROJECT_DIR Whitelist
+#
+# This file contains a whitelist of safe base directories for the CLAUDE_PROJECT_DIR
+# environment variable used by context-monitor.mjs.
+#
+# Format: One absolute path per line. Lines starting with # are comments.
+# Paths are checked with path.isAbsolute() and path.resolve() for normalization.
+#
+# Defaults (always whitelisted, even if this file is empty):
+# - User home directory (os.homedir())
+# - /tmp
+# - /var/tmp
+# - Current working directory at session start
+#
+# Custom entries below allow restricting CLAUDE_PROJECT_DIR to additional safe roots.
+# Leave empty if you only want to use the defaults.
+#
+# Example entries (uncomment to use):
+# /opt/projects
+# /home/dev/workspaces
+# C:\Users\YourName\projects  (Windows)
+#
+# DO NOT add system directories like / or /usr unless absolutely necessary.
+# DO NOT add paths that contain user credentials or secrets.
+# DO NOT add symlink targets without explicit intent.
+#
+
+# Custom whitelist entries
+# (None configured initially; add as needed)

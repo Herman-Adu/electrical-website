@@ -252,6 +252,122 @@ SMTP_PASSWORD=<fill-in-your-smtp-password>
 
 ---
 
+## Session-Lifecycle Hooks
+
+### Hook-Specific Redaction Rules
+
+The session-lifecycle hooks (`session-start.sh` and `context-monitor.mjs`) include automatic secret redaction to prevent credentials from being stored in Docker memory or transmitted to Claude API.
+
+**Redaction Timing:**
+1. Git output is captured (branch name, commit message)
+2. Secrets are redacted using patterns from `.claude/security/redaction-patterns.md`
+3. Redacted values are used in all subsequent operations (Docker storage, API transmission, logs)
+
+**Redaction Patterns (8 Categories):**
+
+| Pattern | Example Match | Redacted Output |
+|---------|---------------|------------------|
+| API Keys | `api_key=sk1234567890abcdefghij` | `api_key=[REDACTED]` |
+| Database URLs | `postgres://user:pwd@host:5432/db` | `[REDACTED]` |
+| OAuth Tokens | `bearer eyJhbGc...` (30+ chars) | `bearer [REDACTED]` |
+| AWS Credentials | `AKIAIOSFODNN7EXAMPLE` | `[REDACTED]` |
+| Passwords | `password=MySecret123!` | `password=[REDACTED]` |
+| GitHub Tokens | `ghp_abc123...` | `[REDACTED]` |
+| NPM Tokens | `npm_abcdefghijklmnopqrstuvwxyz1234567890` | `[REDACTED]` |
+| Generic Secrets | `APP_SECRET=mysecret123` | `APP_SECRET=[REDACTED]` |
+
+**Reference:** See `.claude/security/redaction-patterns.md` for full regex definitions, false positive analysis, and test cases.
+
+### Implementation Details
+
+**In `session-start.sh`:**
+- Branch and commit message are sanitized before embedding in the preflight message
+- JSON escaping ensures special characters don't break output format
+- Path validation prevents directory traversal attacks
+
+**In `context-monitor.mjs`:**
+- `sanitizeCommitMessage()` applies all 8 redaction patterns
+- `sanitizeBranchName()` detects secrets in branch names; returns `[branch-name-redacted]` if detected
+- Redacted values are stored in Docker via `mcp__MCP_DOCKER__add_observations()`
+- Redacted values appear in continuation prompts sent to users and Claude API
+
+### What Gets Redacted
+
+✅ **Always redacted:**
+- Git commit messages (full-line if any pattern matches)
+- Git branch names (entire name if any pattern matches)
+- User input containing secrets
+- Database connection strings
+- API keys, tokens, and credentials
+
+❌ **Never redacted (safe to include):**
+- File paths and directory names
+- Function and variable names (e.g., `API_KEY` variable itself, not the value)
+- Code structure and logic
+- Error messages without embedded credentials
+
+### Docker Memory Storage
+
+When session-lifecycle hooks store observations in Docker:
+
+```javascript
+// ✅ Correct — redacted before storage
+const redactedBranch = sanitizeBranchName(branch);
+await mcp__MCP_DOCKER__add_observations(stateId, [{
+  category: 'session_end',
+  branch: redactedBranch,  // Redacted
+  lastCommit: sanitizeCommitMessage(lastCommit),  // Redacted
+}]);
+
+// ❌ Wrong — no raw secrets to Docker
+await mcp__MCP_DOCKER__add_observations(stateId, [{
+  branch: branch,  // Raw — would expose secrets
+}]);
+```
+
+### Path Validation
+
+The `validateProjectDir()` function in `context-monitor.mjs` prevents directory traversal:
+
+1. **Resolves relative paths:** `./foo/../bar` → absolute path
+2. **Verifies path exists:** Non-existent paths rejected
+3. **Checks whitelist:** Path must be under a safe root:
+   - User home directory (os.homedir())
+   - /tmp, /var/tmp
+   - Current working directory
+   - Custom entries from `.claude/security/CLAUDE_PROJECT_DIR_WHITELIST.txt`
+4. **Rejects symlinks:** Prevents symlink-based escape attempts
+
+### Continuation Prompt Variants
+
+When context reaches 70% and a sync is required, `context-monitor.mjs` generates one of two continuation prompts:
+
+**Variant A (Docker Available):**
+- Includes mcp__MCP_DOCKER__ tools in "Available MCP Tools" section
+- States "Docker entity updated: electrical-website-state ✓"
+- All values (branch, commit, timestamps) are pre-redacted
+
+**Variant B (Docker Unavailable):**
+- States "Docker: DOWN — use git+CLAUDE.md fallback"
+- Includes fallback rule: write one-line note to .claude/CLAUDE.md ## Session State
+- All values still redacted (safety applies regardless of Docker availability)
+
+### Testing & Verification
+
+Secret redaction is verified by test batch suites:
+
+**Batch 1 (Secrets Redaction):** 10 test cases covering all 8 patterns + false positives
+**Batch 2 (JSON Escaping):** 6 test cases ensuring JSON safety
+**Batch 3 (Path Validation):** 6 test cases including symlink rejection
+**Batch 5 (JSONL Audit):** 4 test cases including malformed JSON handling
+
+Run tests:
+```bash
+pnpm test -- --testPathPattern="context-monitor|session-start"
+```
+
+---
+
 ## Reporting Issues
 
 If you discover a potential secret exposure:

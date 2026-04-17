@@ -1,7 +1,7 @@
 ---
 name: aos-scroll-reveal
 description: Sub-agent for implementing AOS (Animate On Scroll) scroll-reveal animations with HTML attributes and minimal configuration.
-mode: implement, validate
+mode: execute
 role: Implements AOS scroll-reveal animations using HTML data-attributes with staggering, direction control, and performance optimization.
 trigger: When orchestrator needs bulk scroll-reveal animations or simple entrance effects without complex setup.
 return-format: structured

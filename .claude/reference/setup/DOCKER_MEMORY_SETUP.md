@@ -15,7 +15,7 @@ This guide walks through setting up the Docker `memory-reference` MCP service fo
 
 - Docker daemon running locally
 - MCP server binary (provided by Anthropic)
-- Network access to `localhost:7777`
+- Network access to `localhost:3100` (Caddy gateway)
 - Bash or compatible shell
 
 ---
@@ -92,11 +92,13 @@ EOF
 The MCP service should be running as a background process or Docker container. Verify it's listening:
 
 ```bash
-curl -s http://localhost:7777/health
-# Expected: { "status": "healthy" }
+curl -s http://localhost:3100/health
+# Expected: OK
 
-curl -s http://localhost:7777/api/entities
-# Expected: { "entities": [] } or similar
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":""}}}'
+# Expected: JSON array of entities
 ```
 
 ---
@@ -109,38 +111,29 @@ Create the initial `project_state` entity:
 cat > init_project_state.sh <<'EOF'
 #!/bin/bash
 
-# Initialize electrical-website project state
-curl -X POST http://localhost:7777/api/entities \
+# Initialize electrical-website project state via MCP gateway
+curl -X POST http://localhost:3100/memory/tools/call \
   -H "Content-Type: application/json" \
-  -d '{
+  -d '{"params":{"name":"create_entities","arguments":{"entities":[{
     "type": "project_state",
     "name": "electrical-website-state",
     "properties": {
       "project_name": "electrical-website",
       "current_branch": "main",
       "build_status": "passing",
-      "last_build_time": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",
       "active_phase": null,
       "next_tasks": [],
       "blockers": [],
       "last_updated": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
     }
-  }'
+  }]}}}'
 EOF
 
 chmod +x init_project_state.sh
 ./init_project_state.sh
 ```
 
-Expected response:
-```json
-{
-  "id": "state-xyz",
-  "type": "project_state",
-  "name": "electrical-website-state",
-  "properties": { ... }
-}
-```
+Expected response: JSON object with created entity details
 
 ---
 
@@ -150,20 +143,21 @@ Expected response:
 
 ```bash
 # Health endpoint
-curl http://localhost:7777/health
+curl http://localhost:3100/health
 
-# List all entities
-curl http://localhost:7777/api/entities
-
-# Search for project state
-curl http://localhost:7777/api/entities?type=project_state
+# Search all entities via MCP gateway
+curl -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":"project_state"}}}'
 ```
 
 ### Verify Initial Data
 
 ```bash
-# Should return the electrical-website-state entity
-curl http://localhost:7777/api/entities?name=electrical-website-state
+# Search for project state entity
+curl -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":"electrical-website-state"}}}'
 ```
 
 ---
@@ -231,21 +225,24 @@ create_relations([{
 
 ### Service Not Responding
 
-**Symptom:** `curl http://localhost:7777/health` times out
+**Symptom:** `curl http://localhost:3100/health` times out
 
 **Diagnosis:**
 ```bash
-# Check if process is listening on port 7777
-lsof -i :7777  # macOS/Linux
-netstat -an | grep 7777  # Windows
+# Check if Caddy gateway is listening on port 3100
+lsof -i :3100  # macOS/Linux
+netstat -an | grep 3100  # Windows
 
-# Check Docker logs
-docker logs [memory-service-container-id]
+# Check Docker logs for memory service
+docker logs memory-reference
+
+# Check Caddy logs
+docker logs caddy-gateway
 ```
 
 **Fix:**
-1. Restart Docker: `docker restart [container_id]`
-2. Or restart the MCP service process
+1. Restart Docker: `docker restart caddy-gateway && docker restart memory-reference`
+2. Or restart the MCP service processes
 3. Re-run health check
 
 ---
@@ -265,7 +262,7 @@ curl http://localhost:7777/api/entities?type=project_state
 
 **Fix:**
 - Re-run initialization step 5
-- Verify entity name spelling matches `.claude/rules/docker-memory-policy.md`
+- Verify entity name spelling matches `.claude/rules/memory-policy.md` (naming conventions section)
 
 ---
 
@@ -289,25 +286,18 @@ netstat -ano | findstr :7777 | findstr LISTENING  # Windows
 ### Backup Memory Graph
 
 ```bash
-# Export all entities
-curl http://localhost:7777/api/entities > ~/backup_entities_$(date +%Y-%m-%d).json
+# Export all entities via MCP gateway
+curl -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":""}}}' \
+  > ~/backup_entities_$(date +%Y-%m-%d).json
 
 # Store in Git (optional, if not containing secrets)
 git add .claude/backups/
 git commit -m "backup: memory graph snapshot"
 ```
 
-### Restore from Backup
-
-```bash
-# Clear all entities (careful!)
-curl -X DELETE http://localhost:7777/api/entities/all
-
-# Re-import entities
-curl -X POST http://localhost:7777/api/import \
-  -H "Content-Type: application/json" \
-  -d @backup_entities_2026-04-16.json
-```
+Note: Import/restore capabilities depend on Docker memory service implementation. Contact the Anthropic team for advanced backup/restore procedures.
 
 ---
 
@@ -315,55 +305,28 @@ curl -X POST http://localhost:7777/api/import \
 
 ### Optimize Search
 
-For large graphs (100+ entities), optimize search:
-
-```bash
-# Create index on commonly searched fields
-curl -X POST http://localhost:7777/api/indices \
-  -d '{"field": "type", "index_type": "hash"}' \
-  -d '{"field": "name", "index_type": "trie"}' \
-  -d '{"field": "status", "index_type": "hash"}'
-```
+The Docker memory service handles indexing automatically. For best performance:
+- Use specific search queries (e.g., `feat-phase-5` instead of empty string)
+- Consolidate fine-grained entities using `supersedes` relations
+- Archive old entities after 90 days
 
 ### Monitor Storage
 
+Performance monitoring depends on Docker memory service implementation. Check logs for performance metrics:
+
 ```bash
-# Check memory graph size
-curl http://localhost:7777/api/stats
-→ { "entity_count": 42, "relation_count": 18, "total_observations": 156 }
+docker logs memory-reference | grep -i "performance\|duration"
 ```
 
 ---
 
-## Migration from .md Files
+## Current Policy: Docker Memory Only
 
-If migrating from existing `.claude/memory/*.md` files:
+**As of 2026-04-17:** The project uses Docker `memory-reference` MCP service exclusively for persistent context. No `.md` files are used for memory storage.
 
-1. **Export existing memory:**
-   ```bash
-   # Read existing .md files
-   cat .claude/memory/project_*.md
-   cat .claude/memory/decisions/*.md
-   ```
+**Prohibited:** Creating `.md` files for memory, session state, staging, handoff, rehydration, or seeding purposes in any `.claude/` subdirectory.
 
-2. **Parse and convert to entities:**
-   ```bash
-   # Use script: .claude/scripts/migrate-memory-to-docker.sh
-   ./scripts/migrate-memory-to-docker.sh
-   ```
-
-3. **Verify migration:**
-   ```bash
-   # Check entity count matches prior files
-   curl http://localhost:7777/api/stats
-   ```
-
-4. **Archive old files:**
-   ```bash
-   mv .claude/memory .claude/archives/memory-backup-$(date +%Y-%m-%d)
-   git add .claude/archives/
-   git commit -m "chore: archive old .md memory files"
-   ```
+**All session context is persisted via Docker entities** (project_state, feature, learning, decision, infrastructure, session) and observations (build, test, blocker, learning, performance).
 
 ---
 
@@ -383,7 +346,7 @@ jobs:
     steps:
       - name: Check Docker memory service
         run: |
-          curl -f http://localhost:7777/health || exit 1
+          curl -f http://localhost:3100/health || exit 1
         timeout-minutes: 1
         continue-on-error: true  # Non-blocking for now
 ```
@@ -397,25 +360,12 @@ jobs:
 ```bash
 # If running on network, restrict to localhost
 # In Docker: bind to 127.0.0.1 only
-docker run -p 127.0.0.1:7777:7777 memory-reference
+docker run -p 127.0.0.1:3100:3100 memory-reference
 ```
 
 ### Encrypt Sensitive Data
 
-```bash
-# If storing sensitive learnings/blockers, enable encryption
-curl -X POST http://localhost:7777/api/config \
-  -d '{"encryption_enabled": true, "key": "..."}' \
-  -H "Authorization: Bearer $MCP_TOKEN"
-```
-
-### Audit Access
-
-```bash
-# Enable audit logging
-curl -X POST http://localhost:7777/api/audit \
-  -d '{"enabled": true, "log_file": "/var/log/memory-access.log"}'
-```
+Encryption is handled by the Docker memory service. No additional configuration needed for standard deployments.
 
 ---
 
@@ -437,6 +387,9 @@ docker run -e MCP_DEBUG=true memory-reference
 # Docker container logs
 docker logs memory-reference
 
+# Caddy gateway logs
+docker logs caddy-gateway
+
 # Or system logs (if running as service)
 journalctl -u docker-memory --follow
 ```
@@ -444,8 +397,8 @@ journalctl -u docker-memory --follow
 ### Report Issues
 
 If you encounter issues:
-1. Capture output: `curl -v http://localhost:7777/health 2>&1 | tee debug.log`
-2. Check `.claude/rules/docker-memory-policy.md` Troubleshooting section
+1. Capture output: `curl -v http://localhost:3100/health 2>&1 | tee debug.log`
+2. Check `.claude/rules/memory-policy.md` Troubleshooting section
 3. Review `.claude/reference/ERROR_RECOVERY.md` (if exists)
 
 ---

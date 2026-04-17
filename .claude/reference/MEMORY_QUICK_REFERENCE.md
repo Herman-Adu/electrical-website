@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-04-16
 
-Fast lookup for memory operations. See `.claude/rules/docker-memory-policy.md` for full details.
+Fast lookup for memory operations. See `.claude/rules/memory-policy.md` for full details.
 
 ---
 
@@ -177,15 +177,13 @@ Next: Test scroll animations. Blocker: iOS Safari compatibility.
 
 ```bash
 # Verify service is running
-curl http://localhost:7777/health
-# Expected: { "status": "healthy" }
+curl http://localhost:3100/health
+# Expected: OK
 
-# List all entities
-curl http://localhost:7777/api/entities
-
-# Get stats
-curl http://localhost:7777/api/stats
-# Expected: { "entity_count": N, "relation_count": M, ... }
+# Query entities via MCP gateway
+curl -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":""}}}'
 ```
 
 ---
@@ -196,7 +194,7 @@ curl http://localhost:7777/api/stats
 □ All work committed
 □ Build passing: pnpm build
 □ Tests passing: pnpm test
-□ Docker available? (curl localhost:7777/health)
+□ Docker available? (curl localhost:3100/health)
   └─ YES: create_entities([session]), add_observations(...)
   └─ NO: Write 1-2 lines to .claude/CLAUDE.md## Session State
 □ Git push
@@ -229,8 +227,8 @@ curl http://localhost:7777/api/stats
 
 ## More Information
 
-- **Full policy:** `.claude/rules/docker-memory-policy.md`
+- **Full policy:** `.claude/rules/memory-policy.md`
 - **Setup guide:** `.claude/reference/setup/DOCKER_MEMORY_SETUP.md`
 - **Error recovery:** `.claude/reference/ERROR_RECOVERY.md` (if exists)
-- **Entity types:** Part 1 of docker-memory-policy.md
-- **Observation schema:** Part 2 of docker-memory-policy.md
+- **Entity types:** Part 1 of memory-policy.md
+- **Observation schema:** Part 2 of memory-policy.md

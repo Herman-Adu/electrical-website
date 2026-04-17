@@ -304,7 +304,7 @@ Examples: `decide-memory-docker-over-files`, `decide-animation-gsap-vs-framer`
       {
         "name": "Fallback complexity",
         "description": "If Docker unavailable, must write session notes to CLAUDE.md",
-        "mitigation": "Fallback documented in docker-memory-policy.md"
+        "mitigation": "Fallback documented in memory-policy.md"
       }
     ],
     "related_decisions": [],
@@ -368,14 +368,14 @@ Examples: `infra-mcp-docker-services`, `infra-github-ci-cd`
     "services": [
       {
         "name": "memory-reference",
-        "endpoint": "http://localhost:7777/docker-memory",
+        "endpoint": "http://localhost:3100/memory/tools/call",
         "status": "operational",
         "last_health_check": "2026-04-16T18:45:00Z"
       }
     ],
     "requires": [
       "Docker daemon running",
-      "MCP server listening on port 7777",
+      "MCP server listening on port 3100",
       "Network access to localhost"
     ],
     "alerts": [
@@ -385,7 +385,7 @@ Examples: `infra-mcp-docker-services`, `infra-github-ci-cd`
         "severity": "high"
       }
     ],
-    "docs_url": ".claude/rules/docker-memory-policy.md",
+    "docs_url": ".claude/rules/memory-policy.md",
     "setup_instructions": ".claude/reference/setup/DOCKER_MEMORY_SETUP.md",
     "last_updated": "2026-04-16T18:45:00Z"
   }

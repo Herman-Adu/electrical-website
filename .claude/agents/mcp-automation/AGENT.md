@@ -1,6 +1,7 @@
 ---
 name: mcp-automation
 description: Sub-agent for multi-step workflow decomposition, tool mapping, and orchestration design.
+mode: synthesize
 ---
 
 # MCP Automation Sub-Agent (Haiku)

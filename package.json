@@ -19,13 +19,6 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",
-    "docker:build": "docker compose build web",
-    "docker:up": "docker compose up -d web",
-    "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f web",
-    "docker:start": "docker compose up --build web",
-    "docker:redeploy": "docker compose up -d --build --force-recreate web",
-    "docker:rebuild": "docker compose build --no-cache web && docker compose up -d --force-recreate web",
     "docker:mcp:up": "docker compose up -d caddy github-official openapi-schema playwright sequential-thinking memory-reference nextjs-devtools executor-playwright wikipedia youtube-transcript mcp-aggregator && pnpm docker:mcp:playwright:bootstrap",
     "docker:mcp:down": "docker compose stop caddy github-official openapi-schema playwright sequential-thinking memory-reference nextjs-devtools executor-playwright wikipedia youtube-transcript mcp-aggregator",
     "docker:mcp:logs": "docker compose logs -f caddy github-official openapi-schema playwright sequential-thinking memory-reference nextjs-devtools executor-playwright wikipedia youtube-transcript mcp-aggregator",
@@ -35,7 +28,6 @@
     "docker:mcp:memory:call": "node scripts/mcp-memory-call.mjs",
     "docker:mcp:memory:search": "node scripts/mcp-memory-call.mjs search_nodes",
     "docker:mcp:memory:open": "node scripts/mcp-memory-call.mjs open_nodes",
-    "docker:mcp:memory:bootstrap": "node scripts/bootstrap-memory-animation.mjs",
     "docker:mcp:ready": "pnpm docker:mcp:up && pnpm docker:mcp:ps && pnpm docker:mcp:smoke",
     "orchestrator:bootstrap": "node scripts/orchestrator-bootstrap.sh",
     "orchestrator:bootstrap:win": "scripts\\orchestrator-bootstrap.bat",
@@ -46,10 +38,7 @@
     "startup:new-chat:full": "pwsh scripts/new-chat-startup.ps1 -HydrateLanes",
     "startup:new-chat:refresh": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight -SkipPlaywrightBootstrap",
     "sync:task-close": "pwsh scripts/task-close-sync.ps1",
-    "orchestrator:task": "pwsh scripts/orchestrator-task.ps1",
-    "docker:dev": "docker compose -f docker-compose.dev.yml up web-dev",
-    "docker:dev:build": "docker compose -f docker-compose.dev.yml build web-dev",
-    "docker:dev:down": "docker compose -f docker-compose.dev.yml down"
+    "orchestrator:task": "pwsh scripts/orchestrator-task.ps1"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

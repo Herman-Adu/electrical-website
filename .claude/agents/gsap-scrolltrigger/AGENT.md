@@ -1,7 +1,7 @@
 ---
 name: gsap-scrolltrigger
 description: Sub-agent for fixing scroll-triggered animation issues including flicker, layout shift, performance jank, and animation synchronization.
-mode: analyze, execute, validate
+mode: execute
 role: Diagnoses scroll animation problems and implements GSAP ScrollTrigger solutions with zero flicker, GPU acceleration, and proper cleanup patterns.
 trigger: When orchestrator needs to fix scroll animations, prevent layout shift, or optimize scroll performance for Next.js 16 components.
 return-format: structured
