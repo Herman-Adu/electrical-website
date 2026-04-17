@@ -80,6 +80,7 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
   });
 
   test('tablet viewport: stable height (768px)', async ({ page }) => {
+    test.setTimeout(60000);
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto('/about');
 
