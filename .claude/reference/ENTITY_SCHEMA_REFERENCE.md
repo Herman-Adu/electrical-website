@@ -368,14 +368,14 @@ Examples: `infra-mcp-docker-services`, `infra-github-ci-cd`
     "services": [
       {
         "name": "memory-reference",
-        "endpoint": "http://localhost:7777/docker-memory",
+        "endpoint": "http://localhost:3100/memory/tools/call",
         "status": "operational",
         "last_health_check": "2026-04-16T18:45:00Z"
       }
     ],
     "requires": [
       "Docker daemon running",
-      "MCP server listening on port 7777",
+      "MCP server listening on port 3100",
       "Network access to localhost"
     ],
     "alerts": [

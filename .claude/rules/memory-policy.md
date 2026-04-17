@@ -43,7 +43,7 @@ Savings: 60–70% token reduction per session. This is non-negotiable.
 
 ## Canonical Entity Types
 
-Six entity types are recognised in this project. Every entity must use one of these types — no ad-hoc types are permitted.
+Eight entity types are recognised in this project. Every entity must use one of these types — no ad-hoc types are permitted.
 
 | Type | Purpose | Naming Pattern | Phase 5 Example |
 |------|---------|---------------|-----------------|
@@ -53,6 +53,8 @@ Six entity types are recognised in this project. Every entity must use one of th
 | `decision` | An architectural or strategic choice with full rationale preserved | `decide-{domain}-{choice}` | `decide-memory-docker-over-files` |
 | `infrastructure` | Docker services, MCP tools, CI/CD pipelines, deployment config | `infra-{subsystem}-{descriptor}` | `infra-mcp-docker-services` |
 | `session` | Handoff context enabling continuity between sessions | `session-{YYYY}-{MM}-{DD}-{seq}` | `session-2026-04-16-001` |
+| `plan` | High-level implementation roadmap with phases, dependencies, and milestones | `plan-{domain}-{goal}` | `plan-phase-6-feature-roadmap` |
+| `task` | Atomic work item with status, effort estimate, and completion tracking | `task-{area}-{descriptor}` | `task-animation-optimize-hero` |
 
 ### Naming Rules
 
@@ -583,7 +585,7 @@ Use at session close to confirm memory hygiene before committing.
 - [ ] Build passing: `pnpm build` exits 0
 - [ ] Tests passing: `pnpm test` exits 0
 - [ ] Types passing: `pnpm typecheck` exits 0
-- [ ] Docker health confirmed: `curl http://localhost:7777/health` returns `200`
+- [ ] Docker health confirmed: `curl http://localhost:3100/health` returns `200`
 - [ ] Session entity created: `session-{YYYY}-{MM}-{DD}-{seq}` exists in Docker
 - [ ] Project state updated: `add_observations(state-id, [session_end])` confirmed
 - [ ] Active feature updated: build + learning observations added

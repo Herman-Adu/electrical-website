@@ -177,15 +177,13 @@ Next: Test scroll animations. Blocker: iOS Safari compatibility.
 
 ```bash
 # Verify service is running
-curl http://localhost:7777/health
-# Expected: { "status": "healthy" }
+curl http://localhost:3100/health
+# Expected: OK
 
-# List all entities
-curl http://localhost:7777/api/entities
-
-# Get stats
-curl http://localhost:7777/api/stats
-# Expected: { "entity_count": N, "relation_count": M, ... }
+# Query entities via MCP gateway
+curl -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"params":{"name":"search_nodes","arguments":{"query":""}}}'
 ```
 
 ---
@@ -196,7 +194,7 @@ curl http://localhost:7777/api/stats
 □ All work committed
 □ Build passing: pnpm build
 □ Tests passing: pnpm test
-□ Docker available? (curl localhost:7777/health)
+□ Docker available? (curl localhost:3100/health)
   └─ YES: create_entities([session]), add_observations(...)
   └─ NO: Write 1-2 lines to .claude/CLAUDE.md## Session State
 □ Git push
