@@ -38,7 +38,12 @@
     "startup:new-chat:full": "pwsh scripts/new-chat-startup.ps1 -HydrateLanes",
     "startup:new-chat:refresh": "pwsh scripts/new-chat-startup.ps1 -SkipPreflight -SkipPlaywrightBootstrap",
     "sync:task-close": "pwsh scripts/task-close-sync.ps1",
-    "orchestrator:task": "pwsh scripts/orchestrator-task.ps1"
+    "orchestrator:task": "pwsh scripts/orchestrator-task.ps1",
+    "lane:open": "node scripts/lane-lifecycle.mjs open",
+    "lane:sync": "node scripts/lane-lifecycle.mjs sync",
+    "lane:close": "node scripts/lane-lifecycle.mjs close",
+    "lane:list": "node scripts/lane-lifecycle.mjs list",
+    "validate:memory-lanes": "node scripts/validate-memory-lanes.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

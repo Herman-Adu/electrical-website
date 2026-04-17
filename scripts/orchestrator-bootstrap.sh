@@ -85,13 +85,11 @@ fi
 if [ "$SKIP_MEMORY" != "--skip-memory" ]; then
   echo -e "${YELLOW}[4/4]${NC} Bootstrapping animation memory lanes..."
 
-  if node "$SCRIPT_DIR/bootstrap-memory-animation.mjs" 2>&1 | tail -5; then
-    echo -e "${GREEN}✓${NC} Memory bootstrap complete"
-  else
-    echo -e "${RED}✗${NC} Memory bootstrap failed"
-    echo "  Check: docker compose logs memory-reference"
-    exit 1
-  fi
+  # Note: bootstrap-memory-animation.mjs does not exist yet.
+  # Memory lanes are created on-demand via 'npm run lane:open {phase}' command.
+  # To skip this step, use: ./scripts/orchestrator-bootstrap.sh --skip-memory
+
+  echo -e "${GREEN}✓${NC} Memory bootstrap skipped (use 'npm run lane:open' to create lanes on-demand)"
 else
   echo -e "${YELLOW}[4/4]${NC} Skipping memory bootstrap (--skip-memory flag)"
 fi

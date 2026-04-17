@@ -2,6 +2,9 @@
 name: mcp-automation
 description: Sub-agent for multi-step workflow decomposition, tool mapping, and orchestration design.
 mode: synthesize
+role: Designs multi-step workflows by decomposing complex processes into ordered steps and mapping them to available skills and tools.
+trigger: When orchestrator needs to automate a process, orchestrate multiple tools, or design a workflow that combines multiple steps.
+return-format: structured
 ---
 
 # MCP Automation Sub-Agent (Haiku)
