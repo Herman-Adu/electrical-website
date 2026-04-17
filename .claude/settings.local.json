@@ -53,7 +53,11 @@
       "mcp__filesystem__search_files",
       "Bash(grep -E \"\\\\.mjs$|\\\\.sh$\")",
       "Bash(gh workflow *)",
-      "Bash(gh run *)"
+      "Bash(gh run *)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill *)",
+      "Bash(pkill -f \"node.*next\")",
+      "Bash(taskkill /F /IM node.exe)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
