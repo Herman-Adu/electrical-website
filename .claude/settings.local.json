@@ -40,7 +40,10 @@
       "Bash(bash /tmp/validate_skills.sh)",
       "Bash(grep -l \"Docker\\\\|mcp__\\\\|memory-reference\\\\|MCP_DOCKER\" .claude/agents/*/AGENT.md .claude/skills/*/SKILL.md)",
       "Bash(xargs wc *)",
-      "Bash(grep \"^mode:\" .claude/agents/*/AGENT.md)"
+      "Bash(grep \"^mode:\" .claude/agents/*/AGENT.md)",
+      "Bash(grep -l \"platinum\\\\|validate-build\" scripts/*.ps1 scripts/*.sh)",
+      "mcp__filesystem__create_directory",
+      "Bash(npm run *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
