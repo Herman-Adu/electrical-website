@@ -51,7 +51,9 @@
       "Bash(mv docs/examples/validate-mcp-contract-robust.ts scripts/)",
       "Bash(npm test *)",
       "mcp__filesystem__search_files",
-      "Bash(grep -E \"\\\\.mjs$|\\\\.sh$\")"
+      "Bash(grep -E \"\\\\.mjs$|\\\\.sh$\")",
+      "Bash(gh workflow *)",
+      "Bash(gh run *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
