@@ -57,7 +57,11 @@
       "Bash(lsof -ti:3000)",
       "Bash(xargs kill *)",
       "Bash(pkill -f \"node.*next\")",
-      "Bash(taskkill /F /IM node.exe)"
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(node scripts/lane-lifecycle.mjs close phase-6-infrastructure-and-workflows)",
+      "Bash(git checkout *)",
+      "Bash(node scripts/lane-lifecycle.mjs open phase-7-animation-polish)",
+      "Bash(node scripts/lane-lifecycle.mjs list --active)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
