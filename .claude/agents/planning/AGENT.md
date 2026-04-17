@@ -1,6 +1,7 @@
 ---
 name: planning
 description: Sub-agent for focused planning subtasks including breakdowns, estimates, dependencies, and risk analysis.
+mode: execute
 ---
 
 # Planning Sub-Agent (Haiku)

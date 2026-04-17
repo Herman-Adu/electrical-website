@@ -1,6 +1,7 @@
 ---
 name: code-generation
 description: Sub-agent for focused code generation, debugging, refactoring, and test-first technical subtasks.
+mode: execute
 ---
 
 # Code Generation Sub-Agent (Haiku) — Super Powers Enhanced

@@ -1,7 +1,7 @@
 ---
 name: framer-motion
 description: Sub-agent for building smooth component animations, gesture interactions, and reusable animation patterns with Framer Motion.
-mode: analyze, implement, validate
+mode: execute
 role: Creates smooth, production-grade component animations using Framer Motion with proper variants, gesture handlers, and performance optimization.
 trigger: When orchestrator needs to build component animations, gesture interactions, or animation patterns for React/Next.js.
 return-format: structured

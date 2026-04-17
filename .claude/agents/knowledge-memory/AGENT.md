@@ -1,6 +1,7 @@
 ---
 name: knowledge-memory
 description: Sub-agent for single-file knowledge extraction, summarization, and metadata generation.
+mode: execute
 ---
 
 # Knowledge / File Memory Sub-Agent (Haiku)

@@ -1,6 +1,7 @@
 ---
 name: skill-builder
-description: Sub-agent for skill creation, auditing, and optimization tasks
+description: Sub-agent for skill creation, auditing, and optimization tasks.
+mode: execute
 ---
 
 # Skill Builder Sub-Agent
