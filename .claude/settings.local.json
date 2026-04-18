@@ -91,7 +91,13 @@
       "Bash(curl -s http://localhost:3100/mcp/health)",
       "Bash(python3 -m json.tool)",
       "Bash(curl -s http://localhost:3100/mcp/tools)",
-      "Bash(node scripts/validate-claude-scaffold.mjs)"
+      "Bash(node scripts/validate-claude-scaffold.mjs)",
+      "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"electrical-website-state\"}}')",
+      "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"session-2026-04-18\"}}')",
+      "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"learn-\"}}')",
+      "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"decide-\"}}')",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Total tools discovered: {len\\(data[\\\\\"tools\\\\\"]\\)}'\\)\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
