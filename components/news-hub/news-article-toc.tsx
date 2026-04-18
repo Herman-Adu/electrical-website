@@ -64,7 +64,8 @@ export function NewsArticleToc({
     const element = document.getElementById(id);
     if (element) {
       scrollToElementWithOffset(element, {
-        baseGap: SCROLL_GAP.toc,
+        pageType: 'article',
+        // baseGap will be resolved to SCROLL_GAP.toc (8px) by pageType
       });
     }
   }, []);

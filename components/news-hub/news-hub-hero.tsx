@@ -68,7 +68,7 @@ export function NewsHubHero({
 
   const scrollToFeed = () => {
     const feed = document.getElementById("news-hub-feed");
-    if (feed) scrollToElementWithOffset(feed);
+    if (feed) scrollToElementWithOffset(feed, { pageType: 'article' });
   };
 
   return (

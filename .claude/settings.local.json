@@ -61,7 +61,11 @@
       "Bash(node scripts/lane-lifecycle.mjs close phase-6-infrastructure-and-workflows)",
       "Bash(git checkout *)",
       "Bash(node scripts/lane-lifecycle.mjs open phase-7-animation-polish)",
-      "Bash(node scripts/lane-lifecycle.mjs list --active)"
+      "Bash(node scripts/lane-lifecycle.mjs list --active)",
+      "Read(//c/Users/herma/.claude/plans/**)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(npx tsc *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",

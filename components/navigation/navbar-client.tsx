@@ -134,7 +134,7 @@ export function NavbarClient() {
         const selector = `#${hashPart}`;
         const element = document.querySelector(selector);
         if (element) {
-          scrollToElementWithOffset(element);
+          scrollToElementWithOffset(element, { pageType: 'default' });
           window.history.pushState(null, "", `${targetPath}${selector}`);
           setCurrentHash(selector);
           closeMenus();

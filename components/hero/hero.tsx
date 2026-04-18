@@ -224,7 +224,7 @@ export function Hero() {
   const scrollToContent = () => {
     const servicesSection = document.getElementById("services");
     if (servicesSection) {
-      scrollToElementWithOffset(servicesSection);
+      scrollToElementWithOffset(servicesSection, { pageType: 'default' });
     }
   };
 
