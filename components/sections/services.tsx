@@ -12,6 +12,7 @@ import {
   Wrench,
   ArrowRight,
 } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const services = [
   {
@@ -94,38 +95,13 @@ const services = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  },
-};
 
 export function Services() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const headerRef = useRef<HTMLDivElement>(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="services"
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
-    >
+    <section id="services" className="section-container section-padding bg-background">
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
       <div
@@ -140,8 +116,9 @@ export function Services() {
       <div className="section-content">
         {/* Section Header */}
         <motion.div
+          ref={headerRef}
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -163,18 +140,15 @@ export function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <ScrollReveal
               key={service.title}
-              variants={itemVariants}
-              className="group relative flex flex-col border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 dark:hover:border-electric-cyan/30 transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5"
+              direction="up"
+              blur
+              delay={(index % 3) * 0.07}
             >
+              <motion.div className="group relative flex flex-col border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 dark:hover:border-electric-cyan/30 transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5" >
               {/* Corner accent — inset to respect border-radius */}
               <div className="absolute top-3 right-3 w-10 h-10 border-t border-r dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-muted-foreground/50 dark:group-hover:border-electric-cyan/40 transition-colors" />
 
@@ -230,17 +204,13 @@ export function Services() {
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
           ))}
-        </motion.div>
+        </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
-        >
+        <ScrollReveal direction="fade" delay={0.2} className="mt-16 text-center">
           <div className="inline-flex items-center gap-4 text-foreground/70">
             <div className="h-px w-12 bg-border" />
             <span className="relative font-mono text-xs tracking-widest uppercase overflow-hidden">
@@ -268,7 +238,7 @@ export function Services() {
               Request Consultation
             </Link>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );
