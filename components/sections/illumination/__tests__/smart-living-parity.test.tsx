@@ -7,7 +7,7 @@ import { resolve } from 'path';
  * for viewport detection, parallax motion, and component consistency.
  */
 
-describe('SmartLiving Parity — Illumination Consistency', () => {
+describe('Illumination Parallax Consistency — Shared Viewport Patterns', () => {
   let smartLivingSource: string;
   let illuminationSource: string;
 
@@ -140,6 +140,18 @@ describe('SmartLiving Parity — Illumination Consistency', () => {
       const hasGuard = bgParallaxContent.includes('enableParallaxMotion ? imageY : 0');
       expect(hasEnableParallaxProp).toBe(true);
       expect(hasGuard).toBe(true);
+    });
+  });
+
+  describe('Layout Pattern — Intentional Divergence from SmartLiving', () => {
+    it('Illumination uses section-container + section-padding (not section-fluid)', () => {
+      expect(illuminationSource).toContain('section-container');
+      expect(illuminationSource).toContain('section-padding');
+      expect(illuminationSource).not.toContain('section-fluid');
+    });
+
+    it('SmartLiving retains section-fluid (unchanged)', () => {
+      expect(smartLivingSource).toContain('section-fluid');
     });
   });
 });

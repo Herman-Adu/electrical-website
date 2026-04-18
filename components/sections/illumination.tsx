@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
-import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { BackgroundParallax } from "./illumination/background-parallax";
 import { ScanEffects } from "./illumination/scan-effects";
 import { StatsGrid, type IlluminationStat } from "./illumination/stats-grid";
@@ -19,17 +18,12 @@ export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
   const [enableParallaxMotion, setEnableParallaxMotion] = useState<boolean>(false);
 
-  // Viewport guard: Disable parallax on mobile (<1024px) for performance
+  // Viewport guard: disable parallax on mobile (<1024px) for performance
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
     const updateViewportMode = () => setEnableParallaxMotion(mediaQuery.matches);
-
-    // Sync initial state
     updateViewportMode();
-
-    // Use modern addEventListener API (fully supported in modern browsers)
     mediaQuery.addEventListener("change", updateViewportMode);
-
     return () => mediaQuery.removeEventListener("change", updateViewportMode);
   }, []);
 
@@ -43,49 +37,35 @@ export function Illumination() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax transforms
+  // Parallax transforms — all unchanged from previous implementation
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const brightness = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.5],
-    [0.3, 0.7, 1],
-  );
+  const brightness = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.3, 0.7, 1]);
   // FIXED: Opacity keyframes now start at 1 (visible) instead of 0 (hidden)
   // [0, 0.15, 0.8, 1] → [1, 1, 1, 0] means content is visible on scroll arrival
   const opacity = useTransform(scrollYProgress, [0, 0.15, 0.8, 1], [1, 1, 1, 0]);
-
-  // Convert brightness to overlay opacity (inverse: darker overlay = lower brightness)
-  // brightness 0.3 -> overlay 0.7 (dark), brightness 1 -> overlay 0 (bright)
   const brightnessOverlayOpacity = useTransform(brightness, (b) => 1 - b);
 
-  // Background layer for SectionWrapper
-  const BackgroundLayer = (
-    <>
+  return (
+    <section
+      ref={containerRef}
+      id="illumination"
+      className="section-container section-padding relative min-h-screen"
+    >
+      {/* Background layer — absolute inset-0 z-0, resolves against section-container's position:relative */}
       <BackgroundParallax
         imageY={imageY}
         brightnessOverlayOpacity={brightnessOverlayOpacity}
         enableParallaxMotion={enableParallaxMotion}
       />
       <ScanEffects />
-    </>
-  );
 
-  return (
-    <SectionWrapper
-      id="illumination"
-      sectionRef={containerRef}
-      background={BackgroundLayer}
-      variant="full"
-      className="min-h-[140svh] md:min-h-screen"
-      style={{ position: "relative" }}
-    >
-      {/* Content */}
+      {/* Content layer — natural document flow, z-20 above background */}
       <motion.div
-        className="relative z-20 w-full flex flex-col min-h-svh pb-20 md:min-h-0 md:pb-0"
+        className="section-content relative z-20"
         style={{ y: contentY, opacity }}
       >
-        <div className="max-w-2xl pt-10 md:pt-0">
+        <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -153,6 +133,6 @@ export function Illumination() {
 
         <StatsGrid stats={stats} inView={inView} />
       </motion.div>
-    </SectionWrapper>
+    </section>
   );
 }

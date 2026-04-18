@@ -98,12 +98,37 @@ describe('Illumination Component Implementation', () => {
       expect(illuminationSource).toContain('ScanEffects');
     });
 
-    it('should still use SectionWrapper', () => {
-      expect(illuminationSource).toContain('SectionWrapper');
-    });
-
     it('should maintain section id "illumination"', () => {
       expect(illuminationSource).toContain('id="illumination"');
+    });
+  });
+
+  describe('Section Structure — section-container pattern', () => {
+    it('should use section-container class (not section-fluid)', () => {
+      expect(illuminationSource).toContain('section-container');
+      expect(illuminationSource).not.toContain('section-fluid');
+    });
+
+    it('should use section-padding class', () => {
+      expect(illuminationSource).toContain('section-padding');
+    });
+
+    it('should NOT import SectionWrapper', () => {
+      expect(illuminationSource).not.toMatch(
+        /from ['"]@\/components\/ui\/section-wrapper['"]/
+      );
+    });
+
+    it('should NOT use min-h-[140svh]', () => {
+      expect(illuminationSource).not.toContain('min-h-[140svh]');
+    });
+
+    it('should NOT use min-h-svh on content wrapper', () => {
+      expect(illuminationSource).not.toContain('min-h-svh');
+    });
+
+    it('should use section-content class for horizontal gutters', () => {
+      expect(illuminationSource).toContain('section-content');
     });
   });
 });
