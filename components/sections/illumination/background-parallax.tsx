@@ -6,15 +6,20 @@ import Image from "next/image";
 interface BackgroundParallaxProps {
   imageY: MotionValue<string>;
   brightnessOverlayOpacity: MotionValue<number>;
+  enableParallaxMotion?: boolean;
 }
 
 export function BackgroundParallax({
   imageY,
   brightnessOverlayOpacity,
+  enableParallaxMotion = false,
 }: BackgroundParallaxProps) {
   return (
     <>
-      <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ y: enableParallaxMotion ? imageY : 0 }}
+      >
         <div className="relative w-full h-[120%]">
           <Image
             src="/images/warehouse-lighting.jpg"

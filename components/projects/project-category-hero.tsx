@@ -105,7 +105,7 @@ export function ProjectCategoryHero({
 
   const scrollToProjects = () => {
     const el = document.getElementById("category-projects");
-    if (el) scrollToElementWithOffset(el);
+    if (el) scrollToElementWithOffset(el, { pageType: 'default' });
   };
 
   return (

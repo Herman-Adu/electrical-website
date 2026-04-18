@@ -124,7 +124,7 @@ export function NewsCategoryHero({
 
   const scrollToArticles = () => {
     const el = document.getElementById("category-articles");
-    if (el) scrollToElementWithOffset(el);
+    if (el) scrollToElementWithOffset(el, { pageType: 'article' });
   };
 
   return (

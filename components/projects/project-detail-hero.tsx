@@ -28,7 +28,7 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
 
   const scrollToProjectContent = () => {
     const target = document.getElementById("project-content");
-    if (target) scrollToElementWithOffset(target);
+    if (target) scrollToElementWithOffset(target, { pageType: 'default' });
   };
 
   return (

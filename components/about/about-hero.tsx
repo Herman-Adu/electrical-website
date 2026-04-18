@@ -63,7 +63,7 @@ export function AboutHero() {
 
   const scrollToContent = () => {
     const next = document.getElementById("company-intro");
-    if (next) scrollToElementWithOffset(next);
+    if (next) scrollToElementWithOffset(next, { pageType: 'default' });
   };
 
   return (

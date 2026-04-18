@@ -54,7 +54,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
   const scrollToArticle = () => {
     const articleContent = document.getElementById("article-content");
-    if (articleContent) scrollToElementWithOffset(articleContent);
+    if (articleContent) scrollToElementWithOffset(articleContent, { pageType: 'article' });
   };
 
   return (

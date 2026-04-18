@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Image from "next/image";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
-import { SectionWrapper } from "@/components/ui/section-wrapper";
-import { BackgroundParallax } from "./illumination/background-parallax";
 import { ScanEffects } from "./illumination/scan-effects";
 import { StatsGrid, type IlluminationStat } from "./illumination/stats-grid";
 
@@ -28,43 +27,56 @@ export function Illumination() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax transforms
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  // Smooth spring for brightness transition
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+  });
+
+  // Brightness and saturation based on scroll
   const brightness = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.5],
+    smoothProgress,
+    [0.1, 0.35, 0.5],
     [0.3, 0.7, 1],
   );
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const saturation = useTransform(
+    smoothProgress,
+    [0.1, 0.35, 0.5],
+    [0.5, 0.8, 1],
+  );
 
-  // Convert brightness to overlay opacity (inverse: darker overlay = lower brightness)
-  // brightness 0.3 -> overlay 0.7 (dark), brightness 1 -> overlay 0 (bright)
-  const brightnessOverlayOpacity = useTransform(brightness, (b) => 1 - b);
-
-  // Background layer for SectionWrapper
-  const BackgroundLayer = (
-    <>
-      <BackgroundParallax imageY={imageY} brightnessOverlayOpacity={brightnessOverlayOpacity} />
-      <ScanEffects />
-    </>
+  const imageFilter = useTransform(
+    [brightness, saturation] as const,
+    ([b, s]: number[]) => `brightness(${b}) saturate(${s})`,
   );
 
   return (
-    <SectionWrapper
+    <section
+      ref={containerRef}
       id="illumination"
-      sectionRef={containerRef}
-      background={BackgroundLayer}
-      variant="full"
-      className="min-h-[140svh] md:min-h-screen"
-      style={{ position: "relative" }}
+      className="section-container section-padding relative"
     >
-      {/* Content */}
-      <motion.div
-        className="relative z-20 w-full flex flex-col min-h-svh pb-20 md:min-h-0 md:pb-0"
-        style={{ y: contentY, opacity }}
-      >
-        <div className="max-w-2xl pt-10 md:pt-0">
+      {/* Background Layer */}
+      <motion.div className="absolute inset-0 z-0" style={{ filter: imageFilter }}>
+        <Image
+          src="/images/warehouse-lighting.jpg"
+          alt="Industrial warehouse lighting installation"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </motion.div>
+
+      {/* Gradient overlays for readability */}
+      <div className="absolute inset-0 z-0 bg-linear-to-t from-(--deep-black) via-(--deep-black)/50 to-transparent" />
+      <div className="absolute inset-0 z-0 bg-linear-to-r from-(--deep-black)/40 via-transparent to-(--deep-black)/40" />
+
+      {/* Scan effects */}
+      <ScanEffects />
+
+      {/* Content layer — natural document flow, z-20 above background */}
+      <div className="section-content relative z-20">
+        <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,7 +143,7 @@ export function Illumination() {
         </div>
 
         <StatsGrid stats={stats} inView={inView} />
-      </motion.div>
-    </SectionWrapper>
+      </div>
+    </section>
   );
 }

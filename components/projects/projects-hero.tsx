@@ -58,7 +58,7 @@ export function ProjectsHero({
 
   const scrollToGrid = () => {
     const el = document.getElementById("projects-grid");
-    if (el) scrollToElementWithOffset(el);
+    if (el) scrollToElementWithOffset(el, { pageType: 'default' });
   };
 
   return (
