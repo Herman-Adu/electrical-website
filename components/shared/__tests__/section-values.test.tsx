@@ -9,6 +9,8 @@ vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
   },
+  useInView: () => true,
+  useReducedMotion: () => false,
 }));
 
 // Mock useAnimatedBorders
@@ -24,6 +26,11 @@ vi.mock('@/lib/use-animated-borders', () => ({
 // Mock icon-map
 vi.mock('../icon-map', () => ({
   getIcon: () => () => <svg data-testid="icon" />,
+}));
+
+// Mock ScrollReveal
+vi.mock('@/components/ui/scroll-reveal', () => ({
+  ScrollReveal: ({ children }: any) => <div>{children}</div>,
 }));
 
 // Mock data
