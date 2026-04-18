@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
 import { ScanEffects } from "./illumination/scan-effects";
@@ -16,6 +16,23 @@ const stats: IlluminationStat[] = [
 
 export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Viewport guard: desktop-only parallax (≥1024px, Tailwind lg:)
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const updateViewportMode = () => setIsDesktop(mediaQuery.matches);
+
+    updateViewportMode();
+
+    // Use modern addEventListener API
+    mediaQuery.addEventListener("change", updateViewportMode);
+
+    return () => mediaQuery.removeEventListener("change", updateViewportMode);
+  }, []);
+
+  // Accessibility: disable parallax if user prefers reduced motion
+  const shouldReduceMotion = useReducedMotion();
 
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,
@@ -27,7 +44,7 @@ export function Illumination() {
     offset: ["start end", "end start"],
   });
 
-  // Smooth spring for brightness transition
+  // Smooth spring for brightness transition and parallax
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -49,6 +66,9 @@ export function Illumination() {
     [brightness, saturation] as const,
     ([b, s]: number[]) => `brightness(${b}) saturate(${s})`,
   );
+
+  // Parallax transform: 0→30px vertical offset, applied only on desktop without motion reduction
+  const parallaxY = useTransform(smoothProgress, [0.1, 0.5], [0, 30]);
 
   return (
     <section
@@ -75,7 +95,15 @@ export function Illumination() {
       <ScanEffects />
 
       {/* Content layer — natural document flow, z-20 above background */}
-      <div className="section-content relative z-20">
+      {/* Wrapped in motion.div for parallax effect (30px vertical offset on desktop, desktop-only) */}
+      <motion.div
+        style={{
+          y: isDesktop && !shouldReduceMotion ? parallaxY : 0,
+          willChange: "transform",
+        }}
+        className="will-change-transform"
+      >
+        <div className="section-content relative z-20">
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -143,7 +171,8 @@ export function Illumination() {
         </div>
 
         <StatsGrid stats={stats} inView={inView} />
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

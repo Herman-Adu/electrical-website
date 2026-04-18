@@ -66,7 +66,14 @@
       "Skill(update-config)",
       "Skill(update-config:*)",
       "Bash(npx tsc *)",
-      "Bash(pnpm startup:new-chat)"
+      "Bash(pnpm startup:new-chat)",
+      "Bash(pnpm docker:mcp:ps)",
+      "Bash(pnpm docker:mcp:smoke)",
+      "Bash(bash /tmp/search_docker.sh)",
+      "Read(//c/tmp/**)",
+      "Read(//c/Users/herma/.claude/**)",
+      "Bash(git log *)",
+      "Bash(pnpm test:coverage -- components/sections/illumination/__tests__/parallax.test.tsx)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
