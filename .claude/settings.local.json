@@ -65,7 +65,8 @@
       "Read(//c/Users/herma/.claude/plans/**)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(pnpm startup:new-chat)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",

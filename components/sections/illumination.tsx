@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
@@ -17,6 +17,21 @@ const stats: IlluminationStat[] = [
 
 export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
+  const [enableParallaxMotion, setEnableParallaxMotion] = useState<boolean>(false);
+
+  // Viewport guard: Disable parallax on mobile (<1024px) for performance
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const updateViewportMode = () => setEnableParallaxMotion(mediaQuery.matches);
+
+    // Sync initial state
+    updateViewportMode();
+
+    // Use modern addEventListener API (fully supported in modern browsers)
+    mediaQuery.addEventListener("change", updateViewportMode);
+
+    return () => mediaQuery.removeEventListener("change", updateViewportMode);
+  }, []);
 
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,
@@ -36,7 +51,9 @@ export function Illumination() {
     [0, 0.3, 0.5],
     [0.3, 0.7, 1],
   );
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // FIXED: Opacity keyframes now start at 1 (visible) instead of 0 (hidden)
+  // [0, 0.15, 0.8, 1] → [1, 1, 1, 0] means content is visible on scroll arrival
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.8, 1], [1, 1, 1, 0]);
 
   // Convert brightness to overlay opacity (inverse: darker overlay = lower brightness)
   // brightness 0.3 -> overlay 0.7 (dark), brightness 1 -> overlay 0 (bright)
@@ -45,7 +62,11 @@ export function Illumination() {
   // Background layer for SectionWrapper
   const BackgroundLayer = (
     <>
-      <BackgroundParallax imageY={imageY} brightnessOverlayOpacity={brightnessOverlayOpacity} />
+      <BackgroundParallax
+        imageY={imageY}
+        brightnessOverlayOpacity={brightnessOverlayOpacity}
+        enableParallaxMotion={enableParallaxMotion}
+      />
       <ScanEffects />
     </>
   );
