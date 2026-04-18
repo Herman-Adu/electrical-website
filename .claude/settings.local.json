@@ -75,7 +75,18 @@
       "Bash(git log *)",
       "Bash(pnpm test:coverage -- components/sections/illumination/__tests__/parallax.test.tsx)",
       "Bash(grep -E \"--parallax-amount|--section-padding-top\" /c/Users/herma/source/repository/electrical-website/app/globals.css)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(grep -E \"\\\\.\\(md|sh|json\\)$\")",
+      "Bash(curl -s http://localhost:3100/mcp/call -X POST -H \"Content-Type: application/json\" -d '{\"method\":\"search_nodes\",\"params\":{\"query\":\"electrical-website-state\"}}')",
+      "Bash(curl -s http://localhost:3100/mcp/call -X POST -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(grep -E \"\\\\.\\(js|mjs|ts|sh\\)$\")",
+      "Bash(node scripts/sync-phase-7-docker.mjs)",
+      "Bash(curl -s http://localhost:8000/info)",
+      "Bash(grep -E \"\\\\.\\(json|yaml|toml|Caddyfile\\)$\")",
+      "Bash(curl -s http://localhost:3100/memory/info)",
+      "Bash(chmod +x /tmp/verify_phase7_sync.sh)",
+      "Bash(bash /tmp/verify_phase7_sync.sh)",
+      "Bash(cd c:\\\\\\\\Users\\\\\\\\herma\\\\\\\\source\\\\\\\\repository\\\\\\\\electrical-website)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
