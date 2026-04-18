@@ -94,7 +94,7 @@ export function Dashboard() {
       </ScrollReveal>
 
       {/* Terminal Section */}
-      <SystemTerminal />
+      <SystemTerminal isInView={shouldAnimate} />
 
       {/* Footer Stats */}
       <LiveConnections isInView={isInView} />

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const LOG_MESSAGES = [
   "CHECKING PHASE_A VOLTAGE... [OK]",
@@ -22,11 +23,14 @@ interface LogEntry {
   id: number;
 }
 
-export function SystemTerminal() {
+interface SystemTerminalProps {
+  isInView?: boolean;
+}
+
+export function SystemTerminal({ isInView = false }: SystemTerminalProps) {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [isMounted, setIsMounted] = useState(false);
   const terminalRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(terminalRef, { once: true });
   const logIdRef = useRef(0);
 
   useEffect(() => {
@@ -59,14 +63,11 @@ export function SystemTerminal() {
   }, [isInView, isMounted]);
 
   return (
-    <motion.div
-      ref={terminalRef}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      viewport={{ once: true }}
-      className=" bg-electric-cyan/10  border-electric-cyan/10 p-4 font-mono overflow-hidden rounded-xl"
-    >
+    <ScrollReveal direction="up" blur delay={0.4} duration={0.65} distance={40}>
+      <motion.div
+        ref={terminalRef}
+        className="bg-electric-cyan/10 border-electric-cyan/10 p-4 font-mono overflow-hidden rounded-xl"
+      >
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-b-electric-cyan/20">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
@@ -119,6 +120,7 @@ export function SystemTerminal() {
           ENCRYPTION: AES-256 // MQTT_TLS
         </span>
       </div>
-    </motion.div>
+      </motion.div>
+    </ScrollReveal>
   );
 }
