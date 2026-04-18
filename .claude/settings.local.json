@@ -73,7 +73,9 @@
       "Read(//c/tmp/**)",
       "Read(//c/Users/herma/.claude/**)",
       "Bash(git log *)",
-      "Bash(pnpm test:coverage -- components/sections/illumination/__tests__/parallax.test.tsx)"
+      "Bash(pnpm test:coverage -- components/sections/illumination/__tests__/parallax.test.tsx)",
+      "Bash(grep -E \"--parallax-amount|--section-padding-top\" /c/Users/herma/source/repository/electrical-website/app/globals.css)",
+      "Bash(git stash *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
