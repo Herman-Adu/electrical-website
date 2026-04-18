@@ -345,7 +345,36 @@ If Docker memory service is down:
 
 ## Session State
 
-2026-04-18 — Infrastructure complete (MCP aggregator, Caddyfile, docker-compose). Session lifecycle + SME agents working. Executing skills audit (Batch A/B/C/D). Load Docker entity "electrical-website-state" for phase context.
+2026-04-18 18:45 — **ScrollReveal Animation Complete** | Branch: main | Commit: 815a34c | Build: ✅ passing
+
+**Work Completed:**
+- Created `components/ui/scroll-reveal.tsx` — Reusable per-element scroll animation component
+- Refactored `components/sections/services.tsx` — Now uses per-card triggers instead of section-level
+- Pattern: ScrollReveal wrapper with direction={up|down|left|right|fade}, blur effect, column-based stagger (index % 3)
+- Accessibility: Full prefers-reduced-motion support via useReducedMotion()
+
+**To Rehydrate Next Session (For Docker Migration):**
+Create these entities in Docker:
+1. **feat-scroll-reveal-reusable-component** — Completed feature, reusable site-wide
+2. **learn-scroll-reveal-per-element-triggers** — Insight: per-element triggers smoother than container-level
+3. **learn-orchestrator-pattern-violation-noted** — Process: this session bypassed delegation (violated orchestrator mode)
+4. **decide-scroll-reveal-animation-standard** — Decision: ScrollReveal is now the site animation standard
+
+**Apply ScrollReveal to These Components Next:**
+- `components/sections/features.tsx` → Cards fade up
+- `components/sections/dashboard.tsx` → Metrics fade left/right
+- `components/sections/illumination.tsx` → Section header fade down
+- `components/sections/smart-living.tsx` → Image reveals left/right with distance={60}
+- Any list/counter components → direction={fade}
+
+**Component API Reference:**
+```tsx
+<ScrollReveal direction="up" blur delay={0} duration={0.65} distance={40} once margin="0px 0px -80px 0px">
+  {children}
+</ScrollReveal>
+```
+
+Next: Dispatch animation specialist to apply pattern to remaining components in batch.
 
 ---
 
