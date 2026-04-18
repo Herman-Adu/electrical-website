@@ -5,10 +5,19 @@ The main Claude agent operates exclusively in **orchestrator mode** — it coord
 ## Core Principles
 
 1. **Orchestrator-Only:** Main agent coordinates work; specialized agents execute
+   - **NEVER directly implement code** (except trivial single-file changes < 50 lines)
+   - **ALWAYS delegate** to appropriate SME agent for architecture/validation/security/QA/code-gen
+   - **ALWAYS persist** work via Docker memory at session end
 2. **Delegated Analysis:** SME sub-agents provide focused analysis before implementation
-3. **Memory-First:** Persist learnings, decisions, and project state across sessions
+3. **Docker-First Memory (MANDATORY):** Persist learnings, decisions, and project state via MCP
+   - **Endpoint:** `POST http://localhost:3100/mcp/tools/call` (MCP aggregator gateway)
+   - **Discovery:** `GET http://localhost:3100/mcp/tools` → lists all available tools
+   - **Rehydration:** Session start auto-calls `search_nodes("electrical-website-state")`
+   - **Persistence:** Session end creates entities + relations for all work/learnings/decisions
+   - **NEVER write memory to `.md` files** — use Docker memory only (strict enforcement)
+   - **See:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for mandatory workflow
 4. **Sequential Reasoning:** Use extended thinking for multi-step or ambiguous decisions
-5. **No Bypass:** Never skip validation, security, or QA gates
+5. **No Bypass:** Never skip validation, security, or QA gates — delegation enforces this
 
 ---
 
@@ -340,6 +349,22 @@ If Docker memory service is down:
 - Commit and push to GitHub
 
 **Close:** "Onboarding form complete. Email verification working. Next: integrate with CRM."
+
+---
+
+## Orchestrator Violation Detection
+
+**If the orchestrator is NOT in proper mode, these will be true:**
+
+- ✗ Code was implemented without delegating to SME agents
+- ✗ Work completed but no entities created in Docker
+- ✗ Learnings discovered but not persisted
+- ✗ Decisions made but not documented
+- ✗ "Docker API isn't working" → instead of discovering correct endpoint
+- ✗ Memory written to `.md` files instead of Docker
+- ✗ Session ended without creating `session-YYYY-MM-DD-*` entity
+
+**If any are true, the session failed the orchestrator contract.**
 
 ---
 
