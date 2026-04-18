@@ -345,9 +345,17 @@ If Docker memory service is down:
 
 ## Session State
 
-**2026-04-17 01:15 — Session Lifecycle COMPLETE + merged to main. PR #88 auto-merge enabled (Skill Sync ✅, Vercel ✅). 
-Work: Validation+Security SME analysis (8 blockers refined) → Code-Gen (1,919 lines, 28/28 tests) → merged. 
-Next orchestrator session: Load Docker memory (electrical-website-state), skip docker-cleanup branch context, proceed with Phase 6 planning.**
+**2026-04-18 01:25 — SCROLL-OFFSET SITE-WIDE FIX ARCHITECTURE DESIGNED (Docker fallback note)**
+
+**Current Work:** Phase 7 Animation Polish pivoted to scroll-to-anchor alignment issue (hero scroll button + navbar dropdown links don't scroll far enough; previous component visible).
+
+**Root Cause Analysis:** Three hypotheses identified: (1) Breadcrumb height measurement timing - getStickyBreadcrumbHeight() may return 0 if not yet rendered; (2) Scroll gap inconsistency - Hero/Navbar use 20px default vs TOC uses 8px correctly; (3) Missing dynamic offset per page state.
+
+**Architecture Complete:** Phase 1 (Diagnostics) → Phase 2 (4 fix options: A=reliable measurement, B=standardize 8px gap, C=per-page config, D=scroll anchor hook) → Phase 3 (Site-wide validation). No implementation until Phase 1 confirms root cause.
+
+**Affected Components:** Hero.scrollToContent(), NavbarClient.scrollToSection() — working reference: ContentToc uses baseGap: 8px correctly.
+
+**Next Session:** Execute Phase 1 Diagnostics (add console logging to getScrollOffset showing navbar, breadcrumb, gap, final offset). User feedback determines Phase 2 strategy. Use orchestrator + Docker + sequential-thinking + Context7 for clean implementation.
 
 ---
 
