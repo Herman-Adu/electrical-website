@@ -86,7 +86,11 @@
       "Bash(curl -s http://localhost:3100/memory/info)",
       "Bash(chmod +x /tmp/verify_phase7_sync.sh)",
       "Bash(bash /tmp/verify_phase7_sync.sh)",
-      "Bash(cd c:\\\\\\\\Users\\\\\\\\herma\\\\\\\\source\\\\\\\\repository\\\\\\\\electrical-website)"
+      "Bash(cd c:\\\\\\\\Users\\\\\\\\herma\\\\\\\\source\\\\\\\\repository\\\\\\\\electrical-website)",
+      "Bash(docker compose *)",
+      "Bash(curl -s http://localhost:3100/mcp/health)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s http://localhost:3100/mcp/tools)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
