@@ -370,27 +370,27 @@ If Docker memory service is down:
 
 ## Session State
 
-2026-04-18 18:45 — **ScrollReveal Animation Complete** | Branch: main | Commit: 815a34c | Build: ✅ passing
+2026-04-18 20:35 — **Phase 8a Features ScrollReveal COMPLETE** | Branch: main | Commit: 778c168 | Build: ✅ passing | Tests: 211 passing
 
-**Work Completed:**
-- Created `components/ui/scroll-reveal.tsx` — Reusable per-element scroll animation component
-- Refactored `components/sections/services.tsx` — Now uses per-card triggers instead of section-level
-- Pattern: ScrollReveal wrapper with direction={up|down|left|right|fade}, blur effect, column-based stagger (index % 3)
-- Accessibility: Full prefers-reduced-motion support via useReducedMotion()
+**Work Completed (Phase 8a):**
+- ✅ Fixed Blocking Issue 1: Removed whileInView animation props from LoadMonitorCard, SystemDiagnosticsCard, SchedulerCard
+- ✅ Fixed Blocking Issue 2: Added useReducedMotion() hook + guards to setInterval animations (WCAG compliant)
+- Created `lib/hooks/use-reduced-motion.ts` — Monitors prefers-reduced-motion media query
+- Wrapped all 3 feature cards with ScrollReveal component (direction=up, blur, staggered delay)
+- Added 15 comprehensive TDD tests (RED → GREEN → REFACTOR pattern)
+- All tests passing, production build passing, zero errors
 
-**To Rehydrate Next Session (For Docker Migration):**
-Create these entities in Docker:
-1. **feat-scroll-reveal-reusable-component** — Completed feature, reusable site-wide
-2. **learn-scroll-reveal-per-element-triggers** — Insight: per-element triggers smoother than container-level
-3. **learn-orchestrator-pattern-violation-noted** — Process: this session bypassed delegation (violated orchestrator mode)
-4. **decide-scroll-reveal-animation-standard** — Decision: ScrollReveal is now the site animation standard
+**Learnings Captured:**
+1. **learn-reduced-motion-hook-pattern** — useReducedMotion hook monitors matchMedia, returned by all animated components
+2. **learn-scrollreveal-animation-observer-resolution** — ScrollReveal wrapper prevents multiple IntersectionObserver conflicts
+   - Before: motion.div with whileInView + ScrollReveal wrapper = competing observers
+   - After: motion.div without animation props + ScrollReveal wrapper = single coordinated observer
 
-**Apply ScrollReveal to These Components Next:**
-- `components/sections/features.tsx` → Cards fade up
-- `components/sections/dashboard.tsx` → Metrics fade left/right
+**Ready for Phase 8b:**
+- `components/sections/dashboard.tsx` — Metrics fade left/right
 - `components/sections/illumination.tsx` → Section header fade down
 - `components/sections/smart-living.tsx` → Image reveals left/right with distance={60}
-- Any list/counter components → direction={fade}
+- Any remaining hero components with brightness/saturation scroll transforms
 
 **Component API Reference:**
 ```tsx
@@ -399,7 +399,7 @@ Create these entities in Docker:
 </ScrollReveal>
 ```
 
-Next: Dispatch animation specialist to apply pattern to remaining components in batch.
+Next: Phase 8b — Apply animation polish to remaining hero sections.
 
 ---
 
