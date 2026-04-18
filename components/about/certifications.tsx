@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Shield, Award, Star } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import {
   useAnimatedBorders,
   AnimatedBorders,
@@ -94,45 +95,44 @@ export function Certifications() {
 
       <div className="section-content">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false }}
-          className="text-center mb-16"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Shield size={14} className="text-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
-              Verified & Approved
-            </span>
-            <Shield size={14} className="text-electric-cyan" />
+        <ScrollReveal direction="down" blur delay={0} duration={0.65}>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Shield size={14} className="text-electric-cyan" />
+              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+                Verified & Approved
+              </span>
+              <Shield size={14} className="text-electric-cyan" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+              Our <span className="text-electric-cyan">Certifications</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Every accreditation earned through rigorous examination and
+              continuous professional development. These aren&apos;t badges —
+              they&apos;re proof of commitment.
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Our <span className="text-electric-cyan">Certifications</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Every accreditation earned through rigorous examination and
-            continuous professional development. These aren&apos;t badges —
-            they&apos;re proof of commitment.
-          </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Bento grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {certs.map((cert, idx) => (
-            <motion.div
+            <ScrollReveal
               key={cert.abbr}
-              initial={{ opacity: 0, rotateY: -15, y: 20 }}
-              whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.07 }}
-              viewport={{ once: false }}
-              className={`relative group rounded-2xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
-                cert.featured
-                  ? "border-electric-cyan/50 bg-electric-cyan/8 hover:shadow-xl hover:shadow-electric-cyan/20"
-                  : "border-border bg-card/40 hover:border-electric-cyan/30 hover:bg-electric-cyan/5"
-              }`}
+              direction="up"
+              blur
+              delay={(idx % 3) * 0.07}
+              duration={0.65}
+              distance={40}
             >
+              <div
+                className={`relative group rounded-2xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
+                  cert.featured
+                    ? "border-electric-cyan/50 bg-electric-cyan/8 hover:shadow-xl hover:shadow-electric-cyan/20"
+                    : "border-border bg-card/40 hover:border-electric-cyan/30 hover:bg-electric-cyan/5"
+                }`}
+              >
               {/* Shimmer effect */}
               {/* <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" /> */}
 
@@ -181,26 +181,23 @@ export function Certifications() {
                   {cert.level}
                 </span>
               </div>
-            </motion.div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* Bottom statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: false }}
-          className="mt-12 text-center"
-        >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-card/40">
-            <Award size={16} className="text-electric-cyan" />
-            <span className="text-sm text-muted-foreground">
-              All certifications independently verified and maintained through
-              annual audits
-            </span>
+        <ScrollReveal direction="up" blur delay={0.2} duration={0.65}>
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-card/40">
+              <Award size={16} className="text-electric-cyan" />
+              <span className="text-sm text-muted-foreground">
+                All certifications independently verified and maintained through
+                annual audits
+              </span>
+            </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

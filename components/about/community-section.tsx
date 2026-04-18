@@ -4,6 +4,7 @@ import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Heart, Users, BookOpen, Home, Shield } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import {
   useAnimatedBorders,
@@ -132,14 +133,9 @@ export function CommunitySection() {
       variant="full"
     >
       {/* Header Card - Glassmorphic */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="max-w-2xl mb-12"
-      >
-        <div className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <ScrollReveal direction="up" blur delay={0} duration={0.65}>
+        <div className="max-w-2xl mb-12">
+          <div className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-5">
             <Heart size={14} className="text-electric-cyan" />
             <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
@@ -160,44 +156,42 @@ export function CommunitySection() {
             actively invest in them.
           </p>
         </div>
-      </motion.div>
+        </div>
+      </ScrollReveal>
 
       {/* Stats Row - Glassmorphic */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-12"
-      >
-        {communityStats.map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/40 md:p-6"
-          >
-            <div className="mb-1 font-mono text-xl font-black text-electric-cyan sm:text-2xl lg:text-3xl">
-              {stat.value}
+      <ScrollReveal direction="up" blur delay={0.1} duration={0.65}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
+          {communityStats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/40 md:p-6"
+            >
+              <div className="mb-1 font-mono text-xl font-black text-electric-cyan sm:text-2xl lg:text-3xl">
+                {stat.value}
+              </div>
+              <div className="text-xs sm:text-sm text-white/80 leading-tight">
+                {stat.label}
+              </div>
             </div>
-            <div className="text-xs sm:text-sm text-white/80 leading-tight">
-              {stat.label}
-            </div>
-          </div>
-        ))}
-      </motion.div>
+          ))}
+        </div>
+      </ScrollReveal>
 
       {/* Initiatives Grid - Glassmorphic */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {initiatives.map((item, idx) => {
           const Icon = item.icon;
           return (
-            <motion.div
+            <ScrollReveal
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/30 md:p-6"
+              direction="up"
+              blur
+              delay={(idx % 4) * 0.07}
+              duration={0.65}
+              distance={40}
             >
+              <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/30 md:p-6">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-electric-cyan/30 bg-electric-cyan/10">
                 <Icon size={18} className="text-electric-cyan" />
               </div>
@@ -207,7 +201,8 @@ export function CommunitySection() {
               <p className="text-xs text-white/80 leading-relaxed">
                 {item.desc}
               </p>
-            </motion.div>
+              </div>
+            </ScrollReveal>
           );
         })}
       </div>
