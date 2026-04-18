@@ -1,12 +1,12 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 /**
- * Illumination Component Tests - Unit & Code Structure Verification
+ * Illumination Component Tests - Simplified Pattern
  *
- * These tests verify the viewport guard state implementation, opacity fix,
- * and hook setup without requiring complex Framer Motion mocking.
+ * Tests verify the component uses section-container pattern for correct scroll-to behavior,
+ * has background image with scroll-based brightness adjustment, and maintains proper content structure.
  */
 
 describe('Illumination Component Implementation', () => {
@@ -15,92 +15,6 @@ describe('Illumination Component Implementation', () => {
   beforeEach(() => {
     const illuminationPath = resolve(__dirname, '../../illumination.tsx');
     illuminationSource = readFileSync(illuminationPath, 'utf-8');
-  });
-
-  describe('Viewport State Management', () => {
-    it('should import useState and useEffect hooks', () => {
-      expect(illuminationSource).toContain('import { useRef, useEffect, useState }');
-    });
-
-    it('should initialize enableParallaxMotion with useState<boolean>(false)', () => {
-      expect(illuminationSource).toContain('const [enableParallaxMotion, setEnableParallaxMotion] = useState<boolean>(false)');
-    });
-
-    it('should set up useEffect with empty dependency array', () => {
-      expect(illuminationSource).toContain('useEffect(() => {');
-      expect(illuminationSource).toContain('}, [])');
-    });
-
-    it('should use window.matchMedia for viewport detection', () => {
-      expect(illuminationSource).toContain('window.matchMedia("(min-width: 1024px)")');
-    });
-
-    it('should call updateViewportMode on initial load', () => {
-      expect(illuminationSource).toContain('updateViewportMode()');
-    });
-
-    it('should use modern addEventListener API', () => {
-      expect(illuminationSource).toContain('mediaQuery.addEventListener("change"');
-    });
-
-    it('should remove event listener on unmount', () => {
-      expect(illuminationSource).toContain('return () => mediaQuery.removeEventListener("change"');
-    });
-  });
-
-  describe('Opacity Animation Curve Fix', () => {
-    it('should have fixed opacity keyframes [0, 0.15, 0.8, 1]', () => {
-      const opacityMatch = illuminationSource.match(/useTransform\s*\(\s*scrollYProgress\s*,\s*\[\s*0\s*,\s*0\.15\s*,\s*0\.8\s*,\s*1\s*\]/);
-      expect(opacityMatch).toBeTruthy();
-    });
-
-    it('should have fixed opacity values [1, 1, 1, 0] (starts visible)', () => {
-      const opacityMatch = illuminationSource.match(/,\s*\[\s*1\s*,\s*1\s*,\s*1\s*,\s*0\s*\]\s*\)/);
-      expect(opacityMatch).toBeTruthy();
-    });
-
-    it('should have comment explaining the opacity fix', () => {
-      expect(illuminationSource).toContain('FIXED');
-      expect(illuminationSource).toContain('visible on scroll arrival');
-    });
-  });
-
-  describe('Props & Consistency', () => {
-    it('should pass enableParallaxMotion prop to BackgroundParallax', () => {
-      expect(illuminationSource).toContain('enableParallaxMotion={enableParallaxMotion}');
-    });
-
-    it('should pass imageY prop to BackgroundParallax', () => {
-      expect(illuminationSource).toContain('imageY={imageY}');
-    });
-
-    it('should pass brightnessOverlayOpacity prop to BackgroundParallax', () => {
-      expect(illuminationSource).toContain('brightnessOverlayOpacity={brightnessOverlayOpacity}');
-    });
-
-    it('should have containerRef for scroll tracking', () => {
-      expect(illuminationSource).toContain('const containerRef = useRef<HTMLElement>(null)');
-      expect(illuminationSource).toContain('useScroll({');
-      expect(illuminationSource).toContain('target: containerRef');
-    });
-  });
-
-  describe('No Breaking Changes', () => {
-    it('should still have useIntersectionObserverAnimation hook', () => {
-      expect(illuminationSource).toContain('useIntersectionObserverAnimation');
-    });
-
-    it('should still render stats grid', () => {
-      expect(illuminationSource).toContain('StatsGrid');
-    });
-
-    it('should still render scan effects', () => {
-      expect(illuminationSource).toContain('ScanEffects');
-    });
-
-    it('should maintain section id "illumination"', () => {
-      expect(illuminationSource).toContain('id="illumination"');
-    });
   });
 
   describe('Section Structure — section-container pattern', () => {
@@ -119,16 +33,124 @@ describe('Illumination Component Implementation', () => {
       );
     });
 
-    it('should NOT use min-h-[140svh]', () => {
-      expect(illuminationSource).not.toContain('min-h-[140svh]');
-    });
-
-    it('should NOT use min-h-svh on content wrapper', () => {
-      expect(illuminationSource).not.toContain('min-h-svh');
-    });
-
     it('should use section-content class for horizontal gutters', () => {
       expect(illuminationSource).toContain('section-content');
+    });
+
+    it('should size naturally to fit content with balanced padding', () => {
+      expect(illuminationSource).toContain('section-container section-padding relative');
+      expect(illuminationSource).not.toContain('min-h-[120vh]');
+      expect(illuminationSource).not.toContain('min-h-screen');
+    });
+
+    it('should maintain section id "illumination"', () => {
+      expect(illuminationSource).toContain('id="illumination"');
+    });
+  });
+
+  describe('Background Image & Scroll-based Effects', () => {
+    it('should import useScroll and useTransform from framer-motion', () => {
+      expect(illuminationSource).toContain('useScroll');
+      expect(illuminationSource).toContain('useTransform');
+    });
+
+    it('should use brightness and saturation transforms on scroll', () => {
+      expect(illuminationSource).toContain('brightness');
+      expect(illuminationSource).toContain('saturation');
+    });
+
+    it('should apply imageFilter to background image', () => {
+      expect(illuminationSource).toContain('style={{ filter: imageFilter }}');
+    });
+
+    it('should render warehouse lighting image', () => {
+      expect(illuminationSource).toContain('warehouse-lighting.jpg');
+    });
+
+    it('should have gradient overlays for readability', () => {
+      expect(illuminationSource).toContain('bg-linear-to-t from-(--deep-black)');
+      expect(illuminationSource).toContain('bg-linear-to-r from-(--deep-black)');
+    });
+  });
+
+  describe('Content Structure & Consistency', () => {
+    it('should have IntersectionObserverAnimation hook', () => {
+      expect(illuminationSource).toContain('useIntersectionObserverAnimation');
+    });
+
+    it('should still render stats grid', () => {
+      expect(illuminationSource).toContain('StatsGrid');
+    });
+
+    it('should still render scan effects', () => {
+      expect(illuminationSource).toContain('ScanEffects');
+    });
+
+    it('should have containerRef for scroll tracking', () => {
+      expect(illuminationSource).toContain('containerRef = useRef<HTMLElement>(null)');
+    });
+
+    it('should have eyebrow text with ILLUMINATING EXCELLENCE', () => {
+      expect(illuminationSource).toContain('Illuminating Excellence');
+    });
+
+    it('should have main heading Powering the Spaces', () => {
+      expect(illuminationSource).toContain('Powering the Spaces');
+    });
+
+    it('should have description text about LED retrofits', () => {
+      expect(illuminationSource).toContain('high-bay LED retrofits');
+    });
+
+    it('should have VIEW OUR PROJECTS button', () => {
+      expect(illuminationSource).toContain('View Our Projects');
+    });
+  });
+
+  describe('Animation Patterns', () => {
+    it('should use motion.div for entrance animations', () => {
+      expect(illuminationSource).toContain('motion.div');
+    });
+
+    it('should use whileInView viewport animations', () => {
+      expect(illuminationSource).toContain('whileInView');
+      expect(illuminationSource).toContain('viewport={{ once: true }}');
+    });
+
+    it('should NOT use parallax Y transforms', () => {
+      expect(illuminationSource).not.toContain('imageY');
+      expect(illuminationSource).not.toContain('contentY');
+    });
+
+    it('should NOT use parallax opacity animation', () => {
+      // Old opacity transform for fade effect should not be present
+      expect(illuminationSource).not.toMatch(/\[1, 1, 1, 0\]/);
+    });
+  });
+
+  describe('Stats Grid Integration', () => {
+    it('should render stats data with Projects Delivered', () => {
+      expect(illuminationSource).toContain('2400');
+      expect(illuminationSource).toContain('Projects Delivered');
+    });
+
+    it('should render stats data with Years Experience', () => {
+      expect(illuminationSource).toContain('15');
+      expect(illuminationSource).toContain('Industry Excellence');
+    });
+
+    it('should render stats data with Client Satisfaction', () => {
+      expect(illuminationSource).toContain('99.7');
+      expect(illuminationSource).toContain('Client Satisfaction');
+    });
+
+    it('should render stats data with Emergency Response', () => {
+      expect(illuminationSource).toContain('24');
+      expect(illuminationSource).toContain('Emergency Response');
+    });
+
+    it('should pass inView prop to StatsGrid', () => {
+      expect(illuminationSource).toContain('inView={inView}');
     });
   });
 });

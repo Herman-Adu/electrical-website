@@ -3,155 +3,103 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 /**
- * Parity Tests: Verify Illumination follows the same patterns as SmartLiving
- * for viewport detection, parallax motion, and component consistency.
+ * Illumination Component Pattern Tests
+ *
+ * Verifies that Illumination component follows the simplified pattern with:
+ * - section-container for scroll-to consistency
+ * - Scroll-based brightness adjustment (not parallax movement)
+ * - Background image with gradient overlays
  */
 
-describe('Illumination Parallax Consistency — Shared Viewport Patterns', () => {
-  let smartLivingSource: string;
+describe('Illumination Component Pattern', () => {
   let illuminationSource: string;
 
   beforeAll(() => {
-    const smartLivingPath = resolve(__dirname, '../../smart-living.tsx');
     const illuminationPath = resolve(__dirname, '../../illumination.tsx');
-
-    smartLivingSource = readFileSync(smartLivingPath, 'utf-8');
     illuminationSource = readFileSync(illuminationPath, 'utf-8');
   });
 
-  describe('Viewport Breakpoint Consistency', () => {
-    it('should use same 1024px breakpoint as SmartLiving', () => {
-      const smartLivingBreakpoint = smartLivingSource.includes('(min-width: 1024px)');
-      const illuminationBreakpoint = illuminationSource.includes('(min-width: 1024px)');
-
-      expect(smartLivingBreakpoint).toBe(true);
-      expect(illuminationBreakpoint).toBe(true);
+  describe('Scroll-based Effects Implementation', () => {
+    it('should use useScroll from framer-motion', () => {
+      expect(illuminationSource).toContain('useScroll');
     });
 
-    it('should use modern addEventListener (not deprecated addListener)', () => {
-      const smartLivingModern = smartLivingSource.includes('addEventListener("change"');
-      const illuminationModern = illuminationSource.includes('addEventListener("change"');
-
-      expect(smartLivingModern).toBe(true);
-      expect(illuminationModern).toBe(true);
+    it('should use useTransform for brightness adjustments', () => {
+      expect(illuminationSource).toContain('brightness');
     });
 
-    it('should have proper cleanup function', () => {
-      const smartLivingCleanup = smartLivingSource.includes('removeEventListener');
-      const illuminationCleanup = illuminationSource.includes('removeEventListener');
+    it('should use useSpring for smooth transitions', () => {
+      expect(illuminationSource).toContain('useSpring');
+    });
 
-      expect(smartLivingCleanup).toBe(true);
-      expect(illuminationCleanup).toBe(true);
+    it('should apply filter to background motion.div', () => {
+      expect(illuminationSource).toContain('style={{ filter: imageFilter }}');
     });
   });
 
-  describe('State Hook Pattern', () => {
-    it('should use useState for viewport state (not inline)', () => {
-      const smartLivingUseState = smartLivingSource.includes('useState');
-      const illuminationUseState = illuminationSource.includes('useState');
-
-      expect(smartLivingUseState).toBe(true);
-      expect(illuminationUseState).toBe(true);
+  describe('Background Image Pattern', () => {
+    it('should import Image from next/image', () => {
+      expect(illuminationSource).toContain('from "next/image"');
     });
 
-    it('should use useEffect with dependency array', () => {
-      const smartLivingEffect = smartLivingSource.includes('useEffect');
-      const illuminationEffect = illuminationSource.includes('useEffect');
-
-      expect(smartLivingEffect).toBe(true);
-      expect(illuminationEffect).toBe(true);
-    });
-  });
-
-  describe('enableParallaxMotion Prop Pattern', () => {
-    it('should pass enableParallaxMotion to child parallax component', () => {
-      // SmartLiving pattern: enableParallaxMotion={isDesktop} → ContentPanel
-      const smartLivingProp = smartLivingSource.includes('enableParallaxMotion');
-      const illuminationProp = illuminationSource.includes('enableParallaxMotion');
-
-      expect(smartLivingProp).toBe(true);
-      expect(illuminationProp).toBe(true);
+    it('should use warehouse-lighting.jpg image', () => {
+      expect(illuminationSource).toContain('warehouse-lighting.jpg');
     });
 
-    it('should use consistent prop name across both components', () => {
-      // Both should use "enableParallaxMotion", not "isDesktop" or "isParallaxEnabled"
-      const smartLivingMatch = smartLivingSource.match(/enableParallaxMotion=/g);
-      const illuminationMatch = illuminationSource.match(/enableParallaxMotion=/g);
-
-      expect(smartLivingMatch).toBeTruthy();
-      expect(illuminationMatch).toBeTruthy();
+    it('should use object-cover for image sizing', () => {
+      expect(illuminationSource).toContain('object-cover');
     });
 
-    it('should initialize viewport state to false (safe default)', () => {
-      // Both should default to false for SSR safety
-      const smartLivingHasFalse = smartLivingSource.includes('useState(false)');
-      const illuminationHasFalse = illuminationSource.includes('useState<boolean>(false)');
-
-      expect(smartLivingHasFalse).toBe(true);
-      expect(illuminationHasFalse).toBe(true);
+    it('should have gradient overlays for text readability', () => {
+      expect(illuminationSource).toContain('bg-linear-to-t');
+      expect(illuminationSource).toContain('from-(--deep-black)');
     });
   });
 
-  describe('Browser API Safety', () => {
-    it('should check window.matchMedia availability before use', () => {
-      // Modern browsers check matchMedia before calling it
-      const smartLivingChecksWindow = smartLivingSource.includes('window.matchMedia');
-      const illuminationChecksWindow = illuminationSource.includes('window.matchMedia');
-
-      expect(smartLivingChecksWindow).toBe(true);
-      expect(illuminationChecksWindow).toBe(true);
+  describe('Intersection Observer Pattern', () => {
+    it('should use useIntersectionObserverAnimation hook', () => {
+      expect(illuminationSource).toContain('useIntersectionObserverAnimation');
     });
 
-    it('should only run viewport logic in useEffect (not at component render)', () => {
-      // useState init should not call window API
-      const smartLivingStateInit = smartLivingSource.match(/useState\s*\(\s*false\s*\)/);
-      const illuminationStateInit = illuminationSource.includes('useState<boolean>(false)');
+    it('should initialize threshold at 0.3', () => {
+      expect(illuminationSource).toContain('threshold: 0.3');
+    });
 
-      expect(smartLivingStateInit).toBeTruthy();
-      expect(illuminationStateInit).toBe(true);
+    it('should pass inView to StatsGrid for animation triggering', () => {
+      expect(illuminationSource).toContain('inView={inView}');
     });
   });
 
-  describe('Memory Leak Prevention', () => {
-    it('SmartLiving should remove event listener on unmount', () => {
-      expect(smartLivingSource).toContain('removeEventListener');
-      expect(smartLivingSource).toContain('return');
-    });
-
-    it('Illumination should remove event listener on unmount', () => {
-      expect(illuminationSource).toContain('removeEventListener');
-      expect(illuminationSource).toContain('return');
-    });
-  });
-
-  describe('Transform Guards', () => {
-    it('SmartLiving passes enableParallaxMotion to ContentPanel', () => {
-      const match = smartLivingSource.includes('enableParallaxMotion={isDesktop}');
-      expect(match).toBe(true);
-    });
-
-    it('Illumination should guard imageY transform via enableParallaxMotion prop', () => {
-      const hasEnableParallaxProp = illuminationSource.includes('enableParallaxMotion');
-      // Check for the guard pattern in BackgroundParallax component
-      const bgParallaxContent = readFileSync(
-        resolve(__dirname, '../background-parallax.tsx'),
-        'utf-8'
-      );
-      const hasGuard = bgParallaxContent.includes('enableParallaxMotion ? imageY : 0');
-      expect(hasEnableParallaxProp).toBe(true);
-      expect(hasGuard).toBe(true);
-    });
-  });
-
-  describe('Layout Pattern — Intentional Divergence from SmartLiving', () => {
+  describe('Layout Pattern — section-container consistency', () => {
     it('Illumination uses section-container + section-padding (not section-fluid)', () => {
       expect(illuminationSource).toContain('section-container');
       expect(illuminationSource).toContain('section-padding');
       expect(illuminationSource).not.toContain('section-fluid');
     });
 
-    it('SmartLiving retains section-fluid (unchanged)', () => {
-      expect(smartLivingSource).toContain('section-fluid');
+    it('should have relative positioning with natural height for content-fit layout', () => {
+      expect(illuminationSource).toContain('section-container section-padding relative');
+      expect(illuminationSource).not.toContain('min-h-[120vh]');
+    });
+
+    it('should use z-0 for background and z-20 for content', () => {
+      expect(illuminationSource).toContain('z-0');
+      expect(illuminationSource).toContain('z-20');
+    });
+  });
+
+  describe('Content Structure', () => {
+    it('should have section-content class for horizontal gutters', () => {
+      expect(illuminationSource).toContain('section-content');
+    });
+
+    it('should have motion.div for entrance animations', () => {
+      expect(illuminationSource).toContain('motion.div');
+    });
+
+    it('should use whileInView for scroll-triggered animations', () => {
+      expect(illuminationSource).toContain('whileInView');
+      expect(illuminationSource).toContain('viewport={{ once: true }}');
     });
   });
 });

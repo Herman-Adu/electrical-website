@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Image from "next/image";
 import { useIntersectionObserverAnimation } from "../../lib/hooks/useIntersectionObserverAnimation";
-import { BackgroundParallax } from "./illumination/background-parallax";
 import { ScanEffects } from "./illumination/scan-effects";
 import { StatsGrid, type IlluminationStat } from "./illumination/stats-grid";
 
@@ -16,16 +16,6 @@ const stats: IlluminationStat[] = [
 
 export function Illumination() {
   const containerRef = useRef<HTMLElement>(null);
-  const [enableParallaxMotion, setEnableParallaxMotion] = useState<boolean>(false);
-
-  // Viewport guard: disable parallax on mobile (<1024px) for performance
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const updateViewportMode = () => setEnableParallaxMotion(mediaQuery.matches);
-    updateViewportMode();
-    mediaQuery.addEventListener("change", updateViewportMode);
-    return () => mediaQuery.removeEventListener("change", updateViewportMode);
-  }, []);
 
   const { inView } = useIntersectionObserverAnimation({
     ref: containerRef,
@@ -37,34 +27,55 @@ export function Illumination() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax transforms — all unchanged from previous implementation
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const brightness = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.3, 0.7, 1]);
-  // FIXED: Opacity keyframes now start at 1 (visible) instead of 0 (hidden)
-  // [0, 0.15, 0.8, 1] → [1, 1, 1, 0] means content is visible on scroll arrival
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.8, 1], [1, 1, 1, 0]);
-  const brightnessOverlayOpacity = useTransform(brightness, (b) => 1 - b);
+  // Smooth spring for brightness transition
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+  });
+
+  // Brightness and saturation based on scroll
+  const brightness = useTransform(
+    smoothProgress,
+    [0.1, 0.35, 0.5],
+    [0.3, 0.7, 1],
+  );
+  const saturation = useTransform(
+    smoothProgress,
+    [0.1, 0.35, 0.5],
+    [0.5, 0.8, 1],
+  );
+
+  const imageFilter = useTransform(
+    [brightness, saturation] as const,
+    ([b, s]: number[]) => `brightness(${b}) saturate(${s})`,
+  );
 
   return (
     <section
       ref={containerRef}
       id="illumination"
-      className="section-container section-padding relative min-h-screen"
+      className="section-container section-padding relative"
     >
-      {/* Background layer — absolute inset-0 z-0, resolves against section-container's position:relative */}
-      <BackgroundParallax
-        imageY={imageY}
-        brightnessOverlayOpacity={brightnessOverlayOpacity}
-        enableParallaxMotion={enableParallaxMotion}
-      />
+      {/* Background Layer */}
+      <motion.div className="absolute inset-0 z-0" style={{ filter: imageFilter }}>
+        <Image
+          src="/images/warehouse-lighting.jpg"
+          alt="Industrial warehouse lighting installation"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </motion.div>
+
+      {/* Gradient overlays for readability */}
+      <div className="absolute inset-0 z-0 bg-linear-to-t from-(--deep-black) via-(--deep-black)/50 to-transparent" />
+      <div className="absolute inset-0 z-0 bg-linear-to-r from-(--deep-black)/40 via-transparent to-(--deep-black)/40" />
+
+      {/* Scan effects */}
       <ScanEffects />
 
       {/* Content layer — natural document flow, z-20 above background */}
-      <motion.div
-        className="section-content relative z-20"
-        style={{ y: contentY, opacity }}
-      >
+      <div className="section-content relative z-20">
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -132,7 +143,7 @@ export function Illumination() {
         </div>
 
         <StatsGrid stats={stats} inView={inView} />
-      </motion.div>
+      </div>
     </section>
   );
 }
