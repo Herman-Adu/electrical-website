@@ -90,12 +90,14 @@
       "Bash(docker compose *)",
       "Bash(curl -s http://localhost:3100/mcp/health)",
       "Bash(python3 -m json.tool)",
-      "Bash(curl -s http://localhost:3100/mcp/tools)"
+      "Bash(curl -s http://localhost:3100/mcp/tools)",
+      "Bash(node scripts/validate-claude-scaffold.mjs)"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
       "c:\\Users\\herma\\.claude\\memory",
-      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude"
+      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude",
+      "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\reference\\setup"
     ]
   }
 }

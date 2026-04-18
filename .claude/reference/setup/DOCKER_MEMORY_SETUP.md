@@ -254,10 +254,10 @@ docker logs caddy-gateway
 **Diagnosis:**
 ```bash
 # Verify schema was initialized
-curl http://localhost:7777/api/entities
+curl http://localhost:3100/memory/api/entities
 
 # Check for typos in entity name
-curl http://localhost:7777/api/entities?type=project_state
+curl http://localhost:3100/memory/api/entities?type=project_state
 ```
 
 **Fix:**
@@ -268,7 +268,7 @@ curl http://localhost:7777/api/entities?type=project_state
 
 ### Port Already in Use
 
-**Symptom:** `curl http://localhost:7777/health` connects to wrong service
+**Symptom:** `curl http://localhost:3100/memory/health` connects to wrong service
 
 **Fix:**
 ```bash
