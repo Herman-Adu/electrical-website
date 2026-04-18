@@ -345,9 +345,23 @@ If Docker memory service is down:
 
 ## Session State
 
-**2026-04-17 01:15 — Session Lifecycle COMPLETE + merged to main. PR #88 auto-merge enabled (Skill Sync ✅, Vercel ✅). 
-Work: Validation+Security SME analysis (8 blockers refined) → Code-Gen (1,919 lines, 28/28 tests) → merged. 
-Next orchestrator session: Load Docker memory (electrical-website-state), skip docker-cleanup branch context, proceed with Phase 6 planning.**
+**2026-04-18 — DOCKER MEMORY CRITICAL ISSUE IDENTIFIED & DOCUMENTED**
+
+**Problem:** Docker memory service persists wrong project data (contact-migration entities). Phase 7 sync returned `createdCount: 0` — entities never created. Memory writes are failing.
+
+**Status:** Root cause diagnosed. Recovery path documented in `docs/DOCKER_MEMORY_RESET_HANDOFF_2026-04-18.md`.
+
+**Next Window Action:** 
+1. Read `docs/DOCKER_MEMORY_RESET_HANDOFF_2026-04-18.md` (complete context + exact commands)
+2. Run the 5-step reset sequence (docker volume rm, restart, verify clean)
+3. Create electrical-website-state entity
+4. Implement the 3-layer fix:
+   - Layer 1: Create phase-8-next-steps.json, update active-memory-lanes.json
+   - Layer 2: Fix CLAUDE.md docs (open_nodes names vs IDs, add MCP Quick Reference, update Session State)
+   - Layer 3: Verify load-active-memory-lane.mjs works, add mandatory preflight to CLAUDE.md top
+5. Commit and proceed
+
+**Do NOT skip the memory reset.** Yesterday's sync reported success but entities were never persisted.
 
 ---
 
