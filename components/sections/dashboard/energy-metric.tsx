@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import type { LucideIcon } from "lucide-react";
 
@@ -11,6 +11,7 @@ export interface EnergyMetricProps {
   unit: string;
   icon: LucideIcon;
   delay?: number;
+  isInView?: boolean;
 }
 
 export function EnergyMetric({
@@ -19,10 +20,10 @@ export function EnergyMetric({
   unit,
   icon: Icon,
   delay = 0,
+  isInView = false,
 }: EnergyMetricProps) {
   const countRef = useRef<HTMLSpanElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: false, amount: 0.3 });
 
   useEffect(() => {
     if (!countRef.current) return;
