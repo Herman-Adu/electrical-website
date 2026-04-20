@@ -130,12 +130,12 @@ export function DesktopNav({
     return navLinks.reduce<Record<string, boolean>>((accumulator, link) => {
       const topLevel = isTopLevelActive(link.href, Boolean(link.submenu));
       const submenu = Boolean(
-        link.submenu?.some((item) => isSubmenuActive(item.href)),
+        link.submenu?.some((item) => isSubmenuActive(item.href, link.name)),
       );
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
     }, {});
-  }, [navLinks, pathname, propCurrentHash]);
+  }, [navLinks, pathname, propCurrentHash, currentIntersectionSection]);
 
   const isDropdownOpen = (linkName: string): boolean => {
     return hoveredDropdown === linkName || focusedDropdown === linkName;
@@ -185,12 +185,16 @@ export function DesktopNav({
           <div
             key={link.name}
             className="relative"
-            onMouseEnter={() =>
-              setHoveredDropdown(link.submenu ? link.name : null)
-            }
+            onMouseEnter={() => {
+              if (link.submenu) {
+                setHoveredDropdown(link.name);
+                setOpenDropdown?.(link.name);
+              }
+            }}
             onMouseLeave={() => {
               setHoveredDropdown(null);
               setFocusedDropdown(null);
+              setOpenDropdown?.(null);
             }}
             onFocusCapture={() => {
               if (link.submenu) setFocusedDropdown(link.name);
