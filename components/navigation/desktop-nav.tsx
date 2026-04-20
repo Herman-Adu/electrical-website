@@ -32,11 +32,9 @@ export interface DesktopNavProps {
   onScroll: (href: string) => void;
   onNavigate: (href: string) => void;
   currentHash: string;
-  currentIntersectionSection?: string | null;
-  isAboutDropdownHovered?: boolean;
   openDropdown?: string | null;
   setOpenDropdown?: (dropdown: string | null) => void;
-  isSubmenuActive?: (href: string, dropdownName?: string) => boolean;
+  isSubmenuActive?: (href: string) => boolean;
 }
 
 const normalizePath = (path: string): string => {
@@ -49,8 +47,6 @@ export function DesktopNav({
   onScroll,
   onNavigate,
   currentHash: propCurrentHash,
-  currentIntersectionSection,
-  isAboutDropdownHovered,
   openDropdown,
   setOpenDropdown,
   isSubmenuActive: propIsSubmenuActive,
@@ -65,13 +61,13 @@ export function DesktopNav({
   // Use currentHash prop directly — parent (NavbarClient) manages hash state
   const currentHash = propCurrentHash;
 
-  // Use prop-based isSubmenuActive if provided (includes scroll detection), else fall back to local logic
-  const isSubmenuActive = (href: string, dropdownName?: string): boolean => {
+  // Use prop-based isSubmenuActive if provided, else fall back to local logic
+  const isSubmenuActive = (href: string): boolean => {
     if (propIsSubmenuActive) {
-      return propIsSubmenuActive(href, dropdownName);
+      return propIsSubmenuActive(href);
     }
 
-    // Fallback: local logic (no scroll detection)
+    // Fallback: local logic
     const [rawPath, rawHash] = href.split("#");
     const targetPath = normalizePath(rawPath || "/");
     const currentPath = normalizePath(pathname);
@@ -130,12 +126,12 @@ export function DesktopNav({
     return navLinks.reduce<Record<string, boolean>>((accumulator, link) => {
       const topLevel = isTopLevelActive(link.href, Boolean(link.submenu));
       const submenu = Boolean(
-        link.submenu?.some((item) => isSubmenuActive(item.href, link.name)),
+        link.submenu?.some((item) => isSubmenuActive(item.href)),
       );
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
     }, {});
-  }, [navLinks, pathname, propCurrentHash, currentIntersectionSection]);
+  }, [navLinks, pathname, propCurrentHash]);
 
   const isDropdownOpen = (linkName: string): boolean => {
     return hoveredDropdown === linkName || focusedDropdown === linkName;
@@ -266,7 +262,7 @@ export function DesktopNav({
                       className="absolute left-0 top-full mt-4 w-56 backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 border border-electric-cyan/20 rounded-lg pt-2 shadow-lg"
                     >
                       {link.submenu.map((item) => {
-                        const submenuActive = isSubmenuActive(item.href, link.name);
+                        const submenuActive = isSubmenuActive(item.href);
                         const submenuRefKey = `${link.name}-${item.name}`;
 
                         return (

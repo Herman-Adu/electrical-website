@@ -10,7 +10,6 @@ import { BrandSection } from "@/components/navigation/brand-section";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
 import { ActionBar } from "@/components/navigation/action-bar";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { useIntersectionSections } from "@/lib/hooks/use-intersection-sections";
 
 const navLinks = [
   {
@@ -33,9 +32,9 @@ const navLinks = [
       { name: "Our Story", href: "/about#company-intro" },
       { name: "Our Directors", href: "/about#directors" },
       { name: "Company History", href: "/about#timeline" },
+      { name: "Peace of Mind", href: "/about#peace-of-mind" },
       { name: "Vision & Mission", href: "/about#vision-mission" },
       { name: "Certifications", href: "/about#certifications" },
-      { name: "Peace of Mind", href: "/about#peace-of-mind" },
       { name: "Core Values", href: "/about#core-values" },
       { name: "Community", href: "/about#community" },
       { name: "Why Choose Us", href: "/about#why-choose-us" },
@@ -91,10 +90,6 @@ export function NavbarClient() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [currentHash, setCurrentHash] = useState("");
 
-  // Activate scroll-based section detection only when About dropdown is hovered on About page
-  const isAboutDropdownHovered = openDropdown === "About" && pathname.startsWith("/about");
-  const currentIntersectionSection = useIntersectionSections(isAboutDropdownHovered);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -144,7 +139,7 @@ export function NavbarClient() {
         const selector = `#${hashPart}`;
         const element = document.querySelector(selector);
         if (element) {
-          scrollToElementWithOffset(element, { pageType: 'default' });
+          scrollToElementWithOffset(element, { pageType: "default" });
           closeMenus();
           return;
         }
@@ -171,22 +166,12 @@ export function NavbarClient() {
     return path.endsWith("/") ? path.slice(0, -1) : path;
   };
 
-  const isSubmenuActive = (href: string, dropdownName?: string) => {
+  const isSubmenuActive = (href: string) => {
     const [rawPath, rawHash] = href.split("#");
     const targetPath = normalizePath(rawPath || "/");
     const currentPath = normalizePath(pathname);
 
     if (rawHash) {
-      // If About dropdown is hovered and we have scroll-based detection, use that
-      if (
-        dropdownName === "About" &&
-        isAboutDropdownHovered &&
-        currentIntersectionSection
-      ) {
-        return currentPath === targetPath && rawHash === currentIntersectionSection;
-      }
-
-      // Otherwise use hash-based detection (click-based or stale scroll)
       return currentPath === targetPath && currentHash === `#${rawHash}`;
     }
 
@@ -257,8 +242,6 @@ export function NavbarClient() {
               onScroll={scrollToSection}
               onNavigate={navigateTo}
               currentHash={currentHash}
-              currentIntersectionSection={currentIntersectionSection}
-              isAboutDropdownHovered={isAboutDropdownHovered}
               openDropdown={openDropdown}
               setOpenDropdown={setOpenDropdown}
               isSubmenuActive={isSubmenuActive}
