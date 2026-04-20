@@ -370,36 +370,69 @@ If Docker memory service is down:
 
 ## Session State
 
-2026-04-18 20:35 — **Phase 8a Features ScrollReveal COMPLETE** | Branch: main | Commit: 778c168 | Build: ✅ passing | Tests: 211 passing
+**2026-04-20 12:45 — URGENT HANDOFF REQUIRED** | Context: 12% remaining | Branch: feat/phase-8-scrollreveal-production
 
-**Work Completed (Phase 8a):**
-- ✅ Fixed Blocking Issue 1: Removed whileInView animation props from LoadMonitorCard, SystemDiagnosticsCard, SchedulerCard
-- ✅ Fixed Blocking Issue 2: Added useReducedMotion() hook + guards to setInterval animations (WCAG compliant)
-- Created `lib/hooks/use-reduced-motion.ts` — Monitors prefers-reduced-motion media query
-- Wrapped all 3 feature cards with ScrollReveal component (direction=up, blur, staggered delay)
-- Added 15 comprehensive TDD tests (RED → GREEN → REFACTOR pattern)
-- All tests passing, production build passing, zero errors
+**Session 1 Work Completed (Phase 8 Navbar + UI Fixes):**
+- ✅ Phase 8 Navbar Anchor Active State Regression — FIXED (commit 1b4c465)
+  - Root cause: pushState() doesn't trigger hashchange; dual state trees
+  - Solution: location.hash + prop-passing to DesktopNav
+- ✅ Desktop Navbar Dropdown Close Behavior — FIXED (commit 39ebba8)
+  - Dropdown stays open on mouse leave → cleared focusedDropdown too
+- ✅ Monitor Cards Carousel Display — FIXED (commits deabd95, a6d1dda, bdf6702)
+  - All cards visible, top card too transparent → overflow-hidden, top-0, bg-background/90
+- ✅ Home Button Scroll to Top — FIXED (commit deabd95)
+  - Added smooth scroll to top when Home clicked on home page
+- ✅ All Tests Passing: 269/273 | Build: 58/58 pages
 
-**Learnings Captured:**
-1. **learn-reduced-motion-hook-pattern** — useReducedMotion hook monitors matchMedia, returned by all animated components
-2. **learn-scrollreveal-animation-observer-resolution** — ScrollReveal wrapper prevents multiple IntersectionObserver conflicts
-   - Before: motion.div with whileInView + ScrollReveal wrapper = competing observers
-   - After: motion.div without animation props + ScrollReveal wrapper = single coordinated observer
+**NEW BLOCKERS DISCOVERED (Session 2 Priority):**
 
-**Ready for Phase 8b:**
-- `components/sections/dashboard.tsx` — Metrics fade left/right
-- `components/sections/illumination.tsx` → Section header fade down
-- `components/sections/smart-living.tsx` → Image reveals left/right with distance={60}
-- Any remaining hero components with brightness/saturation scroll transforms
+🔴 **BLOCKER 1 — SectionValues Component Broken**
+- Reveal animation removed (reverted accidentally during commits)
+- All card details visible at once (no staggered reveal)
+- Cards have excessive height → causes CLS when hovering
+- Hover on cards causes UI below to jump → layout shift issue
+- **Action:** Restore reveal animation, fix card heights, add CSS containment
+- **File:** `components/shared/section-values.tsx`
 
-**Component API Reference:**
-```tsx
-<ScrollReveal direction="up" blur delay={0} duration={0.65} distance={40} once margin="0px 0px -80px 0px">
-  {children}
-</ScrollReveal>
+🔴 **BLOCKER 2 — About Dropdown Missing PeaceOfMind**
+- PeaceOfMind section link missing from About navbar dropdown
+- Users cannot navigate to section from navbar
+- **Action:** Add link to About submenu in navbar-client.tsx
+- **File:** `components/navigation/navbar-client.tsx` (navLinks)
+
+🟠 **ISSUE 3 — Scroll-To Requires 2 Clicks**
+- Navbar link click doesn't scroll on first attempt
+- Second click scrolls correctly
+- **Root cause:** Hash change not triggering scroll OR element not found OR breadcrumb height
+- **Action:** Debug scrollToSection() logic, add console logs, verify offset calculation
+- **Files:** `components/navigation/navbar-client.tsx`, `lib/scroll-to-section.ts`
+
+**FOR NEXT SESSION:**
+1. Load Docker memory: `electrical-website-state`
+2. Delegate 3 blockers to SME agents in parallel (architecture, validation, QA)
+3. Synthesize findings, create fix plan
+4. Implement with TDD (red → green → refactor)
+5. Verify: pnpm test (269+ passing), pnpm build (58/58 pages)
+6. Sync to Docker memory: fix entities + observations
+
+**Git State:**
+- Branch: feat/phase-8-scrollreveal-production
+- Last commit: bdf6702 (Monitor cards opacity fix)
+- Untracked files: none
+- All fixes committed, tests passing, build succeeding
+
+**Next Session Prompt:**
 ```
+ORCHESTRATOR MODE - Phase 8 Continuation (Session 2)
 
-Next: Phase 8b — Apply animation polish to remaining hero sections.
+3 CRITICAL BLOCKERS to fix (parallel SME analysis + implementation):
+1. SectionValues reveal animation broken + CLS + card height
+2. About navbar dropdown missing PeaceOfMind link  
+3. Scroll-to functionality requires 2 clicks instead of 1
+
+See .claude/CLAUDE.md ## Session State for detailed breakdowns.
+All work must pass: pnpm test, pnpm build, manual testing.
+```
 
 ---
 
