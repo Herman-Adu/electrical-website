@@ -80,7 +80,7 @@ function LoadMonitorCard() {
             return (
               <div
                 key={card.id}
-                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border border-muted-foreground/10 bg-electric-cyan/10 dark:bg-electric-cyan/10 dark:border-white/25 backdrop-blur-md transition-all duration-700  ${
+                className={`absolute inset-x-0 top-0 flex items-center justify-between p-4 rounded-lg border border-muted-foreground/10 bg-electric-cyan/10 dark:bg-electric-cyan/10 dark:border-white/25 backdrop-blur-md transition-all duration-700  ${
                   isTop
                     ? "z-30 translate-y-0 scale-100 opacity-100 border-electric-cyan/60 shadow-md"
                     : isMiddle
