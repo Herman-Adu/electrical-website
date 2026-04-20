@@ -86,8 +86,8 @@ export function SectionValues({ data }: SectionValuesProps) {
           </div>
         </ScrollReveal>
 
-        {/* Values grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Values grid — all cards equal height via CSS Grid minmax */}
+        <div className="values-grid">
           {values.map((value, idx) => {
             const Icon = getIcon(value.icon);
             const isCyan = value.color === "cyan" || !value.color;
@@ -106,7 +106,7 @@ export function SectionValues({ data }: SectionValuesProps) {
               >
                 <motion.div
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col h-full"
                   initial="hidden"
                   whileInView="visible"
                   variants={cardVariants}
@@ -132,27 +132,28 @@ export function SectionValues({ data }: SectionValuesProps) {
                     style={{
                       borderColor: `${accentColor}30`,
                       background: `${accentColor}10`,
+                      willChange: 'opacity, transform',
                     }}
                   >
                     <Icon size={24} style={{ color: accentColor }} />
                   </motion.div>
 
                   {/* Title — staggered reveal */}
-                  <motion.div variants={childVariants}>
+                  <motion.div variants={childVariants} style={{ willChange: 'opacity, transform' }}>
                     <h3 className="text-xl font-bold text-foreground mb-2">
                       {value.title}
                     </h3>
                   </motion.div>
 
                   {/* Short tagline — staggered reveal */}
-                  <motion.div variants={childVariants}>
+                  <motion.div variants={childVariants} style={{ willChange: 'opacity, transform' }}>
                     <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
                       {value.short}
                     </p>
                   </motion.div>
 
-                  {/* Full description — always visible, grows to fill available space */}
-                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  {/* Full description — always visible, grows to fill available space with min-height floor */}
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1 min-h-15">
                     {value.full}
                   </p>
 

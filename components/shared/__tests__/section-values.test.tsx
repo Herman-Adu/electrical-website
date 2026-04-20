@@ -116,6 +116,16 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
         expect(screen.getByText(value.short)).toBeVisible();
       });
     });
+
+    it('all cards have equal height within tolerance', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+      const cards = screen.getAllByTestId('section-value-card');
+      const heights = cards.map(c => c.offsetHeight);
+      const maxHeight = Math.max(...heights);
+      const minHeight = Math.min(...heights);
+
+      expect(maxHeight - minHeight).toBeLessThan(5);
+    });
   });
 
   describe('Content & Accessibility', () => {
