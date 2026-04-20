@@ -33,31 +33,31 @@ const socials = [
     name: "Facebook",
     icon: Facebook,
     href: "https://facebook.com",
-    handle: "@IntactElectrical",
+    handle: "@nexgen-electrical-innovations",
   },
   {
     name: "Instagram",
     icon: Instagram,
     href: "https://instagram.com",
-    handle: "@intact.electrical",
+    handle: "@nexgen-electrical-innovations",
   },
   {
     name: "LinkedIn",
     icon: Linkedin,
     href: "https://linkedin.com",
-    handle: "Intact Electrical",
+    handle: "nexgen-electrical-innovations",
   },
   {
     name: "Twitter",
     icon: Twitter,
     href: "https://twitter.com",
-    handle: "@IntactElec",
+    handle: "@nexgen-electrical-innovations",
   },
   {
     name: "YouTube",
     icon: Youtube,
     href: "https://youtube.com",
-    handle: "Intact TV",
+    handle: "Nexgen Electrical Innovations TV",
   },
 ];
 

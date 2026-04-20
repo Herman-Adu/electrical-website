@@ -156,7 +156,7 @@ export const coreValuesData: SectionValuesData = {
       icon: "Users",
       title: "Teamwork",
       short: "Our greatest asset is our people.",
-      full: "A culture of mutual respect, shared responsibility, and collective pride. We collaborate across disciplines and experience levels, knowing that diverse perspectives strengthen our solutions. When one of us succeeds, all of us succeed.",
+      full: "A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed.",
       color: "amber",
     },
     {

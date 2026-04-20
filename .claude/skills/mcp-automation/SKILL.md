@@ -25,17 +25,24 @@ It integrates with:
 
 ## Execution Method
 
-1. **Validate required tools are available**
+1. **Docker Preflight (Session Start)**
+   - Search for project state: `mcp__MCP_DOCKER__search_nodes(“electrical-website-state”)`
+   - Load context: `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
+   - Extract: active phase, workflow dependencies, prior automations, blockers
+   - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
+   - This ensures workflows build on verified prior context
+
+2. **Validate required tools are available**
    - Confirm all skills (planning, code-generation, knowledge-memory) are accessible
    - Check Context7 library resolver is working (for current API docs)
    - Fail gracefully with error message if dependencies missing
 
-2. **Parse the request**
+3. **Parse the request**
    - Identify the workflow goal and steps
    - Identify which skills/tools are involved
    - **DISAMBIGUATION:** If the request is only “save this to archives”, delegate to Knowledge Memory instead
 
-3. **If needed, call the MCP Automation Agent**
+4. **If needed, call the MCP Automation Agent**
    - Use agent for: workflow design, step decomposition, tool mapping, input/output definition
    - Do NOT use for: execution or final synthesis
 
@@ -54,9 +61,16 @@ It integrates with:
    - Handle failures gracefully
    - Log key outputs
 
-7. **Return the result**
+7. **Persist workflow to Docker (session-end)**
+   - Create infrastructure entity: `mcp__MCP_DOCKER__create_entities([workflow])`
+   - Add observations: `mcp__MCP_DOCKER__add_observations(entity_id, [execution_metadata])`
+   - Wire relations: `mcp__MCP_DOCKER__create_relations([derives_from, documents])`
+   - Enable future discovery via `search_nodes("{workflow-domain}")`
+
+8. **Return the result**
    - Workflow summary with outputs and paths
    - How to re-run it
+   - Docker entity ID for future persistence
 
 ---
 

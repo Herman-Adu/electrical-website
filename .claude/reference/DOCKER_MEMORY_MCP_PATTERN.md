@@ -166,6 +166,30 @@ Returns: All entities created in this session with full observations.
 
 ---
 
+## Canonical Docker MCP Signatures (Reference)
+
+All Docker memory operations use the `mcp__MCP_DOCKER__` tool prefix. These are the six canonical tools with standardized signatures:
+
+| Tool | Purpose | Signature | Return |
+|------|---------|-----------|--------|
+| **search_nodes** | Find entities by name, type, or query | `mcp__MCP_DOCKER__search_nodes(query: string)` | `[entity_ids]` |
+| **open_nodes** | Load full entity details | `mcp__MCP_DOCKER__open_nodes(ids: string[])` | `[entity objects]` |
+| **create_entities** | Persist new entities (features, learnings, decisions, sessions) | `mcp__MCP_DOCKER__create_entities(entities: array)` | `[created_entity_ids]` |
+| **add_observations** | Append findings to existing entity | `mcp__MCP_DOCKER__add_observations(entity_id: string, observations: array)` | `updated_entity` |
+| **create_relations** | Link two entities in knowledge graph | `mcp__MCP_DOCKER__create_relations(relations: array)` | `[relation_ids]` |
+| **delete_entities** | Remove archived/duplicate entities | `mcp__MCP_DOCKER__delete_entities(ids: string[])` | `success: true/false` |
+| **delete_relations** | Prune stale links | `mcp__MCP_DOCKER__delete_relations(relation_ids: string[])` | `success: true/false` |
+
+**Parameter Order (Consistent Across All Tools):**
+1. Primary identifier(s): `query`, `ids`, `entities`, `entity_id`, `relations`
+2. Optional filters/modifiers come last
+
+**Return Format (Always):**
+- Success: Object with result data or array of IDs
+- Error: Exception with diagnostic message
+
+---
+
 ## Why Orchestrator Mode Enforces This
 
 **Orchestrator-only contract (from CLAUDE.md):**

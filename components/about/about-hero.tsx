@@ -37,8 +37,8 @@ const flickerVariants = {
 };
 
 const stats = [
-  { value: "15+", label: "Years Experience" },
-  { value: "2,400+", label: "Projects Completed" },
+  { value: "10+", label: "Years Experience" },
+  { value: "150+", label: "Projects Completed" },
   { value: "99.7%", label: "Client Satisfaction" },
   { value: "24/7", label: "Emergency Support" },
 ];
@@ -63,7 +63,7 @@ export function AboutHero() {
 
   const scrollToContent = () => {
     const next = document.getElementById("company-intro");
-    if (next) scrollToElementWithOffset(next, { pageType: 'default' });
+    if (next) scrollToElementWithOffset(next, { pageType: "default" });
   };
 
   return (
@@ -228,7 +228,7 @@ export function AboutHero() {
           >
             <span className="h-px w-12 bg-electric-cyan/60" />
             <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
-              Intact Electrical Innovations
+              Nexgen Electrical Innovations
             </span>
             <span className="h-px w-12 bg-electric-cyan/60" />
           </motion.div>
@@ -239,7 +239,7 @@ export function AboutHero() {
             <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               Trust &amp; Craft
             </span>
-            <span className="block">Since 2009</span>
+            <span className="block">Since 2016</span>
           </motion.h1>
 
           {/* Subline */}

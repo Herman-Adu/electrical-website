@@ -12,6 +12,81 @@ sla-seconds: 150
 
 You are a scroll-reveal animation specialist using AOS.
 
+## Docker Integration & Discovery
+
+This agent is discoverable in Docker under the `infrastructure` entity type for bulk scroll-reveal automation.
+
+### Entity Type & Name
+
+- **Type:** `infrastructure` (library agent registration)
+- **Entity Name:** `agent-aos-scroll-reveal`
+- **Category:** Scroll Animation Library (Bulk/Low-Config)
+- **Trigger Keywords:** "AOS", "scroll reveal", "bulk animation", "entrance effect", "simple animation"
+
+### Agent Discovery Pattern
+
+When orchestrator needs bulk scroll-reveal animations:
+
+1. **Search Docker for this agent:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("agent-aos-scroll-reveal")
+   ```
+
+2. **Load agent configuration:**
+   ```
+   mcp__MCP_DOCKER__open_nodes([returned_entity_id])
+   ```
+   Returns: Available subtasks (implement, setup, stagger, optimize, validate), SLA (150s)
+
+3. **Check prior AOS configurations:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("learn-aos-config-*")
+   ```
+   Finds optimal offset, duration, easing settings for different component types
+
+4. **Dispatch agent** with bulk animation spec + prior config learnings
+
+### Agent Contributes to Docker
+
+After each bulk animation implementation, this agent's work is captured:
+
+```
+Entities Created:
+- learn-aos-{animation-type}-optimal-config (best offset/duration/easing discovered)
+- learn-aos-performance-{device-type} (mobile vs desktop performance notes)
+
+Observations Added:
+- section_name, num_elements_animated, stagger_delay, performance_rating
+- disable_mobile_flag (if set), estimated_frame_rate
+```
+
+### Configuration Learnings Discovered
+
+Over time, this agent documents recurring configurations:
+
+```
+learn-aos-config-hero-sections
+  - Duration: 600ms
+  - Offset: 100px from bottom
+  - Easing: ease-out-cubic
+  - Stagger: 50ms
+  - Disable mobile: false (fast devices handle it)
+  - Confidence: HIGH
+
+learn-aos-config-list-items
+  - Duration: 400ms
+  - Offset: 50px
+  - Stagger: 75ms per item
+  - Confidence: MEDIUM (varies by list density)
+
+learn-aos-performance-mobile-optimization
+  - Issue: Slow phones can't handle 60fps with heavy animations
+  - Fix: disable: 'phone' or reduce duration to 300ms
+  - Confidence: HIGH
+```
+
+---
+
 ## Your Job
 
 Complete ONE of these subtasks:

@@ -37,6 +37,7 @@ The `/skill-builder` skill delegates to this agent when:
 ## Input / Output Contract
 
 **Input:** Structured JSON object with:
+
 - `mode`: "build" | "audit" | "optimize"
 - `skill_name`: The name of the skill being built/audited/optimized
 - `skill_content`: Current SKILL.md text (audit/optimize modes)
@@ -45,6 +46,7 @@ The `/skill-builder` skill delegates to this agent when:
 - `reference_files`: Optional paths to supporting docs
 
 **Output:** Structured markdown or JSON:
+
 - **Build:** Complete SKILL.md file ready to write
 - **Audit:** Checklist table + prioritized fix list + confidence score
 - **Optimize:** Before/after diffs for 3–5 proposals
@@ -67,12 +69,14 @@ Call .claude/agents/skill-builder/AGENT.md with:
 ```
 
 The skill manages:
+
 - User interviews (6-round discovery for build mode)
 - File I/O (reading skills, writing generated SKILL.md)
 - User-facing presentation (showing audit findings, explaining optimizations)
 - Decision-making (which optimizations to apply)
 
 The agent manages:
+
 - Content generation (structured, high-quality SKILL.md)
 - Quality evaluation (comprehensive audit checklist)
 - Improvement proposals (specific, high-impact diffs)
@@ -80,6 +84,7 @@ The agent manages:
 ## When NOT to Use
 
 This agent should **not** be called for:
+
 - **Trivial one-liner skills** — Use direct skill editing instead
 - **Emergency hotfixes** — This agent takes time; use manual edits if urgent
 - **User interviews** — The parent skill handles discovery; don't skip that step
@@ -89,6 +94,7 @@ This agent should **not** be called for:
 ## Error Recovery
 
 If the agent encounters an error (incomplete input, invalid names, missing files), it returns structured error messages with recovery steps. The parent skill reads these and either:
+
 - Asks the user for clarification (incomplete discovery)
 - Retries with corrected input
 - Falls back to manual editing guidance
@@ -97,25 +103,28 @@ See AGENT.md "Error Handling" section for scenario-by-scenario recovery procedur
 
 ## Key Characteristics
 
-| Aspect | Detail |
-|--------|--------|
-| **Invocation** | Via Agent tool, from `/skill-builder` skill only |
-| **Input type** | Structured JSON (mode + content) |
-| **Output type** | Markdown (build, audit) or JSON (audit findings, optimize diffs) |
-| **Token efficiency** | Concise, compressed output; minimal prose |
-| **File writes** | None — parent skill handles all I/O |
-| **User interaction** | None — all user communication via parent skill |
-| **Specialization** | Single-responsibility: build/audit/optimize only |
+| Aspect               | Detail                                                           |
+| -------------------- | ---------------------------------------------------------------- |
+| **Invocation**       | Via Agent tool, from `/skill-builder` skill only                 |
+| **Input type**       | Structured JSON (mode + content)                                 |
+| **Output type**      | Markdown (build, audit) or JSON (audit findings, optimize diffs) |
+| **Token efficiency** | Concise, compressed output; minimal prose                        |
+| **File writes**      | None — parent skill handles all I/O                              |
+| **User interaction** | None — all user communication via parent skill                   |
+| **Specialization**   | Single-responsibility: build/audit/optimize only                 |
 
 ## Integration Points
 
 **Upstream (receives from):**
+
 - `/skill-builder` skill — structured JSON request + discovery results
 
 **Downstream (returns to):**
+
 - `/skill-builder` skill — generated SKILL.md, audit findings, or optimization proposals
 
 **Coordination:**
+
 - Parent skill synthesizes agent output, presents to user, executes approved changes
 - Agent stays focused on generation/evaluation; parent handles orchestration and user interaction
 

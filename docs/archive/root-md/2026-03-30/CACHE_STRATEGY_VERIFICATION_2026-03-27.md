@@ -118,7 +118,7 @@ cacheLife: {
 **Values from next.config.ts:**
 
 - Production CSP: Strict with Vercel Analytics + Turnstile origins
-- Cache-Control: Public (allows CDN caching with CSP headers intact)
+- Cache-Control: Public (allows CDN caching with CSP headers N)
 
 **Risk Assessment:** ✅ Low — CSP headers cached with content, safe
 

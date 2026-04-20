@@ -225,6 +225,87 @@ curl -X POST http://localhost:3100/memory/tools/call \
 
 ---
 
+---
+
+## Ready-to-Copy Signature Templates
+
+### Template 1: Session Start (Rehydration)
+
+```
+mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+→ [entity_ids]
+
+mcp__MCP_DOCKER__open_nodes([entity_ids])
+→ {current_branch, active_phase, next_tasks, blockers}
+```
+
+### Template 2: Create Feature + Learnings (Session Active)
+
+```
+mcp__MCP_DOCKER__create_entities([
+  {
+    "type": "feature",
+    "name": "feat-phase-X-{kebab-name}",
+    "properties": {
+      "title": "...",
+      "status": "in-progress",
+      "files_modified": N,
+      "test_coverage": 0.XX
+    }
+  },
+  {
+    "type": "learning",
+    "name": "learn-{topic}-{descriptor}",
+    "properties": {
+      "title": "...",
+      "summary": "...",
+      "confidence": "high"
+    }
+  }
+])
+→ [entity_ids]
+```
+
+### Template 3: Append Observations (Build Status, Blockers)
+
+```
+mcp__MCP_DOCKER__add_observations(entity_id, [
+  {
+    "category": "build",
+    "timestamp": "2026-04-20T18:45:00Z",
+    "status": "passing",
+    "typescript_errors": 0
+  },
+  {
+    "category": "blocker",
+    "severity": "high",
+    "title": "...",
+    "workaround": "..."
+  }
+])
+→ updated_entity
+```
+
+### Template 4: Wire Relations (Features ← Decisions)
+
+```
+mcp__MCP_DOCKER__create_relations([
+  {
+    "type": "derives_from",
+    "source": "feat-phase-5-animation",
+    "target": "decide-memory-docker-over-files"
+  },
+  {
+    "type": "documents",
+    "source": "learn-gpu-transform-compositing",
+    "target": "feat-phase-5-animation"
+  }
+])
+→ [relation_ids]
+```
+
+---
+
 ## More Information
 
 - **Full policy:** `.claude/rules/memory-policy.md`
@@ -232,3 +313,4 @@ curl -X POST http://localhost:3100/memory/tools/call \
 - **Error recovery:** `.claude/reference/ERROR_RECOVERY.md` (if exists)
 - **Entity types:** Part 1 of memory-policy.md
 - **Observation schema:** Part 2 of memory-policy.md
+- **Canonical signatures:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` (Signatures section)

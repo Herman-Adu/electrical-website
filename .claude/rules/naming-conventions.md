@@ -166,6 +166,68 @@ const handleFormSubmit = (e: React.FormEvent) => { /* ... */ };
 const onProjectSelect = (projectId: string) => { /* ... */ };
 ```
 
+## Docker Entity Names
+
+Docker memory entities follow a strict naming scheme to ensure discoverability and consistency.
+
+### Entity Type Prefixes (Required)
+
+| Entity Type | Prefix | Purpose | Example |
+|-------------|--------|---------|---------|
+| `project_state` | (none) | Single project state entity | `electrical-website-state` |
+| `feature` | `feat-` | Completed/in-progress work units | `feat-phase-5-animation-optimization` |
+| `learning` | `learn-` | Technical patterns and insights | `learn-gpu-transform-compositing` |
+| `decision` | `decide-` | Architectural choices with rationale | `decide-memory-docker-over-files` |
+| `infrastructure` | `infra-` | Docker services, MCP tools, CI/CD | `infra-mcp-docker-services` |
+| `session` | `session-` | Work session summaries with timestamps | `session-2026-04-16-001` |
+| `task` | `task-` | Atomic work items with status | `task-animation-optimize-hero` |
+| `plan` | `plan-` | Implementation roadmaps with phases | `plan-phase-6-feature-roadmap` |
+
+### Naming Rules (Mandatory)
+
+1. **Casing:** `kebab-case` only — lowercase, hyphens as separators, NO underscores or spaces
+2. **Type Prefix:** Always include the prefix above (except `project_state`)
+3. **Specificity:** Be specific enough to find via substring search
+   - ❌ Bad: `learn-bug`, `feat-fix`, `decide-standard`
+   - ✅ Good: `learn-scroll-trigger-ios-timing`, `feat-hero-parallax-refactor`, `decide-animation-library-choice`
+4. **Dates (for sessions only):** Use `YYYY-MM-DD-seq` format: `session-2026-04-16-001`, `session-2026-04-16-002`
+5. **Uniqueness:** Search Docker before creating to avoid duplicates
+
+### Valid Examples
+
+```
+electrical-website-state
+feat-phase-5-animation-optimization
+learn-gpu-transform-compositing
+decide-memory-docker-over-files
+infra-mcp-docker-services
+session-2026-04-16-001
+task-animation-optimize-hero
+plan-phase-6-feature-roadmap
+```
+
+### Invalid Examples (Never Use)
+
+```
+ProjectState                    ← not kebab-case
+feature_phase5                  ← uses underscore, not hyphen
+learning                        ← too generic, unsearchable
+Decision123                     ← unnecessary numbers
+session_2026_04_16             ← should use hyphens, not underscores
+feat phase 5 animation          ← spaces not allowed
+```
+
+### Validation Checklist
+
+- [ ] Entity name starts with correct type prefix (or is `project_state`)
+- [ ] Uses `kebab-case` throughout (lowercase + hyphens only)
+- [ ] No spaces, underscores, uppercase, or special characters
+- [ ] Specific enough to find via partial search
+- [ ] Searched Docker first to verify no duplicate
+- [ ] If session entity: uses `session-YYYY-MM-DD-seq` format exactly
+
+---
+
 ## Checklist for Code Review
 
 - [ ] File names are `kebab-case`

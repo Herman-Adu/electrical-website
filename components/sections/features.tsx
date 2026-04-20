@@ -82,12 +82,14 @@ function LoadMonitorCard() {
                 key={card.id}
                 className={`absolute inset-x-0 top-0 flex items-center justify-between p-4 rounded-lg border backdrop-blur-md transition-all duration-700  ${
                   isTop
-                    ? "z-30 translate-y-0 scale-100 opacity-100 bg-background/90 border-electric-cyan/60 shadow-md"
+                    ? "z-30 translate-y-0 scale-100 opacity-100  bg-background/90 border-electric-cyan/60 shadow-md"
                     : isMiddle
                       ? "z-20 translate-y-2 scale-[0.96] opacity-60 bg-electric-cyan/10 dark:bg-electric-cyan/10 border-slate-300/40 dark:border-slate-700/40"
                       : "z-10 translate-y-4 scale-[0.92] opacity-30 bg-electric-cyan/10 dark:bg-electric-cyan/10 border-slate-300/40 dark:border-slate-700/40"
                 } ${
-                  isTop ? "border-muted-foreground/10" : "border-muted-foreground/10"
+                  isTop
+                    ? "border-muted-foreground/10"
+                    : "border-muted-foreground/10"
                 }`}
                 style={{
                   transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",

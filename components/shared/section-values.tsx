@@ -63,7 +63,13 @@ export function SectionValues({ data }: SectionValuesProps) {
 
       <div className="section-content">
         {/* Header */}
-        <ScrollReveal direction="down" blur delay={0} duration={0.65} distance={40}>
+        <ScrollReveal
+          direction="down"
+          blur
+          delay={0}
+          duration={0.65}
+          distance={40}
+        >
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
@@ -74,7 +80,9 @@ export function SectionValues({ data }: SectionValuesProps) {
               {headlineHighlight ? (
                 <>
                   {headline.replace(headlineHighlight, "")}{" "}
-                  <span className="text-electric-cyan">{headlineHighlight}</span>
+                  <span className="text-electric-cyan">
+                    {headlineHighlight}
+                  </span>
                 </>
               ) : (
                 headline
@@ -106,12 +114,12 @@ export function SectionValues({ data }: SectionValuesProps) {
               >
                 <motion.div
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col h-full"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col h-80"
                   initial="hidden"
                   whileInView="visible"
                   variants={cardVariants}
                   viewport={{ once: true }}
-                  style={{ contain: 'content' }}
+                  style={{ contain: "content" }}
                 >
                   {/* Hover background fill */}
                   <div
@@ -132,21 +140,27 @@ export function SectionValues({ data }: SectionValuesProps) {
                     style={{
                       borderColor: `${accentColor}30`,
                       background: `${accentColor}10`,
-                      willChange: 'opacity, transform',
+                      willChange: "opacity, transform",
                     }}
                   >
                     <Icon size={24} style={{ color: accentColor }} />
                   </motion.div>
 
                   {/* Title — staggered reveal */}
-                  <motion.div variants={childVariants} style={{ willChange: 'opacity, transform' }}>
+                  <motion.div
+                    variants={childVariants}
+                    style={{ willChange: "opacity, transform" }}
+                  >
                     <h3 className="text-xl font-bold text-foreground mb-2">
                       {value.title}
                     </h3>
                   </motion.div>
 
                   {/* Short tagline — staggered reveal */}
-                  <motion.div variants={childVariants} style={{ willChange: 'opacity, transform' }}>
+                  <motion.div
+                    variants={childVariants}
+                    style={{ willChange: "opacity, transform" }}
+                  >
                     <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
                       {value.short}
                     </p>
@@ -170,7 +184,13 @@ export function SectionValues({ data }: SectionValuesProps) {
 
         {/* Tagline */}
         {tagline && (
-          <ScrollReveal direction="up" blur delay={0.21} duration={0.65} distance={40}>
+          <ScrollReveal
+            direction="up"
+            blur
+            delay={0.21}
+            duration={0.65}
+            distance={40}
+          >
             <div className="mt-12 text-center font-mono text-sm tracking-widest uppercase text-muted-foreground/50">
               {tagline}
             </div>

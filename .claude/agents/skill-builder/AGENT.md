@@ -1,10 +1,9 @@
 ---
 name: skill-builder
-description: Sub-agent for skill creation, auditing, and optimization tasks.
 mode: execute
-role: Creates new production-ready skills, audits existing skills against standards, and proposes optimization improvements. Works in three modes: build, audit, and optimize.
-trigger: When orchestrator needs to generate a new skill, audit skill quality and compliance, or optimize an existing skill's design and descriptions.
-return-format: structured
+role: Executes skill creation, auditing, and optimization tasks with full lifecycle support
+trigger: When /skill-builder skill delegates subtasks (build, audit, optimize, evaluate modes)
+description: Sub-agent for skill creation, auditing, and optimization tasks
 ---
 
 # Skill Builder Sub-Agent
@@ -78,7 +77,7 @@ You receive a JSON object with these named fields:
 **5. Apply project patterns**
 
 - Reference existing skills as examples
-- Match tone and structure of similar skills under `.claude/skills/`
+- Match tone and structure of `.claude/skills/[similar-skill]/SKILL.md`
 - Inject dynamic context if needed (current priorities, brand voice, work context)
 - Add `(ultrathink)` to synthesis steps if multi-factor analysis
 
@@ -88,7 +87,7 @@ You receive a JSON object with these named fields:
 - Verify all file paths are documented
 - Verify all agent delegations are explicit
 
-**Output:** Complete SKILL.md ready to write under `.claude/skills/`
+**Output:** Complete SKILL.md ready to write to `.claude/skills/[skill-name]/SKILL.md`
 
 ---
 

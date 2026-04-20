@@ -58,9 +58,8 @@ export function Dashboard() {
             </h2>
 
             <p className="text-foreground/70 max-w-xl text-base lg:text-lg font-light">
-              Real-time monitoring of Nexgen installed assets across the
-              industrial sector. Efficiency is not a goal; it is a constant
-              variable.
+              Real-time monitoring of installed assets across the industrial
+              sector. Efficiency is not a goal; it is a constant variable.
             </p>
           </div>
 
@@ -80,7 +79,14 @@ export function Dashboard() {
       </motion.div>
 
       {/* Metrics Grid */}
-      <ScrollReveal direction="left" blur delay={0} duration={0.65} distance={40} once>
+      <ScrollReveal
+        direction="left"
+        blur
+        delay={0}
+        duration={0.65}
+        distance={40}
+        once
+      >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
           {metrics.map((metric, index) => (
             <EnergyMetric
