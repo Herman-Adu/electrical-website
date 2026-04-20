@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { getIcon } from "./icon-map";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -10,15 +10,33 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 
+// Framer Motion variants for staggered card content reveals
+const cardVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0,
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4 },
+  },
+};
+
 interface SectionValuesProps {
   data: SectionValuesData;
 }
 
 export function SectionValues({ data }: SectionValuesProps) {
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
-  const [expandedStates, setExpandedStates] = useState<{
-    [key: string]: boolean;
-  }>({});
 
   const {
     sectionId,
@@ -29,13 +47,6 @@ export function SectionValues({ data }: SectionValuesProps) {
     values,
     tagline,
   } = data;
-
-  const toggleExpanded = (title: string) => {
-    setExpandedStates((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }));
-  };
 
   return (
     <section
@@ -52,7 +63,13 @@ export function SectionValues({ data }: SectionValuesProps) {
 
       <div className="section-content">
         {/* Header */}
-        <ScrollReveal direction="down" blur delay={0} duration={0.65} distance={40}>
+        <ScrollReveal
+          direction="down"
+          blur
+          delay={0}
+          duration={0.65}
+          distance={40}
+        >
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
@@ -63,7 +80,9 @@ export function SectionValues({ data }: SectionValuesProps) {
               {headlineHighlight ? (
                 <>
                   {headline.replace(headlineHighlight, "")}{" "}
-                  <span className="text-electric-cyan">{headlineHighlight}</span>
+                  <span className="text-electric-cyan">
+                    {headlineHighlight}
+                  </span>
                 </>
               ) : (
                 headline
@@ -75,41 +94,32 @@ export function SectionValues({ data }: SectionValuesProps) {
           </div>
         </ScrollReveal>
 
-        {/* Values grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Values grid — all cards equal height via CSS Grid minmax */}
+        <div className="values-grid">
           {values.map((value, idx) => {
             const Icon = getIcon(value.icon);
             const isCyan = value.color === "cyan" || !value.color;
             const accentColor = isCyan
               ? "hsl(174 100% 50%)"
               : "hsl(37 100% 49%)";
-            const isExpanded = expandedStates[value.title] ?? false;
-
-            const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                toggleExpanded(value.title);
-              }
-            };
 
             return (
               <ScrollReveal
                 key={value.title}
                 direction="up"
                 blur
-                delay={(idx % 3) * 0.07}
+                delay={idx * 0.05}
                 duration={0.65}
                 distance={40}
               >
                 <motion.div
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isExpanded}
-                  aria-describedby={`value-${value.title}`}
-                  onKeyDown={handleKeyDown}
-                  onClick={() => toggleExpanded(value.title)}
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col h-80"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={cardVariants}
+                  viewport={{ once: true }}
+                  style={{ contain: "content" }}
                 >
                   {/* Hover background fill */}
                   <div
@@ -123,44 +133,43 @@ export function SectionValues({ data }: SectionValuesProps) {
                   <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-border group-hover:border-electric-cyan/40 transition-colors" />
                   <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-border group-hover:border-electric-cyan/40 transition-colors" />
 
-                  {/* Icon */}
-                  <div
+                  {/* Icon — staggered reveal */}
+                  <motion.div
+                    variants={childVariants}
                     className="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-300"
                     style={{
                       borderColor: `${accentColor}30`,
                       background: `${accentColor}10`,
+                      willChange: "opacity, transform",
                     }}
                   >
                     <Icon size={24} style={{ color: accentColor }} />
-                  </div>
+                  </motion.div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    {value.title}
-                  </h3>
+                  {/* Title — staggered reveal */}
+                  <motion.div
+                    variants={childVariants}
+                    style={{ willChange: "opacity, transform" }}
+                  >
+                    <h3 className="text-xl font-bold text-foreground mb-2">
+                      {value.title}
+                    </h3>
+                  </motion.div>
 
-                  {/* Short tagline */}
-                  <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
-                    {value.short}
+                  {/* Short tagline — staggered reveal */}
+                  <motion.div
+                    variants={childVariants}
+                    style={{ willChange: "opacity, transform" }}
+                  >
+                    <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
+                      {value.short}
+                    </p>
+                  </motion.div>
+
+                  {/* Full description — always visible, grows to fill available space with min-height floor */}
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1 min-h-15">
+                    {value.full}
                   </p>
-
-                  {/* Description container — fixed height to prevent CLS, layout containment to isolate reflow */}
-                  <div className="h-[280px] relative overflow-hidden" style={{ contain: 'layout style paint' }}>
-                    {/* Short description — absolutely positioned, visible by default */}
-                    <p className="text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 group-hover:opacity-0 pointer-events-none">
-                      {value.full.slice(0, 80)}...
-                    </p>
-
-                    {/* Full description — absolutely positioned, shown on hover or keyboard expansion */}
-                    <p
-                      id={`value-${value.title}`}
-                      className={`text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 pointer-events-none ${
-                        isExpanded ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                      }`}
-                    >
-                      {value.full}
-                    </p>
-                  </div>
 
                   {/* Bottom accent line */}
                   <div
@@ -175,7 +184,13 @@ export function SectionValues({ data }: SectionValuesProps) {
 
         {/* Tagline */}
         {tagline && (
-          <ScrollReveal direction="up" blur delay={0.21} duration={0.65} distance={40}>
+          <ScrollReveal
+            direction="up"
+            blur
+            delay={0.21}
+            duration={0.65}
+            distance={40}
+          >
             <div className="mt-12 text-center font-mono text-sm tracking-widest uppercase text-muted-foreground/50">
               {tagline}
             </div>

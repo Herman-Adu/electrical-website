@@ -39,9 +39,7 @@ function LoadMonitorCard() {
   }, [prefersReducedMotion]);
 
   return (
-    <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-    >
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
         <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
@@ -74,7 +72,7 @@ function LoadMonitorCard() {
           Real-time load balancing across multi-zone distribution networks
         </p>
 
-        <div className="relative flex items-center justify-center h-20 mb-6">
+        <div className="relative flex items-center justify-center h-20 mb-6 overflow-hidden">
           {cards.map((card, i) => {
             const isTop = i === 0;
             const isMiddle = i === 1;
@@ -82,12 +80,16 @@ function LoadMonitorCard() {
             return (
               <div
                 key={card.id}
-                className={`absolute inset-x-0 flex items-center justify-between p-4 rounded-lg border border-muted-foreground/10 bg-electric-cyan/10 dark:bg-electric-cyan/10 dark:border-white/25 backdrop-blur-md transition-all duration-700  ${
+                className={`absolute inset-x-0 top-0 flex items-center justify-between p-4 rounded-lg border backdrop-blur-md transition-all duration-700  ${
                   isTop
-                    ? "z-30 translate-y-0 scale-100 opacity-100 border-electric-cyan/60 shadow-md"
+                    ? "z-30 translate-y-0 scale-100 opacity-100  bg-background/90 border-electric-cyan/60 shadow-md"
                     : isMiddle
-                      ? "z-20 translate-y-2 scale-[0.96] opacity-60 border-slate-300/40 dark:border-slate-700/40"
-                      : "z-10 translate-y-4 scale-[0.92] opacity-30 border-slate-300/40 dark:border-slate-700/40"
+                      ? "z-20 translate-y-2 scale-[0.96] opacity-60 bg-electric-cyan/10 dark:bg-electric-cyan/10 border-slate-300/40 dark:border-slate-700/40"
+                      : "z-10 translate-y-4 scale-[0.92] opacity-30 bg-electric-cyan/10 dark:bg-electric-cyan/10 border-slate-300/40 dark:border-slate-700/40"
+                } ${
+                  isTop
+                    ? "border-muted-foreground/10"
+                    : "border-muted-foreground/10"
                 }`}
                 style={{
                   transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
@@ -156,9 +158,7 @@ function SystemDiagnosticsCard() {
   }, [isMounted, isComplete, prefersReducedMotion]);
 
   return (
-    <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-    >
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
         <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />

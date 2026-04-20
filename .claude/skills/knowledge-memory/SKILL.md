@@ -33,14 +33,20 @@ It integrates with:
 
 ## Docker Memory (Primary Source of Truth)
 
-Before searching file archives, query Docker first:
+Before searching file archives, query Docker first using canonical signatures:
 
 1. **Search Docker:** `mcp__MCP_DOCKER__search_nodes("[topic keyword]")`
-2. **Load entities:** `mcp__MCP_DOCKER__open_nodes([returned_ids])`
+   - Returns: `[entity_ids]` matching the search query
+2. **Load entities:** `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
+   - Returns: Full entity objects with observations and properties
 3. **If no Docker match:** proceed to file archive routing below
-4. **If storing:** create Docker entity first (`learning` or `decision` type), then optionally archive
+4. **If storing:** create Docker entity first using: `mcp__MCP_DOCKER__create_entities([{type: "learning" | "decision", name: "...", properties: {...}}])`
+   - Returns: `[created_entity_ids]`
+5. **Then optionally archive** to files per canonical routing table below
 
 Entity types for knowledge: `learning` (patterns/insights), `decision` (architectural choices)
+
+See `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` for full Docker signatures and working examples.
 
 ---
 

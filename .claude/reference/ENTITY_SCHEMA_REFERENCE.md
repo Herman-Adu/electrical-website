@@ -2,6 +2,8 @@
 
 Complete JSON schema definitions for all Docker memory entity types.
 
+**See also:** [Docker MCP Quick Reference](DOCKER_MCP_QUICK_REFERENCE.md) for working examples and how to use these schemas.
+
 ---
 
 ## Quick Index

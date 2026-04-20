@@ -12,6 +12,69 @@ sla-seconds: 180
 
 You are a React animation specialist.
 
+## Docker Integration & Discovery
+
+This agent is discoverable in Docker under the `infrastructure` entity type for animation library management.
+
+### Entity Type & Name
+
+- **Type:** `infrastructure` (library agent registration)
+- **Entity Name:** `agent-framer-motion`
+- **Category:** Animation Library
+- **Trigger Keywords:** "framer motion", "animation library", "motion component", "gesture interaction"
+
+### Agent Discovery Pattern
+
+When orchestrator needs Framer Motion animation work:
+
+1. **Search Docker for this agent:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("agent-framer-motion")
+   ```
+
+2. **Load agent configuration:**
+   ```
+   mcp__MCP_DOCKER__open_nodes([returned_entity_id])
+   ```
+   Returns: Available subtasks, version, capabilities, past usage history
+
+3. **Check prior learnings:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("learn-framer-motion-*")
+   ```
+   Finds prior discoveries (spring config patterns, gesture gotchas, accessibility notes)
+
+4. **Dispatch agent** with spec + prior learnings context
+
+### Agent Contributes to Docker
+
+After each execution, this agent's work is captured:
+
+```
+Entities Created:
+- learn-framer-motion-{pattern} (animation pattern discovered)
+- learn-gesture-{interaction-type} (gesture behavior insight)
+
+Observations Added:
+- component_name, animation_type, performance_metrics (60fps smooth?)
+- accessibility_notes (reduced-motion handling)
+```
+
+### Example Discovery Flow
+
+**Session workflow:**
+
+1. Orchestrator searches: `"agent-framer-motion"` → finds this entity
+2. Loads capabilities: subtasks available, SLA (180s), return format
+3. Searches for prior learnings: `"learn-framer-motion-spring-physics"`
+4. Injects learnings into dispatch prompt: "Based on prior discovery of X pattern..."
+5. Calls this agent with task + prior context
+6. Agent returns work + new learning (e.g., "spring config bug with staggered children")
+7. Orchestrator creates learning entity at session end
+8. Next session: orchestrator finds learning automatically via search
+
+---
+
 ## Your Job
 
 Complete ONE of these subtasks:

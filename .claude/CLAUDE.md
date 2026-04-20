@@ -15,7 +15,7 @@ The main Claude agent operates exclusively in **orchestrator mode** — it coord
    - **Rehydration:** Session start auto-calls `search_nodes("electrical-website-state")`
    - **Persistence:** Session end creates entities + relations for all work/learnings/decisions
    - **NEVER write memory to `.md` files** — use Docker memory only (strict enforcement)
-   - **See:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for mandatory workflow
+   - **See:** `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` for correct working format
 4. **Sequential Reasoning:** Use extended thinking for multi-step or ambiguous decisions
 5. **No Bypass:** Never skip validation, security, or QA gates — delegation enforces this
 
@@ -283,15 +283,51 @@ The ONLY .md writes permitted in `.claude/` are:
 
 ### Rehydration (Session Start)
 
-1. **Search:** `mcp__MCP_DOCKER__search_nodes("electrical-website")` → finds project entities
-2. **Load:** `mcp__MCP_DOCKER__open_nodes([entity_ids])` → pull entities + relations
-3. **Cost:** ~50 tokens vs ~5,000+ tokens for `.md` files
+**Use the node script with correct JSON format:**
+
+```bash
+# Search for project state
+pnpm docker:mcp:memory:search "electrical-website-state"
+
+# Load entities
+pnpm docker:mcp:memory:open electrical-website-state
+```
+
+**Cost:** ~50 tokens vs ~5,000+ tokens for `.md` files
 
 ### Sync (Session End)
 
-1. **Create:** `mcp__MCP_DOCKER__create_entities` → new phases, decisions, learnings
-2. **Observe:** `mcp__MCP_DOCKER__add_observations` → append findings to existing entities
-3. **Link:** `mcp__MCP_DOCKER__create_relations` → connect work to prior context
+**Use the node script with correct JSON format:**
+
+```bash
+# Create session entity
+node scripts/mcp-memory-call.mjs create_entities '{
+  "entities": [{
+    "name": "session-2026-04-20-001",
+    "entityType": "session",
+    "observations": ["Work completed...", "Build status...", "Next steps..."]
+  }]
+}'
+
+# Add observations to existing entity
+node scripts/mcp-memory-call.mjs add_observations '{
+  "observations": [{
+    "entityName": "electrical-website-state",
+    "contents": ["Session end update...", "Next tasks..."]
+  }]
+}'
+
+# Create relations
+node scripts/mcp-memory-call.mjs create_relations '{
+  "relations": [{
+    "from": "session-2026-04-20-001",
+    "to": "electrical-website-state",
+    "relationType": "updates"
+  }]
+}'
+```
+
+**See:** [.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md](reference/DOCKER_MCP_QUICK_REFERENCE.md) for complete working examples and common mistakes.
 
 ### Entity Types
 
@@ -312,6 +348,40 @@ If Docker memory service is down:
 - Priority: Resume work next session by reading Git history + code state
 
 **Principle:** Memory informs decisions; local code is source of truth for implementation details.
+
+---
+
+## Common Docker MCP Mistakes
+
+**These mistakes wasted significant tokens in prior sessions. Avoid them:**
+
+### Mistake 1: Using curl Instead of Node Script
+❌ **WRONG:** Direct curl calls to localhost:3100
+✅ **RIGHT:** `node scripts/mcp-memory-call.mjs` or `pnpm docker:mcp:memory:*`
+
+### Mistake 2: Observations as Object Instead of Array
+❌ **WRONG:** `"observations": { "work": "...", "status": "..." }`
+✅ **RIGHT:** `"observations": ["Work completed...", "Status: passing"]`
+
+Observations MUST be an array of strings, not a JSON object.
+
+### Mistake 3: Missing entityType Field
+❌ **WRONG:** `{ "name": "...", "observations": [...] }`
+✅ **RIGHT:** `{ "name": "...", "entityType": "session", "observations": [...] }`
+
+Every entity requires entityType. Options: session, feature, learning, decision, infrastructure, task, plan, project_state.
+
+### Mistake 4: Creating Duplicate Entities
+❌ **WRONG:** Create same entity twice without searching
+✅ **RIGHT:** Search first (`pnpm docker:mcp:memory:search "name"`), then use `add_observations` for existing entities
+
+### Mistake 5: Forgetting Quotes Around JSON
+❌ **WRONG:** `node scripts/mcp-memory-call.mjs create_entities { "entities": [...] }`
+✅ **RIGHT:** `node scripts/mcp-memory-call.mjs create_entities '{ "entities": [...] }'`
+
+JSON argument must be a single-quoted string to prevent bash expansion.
+
+**See:** [DOCKER_MCP_QUICK_REFERENCE.md](reference/DOCKER_MCP_QUICK_REFERENCE.md) for detailed examples and fixes.
 
 ---
 
@@ -370,36 +440,69 @@ If Docker memory service is down:
 
 ## Session State
 
-2026-04-18 20:35 — **Phase 8a Features ScrollReveal COMPLETE** | Branch: main | Commit: 778c168 | Build: ✅ passing | Tests: 211 passing
+**2026-04-20 17:45 — SESSION 5 HANDOFF** | Context: 1% remaining | Branch: feat/phase-8-scrollreveal-production
 
-**Work Completed (Phase 8a):**
-- ✅ Fixed Blocking Issue 1: Removed whileInView animation props from LoadMonitorCard, SystemDiagnosticsCard, SchedulerCard
-- ✅ Fixed Blocking Issue 2: Added useReducedMotion() hook + guards to setInterval animations (WCAG compliant)
-- Created `lib/hooks/use-reduced-motion.ts` — Monitors prefers-reduced-motion media query
-- Wrapped all 3 feature cards with ScrollReveal component (direction=up, blur, staggered delay)
-- Added 15 comprehensive TDD tests (RED → GREEN → REFACTOR pattern)
-- All tests passing, production build passing, zero errors
+✅ **SESSION 4 COMPLETED (Phase 8: SectionValues Professional Refactor)**
+- ✅ SectionValues reveal animation REMOVED (show all content always)
+- ✅ Professional CSS Grid minmax layout (320px/380px responsive minima)
+- ✅ Equal-height cards with content-driven sizing
+- ✅ Optimized row/column gap (reduced excessive spacing)
+- ✅ CLS prevention (will-change, contain: content)
+- ✅ Tests updated: 267/270 passing (4 skipped)
+- ✅ Build: 58/58 pages passing
+- ✅ Commits: 4 (b7f9a4f, 3c00b5b, 5137b0b, e146894)
+- ✅ Branch: 17 commits ahead of origin
 
-**Learnings Captured:**
-1. **learn-reduced-motion-hook-pattern** — useReducedMotion hook monitors matchMedia, returned by all animated components
-2. **learn-scrollreveal-animation-observer-resolution** — ScrollReveal wrapper prevents multiple IntersectionObserver conflicts
-   - Before: motion.div with whileInView + ScrollReveal wrapper = competing observers
-   - After: motion.div without animation props + ScrollReveal wrapper = single coordinated observer
+**CRITICAL BLOCKER — SESSION 5 START:**
+🔴 **phase-8-blockers.spec.ts EXISTS & TESTS IMPLEMENTATION**
+- File: `e2e/phase-8-blockers.spec.ts` (anti-pattern: phase-specific tests)
+- Problem: Tests outdated implementation (reveal animation, scroll-to race conditions)
+- Action: RUN tests first thing. If FAIL → DELETE file. If PASS → migrate valid behavior tests to main suites, DELETE phase-specific file.
+- NEVER commit phase-numbered tests to main.
 
-**Ready for Phase 8b:**
-- `components/sections/dashboard.tsx` — Metrics fade left/right
-- `components/sections/illumination.tsx` → Section header fade down
-- `components/sections/smart-living.tsx` → Image reveals left/right with distance={60}
-- Any remaining hero components with brightness/saturation scroll transforms
+**SESSION 5 TASKS (In Order):**
+1. Run `pnpm test` — MUST PASS 267+
+2. Deal with phase-8-blockers.spec.ts (delete or migrate)
+3. Delegate: ServicesHero + ProjectCategoryHero brightness/saturation (use About hero as reference)
+4. Reference: `components/about/about-hero.tsx` (has brightness/saturation already)
+5. Apply same pattern to: `components/sections/services.tsx`, `components/projects/project-category-hero.tsx`
+6. Run Lighthouse audit
+7. Build + Commit + Push (all green)
+8. Merge feat/phase-8-scrollreveal-production → main
 
-**Component API Reference:**
-```tsx
-<ScrollReveal direction="up" blur delay={0} duration={0.65} distance={40} once margin="0px 0px -80px 0px">
-  {children}
-</ScrollReveal>
+**Git State:**
+- Branch: feat/phase-8-scrollreveal-production (17 commits ahead of origin)
+- Last 4 commits: SectionValues refactor (b7f9a4f, 3c00b5b, 5137b0b, e146894)
+- Modified: 16 files (components, data, baselines)
+- Untracked: MCP logs, test docs, profile images
+- Status: Ready for phase-8-blockers.spec.ts decision
+
+**Docker Memory Status:**
+- Attempted sync at session end (curl calls sent)
+- Verify on next session start: search for "session-2026-04-20-005"
+- If entities missing: use this ## Session State as fallback
+
+**Next Session Start (Session 5):**
 ```
+ORCHESTRATOR MODE - Phase 8 Final Push
 
-Next: Phase 8b — Apply animation polish to remaining hero sections.
+STEP 1: Deal with phase-8-blockers.spec.ts
+- Run: pnpm test
+- If fails: DELETE e2e/phase-8-blockers.spec.ts (tests old implementation)
+- If passes: migrate valid tests to main suites, DELETE phase-specific file
+- NEVER commit phase-specific tests
+
+STEP 2: Delegate brightness/saturation to heroes
+- Reference: components/about/about-hero.tsx (existing pattern)
+- Apply to: components/sections/services.tsx, components/projects/project-category-hero.tsx
+
+STEP 3: Build → Commit → Push → Merge
+- All tests passing
+- All builds passing
+- Merge to main for production
+
+Go!
+```
 
 ---
 

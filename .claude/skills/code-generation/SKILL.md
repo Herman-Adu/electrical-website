@@ -23,6 +23,15 @@ It integrates with:
 
 ## Execution Method
 
+**Step 0: Docker Preflight (Session Start)**
+- Search for project state: `mcp__MCP_DOCKER__search_nodes("electrical-website-state")`
+- Load context: `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
+- Extract: active phase, prior code decisions, test coverage status, blockers
+- If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
+- This ensures code work builds on verified prior context and architectural decisions
+
+**Workflow Selection:**
+
 Choose your workflow based on task size and requirements:
 
 → See [README.md](README.md) for detailed **Super Powers Workflow** (large features) and **Standard Workflow** (quick tasks) including step-by-step instructions and decision matrix.
@@ -31,7 +40,7 @@ Choose your workflow based on task size and requirements:
 - **Super Powers:** Use for features 2–3h+, architecture redesigns, critical features
 - **Standard:** Use for bug fixes, quick refactors, one-off utilities
 
-**Core steps for both:**
+**Core steps for both (after Docker Preflight):**
 1. Parse request (language, framework, goal)
 2. Fetch context via Context7 (if needed) for latest framework docs
 3. Delegate to code-generation agent (if needed)

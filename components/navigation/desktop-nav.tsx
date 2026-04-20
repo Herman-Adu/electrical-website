@@ -31,6 +31,10 @@ export interface DesktopNavProps {
   navLinks: DesktopNavLink[];
   onScroll: (href: string) => void;
   onNavigate: (href: string) => void;
+  currentHash: string;
+  openDropdown?: string | null;
+  setOpenDropdown?: (dropdown: string | null) => void;
+  isSubmenuActive?: (href: string) => boolean;
 }
 
 const normalizePath = (path: string): string => {
@@ -42,43 +46,28 @@ export function DesktopNav({
   navLinks,
   onScroll,
   onNavigate,
+  currentHash: propCurrentHash,
+  openDropdown,
+  setOpenDropdown,
+  isSubmenuActive: propIsSubmenuActive,
 }: DesktopNavProps) {
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-  const [currentHash, setCurrentHash] = useState("");
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [focusedDropdown, setFocusedDropdown] = useState<string | null>(null);
 
   const triggerRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const submenuItemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Use currentHash prop directly — parent (NavbarClient) manages hash state
+  const currentHash = propCurrentHash;
 
-  useEffect(() => {
-    if (!mounted || typeof window === "undefined") return;
-
-    const syncHash = () => {
-      setCurrentHash(window.location.hash || "");
-    };
-
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    window.addEventListener("popstate", syncHash);
-
-    return () => {
-      window.removeEventListener("hashchange", syncHash);
-      window.removeEventListener("popstate", syncHash);
-    };
-  }, [mounted]);
-
-  useEffect(() => {
-    if (!mounted || typeof window === "undefined") return;
-    setCurrentHash(window.location.hash || "");
-  }, [mounted, pathname]);
-
+  // Use prop-based isSubmenuActive if provided, else fall back to local logic
   const isSubmenuActive = (href: string): boolean => {
+    if (propIsSubmenuActive) {
+      return propIsSubmenuActive(href);
+    }
+
+    // Fallback: local logic
     const [rawPath, rawHash] = href.split("#");
     const targetPath = normalizePath(rawPath || "/");
     const currentPath = normalizePath(pathname);
@@ -142,7 +131,7 @@ export function DesktopNav({
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
     }, {});
-  }, [navLinks, pathname, currentHash]);
+  }, [navLinks, pathname, propCurrentHash]);
 
   const isDropdownOpen = (linkName: string): boolean => {
     return hoveredDropdown === linkName || focusedDropdown === linkName;
@@ -192,10 +181,17 @@ export function DesktopNav({
           <div
             key={link.name}
             className="relative"
-            onMouseEnter={() =>
-              setHoveredDropdown(link.submenu ? link.name : null)
-            }
-            onMouseLeave={() => setHoveredDropdown(null)}
+            onMouseEnter={() => {
+              if (link.submenu) {
+                setHoveredDropdown(link.name);
+                setOpenDropdown?.(link.name);
+              }
+            }}
+            onMouseLeave={() => {
+              setHoveredDropdown(null);
+              setFocusedDropdown(null);
+              setOpenDropdown?.(null);
+            }}
             onFocusCapture={() => {
               if (link.submenu) setFocusedDropdown(link.name);
             }}

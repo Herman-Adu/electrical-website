@@ -32,8 +32,10 @@ const navLinks = [
       { name: "Our Story", href: "/about#company-intro" },
       { name: "Our Directors", href: "/about#directors" },
       { name: "Company History", href: "/about#timeline" },
+      { name: "Peace of Mind", href: "/about#peace-of-mind" },
       { name: "Vision & Mission", href: "/about#vision-mission" },
       { name: "Certifications", href: "/about#certifications" },
+      { name: "Core Values", href: "/about#core-values" },
       { name: "Community", href: "/about#community" },
       { name: "Why Choose Us", href: "/about#why-choose-us" },
     ],
@@ -131,12 +133,13 @@ export function NavbarClient() {
     if (hasHash) {
       const targetPath = pathPart || pathname;
       if (targetPath === pathname) {
+        // Set hash FIRST (before scroll measurement) to ensure breadcrumb is in correct layout state
+        window.location.hash = hashPart;
+
         const selector = `#${hashPart}`;
         const element = document.querySelector(selector);
         if (element) {
-          scrollToElementWithOffset(element, { pageType: 'default' });
-          window.history.pushState(null, "", `${targetPath}${selector}`);
-          setCurrentHash(selector);
+          scrollToElementWithOffset(element, { pageType: "default" });
           closeMenus();
           return;
         }
@@ -148,6 +151,12 @@ export function NavbarClient() {
   };
 
   const navigateTo = (href: string) => {
+    // Special case: "Home" button should scroll to top
+    if (href === "/" && pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      closeMenus();
+      return;
+    }
     router.push(href);
     closeMenus();
   };
@@ -232,6 +241,10 @@ export function NavbarClient() {
               navLinks={navLinks}
               onScroll={scrollToSection}
               onNavigate={navigateTo}
+              currentHash={currentHash}
+              openDropdown={openDropdown}
+              setOpenDropdown={setOpenDropdown}
+              isSubmenuActive={isSubmenuActive}
             />
 
             {/* Right: Actions */}

@@ -36,44 +36,44 @@ import type { CompanyTimelineMilestoneInput } from "@/types/timeline";
 
 const companyMilestoneSource = [
   {
-    year: "2009",
+    year: "2016",
     title: "Company Founded",
-    desc: "Started as a two-man domestic electrical team in South London with a commitment to quality over volume.",
+    desc: "Started as a two-man domestic electrical team in South Bucks with a commitment to quality over volume.",
     icon: Zap,
     highlight: true,
   },
   {
-    year: "2011",
+    year: "2018",
     title: "NICEIC Approved",
     desc: "Achieved NICEIC Approved Contractor status, cementing our commitment to the highest safety standards.",
     icon: Shield,
     highlight: false,
   },
   {
-    year: "2013",
+    year: "2019",
     title: "Commercial Expansion",
     desc: "Expanded into commercial electrical installations, completing our first major office fit-out contract.",
     icon: Building,
     highlight: false,
   },
   {
-    year: "2016",
-    title: "Team of 12",
-    desc: "Grew to a team of 12 qualified electricians, taking on larger industrial and commercial projects.",
+    year: "2020",
+    title: "Professional Team",
+    desc: "Growing a team of qualified electricians, taking on larger industrial and commercial projects.",
     icon: Users,
     highlight: false,
   },
   {
-    year: "2018",
-    title: "Award Recognised",
-    desc: 'Named "Best Electrical Contractor" at the London Trades Awards — a milestone that validated our approach.',
+    year: "2021",
+    title: "DHL Reading",
+    desc: "chosen as the preferred and trusted electrical contractor to deliver DHLs distribution hub Cat B fit out in Reading.",
     icon: Award,
     highlight: true,
   },
   {
-    year: "2020",
+    year: "20203",
     title: "Community Programme",
-    desc: "Launched our community reinvestment programme, providing free electrical safety checks for vulnerable residents.",
+    desc: "Launched our community reinvestment programme, providing free electrical safety checks for vulnerable residents, working together with the local council community programmes and local schools.",
     icon: Users,
     highlight: false,
   },
@@ -85,9 +85,9 @@ const companyMilestoneSource = [
     highlight: false,
   },
   {
-    year: "2024",
-    title: "2,400+ Projects",
-    desc: "Surpassed 2,400 completed projects with a 99.7% client satisfaction rating. The journey continues.",
+    year: "2026",
+    title: "250+ Projects",
+    desc: "Surpassed 250 completed projects with a 99.7% client satisfaction rating. The journey continues.",
     icon: Star,
     highlight: true,
   },
@@ -147,7 +147,7 @@ function TimelineHeader() {
         <div className="h-px w-6 md:w-8 bg-electric-cyan" />
       </div>
       <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 text-balance">
-        15 Years of{" "}
+        10+ Years of{" "}
         <span className="text-electric-cyan">Powering Progress</span>
       </h2>
       <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">

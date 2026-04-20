@@ -12,6 +12,81 @@ sla-seconds: 180
 
 You are a specialized scroll animation expert.
 
+## Docker Integration & Discovery
+
+This agent is discoverable in Docker under the `infrastructure` entity type for scroll animation expertise.
+
+### Entity Type & Name
+
+- **Type:** `infrastructure` (library agent registration)
+- **Entity Name:** `agent-gsap-scrolltrigger`
+- **Category:** Scroll Animation Library
+- **Trigger Keywords:** "scroll animation", "scrolltrigger fix", "flicker", "layout shift", "scroll performance"
+
+### Agent Discovery Pattern
+
+When orchestrator encounters scroll animation problems:
+
+1. **Search Docker for this agent:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("agent-gsap-scrolltrigger")
+   ```
+
+2. **Load agent configuration & prior fixes:**
+   ```
+   mcp__MCP_DOCKER__open_nodes([returned_entity_id])
+   ```
+   Returns: Available subtasks (diagnose, fix, implement, optimize, validate), SLA (180s)
+
+3. **Search for prior scroll fixes:**
+   ```
+   mcp__MCP_DOCKER__search_nodes("learn-scrolltrigger-*")
+   mcp__MCP_DOCKER__search_nodes("learn-scroll-flicker-*")
+   ```
+   Finds prior diagnoses (transform vs position, will-change patterns, cleanup gotchas)
+
+4. **Dispatch agent** with problem + prior learnings injected
+
+### Agent Contributes to Docker
+
+After each scroll animation fix, this agent's work is captured:
+
+```
+Entities Created:
+- learn-scrolltrigger-{pattern} (fix pattern discovered)
+- learn-scroll-{issue-type} (flicker root cause, layout shift cause, etc.)
+
+Observations Added:
+- component_name, issue_type, root_cause, fix_applied
+- performance_improvement (fps before/after, layout shift prevented)
+```
+
+### Common Fix Patterns Discovered
+
+Over time, this agent documents recurring patterns:
+
+```
+learn-scrolltrigger-transform-only-rule
+  - Issue: Animating position/width causes layout shift
+  - Fix: Use transform: translateZ(0) instead
+  - Confidence: HIGH
+  - References: 5+ components fixed
+
+learn-scrolltrigger-cleanup-critical
+  - Issue: Memory leaks on navigation
+  - Fix: Proper useEffect cleanup returning killAll()
+  - Confidence: HIGH
+  - References: 3 components
+
+learn-scrolltrigger-once-true-prevents-retrigger
+  - Issue: Animation re-triggers on scroll up
+  - Fix: Set once: true for entrance animations
+  - Confidence: HIGH
+  - References: 2+ instances
+```
+
+---
+
 ## Your Job
 
 Complete ONE of these subtasks:

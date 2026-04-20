@@ -1,6 +1,5 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { SectionValues } from '../section-values';
 import type { SectionValuesData } from '@/types/sections';
 
@@ -77,6 +76,13 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       expect(screen.getByText('Drives')).toHaveClass('text-electric-cyan');
     });
+
+    it('renders all value titles', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+      expect(screen.getByText('Innovation')).toBeInTheDocument();
+      expect(screen.getByText('Reliability')).toBeInTheDocument();
+      expect(screen.getByText('Sustainability')).toBeInTheDocument();
+    });
   });
 
   describe('CLS Prevention', () => {
@@ -93,124 +99,78 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       }, { timeout: 500 });
     });
 
-    it('both descriptions exist in DOM (pre-allocated)', () => {
+    it('full description always visible in DOM', () => {
       render(<SectionValues data={mockSectionValuesData} />);
 
       mockSectionValuesData.values.forEach(value => {
         expect(screen.getByText(value.full)).toBeInTheDocument();
-        expect(screen.getByText(value.short)).toBeInTheDocument();
+        expect(screen.getByText(value.full)).toBeVisible();
       });
     });
 
-    it('full description hidden initially (opacity-0 absolute positioning)', () => {
-      render(<SectionValues data={mockSectionValuesData} />);
-      const cards = screen.getAllByTestId('section-value-card');
-      const innovationCard = cards[0];
-      const fullDescElement = innovationCard.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDescElement).toHaveClass('opacity-0');
-    });
-  });
-
-  describe('Accessibility - Keyboard', () => {
-    it('card has role="button"', () => {
-      render(<SectionValues data={mockSectionValuesData} />);
-      const cards = screen.getAllByTestId('section-value-card');
-      cards.forEach(card => {
-        expect(card).toHaveAttribute('role', 'button');
-      });
-    });
-
-    it('card has tabIndex={0} for focus', () => {
-      render(<SectionValues data={mockSectionValuesData} />);
-      const cards = screen.getAllByTestId('section-value-card');
-      cards.forEach(card => {
-        expect(card).toHaveAttribute('tabindex', '0');
-      });
-    });
-
-    it('aria-expanded starts false', () => {
-      render(<SectionValues data={mockSectionValuesData} />);
-      const cards = screen.getAllByTestId('section-value-card');
-      cards.forEach(card => {
-        expect(card).toHaveAttribute('aria-expanded', 'false');
-      });
-    });
-
-    it('Enter key toggles aria-expanded', async () => {
-      const user = userEvent.setup();
-      render(<SectionValues data={mockSectionValuesData} />);
-
-      const card = screen.getAllByTestId('section-value-card')[0] as HTMLElement;
-      card.focus();
-
-      expect(card).toHaveAttribute('aria-expanded', 'false');
-
-      await user.keyboard('{Enter}');
-
-      await waitFor(() => {
-        expect(card).toHaveAttribute('aria-expanded', 'true');
-      });
-    });
-
-    it('Space key toggles aria-expanded', async () => {
-      const user = userEvent.setup();
-      render(<SectionValues data={mockSectionValuesData} />);
-
-      const card = screen.getAllByTestId('section-value-card')[0] as HTMLElement;
-      card.focus();
-
-      expect(card).toHaveAttribute('aria-expanded', 'false');
-
-      await user.keyboard(' ');
-
-      await waitFor(() => {
-        expect(card).toHaveAttribute('aria-expanded', 'true');
-      });
-    });
-  });
-
-  describe('Accessibility - Screen Readers', () => {
-    it('has aria-describedby linking to description', () => {
-      render(<SectionValues data={mockSectionValuesData} />);
-      const cards = screen.getAllByTestId('section-value-card');
-      cards.forEach(card => {
-        expect(card).toHaveAttribute('aria-describedby');
-      });
-    });
-
-    it('full description not hidden from screen readers', () => {
+    it('short tagline visible for each card', () => {
       render(<SectionValues data={mockSectionValuesData} />);
 
       mockSectionValuesData.values.forEach(value => {
-        const fullDesc = screen.getByText(value.full);
-        expect(fullDesc).not.toHaveAttribute('aria-hidden', 'true');
+        expect(screen.getByText(value.short)).toBeInTheDocument();
+        expect(screen.getByText(value.short)).toBeVisible();
+      });
+    });
+
+    it('all cards have equal height within tolerance', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+      const cards = screen.getAllByTestId('section-value-card');
+      const heights = cards.map(c => c.offsetHeight);
+      const maxHeight = Math.max(...heights);
+      const minHeight = Math.min(...heights);
+
+      expect(maxHeight - minHeight).toBeLessThan(5);
+    });
+  });
+
+  describe('Content & Accessibility', () => {
+    it('renders tagline when provided', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+      expect(screen.getByText('Engineering Excellence Since 2009')).toBeInTheDocument();
+    });
+
+    it('all full descriptions visible and readable', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+
+      mockSectionValuesData.values.forEach(value => {
+        const element = screen.getByText(value.full);
+        expect(element).toHaveClass('text-sm');
+        expect(element).toHaveClass('text-muted-foreground');
+      });
+    });
+
+    it('icon and title visible for each card', () => {
+      render(<SectionValues data={mockSectionValuesData} />);
+      const cards = screen.getAllByTestId('section-value-card');
+      expect(cards).toHaveLength(mockSectionValuesData.values.length);
+
+      cards.forEach((card) => {
+        expect(card.querySelector('svg')).toBeInTheDocument();
       });
     });
   });
 
-  describe('Independent State', () => {
-    it('each card maintains independent expanded state', async () => {
-      const user = userEvent.setup();
+  describe('Hover Effects', () => {
+    it('card has hover styling classes', () => {
       render(<SectionValues data={mockSectionValuesData} />);
-
       const cards = screen.getAllByTestId('section-value-card');
 
-      await user.click(cards[0]);
-      await waitFor(() => {
-        expect(cards[0]).toHaveAttribute('aria-expanded', 'true');
-        expect(cards[1]).toHaveAttribute('aria-expanded', 'false');
+      cards.forEach(card => {
+        expect(card.className).toContain('group');
+        expect(card.className).toContain('hover:border-electric-cyan');
       });
     });
-  });
 
-  describe('Hover Behavior', () => {
-    it('full description shown on hover via group-hover:opacity-100', () => {
+    it('bottom accent line present for hover effect', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const card = screen.getAllByTestId('section-value-card')[0];
-
-      // Component uses opacity-based hover via group-hover:opacity-100
-      const fullDesc = card.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDesc.className).toContain('group-hover:opacity-100');
+      const accentLine = card.querySelector('div[style*="background"]');
+      expect(accentLine).toBeInTheDocument();
     });
   });
 });

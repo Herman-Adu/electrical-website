@@ -33,8 +33,15 @@ This skill acts as the COO of the Executive Assistant.
    - The request is: $ARGUMENTS
    - Identify the goal, timeframe, constraints, and desired outcome.
 
-2. **Inject current context (Context7)**
-   - Before planning, inject live documentation context:
+2. **Docker Preflight (Session Start)**
+   - Search for project state: `mcp__MCP_DOCKER__search_nodes("electrical-website-state")`
+   - Load context: `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
+   - Extract: active phase, next_tasks, blockers, prior decisions
+   - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
+   - This ensures plans build on verified prior context, not assumptions
+
+3. **Inject current context (Context7)**
+   - After Docker preflight, inject live documentation context:
    - Call `mcp__MCP_DOCKER__resolve-library-id` to identify relevant context docs
    - Call `mcp__MCP_DOCKER__get-library-docs` to pull in current goals, priorities, architecture
    - Inject resolved context into planning subtasks for grounding in current state

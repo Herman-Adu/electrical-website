@@ -1,0 +1,21 @@
+{
+  "memoryLane": {
+    "id": "feat-phase-8-scrollreveal-production",
+    "name": "Phase 8: ScrollReveal Production",
+    "branch": "feat/phase-8-scrollreveal-production",
+    "phase": 8,
+    "status": "active",
+    "created_date": "2026-04-20",
+    "docker_entities": {
+      "project_state": "electrical-website-state",
+      "feature": "feat-phase-8-scrollreveal-production"
+    },
+    "related_learnings": [
+      "learn-css-grid-minmax-equal-height",
+      "learn-scrollreveal-aos-removal"
+    ],
+    "related_decisions": [
+      "decide-section-values-grid-layout"
+    ]
+  }
+}

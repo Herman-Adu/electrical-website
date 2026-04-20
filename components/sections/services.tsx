@@ -21,9 +21,9 @@ const services = [
     description:
       "Full electrical infrastructure for offices, retail spaces, and commercial complexes including full lighting design, fit-out wiring, and emergency systems.",
     specs: [
-      "High-rise wiring",
+      //"High-rise wiring",
       "Emergency systems",
-      "Data centers",
+      "Data installs",
       "LED lighting",
       "Fit-out wiring",
     ],
@@ -36,8 +36,8 @@ const services = [
       "Heavy-duty electrical solutions for manufacturing plants, warehouses, and processing facilities with full lighting and high-voltage infrastructure.",
     specs: [
       "Motor controls",
-      "PLC systems",
-      "High-voltage",
+      "Busbar systems",
+      //"High-voltage",
       "Warehouse lighting",
       "Panel boards",
     ],
@@ -76,7 +76,13 @@ const services = [
     title: "Energy Management",
     description:
       "Smart energy monitoring and optimisation systems to reduce operational costs, improve efficiency, and meet sustainability compliance targets.",
-    specs: ["SCADA", "Metering", "Analytics", "Power factor", "Compliance"],
+    specs: [
+      "BMS system",
+      "Metering",
+      "Analytics",
+      "Power factor",
+      "Compliance",
+    ],
     voltage: "Smart",
   },
   {
@@ -95,13 +101,15 @@ const services = [
   },
 ];
 
-
 export function Services() {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="section-container section-padding bg-background">
+    <section
+      id="services"
+      className="section-container section-padding bg-background"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
       <div
@@ -148,69 +156,73 @@ export function Services() {
               blur
               delay={(index % 3) * 0.07}
             >
-              <motion.div className="group relative flex flex-col border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 dark:hover:border-electric-cyan/30 transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5" >
-              {/* Corner accent — inset to respect border-radius */}
-              <div className="absolute top-3 right-3 w-10 h-10 border-t border-r dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-muted-foreground/50 dark:group-hover:border-electric-cyan/40 transition-colors" />
+              <motion.div className="group relative flex flex-col border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 dark:hover:border-electric-cyan/30 transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5">
+                {/* Corner accent — inset to respect border-radius */}
+                <div className="absolute top-3 right-3 w-10 h-10 border-t border-r dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-muted-foreground/50 dark:group-hover:border-electric-cyan/40 transition-colors" />
 
-              {/* Voltage badge */}
-              <div className="absolute top-4 right-4 pr-1">
-                <span className="font-mono text-[9px] dark:text-electric-cyan/40 dark:group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_8px_rgba(0,243,189,0.4)]">
-                  {service.voltage}
-                </span>
-              </div>
-
-              {/* Icon */}
-              <div className="relative mb-6">
-                <service.icon
-                  size={32}
-                  className="dark:text-electric-cyan dark:group-hover:text-white transition-colors"
-                />
-                <div className="absolute -inset-2 bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-
-              {/* Content */}
-              <h3 className="text-lg lg:text-xl font-bold text-card-foreground mb-3 dark:group-hover:text-electric-cyan transition-colors">
-                {service.title}
-              </h3>
-
-              <p className="dark:text-foreground/70 text-sm leading-relaxed mb-4 line-clamp-3">
-                {service.description}
-              </p>
-
-              {/* Specs — 2 rows */}
-              <div className="flex flex-wrap gap-2 mb-6 min-h-13 content-start">
-                {service.specs.map((spec) => (
-                  <span
-                    key={spec}
-                    className="font-mono text-[10px] px-2 py-1 rounded bg-electric-cyan/10 border dark:border-electric-cyan/10 text-foreground tracking-wider"
-                  >
-                    {spec}
+                {/* Voltage badge */}
+                <div className="absolute top-4 right-4 pr-1">
+                  <span className="font-mono text-[9px] dark:text-electric-cyan/40 dark:group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_8px_rgba(0,243,189,0.4)]">
+                    {service.voltage}
                   </span>
-                ))}
-              </div>
-
-              {/* Learn More — pinned to bottom */}
-              <div className="mt-auto flex items-end justify-between">
-                <button className="flex items-center gap-2 text-sm dark:text-foreground/70 dark:group-hover:text-electric-cyan transition-colors px-3 py-2 rounded-lg dark:hover:bg-electric-cyan/5">
-                  <span className="font-medium">Learn More</span>
-                  <ArrowRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </button>
-
-                {/* Index number */}
-                <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-muted-foreground/70 dark:group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_12px_rgba(0,243,189,0.5)]">
-                  {String(index + 1).padStart(2, "0")}
                 </div>
-              </div>
+
+                {/* Icon */}
+                <div className="relative mb-6">
+                  <service.icon
+                    size={32}
+                    className="dark:text-electric-cyan dark:group-hover:text-white transition-colors"
+                  />
+                  <div className="absolute -inset-2 bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-lg lg:text-xl font-bold text-card-foreground mb-3 dark:group-hover:text-electric-cyan transition-colors">
+                  {service.title}
+                </h3>
+
+                <p className="dark:text-foreground/70 text-sm leading-relaxed mb-4 line-clamp-3">
+                  {service.description}
+                </p>
+
+                {/* Specs — 2 rows */}
+                <div className="flex flex-wrap gap-2 mb-6 min-h-13 content-start">
+                  {service.specs.map((spec) => (
+                    <span
+                      key={spec}
+                      className="font-mono text-[10px] px-2 py-1 rounded bg-electric-cyan/10 border dark:border-electric-cyan/10 text-foreground tracking-wider"
+                    >
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Learn More — pinned to bottom */}
+                <div className="mt-auto flex items-end justify-between">
+                  <button className="flex items-center gap-2 text-sm dark:text-foreground/70 dark:group-hover:text-electric-cyan transition-colors px-3 py-2 rounded-lg dark:hover:bg-electric-cyan/5">
+                    <span className="font-medium">Learn More</span>
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </button>
+
+                  {/* Index number */}
+                  <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-muted-foreground/70 dark:group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_12px_rgba(0,243,189,0.5)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+                </div>
               </motion.div>
             </ScrollReveal>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <ScrollReveal direction="fade" delay={0.2} className="mt-16 text-center">
+        <ScrollReveal
+          direction="fade"
+          delay={0.2}
+          className="mt-16 text-center"
+        >
           <div className="inline-flex items-center gap-4 text-foreground/70">
             <div className="h-px w-12 bg-border" />
             <span className="relative font-mono text-xs tracking-widest uppercase overflow-hidden">

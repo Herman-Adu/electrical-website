@@ -1,0 +1,493 @@
+[     235ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1135ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1136ms] [LOG] [Fast Refresh] done in 1291ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1264ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1445ms] [LOG] [Fast Refresh] done in 284ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1826ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    1892ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2398ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2399ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2400ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2443ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2443ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2443ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2637ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2638ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /about, path: /about} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[    2638ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/about, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776700869467} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42792ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42792ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42792ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42988ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42989ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   42989ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   43396ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   43396ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   43397ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44095ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44095ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44096ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44307ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44324ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44324ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44325ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44334ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   44682ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   45990ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46001ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46001ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46001ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46007ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46013ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46014ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46014ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46020ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46038ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46386ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 1, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46396ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46396ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46397ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46404ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46413ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46414ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46414ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   46420ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   48152ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   48152ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   48152ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   48152ms] [LOG] [scroll-fix] Scroll action: {targetElement: company-intro, currentScrollY: 966.6666870117188, targetRectTop: 0.2083333432674408, calculatedOffset: 78, finalScrollTop: 888.8750203549862} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   50440ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   50768ms] [LOG] [Fast Refresh] done in 432ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   52721ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   52808ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53508ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53509ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53509ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53538ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53538ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53538ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53597ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53597ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /about, path: /about} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   53598ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/about#company-intro color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/about#company-intro, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776700920427} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54655ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54656ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54656ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54665ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54681ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54681ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54681ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   54691ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   55501ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   55502ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   55502ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   55507ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   56239ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   56239ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   56239ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   56239ms] [LOG] [scroll-fix] Scroll action: {targetElement: company-intro, currentScrollY: 1555.3333740234375, targetRectTop: -588.4583740234375, calculatedOffset: 78, finalScrollTop: 888.875} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   59005ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   59005ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   59006ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   82008ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[   82213ms] [LOG] [Fast Refresh] done in 311ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  165389ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  165469ms] [LOG] [Fast Refresh] done in 182ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  171533ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  171670ms] [LOG] [Fast Refresh] done in 242ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  480572ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  480641ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  480652ms] [LOG] [Fast Refresh] done in 170ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  480760ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481105ms] [LOG] [Fast Refresh] done in 449ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481420ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481548ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481918ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481918ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481919ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481949ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481949ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  481949ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 0, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  482136ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  482137ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /about, path: /about} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  482137ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/about#company-intro color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/about#company-intro, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776701348966} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486159ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486160ms] [LOG] [Fast Refresh] done in 102ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  494165ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  494443ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  500765ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  500927ms] [LOG] [Fast Refresh] done in 265ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  513286ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  513482ms] [LOG] [Fast Refresh] done in 299ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  841993ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  842052ms] [LOG] [Fast Refresh] done in 163ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  848434ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  848498ms] [LOG] [Fast Refresh] done in 166ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  947014ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  947211ms] [LOG] [Fast Refresh] done in 297ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123368ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123369ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123369ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123376ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123383ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123383ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123384ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123589ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123590ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123590ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1123597ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1124549ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1124549ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1124549ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1124557ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127323ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127336ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127336ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127336ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127342ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127349ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127349ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127349ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1127356ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130097ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130098ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130098ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130112ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130120ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130120ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130121ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1130137ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131564ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131564ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131564ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131564ms] [LOG] [scroll-fix] Scroll action: {targetElement: why-choose-us, currentScrollY: 11046.6669921875, targetRectTop: 0.0833333358168602, calculatedOffset: 78, finalScrollTop: 10968.750325523317} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131598ms] [WARNING] Image with src "/images/brand-assets/nexgen-logo-full.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131907ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131907ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131907ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131914ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131926ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131926ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131926ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1131932ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132252ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132252ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132252ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132264ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132264ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132264ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1132270ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133102ms] [LOG] [scroll-diagnostics] Current section: why-choose-us {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133109ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133109ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133110ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133120ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133127ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133127ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133128ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133135ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1133214ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134192ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134192ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134192ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134196ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134245ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134245ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134245ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134255ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134647ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134684ms] [LOG] [scroll-diagnostics] Current section: why-choose-us {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134690ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134690ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134691ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134697ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134703ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134703ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134703ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1134710ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1135805ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1135811ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1135811ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1135812ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1135816ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137330ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137377ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137384ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137384ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137384ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137390ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137397ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137398ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137398ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1137404ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138139ms] [LOG] [scroll-diagnostics] Current section: community {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138147ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138147ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138148ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138156ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138164ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138164ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138165ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138175ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1138189ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139061ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139062ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139062ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139066ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139099ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139099ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139099ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1139103ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140151ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140158ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140158ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140159ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140165ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140675ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140682ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140682ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140682ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140688ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140699ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140699ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140699ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140705ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1140800ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141679ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141689ms] [LOG] [scroll-diagnostics] Current section: core-values {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141695ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141695ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141696ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141701ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141711ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141711ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141712ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1141716ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142118ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142118ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142118ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142122ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142164ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142164ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142164ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142168ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142906ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142915ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142915ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142915ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1142922ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143372ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143851ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143858ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143858ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143858ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143863ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143869ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143869ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143869ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143875ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1143893ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144430ms] [LOG] [scroll-diagnostics] Current section: certifications {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144438ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144438ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144438ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144447ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144453ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144454ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144454ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144463ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144968ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144976ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144976ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144976ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1144984ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 3, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1145858ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146045ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146052ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146053ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146053ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146058ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146064ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146065ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146065ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146078ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146438ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146467ms] [LOG] [scroll-diagnostics] Current section: vision-mission {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146477ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146478ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146478ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146484ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146498ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146499ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146499ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1146506ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148025ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148031ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148032ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148032ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148043ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148320ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148320ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148321ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148326ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148409ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148409ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148409ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148418ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148980ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148987ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148988ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148988ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1148994ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149006ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149007ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149007ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149013ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149666ms] [LOG] [scroll-diagnostics] Current section: peace-of-mind {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149672ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149673ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149673ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149679ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149685ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149685ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149685ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1149692ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1150121ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154257ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154263ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154264ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154264ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154270ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154680ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154680ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154680ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154688ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 2, offset: 78, scrollDirection: down, rootMargin: -78px 0px -60% 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154731ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154731ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154732ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154737ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154908ms] [LOG] [scroll-diagnostics] Current section: timeline {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154916ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154916ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154916ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154922ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154932ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154932ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154933ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1154938ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1155215ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1156160ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1157437ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1157445ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1157446ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1157446ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1157451ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158656ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158686ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158693ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158693ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158693ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158698ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158704ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158704ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158704ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1158709ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159236ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159564ms] [LOG] [scroll-diagnostics] Current section: director-2 {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159571ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159572ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159572ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159577ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159583ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159584ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159584ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1159591ms] [LOG] [scroll-diagnostics] Current section: directors {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1160503ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1160509ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1160509ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1160510ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1160514ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161040ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161124ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161124ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161124ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161131ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161234ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161235ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161235ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161241ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161327ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161327ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161327ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161334ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161422ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161422ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161422ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161428ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161492ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161492ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161492ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161497ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161560ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161561ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161561ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161566ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161652ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161652ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161652ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161662ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161752ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161752ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161752ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161760ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161849ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161850ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161850ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161855ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161916ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161916ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161916ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161920ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161982ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161982ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161983ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1161987ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162046ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162047ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162047ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162052ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162105ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162106ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162106ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1162112ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 2, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1164904ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1164905ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1164905ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1164910ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165392ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165393ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165393ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165397ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165695ms] [LOG] [scroll-diagnostics] navbar measured: 81px @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165695ms] [LOG] [scroll-diagnostics] breadcrumb measured: 40px (display: block, position: sticky) @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165695ms] [LOG] [scroll-fix] Offset calculation: {navbarHeight: 81, breadcrumbHeight: 40, effectiveNavbarHeight: 0, baseGap: 38, extraOffset: 0} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[ 1165700ms] [LOG] [scroll-diagnostics] Current section: company-intro {visibleCount: 1, offset: 78, scrollDirection: up, rootMargin: -78px 0px 0px 0px} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297

@@ -68,10 +68,11 @@ All forms with multiple steps **must** follow [docs/standards/NEXTJS16_SERVER_AC
    pnpm run status:next-docs      # Available Next.js docs
    ```
 
-2. **Load Orchestrator Contract**
+2. **Load Orchestrator Contract & Memory**
    - Review [.claude/CLAUDE.md](.claude/CLAUDE.md) for delegation sequences
    - Review [.claude/security/SECRETS_POLICY.md](.claude/security/SECRETS_POLICY.md)
-   - Check `.claude/memory/` for active project context
+   - Load Docker memory: `pnpm docker:mcp:memory:search "electrical-website-state"`
+   - See [.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md](.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md) for all memory operations
 
 3. **Clarify Requirements**
    - If ambiguous, ask before implementing

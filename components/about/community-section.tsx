@@ -91,7 +91,7 @@ export function CommunitySection() {
       >
         <Image
           src="/images/community-hero.jpg"
-          alt="Intact Electrical team volunteering in the community"
+          alt="Nexgen Electrical team volunteering in the community"
           fill
           sizes="100vw"
           className="object-cover"
@@ -136,26 +136,26 @@ export function CommunitySection() {
       <ScrollReveal direction="up" blur delay={0} duration={0.65}>
         <div className="max-w-2xl mb-12">
           <div className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
-          <div className="flex items-center gap-3 mb-5">
-            <Heart size={14} className="text-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
-              Giving Back
-            </span>
+            <div className="flex items-center gap-3 mb-5">
+              <Heart size={14} className="text-electric-cyan" />
+              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+                Giving Back
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-balance leading-tight">
+              <span className="bg-linear-to-r from-amber-400 to-electric-cyan bg-clip-text text-transparent">
+                Powered by Community,{" "}
+              </span>
+              <span className="bg-linear-to-r from-electric-cyan to-amber-400 bg-clip-text text-transparent">
+                Built for People
+              </span>
+            </h2>
+            <p className="text-white/90 text-base md:text-lg leading-relaxed">
+              We believe a business is only as strong as the community it
+              serves. That&apos;s why we don&apos;t just work in our communities
+              — we actively invest in them.
+            </p>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-balance leading-tight">
-            <span className="bg-linear-to-r from-amber-400 to-electric-cyan bg-clip-text text-transparent">
-              Powered by Community,{" "}
-            </span>
-            <span className="bg-linear-to-r from-electric-cyan to-amber-400 bg-clip-text text-transparent">
-              Built for People
-            </span>
-          </h2>
-          <p className="text-white/90 text-base md:text-lg leading-relaxed">
-            We believe a business is only as strong as the community it serves.
-            That&apos;s why we don&apos;t just work in our communities — we
-            actively invest in them.
-          </p>
-        </div>
         </div>
       </ScrollReveal>
 
@@ -192,15 +192,15 @@ export function CommunitySection() {
               distance={40}
             >
               <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/30 md:p-6">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-electric-cyan/30 bg-electric-cyan/10">
-                <Icon size={18} className="text-electric-cyan" />
-              </div>
-              <h3 className="text-sm font-bold text-white mb-2">
-                {item.title}
-              </h3>
-              <p className="text-xs text-white/80 leading-relaxed">
-                {item.desc}
-              </p>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-electric-cyan/30 bg-electric-cyan/10">
+                  <Icon size={18} className="text-electric-cyan" />
+                </div>
+                <h3 className="text-sm font-bold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-white/80 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             </ScrollReveal>
           );

@@ -162,6 +162,45 @@ test.describe("projects category filter", () => {
 // ---------------------------------------------------------------------------
 // 4. Page metadata
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// 5. Dropdown navigation to in-page sections
+// ---------------------------------------------------------------------------
+test.describe("dropdown navigation to in-page sections", () => {
+  test("About dropdown includes section links", async ({ page }) => {
+    await page.goto("/");
+
+    // Hover navbar "About" to open dropdown
+    const aboutLink = page.locator('nav a:has-text("About")').first();
+    await aboutLink.hover();
+
+    // Verify at least one section link is visible in dropdown (Core Values, Peace of Mind, etc.)
+    const coreValuesLink = page.locator('a[href="/about#core-values"], button:has-text("Core Values")').first();
+    await expect(coreValuesLink).toBeVisible();
+  });
+
+  test("clicking section link navigates to section", async ({ page }) => {
+    await page.goto("/about");
+
+    // Hover to open dropdown
+    const aboutLink = page.locator('nav a:has-text("About")').first();
+    await aboutLink.hover();
+
+    // Click Core Values link
+    const coreValuesLink = page.locator('a[href="#core-values"], button:has-text("Core Values")').first();
+    await coreValuesLink.click();
+
+    // Verify navigation
+    await expect(page).toHaveURL(/#core-values/);
+
+    // Verify section is in viewport
+    const section = page.locator("#core-values");
+    await expect(section).toBeInViewport();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 6. Page metadata
+// ---------------------------------------------------------------------------
 test.describe("page metadata", () => {
   test("homepage <meta name='description'> is set and non-empty", async ({
     page,
