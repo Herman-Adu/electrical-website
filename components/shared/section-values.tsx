@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { getIcon } from "./icon-map";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -37,9 +37,6 @@ interface SectionValuesProps {
 
 export function SectionValues({ data }: SectionValuesProps) {
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
-  const [expandedStates, setExpandedStates] = useState<{
-    [key: string]: boolean;
-  }>({});
 
   const {
     sectionId,
@@ -50,13 +47,6 @@ export function SectionValues({ data }: SectionValuesProps) {
     values,
     tagline,
   } = data;
-
-  const toggleExpanded = (title: string) => {
-    setExpandedStates((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }));
-  };
 
   return (
     <section
@@ -104,14 +94,6 @@ export function SectionValues({ data }: SectionValuesProps) {
             const accentColor = isCyan
               ? "hsl(174 100% 50%)"
               : "hsl(37 100% 49%)";
-            const isExpanded = expandedStates[value.title] ?? false;
-
-            const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                toggleExpanded(value.title);
-              }
-            };
 
             return (
               <ScrollReveal
@@ -123,14 +105,8 @@ export function SectionValues({ data }: SectionValuesProps) {
                 distance={40}
               >
                 <motion.div
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isExpanded}
-                  aria-describedby={`value-${value.title}`}
-                  onKeyDown={handleKeyDown}
-                  onClick={() => toggleExpanded(value.title)}
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col"
                   initial="hidden"
                   whileInView="visible"
                   variants={cardVariants}
@@ -175,23 +151,10 @@ export function SectionValues({ data }: SectionValuesProps) {
                     </p>
                   </motion.div>
 
-                  {/* Description container — fixed height to prevent CLS, layout containment to isolate reflow */}
-                  <div className="h-45 relative overflow-hidden" style={{ contain: 'layout style paint', willChange: 'opacity' }}>
-                    {/* Short description — absolutely positioned, visible by default */}
-                    <p className="text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 group-hover:opacity-0 pointer-events-none">
-                      {value.full.slice(0, 80)}...
-                    </p>
-
-                    {/* Full description — absolutely positioned, shown on hover or keyboard expansion */}
-                    <p
-                      id={`value-${value.title}`}
-                      className={`text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 pointer-events-none ${
-                        isExpanded ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                      }`}
-                    >
-                      {value.full}
-                    </p>
-                  </div>
+                  {/* Full description — always visible, grows to fill available space */}
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                    {value.full}
+                  </p>
 
                   {/* Bottom accent line */}
                   <div

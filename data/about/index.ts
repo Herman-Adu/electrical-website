@@ -29,12 +29,12 @@ export const companyIntroData: SectionIntroData = {
     "Electrical",
     "Engineering",
     "Since",
-    "2009.",
+    "2016.",
   ],
   leadParagraph:
-    "What started as a one-man operation in South London has grown into a leading electrical contractor serving homes, businesses, and industrial clients across the capital and surrounding counties.",
+    "What started as a two-man operation in south bucks, and have grown into a leading electrical contractor serving homes, businesses, and industrial clients across the capital, and surrounding counties, across the southeast of England",
   bodyParagraphs: [
-    "Intact Electrical Innovations was founded with a simple belief: that electrical work should be done with integrity, precision, and pride. Over fifteen years, we've built a reputation for delivering projects on time, within budget, and to standards that exceed expectations.",
+    "Nexgen Electrical Innovations was founded with a simple belief: that electrical work should be done with integrity, precision, and pride. Over ten years, we've built a reputation for delivering projects on time, within budget, and to standards that exceed expectations.",
     "Today, we employ a team of highly qualified electricians, apprentices, and project managers — all committed to the same founding principles. From small domestic repairs to large-scale industrial installations, we bring the same attention to detail and commitment to every job.",
   ],
   pillars: [
@@ -75,21 +75,21 @@ export const director1Data: SectionProfileData = {
     "18th Edition",
   ],
   bio: [
-    "Richard Barber is the Co-Founder and Managing Director of NEXGEN Electrical Innovations Ltd, bringing over 27 years of experience across the domestic, commercial, and industrial electrical sectors. With a career built on technical expertise, leadership, and a strong client-first mindset, Richard plays a pivotal role in driving the company’s strategic direction and operational excellence.",
-    "Together with co-founder Gavin Little, Richard established NEXGEN with a clear vision: not just to meet industry standards, but to set them. This ethos underpins every aspect of the business, ensuring a consistent focus on quality, reliability, and long-term client relationships.",
+    "Richard Barber is the Co-Founder and Managing Director of Nexgen Electrical Innovations Ltd, bringing over 27 years of experience across the domestic, commercial, and industrial electrical sectors. With a career built on technical expertise, leadership, and a strong client-first mindset, Richard plays a pivotal role in driving the company’s strategic direction and operational excellence.",
+    "Together with co-founder Gavin Little, Richard established Nexgen with a clear vision: not just to meet industry standards, but to set them. This ethos underpins every aspect of the business, ensuring a consistent focus on quality, reliability, and long-term client relationships.",
     "Richard leads on strategic planning, operational oversight, and business development, while fostering a culture built on strong communication, accountability, and continuous improvement. His leadership ensures that both clients and strategic partners receive a service that is professional, responsive, and aligned with their needs.",
-    "A firm believer in giving back to the community, Richard is actively involved in supporting local initiatives. NEXGEN proudly sponsors local sports clubs and provides compliance services to charities, helping them allocate their resources where they are needed most.",
+    "A firm believer in giving back to the community, Richard is actively involved in supporting local initiatives. Nexgen proudly sponsors local sports clubs and provides compliance services to charities, helping them allocate their resources where they are needed most.",
   ],
   quote:
     "Integrity is not a policy. It's the only way I know how to work. Every circuit we wire, every panel we install — it has our name on it. That's not a responsibility I take lightly.",
   image: {
-    src: "/images/director-1.jpg",
-    alt: "Marcus Johnson, Managing Director of Intact Electrical Innovations",
+    src: "/images/richard-barber-profile.jpeg",
+    alt: "Richard Barber, Managing Director of Nexgen Electrical Innovations",
     priority: true,
   },
   socialLinks: [
     { platform: "linkedin", url: "https://linkedin.com" },
-    { platform: "email", url: "mailto:marcus@intactelectrical.co.uk" },
+    { platform: "email", url: "mailto:richard@nexgen-electrical.co.uk" },
   ],
   reversed: false,
 };
@@ -106,22 +106,22 @@ export const director2Data: SectionProfileData = {
     "CHAS Accredited",
   ],
   bio: [
-    "Gavin Little co-founded NEXGEN Electrical Innovations Ltd alongside Richard Barber, with a clear vision — to deliver high-quality electrical services that combine technical excellence with a genuinely client-focused approach. Together, they have built NEXGEN into a trusted contractor across the FM, commercial, and fit-out sectors.",
+    "Gavin Little co-founded Nexgen Electrical Innovations Ltd alongside Richard Barber, with a clear vision — to deliver high-quality electrical services that combine technical excellence with a genuinely client-focused approach. Together, they have built Nexgen into a trusted contractor across the FM, commercial, and fit-out sectors.",
     "Drawing on a strong background in commercial and industrial electrical systems, Gavin leads the business across operations, project delivery, and client relationships. Working closely with Richard, the leadership team ensures every project is delivered to the highest standard, with a shared commitment to quality, accountability, and consistency.",
-    "Gavin’s hands-on approach and attention to detail have been instrumental in establishing NEXGEN’s reputation for reliability, professionalism, and quality workmanship.",
+    "Gavin’s hands-on approach and attention to detail have been instrumental in establishing Nexgen’s reputation for reliability, professionalism, and quality workmanship.",
     "He has also played a key role in securing and maintaining key industry accreditations including NICEIC Approved Contractor, SafeContractor, and Achilles Gold — reinforcing the company’s commitment to compliance, safety, and best practice across all works.",
-    "Beyond project delivery, Gavin is focused on building long-term partnerships with clients by removing common pain points within project management. Through a collaborative, team-led approach, NEXGEN delivers a fully managed service that ensures efficiency, clear communication, and complete transparency from start to finish.",
+    "Beyond project delivery, Gavin is focused on building long-term partnerships with clients by removing common pain points within project management. Through a collaborative, team-led approach, Nexgen delivers a fully managed service that ensures efficiency, clear communication, and complete transparency from start to finish.",
   ],
   quote:
     "At NEXGEN, we don’t just deliver electrical installations — we deliver confidence. As a team, we take ownership, solve problems, and provide solutions that stand the test of time.",
   image: {
-    src: "/images/director-2.jpg",
-    alt: "David Clarke, Technical Director of Intact Electrical Innovations",
+    src: "/images/gavin-little-profile.jpeg",
+    alt: "Gavin Little, Technical Director of Nexgen Electrical Innovations",
     priority: false,
   },
   socialLinks: [
     { platform: "linkedin", url: "https://linkedin.com" },
-    { platform: "email", url: "mailto:david@intactelectrical.co.uk" },
+    { platform: "email", url: "mailto:gavin@nexgen-electrical.co.uk" },
   ],
   reversed: true,
 };
@@ -156,7 +156,7 @@ export const coreValuesData: SectionValuesData = {
       icon: "Users",
       title: "Teamwork",
       short: "Our greatest asset is our people.",
-      full: "A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed.",
+      full: "A culture of mutual respect, shared responsibility, and collective pride. We collaborate across disciplines and experience levels, knowing that diverse perspectives strengthen our solutions. When one of us succeeds, all of us succeed.",
       color: "amber",
     },
     {
