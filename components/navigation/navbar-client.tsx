@@ -34,6 +34,7 @@ const navLinks = [
       { name: "Company History", href: "/about#timeline" },
       { name: "Vision & Mission", href: "/about#vision-mission" },
       { name: "Certifications", href: "/about#certifications" },
+      { name: "Peace of Mind", href: "/about#peace-of-mind" },
       { name: "Community", href: "/about#community" },
       { name: "Why Choose Us", href: "/about#why-choose-us" },
     ],
@@ -131,11 +132,13 @@ export function NavbarClient() {
     if (hasHash) {
       const targetPath = pathPart || pathname;
       if (targetPath === pathname) {
+        // Set hash FIRST (before scroll measurement) to ensure breadcrumb is in correct layout state
+        window.location.hash = hashPart;
+
         const selector = `#${hashPart}`;
         const element = document.querySelector(selector);
         if (element) {
           scrollToElementWithOffset(element, { pageType: 'default' });
-          window.location.hash = hashPart; // Triggers hashchange automatically
           closeMenus();
           return;
         }

@@ -10,6 +10,27 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 
+// Framer Motion variants for staggered card content reveals
+const cardVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0,
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4 },
+  },
+};
+
 interface SectionValuesProps {
   data: SectionValuesData;
 }
@@ -97,7 +118,7 @@ export function SectionValues({ data }: SectionValuesProps) {
                 key={value.title}
                 direction="up"
                 blur
-                delay={(idx % 3) * 0.07}
+                delay={idx * 0.05}
                 duration={0.65}
                 distance={40}
               >
@@ -110,6 +131,11 @@ export function SectionValues({ data }: SectionValuesProps) {
                   onClick={() => toggleExpanded(value.title)}
                   data-testid="section-value-card"
                   className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={cardVariants}
+                  viewport={{ once: true }}
+                  style={{ contain: 'content' }}
                 >
                   {/* Hover background fill */}
                   <div
@@ -123,8 +149,9 @@ export function SectionValues({ data }: SectionValuesProps) {
                   <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-border group-hover:border-electric-cyan/40 transition-colors" />
                   <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-border group-hover:border-electric-cyan/40 transition-colors" />
 
-                  {/* Icon */}
-                  <div
+                  {/* Icon — staggered reveal */}
+                  <motion.div
+                    variants={childVariants}
                     className="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-300"
                     style={{
                       borderColor: `${accentColor}30`,
@@ -132,20 +159,24 @@ export function SectionValues({ data }: SectionValuesProps) {
                     }}
                   >
                     <Icon size={24} style={{ color: accentColor }} />
-                  </div>
+                  </motion.div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    {value.title}
-                  </h3>
+                  {/* Title — staggered reveal */}
+                  <motion.div variants={childVariants}>
+                    <h3 className="text-xl font-bold text-foreground mb-2">
+                      {value.title}
+                    </h3>
+                  </motion.div>
 
-                  {/* Short tagline */}
-                  <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
-                    {value.short}
-                  </p>
+                  {/* Short tagline — staggered reveal */}
+                  <motion.div variants={childVariants}>
+                    <p className="font-mono text-xs tracking-wide text-muted-foreground/70 mb-4 italic">
+                      {value.short}
+                    </p>
+                  </motion.div>
 
                   {/* Description container — fixed height to prevent CLS, layout containment to isolate reflow */}
-                  <div className="h-[280px] relative overflow-hidden" style={{ contain: 'layout style paint' }}>
+                  <div className="h-45 relative overflow-hidden" style={{ contain: 'layout style paint', willChange: 'opacity' }}>
                     {/* Short description — absolutely positioned, visible by default */}
                     <p className="text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 group-hover:opacity-0 pointer-events-none">
                       {value.full.slice(0, 80)}...
