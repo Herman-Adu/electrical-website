@@ -283,15 +283,51 @@ The ONLY .md writes permitted in `.claude/` are:
 
 ### Rehydration (Session Start)
 
-1. **Search:** `mcp__MCP_DOCKER__search_nodes("electrical-website")` → finds project entities
-2. **Load:** `mcp__MCP_DOCKER__open_nodes([entity_ids])` → pull entities + relations
-3. **Cost:** ~50 tokens vs ~5,000+ tokens for `.md` files
+**Use the node script with correct JSON format:**
+
+```bash
+# Search for project state
+pnpm docker:mcp:memory:search "electrical-website-state"
+
+# Load entities
+pnpm docker:mcp:memory:open electrical-website-state
+```
+
+**Cost:** ~50 tokens vs ~5,000+ tokens for `.md` files
 
 ### Sync (Session End)
 
-1. **Create:** `mcp__MCP_DOCKER__create_entities` → new phases, decisions, learnings
-2. **Observe:** `mcp__MCP_DOCKER__add_observations` → append findings to existing entities
-3. **Link:** `mcp__MCP_DOCKER__create_relations` → connect work to prior context
+**Use the node script with correct JSON format:**
+
+```bash
+# Create session entity
+node scripts/mcp-memory-call.mjs create_entities '{
+  "entities": [{
+    "name": "session-2026-04-20-001",
+    "entityType": "session",
+    "observations": ["Work completed...", "Build status...", "Next steps..."]
+  }]
+}'
+
+# Add observations to existing entity
+node scripts/mcp-memory-call.mjs add_observations '{
+  "observations": [{
+    "entityName": "electrical-website-state",
+    "contents": ["Session end update...", "Next tasks..."]
+  }]
+}'
+
+# Create relations
+node scripts/mcp-memory-call.mjs create_relations '{
+  "relations": [{
+    "from": "session-2026-04-20-001",
+    "to": "electrical-website-state",
+    "relationType": "updates"
+  }]
+}'
+```
+
+**See:** [.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md](reference/DOCKER_MCP_QUICK_REFERENCE.md) for complete working examples and common mistakes.
 
 ### Entity Types
 
@@ -312,6 +348,40 @@ If Docker memory service is down:
 - Priority: Resume work next session by reading Git history + code state
 
 **Principle:** Memory informs decisions; local code is source of truth for implementation details.
+
+---
+
+## Common Docker MCP Mistakes
+
+**These mistakes wasted significant tokens in prior sessions. Avoid them:**
+
+### Mistake 1: Using curl Instead of Node Script
+❌ **WRONG:** Direct curl calls to localhost:3100
+✅ **RIGHT:** `node scripts/mcp-memory-call.mjs` or `pnpm docker:mcp:memory:*`
+
+### Mistake 2: Observations as Object Instead of Array
+❌ **WRONG:** `"observations": { "work": "...", "status": "..." }`
+✅ **RIGHT:** `"observations": ["Work completed...", "Status: passing"]`
+
+Observations MUST be an array of strings, not a JSON object.
+
+### Mistake 3: Missing entityType Field
+❌ **WRONG:** `{ "name": "...", "observations": [...] }`
+✅ **RIGHT:** `{ "name": "...", "entityType": "session", "observations": [...] }`
+
+Every entity requires entityType. Options: session, feature, learning, decision, infrastructure, task, plan, project_state.
+
+### Mistake 4: Creating Duplicate Entities
+❌ **WRONG:** Create same entity twice without searching
+✅ **RIGHT:** Search first (`pnpm docker:mcp:memory:search "name"`), then use `add_observations` for existing entities
+
+### Mistake 5: Forgetting Quotes Around JSON
+❌ **WRONG:** `node scripts/mcp-memory-call.mjs create_entities { "entities": [...] }`
+✅ **RIGHT:** `node scripts/mcp-memory-call.mjs create_entities '{ "entities": [...] }'`
+
+JSON argument must be a single-quoted string to prevent bash expansion.
+
+**See:** [DOCKER_MCP_QUICK_REFERENCE.md](reference/DOCKER_MCP_QUICK_REFERENCE.md) for detailed examples and fixes.
 
 ---
 

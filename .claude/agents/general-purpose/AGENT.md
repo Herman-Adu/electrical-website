@@ -76,11 +76,55 @@ The primary output (varies by task type):
 
 High / Medium / Low
 
+## Docker Memory & MCP (Session Persistence)
+
+**When to use Docker memory operations:**
+
+1. **Session Start** — Load prior context
+   ```bash
+   pnpm docker:mcp:memory:search "electrical-website-state"
+   pnpm docker:mcp:memory:open electrical-website-state
+   ```
+
+2. **While Working** — Accumulate findings in memory (do NOT spam Docker mid-task)
+
+3. **Session End** — Persist work (ONLY at session completion)
+   ```bash
+   # Create session entity
+   node scripts/mcp-memory-call.mjs create_entities '{
+     "entities": [{
+       "name": "session-2026-04-20-001",
+       "entityType": "session",
+       "observations": ["Work completed...", "Build status...", "Next steps..."]
+     }]
+   }'
+
+   # Add observations to project state
+   node scripts/mcp-memory-call.mjs add_observations '{
+     "observations": [{
+       "entityName": "electrical-website-state",
+       "contents": ["Session end update...", "Next tasks..."]
+     }]
+   }'
+
+   # Wire relations
+   node scripts/mcp-memory-call.mjs create_relations '{
+     "relations": [{
+       "from": "session-2026-04-20-001",
+       "to": "electrical-website-state",
+       "relationType": "updates"
+     }]
+   }'
+   ```
+
+**CRITICAL:** Observations MUST be an array of strings, not an object. See [DOCKER_MCP_QUICK_REFERENCE.md](../../reference/DOCKER_MCP_QUICK_REFERENCE.md) for all operations and common mistakes.
+
 ## Integration
 
 - **Receives from:** Parent skill via Agent tool invocation
 - **Returns to:** Parent skill for synthesis or next step
 - **Usage pattern:** Multiple instances of this agent may run in parallel for independent subtasks
+- **Memory:** Use Docker MCP only at session start/end, not mid-task
 
 ## Examples
 

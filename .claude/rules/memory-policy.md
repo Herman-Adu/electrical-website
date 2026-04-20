@@ -534,44 +534,89 @@ create_relations([{
 
 ---
 
-## MCP Tool Reference
+## MCP Tool Reference (Correct Format)
 
-All memory operations use the `mcp__MCP_DOCKER__` tool namespace. These are the only tools that may be used for session memory operations.
+All memory operations use `node scripts/mcp-memory-call.mjs` or pnpm shortcuts. Do NOT use curl or incorrect tool invocations.
 
-| Tool | When to Use | Cost |
-|------|------------|------|
-| `mcp__MCP_DOCKER__search_nodes` | Find entities by name prefix or property | ~10–20 tokens |
-| `mcp__MCP_DOCKER__open_nodes` | Load entity content by ID | ~20–30 tokens |
-| `mcp__MCP_DOCKER__create_entities` | Create new entity (feature, learning, decision, session) | ~50–100 tokens |
-| `mcp__MCP_DOCKER__add_observations` | Append observation to existing entity | ~30–50 tokens |
-| `mcp__MCP_DOCKER__create_relations` | Link two entities with a typed relation | ~20–30 tokens |
-| `mcp__MCP_DOCKER__delete_entities` | Remove archived or duplicate entities | ~10 tokens |
-| `mcp__MCP_DOCKER__delete_relations` | Remove stale or incorrect relations | ~10 tokens |
+| Operation | Command | Cost | Use When |
+|-----------|---------|------|----------|
+| **Search** | `pnpm docker:mcp:memory:search "query"` | ~10–20 tokens | Find entities by name prefix |
+| **Open** | `pnpm docker:mcp:memory:open entity-name` | ~20–30 tokens | Load entity to read observations |
+| **Create** | `node scripts/mcp-memory-call.mjs create_entities '{...}'` | ~50–100 tokens | Create new session, feature, learning |
+| **Observe** | `node scripts/mcp-memory-call.mjs add_observations '{...}'` | ~30–50 tokens | Append findings to existing entity |
+| **Relate** | `node scripts/mcp-memory-call.mjs create_relations '{...}'` | ~20–30 tokens | Link entities (derives_from, depends_on, etc.) |
+| **Delete** | `node scripts/mcp-memory-call.mjs delete_entities` | ~10 tokens | Remove archived/duplicate entities |
 
-**Canonical sequence for session start:**
+### Correct JSON Format (MANDATORY)
 
-```
-search_nodes("electrical-website-state")
-→ open_nodes([id])
-```
-
-**Canonical sequence for session end:**
-
-```
-create_entities([session])
-→ add_observations(project_state_id, [session_end])
-→ add_observations(feature_id, [build, learning])
-→ create_entities([learning entities])
-→ create_relations([new links])
+**Observations MUST be an array of strings:**
+```json
+{
+  "name": "session-2026-04-20-001",
+  "entityType": "session",
+  "observations": [
+    "Work completed: Phase 8 refactoring",
+    "Build status: passing",
+    "Tests: 267/270 passing"
+  ]
+}
 ```
 
-For full schema definitions, query patterns, and troubleshooting, see:
+**NOT an object:**
+```json
+{
+  "observations": {
+    "work": "Phase 8 refactoring",
+    "status": "passing"
+  }
+}
+```
 
-- This file (`.claude/rules/memory-policy.md`) — Complete policy and implementation guide
-- `.claude/reference/MEMORY_QUICK_REFERENCE.md` — fast lookup card
-- `.claude/reference/ENTITY_SCHEMA_REFERENCE.md` — JSON schema per entity type
-- `.claude/reference/setup/DOCKER_MEMORY_SETUP.md` — service setup and health checks
-- `.claude/CLAUDE.md` section `## Memory System — Docker First` — orchestrator contract
+### Canonical Sequences
+
+**Session Start:**
+```bash
+pnpm docker:mcp:memory:search "electrical-website-state"
+pnpm docker:mcp:memory:open electrical-website-state
+# Read observations for current phase and next tasks
+```
+
+**Session End:**
+```bash
+# 1. Create session entity
+node scripts/mcp-memory-call.mjs create_entities '{
+  "entities": [{
+    "name": "session-YYYY-MM-DD-seq",
+    "entityType": "session",
+    "observations": ["Summary of work..."]
+  }]
+}'
+
+# 2. Add observations to project state
+node scripts/mcp-memory-call.mjs add_observations '{
+  "observations": [{
+    "entityName": "electrical-website-state",
+    "contents": ["Session end update...", "Next tasks..."]
+  }]
+}'
+
+# 3. Create relations
+node scripts/mcp-memory-call.mjs create_relations '{
+  "relations": [{
+    "from": "session-YYYY-MM-DD-seq",
+    "to": "electrical-website-state",
+    "relationType": "updates"
+  }]
+}'
+```
+
+### Documentation References
+
+For complete working examples, common mistakes, and troubleshooting:
+
+- **[.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md](../reference/DOCKER_MCP_QUICK_REFERENCE.md)** — Copy-paste ready examples, all operations, common pitfalls
+- **[.claude/rules/memory-policy.md](memory-policy.md)** — Entity types, naming rules, observation schema
+- **[.claude/CLAUDE.md](../CLAUDE.md)** — Memory System section + common mistakes
 
 ---
 
