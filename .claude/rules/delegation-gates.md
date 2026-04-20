@@ -30,7 +30,7 @@ This rule file defines when orchestrator-mode work must dispatch specialist agen
 **THEN verify:**
 - Search Docker: `search_nodes(query)` → confirms entities were saved
 
-**See:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for the complete workflow.
+**See:** `.claude/rules/memory-policy.md` for complete Docker memory workflow and `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` for working examples.
 
 ---
 

@@ -320,7 +320,7 @@ At **session end**, the orchestrator will:
 ## References
 
 - `.claude/CLAUDE.md` — Orchestrator contract and execution lifecycle
-- `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` — MCP tool workflow (for orchestrator)
+- `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` — MCP tool workflow and working examples
 - `.claude/rules/delegation-gates.md` — When you get dispatched
 - `docs/standards/` — Project standards for forms, auth, components, etc.
 

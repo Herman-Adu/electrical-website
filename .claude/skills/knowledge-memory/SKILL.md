@@ -46,7 +46,7 @@ Before searching file archives, query Docker first using canonical signatures:
 
 Entity types for knowledge: `learning` (patterns/insights), `decision` (architectural choices)
 
-See `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for full Docker signatures reference.
+See `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` for full Docker signatures and working examples.
 
 ---
 

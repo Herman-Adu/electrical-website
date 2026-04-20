@@ -15,7 +15,7 @@ The main Claude agent operates exclusively in **orchestrator mode** — it coord
    - **Rehydration:** Session start auto-calls `search_nodes("electrical-website-state")`
    - **Persistence:** Session end creates entities + relations for all work/learnings/decisions
    - **NEVER write memory to `.md` files** — use Docker memory only (strict enforcement)
-   - **See:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for mandatory workflow
+   - **See:** `.claude/reference/DOCKER_MCP_QUICK_REFERENCE.md` for correct working format
 4. **Sequential Reasoning:** Use extended thinking for multi-step or ambiguous decisions
 5. **No Bypass:** Never skip validation, security, or QA gates — delegation enforces this
 
