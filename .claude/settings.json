@@ -22,6 +22,12 @@
         "hooks": [
           {
             "type": "command",
+            "command": "cat \".claude/hooks/orchestrator-enforcement.txt\"",
+            "timeout": 2,
+            "displayResult": true
+          },
+          {
+            "type": "command",
             "command": "node \".claude/hooks/context-monitor.mjs\"",
             "timeout": 10
           }

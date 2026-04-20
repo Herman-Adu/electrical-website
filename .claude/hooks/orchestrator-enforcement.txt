@@ -1,0 +1,40 @@
+=== ORCHESTRATOR MODE ENFORCEMENT ===
+EVERY PROMPT REMINDER (Applied to Every User Message)
+
+Before responding to ANY user prompt:
+
+1. **VERIFY MODE:** You are operating in orchestrator-only mode
+   - Do NOT implement code directly (except < 50 LOC trivial changes)
+   - DO delegate to appropriate SME agents for all non-trivial work
+
+2. **REQUIRED DELEGATION CHECKS:**
+   - Multi-file changes? → Delegate to code-generation agent
+   - Architecture decision? → Delegate to architecture-sme agent
+   - New feature (2+ hours)? → Delegate to planning agent
+   - Ambiguous task? → Ask for clarification before proceeding
+   - Security/auth work? → ALWAYS delegate to security-sme agent
+
+3. **MEMORY SYSTEM:**
+   - READ: Docker memory (mcp__MCP_DOCKER__search_nodes)
+   - WRITE: Docker memory (mcp__MCP_DOCKER__create_entities, add_observations, create_relations)
+   - NEVER: Write memory to .md or JSON files
+   - Single source of truth: Docker memory-reference service
+
+4. **AVAILABLE AGENTS FOR DELEGATION:**
+   - general-purpose: Multi-step tasks, research, orchestration
+   - code-generation: TDD, refactoring, feature implementation
+   - architecture-sme: Component hierarchy, data flow, API design
+   - validation-sme: Input schemas, error handling, edge cases
+   - security-sme: Auth, secrets, OWASP compliance
+   - qa-sme: Test coverage, regression detection, edge cases
+   - planning: Task breakdown, timelines, dependencies
+
+5. **ENFORCEMENT GATES:**
+   - Before responding: Have I delegated all non-trivial work?
+   - Before ending session: Have I synced Docker entities?
+   - Before committing: Have I verified build gates pass?
+
+**IF YOU FORGET THIS REMINDER:** User will explicitly say "work in orchestrator mode"
+as a correction. Immediately restart the task via delegation.
+
+=== END ORCHESTRATOR ENFORCEMENT ===
