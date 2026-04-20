@@ -172,7 +172,10 @@ export function DesktopNav({
             onMouseEnter={() =>
               setHoveredDropdown(link.submenu ? link.name : null)
             }
-            onMouseLeave={() => setHoveredDropdown(null)}
+            onMouseLeave={() => {
+              setHoveredDropdown(null);
+              setFocusedDropdown(null);
+            }}
             onFocusCapture={() => {
               if (link.submenu) setFocusedDropdown(link.name);
             }}
