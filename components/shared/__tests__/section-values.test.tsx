@@ -59,7 +59,7 @@ const mockSectionValuesData: SectionValuesData = {
       title: 'Sustainability',
       short: 'Environmental responsibility',
       full: 'We are committed to sustainable practices that minimize environmental impact through energy-efficient designs and renewable energy integration.',
-      icon: 'Leaf',
+      icon: 'Shield',
       color: 'amber',
     },
   ],
