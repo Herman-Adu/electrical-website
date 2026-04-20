@@ -1,0 +1,731 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Nexgen round logo NEXGEN Electrical" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Nexgen round logo" [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: NEXGEN
+          - generic [ref=e11]: Electrical
+      - generic "Desktop navigation" [ref=e12]:
+        - generic [ref=e14]:
+          - link "Navigate to Home" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - img [ref=e16]
+        - generic [ref=e19]:
+          - link "Navigate to About" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - img [ref=e22]
+        - generic [ref=e25]:
+          - link "Navigate to Services" [ref=e26] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+          - img [ref=e27]
+        - generic [ref=e30]:
+          - link "Navigate to Projects" [ref=e31] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+          - img [ref=e32]
+        - generic [ref=e35]:
+          - link "Navigate to News Hub" [ref=e36] [cursor=pointer]:
+            - /url: /news-hub
+            - text: News Hub
+          - img [ref=e37]
+        - button "Navigate to Contact" [ref=e40]: Contact
+      - link "Get Quote" [ref=e43] [cursor=pointer]:
+        - /url: /contact
+  - main [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e50]:
+        - generic [ref=e60]: X:0000 Y:0000
+        - generic [ref=e61]: SECTOR_A1
+      - generic:
+        - img
+      - generic [ref=e63]:
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - generic [ref=e68]: Profile // INITIALIZING
+        - generic [ref=e71]: Nexgen Electrical Innovations
+        - heading "Built on Trust & Craft Since 2016" [level=1] [ref=e73]:
+          - generic [ref=e74]: Built on
+          - generic [ref=e75]: Trust & Craft
+          - generic [ref=e76]: Since 2016
+        - paragraph [ref=e77]: Where engineering excellence meets genuine community commitment. Delivering gold-standard electrical solutions across commercial, industrial, and residential sectors.
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - generic [ref=e81]: 10+
+            - generic [ref=e82]: Years Experience
+          - generic [ref=e83]:
+            - generic [ref=e85]: 150+
+            - generic [ref=e86]: Projects Completed
+          - generic [ref=e87]:
+            - generic [ref=e89]: 99.7%
+            - generic [ref=e90]: Client Satisfaction
+          - generic [ref=e91]:
+            - generic [ref=e93]: 24/7
+            - generic [ref=e94]: Emergency Support
+        - generic [ref=e95]:
+          - generic [ref=e96]: Est. 2009
+          - generic [ref=e97]: "|"
+          - generic [ref=e98]: NICEIC Approved
+          - generic [ref=e99]: "|"
+          - generic [ref=e100]: London & Home Counties
+          - generic [ref=e101]: "|"
+          - generic [ref=e102]: Part P Certified
+      - button "Our Story" [ref=e104] [cursor=pointer]:
+        - generic [ref=e105]: Our Story
+        - img [ref=e106]
+    - navigation "Breadcrumb" [ref=e110]:
+      - link "Home" [ref=e111] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e112]: /
+      - generic [ref=e113]: About
+    - generic [ref=e115]:
+      - generic [ref=e118]: Our Story
+      - generic [ref=e119]:
+        - heading "Powering London & the Home Counties with Gold-Standard Electrical Engineering Since 2016." [level=2] [ref=e120]:
+          - generic [ref=e121]: Powering
+          - generic [ref=e122]: London
+          - generic [ref=e123]: "&"
+          - generic [ref=e124]: the
+          - generic [ref=e125]: Home
+          - generic [ref=e126]: Counties
+          - generic [ref=e127]: with
+          - generic [ref=e128]: Gold-Standard
+          - generic [ref=e129]: Electrical
+          - generic [ref=e130]: Engineering
+          - generic [ref=e131]: Since
+          - generic [ref=e132]: "2016."
+        - paragraph [ref=e133]: What started as a two-man operation in south bucks, and have grown into a leading electrical contractor serving homes, businesses, and industrial clients across the capital, and surrounding counties, across the southeast of England
+      - generic [ref=e134]:
+        - paragraph [ref=e135]: "Nexgen Electrical Innovations was founded with a simple belief: that electrical work should be done with integrity, precision, and pride. Over ten years, we've built a reputation for delivering projects on time, within budget, and to standards that exceed expectations."
+        - paragraph [ref=e136]: Today, we employ a team of highly qualified electricians, apprentices, and project managers — all committed to the same founding principles. From small domestic repairs to large-scale industrial installations, we bring the same attention to detail and commitment to every job.
+      - generic [ref=e137]:
+        - generic [ref=e139]:
+          - generic [ref=e142]: "01"
+          - heading "Precision Engineering" [level=3] [ref=e143]
+          - paragraph [ref=e144]: Every circuit, every connection, engineered to exacting standards with zero compromise on quality or safety.
+        - generic [ref=e146]:
+          - generic [ref=e149]: "02"
+          - heading "Community First" [level=3] [ref=e150]
+          - paragraph [ref=e151]: We reinvest in the communities we serve — from apprenticeship programmes to charitable initiatives that power local growth.
+        - generic [ref=e153]:
+          - generic [ref=e156]: "03"
+          - heading "Trusted Partnership" [level=3] [ref=e157]
+          - paragraph [ref=e158]: Our clients are partners. We communicate transparently, deliver consistently, and stand behind every job we complete.
+    - generic [ref=e164]:
+      - generic [ref=e166]:
+        - img "Richard Barber, Managing Director of Nexgen Electrical Innovations" [ref=e175]
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - img [ref=e180]
+            - text: NICEIC Approved
+          - generic [ref=e183]:
+            - img [ref=e184]
+            - text: Part P Certified
+          - generic [ref=e187]:
+            - img [ref=e188]
+            - text: IEE Member
+          - generic [ref=e191]:
+            - img [ref=e192]
+            - text: 18th Edition
+        - generic [ref=e195]:
+          - link "Richard Barber on linkedin" [ref=e196] [cursor=pointer]:
+            - /url: https://linkedin.com
+            - img [ref=e197]
+          - link "Richard Barber on email" [ref=e201] [cursor=pointer]:
+            - /url: mailto:richard@nexgen-electrical.co.uk
+            - img [ref=e202]
+      - generic [ref=e205]:
+        - generic [ref=e208]: Leadership
+        - heading "Richard Barber" [level=2] [ref=e209]
+        - paragraph [ref=e210]: Co-Founder & Managing Director
+        - generic [ref=e211]:
+          - paragraph [ref=e212]: Richard Barber is the Co-Founder and Managing Director of Nexgen Electrical Innovations Ltd, bringing over 27 years of experience across the domestic, commercial, and industrial electrical sectors. With a career built on technical expertise, leadership, and a strong client-first mindset, Richard plays a pivotal role in driving the company’s strategic direction and operational excellence.
+          - paragraph [ref=e213]: "Together with co-founder Gavin Little, Richard established Nexgen with a clear vision: not just to meet industry standards, but to set them. This ethos underpins every aspect of the business, ensuring a consistent focus on quality, reliability, and long-term client relationships."
+          - paragraph [ref=e214]: Richard leads on strategic planning, operational oversight, and business development, while fostering a culture built on strong communication, accountability, and continuous improvement. His leadership ensures that both clients and strategic partners receive a service that is professional, responsive, and aligned with their needs.
+          - paragraph [ref=e215]: A firm believer in giving back to the community, Richard is actively involved in supporting local initiatives. Nexgen proudly sponsors local sports clubs and provides compliance services to charities, helping them allocate their resources where they are needed most.
+    - generic [ref=e221]:
+      - generic [ref=e223]:
+        - img "Gavin Little, Technical Director of Nexgen Electrical Innovations" [ref=e232]
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - img [ref=e237]
+            - text: ECS Gold Card
+          - generic [ref=e240]:
+            - img [ref=e241]
+            - text: ISO 9001 Lead
+          - generic [ref=e244]:
+            - img [ref=e245]
+            - text: IPAF Licensed
+          - generic [ref=e248]:
+            - img [ref=e249]
+            - text: CHAS Accredited
+        - generic [ref=e252]:
+          - link "Gavin Little on linkedin" [ref=e253] [cursor=pointer]:
+            - /url: https://linkedin.com
+            - img [ref=e254]
+          - link "Gavin Little on email" [ref=e258] [cursor=pointer]:
+            - /url: mailto:gavin@nexgen-electrical.co.uk
+            - img [ref=e259]
+      - generic [ref=e262]:
+        - generic [ref=e265]: Leadership
+        - heading "Gavin Little" [level=2] [ref=e266]
+        - paragraph [ref=e267]: Co-Founder & Managing Director
+        - generic [ref=e268]:
+          - paragraph [ref=e269]: Gavin Little co-founded Nexgen Electrical Innovations Ltd alongside Richard Barber, with a clear vision — to deliver high-quality electrical services that combine technical excellence with a genuinely client-focused approach. Together, they have built Nexgen into a trusted contractor across the FM, commercial, and fit-out sectors.
+          - paragraph [ref=e270]: Drawing on a strong background in commercial and industrial electrical systems, Gavin leads the business across operations, project delivery, and client relationships. Working closely with Richard, the leadership team ensures every project is delivered to the highest standard, with a shared commitment to quality, accountability, and consistency.
+          - paragraph [ref=e271]: Gavin’s hands-on approach and attention to detail have been instrumental in establishing Nexgen’s reputation for reliability, professionalism, and quality workmanship.
+          - paragraph [ref=e272]: He has also played a key role in securing and maintaining key industry accreditations including NICEIC Approved Contractor, SafeContractor, and Achilles Gold — reinforcing the company’s commitment to compliance, safety, and best practice across all works.
+          - paragraph [ref=e273]: Beyond project delivery, Gavin is focused on building long-term partnerships with clients by removing common pain points within project management. Through a collaborative, team-led approach, Nexgen delivers a fully managed service that ensures efficiency, clear communication, and complete transparency from start to finish.
+    - generic [ref=e277]:
+      - generic [ref=e278]:
+        - generic [ref=e281]: Our Journey
+        - heading "10+ Years of Powering Progress" [level=2] [ref=e283]
+        - paragraph [ref=e284]: From humble beginnings to industry leadership — every year has been built on the same foundation of quality and community.
+      - list [ref=e285]:
+        - listitem [ref=e286]:
+          - generic [ref=e288]:
+            - img [ref=e292]
+            - img [ref=e295]
+          - generic [ref=e298]:
+            - generic [ref=e300]: "2016"
+            - heading "Company Founded" [level=3] [ref=e301]:
+              - generic [ref=e302]: Company
+              - generic [ref=e303]: Founded
+            - paragraph [ref=e304]: Started as a two-man domestic electrical team in South Bucks with a commitment to quality over volume.
+            - generic [ref=e305]:
+              - img [ref=e306]
+              - generic [ref=e308]: Milestone
+        - listitem [ref=e309]:
+          - generic [ref=e311]:
+            - img [ref=e315]
+            - img [ref=e318]
+          - generic [ref=e321]:
+            - generic [ref=e323]: "2018"
+            - heading "NICEIC Approved" [level=3] [ref=e324]:
+              - generic [ref=e325]: NICEIC
+              - generic [ref=e326]: Approved
+            - paragraph [ref=e327]: Achieved NICEIC Approved Contractor status, cementing our commitment to the highest safety standards.
+        - listitem [ref=e328]:
+          - generic [ref=e330]:
+            - img [ref=e334]
+            - img [ref=e338]
+          - generic [ref=e342]:
+            - generic [ref=e344]: "2019"
+            - heading "Commercial Expansion" [level=3] [ref=e345]:
+              - generic [ref=e346]: Commercial
+              - generic [ref=e347]: Expansion
+            - paragraph [ref=e348]: Expanded into commercial electrical installations, completing our first major office fit-out contract.
+        - listitem [ref=e349]:
+          - generic [ref=e351]:
+            - img [ref=e355]
+            - img [ref=e361]
+          - generic [ref=e367]:
+            - generic [ref=e369]: "2020"
+            - heading "Professional Team" [level=3] [ref=e370]:
+              - generic [ref=e371]: Professional
+              - generic [ref=e372]: Team
+            - paragraph [ref=e373]: Growing a team of qualified electricians, taking on larger industrial and commercial projects.
+        - listitem [ref=e374]:
+          - generic [ref=e376]:
+            - img [ref=e380]
+            - img [ref=e384]
+          - generic [ref=e388]:
+            - generic [ref=e390]: "2021"
+            - heading "DHL Reading" [level=3] [ref=e391]:
+              - generic [ref=e392]: DHL
+              - generic [ref=e393]: Reading
+            - paragraph [ref=e394]: chosen as the preferred and trusted electrical contractor to deliver DHLs distribution hub Cat B fit out in Reading.
+            - generic [ref=e395]:
+              - img [ref=e396]
+              - generic [ref=e398]: Milestone
+        - listitem [ref=e399]:
+          - generic [ref=e401]:
+            - img [ref=e405]
+            - img [ref=e411]
+          - generic [ref=e417]:
+            - generic [ref=e419]: "20203"
+            - heading "Community Programme" [level=3] [ref=e420]:
+              - generic [ref=e421]: Community
+              - generic [ref=e422]: Programme
+            - paragraph [ref=e423]: Launched our community reinvestment programme, providing free electrical safety checks for vulnerable residents, working together with the local council community programmes and local schools.
+        - listitem [ref=e424]:
+          - generic [ref=e426]:
+            - img [ref=e430]
+            - img [ref=e433]
+          - generic [ref=e436]:
+            - generic [ref=e438]: "2023"
+            - heading "Industrial Division" [level=3] [ref=e439]:
+              - generic [ref=e440]: Industrial
+              - generic [ref=e441]: Division
+            - paragraph [ref=e442]: Opened our dedicated industrial division, handling high-voltage systems and complex distribution networks.
+        - listitem [ref=e443]:
+          - generic [ref=e445]:
+            - img [ref=e449]
+            - img [ref=e452]
+          - generic [ref=e455]:
+            - generic [ref=e457]: "2026"
+            - heading "250+ Projects" [level=3] [ref=e458]:
+              - generic [ref=e459]: 250+
+              - generic [ref=e460]: Projects
+            - paragraph [ref=e461]: Surpassed 250 completed projects with a 99.7% client satisfaction rating. The journey continues.
+            - generic [ref=e462]:
+              - img [ref=e463]
+              - generic [ref=e465]: Milestone
+    - generic [ref=e469]:
+      - generic [ref=e471]:
+        - generic [ref=e472]:
+          - img [ref=e473]
+          - generic [ref=e475]: Our Promise
+          - img [ref=e476]
+        - heading "Peace of Mind, Guaranteed" [level=2] [ref=e478]
+        - paragraph [ref=e479]: Your electrical problems, solved with absolute confidence. We don't just complete jobs — we deliver certainty. Here's exactly what you can expect from us.
+      - generic [ref=e480]:
+        - generic [ref=e482]:
+          - img [ref=e486]
+          - heading "Fully Licensed & Insured" [level=3] [ref=e488]
+          - paragraph [ref=e489]: All work carried out by NICEIC Approved Contractors. Full public liability and professional indemnity insurance on every project.
+        - generic [ref=e491]:
+          - img [ref=e495]
+          - heading "Workmanship Guaranteed" [level=3] [ref=e498]
+          - paragraph [ref=e499]: Every installation backed by our comprehensive workmanship guarantee. If something isn't right, we fix it — no questions asked.
+          - generic [ref=e502]: Core Commitment
+        - generic [ref=e504]:
+          - img [ref=e508]
+          - heading "24/7 Emergency Response" [level=3] [ref=e511]
+          - paragraph [ref=e512]: Electrical emergencies don't keep business hours. Our rapid response team is available around the clock, every day of the year.
+        - generic [ref=e514]:
+          - img [ref=e518]
+          - heading "Fixed Price Quotes" [level=3] [ref=e520]
+          - paragraph [ref=e521]: No hidden charges. No surprise invoices. We quote clearly, and we deliver to budget. Your financial peace of mind matters to us.
+      - generic [ref=e522]:
+        - generic [ref=e524]:
+          - heading "What You Always Receive" [level=3] [ref=e525]
+          - generic [ref=e526]:
+            - generic [ref=e528]:
+              - img [ref=e529]
+              - generic [ref=e532]: Written quotations provided for every job
+            - generic [ref=e534]:
+              - img [ref=e535]
+              - generic [ref=e538]: All work tested to BS 7671 18th Edition
+            - generic [ref=e540]:
+              - img [ref=e541]
+              - generic [ref=e544]: Electrical Installation Certificate issued on completion
+            - generic [ref=e546]:
+              - img [ref=e547]
+              - generic [ref=e550]: Full Part P notification where required
+            - generic [ref=e552]:
+              - img [ref=e553]
+              - generic [ref=e556]: Manufacturer warranties honoured and documented
+            - generic [ref=e558]:
+              - img [ref=e559]
+              - generic [ref=e562]: Annual free safety check for returning clients
+        - generic [ref=e564]:
+          - heading "Our Accreditations & Partners" [level=3] [ref=e565]
+          - generic [ref=e566]:
+            - generic [ref=e568]:
+              - generic [ref=e569]: NIC
+              - generic [ref=e570]: NICEIC
+            - generic [ref=e572]:
+              - generic [ref=e573]: P.P
+              - generic [ref=e574]: Part P
+            - generic [ref=e576]:
+              - generic [ref=e577]: NAP
+              - generic [ref=e578]: NAPIT
+            - generic [ref=e580]:
+              - generic [ref=e581]: ECS
+              - generic [ref=e582]: ECS Gold
+            - generic [ref=e584]:
+              - generic [ref=e585]: CHA
+              - generic [ref=e586]: CHAS
+            - generic [ref=e588]:
+              - generic [ref=e589]: ISO
+              - generic [ref=e590]: ISO 9001
+    - generic [ref=e595]:
+      - generic [ref=e598]:
+        - generic [ref=e599]:
+          - img [ref=e601]
+          - generic [ref=e604]:
+            - generic [ref=e605]: Looking Ahead
+            - heading "Our Vision" [level=2] [ref=e606]
+        - generic [ref=e607]:
+          - generic [ref=e608]: "> VISION_2030.md"
+          - paragraph [ref=e609]: To be the UK's most trusted electrical engineering partner — recognised not just for the quality of our installations, but for the lasting positive impact we create in every community we touch.
+        - generic [ref=e610]:
+          - generic [ref=e612]:
+            - img [ref=e614]
+            - generic [ref=e616]:
+              - generic [ref=e617]: Innovation
+              - generic [ref=e618]: Pioneering smart electrical systems that set the standard for the next generation of infrastructure.
+          - generic [ref=e620]:
+            - img [ref=e622]
+            - generic [ref=e624]:
+              - generic [ref=e625]: Sustainability
+              - generic [ref=e626]: Leading the transition to energy-efficient electrical solutions that reduce carbon footprint across all sectors.
+          - generic [ref=e628]:
+            - img [ref=e630]
+            - generic [ref=e632]:
+              - generic [ref=e633]: Leadership
+              - generic [ref=e634]: Recognised nationally as the benchmark for excellence in electrical engineering and contractor standards.
+      - generic [ref=e638]:
+        - generic [ref=e639]:
+          - img [ref=e641]
+          - generic [ref=e645]:
+            - generic [ref=e646]: Every Day
+            - heading "Our Mission" [level=2] [ref=e647]
+        - generic [ref=e648]:
+          - generic [ref=e649]: "> MISSION_STATEMENT.md"
+          - paragraph [ref=e650]: To deliver safe, reliable, and innovative electrical solutions that exceed client expectations — while building stronger communities through honest work, continuous learning, and unwavering integrity.
+        - generic [ref=e651]:
+          - generic [ref=e653]:
+            - generic [ref=e654]: Safety
+            - generic [ref=e655]: Zero compromise on electrical safety, from initial design to final certification.
+          - generic [ref=e657]:
+            - generic [ref=e658]: Quality
+            - generic [ref=e659]: Workmanship that exceeds British Standards on every single project, without exception.
+          - generic [ref=e661]:
+            - generic [ref=e662]: Community
+            - generic [ref=e663]: Reinvesting in the communities we serve through training, employment and charitable programmes.
+          - generic [ref=e665]:
+            - generic [ref=e666]: Innovation
+            - generic [ref=e667]: Continuously adopting new technologies and methods that deliver better outcomes for clients.
+    - generic [ref=e671]:
+      - generic [ref=e673]:
+        - generic [ref=e674]:
+          - img [ref=e675]
+          - generic [ref=e677]: Verified & Approved
+          - img [ref=e678]
+        - heading "Our Certifications" [level=2] [ref=e680]
+        - paragraph [ref=e681]: Every accreditation earned through rigorous examination and continuous professional development. These aren't badges — they're proof of commitment.
+      - generic [ref=e682]:
+        - generic [ref=e684]:
+          - img [ref=e688]
+          - generic [ref=e690]: NICEIC
+          - generic [ref=e691]: Safety
+          - generic [ref=e692]: Approved Contractor
+          - generic [ref=e693]:
+            - img [ref=e694]
+            - generic [ref=e697]: Gold
+        - generic [ref=e699]:
+          - generic [ref=e702]: Part P
+          - generic [ref=e703]: Compliance
+          - generic [ref=e704]: Certified Competent Person
+          - generic [ref=e705]:
+            - img [ref=e706]
+            - generic [ref=e709]: Certified
+        - generic [ref=e711]:
+          - generic [ref=e714]: NAPIT
+          - generic [ref=e715]: Industry Body
+          - generic [ref=e716]: Registered Member
+          - generic [ref=e717]:
+            - img [ref=e718]
+            - generic [ref=e721]: Member
+        - generic [ref=e723]:
+          - img [ref=e727]
+          - generic [ref=e729]: ECS
+          - generic [ref=e730]: Skills
+          - generic [ref=e731]: Gold Card Holder
+          - generic [ref=e732]:
+            - img [ref=e733]
+            - generic [ref=e736]: Gold
+        - generic [ref=e738]:
+          - generic [ref=e741]: CHAS
+          - generic [ref=e742]: Health & Safety
+          - generic [ref=e743]: Accredited Contractor
+          - generic [ref=e744]:
+            - img [ref=e745]
+            - generic [ref=e748]: Accredited
+        - generic [ref=e750]:
+          - generic [ref=e753]: 18th Ed
+          - generic [ref=e754]: Standards
+          - generic [ref=e755]: BS 7671 Qualified
+          - generic [ref=e756]:
+            - img [ref=e757]
+            - generic [ref=e760]: Qualified
+        - generic [ref=e762]:
+          - img [ref=e766]
+          - generic [ref=e768]: ISO 9001
+          - generic [ref=e769]: Quality
+          - generic [ref=e770]: Quality Management
+          - generic [ref=e771]:
+            - img [ref=e772]
+            - generic [ref=e775]: Certified
+        - generic [ref=e777]:
+          - generic [ref=e780]: PAT
+          - generic [ref=e781]: Testing
+          - generic [ref=e782]: Portable Appliance Testing
+          - generic [ref=e783]:
+            - img [ref=e784]
+            - generic [ref=e787]: Approved
+        - generic [ref=e789]:
+          - generic [ref=e792]: IPAF
+          - generic [ref=e793]: Safety
+          - generic [ref=e794]: Powered Access Licensed
+          - generic [ref=e795]:
+            - img [ref=e796]
+            - generic [ref=e799]: Licensed
+      - generic [ref=e802]:
+        - img [ref=e803]
+        - generic [ref=e806]: All certifications independently verified and maintained through annual audits
+    - generic [ref=e810]:
+      - generic [ref=e812]:
+        - generic [ref=e814]: How We Operate
+        - heading "Our Core Values" [level=2] [ref=e815]
+        - paragraph [ref=e816]: The principles that guide every decision, every interaction, and every project we undertake.
+      - generic [ref=e817]:
+        - button "Integrity We don't cut corners. Ever. Our reputation is built on doing the right thing — even when no one's looking. T... Our reputation is built on doing the right thing — even when no one's looking. Transparent pricing, honest timelines, and work that stands the test of time." [ref=e819] [cursor=pointer]:
+          - img [ref=e824]
+          - heading "Integrity" [level=3] [ref=e827]
+          - paragraph [ref=e829]: We don't cut corners. Ever.
+          - generic [ref=e830]:
+            - paragraph: Our reputation is built on doing the right thing — even when no one's looking. T...
+            - paragraph: Our reputation is built on doing the right thing — even when no one's looking. Transparent pricing, honest timelines, and work that stands the test of time.
+        - button "Excellence Gold standard, every time. We set our bar higher than the regulations require. From cable dressing to final... We set our bar higher than the regulations require. From cable dressing to final inspection, every detail reflects our commitment to exceptional craftsmanship." [ref=e832] [cursor=pointer]:
+          - img [ref=e837]
+          - heading "Excellence" [level=3] [ref=e841]
+          - paragraph [ref=e843]: Gold standard, every time.
+          - generic [ref=e844]:
+            - paragraph: We set our bar higher than the regulations require. From cable dressing to final...
+            - paragraph: We set our bar higher than the regulations require. From cable dressing to final inspection, every detail reflects our commitment to exceptional craftsmanship.
+        - button "Teamwork Our greatest asset is our people. A culture of mutual respect, shared responsibility, and collective pride. When o... A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed." [ref=e846] [cursor=pointer]:
+          - img [ref=e851]
+          - heading "Teamwork" [level=3] [ref=e857]
+          - paragraph [ref=e859]: Our greatest asset is our people.
+          - generic [ref=e860]:
+            - paragraph: A culture of mutual respect, shared responsibility, and collective pride. When o...
+            - paragraph: A culture of mutual respect, shared responsibility, and collective pride. When one of us succeeds, all of us succeed.
+        - button "Innovation We embrace tomorrow's technology today. From smart systems to sustainable solutions, we actively invest in emerging elec... From smart systems to sustainable solutions, we actively invest in emerging electrical technology to deliver better, faster, and more efficient outcomes." [ref=e862] [cursor=pointer]:
+          - img [ref=e867]
+          - heading "Innovation" [level=3] [ref=e870]
+          - paragraph [ref=e872]: We embrace tomorrow's technology today.
+          - generic [ref=e873]:
+            - paragraph: From smart systems to sustainable solutions, we actively invest in emerging elec...
+            - paragraph: From smart systems to sustainable solutions, we actively invest in emerging electrical technology to deliver better, faster, and more efficient outcomes.
+        - button "Reliability On time. On budget. Without compromise. We show up when we say we will, complete work when we commit to, and deliver wit... We show up when we say we will, complete work when we commit to, and deliver within the agreed price. Reliability isn't a feature — it's our baseline." [ref=e875] [cursor=pointer]:
+          - img [ref=e880]
+          - heading "Reliability" [level=3] [ref=e883]
+          - paragraph [ref=e885]: On time. On budget. Without compromise.
+          - generic [ref=e886]:
+            - paragraph: We show up when we say we will, complete work when we commit to, and deliver wit...
+            - paragraph: We show up when we say we will, complete work when we commit to, and deliver within the agreed price. Reliability isn't a feature — it's our baseline.
+        - button "Community We give back to where we came from. From apprenticeship programmes to local charity partnerships, we actively invest... From apprenticeship programmes to local charity partnerships, we actively invest in the communities we serve — because success means nothing if it isn't shared." [ref=e888] [cursor=pointer]:
+          - img [ref=e893]
+          - heading "Community" [level=3] [ref=e896]
+          - paragraph [ref=e898]: We give back to where we came from.
+          - generic [ref=e899]:
+            - paragraph: From apprenticeship programmes to local charity partnerships, we actively invest...
+            - paragraph: From apprenticeship programmes to local charity partnerships, we actively invest in the communities we serve — because success means nothing if it isn't shared.
+      - generic [ref=e901]: THESE ARE NOT JUST WORDS ON A WALL — THEY ARE HOW WE WORK.
+    - generic [ref=e902]:
+      - img "Nexgen Electrical team volunteering in the community" [ref=e905]
+      - generic [ref=e916]:
+        - generic [ref=e919]:
+          - generic [ref=e920]:
+            - img [ref=e921]
+            - generic [ref=e923]: Giving Back
+          - heading "Powered by Community, Built for People" [level=2] [ref=e924]:
+            - generic [ref=e925]: Powered by Community,
+            - text: Built for People
+          - paragraph [ref=e926]: We believe a business is only as strong as the community it serves. That's why we don't just work in our communities — we actively invest in them.
+        - generic [ref=e928]:
+          - generic [ref=e929]:
+            - generic [ref=e930]: 500+
+            - generic [ref=e931]: Volunteer Hours Annually
+          - generic [ref=e932]:
+            - generic [ref=e933]: "24"
+            - generic [ref=e934]: Apprentices Trained
+          - generic [ref=e935]:
+            - generic [ref=e936]: £50k+
+            - generic [ref=e937]: Community Investment
+          - generic [ref=e938]:
+            - generic [ref=e939]: "12"
+            - generic [ref=e940]: Partner Charities
+        - generic [ref=e941]:
+          - generic [ref=e943]:
+            - img [ref=e945]
+            - heading "Apprenticeship Programme" [level=3] [ref=e947]
+            - paragraph [ref=e948]: Funding and mentoring 4 apprentices per year from local schools and colleges.
+          - generic [ref=e950]:
+            - img [ref=e952]
+            - heading "Free Safety Checks" [level=3] [ref=e954]
+            - paragraph [ref=e955]: Providing complimentary electrical safety inspections for elderly and vulnerable residents.
+          - generic [ref=e957]:
+            - img [ref=e959]
+            - heading "Community Hall Upgrades" [level=3] [ref=e962]
+            - paragraph [ref=e963]: Donating installation services to upgrade electrical systems in local community spaces.
+          - generic [ref=e965]:
+            - img [ref=e967]
+            - heading "Local Employment" [level=3] [ref=e972]
+            - paragraph [ref=e973]: Over 90% of our team live within 10 miles of our projects — we employ locally, always.
+    - generic [ref=e977]:
+      - generic [ref=e978]:
+        - generic [ref=e979]:
+          - generic [ref=e982]: The Difference
+          - heading "Why Choose Nexgen Electrical Innovations?" [level=2] [ref=e983]
+          - paragraph [ref=e984]: There are thousands of electricians. There are very few Nexgen Electrical Innovations Electrical Innovations. Here's exactly what sets us apart.
+          - generic [ref=e985]:
+            - generic [ref=e986]:
+              - img [ref=e987]
+              - generic [ref=e990]: NICEIC Approved Contractor — fully verified and independently audited
+            - generic [ref=e991]:
+              - img [ref=e992]
+              - generic [ref=e995]: Fixed price quotes with zero hidden charges or surprises
+            - generic [ref=e996]:
+              - img [ref=e997]
+              - generic [ref=e1000]: All work certified to BS 7671 18th Edition with full documentation
+            - generic [ref=e1001]:
+              - img [ref=e1002]
+              - generic [ref=e1005]: Emergency response within 2 hours, 24 hours a day, 365 days a year
+            - generic [ref=e1006]:
+              - img [ref=e1007]
+              - generic [ref=e1010]: Directly employed, directly accountable — no subcontractors
+            - generic [ref=e1011]:
+              - img [ref=e1012]
+              - generic [ref=e1015]: 99.7% client satisfaction rating across 2,400+ completed projects
+        - generic [ref=e1017]:
+          - generic [ref=e1021]:
+            - img [ref=e1022]
+            - generic [ref=e1024]: Featured Article
+          - heading "The True Cost of Cheap Electrical Work" [level=3] [ref=e1025]
+          - paragraph [ref=e1026]: We break down why cutting corners on electrical installations risks more than just your budget — and what to look for when choosing a contractor.
+          - generic [ref=e1027]:
+            - generic [ref=e1028]: 4 min read
+            - button "Read Article" [ref=e1029]:
+              - text: Read Article
+              - img [ref=e1030]
+      - generic [ref=e1032]:
+        - generic [ref=e1033]:
+          - generic [ref=e1036]: Follow Our Work
+          - heading "Stay Connected" [level=3] [ref=e1038]
+        - generic [ref=e1039]:
+          - link "Facebook" [ref=e1040] [cursor=pointer]:
+            - /url: https://facebook.com
+            - img [ref=e1041]
+            - generic [ref=e1044]: Facebook
+          - link "Instagram" [ref=e1045] [cursor=pointer]:
+            - /url: https://instagram.com
+            - img [ref=e1046]
+            - generic [ref=e1050]: Instagram
+          - link "LinkedIn" [ref=e1051] [cursor=pointer]:
+            - /url: https://linkedin.com
+            - img [ref=e1052]
+            - generic [ref=e1057]: LinkedIn
+          - link "Twitter" [ref=e1058] [cursor=pointer]:
+            - /url: https://twitter.com
+            - img [ref=e1059]
+            - generic [ref=e1062]: Twitter
+          - link "YouTube" [ref=e1063] [cursor=pointer]:
+            - /url: https://youtube.com
+            - img [ref=e1064]
+            - generic [ref=e1068]: YouTube
+      - generic [ref=e1078]:
+        - generic [ref=e1079]:
+          - img [ref=e1080]
+          - generic [ref=e1082]: Ready to Start?
+        - heading "Let's Build Something Extraordinary" [level=2] [ref=e1083]
+        - paragraph [ref=e1084]: Whether it's a domestic rewire or a full industrial installation — bring us your project. We'll bring the expertise, integrity, and commitment it deserves.
+        - generic [ref=e1085]:
+          - button "Start Your Project" [ref=e1086]:
+            - generic [ref=e1087]:
+              - text: Start Your Project
+              - img [ref=e1088]
+          - button "Contact Our Team" [ref=e1091]
+    - generic [ref=e1092]:
+      - generic [ref=e1095]:
+        - generic [ref=e1096]:
+          - link "NEXGEN Electrical Innovations" [ref=e1097] [cursor=pointer]:
+            - /url: /
+            - img "NEXGEN Electrical Innovations" [ref=e1099]
+          - paragraph [ref=e1100]: Powering the next generation of commercial and industrial innovation with precision-engineered electrical solutions.
+          - generic [ref=e1101]:
+            - link "LinkedIn" [ref=e1102] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e1103]
+            - link "Twitter" [ref=e1107] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e1108]
+            - link "Facebook" [ref=e1110] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e1111]
+            - link "Instagram" [ref=e1113] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e1114]
+        - generic [ref=e1117]:
+          - heading "Services" [level=3] [ref=e1118]
+          - list [ref=e1119]:
+            - listitem [ref=e1120]:
+              - link "Commercial Installations" [ref=e1121] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e1122]:
+              - link "Industrial Systems" [ref=e1123] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e1124]:
+              - link "Power Distribution" [ref=e1125] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e1126]:
+              - link "Safety Systems" [ref=e1127] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e1128]:
+              - link "Energy Management" [ref=e1129] [cursor=pointer]:
+                - /url: /services
+        - generic [ref=e1130]:
+          - heading "Company" [level=3] [ref=e1131]
+          - list [ref=e1132]:
+            - listitem [ref=e1133]:
+              - link "About Us" [ref=e1134] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e1135]:
+              - link "Our Team" [ref=e1136] [cursor=pointer]:
+                - /url: /about#directors
+            - listitem [ref=e1137]:
+              - link "Careers" [ref=e1138] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e1139]:
+              - link "News & Updates" [ref=e1140] [cursor=pointer]:
+                - /url: /news-hub
+            - listitem [ref=e1141]:
+              - link "Case Studies" [ref=e1142] [cursor=pointer]:
+                - /url: /news-hub/category/case-studies
+        - generic [ref=e1143]:
+          - heading "Support" [level=3] [ref=e1144]
+          - list [ref=e1145]:
+            - listitem [ref=e1146]:
+              - link "Contact" [ref=e1147] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e1148]:
+              - link "Emergency Services" [ref=e1149] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e1150]:
+              - link "Maintenance Plans" [ref=e1151] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e1152]:
+              - link "Documentation" [ref=e1153] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e1154]:
+              - link "FAQs" [ref=e1155] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e1156]:
+          - heading "24/7 Emergency" [level=3] [ref=e1157]
+          - generic [ref=e1158]:
+            - generic [ref=e1161]: Online
+            - img "NEXGEN" [ref=e1163]
+            - link "+44 (0) 20 1234 5678" [ref=e1164] [cursor=pointer]:
+              - /url: tel:+442012345678
+            - paragraph [ref=e1165]: Rapid response team ready
+      - generic [ref=e1168]:
+        - generic [ref=e1169]: 2026 NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
+        - generic [ref=e1170]:
+          - link "PRIVACY POLICY" [ref=e1171] [cursor=pointer]:
+            - /url: "#"
+          - link "TERMS OF SERVICE" [ref=e1172] [cursor=pointer]:
+            - /url: "#"
+          - link "LICENSING" [ref=e1173] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e1174]: POWERED BY ADU-DEV SOLUTIONS
+      - generic:
+        - img
+  - button "Open Next.js Dev Tools" [ref=e1180] [cursor=pointer]:
+    - img [ref=e1181]
