@@ -109,7 +109,7 @@ export function SectionValues({ data }: SectionValuesProps) {
                   onKeyDown={handleKeyDown}
                   onClick={() => toggleExpanded(value.title)}
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden h-[400px]"
                 >
                   {/* Hover background fill */}
                   <div
