@@ -5,10 +5,19 @@ The main Claude agent operates exclusively in **orchestrator mode** — it coord
 ## Core Principles
 
 1. **Orchestrator-Only:** Main agent coordinates work; specialized agents execute
+   - **NEVER directly implement code** (except trivial single-file changes < 50 lines)
+   - **ALWAYS delegate** to appropriate SME agent for architecture/validation/security/QA/code-gen
+   - **ALWAYS persist** work via Docker memory at session end
 2. **Delegated Analysis:** SME sub-agents provide focused analysis before implementation
-3. **Memory-First:** Persist learnings, decisions, and project state across sessions
+3. **Docker-First Memory (MANDATORY):** Persist learnings, decisions, and project state via MCP
+   - **Endpoint:** `POST http://localhost:3100/mcp/tools/call` (MCP aggregator gateway)
+   - **Discovery:** `GET http://localhost:3100/mcp/tools` → lists all available tools
+   - **Rehydration:** Session start auto-calls `search_nodes("electrical-website-state")`
+   - **Persistence:** Session end creates entities + relations for all work/learnings/decisions
+   - **NEVER write memory to `.md` files** — use Docker memory only (strict enforcement)
+   - **See:** `.claude/reference/DOCKER_MEMORY_MCP_PATTERN.md` for mandatory workflow
 4. **Sequential Reasoning:** Use extended thinking for multi-step or ambiguous decisions
-5. **No Bypass:** Never skip validation, security, or QA gates
+5. **No Bypass:** Never skip validation, security, or QA gates — delegation enforces this
 
 ---
 
@@ -343,11 +352,54 @@ If Docker memory service is down:
 
 ---
 
+## Orchestrator Violation Detection
+
+**If the orchestrator is NOT in proper mode, these will be true:**
+
+- ✗ Code was implemented without delegating to SME agents
+- ✗ Work completed but no entities created in Docker
+- ✗ Learnings discovered but not persisted
+- ✗ Decisions made but not documented
+- ✗ "Docker API isn't working" → instead of discovering correct endpoint
+- ✗ Memory written to `.md` files instead of Docker
+- ✗ Session ended without creating `session-YYYY-MM-DD-*` entity
+
+**If any are true, the session failed the orchestrator contract.**
+
+---
+
 ## Session State
 
-**2026-04-17 01:15 — Session Lifecycle COMPLETE + merged to main. PR #88 auto-merge enabled (Skill Sync ✅, Vercel ✅). 
-Work: Validation+Security SME analysis (8 blockers refined) → Code-Gen (1,919 lines, 28/28 tests) → merged. 
-Next orchestrator session: Load Docker memory (electrical-website-state), skip docker-cleanup branch context, proceed with Phase 6 planning.**
+2026-04-18 20:35 — **Phase 8a Features ScrollReveal COMPLETE** | Branch: main | Commit: 778c168 | Build: ✅ passing | Tests: 211 passing
+
+**Work Completed (Phase 8a):**
+- ✅ Fixed Blocking Issue 1: Removed whileInView animation props from LoadMonitorCard, SystemDiagnosticsCard, SchedulerCard
+- ✅ Fixed Blocking Issue 2: Added useReducedMotion() hook + guards to setInterval animations (WCAG compliant)
+- Created `lib/hooks/use-reduced-motion.ts` — Monitors prefers-reduced-motion media query
+- Wrapped all 3 feature cards with ScrollReveal component (direction=up, blur, staggered delay)
+- Added 15 comprehensive TDD tests (RED → GREEN → REFACTOR pattern)
+- All tests passing, production build passing, zero errors
+
+**Learnings Captured:**
+1. **learn-reduced-motion-hook-pattern** — useReducedMotion hook monitors matchMedia, returned by all animated components
+2. **learn-scrollreveal-animation-observer-resolution** — ScrollReveal wrapper prevents multiple IntersectionObserver conflicts
+   - Before: motion.div with whileInView + ScrollReveal wrapper = competing observers
+   - After: motion.div without animation props + ScrollReveal wrapper = single coordinated observer
+
+**Ready for Phase 8b:**
+- `components/sections/dashboard.tsx` — Metrics fade left/right
+- `components/sections/illumination.tsx` → Section header fade down
+- `components/sections/smart-living.tsx` → Image reveals left/right with distance={60}
+- Any remaining hero components with brightness/saturation scroll transforms
+
+**Component API Reference:**
+```tsx
+<ScrollReveal direction="up" blur delay={0} duration={0.65} distance={40} once margin="0px 0px -80px 0px">
+  {children}
+</ScrollReveal>
+```
+
+Next: Phase 8b — Apply animation polish to remaining hero sections.
 
 ---
 

@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Clock, Award, ThumbsUp, CheckCircle, Zap } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import {
   useAnimatedBorders,
   AnimatedBorders,
@@ -90,48 +91,48 @@ export function PeaceOfMind() {
 
       <div className="section-content">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false }}
-          className="text-center mb-16"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Zap size={14} className="text-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
-              Our Promise
-            </span>
-            <Zap size={14} className="text-electric-cyan" />
+        <ScrollReveal direction="down" blur delay={0} duration={0.65}>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Zap size={14} className="text-electric-cyan" />
+              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+                Our Promise
+              </span>
+              <Zap size={14} className="text-electric-cyan" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+              Peace of Mind,{" "}
+              <span className="text-electric-cyan">Guaranteed</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-lg">
+              Your electrical problems, solved with absolute confidence. We
+              don&apos;t just complete jobs — we deliver certainty. Here&apos;s
+              exactly what you can expect from us.
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Peace of Mind,{" "}
-            <span className="text-electric-cyan">Guaranteed</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-lg">
-            Your electrical problems, solved with absolute confidence. We
-            don&apos;t just complete jobs — we deliver certainty. Here&apos;s
-            exactly what you can expect from us.
-          </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Four pillars */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
-              <motion.div
+              <ScrollReveal
                 key={pillar.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                viewport={{ once: false }}
-                className={`relative p-7 rounded-2xl border transition-all duration-300 group ${
-                  pillar.highlight
-                    ? "border-electric-cyan/60 bg-electric-cyan/8 shadow-lg shadow-electric-cyan/15"
-                    : "border-border bg-card/50 hover:border-electric-cyan/30"
-                }`}
+                direction="up"
+                blur
+                delay={(idx % 4) * 0.07}
+                duration={0.65}
+                distance={40}
+                once
               >
+                <div
+                  className={`relative p-7 rounded-2xl border transition-all duration-300 group ${
+                    pillar.highlight
+                      ? "border-electric-cyan/60 bg-electric-cyan/8 shadow-lg shadow-electric-cyan/15"
+                      : "border-border bg-card/50 hover:border-electric-cyan/30"
+                  }`}
+                >
                 {/* Corner brackets */}
                 <div className="absolute top-3 left-3 h-5 w-5 border-t border-l border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
                 <div className="absolute right-3 bottom-3 h-5 w-5 border-r border-b border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
@@ -169,7 +170,8 @@ export function PeaceOfMind() {
                     </span>
                   </div>
                 )}
-              </motion.div>
+              </div>
+              </ScrollReveal>
             );
           })}
         </div>
@@ -177,65 +179,62 @@ export function PeaceOfMind() {
         {/* Two column: checks + partners */}
         <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Checklist */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: false }}
-          >
-            <h3 className="text-xl font-bold text-foreground mb-6">
-              What You Always Receive
-            </h3>
-            <div className="space-y-3">
-              {checks.map((check, idx) => (
-                <motion.div
-                  key={check}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.07 }}
-                  viewport={{ once: false }}
-                  className="flex items-start gap-3"
-                >
-                  <CheckCircle
-                    size={16}
-                    className="mt-0.5 shrink-0 text-electric-cyan"
-                  />
-                  <span className="text-sm text-muted-foreground">{check}</span>
-                </motion.div>
-              ))}
+          <ScrollReveal direction="left" blur delay={0} duration={0.65}>
+            <div>
+              <h3 className="text-xl font-bold text-foreground mb-6">
+                What You Always Receive
+              </h3>
+              <div className="space-y-3">
+                {checks.map((check, idx) => (
+                  <ScrollReveal
+                    key={check}
+                    direction="left"
+                    delay={idx * 0.07}
+                    duration={0.65}
+                    distance={20}
+                  >
+                    <div className="flex items-start gap-3">
+                      <CheckCircle
+                        size={16}
+                        className="mt-0.5 shrink-0 text-electric-cyan"
+                      />
+                      <span className="text-sm text-muted-foreground">{check}</span>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Trusted partners / accreditations */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: false }}
-          >
-            <h3 className="text-xl font-bold text-foreground mb-6">
-              Our Accreditations &amp; Partners
-            </h3>
-            <div className="grid grid-cols-3 gap-4">
-              {partners.map((partner, idx) => (
-                <motion.div
-                  key={partner.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: idx * 0.06 }}
-                  viewport={{ once: false }}
-                  className="group aspect-square cursor-default rounded-xl border border-border bg-card/40 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 flex flex-col items-center justify-center gap-1"
-                >
-                  <span className="font-mono text-lg font-bold text-electric-cyan/60 transition-colors group-hover:text-electric-cyan">
-                    {partner.abbr}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground font-medium tracking-wide text-center leading-tight px-2">
-                    {partner.name}
-                  </span>
-                </motion.div>
-              ))}
+          <ScrollReveal direction="right" blur delay={0} duration={0.65}>
+            <div>
+              <h3 className="text-xl font-bold text-foreground mb-6">
+                Our Accreditations &amp; Partners
+              </h3>
+              <div className="grid grid-cols-3 gap-4">
+                {partners.map((partner, idx) => (
+                  <ScrollReveal
+                    key={partner.name}
+                    direction="up"
+                    blur
+                    delay={(idx % 3) * 0.07}
+                    duration={0.65}
+                    distance={30}
+                  >
+                    <div className="group aspect-square cursor-default rounded-xl border border-border bg-card/40 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 flex flex-col items-center justify-center gap-1">
+                      <span className="font-mono text-lg font-bold text-electric-cyan/60 transition-colors group-hover:text-electric-cyan">
+                        {partner.abbr}
+                      </span>
+                      <span className="text-[10px] text-muted-foreground font-medium tracking-wide text-center leading-tight px-2">
+                        {partner.name}
+                      </span>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { SectionIntroData } from "@/types/sections";
 import { AnimatedWord } from "@/components/shared/animated-word";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 interface SectionIntroProps {
   data: SectionIntroData;
@@ -113,28 +114,32 @@ export function SectionIntro({ data }: SectionIntroProps) {
         {pillars.length > 0 && (
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             {pillars.map((pillar, idx) => (
-              <motion.div
+              <ScrollReveal
                 key={pillar.num}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                viewport={{ once: true }}
-                className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-400 group"
+                direction="up"
+                blur
+                delay={(idx % 3) * 0.07}
+                duration={0.65}
+                distance={40}
               >
-                {/* Corner brackets */}
-                <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
-                <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                <motion.div
+                  className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-400 group"
+                >
+                  {/* Corner brackets */}
+                  <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                  <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
 
-                <div className="font-mono text-4xl font-bold text-electric-cyan/20 mb-4 group-hover:text-electric-cyan/60 transition-colors">
-                  {pillar.num}
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-3">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm dark:text-foreground/70 leading-relaxed">
-                  {pillar.description}
-                </p>
-              </motion.div>
+                  <div className="font-mono text-4xl font-bold text-electric-cyan/20 mb-4 group-hover:text-electric-cyan/60 transition-colors">
+                    {pillar.num}
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm dark:text-foreground/70 leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         )}

@@ -152,6 +152,21 @@
     }
   }
 
+  # MCP Aggregator Service: Unified MCP JSON-RPC gateway
+  # Rate limit: 100 requests/min
+  handle /mcp* {
+    rate_limit {
+      zone mcp {
+        key {remote_host}
+        events 100
+        window 1m
+      }
+    }
+    reverse_proxy mcp-aggregator:8000 {
+      header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+    }
+  }
+
   # Catch-all: return 404 for undefined routes
   respond "Service not found" 404
 

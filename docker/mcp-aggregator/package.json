@@ -2,16 +2,10 @@
   "name": "mcp-aggregator",
   "version": "1.0.0",
   "type": "module",
-  "description": "MCP JSON-RPC aggregator bridging custom REST services to Streamable HTTP transport",
-  "main": "server.mjs",
-  "scripts": {
-    "start": "node server.mjs"
-  },
+  "description": "MCP JSON-RPC aggregator bridging custom REST services to HTTP transport",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^3.25.0"
   },
-  "engines": {
-    "node": ">=22"
-  }
+  "engines": { "node": ">=22" }
 }

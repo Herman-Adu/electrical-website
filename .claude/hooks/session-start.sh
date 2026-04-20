@@ -158,47 +158,63 @@ if [ -d "$PROJECT_ROOT/.git" ]; then
     COMMIT=$(sanitizeCommitMessage "$COMMIT")
 fi
 
-# ── Load selective rehydration (memory-lane aware) ─────────────────────────────
-SELECTIVE_LOAD=""
-if command -v node >/dev/null 2>&1; then
-    SELECTIVE_LOAD=$(node "${PROJECT_ROOT}/scripts/load-active-memory-lane.mjs" 2>/dev/null | tail -1)
-fi
-
-# Fallback to default if selective load fails
-if [ -z "$SELECTIVE_LOAD" ]; then
-    SELECTIVE_LOAD='mcp__MCP_DOCKER__search_nodes("electrical-website-state")'
+# ── Load Docker state via HTTP API (if Docker is healthy) ───────────────────
+DOCKER_STATE="[Docker unavailable]"
+if $DOCKER_OK; then
+    DOCKER_STATE=$(curl -s -X POST http://localhost:3100/mcp/tools/call \
+      -H "Content-Type: application/json" \
+      -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}' 2>/dev/null | \
+      node -e "
+const stdin = require('fs').readFileSync(0, 'utf-8');
+try {
+  const data = JSON.parse(stdin);
+  if (data.content && data.content[0] && data.content[0].json && data.content[0].json.entities && data.content[0].json.entities[0]) {
+    const entity = data.content[0].json.entities[0];
+    const obs = entity.observations || [];
+    const state = obs.join(' | ');
+    console.log(state || '[no state found]');
+  } else {
+    console.log('[Docker search returned no entities]');
+  }
+} catch (e) {
+  console.log('[Docker parse error]');
+}
+" 2>/dev/null || echo "[Docker call failed]")
 fi
 
 # ── Build the preflight message ─────────────────────────────────────────────
 if $DOCKER_OK; then
     PREFLIGHT="<session-preflight-required>
-MANDATORY SESSION START — execute all steps before responding to user:
+MANDATORY SESSION START — Docker memory available (HTTP API):
 
-STEP 1 — DOCKER REHYDRATION (~30-50 tokens, ~5 seconds):
-  a. $SELECTIVE_LOAD
-  b. mcp__MCP_DOCKER__open_nodes([returned_entity_id]) [or selective entities from above]
-  c. Read from entity: current_branch, active_phase, next_tasks, blockers
+DOCKER STATE: $DOCKER_STATE
 
-STEP 2 — GIT STATE:
-  git status && git log --oneline -5
+STEP 1 — CONTEXT LOADED:
+  a. Docker memory: Searched and loaded via HTTP
+  b. Git state: Ready via \`git status\` and \`git log\`
+  c. You may proceed immediately with the user's request
 
-STEP 3 — CONTEXT CHECK:
-  Check .claude/CLAUDE.md ## Session State section for any Docker-down fallback notes.
-  If notes exist: incorporate them, then clear them (Docker is now available).
+STEP 2 — IF YOU NEED TO PERSIST WORK:
+  Use curl-based HTTP API calls (MCP tools not available as callable functions):
 
-STEP 4 — CONFIRM AND PROCEED:
-  Report rehydrated state: \"[Session ready — Branch: $BRANCH | Phase: Y | Next: Z]\"
-  Then immediately address the user's first request.
+  curl -X POST http://localhost:3100/mcp/tools/call \\
+    -H \"Content-Type: application/json\" \\
+    -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"...\"}}'
+
+  Tool names: memory_reference__search_nodes, memory_reference__open_nodes,
+              memory_reference__create_entities, memory_reference__add_observations,
+              memory_reference__create_relations
+
+STEP 3 — PROCEED:
+  Address the user's first request. You have full Docker context loaded above.
 
 RULES:
-- Docker is the SINGLE SOURCE OF TRUTH. No .md file reads for session context.
-- If Docker returns no entities: create electrical-website-state entity NOW via mcp__MCP_DOCKER__create_entities.
-- If Docker times out or errors: write one-line fallback to .claude/CLAUDE.md ## Session State, then continue.
-- Available MCP tools: mcp__MCP_DOCKER__, sequential-thinking, context7, nextjs-devtools, playwright (x2).
-- Do NOT ask the user to provide context that Docker should have.
+- Docker HTTP API endpoint: POST http://localhost:3100/mcp/tools/call
+- Fallback policy: If Docker is down, write one-line note to .claude/CLAUDE.md ## Session State
+- Never create .md memory files as substitutes for Docker memory
 </session-preflight-required>"
 else
-    # Docker unavailable — provide minimal fallback instructions
+    # Docker unavailable — provide HTTP API fallback instructions
     PREFLIGHT="<session-preflight-required>
 MANDATORY SESSION START — Docker memory unavailable (health check failed):
 
@@ -207,13 +223,20 @@ STEP 1 — FALLBACK REHYDRATION:
   b. git status && git log --oneline -10
   c. Report: \"[Docker DOWN — using git+CLAUDE.md fallback]\"
 
-STEP 2 — PROCEED WITH CAUTION:
+STEP 2 — IF DOCKER RECOVERS:
+  Try this HTTP API call to load state:
+
+  curl -X POST http://localhost:3100/mcp/tools/call \\
+    -H \"Content-Type: application/json\" \\
+    -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"electrical-website-state\"}}'
+
+STEP 3 — PROCEED WITH CAUTION:
   - Do not create .md memory files as substitutes for Docker
   - Write ONE fallback note to .claude/CLAUDE.md ## Session State if doing significant work
-  - Retry Docker at: mcp__MCP_DOCKER__search_nodes(\"electrical-website-state\") — it may recover
+  - Resume work next session by reading git history (code is source of truth)
 
-STEP 3 — CONTINUE:
-  Address the user's first request using git history as the source of truth for implementation details.
+STEP 4 — CONTINUE:
+  Address the user's first request using git history as context.
 </session-preflight-required>"
 fi
 

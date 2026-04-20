@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Eye, Target, ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import {
   useAnimatedBorders,
   AnimatedBorders,
@@ -75,12 +76,8 @@ export function VisionMission() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* VISION */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: false }}
-            >
+            <ScrollReveal direction="up" blur delay={0} duration={0.65}>
+              <div>
               {/* Section label */}
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 rounded-xl border border-electric-cyan/40 bg-electric-cyan/10 flex items-center justify-center">
@@ -112,32 +109,34 @@ export function VisionMission() {
               {/* Vision points */}
               <div className="space-y-5">
                 {visionPoints.map((point, idx) => (
-                  <motion.div
+                  <ScrollReveal
                     key={point.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    viewport={{ once: false }}
-                    className="flex gap-4 group"
+                    direction="left"
+                    delay={idx * 0.07}
+                    duration={0.65}
+                    distance={30}
                   >
-                    <div className="w-8 h-8 rounded-lg border border-border flex items-center justify-center shrink-0 mt-0.5 group-hover:border-electric-cyan/40 transition-colors">
-                      <ArrowRight
-                        size={14}
-                        className="text-muted-foreground group-hover:text-electric-cyan transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground mb-1">
-                        {point.label}
+                    <div className="flex gap-4 group">
+                      <div className="w-8 h-8 rounded-lg border border-border flex items-center justify-center shrink-0 mt-0.5 group-hover:border-electric-cyan/40 transition-colors">
+                        <ArrowRight
+                          size={14}
+                          className="text-muted-foreground group-hover:text-electric-cyan transition-colors"
+                        />
                       </div>
-                      <div className="text-sm text-muted-foreground leading-relaxed">
-                        {point.text}
+                      <div>
+                        <div className="font-semibold text-foreground mb-1">
+                          {point.label}
+                        </div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">
+                          {point.text}
+                        </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </ScrollReveal>
                 ))}
               </div>
-            </motion.div>
+            </div>
+            </ScrollReveal>
           </div>
 
           {/* Animated divider — visible on desktop */}
@@ -154,12 +153,8 @@ export function VisionMission() {
 
           {/* MISSION */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              viewport={{ once: false }}
-            >
+            <ScrollReveal direction="up" blur delay={0.07} duration={0.65}>
+              <div>
               {/* Section label */}
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 rounded-xl border border-amber-warning/40 bg-amber-warning/10 flex items-center justify-center">
@@ -191,24 +186,27 @@ export function VisionMission() {
               {/* Mission pillars */}
               <div className="grid grid-cols-2 gap-4">
                 {missionPillars.map((pillar, idx) => (
-                  <motion.div
+                  <ScrollReveal
                     key={pillar.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    viewport={{ once: false }}
-                    className="p-5 rounded-xl border border-border bg-card/40 hover:border-amber-warning/30 hover:bg-amber-warning/5 transition-all duration-300 group"
+                    direction="up"
+                    blur
+                    delay={idx * 0.07}
+                    duration={0.65}
+                    distance={30}
                   >
+                    <div className="p-5 rounded-xl border border-border bg-card/40 hover:border-amber-warning/30 hover:bg-amber-warning/5 transition-all duration-300 group">
                     <div className="font-bold text-foreground mb-2 group-hover:text-amber-warning transition-colors">
                       {pillar.title}
                     </div>
                     <div className="text-xs text-muted-foreground leading-relaxed">
                       {pillar.desc}
                     </div>
-                  </motion.div>
+                  </div>
+                  </ScrollReveal>
                 ))}
               </div>
-            </motion.div>
+            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

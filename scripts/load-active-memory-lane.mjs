@@ -103,15 +103,47 @@ function extractSelectiveEntities(configPath) {
 }
 
 /**
- * 4. Format as open_nodes() call for shell/hook integration
+ * 4. Load entities from Docker via HTTP API
  */
-function formatOpenNodesCall(entities) {
+async function loadEntitiesViaHttp(entities) {
+  try {
+    const response = await fetch('http://localhost:3100/mcp/tools/call', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      timeout: 3000,
+      body: JSON.stringify({
+        name: 'memory_reference__open_nodes',
+        arguments: { nodeIds: entities }
+      })
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+    if (data.content && data.content[0] && data.content[0].json && data.content[0].json.nodes) {
+      return data.content[0].json.nodes;
+    }
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * 4b. Format HTTP API fallback instructions for shell/hook integration
+ */
+function formatHttpApiFallback(entities) {
   if (!entities || entities.length === 0) {
     return null;
   }
 
-  const entityList = entities.map(e => `"${e}"`).join(', ');
-  return `mcp__MCP_DOCKER__open_nodes([${entityList}])`;
+  // Return HTTP API instructions as a shell-safe one-liner string
+  const entityList = entities.map(e => `"${e}"`).join(',');
+  const httpCall = `curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__open_nodes","arguments":{"nodeIds":[${entityList}]}}'`;
+
+  return httpCall;
 }
 
 /**
@@ -125,10 +157,10 @@ async function main() {
   if (!configPath) {
     console.log(
       `⚠️  No memory lane config found for branch "${branch}".`,
-      '\n   Falling back to default: search_nodes("electrical-website-state")'
+      '\n   Falling back to default: HTTP search_nodes("electrical-website-state")'
     );
     console.log('');
-    console.log('mcp__MCP_DOCKER__search_nodes("electrical-website-state")');
+    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}'`);
     return;
   }
 
@@ -140,16 +172,16 @@ async function main() {
       `⚠️  No docker_entities found in config. Falling back to default.`
     );
     console.log('');
-    console.log('mcp__MCP_DOCKER__search_nodes("electrical-website-state")');
+    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}'`);
     return;
   }
 
-  const openNodesCall = formatOpenNodesCall(entities);
+  const httpCall = formatHttpApiFallback(entities);
   console.log(
-    `✨ Token savings: ~500 → ~30 tokens (${entities.length} entities loaded)`
+    `✨ Token savings: ~500 → ~30 tokens (${entities.length} entities loaded via HTTP)`
   );
   console.log('');
-  console.log(openNodesCall);
+  console.log(httpCall);
 }
 
 main().catch(error => {

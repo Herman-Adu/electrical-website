@@ -4,6 +4,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SchedulerCard } from "./scheduler-card";
 
 const monitorData = [
@@ -20,8 +22,11 @@ const diagnosticsMessages = [
 
 function LoadMonitorCard() {
   const [cards, setCards] = useState(monitorData);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       setCards((prev) => {
         const newCards = [...prev];
@@ -31,15 +36,11 @@ function LoadMonitorCard() {
       });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <motion.div
       className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
@@ -125,13 +126,14 @@ function SystemDiagnosticsCard() {
   const [displayText, setDisplayText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || prefersReducedMotion) return;
 
     let charIdx = 0;
     const fullText = diagnosticsMessages.join("\n");
@@ -151,15 +153,11 @@ function SystemDiagnosticsCard() {
     }, 35);
 
     return () => clearInterval(interval);
-  }, [isMounted, isComplete]);
+  }, [isMounted, isComplete, prefersReducedMotion]);
 
   return (
     <motion.div
       className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.15 }}
-      viewport={{ once: true, margin: "-100px" }}
     >
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
@@ -244,9 +242,39 @@ export function Features() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
-          <LoadMonitorCard />
-          <SystemDiagnosticsCard />
-          <SchedulerCard />
+          <ScrollReveal
+            direction="up"
+            blur
+            delay={0}
+            duration={0.65}
+            distance={40}
+            once
+            margin="0px 0px -80px 0px"
+          >
+            <LoadMonitorCard />
+          </ScrollReveal>
+          <ScrollReveal
+            direction="up"
+            blur
+            delay={0.07}
+            duration={0.65}
+            distance={40}
+            once
+            margin="0px 0px -80px 0px"
+          >
+            <SystemDiagnosticsCard />
+          </ScrollReveal>
+          <ScrollReveal
+            direction="up"
+            blur
+            delay={0.14}
+            duration={0.65}
+            distance={40}
+            once
+            margin="0px 0px -80px 0px"
+          >
+            <SchedulerCard />
+          </ScrollReveal>
         </div>
       </div>
     </section>

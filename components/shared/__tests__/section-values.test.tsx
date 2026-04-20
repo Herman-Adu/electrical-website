@@ -9,6 +9,8 @@ vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
   },
+  useInView: () => true,
+  useReducedMotion: () => false,
 }));
 
 // Mock useAnimatedBorders
@@ -24,6 +26,11 @@ vi.mock('@/lib/use-animated-borders', () => ({
 // Mock icon-map
 vi.mock('../icon-map', () => ({
   getIcon: () => () => <svg data-testid="icon" />,
+}));
+
+// Mock ScrollReveal
+vi.mock('@/components/ui/scroll-reveal', () => ({
+  ScrollReveal: ({ children }: any) => <div>{children}</div>,
 }));
 
 // Mock data
@@ -52,7 +59,7 @@ const mockSectionValuesData: SectionValuesData = {
       title: 'Sustainability',
       short: 'Environmental responsibility',
       full: 'We are committed to sustainable practices that minimize environmental impact through energy-efficient designs and renewable energy integration.',
-      icon: 'Leaf',
+      icon: 'Shield',
       color: 'amber',
     },
   ],
@@ -95,12 +102,12 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       });
     });
 
-    it('full description hidden initially (min-h pre-allocation)', () => {
+    it('full description hidden initially (opacity-0 absolute positioning)', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const cards = screen.getAllByTestId('section-value-card');
       const innovationCard = cards[0];
       const fullDescElement = innovationCard.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDescElement).toHaveClass('hidden');
+      expect(fullDescElement).toHaveClass('opacity-0');
     });
   });
 
@@ -197,14 +204,13 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
   });
 
   describe('Hover Behavior', () => {
-    it('full description shown on hover via group-hover class', () => {
+    it('full description shown on hover via group-hover:opacity-100', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const card = screen.getAllByTestId('section-value-card')[0];
 
-      // Component uses group-hover:block which is CSS-based
-      // Verify full desc has this potential
+      // Component uses opacity-based hover via group-hover:opacity-100
       const fullDesc = card.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDesc.className).toContain('group-hover:block');
+      expect(fullDesc.className).toContain('group-hover:opacity-100');
     });
   });
 });

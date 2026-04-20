@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Zap, Gauge, History, Share2, Activity, Shield } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import {
   EnergyMetric,
   type EnergyMetricProps,
@@ -79,14 +80,21 @@ export function Dashboard() {
       </motion.div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
-        {metrics.map((metric, index) => (
-          <EnergyMetric key={metric.label} {...metric} delay={index * 0.1} />
-        ))}
-      </div>
+      <ScrollReveal direction="left" blur delay={0} duration={0.65} distance={40} once>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+          {metrics.map((metric, index) => (
+            <EnergyMetric
+              key={metric.label}
+              {...metric}
+              delay={index * 0.1}
+              isInView={shouldAnimate}
+            />
+          ))}
+        </div>
+      </ScrollReveal>
 
       {/* Terminal Section */}
-      <SystemTerminal />
+      <SystemTerminal isInView={shouldAnimate} />
 
       {/* Footer Stats */}
       <LiveConnections isInView={isInView} />
