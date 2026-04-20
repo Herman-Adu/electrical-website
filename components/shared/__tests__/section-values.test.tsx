@@ -102,7 +102,7 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       });
     });
 
-    it('full description hidden initially (min-h pre-allocation)', () => {
+    it('full description hidden initially (opacity-0 absolute positioning)', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const cards = screen.getAllByTestId('section-value-card');
       const innovationCard = cards[0];
@@ -204,12 +204,11 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
   });
 
   describe('Hover Behavior', () => {
-    it('full description shown on hover via group-hover class', () => {
+    it('full description shown on hover via group-hover:opacity-100', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const card = screen.getAllByTestId('section-value-card')[0];
 
       // Component uses opacity-based hover via group-hover:opacity-100
-      // Verify full desc has this potential
       const fullDesc = card.querySelector('[id="value-Innovation"]') as HTMLElement;
       expect(fullDesc.className).toContain('group-hover:opacity-100');
     });

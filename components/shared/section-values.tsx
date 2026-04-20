@@ -109,7 +109,7 @@ export function SectionValues({ data }: SectionValuesProps) {
                   onKeyDown={handleKeyDown}
                   onClick={() => toggleExpanded(value.title)}
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden min-h-[500px]"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 cursor-pointer overflow-hidden"
                 >
                   {/* Hover background fill */}
                   <div
@@ -144,17 +144,17 @@ export function SectionValues({ data }: SectionValuesProps) {
                     {value.short}
                   </p>
 
-                  {/* Description container with pre-allocated height (CLS prevention) */}
-                  <div className="h-[300px] relative">
-                    {/* Short description — visible by default, positioned absolutely for overlap */}
-                    <p className="text-sm text-muted-foreground leading-relaxed group-hover:opacity-0 transition-opacity duration-200 absolute inset-0">
+                  {/* Description container — fixed height to prevent CLS, layout containment to isolate reflow */}
+                  <div className="h-[280px] relative overflow-hidden" style={{ contain: 'layout style paint' }}>
+                    {/* Short description — absolutely positioned, visible by default */}
+                    <p className="text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 group-hover:opacity-0 pointer-events-none">
                       {value.full.slice(0, 80)}...
                     </p>
 
-                    {/* Full description — hidden by default, shown on hover or keyboard expansion */}
+                    {/* Full description — absolutely positioned, shown on hover or keyboard expansion */}
                     <p
                       id={`value-${value.title}`}
-                      className={`text-sm text-muted-foreground leading-relaxed transition-opacity duration-200 absolute inset-0 ${
+                      className={`text-sm text-muted-foreground leading-relaxed absolute inset-0 transition-opacity duration-200 pointer-events-none ${
                         isExpanded ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                       }`}
                     >
