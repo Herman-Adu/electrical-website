@@ -147,6 +147,12 @@ export function NavbarClient() {
   };
 
   const navigateTo = (href: string) => {
+    // Special case: "Home" button should scroll to top
+    if (href === "/" && pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      closeMenus();
+      return;
+    }
     router.push(href);
     closeMenus();
   };

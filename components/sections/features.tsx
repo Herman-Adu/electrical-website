@@ -39,9 +39,7 @@ function LoadMonitorCard() {
   }, [prefersReducedMotion]);
 
   return (
-    <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-    >
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
         <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
@@ -74,7 +72,7 @@ function LoadMonitorCard() {
           Real-time load balancing across multi-zone distribution networks
         </p>
 
-        <div className="relative flex items-center justify-center h-20 mb-6">
+        <div className="relative flex items-center justify-center h-20 mb-6 overflow-hidden">
           {cards.map((card, i) => {
             const isTop = i === 0;
             const isMiddle = i === 1;
@@ -156,9 +154,7 @@ function SystemDiagnosticsCard() {
   }, [isMounted, isComplete, prefersReducedMotion]);
 
   return (
-    <motion.div
-      className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10"
-    >
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
         <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
