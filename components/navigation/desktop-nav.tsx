@@ -32,6 +32,11 @@ export interface DesktopNavProps {
   onScroll: (href: string) => void;
   onNavigate: (href: string) => void;
   currentHash: string;
+  currentIntersectionSection?: string | null;
+  isAboutDropdownHovered?: boolean;
+  openDropdown?: string | null;
+  setOpenDropdown?: (dropdown: string | null) => void;
+  isSubmenuActive?: (href: string, dropdownName?: string) => boolean;
 }
 
 const normalizePath = (path: string): string => {
@@ -44,6 +49,11 @@ export function DesktopNav({
   onScroll,
   onNavigate,
   currentHash: propCurrentHash,
+  currentIntersectionSection,
+  isAboutDropdownHovered,
+  openDropdown,
+  setOpenDropdown,
+  isSubmenuActive: propIsSubmenuActive,
 }: DesktopNavProps) {
   const pathname = usePathname();
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
@@ -55,7 +65,13 @@ export function DesktopNav({
   // Use currentHash prop directly — parent (NavbarClient) manages hash state
   const currentHash = propCurrentHash;
 
-  const isSubmenuActive = (href: string): boolean => {
+  // Use prop-based isSubmenuActive if provided (includes scroll detection), else fall back to local logic
+  const isSubmenuActive = (href: string, dropdownName?: string): boolean => {
+    if (propIsSubmenuActive) {
+      return propIsSubmenuActive(href, dropdownName);
+    }
+
+    // Fallback: local logic (no scroll detection)
     const [rawPath, rawHash] = href.split("#");
     const targetPath = normalizePath(rawPath || "/");
     const currentPath = normalizePath(pathname);
@@ -246,7 +262,7 @@ export function DesktopNav({
                       className="absolute left-0 top-full mt-4 w-56 backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 border border-electric-cyan/20 rounded-lg pt-2 shadow-lg"
                     >
                       {link.submenu.map((item) => {
-                        const submenuActive = isSubmenuActive(item.href);
+                        const submenuActive = isSubmenuActive(item.href, link.name);
                         const submenuRefKey = `${link.name}-${item.name}`;
 
                         return (
