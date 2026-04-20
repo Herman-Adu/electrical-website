@@ -145,18 +145,18 @@ export function SectionValues({ data }: SectionValuesProps) {
                   </p>
 
                   {/* Description container with pre-allocated height (CLS prevention) */}
-                  <div className="min-h-[140px]">
-                    {/* Short description — visible by default */}
-                    <p className="text-sm text-muted-foreground leading-relaxed group-hover:hidden transition-opacity duration-200">
+                  <div className="h-[300px] relative">
+                    {/* Short description — visible by default, positioned absolutely for overlap */}
+                    <p className="text-sm text-muted-foreground leading-relaxed group-hover:opacity-0 transition-opacity duration-200 absolute inset-0">
                       {value.full.slice(0, 80)}...
                     </p>
 
                     {/* Full description — hidden by default, shown on hover or keyboard expansion */}
                     <p
                       id={`value-${value.title}`}
-                      className={`text-sm text-muted-foreground leading-relaxed transition-opacity duration-200 ${
-                        isExpanded ? "block" : "hidden"
-                      } group-hover:block`}
+                      className={`text-sm text-muted-foreground leading-relaxed transition-opacity duration-200 absolute inset-0 ${
+                        isExpanded ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                      }`}
                     >
                       {value.full}
                     </p>

@@ -107,7 +107,7 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       const cards = screen.getAllByTestId('section-value-card');
       const innovationCard = cards[0];
       const fullDescElement = innovationCard.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDescElement).toHaveClass('hidden');
+      expect(fullDescElement).toHaveClass('opacity-0');
     });
   });
 
@@ -208,10 +208,10 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
       render(<SectionValues data={mockSectionValuesData} />);
       const card = screen.getAllByTestId('section-value-card')[0];
 
-      // Component uses group-hover:block which is CSS-based
+      // Component uses opacity-based hover via group-hover:opacity-100
       // Verify full desc has this potential
       const fullDesc = card.querySelector('[id="value-Innovation"]') as HTMLElement;
-      expect(fullDesc.className).toContain('group-hover:block');
+      expect(fullDesc.className).toContain('group-hover:opacity-100');
     });
   });
 });
