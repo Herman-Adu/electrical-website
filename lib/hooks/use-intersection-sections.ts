@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState, useRef } from 'react';
 import { getScrollOffset } from '@/lib/scroll-to-section';
 
 interface UseIntersectionSectionsOptions {
@@ -8,7 +8,9 @@ interface UseIntersectionSectionsOptions {
 
 /**
  * Tracks which section is currently in viewport using IntersectionObserver.
- * Avoids useEffect to ensure observer syncs with rendering before paint.
+ * Adjusts detection based on scroll direction:
+ * - DOWN: Activate when section top reaches navbar
+ * - UP: Activate when section is visible in viewport
  *
  * @param isActive - Only observe when true (e.g., dropdown is hovered)
  * @param sectionIds - Section IDs to observe; auto-detected if omitted
@@ -19,7 +21,28 @@ export function useIntersectionSections(
   sectionIds: string[] = [],
 ): string | null {
   const [currentSection, setCurrentSection] = useState<string | null>(null);
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
+  const prevScrollYRef = useRef(0);
 
+  // Track scroll direction
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined' || !isActive) return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > prevScrollYRef.current) {
+        setScrollDirection('down');
+      } else if (currentScrollY < prevScrollYRef.current) {
+        setScrollDirection('up');
+      }
+      prevScrollYRef.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isActive]);
+
+  // Create observer with scroll-direction-aware rootMargin
   useLayoutEffect(() => {
     if (typeof window === 'undefined' || !isActive) return;
 
@@ -30,7 +53,14 @@ export function useIntersectionSections(
       baseGap: 38,
     });
 
-    // Create observer with margin that accounts for fixed navbar + breadcrumb
+    // Adjust rootMargin based on scroll direction:
+    // DOWN: Activate at section top (top 40% of viewport)
+    // UP: Activate when section is visible (full height below navbar)
+    const rootMarginValue = scrollDirection === 'down'
+      ? `-${offset}px 0px -60% 0px`  // Only top 40% counts
+      : `-${offset}px 0px 0px 0px`;   // Any part visible counts
+
+    // Create observer with directional rootMargin
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries.length) return;
@@ -48,18 +78,16 @@ export function useIntersectionSections(
           const topSection = visibleEntries[0].target.id;
           setCurrentSection(topSection);
 
-          // Diagnostic logging
           console.log(`[scroll-diagnostics] Current section: ${topSection}`, {
             visibleCount: visibleEntries.length,
             offset,
-            rootMargin: `-${offset}px 0px -60% 0px`,
+            scrollDirection,
+            rootMargin: rootMarginValue,
           });
         }
       },
       {
-        // Negative margin accounts for navbar + breadcrumb height
-        // Negative bottom margin makes only top 40% count as "in viewport"
-        rootMargin: `-${offset}px 0px -60% 0px`,
+        rootMargin: rootMarginValue,
         threshold: [0, 0.25, 0.5],
       },
     );
@@ -78,7 +106,7 @@ export function useIntersectionSections(
     return () => {
       observer.disconnect();
     };
-  }, [isActive, sectionIds]);
+  }, [isActive, sectionIds, scrollDirection]);
 
   return currentSection;
 }
