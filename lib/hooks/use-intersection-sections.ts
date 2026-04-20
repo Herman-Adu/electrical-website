@@ -56,9 +56,9 @@ export function useIntersectionSections(
     // Adjust rootMargin based on scroll direction:
     // DOWN: Activate at section top (top 40% of viewport)
     // UP: Activate when section is visible (full height below navbar)
-    const rootMarginValue = scrollDirection === 'down'
-      ? `-${offset}px 0px -60% 0px`  // Only top 40% counts
-      : `-${offset}px 0px 0px 0px`;   // Any part visible counts
+    const rootMarginValue = scrollDirection === 'up'
+      ? `-${offset}px 0px 0px 0px`     // UP: Any part visible (full height)
+      : `-${offset}px 0px -60% 0px`;   // DOWN: Only top 40% counts
 
     // Create observer with directional rootMargin
     const observer = new IntersectionObserver(
