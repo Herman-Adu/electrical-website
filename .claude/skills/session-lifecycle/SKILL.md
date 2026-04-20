@@ -43,6 +43,11 @@ This skill is the **orchestrator's manual override** for session state managemen
 
 **Cost:** ~50 tokens
 
+**Memory Lane Filtering:**
+- Reads `config/active-memory-lanes.json` to identify active lane
+- Searches for only project_state + active feature entity (not all observations)
+- Saves ~2-3K tokens vs loading entire Docker history
+
 ---
 
 ### Mode 2: `sync` — Mid-Session Checkpoint

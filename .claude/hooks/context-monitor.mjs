@@ -352,75 +352,45 @@ function getGitState(projectDir) {
   }
 }
 
-// ── Build continuation prompts (Variant A & B) ──────────────────────────────
+// ── Build continuation prompts (Variant A & B — Concise) ─────────────────────
 /**
- * Builds continuation prompt based on Docker availability and context state
+ * Builds concise continuation prompt based on Docker availability and context state
+ * Token savings: ~200 tokens vs previous ~900 tokens
  */
 function buildContinuationPrompt(data, dockerOk, gitState) {
-  const { pct, inputTokens, totalLimit } = data;
+  const { pct } = data;
   const pctStr = pct.toFixed(1);
-  const usedK = (inputTokens / 1000).toFixed(1);
-  const limitK = (totalLimit / 1000).toFixed(0);
   const { branch, lastCommit } = gitState;
   const now = new Date().toISOString();
-
-  const base = `## Session Continuation — electrical-website
-Synced: ${now} | Context at sync: ${pctStr}%
-
-### State at Sync
-- Branch: ${branch}
-- Last commit: ${lastCommit}
-- Context: ${pctStr}% of ${limitK}K tokens (${usedK}K used)
-- Docker: ${dockerOk ? 'AVAILABLE ✓' : 'DOWN — use fallback'}
-
-### Continue From
-[Specific next action — fill in exact task to resume]`;
+  const shortCommit = lastCommit.split(' ')[0].substring(0, 7);
 
   if (dockerOk) {
-    // Variant A: Docker available
-    return `---CONTINUATION PROMPT (paste as first message in new session)---
+    // Variant A: Docker available — 12 lines
+    return `---CONTINUATION PROMPT---
+Session: ${branch} | ${pctStr}% | ${now}
+Last: ${shortCommit}
+Docker: ✓
 
-${base}
-
-### Preflight (run ALL before responding)
-1. mcp__MCP_DOCKER__search_nodes("electrical-website-state") → open_nodes([id])
+Preflight (before responding):
+1. curl -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}'
 2. git status && git log --oneline -5
-3. Report: "[Session ready — Branch: ${branch} | Phase: TBD | Next: TBD]"
+3. Load .claude/rules/orchestrator-enforcement.txt
 
-### Available MCP Tools
-mcp__MCP_DOCKER__* | sequential-thinking | context7 | nextjs-devtools | playwright (x2)
-
-### Session Rules
-- Orchestrator-only: coordinate + delegate; SME agents for analysis
-- Gates: pnpm typecheck && pnpm build && pnpm test before done
-- Context watch: pause + sync at 70% again if needed
-
+Next: [fill in exact next task]
 ---END CONTINUATION PROMPT---`;
   } else {
-    // Variant B: Docker unavailable
-    return `---CONTINUATION PROMPT (paste as first message in new session)---
+    // Variant B: Docker unavailable — 11 lines
+    return `---CONTINUATION PROMPT---
+Session: ${branch} | ${pctStr}% | ${now}
+Last: ${shortCommit}
+Docker: DOWN
 
-${base}
-
-### Preflight (Docker unavailable — use fallback)
-1. Read .claude/CLAUDE.md ## Session State for last known state
+Preflight (before responding):
+1. Read .claude/CLAUDE.md ## Session State
 2. git status && git log --oneline -10
-3. Report: "[Docker DOWN — using git+CLAUDE.md fallback]"
+3. Retry Docker: curl http://localhost:3100/health
 
-### Important
-- Do not create .md memory files as substitutes for Docker
-- Write ONE fallback note to .claude/CLAUDE.md ## Session State if continuing this work
-- Retry Docker connection at session start: mcp__MCP_DOCKER__search_nodes("electrical-website-state")
-
-### Available MCP Tools
-sequential-thinking | context7 | nextjs-devtools | playwright (x2)
-(Docker unavailable; MCP tools limited to non-Docker operations)
-
-### Session Rules
-- Use git history as source of truth for implementation details
-- Orchestrator-only: coordinate + delegate; SME agents for analysis
-- Gates: pnpm typecheck && pnpm build && pnpm test before done
-
+Next: [fill in exact next task]
 ---END CONTINUATION PROMPT---`;
   }
 }

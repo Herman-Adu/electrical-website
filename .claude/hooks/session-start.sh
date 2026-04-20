@@ -147,39 +147,85 @@ req.setTimeout(2000, () => { req.destroy(); process.stdout.write('down'); });
     [ "$STATUS" = "ok" ] && DOCKER_OK=true
 fi
 
+# ── Load active memory lane configuration ────────────────────────────────────────
+# Read config/active-memory-lanes.json if it exists; extract active lane ID and memoryKeys
+ACTIVE_LANE=""
+MEMORY_KEYS_ARRAY=()
+if [ -f "$PROJECT_ROOT/config/active-memory-lanes.json" ]; then
+    CONFIG_CONTENT=$(cat "$PROJECT_ROOT/config/active-memory-lanes.json" 2>/dev/null)
+    ACTIVE_LANE=$(echo "$CONFIG_CONTENT" | node -e "
+const stdin = require('fs').readFileSync(0, 'utf-8');
+try {
+  const cfg = JSON.parse(stdin);
+  console.log(cfg.active || '');
+} catch {
+  console.log('');
+}
+" 2>/dev/null || echo "")
+
+    # Extract memoryKeys array into bash array
+    MEMORY_KEYS_ARRAY=($(echo "$CONFIG_CONTENT" | node -e "
+const stdin = require('fs').readFileSync(0, 'utf-8');
+try {
+  const cfg = JSON.parse(stdin);
+  const keys = cfg.memoryKeys || [];
+  console.log(keys.join(' '));
+} catch {
+  console.log('');
+}
+" 2>/dev/null || echo ""))
+fi
+
+# Fallback: Always include electrical-website-state
+if [ ${#MEMORY_KEYS_ARRAY[@]} -eq 0 ]; then
+    MEMORY_KEYS_ARRAY=("electrical-website-state")
+fi
+
 # ── Get git state (with sanitization) ───────────────────────────────────────
 BRANCH=""
 COMMIT=""
 if [ -d "$PROJECT_ROOT/.git" ]; then
     BRANCH=$(cd "$PROJECT_ROOT" && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
     BRANCH=$(sanitizeBranchName "$BRANCH")
-    
+
     COMMIT=$(cd "$PROJECT_ROOT" && git log --oneline -1 2>/dev/null || echo "unknown")
     COMMIT=$(sanitizeCommitMessage "$COMMIT")
 fi
 
-# ── Load Docker state via HTTP API (if Docker is healthy) ───────────────────
+# ── Load Docker state via HTTP API with active memory lane filtering ────────────
 DOCKER_STATE="[Docker unavailable]"
 if $DOCKER_OK; then
-    DOCKER_STATE=$(curl -s -X POST http://localhost:3100/mcp/tools/call \
-      -H "Content-Type: application/json" \
-      -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}' 2>/dev/null | \
-      node -e "
+    DOCKER_STATE=""
+
+    # Loop through memory keys and search each one
+    for key in "${MEMORY_KEYS_ARRAY[@]}"; do
+        key=$(echo "$key" | xargs)  # Trim whitespace
+        [ -z "$key" ] && continue
+
+        KEY_STATE=$(curl -s -X POST http://localhost:3100/mcp/tools/call \
+          -H "Content-Type: application/json" \
+          -d "{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"$key\"}}" 2>/dev/null | \
+          node -e "
 const stdin = require('fs').readFileSync(0, 'utf-8');
 try {
   const data = JSON.parse(stdin);
   if (data.content && data.content[0] && data.content[0].json && data.content[0].json.entities && data.content[0].json.entities[0]) {
     const entity = data.content[0].json.entities[0];
     const obs = entity.observations || [];
-    const state = obs.join(' | ');
-    console.log(state || '[no state found]');
+    const state = obs.slice(-1).join('');  // Last observation only
+    console.log(state || '[no state]');
   } else {
-    console.log('[Docker search returned no entities]');
+    console.log('[no entities]');
   }
 } catch (e) {
-  console.log('[Docker parse error]');
+  console.log('[parse error]');
 }
-" 2>/dev/null || echo "[Docker call failed]")
+" 2>/dev/null || echo "[call failed]")
+
+        [ -z "$DOCKER_STATE" ] && DOCKER_STATE="$key: $KEY_STATE" || DOCKER_STATE="$DOCKER_STATE | $key: $KEY_STATE"
+    done
+
+    [ -z "$DOCKER_STATE" ] && DOCKER_STATE="[Docker search returned no entities]"
 fi
 
 # ── Build the preflight message ─────────────────────────────────────────────
