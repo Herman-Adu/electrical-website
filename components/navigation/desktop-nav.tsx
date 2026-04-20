@@ -31,6 +31,7 @@ export interface DesktopNavProps {
   navLinks: DesktopNavLink[];
   onScroll: (href: string) => void;
   onNavigate: (href: string) => void;
+  currentHash: string;
 }
 
 const normalizePath = (path: string): string => {
@@ -42,41 +43,17 @@ export function DesktopNav({
   navLinks,
   onScroll,
   onNavigate,
+  currentHash: propCurrentHash,
 }: DesktopNavProps) {
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-  const [currentHash, setCurrentHash] = useState("");
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [focusedDropdown, setFocusedDropdown] = useState<string | null>(null);
 
   const triggerRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const submenuItemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || typeof window === "undefined") return;
-
-    const syncHash = () => {
-      setCurrentHash(window.location.hash || "");
-    };
-
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    window.addEventListener("popstate", syncHash);
-
-    return () => {
-      window.removeEventListener("hashchange", syncHash);
-      window.removeEventListener("popstate", syncHash);
-    };
-  }, [mounted]);
-
-  useEffect(() => {
-    if (!mounted || typeof window === "undefined") return;
-    setCurrentHash(window.location.hash || "");
-  }, [mounted, pathname]);
+  // Use currentHash prop directly — parent (NavbarClient) manages hash state
+  const currentHash = propCurrentHash;
 
   const isSubmenuActive = (href: string): boolean => {
     const [rawPath, rawHash] = href.split("#");
@@ -142,7 +119,7 @@ export function DesktopNav({
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
     }, {});
-  }, [navLinks, pathname, currentHash]);
+  }, [navLinks, pathname, propCurrentHash]);
 
   const isDropdownOpen = (linkName: string): boolean => {
     return hoveredDropdown === linkName || focusedDropdown === linkName;

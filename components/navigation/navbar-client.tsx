@@ -135,8 +135,7 @@ export function NavbarClient() {
         const element = document.querySelector(selector);
         if (element) {
           scrollToElementWithOffset(element, { pageType: 'default' });
-          window.history.pushState(null, "", `${targetPath}${selector}`);
-          setCurrentHash(selector);
+          window.location.hash = hashPart; // Triggers hashchange automatically
           closeMenus();
           return;
         }
@@ -232,6 +231,7 @@ export function NavbarClient() {
               navLinks={navLinks}
               onScroll={scrollToSection}
               onNavigate={navigateTo}
+              currentHash={currentHash}
             />
 
             {/* Right: Actions */}
