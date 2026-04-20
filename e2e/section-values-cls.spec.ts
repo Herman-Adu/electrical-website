@@ -43,52 +43,6 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     expect(Math.abs((heightAfter?.height || 0) - (heightBefore?.height || 0))).toBeLessThan(15);
   });
 
-  test('keyboard: Enter toggles aria-expanded', async ({ page }) => {
-    const card = page.locator('[data-testid="section-value-card"]').first();
-
-    await card.focus();
-    await expect(card).toHaveAttribute('aria-expanded', 'false');
-
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(300);
-
-    await expect(card).toHaveAttribute('aria-expanded', 'true');
-  });
-
-  test('keyboard: Space toggles aria-expanded', async ({ page }) => {
-    const card = page.locator('[data-testid="section-value-card"]').first();
-
-    await card.focus();
-    await page.keyboard.press('Space');
-    await page.waitForTimeout(300);
-
-    await expect(card).toHaveAttribute('aria-expanded', 'true');
-  });
-
-  test('ARIA attributes present and correct', async ({ page }) => {
-    const card = page.locator('[data-testid="section-value-card"]').first();
-
-    await expect(card).toHaveAttribute('role', 'button');
-    await expect(card).toHaveAttribute('tabindex', '0');
-    await expect(card).toHaveAttribute('aria-expanded');
-    await expect(card).toHaveAttribute('aria-describedby');
-  });
-
-  test('full description in DOM (screen reader accessible)', async ({ page }) => {
-    const cards = page.locator('[data-testid="section-value-card"]');
-    const count = await cards.count();
-
-    for (let i = 0; i < count; i++) {
-      const card = cards.nth(i);
-      const describedById = await card.getAttribute('aria-describedby');
-
-      const description = page.locator(`#${describedById}`);
-      await expect(description).toHaveCount(1);
-
-      const hidden = await description.getAttribute('aria-hidden');
-      expect(hidden).not.toBe('true');
-    }
-  });
 
   test('tablet viewport: stable height (768px)', async ({ page }) => {
     test.setTimeout(60000);

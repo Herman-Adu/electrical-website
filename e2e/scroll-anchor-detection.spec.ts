@@ -80,17 +80,17 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
     test('hash set before scroll measurement - no 2-click needed', async ({ page }) => {
       await page.goto('/about');
 
-      // Click Core Values link in dropdown
+      // Click Core Values link in dropdown (submenu button)
       const aboutLink = page.locator('nav a:has-text("About")').first();
       await aboutLink.hover();
 
-      const coreValuesLink = page.locator('a[href="#core-values"]');
+      const coreValuesLink = page.locator('button[role="menuitem"]:has-text("Core Values")');
 
       // Single click should scroll immediately (no second click needed)
       await coreValuesLink.click();
 
       // Verify URL updated
-      await expect(page).toHaveURL(/core-values/);
+      await expect(page).toHaveURL(/#core-values/);
 
       // Verify section in viewport (within 500ms timeout for smooth scroll)
       const section = page.locator('#core-values');
@@ -108,7 +108,7 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       const aboutDropdown = page.locator('nav a:has-text("About")').first();
       await aboutDropdown.hover();
 
-      const timelineLink = page.locator('a[href="/about#timeline"]');
+      const timelineLink = page.locator('button[role="menuitem"]:has-text("Company History")');
 
       // Wait for navigation AND viewport visibility
       await Promise.all([
@@ -236,6 +236,86 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Last section should be highlighted
       const lastSectionLink = page.locator('button:has-text("Why Choose Us")').first();
       await expect(lastSectionLink).toBeVisible();
+    });
+  });
+
+  test.describe('Scroll-to Race Condition Resolution', () => {
+    test('same-page scroll occurs on first click (no race condition)', async ({ page }) => {
+      await page.goto('/');
+
+      const scrollBefore = await page.evaluate(() => window.scrollY);
+
+      // Click Home link in navbar to access Services submenu
+      const homeLink = page.locator('nav a:has-text("Home")').first();
+      await homeLink.hover();
+
+      const servicesSubmenuLink = page.locator('button[role="menuitem"]:has-text("Services")');
+      await servicesSubmenuLink.click();
+
+      // Verify scroll happened immediately (first click)
+      await page.waitForTimeout(500); // Allow smooth scroll to complete
+      const scrollAfter = await page.evaluate(() => window.scrollY);
+
+      expect(scrollAfter).toBeGreaterThan(scrollBefore);
+      await expect(page).toHaveURL(/#services/);
+
+      // Verify Services section is in viewport
+      const servicesSection = page.locator('#services');
+      await expect(servicesSection).toBeInViewport();
+    });
+
+    test('deep link reload scrolls without extra click', async ({ page }) => {
+      // Navigate directly to page with hash
+      await page.goto('/about#timeline');
+
+      // Verify section is visible immediately (no scroll needed)
+      const timelineSection = page.locator('#timeline');
+      await expect(timelineSection).toBeInViewport({ timeout: 5000 });
+    });
+
+    test('cross-page navigation then scrolls correctly', async ({ page }) => {
+      await page.goto('/');
+
+      // Navigate from home to About page with hash
+      const aboutDropdown = page.locator('nav a:has-text("About")').first();
+      await aboutDropdown.hover();
+
+      const certLink = page.locator('button[role="menuitem"]:has-text("Certifications")');
+
+      // Wait for both navigation and section to be in viewport
+      await Promise.all([
+        page.waitForURL(/\/about/),
+        certLink.click(),
+      ]);
+
+      // Verify section scrolled into view after navigation
+      const certSection = page.locator('#certifications');
+      await expect(certSection).toBeInViewport({ timeout: 5000 });
+    });
+
+    test('hash updates before scroll measurement (prevents breadcrumb offset race)', async ({ page }) => {
+      await page.goto('/about');
+
+      // Get scroll position before clicking
+      const scrollBefore = await page.evaluate(() => window.scrollY);
+
+      // Click Vision & Mission link
+      const aboutLink = page.locator('nav a:has-text("About")').first();
+      await aboutLink.hover();
+
+      const visionLink = page.locator('button[role="menuitem"]:has-text("Vision & Mission")');
+      await visionLink.click();
+
+      // Wait for scroll to complete
+      await page.waitForTimeout(500);
+
+      // Verify hash changed
+      const currentHash = await page.evaluate(() => window.location.hash);
+      expect(currentHash).toBe('#vision-mission');
+
+      // Verify section is in viewport
+      const visionSection = page.locator('#vision-mission');
+      await expect(visionSection).toBeInViewport();
     });
   });
 });
