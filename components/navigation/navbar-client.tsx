@@ -35,6 +35,7 @@ const navLinks = [
       { name: "Vision & Mission", href: "/about#vision-mission" },
       { name: "Certifications", href: "/about#certifications" },
       { name: "Peace of Mind", href: "/about#peace-of-mind" },
+      { name: "Core Values", href: "/about#core-values" },
       { name: "Community", href: "/about#community" },
       { name: "Why Choose Us", href: "/about#why-choose-us" },
     ],
