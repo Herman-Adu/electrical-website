@@ -33,7 +33,7 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
     <div
       data-section={section}
       data-sticky-breadcrumb="true"
-      className="sticky top-16 lg:top-20 z-40 dark:bg-background/95 backdrop-blur-md border-b border-foreground/60 dark:border-electric-cyan/20"
+      className="sticky top-16 lg:top-20 z-40 dark:bg-background/95 backdrop-blur-md border-b border-slate-400 dark:border-electric-cyan/20"
     >
       <div className="section-content max-w-7xl py-3">
         <nav

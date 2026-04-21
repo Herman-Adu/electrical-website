@@ -258,12 +258,12 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-slate-500/30 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="text-slate-500/70 dark:text-electric-cyan animate-pulse"
+                className="text-foreground70 dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-slate-500/60 dark:text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/60 dark:text-electric-cyan/80 uppercase">
                 Status // {statusText}
               </span>
             </div>
@@ -281,7 +281,7 @@ export function Hero() {
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-muted-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Expert electrical engineering and installations for commercial and
             industrial frontiers. Precision-engineered power solutions delivered
@@ -319,7 +319,7 @@ export function Hero() {
           {/* Technical Metadata */}
           <motion.div
             variants={statsContainerVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] text-muted-foreground dark:text-foreground/80 uppercase"
+            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] text-foreground/80 dark:text-foreground/80 uppercase"
           >
             <span>Est. 2024</span>
             <span className="hidden sm:inline">|</span>
@@ -338,7 +338,7 @@ export function Hero() {
           onClick={scrollToContent}
           className="flex cursor-pointer flex-col items-center gap-2 text-foreground/70 transition-colors hover:text-electric-cyan"
         >
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground dark:text-foreground/80 font-bold">
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-foreground/70 dark:text-foreground/80 font-bold">
             Scroll
           </span>
           <ChevronDown

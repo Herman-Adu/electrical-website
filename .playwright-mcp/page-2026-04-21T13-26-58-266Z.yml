@@ -1,0 +1,263 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Nexgen round logo NEXGEN Electrical" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Nexgen round logo" [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: NEXGEN
+          - generic [ref=e11]: Electrical
+      - generic "Desktop navigation" [ref=e12]:
+        - generic [ref=e14]:
+          - link "Navigate to Home" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - img [ref=e16]
+        - generic [ref=e19]:
+          - link "Navigate to About" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - img [ref=e21]
+        - generic [ref=e24]:
+          - link "Navigate to Services" [ref=e25] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+          - img [ref=e26]
+        - generic [ref=e29]:
+          - link "Navigate to Projects" [ref=e30] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+          - img [ref=e32]
+        - generic [ref=e35]:
+          - link "Navigate to News Hub" [ref=e36] [cursor=pointer]:
+            - /url: /news-hub
+            - text: News Hub
+          - img [ref=e37]
+        - button "Navigate to Contact" [ref=e40]: Contact
+      - link "Get Quote" [ref=e43] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e44]: Get Quote
+  - main [ref=e47]:
+    - generic [ref=e48]:
+      - img "Residential category hero" [ref=e51]
+      - generic [ref=e55]:
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e60]: Category // INITIALIZING
+        - navigation "Breadcrumb" [ref=e61]:
+          - link "Projects" [ref=e62] [cursor=pointer]:
+            - /url: /projects
+          - generic [ref=e63]: /
+          - link "Categories" [ref=e64] [cursor=pointer]:
+            - /url: /projects/category
+          - generic [ref=e65]: /
+          - generic [ref=e66]: Residential
+        - img [ref=e69]
+        - generic [ref=e74]: 1 Project
+        - heading "Residential Living" [level=1] [ref=e76]:
+          - generic [ref=e77]: Residential
+          - generic [ref=e78]: Living
+        - paragraph [ref=e79]: Home and domestic electrical delivery projects.
+        - generic [ref=e80]:
+          - link "All Projects" [ref=e81] [cursor=pointer]:
+            - /url: /projects
+          - link "Start a Project" [ref=e82] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e83]:
+          - generic [ref=e84]: NICEIC Approved
+          - generic [ref=e85]: "|"
+          - generic [ref=e86]: Part P Certified
+          - generic [ref=e87]: "|"
+          - generic [ref=e88]: Quality Assured
+      - button "Scroll to projects" [ref=e90] [cursor=pointer]:
+        - generic [ref=e91]: View Projects
+        - img [ref=e92]
+    - navigation "Breadcrumb" [ref=e96]:
+      - link "Home" [ref=e97] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e98]: /
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - link "Projects" [ref=e101] [cursor=pointer]:
+            - /url: /projects
+          - generic [ref=e102]: /
+        - generic [ref=e103]:
+          - link "Categories" [ref=e104] [cursor=pointer]:
+            - /url: /projects/category
+          - generic [ref=e105]: /
+      - generic [ref=e106]: Residential
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e117]: Live Feed
+            - heading "Residential Projects" [level=2] [ref=e118]
+          - generic [ref=e120]: 1 project
+        - feed [ref=e121]:
+          - article [ref=e123]:
+            - generic [ref=e124]:
+              - img "Residential development electrical installation" [ref=e126]
+              - generic [ref=e128]:
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - generic [ref=e131]: Residential
+                    - generic [ref=e132]: In Progress
+                    - generic [ref=e133]: 01 Feb 2026
+                  - generic [ref=e134]:
+                    - heading "North Estate Residential Phase 2" [level=3] [ref=e135]
+                    - paragraph [ref=e136]: Second-phase domestic distribution, EV charging readiness, and smart-home backbone for a high-density new-build estate.
+                  - generic [ref=e137]:
+                    - generic [ref=e138]:
+                      - img [ref=e139]
+                      - text: Croydon
+                    - generic [ref=e142]: Residential
+                - link "View Project" [ref=e144] [cursor=pointer]:
+                  - /url: /projects/category/residential/north-estate-residential-phase-2
+                  - text: View Project
+                  - generic [ref=e145]: →
+      - complementary [ref=e146]:
+        - generic [ref=e147]:
+          - generic [ref=e153]: Live Feed
+          - heading "Residential Resources" [level=3] [ref=e154]
+          - paragraph [ref=e155]: Guides, consultations, and resources for residential projects.
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e160]: 📢
+            - paragraph [ref=e161]: Home Upgrades
+          - generic [ref=e162]:
+            - heading "Whole-Home Rewiring" [level=4] [ref=e163]
+            - paragraph [ref=e164]: Modernise your property with a complete electrical rewire including consumer unit upgrade.
+          - generic [ref=e165]:
+            - generic [ref=e166]: campaign
+            - link "Get Quote →" [ref=e167] [cursor=pointer]:
+              - /url: /contact?service=rewiring
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e172]: 💬
+            - paragraph [ref=e173]: Smart Living
+          - generic [ref=e174]:
+            - heading "Smart Home Integration" [level=4] [ref=e175]
+            - paragraph [ref=e176]: Transform your home with intelligent lighting, heating controls, and EV charging solutions.
+          - generic [ref=e177]:
+            - generic [ref=e178]: social
+            - link "Explore Options →" [ref=e179] [cursor=pointer]:
+              - /url: /services/residential
+        - generic [ref=e182]:
+          - generic [ref=e183]:
+            - generic [ref=e184]: 🎯
+            - paragraph [ref=e185]: Start Your Project
+          - generic [ref=e186]:
+            - heading "Free Project Consultation" [level=4] [ref=e187]
+            - paragraph [ref=e188]: Discuss your electrical project requirements with our experienced team. No obligation quote.
+          - generic [ref=e189]:
+            - generic [ref=e190]: cta
+            - link "Book Consultation →" [ref=e191] [cursor=pointer]:
+              - /url: /contact?service=project-consultation
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - generic [ref=e196]: 📢
+            - paragraph [ref=e197]: Our Approach
+          - generic [ref=e198]:
+            - heading "Project Methodology Guide" [level=4] [ref=e199]
+            - paragraph [ref=e200]: Learn how we deliver complex electrical projects on time and on budget with our proven process.
+          - generic [ref=e201]:
+            - generic [ref=e202]: campaign
+            - link "Learn More →" [ref=e203] [cursor=pointer]:
+              - /url: /about
+    - generic [ref=e204]:
+      - generic [ref=e207]:
+        - generic [ref=e208]:
+          - link "NEXGEN Electrical Innovations" [ref=e209] [cursor=pointer]:
+            - /url: /
+            - img "NEXGEN Electrical Innovations" [ref=e211]
+          - paragraph [ref=e212]: Powering the next generation of commercial and industrial innovation with precision-engineered electrical solutions.
+          - generic [ref=e213]:
+            - link "LinkedIn" [ref=e214] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e215]
+            - link "Twitter" [ref=e219] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e220]
+            - link "Facebook" [ref=e222] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e223]
+            - link "Instagram" [ref=e225] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e226]
+        - generic [ref=e229]:
+          - heading "Services" [level=3] [ref=e230]
+          - list [ref=e231]:
+            - listitem [ref=e232]:
+              - link "Commercial Installations" [ref=e233] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e234]:
+              - link "Industrial Systems" [ref=e235] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e236]:
+              - link "Power Distribution" [ref=e237] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e238]:
+              - link "Safety Systems" [ref=e239] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e240]:
+              - link "Energy Management" [ref=e241] [cursor=pointer]:
+                - /url: /services
+        - generic [ref=e242]:
+          - heading "Company" [level=3] [ref=e243]
+          - list [ref=e244]:
+            - listitem [ref=e245]:
+              - link "About Us" [ref=e246] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e247]:
+              - link "Our Team" [ref=e248] [cursor=pointer]:
+                - /url: /about#directors
+            - listitem [ref=e249]:
+              - link "Careers" [ref=e250] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e251]:
+              - link "News & Updates" [ref=e252] [cursor=pointer]:
+                - /url: /news-hub
+            - listitem [ref=e253]:
+              - link "Case Studies" [ref=e254] [cursor=pointer]:
+                - /url: /news-hub/category/case-studies
+        - generic [ref=e255]:
+          - heading "Support" [level=3] [ref=e256]
+          - list [ref=e257]:
+            - listitem [ref=e258]:
+              - link "Contact" [ref=e259] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e260]:
+              - link "Emergency Services" [ref=e261] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e262]:
+              - link "Maintenance Plans" [ref=e263] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e264]:
+              - link "Documentation" [ref=e265] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e266]:
+              - link "FAQs" [ref=e267] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e268]:
+          - heading "24/7 Emergency" [level=3] [ref=e269]
+          - generic [ref=e270]:
+            - generic [ref=e273]: Online
+            - img "NEXGEN" [ref=e275]
+            - link "+44 (0) 20 1234 5678" [ref=e276] [cursor=pointer]:
+              - /url: tel:+442012345678
+            - paragraph [ref=e277]: Rapid response team ready
+      - generic [ref=e280]:
+        - generic [ref=e281]: 2026 NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
+        - generic [ref=e282]:
+          - link "PRIVACY POLICY" [ref=e283] [cursor=pointer]:
+            - /url: "#"
+          - link "TERMS OF SERVICE" [ref=e284] [cursor=pointer]:
+            - /url: "#"
+          - link "LICENSING" [ref=e285] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e286]: POWERED BY ADU-DEV SOLUTIONS
+      - generic:
+        - img
+  - button "Open Next.js Dev Tools" [ref=e292] [cursor=pointer]:
+    - img [ref=e293]
+  - alert [ref=e296]
