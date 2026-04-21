@@ -1,0 +1,590 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Nexgen round logo NEXGEN Electrical" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Nexgen round logo" [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: NEXGEN
+          - generic [ref=e11]: Electrical
+      - generic "Desktop navigation" [ref=e12]:
+        - generic [ref=e14]:
+          - link "Navigate to Home" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - img [ref=e17]
+        - generic [ref=e20]:
+          - link "Navigate to About" [ref=e21] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - img [ref=e22]
+        - generic [ref=e25]:
+          - link "Navigate to Services" [ref=e26] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+          - img [ref=e27]
+        - generic [ref=e30]:
+          - link "Navigate to Projects" [ref=e31] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+          - img [ref=e32]
+        - generic [ref=e35]:
+          - link "Navigate to News Hub" [ref=e36] [cursor=pointer]:
+            - /url: /news-hub
+            - text: News Hub
+          - img [ref=e37]
+        - button "Navigate to Contact" [ref=e40]: Contact
+      - link "Get Quote" [ref=e43] [cursor=pointer]:
+        - /url: /contact
+  - main [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e50]:
+        - generic [ref=e60]: X:0000 Y:0000
+        - generic [ref=e61]: SECTOR_A1
+      - generic:
+        - generic:
+          - img:
+            - generic:
+              - generic: PWR_NODE_001
+              - generic: MAIN_HUB
+              - generic: IN_FEED_L
+              - generic: IN_FEED_R
+      - generic [ref=e63]:
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - generic [ref=e68]: Status // INITIALIZING
+        - heading "Powering the Next Generation of Innovation" [level=1] [ref=e69]:
+          - generic [ref=e70]: Powering the
+          - generic [ref=e71]: Next Generation
+          - generic [ref=e72]: of Innovation
+        - paragraph [ref=e73]: Expert electrical engineering and installations for commercial and industrial frontiers. Precision-engineered power solutions delivered with absolute excellence.
+        - generic [ref=e74]:
+          - button "Initiate System" [ref=e75]:
+            - generic [ref=e76]:
+              - text: Initiate System
+              - img [ref=e77]
+          - button "Our Solutions" [ref=e80]
+        - generic [ref=e81]:
+          - generic [ref=e82]: Est. 2024
+          - generic [ref=e83]: "|"
+          - generic [ref=e84]: Commercial & Industrial
+          - generic [ref=e85]: "|"
+          - generic [ref=e86]: 24/7 Operations
+      - button "Scroll" [ref=e88] [cursor=pointer]:
+        - generic [ref=e89]: Scroll
+        - img [ref=e90]
+    - navigation "Breadcrumb" [ref=e94]:
+      - generic [ref=e95]: Home
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e102]: Core Services
+        - heading "Engineering Excellence" [level=2] [ref=e104]
+        - paragraph [ref=e105]: Comprehensive electrical solutions designed for the demands of modern commercial and industrial operations.
+      - generic [ref=e106]:
+        - generic [ref=e108]:
+          - generic [ref=e110]: 440V
+          - img [ref=e112]
+          - heading "Commercial Installations" [level=3] [ref=e117]
+          - paragraph [ref=e118]: Full electrical infrastructure for offices, retail spaces, and commercial complexes including full lighting design, fit-out wiring, and emergency systems.
+          - generic [ref=e119]:
+            - generic [ref=e120]: Emergency systems
+            - generic [ref=e121]: Data installs
+            - generic [ref=e122]: LED lighting
+            - generic [ref=e123]: Fit-out wiring
+          - generic [ref=e124]:
+            - button "Learn More" [ref=e125]:
+              - generic [ref=e126]: Learn More
+              - img [ref=e127]
+            - generic [ref=e129]: "01"
+        - generic [ref=e131]:
+          - generic [ref=e133]: 11kV
+          - img [ref=e135]
+          - heading "Industrial Systems" [level=3] [ref=e138]
+          - paragraph [ref=e139]: Heavy-duty electrical solutions for manufacturing plants, warehouses, and processing facilities with full lighting and high-voltage infrastructure.
+          - generic [ref=e140]:
+            - generic [ref=e141]: Motor controls
+            - generic [ref=e142]: Busbar systems
+            - generic [ref=e143]: Warehouse lighting
+            - generic [ref=e144]: Panel boards
+          - generic [ref=e145]:
+            - button "Learn More" [ref=e146]:
+              - generic [ref=e147]: Learn More
+              - img [ref=e148]
+            - generic [ref=e150]: "02"
+        - generic [ref=e152]:
+          - generic [ref=e154]: 33kV
+          - img [ref=e156]
+          - heading "Power Distribution" [level=3] [ref=e159]
+          - paragraph [ref=e160]: Efficient power distribution networks ensuring reliable electricity flow across facilities, from transformer installation to final circuit protection.
+          - generic [ref=e161]:
+            - generic [ref=e162]: Transformers
+            - generic [ref=e163]: Switchgear
+            - generic [ref=e164]: Load balancing
+            - generic [ref=e165]: Cable management
+            - generic [ref=e166]: Sub-metering
+          - generic [ref=e167]:
+            - button "Learn More" [ref=e168]:
+              - generic [ref=e169]: Learn More
+              - img [ref=e170]
+            - generic [ref=e172]: "03"
+        - generic [ref=e174]:
+          - generic [ref=e176]: 230V
+          - img [ref=e178]
+          - heading "Residential Services" [level=3] [ref=e182]
+          - paragraph [ref=e183]: Complete home electrical solutions from new builds to full rewires, EV charger installation, smart home wiring, and solar-ready consumer units.
+          - generic [ref=e184]:
+            - generic [ref=e185]: Full rewires
+            - generic [ref=e186]: EV chargers
+            - generic [ref=e187]: Smart home
+            - generic [ref=e188]: Solar-ready
+            - generic [ref=e189]: Consumer units
+          - generic [ref=e190]:
+            - button "Learn More" [ref=e191]:
+              - generic [ref=e192]: Learn More
+              - img [ref=e193]
+            - generic [ref=e195]: "04"
+        - generic [ref=e197]:
+          - generic [ref=e199]: Smart
+          - img [ref=e201]
+          - heading "Energy Management" [level=3] [ref=e205]
+          - paragraph [ref=e206]: Smart energy monitoring and optimisation systems to reduce operational costs, improve efficiency, and meet sustainability compliance targets.
+          - generic [ref=e207]:
+            - generic [ref=e208]: BMS system
+            - generic [ref=e209]: Metering
+            - generic [ref=e210]: Analytics
+            - generic [ref=e211]: Power factor
+            - generic [ref=e212]: Compliance
+          - generic [ref=e213]:
+            - button "Learn More" [ref=e214]:
+              - generic [ref=e215]: Learn More
+              - img [ref=e216]
+            - generic [ref=e218]: "05"
+        - generic [ref=e220]:
+          - generic [ref=e222]: All
+          - img [ref=e224]
+          - heading "Maintenance & Repair" [level=3] [ref=e227]
+          - paragraph [ref=e228]: 24/7 emergency response and scheduled preventive maintenance programmes to keep commercial, industrial, and residential systems operational.
+          - generic [ref=e229]:
+            - generic [ref=e230]: 24/7 support
+            - generic [ref=e231]: Preventive
+            - generic [ref=e232]: Upgrades
+            - generic [ref=e233]: Testing
+            - generic [ref=e234]: Certification
+          - generic [ref=e235]:
+            - button "Learn More" [ref=e236]:
+              - generic [ref=e237]: Learn More
+              - img [ref=e238]
+            - generic [ref=e240]: "06"
+      - generic [ref=e241]:
+        - generic [ref=e244]: Need a custom solution?
+        - generic [ref=e247]:
+          - link "View All Services" [ref=e248] [cursor=pointer]:
+            - /url: /services
+          - link "Request Consultation" [ref=e249] [cursor=pointer]:
+            - /url: /contact
+    - generic [ref=e250]:
+      - img "Industrial warehouse lighting installation" [ref=e252]
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - generic [ref=e259]: Illuminating Excellence
+          - heading "Powering the Spaces That Power Industry" [level=2] [ref=e260]:
+            - text: Powering the Spaces
+            - text: That Power Industry
+          - paragraph [ref=e261]: From high-bay LED retrofits to complete industrial lighting systems, we deliver solutions that reduce energy costs by up to 60% while maximizing visibility and safety across your facilities.
+          - button "View Our Projects" [ref=e263]:
+            - generic [ref=e264]:
+              - text: View Our Projects
+              - img [ref=e265]
+        - generic [ref=e268]:
+          - generic [ref=e269]:
+            - generic [ref=e272]: 0+
+            - generic [ref=e273]: Projects Delivered
+          - generic [ref=e275]:
+            - generic [ref=e278]: 0 Years
+            - generic [ref=e279]: Industry Excellence
+          - generic [ref=e281]:
+            - generic [ref=e284]: 0.0%
+            - generic [ref=e285]: Client Satisfaction
+          - generic [ref=e287]:
+            - generic [ref=e290]: 0/7
+            - generic [ref=e291]: Emergency Response
+    - generic [ref=e294]:
+      - generic [ref=e295]:
+        - generic [ref=e297]: Core Capabilities
+        - heading "Intelligent Systems" [level=2] [ref=e299]
+        - paragraph [ref=e300]: Real-time monitoring, diagnostics, and preventive maintenance for modern electrical infrastructure.
+      - generic [ref=e301]:
+        - generic [ref=e303]:
+          - generic [ref=e304]: "01"
+          - img "Power Distribution" [ref=e306]
+          - generic [ref=e307]:
+            - generic [ref=e309]: Grid Intelligence
+            - heading "Power Distribution Monitor" [level=3] [ref=e311]
+            - paragraph [ref=e312]: Real-time load balancing across multi-zone distribution networks
+            - generic [ref=e313]:
+              - generic [ref=e314]:
+                - generic [ref=e315]:
+                  - paragraph [ref=e316]: Zone A
+                  - paragraph [ref=e317]: Optimal
+                - generic [ref=e318]:
+                  - paragraph [ref=e319]: 98.5%
+                  - paragraph [ref=e320]: Capacity
+              - generic [ref=e321]:
+                - generic [ref=e322]:
+                  - paragraph [ref=e323]: Zone B
+                  - paragraph [ref=e324]: Stable
+                - generic [ref=e325]:
+                  - paragraph [ref=e326]: 76.2%
+                  - paragraph [ref=e327]: Capacity
+              - generic [ref=e328]:
+                - generic [ref=e329]:
+                  - paragraph [ref=e330]: Zone C
+                  - paragraph [ref=e331]: Balanced
+                - generic [ref=e332]:
+                  - paragraph [ref=e333]: 84.1%
+                  - paragraph [ref=e334]: Capacity
+            - button "Monitor Zones" [ref=e335]
+        - generic [ref=e337]:
+          - generic [ref=e338]: "02"
+          - img "System Diagnostics" [ref=e340]
+          - generic [ref=e341]:
+            - generic [ref=e343]: Live Diagnostics
+            - heading "System Diagnostics Feed" [level=3] [ref=e345]
+            - paragraph [ref=e346]: Continuous system health monitoring with predictive fault detection
+            - button "View Full Report" [ref=e348]
+        - generic [ref=e350]:
+          - generic [ref=e351]: "03"
+          - img "Maintenance Engineer" [ref=e353]
+          - generic [ref=e354]:
+            - generic [ref=e356]: Preventive Protocol
+            - heading "Maintenance Scheduler" [level=3] [ref=e358]
+            - paragraph [ref=e359]: Automated maintenance scheduling aligned with operational windows
+            - generic [ref=e361]:
+              - button "S" [ref=e362]
+              - button "M" [ref=e363]
+              - button "T" [ref=e364]
+              - button "W" [ref=e365]
+              - button "T" [ref=e366]
+              - button "F" [ref=e367]
+              - button "S" [ref=e368]
+            - button "Schedule Service" [disabled] [ref=e369]
+    - generic [ref=e372]:
+      - generic [ref=e373]:
+        - generic [ref=e374]:
+          - generic [ref=e377]: Our Process
+          - heading "Precision Architecture" [level=2] [ref=e378]
+          - paragraph [ref=e379]: We don't just install; we engineer. Every Nexgen project begins with a high-fidelity digital twin of your electrical infrastructure, ensuring precision before a single wire is laid.
+          - generic [ref=e380]:
+            - generic [ref=e381]:
+              - img [ref=e382]
+              - generic [ref=e385]:
+                - text: Load Analysis
+                - paragraph [ref=e386]: Comprehensive power requirement assessment
+            - generic [ref=e387]:
+              - img [ref=e388]
+              - generic [ref=e391]:
+                - text: CAD Design
+                - paragraph [ref=e392]: Precision digital blueprints and schematics
+            - generic [ref=e393]:
+              - img [ref=e394]
+              - generic [ref=e397]:
+                - text: Safety Audits
+                - paragraph [ref=e398]: Thorough safety compliance verification
+            - generic [ref=e399]:
+              - img [ref=e400]
+              - generic [ref=e403]:
+                - text: Efficiency Tuning
+                - paragraph [ref=e404]: Optimized power distribution design
+          - button "Start Your Project" [ref=e405]:
+            - text: Start Your Project
+            - img [ref=e406]
+        - img [ref=e411]:
+          - generic [ref=e427]:
+            - generic [ref=e428]: PWR_IN
+            - generic [ref=e429]: DIST_A
+            - generic [ref=e430]: DIST_B
+            - generic [ref=e431]: MAIN
+          - generic [ref=e433]: 400m
+      - generic [ref=e439]:
+        - generic [ref=e440]:
+          - generic [ref=e441]: 500+
+          - generic [ref=e442]: Projects Completed
+        - generic [ref=e443]:
+          - generic [ref=e444]: 99.9%
+          - generic [ref=e445]: System Uptime
+        - generic [ref=e446]:
+          - generic [ref=e447]: 24/7
+          - generic [ref=e448]: Support Available
+        - generic [ref=e449]:
+          - generic [ref=e450]: 15+
+          - generic [ref=e451]: Years Experience
+    - generic [ref=e455]:
+      - generic [ref=e457]:
+        - generic [ref=e458]:
+          - generic [ref=e459]:
+            - img [ref=e460]
+            - generic [ref=e462]: Live Monitoring
+          - heading "Grid Intelligence" [level=2] [ref=e463]
+          - paragraph [ref=e464]: Real-time monitoring of installed assets across the industrial sector. Efficiency is not a goal; it is a constant variable.
+        - generic [ref=e466]:
+          - img [ref=e467]
+          - generic [ref=e469]: ALL SYSTEMS NOMINAL
+      - generic [ref=e471]:
+        - generic [ref=e472]:
+          - generic [ref=e473]:
+            - img [ref=e474]
+            - generic [ref=e476]: Active Load
+          - generic [ref=e477]:
+            - generic [ref=e478]: "0"
+            - generic [ref=e479]: kW
+        - generic [ref=e482]:
+          - generic [ref=e483]:
+            - img [ref=e484]
+            - generic [ref=e487]: Grid Stability
+          - generic [ref=e488]:
+            - generic [ref=e489]: "0"
+            - generic [ref=e490]: "%"
+        - generic [ref=e493]:
+          - generic [ref=e494]:
+            - img [ref=e495]
+            - generic [ref=e499]: Reactive Power
+          - generic [ref=e500]:
+            - generic [ref=e501]: "0"
+            - generic [ref=e502]: kVAR
+        - generic [ref=e505]:
+          - generic [ref=e506]:
+            - img [ref=e507]
+            - generic [ref=e513]: Assets Online
+          - generic [ref=e514]:
+            - generic [ref=e515]: "0"
+            - generic [ref=e516]: Nodes
+      - generic [ref=e520]:
+        - generic [ref=e526]: Diagnostics_Console_v4.2.1
+        - generic [ref=e528]: "> AWAITING SYSTEM BOOT..."
+        - generic [ref=e529]:
+          - generic [ref=e532]: LIVE
+          - generic [ref=e533]: "ENCRYPTION: AES-256 // MQTT_TLS"
+      - generic [ref=e534]:
+        - generic [ref=e535]:
+          - generic [ref=e536]: "PROTOCOL: IEC 61850"
+          - generic [ref=e537]: "|"
+          - generic [ref=e538]: "LATENCY: 12ms"
+          - generic [ref=e539]: "|"
+          - generic [ref=e540]: "UPTIME: 99.97%"
+        - generic [ref=e547]: "SIGNAL: STRONG"
+    - generic [ref=e548]:
+      - img "Modern smart home interior with professional lighting" [ref=e551]
+      - generic [ref=e558]:
+        - generic [ref=e559]:
+          - generic [ref=e562]: Smart Living
+          - heading "Intelligent Lighting For Modern Living" [level=2] [ref=e563]:
+            - text: Intelligent Lighting
+            - text: For Modern Living
+          - paragraph [ref=e565]: Transform your home with smart lighting systems that adapt to your lifestyle. Experience perfect ambiance at every moment while significantly reducing your energy footprint.
+          - generic [ref=e566]:
+            - generic [ref=e567]:
+              - img [ref=e568]
+              - generic [ref=e572]: 0%
+            - generic [ref=e573]:
+              - heading "Energy Savings" [level=3] [ref=e574]
+              - paragraph [ref=e575]: Average reduction in residential electricity costs with our smart lighting solutions
+          - button "Schedule Consultation" [ref=e577]:
+            - generic [ref=e578]:
+              - text: Schedule Consultation
+              - img [ref=e579]
+        - generic [ref=e582]:
+          - generic [ref=e584]:
+            - generic [ref=e585]:
+              - img [ref=e587]
+              - generic [ref=e589]:
+                - paragraph [ref=e590]: Status
+                - paragraph [ref=e591]: All Systems Active
+            - generic [ref=e592]:
+              - generic [ref=e593]:
+                - generic [ref=e594]: Connected Lights
+                - generic [ref=e595]: "24"
+              - generic [ref=e596]:
+                - generic [ref=e597]: Scenes Active
+                - generic [ref=e598]: Evening
+              - generic [ref=e599]:
+                - generic [ref=e600]: Auto Schedule
+                - generic [ref=e601]: "ON"
+          - generic [ref=e602]:
+            - generic [ref=e603]:
+              - generic [ref=e604]:
+                - generic [ref=e605]: Living Room
+                - generic [ref=e606]: 75%
+              - slider [ref=e609] [cursor=pointer]: "75"
+            - generic [ref=e610]:
+              - generic [ref=e611]:
+                - generic [ref=e612]: Kitchen
+                - generic [ref=e613]: 90%
+              - slider [ref=e616] [cursor=pointer]: "90"
+            - generic [ref=e617]:
+              - generic [ref=e618]:
+                - generic [ref=e619]: Bedroom
+                - generic [ref=e620]: 40%
+              - slider [ref=e623] [cursor=pointer]: "40"
+          - generic [ref=e625]:
+            - generic [ref=e626]:
+              - generic [ref=e627]: Weekly Usage
+              - generic [ref=e628]: kWh
+            - generic [ref=e629]: 17.2kWh this week
+            - generic [ref=e630]:
+              - generic [ref=e632]: "3.2"
+              - generic [ref=e634]: "2.1"
+              - generic [ref=e636]: "3.8"
+              - generic [ref=e638]: "2.6"
+              - generic [ref=e640]: "1.9"
+              - generic [ref=e642]: "1.6"
+              - generic [ref=e644]: "2"
+            - generic [ref=e645]:
+              - generic [ref=e646]: Mon
+              - generic [ref=e647]: Tue
+              - generic [ref=e648]: Wed
+              - generic [ref=e649]: Thu
+              - generic [ref=e650]: Fri
+              - generic [ref=e651]: Sat
+              - generic [ref=e652]: Sun
+            - generic [ref=e653]:
+              - generic [ref=e654]: Avg / day
+              - generic [ref=e655]: 2.5 kWh
+    - generic [ref=e661]:
+      - generic:
+        - img
+        - img
+      - generic [ref=e664]: Systems Ready
+      - generic [ref=e665]:
+        - generic [ref=e666]:
+          - generic [ref=e667]:
+            - generic [ref=e668]: 0+
+            - generic [ref=e669]: Years Experience
+          - generic [ref=e670]:
+            - generic [ref=e671]: 0+
+            - generic [ref=e672]: Projects Completed
+          - generic [ref=e673]:
+            - generic [ref=e674]: 0%
+            - generic [ref=e675]: Safety Compliance
+        - generic [ref=e676]:
+          - heading "Ready to Power Your Vision?" [level=2] [ref=e677]:
+            - text: Ready to Power
+            - text: Your Vision?
+          - paragraph [ref=e678]: From precision engineering to complete installation, we deliver electrical solutions tailored to your domain. Let's build something extraordinary.
+        - generic [ref=e679]:
+          - generic [ref=e681] [cursor=pointer]:
+            - img [ref=e682]
+            - text: Residential
+          - generic [ref=e686] [cursor=pointer]:
+            - img [ref=e687]
+            - text: Commercial
+          - generic [ref=e692] [cursor=pointer]:
+            - img [ref=e693]
+            - text: Industrial
+        - generic [ref=e695]:
+          - link "Get Started" [ref=e697] [cursor=pointer]:
+            - /url: /contact
+            - button "Get Started" [ref=e698]:
+              - generic [ref=e702]:
+                - text: Get Started
+                - img [ref=e704]
+          - link "View Our Work" [ref=e708] [cursor=pointer]:
+            - /url: /#smart-living
+            - button "View Our Work" [ref=e709]:
+              - text: View Our Work
+              - img [ref=e710]
+    - generic [ref=e713]:
+      - generic [ref=e716]:
+        - generic [ref=e717]:
+          - link "NEXGEN Electrical Innovations" [ref=e718] [cursor=pointer]:
+            - /url: /
+            - img "NEXGEN Electrical Innovations" [ref=e720]
+          - paragraph [ref=e721]: Powering the next generation of commercial and industrial innovation with precision-engineered electrical solutions.
+          - generic [ref=e722]:
+            - link "LinkedIn" [ref=e723] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e724]
+            - link "Twitter" [ref=e728] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e729]
+            - link "Facebook" [ref=e731] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e732]
+            - link "Instagram" [ref=e734] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e735]
+        - generic [ref=e738]:
+          - heading "Services" [level=3] [ref=e739]
+          - list [ref=e740]:
+            - listitem [ref=e741]:
+              - link "Commercial Installations" [ref=e742] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e743]:
+              - link "Industrial Systems" [ref=e744] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e745]:
+              - link "Power Distribution" [ref=e746] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e747]:
+              - link "Safety Systems" [ref=e748] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e749]:
+              - link "Energy Management" [ref=e750] [cursor=pointer]:
+                - /url: /services
+        - generic [ref=e751]:
+          - heading "Company" [level=3] [ref=e752]
+          - list [ref=e753]:
+            - listitem [ref=e754]:
+              - link "About Us" [ref=e755] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e756]:
+              - link "Our Team" [ref=e757] [cursor=pointer]:
+                - /url: /about#directors
+            - listitem [ref=e758]:
+              - link "Careers" [ref=e759] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e760]:
+              - link "News & Updates" [ref=e761] [cursor=pointer]:
+                - /url: /news-hub
+            - listitem [ref=e762]:
+              - link "Case Studies" [ref=e763] [cursor=pointer]:
+                - /url: /news-hub/category/case-studies
+        - generic [ref=e764]:
+          - heading "Support" [level=3] [ref=e765]
+          - list [ref=e766]:
+            - listitem [ref=e767]:
+              - link "Contact" [ref=e768] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e769]:
+              - link "Emergency Services" [ref=e770] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e771]:
+              - link "Maintenance Plans" [ref=e772] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e773]:
+              - link "Documentation" [ref=e774] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e775]:
+              - link "FAQs" [ref=e776] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e777]:
+          - heading "24/7 Emergency" [level=3] [ref=e778]
+          - generic [ref=e779]:
+            - generic [ref=e782]: Online
+            - img "NEXGEN" [ref=e784]
+            - link "+44 (0) 20 1234 5678" [ref=e785] [cursor=pointer]:
+              - /url: tel:+442012345678
+            - paragraph [ref=e786]: Rapid response team ready
+      - generic [ref=e789]:
+        - generic [ref=e790]: 2026 NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
+        - generic [ref=e791]:
+          - link "PRIVACY POLICY" [ref=e792] [cursor=pointer]:
+            - /url: "#"
+          - link "TERMS OF SERVICE" [ref=e793] [cursor=pointer]:
+            - /url: "#"
+          - link "LICENSING" [ref=e794] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e795]: POWERED BY ADU-DEV SOLUTIONS
+      - generic:
+        - img
+  - button "Open Next.js Dev Tools" [ref=e801] [cursor=pointer]:
+    - img [ref=e802]
