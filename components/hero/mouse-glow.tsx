@@ -5,7 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 export function MouseGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // Detect mobile on component mount
   useEffect(() => {
@@ -23,6 +24,7 @@ export function MouseGlow() {
     const checkDarkMode = () =>
       document.documentElement.classList.contains("dark");
     setIsDarkMode(checkDarkMode());
+    setIsHydrated(true);
 
     const observer = new MutationObserver(() => {
       setIsDarkMode(checkDarkMode());
@@ -54,6 +56,11 @@ export function MouseGlow() {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [isMobile]);
+
+  // Prevent hydration mismatch by deferring render until dark mode state is known
+  if (!isHydrated || isDarkMode === null) {
+    return null;
+  }
 
   // Choose glow color based on theme
   const glowColor = isDarkMode
