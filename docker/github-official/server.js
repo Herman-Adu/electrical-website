@@ -12,9 +12,212 @@ const https = require("https");
 
 const port = process.env.PORT || 8000;
 
-// Token safety: log presence only, never the value
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN ?? "";
-console.log(`GITHUB_TOKEN present: ${GITHUB_TOKEN.length > 0}`);
+// ===== Docker Memory Integration =====
+// Fetch secrets from Docker memory-reference service with robust error handling
+
+let GITHUB_TOKEN = "";
+let TOKEN_SOURCE = "none"; // "docker", "env", or "none"
+
+/**
+ * Fetch a secret from Docker memory-reference service
+ * @param {string} entityName - Docker entity name (e.g., "infra-secrets-github")
+ * @param {string} secretField - Field to extract from observations
+ * @returns {Promise<string|null>} Secret value or null on failure
+ */
+async function fetchSecretFromDocker(entityName, secretField) {
+  const maxRetries = 3;
+  const timeoutMs = 5000;
+  const backoffMs = [100, 200, 400];
+
+  // Docker memory endpoint: use internal network if available, else localhost
+  const dockerEndpoint = process.env.DOCKER_MEMORY_URL ||
+    "http://memory-reference:8000/tools/call";
+
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error("timeout"));
+        }, timeoutMs);
+
+        const requestUrl = new URL(dockerEndpoint);
+        const isLocalhost = requestUrl.hostname === "localhost" ||
+                           requestUrl.hostname === "127.0.0.1";
+
+        // Use http or https based on endpoint
+        const httpModule = requestUrl.protocol === "https:" ? https : http;
+
+        const options = {
+          hostname: requestUrl.hostname,
+          port: requestUrl.port || (requestUrl.protocol === "https:" ? 443 : 80),
+          path: requestUrl.pathname,
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "github-official-mcp/1.0",
+          },
+          timeout: timeoutMs,
+        };
+
+        const req = httpModule.request(options, (res) => {
+          let data = "";
+          res.on("data", (chunk) => {
+            data += chunk;
+          });
+          res.on("end", () => {
+            clearTimeout(timeout);
+            try {
+              const parsed = JSON.parse(data);
+              console.log(`[Secrets] Fetch response received for ${entityName}`);
+              console.log(`[Secrets] Response status: ${res.statusCode}`);
+
+              // Memory-reference /tools/call endpoint returns: { content: [{ type: "json", json: { entities, relations } }] }
+              // Direct endpoints (/open_nodes) return: { entities: [...], relations: [...] }
+              // Handle both formats for robustness.
+
+              let entities = null;
+
+              // Try wrapped format first (standard /tools/call response)
+              if (parsed?.content && Array.isArray(parsed.content) && parsed.content[0]) {
+                const content = parsed.content[0];
+                if (content.type === "json" && content.json && Array.isArray(content.json.entities)) {
+                  entities = content.json.entities;
+                  console.log(`[Secrets] Response format: wrapped (content[0].json.entities)`);
+                }
+              }
+
+              // Fallback to unwrapped format (direct endpoint)
+              if (!entities && parsed?.entities && Array.isArray(parsed.entities)) {
+                entities = parsed.entities;
+                console.log(`[Secrets] Response format: unwrapped (direct endpoint)`);
+              }
+
+              if (entities && Array.isArray(entities)) {
+                console.log(`[Secrets] Entities found: ${entities.length}`);
+
+                for (const entity of entities) {
+                  if (!entity.observations || !Array.isArray(entity.observations)) {
+                    console.log(`[Secrets] Skipping entity "${entity.name}": no observations array`);
+                    continue;
+                  }
+
+                  console.log(`[Secrets] Observations in entity: ${entity.observations.length}`);
+                  console.log(`[Secrets] Looking for observation containing: ${secretField}:`);
+
+                  for (const obs of entity.observations) {
+                    if (typeof obs === "string" && obs.includes(secretField)) {
+                      console.log(`[Secrets] Found matching observation: YES`);
+                      // Parse: "GITHUB_PERSONAL_ACCESS_TOKEN: [value]" or "GITHUB_PERSONAL_ACCESS_TOKEN: value"
+                      // Remove leading/trailing brackets if present
+                      const match = obs.match(new RegExp(`${secretField}:\\s*\\[?(.+?)\\]?\\s*$`));
+                      if (match && match[1]) {
+                        let extractedValue = match[1].trim();
+                        // Remove brackets if they're wrapping the value
+                        if (extractedValue.startsWith("[") && extractedValue.endsWith("]")) {
+                          extractedValue = extractedValue.slice(1, -1);
+                        }
+                        console.log(`[Secrets] Token extracted (length): ${extractedValue.length} chars`);
+                        resolve(extractedValue);
+                        return;
+                      }
+                    }
+                  }
+                  console.log(`[Secrets] Found matching observation: NO`);
+                }
+              } else {
+                console.log(`[Secrets] Could not extract entities from response`);
+              }
+
+              reject(new Error("secret_not_found_in_observations"));
+            } catch (e) {
+              reject(new Error(`parse_error: ${e.message}`));
+            }
+          });
+        });
+
+        req.on("error", (err) => {
+          clearTimeout(timeout);
+          reject(new Error(`network_error: ${err.message}`));
+        });
+
+        req.setTimeout(timeoutMs, () => {
+          clearTimeout(timeout);
+          req.destroy();
+          reject(new Error("socket_timeout"));
+        });
+
+        // Correct format for memory-reference service (not JSON-RPC)
+        const body = JSON.stringify({
+          name: "open_nodes",
+          arguments: {
+            names: [entityName],
+          },
+        });
+
+        req.write(body);
+        req.end();
+      });
+    } catch (err) {
+      const errorMsg = err.message || String(err);
+      const isLastAttempt = attempt === maxRetries - 1;
+
+      if (!isLastAttempt) {
+        const delayMs = backoffMs[attempt];
+        console.log(
+          `[Secrets] Docker fetch attempt ${attempt + 1}/${maxRetries} failed: ${errorMsg}. ` +
+          `Retrying in ${delayMs}ms...`
+        );
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      } else {
+        console.log(
+          `[Secrets] Docker fetch failed after ${maxRetries} retries: ${errorMsg}`
+        );
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Initialize GitHub token from Docker memory or environment
+ * Called once on server startup
+ */
+async function initializeGitHubToken() {
+  // Try Docker memory first
+  const dockerToken = await fetchSecretFromDocker("infra-secrets-github", "GITHUB_PERSONAL_ACCESS_TOKEN");
+
+  if (dockerToken) {
+    GITHUB_TOKEN = dockerToken;
+    TOKEN_SOURCE = "docker";
+
+    if (isValidTokenFormat(GITHUB_TOKEN)) {
+      console.log("[Secrets] ✓ Loaded token from Docker memory-reference");
+    } else {
+      console.warn("[Secrets] Docker token present but format invalid");
+      // Fall through to env
+      GITHUB_TOKEN = "";
+    }
+  }
+
+  // Fallback to environment variables
+  if (!GITHUB_TOKEN) {
+    GITHUB_TOKEN = process.env.GITHUB_TOKEN ?? "";
+
+    if (GITHUB_TOKEN) {
+      TOKEN_SOURCE = "env";
+      console.log("[Secrets] ✓ Loaded token from environment variables");
+    } else {
+      TOKEN_SOURCE = "none";
+      console.log("[Secrets] ✗ No token available (Docker and env both empty)");
+    }
+  }
+
+  // Audit logging (without exposing secret)
+  console.log(`[Audit] Token presence: ${GITHUB_TOKEN.length > 0}`);
+  console.log(`[Audit] Token source: ${TOKEN_SOURCE}`);
+  console.log(`[Audit] Token format valid: ${isValidTokenFormat(GITHUB_TOKEN)}`);
+}
 
 // Token format validation (GitHub tokens start with specific prefixes)
 const GITHUB_TOKEN_PATTERNS = {
@@ -404,7 +607,9 @@ const server = http.createServer(async (req, res) => {
     sendJson(res, 200, {
       status: "healthy",
       service: "github-official",
-      token_configured: GITHUB_TOKEN.length > 0,
+      token_present: GITHUB_TOKEN.length > 0,
+      token_source: TOKEN_SOURCE,
+      token_format_valid: isValidTokenFormat(GITHUB_TOKEN),
     });
     return;
   }
@@ -464,9 +669,15 @@ const server = http.createServer(async (req, res) => {
   sendJson(res, 404, { error: "Endpoint not found" });
 });
 
-server.listen(port, () => {
-  console.log(`GitHub Official server listening on port ${port}`);
-  console.log(`Health check: http://localhost:${port}/health`);
+// Initialize token on startup
+initializeGitHubToken().then(() => {
+  server.listen(port, () => {
+    console.log(`GitHub Official server listening on port ${port}`);
+    console.log(`Health check: http://localhost:${port}/health`);
+  });
+}).catch((err) => {
+  console.error("[Fatal] Token initialization failed:", err.message);
+  process.exit(1);
 });
 
 // Graceful shutdown
