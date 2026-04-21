@@ -33,12 +33,12 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
     <div
       data-section={section}
       data-sticky-breadcrumb="true"
-      className="sticky top-16 lg:top-20 z-40 bg-background/95 backdrop-blur-md border-b border-electric-cyan/20"
+      className="sticky top-16 lg:top-20 z-40 dark:bg-background/95 backdrop-blur-md border-b border-foreground/60 dark:border-electric-cyan/20"
     >
       <div className="section-content max-w-7xl py-3">
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground overflow-hidden"
+          className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500 dark:text-muted-foreground overflow-hidden"
         >
           {/* Single item — current page only (e.g. Home) */}
           {isSingleItem ? (
@@ -53,11 +53,11 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
               {/* First link — always visible */}
               <Link
                 href={firstItem.href}
-                className="shrink-0 hover:text-electric-cyan transition-colors"
+                className="shrink-0 transition-colors hover:text-slate-600 dark:hover:text-electric-cyan"
               >
                 {firstItem.label}
               </Link>
-              <span className="shrink-0 text-muted-foreground/40">/</span>
+              <span className="shrink-0 text-slate-400 dark:text-muted-foreground/40">/</span>
 
               {/* Desktop: show all middle links */}
               <div className="hidden sm:contents">
@@ -65,11 +65,11 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
                   <div key={item.href} className="contents">
                     <Link
                       href={item.href}
-                      className="shrink-0 hover:text-electric-cyan transition-colors"
+                      className="shrink-0 transition-colors hover:text-slate-600 dark:hover:text-electric-cyan"
                     >
                       {item.label}
                     </Link>
-                    <span className="shrink-0 text-muted-foreground/40">/</span>
+                    <span className="shrink-0 text-slate-400 dark:text-muted-foreground/40">/</span>
                   </div>
                 ))}
               </div>
