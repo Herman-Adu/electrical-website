@@ -1,7 +1,15 @@
 {
-  "active": "feat-phase-8-scrollreveal-production",
+  "active": "feat-phase-12-theme-polish-continued",
+  "lastUpdated": "2026-04-21T18:45:00Z",
+  "currentBranch": "main",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-phase-8-scrollreveal-production"
+    "feat-phase-12-theme-polish-continued"
+  ],
+  "phaseSequence": [
+    { "phase": 8, "entity": "feat-phase-8-scrollreveal-production", "status": "archived", "date": "2026-04-20" },
+    { "phase": 10, "entity": "feat-phase-10-docker-secrets", "status": "merged", "date": "2026-04-21" },
+    { "phase": 11, "entity": "feat-phase-11-polish-theme", "status": "merged", "date": "2026-04-21" },
+    { "phase": 12, "entity": "feat-phase-12-theme-polish-continued", "status": "in-progress", "date": "2026-04-21" }
   ]
 }
