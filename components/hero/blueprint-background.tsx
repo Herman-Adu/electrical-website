@@ -42,6 +42,11 @@ export function BlueprintBackground({
         className,
       )}
     >
+      {/* Light theme: subtle background layer to enhance grid visibility */}
+      {!isDarkMode && (
+        <div className="absolute inset-0 bg-slate-50" />
+      )}
+
       {/* Primary Grid - 40px */}
       <div
         className="absolute inset-0 h-full w-full opacity-20 dark:opacity-20"
