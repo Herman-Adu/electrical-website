@@ -66,60 +66,60 @@ export function SystemTerminal({ isInView = false }: SystemTerminalProps) {
     <ScrollReveal direction="up" blur delay={0.4} duration={0.65} distance={40}>
       <motion.div
         ref={terminalRef}
-        className="bg-electric-cyan/10 border-electric-cyan/10 p-4 font-mono overflow-hidden rounded-xl"
+        className="bg-foreground/10 dark:bg-electric-cyan/10 dark:border-electric-cyan/10 p-4 font-mono overflow-hidden rounded-xl"
       >
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-b-electric-cyan/20">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-        </div>
-        <span className="text-[10px] text-foreground/70 uppercase tracking-widest">
-          Diagnostics_Console_v4.2.1
-        </span>
-      </div>
-
-      <div className="h-36 overflow-hidden flex flex-col justify-end relative">
-        <div
-          className="text-xs text-slate-600 font-mono"
-          style={{ display: isMounted ? "none" : "block" }}
-        >
-          &gt; AWAITING SYSTEM BOOT...
-        </div>
-        <div style={{ display: isMounted ? "block" : "none" }}>
-          {logs.map((log) => (
-            <div
-              key={log.id}
-              className="text-xs mb-1 flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-300"
-            >
-              <span className="text-foreground/70 text-[10px]">
-                [{log.time}]
-              </span>
-              <span className="dark:text-electric-cyan/70 hover:text-electric-cyan transition-colors">
-                {log.text}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <motion.div
-          animate={{ y: [0, 144, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-x-0 h-8 bg-linear-to-b from-transparent via-electric-cyan/5 to-transparent pointer-events-none"
-        />
-      </div>
-
-      <div className="mt-4 pt-2 border-t border-t-electric-cyan/20 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 bg-electric-cyan rounded-full animate-pulse" />
-          <span className="text-[9px] text-foreground tracking-widest">
-            LIVE
+        <div className="flex items-center justify-between mb-4 pb-2 border-b border-b-electric-cyan/20">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+          </div>
+          <span className="text-[10px] text-foreground/70 uppercase tracking-widest">
+            Diagnostics_Console_v4.2.1
           </span>
         </div>
-        <span className="text-[9px] text-foreground tracking-widest">
-          ENCRYPTION: AES-256 // MQTT_TLS
-        </span>
-      </div>
+
+        <div className="h-36 overflow-hidden flex flex-col justify-end relative">
+          <div
+            className="text-xs text-slate-600 font-mono"
+            style={{ display: isMounted ? "none" : "block" }}
+          >
+            &gt; AWAITING SYSTEM BOOT...
+          </div>
+          <div style={{ display: isMounted ? "block" : "none" }}>
+            {logs.map((log) => (
+              <div
+                key={log.id}
+                className="text-xs mb-1 flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-300"
+              >
+                <span className="text-foreground/80 text-[10px]">
+                  [{log.time}]
+                </span>
+                <span className="dark:text-electric-cyan/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-white transition-colors">
+                  {log.text}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <motion.div
+            animate={{ y: [0, 144, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-x-0 h-8 bg-linear-to-b from-transparent via-electric-cyan/5 to-transparent pointer-events-none"
+          />
+        </div>
+
+        <div className="mt-4 pt-2 border-t border-t-electric-cyan/20 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan rounded-full animate-pulse" />
+            <span className="text-[9px] text-foreground tracking-widest">
+              LIVE
+            </span>
+          </div>
+          <span className="text-[9px] text-foreground tracking-widest">
+            ENCRYPTION: AES-256 // MQTT_TLS
+          </span>
+        </div>
       </motion.div>
     </ScrollReveal>
   );

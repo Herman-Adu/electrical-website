@@ -94,17 +94,19 @@ export function PeaceOfMind() {
         <ScrollReveal direction="down" blur delay={0} duration={0.65}>
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Zap size={14} className="text-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <div className="h-px w-6 md:w-8 bg-electric-cyan" />
+              <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                 Our Promise
               </span>
-              <Zap size={14} className="text-electric-cyan" />
+              <div className="h-px w-6 md:w-8 bg-electric-cyan" />
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
               Peace of Mind,{" "}
-              <span className="text-electric-cyan">Guaranteed</span>
+              <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                Guaranteed
+              </span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-lg">
+            <p className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal">
               Your electrical problems, solved with absolute confidence. We
               don&apos;t just complete jobs — we deliver certainty. Here&apos;s
               exactly what you can expect from us.
@@ -133,44 +135,44 @@ export function PeaceOfMind() {
                       : "border-border bg-card/50 hover:border-electric-cyan/30"
                   }`}
                 >
-                {/* Corner brackets */}
-                <div className="absolute top-3 left-3 h-5 w-5 border-t border-l border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
-                <div className="absolute right-3 bottom-3 h-5 w-5 border-r border-b border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
+                  {/* Corner brackets */}
+                  <div className="absolute top-3 left-3 h-5 w-5 border-t border-l border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
+                  <div className="absolute right-3 bottom-3 h-5 w-5 border-r border-b border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
 
-                {/* Icon */}
-                <div
-                  className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 ${
-                    pillar.highlight
-                      ? "border-electric-cyan/40 bg-electric-cyan/15"
-                      : "border-border bg-card group-hover:border-electric-cyan/30"
-                  } transition-all duration-300`}
-                >
-                  <Icon
-                    size={22}
-                    className={
+                  {/* Icon */}
+                  <div
+                    className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 ${
                       pillar.highlight
-                        ? "text-electric-cyan"
-                        : "text-muted-foreground transition-colors group-hover:text-electric-cyan"
-                    }
-                  />
-                </div>
-
-                <h3 className="text-base font-bold text-foreground mb-3">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {pillar.desc}
-                </p>
-
-                {pillar.highlight && (
-                  <div className="mt-4 flex items-center gap-1.5">
-                    <div className="size-2 rounded-full bg-electric-cyan animate-pulse" />
-                    <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan">
-                      Core Commitment
-                    </span>
+                        ? "border-electric-cyan/40 bg-electric-cyan/15"
+                        : "border-border bg-card group-hover:border-electric-cyan/30"
+                    } transition-all duration-300`}
+                  >
+                    <Icon
+                      size={22}
+                      className={
+                        pillar.highlight
+                          ? "text-electric-cyan"
+                          : "text-muted-foreground transition-colors group-hover:text-electric-cyan"
+                      }
+                    />
                   </div>
-                )}
-              </div>
+
+                  <h3 className="text-base font-bold text-foreground mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {pillar.desc}
+                  </p>
+
+                  {pillar.highlight && (
+                    <div className="mt-4 flex items-center gap-1.5">
+                      <div className="size-2 rounded-full bg-electric-cyan animate-pulse" />
+                      <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan">
+                        Core Commitment
+                      </span>
+                    </div>
+                  )}
+                </div>
               </ScrollReveal>
             );
           })}
@@ -198,7 +200,9 @@ export function PeaceOfMind() {
                         size={16}
                         className="mt-0.5 shrink-0 text-electric-cyan"
                       />
-                      <span className="text-sm text-muted-foreground">{check}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {check}
+                      </span>
                     </div>
                   </ScrollReveal>
                 ))}
@@ -209,7 +213,7 @@ export function PeaceOfMind() {
           {/* Trusted partners / accreditations */}
           <ScrollReveal direction="right" blur delay={0} duration={0.65}>
             <div>
-              <h3 className="text-xl font-bold text-foreground mb-6">
+              <h3 className="text-xl font-bold text-[hsl(174_100%_35%)] dark:text-foreground mb-6">
                 Our Accreditations &amp; Partners
               </h3>
               <div className="grid grid-cols-3 gap-4">
@@ -223,7 +227,7 @@ export function PeaceOfMind() {
                     distance={30}
                   >
                     <div className="group aspect-square cursor-default rounded-xl border border-border bg-card/40 transition-all duration-300 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 flex flex-col items-center justify-center gap-1">
-                      <span className="font-mono text-lg font-bold text-electric-cyan/60 transition-colors group-hover:text-electric-cyan">
+                      <span className="font-mono text-lg font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan/60 transition-colors group-hover:text-electric-cyan">
                         {partner.abbr}
                       </span>
                       <span className="text-[10px] text-muted-foreground font-medium tracking-wide text-center leading-tight px-2">

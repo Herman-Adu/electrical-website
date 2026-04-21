@@ -53,12 +53,12 @@ export function EnergyMetric({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ delay: delay, duration: 0.5 }}
-      className="group relative rounded-xl border  p-6 bg-electric-cyan/10  border-electric-cyan/25 hover:border-electric-cyan/30 transition-all duration-300"
+      className="group relative rounded-xl border bg-foreground/10 p-6 dark:bg-electric-cyan/10 dark:border-electric-cyan/25 hover:border-electric-cyan/30 transition-all duration-300"
     >
       <div className="flex items-center gap-3 mb-4">
         <Icon
           size={18}
-          className="text-electric-cyan group-hover:text-electric-cyan transition-colors"
+          className="text-[hsl(174_100%_35%)] dark:text-electric-cyan group-hover:text-electric-cyan transition-colors"
         />
         <span className="font-mono text-[10px] tracking-[0.2em] text-foreground uppercase">
           {label}
@@ -72,7 +72,7 @@ export function EnergyMetric({
         >
           0
         </span>
-        <span className="text-electric-cyan font-mono text-sm uppercase">
+        <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan font-mono text-sm uppercase">
           {unit}
         </span>
       </div>

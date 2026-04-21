@@ -66,11 +66,11 @@ export function TrustStat({
       transition={{ delay, duration: 0.6 }}
       className="text-center"
     >
-      <div className="text-3xl font-bold text-electric-cyan font-mono">
+      <div className="text-3xl font-bold text-[hsl(174_100%_35%)] dark:text-white font-mono">
         {count.toLocaleString("en-US")}
         {suffix}
       </div>
-      <div className="text-xs text-muted-foreground uppercase tracking-wider mt-2">
+      <div className="text-xs text-foreground/80 font-bold uppercase tracking-wider mt-2">
         {label}
       </div>
     </motion.div>

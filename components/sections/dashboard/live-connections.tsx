@@ -28,7 +28,9 @@ export function LiveConnections({ isInView }: LiveConnectionsProps) {
           <div
             key={i}
             className={`w-1.5 h-1.5 rounded-full ${
-              i <= 4 ? "bg-electric-cyan/40" : "bg-amber-500"
+              i <= 4
+                ? "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan/40"
+                : "bg-amber-500"
             }`}
           />
         ))}

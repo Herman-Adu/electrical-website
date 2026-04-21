@@ -134,11 +134,14 @@ export function Services() {
             <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
               Core Services
             </span>
-            <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4">
-            Engineering <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">Excellence</span>
+            Engineering{" "}
+            <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+              Excellence
+            </span>
           </h2>
 
           <p className="text-foreground/70 dark:text-foreground/70 max-w-2xl mx-auto text-base lg:text-lg font-light">
@@ -156,7 +159,12 @@ export function Services() {
               blur
               delay={(index % 3) * 0.07}
             >
-              <motion.div className="group relative flex flex-col border border-foreground/20 dark:border-electric-cyan/10 rounded-2xl p-6 lg:p-8 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5">
+              <motion.div
+                className="group relative flex flex-col border border-foreground/20 dark:border-electric-cyan/10 rounded-2xl p-6 lg:p-8 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(27, 97, 122, 0.22) 0%, rgba(0, 243, 189, 0.16) 50%, rgba(0, 0, 0, 0) 100%)'
+                }}
+              >
                 {/* Corner accent — inset to respect border-radius */}
                 <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-foreground/30 dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/40 transition-colors" />
 
@@ -173,7 +181,7 @@ export function Services() {
                     size={32}
                     className="text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-white transition-colors"
                   />
-                  <div className="absolute -inset-2 bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -inset-2 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Content */}
@@ -190,7 +198,7 @@ export function Services() {
                   {service.specs.map((spec) => (
                     <span
                       key={spec}
-                      className="font-mono text-[10px] px-2 py-1 rounded bg-foreground/5 dark:bg-electric-cyan/10 border border-foreground/20 dark:border-electric-cyan/10 text-foreground dark:text-foreground/80 tracking-wider"
+                      className="font-mono text-[10px] px-2 py-1 rounded bg-foreground/10 dark:bg-electric-cyan/10 border border-foreground/20 dark:border-electric-cyan/10 text-foreground dark:text-foreground/80 tracking-wider"
                     >
                       {spec}
                     </span>

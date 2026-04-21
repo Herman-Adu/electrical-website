@@ -58,6 +58,16 @@ function WindowDots() {
   );
 }
 
+function ColouredWindowDots() {
+  return (
+    <div className="flex items-center gap-1.5 mb-4" aria-hidden>
+      <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+      <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
+      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+    </div>
+  );
+}
+
 // ─── Card Shell ────────────────────────────────────────────────────────────
 
 function GlassCard({
@@ -144,28 +154,34 @@ function ImageHeroCard({
           </span>
         </div>
         {/* Index number */}
-        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold select-none text-electric-cyan/10 leading-none">
+        <div className="absolute bottom-3 left-4 font-mono text-4xl font-bold select-none text-[hsl(174_100%_35%)]/80 dark:text-electric-cyan/30 leading-none">
           {String(index + 1).padStart(2, "0")}
         </div>
       </div>
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-5">
-        <WindowDots />
+        {/* Background shimmer */}
+        <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
+        <ColouredWindowDots />
         <div className="flex items-center gap-2 mb-2">
-          <Icon size={16} className="text-electric-cyan shrink-0" />
-          <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan/70">
+          <Icon
+            size={16}
+            className="text-[hsl(174_100%_35%)] dark:text-electric-cyan shrink-0"
+          />
+          <span className="font-mono text-[10px] tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan/70">
             {title}
           </span>
         </div>
-        <p className="text-sm text-foreground/70 leading-relaxed mb-4 flex-1">
+        <p className="text-sm text-foreground/80 leading-relaxed mb-4 flex-1">
           {description}
         </p>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {specs.map((spec) => (
             <span
               key={spec}
-              className="font-mono text-[9px] px-2 py-0.5 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider"
+              className="font-mono text-[9px] px-2 py-0.5 rounded dark:bg-white/15  border dark:border-white/25 dark:text-white/90  tracking-wider"
             >
               {spec}
             </span>
@@ -221,24 +237,30 @@ function TextDetailCard({
 
   return (
     <GlassCard delay={delay} className="flex flex-col h-full p-5">
+      {/* Background shimmer */}
+      <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
       <WindowDots />
       {/* Header row */}
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2 px-2 py-1.5 rounded bg-white/15 border border-white/25 text-white/90 tracking-wider">
-          <Icon size={20} className={`${accentClass} shrink-0`} />
+        <div className="flex items-center gap-2 px-2 py-1.5 rounded dark:bg-white/15 border dark:border-white/25 dark:text-white/90 tracking-wider">
+          <Icon
+            size={20}
+            className="shrink-0 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+          />
           <span
-            className={`font-mono text-[10px] tracking-widest uppercase ${accentClass} opacity-70`}
+            className={`font-mono text-[10px] tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan `}
           >
             {voltage}
           </span>
         </div>
 
-        <div className="font-mono text-4xl right-5 font-bold text-electric-cyan/20 select-none leading-none">
+        <div className="font-mono text-4xl right-5 font-bold text-[hsl(174_100%_35%)]/40 dark:text-electric-cyan/30 select-none leading-none">
           {String(index + 1).padStart(2, "0")}
         </div>
       </div>
 
-      <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-electric-cyan transition-colors">
+      <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
         {title}
       </h3>
       <p className="text-sm text-foreground/70 leading-relaxed mb-5 flex-1">
@@ -246,13 +268,17 @@ function TextDetailCard({
       </p>
 
       {/* Spec rows */}
-      <div className={`border-t ${borderClass} pt-4 space-y-2`}>
+      <div
+        className={`border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10 pt-4 space-y-2`}
+      >
         {specs.map((spec) => (
           <div key={spec.label} className="flex items-center justify-between">
-            <span className="font-mono text-[10px] tracking-wider text-foreground/70 uppercase">
+            <span className="font-mono text-[10px] tracking-wider  dark:text-foreground/70 uppercase">
               {spec.label}
             </span>
-            <span className={`font-mono text-[11px] font-bold ${accentClass}`}>
+            <span
+              className={`font-mono text-[11px] font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan`}
+            >
               {spec.value}
             </span>
           </div>
@@ -362,7 +388,7 @@ function DiagnosticCard({ delay }: { delay: number }) {
     <GlassCard delay={delay} className="flex flex-col p-5 h-full">
       <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
-      <WindowDots />
+      <ColouredWindowDots />
       <div className="flex items-center gap-2 mb-3">
         <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
         <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan/70">
@@ -397,56 +423,6 @@ function DiagnosticCard({ delay }: { delay: number }) {
   );
 }
 
-// ─── Card E: Wide CTA Card ─────────────────────────────────────────────────
-
-function CTACard({ delay }: { delay: number }) {
-  return (
-    <GlassCard
-      delay={delay}
-      glowOnHover={false}
-      className="relative overflow-hidden p-6 sm:p-8"
-    >
-      {/* Background shimmer */}
-      <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/5 via-transparent to-electric-cyan/5 pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/40 to-transparent pointer-events-none" />
-
-      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="flex-1">
-          <WindowDots />
-          <div className="flex items-center gap-2 mb-3">
-            <Zap size={16} className="text-electric-cyan" />
-            <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan/70">
-              Custom Solutions
-            </span>
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-card-foreground mb-2 text-balance">
-            Need a Bespoke Electrical Solution?
-          </h3>
-          <p className="text-sm text-foreground/70 max-w-lg leading-relaxed">
-            Every project is unique. Our engineering team provides tailored
-            consultations, site surveys, and full-scope project proposals — from
-            concept to commissioning.
-          </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-          <Link
-            href="/contact"
-            className="px-6 py-3 rounded-xl bg-electric-cyan text-primary-foreground font-bold text-sm tracking-wide hover:shadow-lg hover:shadow-electric-cyan/30 hover:scale-[1.03] transition-all duration-300"
-          >
-            Request Consultation
-          </Link>
-          <Link
-            href="/#services"
-            className="px-6 py-3 rounded-xl border border-electric-cyan/30 text-electric-cyan font-medium text-sm tracking-wide hover:bg-electric-cyan/10 hover:border-electric-cyan/50 transition-all duration-300"
-          >
-            View Portfolio
-          </Link>
-        </div>
-      </div>
-    </GlassCard>
-  );
-}
 
 // ─── Card F: Emergency Response Card (Wide Image) ──────────────────────────
 
@@ -574,16 +550,18 @@ export function ServicesBento() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 border border-electric-cyan/20 mb-6 rounded-full">
-            <div className="w-2 h-2 bg-electric-cyan animate-pulse rounded-full" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
+            <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
               Service Catalogue
             </span>
+            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4 text-balance">
-            Full Spectrum <span className="text-electric-cyan">Electrical</span>{" "}
-            Solutions
+            Full Spectrum{" "}
+            <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+              Electrical Solutions
+            </span>
           </h2>
 
           <p className="text-muted-foreground max-w-2xl mx-auto text-base font-light leading-relaxed">
@@ -650,11 +628,6 @@ export function ServicesBento() {
 
           {/* Row 2 */}
 
-          {/* Diagnostics — lg: col-span-2 */}
-          <div className="sm:col-span-2 lg:col-span-2">
-            <DiagnosticCard delay={0.24} />
-          </div>
-
           {/* Emergency — lg: col-span-1 */}
           <div className="sm:col-span-1 lg:col-span-1 h-full">
             <EmergencyCard delay={0.32} index={2} />
@@ -672,6 +645,11 @@ export function ServicesBento() {
               index={3}
               exploreLink="/services/industrial#power-distribution"
             />
+          </div>
+
+          {/* Diagnostics — lg: col-span-2 */}
+          <div className="sm:col-span-2 lg:col-span-2">
+            <DiagnosticCard delay={0.24} />
           </div>
 
           {/* Row 3 */}
@@ -695,7 +673,7 @@ export function ServicesBento() {
 
               <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between text-white">
                 <div>
-                  <WindowDots />
+                  <ColouredWindowDots />
                   <div className="flex items-center gap-2 mb-3">
                     <Lightbulb size={18} className="text-electric-cyan" />
                     <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan">
@@ -871,7 +849,7 @@ export function ServicesBento() {
 
                 <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between text-white">
                   <div>
-                    <WindowDots />
+                    <ColouredWindowDots />
                     <div className="flex items-center gap-2 mb-3">
                       <Gauge size={18} className="text-electric-cyan" />
                       <span className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan">
@@ -926,13 +904,12 @@ export function ServicesBento() {
               </GlassCard>
             </div>
           </div>
-
-          {/* Row 4: Full-width CTA */}
-          <div className="sm:col-span-2 lg:col-span-4">
-            <CTACard delay={0.8} />
-          </div>
         </div>
       </div>
     </section>
   );
 }
+
+// ─── Exports for cross-module usage ───────────────────────────────────────
+
+export { GlassCard, WindowDots };

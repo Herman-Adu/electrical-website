@@ -101,14 +101,16 @@ export function AboutCTA() {
             viewport={{ once: false }}
           >
             <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-8 bg-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+              <span className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                 The Difference
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-5 text-balance">
               Why Choose{" "}
-              <span className="text-electric-cyan">Nexgen Electrical </span>
+              <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                Nexgen Electrical{" "}
+              </span>
               <span className="dark:text-foreground">Innovations?</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -128,7 +130,7 @@ export function AboutCTA() {
                 >
                   <CheckCircle
                     size={16}
-                    className="mt-0.5 shrink-0 text-electric-cyan"
+                    className="mt-0.5 shrink-0 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
                   />
                   <span className="text-sm text-muted-foreground leading-relaxed">
                     {point}
@@ -145,16 +147,19 @@ export function AboutCTA() {
             transition={{ duration: 0.7 }}
             viewport={{ once: false }}
           >
-            <div className="group relative overflow-hidden rounded-2xl border border-electric-cyan/30 bg-card/60 p-8 transition-all duration-300 hover:border-electric-cyan/60">
+            <div className="group relative overflow-hidden rounded-2xl border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/5 dark:bg-card/60 p-8 transition-all duration-300 hover:border-electric-cyan/60">
               {/* Shimmer */}
               <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-              <div className="absolute top-3 left-3 h-5 w-5 border-t border-l border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
-              <div className="absolute right-3 bottom-3 h-5 w-5 border-r border-b border-electric-cyan/30 transition-colors group-hover:border-electric-cyan/60" />
+              <div className="absolute top-3 left-3 h-5 w-5 border-t border-l border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 transition-colors dark:group-hover:border-electric-cyan/60 group-hover:border-[hsl(174_100%_35%)]/60 rounded-tl-xl" />
+              <div className="absolute right-3 bottom-3 h-5 w-5 border-r border-b border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 transition-colors dark:group-hover:border-electric-cyan/60 group-hover:border-[hsl(174_100%_35%)]/60 rounded-br-xl" />
 
               <div className="flex items-center gap-2 mb-4">
-                <BookOpen size={14} className="text-electric-cyan" />
-                <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan/70">
+                <BookOpen
+                  size={14}
+                  className="text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                />
+                <span className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                   {article.tag}
                 </span>
               </div>
@@ -168,7 +173,7 @@ export function AboutCTA() {
                 <span className="font-mono text-xs text-muted-foreground/60">
                   {article.readTime}
                 </span>
-                <button className="flex items-center gap-2 text-sm font-medium text-electric-cyan transition-all duration-200 hover:gap-3">
+                <button className="flex items-center gap-2 text-sm font-medium  text-[hsl(174_100%_35%)] dark:text-electric-cyan transition-all duration-200 hover:gap-3">
                   Read Article <ArrowRight size={14} />
                 </button>
               </div>
@@ -187,7 +192,7 @@ export function AboutCTA() {
           <div className="text-center mb-10">
             <div className="flex items-center justify-center gap-3 mb-3">
               <div className="h-px w-8 bg-border" />
-              <span className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
+              <span className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)]/80 dark:text-foreground/80">
                 Follow Our Work
               </span>
               <div className="h-px w-8 bg-border" />
@@ -236,16 +241,16 @@ export function AboutCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: false }}
-          className="relative overflow-hidden rounded-3xl border border-electric-cyan/30 bg-electric-cyan/5 px-8 py-20 text-center"
+          className="relative overflow-hidden rounded-3xl border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 px-8 py-20 text-center"
         >
           {/* Blueprint grid inside CTA */}
           <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none" />
 
           {/* Animated corner brackets */}
-          <div className="absolute top-4 left-4 h-8 w-8 border-t-2 border-l-2 border-electric-cyan/50" />
-          <div className="absolute top-4 right-4 h-8 w-8 border-t-2 border-r-2 border-electric-cyan/50" />
-          <div className="absolute bottom-4 left-4 h-8 w-8 border-b-2 border-l-2 border-electric-cyan/50" />
-          <div className="absolute right-4 bottom-4 h-8 w-8 border-r-2 border-b-2 border-electric-cyan/50" />
+          <div className="absolute top-4 left-4 h-8 w-8 border-t-2 border-l-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/50 rounded-tl-xl" />
+          <div className="absolute top-4 right-4 h-8 w-8 border-t-2 border-r-2 border-[hsl(174_100%_35%)]/60 darkborder-electric-cyan/50 rounded-tr-xl" />
+          <div className="absolute bottom-4 left-4 h-8 w-8 border-b-2 border-l-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/50 rounded-bl-xl" />
+          <div className="absolute right-4 bottom-4 h-8 w-8 border-r-2 border-b-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/50 rounded-br-xl" />
 
           {/* Floating particles */}
           {[...Array(4)].map((_, i) => (
@@ -266,13 +271,15 @@ export function AboutCTA() {
           <div className="relative z-10">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Zap size={14} className="animate-pulse text-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <span className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                 Ready to Start?
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-5 text-balance">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[hsl(174_100%_35%)]text-foreground mb-5 text-balance">
               Let&apos;s Build Something{" "}
-              <span className="text-electric-cyan">Extraordinary</span>
+              <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                Extraordinary
+              </span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10 leading-relaxed">
               Whether it&apos;s a domestic rewire or a full industrial
@@ -284,7 +291,7 @@ export function AboutCTA() {
               <button
                 ref={surgeRef}
                 onClick={handleCTA}
-                className="group relative overflow-hidden rounded-sm bg-electric-cyan px-10 py-5 text-sm font-bold uppercase tracking-widest text-background transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,243,189,0.4)] active:scale-95"
+                className="group relative rounded-xl overflow-hidden bg-[hsl(174_100%_35%)] dark:bg-electric-cyan px-10 py-5 text-sm font-bold uppercase tracking-widest text-background transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,243,189,0.4)] active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   Start Your Project
@@ -295,7 +302,7 @@ export function AboutCTA() {
 
               <button
                 onClick={() => router.push("/contact")}
-                className="rounded-sm border border-border px-10 py-5 text-sm font-bold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-electric-cyan hover:text-electric-cyan"
+                className="rounded-xl border border-border px-10 py-5 text-sm font-bold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
               >
                 Contact Our Team
               </button>

@@ -98,14 +98,17 @@ export function Certifications() {
         <ScrollReveal direction="down" blur delay={0} duration={0.65}>
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Shield size={14} className="text-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <div className="h-px w-6 md:w-8 bg-electric-cyan" />
+              <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan font-bold">
                 Verified & Approved
               </span>
-              <Shield size={14} className="text-electric-cyan" />
+              <div className="h-px w-6 md:w-8 bg-electric-cyan" />
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-              Our <span className="text-electric-cyan">Certifications</span>
+              Our{" "}
+              <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                Certifications
+              </span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
               Every accreditation earned through rigorous examination and
@@ -129,58 +132,58 @@ export function Certifications() {
               <div
                 className={`relative group rounded-2xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
                   cert.featured
-                    ? "border-electric-cyan/50 bg-electric-cyan/8 hover:shadow-xl hover:shadow-electric-cyan/20"
+                    ? "border-[hsl(174_100%_35%)]/50 dark:border-electric-cyan/50 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/8 hover:shadow-xl hover:shadow-[hsl(174_100%_35%)]/10 dark:hover:shadow-electric-cyan/20"
                     : "border-border bg-card/40 hover:border-electric-cyan/30 hover:bg-electric-cyan/5"
                 }`}
               >
-              {/* Shimmer effect */}
-              {/* <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" /> */}
+                {/* Shimmer effect */}
+                {/* <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" /> */}
 
-              {/* Corner brackets */}
-              <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
-              <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                {/* Corner brackets */}
+                <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
 
-              {/* Featured star */}
-              {cert.featured && (
-                <div className="absolute top-3 right-3">
-                  <Star
-                    size={12}
-                    className="text-amber-warning fill-amber-warning"
-                  />
+                {/* Featured star */}
+                {cert.featured && (
+                  <div className="absolute top-3 right-3">
+                    <Star
+                      size={12}
+                      className="text-amber-warning fill-amber-warning"
+                    />
+                  </div>
+                )}
+
+                {/* Cert abbreviation */}
+                <div
+                  className={`font-mono text-2xl font-black mb-3 ${
+                    cert.featured
+                      ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                      : "text-[hsl(174_100%_35%)]/60 dark:text-electric-cyan/60 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors"
+                  }`}
+                >
+                  {cert.abbr}
                 </div>
-              )}
 
-              {/* Cert abbreviation */}
-              <div
-                className={`font-mono text-2xl font-black mb-3 ${
-                  cert.featured
-                    ? "text-electric-cyan"
-                    : "text-electric-cyan/60 group-hover:text-electric-cyan transition-colors"
-                }`}
-              >
-                {cert.abbr}
-              </div>
+                {/* Category chip */}
+                <div className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground/60 mb-2">
+                  {cert.category}
+                </div>
 
-              {/* Category chip */}
-              <div className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground/60 mb-2">
-                {cert.category}
-              </div>
+                {/* Name */}
+                <div className="text-sm font-semibold text-foreground mb-3">
+                  {cert.name}
+                </div>
 
-              {/* Name */}
-              <div className="text-sm font-semibold text-foreground mb-3">
-                {cert.name}
-              </div>
-
-              {/* Level badge */}
-              <div className="flex items-center gap-1.5">
-                <CheckCircle
-                  size={12}
-                  className="text-electric-cyan shrink-0"
-                />
-                <span className="text-xs text-muted-foreground">
-                  {cert.level}
-                </span>
-              </div>
+                {/* Level badge */}
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle
+                    size={12}
+                    className="text-[hsl(174_100%_35%)] dark:text-electric-cyan shrink-0"
+                  />
+                  <span className="text-xs text-muted-foreground">
+                    {cert.level}
+                  </span>
+                </div>
               </div>
             </ScrollReveal>
           ))}
@@ -190,7 +193,10 @@ export function Certifications() {
         <ScrollReveal direction="up" blur delay={0.2} duration={0.65}>
           <div className="mt-12 text-center">
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-card/40">
-              <Award size={16} className="text-electric-cyan" />
+              <Award
+                size={16}
+                className="text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+              />
               <span className="text-sm text-muted-foreground">
                 All certifications independently verified and maintained through
                 annual audits

@@ -229,7 +229,7 @@ export function Features() {
             <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
               Core Capabilities
             </span>
-            <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">

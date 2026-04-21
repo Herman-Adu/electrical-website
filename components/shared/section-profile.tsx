@@ -103,10 +103,10 @@ export function SectionProfile({ data }: SectionProfileProps) {
             <div className="relative p-2">
               <div className="absolute -inset-6 border border-[--electric-cyan]/08 rounded-3xl" />
 
-              <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-electric-cyan/60 rounded-tl-sm z-10" />
-              <div className="absolute -top-1 -right-1 w-8 h-8 border-t-2 border-r-2 border-electric-cyan/60 rounded-tr-sm z-10" />
-              <div className="absolute -bottom-1 -left-1 w-8 h-8 border-b-2 border-l-2 border-electric-cyan/60 rounded-bl-sm z-10" />
-              <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-electric-cyan/60 rounded-br-sm z-10" />
+              <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-tl-xl z-10 p2" />
+              <div className="absolute -top-1 -right-1 w-8 h-8 border-t-2 border-r-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-tr-xl z-10" />
+              <div className="absolute -bottom-1 -left-1 w-8 h-8 border-b-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-bl-xl z-10" />
+              <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-br-xl z-10" />
 
               <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden">
                 <motion.div
@@ -122,7 +122,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
                       alt={image.alt}
                       fill
                       sizes="(min-width: 1024px) 40vw, 100vw"
-                      className="object-cover object-center p-4 "
+                      className="object-cover object-center"
                       priority={image.priority}
                     />
                   </motion.div>
@@ -143,11 +143,11 @@ export function SectionProfile({ data }: SectionProfileProps) {
                   {credentials.map((cred) => (
                     <div
                       key={cred}
-                      className="flex items-center gap-2 text-xs text-foreground/60"
+                      className="flex items-center gap-2 text-xs  text-foreground/80"
                     >
                       <CheckCircle
                         size={14}
-                        className="text-electric-cyan shrink-0"
+                        className="text-[hsl(174_100%_35%)] dark:text-electric-cyan shrink-0"
                       />
                       {cred}
                     </div>
@@ -172,7 +172,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
                         target={platform !== "email" ? "_blank" : undefined}
                         rel="noopener noreferrer"
                         aria-label={`${name} on ${platform}`}
-                        className="w-10 h-10 mb-2 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-electric-cyan hover:border-electric-cyan/50 hover:bg-electric-cyan/10 hover:shadow-lg hover:shadow-(--electric-cyan)/15 transition-all duration-300"
+                        className="w-10 h-10 mb-2 rounded-full border border-border flex items-center justify-center text-[hsl(174_100%_35%)] dark:text-foreground/60 hover:text-electric-cyan hover:border-electric-cyan/50 hover:bg-electric-cyan/10 hover:shadow-lg hover:shadow-(--electric-cyan)/15 transition-all duration-300"
                       >
                         <Icon size={16} />
                       </a>
@@ -191,8 +191,8 @@ export function SectionProfile({ data }: SectionProfileProps) {
               viewport={{ once: true, margin: "-80px" }}
               className="flex items-center gap-3 mb-6 font-semibold"
             >
-              <div className="h-px w-8 bg-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+              <span className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                 {label}
               </span>
             </motion.div>
