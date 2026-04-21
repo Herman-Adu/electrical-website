@@ -224,7 +224,7 @@ export function Hero() {
   const scrollToContent = () => {
     const servicesSection = document.getElementById("services");
     if (servicesSection) {
-      scrollToElementWithOffset(servicesSection, { pageType: 'default' });
+      scrollToElementWithOffset(servicesSection, { pageType: "default" });
     }
   };
 
@@ -258,12 +258,12 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-slate-500/30 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="dark:text-electric-cyan animate-pulse"
+                className="text-slate-500/70 dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-slate-500/60 dark:text-electric-cyan/80 uppercase">
                 Status // {statusText}
               </span>
             </div>
@@ -299,7 +299,7 @@ export function Hero() {
               initial="rest"
               whileHover="hover"
               whileTap={{ scale: 0.97 }}
-              className="group relative px-8 py-4 bg-electric-cyan text-primary-foreground rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
+              className="group relative px-8 py-4 bg-foreground dark:bg-electric-cyan text-primary-foreground rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(100,116,139,0.3)] dark:hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Initiate System

@@ -47,7 +47,7 @@ export function BrandSection({}: BrandSectionProps) {
           priority
         />
         {/* Glow effect on hover */}
-        <div className="absolute inset-0 bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+        <div className="absolute inset-0 bg-slate-500/20 dark:bg-electric-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
       </div>
 
       {/* Text Container - Increased text height without scaling logo */}
@@ -55,7 +55,7 @@ export function BrandSection({}: BrandSectionProps) {
         <span className="text-foreground font-bold text-base tracking-tight leading-none">
           NEXGEN
         </span>
-        <span className="font-mono text-base  text-electric-cyan  uppercase leading-none font-bold">
+        <span className="font-mono text-base text-slate-500 dark:text-electric-cyan uppercase leading-none font-bold">
           Electrical
         </span>
       </div>

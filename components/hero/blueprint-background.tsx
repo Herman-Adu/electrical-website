@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,28 @@ export function BlueprintBackground({
   className,
   showScanLine = true,
 }: BlueprintBackgroundProps) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const checkDarkMode = () =>
+      document.documentElement.classList.contains("dark");
+    setIsDarkMode(checkDarkMode());
+
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(checkDarkMode());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Light theme: slate-500 grey, Dark theme: electric-cyan
+  const gridColor = isDarkMode ? "var(--electric-cyan)" : "var(--pylon-grey)";
+
   return (
     <div
       className={cn(
@@ -25,8 +47,8 @@ export function BlueprintBackground({
         className="absolute inset-0 h-full w-full opacity-20 dark:opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, var(--electric-cyan) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--electric-cyan) 1px, transparent 1px)
+            linear-gradient(to right, ${gridColor} 1px, transparent 1px),
+            linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
@@ -37,8 +59,8 @@ export function BlueprintBackground({
         className="absolute inset-0 h-full w-full opacity-[0.03] dark:opacity-5"
         style={{
           backgroundImage: `
-            linear-gradient(to right, var(--electric-cyan) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--electric-cyan) 1px, transparent 1px)
+            linear-gradient(to right, ${gridColor} 1px, transparent 1px),
+            linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)
           `,
           backgroundSize: "10px 10px",
         }}
@@ -63,21 +85,21 @@ export function BlueprintBackground({
             repeat: Infinity,
             ease: "linear",
           }}
-          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent will-change-transform"
+          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-slate-500/40 dark:via-electric-cyan/30 to-transparent will-change-transform"
         />
       ) : null}
 
       {/* Corner technical markers */}
-      <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-electric-cyan/20" />
-      <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-electric-cyan/20" />
-      <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-electric-cyan/20" />
-      <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-electric-cyan/20" />
+      <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-slate-500/40 dark:border-electric-cyan/20" />
+      <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-slate-500/40 dark:border-electric-cyan/20" />
+      <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-slate-500/40 dark:border-electric-cyan/20" />
+      <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-slate-500/40 dark:border-electric-cyan/20" />
 
       {/* Technical coordinate labels */}
-      <div className="absolute top-6 left-20 font-mono text-[8px] text-electric-cyan/30 tracking-widest">
+      <div className="absolute top-6 left-20 font-mono text-[8px] text-slate-500/50 dark:text-electric-cyan/30 tracking-widest">
         X:0000 Y:0000
       </div>
-      <div className="absolute top-6 right-20 font-mono text-[8px] text-electric-cyan/30 tracking-widest">
+      <div className="absolute top-6 right-20 font-mono text-[8px] text-slate-500/50 dark:text-electric-cyan/30 tracking-widest">
         SECTOR_A1
       </div>
     </div>
