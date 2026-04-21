@@ -43,7 +43,7 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
           {/* Single item — current page only (e.g. Home) */}
           {isSingleItem ? (
             <span
-              className="text-electric-cyan truncate min-w-0 font-medium"
+              className="text-[hsl(174_100%_35%)] dark:text-electric-cyan truncate min-w-0 font-medium"
               aria-current="page"
             >
               {firstItem.label}
@@ -79,7 +79,7 @@ export function ContentBreadcrumb({ items, section }: ContentBreadcrumbProps) {
 
               {/* Last item — current page, always visible */}
               <span
-                className="text-electric-cyan truncate min-w-0 font-medium"
+                className="text-[hsl(174_100%_35%)] dark:text-electric-cyan truncate min-w-0 font-medium"
                 aria-current="page"
               >
                 {lastItem!.label}
