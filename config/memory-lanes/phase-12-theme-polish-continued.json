@@ -1,7 +1,7 @@
 {
   "memoryLane": {
     "id": "feat-phase-12-theme-polish-continued",
-    "name": "Phase 12: Theme Polish - Performance & Coverage Expansion",
+    "name": "Phase 12: Extend Light/Dark Theme Polish to Remaining Sections",
     "branch": "feat/phase-12-theme-polish-continued",
     "phase": 12,
     "status": "in-progress",
@@ -10,25 +10,42 @@
       "project_state": "electrical-website-state",
       "feature": "feat-phase-12-theme-polish-continued"
     },
-    "related_phases": ["feat-phase-11-polish-theme"],
+    "focus": "THEME POLISH ONLY — No performance work in this phase",
     "scope": [
-      "Extend light/dark theme polish to remaining page sections (Services, Projects, About, News Hub, Contact)",
-      "Lighthouse audit and Core Web Vitals optimization",
-      "Image optimization and font loading strategy",
-      "Performance profiling of animated components"
+      "Apply light/dark theme consistency to Services page components",
+      "Apply light/dark theme consistency to Projects page components",
+      "Apply light/dark theme consistency to About page components",
+      "Apply light/dark theme consistency to News Hub components",
+      "Apply light/dark theme consistency to Contact page components",
+      "Verify all section backgrounds, buttons, text, and borders follow color strategy",
+      "Update Cypress baselines for all polished sections"
     ],
     "color_strategy": {
-      "light_theme_accent": "hsl(174 100% 35%)",
-      "dark_theme_accent": "electric-cyan (#00ffff)"
+      "light_theme_accent": "hsl(174 100% 35%) — electric-green",
+      "light_theme_borders": "border-foreground/50",
+      "light_theme_text": "text-foreground/80",
+      "dark_theme_accent": "electric-cyan (#00ffff)",
+      "dark_theme_borders": "border-electric-cyan",
+      "dark_theme_text": "text-electric-cyan/80"
     },
+    "reference_components": [
+      "Phase 11 completed: Hero sections, navbar, breadcrumb, category buttons",
+      "Use these as template for remaining page sections"
+    ],
     "test_coverage": {
-      "unit_tests_baseline": "267/270 passing, 4 skipped",
-      "cypress_baseline": "from Phase 11 completion",
-      "lighthouse_target": "75+ on all pages"
+      "unit_tests_baseline": "267/270 passing, 4 skipped (from Phase 11)",
+      "cypress_baseline": "Update for Services, Projects, About, News Hub, Contact sections",
+      "target": "All pages visually consistent light/dark theme"
     },
-    "git_stats": {
-      "commits": 0,
-      "starting_baseline": "Phase 11 complete at a706dc1"
+    "build_gates": {
+      "typecheck": "Must pass",
+      "build": "58/58 pages must compile",
+      "tests": "267/270+ must pass"
+    },
+    "handoff_protocol": {
+      "on_every_commit": "Update this memory lane with: work completed, learnings discovered, current state, next tasks",
+      "on_main_merge": "Add session observations to Docker electrical-website-state entity",
+      "example": "After each commit: 'Completed: Services page styling. Learned: Grid layout resets on light theme. Next: Projects page'"
     }
   }
 }

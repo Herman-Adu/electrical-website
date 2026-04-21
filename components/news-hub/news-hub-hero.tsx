@@ -185,7 +185,7 @@ export function NewsHubHero({
             <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4">
               <Activity
                 size={14}
-                className="animate-pulse dark:text-electric-cyan"
+                className="animate-pulse text-foreground/70 dark:text-electric-cyan"
               />
               <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80  font-bold uppercase">
                 News Hub // {statusText}
@@ -229,8 +229,8 @@ export function NewsHubHero({
               className={cn(
                 "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
                 activeCategory === "all"
-                  ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                  : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
+                  ? "bg-foreground/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                  : "bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
               )}
             >
               All Stories
@@ -255,8 +255,8 @@ export function NewsHubHero({
                   className={cn(
                     "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
                     activeCategory === category.slug
-                      ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                      : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
+                      ? "bg-foreground/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                      : "bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
                   )}
                 >
                   {category.label}
@@ -267,7 +267,7 @@ export function NewsHubHero({
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/80 dark:text-foreground/80  font-bold uppercase"
           >
             <span>{totalArticles} Seeded Stories</span>
             <span className="hidden opacity-40 sm:inline">|</span>

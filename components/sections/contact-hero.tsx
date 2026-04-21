@@ -170,7 +170,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
             <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="dark:text-electric-cyan animate-pulse"
+                className="text-foreground/70 dark:text-electric-cyan animate-pulse"
               />
               <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
                 Contact // Ready
@@ -185,8 +185,8 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           >
             <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
 
-            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
-              <span className="font-mono text-xs tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-foreground/80 dark:text-electric-cyan/80 font-bold">
+              <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
                 {hero.badge.text}
               </span>
             </span>
@@ -225,15 +225,15 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
               return (
                 <div
                   key={item.title}
-                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
+                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
                 >
                   {Icon ? (
-                    <Icon className="mx-auto mb-2 h-6 w-6 dark:text-electric-cyan" />
+                    <Icon className="mx-auto mb-2 h-6 w-6 text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors" />
                   ) : null}
-                  <p className="text-sm font-medium text-foreground">
+                  <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
                     {item.title}
                   </p>
-                  <p className="mt-1 hidden text-xs text-muted-foreground sm:block">
+                  <p className="mt-1 hidden text-xs text-foreground/70 dark:text-foreground/70 sm:block">
                     {item.description}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80 uppercase font-bold"
+            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/80 dark:text-foreground/80 uppercase font-bold"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
@@ -263,7 +263,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.45 }}
           onClick={scrollToContactForm}
-          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 dark:text-foreground/80 transition-colors hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
           aria-label="Scroll to contact form"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
