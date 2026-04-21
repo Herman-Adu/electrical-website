@@ -12,7 +12,10 @@ import {
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
-import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
+import {
+  HERO_H1_COMPACT_BLUEPRINT,
+  HERO_H1_TALL_BLUEPRINT,
+} from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type {
   MarketingContactContent,
@@ -24,6 +27,14 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.1, delayChildren: 0.15 },
+  },
+};
+
+const flickerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 1, 0.6, 1, 0.8, 1],
+    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
   },
 };
 
@@ -153,15 +164,15 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
         >
           {/* Status label */}
           <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-3 mb-6"
+            variants={flickerVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
-                size={12}
-                className="text-electric-cyan animate-pulse"
+                size={14}
+                className="dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
                 Contact // Ready
               </span>
             </div>
@@ -170,33 +181,35 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           {/* Eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="mb-4 flex items-center justify-center"
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            <div className="inline-flex items-center gap-2 border border-electric-cyan/25 bg-electric-cyan/10 px-4 py-2">
-              {(() => {
-                const BadgeIcon = getIcon(hero.badge.icon);
-                return BadgeIcon ? (
-                  <BadgeIcon className="h-4 w-4 text-electric-cyan" />
-                ) : null;
-              })()}
-              <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase">
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+
+            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
+              <span className="font-mono text-xs tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
                 {hero.badge.text}
               </span>
-            </div>
+            </span>
+
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
           </motion.div>
 
-          {/* Headline */}
+          {/* Main headline */}
           <motion.h1
             variants={itemVariants}
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
-            {hero.title}
+            <span className="block">Contact</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+              Nexgen Electrical
+            </span>
+            <span className="block">Innovations</span>
           </motion.h1>
 
           {/* Sub */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg"
+            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {hero.description}
           </motion.p>
@@ -212,10 +225,10 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
               return (
                 <div
                   key={item.title}
-                  className="border border-electric-cyan/20 bg-background/60 p-4 text-center backdrop-blur-sm"
+                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
                 >
                   {Icon ? (
-                    <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan" />
+                    <Icon className="mx-auto mb-2 h-6 w-6 dark:text-electric-cyan" />
                   ) : null}
                   <p className="text-sm font-medium text-foreground">
                     {item.title}
@@ -226,6 +239,20 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
                 </div>
               );
             })}
+          </motion.div>
+
+          {/* Technical metadata */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80 uppercase font-bold"
+          >
+            <span>Est. 2009</span>
+            <span className="hidden sm:inline">|</span>
+            <span>NICEIC Approved</span>
+            <span className="hidden sm:inline">|</span>
+            <span>London &amp; Home Counties</span>
+            <span className="hidden sm:inline">|</span>
+            <span>Part P Certified</span>
           </motion.div>
         </motion.div>
       }
