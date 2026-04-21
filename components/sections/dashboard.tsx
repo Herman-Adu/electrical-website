@@ -43,18 +43,18 @@ export function Dashboard() {
       >
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-foreground/20 dark:border-electric-cyan/20 mb-6">
               <Activity
                 size={12}
-                className="dark:text-foreground animate-pulse"
+                className="text-foreground/70 dark:text-foreground animate-pulse"
               />
-              <span className="font-mono font-bold text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
+              <span className="font-mono font-bold text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
                 Live Monitoring
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4">
-              Grid <span className="text-electric-cyan">Intelligence</span>
+              Grid <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">Intelligence</span>
             </h2>
 
             <p className="text-foreground/70 max-w-xl text-base lg:text-lg font-light">
@@ -65,12 +65,12 @@ export function Dashboard() {
 
           {/* Status indicators */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl border dark:border-electric-cyan/20">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-foreground/20 dark:border-electric-cyan/20">
               <Shield
                 size={14}
-                className="dark:text-foreground animate-pulse"
+                className="text-foreground/70 dark:text-foreground animate-pulse"
               />
-              <span className="font-mono text-[10px] dark:text-electric-cyan/80 tracking-widest font-bold">
+              <span className="font-mono text-[10px] text-foreground/80 dark:text-electric-cyan/80 tracking-widest font-bold">
                 ALL SYSTEMS NOMINAL
               </span>
             </div>
