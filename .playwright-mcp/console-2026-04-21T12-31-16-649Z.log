@@ -11,3 +11,304 @@
 [   32272ms] [LOG] [Fast Refresh] done in 111ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
 [   39987ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
 [   40005ms] [LOG] [Fast Refresh] done in 119ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  112071ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  112324ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  112328ms] [LOG] [Fast Refresh] done in 353ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  112460ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  112892ms] [LOG] [Fast Refresh] done in 543ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  113245ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  113334ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  114013ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  114014ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  114015ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774790663} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  122145ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  122151ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  122324ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  122343ms] [LOG] [Fast Refresh] done in 119ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  153599ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  153637ms] [LOG] [Fast Refresh] done in 140ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  153744ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  153836ms] [LOG] [Fast Refresh] done in 191ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  179465ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  179683ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  179685ms] [LOG] [Fast Refresh] done in 318ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  179816ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  180468ms] [LOG] [Fast Refresh] done in 753ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  180804ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  180881ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  181441ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  181441ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  181442ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774858090} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  183539ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  183711ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  183715ms] [LOG] [Fast Refresh] done in 280ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  183895ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  184679ms] [LOG] [Fast Refresh] done in 885ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  184986ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  185076ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  185880ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  185880ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  185881ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774862529} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  247561ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  249308ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  249310ms] [LOG] [Fast Refresh] done in 1855ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  249537ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  250837ms] [LOG] [Fast Refresh] done in 1403ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  251103ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  251160ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  252400ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  252401ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  252401ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774929050} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  257934ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  258188ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  258195ms] [LOG] [Fast Refresh] done in 355ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  258315ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  258783ms] [LOG] [Fast Refresh] done in 569ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  259167ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  259226ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  259902ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  259902ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  259903ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774936551} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  284263ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  284495ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  284497ms] [LOG] [Fast Refresh] done in 332ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  284624ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  284987ms] [LOG] [Fast Refresh] done in 465ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  285279ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  285356ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  285920ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  285920ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  285921ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776774962569} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  335718ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  335838ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  335840ms] [LOG] [Fast Refresh] done in 224ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  335977ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  336481ms] [LOG] [Fast Refresh] done in 608ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  336880ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  336936ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  337712ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  337712ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  337713ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775014361} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  355070ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  355195ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  355197ms] [LOG] [Fast Refresh] done in 232ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  355342ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  355761ms] [LOG] [Fast Refresh] done in 525ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  356057ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  356152ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  356757ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  356757ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  356758ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775033406} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  366706ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  366813ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  366827ms] [LOG] [Fast Refresh] done in 208ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  366936ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  367297ms] [LOG] [Fast Refresh] done in 466ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  367615ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  367717ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  368366ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  368367ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  368368ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775045016} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  373308ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  373519ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  373521ms] [LOG] [Fast Refresh] done in 311ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  373642ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  373978ms] [LOG] [Fast Refresh] done in 438ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  374424ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  374474ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  375037ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  375037ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  375037ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775051686} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  391530ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  391896ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  391907ms] [LOG] [Fast Refresh] done in 469ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  392018ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  392422ms] [LOG] [Fast Refresh] done in 506ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  392702ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  392760ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  393351ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  393352ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  393352ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775070000} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  407536ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  407902ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  407904ms] [LOG] [Fast Refresh] done in 468ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  408039ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  408481ms] [LOG] [Fast Refresh] done in 542ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  408861ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  408922ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  409526ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  409526ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  409527ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775086175} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486425ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486590ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486594ms] [LOG] [Fast Refresh] done in 265ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  486733ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  487175ms] [LOG] [Fast Refresh] done in 552ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  487482ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  487597ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  488147ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  488148ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  488149ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775164797} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  508002ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  508154ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  508160ms] [LOG] [Fast Refresh] done in 251ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  508294ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  508912ms] [LOG] [Fast Refresh] done in 728ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  509268ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  509331ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  509870ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  509870ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  509870ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775186519} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  514910ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  515232ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  515235ms] [LOG] [Fast Refresh] done in 420ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  515362ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  515692ms] [LOG] [Fast Refresh] done in 431ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  516108ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  516167ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  516908ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  516908ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  516908ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775193556} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  532417ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  532646ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  532649ms] [LOG] [Fast Refresh] done in 334ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  532765ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  533108ms] [LOG] [Fast Refresh] done in 447ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  533598ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  533686ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  534357ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  534357ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  534357ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775211006} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  592610ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  592690ms] [LOG] [Fast Refresh] done in 193ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  665645ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  665699ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  665714ms] [LOG] [Fast Refresh] done in 155ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  665826ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  666285ms] [LOG] [Fast Refresh] done in 561ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  666603ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  666681ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  667277ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  667278ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  667279ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1776775343927} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  695528ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297
+[  695703ms] [LOG] [Fast Refresh] done in 278ms @ http://localhost:3000/_next/static/chunks/81ac0_next_dist_ab222df0._.js:2297

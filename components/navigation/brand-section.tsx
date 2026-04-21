@@ -52,10 +52,10 @@ export function BrandSection({}: BrandSectionProps) {
 
       {/* Text Container - Increased text height without scaling logo */}
       <div className="flex flex-col justify-center h-full gap-0.5">
-        <span className="text-slate-500 dark:text-white font-bold text-base tracking-tight leading-none">
+        <span className="block font-bold text-base tracking-tight leading-none">
           NEXGEN
         </span>
-        <span className="font-mono text-base text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-[hsl(174_80%_45%)] to-[hsl(174_100%_35%)] uppercase leading-none font-bold">
+        <span className="font-mono text-base text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-[hsl(174_80%_45%)] to-[hsl(174_100%_35%)] dark:text-electric-cyan uppercase leading-none font-bold">
           Electrical
         </span>
       </div>
