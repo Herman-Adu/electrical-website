@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
@@ -37,13 +39,17 @@ const flickerVariants: Variants = {
 };
 
 const serviceCategories = [
-  { label: "Commercial", color: "cyan" },
-  { label: "Industrial", color: "cyan" },
-  { label: "Residential", color: "cyan" },
-  { label: "Emergency", color: "amber" },
+  { label: "Commercial", slug: "commercial", color: "cyan" },
+  { label: "Industrial", slug: "industrial", color: "cyan" },
+  { label: "Residential", slug: "residential", color: "cyan" },
+  { label: "Emergency", slug: "emergency", color: "amber" },
 ];
 
-export function ServicesHero() {
+interface ServicesHeroProps {
+  activeService?: string;
+}
+
+export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
@@ -176,12 +182,12 @@ export function ServicesHero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4">
               <Activity
                 size={14}
-                className="text-electric-cyan animate-pulse"
+                className="dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
                 Services // {statusText}
               </span>
             </div>
@@ -192,11 +198,11 @@ export function ServicesHero() {
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
               What We Do
             </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
           </motion.div>
 
           {/* Headline */}
@@ -211,7 +217,7 @@ export function ServicesHero() {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Comprehensive electrical solutions from high-voltage industrial
             systems to intelligent residential installations — all backed by 15+
@@ -223,22 +229,32 @@ export function ServicesHero() {
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center gap-3 mb-10"
           >
-            {serviceCategories.map((cat) => (
-              <div
-                key={cat.label}
-                className="px-4 py-2 rounded-full border border-(--electric-cyan)/25 bg-electric-cyan/5 backdrop-blur-sm"
+            {serviceCategories.map((cat, index) => (
+              <motion.div
+                key={cat.slug}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
               >
-                <span className="font-mono text-[11px] tracking-widest uppercase text-electric-cyan/70">
+                <Link
+                  href={`/services/${cat.slug}`}
+                  className={cn(
+                    "px-4 py-2 rounded-xl border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
+                    activeService === cat.slug
+                      ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                      : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
+                  )}
+                >
                   {cat.label}
-                </span>
-              </div>
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase"
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline">|</span>
@@ -257,7 +273,7 @@ export function ServicesHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToGrid}
-          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
           aria-label="Scroll to services"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

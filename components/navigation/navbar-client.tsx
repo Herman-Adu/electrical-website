@@ -313,8 +313,8 @@ export function NavbarClient() {
                               aria-current={getAriaCurrent(link.href)}
                               className={`text-lg xs:text-xl sm:text-2xl font-bold transition-colors flex-1 ${
                                 topLevelActive
-                                  ? "text-slate-500 dark:text-electric-cyan"
-                                  : "text-foreground hover:text-slate-500 dark:hover:text-electric-cyan"
+                                  ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                                  : "text-foreground hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
                               }`}
                             >
                               {link.name}
@@ -328,11 +328,11 @@ export function NavbarClient() {
                               type="button"
                               aria-label={`${openDropdown === link.name ? "Collapse" : "Expand"} ${link.name} menu`}
                               aria-expanded={openDropdown === link.name}
-                              className="p-1 ml-2 text-muted-foreground hover:text-slate-500 dark:hover:text-electric-cyan transition-colors flex-shrink-0"
+                              className="p-1 ml-2 text-muted-foreground hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan transition-colors flex-shrink-0"
                             >
                               <ChevronDown
                                 size={20}
-                                className={`transition-transform ${topLevelActive ? "text-slate-500 dark:text-electric-cyan" : ""} ${openDropdown === link.name ? "rotate-180" : ""}`}
+                                className={`transition-transform ${topLevelActive ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan" : ""} ${openDropdown === link.name ? "rotate-180" : ""}`}
                               />
                             </button>
                           </motion.div>
@@ -358,8 +358,8 @@ export function NavbarClient() {
                                       aria-current={getAriaCurrent(item.href)}
                                       className={`w-full text-left text-sm xs:text-base sm:text-lg transition-colors py-2 xs:py-2.5 pl-6 xs:pl-8 border-b border-border/50 ${
                                         submenuActive
-                                          ? "text-slate-500 dark:text-electric-cyan"
-                                          : "text-muted-foreground hover:text-slate-500 dark:hover:text-electric-cyan"
+                                          ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                                          : "text-muted-foreground hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
                                       }`}
                                     >
                                       {item.name}
@@ -379,8 +379,8 @@ export function NavbarClient() {
                           aria-current={getAriaCurrent(link.href)}
                           className={`text-left text-lg xs:text-xl sm:text-2xl font-bold transition-colors py-2 xs:py-3 border-b border-border w-full ${
                             topLevelActive
-                              ? "text-slate-500 dark:text-electric-cyan"
-                              : "text-foreground hover:text-slate-500 dark:hover:text-electric-cyan"
+                              ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                              : "text-foreground hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
                           }`}
                         >
                           {link.name}

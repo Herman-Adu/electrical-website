@@ -13,7 +13,7 @@ export function BlueprintBackground({
   className,
   showScanLine = true,
 }: BlueprintBackgroundProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkDarkMode = () =>
@@ -31,6 +31,11 @@ export function BlueprintBackground({
 
     return () => observer.disconnect();
   }, []);
+
+  // Prevent hydration mismatch by deferring render until client state is known
+  if (isDarkMode === null) {
+    return null;
+  }
 
   // Light theme: slate-500 grey, Dark theme: electric-cyan
   const gridColor = isDarkMode ? "var(--electric-cyan)" : "var(--pylon-grey)";

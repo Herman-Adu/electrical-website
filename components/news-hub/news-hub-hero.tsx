@@ -68,7 +68,7 @@ export function NewsHubHero({
 
   const scrollToFeed = () => {
     const feed = document.getElementById("news-hub-feed");
-    if (feed) scrollToElementWithOffset(feed, { pageType: 'article' });
+    if (feed) scrollToElementWithOffset(feed, { pageType: "article" });
   };
 
   return (
@@ -182,12 +182,12 @@ export function NewsHubHero({
             variants={flickerVariants}
             className="mb-8 flex items-center justify-center gap-3"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4">
               <Activity
                 size={14}
-                className="animate-pulse text-electric-cyan"
+                className="animate-pulse dark:text-electric-cyan"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80  font-bold uppercase">
                 News Hub // {statusText}
               </span>
             </div>
@@ -197,23 +197,23 @@ export function NewsHubHero({
             variants={itemVariants}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
               Editorial Systems
             </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
           </motion.div>
 
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Editorial</span>
-            <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               Command Centre
             </span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-white/75 sm:text-lg drop-shadow-md"
+            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Live editorial hub for campaigns, case studies, insights, and
             partner updates. Powered by typed content models ready for scalable
@@ -227,10 +227,10 @@ export function NewsHubHero({
             <Link
               href="/news-hub"
               className={cn(
-                "rounded-full border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
+                "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
                 activeCategory === "all"
-                  ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,243,189,0.15)]"
-                  : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
+                  ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                  : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
               )}
             >
               All Stories
@@ -253,10 +253,10 @@ export function NewsHubHero({
                 <Link
                   href={`/news-hub?category=${category.slug}`}
                   className={cn(
-                    "rounded-full border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
+                    "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
                     activeCategory === category.slug
-                      ? "border-electric-cyan/40 bg-electric-cyan/15 text-electric-cyan shadow-[0_0_15px_rgba(0,243,189,0.15)]"
-                      : "border-electric-cyan/25 bg-electric-cyan/5 text-electric-cyan/70 hover:border-electric-cyan/40 hover:text-electric-cyan",
+                      ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                      : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
                   )}
                 >
                   {category.label}
@@ -267,7 +267,7 @@ export function NewsHubHero({
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/40 uppercase dark:text-white/40"
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
           >
             <span>{totalArticles} Seeded Stories</span>
             <span className="hidden opacity-40 sm:inline">|</span>
@@ -285,7 +285,7 @@ export function NewsHubHero({
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToFeed}
           type="button"
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-electric-cyan dark:text-white/50"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
           aria-label="Explore News Hub"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

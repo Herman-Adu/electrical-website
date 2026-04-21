@@ -258,12 +258,12 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-foreground70 dark:text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/60 dark:text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
                 Status // {statusText}
               </span>
             </div>
@@ -336,7 +336,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/70 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-foreground/70 dark:text-foreground/80 font-bold">
             Scroll

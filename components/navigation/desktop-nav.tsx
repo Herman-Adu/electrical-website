@@ -225,13 +225,13 @@ export function DesktopNav({
                     }}
                     className={`relative text-sm transition-colors font-medium tracking-wide ${
                       topLevelActive
-                        ? "text-slate-500 dark:text-electric-cyan"
-                        : "text-muted-foreground dark:text-foreground/90 hover:text-slate-500 dark:hover:text-foreground"
+                        ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                        : "text-muted-foreground dark:text-foreground/90 hover:text-[hsl(174_100%_35%)] dark:hover:text-foreground"
                     }`}
                   >
                     {link.name}
                     <span
-                      className={`absolute -bottom-1 left-0 z-10 h-px bg-slate-500 dark:bg-electric-cyan transition-all duration-300 ${
+                      className={`absolute -bottom-1 left-0 z-10 h-px bg-[hsl(174_100%_35%)] dark:bg-electric-cyan transition-all duration-300 ${
                         topLevelActive ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                     />
@@ -243,7 +243,7 @@ export function DesktopNav({
                       isDropdownOpen(link.name) ? "rotate-180" : "rotate-0"
                     } ${
                       topLevelActive
-                        ? "text-slate-500 dark:text-electric-cyan"
+                        ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
                         : "text-muted-foreground dark:text-foreground/90"
                     }`}
                   />
@@ -281,8 +281,8 @@ export function DesktopNav({
                             }
                             className={`w-full text-left px-4 py-2 text-sm transition-all border-b border-border/50 last:border-b-0 ${
                               submenuActive
-                                ? "text-slate-500 dark:text-electric-cyan bg-slate-500/10 dark:bg-electric-cyan/10"
-                                : "text-popover-foreground/80 hover:text-slate-500 dark:hover:text-electric-cyan hover:bg-slate-500/10 dark:hover:bg-electric-cyan/10"
+                                ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10"
+                                : "text-popover-foreground/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan hover:bg-[hsl(174_100%_35%)]/10 dark:hover:bg-electric-cyan/10"
                             }`}
                           >
                             {item.name}
@@ -301,13 +301,13 @@ export function DesktopNav({
                 onClick={() => onNavigate(link.href)}
                 className={`group relative text-sm transition-colors font-medium tracking-wide ${
                   topLevelActive
-                    ? "text-slate-500 dark:text-electric-cyan"
-                    : "text-muted-foreground dark:text-foreground/90 hover:text-slate-500 dark:hover:text-foreground"
+                    ? "text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                    : "text-muted-foreground dark:text-foreground/90 hover:text-[hsl(174_100%_35%)] dark:hover:text-foreground"
                 }`}
               >
                 {link.name}
                 <span
-                  className={`absolute -bottom-1 left-0 z-10 h-px bg-slate-500 dark:bg-electric-cyan transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 z-10 h-px bg-[hsl(174_100%_35%)] dark:bg-electric-cyan transition-all duration-300 ${
                     topLevelActive ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
