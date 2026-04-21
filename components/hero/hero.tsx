@@ -309,8 +309,10 @@ export function Hero() {
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             </motion.button>
 
-            <button className="px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground uppercase tracking-widest dark:hover:border-electric-cyan hover:text-[hsl(174_100%_35%)] transition-all duration-300 text-sm">
-              Our Solutions
+            <button className="group px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground uppercase tracking-widest dark:hover:border-electric-cyan transition-all duration-300 text-sm">
+              <span className="group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-electric-cyan group-hover:via-[hsl(174_80%_45%)] group-hover:to-[hsl(174_100%_35%)]">
+                Our Solutions
+              </span>
             </button>
           </motion.div>
 
