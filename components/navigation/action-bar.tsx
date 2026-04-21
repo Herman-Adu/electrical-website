@@ -13,7 +13,7 @@ export function ActionBar() {
         href="/contact"
         className="inline-flex items-center px-3 py-2 rounded-lg border border-border bg-background text-sm font-medium tracking-wide hover:bg-electric-cyan/15 hover:border-electric-cyan/50 transition-all duration-300 dark:text-electric-cyan"
       >
-        <span className="dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-electric-cyan dark:via-[hsl(174_80%_45%)] dark:to-[hsl(174_100%_35%)]">
+        <span className="dark:text-electric-cyan">
           Get Quote
         </span>
       </Link>
