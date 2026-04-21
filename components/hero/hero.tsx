@@ -310,7 +310,7 @@ export function Hero() {
             </motion.button>
 
             <button className="group px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground uppercase tracking-widest dark:hover:border-electric-cyan transition-all duration-300 text-sm">
-              <span className="dark:group-hover:bg-clip-text dark:group-hover:text-transparent dark:group-hover:bg-gradient-to-r dark:group-hover:from-electric-cyan dark:group-hover:via-[hsl(174_80%_45%)] dark:group-hover:to-[hsl(174_100%_35%)]">
+              <span className="group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-electric-cyan group-hover:via-[hsl(174_80%_45%)] group-hover:to-[hsl(174_100%_35%)]">
                 Our Solutions
               </span>
             </button>
