@@ -112,6 +112,7 @@ export function Services() {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 blueprint-grid opacity-5" />
+
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
@@ -159,12 +160,9 @@ export function Services() {
               blur
               delay={(index % 3) * 0.07}
             >
-              <motion.div
-                className="group relative flex flex-col border border-foreground/20 dark:border-electric-cyan/10 rounded-2xl p-6 lg:p-8 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(27, 97, 122, 0.22) 0%, rgba(0, 243, 189, 0.16) 50%, rgba(0, 0, 0, 0) 100%)'
-                }}
-              >
+              <motion.div className="group relative flex flex-col border border-foreground/20 dark:border-electric-cyan/10 rounded-2xl p-6 lg:p-8 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5 dark:bg-gradient-to-br dark:from-electric-cyan/5 dark:to-transparent">
+                {/* Light theme shimmer background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(174_100%_35%)]/6 via-transparent to-[hsl(174_100%_35%)]/5 pointer-events-none rounded-2xl dark:hidden" />
                 {/* Corner accent — inset to respect border-radius */}
                 <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-foreground/30 dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/40 transition-colors" />
 
