@@ -34,7 +34,10 @@ export function DomainCards({ domains, isInView }: DomainCardsProps) {
           className="px-6 py-3 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:border-electric-cyan transition-colors cursor-pointer"
         >
           <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-            <domain.icon size={16} className="text-electric-cyan" />
+            <domain.icon
+              size={16}
+              className="text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+            />
             {domain.name}
           </span>
         </motion.div>

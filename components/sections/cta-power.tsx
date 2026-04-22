@@ -74,7 +74,7 @@ const CTAPowerClient = () => {
         transition={{ delay: 0.2, duration: 0.8 }}
         className="absolute top-8 right-8 lg:top-16 lg:right-16 flex items-center gap-2 text-sm"
       >
-        <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+        <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
         <span className="text-foreground/70 font-mono text-xs uppercase tracking-wide">
           Systems Ready
         </span>

@@ -26,7 +26,7 @@ export function FeaturesList({ features, isInView }: FeaturesListProps) {
         >
           <CheckCircle2
             size={18}
-            className="text-electric-cyan mt-0.5 shrink-0"
+            className="text-[hsl(174_100%_35%)] dark:text-electric-cyan mt-0.5 shrink-0"
           />
           <div>
             <span className="text-foreground font-medium text-sm">

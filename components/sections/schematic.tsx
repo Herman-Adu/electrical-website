@@ -62,18 +62,21 @@ export function Schematic() {
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-1"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 border border-electric-cyan/20 mb-6">
-              <div className="size-2 bg-electric-cyan animate-pulse" />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
+              <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
                 Our Process
               </span>
+              <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-6">
-              Precision <span className="text-electric-cyan">Architecture</span>
+              Precision{" "}
+              <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                Architecture
+              </span>
             </h2>
 
-            <p className="text-muted-foreground text-base lg:text-lg font-light leading-relaxed mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
               We don't just install; we engineer. Every Nexgen project begins
               with a high-fidelity digital twin of your electrical
               infrastructure, ensuring precision before a single wire is laid.
@@ -82,7 +85,7 @@ export function Schematic() {
             <FeaturesList features={features} isInView={isInView} />
 
             {/* CTA */}
-            <button className="group flex items-center rounded-xl gap-3 px-6 py-3 bg-electric-cyan text-deep-slate font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(0,243,189,0.3)] transition-all duration-300">
+            <button className="group flex items-center rounded-xl gap-3 px-6 py-3 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan text-deep-slate font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(0,243,189,0.3)] transition-all duration-300">
               Start Your Project
               <ArrowRight
                 size={16}

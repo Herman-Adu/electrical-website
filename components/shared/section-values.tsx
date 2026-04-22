@@ -72,15 +72,17 @@ export function SectionValues({ data }: SectionValuesProps) {
         >
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+              <div className="h-px w-6 md:w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+              <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan font-bold">
                 {label}
               </span>
+              <div className="h-px w-6 md:w-8 bg-electric-cyan" />
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
               {headlineHighlight ? (
                 <>
                   {headline.replace(headlineHighlight, "")}{" "}
-                  <span className="text-electric-cyan">
+                  <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                     {headlineHighlight}
                   </span>
                 </>

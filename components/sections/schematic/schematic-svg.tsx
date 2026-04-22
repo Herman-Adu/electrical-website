@@ -9,18 +9,27 @@ type SchematicSvgProps = {
 export function SchematicSvg({ svgRef }: SchematicSvgProps) {
   return (
     <div className="relative aspect-square max-w-lg mx-auto">
+      <style>{`
+        .schematic-container {
+          --schematic-stroke: hsl(174 100% 35%);
+        }
+        .dark .schematic-container {
+          --schematic-stroke: #00f3bd;
+        }
+      `}</style>
       <div className="absolute inset-0 bg-electric-cyan/5 blur-3xl rounded-full" />
 
-      <svg
-        ref={svgRef}
-        viewBox="0 0 500 500"
-        className="w-full h-full drop-shadow-[0_0_20px_rgba(0,243,189,0.15)]"
-      >
+      <div className="schematic-container">
+        <svg
+          ref={svgRef}
+          viewBox="0 0 500 500"
+          className="w-full h-full drop-shadow-[0_0_20px_rgba(0,243,189,0.15)]"
+        >
         <g className="schematic-lines">
           <path
             className="schematic-path"
             d="M50 50 H450 V450 H50 Z"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="1.5"
             fill="none"
             opacity="0.6"
@@ -29,7 +38,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <path
             className="schematic-path"
             d="M50 200 H250"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="1"
             fill="none"
             opacity="0.5"
@@ -37,7 +46,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <path
             className="schematic-path"
             d="M250 50 V200"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="1"
             fill="none"
             opacity="0.5"
@@ -45,7 +54,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <path
             className="schematic-path"
             d="M250 200 V350 H450"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="1"
             fill="none"
             opacity="0.5"
@@ -53,7 +62,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <path
             className="schematic-path"
             d="M50 350 H250"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="1"
             fill="none"
             opacity="0.5"
@@ -62,21 +71,21 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <path
             className="schematic-path"
             d="M100 100 L100 150 L200 150"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="2"
             fill="none"
           />
           <path
             className="schematic-path"
             d="M350 100 L350 280 L400 280"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="2"
             fill="none"
           />
           <path
             className="schematic-path"
             d="M150 280 L150 400 L300 400"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="2"
             fill="none"
           />
@@ -88,42 +97,42 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
             cx="100"
             cy="100"
             r="6"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
           <circle
             className="schematic-dot"
             cx="200"
             cy="150"
             r="4"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
           <circle
             className="schematic-dot"
             cx="350"
             cy="100"
             r="6"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
           <circle
             className="schematic-dot"
             cx="400"
             cy="280"
             r="4"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
           <circle
             className="schematic-dot"
             cx="150"
             cy="280"
             r="6"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
           <circle
             className="schematic-dot"
             cx="300"
             cy="400"
             r="4"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
 
           <circle
@@ -132,7 +141,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
             cy="200"
             r="10"
             fill="none"
-            stroke="var(--electric-cyan)"
+            stroke="var(--schematic-stroke)"
             strokeWidth="2"
           />
           <circle
@@ -140,11 +149,11 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
             cx="250"
             cy="200"
             r="5"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
           />
         </g>
 
-        <g fill="var(--electric-cyan)" fontSize="10" fontFamily="monospace">
+        <g fill="var(--schematic-stroke)" fontSize="10" fontFamily="monospace">
           <text className="schematic-label" x="80" y="90">
             PWR_IN
           </text>
@@ -161,7 +170,7 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
 
         <g
           className="measurements"
-          stroke="var(--electric-cyan)"
+          stroke="var(--schematic-stroke)"
           strokeWidth="0.5"
           opacity="0.3"
         >
@@ -171,19 +180,20 @@ export function SchematicSvg({ svgRef }: SchematicSvgProps) {
           <text
             x="230"
             y="35"
-            fill="var(--electric-cyan)"
+            fill="var(--schematic-stroke)"
             fontSize="8"
             fontFamily="monospace"
           >
             400m
           </text>
         </g>
-      </svg>
+        </svg>
 
-      <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-muted-foreground  dark:border-electric-cyan/30" />
-      <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-muted-foreground dark:border-electric-cyan/30" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-muted-foreground dark:border-electric-cyan/30" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-muted-foreground dark:border-electric-cyan/30" />
+        <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/30" />
+        <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/30" />
+        <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/30" />
+        <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/30" />
+      </div>
     </div>
   );
 }

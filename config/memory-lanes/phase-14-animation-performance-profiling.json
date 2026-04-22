@@ -1,0 +1,38 @@
+{
+  "memoryLane": {
+    "id": "feat-phase-14-animation-performance-profiling",
+    "name": "Phase 14: Animation Performance Profiling & Optimization",
+    "branch": "feat/phase-14-animation-performance-profiling",
+    "phase": 14,
+    "status": "pending",
+    "created_date": "2026-04-21",
+    "planned_date": "After Phase 13 completes",
+    "docker_entities": {
+      "project_state": "electrical-website-state",
+      "feature": "feat-phase-14-animation-performance-profiling"
+    },
+    "focus": "ANIMATION PERFORMANCE — Profiling, GPU acceleration, frame rate optimization",
+    "scope": [
+      "Profile animated components using Chrome DevTools Performance panel",
+      "Identify jank, layout thrashing, or paint overhead in animations",
+      "Verify GPU acceleration (transform, opacity, will-change strategies)",
+      "Optimize animation frame rates (target: 60fps on all devices)",
+      "Profile hero ScrollReveal animations for smooth scrolling",
+      "Profile category button interactions for instant responsiveness",
+      "Profile breadcrumb and navbar animations",
+      "Measure before/after performance gains with metrics"
+    ],
+    "success_criteria": {
+      "animation_fps": "60fps sustained on desktop and mobile",
+      "no_jank": "Smooth scrolling without layout shift",
+      "gpu_acceleration": "All animated elements using GPU transforms",
+      "performance_improvement": "Measurable improvement over baseline"
+    },
+    "tools": [
+      "Chrome DevTools Performance tab",
+      "Web Vitals library (INP measurements)",
+      "React DevTools Profiler (component render times)"
+    ],
+    "blockers": "None — Phase 14 starts after Phase 13 completes"
+  }
+}

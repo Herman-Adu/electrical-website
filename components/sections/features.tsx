@@ -41,8 +41,8 @@ function LoadMonitorCard() {
   return (
     <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
+        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-foreground/30 dark:border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-foreground/30 dark:border-electric-cyan rounded-br-lg" />
       </div>
 
       <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
@@ -60,7 +60,7 @@ function LoadMonitorCard() {
 
       <div className="p-6 py-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase dark:text-electric-cyan/60">
+          <span className="text-[10px] font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/60">
             Grid Intelligence
           </span>
           <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -96,7 +96,7 @@ function LoadMonitorCard() {
                 }}
               >
                 <div>
-                  <p className="text-xs font-mono dark:text-electric-cyan font-bold">
+                  <p className="text-xs font-mono text-foreground/80 dark:text-electric-cyan font-bold">
                     {card.zone}
                   </p>
                   <p className="text-sm font-bold text-foreground">
@@ -104,10 +104,10 @@ function LoadMonitorCard() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold dark:text-electric-cyan">
+                  <p className="text-lg font-bold text-foreground/80 dark:text-electric-cyan">
                     {card.capacity}
                   </p>
-                  <p className="text-[10px] dark:text-foreground/80 uppercase tracking-wider font-bold">
+                  <p className="text-[10px] text-foreground/70 dark:text-foreground/80 uppercase tracking-wider font-bold">
                     Capacity
                   </p>
                 </div>
@@ -116,7 +116,7 @@ function LoadMonitorCard() {
           })}
         </div>
 
-        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border text-sm font-mono tracking-widest uppercase dark:text-electric-cyan/80 hover:border-electric-cyan/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-foreground/20 dark:border-foreground/20 text-sm font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/80 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
           Monitor Zones
         </button>
       </div>
@@ -160,8 +160,8 @@ function SystemDiagnosticsCard() {
   return (
     <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-muted-foreground/40 dark:border-electric-cyan rounded-tl-lg" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-muted-foreground/40 dark:border-electric-cyan rounded-br-lg" />
+        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-foreground/30 dark:border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-foreground/30 dark:border-electric-cyan rounded-br-lg" />
       </div>
 
       <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
@@ -229,7 +229,7 @@ export function Features() {
             <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
               Core Capabilities
             </span>
-            <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">

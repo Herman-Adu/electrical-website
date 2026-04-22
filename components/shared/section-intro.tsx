@@ -50,8 +50,8 @@ export function SectionIntro({ data }: SectionIntroProps) {
           viewport={{ once: true }}
           className="flex items-center gap-3 mb-6"
         >
-          <div className="h-px w-8 bg-electric-cyan" />
-          <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+          <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+          <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
             {label}
           </span>
         </motion.div>
@@ -122,14 +122,12 @@ export function SectionIntro({ data }: SectionIntroProps) {
                 duration={0.65}
                 distance={40}
               >
-                <motion.div
-                  className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-400 group"
-                >
+                <motion.div className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-[hsl(174_100%_35%)]/80 dark:hover:border-electric-cyan/40 transition-all duration-400 group">
                   {/* Corner brackets */}
-                  <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
-                  <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                  <div className="absolute rounded-tl-xl top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/30 group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/60 transition-colors" />
+                  <div className="absolute rounded-br-xl bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/30 group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/60 transition-colors" />
 
-                  <div className="font-mono text-4xl font-bold text-electric-cyan/20 mb-4 group-hover:text-electric-cyan/60 transition-colors">
+                  <div className="font-mono text-4xl font-bold text-[hsl(174_100%_35%)]/20 dark:text-electric-cyan/20 mb-4 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan/60 transition-colors">
                     {pillar.num}
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">

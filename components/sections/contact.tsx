@@ -233,23 +233,23 @@ export function Contact() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="group flex gap-4 border border-slate-800 p-4 transition-all duration-300 hover:border-electric-cyan/30"
+                className="group flex gap-4 border border-foreground/20 dark:border-slate-800 p-4 transition-all duration-300 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan/30"
               >
                 <div className="relative">
                   <item.icon
                     size={20}
-                    className="text-electric-cyan/60 transition-colors group-hover:text-electric-cyan"
+                    className="text-foreground/70 dark:text-electric-cyan/60 transition-colors group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan"
                   />
                   <div className="absolute -inset-2 bg-electric-cyan/10 blur-lg opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] text-foreground/70 tracking-widest uppercase block mb-1">
+                  <span className="font-mono text-[10px] text-foreground/70 dark:text-foreground/70 tracking-widest uppercase block mb-1">
                     {item.label}
                   </span>
-                  <span className="text-white font-medium block">
+                  <span className="text-foreground dark:text-white font-medium block">
                     {item.value}
                   </span>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-foreground/70 dark:text-slate-300 text-sm">
                     {item.subvalue}
                   </span>
                 </div>
@@ -261,18 +261,18 @@ export function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.7 }}
-              className="p-4 bg-red-500/10 border border-red-500/30"
+              className="p-4 bg-red-500/10 dark:bg-red-500/10 border border-red-500/30 dark:border-red-500/30"
             >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-2 h-2 bg-red-500 animate-pulse rounded-full" />
-                <span className="font-mono text-[10px] text-red-500 tracking-widest uppercase">
+                <span className="font-mono text-[10px] text-red-500 dark:text-red-500 tracking-widest uppercase">
                   Emergency Services
                 </span>
               </div>
-              <p className="text-slate-300 text-sm">
+              <p className="text-foreground/70 dark:text-slate-300 text-sm">
                 Electrical emergency? Our rapid response team is available 24/7.
               </p>
-              <button className="mt-3 text-red-400 font-bold text-sm hover:text-red-300 transition-colors">
+              <button className="mt-3 text-red-600 dark:text-red-400 font-bold text-sm hover:text-red-700 dark:hover:text-red-300 transition-colors">
                 Call Emergency Line
               </button>
             </motion.div>
@@ -287,20 +287,20 @@ export function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="border border-slate-800 bg-deep-slate/50 p-6 lg:p-8"
+              className="border border-foreground/20 dark:border-slate-800 bg-foreground/5 dark:bg-deep-slate/50 p-6 lg:p-8"
               noValidate
             >
               {/* Form Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                <span className="font-mono text-[10px] text-slate-500 tracking-widest uppercase">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-foreground/20 dark:border-slate-800">
+                <span className="font-mono text-[10px] text-foreground/70 dark:text-slate-500 tracking-widest uppercase">
                   Project Inquiry Form
                 </span>
                 {isSubmitted ? (
-                  <span className="font-mono text-[10px] text-emerald-500/80 tracking-widest font-bold">
+                  <span className="font-mono text-[10px] text-emerald-500/80 dark:text-emerald-500/80 tracking-widest font-bold">
                     ✓ {refCode}
                   </span>
                 ) : (
-                  <span className="font-mono text-[10px] text-slate-600/50 tracking-widest">
+                  <span className="font-mono text-[10px] text-foreground/50 dark:text-slate-600/50 tracking-widest">
                     REF: PENDING
                   </span>
                 )}
@@ -341,8 +341,8 @@ export function Contact() {
                     className={`w-full border ${
                       fieldErrors.name
                         ? "border-red-500 focus:border-red-400"
-                        : "border-slate-700"
-                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                        : "border-foreground/20 dark:border-slate-700"
+                    } bg-foreground/5 dark:bg-slate-dark px-4 py-3 text-sm text-foreground dark:text-white transition-colors focus:border-[hsl(174_100%_35%)] dark:focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
                     placeholder="John Smith"
                   />
                   {fieldErrors.name && (
@@ -370,8 +370,8 @@ export function Contact() {
                     className={`w-full border ${
                       fieldErrors.email
                         ? "border-red-500 focus:border-red-400"
-                        : "border-slate-700"
-                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                        : "border-foreground/20 dark:border-slate-700"
+                    } bg-foreground/5 dark:bg-slate-dark px-4 py-3 text-sm text-foreground dark:text-white transition-colors focus:border-[hsl(174_100%_35%)] dark:focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
                     placeholder="john@company.com"
                   />
                   {fieldErrors.email && (
@@ -398,7 +398,7 @@ export function Contact() {
                     value={formData.company}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className="w-full border border-slate-700 bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50"
+                    className="w-full border border-foreground/20 dark:border-slate-700 bg-foreground/5 dark:bg-slate-dark px-4 py-3 text-sm text-foreground dark:text-white transition-colors focus:border-[hsl(174_100%_35%)] dark:focus:border-electric-cyan focus:outline-none disabled:opacity-50"
                     placeholder="Company Name"
                   />
                 </div>
@@ -418,8 +418,8 @@ export function Contact() {
                     className={`w-full cursor-pointer appearance-none border ${
                       fieldErrors.projectType
                         ? "border-red-500 focus:border-red-400"
-                        : "border-slate-700"
-                    } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                        : "border-foreground/20 dark:border-slate-700"
+                    } bg-foreground/5 dark:bg-slate-dark px-4 py-3 text-sm text-foreground dark:text-white transition-colors focus:border-[hsl(174_100%_35%)] dark:focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
                   >
                     <option value="">Select Type</option>
                     <option value="commercial">Commercial Installation</option>
@@ -454,8 +454,8 @@ export function Contact() {
                   className={`w-full resize-none border ${
                     fieldErrors.message
                       ? "border-red-500 focus:border-red-400"
-                      : "border-slate-700"
-                  } bg-slate-dark px-4 py-3 text-sm text-white transition-colors focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
+                      : "border-foreground/20 dark:border-slate-700"
+                  } bg-foreground/5 dark:bg-slate-dark px-4 py-3 text-sm text-foreground dark:text-white transition-colors focus:border-[hsl(174_100%_35%)] dark:focus:border-electric-cyan focus:outline-none disabled:opacity-50`}
                   placeholder="Describe your project requirements, timeline, and any specific needs..."
                 />
                 {fieldErrors.message && (
@@ -504,10 +504,10 @@ export function Contact() {
                 disabled={isSubmitted || isLoading}
                 className={`w-full py-4 font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all duration-300 ${
                   isSubmitted
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-emerald-500 text-white dark:bg-emerald-600"
                     : isLoading
-                      ? "cursor-not-allowed bg-electric-cyan/50 text-deep-slate"
-                      : "bg-electric-cyan text-deep-slate hover:shadow-[0_0_30px_rgba(0,243,189,0.3)]"
+                      ? "cursor-not-allowed bg-[hsl(174_100%_35%)]/50 dark:bg-electric-cyan/50 text-deep-slate dark:text-deep-slate"
+                      : "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan text-white dark:text-deep-slate hover:shadow-[0_0_30px_rgba(0,243,189,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,243,189,0.3)]"
                 }`}
               >
                 {isSubmitted ? (

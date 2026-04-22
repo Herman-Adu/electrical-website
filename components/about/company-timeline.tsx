@@ -141,16 +141,18 @@ function TimelineHeader() {
     >
       <div className="flex items-center justify-center gap-3 mb-4">
         <div className="h-px w-6 md:w-8 bg-electric-cyan" />
-        <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-electric-cyan">
+        <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
           Our Journey
         </span>
         <div className="h-px w-6 md:w-8 bg-electric-cyan" />
       </div>
       <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 text-balance">
         10+ Years of{" "}
-        <span className="text-electric-cyan">Powering Progress</span>
+        <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+          Powering Progress
+        </span>
       </h2>
-      <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+      <p className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal">
         From humble beginnings to industry leadership — every year has been
         built on the same foundation of quality and community.
       </p>
@@ -189,12 +191,12 @@ function TimelineCard({
       <div
         className={`relative w-full md:max-w-sm rounded-3xl border p-5 md:p-6 backdrop-blur-sm transition-colors duration-300 ${
           milestone.highlight
-            ? "border-electric-cyan/30 bg-electric-cyan/[0.07]"
+            ? "border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/[0.07] dark:bg-electric-cyan/[0.07]"
             : "border-border/70 bg-card/65"
         }`}
       >
         <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-electric-cyan/0 via-electric-cyan/50 to-electric-cyan/0" />
-        <div className="font-mono text-xs tracking-[0.28em] text-electric-cyan/70 mb-3">
+        <div className="font-mono text-xs tracking-[0.28em] text-[hsl(174_100%_35%)] dark:text-electric-cyan/70 mb-3 font-bold">
           {milestone.year}
         </div>
         <h3 className="text-lg md:text-xl font-bold text-foreground mb-2 leading-tight text-balance">
@@ -263,12 +265,18 @@ function AnimatedSegment({
       className="pointer-events-none absolute left-1/2 top-(--timeline-node) bottom-[calc(var(--timeline-gap)*-1)] w-0.5 -translate-x-1/2 z-10 rounded-full"
     >
       <motion.div
-        className="absolute inset-0 rounded-full origin-top bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25"
-        style={{ scaleY: segmentProgress }}
+        className="absolute inset-0 rounded-full origin-top"
+        style={{
+          scaleY: segmentProgress,
+          background: `linear-gradient(to bottom, var(--timeline-stroke), rgba(0, 243, 189, 0.85), rgba(0, 243, 189, 0.25))`,
+        }}
       />
       <motion.div
-        className="absolute inset-0 rounded-full origin-top bg-electric-cyan/45 blur-[2px]"
-        style={{ scaleY: segmentProgress }}
+        className="absolute inset-0 rounded-full origin-top blur-[2px]"
+        style={{
+          scaleY: segmentProgress,
+          backgroundColor: `rgba(0, 243, 189, 0.45)`,
+        }}
       />
     </div>
   );
@@ -460,7 +468,10 @@ function ReducedTimelineNode({
         {showSegment && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-(--timeline-node) bottom-[calc(var(--timeline-gap)*-1)] w-0.5 -translate-x-1/2 rounded-full bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25 shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+            className="pointer-events-none absolute left-1/2 top-(--timeline-node) bottom-[calc(var(--timeline-gap)*-1)] w-0.5 -translate-x-1/2 rounded-full shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+            style={{
+              background: `linear-gradient(to bottom, var(--timeline-stroke), rgba(0, 243, 189, 0.85), rgba(0, 243, 189, 0.25))`,
+            }}
           />
         )}
       </div>
@@ -501,66 +512,76 @@ export function CompanyTimeline() {
   });
 
   return (
-    <section
-      id={timelineAnchorId}
-      ref={sectionRef}
-      className="section-container section-padding bg-background"
-    >
-      <AnimatedBorders
-        shouldReduce={shouldReduce}
-        lineScale={lineScale}
-        showBottom={false}
-      />
-      <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
+    <div className="timeline-container">
+      <style>{`
+        .timeline-container {
+          --timeline-stroke: hsl(174 100% 35%);
+        }
+        .dark .timeline-container {
+          --timeline-stroke: #00f3bd;
+        }
+      `}</style>
+      <section
+        id={timelineAnchorId}
+        ref={sectionRef}
+        className="section-container section-padding bg-background"
+      >
+        <AnimatedBorders
+          shouldReduce={shouldReduce}
+          lineScale={lineScale}
+          showBottom={false}
+        />
+        <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
-      <div className="section-content max-w-5xl">
-        <TimelineHeader />
+        <div className="section-content max-w-5xl">
+          <TimelineHeader />
 
-        <ul
-          ref={timelineRef}
-          className="relative m-0 list-none p-0 [--timeline-node:2.5rem] [--timeline-gap:1.75rem] md:[--timeline-node:3rem] md:[--timeline-gap:2.5rem]"
-        >
-          {isReduced
-            ? milestones.map((milestone, index) => {
-                const trigger = thresholds[index] ?? 0;
-                const nextTrigger = thresholds[index + 1];
-                const state = getTimelineNodeState(
-                  reducedProgress,
-                  trigger,
-                  nextTrigger,
-                );
-                const showSegment =
-                  nextTrigger !== undefined && reducedProgress >= nextTrigger;
+          <ul
+            ref={timelineRef}
+            className="relative m-0 list-none p-0 [--timeline-node:2.5rem] [--timeline-gap:1.75rem] md:[--timeline-node:3rem] md:[--timeline-gap:2.5rem]"
+          >
+            {isReduced
+              ? milestones.map((milestone, index) => {
+                  const trigger = thresholds[index] ?? 0;
+                  const nextTrigger = thresholds[index + 1];
+                  const state = getTimelineNodeState(
+                    reducedProgress,
+                    trigger,
+                    nextTrigger,
+                  );
+                  const showSegment =
+                    nextTrigger !== undefined && reducedProgress >= nextTrigger;
 
-                return (
-                  <ReducedTimelineNode
+                  return (
+                    <ReducedTimelineNode
+                      key={milestone.id}
+                      milestone={milestone}
+                      index={index}
+                      state={state}
+                      showSegment={showSegment}
+                      shouldReduceTitle={isReduced}
+                      nodeRef={(nodeElement) => {
+                        nodeRefs.current[index] = nodeElement;
+                      }}
+                    />
+                  );
+                })
+              : milestones.map((milestone, index) => (
+                  <AnimatedTimelineNode
                     key={milestone.id}
                     milestone={milestone}
                     index={index}
-                    state={state}
-                    showSegment={showSegment}
-                    shouldReduceTitle={isReduced}
+                    trigger={thresholds[index] ?? 0}
+                    nextTrigger={thresholds[index + 1]}
+                    progress={scrollYProgress}
                     nodeRef={(nodeElement) => {
                       nodeRefs.current[index] = nodeElement;
                     }}
                   />
-                );
-              })
-            : milestones.map((milestone, index) => (
-                <AnimatedTimelineNode
-                  key={milestone.id}
-                  milestone={milestone}
-                  index={index}
-                  trigger={thresholds[index] ?? 0}
-                  nextTrigger={thresholds[index + 1]}
-                  progress={scrollYProgress}
-                  nodeRef={(nodeElement) => {
-                    nodeRefs.current[index] = nodeElement;
-                  }}
-                />
-              ))}
-        </ul>
-      </div>
-    </section>
+                ))}
+          </ul>
+        </div>
+      </section>
+    </div>
   );
 }

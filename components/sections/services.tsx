@@ -130,18 +130,21 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
-            <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-foreground/50 dark:border-electric-cyan/20 mb-6">
+            <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
               Core Services
             </span>
-            <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4">
-            Engineering <span className="text-electric-cyan">Excellence</span>
+            Engineering{" "}
+            <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+              Excellence
+            </span>
           </h2>
 
-          <p className="dark:text-foreground/70 max-w-2xl mx-auto text-base lg:text-lg font-light">
+          <p className="text-foreground/70 dark:text-foreground/70 max-w-2xl mx-auto text-base lg:text-lg font-light">
             Comprehensive electrical solutions designed for the demands of
             modern commercial and industrial operations.
           </p>
@@ -156,13 +159,18 @@ export function Services() {
               blur
               delay={(index % 3) * 0.07}
             >
-              <motion.div className="group relative flex flex-col border border-border rounded-2xl p-6 lg:p-8 hover:border-electric-cyan/30 dark:hover:border-electric-cyan/30 transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5">
+              <motion.div
+                className="group relative flex flex-col border border-foreground/20 dark:border-electric-cyan/10 rounded-2xl p-6 lg:p-8 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 dark:hover:shadow-xl dark:hover:shadow-(--electric-cyan)/5"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(27, 97, 122, 0.22) 0%, rgba(0, 243, 189, 0.16) 50%, rgba(0, 0, 0, 0) 100%)'
+                }}
+              >
                 {/* Corner accent — inset to respect border-radius */}
-                <div className="absolute top-3 right-3 w-10 h-10 border-t border-r dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-muted-foreground/50 dark:group-hover:border-electric-cyan/40 transition-colors" />
+                <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-foreground/30 dark:border-electric-cyan/20 rounded-tr-xl group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/40 transition-colors" />
 
                 {/* Voltage badge */}
                 <div className="absolute top-4 right-4 pr-1">
-                  <span className="font-mono text-[9px] dark:text-electric-cyan/40 dark:group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_8px_rgba(0,243,189,0.4)]">
+                  <span className="font-mono text-[9px] text-foreground/60 dark:text-electric-cyan/40 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan/80 tracking-widest transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_8px_rgba(0,243,189,0.4)]">
                     {service.voltage}
                   </span>
                 </div>
@@ -171,17 +179,17 @@ export function Services() {
                 <div className="relative mb-6">
                   <service.icon
                     size={32}
-                    className="dark:text-electric-cyan dark:group-hover:text-white transition-colors"
+                    className="text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-white transition-colors"
                   />
-                  <div className="absolute -inset-2 bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -inset-2 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg lg:text-xl font-bold text-card-foreground mb-3 dark:group-hover:text-electric-cyan transition-colors">
+                <h3 className="text-lg lg:text-xl font-bold text-foreground mb-3 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="dark:text-foreground/70 text-sm leading-relaxed mb-4 line-clamp-3">
+                <p className="text-foreground/70 dark:text-foreground/70 text-sm leading-relaxed mb-4 line-clamp-3">
                   {service.description}
                 </p>
 
@@ -190,7 +198,7 @@ export function Services() {
                   {service.specs.map((spec) => (
                     <span
                       key={spec}
-                      className="font-mono text-[10px] px-2 py-1 rounded bg-electric-cyan/10 border dark:border-electric-cyan/10 text-foreground tracking-wider"
+                      className="font-mono text-[10px] px-2 py-1 rounded bg-foreground/10 dark:bg-electric-cyan/10 border border-foreground/20 dark:border-electric-cyan/10 text-foreground dark:text-foreground/80 tracking-wider"
                     >
                       {spec}
                     </span>
@@ -199,7 +207,7 @@ export function Services() {
 
                 {/* Learn More — pinned to bottom */}
                 <div className="mt-auto flex items-end justify-between">
-                  <button className="flex items-center gap-2 text-sm dark:text-foreground/70 dark:group-hover:text-electric-cyan transition-colors px-3 py-2 rounded-lg dark:hover:bg-electric-cyan/5">
+                  <button className="flex items-center gap-2 text-sm text-foreground/70 group-hover:text-[hsl(174_100%_35%)] dark:text-foreground/70 dark:group-hover:text-electric-cyan transition-colors px-3 py-2 rounded-lg hover:bg-foreground/5 dark:hover:bg-electric-cyan/5">
                     <span className="font-medium">Learn More</span>
                     <ArrowRight
                       size={14}
@@ -208,7 +216,7 @@ export function Services() {
                   </button>
 
                   {/* Index number */}
-                  <div className="font-mono text-[40px] font-bold text-muted/50 group-hover:text-muted-foreground/70 dark:group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_12px_rgba(0,243,189,0.5)]">
+                  <div className="font-mono text-[40px] font-bold text-foreground/30 group-hover:text-foreground/50 dark:group-hover:text-electric-cyan/40 leading-none select-none transition-colors duration-300 dark:group-hover:drop-shadow-[0_0_12px_rgba(0,243,189,0.5)]">
                     {String(index + 1).padStart(2, "0")}
                   </div>
                 </div>
@@ -224,7 +232,7 @@ export function Services() {
           className="mt-16 text-center"
         >
           <div className="inline-flex items-center gap-4 text-foreground/70">
-            <div className="h-px w-12 bg-border" />
+            <div className="h-px w-12 bg-foreground/50 dark:bg-electric-cyan/50" />
             <span className="relative font-mono text-xs tracking-widest uppercase overflow-hidden">
               <span className="relative z-10">Need a custom solution?</span>
               {/* Shimmer sweep animation */}
@@ -233,19 +241,19 @@ export function Services() {
                 style={{ backgroundSize: "200% 100%" }}
               />
             </span>
-            <div className="h-px w-12 bg-border" />
+            <div className="h-px w-12 bg-foreground/50 dark:bg-electric-cyan/50" />
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/services"
-              className="px-8 py-4 rounded-xl bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-bold uppercase tracking-widest hover:bg-electric-cyan/20 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300"
+              className="px-8 py-4 rounded-xl bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 text-[hsl(174_100%_35%)] dark:text-electric-cyan font-bold uppercase tracking-widest hover:bg-[hsl(174_100%_35%)]/20 dark:hover:bg-electric-cyan/20 hover:shadow-lg hover:shadow-[hsl(174_100%_35%)]/10 dark:hover:shadow-(--electric-cyan)/10 transition-all duration-300"
             >
               View All Services
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-4 rounded-xl border border-border text-foreground/70 font-bold uppercase tracking-widest hover:border-electric-cyan/30 hover:text-electric-cyan transition-all duration-300"
+              className="px-8 py-4 rounded-xl border border-foreground/30 dark:border-foreground/30 text-foreground/70 dark:text-foreground/70 font-bold uppercase tracking-widest hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan transition-all duration-300"
             >
               Request Consultation
             </Link>

@@ -43,7 +43,6 @@ const missionPillars = [
   },
 ];
 
-
 export function VisionMission() {
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
   const [mounted, setMounted] = useState(false);
@@ -57,7 +56,6 @@ export function VisionMission() {
     offset: ["start end", "end start"],
   });
   const dividerScale = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
-
 
   return (
     <section
@@ -78,64 +76,67 @@ export function VisionMission() {
           <div>
             <ScrollReveal direction="up" blur delay={0} duration={0.65}>
               <div>
-              {/* Section label */}
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl border border-electric-cyan/40 bg-electric-cyan/10 flex items-center justify-center">
-                  <Eye size={18} className="text-electric-cyan" />
-                </div>
-                <div>
-                  <div className="font-mono text-[10px] tracking-widest uppercase text-electric-cyan/60 mb-0.5">
-                    Looking Ahead
+                {/* Section label */}
+                <div className="flex items-center gap-2 mb-8">
+                  <div className="w-12 h-12 rounded-xl border border-[hsl(174_100%_35%)] dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 flex items-center justify-center">
+                    <Eye
+                      size={18}
+                      className="text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                    />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    Our Vision
-                  </h2>
-                </div>
-              </div>
-
-              {/* Terminal statement */}
-              <div className="p-6 rounded-xl border border-electric-cyan/30 bg-electric-cyan/5 mb-8 font-mono text-sm leading-relaxed">
-                <div className="text-electric-cyan/50 text-xs mb-2 tracking-widest">
-                  {"> VISION_2030.md"}
-                </div>
-                <p className="text-foreground text-base leading-relaxed">
-                  To be the UK&apos;s most trusted electrical engineering
-                  partner — recognised not just for the quality of our
-                  installations, but for the lasting positive impact we create
-                  in every community we touch.
-                </p>
-              </div>
-
-              {/* Vision points */}
-              <div className="space-y-5">
-                {visionPoints.map((point, idx) => (
-                  <ScrollReveal
-                    key={point.label}
-                    direction="left"
-                    delay={idx * 0.07}
-                    duration={0.65}
-                    distance={30}
-                  >
-                    <div className="flex gap-4 group">
-                      <div className="w-8 h-8 rounded-lg border border-border flex items-center justify-center shrink-0 mt-0.5 group-hover:border-electric-cyan/40 transition-colors">
-                        <ArrowRight
-                          size={14}
-                          className="text-muted-foreground group-hover:text-electric-cyan transition-colors"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-foreground mb-1">
-                          {point.label}
-                        </div>
-                        <div className="text-sm text-muted-foreground leading-relaxed">
-                          {point.text}
-                        </div>
-                      </div>
+                  <div>
+                    <div className="font-mono text-[10px] tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan/60 mb-0.5">
+                      Looking Ahead
                     </div>
-                  </ScrollReveal>
-                ))}
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      Our Vision
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Terminal statement */}
+                <div className="p-6 rounded-xl border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 mb-8 font-mono text-sm leading-relaxed">
+                  <div className="text-[hsl(174_100%_35%)] dark:text-electric-cyan/50 text-xs mb-2 tracking-widest">
+                    {"> VISION_2030.md"}
+                  </div>
+                  <p className="text-foreground text-base leading-relaxed">
+                    To be the UK&apos;s most trusted electrical engineering
+                    partner — recognised not just for the quality of our
+                    installations, but for the lasting positive impact we create
+                    in every community we touch.
+                  </p>
+                </div>
+
+                {/* Vision points */}
+                <div className="space-y-5">
+                  {visionPoints.map((point, idx) => (
+                    <ScrollReveal
+                      key={point.label}
+                      direction="left"
+                      delay={idx * 0.07}
+                      duration={0.65}
+                      distance={30}
+                    >
+                      <div className="flex gap-4 group">
+                        <div className="w-8 h-8 rounded-lg border border-border flex items-center justify-center shrink-0 mt-0.5 group-hover:border-electric-cyan/40 transition-colors">
+                          <ArrowRight
+                            size={14}
+                            className="text-muted-foreground group-hover:text-electric-cyan transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-foreground mb-1">
+                            {point.label}
+                          </div>
+                          <div className="text-sm text-muted-foreground leading-relaxed">
+                            {point.text}
+                          </div>
+                        </div>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </div>
               </div>
-            </div>
             </ScrollReveal>
           </div>
 
@@ -155,57 +156,57 @@ export function VisionMission() {
           <div>
             <ScrollReveal direction="up" blur delay={0.07} duration={0.65}>
               <div>
-              {/* Section label */}
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl border border-amber-warning/40 bg-amber-warning/10 flex items-center justify-center">
-                  <Target size={18} className="text-amber-warning" />
-                </div>
-                <div>
-                  <div className="font-mono text-[10px] tracking-widest uppercase text-amber-warning/60 mb-0.5">
-                    Every Day
+                {/* Section label */}
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl border border-amber-warning/40 bg-amber-warning/10 flex items-center justify-center">
+                    <Target size={18} className="text-amber-warning" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    Our Mission
-                  </h2>
-                </div>
-              </div>
-
-              {/* Terminal statement */}
-              <div className="p-6 rounded-xl border border-amber-warning/30 bg-amber-warning/5 mb-8 font-mono text-sm leading-relaxed">
-                <div className="text-amber-warning/50 text-xs mb-2 tracking-widest">
-                  {"> MISSION_STATEMENT.md"}
-                </div>
-                <p className="text-foreground text-base leading-relaxed">
-                  To deliver safe, reliable, and innovative electrical
-                  solutions that exceed client expectations — while building
-                  stronger communities through honest work, continuous learning,
-                  and unwavering integrity.
-                </p>
-              </div>
-
-              {/* Mission pillars */}
-              <div className="grid grid-cols-2 gap-4">
-                {missionPillars.map((pillar, idx) => (
-                  <ScrollReveal
-                    key={pillar.title}
-                    direction="up"
-                    blur
-                    delay={idx * 0.07}
-                    duration={0.65}
-                    distance={30}
-                  >
-                    <div className="p-5 rounded-xl border border-border bg-card/40 hover:border-amber-warning/30 hover:bg-amber-warning/5 transition-all duration-300 group">
-                    <div className="font-bold text-foreground mb-2 group-hover:text-amber-warning transition-colors">
-                      {pillar.title}
+                  <div>
+                    <div className="font-mono text-[10px] tracking-widest uppercase text-amber-warning/60 mb-0.5">
+                      Every Day
                     </div>
-                    <div className="text-xs text-muted-foreground leading-relaxed">
-                      {pillar.desc}
-                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      Our Mission
+                    </h2>
                   </div>
-                  </ScrollReveal>
-                ))}
+                </div>
+
+                {/* Terminal statement */}
+                <div className="p-6 rounded-xl border border-amber-warning/30 bg-amber-warning/5 mb-8 font-mono text-sm leading-relaxed">
+                  <div className="text-amber-warning/50 text-xs mb-2 tracking-widest">
+                    {"> MISSION_STATEMENT.md"}
+                  </div>
+                  <p className="text-foreground text-base leading-relaxed">
+                    To deliver safe, reliable, and innovative electrical
+                    solutions that exceed client expectations — while building
+                    stronger communities through honest work, continuous
+                    learning, and unwavering integrity.
+                  </p>
+                </div>
+
+                {/* Mission pillars */}
+                <div className="grid grid-cols-2 gap-4">
+                  {missionPillars.map((pillar, idx) => (
+                    <ScrollReveal
+                      key={pillar.title}
+                      direction="up"
+                      blur
+                      delay={idx * 0.07}
+                      duration={0.65}
+                      distance={30}
+                    >
+                      <div className="p-5 rounded-xl border border-border bg-card/40 hover:border-amber-warning/30 hover:bg-amber-warning/5 transition-all duration-300 group">
+                        <div className="font-bold text-foreground mb-2 group-hover:text-amber-warning transition-colors">
+                          {pillar.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground leading-relaxed">
+                          {pillar.desc}
+                        </div>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </div>
               </div>
-            </div>
             </ScrollReveal>
           </div>
         </div>

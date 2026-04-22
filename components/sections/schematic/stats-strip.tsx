@@ -27,9 +27,9 @@ export function StatsStrip({ stats, isInView }: StatsStripProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.8 + index * 0.1 }}
-            className="text-center bg-electric-cyan/10 border border-white/25 p-6 rounded-xl"
+            className="text-center bg-foreground/10 dark:bg-electric-cyan/10 border dark:border-white/25 p-6 rounded-xl"
           >
-            <div className="text-3xl lg:text-4xl font-black text-foreground/70  mb-2 ">
+            <div className="text-3xl lg:text-4xl font-black text-[hsl(174_100%_35%)] dark:text-foreground/70  mb-2 ">
               {stat.value}
             </div>
             <div className="font-mono text-[10px] text-foreground/70tracking-widest uppercase">

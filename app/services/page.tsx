@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesBento } from "@/components/services/services-bento";
+import { ServicesCTA } from "@/components/services/service-cta";
 import { Footer } from "@/components/sections/footer";
 import { createPageMetadata } from "@/lib/metadata";
 import { ContentBreadcrumb } from "@/components/shared";
@@ -57,6 +58,8 @@ export default function ServicesPage() {
           <MultiStepFormContainer />
         </div>
       </section>
+
+      <ServicesCTA />
 
       <Footer />
     </main>
