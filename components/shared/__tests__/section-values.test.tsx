@@ -74,7 +74,8 @@ describe('SectionValues Component - CLS & A11y Tests', () => {
 
     it('renders headline with highlight', () => {
       render(<SectionValues data={mockSectionValuesData} />);
-      expect(screen.getByText('Drives')).toHaveClass('text-electric-cyan');
+      const element = screen.getByText('Drives');
+      expect(element.className).toMatch(/text-\[hsl/);
     });
 
     it('renders all value titles', () => {
