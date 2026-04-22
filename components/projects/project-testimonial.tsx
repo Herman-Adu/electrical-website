@@ -32,22 +32,22 @@ export function ProjectTestimonialCard({
           initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="relative scroll-mt-36 p-8 sm:p-12 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
+          className="relative scroll-mt-36 p-8 sm:p-12 rounded-2xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-[hsl(174_100%_35%)]/5 dark:from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
         >
           {/* Decorative corners */}
-          <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-electric-cyan/40" />
-          <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-electric-cyan/40" />
-          <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-electric-cyan/40" />
-          <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-electric-cyan/40" />
+          <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[hsl(174_100%_35%)]/40 dark:border-electric-cyan/40" />
+          <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-[hsl(174_100%_35%)]/40 dark:border-electric-cyan/40" />
+          <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-[hsl(174_100%_35%)]/40 dark:border-electric-cyan/40" />
+          <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[hsl(174_100%_35%)]/40 dark:border-electric-cyan/40" />
 
           {/* Quote icon */}
           <motion.div
             initial={shouldReduce ? {} : { opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-14 h-14 rounded-full border border-electric-cyan/30 bg-electric-cyan/10 flex items-center justify-center mb-8"
+            className="w-14 h-14 rounded-full border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 flex items-center justify-center mb-8"
           >
-            <Quote className="w-6 h-6 text-electric-cyan" />
+            <Quote className="w-6 h-6 text-[hsl(174_100%_35%)] dark:text-electric-cyan" />
           </motion.div>
 
           {/* Quote text */}
@@ -69,7 +69,7 @@ export function ProjectTestimonialCard({
           >
             {/* Avatar */}
             {testimonial.image ? (
-              <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-electric-cyan/30">
+              <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30">
                 <Image
                   src={testimonial.image.src}
                   alt={testimonial.image.alt}
@@ -79,8 +79,8 @@ export function ProjectTestimonialCard({
                 />
               </div>
             ) : (
-              <div className="w-14 h-14 rounded-full bg-electric-cyan/10 border border-electric-cyan/30 flex items-center justify-center">
-                <span className="text-xl font-bold text-electric-cyan">
+              <div className="w-14 h-14 rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 flex items-center justify-center">
+                <span className="text-xl font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                   {testimonial.author.charAt(0)}
                 </span>
               </div>
@@ -91,7 +91,7 @@ export function ProjectTestimonialCard({
               <p className="text-sm text-muted-foreground">
                 {testimonial.role}
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-electric-cyan/70 mt-1">
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70 mt-1">
                 {testimonial.company}
               </p>
             </div>
