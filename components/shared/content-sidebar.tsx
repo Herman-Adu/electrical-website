@@ -43,8 +43,8 @@ export function ContentSidebar({
             <ContentPulseIndicator label="Live Feed" variant="live" />
           </div>
         )}
-        <h3 className="text-lg font-bold text-white">{title}</h3>
-        <p className="text-xs leading-5 text-foreground/60">{description}</p>
+        <h3 className="text-lg font-bold text-white dark:text-white">{title}</h3>
+        <p className="text-xs leading-5 text-foreground/60 dark:text-foreground/60">{description}</p>
       </div>
 
       {cards.map((card, index) => (
@@ -59,18 +59,18 @@ export function ContentSidebar({
             as="div"
             className={`p-5 border-l-4 transition-all ${
               card.type === "campaign"
-                ? "border-l-electric-cyan hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                ? "border-l-[hsl(174_100%_35%)] dark:border-l-electric-cyan hover:shadow-[0_0_25px_hsl(174_100%_35%_/_0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
                 : card.type === "review"
-                  ? "border-l-electric-cyan/70 hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
+                  ? "border-l-[hsl(174_100%_35%)]/70 dark:border-l-electric-cyan/70 hover:shadow-[0_0_20px_hsl(174_100%_35%_/_0.1)] dark:hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
                   : card.type === "cta"
-                    ? "border-l-electric-cyan hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
-                    : "border-l-electric-cyan/40"
+                    ? "border-l-[hsl(174_100%_35%)] dark:border-l-electric-cyan hover:shadow-[0_0_25px_hsl(174_100%_35%_/_0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                    : "border-l-[hsl(174_100%_35%)]/40 dark:border-l-electric-cyan/40"
             }`}
           >
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <span className="text-sm">{typeIcons[card.type] || "📰"}</span>
-                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-electric-cyan/70">
+                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                   {card.eyebrow}
                 </p>
               </div>
@@ -82,13 +82,13 @@ export function ContentSidebar({
                   {card.description}
                 </p>
               </div>
-              <div className="flex items-center justify-between gap-3 border-t border-electric-cyan/10 pt-2">
-                <span className="rounded-md border border-electric-cyan/20 bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
+              <div className="flex items-center justify-between gap-3 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10 pt-2">
+                <span className="rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                   {card.type}
                 </span>
                 <Link
                   href={card.href}
-                  className="inline-flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/80 transition-all hover:text-electric-cyan"
+                  className="inline-flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[hsl(174_100%_35%)]/80 dark:text-electric-cyan/80 transition-all hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
                 >
                   {card.ctaLabel} →
                 </Link>

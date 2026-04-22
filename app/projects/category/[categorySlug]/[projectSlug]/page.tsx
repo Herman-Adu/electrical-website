@@ -288,14 +288,14 @@ export default async function CategoryProjectDetailPage({
             <ContentToc items={tocItems} title="Project Contents" />
 
             {/* Project KPIs Card */}
-            <div className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 space-y-4">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
+            <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                 Project Details
               </h3>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Status</dt>
-                  <dd className="font-medium text-electric-cyan capitalize">
+                  <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
                     {project.status.replace("-", " ")}
                   </dd>
                 </div>
@@ -333,18 +333,18 @@ export default async function CategoryProjectDetailPage({
 
               {/* Progress bar for in-progress projects */}
               {project.status === "in-progress" && (
-                <div className="pt-2 border-t border-electric-cyan/10">
+                <div className="pt-2 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
                       Progress
                     </span>
-                    <span className="font-mono text-[10px] text-electric-cyan">
+                    <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                       {project.progress}%
                     </span>
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-electric-cyan/10">
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
                     <div
-                      className="h-full bg-gradient-to-r from-electric-cyan/60 to-electric-cyan transition-all"
+                      className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
                       style={{ width: `${project.progress}%` }}
                     />
                   </div>
@@ -355,14 +355,14 @@ export default async function CategoryProjectDetailPage({
             {/* Tags */}
             {project.tags && project.tags.length > 0 && (
               <div className="space-y-3">
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                   Project Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md border border-electric-cyan/20 bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
+                      className="rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
                     >
                       {tag}
                     </span>
