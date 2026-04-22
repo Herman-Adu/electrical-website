@@ -129,16 +129,6 @@ export function ContentToc({
                         "absolute bottom-1 left-0 top-1 w-0.5 rounded-full transition-colors duration-200",
                         isActive ? "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" : "bg-[hsl(174_100%_35%)]/25 dark:bg-electric-cyan/20",
                       )}
-                      animate={{
-                        backgroundColor: isActive
-                          ? "var(--light-theme-active)"
-                          : "var(--light-theme-inactive)",
-                      }}
-                      transition={{ duration: 0.2 }}
-                      style={{
-                        "--light-theme-active": "hsl(174, 100%, 35%)",
-                        "--light-theme-inactive": "hsl(174, 100%, 35%, 0.25)",
-                      } as React.CSSProperties}
                     />
                   )}
 

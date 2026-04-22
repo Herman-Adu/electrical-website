@@ -43,7 +43,7 @@ export function ContentSidebar({
             <ContentPulseIndicator label="Live Feed" variant="live" />
           </div>
         )}
-        <h3 className="text-lg font-bold text-white dark:text-white">{title}</h3>
+        <h3 className="text-lg font-bold text-foreground dark:text-white">{title}</h3>
         <p className="text-xs leading-5 text-foreground/60 dark:text-foreground/60">{description}</p>
       </div>
 
