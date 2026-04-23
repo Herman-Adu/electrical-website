@@ -205,17 +205,17 @@ export function AboutHero() {
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
-          {/* Status label */}
+          {/* Status Label */}
           <motion.div
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
                 size={14}
-                className="dark:text-electric-cyan animate-pulse"
+                className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 Profile // {statusText}
               </span>
             </div>
@@ -226,20 +226,20 @@ export function AboutHero() {
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               Nexgen Electrical Innovations
             </span>
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan" />
           </motion.div>
 
-          {/* Main headline */}
+          {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
-            <span className="block">Built on</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
-              Trust &amp; Craft
+            <span className="block">Powering the</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+              Next Generation
             </span>
-            <span className="block">Since 2016</span>
+            <span className="block">of Innovation</span>
           </motion.h1>
 
           {/* Subline */}
@@ -268,7 +268,7 @@ export function AboutHero() {
                 <div className="text-2xl font-black font-mono dark:text-electric-cyan mb-1">
                   {stat.value}
                 </div>
-                <div className="text-xs dark:text-foreground/80 font-medium tracking-wide">
+                <div className="text-xs dark:text-foreground font-medium tracking-wide">
                   {stat.label}
                 </div>
               </div>
@@ -295,21 +295,17 @@ export function AboutHero() {
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2, duration: 0.5 }}
+          transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
-          aria-label="Scroll to our story"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to services"
         >
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase  font-bold">
-            Our Story
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Explore Services
           </span>
           <ChevronDown
             size={20}
-            className={
-              shouldReduceMotion
-                ? ""
-                : "animate-bounce dark:text-foreground/80 font-bold"
-            }
+            className={shouldReduceMotion ? "" : "animate-bounce"}
           />
         </motion.button>
       }

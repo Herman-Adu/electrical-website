@@ -1,13 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, ChevronDown } from "lucide-react";
+import {
+  Activity,
+  ChevronDown,
+  Clock,
+  MessageSquare,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import type { MarketingQuotationContent } from "@/types/marketing";
+import type {
+  MarketingQuotationContent,
+  MarketingIconName,
+} from "@/types/marketing";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+
+const iconMap = {
+  Clock,
+  MessageSquare,
+  ShieldCheck,
+  Wrench,
+} as const;
+
+type QuotationIconName = keyof typeof iconMap;
+
+const getIcon = (name?: MarketingIconName) =>
+  name ? iconMap[name as QuotationIconName] : undefined;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,6 +50,17 @@ const itemVariants = {
   },
 };
 
+const flickerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 1, 0.5, 1, 0.8, 1],
+    transition: {
+      duration: 0.8,
+      times: [0, 0.2, 0.3, 0.5, 0.7, 1],
+    },
+  },
+};
+
 interface QuotationHeroProps {
   header: MarketingQuotationContent["header"];
   trustIndicators: MarketingQuotationContent["trustIndicators"];
@@ -40,6 +74,25 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
     const element = document.getElementById("quotation-form-section");
     if (element) scrollToElementWithOffset(element);
   };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { type: "spring" as const, damping: 25, stiffness: 120 },
+    },
+  };
+
+  const statuses = [
+    "INITIALIZING",
+    "LOADING_MODULES",
+    "CALIBRATING",
+    "PROFESSIONAL SCOPE",
+  ];
+
+  const { currentText: statusText } = useCyclingText(statuses, 400);
 
   return (
     <HeroParallaxShell
@@ -104,38 +157,66 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
           animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
+          {/* Status Label */}
           <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-3 mb-6"
+            variants={flickerVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
-                size={12}
+                size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-                Quotation // Professional Scope
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
+                Services // {statusText}
               </span>
             </div>
           </motion.div>
 
+          {/* Eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="mb-4 flex items-center justify-center"
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            <div className="inline-flex items-center gap-2 border border-electric-cyan/25 bg-electric-cyan/10 px-4 py-2">
-              <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase">
-                Project Quotation
-              </span>
-            </div>
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
+              Engineered For Technical Clarity
+            </span>
+            <span className="h-px w-12 bg-electric-cyan" />
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
-            {header.title}
+            <span className="block">Request Your</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+              Quotation
+            </span>
+            <span className="block">Today</span>
           </motion.h1>
+
+          {/* <motion.h1
+            variants={itemVariants}
+            className={HERO_H1_COMPACT_BLUEPRINT}
+          >
+            {header.title}
+          </motion.h1> */}
+
+          {/* Main headline */}
+          {/*  <motion.h1 variants={itemVariants} className={HERO_H1_TALL_IMAGE}>
+            {headlineHighlight ? (
+              <>
+                {headlineText.split(headlineHighlight)[0]}
+                <span className="text-electric-cyan">{headlineHighlight}</span>
+                {headlineText.split(headlineHighlight)[1]}
+              </>
+            ) : (
+              headlineText
+            )}
+          </motion.h1> */}
+
+          {/* Description */}
 
           <motion.p
             variants={itemVariants}
@@ -144,23 +225,31 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
             {header.description}
           </motion.p>
 
+          {/* Trust indicators */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3"
+            className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4"
           >
-            {trustIndicators.map((item) => (
-              <div
-                key={item.label}
-                className="border border-electric-cyan/20 bg-background/60 p-4 text-center backdrop-blur-sm"
-              >
-                <p className="text-2xl font-bold text-electric-cyan">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground uppercase tracking-[0.18em]">
-                  {item.label}
-                </p>
-              </div>
-            ))}
+            {trustIndicators.map((item) => {
+              const Icon = getIcon(item.icon);
+
+              return (
+                <div
+                  key={item.title}
+                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
+                >
+                  {Icon ? (
+                    <Icon className="mx-auto mb-2 h-6 w-6 text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors" />
+                  ) : null}
+                  <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 hidden text-xs text-foreground/70 dark:text-foreground/70 sm:block">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </motion.div>
         </motion.div>
       }

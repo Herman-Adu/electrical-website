@@ -177,17 +177,17 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
-          {/* Status label */}
+          {/* Status Label */}
           <motion.div
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
                 size={14}
-                className="dark:text-electric-cyan animate-pulse"
+                className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 Services // {statusText}
               </span>
             </div>
@@ -204,11 +204,10 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
             </span>
             <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
           </motion.div>
-
-          {/* Headline */}
+          {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineering</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
               Excellence
             </span>
             <span className="block">Delivered</span>

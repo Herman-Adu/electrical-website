@@ -258,12 +258,12 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
                 size={14}
-                className="text-foreground70 dark:text-electric-cyan animate-pulse"
+                className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 Status // {statusText}
               </span>
             </div>
@@ -272,16 +272,16 @@ export function Hero() {
           {/* Main Headline */}
           <motion.h1 variants={slideInVariants} className={HERO_H1_SCREEN}>
             <span className="block">Powering the</span>
-            <span className="block text-electric text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-[hsl(174_80%_45%)] to-[hsl(174_100%_35%)]">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
               Next Generation
             </span>
             <span className="block">of Innovation</span>
           </motion.h1>
 
-          {/* Subheadline */}
+          {/* Sub headline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Expert electrical engineering and installations for commercial and
             industrial frontiers. Precision-engineered power solutions delivered
@@ -299,7 +299,7 @@ export function Hero() {
               initial="rest"
               whileHover="hover"
               whileTap={{ scale: 0.97 }}
-              className="group relative px-8 py-4 bg-foreground dark:bg-electric-cyan text-primary-foreground rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(100,116,139,0.3)] dark:hover:shadow-[0_0_30px_rgb(0,243,189,0.3)]"
+              className="group relative px-8 py-4 bg-foreground/80 dark:bg-electric-cyan/80 text-primary-foreground rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgb(100,116,139,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Initiate System
@@ -309,8 +309,8 @@ export function Hero() {
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             </motion.button>
 
-            <button className="group px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground uppercase tracking-widest dark:hover:border-electric-cyan transition-all duration-300 text-sm">
-              <span className="group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-electric-cyan group-hover:via-[hsl(174_80%_45%)] group-hover:to-[hsl(174_100%_35%)]">
+            <button className="group px-8 py-4 border dark:border-electric-cyan/30 rounded-xl font-bold text-foreground uppercase tracking-widest hover:border-electric-cyan transition-all duration-300 text-sm">
+              <span className="group-hover:bg-clip-text group-hover:text-electric-cyan  ">
                 Our Solutions
               </span>
             </button>
@@ -319,7 +319,7 @@ export function Hero() {
           {/* Technical Metadata */}
           <motion.div
             variants={statsContainerVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] text-foreground/80 dark:text-foreground/80 uppercase"
+            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
           >
             <span>Est. 2024</span>
             <span className="hidden sm:inline">|</span>
@@ -336,18 +336,15 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors hover:text-electric-cyan"
+          aria-label="Scroll to services"
         >
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-foreground/70 dark:text-foreground/80 font-bold">
-            Scroll
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+            Explore Services
           </span>
           <ChevronDown
             size={20}
-            className={
-              shouldReduceMotion
-                ? ""
-                : "animate-bounce text-muted-foreground dark:text-foreground/80"
-            }
+            className={shouldReduceMotion ? "" : "animate-bounce"}
           />
         </motion.button>
       }

@@ -108,21 +108,21 @@ export default function QuotationPage() {
               Campaign Confidence Metrics
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              Signals That Support Commercial Decisions
+              Why Projects Trust Our Quotation Process
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {trustIndicators.map((item) => (
               <article
-                key={item.label}
-                className="rounded-xl border border-electric-cyan/20 bg-card/60 p-6 text-center"
+                key={item.title}
+                className="rounded-xl border border-electric-cyan/20 bg-card/60 p-6"
               >
-                <p className="text-3xl font-bold text-electric-cyan">
-                  {item.value}
+                <p className="text-sm font-medium text-foreground">
+                  {item.title}
                 </p>
-                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {item.label}
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {item.description}
                 </p>
               </article>
             ))}

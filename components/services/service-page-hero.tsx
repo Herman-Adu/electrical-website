@@ -156,12 +156,12 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
             variants={itemVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Services // Active
               </span>
             </div>
@@ -174,7 +174,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
               className="flex items-center justify-center gap-4 mb-6"
             >
               <span className="h-px w-12 bg-electric-cyan/60" />
-              <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+              <span className="font-mono text-xs tracking-[0.3em] uppercase font-bold text-electric-cyan">
                 {eyebrow}
               </span>
               <span className="h-px w-12 bg-electric-cyan/60" />
@@ -197,7 +197,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-white mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {subheadline}
           </motion.p>
@@ -217,7 +217,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
                   <div className="text-2xl font-black font-mono text-electric-cyan mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/60 font-medium tracking-wide">
+                  <div className="text-xs text-white font-medium tracking-wide">
                     {stat.label}
                   </div>
                 </div>
