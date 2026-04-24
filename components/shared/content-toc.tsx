@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { SCROLL_GAP, scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { SCROLL_GAP, scrollToElementWithOffset, getStickyAnchorOffset } from "@/lib/scroll-to-section";
 import type { TocItem } from "@/types/shared-content";
 
 interface ContentTocProps {
@@ -33,35 +33,45 @@ export function ContentToc({
     // Show TOC after initial render with delay
     const showTimer = setTimeout(() => setIsVisible(true), 300);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0% -60% 0%",
-        threshold: 0,
-      },
-    );
+    let rafId: number;
 
-    // Observe all section elements
-    items.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) {
-        observer.observe(element);
+    const findActive = () => {
+      // Threshold = CSS top of sticky aside = exactly where section activates
+      // Falls back to 160px on mobile where aside is hidden (display:none → returns 0)
+      const threshold = getStickyAnchorOffset() || 160;
+      let active: string | null = null;
+
+      for (const item of items) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        // Last anchor whose top has reached or passed the threshold = active section
+        if (el.getBoundingClientRect().top <= threshold) {
+          active = item.id;
+        }
       }
-    });
+
+      setActiveId(active);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(findActive);
+    };
+
+    findActive(); // set initial state on mount
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
       clearTimeout(showTimer);
-      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId);
     };
-  }, [items]);
+  }, [items]); // items only — no stickyOffset dependency needed
 
   const handleClick = useCallback((id: string) => {
+    // Set active immediately (don't wait for scroll detection)
+    setActiveId(id);
+
     // Trigger click animation
     setClickedId(id);
     setTimeout(() => setClickedId(null), 300);
@@ -126,8 +136,10 @@ export function ContentToc({
                   {isSubItem && (
                     <motion.div
                       className={cn(
-                        "absolute bottom-1 left-0 top-1 w-0.5 rounded-full transition-colors duration-200",
-                        isActive ? "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" : "bg-[hsl(174_100%_35%)]/25 dark:bg-electric-cyan/20",
+                        "absolute bottom-1 left-0 top-1 w-0.5 rounded-full transition-colors duration-200 dark:text-white",
+                        isActive
+                          ? "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan"
+                          : "bg-[hsl(174_100%_35%)]/25 dark:bg-electric-cyan/20",
                       )}
                     />
                   )}
@@ -142,7 +154,7 @@ export function ContentToc({
                       isSubItem && "pl-4",
                       isActive
                         ? "bg-[hsl(174_100%_35%)]/12 dark:bg-electric-cyan/15 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
-                        : "text-foreground/60 hover:bg-[hsl(174_100%_35%)]/5 dark:hover:bg-electric-cyan/5 hover:text-foreground/90",
+                        : "text-foreground dark:text-foreground/70 hover:bg-[hsl(174_100%_35%)]/5 dark:hover:bg-electric-cyan/5 hover:text-foreground",
                     )}
                   >
                     {/* Progress indicator */}
@@ -152,7 +164,7 @@ export function ContentToc({
                         isSubItem && "h-4 w-4 text-[8px]",
                         isActive
                           ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
-                          : "border-border/40 bg-background/50 text-foreground/40 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
+                          : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -220,7 +232,7 @@ function ReadingProgress() {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/50">
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-foreground dark:text-foreground/70">
           Reading Progress
         </span>
         <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
