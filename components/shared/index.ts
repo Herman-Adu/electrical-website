@@ -16,7 +16,6 @@ export { ContentGridLayout } from "./content-grid-layout";
 export { ContentPulseIndicator } from "./content-pulse-indicator";
 export { ContentSidebar } from "./content-sidebar";
 export { ContentToc } from "./content-toc";
-export { StickyTocAside } from "./sticky-toc-aside";
 export { LoadMoreButton } from "./load-more-button";
 export { ContentBreadcrumb } from "./content-breadcrumb";
 export { BreadcrumbMobileToggle } from "./breadcrumb-mobile-toggle";
