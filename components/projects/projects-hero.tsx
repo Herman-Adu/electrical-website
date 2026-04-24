@@ -182,22 +182,22 @@ export function ProjectsHero({
             </div>
           </motion.div>
 
-          {/* Status Label Eyebrow */}
+          {/* Eyebrow */}
           <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
               Our Portfolio
             </span>
-            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
           </motion.div>
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineered</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
               Delivery
             </span>
             <span className="block">Proven Results</span>
