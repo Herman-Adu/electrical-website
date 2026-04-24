@@ -547,3 +547,23 @@
     grid-auto-rows: minmax(380px, 1fr);
   }
 }
+
+/* ===== TOC STICKY-TO-FIXED HYBRID PATTERN ===== */
+/*
+   IntersectionObserver-based sticky positioning that automatically switches
+   to fixed when the element's containing block (grid cell) scrolls off viewport.
+
+   CSS variables are set by useStickyWithFallback hook:
+   - --toc-position-mode: 'sticky' or 'fixed'
+   - --toc-top: offset in pixels
+   - --toc-z-index: z-index value
+*/
+[data-sticky-toc] {
+  position: var(--toc-position-mode, sticky);
+  top: var(--toc-top, 150px);
+  z-index: var(--toc-z-index, 10);
+  /* Prevent layout shifts during position changes */
+  will-change: transform;
+  /* Ensure smooth transitions without animation lag */
+  transition: none;
+}
