@@ -8,7 +8,7 @@ import {
   type TocItem,
 } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
-import { ContentBreadcrumb } from "@/components/shared";
+import { ContentBreadcrumb, StickyTocAside } from "@/components/shared";
 import {
   getNewsArticleByCategoryAndSlug,
   getNewsArticleSlugsByCategory,
@@ -216,7 +216,7 @@ export default async function NewsArticlePage({
           />
 
           {/* Sticky Sidebar */}
-          <aside data-sticky-toc="true" className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start min-h-[calc(100vh-132px)]">
+          <StickyTocAside stickyOffset={132}>
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 
@@ -294,7 +294,7 @@ export default async function NewsArticlePage({
                 </div>
               </div>
             )}
-          </aside>
+          </StickyTocAside>
         </div>
       </section>
 

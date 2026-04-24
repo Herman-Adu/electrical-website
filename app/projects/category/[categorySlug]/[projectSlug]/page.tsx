@@ -25,6 +25,7 @@ import {
   ContentToc,
   ContentSidebar,
   ContentBreadcrumb,
+  StickyTocAside,
 } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
@@ -272,10 +273,7 @@ export default async function CategoryProjectDetailPage({
           </div>
 
           {/* Sticky Sidebar */}
-          <aside
-            data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2 min-h-[calc(100vh-150px)]"
-          >
+          <StickyTocAside stickyOffset={150}>
             {/* Table of Contents */}
             <ContentToc items={tocItems} title="Project Contents" />
 
@@ -372,7 +370,7 @@ export default async function CategoryProjectDetailPage({
                 showLiveIndicator={false}
               />
             )}
-          </aside>
+          </StickyTocAside>
         </div>
       </section>
 
