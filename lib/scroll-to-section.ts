@@ -139,40 +139,101 @@ export function scrollToElementWithOffset(
     baseGap,
     pageType = "default",
   }: ScrollToElementOptions = {},
-): void {
-  if (typeof window === "undefined") {
-    return;
-  }
+): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined") {
+      resolve();
+      return;
+    }
 
-  const resolvedBaseGap =
-    baseGap !== undefined ? baseGap : PAGE_TYPE_GAPS[pageType];
-  const stickyAnchorOffset = getStickyAnchorOffset();
-  const offset = stickyAnchorOffset > 0
-    ? stickyAnchorOffset + extraOffset
-    : getScrollOffset({
-      includeNavbar,
-      includeBreadcrumb,
-      extraOffset,
-      baseGap,
+    const resolvedBaseGap =
+      baseGap !== undefined ? baseGap : PAGE_TYPE_GAPS[pageType];
+    const stickyAnchorOffset = getStickyAnchorOffset();
+    const offset = stickyAnchorOffset > 0
+      ? stickyAnchorOffset + extraOffset
+      : getScrollOffset({
+        includeNavbar,
+        includeBreadcrumb,
+        extraOffset,
+        baseGap,
+        pageType,
+      });
+
+    const targetRect = target.getBoundingClientRect();
+    const targetTop = window.scrollY + targetRect.top - Math.max(offset, 0);
+    const finalScrollTop = Math.max(0, targetTop);
+
+    console.log(`[scroll-fix] Scroll action:`, {
+      targetElement: target.id || target.className || "unknown",
+      currentScrollY: window.scrollY,
+      targetRectTop: targetRect.top,
+      calculatedOffset: offset,
+      finalScrollTop,
+      behavior,
       pageType,
     });
 
-  const targetRect = target.getBoundingClientRect();
-  const targetTop = window.scrollY + targetRect.top - Math.max(offset, 0);
+    // If already at the target position, resolve immediately
+    if (Math.abs(window.scrollY - finalScrollTop) < 1) {
+      resolve();
+      return;
+    }
 
-  console.log(`[scroll-fix] Scroll action:`, {
-    targetElement: target.id || target.className || "unknown",
-    currentScrollY: window.scrollY,
-    targetRectTop: targetRect.top,
-    calculatedOffset: offset,
-    finalScrollTop: Math.max(0, targetTop),
-    behavior,
-    pageType,
-  });
+    window.scrollTo({
+      top: finalScrollTop,
+      behavior,
+    });
 
-  window.scrollTo({
-    top: Math.max(0, targetTop),
-    behavior,
+    // For smooth scrolling, detect actual scroll animation completion
+    if (behavior === "smooth") {
+      let isWaitingForScroll = true;
+      let scrollTimeout: NodeJS.Timeout;
+      let hasScrolled = false;
+
+      const onScroll = () => {
+        if (!isWaitingForScroll) return;
+
+        hasScrolled = true;
+
+        // Reset the timeout each time a scroll event fires
+        clearTimeout(scrollTimeout);
+
+        // If no scroll event fires for 200ms, animation is done
+        scrollTimeout = setTimeout(() => {
+          isWaitingForScroll = false;
+          window.removeEventListener('scroll', onScroll as EventListener);
+          resolve();
+        }, 200);
+      };
+
+      window.addEventListener('scroll', onScroll as EventListener);
+
+      // Safety fallback: resolve after 2000ms maximum
+      // If no scroll events fired by 100ms, assume smooth scroll isn't supported (e.g., tests)
+      const fallbackTimeout = setTimeout(() => {
+        if (!hasScrolled) {
+          // No scroll events fired - likely in test environment or instant scroll
+          isWaitingForScroll = false;
+          window.removeEventListener('scroll', onScroll as EventListener);
+          clearTimeout(scrollTimeout);
+          resolve();
+        }
+      }, 100);
+
+      // Ultimate safety: resolve after 2000ms to prevent hangs
+      const ultimateFallback = setTimeout(() => {
+        if (isWaitingForScroll) {
+          isWaitingForScroll = false;
+          window.removeEventListener('scroll', onScroll as EventListener);
+          clearTimeout(scrollTimeout);
+          clearTimeout(fallbackTimeout);
+          resolve();
+        }
+      }, 2000);
+    } else {
+      // For instant/auto scroll, resolve immediately
+      resolve();
+    }
   });
 }
 

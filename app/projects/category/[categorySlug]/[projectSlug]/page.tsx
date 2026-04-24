@@ -274,7 +274,7 @@ export default async function CategoryProjectDetailPage({
           {/* Sticky Sidebar */}
           <aside
             data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2 min-h-[calc(100vh-150px)]"
           >
             {/* Table of Contents */}
             <ContentToc items={tocItems} title="Project Contents" />

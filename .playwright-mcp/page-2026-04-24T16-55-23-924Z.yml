@@ -1,0 +1,48 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Nexgen round logo NEXGEN Electrical" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Nexgen round logo" [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: NEXGEN
+          - generic [ref=e11]: Electrical
+      - generic "Desktop navigation" [ref=e12]:
+        - generic [ref=e14]:
+          - link "Navigate to Home" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - img [ref=e16]
+        - generic [ref=e19]:
+          - link "Navigate to About" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - img [ref=e21]
+        - generic [ref=e24]:
+          - link "Navigate to Services" [ref=e25] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+          - img [ref=e26]
+        - generic [ref=e29]:
+          - link "Navigate to Projects" [ref=e30] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+          - img [ref=e31]
+        - generic [ref=e34]:
+          - link "Navigate to News Hub" [ref=e35] [cursor=pointer]:
+            - /url: /news-hub
+            - text: News Hub
+          - img [ref=e36]
+        - button "Navigate to Contact" [ref=e39]: Contact
+      - link "Get Quote" [ref=e42] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e43]: Get Quote
+  - main [ref=e46]:
+    - paragraph [ref=e47]: 404 // Route Not Found
+    - heading "This Circuit Doesn't Exist" [level=1] [ref=e48]
+    - paragraph [ref=e49]: The page you requested is unavailable or has been moved. Return to a known route to continue.
+    - generic [ref=e50]:
+      - link "Go Home" [ref=e51] [cursor=pointer]:
+        - /url: /
+      - link "View Services" [ref=e52] [cursor=pointer]:
+        - /url: /services
