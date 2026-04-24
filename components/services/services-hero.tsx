@@ -182,7 +182,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
@@ -193,17 +193,18 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
             </div>
           </motion.div>
 
-          {/* Eyebrow */}
+          {/* Status Label Eyebrow */}
           <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase dark:text-electric-cyan/80 font-bold">
-              What We Do
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
+              Professional Electrical Solutions
             </span>
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan" />
           </motion.div>
+
           {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineering</span>

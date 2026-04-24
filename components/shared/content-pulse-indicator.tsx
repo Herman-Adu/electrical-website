@@ -25,7 +25,7 @@ export function ContentPulseIndicator({
     switch (variant) {
       case "live":
       case "featured":
-        return "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan";
+        return "bg-[hsl(174_100%_35%)] bg-electric-cyan dark:bg-white";
       case "breaking":
         return "bg-amber-warning";
     }
@@ -34,7 +34,7 @@ export function ContentPulseIndicator({
   const getRingColor = () => {
     switch (variant) {
       case "live":
-        return "bg-[hsl(174_100%_35%)]/30 dark:bg-electric-cyan/30";
+        return "bg-[hsl(174_100%_35%)]/30 bg-electric-cyan/60 dark:bg-white/60";
       case "featured":
         return "bg-[hsl(174_100%_35%)]/20 dark:bg-electric-cyan/20";
       case "breaking":
@@ -46,7 +46,7 @@ export function ContentPulseIndicator({
     switch (variant) {
       case "live":
       case "featured":
-        return "text-[hsl(174_100%_35%)] dark:text-electric-cyan";
+        return "text-electric-cyan font-bold";
       case "breaking":
         return "text-amber-warning";
     }
@@ -56,16 +56,25 @@ export function ContentPulseIndicator({
     <div className="inline-flex items-center gap-2">
       <div className="relative flex h-3 w-3 items-center justify-center">
         <motion.span
-          className={cn("absolute inline-flex h-full w-full rounded-full", getRingColor())}
+          className={cn(
+            "absolute inline-flex h-full w-full rounded-full",
+            getRingColor(),
+          )}
           animate={{ scale: [1, 1.5, 1], opacity: [0.7, 0, 0.7] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         />
         <span
-          className={cn("relative inline-flex h-2 w-2 rounded-full", getDotColor())}
+          className={cn(
+            "relative inline-flex h-2 w-2 rounded-full",
+            getDotColor(),
+          )}
         />
       </div>
       <span
-        className={cn("font-mono text-[9px] uppercase tracking-[0.2em]", getTextColor())}
+        className={cn(
+          "font-mono text-[9px] uppercase tracking-[0.2em]",
+          getTextColor(),
+        )}
       >
         {label}
       </span>

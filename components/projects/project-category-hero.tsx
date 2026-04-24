@@ -12,13 +12,18 @@ import {
   Lightbulb,
   Zap,
   FolderOpen,
+  Layers,
 } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { cn } from "@/lib/utils";
+import { categoryHeroButtons } from "@/data/projects/category-hero-buttons";
 import type { ProjectCategory } from "@/types/projects";
+import { categoriesHeroButtons } from "@/data/projects/categories-hero-buttons";
+import { Button } from "../ui/button";
 
 // Map each category slug to its dedicated hero image and icon
 const categoryConfig: Record<
@@ -27,24 +32,24 @@ const categoryConfig: Record<
 > = {
   residential: {
     image: "/images/hero-residential.jpg",
-    icon: <Home className="w-8 h-8 text-electric-cyan" />,
+    icon: <Home className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Living",
   },
   "commercial-lighting": {
     image: "/images/hero-commercial-lighting.jpg",
-    icon: <Lightbulb className="w-8 h-8 text-electric-cyan" />,
+    icon: <Lightbulb className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Illuminated",
   },
   "power-boards": {
     image: "/images/hero-power-boards.jpg",
-    icon: <Zap className="w-8 h-8 text-electric-cyan" />,
+    icon: <Zap className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Powered",
   },
 };
 
 const fallbackConfig = {
   image: "",
-  icon: <FolderOpen className="w-8 h-8 text-electric-cyan" />,
+  icon: <FolderOpen className="w-9 h-9 text-electric-cyan" />,
   accentWord: "Delivered",
 };
 
@@ -105,7 +110,7 @@ export function ProjectCategoryHero({
 
   const scrollToProjects = () => {
     const el = document.getElementById("category-projects");
-    if (el) scrollToElementWithOffset(el, { pageType: 'default' });
+    if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
   return (
@@ -124,8 +129,8 @@ export function ProjectCategoryHero({
               className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/80" />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/25 to-black/80" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
           </>
         ) : (
           <BlueprintBackground showScanLine={false} />
@@ -171,17 +176,17 @@ export function ProjectCategoryHero({
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
-          {/* Status label */}
+          {/* Status indicator */}
           <motion.div
-            variants={flickerVariants}
-            className="flex items-center justify-center gap-3 mb-6"
+            variants={itemVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Category // {statusText}
               </span>
             </div>
@@ -191,7 +196,7 @@ export function ProjectCategoryHero({
           <motion.nav
             variants={itemVariants}
             aria-label="Breadcrumb"
-            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60 mb-6"
+            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/90 mb-6"
           >
             <Link
               href="/projects"
@@ -210,26 +215,40 @@ export function ProjectCategoryHero({
             <span className="text-electric-cyan">{category.label}</span>
           </motion.nav>
 
-          {/* Category icon */}
+          {/* Icon */}
           <motion.div
             variants={itemVariants}
             className="flex justify-center mb-6"
           >
-            <div className="w-16 h-16 rounded-xl border border-electric-cyan/40 bg-black/40 backdrop-blur-sm flex items-center justify-center shadow-[0_0_24px_rgba(0,243,189,0.15)]">
-              {config.icon}
+            <div className="relative">
+              <div className="w-16 h-16 rounded-xl border border-white bg-white/10 flex items-center justify-center backdrop-blur-sm">
+                <span className="flex items-center justify-center w-9 h-9 text-white">
+                  {config.icon}
+                </span>
+              </div>
+              {/* Glow ring */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
           </motion.div>
 
-          {/* Project count */}
+          {/* Project count eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center justify-center gap-4 mb-4"
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/80">
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               {projectCount} Project{projectCount !== 1 ? "s" : ""}
             </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="h-px w-12 bg-electric-cyan" />
           </motion.div>
 
           {/* Headline */}
@@ -248,35 +267,47 @@ export function ProjectCategoryHero({
             {category.description}
           </motion.p>
 
-          {/* Action buttons */}
+          {/* Category hero action buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-4 mb-10"
+            className="flex flex-wrap items-center justify-center gap-3 mb-10"
           >
-            <Link
-              href="/projects"
-              className="px-5 py-2.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-white hover:border-electric-cyan/60 hover:text-electric-cyan transition-all duration-300"
-            >
-              All Projects
-            </Link>
-            <Link
-              href="/contact"
-              className="px-5 py-2.5 rounded-full border border-electric-cyan/40 bg-electric-cyan/15 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-electric-cyan hover:bg-electric-cyan/25 transition-all duration-300"
-            >
-              Start a Project
-            </Link>
+            {categoriesHeroButtons.map((button, index) => (
+              <motion.div
+                key={button.href}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
+              >
+                <Button
+                  asChild
+                  className={cn(
+                    "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
+                    "bg-white/10 border-electric-cyan/50 ",
+                    "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
+                    "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
+                  )}
+                >
+                  <Link href="/projects">
+                    <span>{button.label}</span>
+                  </Link>
+                </Button>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase"
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
           >
             <span>NICEIC Approved</span>
-            <span className="hidden sm:inline text-white/25">|</span>
+            <span className="hidden sm:inline opacity-40">|</span>
             <span>Part P Certified</span>
-            <span className="hidden sm:inline text-white/25">|</span>
-            <span>Quality Assured</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>24/7 Emergency</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>4 Active Projects</span>
           </motion.div>
         </motion.div>
       }

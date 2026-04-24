@@ -88,7 +88,7 @@ export function ProjectRelatedCarousel({
   return (
     <section
       ref={sectionRef}
-      className="relative py-12 bg-background overflow-hidden"
+      className="relative section-padding bg-background overflow-hidden"
       aria-label="Related projects"
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}

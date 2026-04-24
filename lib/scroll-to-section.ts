@@ -5,6 +5,7 @@ const TOC_SCROLL_GAP = 8;
 
 const PRIMARY_NAV_SELECTOR = 'nav[aria-label="Primary"]';
 const STICKY_BREADCRUMB_SELECTOR = '[data-sticky-breadcrumb="true"]';
+const STICKY_TOC_SELECTOR = '[data-sticky-toc="true"]';
 
 type PageType = "default" | "article" | "form";
 
@@ -75,6 +76,17 @@ function getStickyBreadcrumbHeight(): number {
   return height;
 }
 
+export function getStickyAnchorOffset(): number {
+  if (typeof window === 'undefined') return 0;
+  const container = document.querySelector<HTMLElement>(STICKY_TOC_SELECTOR);
+  if (!container) return 0;
+  const style = window.getComputedStyle(container);
+  if (style.display === 'none' || style.visibility === 'hidden') return 0;
+  // CSS 'top' = static sticky threshold — correct at any scroll position
+  const cssTop = parseFloat(window.getComputedStyle(container).top);
+  return isNaN(cssTop) || cssTop <= 0 ? 0 : Math.round(cssTop);
+}
+
 export function getScrollOffset({
   includeNavbar = true,
   includeBreadcrumb = true,
@@ -132,13 +144,18 @@ export function scrollToElementWithOffset(
     return;
   }
 
-  const offset = getScrollOffset({
-    includeNavbar,
-    includeBreadcrumb,
-    extraOffset,
-    baseGap,
-    pageType,
-  });
+  const resolvedBaseGap =
+    baseGap !== undefined ? baseGap : PAGE_TYPE_GAPS[pageType];
+  const stickyAnchorOffset = getStickyAnchorOffset();
+  const offset = stickyAnchorOffset > 0
+    ? stickyAnchorOffset + extraOffset
+    : getScrollOffset({
+      includeNavbar,
+      includeBreadcrumb,
+      extraOffset,
+      baseGap,
+      pageType,
+    });
 
   const targetRect = target.getBoundingClientRect();
   const targetTop = window.scrollY + targetRect.top - Math.max(offset, 0);

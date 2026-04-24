@@ -75,7 +75,7 @@ export function ProjectScopeGrid({
   return (
     <section
       ref={sectionRef}
-      className="relative py-18 bg-card/30 overflow-hidden"
+      className="relative section-padding bg-card/30 overflow-hidden"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
@@ -109,7 +109,7 @@ export function ProjectScopeGrid({
 
         {/* Description */}
         <motion.p
-          className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-4xl mb-12"
+          className="text-base sm:text-lg text-foreground dark:text-foreground/70 leading-relaxed max-w-4xl mb-12"
           initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -118,7 +118,7 @@ export function ProjectScopeGrid({
         </motion.p>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2  gap-6">
           {items.map((item, index) => {
             const Icon = iconMap[item.icon] || Zap;
 
@@ -128,7 +128,7 @@ export function ProjectScopeGrid({
                 initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative p-6 rounded-xl bg-background/60 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
+                className="group relative p-6 rounded-xl border border-border bg-background/60 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
               >
                 {/* Top accent line */}
                 <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-electric-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -139,10 +139,10 @@ export function ProjectScopeGrid({
                 </div>
 
                 {/* Content */}
-                <h3 className="text-base font-bold text-foreground mb-2 transition-colors duration-300 group-hover:text-electric-cyan">
+                <h3 className="text-base font-bold text-foreground dark:text-foreground/70 mb-2 transition-colors duration-300 group-hover:text-electric-cyan">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-foreground dark:text-foreground/70 leading-relaxed">
                   {item.description}
                 </p>
               </motion.div>

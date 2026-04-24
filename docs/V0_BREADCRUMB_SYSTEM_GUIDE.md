@@ -11,6 +11,7 @@ This guide documents the breadcrumb navigation system implemented across all maj
 ### Why CSS Sticky Over IntersectionObserver?
 
 **IntersectionObserver Pattern** (Original Approach):
+
 - Tracks when breadcrumb scrolls out of view
 - Renders duplicate breadcrumb bar when detected
 - Adds ~50 lines of JavaScript for state management
@@ -18,6 +19,7 @@ This guide documents the breadcrumb navigation system implemented across all maj
 - More complex event handling
 
 **CSS Sticky Pattern** (Current Implementation):
+
 - Browser handles stick/unstick natively
 - Zero JavaScript for positioning
 - Single breadcrumb element
@@ -26,6 +28,7 @@ This guide documents the breadcrumb navigation system implemented across all maj
 - Lower cognitive overhead
 
 **Performance Comparison:**
+
 ```
 IntersectionObserver: ~120 lines JS + DOM duplication
 CSS Sticky:           ~30 lines CSS + single element
@@ -53,13 +56,13 @@ export interface BreadcrumbItem {
 The breadcrumb component supports 6 different sections, each with distinct styling:
 
 ```typescript
-type BreadcrumbSection = 
-  | "projects"      // Green accent, Projects section
-  | "news"          // Green accent, News Hub section
-  | "services"      // Green accent, Services section
-  | "home"          // Green accent, Home page
-  | "about"         // Green accent, About page
-  | "contact"       // Green accent, Contact page
+type BreadcrumbSection =
+  | "projects" // Green accent, Projects section
+  | "news" // Green accent, News Hub section
+  | "services" // Green accent, Services section
+  | "home" // Green accent, Home page
+  | "about" // Green accent, About page
+  | "contact"; // Green accent, Contact page
 ```
 
 ---
@@ -87,7 +90,7 @@ interface ContentBreadcrumbProps {
 
 ```css
 position: sticky;
-top: 80px;  /* Navbar height: 5rem = 80px */
+top: 80px; /* Navbar height: 5rem = 80px */
 z-index: 40;
 ```
 
@@ -186,16 +189,16 @@ export default async function NewsCategoryPage() {
   return (
     <main>
       <NewsCategoryHero category={category} />
-      
+
       <ContentBreadcrumb
         items={[
           { label: "Home", href: "/" },
           { label: "News Hub", href: "/news-hub" },
           { label: "Categories", href: "/news-hub/category" },
-          { 
-            label: category.label, 
-            href: `/news-hub/category/${categorySlug}`, 
-            isCurrent: true 
+          {
+            label: category.label,
+            href: `/news-hub/category/${categorySlug}`,
+            isCurrent: true
           },
         ]}
         section="news"
@@ -209,21 +212,21 @@ export default async function NewsCategoryPage() {
 
 ### Breadcrumb Hierarchy Map
 
-| Page | Breadcrumb Trail | isCurrent |
-|------|-----------------|-----------|
-| `/` | `Home` | Yes |
-| `/about` | `Home / About` | Last |
-| `/contact` | `Home / Contact` | Last |
-| `/services` | `Home / Services` | Last |
-| `/services/residential` | `Home / Services / Residential` | Last |
-| `/projects` | `Home / Projects` | Last |
-| `/projects/category` | `Home / Projects / Categories` | Last |
-| `/projects/category/power-boards` | `Home / Projects / Categories / Power Boards` | Last |
-| `/projects/category/power-boards/project-slug` | `Projects / Categories / Power Boards / Project Title` | Last |
-| `/news-hub` | `Home / News Hub` | Last |
-| `/news-hub/category` | `Home / News Hub / Categories` | Last |
-| `/news-hub/category/renewable` | `Home / News Hub / Categories / Renewable Energy` | Last |
-| `/news-hub/category/renewable/article-slug` | `News Hub / Categories / Renewable / Article Title` | Last |
+| Page                                           | Breadcrumb Trail                                       | isCurrent |
+| ---------------------------------------------- | ------------------------------------------------------ | --------- |
+| `/`                                            | `Home`                                                 | Yes       |
+| `/about`                                       | `Home / About`                                         | Last      |
+| `/contact`                                     | `Home / Contact`                                       | Last      |
+| `/services`                                    | `Home / Services`                                      | Last      |
+| `/services/residential`                        | `Home / Services / Residential`                        | Last      |
+| `/projects`                                    | `Home / Projects`                                      | Last      |
+| `/projects/category`                           | `Home / Projects / Categories`                         | Last      |
+| `/projects/category/power-boards`              | `Home / Projects / Categories / Power Boards`          | Last      |
+| `/projects/category/power-boards/project-slug` | `Projects / Categories / Power Boards / Project Title` | Last      |
+| `/news-hub`                                    | `Home / News Hub`                                      | Last      |
+| `/news-hub/category`                           | `Home / News Hub / Categories`                         | Last      |
+| `/news-hub/category/renewable`                 | `Home / News Hub / Categories / Renewable Energy`      | Last      |
+| `/news-hub/category/renewable/article-slug`    | `News Hub / Categories / Renewable / Article Title`    | Last      |
 
 ---
 
@@ -259,6 +262,7 @@ Both News Hub and Projects detail pages now use:
 ```
 
 The `top-[132px]` value accounts for:
+
 - 80px: Navbar height
 - 44px: Breadcrumb height (py-3 = 12px top + 12px bottom + ~20px content)
 - 8px: Gap between breadcrumb and sidebar
@@ -325,10 +329,9 @@ This ensures clicked TOC items scroll to be visible below the breadcrumb bar.
 Breadcrumbs use the shared design system:
 
 ```css
---electric-cyan: Brand accent color for current/hover state
---foreground: Text color for links
---muted-foreground: Separator and muted text color
---background: Section background
+--electric-cyan: Brand accent color for current/hover state --foreground: Text
+  color for links --muted-foreground: Separator and muted text color
+  --background: Section background;
 ```
 
 ---
@@ -385,12 +388,14 @@ return (
 ### Breakpoint Behavior
 
 **Mobile (< 640px)**:
+
 - First item always visible: `[Home]`
 - Middle items hidden: `... (expandable)`
 - Last item always visible: `[Current]`
 - Expand/collapse on click
 
 **Desktop (≥ 640px)**:
+
 - All items visible: `[Home] / [Projects] / [Categories] / [Current]`
 - No toggle button
 
@@ -477,19 +482,20 @@ return (
 
 ```typescript
 // types/shared-content.ts
-export type BreadcrumbSection = 
+export type BreadcrumbSection =
   | "projects"
   | "news"
   | "services"
   | "home"
   | "about"
   | "contact"
-  | "my-new-section"  // Add here
+  | "my-new-section"; // Add here
 ```
 
 ### Step 2: Add to All Pages
 
 Add `<ContentBreadcrumb>` after hero on:
+
 - Root page (`/my-new-section`)
 - Category index (`/my-new-section/category`)
 - Category page (`/my-new-section/category/[slug]`)
@@ -512,7 +518,8 @@ If section has sidebar TOC:
 ### Breadcrumb Not Sticking
 
 **Issue**: Breadcrumb scrolls away instead of staying below navbar  
-**Solution**: 
+**Solution**:
+
 - Verify navbar has `h-20` (80px) height
 - Check no parent has `overflow: hidden` (breaks sticky)
 - Ensure `z-index: 40` is set
@@ -521,6 +528,7 @@ If section has sidebar TOC:
 
 **Issue**: "..." button doesn't expand on mobile  
 **Solution**:
+
 - Verify `BreadcrumbMobileToggle` is rendered (check screen size)
 - Check JavaScript is enabled
 - Inspect browser console for errors

@@ -69,7 +69,7 @@ export function ProjectGallery({
     <>
       <section
         ref={sectionRef}
-        className="relative py-16 sm:py-24 bg-card/30 overflow-hidden"
+        className="relative section-padding bg-card/30 overflow-hidden"
       >
         <AnimatedBorders
           shouldReduce={shouldReduce}

@@ -27,7 +27,7 @@ export function ProjectChallengeSolution({
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+      className="relative section-padding bg-background overflow-hidden"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
@@ -70,7 +70,7 @@ export function ProjectChallengeSolution({
             <h3 className="text-xl font-bold text-foreground mb-4">
               The Challenge
             </h3>
-            <p className="text-muted-foreground leading-relaxed">{challenge}</p>
+            <p className="text-foreground/70 leading-relaxed">{challenge}</p>
           </motion.div>
 
           {/* Solution */}
@@ -92,7 +92,7 @@ export function ProjectChallengeSolution({
             <h3 className="text-xl font-bold text-foreground mb-4">
               Our Solution
             </h3>
-            <p className="text-muted-foreground leading-relaxed">{solution}</p>
+            <p className="text-foreground/70 leading-relaxed">{solution}</p>
           </motion.div>
         </div>
       </div>

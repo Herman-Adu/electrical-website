@@ -119,7 +119,7 @@ function ProjectTimelineRow({
     >
       {/* Desktop-only label column — hidden on mobile */}
       <div className="hidden md:block md:w-25 shrink-0 pt-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
           {item.label}
         </span>
         <p className="font-mono text-xs text-electric-cyan/70 mt-1">
@@ -220,7 +220,7 @@ function ProjectTimelineRow({
               </span>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-sm text-foreground/70 leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -282,7 +282,7 @@ export function ProjectTimeline({
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+      className="relative section-padding bg-background overflow-hidden"
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       <div className="section-content max-w-6xl" ref={containerRef}>

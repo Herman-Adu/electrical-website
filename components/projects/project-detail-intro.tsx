@@ -59,7 +59,7 @@ export function ProjectDetailIntro({
   return (
     <section
       ref={sectionRef}
-      className="relative py-18 bg-background overflow-hidden"
+      className="relative section-padding-bottom pt-6 bg-background overflow-hidden"
     >
       {/* Blueprint grid overlay */}
       {/* <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" /> */}
@@ -73,12 +73,6 @@ export function ProjectDetailIntro({
               style={{ scaleX: lineScale, transformOrigin: "center" }}
             />
           </div>
-          {/* <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
-            <motion.div
-              className="h-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
-              style={{ width: lineRight }}
-            />
-          </div> */}
         </>
       )}
 
@@ -86,20 +80,20 @@ export function ProjectDetailIntro({
         {/* Section label */}
         <motion.div
           id={anchorId}
-          className="flex items-center gap-3 mb-12 scroll-mt-36"
+          className="flex items-center gap-3 mb-6 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="h-px w-8 bg-electric-cyan" />
-          <span className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+          <span className="font-mono text-xs tracking-widest uppercase font-bold text-electric-cyan">
             {label}
           </span>
         </motion.div>
 
         {/* Animated headline words */}
-        <div className="mb-16">
+        <div className="mb-6">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
             {headlineWords.map((word, i) => (
               <AnimatedWord
@@ -118,7 +112,7 @@ export function ProjectDetailIntro({
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-lg text-foreground dark:text-foreground/70 leading-relaxed"
           >
             {leadParagraph}
           </motion.p>
@@ -134,7 +128,10 @@ export function ProjectDetailIntro({
             className="grid md:grid-cols-2 gap-8 mb-20"
           >
             {bodyParagraphs.map((para, idx) => (
-              <p key={idx} className="text-muted-foreground leading-relaxed">
+              <p
+                key={idx}
+                className="text-foreground dark:text-foreground/70 leading-relaxed"
+              >
                 {para}
               </p>
             ))}
@@ -143,7 +140,7 @@ export function ProjectDetailIntro({
 
         {/* Three pillars */}
         {pillars.length > 0 && (
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {pillars.map((pillar, idx) => (
               <motion.div
                 key={pillar.num}
@@ -163,7 +160,7 @@ export function ProjectDetailIntro({
                 <h3 className="text-lg font-bold text-foreground mb-3">
                   {pillar.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-foreground dark:text-foreground/70 leading-relaxed">
                   {pillar.description}
                 </p>
               </motion.div>

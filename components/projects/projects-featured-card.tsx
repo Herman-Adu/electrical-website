@@ -60,7 +60,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
         id="projects-grid"
       >
         {/* Left: Image with parallax - Responsive height */}
-        <div className="relative min-h-[200px] sm:min-h-[280px] md:min-h-[350px] lg:min-h-[400px] 2xl:min-h-120 overflow-hidden">
+        <div className="relative min-h-50 sm:min-h-70 md:min-h-87.5 lg:min-h-100 2xl:min-h-120 overflow-hidden">
           <motion.div
             className="absolute inset-0"
             style={{ y: shouldReduce ? 0 : imageY }}
@@ -76,17 +76,17 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
           </motion.div>
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
 
           {/* FEATURED holographic ribbon - Responsive positioning */}
           <div className="absolute top-0 left-0 overflow-hidden">
             <motion.div
-              className="relative -translate-x-1/4 -translate-y-1/4 rotate-[-45deg] origin-center"
+              className="relative -translate-x-1/4 -translate-y-1/4 -rotate-45 origin-center"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.4 }}
             >
-              <div className="px-8 sm:px-10 py-1 sm:py-1.5 bg-gradient-to-r from-electric-cyan/50 via-electric-cyan/30 to-transparent backdrop-blur-sm border-b border-electric-cyan/30">
+              <div className="px-8 sm:px-10 py-1 sm:py-1.5 bg-linear-to-r from-electric-cyan/50 via-electric-cyan/30 to-transparent backdrop-blur-sm border-b border-electric-cyan/30">
                 <span className="font-mono text-[7px] sm:text-[8px] tracking-[0.3em] text-electric-cyan uppercase font-bold">
                   Featured
                 </span>
@@ -112,7 +112,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
 
           {/* Header - Responsive typography */}
           <motion.p
-            className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.16em] sm:tracking-[0.18em] text-electric-cyan/80"
+            className="font-mono text-[8px] sm:text-[9px] uppercase font-bold tracking-[0.16em] sm:tracking-[0.18em] text-electric-cyan/80"
             initial={shouldReduce ? {} : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -132,7 +132,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
 
           {/* Description - Responsive sizing */}
           <motion.p
-            className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground"
+            className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-foreground dark:text-foreground/80"
             initial={shouldReduce ? {} : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -157,7 +157,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
                 key={kpi.label}
                 className="rounded-lg border border-border/50 bg-muted/30 p-2 sm:p-3 transition-all duration-300 hover:border-electric-cyan/30"
               >
-                <p className="font-mono text-[7px] sm:text-[8px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-muted-foreground">
+                <p className="font-mono text-[7px] sm:text-[8px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-foreground dark:text-foreground/80">
                   {kpi.label}
                 </p>
                 <p className="mt-1 text-xs sm:text-sm font-bold text-foreground truncate">
@@ -198,7 +198,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
                 variants={shouldReduce ? {} : tagVariants}
                 initial="hidden"
                 animate="visible"
-                className="rounded-md border border-border/50 bg-muted/30 px-2 sm:px-2.5 py-0.5 sm:py-1 font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.12em] sm:tracking-[0.14em] text-muted-foreground whitespace-nowrap"
+                className="rounded-md border border-border/50 bg-muted/30 px-2 sm:px-2.5 py-0.5 sm:py-1 font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.12em] sm:tracking-[0.14em] text-foreground dark:text-foreground/80 whitespace-nowrap"
               >
                 {tag}
               </motion.span>

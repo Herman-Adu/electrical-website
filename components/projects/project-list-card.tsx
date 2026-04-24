@@ -25,7 +25,7 @@ const statusConfig: Record<
   },
   "in-progress": {
     label: "In Progress",
-    className: "border-electric-cyan/30 bg-electric-cyan/10 text-electric-cyan",
+    className: "border-cyan-500 bg-cyan-500/10 text-cyan-500",
   },
   completed: {
     label: "Completed",
@@ -41,12 +41,12 @@ export function ProjectListCard({ item }: ProjectListCardProps) {
   const status = statusConfig[item.status];
 
   return (
-    <ContentCardShell className="overflow-hidden transition-all hover:border-electric-cyan/50 hover:shadow-[0_0_25px_rgba(0,243,189,0.1)]">
+    <ContentCardShell className="overflow-hidden text-cyan-400 transition-all border border-foreground/30 hover:border-electric-cyan/50 dark:hover:border-electric-cyan/60 hover:shadow-[0_0_25px_rgba(0,243,189,0.1)]">
       {/* Mobile/Tablet: Column layout (image top, content below) */}
       {/* Desktop: Row layout (image left, content right) */}
       <div className="flex flex-col md:flex-row">
         {/* Image Section */}
-        <div className="relative h-48 w-full shrink-0 md:h-auto md:min-h-[180px] md:w-56 lg:w-64">
+        <div className="relative h-48 w-full shrink-0 md:h-auto md:min-h-45 md:w-56 lg:w-64">
           {item.featuredImage ? (
             <Image
               src={item.featuredImage.src}
@@ -64,7 +64,7 @@ export function ProjectListCard({ item }: ProjectListCardProps) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-background/40" />
           {item.isFeatured && (
-            <div className="absolute left-3 top-3 rounded-md border border-electric-cyan/40 bg-electric-cyan/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan backdrop-blur-sm">
+            <div className="absolute left-3 top-3 rounded-lg border border-electric-cyan/40 bg-electric-cyan/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white backdrop-blur-sm">
               Featured
             </div>
           )}
@@ -75,29 +75,31 @@ export function ProjectListCard({ item }: ProjectListCardProps) {
           <div className="space-y-3">
             {/* Meta info row */}
             <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
-              <span className="rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2.5 py-1 text-electric-cyan">
+              <span className="rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-2.5 py-1 text-electric-cyan">
                 {item.categoryLabel}
               </span>
-              <span className={`rounded-md border px-2.5 py-1 ${status.className}`}>
+              <span
+                className={`rounded-lg border px-2.5 py-1 ${status.className}`}
+              >
                 {status.label}
               </span>
-              <span className="text-foreground/50">
+              <span className="text-foreground dark:text-foreground/70 font-bold">
                 {formatDate(item.publishedAt)}
               </span>
             </div>
 
             {/* Title and excerpt */}
             <div className="space-y-2">
-              <h3 className="line-clamp-2 text-lg font-bold leading-snug tracking-tight text-white">
+              <h3 className="line-clamp-2 text-lg font-bold leading-snug tracking-tight text-foreground">
                 {item.title}
               </h3>
-              <p className="line-clamp-2 text-sm leading-6 text-foreground/70">
+              <p className="line-clamp-2 text-sm leading-6 text-foreground dark:text-foreground/70">
                 {item.excerpt}
               </p>
             </div>
 
             {/* Location and sector */}
-            <div className="flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/50">
+            <div className="flex flex-wrap gap-3 font-mono text-[10px] uppercase font-bold tracking-[0.18em] text-foreground dark:text-foreground/70">
               {item.location && (
                 <span className="flex items-center gap-1">
                   <svg
@@ -133,7 +135,7 @@ export function ProjectListCard({ item }: ProjectListCardProps) {
           <div className="flex items-center justify-end gap-3 border-t border-electric-cyan/10 pt-2">
             <Link
               href={`/projects/category/${item.category}/${item.slug}`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan transition-all hover:bg-electric-cyan/20 hover:shadow-[0_0_15px_rgba(0,243,189,0.15)]"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan transition-all hover:bg-electric-cyan/20 shadow-md shadow-electric-cyan/30 dark:shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]"
             >
               View Project
               <span aria-hidden>→</span>

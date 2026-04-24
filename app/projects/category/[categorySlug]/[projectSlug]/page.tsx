@@ -219,11 +219,11 @@ export default async function CategoryProjectDetailPage({
       {/* Main Content with Sticky Sidebar */}
       <section
         id="project-content"
-        className="section-standard bg-background !overflow-visible"
+        className="section-padding bg-background overflow-visible!"
       >
         <div className="section-content grid max-w-7xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content Column */}
-          <div className="space-y-0">
+          <div className="mt-2">
             {detail?.intro && (
               <div>
                 <ProjectDetailIntro data={detail.intro} anchorId="overview" />
@@ -269,21 +269,13 @@ export default async function CategoryProjectDetailPage({
                 />
               </div>
             )}
-
-            {relatedProjects.length > 0 && (
-              <div>
-                <ProjectRelatedCarousel
-                  projects={relatedProjects}
-                  categorySlug={categorySlug}
-                  heading={`More ${category.label} Projects`}
-                  anchorId="related"
-                />
-              </div>
-            )}
           </div>
 
           {/* Sticky Sidebar */}
-          <aside className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start">
+          <aside
+            data-sticky-toc="true"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2"
+          >
             {/* Table of Contents */}
             <ContentToc items={tocItems} title="Project Contents" />
 
@@ -384,8 +376,22 @@ export default async function CategoryProjectDetailPage({
         </div>
       </section>
 
+      {/* Related Projects — Full Width */}
+      <section className="section-container section-padding  bg-background">
+        <div className="section-content max-w-6xl">
+          {relatedProjects.length > 0 && (
+            <ProjectRelatedCarousel
+              projects={relatedProjects}
+              categorySlug={categorySlug}
+              heading={`More ${category.label} Projects`}
+              anchorId="related"
+            />
+          )}
+        </div>
+      </section>
+
       {/* Social CTA - Full Width */}
-      <section className="section-container bg-background">
+      <section className="section-container section-padding  bg-background">
         <div className="section-content max-w-6xl">
           <ProjectSocialCTA
             projectTitle={project.title}

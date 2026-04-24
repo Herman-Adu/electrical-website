@@ -24,7 +24,7 @@ export function ProjectTestimonialCard({
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+      className="relative section-padding bg-background overflow-hidden"
     >
       <div className="section-content max-w-4xl" ref={containerRef}>
         <motion.div

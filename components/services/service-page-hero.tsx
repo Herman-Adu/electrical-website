@@ -186,7 +186,9 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
             {headlineHighlight ? (
               <>
                 {headlineText.split(headlineHighlight)[0]}
-                <span className="text-electric-cyan">{headlineHighlight}</span>
+                <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+                  {headlineHighlight}
+                </span>
                 {headlineText.split(headlineHighlight)[1]}
               </>
             ) : (
@@ -197,7 +199,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-white mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {subheadline}
           </motion.p>

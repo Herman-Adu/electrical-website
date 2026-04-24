@@ -5,6 +5,7 @@
 This guide documents the Projects section architecture and implementation. It covers all routes, data contracts, TypeScript types, component organization, and integration with shared components and breadcrumb system.
 
 **Cross-references**:
+
 - For shared components used across sections, see `V0_SHARED_COMPONENTS_GUIDE.md`
 - For breadcrumb system, see `V0_BREADCRUMB_SYSTEM_GUIDE.md`
 
@@ -155,6 +156,7 @@ Used on `/projects/category/[categorySlug]` to display project list with paginat
 ```
 
 **Features**:
+
 - Generic grid with 50/50 image/content split on featured card
 - Load More pagination (4 initial + 3 per batch)
 - Sidebar with category cards
@@ -179,6 +181,7 @@ Used on project detail page to show scrollable table of contents:
 ```
 
 **Features**:
+
 - Sticky positioning at `top: 132px` (below navbar + breadcrumb)
 - Scroll tracking via `IntersectionObserver`
 - Mobile expandable on screens < 640px
@@ -194,6 +197,7 @@ New card component matching `NewsHubArticleCard` design for use in `ContentGridL
 ```
 
 **Features**:
+
 - Consistent layout with news cards (50/50 image/content)
 - Category badge and status indicator
 - KPI highlights
@@ -277,12 +281,12 @@ All data fetching functions are type-safe and return proper extended types:
 ```typescript
 // data/projects/index.ts
 
-export function getProjectListItemsExtended(): ProjectListItemExtended[]
+export function getProjectListItemsExtended(): ProjectListItemExtended[];
 export function getProjectListItemsExtendedByCategory(
-  categorySlug: string
-): ProjectListItemExtended[]
-export function getCategoryBySlug(slug: string): ProjectCategory
-export function getProjectBySlug(slug: string): Project
+  categorySlug: string,
+): ProjectListItemExtended[];
+export function getCategoryBySlug(slug: string): ProjectCategory;
+export function getProjectBySlug(slug: string): Project;
 ```
 
 ---
@@ -291,7 +295,7 @@ export function getProjectBySlug(slug: string): Project
 
 ### All Project Components
 
-```  kpis: ProjectKpis;
+```kpis: ProjectKpis;
   tags: string[];
   progress: number; // 0–100
   isFeatured: boolean;
