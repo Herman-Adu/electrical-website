@@ -69,9 +69,6 @@ export function ContentToc({
   }, [items]); // items only — no stickyOffset dependency needed
 
   const handleClick = useCallback((id: string) => {
-    // Set active immediately (don't wait for scroll detection)
-    setActiveId(id);
-
     // Trigger click animation
     setClickedId(id);
     setTimeout(() => setClickedId(null), 300);
