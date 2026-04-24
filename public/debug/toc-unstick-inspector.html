@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOC Unstick Point Inspector</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #000;
+      color: #fff;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid #333;
+    }
+    h1 {
+      margin-top: 0;
+      color: #00d4ff;
+      font-size: 24px;
+    }
+    .instructions {
+      background: #2a2a2a;
+      border-left: 4px solid #00d4ff;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .code-block {
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 16px 0;
+      position: relative;
+    }
+    .copy-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #00d4ff;
+      color: #000;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .copy-button:hover {
+      background: #00f0ff;
+    }
+    .copy-button.copied {
+      background: #00ff00;
+      color: #000;
+    }
+    .step {
+      margin: 24px 0;
+      padding: 16px;
+      background: #222;
+      border-radius: 4px;
+      border: 1px solid #333;
+    }
+    .step-number {
+      display: inline-block;
+      background: #00d4ff;
+      color: #000;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      margin-right: 12px;
+    }
+    .step h3 {
+      display: inline-block;
+      margin: 0;
+      color: #fff;
+    }
+    .warning {
+      background: #3a2a1a;
+      border-left: 4px solid #ff6600;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #ffb366;
+    }
+    .success {
+      background: #1a3a2a;
+      border-left: 4px solid #00ff00;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #66ff99;
+    }
+    ul, ol {
+      margin: 12px 0;
+      padding-left: 24px;
+    }
+    li {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+    code {
+      background: #000;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", monospace;
+      color: #00d4ff;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      font-size: 12px;
+      color: #666;
+    }
+    a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 TOC Unstick Point Inspector</h1>
+
+    <div class="instructions">
+      <strong>Purpose:</strong> Capture exact measurements when TOC unsticks at Gallery section on
+      project detail pages.
+    </div>
+
+    <div class="step">
+      <span class="step-number">1</span>
+      <h3>Navigate to a Project Detail Page</h3>
+      <p>Go to any project detail page:</p>
+      <code>/projects/category/[category]/[project]</code>
+      <p style="margin-bottom: 0; color: #999; font-size: 12px;">
+        Example: /projects/category/industrial-solutions/power-distribution-upgrade
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-number">2</span>
+      <h3>Open Browser Developer Console</h3>
+      <ul>
+        <li><strong>Windows/Linux:</strong> Press <code>F12</code>, then click "Console" tab</li>
+        <li><strong>macOS:</strong> Press <code>Cmd + Option + I</code>, then click "Console" tab</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step-number">3</span>
+      <h3>Copy & Paste the Debug Script</h3>
+      <p>Copy the script below and paste it into the console:</p>
+
+      <div class="code-block">
+        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+        <pre id="debug-script">(async function debugTocMeasurements() {
+  const measurements = [];
+  let isRunning = true;
+  let lastScrollY = 0;
+
+  // Section labels for reference
+  const sectionMap = {
+    overview: "Overview",
+    scope: "Scope of Work",
+    challenge: "Challenge & Solution",
+    timeline: "Project Timeline",
+    gallery: "Gallery",
+    testimonial: "Client Testimonial",
+    related: "Related Projects",
+  };
+
+  // Get computed value safely
+  function getComputedValue(el, prop) {
+    return window.getComputedStyle(el).getPropertyValue(prop) || "N/A";
+  }
+
+  // Capture single snapshot
+  function captureSnapshot(reason) {
+    const aside = document.querySelector('[data-sticky-toc="true"]');
+    const toc = document.querySelector('[aria-label="Table of contents"]');
+    const mainContent = document.querySelector('[id="project-content"]');
+    const gridCell = document.querySelector('.section-padding.bg-background');
+
+    if (!aside || !toc || !mainContent) {
+      return {
+        scrollY: window.scrollY,
+        timestamp: Date.now(),
+        notes: ["ERROR: Elements not found"],
+      };
+    }
+
+    const asideRect = aside.getBoundingClientRect();
+    const tocRect = toc.getBoundingClientRect();
+    const mainRect = mainContent.getBoundingClientRect();
+    const gridCellRect = gridCell?.getBoundingClientRect();
+    const galleryEl = document.getElementById("gallery");
+    const galleryRect = galleryEl?.getBoundingClientRect();
+
+    // Capture sections
+    const sections = Object.entries(sectionMap)
+      .map(([id, label]) => {
+        const el = document.getElementById(id);
+        if (!el) return null;
+        const rect = el.getBoundingClientRect();
+        return {
+          id,
+          label,
+          top: rect.top,
+          isVisible: rect.top < window.innerHeight && rect.bottom > 0,
+        };
+      })
+      .filter(s => s !== null);
+
+    // Build notes
+    const notes = [];
+    if (reason) notes.push(`Reason: ${reason}`);
+
+    const asideComputedPosition = getComputedValue(aside, "position");
+    const isSticky = asideComputedPosition === "sticky" || asideComputedPosition === "fixed";
+    notes.push(`Aside position: ${asideComputedPosition}`);
+
+    if (tocRect.top < 0) {
+      notes.push(`⚠️ TOC UNSTICKING! top=${tocRect.top.toFixed(1)}px`);
+    }
+
+    const galleryIsVisible = galleryRect
+      ? galleryRect.top < window.innerHeight && galleryRect.bottom > 0
+      : false;
+
+    if (galleryIsVisible && lastScrollY < window.scrollY) {
+      notes.push(`✓ Gallery entered viewport`);
+    }
+
+    return {
+      scrollY: window.scrollY,
+      timestamp: Date.now(),
+      viewport: {
+        height: window.innerHeight,
+        width: window.innerWidth,
+      },
+      aside: {
+        height: asideRect.height.toFixed(1),
+        offsetHeight: aside.offsetHeight,
+        scrollHeight: aside.scrollHeight,
+        minHeight: getComputedValue(aside, "min-height"),
+        alignSelf: getComputedValue(aside, "align-self"),
+        top: asideRect.top.toFixed(1),
+        bottom: asideRect.bottom.toFixed(1),
+        isSticky,
+      },
+      toc: {
+        height: tocRect.height.toFixed(1),
+        offsetHeight: toc.offsetHeight,
+        scrollHeight: toc.scrollHeight,
+        top: tocRect.top.toFixed(1),
+        bottom: tocRect.bottom.toFixed(1),
+      },
+      mainContent: {
+        scrollHeight: mainContent.scrollHeight,
+        offsetHeight: mainContent.offsetHeight,
+        top: mainRect.top.toFixed(1),
+      },
+      gridCell: {
+        height: gridCellRect?.height.toFixed(1) ?? "N/A",
+        offsetHeight: gridCell?.offsetHeight ?? "N/A",
+      },
+      sections,
+      gallery: {
+        isVisible: galleryIsVisible,
+        distanceFromViewportTop: galleryRect?.top.toFixed(1) ?? "N/A",
+      },
+      notes,
+    };
+  }
+
+  // Format snapshot
+  function formatSnapshot(snap) {
+    const lines = [];
+    const scrollPercent = ((snap.scrollY / document.documentElement.scrollHeight) * 100).toFixed(1);
+
+    lines.push(`\n${'='.repeat(80)}`);
+    lines.push(
+      `[SCROLL: ${snap.scrollY.toFixed(0)}px] (${scrollPercent}% down) | ` +
+      `Viewport: ${snap.viewport.height}h × ${snap.viewport.width}w`
+    );
+    lines.push(`Timestamp: ${new Date(snap.timestamp).toISOString()}`);
+
+    lines.push(
+      `Aside: height=${snap.aside.height}px | offset=${snap.aside.offsetHeight} | scroll=${snap.aside.scrollHeight} | top=${snap.aside.top}px | sticky=${snap.aside.isSticky}`
+    );
+
+    lines.push(
+      `TOC: height=${snap.toc.height}px | offset=${snap.toc.offsetHeight} | top=${snap.toc.top}px ${snap.toc.top < 0 ? '⚠️ UNSTICKING' : '(sticky)'}`
+    );
+
+    lines.push(`Main: scroll=${snap.mainContent.scrollHeight} | offset=${snap.mainContent.offsetHeight}`);
+
+    if (snap.gallery.isVisible) {
+      lines.push(`Gallery: ✓ VISIBLE | distance=${snap.gallery.distanceFromViewportTop}px`);
+    }
+
+    lines.push(`Sections:`);
+    snap.sections.forEach(sec => {
+      const visible = sec.isVisible ? '✓' : ' ';
+      lines.push(`  [${visible}] ${sec.label.padEnd(25)} | top=${sec.top.toFixed(1).padStart(7)}px`);
+    });
+
+    if (snap.notes.length > 0) {
+      lines.push(`Notes:`);
+      snap.notes.forEach(note => lines.push(`  • ${note}`));
+    }
+
+    return lines.join("\n");
+  }
+
+  // Scroll listener
+  function onScroll() {
+    const didScroll100px = Math.abs(window.scrollY - lastScrollY) >= 100;
+    const gallery = document.getElementById("gallery");
+    const galleryRect = gallery?.getBoundingClientRect();
+    const galleryJustEntered =
+      lastScrollY < window.scrollY &&
+      galleryRect &&
+      galleryRect.top < window.innerHeight &&
+      lastScrollY > 0;
+
+    if (didScroll100px) {
+      const snap = captureSnapshot(`Every 100px`);
+      measurements.push(snap);
+      console.log(formatSnapshot(snap));
+      lastScrollY = window.scrollY;
+    }
+
+    if (galleryJustEntered) {
+      const snap = captureSnapshot(`Gallery entered viewport`);
+      measurements.push(snap);
+      console.log(formatSnapshot(snap));
+      lastScrollY = window.scrollY;
+    }
+  }
+
+  // Start
+  console.clear();
+  console.log(
+    "%c🔍 TOC UNSTICK DEBUG INSTRUMENTATION STARTED",
+    "font-weight: bold; font-size: 16px; color: #00d4ff;"
+  );
+  console.log(
+    "%cScroll down slowly and watch for ⚠️ TOC UNSTICKING. Call stopTocDebug() when done.",
+    "color: #666;"
+  );
+
+  const initialSnap = captureSnapshot("Initial state");
+  measurements.push(initialSnap);
+  console.log(formatSnapshot(initialSnap));
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Export function
+  window.stopTocDebug = function() {
+    window.removeEventListener("scroll", onScroll);
+    console.log(
+      "%c\n📊 DEBUG CAPTURE COMPLETE",
+      "font-weight: bold; font-size: 16px; color: #00d4ff;"
+    );
+    console.log(`Captured ${measurements.length} snapshots.`);
+    console.log(
+      "%c📥 COPY THE JSON BELOW AND SAVE TO FILE:",
+      "font-weight: bold; color: #00ff00; background: #000; padding: 8px;"
+    );
+
+    const jsonDump = {
+      projectTitle: "Project Detail Page TOC Unstick Debug",
+      capturedAt: new Date().toISOString(),
+      totalSnapshots: measurements.length,
+      measurements,
+    };
+
+    console.log(JSON.stringify(jsonDump, null, 2));
+    console.log("%cJSON ready to copy above ⬆️", "color: #00ff00; font-weight: bold;");
+    return jsonDump;
+  };
+
+  console.log(
+    "%c✓ Ready. Call stopTocDebug() in console to dump results.",
+    "color: #00ff00; font-weight: bold;"
+  );
+})();</pre>
+      </div>
+
+      <div class="success">
+        ✓ Press Enter. Console will show initial state automatically.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-number">4</span>
+      <h3>Scroll Through the Page</h3>
+      <ul>
+        <li>Scroll <strong>slowly</strong> through the project detail page</li>
+        <li>
+          Watch the console for measurement dumps every 100px
+        </li>
+        <li>
+          <strong>Watch for</strong> <code>⚠️ TOC UNSTICKING</code> message — this is the exact
+          trigger moment!
+        </li>
+      </ul>
+
+      <div class="warning">
+        ⚠️ Pay special attention when the Gallery section enters the viewport. The TOC should
+        unstick around this point.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-number">5</span>
+      <h3>Stop Recording and Export</h3>
+      <p>When you've finished scrolling through the page, type this in the console:</p>
+      <div class="code-block">
+        <pre>stopTocDebug()</pre>
+      </div>
+
+      <p>This will:</p>
+      <ul>
+        <li>Stop listening for scroll events</li>
+        <li>Display the complete JSON dump</li>
+        <li>Show "📥 COPY THE JSON BELOW AND SAVE TO FILE"</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step-number">6</span>
+      <h3>Save and Share Results</h3>
+      <ol>
+        <li>Select all the JSON output in the console (entire blob)</li>
+        <li>Copy it (Ctrl+C / Cmd+C)</li>
+        <li>Paste into a text editor</li>
+        <li>Save as <code>toc-debug-results.json</code></li>
+        <li>Share the file with the development team</li>
+      </ol>
+
+      <div class="success">
+        ✓ The JSON contains exact pixel values, CSS states, and timestamps at every checkpoint.
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 20px; background: #2a3a4a; border-radius: 6px; border-left: 4px solid #0088ff;">
+      <h3 style="margin-top: 0; color: #0088ff;">What Gets Captured</h3>
+      <ul style="margin-bottom: 0;">
+        <li><strong>Viewport dimensions:</strong> window.innerHeight, window.innerWidth</li>
+        <li>
+          <strong>Aside measurements:</strong> height, offsetHeight, scrollHeight, minHeight, top,
+          isSticky
+        </li>
+        <li>
+          <strong>TOC measurements:</strong> height, offsetHeight, scrollHeight, top (the critical one!)
+        </li>
+        <li><strong>Main content:</strong> scrollHeight, offsetHeight</li>
+        <li>
+          <strong>Section tracking:</strong> Each section's visibility and distance from viewport
+        </li>
+        <li><strong>Gallery detection:</strong> When it enters viewport and distance from top</li>
+        <li><strong>Timestamps:</strong> Exact time each snapshot was captured</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>
+        <strong>Need help?</strong> Check the console for error messages. If elements aren't found,
+        ensure you're on a project detail page and the page has loaded completely.
+      </p>
+      <p>
+        For detailed troubleshooting and expected output format, see
+        <code>/docs/debug/TOC_UNSTICK_DEBUG.md</code>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function copyCode(button) {
+      const code = document.getElementById("debug-script").textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = button.textContent;
+        button.textContent = "✓ Copied!";
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove("copied");
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
