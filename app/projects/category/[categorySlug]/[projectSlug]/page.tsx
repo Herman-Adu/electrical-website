@@ -269,6 +269,18 @@ export default async function CategoryProjectDetailPage({
                 />
               </div>
             )}
+
+            {/* Related Projects — inside grid column to extend containing block for sticky */}
+            {relatedProjects.length > 0 && (
+              <div className="mt-8">
+                <ProjectRelatedCarousel
+                  projects={relatedProjects}
+                  categorySlug={categorySlug}
+                  heading={`More ${category.label} Projects`}
+                  anchorId="related"
+                />
+              </div>
+            )}
           </div>
 
           {/* Sticky Sidebar */}
@@ -373,20 +385,6 @@ export default async function CategoryProjectDetailPage({
               />
             )}
           </aside>
-        </div>
-      </section>
-
-      {/* Related Projects — Full Width */}
-      <section className="section-container section-padding  bg-background">
-        <div className="section-content max-w-6xl">
-          {relatedProjects.length > 0 && (
-            <ProjectRelatedCarousel
-              projects={relatedProjects}
-              categorySlug={categorySlug}
-              heading={`More ${category.label} Projects`}
-              anchorId="related"
-            />
-          )}
         </div>
       </section>
 
