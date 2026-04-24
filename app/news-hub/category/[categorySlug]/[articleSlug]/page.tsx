@@ -216,7 +216,7 @@ export default async function NewsArticlePage({
           />
 
           {/* Sticky Sidebar */}
-          <aside data-sticky-toc="true" className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start min-h-[calc(100vh-132px)]">
+          <aside data-sticky-toc="true" className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-stretch items-start min-h-[calc(100vh-132px)]">
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 
