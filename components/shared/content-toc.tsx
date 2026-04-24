@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SCROLL_GAP, scrollToElementWithOffset, getStickyAnchorOffset } from "@/lib/scroll-to-section";
@@ -28,6 +28,7 @@ export function ContentToc({
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [clickedId, setClickedId] = useState<string | null>(null);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     // Show TOC after initial render with delay
@@ -36,6 +37,11 @@ export function ContentToc({
     let rafId: number;
 
     const findActive = () => {
+      // Skip findActive() during programmatic scroll (prevents race condition)
+      if (isScrollingRef.current) {
+        return;
+      }
+
       // Threshold = CSS top of sticky aside = exactly where section activates
       // Falls back to 160px on mobile where aside is hidden (display:none → returns 0)
       const threshold = getStickyAnchorOffset() || 160;
@@ -58,6 +64,9 @@ export function ContentToc({
       rafId = requestAnimationFrame(findActive);
     };
 
+    // Store findActive in a ref so handleClick can call it later
+    (handleClick as any).findActive = findActive;
+
     findActive(); // set initial state on mount
     window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -66,9 +75,15 @@ export function ContentToc({
       window.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(rafId);
     };
-  }, [items]); // items only — no stickyOffset dependency needed
+  }, [items]);
 
   const handleClick = useCallback((id: string) => {
+    // Optimistic update: set activeId immediately to prevent race condition
+    setActiveId(id);
+
+    // Mark that a programmatic scroll is starting
+    isScrollingRef.current = true;
+
     // Trigger click animation
     setClickedId(id);
     setTimeout(() => setClickedId(null), 300);
@@ -79,6 +94,15 @@ export function ContentToc({
         baseGap: SCROLL_GAP.toc,
       });
     }
+
+    // After scroll animation completes (~1000ms), reset and re-verify activeId
+    setTimeout(() => {
+      isScrollingRef.current = false;
+      // Re-verify activeId by checking current scroll position
+      if ((handleClick as any).findActive) {
+        (handleClick as any).findActive();
+      }
+    }, 1000);
   }, []);
 
   const containerVariants = {

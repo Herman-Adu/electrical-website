@@ -60,7 +60,7 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
           alt={project.coverImage.alt}
           fill
           className="object-cover"
-          //izes="80vw"
+          //sizes="80vw"
           priority
         />
       }

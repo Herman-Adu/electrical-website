@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ContentToc } from '../content-toc';
 import type { TocItem } from '@/types/shared-content';
@@ -7,6 +7,13 @@ import type { TocItem } from '@/types/shared-content';
 // ═══════════════════════════════════════════════════════════════════════════
 // MOCKS & FIXTURES
 // ═══════════════════════════════════════════════════════════════════════════
+
+// Helper: Wrapper for advancing timers with act() to satisfy React Testing Library
+const advanceTimers = (ms: number) => {
+  act(() => {
+    vi.advanceTimersByTime(ms);
+  });
+};
 
 // Mock framer-motion to prevent animation timing issues in tests
 vi.mock('framer-motion', () => ({
@@ -104,16 +111,14 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
       // Wait for TOC to become visible (300ms delay in component)
-      vi.advanceTimersByTime(300);
-      await waitFor(() => {
-        expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
-      });
+      advanceTimers(300);
+      expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
 
       // Simulate scroll to 'challenge' section (scrollY > 1000)
       simulateScrollToPosition(1000);
 
       // The onScroll handler uses requestAnimationFrame; advance one frame
-      vi.advanceTimersByTime(16); // ~1 frame at 60fps
+      advanceTimers(16); // ~1 frame at 60fps
 
       // Verify that 'challenge' becomes active immediately
       await waitFor(
@@ -129,18 +134,18 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should update activeId as user scrolls past different sections', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
 
       // Start at overview
       simulateScrollToPosition(0);
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       // Move to scope
       simulateScrollToPosition(600);
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       await waitFor(
         () => {
@@ -153,7 +158,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
 
       // Move to challenge
       simulateScrollToPosition(1200);
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       await waitFor(
         () => {
@@ -173,7 +178,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should activate clicked section IMMEDIATELY without waiting for scroll animation', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -199,7 +204,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       );
 
       // Verify the click animation briefly fires (300ms)
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
 
       // After animation time, the active state should STILL be 'challenge'
       const finalButtons = screen.getAllByRole('button');
@@ -210,7 +215,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should NOT have 1-click lag when clicking from one section to another', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -230,7 +235,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       );
 
       // Simulate scroll animation completing (but don't let it update activeId)
-      vi.advanceTimersByTime(500); // Wait for smooth scroll timeout
+      advanceTimers(500); // Wait for smooth scroll timeout
 
       // Click second link: 'challenge' (before first animation even finishes in real world)
       buttons = screen.getAllByRole('button');
@@ -256,7 +261,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should keep clicked section active throughout smooth scroll animation', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -279,9 +284,9 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       // Simulate scroll events during the 500ms smooth scroll animation
       // In the old broken code, findActive() would detect the previous section
       simulateScrollToPosition(500); // Partial scroll position
-      vi.advanceTimersByTime(100);
+      advanceTimers(100);
       fireEvent.scroll(window, { target: { scrollY: 500 } });
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       // Verify 'solution' is STILL active (not flickering to previous section)
       let activeButtons = screen.getAllByRole('button').filter(b =>
@@ -291,9 +296,9 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
 
       // Continue simulating scroll during animation
       simulateScrollToPosition(750);
-      vi.advanceTimersByTime(100);
+      advanceTimers(100);
       fireEvent.scroll(window, { target: { scrollY: 750 } });
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       // Still 'solution'
       activeButtons = screen.getAllByRole('button').filter(b =>
@@ -302,7 +307,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect(activeButtons[0].textContent).toContain('Solution');
 
       // Wait for smooth scroll timeout (500ms) to pass
-      vi.advanceTimersByTime(500);
+      advanceTimers(500);
 
       // After timeout, 'solution' should still be active
       activeButtons = screen.getAllByRole('button').filter(b =>
@@ -314,7 +319,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should suppress findActive() during smooth scroll animation window', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -337,7 +342,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       // Simulate user scrolling BACKWARDS during animation (to trigger race condition)
       // This would normally call findActive() and detect an earlier section
       simulateScrollToPosition(200);
-      vi.advanceTimersByTime(16);
+      advanceTimers(16);
 
       // Race condition fix: activeId should still be 'results' (suppressed during 500ms)
       let activeButtons = screen.getAllByRole('button').filter(b =>
@@ -346,7 +351,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect(activeButtons[0].textContent).toContain('Results');
 
       // Advance to 400ms (still within 500ms timeout)
-      vi.advanceTimersByTime(400);
+      advanceTimers(400);
       activeButtons = screen.getAllByRole('button').filter(b =>
         b.className?.includes('bg-[hsl(174_100%_35%)]/12')
       );
@@ -361,7 +366,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should handle rapid click sequence without race conditions', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -382,7 +387,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect.assertions(1);
 
       // Wait 100ms, then click 'scope'
-      vi.advanceTimersByTime(100);
+      advanceTimers(100);
 
       let allButtons = screen.getAllByRole('button');
       const scopeButton = allButtons.find(b => b.textContent?.includes('Scope'));
@@ -399,7 +404,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect.assertions(2);
 
       // Wait another 100ms, then click 'challenge'
-      vi.advanceTimersByTime(100);
+      advanceTimers(100);
 
       allButtons = screen.getAllByRole('button');
       const challengeButton = allButtons.find(b => b.textContent?.includes('Challenge'));
@@ -419,7 +424,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
     it('should activate each clicked section immediately without showing intermediate states', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -443,14 +448,14 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
         );
 
         // Advance only 50ms between clicks (fast clicker)
-        vi.advanceTimersByTime(50);
+        advanceTimers(50);
       }
     });
 
     it('should not show 1-click lag in any part of the sequence', async () => {
       render(<ContentToc items={mockTocItems} title="Contents" />);
 
-      vi.advanceTimersByTime(300);
+      advanceTimers(300);
       await waitFor(() => {
         expect(screen.getByLabelText('Table of contents')).toBeInTheDocument();
       });
@@ -466,7 +471,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect(activeButton?.textContent).toContain('Scope');
 
       // Click #2: Solution (200ms after first click)
-      vi.advanceTimersByTime(200);
+      advanceTimers(200);
       buttons = screen.getAllByRole('button');
       const solutionButton = buttons.find(b => b.textContent?.includes('Solution'));
       fireEvent.click(solutionButton!);
@@ -480,7 +485,7 @@ describe('ContentToc: Click Active State Race Condition Fix', () => {
       expect(activeButton?.textContent).not.toContain('Scope');
 
       // Click #3: Results (200ms after second click)
-      vi.advanceTimersByTime(200);
+      advanceTimers(200);
       buttons = screen.getAllByRole('button');
       const resultsButton = buttons.find(b => b.textContent?.includes('Results'));
       fireEvent.click(resultsButton!);
