@@ -29,6 +29,7 @@ export function ContentToc({
   const [isVisible, setIsVisible] = useState(false);
   const [clickedId, setClickedId] = useState<string | null>(null);
   const isScrollingRef = useRef(false);
+  const findActiveRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // Show TOC after initial render with delay
@@ -64,9 +65,7 @@ export function ContentToc({
       rafId = requestAnimationFrame(findActive);
     };
 
-    // Store findActive in a ref so handleClick can call it later
-    (handleClick as any).findActive = findActive;
-
+    findActiveRef.current = findActive;
     findActive(); // set initial state on mount
     window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -74,6 +73,7 @@ export function ContentToc({
       clearTimeout(showTimer);
       window.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(rafId);
+      findActiveRef.current = null;
     };
   }, [items]);
 
@@ -92,17 +92,15 @@ export function ContentToc({
     if (element) {
       scrollToElementWithOffset(element, {
         baseGap: SCROLL_GAP.toc,
+      }).then(() => {
+        // Re-enable scroll-based section detection after animation completes
+        // The optimistic setActiveId(id) above is already correct — the scroll ends at section 'id'
+        isScrollingRef.current = false;
       });
-    }
-
-    // After scroll animation completes (~1000ms), reset and re-verify activeId
-    setTimeout(() => {
+    } else {
+      // No element found, just reset immediately
       isScrollingRef.current = false;
-      // Re-verify activeId by checking current scroll position
-      if ((handleClick as any).findActive) {
-        (handleClick as any).findActive();
-      }
-    }, 1000);
+    }
   }, []);
 
   const containerVariants = {
