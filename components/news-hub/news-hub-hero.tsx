@@ -182,12 +182,12 @@ export function NewsHubHero({
             variants={flickerVariants}
             className="mb-8 flex items-center justify-center gap-3"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-electric-cyan/50 dark:border-electric-cyan pl-4">
               <Activity
                 size={14}
-                className="animate-pulse text-foreground/70 dark:text-electric-cyan"
+                className="animate-pulse text-electric-cyan"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80  font-bold uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 font-bold uppercase">
                 News Hub // {statusText}
               </span>
             </div>
@@ -197,11 +197,11 @@ export function NewsHubHero({
             variants={itemVariants}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
-            <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
+            <span className="h-px w-12 bg-electric-cyan/80" />
+            <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase font-bold">
               Editorial Systems
             </span>
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan/80" />
           </motion.div>
 
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
@@ -229,8 +229,8 @@ export function NewsHubHero({
               className={cn(
                 "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
                 activeCategory === "all"
-                  ? "bg-foreground/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                  : "bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
+                  ? "bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-[hsl(174_100%_35%)] dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
+                  : "bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
               )}
             >
               All Stories

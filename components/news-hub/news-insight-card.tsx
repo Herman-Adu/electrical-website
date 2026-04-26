@@ -40,7 +40,7 @@ export function NewsInsightCard({ article }: NewsInsightCardProps) {
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-bold text-white leading-snug group-hover:text-electric-cyan transition-colors">
+            <h3 className="text-lg font-bold text-foreground leading-snug group-hover:text-electric-cyan transition-colors">
               {article.title}
             </h3>
 

@@ -72,7 +72,7 @@ export function NewsHubArticleCard({
 
             {/* Title and excerpt */}
             <div className="space-y-2">
-              <h3 className="text-lg font-bold tracking-tight text-white leading-snug line-clamp-2">
+              <h3 className="text-lg font-bold tracking-tight text-foreground leading-snug line-clamp-2">
                 {item.title}
               </h3>
               <p className="text-sm leading-6 text-foreground/70 line-clamp-2">

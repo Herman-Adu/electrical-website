@@ -88,7 +88,7 @@ export function ContactIntro() {
 
                     <Link
                       href="tel:+442079460958"
-                      className="inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/20 dark:border-border px-4 py-3 text-xs font-semibold tracking-[0.14em] text-foreground dark:text-foreground uppercase transition-colors hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
+                      className="inline-flex items-center justify-center gap-2 rounded-sm border border-[hsl(174_100%_35%)]/25 dark:border-border px-4 py-3 text-xs font-semibold tracking-[0.14em] text-foreground dark:text-foreground uppercase transition-colors hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
                     >
                       <Phone className="h-4 w-4" />
                       Call Emergency Line

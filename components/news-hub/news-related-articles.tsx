@@ -17,7 +17,7 @@ export function NewsRelatedArticles({ articles }: NewsRelatedArticlesProps) {
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
           📚 Related Articles
         </p>
-        <h2 className="text-3xl font-bold text-white">
+        <h2 className="text-3xl font-bold text-foreground">
           Continue Reading
         </h2>
       </div>
@@ -34,7 +34,7 @@ export function NewsRelatedArticles({ articles }: NewsRelatedArticlesProps) {
                 <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
                   {article.categoryLabel}
                 </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-electric-cyan transition-colors">
+                <h3 className="text-lg font-bold text-foreground group-hover:text-electric-cyan transition-colors">
                   {article.title}
                 </h3>
                 <p className="text-sm leading-6 text-foreground/70">

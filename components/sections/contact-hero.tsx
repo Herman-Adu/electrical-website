@@ -167,12 +167,12 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/50 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-electric-cyan/50 dark:border-electric-cyan pl-4 font-semibold">
               <Activity
                 size={14}
-                className="text-foreground/70 dark:text-electric-cyan animate-pulse"
+                className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase font-bold">
                 Contact // Ready
               </span>
             </div>
@@ -183,15 +183,15 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan/80" />
 
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-foreground/80 dark:text-electric-cyan/80 font-bold">
-              <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase">
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/80 font-bold">
+              <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase">
                 {hero.badge.text}
               </span>
             </span>
 
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan/80" />
           </motion.div>
 
           {/* Main headline */}
@@ -225,10 +225,10 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
               return (
                 <div
                   key={item.title}
-                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
+                  className="relative p-5 rounded-xl border bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
                 >
                   {Icon ? (
-                    <Icon className="mx-auto mb-2 h-6 w-6 text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors" />
+                    <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan/70 dark:text-electric-cyan group-hover:text-electric-cyan transition-colors" />
                   ) : null}
                   <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
                     {item.title}

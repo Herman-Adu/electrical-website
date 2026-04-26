@@ -82,7 +82,7 @@ export function NewsGridLayout({
             {showLiveIndicator && (
               <NewsPulseIndicator label="Live Feed" variant="live" />
             )}
-            <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
               {title}
             </h2>
           </div>

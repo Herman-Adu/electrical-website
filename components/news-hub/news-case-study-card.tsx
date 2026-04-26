@@ -77,7 +77,7 @@ export function NewsCaseStudyCard({ article }: NewsCaseStudyCardProps) {
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-white leading-tight group-hover:text-electric-cyan transition-colors">
+            <h3 className="text-xl font-bold text-foreground leading-tight group-hover:text-electric-cyan transition-colors">
               {article.title}
             </h3>
 
