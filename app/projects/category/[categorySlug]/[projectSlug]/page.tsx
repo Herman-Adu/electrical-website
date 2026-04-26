@@ -13,6 +13,7 @@ import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectDetailHero,
   ProjectArticleContent,
+  ProjectRelatedCarousel,
   ProjectSocialCTA,
 } from "@/components/projects";
 import {
@@ -110,8 +111,6 @@ function generateTocItems(project: Project, hasTimeline: boolean): TocItem[] {
   if (detail?.testimonial) {
     items.push({ id: "testimonial", label: "Client Testimonial" });
   }
-
-  items.push({ id: "related", label: "Related Projects" });
 
   return items;
 }
@@ -222,65 +221,10 @@ export default async function CategoryProjectDetailPage({
               <ProjectArticleContent
                 detail={detail}
                 canonicalTimeline={canonicalTimeline}
-                relatedProjects={relatedProjects}
-                categorySlug={categorySlug}
-                categoryLabel={category.label}
               />
             )}
-            {/* Supplemental project info — inside left column so it contributes to gridHeight */}
+            {/* Supplemental project info */}
             <div className="mt-6 flex flex-col gap-6">
-              {/* Project KPIs Card */}
-              <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
-                  Project Details
-                </h3>
-                <dl className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Status</dt>
-                    <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
-                      {project.status.replace("-", " ")}
-                    </dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Budget</dt>
-                    <dd className="font-medium text-foreground">{project.kpis.budget}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Timeline</dt>
-                    <dd className="font-medium text-foreground">{project.kpis.timeline}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Location</dt>
-                    <dd className="font-medium text-foreground">{project.kpis.location}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Capacity</dt>
-                    <dd className="font-medium text-foreground">{project.kpis.capacity}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-foreground/50">Sector</dt>
-                    <dd className="font-medium text-foreground">{project.clientSector}</dd>
-                  </div>
-                </dl>
-                {project.status === "in-progress" && (
-                  <div className="pt-2 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
-                        Progress
-                      </span>
-                      <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-                        {project.progress}%
-                      </span>
-                    </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
-                      <div
-                        className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
-                        style={{ width: `${project.progress}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
               {/* Tags */}
               {project.tags && project.tags.length > 0 && (
                 <div className="space-y-3">
@@ -311,15 +255,81 @@ export default async function CategoryProjectDetailPage({
             </div>
           </div>
 
-          {/* Sticky Sidebar — TOC only */}
+          {/* Sticky Sidebar — TOC + Project Details */}
           <aside
             data-sticky-toc="true"
             className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2"
           >
             <ContentToc items={tocItems} title="Project Contents" />
+
+            {/* Project Details card */}
+            <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
+                Project Details
+              </h3>
+              <dl className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Status</dt>
+                  <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
+                    {project.status.replace("-", " ")}
+                  </dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Budget</dt>
+                  <dd className="font-medium text-foreground">{project.kpis.budget}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Timeline</dt>
+                  <dd className="font-medium text-foreground">{project.kpis.timeline}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Location</dt>
+                  <dd className="font-medium text-foreground">{project.kpis.location}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Capacity</dt>
+                  <dd className="font-medium text-foreground">{project.kpis.capacity}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-foreground/50">Sector</dt>
+                  <dd className="font-medium text-foreground">{project.clientSector}</dd>
+                </div>
+              </dl>
+              {project.status === "in-progress" && (
+                <div className="pt-2 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
+                      Progress
+                    </span>
+                    <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                      {project.progress}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
+                    <div
+                      className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
+                      style={{ width: `${project.progress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </aside>
         </div>
       </section>
+
+      {/* Related Projects - Full Width */}
+      {relatedProjects.length > 0 && (
+        <section className="section-container section-padding bg-background">
+          <div className="section-content max-w-6xl">
+            <ProjectRelatedCarousel
+              projects={relatedProjects}
+              categorySlug={categorySlug}
+              heading={`More ${category.label} Projects`}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Social CTA - Full Width */}
       <section className="section-container section-padding  bg-background">

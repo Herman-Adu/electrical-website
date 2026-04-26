@@ -11,6 +11,9 @@ import {
 interface ProjectChallengeSolutionProps {
   challenge: string;
   solution: string;
+  heading?: string;
+  title?: string;
+  description?: string;
   anchorId?: string;
   embedded?: boolean;
 }
@@ -18,6 +21,9 @@ interface ProjectChallengeSolutionProps {
 export function ProjectChallengeSolution({
   challenge,
   solution,
+  heading = "Engineering Excellence",
+  title = "Meeting Every Challenge Head On.",
+  description = "Complex electrical projects rarely follow a straight line. Our engineers thrive in high-constraint environments — designing solutions that protect operations, meet deadlines, and stand the test of time.",
   anchorId,
   embedded,
 }: ProjectChallengeSolutionProps) {
@@ -37,19 +43,39 @@ export function ProjectChallengeSolution({
         showBottom={false}
       />
       <div className="section-content max-w-6xl" ref={containerRef}>
-        {/* Header */}
+        {/* Eyebrow */}
         <motion.div
           id={anchorId}
-          className="flex items-center gap-4 mb-12 scroll-mt-36"
+          className="flex items-center gap-4 mb-6 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
           <div className="h-px w-8 bg-[hsl(174_100%_35%)]/50 dark:bg-electric-cyan/50" />
           <h2 className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-            Engineering Excellence
+            {heading}
           </h2>
         </motion.div>
+
+        {/* Title */}
+        <motion.h3
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6 max-w-3xl"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {title}
+        </motion.h3>
+
+        {/* Description */}
+        <motion.p
+          className="text-base sm:text-lg text-foreground dark:text-foreground/70 leading-relaxed max-w-4xl mb-12"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {description}
+        </motion.p>
 
         {/* Two-column layout */}
         <div className="grid md:grid-cols-2 gap-8">

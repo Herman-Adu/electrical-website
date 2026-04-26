@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProjectDetailContent, Project } from "@/types/projects";
+import type { ProjectDetailContent } from "@/types/projects";
 import type { adaptProjectTimeline } from "@/lib/timeline/adapters";
 import { ProjectDetailIntro } from "./project-detail-intro";
 import { ProjectScopeGrid } from "./project-scope";
@@ -8,22 +8,15 @@ import { ProjectChallengeSolution } from "./project-challenge-solution";
 import { ProjectTimeline } from "./project-timeline";
 import { ProjectGallery } from "./project-gallery";
 import { ProjectTestimonialCard } from "./project-testimonial";
-import { ProjectRelatedCarousel } from "./project-related-carousel";
 
 interface ProjectArticleContentProps {
   detail: ProjectDetailContent;
   canonicalTimeline: ReturnType<typeof adaptProjectTimeline> | null;
-  relatedProjects: Project[];
-  categorySlug: string;
-  categoryLabel: string;
 }
 
 export function ProjectArticleContent({
   detail,
   canonicalTimeline,
-  relatedProjects,
-  categorySlug,
-  categoryLabel,
 }: ProjectArticleContentProps) {
   return (
     <div className="mt-2">
@@ -58,15 +51,6 @@ export function ProjectArticleContent({
         <ProjectTestimonialCard
           testimonial={detail.testimonial}
           anchorId="testimonial"
-        />
-      )}
-
-      {relatedProjects.length > 0 && (
-        <ProjectRelatedCarousel
-          projects={relatedProjects}
-          categorySlug={categorySlug}
-          heading={`More ${categoryLabel} Projects`}
-          anchorId="related"
         />
       )}
     </div>
