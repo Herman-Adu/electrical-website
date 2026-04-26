@@ -32,3 +32,6 @@ npm-shrinkwrap.json
 # Temporary orchestrator / agent scratch files
 .tmp/
 .vercel
+
+# Playwright MCP session artefacts (logs, snapshots, screenshots)
+.playwright-mcp/
