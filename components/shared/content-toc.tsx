@@ -221,7 +221,7 @@ export function ContentToc({
           {/* Reading progress */}
           {showReadingProgress && (
             <div className="mt-4 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10 pt-4">
-              <ReadingProgress />
+              <ReadingProgress activeId={activeId} items={items} />
             </div>
           )}
         </motion.nav>
@@ -230,7 +230,7 @@ export function ContentToc({
   );
 }
 
-function ReadingProgress() {
+function ReadingProgress({ activeId, items }: { activeId: string | null; items: TocItem[] }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -248,6 +248,9 @@ function ReadingProgress() {
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
+  const lastItemId = items[items.length - 1]?.id;
+  const displayProgress = activeId === lastItemId ? 100 : Math.round(progress);
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
@@ -255,13 +258,13 @@ function ReadingProgress() {
           Reading Progress
         </span>
         <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-          {Math.round(progress)}%
+          {displayProgress}%
         </span>
       </div>
       <div className="h-1 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
         <motion.div
           className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${displayProgress}%` }}
           transition={{ duration: 0.1 }}
         />
       </div>

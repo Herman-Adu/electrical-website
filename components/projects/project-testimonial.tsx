@@ -4,7 +4,10 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { useAnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import type { ProjectTestimonial } from "@/types/projects";
 
 interface ProjectTestimonialCardProps {
@@ -27,13 +30,18 @@ export function ProjectTestimonialCard({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef } = useAnimatedBorders();
+  const { sectionRef, lineScale } = useAnimatedBorders();
 
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden bg-background section-padding"
     >
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={true}
+      />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
@@ -130,7 +138,9 @@ export function ProjectTestimonialCard({
               )}
 
               <div>
-                <p className="font-bold text-foreground">{testimonial.author}</p>
+                <p className="font-bold text-foreground">
+                  {testimonial.author}
+                </p>
                 <p className="text-sm text-muted-foreground">
                   {testimonial.role}
                 </p>

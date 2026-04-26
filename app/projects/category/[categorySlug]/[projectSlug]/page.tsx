@@ -15,10 +15,10 @@ import {
   ProjectArticleContent,
   ProjectRelatedCarousel,
   ProjectSocialCTA,
+  ProjectSupplementalSection,
 } from "@/components/projects";
 import {
   ContentToc,
-  ContentSidebar,
   ContentBreadcrumb,
 } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
@@ -84,7 +84,7 @@ export async function generateMetadata({
 }
 
 // Generate TOC items based on available content sections
-function generateTocItems(project: Project, hasTimeline: boolean): TocItem[] {
+function generateTocItems(project: Project, hasTimeline: boolean, hasSidebarCards: boolean): TocItem[] {
   const items: TocItem[] = [];
   const detail = project.detail;
 
@@ -110,6 +110,10 @@ function generateTocItems(project: Project, hasTimeline: boolean): TocItem[] {
 
   if (detail?.testimonial) {
     items.push({ id: "testimonial", label: "Client Testimonial" });
+  }
+
+  if (hasSidebarCards) {
+    items.push({ id: "get-started", label: "Get Started" });
   }
 
   return items;
@@ -154,6 +158,7 @@ export default async function CategoryProjectDetailPage({
   const tocItems = generateTocItems(
     project,
     (canonicalTimeline?.items.length ?? 0) > 0,
+    sidebarCards.length > 0,
   );
 
   // Build breadcrumb for JSON-LD
@@ -224,35 +229,10 @@ export default async function CategoryProjectDetailPage({
               />
             )}
             {/* Supplemental project info */}
-            <div className="mt-6 flex flex-col gap-6">
-              {/* Tags */}
-              {project.tags && project.tags.length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
-                    Project Tags
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {/* Sidebar Cards */}
-              {sidebarCards.length > 0 && (
-                <ContentSidebar
-                  cards={sidebarCards.slice(0, 2)}
-                  title="Get Started"
-                  description="Ready to discuss your project requirements?"
-                  showLiveIndicator={false}
-                />
-              )}
-            </div>
+            <ProjectSupplementalSection
+              tags={project.tags}
+              cards={sidebarCards.slice(0, 2)}
+            />
           </div>
 
           {/* Sticky Sidebar — TOC + Project Details */}

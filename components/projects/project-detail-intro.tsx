@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import type { ProjectIntroData } from "@/types/projects";
 import { AnimatedWord } from "@/components/shared/animated-word";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 
 interface ProjectDetailIntroProps {
   data: ProjectIntroData;
@@ -29,25 +28,8 @@ export function ProjectDetailIntro({
     pillars = [],
   } = data;
 
-  const sectionRef = useRef<HTMLElement>(null);
+  const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
   const [inView, setInView] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const shouldReduce = useReducedMotion();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: mounted ? sectionRef : undefined,
-    offset: ["start end", "end start"],
-  });
-
-  const lineScale = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    [0, 1, 1, 0],
-  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,21 +45,7 @@ export function ProjectDetailIntro({
       ref={sectionRef}
       className="relative overflow-hidden bg-background section-padding-bottom pt-6"
     >
-      {/* Blueprint grid overlay */}
-      {/* <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" /> */}
-
-      {/* Animated border lines */}
-      {!shouldReduce && (
-        <>
-          <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
-            <motion.div
-              className="h-full w-full bg-linear-to-r from-transparent via-electric-cyan/60 to-transparent"
-              style={{ scaleX: lineScale, transformOrigin: "center" }}
-            />
-          </div>
-        </>
-      )}
-
+      <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} showBottom={false} />
       <div className="section-content max-w-6xl">
         {/* Section label */}
         <motion.div
@@ -150,7 +118,7 @@ export function ProjectDetailIntro({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 viewport={{ once: true }}
-                className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-300 group"
+                className="relative p-8 rounded-2xl border border-border bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm hover:border-electric-cyan/40 transition-all duration-300 group"
               >
                 {/* Corner brackets */}
                 <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />

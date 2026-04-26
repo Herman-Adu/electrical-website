@@ -9,48 +9,64 @@ import {
 } from "framer-motion";
 
 /**
- * Hook that provides a scroll-linked scaleX value for animated border lines.
+ * Hook that provides scroll-linked scaleX values for animated border lines.
  *
- * Timeline (keyed to scrollYProgress where 0 = section top hits viewport bottom,
+ * Top border timeline (keyed to topProgress where 0 = section top hits viewport bottom,
  * 1 = section bottom hits viewport top):
  *   0.00 → 0.30  line scales in  (section entering)
  *   0.30 → 0.70  line holds at full width (section visible)
  *   0.70 → 1.00  line scales out (section exiting)
  *
- * Using scaleX with transformOrigin:"center" means the animation is direction-
- * agnostic — scrolling up reverses the same keyframes naturally, no React state
- * or scroll-direction detection required.
+ * Bottom border timeline (keyed to bottomProgress where 0 = section bottom hits
+ * viewport bottom, 1 = section bottom hits viewport top):
+ *   0.00 → 0.30  line scales in  (bottom edge entering viewport)
+ *   0.30 → 0.70  line holds at full width
+ *   0.70 → 1.00  line scales out (bottom edge exiting viewport)
+ *
+ * Using clip-path with symmetric insets means the animation is direction-agnostic —
+ * scrolling up reverses the same keyframes naturally, no React state or
+ * scroll-direction detection required.
  */
 export function useAnimatedBorders() {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduce = useReducedMotion();
 
-  const { scrollYProgress } = useScroll({
+  // Tracks the section's top edge entering/exiting the viewport
+  const { scrollYProgress: topProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Keyframe: draw-in → hold → retract.  Works identically in both scroll directions.
-  const lineScale = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    [0, 1, 1, 0],
-  );
+  // Tracks the section's bottom edge entering/exiting the viewport
+  const { scrollYProgress: bottomProgress } = useScroll({
+    target: sectionRef,
+    offset: ["end end", "end start"],
+  });
 
-  return { sectionRef, shouldReduce, lineScale };
+  // Keyframe: draw-in → hold → retract.  Works identically in both scroll directions.
+  const lineScale = useTransform(topProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const lineScaleBottom = useTransform(bottomProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  return { sectionRef, shouldReduce, lineScale, lineScaleBottom };
 }
 
 /**
  * Animated top (and optional bottom) border lines.
  * Must be placed inside a positioned parent with `overflow-hidden`.
+ *
+ * Pass `lineScaleBottom` (from `useAnimatedBorders`) to give the bottom border
+ * its own scroll-linked animation keyed to the section's bottom edge.
+ * Omitting it falls back to `lineScale` for backward compatibility.
  */
 export function AnimatedBorders({
   shouldReduce,
   lineScale,
+  lineScaleBottom,
   showBottom = true,
 }: {
   shouldReduce: boolean | null;
   lineScale: MotionValue<number>;
+  lineScaleBottom?: MotionValue<number>;
   showBottom?: boolean;
 }) {
   // Derived MotionValues — must be called unconditionally (before any early return)
@@ -60,15 +76,20 @@ export function AnimatedBorders({
   const half = useTransform(lineScale, (v: number) => 50 - v * 50);
   const clipPath = useMotionTemplate`inset(0 ${half}% 0 ${half}%)`;
 
+  // Bottom border uses its own scroll source when provided; falls back to lineScale.
+  const bottomSource = lineScaleBottom ?? lineScale;
+  const halfBottom = useTransform(bottomSource, (v: number) => 50 - v * 50);
+  const clipPathBottom = useMotionTemplate`inset(0 ${halfBottom}% 0 ${halfBottom}%)`;
+
   if (shouldReduce) {
     return (
       <>
         <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
-          <div className="h-full w-full bg-linear-to-r/srgb from-background/0 via-muted-foreground to-background/0 dark:via-electric-cyan/60" />
+          <div className="h-full w-full bg-linear-to-r/srgb from-background/0 via-electric-cyan to-background/0 dark:via-electric-cyan/60" />
         </div>
         {showBottom && (
           <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
-            <div className="h-full w-full bg-linear-to-r/srgb from-background/0 via-muted-foreground to-background/0 dark:via-electric-cyan/60" />
+            <div className="h-full w-full bg-linear-to-r/srgb from-background/0 via-electric-cyan to-background/0 dark:via-electric-cyan/60" />
           </div>
         )}
       </>
@@ -79,15 +100,15 @@ export function AnimatedBorders({
     <>
       <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
         <motion.div
-          className="h-full w-full bg-linear-to-r/srgb from-background/0 via-muted-foreground/40 to-background/0 dark:via-electric-cyan/60"
+          className="h-full w-full bg-linear-to-r/srgb from-background/0 via-electric-cyan to-background/0 dark:via-electric-cyan/60"
           style={{ clipPath }}
         />
       </div>
       {showBottom && (
         <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
           <motion.div
-            className="h-full w-full bg-linear-to-r/srgb from-background/0 via-electric-cyan/60 to-background/0"
-            style={{ clipPath }}
+            className="h-full w-full bg-linear-to-r/srgb from-background/0 via-electric-cyan to-background/0 dark:via-electric-cyan/60"
+            style={{ clipPath: clipPathBottom }}
           />
         </div>
       )}

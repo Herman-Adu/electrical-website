@@ -131,7 +131,7 @@ export function ProjectScopeGrid({
                 initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative p-6 rounded-xl border border-border bg-background/60 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
+                className="group relative p-6 rounded-xl border border-border bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
               >
                 {/* Top accent line */}
                 <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-electric-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

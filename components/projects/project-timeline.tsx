@@ -14,7 +14,10 @@ import {
   AnimatedWord,
   ScrollLinkedAnimatedWord,
 } from "@/components/shared/animated-word";
-import { useAnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import { useTimelineProgressController } from "@/lib/timeline/progress-controller";
 import type { TimelineItem } from "@/types/timeline";
 
@@ -269,7 +272,7 @@ export function ProjectTimeline({
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef } = useAnimatedBorders();
+  const { sectionRef, lineScale } = useAnimatedBorders();
   const { thresholds, scrollOffsets } = useTimelineProgressController({
     timelineRef,
     nodeRefs,
@@ -290,7 +293,7 @@ export function ProjectTimeline({
       ref={sectionRef}
       className="relative overflow-hidden bg-background section-padding"
     >
-      {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
+      <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} showBottom={false} />
       <div className="section-content max-w-6xl" ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
