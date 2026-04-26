@@ -12,12 +12,14 @@ interface ProjectChallengeSolutionProps {
   challenge: string;
   solution: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 export function ProjectChallengeSolution({
   challenge,
   solution,
   anchorId,
+  embedded,
 }: ProjectChallengeSolutionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
@@ -27,7 +29,7 @@ export function ProjectChallengeSolution({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}

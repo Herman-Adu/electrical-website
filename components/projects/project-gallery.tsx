@@ -14,17 +14,20 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 import type { ProjectGalleryImage } from "@/types/projects";
+import { cn } from "@/lib/utils";
 
 interface ProjectGalleryProps {
   images: ProjectGalleryImage[];
   heading?: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 export function ProjectGallery({
   images,
   heading = "Project Gallery",
   anchorId,
+  embedded,
 }: ProjectGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -69,7 +72,7 @@ export function ProjectGallery({
     <>
       <section
         ref={sectionRef}
-        className="relative section-padding bg-card/30 overflow-hidden"
+        className="relative overflow-hidden bg-card/30 section-padding"
       >
         <AnimatedBorders
           shouldReduce={shouldReduce}

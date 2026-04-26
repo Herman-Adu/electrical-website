@@ -289,7 +289,7 @@ export function NewsArticleContent({
   timelineItems,
 }: NewsArticleContentProps) {
   return (
-    <div className="space-y-16">
+    <div className="space-y-18">
       {/* Introduction Section */}
       <motion.section
         id="overview"
@@ -325,7 +325,7 @@ export function NewsArticleContent({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="space-y-6"
+          //className="space-y-6"
         >
           <h2 className="text-2xl font-bold text-white">Project Details</h2>
           {detail.body.map((paragraph, index) => (

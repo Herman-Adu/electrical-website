@@ -19,6 +19,7 @@ interface ProjectRelatedCarouselProps {
   categorySlug: string;
   heading?: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 const cardVariants: Variants = {
@@ -39,6 +40,7 @@ export function ProjectRelatedCarousel({
   categorySlug,
   heading = "Related Projects",
   anchorId,
+  embedded,
 }: ProjectRelatedCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
@@ -88,7 +90,7 @@ export function ProjectRelatedCarousel({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding"
       aria-label="Related projects"
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}

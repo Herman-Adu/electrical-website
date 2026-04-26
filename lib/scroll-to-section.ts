@@ -129,6 +129,19 @@ export function getScrollOffset({
   return totalOffset;
 }
 
+/**
+ * Returns the element's viewport-relative top, stripped of the element's own CSS Y-transform.
+ * Framer Motion initial states (e.g. y:30) shift getBoundingClientRect().top, causing scroll
+ * targets to be offset by the initial transform value before the animation plays.
+ */
+function getLayoutTop(element: Element): number {
+  const top = element.getBoundingClientRect().top;
+  const transform = window.getComputedStyle(element as HTMLElement).transform;
+  if (!transform || transform === "none") return top;
+  const yTranslation = new DOMMatrix(transform).m42;
+  return top - yTranslation;
+}
+
 export function scrollToElementWithOffset(
   target: Element,
   {
@@ -159,14 +172,19 @@ export function scrollToElementWithOffset(
         pageType,
       });
 
-    const targetRect = target.getBoundingClientRect();
-    const targetTop = window.scrollY + targetRect.top - Math.max(offset, 0);
+    // Strip the element's own CSS Y-transform before computing scroll target.
+    // whileInView sections start at y=30 (Framer Motion initial state). getBoundingClientRect()
+    // includes this transform, so the naive calculation scrolls 30px too far. When the section
+    // enters the viewport the animation fires (y: 30→0), shifting content up into the breadcrumb.
+    // Using the layout position (transform subtracted) places the element correctly after animation.
+    const layoutTop = getLayoutTop(target);
+    const targetTop = window.scrollY + layoutTop - Math.max(offset, 0);
     const finalScrollTop = Math.max(0, targetTop);
 
     console.log(`[scroll-fix] Scroll action:`, {
       targetElement: target.id || target.className || "unknown",
       currentScrollY: window.scrollY,
-      targetRectTop: targetRect.top,
+      layoutTop,
       calculatedOffset: offset,
       finalScrollTop,
       behavior,

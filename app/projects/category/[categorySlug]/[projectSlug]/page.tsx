@@ -12,13 +12,7 @@ import { createProjectDetailMetadata } from "@/lib/metadata-projects";
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import {
   ProjectDetailHero,
-  ProjectDetailIntro,
-  ProjectTimeline,
-  ProjectScopeGrid,
-  ProjectChallengeSolution,
-  ProjectGallery,
-  ProjectTestimonialCard,
-  ProjectRelatedCarousel,
+  ProjectArticleContent,
   ProjectSocialCTA,
 } from "@/components/projects";
 import {
@@ -222,168 +216,107 @@ export default async function CategoryProjectDetailPage({
         className="section-padding bg-background overflow-visible!"
       >
         <div className="section-content grid max-w-7xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
-          {/* Main Content Column */}
-          <div className="mt-2">
-            {detail?.intro && (
-              <div>
-                <ProjectDetailIntro data={detail.intro} anchorId="overview" />
-              </div>
+          {/* Left column: article content + supplemental project info (inside grid to extend gridHeight for sticky TOC) */}
+          <div>
+            {detail && (
+              <ProjectArticleContent
+                detail={detail}
+                canonicalTimeline={canonicalTimeline}
+                relatedProjects={relatedProjects}
+                categorySlug={categorySlug}
+                categoryLabel={category.label}
+              />
             )}
-
-            {detail?.scope && detail.scope.length > 0 && (
-              <div className="py-2">
-                <ProjectScopeGrid items={detail.scope} anchorId="scope" />
-              </div>
-            )}
-
-            {detail?.challenge && detail?.solution && (
-              <div>
-                <ProjectChallengeSolution
-                  challenge={detail.challenge}
-                  solution={detail.solution}
-                  anchorId="challenge"
-                />
-              </div>
-            )}
-
-            {(canonicalTimeline?.items.length ?? 0) > 0 && (
-              <div>
-                <ProjectTimeline
-                  items={canonicalTimeline?.items ?? []}
-                  anchorId="timeline"
-                />
-              </div>
-            )}
-
-            {detail?.gallery && detail.gallery.length > 0 && (
-              <div>
-                <ProjectGallery images={detail.gallery} anchorId="gallery" />
-              </div>
-            )}
-
-            {detail?.testimonial && (
-              <div>
-                <ProjectTestimonialCard
-                  testimonial={detail.testimonial}
-                  anchorId="testimonial"
-                />
-              </div>
-            )}
-
-            {/* Related Projects — inside grid column to extend containing block for sticky */}
-            {relatedProjects.length > 0 && (
-              <div className="mt-8">
-                <ProjectRelatedCarousel
-                  projects={relatedProjects}
-                  categorySlug={categorySlug}
-                  heading={`More ${category.label} Projects`}
-                  anchorId="related"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Sticky Sidebar */}
-          <aside
-            data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2 min-h-[calc(100vh-150px)]"
-          >
-            {/* Table of Contents */}
-            <ContentToc items={tocItems} title="Project Contents" />
-
-            {/* Project KPIs Card */}
-            <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
-                Project Details
-              </h3>
-              <dl className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Status</dt>
-                  <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
-                    {project.status.replace("-", " ")}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Budget</dt>
-                  <dd className="font-medium text-white">
-                    {project.kpis.budget}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Timeline</dt>
-                  <dd className="font-medium text-white">
-                    {project.kpis.timeline}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Location</dt>
-                  <dd className="font-medium text-white">
-                    {project.kpis.location}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Capacity</dt>
-                  <dd className="font-medium text-white">
-                    {project.kpis.capacity}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Sector</dt>
-                  <dd className="font-medium text-white">
-                    {project.clientSector}
-                  </dd>
-                </div>
-              </dl>
-
-              {/* Progress bar for in-progress projects */}
-              {project.status === "in-progress" && (
-                <div className="pt-2 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
-                      Progress
-                    </span>
-                    <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-                      {project.progress}%
-                    </span>
+            {/* Supplemental project info — inside left column so it contributes to gridHeight */}
+            <div className="mt-6 flex flex-col gap-6">
+              {/* Project KPIs Card */}
+              <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
+                  Project Details
+                </h3>
+                <dl className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Status</dt>
+                    <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
+                      {project.status.replace("-", " ")}
+                    </dd>
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
-                    <div
-                      className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
-                      style={{ width: `${project.progress}%` }}
-                    />
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Budget</dt>
+                    <dd className="font-medium text-foreground">{project.kpis.budget}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Timeline</dt>
+                    <dd className="font-medium text-foreground">{project.kpis.timeline}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Location</dt>
+                    <dd className="font-medium text-foreground">{project.kpis.location}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Capacity</dt>
+                    <dd className="font-medium text-foreground">{project.kpis.capacity}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-foreground/50">Sector</dt>
+                    <dd className="font-medium text-foreground">{project.clientSector}</dd>
+                  </div>
+                </dl>
+                {project.status === "in-progress" && (
+                  <div className="pt-2 border-t border-[hsl(174_100%_35%)]/10 dark:border-electric-cyan/10">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
+                        Progress
+                      </span>
+                      <span className="font-mono text-[10px] text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                        {project.progress}%
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
+                      <div
+                        className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
+                        style={{ width: `${project.progress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+              {/* Tags */}
+              {project.tags && project.tags.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
+                    Project Tags
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
+              {/* Sidebar Cards */}
+              {sidebarCards.length > 0 && (
+                <ContentSidebar
+                  cards={sidebarCards.slice(0, 2)}
+                  title="Get Started"
+                  description="Ready to discuss your project requirements?"
+                  showLiveIndicator={false}
+                />
+              )}
             </div>
+          </div>
 
-            {/* Tags */}
-            {project.tags && project.tags.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
-                  Project Tags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/60"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Sidebar Cards (marketing, consultation CTAs) */}
-            {sidebarCards.length > 0 && (
-              <ContentSidebar
-                cards={sidebarCards.slice(0, 2)}
-                title="Get Started"
-                description="Ready to discuss your project requirements?"
-                showLiveIndicator={false}
-              />
-            )}
+          {/* Sticky Sidebar — TOC only */}
+          <aside
+            data-sticky-toc="true"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2"
+          >
+            <ContentToc items={tocItems} title="Project Contents" />
           </aside>
         </div>
       </section>

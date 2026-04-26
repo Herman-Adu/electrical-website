@@ -13,11 +13,13 @@ import { AnimatedWord } from "@/components/shared/animated-word";
 interface ProjectDetailIntroProps {
   data: ProjectIntroData;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 export function ProjectDetailIntro({
   data,
   anchorId,
+  embedded,
 }: ProjectDetailIntroProps) {
   const {
     label,
@@ -59,7 +61,7 @@ export function ProjectDetailIntro({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding-bottom pt-6 bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding-bottom pt-6"
     >
       {/* Blueprint grid overlay */}
       {/* <div className="absolute inset-0 blueprint-grid-fine opacity-30 pointer-events-none" /> */}

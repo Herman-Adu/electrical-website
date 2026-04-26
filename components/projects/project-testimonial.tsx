@@ -10,11 +10,13 @@ import type { ProjectTestimonial } from "@/types/projects";
 interface ProjectTestimonialCardProps {
   testimonial: ProjectTestimonial;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 export function ProjectTestimonialCard({
   testimonial,
   anchorId,
+  embedded,
 }: ProjectTestimonialCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
@@ -24,7 +26,7 @@ export function ProjectTestimonialCard({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding"
     >
       <div className="section-content max-w-4xl" ref={containerRef}>
         <motion.div

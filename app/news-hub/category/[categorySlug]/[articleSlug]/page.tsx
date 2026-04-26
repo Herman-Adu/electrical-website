@@ -206,7 +206,7 @@ export default async function NewsArticlePage({
 
       <section
         id="article-content"
-        className="section-standard bg-background !overflow-visible"
+        className="section-padding bg-background !overflow-visible"
       >
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
@@ -216,7 +216,10 @@ export default async function NewsArticlePage({
           />
 
           {/* Sticky Sidebar */}
-          <aside data-sticky-toc="true" className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start min-h-[calc(100vh-132px)]">
+          <aside
+            data-sticky-toc="true"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start min-h-[calc(100vh-132px)]"
+          >
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
 

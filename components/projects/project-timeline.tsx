@@ -22,6 +22,7 @@ interface ProjectTimelineProps {
   items: readonly TimelineItem[];
   heading?: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 function ProjectTimelineSegment({
@@ -257,6 +258,7 @@ export function ProjectTimeline({
   items,
   heading = "Project Timeline",
   anchorId,
+  embedded,
 }: ProjectTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLUListElement>(null);
@@ -282,7 +284,7 @@ export function ProjectTimeline({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding"
     >
       {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
       <div className="section-content max-w-6xl" ref={containerRef}>

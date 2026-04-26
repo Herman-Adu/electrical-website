@@ -28,6 +28,7 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 import type { ProjectScope } from "@/types/projects";
+import { cn } from "@/lib/utils";
 
 const iconMap: Record<ProjectScope["icon"], LucideIcon> = {
   Zap,
@@ -56,6 +57,7 @@ interface ProjectScopeGridProps {
   title?: string;
   description?: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 export function ProjectScopeGrid({
@@ -64,6 +66,7 @@ export function ProjectScopeGrid({
   title = "Precision Engineering, Comprehensive Delivery.",
   description = "Every project demands a tailored approach. Our scope encompasses the full spectrum of electrical infrastructure — from initial assessment through final commissioning — ensuring seamless integration and long-term reliability.",
   anchorId,
+  embedded,
 }: ProjectScopeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -75,7 +78,7 @@ export function ProjectScopeGrid({
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-card/30 overflow-hidden"
+      className="relative overflow-hidden bg-card/30 section-padding"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
