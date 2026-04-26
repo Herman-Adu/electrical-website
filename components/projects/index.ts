@@ -27,3 +27,5 @@ export { ProjectKpiGrid } from "./project-kpi-grid";
 export { ProjectKpiSection } from "./project-kpi-section";
 export { ProjectRelatedCarousel } from "./project-related-carousel";
 export { ProjectSocialCTA } from "./project-social-cta";
+export { ProjectArticleContent } from "./project-article-content";
+export { ProjectSupplementalSection } from "./project-supplemental-section";

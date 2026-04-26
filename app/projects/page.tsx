@@ -58,14 +58,14 @@ export default async function ProjectsPage({
         section="projects"
       />
 
-      <section id="projects-grid" className="section-standard bg-background">
-        <div className="section-content max-w-6xl">
+      <section id="projects-grid" className="section-padding bg-background">
+        <div className="section-content max-w-xl">
           {featuredProject ? (
             <ProjectsFeaturedCard project={featuredProject} />
           ) : null}
         </div>
       </section>
-      <section className="section-container section-padding-sm bg-background">
+      <section className="section-container bg-background">
         <div className="section-content max-w-6xl">
           <ProjectsBentoGrid items={projectBentoItems} />
         </div>

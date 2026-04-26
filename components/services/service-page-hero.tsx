@@ -156,37 +156,37 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
             variants={itemVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Services // Active
               </span>
             </div>
           </motion.div>
 
-          {/* Eyebrow */}
-          {eyebrow && (
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center justify-center gap-4 mb-6"
-            >
-              <span className="h-px w-12 bg-electric-cyan/60" />
-              <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
-                {eyebrow}
-              </span>
-              <span className="h-px w-12 bg-electric-cyan/60" />
-            </motion.div>
-          )}
+          {/* Status Label Eyebrow */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
+              {eyebrow}
+            </span>
+            <span className="h-px w-12 bg-electric-cyan" />
+          </motion.div>
 
           {/* Main headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_IMAGE}>
             {headlineHighlight ? (
               <>
                 {headlineText.split(headlineHighlight)[0]}
-                <span className="text-electric-cyan">{headlineHighlight}</span>
+                <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
+                  {headlineHighlight}
+                </span>
                 {headlineText.split(headlineHighlight)[1]}
               </>
             ) : (
@@ -197,7 +197,7 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {subheadline}
           </motion.p>
@@ -211,13 +211,13 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="relative p-5 rounded-xl border border-white/10 bg-black/40 backdrop-blur-md hover:border-electric-cyan/50 transition-all duration-300 group"
+                  className="relative p-5 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md hover:border-electric-cyan/50 transition-all duration-300 group"
                 >
                   <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-electric-cyan/30 rounded-tr group-hover:border-electric-cyan/60 transition-colors" />
                   <div className="text-2xl font-black font-mono text-electric-cyan mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/60 font-medium tracking-wide">
+                  <div className="text-xs text-white/80 font-medium tracking-wide">
                     {stat.label}
                   </div>
                 </div>
@@ -233,7 +233,8 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-white/60 transition-colors hover:text-electric-cyan"
+          //className="flex cursor-pointer flex-col items-center gap-2 text-white/60 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 font-bold hover:text-electric-cyan transition-colors duration-300"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
             {scrollLabel}

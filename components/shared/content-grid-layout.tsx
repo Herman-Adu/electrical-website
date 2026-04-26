@@ -112,7 +112,7 @@ export function ContentGridLayout<T extends ContentListItem>({
   if (items.length === 0) {
     return (
       <div className="grid gap-12 xl:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] xl:items-start">
-        <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">
+        <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-foreground">
           {emptyMessage}
         </div>
         <ContentSidebar
@@ -135,12 +135,12 @@ export function ContentGridLayout<T extends ContentListItem>({
             {showLiveIndicator && (
               <ContentPulseIndicator label="Live Feed" variant="live" />
             )}
-            <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
               {title}
             </h2>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+            <span className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-electric-cyan">
               {totalCount} {totalCount === 1 ? itemLabel : itemLabelPlural}
             </span>
           </div>
@@ -171,7 +171,7 @@ export function ContentGridLayout<T extends ContentListItem>({
           />
         ) : totalCount > initialCount ? (
           <div
-            className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50"
+            className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
             role="status"
             aria-live="polite"
           >

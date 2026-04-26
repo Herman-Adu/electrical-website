@@ -57,7 +57,10 @@ export function Illumination() {
       className="section-container section-padding relative"
     >
       {/* Background Layer */}
-      <motion.div className="absolute inset-0 z-0" style={{ filter: imageFilter }}>
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ filter: imageFilter }}
+      >
         <Image
           src="/images/warehouse-lighting.jpg"
           alt="Industrial warehouse lighting installation"
@@ -99,7 +102,9 @@ export function Illumination() {
           >
             Powering the Spaces
             <br />
-            <span className="text-electric-cyan">That Power Industry</span>
+            <span className="text-electric-cyan dark:text-(--electric-cyan-glow-subtle)">
+              That Power Industry
+            </span>
           </motion.h2>
 
           <motion.p
@@ -120,7 +125,7 @@ export function Illumination() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <button className="group relative px-8 py-4 rounded-2xl border border-electric-cyan/50 text-white font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/20 hover:scale-[1.03]">
+            <button className="group relative px-8 py-4 rounded-2xl border border-electric-cyan dark:border-electric-cyan/60 text-white/80 font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/20 hover:scale-[1.03]">
               <span className="relative z-10 flex items-center gap-3">
                 View Our Projects
                 <svg

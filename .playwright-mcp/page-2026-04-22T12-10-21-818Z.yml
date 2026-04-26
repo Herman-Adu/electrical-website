@@ -1,0 +1,297 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Nexgen round logo NEXGEN Electrical" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Nexgen round logo" [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: NEXGEN
+          - generic [ref=e11]: Electrical
+      - generic "Desktop navigation" [ref=e12]:
+        - generic [ref=e14]:
+          - link "Navigate to Home" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - img [ref=e16]
+        - generic [ref=e19]:
+          - link "Navigate to About" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - img [ref=e21]
+        - generic [ref=e24]:
+          - link "Navigate to Services" [ref=e25] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+          - img [ref=e27]
+        - generic [ref=e30]:
+          - link "Navigate to Projects" [ref=e31] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+          - img [ref=e32]
+        - generic [ref=e35]:
+          - link "Navigate to News Hub" [ref=e36] [cursor=pointer]:
+            - /url: /news-hub
+            - text: News Hub
+          - img [ref=e37]
+        - button "Navigate to Contact" [ref=e40]: Contact
+      - link "Get Quote" [ref=e43] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e44]: Get Quote
+  - main [ref=e47]:
+    - generic [ref=e48]:
+      - generic:
+        - img
+      - generic [ref=e52]:
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - generic [ref=e57]: Quotation // Professional Scope
+        - generic [ref=e60]: Project Quotation
+        - heading "Engineered For Technical Clarity" [level=1] [ref=e62]:
+          - generic [ref=e63]: Engineered
+          - generic [ref=e64]: For Technical
+          - generic [ref=e65]: Clarity
+        - paragraph [ref=e66]: Tell us about your project and receive a detailed, no-obligation quote from our experienced team.
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - img [ref=e69]
+            - paragraph [ref=e71]: Secure & Private
+            - paragraph [ref=e72]: Your project details are kept confidential with full data protection
+          - generic [ref=e73]:
+            - img [ref=e74]
+            - paragraph [ref=e77]: Quick Response
+            - paragraph [ref=e78]: We respond to quotation requests within 2-5 business days
+          - generic [ref=e79]:
+            - img [ref=e80]
+            - paragraph [ref=e82]: Expert Support
+            - paragraph [ref=e83]: Our certified electricians provide professional guidance throughout
+          - generic [ref=e84]:
+            - img [ref=e85]
+            - paragraph [ref=e88]: Confirmation Email
+            - paragraph [ref=e89]: Detailed quotation delivered via email with no hidden costs
+      - button "Scroll to quotation form" [ref=e91] [cursor=pointer]:
+        - generic [ref=e92]: Start Quotation
+        - img [ref=e93]
+    - navigation "Breadcrumb" [ref=e97]:
+      - link "Home" [ref=e98] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e99]: /
+      - generic [ref=e100]: Quotation
+    - generic [ref=e102]:
+      - generic [ref=e105]: Professional Quotation Workflow
+      - generic [ref=e106]:
+        - heading "From Brief To Bankable Proposal" [level=2] [ref=e107]:
+          - generic [ref=e108]: From
+          - generic [ref=e109]: Brief
+          - generic [ref=e110]: To
+          - generic [ref=e111]: Bankable
+          - generic [ref=e112]: Proposal
+        - paragraph [ref=e113]: Our quotation process is engineered for technical clarity, predictable delivery, and commercial confidence. Every step captures the right scope inputs so your estimate is accurate and actionable.
+      - generic [ref=e114]:
+        - paragraph [ref=e115]: This seven-step flow aligns project objectives, site realities, budget windows, and compliance expectations before pricing is finalized.
+        - paragraph [ref=e116]: The result is a quotation package your technical, operations, and procurement teams can review quickly and approve with confidence.
+      - generic [ref=e117]:
+        - generic [ref=e119]:
+          - generic [ref=e122]: "01"
+          - heading "Scope Precision" [level=3] [ref=e123]
+          - paragraph [ref=e124]: Capture technical requirements early to reduce revision cycles and pricing ambiguity.
+        - generic [ref=e126]:
+          - generic [ref=e129]: "02"
+          - heading "Commercial Clarity" [level=3] [ref=e130]
+          - paragraph [ref=e131]: Align timeline, budget, and delivery constraints into one structured decision-ready brief.
+        - generic [ref=e133]:
+          - generic [ref=e136]: "03"
+          - heading "Execution Readiness" [level=3] [ref=e137]
+          - paragraph [ref=e138]: Produce a quotation pathway that transitions smoothly into planning and delivery.
+    - generic [ref=e140]:
+      - generic [ref=e141]:
+        - paragraph [ref=e142]: 7-Step Quotation Submission
+        - heading "Build Your Project Brief" [level=2] [ref=e143]
+        - paragraph [ref=e144]: Complete the full one-column workflow below to give our engineering team the detail needed for a precise, professional quotation.
+      - generic [ref=e146]:
+        - generic [ref=e151]:
+          - button "1 Contact" [ref=e152] [cursor=pointer]:
+            - generic [ref=e153]: "1"
+            - generic [ref=e154]: Contact
+          - button "2 Project Type" [disabled] [ref=e155]:
+            - generic [ref=e156]: "2"
+            - generic [ref=e157]: Project Type
+          - button "3 Scope" [disabled] [ref=e158]:
+            - generic [ref=e159]: "3"
+            - generic [ref=e160]: Scope
+          - button "4 Site" [disabled] [ref=e161]:
+            - generic [ref=e162]: "4"
+            - generic [ref=e163]: Site
+          - button "5 Budget" [disabled] [ref=e164]:
+            - generic [ref=e165]: "5"
+            - generic [ref=e166]: Budget
+          - button "6 Additional" [disabled] [ref=e167]:
+            - generic [ref=e168]: "6"
+            - generic [ref=e169]: Additional
+          - button "7 Review" [disabled] [ref=e170]:
+            - generic [ref=e171]: "7"
+            - generic [ref=e172]: Review
+        - generic [ref=e173]:
+          - paragraph [ref=e174]: Fields marked * are required.
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - img [ref=e180]
+                - heading "Contact Information" [level=2] [ref=e183]
+              - paragraph [ref=e184]: Please provide your contact details so we can reach you about your quotation.
+            - generic [ref=e186]:
+              - generic [ref=e187]:
+                - generic [ref=e188]: Full Name*
+                - textbox "John Smith" [ref=e189]
+              - generic [ref=e190]:
+                - generic [ref=e191]: Email Address*
+                - textbox "john.smith@example.com" [ref=e192]
+              - generic [ref=e193]:
+                - generic [ref=e194]: Phone Number*
+                - textbox "07700 900000" [ref=e195]
+              - generic [ref=e196]:
+                - text: Company Name
+                - textbox "Your Company Ltd (Optional)" [ref=e197]
+            - generic [ref=e198]:
+              - button "Continue" [disabled]:
+                - text: Continue
+                - img
+    - generic [ref=e200]:
+      - generic [ref=e201]:
+        - paragraph [ref=e202]: Campaign Confidence Metrics
+        - heading "Signals That Support Commercial Decisions" [level=2] [ref=e203]
+      - generic [ref=e204]:
+        - article [ref=e205]:
+          - paragraph [ref=e206]: 15+
+          - paragraph [ref=e207]: Years of Experience
+        - article [ref=e208]:
+          - paragraph [ref=e209]: 500+
+          - paragraph [ref=e210]: Projects Completed
+        - article [ref=e211]:
+          - paragraph [ref=e212]: 100%
+          - paragraph [ref=e213]: Certified Electricians
+    - generic [ref=e215]:
+      - generic [ref=e216]:
+        - paragraph [ref=e217]: Marketing & Buyer Enablement
+        - heading "Frequently Asked Questions" [level=2] [ref=e218]
+      - generic [ref=e219]:
+        - article [ref=e220]:
+          - heading "How long does it take to receive a quotation?" [level=3] [ref=e221]
+          - paragraph [ref=e222]: We typically respond within 2-5 business days with a detailed quotation. Urgent projects may receive faster responses.
+        - article [ref=e223]:
+          - heading "Is the quotation free?" [level=3] [ref=e224]
+          - paragraph [ref=e225]: Yes, all quotations are completely free and come with no obligation. Complex projects may require a site visit.
+        - article [ref=e226]:
+          - heading "What information do you need from me?" [level=3] [ref=e227]
+          - paragraph [ref=e228]: The more detail you can provide about your project, the more accurate our quotation will be. Include scope, timeline, and any specific requirements.
+        - article [ref=e229]:
+          - heading "Do you handle all types of electrical work?" [level=3] [ref=e230]
+          - paragraph [ref=e231]: Yes, we handle residential, commercial, and industrial projects of all sizes, from simple installations to complete electrical systems.
+    - generic [ref=e234]:
+      - paragraph [ref=e235]: Quotation Action Lane
+      - heading "Ready To Finalize Your Scope?" [level=2] [ref=e236]
+      - paragraph [ref=e237]: Submit your seven-step quotation now, or talk to our team first to align technical requirements, timeline expectations, and budget boundaries.
+      - generic [ref=e238]:
+        - link "Continue Quotation" [ref=e239] [cursor=pointer]:
+          - /url: "#quotation-form-section"
+          - text: Continue Quotation
+          - img
+        - link "Speak With Our Team" [ref=e240] [cursor=pointer]:
+          - /url: /contact
+          - text: Speak With Our Team
+          - img
+    - generic [ref=e241]:
+      - generic [ref=e244]:
+        - generic [ref=e245]:
+          - link "NEXGEN Electrical Innovations" [ref=e246] [cursor=pointer]:
+            - /url: /
+            - img "NEXGEN Electrical Innovations" [ref=e248]
+          - paragraph [ref=e249]: Powering the next generation of commercial and industrial innovation with precision-engineered electrical solutions.
+          - generic [ref=e250]:
+            - link "LinkedIn" [ref=e251] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e252]
+            - link "Twitter" [ref=e256] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e257]
+            - link "Facebook" [ref=e259] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e260]
+            - link "Instagram" [ref=e262] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e263]
+        - generic [ref=e266]:
+          - heading "Services" [level=3] [ref=e267]
+          - list [ref=e268]:
+            - listitem [ref=e269]:
+              - link "Commercial Installations" [ref=e270] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e271]:
+              - link "Industrial Systems" [ref=e272] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e273]:
+              - link "Power Distribution" [ref=e274] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e275]:
+              - link "Safety Systems" [ref=e276] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e277]:
+              - link "Energy Management" [ref=e278] [cursor=pointer]:
+                - /url: /services
+        - generic [ref=e279]:
+          - heading "Company" [level=3] [ref=e280]
+          - list [ref=e281]:
+            - listitem [ref=e282]:
+              - link "About Us" [ref=e283] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e284]:
+              - link "Our Team" [ref=e285] [cursor=pointer]:
+                - /url: /about#directors
+            - listitem [ref=e286]:
+              - link "Careers" [ref=e287] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e288]:
+              - link "News & Updates" [ref=e289] [cursor=pointer]:
+                - /url: /news-hub
+            - listitem [ref=e290]:
+              - link "Case Studies" [ref=e291] [cursor=pointer]:
+                - /url: /news-hub/category/case-studies
+        - generic [ref=e292]:
+          - heading "Support" [level=3] [ref=e293]
+          - list [ref=e294]:
+            - listitem [ref=e295]:
+              - link "Contact" [ref=e296] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e297]:
+              - link "Emergency Services" [ref=e298] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e299]:
+              - link "Maintenance Plans" [ref=e300] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e301]:
+              - link "Documentation" [ref=e302] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e303]:
+              - link "FAQs" [ref=e304] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e305]:
+          - heading "24/7 Emergency" [level=3] [ref=e306]
+          - generic [ref=e307]:
+            - generic [ref=e310]: Online
+            - img "NEXGEN" [ref=e312]
+            - link "+44 (0) 20 1234 5678" [ref=e313] [cursor=pointer]:
+              - /url: tel:+442012345678
+            - paragraph [ref=e314]: Rapid response team ready
+      - generic [ref=e317]:
+        - generic [ref=e318]: 2026 NEXGEN ELECTRICAL INNOVATIONS. ALL RIGHTS RESERVED.
+        - generic [ref=e319]:
+          - link "PRIVACY POLICY" [ref=e320] [cursor=pointer]:
+            - /url: "#"
+          - link "TERMS OF SERVICE" [ref=e321] [cursor=pointer]:
+            - /url: "#"
+          - link "LICENSING" [ref=e322] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e323]: POWERED BY ADU-DEV SOLUTIONS
+      - generic:
+        - img
+  - button "Open Next.js Dev Tools" [ref=e329] [cursor=pointer]:
+    - img [ref=e330]

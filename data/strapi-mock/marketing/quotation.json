@@ -4,9 +4,26 @@
     "description": "Tell us about your project and receive a detailed, no-obligation quote from our experienced team."
   },
   "trustIndicators": [
-    { "value": "15+", "label": "Years of Experience" },
-    { "value": "500+", "label": "Projects Completed" },
-    { "value": "100%", "label": "Certified Electricians" }
+    {
+      "icon": "Clock",
+      "title": "Fast Quotes",
+      "description": "Detailed quotations within 48 hours of your request"
+    },
+    {
+      "icon": "ShieldCheck",
+      "title": "Certified Team",
+      "description": "All quotations backed by certified electricians with 15+ years experience"
+    },
+    {
+      "icon": "MessageSquare",
+      "title": "Transparent Pricing",
+      "description": "Detailed cost breakdown with zero hidden charges or surprises"
+    },
+    {
+      "icon": "Wrench",
+      "title": "Professional Assessment",
+      "description": "Comprehensive site assessment included in every quotation"
+    }
   ],
   "faq": {
     "title": "Frequently Asked Questions",

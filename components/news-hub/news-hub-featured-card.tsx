@@ -58,7 +58,7 @@ export function NewsHubFeaturedCard({ article }: NewsHubFeaturedCardProps) {
               ) : null}
             </div>
             <div className="space-y-3">
-              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl leading-tight">
+              <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl leading-tight">
                 {article.title}
               </h2>
               <p className="text-base leading-7 text-foreground/75">
@@ -72,7 +72,7 @@ export function NewsHubFeaturedCard({ article }: NewsHubFeaturedCardProps) {
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
                 Author
               </div>
-              <div className="mt-2 font-semibold text-white">
+              <div className="mt-2 font-semibold text-foreground">
                 {article.author.name}
               </div>
             </div>
@@ -80,7 +80,7 @@ export function NewsHubFeaturedCard({ article }: NewsHubFeaturedCardProps) {
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
                 Format
               </div>
-              <div className="mt-2 font-semibold text-white">
+              <div className="mt-2 font-semibold text-foreground">
                 Editorial Brief
               </div>
             </div>

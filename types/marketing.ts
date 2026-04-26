@@ -120,8 +120,9 @@ export interface MarketingQuotationContent {
     description: string;
   };
   trustIndicators: Array<{
-    value: string;
-    label: string;
+    icon: MarketingIconName;
+    title: string;
+    description: string;
   }>;
   faq: {
     title: string;

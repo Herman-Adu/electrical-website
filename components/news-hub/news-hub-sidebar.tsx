@@ -24,7 +24,7 @@ export function NewsHubSidebar({ cards }: NewsHubSidebarProps) {
         <div className="flex items-center gap-3">
           <NewsPulseIndicator label="Live Feed" variant="live" />
         </div>
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Strategic Modules
         </h3>
         <p className="text-xs leading-5 text-foreground/60">
@@ -57,7 +57,7 @@ export function NewsHubSidebar({ cards }: NewsHubSidebarProps) {
                 </p>
               </div>
               <div className="space-y-2">
-                <h4 className="text-base font-semibold text-white leading-snug">
+                <h4 className="text-base font-semibold text-foreground leading-snug">
                   {card.title}
                 </h4>
                 <p className="text-xs leading-5 text-foreground/65">

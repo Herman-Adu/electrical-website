@@ -14,14 +14,20 @@ import {
   AnimatedWord,
   ScrollLinkedAnimatedWord,
 } from "@/components/shared/animated-word";
-import { useAnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import { useTimelineProgressController } from "@/lib/timeline/progress-controller";
 import type { TimelineItem } from "@/types/timeline";
 
 interface ProjectTimelineProps {
   items: readonly TimelineItem[];
   heading?: string;
+  title?: string;
+  description?: string;
   anchorId?: string;
+  embedded?: boolean;
 }
 
 function ProjectTimelineSegment({
@@ -119,7 +125,7 @@ function ProjectTimelineRow({
     >
       {/* Desktop-only label column — hidden on mobile */}
       <div className="hidden md:block md:w-25 shrink-0 pt-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
           {item.label}
         </span>
         <p className="font-mono text-xs text-electric-cyan/70 mt-1">
@@ -220,7 +226,7 @@ function ProjectTimelineRow({
               </span>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-sm text-foreground/70 leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -256,14 +262,17 @@ const statusConfig = {
 export function ProjectTimeline({
   items,
   heading = "Project Timeline",
+  title = "A Methodical Approach to Delivery.",
+  description = "Every phase is planned, sequenced, and executed with precision. From initial assessment through to commissioning, we keep every milestone visible and every deadline on track.",
   anchorId,
+  embedded,
 }: ProjectTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLUListElement>(null);
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const shouldReduce = useReducedMotion();
-  const { sectionRef } = useAnimatedBorders();
+  const { sectionRef, lineScale } = useAnimatedBorders();
   const { thresholds, scrollOffsets } = useTimelineProgressController({
     timelineRef,
     nodeRefs,
@@ -282,23 +291,43 @@ export function ProjectTimeline({
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-background overflow-hidden"
+      className="relative overflow-hidden bg-background section-padding"
     >
-      {/*  <AnimatedBorders shouldReduce={shouldReduce} lineLeft={lineLeft} lineRight={lineRight} showBottom={false} /> */}
+      <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} showBottom={false} />
       <div className="section-content max-w-6xl" ref={containerRef}>
-        {/* Header */}
+        {/* Eyebrow */}
         <motion.div
           id={anchorId}
-          className="flex items-center gap-4 mb-12 scroll-mt-36"
+          className="flex items-center gap-4 mb-6 scroll-mt-36"
           initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-px w-8 bg-electric-cyan/50" />
-          <h2 className="font-mono text-xs tracking-widest uppercase text-electric-cyan">
+          <div className="h-px w-8 bg-[hsl(174_100%_35%)]/50 dark:bg-electric-cyan/50" />
+          <h2 className="font-mono text-xs tracking-widest uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan">
             {heading}
           </h2>
         </motion.div>
+
+        {/* Title */}
+        <motion.h3
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6 max-w-3xl"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {title}
+        </motion.h3>
+
+        {/* Description */}
+        <motion.p
+          className="text-base sm:text-lg text-foreground dark:text-foreground/70 leading-relaxed max-w-4xl mb-12"
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {description}
+        </motion.p>
 
         {/* Timeline */}
         <div className="relative">

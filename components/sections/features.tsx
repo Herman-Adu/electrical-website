@@ -39,16 +39,14 @@ function LoadMonitorCard() {
   }, [prefersReducedMotion]);
 
   return (
-    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10 transition-all duration-500">
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-foreground/30 dark:border-electric-cyan rounded-tl-lg" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-foreground/30 dark:border-electric-cyan rounded-br-lg" />
+        <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-electric-cyan rounded-br-lg" />
       </div>
-
-      <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
+      <div className="absolute top-4 right-4 text-6xl font-bold text-electric-cyan dark:text-electric-cyan/70 font-mono z-1">
         01
       </div>
-
       <div className="relative w-full h-40 overflow-hidden">
         <Image
           src="/images/power-distribution.jpg"
@@ -57,13 +55,16 @@ function LoadMonitorCard() {
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
-
       <div className="p-6 py-6 flex flex-col flex-1">
+        {/* Background shimmer */}
+        <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/8 via-transparent to-electric-cyan/8 pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/10 to-transparent pointer-events-none" />
+
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/60">
+          <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-electric-cyan dark:text-electric-cyan/80">
             Grid Intelligence
           </span>
-          <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-amber-warning animate-pulse" />
         </div>
         <h3 className="text-xl font-bold text-card-foreground mb-2">
           Power Distribution Monitor
@@ -116,7 +117,7 @@ function LoadMonitorCard() {
           })}
         </div>
 
-        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-foreground/20 dark:border-foreground/20 text-sm font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/80 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-electric-cyan/20 text-sm font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/80 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
           Monitor Zones
         </button>
       </div>
@@ -158,13 +159,12 @@ function SystemDiagnosticsCard() {
   }, [isMounted, isComplete, prefersReducedMotion]);
 
   return (
-    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border border-slate-700/50 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10">
+    <motion.div className="group relative h-full flex flex-col overflow-hidden rounded-2xl bg-transparent border hover:border-electric-cyan/40 hover:shadow-xl hover:shadow-(--electric-cyan)/10 transition-all duration-500">
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-foreground/30 dark:border-electric-cyan rounded-tl-lg" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-foreground/30 dark:border-electric-cyan rounded-br-lg" />
+        <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-electric-cyan rounded-tl-lg" />
+        <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-electric-cyan rounded-br-lg" />
       </div>
-
-      <div className="absolute top-4 right-4 text-6xl font-bold text-slate-700/20 font-mono z-0">
+      <div className="absolute top-4 right-4 text-6xl font-bold text-electric-cyan dark:text-electric-cyan/70 font-mono z-1">
         02
       </div>
 
@@ -178,8 +178,12 @@ function SystemDiagnosticsCard() {
       </div>
 
       <div className="p-6 flex flex-col flex-1">
+        {/* Background shimmer */}
+        <div className="absolute inset-0 bg-linear-to-br from-electric-cyan/8 via-transparent to-electric-cyan/8 pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/10 to-transparent pointer-events-none" />
+
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono tracking-widest uppercase dark:text-electric-cyan/60">
+          <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-electric-cyan dark:text-electric-cyan/80">
             Live Diagnostics
           </span>
           <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse" />
@@ -191,7 +195,7 @@ function SystemDiagnosticsCard() {
           Continuous system health monitoring with predictive fault detection
         </p>
 
-        <div className="h-20 mb-6 p-4 rounded-lg border-muted-foreground/10 bg-electric-cyan/10  font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/40 transition-colors duration-300 flex flex-col justify-center">
+        <div className="border backdrop-blur-md shadow-xl shadow-foreground/20 dark:shadow-electric-cyan/8 h-20 mb-6 p-4 rounded-lg border-muted-foreground/10 font-mono text-[11px] leading-5 overflow-hidden hover:border-electric-cyan/40  transition-colors duration-300 flex flex-col justify-center">
           <div className="dark:text-electric-cyan/80 whitespace-pre-line">
             {displayText}
           </div>
@@ -200,7 +204,7 @@ function SystemDiagnosticsCard() {
           )}
         </div>
 
-        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border text-sm font-mono tracking-widest uppercase dark:text-electric-cyan/80 hover:border-electric-cyan/80 hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
+        <button className="mt-auto w-full py-3 px-4 rounded-lg bg-transparent border border-electric-cyan/20 text-sm font-mono tracking-widest uppercase text-foreground/70 dark:text-electric-cyan/80 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan/80 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan hover:shadow-lg hover:shadow-(--electric-cyan)/10 transition-all duration-300">
           View Full Report
         </button>
       </div>
@@ -232,9 +236,12 @@ export function Features() {
             <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Intelligent Systems
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4"></h2>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black  uppercase tracking-tight mb-4">
+            Intelligent <span className="text-electric-cyan">Systems</span>
           </h2>
+
           <p className="text-foreground dark:text-foreground/80 max-w-2xl mx-auto">
             Real-time monitoring, diagnostics, and preventive maintenance for
             modern electrical infrastructure.

@@ -145,7 +145,7 @@ export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
 
   return (
     <section
-      className="section-container py-8 sm:py-10 md:py-12 lg:py-14"
+      className="lg:pb-16 md:pb-12 sm:pb-8"
       aria-label="Project highlights"
     >
       <div className="section-content max-w-6xl">
@@ -158,7 +158,7 @@ export function ProjectsBentoGrid({ items }: { items: ProjectBentoItem[] }) {
           transition={{ duration: 0.4 }}
         >
           <div className="h-px w-6 sm:w-8 bg-electric-cyan/50" />
-          <p className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-electric-cyan/80">
+          <p className="font-mono text-[9px] sm:text-[10px] uppercase font-bold tracking-[0.18em] sm:tracking-[0.2em] text-electric-cyan/80">
             Performance Snapshot
           </p>
         </motion.div>

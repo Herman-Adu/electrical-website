@@ -9,6 +9,9 @@ import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { categoriesHeroButtons } from "@/data/projects/categories-hero-buttons";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -77,7 +80,7 @@ export function ProjectsCategoriesHero({
 
   const scrollToCategories = () => {
     const el = document.getElementById("categories-grid");
-    if (el) scrollToElementWithOffset(el, { pageType: 'default' });
+    if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
   return (
@@ -244,17 +247,17 @@ export function ProjectsCategoriesHero({
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-4xl px-4 text-center"
         >
-          {/* Status label */}
+          {/* Status Label */}
           <motion.div
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 Projects // {statusText}
               </span>
             </div>
@@ -264,7 +267,7 @@ export function ProjectsCategoriesHero({
           <motion.nav
             variants={itemVariants}
             aria-label="Breadcrumb"
-            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/60 dark:text-white/60 mb-8"
+            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase font-bold tracking-[0.14em] text-foreground mb-8"
           >
             <Link
               href="/projects"
@@ -282,8 +285,10 @@ export function ProjectsCategoriesHero({
             className="flex justify-center mb-6"
           >
             <div className="relative">
-              <div className="w-20 h-20 rounded-2xl border border-electric-cyan/30 bg-electric-cyan/5 flex items-center justify-center backdrop-blur-sm">
-                <Layers className="w-9 h-9 text-electric-cyan" />
+              <div className="w-16 h-16 rounded-xl border border-electric-cyan/50 dark:border-electric-cyan/70 bg-white/10 flex items-center justify-center backdrop-blur-sm">
+                <span className="flex items-center justify-center w-9 h-9 text-white">
+                  <Layers className="w-9 h-9 text-foreground dark:text-white/80" />
+                </span>
               </div>
               {/* Glow ring */}
               <motion.div
@@ -301,13 +306,13 @@ export function ProjectsCategoriesHero({
           {/* Eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center justify-center gap-4 mb-5"
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan/70">
+            <span className="h-px w-12 bg-electric-cyan font-bold" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               {categoryCount} Specialist Sectors
             </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="h-px w-12 bg-electric-cyan font-bold" />
           </motion.div>
 
           {/* Headline */}
@@ -316,7 +321,7 @@ export function ProjectsCategoriesHero({
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Browse by</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Sector
             </span>
           </motion.h1>
@@ -324,36 +329,46 @@ export function ProjectsCategoriesHero({
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-foreground/70 dark:text-white/70 mb-10 max-w-xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Each sector represents a distinct area of electrical engineering
             expertise. Explore our project portfolio by the type of environment
             we&apos;ve transformed.
           </motion.p>
 
-          {/* Action */}
+          {/* Category hero action buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-4 mb-10"
+            className="flex flex-wrap items-center justify-center gap-3 mb-10"
           >
-            <Link
-              href="/projects"
-              className="px-5 py-2.5 rounded-full border border-foreground/20 dark:border-white/20 bg-foreground/5 dark:bg-white/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-foreground dark:text-white hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300"
-            >
-              ← All Projects
-            </Link>
-            <Link
-              href="/contact"
-              className="px-5 py-2.5 rounded-full border border-electric-cyan/30 bg-electric-cyan/10 backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase text-electric-cyan hover:bg-electric-cyan/20 transition-all duration-300"
-            >
-              Start a Project
-            </Link>
+            {categoriesHeroButtons.map((button, index) => (
+              <motion.div
+                key={button.href}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
+              >
+                <Button
+                  asChild
+                  className={cn(
+                    "px-4 py-2 rounded-lg bg-white/10 border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
+                    "border-electric-cyan/50 hover:border-electric-cyan dark:hover:border-electric-cyan/70 hover:bg-electric-cyan/15",
+                    "text-foreground dark:text-foreground/80 shadow-md shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
+                    "hover:text-electric-cyan dark:hover:text-electric-cyan",
+                  )}
+                >
+                  <Link href="/projects">
+                    <span>{button.label}</span>
+                  </Link>
+                </Button>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Meta bar */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/40 dark:text-white/40 uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -361,7 +376,7 @@ export function ProjectsCategoriesHero({
             <span className="hidden sm:inline opacity-40">|</span>
             <span>24/7 Emergency</span>
             <span className="hidden sm:inline opacity-40">|</span>
-            <span>15+ Years Experience</span>
+            <span>10+ Years Experience</span>
           </motion.div>
         </motion.div>
       }
@@ -372,7 +387,7 @@ export function ProjectsCategoriesHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.5 }}
           onClick={scrollToCategories}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-electric-cyan dark:text-white/50"
+          className="flex cursor-pointer flex-col items-center gap-2 font-bold text-foreground dark:text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-electric-cyan"
           aria-label="Scroll to categories"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

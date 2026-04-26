@@ -62,7 +62,7 @@ export function NewsReviewCard({ article }: NewsReviewCardProps) {
             {/* Quote-style title */}
             <div className="relative">
               <span className="absolute -left-2 -top-2 text-4xl text-electric-cyan/20">"</span>
-              <h3 className="text-lg font-bold text-white leading-snug pl-4 group-hover:text-electric-cyan transition-colors">
+              <h3 className="text-lg font-bold text-foreground leading-snug pl-4 group-hover:text-electric-cyan transition-colors">
                 {article.title}
               </h3>
             </div>
@@ -80,7 +80,7 @@ export function NewsReviewCard({ article }: NewsReviewCardProps) {
                 </span>
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
+                <div className="text-sm font-medium text-foreground">
                   {article.author.name}
                 </div>
                 <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">

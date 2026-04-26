@@ -49,12 +49,12 @@ function QuoteCard({ quote }: { quote: NewsQuote }) {
         <span className="absolute -left-2 -top-4 text-5xl text-electric-cyan/20 font-serif">
           &ldquo;
         </span>
-        <blockquote className="pl-4 text-lg leading-relaxed text-white italic">
+        <blockquote className="pl-4 text-lg leading-relaxed text-foreground italic">
           {quote.quote}
         </blockquote>
       </div>
       <footer className="mt-4 pt-4 border-t border-electric-cyan/20">
-        <div className="font-semibold text-white">{quote.author}</div>
+        <div className="font-semibold text-foreground">{quote.author}</div>
         <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan/70">
           {quote.role}
         </div>
@@ -88,7 +88,7 @@ export function NewsContentBody({ detail }: NewsContentBodyProps) {
 
         {/* Key takeaways */}
         <motion.div variants={itemVariants} className="space-y-4">
-          <h2 className="text-2xl font-bold text-white">Key Takeaways</h2>
+          <h2 className="text-2xl font-bold text-foreground">Key Takeaways</h2>
           <ul className="space-y-3">
             {detail.takeaways.map((takeaway, index) => (
               <motion.li

@@ -8,7 +8,7 @@
 /* ===== LIGHT THEME (Default) ===== */
 :root {
   /* Core Brand Colors - Light Mode */
-  --electric-cyan: #00f3bd;
+  --electric-cyan: #00b2a9;
   --electric-cyan-dim: rgba(0, 243, 189, 0.6);
   --electric-cyan-soft: #c2fff1;
   --electric-cyan-mid: #00c99d;
@@ -328,6 +328,18 @@
   }
 }
 
+@media (min-width: 640px) {
+  .section-padding-top {
+    padding-top: 5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .section-padding-bottom {
+    padding-bottom: 5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .section-padding {
     padding-top: 6rem;
@@ -335,9 +347,33 @@
   }
 }
 
+@media (min-width: 768px) {
+  .section-padding-top {
+    padding-top: 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-padding-bottom {
+    padding-bottom: 6rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .section-padding {
     padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding-top {
+    padding-top: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding-bottom {
     padding-bottom: 4rem;
   }
 }
@@ -510,4 +546,24 @@
   .values-grid {
     grid-auto-rows: minmax(380px, 1fr);
   }
+}
+
+/* ===== TOC STICKY-TO-FIXED HYBRID PATTERN ===== */
+/*
+   IntersectionObserver-based sticky positioning that automatically switches
+   to fixed when the element's containing block (grid cell) scrolls off viewport.
+
+   CSS variables are set by useStickyWithFallback hook:
+   - --toc-position-mode: 'sticky' or 'fixed'
+   - --toc-top: offset in pixels
+   - --toc-z-index: z-index value
+*/
+[data-sticky-toc] {
+  position: var(--toc-position-mode, sticky);
+  top: var(--toc-top, 150px);
+  z-index: var(--toc-z-index, 10);
+  /* Prevent layout shifts during position changes */
+  will-change: transform;
+  /* Ensure smooth transitions without animation lag */
+  transition: none;
 }

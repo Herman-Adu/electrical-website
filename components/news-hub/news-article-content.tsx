@@ -192,7 +192,7 @@ function StoryTimelineRow({
               <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
                 {item.label}
               </p>
-              <h3 className="mt-1 font-semibold text-white">
+              <h3 className="mt-1 font-semibold text-foreground">
                 {titleWords.map((word, wordIndex) =>
                   shouldReduce ? (
                     <AnimatedWord
@@ -289,7 +289,7 @@ export function NewsArticleContent({
   timelineItems,
 }: NewsArticleContentProps) {
   return (
-    <div className="space-y-16">
+    <div className="space-y-18">
       {/* Introduction Section */}
       <motion.section
         id="overview"
@@ -325,9 +325,9 @@ export function NewsArticleContent({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="space-y-6"
+          //className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Project Details</h2>
+          <h2 className="text-2xl font-bold text-foreground">Project Details</h2>
           {detail.body.map((paragraph, index) => (
             <p
               key={`body-${index}`}
@@ -349,7 +349,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Project Scope</h2>
+          <h2 className="text-2xl font-bold text-foreground">Project Scope</h2>
           <motion.ul
             variants={staggerContainer}
             className="grid gap-3 sm:grid-cols-2"
@@ -382,7 +382,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl font-bold text-foreground">
             Methodology & Approach
           </h2>
           <div className="space-y-4">
@@ -408,7 +408,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl font-bold text-foreground">
             Challenges & Solutions
           </h2>
           <motion.div variants={staggerContainer} className="space-y-4">
@@ -423,7 +423,7 @@ export function NewsArticleContent({
                     <span className="flex h-6 w-6 items-center justify-center rounded-md bg-electric-cyan/20 font-mono text-[10px] text-electric-cyan">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-semibold text-white">
+                    <h3 className="font-semibold text-foreground">
                       {challenge.title}
                     </h3>
                   </div>
@@ -462,7 +462,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Project Timeline</h2>
+          <h2 className="text-2xl font-bold text-foreground">Project Timeline</h2>
           <StoryTimeline items={timelineItems} />
         </motion.section>
       )}
@@ -477,7 +477,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl font-bold text-foreground">
             Technical Specifications
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -495,7 +495,7 @@ export function NewsArticleContent({
                       <dt className="text-sm text-foreground/60">
                         {item.label}
                       </dt>
-                      <dd className="font-mono text-sm font-medium text-white">
+                      <dd className="font-mono text-sm font-medium text-foreground">
                         {item.value}
                       </dd>
                     </div>
@@ -516,7 +516,7 @@ export function NewsArticleContent({
         viewport={{ once: true, margin: "-50px" }}
         className="space-y-6"
       >
-        <h2 className="text-2xl font-bold text-white">Key Takeaways</h2>
+        <h2 className="text-2xl font-bold text-foreground">Key Takeaways</h2>
         <motion.ul variants={staggerContainer} className="space-y-3">
           {detail.takeaways.map((takeaway, index) => (
             <motion.li
@@ -543,7 +543,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Results & Outcomes</h2>
+          <h2 className="text-2xl font-bold text-foreground">Results & Outcomes</h2>
           <div className="rounded-xl border border-electric-cyan/30 bg-gradient-to-br from-electric-cyan/10 to-transparent p-6 space-y-4">
             {detail.results.map((result, index) => (
               <div key={`result-${index}`} className="flex items-start gap-3">
@@ -567,7 +567,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Project Gallery</h2>
+          <h2 className="text-2xl font-bold text-foreground">Project Gallery</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {detail.gallery.map((image, index) => (
               <motion.div
@@ -584,7 +584,7 @@ export function NewsArticleContent({
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 {image.caption && (
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform">
-                    <p className="text-sm text-white">{image.caption}</p>
+                    <p className="text-sm text-foreground">{image.caption}</p>
                   </div>
                 )}
               </motion.div>
@@ -603,7 +603,7 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-white">Conclusion</h2>
+          <h2 className="text-2xl font-bold text-foreground">Conclusion</h2>
           {detail.conclusion.map((paragraph, index) => (
             <p
               key={`conclusion-${index}`}
@@ -668,14 +668,14 @@ function QuoteCard({
         </svg>
       </div>
       <p
-        className={`leading-7 text-white ${isPrimary ? "text-lg italic" : "text-base"}`}
+        className={`leading-7 text-foreground ${isPrimary ? "text-lg italic" : "text-base"}`}
       >
         {quote.quote}
       </p>
       <footer className="mt-4 flex items-center gap-3">
         <div className="h-px flex-1 bg-electric-cyan/20" />
         <div className="text-right">
-          <p className="font-medium text-white">{quote.author}</p>
+          <p className="font-medium text-foreground">{quote.author}</p>
           <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-electric-cyan/70">
             {quote.role}
           </p>

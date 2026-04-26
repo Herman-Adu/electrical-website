@@ -71,7 +71,7 @@ export function MultiStepFormWrapper({
       </div>
 
       {/* Form Content */}
-      <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-lg">
+      <div className="bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 rounded-xl p-6 md:p-8 shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)]">
         {showRequiredFieldsNote && (
           <p className="mb-6 text-xs text-muted-foreground">
             Fields marked <span className="text-destructive">*</span> are

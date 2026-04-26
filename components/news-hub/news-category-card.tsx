@@ -44,7 +44,7 @@ export function NewsCategoryCard({
               <span className="text-2xl">{icon}</span>
             </div>
             <div className="space-y-3">
-              <h2 className="text-2xl font-bold text-white group-hover:text-electric-cyan transition-colors">
+              <h2 className="text-2xl font-bold text-foreground group-hover:text-electric-cyan transition-colors">
                 {category.label}
               </h2>
               <p className="text-sm leading-6 text-foreground/70">

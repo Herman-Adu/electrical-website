@@ -53,7 +53,7 @@ export function NewsHubFeed({
         <div className="flex items-center justify-between gap-4 px-1">
           <div>
             <NewsPulseIndicator label="Live Feed" variant="live" />
-            <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
               Latest Articles
             </h2>
           </div>
