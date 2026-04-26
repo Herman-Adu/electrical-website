@@ -187,17 +187,17 @@ export function ProjectsHero({
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
-            <span className="font-mono text-xs tracking-[0.3em] text-foreground/80 dark:text-electric-cyan/80 uppercase font-bold">
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80 font-bold" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               Our Portfolio
             </span>
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80 font-bold" />
           </motion.div>
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineered</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Delivery
             </span>
             <span className="block">Proven Results</span>
@@ -206,7 +206,7 @@ export function ProjectsHero({
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             A data-driven portfolio of industrial, commercial, and critical
             infrastructure electrical projects delivered with strict safety,
@@ -216,7 +216,7 @@ export function ProjectsHero({
           {/* Category pills */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
+            className="flex flex-wrap items-center justify-center gap-3 mb-14"
           >
             <Link
               href="/projects"
@@ -254,7 +254,7 @@ export function ProjectsHero({
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -274,7 +274,7 @@ export function ProjectsHero({
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToGrid}
           type="button"
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Explore Projects"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

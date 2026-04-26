@@ -267,7 +267,7 @@ export function ProjectsCategoriesHero({
           <motion.nav
             variants={itemVariants}
             aria-label="Breadcrumb"
-            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground mb-8"
+            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase font-bold tracking-[0.14em] text-foreground mb-8"
           >
             <Link
               href="/projects"
@@ -308,11 +308,11 @@ export function ProjectsCategoriesHero({
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="h-px w-12 bg-electric-cyan font-bold" />
             <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               {categoryCount} Specialist Sectors
             </span>
-            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="h-px w-12 bg-electric-cyan font-bold" />
           </motion.div>
 
           {/* Headline */}
@@ -321,7 +321,7 @@ export function ProjectsCategoriesHero({
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Browse by</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Sector
             </span>
           </motion.h1>
@@ -329,7 +329,7 @@ export function ProjectsCategoriesHero({
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Each sector represents a distinct area of electrical engineering
             expertise. Explore our project portfolio by the type of environment
@@ -368,7 +368,7 @@ export function ProjectsCategoriesHero({
           {/* Meta bar */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -376,7 +376,7 @@ export function ProjectsCategoriesHero({
             <span className="hidden sm:inline opacity-40">|</span>
             <span>24/7 Emergency</span>
             <span className="hidden sm:inline opacity-40">|</span>
-            <span>15+ Years Experience</span>
+            <span>10+ Years Experience</span>
           </motion.div>
         </motion.div>
       }
@@ -387,7 +387,7 @@ export function ProjectsCategoriesHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.5 }}
           onClick={scrollToCategories}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-electric-cyan dark:text-white/50"
+          className="flex cursor-pointer flex-col items-center gap-2 font-bold text-foreground dark:text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-electric-cyan"
           aria-label="Scroll to categories"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

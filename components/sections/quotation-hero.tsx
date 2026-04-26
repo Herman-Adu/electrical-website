@@ -190,7 +190,7 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Request Your</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-(--electric-cyan)/10">
               Quotation
             </span>
             <span className="block">Today</span>

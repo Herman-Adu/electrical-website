@@ -113,7 +113,7 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
         </>
       }
       content={
-        <div className="w-full px-4 text-center py-16 sm:py-20">
+        <div className="w-full px-4 text-center py-8 sm:py-8">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -143,11 +143,11 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              <span className="h-px w-8 bg-electric-cyan/60" />
+              <span className="h-px w-8 bg-electric-cyan/60 font-bold" />
               <span className="font-mono text-xs tracking-[0.3em] uppercase font-bold text-electric-cyan">
                 {project.clientSector} Sector
               </span>
-              <span className="h-px w-8 bg-electric-cyan/60" />
+              <span className="h-px w-8 bg-electric-cyan/60 font-bold" />
             </motion.div>
 
             {/* Two-tone title — first half white, rest electric cyan */}
@@ -199,7 +199,7 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
             {/* Meta */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+              className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/70 font-bold uppercase"
             >
               <span>NICEIC Approved</span>
               <span className="hidden sm:inline opacity-40">|</span>

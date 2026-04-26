@@ -182,7 +182,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
@@ -208,7 +208,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Engineering</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Excellence
             </span>
             <span className="block">Delivered</span>
@@ -217,7 +217,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Comprehensive electrical solutions from high-voltage industrial
             systems to intelligent residential installations — all backed by 15+
@@ -227,7 +227,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           {/* Category pills */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
+            className="flex flex-wrap items-center justify-center gap-3 mb-14"
           >
             {serviceCategories.map((cat, index) => (
               <motion.div
@@ -254,7 +254,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline">|</span>
@@ -273,7 +273,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToGrid}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to services"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

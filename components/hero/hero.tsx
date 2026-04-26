@@ -272,7 +272,7 @@ export function Hero() {
           {/* Main Headline */}
           <motion.h1 variants={slideInVariants} className={HERO_H1_SCREEN}>
             <span className="block">Powering the</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Next Generation
             </span>
             <span className="block">of Innovation</span>
@@ -281,7 +281,7 @@ export function Hero() {
           {/* Sub headline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Expert electrical engineering and installations for commercial and
             industrial frontiers. Precision-engineered power solutions delivered
@@ -319,7 +319,7 @@ export function Hero() {
           {/* Technical Metadata */}
           <motion.div
             variants={statsContainerVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase"
+            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>Est. 2024</span>
             <span className="hidden sm:inline">|</span>
@@ -336,7 +336,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to services"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

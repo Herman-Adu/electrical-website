@@ -27,7 +27,7 @@ export function ContactIntro() {
 
       <section className="section-container border-b border-foreground/20 dark:border-border/40 bg-muted/20 pt-18 pb-10 sm:pt-14 sm:pb-12">
         <div className="section-content">
-          <div className="relative overflow-hidden rounded-2xl border border-[hsl(174_100%_35%)]/25 dark:border-electric-cyan/25 bg-card/80 px-6 py-8 sm:px-8 sm:py-10">
+          <div className="relative overflow-hidden rounded-2xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)] px-6 py-8 sm:px-8 sm:py-10">
             <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
             <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-[hsl(174_100%_35%)]/40 dark:via-electric-cyan/40 to-transparent" />
 
@@ -64,7 +64,7 @@ export function ContactIntro() {
               </div>
 
               <div className="lg:col-span-2">
-                <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-background/70 p-5 backdrop-blur-sm">
+                <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-white/60 dark:bg-background/60 p-5 backdrop-blur-sm">
                   <div className="mb-4 flex items-center gap-2 text-[hsl(174_100%_35%)] dark:text-electric-cyan">
                     <Clock className="h-4 w-4" />
                     <span className="font-mono text-[11px] tracking-[0.18em] uppercase">

@@ -35,12 +35,12 @@ export const HERO_H1_COMPACT_BLUEPRINT =
 
 /** category tier · photographic dark-overlay background (project-category, news-category) */
 export const HERO_H1_CATEGORY_IMAGE =
-  "text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white" as const;
+  "text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-6 text-white/80" as const;
 
 /** detail tier · photographic dark-overlay · article titles (news-detail) */
 export const HERO_H1_DETAIL_ARTICLE =
-  "mx-auto mb-6 max-w-4xl text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white" as const;
+  "mx-auto mb-6 max-w-4xl text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white/80" as const;
 
 /** detail tier · photographic dark-overlay · uppercase titles (project-detail) */
 export const HERO_H1_DETAIL_PROJECT =
-  "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.0] text-white" as const;
+  "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.0] text-whit/80e" as const;

@@ -200,18 +200,18 @@ export function ProjectCategoryHero({
           >
             <Link
               href="/projects"
-              className="hover:text-electric-cyan transition-colors"
+              className="text-white/90 hover:text-electric-cyan transition-colors"
             >
               Projects
             </Link>
-            <span className="text-white/30">/</span>
+            <span className="text-white/80">/</span>
             <Link
               href="/projects/category"
               className="hover:text-electric-cyan transition-colors"
             >
               Categories
             </Link>
-            <span className="text-white/30">/</span>
+            <span className="text-white/80">/</span>
             <span className="text-electric-cyan">{category.label}</span>
           </motion.nav>
 
@@ -254,7 +254,7 @@ export function ProjectCategoryHero({
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
             <span className="block">{category.label}</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-red/500 via-electric-cyan to-red/500">
               {config.accentWord}
             </span>
           </motion.h1>
@@ -262,7 +262,7 @@ export function ProjectCategoryHero({
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-white/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed drop-shadow-md"
+            className="text-base sm:text-lg text-white/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
           >
             {category.description}
           </motion.p>
@@ -299,7 +299,7 @@ export function ProjectCategoryHero({
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80  font-bold uppercase"
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -318,7 +318,7 @@ export function ProjectCategoryHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToProjects}
-          className="flex cursor-pointer flex-col items-center gap-2 text-white/60 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 transition-colors hover:text-electric-cyan"
           aria-label="Scroll to projects"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

@@ -236,7 +236,7 @@ export function AboutHero() {
           {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Powering the</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-(--electric-cyan)/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Next Generation
             </span>
             <span className="block">of Innovation</span>
@@ -245,7 +245,7 @@ export function AboutHero() {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Where engineering excellence meets genuine community commitment.
             Delivering gold-standard electrical solutions across commercial,
@@ -278,7 +278,7 @@ export function AboutHero() {
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] dark:text-foreground/80 uppercase font-bold"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
@@ -297,7 +297,7 @@ export function AboutHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to services"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

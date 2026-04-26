@@ -32,7 +32,7 @@ function useCountUp(
   target: number | null,
   duration: number,
   isInView: boolean,
-  shouldReduce: boolean | null
+  shouldReduce: boolean | null,
 ) {
   const [count, setCount] = useState(0);
 
@@ -126,7 +126,7 @@ function KpiTile({
       </motion.p>
 
       {/* Label */}
-      <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/60">
+      <p className="font-mono text-[9px] uppercase font-bold tracking-[0.16em] text-white/80">
         {label}
       </p>
     </motion.div>

@@ -178,16 +178,17 @@ export function NewsHubHero({
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
+          {/* Status Label */}
           <motion.div
             variants={flickerVariants}
-            className="mb-8 flex items-center justify-center gap-3"
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan/50 dark:border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
               <Activity
                 size={14}
-                className="animate-pulse text-electric-cyan"
+                className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 font-bold uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 News Hub // {statusText}
               </span>
             </div>
@@ -197,23 +198,23 @@ export function NewsHubHero({
             variants={itemVariants}
             className="mb-6 flex items-center justify-center gap-4"
           >
-            <span className="h-px w-12 bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan/80 font-bold" />
             <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase font-bold">
               Editorial Systems
             </span>
-            <span className="h-px w-12 bg-electric-cyan/80" />
+            <span className="h-px w-12 bg-electric-cyan/80 font-bold" />
           </motion.div>
 
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
             <span className="block">Editorial</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Command Centre
             </span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Live editorial hub for campaigns, case studies, insights, and
             partner updates. Powered by typed content models ready for scalable
@@ -267,7 +268,7 @@ export function NewsHubHero({
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/80 dark:text-foreground/80  font-bold uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>{totalArticles} Seeded Stories</span>
             <span className="hidden opacity-40 sm:inline">|</span>
@@ -285,7 +286,7 @@ export function NewsHubHero({
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToFeed}
           type="button"
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-[hsl(174_100%_35%)]"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Explore News Hub"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

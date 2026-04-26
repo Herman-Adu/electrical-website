@@ -21,6 +21,8 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsCategory } from "@/types/news";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 const categoryConfig: Record<
   string,
@@ -124,7 +126,7 @@ export function NewsCategoryHero({
 
   const scrollToArticles = () => {
     const el = document.getElementById("category-articles");
-    if (el) scrollToElementWithOffset(el, { pageType: 'article' });
+    if (el) scrollToElementWithOffset(el, { pageType: "article" });
   };
 
   return (
@@ -186,36 +188,38 @@ export function NewsCategoryHero({
           animate={isLoaded ? "visible" : "hidden"}
           className="mx-auto max-w-5xl px-4 text-center"
         >
+          {/* Status indicator */}
           <motion.div
-            variants={flickerVariants}
-            className="mb-6 flex items-center justify-center gap-3"
+            variants={itemVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Category // {statusText}
               </span>
             </div>
           </motion.div>
 
+          {/* Breadcrumb */}
           <motion.nav
             variants={itemVariants}
             aria-label="Breadcrumb"
-            className="mb-6 flex items-center justify-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/60 uppercase"
+            className="mb-6 flex items-center justify-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/90 uppercase font-bold"
           >
             <Link
               href="/news-hub"
-              className="transition-colors hover:text-electric-cyan"
+              className="transition-colors hover:text-electric-cyan text-white/90"
             >
               News Hub
             </Link>
             <span className="text-white/30">/</span>
             <Link
               href="/news-hub/category"
-              className="transition-colors hover:text-electric-cyan"
+              className="transition-colors hover:text-electric-cyan text-white/90"
             >
               Categories
             </Link>
@@ -223,56 +227,104 @@ export function NewsCategoryHero({
             <span className="text-electric-cyan">{category.label}</span>
           </motion.nav>
 
+          {/* Icon */}
           <motion.div
             variants={itemVariants}
-            className="mb-6 flex justify-center"
+            className="flex justify-center mb-6"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-electric-cyan/40 bg-black/40 backdrop-blur-sm shadow-[0_0_24px_rgba(0,243,189,0.15)]">
-              {config.icon}
+            <div className="relative">
+              <div className="w-16 h-16 rounded-xl border border-white bg-white/10 flex items-center justify-center backdrop-blur-sm">
+                <span className="flex items-center justify-center w-9 h-9 text-white">
+                  {config.icon}
+                </span>
+              </div>
+              {/* Glow ring */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
           </motion.div>
 
+          {/* Article count eyebrow */}
           <motion.div
             variants={itemVariants}
-            className="mb-4 flex items-center justify-center gap-4"
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-electric-cyan/60" />
-            <span className="font-mono text-xs tracking-[0.3em] text-electric-cyan/80 uppercase">
+            <span className="h-px w-12 bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               {articleCount} Article{articleCount !== 1 ? "s" : ""}
             </span>
-            <span className="h-px w-12 bg-electric-cyan/60" />
+            <span className="h-px w-12 bg-electric-cyan" />
           </motion.div>
 
+          {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
             <span className="block">{category.label}</span>
-            <span className="block bg-linear-to-r from-electric-cyan via-[var(--electric-cyan)] to-electric-cyan/80 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,243,189,0.3)]">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               {config.accentWord}
             </span>
           </motion.h1>
 
+          {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-10 max-w-2xl text-base leading-relaxed font-light text-white/80 drop-shadow-md sm:text-lg"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {category.description}
           </motion.p>
 
+          {/* Category hero action buttons */}
           <motion.div
             variants={itemVariants}
-            className="mb-10 flex flex-wrap items-center justify-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-3 mb-10"
           >
-            <Link
-              href="/news-hub"
-              className="rounded-full border border-white/30 bg-white/10 px-5 py-2.5 font-mono text-[11px] tracking-widest text-white uppercase backdrop-blur-sm transition-all duration-300 hover:border-electric-cyan/60 hover:text-electric-cyan"
+            <Button
+              asChild
+              className={cn(
+                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
+                "bg-white/10 border-electric-cyan/50 ",
+                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
+                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
+              )}
             >
-              All News
-            </Link>
-            <Link
-              href="/news-hub/category"
-              className="rounded-full border border-electric-cyan/40 bg-electric-cyan/15 px-5 py-2.5 font-mono text-[11px] tracking-widest text-electric-cyan uppercase backdrop-blur-sm transition-all duration-300 hover:bg-electric-cyan/25"
+              <Link href="/projects">
+                <span>All News</span>
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              className={cn(
+                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
+                "bg-white/10 border-electric-cyan/50 ",
+                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
+                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
+              )}
             >
-              All Categories
-            </Link>
+              <Link href="/news-hub/category">
+                <span>All Categories</span>
+              </Link>
+            </Button>
+          </motion.div>
+
+          {/* Meta */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
+          >
+            <span>NICEIC Approved</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>Part P Certified</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>24/7 Emergency</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>4 Active Articles</span>
           </motion.div>
         </motion.div>
       }
@@ -283,7 +335,7 @@ export function NewsCategoryHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToArticles}
-          className="flex cursor-pointer flex-col items-center gap-2 text-white/60 transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 font-bold hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to articles"
           type="button"
         >

@@ -162,23 +162,23 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           animate="visible"
           className="mx-auto max-w-4xl px-4 text-center"
         >
-          {/* Status label */}
+          {/* Status Label */}
           <motion.div
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan/50 dark:border-electric-cyan pl-4 font-semibold">
+            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
                 Contact // Ready
               </span>
             </div>
           </motion.div>
 
-          {/* Eyebrow */}
+          {/* Status Label Eyebrow */}
           <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
@@ -200,7 +200,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Contact</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan via-(--electric-cyan-mid) to-(--electric-cyan-strong)">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Nexgen Electrical
             </span>
             <span className="block">Innovations</span>
@@ -209,7 +209,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           {/* Sub */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground/90 dark:text-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {hero.description}
           </motion.p>
@@ -233,7 +233,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
                   <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
                     {item.title}
                   </p>
-                  <p className="mt-1 hidden text-xs text-foreground/70 dark:text-foreground/70 sm:block">
+                  <p className="mt-1 hidden text-xs text-foreground/90 dark:text-foreground/70 sm:block">
                     {item.description}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-foreground/80 dark:text-foreground/80 uppercase font-bold"
+            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
@@ -263,7 +263,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.45 }}
           onClick={scrollToContactForm}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground/80 dark:text-foreground/80 transition-colors hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to contact form"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

@@ -54,7 +54,8 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
   const scrollToArticle = () => {
     const articleContent = document.getElementById("article-content");
-    if (articleContent) scrollToElementWithOffset(articleContent, { pageType: 'article' });
+    if (articleContent)
+      scrollToElementWithOffset(articleContent, { pageType: "article" });
   };
 
   return (
@@ -116,33 +117,47 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
           animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
+          {/* Status indicator */}
           <motion.div
-            variants={flickerVariants}
-            className="mb-6 flex items-center justify-center gap-3"
+            variants={itemVariants}
+            className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-electric-cyan pl-4">
+            <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-electric-cyan/80 uppercase">
-                Article // Live
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
+                Article // Active
               </span>
             </div>
+          </motion.div>
+
+          {/* Eyebrow — sector label */}
+          <motion.div
+            className="mb-6 flex items-center justify-center gap-3"
+            initial={shouldReduce ? {} : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+          >
+            <span className="h-px w-8 bg-electric-cyan/60 font-bold" />
+            <span className="font-mono text-xs tracking-[0.3em] uppercase font-bold text-electric-cyan">
+              <span className="font-mono text-[10px] tracking-[0.18em]">
+                {formatDate(article.publishedAt)}
+              </span>{" "}
+              <span className="font-mono text-[10px] tracking-[0.18em]">
+                {article.readTime}
+              </span>
+            </span>
+            <span className="h-px w-8 bg-electric-cyan/60 font-bold" />
           </motion.div>
 
           <motion.div
             variants={itemVariants}
             className="mb-4 flex flex-wrap items-center justify-center gap-3"
           >
-            <span className="rounded-full border border-electric-cyan/30 bg-electric-cyan/10 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-electric-cyan uppercase">
+            <span className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono font-bold text-lg tracking-[0.18em] text-electric-cyan uppercase">
               {article.categoryLabel}
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.18em] text-white/70 uppercase">
-              {formatDate(article.publishedAt)}
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.18em] text-white/70 uppercase">
-              {article.readTime}
             </span>
           </motion.div>
 
@@ -152,20 +167,20 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-8 max-w-3xl text-base leading-relaxed font-light text-white/80 sm:text-lg"
+            className="mt-8 text-base sm:text-lg leading-relaxed text-white/80 max-w-2xl mx-auto"
           >
             {article.description}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-3"
+            className="flex flex-wrap justify-center gap-3 mt-8"
           >
             <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm">
               <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                 Author
               </div>
-              <div className="mt-1 font-semibold text-white">
+              <div className="mt-1 font-semibold text-white/80">
                 {article.author.name}
               </div>
             </div>
@@ -174,7 +189,7 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
                 <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
                   {article.spotlightMetric.label}
                 </div>
-                <div className="mt-1 font-semibold text-electric-cyan">
+                <div className="mt-1 font-semibold text-white/80">
                   {article.spotlightMetric.value}
                 </div>
               </div>
