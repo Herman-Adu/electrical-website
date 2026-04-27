@@ -142,8 +142,8 @@ export function AdditionalRequirementsStep({
                     selectedCompliance.includes(
                       option.value as QuotationAdditionalInput["complianceRequirements"][number],
                     )
-                      ? "border-accent bg-accent/10 text-foreground"
-                      : "border-input hover:border-accent/50 text-muted-foreground hover:text-foreground",
+                      ? "border-electric-cyan bg-electric-cyan/10 text-foreground"
+                      : "border-input hover:border-electric-cyan/50 text-muted-foreground hover:text-foreground",
                   )}
                 >
                   <div
@@ -152,7 +152,7 @@ export function AdditionalRequirementsStep({
                       selectedCompliance.includes(
                         option.value as QuotationAdditionalInput["complianceRequirements"][number],
                       )
-                        ? "bg-accent border-accent"
+                        ? "bg-electric-cyan border-electric-cyan"
                         : "border-input",
                     )}
                   >
@@ -160,7 +160,7 @@ export function AdditionalRequirementsStep({
                       option.value as QuotationAdditionalInput["complianceRequirements"][number],
                     ) && (
                       <svg
-                        className="w-3 h-3 text-accent-foreground"
+                        className="w-3 h-3 text-white"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -230,7 +230,7 @@ export function AdditionalRequirementsStep({
               className={cn(
                 "rounded-lg border p-3 transition-colors",
                 watch("termsAccepted")
-                  ? "border-accent/40"
+                  ? "border-electric-cyan/40"
                   : "border-destructive/50",
               )}
             >

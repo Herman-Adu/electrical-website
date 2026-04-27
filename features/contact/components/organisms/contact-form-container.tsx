@@ -6,7 +6,8 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, startTransition, useState } from "react";
+import { usePathname } from "next/navigation";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { MultiStepFormWrapper } from "@/components/organisms/multi-step-form-wrapper";
 import { PowerSurge } from "@/components/animations/power-surge";
@@ -20,10 +21,10 @@ import { MessageDetailsStep } from "./contact-steps/message-details-step";
 import { ContactReviewStep } from "./contact-steps/contact-review-step";
 
 const CONTACT_PROGRESS_ANCHOR_ID = "contact-form-progress-anchor";
-const CONTACT_SCROLL_TOP_GAP = 28;
+const CONTACT_SCROLL_TOP_GAP = 116;
 const CONTACT_SUCCESS_ANCHOR_ID = "contact-success-anchor";
-const CONTACT_SUCCESS_SCROLL_TOP_GAP = 8;
-const CONTACT_SUCCESS_VISIBILITY_MS = 5000;
+const CONTACT_SUCCESS_SCROLL_TOP_GAP = 116;
+const CONTACT_SUCCESS_VISIBILITY_MS = 30000;
 
 const CONTACT_STEPS: FormStepConfig[] = [
   { id: "contact-info", title: "Contact Info", description: "Your details" },
@@ -42,10 +43,16 @@ export function ContactFormContainer() {
     resetForm,
   } = useContactStore();
 
+  const pathname = usePathname();
+
   const handleStartNew = () => {
-    resetForm();
-    useContactStore.persist.clearStorage();
+    startTransition(() => {
+      useContactStore.getState().setSubmitted(false);
+      resetForm();
+      useContactStore.persist.clearStorage();
+    });
   };
+  const formRef = useRef<HTMLDivElement>(null);
   const [surgeTrigger, setSurgeTrigger] = useState(0);
   const previousStepRef = useRef<number | null>(null);
   const successTimerRef = useRef<number | null>(null);
@@ -54,6 +61,14 @@ export function ContactFormContainer() {
     resetForm();
     useContactStore.persist.clearStorage();
   }, [resetForm]);
+
+  useEffect(() => {
+    if (pathname !== "/contact") return;
+    startTransition(() => {
+      resetForm();
+      useContactStore.persist.clearStorage();
+    });
+  }, [pathname, resetForm]);
 
   useEffect(() => {
     if (previousStepRef.current === null) {
@@ -95,9 +110,11 @@ export function ContactFormContainer() {
     }
 
     successTimerRef.current = window.setTimeout(() => {
-      useContactStore.getState().setSubmitted(false);
-      resetForm();
-      useContactStore.persist.clearStorage();
+      startTransition(() => {
+        useContactStore.getState().setSubmitted(false);
+        resetForm();
+        useContactStore.persist.clearStorage();
+      });
     }, CONTACT_SUCCESS_VISIBILITY_MS);
 
     return () => {
@@ -115,6 +132,7 @@ export function ContactFormContainer() {
           referenceId={contactReferenceId || ""}
           formType="contact"
           onStartNew={handleStartNew}
+          onDismiss={handleStartNew}
         />
       </div>
     );
@@ -122,28 +140,30 @@ export function ContactFormContainer() {
 
   return (
     <>
-      <PowerSurge trigger={surgeTrigger} />
+      <PowerSurge trigger={surgeTrigger} containerRef={formRef} />
 
-      <MultiStepFormWrapper
-        title=""
-        description=""
-        steps={CONTACT_STEPS}
-        currentStep={currentStep - 1}
-        className="w-full max-w-3xl px-1 sm:px-0"
-        progressAnchorId={CONTACT_PROGRESS_ANCHOR_ID}
-        onStepClick={(stepIndex) => {
-          const stepNumber = stepIndex + 1;
-          if (stepNumber <= currentStep) {
-            setCurrentStep(stepNumber);
-          }
-        }}
-      >
-        {currentStep === 1 && <ContactInfoStep key="step-1" />}
-        {currentStep === 2 && <InquiryTypeStep key="step-2" />}
-        {currentStep === 3 && <ReferenceLinkingStep key="step-3" />}
-        {currentStep === 4 && <MessageDetailsStep key="step-4" />}
-        {currentStep === 5 && <ContactReviewStep key="step-5" />}
-      </MultiStepFormWrapper>
+      <div ref={formRef}>
+        <MultiStepFormWrapper
+          title=""
+          description=""
+          steps={CONTACT_STEPS}
+          currentStep={currentStep - 1}
+          className="w-full max-w-3xl px-1 sm:px-0"
+          progressAnchorId={CONTACT_PROGRESS_ANCHOR_ID}
+          onStepClick={(stepIndex) => {
+            const stepNumber = stepIndex + 1;
+            if (stepNumber <= currentStep) {
+              setCurrentStep(stepNumber);
+            }
+          }}
+        >
+          {currentStep === 1 && <ContactInfoStep key="step-1" />}
+          {currentStep === 2 && <InquiryTypeStep key="step-2" />}
+          {currentStep === 3 && <ReferenceLinkingStep key="step-3" />}
+          {currentStep === 4 && <MessageDetailsStep key="step-4" />}
+          {currentStep === 5 && <ContactReviewStep key="step-5" />}
+        </MultiStepFormWrapper>
+      </div>
     </>
   );
 }

@@ -13,6 +13,7 @@
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useFormStore } from "../../../hooks/use-form-store";
 import { submitServiceRequest } from "../../../api/service-request";
@@ -112,9 +113,14 @@ export function ReviewStep({ onSubmitSuccess }: ReviewStepProps) {
     >
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Review Your Request
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-electric-cyan/10 text-electric-cyan">
+              <CheckCircle className="h-5 w-5" />
+            </div>
+            <h2 className="text-2xl font-semibold text-foreground">
+              Review Your Request
+            </h2>
+          </div>
           <p className="text-muted-foreground">
             Please review your information before submitting
           </p>
@@ -268,7 +274,7 @@ export function ReviewStep({ onSubmitSuccess }: ReviewStepProps) {
               !isTurnstileVerified ||
               !turnstileSiteKey
             }
-            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
+            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             {isSubmitting ? (
               <>

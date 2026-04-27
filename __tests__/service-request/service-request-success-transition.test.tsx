@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { MultiStepFormContainer } from "../../features/service-request/components/organisms/multi-step-form-container";
+import { ServiceRequestFormContainer } from "../../features/service-request/components/organisms/service-request-form-container";
 
 const mocks = vi.hoisted(() => {
   const mockResetForm = vi.fn();
@@ -57,6 +57,10 @@ vi.mock("@/components/molecules/unified-success-message", () => ({
   ),
 }));
 
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(() => "/services"),
+}));
+
 vi.mock("@/lib/scroll-to-section", () => ({
   scrollToElementWithOffset: vi.fn(),
 }));
@@ -93,7 +97,7 @@ vi.mock(
   }),
 );
 
-describe("MultiStepFormContainer success transition", () => {
+describe("ServiceRequestFormContainer success transition", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     mocks.mockResetForm.mockClear();
@@ -111,7 +115,7 @@ describe("MultiStepFormContainer success transition", () => {
   });
 
   it("renders success state deterministically after review submit callback", () => {
-    render(<MultiStepFormContainer />);
+    render(<ServiceRequestFormContainer />);
 
     mocks.mockResetForm.mockClear();
     mocks.clearStorage.mockClear();
@@ -127,7 +131,7 @@ describe("MultiStepFormContainer success transition", () => {
   });
 
   it("returns to form review state after success timeout", () => {
-    render(<MultiStepFormContainer />);
+    render(<ServiceRequestFormContainer />);
 
     fireEvent.click(
       screen.getByRole("button", { name: "Trigger Submit Success" }),
@@ -135,7 +139,7 @@ describe("MultiStepFormContainer success transition", () => {
     expect(screen.getByTestId("service-success")).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(5000);
+      vi.advanceTimersByTime(30000);
     });
 
     expect(

@@ -41,7 +41,7 @@ export function QuickContactCard() {
       <div className="p-4 bg-electric-cyan/10 border border-accent/20 border-b ">
         <div className="flex items-center gap-2">
           <MessageSquare className="h-5 w-5 text-electric-cyan dark:text-accent" />
-          <h3 className="font-semibold text-foreground dark:text-foreground/80">
+          <h3 className="font-semibold text-electric-cyan dark:text-foreground/80">
             Quick Contact
           </h3>
         </div>

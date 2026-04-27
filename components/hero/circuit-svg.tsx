@@ -78,9 +78,9 @@ export function CircuitSVG() {
           
           {/* Gradient for circuit lines - theme-aware */}
           <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={isDarkMode ? "hsl(174, 100%, 50%)" : "#64748b"} stopOpacity={isDarkMode ? "0.1" : "0.15"} />
-            <stop offset="50%" stopColor={isDarkMode ? "hsl(174, 100%, 50%)" : "#64748b"} stopOpacity={isDarkMode ? "0.4" : "0.35"} />
-            <stop offset="100%" stopColor={isDarkMode ? "hsl(174, 100%, 50%)" : "#64748b"} stopOpacity={isDarkMode ? "0.1" : "0.15"} />
+            <stop offset="0%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.1" : "0.15"} />
+            <stop offset="50%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.4" : "0.35"} />
+            <stop offset="100%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.1" : "0.15"} />
           </linearGradient>
         </defs>
 
@@ -145,7 +145,7 @@ export function CircuitSVG() {
           <path
             className="circuit-path"
             d="M50 300 L250 300"
-            stroke={isDarkMode ? "var(--electric-cyan)" : "#64748b"}
+            stroke="var(--electric-cyan)"
             strokeWidth="0.5"
             fill="none"
             opacity="0.3"
@@ -153,7 +153,7 @@ export function CircuitSVG() {
           <path
             className="circuit-path"
             d="M950 300 L1150 300"
-            stroke={isDarkMode ? "var(--electric-cyan)" : "#64748b"}
+            stroke="var(--electric-cyan)"
             strokeWidth="0.5"
             fill="none"
             opacity="0.3"
@@ -163,32 +163,32 @@ export function CircuitSVG() {
         {/* Junction Nodes */}
         <g className="junction-nodes">
           {/* Main tower top */}
-          <circle cx="600" cy="50" r="4" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} className="animate-glow-hum" />
+          <circle cx="600" cy="50" r="4" fill="var(--electric-cyan)" className="animate-glow-hum" />
 
           {/* Tower intersection */}
-          <circle cx="600" cy="200" r="6" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.8" />
-          <circle cx="600" cy="200" r="10" fill="none" stroke={isDarkMode ? "var(--electric-cyan)" : "#64748b"} strokeWidth="1" opacity="0.4" />
+          <circle cx="600" cy="200" r="6" fill="var(--electric-cyan)" opacity="0.8" />
+          <circle cx="600" cy="200" r="10" fill="none" stroke="var(--electric-cyan)" strokeWidth="1" opacity="0.4" />
 
           {/* Mid points */}
-          <circle cx="500" cy="350" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} className="animate-pulse" />
-          <circle cx="700" cy="350" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} className="animate-pulse" />
+          <circle cx="500" cy="350" r="3" fill="var(--electric-cyan)" className="animate-pulse" />
+          <circle cx="700" cy="350" r="3" fill="var(--electric-cyan)" className="animate-pulse" />
 
           {/* Central hub */}
-          <circle cx="600" cy="400" r="8" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.6" />
-          <circle cx="600" cy="400" r="14" fill="none" stroke={isDarkMode ? "var(--electric-cyan)" : "#64748b"} strokeWidth="1.5" opacity="0.3" />
-          <circle cx="600" cy="400" r="20" fill="none" stroke={isDarkMode ? "var(--electric-cyan)" : "#64748b"} strokeWidth="0.5" opacity="0.2" />
+          <circle cx="600" cy="400" r="8" fill="var(--electric-cyan)" opacity="0.6" />
+          <circle cx="600" cy="400" r="14" fill="none" stroke="var(--electric-cyan)" strokeWidth="1.5" opacity="0.3" />
+          <circle cx="600" cy="400" r="20" fill="none" stroke="var(--electric-cyan)" strokeWidth="0.5" opacity="0.2" />
 
           {/* Distribution nodes */}
-          <circle cx="400" cy="650" r="4" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} className="animate-glow-hum" />
-          <circle cx="800" cy="650" r="4" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} className="animate-glow-hum" />
+          <circle cx="400" cy="650" r="4" fill="var(--electric-cyan)" className="animate-glow-hum" />
+          <circle cx="800" cy="650" r="4" fill="var(--electric-cyan)" className="animate-glow-hum" />
 
           {/* End points */}
-          <circle cx="200" cy="700" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.6" />
-          <circle cx="1000" cy="700" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.6" />
+          <circle cx="200" cy="700" r="3" fill="var(--electric-cyan)" opacity="0.6" />
+          <circle cx="1000" cy="700" r="3" fill="var(--electric-cyan)" opacity="0.6" />
 
           {/* Outer connection points */}
-          <circle cx="100" cy="400" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.5" />
-          <circle cx="1100" cy="400" r="3" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.5" />
+          <circle cx="100" cy="400" r="3" fill="var(--electric-cyan)" opacity="0.5" />
+          <circle cx="1100" cy="400" r="3" fill="var(--electric-cyan)" opacity="0.5" />
         </g>
 
         {/* Traveling Sparks */}
@@ -196,25 +196,25 @@ export function CircuitSVG() {
           <circle
             className="spark"
             r="4"
-            fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"}
+            fill="var(--electric-cyan)"
             filter="url(#spark-glow)"
           />
           <circle
             className="spark"
             r="3"
-            fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"}
+            fill="var(--electric-cyan)"
             filter="url(#spark-glow)"
           />
           <circle
             className="spark"
             r="3"
-            fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"}
+            fill="var(--electric-cyan)"
             filter="url(#spark-glow)"
           />
         </g>
 
         {/* Technical Labels */}
-        <g className="labels" fill={isDarkMode ? "var(--electric-cyan)" : "#64748b"} opacity="0.4" fontSize="8" fontFamily="monospace">
+        <g className="labels" fill="var(--electric-cyan)" opacity="0.4" fontSize="8" fontFamily="monospace">
           <text x="610" y="45">PWR_NODE_001</text>
           <text x="610" y="395">MAIN_HUB</text>
           <text x="80" y="390">IN_FEED_L</text>

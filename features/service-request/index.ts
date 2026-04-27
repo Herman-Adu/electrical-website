@@ -6,7 +6,7 @@
  */
 
 // Components (Atomic Design Structure)
-export { MultiStepFormContainer } from "./components/organisms/multi-step-form-container";
+export { ServiceRequestFormContainer } from "./components/organisms/service-request-form-container";
 export { PersonalInfoStep } from "./components/organisms/service-request-steps/personal-info-step";
 export { ServiceDetailsStep } from "./components/organisms/service-request-steps/service-details-step";
 export { PropertyInfoStep } from "./components/organisms/service-request-steps/property-info-step";

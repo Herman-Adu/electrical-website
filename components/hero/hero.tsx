@@ -258,7 +258,7 @@ export function Hero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-electric-cyan/60 dark:border-electric-cyan pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"

@@ -16,6 +16,7 @@ import {
   Copy,
   Check,
   FileText,
+  X,
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -33,6 +34,7 @@ interface UnifiedSuccessMessageProps {
   formType: FormType;
   referenceId: string;
   onStartNew: () => void;
+  onDismiss?: () => void;
   title?: string;
   subtitle?: string;
   details?: DetailItem[];
@@ -42,6 +44,7 @@ export function UnifiedSuccessMessage({
   formType,
   referenceId,
   onStartNew,
+  onDismiss,
   title,
   subtitle,
   details,
@@ -116,6 +119,12 @@ export function UnifiedSuccessMessage({
             description:
               "Our team will review your inquiry and respond within 24-48 hours.",
           },
+          {
+            icon: <ArrowRight className="w-4 h-4 text-electric-cyan" />,
+            title: "Next Steps",
+            description:
+              "A specialist will review your enquiry and contact you with clear next steps.",
+          },
         ];
       case "quotation":
         return [
@@ -152,7 +161,28 @@ export function UnifiedSuccessMessage({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="w-full"
     >
-      <div className="rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 overflow-hidden">
+      <div className="relative rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 overflow-hidden">
+        {onDismiss && (
+          <div className="absolute top-4 right-4 z-10">
+            {/* Pulsing ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border border-electric-cyan/40"
+              animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Close button */}
+            <motion.button
+              onClick={onDismiss}
+              animate={{ scale: [1, 1.08, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 flex items-center justify-center w-8 h-8 rounded-full bg-electric-cyan/10 hover:bg-electric-cyan/20 text-electric-cyan border border-electric-cyan/30 hover:border-electric-cyan/60 transition-colors duration-200"
+              aria-label="Close success message"
+              type="button"
+            >
+              <X className="h-4 w-4" />
+            </motion.button>
+          </div>
+        )}
         {/* Header Section with Glassmorphic Effect */}
         <div className="p-4 bg-linear-to-r from-accent/10 to-transparent border-b border-border/50">
           <motion.div
