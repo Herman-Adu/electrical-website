@@ -125,7 +125,7 @@ export function NewsCategoryHero({
   const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToArticles = () => {
-    const el = document.getElementById("category-articles");
+    const el = document.getElementById("category-intro");
     if (el) scrollToElementWithOffset(el, { pageType: "article" });
   };
 
