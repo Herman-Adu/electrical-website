@@ -4284,3 +4284,4 @@ export function getRelatedNewsArticles(
 export { newsHubIntroData } from './news-hub-intro';
 export { newsCategoriesIntroData } from './categories-intro';
 export { newsCategoryIntroData } from './category-intro';
+export { newsCategoryColors } from "./category-colors";
