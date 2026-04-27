@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import { env } from "./app/env";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    viewTransition: true,
+  },
   // Windows local builds can hit standalone traced-file copy failures (Failed to copy traced files / EINVAL) for node:inspector-style names,
   // so standalone output is disabled on win32 locally while CI/Linux and production remain standalone-capable.
   output:

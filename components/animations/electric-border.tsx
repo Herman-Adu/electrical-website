@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
 
 interface ElectricBorderProps {
   isActive: boolean
@@ -10,23 +9,20 @@ interface ElectricBorderProps {
 /**
  * Electric Border Animation
  * Animated electric current flowing around step circle border
- * Sparks appear when the current completes the circuit
+ * Sparks appear when the current completes the circuit — driven by
+ * Framer Motion keyframes rather than setInterval/setTimeout.
  */
 export function ElectricBorder({ isActive }: ElectricBorderProps) {
-  const [showSpark, setShowSpark] = useState(false)
-
-  useEffect(() => {
-    if (!isActive) return
-
-    const interval = setInterval(() => {
-      setShowSpark(true)
-      setTimeout(() => setShowSpark(false), 300)
-    }, 2000)
-
-    return () => clearInterval(interval)
-  }, [isActive])
-
   if (!isActive) return null
+
+  const sparks = Array.from({ length: 6 }, (_, i) => {
+    const angle = (i / 6) * Math.PI * 2
+    const distance = 25
+    return {
+      x: Math.cos(angle) * distance,
+      y: Math.sin(angle) * distance,
+    }
+  })
 
   return (
     <>
@@ -58,43 +54,31 @@ export function ElectricBorder({ isActive }: ElectricBorderProps) {
         }}
       />
 
-      {/* Small spark bursts when current completes circle */}
-      {showSpark && (
-        <>
-          {[...Array(6)].map((_, i) => {
-            const angle = (i / 6) * Math.PI * 2
-            const distance = 25
-
-            return (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 rounded-full bg-accent"
-                style={{
-                  left: "50%",
-                  top: "50%",
-                  boxShadow: "0 0 4px oklch(0.9 0.25 85)",
-                }}
-                initial={{
-                  x: 0,
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                }}
-                animate={{
-                  x: Math.cos(angle) * distance,
-                  y: Math.sin(angle) * distance,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeOut",
-                }}
-              />
-            )
-          })}
-        </>
-      )}
+      {/* Spark bursts — declarative 2s cycle, no setInterval */}
+      {sparks.map(({ x, y }, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-accent"
+          style={{
+            left: "50%",
+            top: "50%",
+            boxShadow: "0 0 4px oklch(0.9 0.25 85)",
+          }}
+          animate={{
+            x: [0, x, 0],
+            y: [0, y, 0],
+            opacity: [0, 1, 0],
+            scale: [0, 1, 0],
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeOut",
+            repeat: Number.POSITIVE_INFINITY,
+            repeatDelay: 1.7,
+            delay: i * 0.02,
+          }}
+        />
+      ))}
 
       {/* Inner glow pulse */}
       <motion.div

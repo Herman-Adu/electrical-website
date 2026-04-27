@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 
 interface LightBulbProps {
   progress: number; // 0-100
@@ -25,7 +25,7 @@ export function LightBulb({
   useEffect(() => {
     if (progress > 0) {
       setIsFlickering(true);
-      const timer = setTimeout(() => setIsFlickering(false), 600);
+      const timer = setTimeout(() => startTransition(() => setIsFlickering(false)), 600);
       return () => clearTimeout(timer);
     }
   }, [progress]);
