@@ -4,7 +4,8 @@ export type ProjectCategorySlug =
   | "all"
   | "residential"
   | "commercial-lighting"
-  | "power-boards";
+  | "power-boards"
+  | "community";
 
 export interface ProjectCategory {
   slug: Exclude<ProjectCategorySlug, "all">;

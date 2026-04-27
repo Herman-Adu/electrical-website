@@ -24,6 +24,12 @@ export const projectCategories: ProjectCategory[] = [
     description:
       "Distribution, switchgear, and board upgrade infrastructure projects.",
   },
+  {
+    slug: "community",
+    label: "Community",
+    description:
+      "Public sector, community facilities, and social infrastructure electrical projects.",
+  },
 ];
 
 export function isProjectCategorySlug(
@@ -1224,6 +1230,7 @@ export function getProjectSlugsByCategory(
 export { projectsIntroData } from "./projects-intro";
 export { categoryProjectsIntroData } from "./category-intro";
 export { projectDetailIntroData } from "./project-detail-intro";
+export { categoriesIntroData } from "./categories-intro";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // SHARED CONTENT GRID SUPPORT
