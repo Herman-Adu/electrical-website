@@ -3,7 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { SCROLL_GAP, scrollToElementWithOffset, getStickyAnchorOffset } from "@/lib/scroll-to-section";
+import {
+  SCROLL_GAP,
+  scrollToElementWithOffset,
+  getStickyAnchorOffset,
+} from "@/lib/scroll-to-section";
 import type { TocItem } from "@/types/shared-content";
 
 interface ContentTocProps {
@@ -67,11 +71,11 @@ export function ContentToc({
 
     findActiveRef.current = findActive;
     findActive(); // set initial state on mount
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       clearTimeout(showTimer);
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(rafId);
       findActiveRef.current = null;
     };
@@ -129,7 +133,7 @@ export function ContentToc({
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 backdrop-blur-sm"
+          className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-linear-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 backdrop-blur-sm"
           aria-label="Table of contents"
         >
           <div className="mb-4 flex items-center gap-2">
@@ -204,7 +208,7 @@ export function ContentToc({
                     {isActive && (
                       <motion.span
                         layoutId="toc-active"
-                        className="h-1.5 w-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white shadow-[0_0_8px_hsl(174_100%_35%_/_0.5)] dark:shadow-[0_0_8px_rgba(255,255,255,0.6)]"
+                        className="h-1.5 w-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white shadow-[0_0_8px_hsl(174_100%_35%/0.5)] dark:shadow-[0_0_8px_rgba(255,255,255,0.6)]"
                         transition={{
                           type: "spring",
                           stiffness: 300,
@@ -230,7 +234,13 @@ export function ContentToc({
   );
 }
 
-function ReadingProgress({ activeId, items }: { activeId: string | null; items: TocItem[] }) {
+function ReadingProgress({
+  activeId,
+  items,
+}: {
+  activeId: string | null;
+  items: TocItem[];
+}) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -263,7 +273,7 @@ function ReadingProgress({ activeId, items }: { activeId: string | null; items: 
       </div>
       <div className="h-1 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
         <motion.div
-          className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan"
+          className="h-full bg-linear-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan"
           style={{ width: `${displayProgress}%` }}
           transition={{ duration: 0.1 }}
         />

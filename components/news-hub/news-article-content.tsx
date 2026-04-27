@@ -64,7 +64,7 @@ function StoryTimelineSegment({
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-[28px] bottom-[-2rem] w-0.5 -translate-x-1/2 z-10 rounded-full"
+      className="pointer-events-none absolute left-1/2 top-7 bottom-8 w-0.5 -translate-x-1/2 z-10 rounded-full"
     >
       <motion.div
         className="absolute inset-0 rounded-full origin-top bg-linear-to-b from-electric-cyan via-electric-cyan/85 to-electric-cyan/25"
@@ -143,7 +143,7 @@ function StoryTimelineRow({
 
   return (
     <li className="relative mb-8 grid grid-cols-[28px_minmax(0,1fr)] gap-4 last:mb-0 md:mb-10 md:grid-cols-[minmax(0,1fr)_28px_minmax(0,1fr)] md:items-start">
-      <div className="relative col-start-1 row-start-1 flex min-h-[28px] self-stretch justify-center md:col-start-2">
+      <div className="relative col-start-1 row-start-1 flex min-h-7 self-stretch justify-center md:col-start-2">
         <motion.div
           ref={nodeRef}
           data-timeline-node={item.id}
@@ -182,9 +182,7 @@ function StoryTimelineRow({
       >
         <NewsArticleCardShell
           className={`p-5 ${
-            item.highlight
-              ? "border-electric-cyan/35 bg-electric-cyan/[0.08]"
-              : ""
+            item.highlight ? "border-electric-cyan/35 bg-electric-cyan/8" : ""
           }`}
         >
           <div className="mb-3 flex items-start justify-between gap-4">
@@ -258,7 +256,7 @@ function StoryTimeline({ items }: { items: readonly TimelineItem[] }) {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute left-3.5 top-0 bottom-0 w-px bg-gradient-to-b from-electric-cyan/50 via-electric-cyan/30 to-electric-cyan/10 md:left-1/2 md:-translate-x-px" />
+      <div className="pointer-events-none absolute left-3.5 top-0 bottom-0 w-px bg-linear-to-b from-electric-cyan/50 via-electric-cyan/30 to-electric-cyan/10 md:left-1/2 md:-translate-x-px" />
 
       <motion.ul
         ref={timelineRef}
@@ -300,11 +298,11 @@ export function NewsArticleContent({
         className="space-y-6"
       >
         <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-gradient-to-r from-electric-cyan/40 to-transparent" />
+          <div className="h-px flex-1 bg-linear-to-r from-electric-cyan/40 to-transparent" />
           <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
             Overview
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-l from-electric-cyan/40 to-transparent" />
+          <div className="h-px flex-1 bg-linear-to-l from-electric-cyan/40 to-transparent" />
         </div>
         {detail.intro.map((paragraph, index) => (
           <motion.p
@@ -327,7 +325,9 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           //className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-foreground">Project Details</h2>
+          <h2 className="text-2xl font-bold text-foreground">
+            Project Details
+          </h2>
           {detail.body.map((paragraph, index) => (
             <p
               key={`body-${index}`}
@@ -416,7 +416,7 @@ export function NewsArticleContent({
               <motion.div
                 key={`challenge-${index}`}
                 variants={itemVariants}
-                className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background to-electric-cyan/5 overflow-hidden"
+                className="rounded-xl border border-electric-cyan/20 bg-linear-to-br from-background to-electric-cyan/5 overflow-hidden"
               >
                 <div className="border-b border-electric-cyan/10 bg-electric-cyan/10 px-5 py-3">
                   <div className="flex items-center gap-2">
@@ -462,7 +462,9 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-foreground">Project Timeline</h2>
+          <h2 className="text-2xl font-bold text-foreground">
+            Project Timeline
+          </h2>
           <StoryTimeline items={timelineItems} />
         </motion.section>
       )}
@@ -543,8 +545,10 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-foreground">Results & Outcomes</h2>
-          <div className="rounded-xl border border-electric-cyan/30 bg-gradient-to-br from-electric-cyan/10 to-transparent p-6 space-y-4">
+          <h2 className="text-2xl font-bold text-foreground">
+            Results & Outcomes
+          </h2>
+          <div className="rounded-xl border border-electric-cyan/30 bg-linear-to-br from-electric-cyan/10 to-transparent p-6 space-y-4">
             {detail.results.map((result, index) => (
               <div key={`result-${index}`} className="flex items-start gap-3">
                 <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-electric-cyan shadow-[0_0_8px_rgba(0,243,189,0.5)]" />
@@ -567,7 +571,9 @@ export function NewsArticleContent({
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-foreground">Project Gallery</h2>
+          <h2 className="text-2xl font-bold text-foreground">
+            Project Gallery
+          </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {detail.gallery.map((image, index) => (
               <motion.div
@@ -581,7 +587,7 @@ export function NewsArticleContent({
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-linear-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 {image.caption && (
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform">
                     <p className="text-sm text-foreground">{image.caption}</p>
@@ -658,7 +664,7 @@ function QuoteCard({
     <blockquote
       className={`rounded-xl border p-6 ${
         isPrimary
-          ? "border-electric-cyan/30 bg-gradient-to-br from-electric-cyan/15 to-electric-cyan/5 shadow-[0_0_30px_rgba(0,243,189,0.1)]"
+          ? "border-electric-cyan/30 bg-linear-to-br from-electric-cyan/15 to-electric-cyan/5 shadow-[0_0_30px_rgba(0,243,189,0.1)]"
           : "border-electric-cyan/20 bg-electric-cyan/5"
       }`}
     >

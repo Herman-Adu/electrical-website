@@ -40,7 +40,7 @@ export function ProjectRelatedCarousel({
   categorySlug,
   heading = "Related Projects",
   anchorId,
-  embedded,
+  //embedded,
 }: ProjectRelatedCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
@@ -134,7 +134,7 @@ export function ProjectRelatedCarousel({
           style={{ touchAction: "pan-y" }}
         >
           {/* Left padding spacer */}
-          <div className="shrink-0 w-[calc((100vw-80rem)/2+1rem)] max-w-[4rem] min-w-0 hidden xl:block" />
+          <div className="shrink-0 w-[calc((100vw-80rem)/2+1rem)] max-w-16 min-w-0 hidden xl:block" />
 
           {projects.map((project, index) => (
             <motion.div
@@ -144,7 +144,7 @@ export function ProjectRelatedCarousel({
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="shrink-0 w-[280px] sm:w-[320px]"
+              className="shrink-0 w-70 sm:w-[320px]"
             >
               <Link
                 href={`/projects/category/${categorySlug}/${project.slug}`}
@@ -162,7 +162,7 @@ export function ProjectRelatedCarousel({
                     sizes="320px"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
 
                   {/* Status badge */}
                   <div className="absolute bottom-2 left-2">
@@ -195,9 +195,9 @@ export function ProjectRelatedCarousel({
           <div className="shrink-0 w-4 sm:w-6 lg:w-8" />
         </motion.div>
 
-        {/* Gradient fade edges */}
-        <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        {/* linear fade edges */}
+        <div className="absolute inset-y-0 left-0 w-8 bg-linear-to-r from-background to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-8 bg-linear-to-l from-background to-transparent pointer-events-none" />
       </div>
     </section>
   );

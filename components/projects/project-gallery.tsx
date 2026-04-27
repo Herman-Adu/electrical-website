@@ -14,7 +14,7 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 import type { ProjectGalleryImage } from "@/types/projects";
-import { cn } from "@/lib/utils";
+//import { cn } from "@/lib/utils";
 
 interface ProjectGalleryProps {
   images: ProjectGalleryImage[];
@@ -31,7 +31,7 @@ export function ProjectGallery({
   title = "Captured at Every Stage.",
   description = "From groundworks to final commissioning, these images document the precision and care that goes into every Nexgen installation.",
   anchorId,
-  embedded,
+  //embedded,
 }: ProjectGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -127,7 +127,7 @@ export function ProjectGallery({
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => openLightbox(index)}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-card/60 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group relative aspect-4/3 rounded-xl overflow-hidden border border-border bg-card/60 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label={`View ${image.alt} in lightbox`}
               >
                 <Image
@@ -139,7 +139,7 @@ export function ProjectGallery({
                 />
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Zoom icon */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -166,7 +166,7 @@ export function ProjectGallery({
       <AnimatePresence>
         {lightboxOpen && (
           <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/95"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

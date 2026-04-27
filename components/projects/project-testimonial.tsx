@@ -25,7 +25,7 @@ export function ProjectTestimonialCard({
   title = "Straight From the Client.",
   description = "The measure of our work is the confidence our clients carry forward. Here's what they had to say.",
   anchorId,
-  embedded,
+  //embedded,
 }: ProjectTestimonialCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
@@ -83,7 +83,7 @@ export function ProjectTestimonialCard({
             initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="relative p-8 sm:p-12 rounded-2xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-[hsl(174_100%_35%)]/5 dark:from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
+            className="relative p-8 sm:p-12 rounded-2xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-linear-to-br from-[hsl(174_100%_35%)]/5 dark:from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
           >
             {/* Decorative corners */}
             <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[hsl(174_100%_35%)]/40 dark:border-electric-cyan/40" />

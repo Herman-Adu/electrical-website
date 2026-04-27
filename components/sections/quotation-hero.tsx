@@ -75,16 +75,6 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
     if (element) scrollToElementWithOffset(element);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { type: "spring" as const, damping: 25, stiffness: 120 },
-    },
-  };
-
   const statuses = [
     "INITIALIZING",
     "LOADING_MODULES",
@@ -190,7 +180,7 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
             <span className="block">Request Your</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-(--electric-cyan)/10">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Quotation
             </span>
             <span className="block">Today</span>

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";

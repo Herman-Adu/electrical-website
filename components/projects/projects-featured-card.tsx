@@ -75,7 +75,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
             />
           </motion.div>
 
-          {/* Gradient overlay */}
+          {/* linear overlay */}
           <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
 
           {/* FEATURED holographic ribbon - Responsive positioning */}
@@ -179,7 +179,7 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
             </div>
             <div className="h-1.5 sm:h-2 rounded-full bg-muted/50 overflow-hidden">
               <motion.div
-                className="h-full rounded-full bg-gradient-to-r from-electric-cyan to-electric-cyan/70"
+                className="h-full rounded-full bg-linear-to-r from-electric-cyan to-electric-cyan/70"
                 initial={{ width: 0 }}
                 animate={{
                   width: isProgressInView ? `${project.progress}%` : 0,
@@ -209,14 +209,14 @@ export function ProjectsFeaturedCard({ project }: { project: Project }) {
           <div className="mt-4 sm:mt-5 md:mt-6 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3">
             <Link
               href={`/projects/category/${project.category}/${project.slug}`}
-              className="group inline-flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-electric-cyan transition-all duration-300 hover:bg-electric-cyan/20 hover:shadow-[0_0_15px_rgba(0,243,189,0.15)] min-h-[44px] w-full sm:w-auto"
+              className="group inline-flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-electric-cyan transition-all duration-300 hover:bg-electric-cyan/20 hover:shadow-[0_0_15px_rgba(0,243,189,0.15)] min-h-11 w-full sm:w-auto"
             >
               View Details
               <ArrowRight className="h-3 sm:h-3.5 w-3 sm:w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-lg border border-border px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-foreground transition-all duration-300 hover:border-electric-cyan/30 hover:text-electric-cyan min-h-[44px] w-full sm:w-auto"
+              className="inline-flex items-center justify-center rounded-lg border border-border px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-foreground transition-all duration-300 hover:border-electric-cyan/30 hover:text-electric-cyan min-h-11 w-full sm:w-auto"
             >
               Contact Team
             </Link>

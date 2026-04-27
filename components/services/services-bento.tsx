@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -214,7 +213,7 @@ function TextDetailCard({
   voltage,
   delay,
   index,
-  accentColor = "cyan",
+  //accentColor = "cyan",
   exploreLink,
 }: {
   title: string;
@@ -229,11 +228,11 @@ function TextDetailCard({
 }) {
   const router = useRouter();
 
-  const isAmber = accentColor === "amber";
-  const accentClass = isAmber ? "text-amber-warning" : "text-electric-cyan";
-  const borderClass = isAmber
-    ? "border-amber-warning/20"
-    : "border-electric-cyan/20";
+  //const isAmber = accentColor === "amber";
+  //const accentClass = isAmber ? "text-amber-warning" : "text-electric-cyan";
+  // const borderClass = isAmber
+  //   ? "border-amber-warning/20"
+  //   : "border-electric-cyan/20";
 
   return (
     <GlassCard delay={delay} className="flex flex-col h-full p-5">
@@ -422,7 +421,6 @@ function DiagnosticCard({ delay }: { delay: number }) {
     </GlassCard>
   );
 }
-
 
 // ─── Card F: Emergency Response Card (Wide Image) ──────────────────────────
 

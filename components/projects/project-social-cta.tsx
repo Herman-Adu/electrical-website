@@ -124,7 +124,7 @@ export function ProjectSocialCTA({
             initial={shouldReduce ? {} : { opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative p-8 rounded-2xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
+            className="relative p-8 rounded-2xl border border-electric-cyan/20 bg-linear-to-br from-electric-cyan/5 via-transparent to-transparent backdrop-blur-sm"
           >
             {/* Corner brackets */}
             <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-electric-cyan/40" />
