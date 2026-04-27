@@ -113,8 +113,9 @@ export function SectionIntro({ data }: SectionIntroProps) {
                 delay={(idx % 3) * 0.07}
                 duration={0.65}
                 distance={40}
+                className="h-full"
               >
-                <motion.div className="relative p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-[hsl(174_100%_35%)]/80 dark:hover:border-electric-cyan/40 transition-all duration-400 group">
+                <motion.div className="relative h-full p-8 rounded-2xl border border-border bg-card/40 backdrop-blur-sm hover:border-[hsl(174_100%_35%)]/80 dark:hover:border-electric-cyan/40 transition-all duration-400 group">
                   {/* Corner brackets */}
                   <div className="absolute rounded-tl-xl top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/30 group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/60 transition-colors" />
                   <div className="absolute rounded-br-xl bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[hsl(174_100%_35%)]/60 dark:border-electric-cyan/30 group-hover:border-[hsl(174_100%_35%)] dark:group-hover:border-electric-cyan/60 transition-colors" />
