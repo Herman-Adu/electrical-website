@@ -10,6 +10,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { Calendar } from "lucide-react";
 import { DatePicker } from "@/components/atoms/date-picker";
 import { FormCheckbox } from "@/components/atoms/form-checkbox";
 import { RadioGroup } from "@/components/atoms/radio-group";
@@ -93,9 +94,14 @@ export function ScheduleStep() {
     >
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Schedule Preferences
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-electric-cyan/10 text-electric-cyan">
+              <Calendar className="h-5 w-5" />
+            </div>
+            <h2 className="text-2xl font-semibold text-foreground">
+              Schedule Preferences
+            </h2>
+          </div>
           <p className="text-muted-foreground">
             When would you like us to visit?
           </p>
@@ -231,7 +237,7 @@ export function ScheduleStep() {
           <button
             type="submit"
             disabled={!isValid || Boolean(urgencyDateError)}
-            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
+            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
             <svg

@@ -142,84 +142,78 @@ export function generateContactBusinessEmail({
                 </tr>
               </table>
 
-              <!-- Summary/Detail Grid (2-column max) -->
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 20px;">
+              <!-- Customer Summary -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 12px;">
                 <tr>
-                  <td style="width: 50%; vertical-align: top; padding: 0 8px 0 0;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: ${BRAND_COLORS.bgBodyAlt}; border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px;">
+                  <td style="background-color: ${BRAND_COLORS.bgBodyAlt}; border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px; padding: 16px;">
+                    <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Customer Summary</p>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding: 16px;">
-                          <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Customer Summary</p>
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; width: 92px; vertical-align: top;">Name:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerName}</td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Email:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerEmail}</td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Phone:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerPhone}</td>
-                            </tr>
-                            ${
-                              company
-                                ? `
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Company:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${company}</td>
-                            </tr>`
-                                : ""
-                            }
-                          </table>
-                        </td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; width: 92px; vertical-align: top;">Name:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerName}</td>
                       </tr>
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Email:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerEmail}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Phone:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${customerPhone}</td>
+                      </tr>
+                      ${
+                        company
+                          ? `
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Company:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${company}</td>
+                      </tr>`
+                          : ""
+                      }
                     </table>
                   </td>
-                  <td style="width: 50%; vertical-align: top; padding: 0 0 0 8px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: ${BRAND_COLORS.bgBodyAlt}; border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px;">
+                </tr>
+              </table>
+
+              <!-- Inquiry Details -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 20px;">
+                <tr>
+                  <td style="background-color: ${BRAND_COLORS.bgBodyAlt}; border: 1px solid ${BRAND_COLORS.borderLight}; border-radius: 8px; padding: 16px;">
+                    <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Inquiry Details</p>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding: 16px;">
-                          <p style="margin: 0 0 12px; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.45px;">Inquiry Details</p>
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; width: 110px; vertical-align: top;">Subject:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${subject}</td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Method:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${contactMethodLabels[preferredContactMethod] || preferredContactMethod}</td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Best Time:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${timeLabels[bestTimeToContact] || bestTimeToContact}</td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Newsletter:</td>
-                              <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${newsletterOptIn ? "Subscribed" : "Not subscribed"}</td>
-                            </tr>
-                          </table>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; width: 110px; vertical-align: top;">Subject:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${subject}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Method:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${contactMethodLabels[preferredContactMethod] || preferredContactMethod}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Best Time:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${timeLabels[bestTimeToContact] || bestTimeToContact}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textLighter}; font-size: 13px; vertical-align: top;">Newsletter:</td>
+                        <td style="padding: 6px 0; color: ${BRAND_COLORS.textDark}; font-size: 13px; font-weight: 500;">${newsletterOptIn ? "Subscribed" : "Not subscribed"}</td>
+                      </tr>
+                    </table>
+                    ${
+                      hasExistingReference && existingReferenceId
+                        ? `
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 12px; background-color: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px;">
+                      <tr>
+                        <td style="padding: 10px 12px;">
+                          <p style="margin: 0; color: #92400e; font-size: 12px;"><strong>Linked Reference:</strong> <span style="font-family: monospace; color: #78350f;">${existingReferenceId}</span></p>
                           ${
-                            hasExistingReference && existingReferenceId
-                              ? `
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 12px; background-color: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px;">
-                            <tr>
-                              <td style="padding: 10px 12px;">
-                                <p style="margin: 0; color: #92400e; font-size: 12px;"><strong>Linked Reference:</strong> <span style="font-family: monospace; color: #78350f;">${existingReferenceId}</span></p>
-                                ${
-                                  existingReferenceDescription
-                                    ? `<p style="margin: 6px 0 0; color: #78350f; font-size: 12px;"><strong>Description:</strong> ${existingReferenceDescription}</p>`
-                                    : ""
-                                }
-                              </td>
-                            </tr>
-                          </table>`
+                            existingReferenceDescription
+                              ? `<p style="margin: 6px 0 0; color: #78350f; font-size: 12px;"><strong>Description:</strong> ${existingReferenceDescription}</p>`
                               : ""
                           }
                         </td>
                       </tr>
-                    </table>
+                    </table>`
+                        : ""
+                    }
                   </td>
                 </tr>
               </table>

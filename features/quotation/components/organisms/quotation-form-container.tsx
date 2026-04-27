@@ -7,7 +7,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, startTransition, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useQuotationStore } from "../../hooks/use-quotation-store";
 import { MultiStepFormWrapper } from "@/components/organisms/multi-step-form-wrapper";
@@ -33,11 +33,11 @@ const QUOTATION_STEPS: FormStepConfig[] = [
   { id: "review", title: "Review" },
 ];
 
-const SUCCESS_VISIBILITY_MS = 5000;
+const SUCCESS_VISIBILITY_MS = 30000;
 const SUCCESS_ANCHOR_ID = "quotation-success-anchor";
-const SUCCESS_SCROLL_TOP_GAP = 8;
+const SUCCESS_SCROLL_TOP_GAP = 116;
 const FORM_SECTION_ID = "quotation-form-section";
-const QUOTATION_SCROLL_TOP_GAP = 28;
+const QUOTATION_SCROLL_TOP_GAP = 116;
 
 export function QuotationFormContainer() {
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -129,10 +129,12 @@ export function QuotationFormContainer() {
     }
 
     successTimerRef.current = window.setTimeout(() => {
-      setSuccessData(null);
-      setSubmitError(null);
-      resetForm();
-      useQuotationStore.persist.clearStorage();
+      startTransition(() => {
+        setSuccessData(null);
+        setSubmitError(null);
+        resetForm();
+        useQuotationStore.persist.clearStorage();
+      });
 
       const formSection = document.getElementById(FORM_SECTION_ID);
       if (formSection) {
@@ -159,10 +161,12 @@ export function QuotationFormContainer() {
       successTimerRef.current = null;
     }
 
-    setSuccessData(null);
-    setSubmitError(null);
-    resetForm();
-    useQuotationStore.persist.clearStorage();
+    startTransition(() => {
+      setSuccessData(null);
+      setSubmitError(null);
+      resetForm();
+      useQuotationStore.persist.clearStorage();
+    });
 
     const formSection = document.getElementById(FORM_SECTION_ID);
     if (formSection) {
@@ -183,6 +187,7 @@ export function QuotationFormContainer() {
           referenceId={successData.requestId}
           formType="quotation"
           onStartNew={handleStartNew}
+          onDismiss={handleStartNew}
         />
       </div>
     );

@@ -71,7 +71,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
 
   const scrollToContactForm = () => {
     const element = document.getElementById("contact-form-section");
-    if (element) scrollToElementWithOffset(element);
+    if (element) scrollToElementWithOffset(element, { baseGap: 70 });
   };
 
   return (

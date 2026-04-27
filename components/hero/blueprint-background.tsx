@@ -37,8 +37,7 @@ export function BlueprintBackground({
     return null;
   }
 
-  // Light theme: slate-500 grey, Dark theme: electric-cyan
-  const gridColor = isDarkMode ? "var(--electric-cyan)" : "var(--pylon-grey)";
+  const gridColor = "var(--electric-cyan)";
 
   return (
     <div
@@ -52,7 +51,7 @@ export function BlueprintBackground({
 
       {/* Primary Grid - 40px */}
       <div
-        className="absolute inset-0 h-full w-full opacity-20 dark:opacity-20"
+        className="absolute inset-0 h-full w-full opacity-10 dark:opacity-10"
         style={{
           backgroundImage: `
             linear-gradient(to right, ${gridColor} 1px, transparent 1px),
@@ -93,21 +92,21 @@ export function BlueprintBackground({
             repeat: Infinity,
             ease: "linear",
           }}
-          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-slate-500/40 dark:via-electric-cyan/30 to-transparent will-change-transform"
+          className="pointer-events-none absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent will-change-transform"
         />
       ) : null}
 
       {/* Corner technical markers */}
-      <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-slate-500/40 dark:border-electric-cyan/20" />
-      <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-slate-500/40 dark:border-electric-cyan/20" />
-      <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-slate-500/40 dark:border-electric-cyan/20" />
-      <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-slate-500/40 dark:border-electric-cyan/20" />
+      <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-electric-cyan/40" />
+      <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-electric-cyan/40" />
+      <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-electric-cyan/40" />
+      <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-electric-cyan/40" />
 
       {/* Technical coordinate labels */}
-      <div className="absolute top-6 left-20 font-mono text-[8px] text-slate-500/50 dark:text-electric-cyan/30 tracking-widest">
+      <div className="absolute top-6 left-20 font-mono text-[8px] text-electric-cyan/50 tracking-widest">
         X:0000 Y:0000
       </div>
-      <div className="absolute top-6 right-20 font-mono text-[8px] text-slate-500/50 dark:text-electric-cyan/30 tracking-widest">
+      <div className="absolute top-6 right-20 font-mono text-[8px] text-electric-cyan/50 tracking-widest">
         SECTOR_A1
       </div>
     </div>

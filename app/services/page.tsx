@@ -5,7 +5,7 @@ import { ServicesCTA } from "@/components/services/service-cta";
 import { Footer } from "@/components/sections/footer";
 import { createPageMetadata } from "@/lib/metadata";
 import { ContentBreadcrumb } from "@/components/shared";
-import { MultiStepFormContainer } from "@/features/service-request";
+import { ServiceRequestFormContainer } from "@/features/service-request";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Services | Nexgen Electrical Innovations",
@@ -55,7 +55,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <MultiStepFormContainer />
+          <ServiceRequestFormContainer />
         </div>
       </section>
 

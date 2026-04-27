@@ -30,6 +30,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { User } from "lucide-react";
 import { FormInput } from "@/components/atoms/form-input";
 import { useFormStore } from "../../../hooks/use-form-store";
 import {
@@ -75,9 +76,14 @@ export function PersonalInfoStep() {
       <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
         {/* Form Header */}
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Personal Information
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-electric-cyan/10 text-electric-cyan">
+              <User className="h-5 w-5" />
+            </div>
+            <h2 className="text-2xl font-semibold text-foreground">
+              Personal Information
+            </h2>
+          </div>
           <p className="text-foreground/70">
             Let's start with your basic contact information
           </p>
@@ -135,7 +141,7 @@ export function PersonalInfoStep() {
           <button
             type="submit"
             disabled={!isValid}
-            className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
+            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium transition-all duration-200 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed electric-glow-sm"
           >
             Continue
             <svg

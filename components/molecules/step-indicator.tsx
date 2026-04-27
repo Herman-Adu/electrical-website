@@ -51,7 +51,7 @@ export function StepIndicator({
                 >
                   <div className="h-full w-full bg-border">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-accent to-accent/40"
+                      className="h-full bg-gradient-to-r from-electric-cyan to-electric-cyan/40"
                       initial={{ width: "0%" }}
                       animate={{ width: nextStepCompleted ? "100%" : "0%" }}
                       transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -78,16 +78,16 @@ export function StepIndicator({
                     <>
                       {/* Outer glow ring - scaled for mobile */}
                       <motion.div
-                        className="absolute inset-[-12px] min-[460px]:inset-[-20px] rounded-full"
+                        className="absolute inset-[-8px] min-[460px]:inset-[-14px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.85 0.22 168 / 0.5) 0%, oklch(0.8 0.2 168 / 0.3) 40%, transparent 70%)",
-                          filter: "blur(12px)",
+                            "radial-gradient(circle, oklch(0.85 0.22 168 / 0.35) 0%, oklch(0.8 0.2 168 / 0.2) 40%, transparent 70%)",
+                          filter: "blur(8px)",
                         }}
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{
-                          scale: [1, 1.4, 1],
-                          opacity: [0.7, 1, 0.7],
+                          scale: [1, 1.2, 1],
+                          opacity: [0.4, 0.65, 0.4],
                         }}
                         transition={{
                           duration: 2,
@@ -97,16 +97,16 @@ export function StepIndicator({
                       />
                       {/* Middle glow layer */}
                       <motion.div
-                        className="absolute inset-[-8px] min-[460px]:inset-[-12px] rounded-full"
+                        className="absolute inset-[-5px] min-[460px]:inset-[-8px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.9 0.24 168 / 0.6) 0%, oklch(0.85 0.22 168 / 0.4) 50%, transparent 70%)",
-                          filter: "blur(8px)",
+                            "radial-gradient(circle, oklch(0.9 0.24 168 / 0.4) 0%, oklch(0.85 0.22 168 / 0.25) 50%, transparent 70%)",
+                          filter: "blur(6px)",
                         }}
                         initial={{ scale: 0.3, opacity: 0 }}
                         animate={{
-                          scale: [0.8, 1.2, 0.8],
-                          opacity: [0.8, 1, 0.8],
+                          scale: [0.7, 1.0, 0.7],
+                          opacity: [0.5, 0.7, 0.5],
                         }}
                         transition={{
                           duration: 1.5,
@@ -116,16 +116,16 @@ export function StepIndicator({
                       />
                       {/* Inner bright core glow */}
                       <motion.div
-                        className="absolute inset-[-4px] min-[460px]:inset-[-6px] rounded-full"
+                        className="absolute inset-[-2px] min-[460px]:inset-[-4px] rounded-full"
                         style={{
                           background:
-                            "radial-gradient(circle, oklch(0.95 0.25 168 / 0.8) 0%, transparent 60%)",
-                          filter: "blur(4px)",
+                            "radial-gradient(circle, oklch(0.95 0.25 168 / 0.5) 0%, transparent 60%)",
+                          filter: "blur(3px)",
                         }}
                         initial={{ scale: 0.2, opacity: 0 }}
                         animate={{
                           scale: [0.6, 1, 0.6],
-                          opacity: [0.9, 1, 0.9],
+                          opacity: [0.6, 0.8, 0.6],
                         }}
                         transition={{
                           duration: 1,
@@ -153,7 +153,7 @@ export function StepIndicator({
                       className={cn(
                         "transition-colors duration-500",
                         isCompleted || isCurrent
-                          ? "fill-accent/80"
+                          ? "fill-electric-cyan/80"
                           : "fill-muted",
                       )}
                     />
@@ -163,9 +163,9 @@ export function StepIndicator({
                       className={cn(
                         "transition-all duration-500",
                         isCompleted
-                          ? "fill-accent/40 stroke-accent"
+                          ? "fill-electric-cyan/40 stroke-electric-cyan"
                           : isCurrent
-                            ? "fill-accent/50 stroke-accent"
+                            ? "fill-electric-cyan/50 stroke-electric-cyan"
                             : "fill-background stroke-muted-foreground/50",
                       )}
                       strokeWidth="1.5"
@@ -191,7 +191,7 @@ export function StepIndicator({
                     {(isCompleted || isCurrent) && (
                       <motion.path
                         d="M24 14V22M21 18H27"
-                        className="stroke-accent"
+                        className="stroke-electric-cyan"
                         strokeWidth={isCurrent ? "3" : "2"}
                         strokeLinecap="round"
                         initial={{
@@ -221,11 +221,11 @@ export function StepIndicator({
                         cx="24"
                         cy="18"
                         r="10"
-                        className="fill-accent/40"
+                        className="fill-electric-cyan/30"
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{
-                          scale: [0.9, 1.3, 0.9],
-                          opacity: [0.5, 0.8, 0.5],
+                          scale: [0.8, 1.1, 0.8],
+                          opacity: [0.25, 0.45, 0.25],
                         }}
                         transition={{
                           duration: 1.5,
@@ -240,7 +240,7 @@ export function StepIndicator({
                         cx="24"
                         cy="18"
                         r="12"
-                        className="fill-accent/30"
+                        className="fill-electric-cyan/30"
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{
                           scale: [1, 1.3, 1],
@@ -258,7 +258,7 @@ export function StepIndicator({
                     {isCompleted && (
                       <motion.path
                         d="M20 18L23 21L28 16"
-                        className="stroke-accent"
+                        className="stroke-electric-cyan"
                         strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -280,7 +280,7 @@ export function StepIndicator({
                         "text-[10px] min-[460px]:text-xs font-bold",
                         "transition-all duration-300",
                         isCurrent
-                          ? "bg-accent text-accent-foreground scale-100"
+                          ? "bg-electric-cyan text-white dark:text-black scale-100"
                           : "bg-muted text-muted-foreground scale-90",
                       )}
                     >
@@ -294,9 +294,11 @@ export function StepIndicator({
                   <motion.div
                     className={cn(
                       "text-[10px] min-[460px]:text-xs sm:text-sm font-medium transition-colors duration-300 leading-tight",
-                      isCompleted || isCurrent
+                      isCurrent
                         ? "text-foreground"
-                        : "text-muted-foreground",
+                        : isCompleted
+                          ? "text-electric-cyan/80 dark:text-electric-cyan/70"
+                          : "text-muted-foreground",
                     )}
                   >
                     {step.label}

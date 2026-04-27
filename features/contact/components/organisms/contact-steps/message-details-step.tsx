@@ -72,7 +72,7 @@ export function MessageDetailsStep() {
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <MessageCircle className="h-5 w-5 text-accent" />
+            <MessageCircle className="h-5 w-5 text-electric-cyan" />
             <h2 className="text-xl font-semibold text-foreground">
               Your Message
             </h2>

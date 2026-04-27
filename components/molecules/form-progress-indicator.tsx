@@ -35,7 +35,7 @@ export function FormProgressIndicator({
       <div className="px-4">
         <div className="relative h-2 bg-muted rounded-full overflow-hidden">
           <motion.div
-            className="absolute inset-y-0 left-0 bg-accent rounded-full"
+            className="absolute inset-y-0 left-0 bg-electric-cyan rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -67,11 +67,12 @@ export function FormProgressIndicator({
               <motion.div
                 className={cn(
                   "flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors",
-                  isCompleted && "bg-accent text-accent-foreground",
+                  isCompleted &&
+                    "bg-electric-cyan/20 dark:bg-electric-cyan/20 text-electric-cyan dark:text-electric-cyan/80",
                   isCurrent &&
-                    "bg-accent text-accent-foreground ring-2 ring-accent ring-offset-2 ring-offset-background",
+                    "border border-electric-cyan/40 bg-electric-cyan/20 dark:bg-electric-cyan/20 text-electric-cyan dark:text-electric-cyan/80 ring-2 ring-electric-cyan dark:ring-electric-cyan/80 ring-offset-2 ring-offset-background",
                   isPending && "bg-muted text-muted-foreground",
-                  isClickable && "hover:ring-2 hover:ring-accent/50",
+                  isClickable && "hover:ring-2 hover:ring-electric-cyan/50",
                 )}
                 initial={false}
                 animate={{

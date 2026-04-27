@@ -55,7 +55,7 @@ export function FormStepContainer({
       <div className="space-y-2">
         <div className="flex items-center gap-3">
           {icon && (
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-electric-cyan/10 text-electric-cyan">
               {icon}
             </div>
           )}
@@ -92,7 +92,7 @@ export function FormStepContainer({
           type="submit"
           onClick={onNext}
           disabled={isSubmitting || !isValid}
-          className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground"
+          className="gap-2"
         >
           {isSubmitting ? (
             <>

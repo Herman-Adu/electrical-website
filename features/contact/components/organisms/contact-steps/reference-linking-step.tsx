@@ -89,7 +89,7 @@ export function ReferenceLinkingStep() {
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Link2 className="h-5 w-5 text-accent" />
+            <Link2 className="h-5 w-5 text-electric-cyan" />
             <h2 className="text-xl font-semibold text-foreground">
               Reference Linking
             </h2>
@@ -246,7 +246,7 @@ export function ReferenceLinkingStep() {
         {/* Info Card */}
         <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
           <div className="flex items-start gap-3">
-            <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <Info className="h-5 w-5 text-electric-cyan shrink-0 mt-0.5" />
             <div className="space-y-1">
               <p className="text-sm font-medium text-foreground">
                 Where to find your reference?
