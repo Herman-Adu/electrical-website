@@ -14,7 +14,7 @@ import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import {
   HERO_H1_COMPACT_BLUEPRINT,
-  HERO_H1_TALL_BLUEPRINT,
+  //HERO_H1_TALL_BLUEPRINT,
 } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type {

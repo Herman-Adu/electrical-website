@@ -56,13 +56,13 @@ export function ProjectListCard({ item }: ProjectListCardProps) {
               className="object-cover"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-electric-cyan/20 via-electric-cyan/10 to-background">
+            <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-electric-cyan/20 via-electric-cyan/10 to-background">
               <div className="font-mono text-[10px] uppercase tracking-widest text-electric-cyan/40">
                 {item.categoryLabel}
               </div>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-background/40" />
+          <div className="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent md:bg-linear-to-r md:from-transparent md:via-transparent md:to-background/40" />
           {item.isFeatured && (
             <div className="absolute left-3 top-3 rounded-lg border border-electric-cyan/40 bg-electric-cyan/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white backdrop-blur-sm">
               Featured

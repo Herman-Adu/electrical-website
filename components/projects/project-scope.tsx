@@ -28,7 +28,7 @@ import {
   AnimatedBorders,
 } from "@/lib/use-animated-borders";
 import type { ProjectScope } from "@/types/projects";
-import { cn } from "@/lib/utils";
+//import { cn } from "@/lib/utils";
 
 const iconMap: Record<ProjectScope["icon"], LucideIcon> = {
   Zap,
@@ -66,7 +66,7 @@ export function ProjectScopeGrid({
   title = "Precision Engineering, Comprehensive Delivery.",
   description = "Every project demands a tailored approach. Our scope encompasses the full spectrum of electrical infrastructure — from initial assessment through final commissioning — ensuring seamless integration and long-term reliability.",
   anchorId,
-  embedded,
+  //embedded,
 }: ProjectScopeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -131,10 +131,10 @@ export function ProjectScopeGrid({
                 initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative p-6 rounded-xl border border-border bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
+                className="group relative p-6 rounded-xl border border-border bg-linear-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,189,0.06)]"
               >
                 {/* Top accent line */}
-                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-electric-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-6 right-6 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Icon */}
                 <div className="w-12 h-12 rounded-lg border border-electric-cyan/20 bg-electric-cyan/5 flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-electric-cyan/40 group-hover:bg-electric-cyan/10">

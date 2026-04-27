@@ -206,7 +206,7 @@ export default async function NewsArticlePage({
 
       <section
         id="article-content"
-        className="section-padding bg-background !overflow-visible"
+        className="section-padding bg-background overflow-visible!"
       >
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
@@ -218,7 +218,7 @@ export default async function NewsArticlePage({
           {/* Sticky Sidebar */}
           <aside
             data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[132px] self-start min-h-[calc(100vh-132px)]"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-33 self-start min-h-[calc(100vh-132px)]"
           >
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
@@ -233,7 +233,7 @@ export default async function NewsArticlePage({
                   {article.detail.spotlight.map((metric) => (
                     <div
                       key={metric.label}
-                      className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-electric-cyan/10 to-transparent p-4"
+                      className="rounded-xl border border-electric-cyan/20 bg-linear-to-br from-electric-cyan/10 to-transparent p-4"
                     >
                       <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/50">
                         {metric.label}
@@ -247,7 +247,7 @@ export default async function NewsArticlePage({
               )}
 
             {/* Article Info Card */}
-            <div className="rounded-xl border border-electric-cyan/20 bg-gradient-to-br from-background/90 to-background/70 p-5 space-y-4">
+            <div className="rounded-xl border border-electric-cyan/20 bg-linear-to-br from-background/90 to-background/70 p-5 space-y-4">
               <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan/70">
                 Article Info
               </h3>

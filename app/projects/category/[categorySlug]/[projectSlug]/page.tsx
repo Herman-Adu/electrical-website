@@ -17,10 +17,7 @@ import {
   ProjectSocialCTA,
   ProjectSupplementalSection,
 } from "@/components/projects";
-import {
-  ContentToc,
-  ContentBreadcrumb,
-} from "@/components/shared";
+import { ContentToc, ContentBreadcrumb } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 import { adaptProjectTimeline } from "@/lib/timeline/adapters";
@@ -84,7 +81,11 @@ export async function generateMetadata({
 }
 
 // Generate TOC items based on available content sections
-function generateTocItems(project: Project, hasTimeline: boolean, hasSidebarCards: boolean): TocItem[] {
+function generateTocItems(
+  project: Project,
+  hasTimeline: boolean,
+  hasSidebarCards: boolean,
+): TocItem[] {
   const items: TocItem[] = [];
   const detail = project.detail;
 
@@ -238,12 +239,12 @@ export default async function CategoryProjectDetailPage({
           {/* Sticky Sidebar — TOC + Project Details */}
           <aside
             data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-[150px] self-start mt-2"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-37.5 self-start mt-2"
           >
             <ContentToc items={tocItems} title="Project Contents" />
 
             {/* Project Details card */}
-            <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
+            <div className="rounded-xl border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-linear-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 p-5 space-y-4">
               <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan/70">
                 Project Details
               </h3>
@@ -256,23 +257,33 @@ export default async function CategoryProjectDetailPage({
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Budget</dt>
-                  <dd className="font-medium text-foreground">{project.kpis.budget}</dd>
+                  <dd className="font-medium text-foreground">
+                    {project.kpis.budget}
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Timeline</dt>
-                  <dd className="font-medium text-foreground">{project.kpis.timeline}</dd>
+                  <dd className="font-medium text-foreground">
+                    {project.kpis.timeline}
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Location</dt>
-                  <dd className="font-medium text-foreground">{project.kpis.location}</dd>
+                  <dd className="font-medium text-foreground">
+                    {project.kpis.location}
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Capacity</dt>
-                  <dd className="font-medium text-foreground">{project.kpis.capacity}</dd>
+                  <dd className="font-medium text-foreground">
+                    {project.kpis.capacity}
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-foreground/50">Sector</dt>
-                  <dd className="font-medium text-foreground">{project.clientSector}</dd>
+                  <dd className="font-medium text-foreground">
+                    {project.clientSector}
+                  </dd>
                 </div>
               </dl>
               {project.status === "in-progress" && (
@@ -287,7 +298,7 @@ export default async function CategoryProjectDetailPage({
                   </div>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10">
                     <div
-                      className="h-full bg-gradient-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
+                      className="h-full bg-linear-to-r from-[hsl(174_100%_35%)]/60 dark:from-electric-cyan/60 to-[hsl(174_100%_35%)] dark:to-electric-cyan transition-all"
                       style={{ width: `${project.progress}%` }}
                     />
                   </div>

@@ -106,7 +106,7 @@ function BentoTile({ item, index }: { item: ProjectBentoItem; index: number }) {
        * Tablet: min-h-[180px], increased padding
        * Desktop: min-h-[200px], generous spacing
        */}
-      <ProjectCardShell className="relative min-h-[160px] sm:min-h-[180px] md:min-h-[200px] border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,243,189,0.08)] group-hover:border-electric-cyan/50">
+      <ProjectCardShell className="relative min-h-40 sm:min-h-45 md:min-h-50 border-l-2 border-l-electric-cyan transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,243,189,0.08)] group-hover:border-electric-cyan/50">
         {/* Corner bracket - responsive sizing */}
         <div className="absolute top-2 sm:top-3 right-2 sm:right-3 w-3 sm:w-4 h-3 sm:h-4 border-t border-r border-electric-cyan/20 rounded-tr transition-colors duration-300 group-hover:border-electric-cyan/50" />
 
