@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { type RefObject, useEffect, useState } from "react"
+import { type RefObject, useEffect, useState, startTransition } from "react"
 
 interface PowerSurgeProps {
   trigger: number // Increment to trigger animation
@@ -31,7 +31,7 @@ export function PowerSurge({ trigger, containerRef }: PowerSurgeProps) {
         setCenter(null)
       }
       setIsActive(true)
-      const timer = setTimeout(() => setIsActive(false), 1000)
+      const timer = setTimeout(() => startTransition(() => setIsActive(false)), 1000)
       return () => clearTimeout(timer)
     }
   }, [trigger])
