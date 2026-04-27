@@ -4,11 +4,12 @@ import {
   getCategoryBySlug,
   getCategorySlugs,
   getProjectListItemsExtended,
+  categoryProjectsIntroData,
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import { ProjectCategoryHero } from "@/components/projects";
-import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
+import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 
 export const revalidate = 86400; // 24 hours
@@ -68,6 +69,8 @@ export default async function CategoryProjectsPage({
         ]}
         section="projects"
       />
+
+      <SectionIntro data={categoryProjectsIntroData} />
 
       {/* Projects Grid Section */}
       <section

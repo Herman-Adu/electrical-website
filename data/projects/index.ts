@@ -1221,6 +1221,10 @@ export function getProjectSlugsByCategory(
     .map((project) => project.slug);
 }
 
+export { projectsIntroData } from "./projects-intro";
+export { categoryProjectsIntroData } from "./category-intro";
+export { projectDetailIntroData } from "./project-detail-intro";
+
 // ═══════════════════════════════════════════════════════════════════════════
 // SHARED CONTENT GRID SUPPORT
 // Extended list items for ContentGridLayout compatibility

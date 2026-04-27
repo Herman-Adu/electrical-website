@@ -5,13 +5,14 @@ import {
   ProjectsFeaturedCard,
   ProjectsBentoGrid,
 } from "@/components/projects";
-import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
+import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
   getProjectListItemsExtended,
   isProjectCategorySlug,
   projectBentoItems,
   projectCategories,
+  projectsIntroData,
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectsListMetadata } from "@/lib/metadata-projects";
@@ -58,10 +59,21 @@ export default async function ProjectsPage({
         section="projects"
       />
 
+      <SectionIntro data={projectsIntroData} />
+
       <section id="projects-grid" className="section-padding bg-background">
         <div className="section-content max-w-xl">
           {featuredProject ? (
-            <ProjectsFeaturedCard project={featuredProject} />
+            <>
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+                <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+                  Featured Project
+                </span>
+                <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
+              </div>
+              <ProjectsFeaturedCard project={featuredProject} />
+            </>
           ) : null}
         </div>
       </section>

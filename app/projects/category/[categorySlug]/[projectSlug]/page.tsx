@@ -6,6 +6,7 @@ import {
   getProjectByCategoryAndSlug,
   getProjectSlugsByCategory,
   allProjects,
+  projectDetailIntroData,
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectDetailMetadata } from "@/lib/metadata-projects";
@@ -17,7 +18,7 @@ import {
   ProjectSocialCTA,
   ProjectSupplementalSection,
 } from "@/components/projects";
-import { ContentToc, ContentBreadcrumb } from "@/components/shared";
+import { ContentToc, ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 import { adaptProjectTimeline } from "@/lib/timeline/adapters";
@@ -214,6 +215,8 @@ export default async function CategoryProjectDetailPage({
         ]}
         section="projects"
       />
+
+      <SectionIntro data={projectDetailIntroData} />
 
       {/* Main Content with Sticky Sidebar */}
       <section

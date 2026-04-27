@@ -109,7 +109,7 @@ export function ProjectCategoryHero({
   const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToProjects = () => {
-    const el = document.getElementById("category-projects");
+    const el = document.getElementById("category-intro");
     if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
