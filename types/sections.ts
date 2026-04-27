@@ -110,6 +110,8 @@ export interface SectionIntroData {
   bodyParagraphs?: string[];
   /** Three pillar cards */
   pillars?: SectionIntroPillar[];
+  /** Optional credential/badge strip rendered below pillars */
+  credentialStrip?: string[];
 }
 
 // =============================================================================

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import type { SectionIntroData } from "@/types/sections";
 import { AnimatedWord } from "@/components/shared/animated-word";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -19,19 +19,11 @@ export function SectionIntro({ data }: SectionIntroProps) {
     leadParagraph,
     bodyParagraphs = [],
     pillars = [],
+    credentialStrip,
   } = data;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.25 },
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const inView = useInView(sectionRef, { amount: 0.25, once: false });
 
   return (
     <section
@@ -140,6 +132,27 @@ export function SectionIntro({ data }: SectionIntroProps) {
               </ScrollReveal>
             ))}
           </div>
+        )}
+
+        {/* Credential strip */}
+        {credentialStrip && credentialStrip.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap gap-3 mt-6"
+          >
+            {credentialStrip.map((badge) => (
+              <span
+                key={badge}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/5 font-mono text-[10px] tracking-[0.2em] uppercase text-[hsl(174_100%_35%)] dark:text-electric-cyan/80"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan opacity-70 flex-shrink-0" />
+                {badge}
+              </span>
+            ))}
+          </motion.div>
         )}
       </div>
     </section>
