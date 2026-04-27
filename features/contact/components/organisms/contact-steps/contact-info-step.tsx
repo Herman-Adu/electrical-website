@@ -47,7 +47,7 @@ export function ContactInfoStep() {
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <User className="h-5 w-5 text-accent" />
+            <User className="h-5 w-5 text-electric-cyan" />
             <h2 className="text-xl font-semibold text-foreground">
               Your Contact Details
             </h2>
@@ -59,7 +59,7 @@ export function ContactInfoStep() {
         </div>
 
         {/* Form Fields */}
-        <div className="space-y-4">
+        <div className="space-y-4 text-muted-foreground">
           <FormInput
             label="Full Name"
             placeholder="John Smith"
@@ -100,7 +100,7 @@ export function ContactInfoStep() {
         {/* Info Card */}
         <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
           <div className="flex items-start gap-3">
-            <Mail className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <Mail className="h-5 w-5 text-electric-cyan shrink-0 mt-0.5" />
             <div className="space-y-1">
               <p className="text-sm font-medium text-foreground">
                 Privacy Notice

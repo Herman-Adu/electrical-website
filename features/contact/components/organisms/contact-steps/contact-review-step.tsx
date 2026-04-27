@@ -241,7 +241,7 @@ export function ContactReviewStep() {
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-accent" />
+            <CheckCircle2 className="h-5 w-5 text-electric-cyan" />
             <h2 className="text-xl font-semibold text-foreground">
               Review Your Inquiry
             </h2>
@@ -256,7 +256,7 @@ export function ContactReviewStep() {
           {/* Contact Information */}
           <ReviewSection
             title="Contact Information"
-            icon={<User className="h-4 w-4 text-accent" />}
+            icon={<User className="h-4 w-4 text-electric-cyan" />}
             onEdit={() => setCurrentStep(1)}
           >
             <ReviewItem label="Name" value={contactInfo.fullName} />
@@ -270,7 +270,7 @@ export function ContactReviewStep() {
           {/* Inquiry Type */}
           <ReviewSection
             title="Inquiry Details"
-            icon={<MessageSquare className="h-4 w-4 text-accent" />}
+            icon={<MessageSquare className="h-4 w-4 text-electric-cyan" />}
             onEdit={() => setCurrentStep(2)}
           >
             <ReviewItem
@@ -304,7 +304,7 @@ export function ContactReviewStep() {
             referenceLinking.referenceId && (
               <ReviewSection
                 title="Reference Linking"
-                icon={<Link2 className="h-4 w-4 text-accent" />}
+                icon={<Link2 className="h-4 w-4 text-electric-cyan" />}
                 onEdit={() => setCurrentStep(3)}
               >
                 <ReviewItem
@@ -323,7 +323,7 @@ export function ContactReviewStep() {
           {/* Message */}
           <ReviewSection
             title="Message"
-            icon={<FileText className="h-4 w-4 text-accent" />}
+            icon={<FileText className="h-4 w-4 text-electric-cyan" />}
             onEdit={() => setCurrentStep(4)}
           >
             <ReviewItem label="Subject" value={messageDetails.subject} />

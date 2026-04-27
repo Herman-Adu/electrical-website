@@ -36,20 +36,22 @@ const contactMethods = [
 
 export function QuickContactCard() {
   return (
-    <div className="rounded-xl bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)] overflow-hidden">
+    <div className="rounded-xl bg-linear-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)] overflow-hidden">
       {/* Header */}
-      <div className="p-4 bg-linear-to-r from-accent/10 to-transparent border-b border-border/50">
+      <div className="p-4 bg-electric-cyan/10 border border-accent/20 border-b ">
         <div className="flex items-center gap-2">
-          <MessageSquare className="h-5 w-5 text-accent" />
-          <h3 className="font-semibold text-foreground">Quick Contact</h3>
+          <MessageSquare className="h-5 w-5 text-electric-cyan dark:text-accent" />
+          <h3 className="font-semibold text-foreground dark:text-foreground/80">
+            Quick Contact
+          </h3>
         </div>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-xs text-foreground dark:text-foreground/80 mt-1">
           Choose your preferred way to reach us
         </p>
       </div>
 
       {/* Contact Methods */}
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 flex flex-col gaap-6">
         {contactMethods.map((method) => {
           const Icon = method.icon;
           const isExternal =
@@ -59,33 +61,39 @@ export function QuickContactCard() {
             <div
               className={`flex items-start gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
                 method.highlight
-                  ? "bg-accent/10 border-accent/30 hover:bg-accent/20"
-                  : "border-border hover:border-accent/50 hover:bg-accent/5"
+                  ? "bg-electric-cyan/10 dark:bg-accent/10 border-electric-cyan/30 dark:border-accent/30 hover:bg-accent/30 dark:hover:bg-electric-cyan/10"
+                  : "border-border hover:border-electric-cyan/50 dark:hover:border-accent/50 hover:bg-accent/5"
               }`}
             >
               <div
                 className={`p-2 rounded-lg ${
-                  method.highlight ? "bg-accent/20" : "bg-muted"
+                  method.highlight
+                    ? "border border-electric-cyan/30 bg-accent/20"
+                    : "bg-muted/40 border border-electric-cyan/30"
                 }`}
               >
                 <Icon
                   className={`h-5 w-5 ${
-                    method.highlight ? "text-accent" : "text-muted-foreground"
+                    method.highlight
+                      ? "text-electric-cyan"
+                      : "text-electric-cyan"
                   }`}
                 />
               </div>
               <div className="flex-1 min-w-0">
                 <p
                   className={`text-sm font-medium ${
-                    method.highlight ? "text-accent" : "text-foreground"
+                    method.highlight
+                      ? "text-electric-cyan"
+                      : "text-foreground dark:text-foreground/80"
                   }`}
                 >
                   {method.label}
                 </p>
-                <p className="text-sm text-foreground truncate">
+                <p className="text-sm text-foreground dark:text-foreground/80 truncate">
                   {method.value}
                 </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
+                <p className="text-xs text-foreground dark:text-foreground/80 mt-0.5">
                   {method.description}
                 </p>
               </div>
@@ -111,17 +119,29 @@ export function QuickContactCard() {
       {/* Trust Indicators */}
       <div className="px-4 pb-4">
         <div className="grid grid-cols-3 gap-2 text-center">
-          <div className="p-2 rounded-lg bg-muted/50">
-            <p className="text-lg font-bold text-accent">15+</p>
-            <p className="text-xs text-muted-foreground">Years Experience</p>
+          <div className="p-2 rounded-lg border border-electric-cyan/30 bg-muted/50">
+            <p className="text-lg font-bold text-electric-cyan">10+</p>
+            <p className="text-xs text-foreground dark:text-foreground/80">
+              <span>Years</span>
+              <br />
+              <span>Experience</span>
+            </p>
           </div>
-          <div className="p-2 rounded-lg bg-muted/50">
-            <p className="text-lg font-bold text-accent">5000+</p>
-            <p className="text-xs text-muted-foreground">Happy Clients</p>
+          <div className="p-2 rounded-lg border border-electric-cyan/30 bg-muted/50">
+            <p className="text-lg font-bold text-electric-cyan">100's+</p>
+            <p className="text-xs text-foreground dark:text-foreground/80">
+              <span>Happy</span>
+              <br />
+              <span>Clients</span>
+            </p>
           </div>
-          <div className="p-2 rounded-lg bg-muted/50">
-            <p className="text-lg font-bold text-accent">24/7</p>
-            <p className="text-xs text-muted-foreground">Emergency</p>
+          <div className="p-2 rounded-lg border border-electric-cyan/30 bg-muted/50">
+            <p className="text-lg font-bold text-electric-cyan">24/7</p>
+            <p className="text-xs text-foreground dark:text-foreground/80">
+              <span>Emergency</span>
+              <br />
+              <span>Services</span>
+            </p>
           </div>
         </div>
       </div>

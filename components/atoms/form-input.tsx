@@ -45,7 +45,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           className={cn(
             "w-full px-4 py-2.5 rounded-lg",
             "bg-background border border-input",
-            "text-foreground placeholder:text-muted-foreground",
+            "text-foreground placeholder:text-foreground/40",
             "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
             "focus:shadow-[0_0_10px_oklch(0.745_0.153_72.338_/_0.2)]",
             "transition-all duration-200",

@@ -89,19 +89,21 @@ export function OfficeHoursCard() {
   }, []);
 
   return (
-    <div className="rounded-xl bg-gradient-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)] overflow-hidden">
+    <div className="rounded-xl bg-linear-to-br from-white/95 dark:from-background/90 to-[hsl(174_100%_35%)]/5 dark:to-background/70 backdrop-blur-sm border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 shadow-[0_20px_60px_-40px_hsl(174_100%_35%_/_0.15)] dark:shadow-[0_20px_60px_-40px_rgba(0,243,189,0.2)] overflow-hidden">
       {/* Header */}
-      <div className="p-4 bg-linear-to-r from-accent/10 to-transparent border-b border-border/50">
+      <div className="p-4 bg-electric-cyan/10 border border-accent/20 border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-accent" />
-            <h3 className="font-semibold text-foreground">Office Hours</h3>
+            <Clock className="h-5 w-5 text-electric-cyan" />
+            <h3 className="font-semibold text-foreground dark:text-foreground/80">
+              Office Hours
+            </h3>
           </div>
           <div
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
               status.isOpen
-                ? "bg-green-500/20 text-green-600 dark:text-green-400"
-                : "bg-red-500/20 text-red-600 dark:text-red-400"
+                ? "border border-green-400 bg-green-500/20 text-green-600 dark:text-green-400"
+                : "border border-red-400 bg-red-500/20 text-red-600 dark:text-red-400"
             }`}
           >
             {status.isOpen ? (
@@ -118,7 +120,7 @@ export function OfficeHoursCard() {
           </div>
         </div>
         {status.nextChange && (
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-foreground dark:text-foreground/80 mt-1">
             {status.nextChange}
           </p>
         )}
@@ -132,15 +134,15 @@ export function OfficeHoursCard() {
               key={day.day}
               className={`flex items-center justify-between py-2 px-3 rounded-lg transition-colors ${
                 day.day === currentDay
-                  ? "bg-accent/10 border border-accent/20"
+                  ? "bg-electric-cyan/10 dark:bg-accent/10 border border-electric-cyan/30 dark:border-accent/20"
                   : "hover:bg-accent/5"
               }`}
             >
               <span
                 className={`text-sm ${
                   day.day === currentDay
-                    ? "font-medium text-foreground"
-                    : "text-muted-foreground"
+                    ? "font-medium text-electric-cyan"
+                    : "text-foreground dark:text-foreground/80"
                 }`}
               >
                 {day.day}
@@ -148,10 +150,10 @@ export function OfficeHoursCard() {
               <span
                 className={`text-sm ${
                   day.isClosed
-                    ? "text-muted-foreground"
+                    ? "text-foreground dark:text-foreground/80"
                     : day.day === currentDay
-                      ? "font-medium text-accent"
-                      : "text-foreground"
+                      ? "font-medium text-electric-cyan"
+                      : "text-foreground dark:text-foreground/80"
                 }`}
               >
                 {day.isClosed ? "Closed" : `${day.open} - ${day.close}`}

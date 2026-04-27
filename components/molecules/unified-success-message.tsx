@@ -85,18 +85,18 @@ export function UnifiedSuccessMessage({
       case "service":
         return [
           {
-            icon: <Mail className="w-4 h-4 text-accent" />,
+            icon: <Mail className="w-4 h-4 text-electric-cyan" />,
             title: "Confirmation Email",
             description: "You will receive a confirmation email shortly",
           },
           {
-            icon: <Clock className="w-4 h-4 text-accent" />,
+            icon: <Clock className="w-4 h-4 text-electric-cyan" />,
             title: "Response Timeline",
             description:
               "Our team will respond within 24-48 hours based on urgency",
           },
           {
-            icon: <ArrowRight className="w-4 h-4 text-accent" />,
+            icon: <ArrowRight className="w-4 h-4 text-electric-cyan" />,
             title: "Next Steps",
             description:
               "We'll reach out to schedule your service or provide a quote",
@@ -105,13 +105,13 @@ export function UnifiedSuccessMessage({
       case "contact":
         return [
           {
-            icon: <Mail className="w-4 h-4 text-accent" />,
+            icon: <Mail className="w-4 h-4 text-electric-cyan" />,
             title: "Confirmation Email",
             description:
               "You'll receive a confirmation email shortly with your reference number.",
           },
           {
-            icon: <Clock className="w-4 h-4 text-accent" />,
+            icon: <Clock className="w-4 h-4 text-electric-cyan" />,
             title: "Response Timeline",
             description:
               "Our team will review your inquiry and respond within 24-48 hours.",
@@ -120,18 +120,18 @@ export function UnifiedSuccessMessage({
       case "quotation":
         return [
           {
-            icon: <Mail className="w-4 h-4 text-accent" />,
+            icon: <Mail className="w-4 h-4 text-electric-cyan" />,
             title: "Confirmation Email",
             description: "You will receive a confirmation email shortly",
           },
           {
-            icon: <Clock className="w-4 h-4 text-accent" />,
+            icon: <Clock className="w-4 h-4 text-electric-cyan" />,
             title: "Review Process",
             description:
               "Our team will review your requirements within 2-5 business days",
           },
           {
-            icon: <FileText className="w-4 h-4 text-accent" />,
+            icon: <FileText className="w-4 h-4 text-electric-cyan" />,
             title: "Detailed Quotation",
             description: "You will receive a comprehensive quotation via email",
           },
@@ -172,12 +172,12 @@ export function UnifiedSuccessMessage({
             </motion.div>
 
             {/* Title */}
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-electric-cyan mb-4">
               {finalTitle}
             </h2>
 
             {/* Subtitle */}
-            <p className="text-muted-foreground text-sm sm:text-base">
+            <p className="text-foreground dark:text-foreground/80 text-sm sm:text-base">
               {finalSubtitle}
             </p>
           </motion.div>
@@ -187,7 +187,7 @@ export function UnifiedSuccessMessage({
           {/* Reference ID Card */}
           <div className="flex justify-center">
             <div className="w-full max-w-sm p-4 rounded-lg bg-accent/10 border border-accent/20">
-              <p className="text-sm text-muted-foreground mb-2 text-left">
+              <p className="text-sm text-foreground dark:text-foreground/80 mb-2 text-left">
                 {formType === "service"
                   ? "Service Request Reference"
                   : formType === "quotation"
@@ -195,7 +195,7 @@ export function UnifiedSuccessMessage({
                     : "Your Reference Number"}
               </p>
               <div className="flex items-center justify-start gap-2">
-                <code className="text-lg font-mono font-bold text-accent break-all">
+                <code className="text-lg font-mono font-bold text-electric-cyan break-all">
                   {referenceId}
                 </code>
                 <Button
@@ -221,7 +221,7 @@ export function UnifiedSuccessMessage({
           {finalDetails && finalDetails.length > 0 && (
             <div className="flex justify-center">
               <div className="w-full max-w-2xl justify-center">
-                <h3 className="text-lg font-semibold text-foreground text-center mb-4">
+                <h3 className="text-lg font-semibold text-foreground dark:text-foreground/80 text-center mb-4">
                   What Happens Next?
                 </h3>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mx-auto w-fill justify-center">
@@ -236,10 +236,10 @@ export function UnifiedSuccessMessage({
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-3">
                         {detail.icon}
                       </div>
-                      <h4 className="font-medium text-foreground text-sm mb-1 text-left">
+                      <h4 className="font-medium text-foreground dark:text-foreground/80 text-sm mb-1 text-left">
                         {detail.title}
                       </h4>
-                      <p className="text-xs text-muted-foreground text-left">
+                      <p className="text-xs text-foreground dark:text-foreground/80 text-left">
                         {detail.description}
                       </p>
                     </motion.div>

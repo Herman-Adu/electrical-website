@@ -76,37 +76,45 @@ export function LocationMapCard({
       <div className="p-4 space-y-4">
         {/* Header */}
         <div className="flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-accent" />
-          <h3 className="font-semibold text-foreground">Our Location</h3>
+          <MapPin className="h-5 w-5 text-electric-cyan" />
+          <h3 className="font-semibold text-foreground dark:text-foreground/80">
+            Our Location
+          </h3>
         </div>
 
         {/* Address */}
         <div className="space-y-1">
-          <p className="text-sm text-foreground">{address.line1}</p>
+          <p className="text-sm text-foreground dark:text-foreground/80">
+            {address.line1}
+          </p>
           {address.line2 && (
-            <p className="text-sm text-foreground">{address.line2}</p>
+            <p className="text-sm text-foreground dark:text-foreground/80">
+              {address.line2}
+            </p>
           )}
-          <p className="text-sm text-foreground/70">
+          <p className="text-sm text-foreground dark:text-foreground/80">
             {address.city}, {address.county && `${address.county}, `}
             {address.postcode}
           </p>
-          <p className="text-sm text-foreground/70">{address.country}</p>
+          <p className="text-sm text-foreground dark:text-foreground/80">
+            {address.country}
+          </p>
         </div>
 
         {/* Contact Details */}
         <div className="space-y-2 pt-2 border-t border-border/50">
           <a
             href={`tel:${phone.replace(/\s/g, "")}`}
-            className="flex items-center gap-2 text-sm text-foreground/70 hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm text-foreground dark:text-foreground/80 hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-4 w-4 text-electric-cyan" />
             {phone}
           </a>
           <a
             href={`mailto:${email}`}
-            className="flex items-center gap-2 text-sm text-foreground/70 hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm text-foreground dark:text-foreground/80 hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors"
           >
-            <Mail className="h-4 w-4" />
+            <Mail className="h-4 w-4 text-electric-cyan" />
             {email}
           </a>
         </div>
@@ -119,7 +127,7 @@ export function LocationMapCard({
           asChild
         >
           <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="h-4 w-4 mr-2" />
+            <ExternalLink className="h-4 w-4 mr-2 text-electric-cyan" />
             Get Directions
           </a>
         </Button>

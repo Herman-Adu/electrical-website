@@ -121,7 +121,7 @@ export function InquiryTypeStep() {
         {/* Header */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-accent" />
+            <MessageSquare className="h-5 w-5 text-electric-cyan" />
             <h2 className="text-xl font-semibold text-foreground">
               Type of Inquiry
             </h2>
