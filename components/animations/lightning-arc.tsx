@@ -1,7 +1,10 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { gsap } from "gsap"
+import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(useGSAP)
 
 interface LightningArcProps {
   isActive: boolean
@@ -17,17 +20,15 @@ export function LightningArc({ isActive, delay = 0 }: LightningArcProps) {
   const pathRef = useRef<SVGPathElement>(null)
   const glowRef = useRef<SVGPathElement>(null)
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!isActive || !pathRef.current || !glowRef.current) return
 
-    // Create timeline for lightning animation
     const tl = gsap.timeline({
       repeat: -1,
       repeatDelay: 0.5,
       delay,
     })
 
-    // Animate stroke-dashoffset to create flowing electricity effect
     tl.fromTo(
       [pathRef.current, glowRef.current],
       {
@@ -43,11 +44,7 @@ export function LightningArc({ isActive, delay = 0 }: LightningArcProps) {
       duration: 0.3,
       ease: "sine.inOut",
     })
-
-    return () => {
-      tl.kill()
-    }
-  }, [isActive, delay])
+  }, { dependencies: [isActive, delay] })
 
   if (!isActive) {
     return (

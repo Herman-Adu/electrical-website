@@ -1,42 +1,34 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(MotionPathPlugin);
-}
+gsap.registerPlugin(useGSAP, MotionPathPlugin);
 
 export function CircuitSVG() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    const checkDarkMode = () => setIsDarkMode(document.documentElement.classList.contains('dark'));
     checkMobile();
-    checkDarkMode();
     window.addEventListener('resize', checkMobile);
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     return () => {
       window.removeEventListener('resize', checkMobile);
-      observer.disconnect();
     };
   }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!svgRef.current || isMobile) return;
 
-    // Animate sparks along the circuit paths
     const sparks = svgRef.current.querySelectorAll('.spark');
     const paths = ['#circuit-path-1', '#circuit-path-2', '#circuit-path-3'];
 
     sparks.forEach((spark, index) => {
       const pathId = paths[index % paths.length];
-      
+
       gsap.to(spark, {
         duration: 3 + index * 0.5,
         repeat: -1,
@@ -49,7 +41,6 @@ export function CircuitSVG() {
         },
       });
 
-      // Flicker effect
       gsap.to(spark, {
         opacity: 0.3,
         duration: 0.15,
@@ -59,7 +50,7 @@ export function CircuitSVG() {
       });
     });
 
-  }, [isMobile]);
+  }, { scope: svgRef, dependencies: [isMobile] });
 
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none opacity-30 lg:opacity-50">
@@ -75,12 +66,12 @@ export function CircuitSVG() {
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
-          
-          {/* Gradient for circuit lines - theme-aware */}
+
+          {/* Gradient for circuit lines */}
           <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.1" : "0.15"} />
-            <stop offset="50%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.4" : "0.35"} />
-            <stop offset="100%" stopColor="hsl(174, 100%, 50%)" stopOpacity={isDarkMode ? "0.1" : "0.15"} />
+            <stop offset="0%" stopColor="hsl(174, 100%, 50%)" stopOpacity="0.1" />
+            <stop offset="50%" stopColor="hsl(174, 100%, 50%)" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="hsl(174, 100%, 50%)" stopOpacity="0.1" />
           </linearGradient>
         </defs>
 
@@ -95,7 +86,7 @@ export function CircuitSVG() {
             strokeWidth="1.5"
             fill="none"
           />
-          
+
           {/* Left power line */}
           <path
             id="circuit-path-2"
@@ -105,7 +96,7 @@ export function CircuitSVG() {
             strokeWidth="1.5"
             fill="none"
           />
-          
+
           {/* Right power line */}
           <path
             id="circuit-path-3"
