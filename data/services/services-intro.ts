@@ -2,7 +2,7 @@ import type { SectionIntroData } from "@/types/sections";
 
 export const servicesIntroData: SectionIntroData = {
   sectionId: "services-intro",
-  label: "Service Catalogue",
+  label: "Our Services",
   headlineWords: [
     "Electrical",
     "Engineering.",

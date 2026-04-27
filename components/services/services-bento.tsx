@@ -540,6 +540,21 @@ export function ServicesBento() {
       />
 
       <div className="section-content">
+        {/* Bento section eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-10"
+        >
+          <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+          <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+            Service Catalogue
+          </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
+        </motion.div>
+
         {/*
           ═══════════════════════════════════════════
           BENTO GRID LAYOUT
