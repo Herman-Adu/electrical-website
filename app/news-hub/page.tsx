@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import {
   NewsHubBentoGrid,
-  NewsHubFeaturedCard,
+  NewsHubFeaturedSection,
+  NewsHubGridSection,
   NewsHubHero,
 } from "@/components/news-hub";
-import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedNewsArticleByCategory,
@@ -60,20 +60,10 @@ export default async function NewsHubPage({
       <SectionIntro data={newsHubIntroData} />
 
       {featuredArticle ? (
-        <section className="section-standard bg-background">
-          <div className="section-content max-w-6xl">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-              <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-                Featured Story
-              </span>
-            </div>
-            <NewsHubFeaturedCard article={featuredArticle} />
-          </div>
-        </section>
+        <NewsHubFeaturedSection article={featuredArticle} />
       ) : null}
 
-      <section className="section-container section-padding-sm bg-background">
+      <section className="section-container section-padding bg-background">
         <div className="section-content max-w-6xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
@@ -86,27 +76,10 @@ export default async function NewsHubPage({
         </div>
       </section>
 
-      <section
-        id="news-hub-feed"
-        className="section-container section-padding bg-background"
-      >
-        <div className="section-content max-w-6xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-              Latest Articles
-            </span>
-            <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
-          </div>
-          <NewsGridLayout
-            items={listItems}
-            sidebarCards={sidebarCards}
-            title="Latest Articles"
-            initialCount={4}
-            batchSize={3}
-          />
-        </div>
-      </section>
+      <NewsHubGridSection
+        items={listItems}
+        sidebarCards={sidebarCards}
+      />
 
       <Footer />
     </main>

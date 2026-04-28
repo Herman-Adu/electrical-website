@@ -2,6 +2,8 @@
 export { NewsHubHero } from "./news-hub-hero";
 export { NewsHubFeaturedCard } from "./news-hub-featured-card";
 export { NewsHubBentoGrid } from "./news-hub-bento-grid";
+export { NewsHubFeaturedSection } from "./news-hub-featured-section";
+export { NewsHubGridSection } from "./news-hub-grid-section";
 export { NewsHubFeed } from "./news-hub-feed";
 export { NewsGridLayout } from "./news-grid-layout";
 export { NewsHubArticleCard } from "./news-hub-article-card";
