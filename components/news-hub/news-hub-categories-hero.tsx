@@ -79,7 +79,7 @@ export function NewsHubCategoriesHero({
 
   const scrollToCategories = () => {
     const el = document.getElementById("news-categories-intro");
-    if (el) scrollToElementWithOffset(el, { pageType: "article" });
+    if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
   return (
