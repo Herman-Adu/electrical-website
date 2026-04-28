@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import {
   ProjectsHero,
-  ProjectsFeaturedCardAnimated,
+  ProjectsFeaturedSection,
   ProjectsBentoGrid,
 } from "@/components/projects";
 import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
@@ -65,22 +65,9 @@ export default async function ProjectsPage({
 
       <SectionIntro data={projectsIntroData} />
 
-      <section id="projects-grid" className="section-padding bg-background">
-        <div className="section-content max-w-xl">
-          {featuredProject ? (
-            <>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-                <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-                  Featured Project
-                </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
-              </div>
-              <ProjectsFeaturedCardAnimated project={featuredProject} />
-            </>
-          ) : null}
-        </div>
-      </section>
+      {featuredProject ? (
+        <ProjectsFeaturedSection project={featuredProject} />
+      ) : null}
       <section className="section-container bg-background">
         <div className="section-content max-w-6xl">
           <ProjectsBentoGrid items={projectBentoItems} />
