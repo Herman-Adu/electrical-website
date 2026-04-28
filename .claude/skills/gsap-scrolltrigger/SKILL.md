@@ -5,6 +5,10 @@ argument-hint: "[describe the scroll animation issue or target]"
 disable-model-invocation: true
 ---
 
+## Session Preflight
+
+`pnpm docker:mcp:memory:open electrical-website-state` — check active phase and existing animation patterns before generating new ones.
+
 ## Live Context (auto-injected)
 
 Current project structure: !`find app -type f -name "*.tsx" | grep -E "(layout|page)" | head -5 2>/dev/null || echo "Next.js 16 App Router structure"`
@@ -57,6 +61,8 @@ Most animation flicker comes from:
    - No layout shift
    - Elements align correctly
 
+For complex timeline orchestration spanning many components, delegate via `Agent(subagent_type='general-purpose')`.
+
 ## Pattern 1: Basic ScrollTrigger (No Flicker)
 
 **When to use:** Simple entrance animations, fade-in-on-scroll
@@ -83,7 +89,7 @@ export function FadeInOnScroll({ children }: { children: React.ReactNode }) {
       scrollTrigger: {
         trigger: element,
         start: 'top 80%',     // Trigger when 80% visible
-        once: true,            // Only animate once ⭐ KEY
+        once: true,            // Only animate once — KEY
         markers: false,
       },
       opacity: 1,
@@ -112,14 +118,14 @@ export function FadeInOnScroll({ children }: { children: React.ReactNode }) {
 **When to use:** Any element where position/size shouldn't change
 
 ```typescript
-// ❌ CAUSES LAYOUT SHIFT (Don't do this)
+// Causes layout shift — avoid:
 gsap.to(element, {
   left: 100,      // Changes layout
   top: 50,        // Changes layout
   width: 200,     // Changes layout
 });
 
-// ✅ NO LAYOUT SHIFT (Use this)
+// No layout shift — use this:
 gsap.to(element, {
   x: 100,         // Transform only
   y: 50,          // Transform only
@@ -137,157 +143,38 @@ gsap.to(element, {
 }
 ```
 
-## Pattern 3: Batch Animations (Performance)
+Patterns 3–5 (batch animations, timeline orchestration, dynamic content refresh) are in [`patterns.md`](patterns.md).
 
-**When to use:** Many elements with the same animation (lists, grids)
+## vs Framer Motion
 
-```typescript
-'use client';
-
-import { useEffect } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-export function ProjectGrid() {
-  useEffect(() => {
-    // Instead of one ScrollTrigger per element, batch them
-    const elements = gsap.utils.toArray<HTMLElement>('.project-card');
-    
-    elements.forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 85%',
-          once: true,
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-      });
-    });
-
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, []);
-
-  return (
-    <div className="grid grid-cols-3 gap-6">
-      {/* Cards with class="project-card" */}
-    </div>
-  );
-}
-```
-
-## Pattern 4: Sync Multiple Animations (Timeline)
-
-**When to use:** Sequential animations that must stay in sync
-
-```typescript
-'use client';
-
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-export function HeroSection() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    // Group related animations with timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ref.current,
-        start: 'top center',
-        markers: false,
-      },
-    });
-
-    // All animations sync together
-    tl.to('.hero-title', { opacity: 1, y: 0, duration: 0.5 }, 0)
-      .to('.hero-subtitle', { opacity: 1, y: 0, duration: 0.5 }, 0.1)
-      .to('.hero-cta', { opacity: 1, scale: 1, duration: 0.5 }, 0.2);
-
-    return () => tl.kill();
-  }, []);
-
-  return (
-    <section ref={ref}>
-      <h1 className="hero-title" style={{ opacity: 0, transform: 'translateY(20px)' }}>
-        Title
-      </h1>
-      <p className="hero-subtitle" style={{ opacity: 0, transform: 'translateY(20px)' }}>
-        Subtitle
-      </p>
-      <button className="hero-cta" style={{ opacity: 0, transform: 'scale(0.8)' }}>
-        CTA
-      </button>
-    </section>
-  );
-}
-```
-
-## Pattern 5: Refresh After Dynamic Content
-
-**When to use:** Content loads dynamically (pagination, infinite scroll)
-
-```typescript
-'use client';
-
-import { useEffect } from 'react';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-
-export function DynamicProjectList({ projects }: { projects: Project[] }) {
-  useEffect(() => {
-    // After content changes, refresh ScrollTrigger measurements
-    ScrollTrigger.refresh();
-  }, [projects]); // Re-run when projects change
-
-  return (
-    <div>
-      {projects.map((p) => (
-        <div key={p.id} className="project-item will-change-transform">
-          {p.title}
-        </div>
-      ))}
-    </div>
-  );
-}
-```
+Use GSAP ScrollTrigger when: complex timeline orchestration, scrub effects, pinning, or batch-animating many elements. Use Framer Motion when: component-level transitions, gesture interactions, or spring physics.
 
 ## Anti-Patterns (Causes Flicker)
 
-### ❌ Updating State on Every Scroll Event
-
+Updating state on every scroll event:
 ```typescript
-// DON'T DO THIS (re-renders = flicker)
+// Re-renders = flicker
 window.addEventListener('scroll', () => {
-  setScrollY(window.scrollY);  // Triggers re-render per pixel
+  setScrollY(window.scrollY);
 });
 ```
 
-### ❌ Animating Position Properties
-
+Animating position properties:
 ```typescript
-// DON'T DO THIS (causes layout shift)
+// Causes layout shift
 gsap.to(el, { left: 100, top: 50 });
 ```
 
-### ❌ Missing will-change CSS
-
+Missing will-change CSS:
 ```typescript
-// DON'T DO THIS (no GPU acceleration)
+// No GPU acceleration
 .element { /* empty styles */ }
 gsap.to(element, { x: 100 });
 ```
 
 ## Implementation Checklist
 
-- [ ] GSAP + ScrollTrigger installed (`npm install gsap`)
+- [ ] GSAP + ScrollTrigger installed (`pnpm add gsap`)
 - [ ] ScrollTrigger plugin registered in useEffect
 - [ ] All animations use transform properties only (x, y, scale, rotate)
 - [ ] Elements have `will-change: transform` CSS
@@ -296,19 +183,19 @@ gsap.to(element, { x: 100 });
 - [ ] No direct scroll event listeners
 - [ ] `ScrollTrigger.refresh()` called after dynamic content
 - [ ] No console errors or warnings
-- [ ] Test: Smooth 60fps on scroll, no flicker, correct alignment
+- [ ] Test with `PLAYWRIGHT_REUSE_SERVER=true pnpm test` when dev server is running on port 3000
 
 ## Quick Fix Checklist (Existing Animations)
 
 If animation flickers on scroll:
 
-1. ✅ Add `will-change: transform;` to element CSS
-2. ✅ Change animation to use `x`, `y`, `scale` not `left`, `top`, `width`
-3. ✅ Wrap ScrollTrigger in useEffect with cleanup
-4. ✅ Add `once: true` to prevent re-triggering
-5. ✅ Call `ScrollTrigger.refresh()` after content loads
-6. ✅ Verify no inline `position` styles conflicting
-7. ✅ Test in production build (dev may have different behavior)
+1. Add `will-change: transform;` to element CSS
+2. Change animation to use `x`, `y`, `scale` not `left`, `top`, `width`
+3. Wrap ScrollTrigger in useEffect with cleanup
+4. Add `once: true` to prevent re-triggering
+5. Call `ScrollTrigger.refresh()` after content loads
+6. Verify no inline `position` styles conflicting
+7. Test in production build (dev may have different behavior)
 
 ## References
 

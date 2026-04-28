@@ -10,8 +10,20 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \".claude/hooks/session-start.sh\"",
-            "timeout": 5
+            "command": "node \".claude/hooks/session-start-v2.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"scripts/memory-lane-stop.mjs\"",
+            "timeout": 15
           }
         ]
       }

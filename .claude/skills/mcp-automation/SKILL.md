@@ -1,76 +1,59 @@
 ---
 name: mcp-automation
-description: Use this skill WHENEVER the user mentions repetition, batch operations, or workflow sequences — even if they don't explicitly ask to "automate". Use for: automating multi-step workflows, batch-generating content, creating repeatable processes, orchestrating tools/APIs/skills together, setting up pipelines, chaining operations. Trigger on: "how can I do this repeatedly", "automate X", "batch process", "connect these tools", "can we chain", "I need to do this every time", "set up a workflow", or any mention of doing the same thing multiple times.
+description: Use this skill WHENEVER the user mentions repetition, batch operations, or workflow sequences on the electrical-website project — even if they don't explicitly ask to "automate". Use for: automating multi-step workflows, batch operations, orchestrating MCP tools together, setting up pipelines, GitHub automation (PRs, CI checks, merges), Playwright browser automation, chaining operations. Trigger on: "automate X", "batch process", "connect these tools", "can we chain", "I need to do this every time", "set up a workflow", "run CI", "merge PR", or any mention of doing the same thing multiple times.
 argument-hint: "[workflow goal]"
 disable-model-invocation: true
 ---
 
-## Current Priorities (auto-injected)
+# MCP Automation Skill — electrical-website
 
-!`cat context/current-priorities.md 2>/dev/null || echo "No priorities file. Ask user for workflow context and priority alignment."`
+Orchestrates MCP tools and automates multi-step workflows for the electrical-website project. Always prefer MCP tools over CLI equivalents.
 
-# MCP Automation Skill
+## MCP Tool Namespace Reference
 
-A system that orchestrates MCP tools and automates multi-step workflows.
-This skill acts as the Automation Engineer of the Executive Assistant.
+| Namespace | Purpose | Never use instead |
+|-----------|---------|-------------------|
+| `mcp__MCP_DOCKER__github_official__*` | All GitHub ops (PRs, merges, CI checks, issues) | `gh` CLI |
+| `mcp__MCP_DOCKER__memory_reference__*` | Session state and project knowledge | .md files |
+| `mcp__MCP_DOCKER__playwright__*` | Browser automation and E2E verification | Manual browser |
+| `mcp__MCP_DOCKER__sequential_thinking__*` | Complex multi-step reasoning | — |
+| `mcp__MCP_DOCKER__nextjs_devtools__*` | Build and type checking | — |
 
-It integrates with:
-
-- Research Skill (automated research workflows)
-- Planning Skill (auto-updating plans and tasks)
-- Content Creation & Social Media (batch generation and repurposing)
-- Code Generation (scaffold, refactor, document)
-- Client Management (auto-summaries, filing, logging)
-- Knowledge/Memory Skill (saving, retrieving, updating files)
+**Playwright:** Always set `PLAYWRIGHT_REUSE_SERVER=true` when dev server is running on port 3000.
+**GitHub automation:** Use `mcp__MCP_DOCKER__github_official__*` tools — NOT `gh` CLI.
+**Agent dispatch:** `Agent(subagent_type="general-purpose")` for subtask delegation — never implement >50 LOC directly.
 
 ## Execution Method
 
-1. **Docker Preflight (Session Start)**
-   - Search for project state: `mcp__MCP_DOCKER__search_nodes(“electrical-website-state”)`
-   - Load context: `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
-   - Extract: active phase, workflow dependencies, prior automations, blockers
+1. **Docker Preflight**
+   - Search project state: `pnpm docker:mcp:memory:search "electrical-website-state"`
+   - Load context: `pnpm docker:mcp:memory:open electrical-website-state`
    - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
-   - This ensures workflows build on verified prior context
 
-2. **Validate required tools are available**
-   - Confirm all skills (planning, code-generation, knowledge-memory) are accessible
-   - Check Context7 library resolver is working (for current API docs)
-   - Fail gracefully with error message if dependencies missing
+2. **Validate tool availability**
+   - Confirm required MCP namespaces are reachable (health: `curl -sf http://localhost:3100/health`)
+   - Fail gracefully with clear error message if dependencies missing
 
 3. **Parse the request**
    - Identify the workflow goal and steps
-   - Identify which skills/tools are involved
-   - **DISAMBIGUATION:** If the request is only “save this to archives”, delegate to Knowledge Memory instead
-
-4. **If needed, call the MCP Automation Agent**
-   - Use agent for: workflow design, step decomposition, tool mapping, input/output definition
-   - Do NOT use for: execution or final synthesis
+   - Identify which MCP tools / namespaces are involved
+   - If request is only "save this to archives" → delegate to knowledge-memory instead
 
 4. **Design the workflow**
-   - Synthesize available skills and constraints
-   - Define each step clearly
-   - Map steps to skills and MCP tools
+   - Synthesize available tools and constraints
+   - Map each step to the correct MCP namespace
    - Define inputs/outputs between steps
 
-5. **Check workflow templates** (if applicable)
-   - Browse `templates/` folder for pre-built patterns
-   - Adapt templates to current request
+5. **Execute the workflow**
+   - Call MCP tools in sequence via correct namespaces
+   - Handle failures gracefully; log key outputs
 
-6. **Execute the workflow**
-   - Call skills/tools in sequence
-   - Handle failures gracefully
-   - Log key outputs
+6. **Persist workflow result**
+   - Persist via Docker memory — see `.claude/CLAUDE.md` Memory Rules
 
-7. **Persist workflow to Docker (session-end)**
-   - Create infrastructure entity: `mcp__MCP_DOCKER__create_entities([workflow])`
-   - Add observations: `mcp__MCP_DOCKER__add_observations(entity_id, [execution_metadata])`
-   - Wire relations: `mcp__MCP_DOCKER__create_relations([derives_from, documents])`
-   - Enable future discovery via `search_nodes("{workflow-domain}")`
-
-8. **Return the result**
-   - Workflow summary with outputs and paths
+7. **Return the result**
+   - Workflow summary with outputs
    - How to re-run it
-   - Docker entity ID for future persistence
 
 ---
 
@@ -79,23 +62,13 @@ It integrates with:
 ### For workflow design:
 
 # Workflow: {Name}
-
-## Goal
-
-…
-
+## Goal …
 ## Steps
-
 1. …
 2. …
-3. …
-
-## Tools / Skills Used
-
+## Tools / MCP Namespaces Used
 - …
-
 ## Inputs / Outputs
-
 - …
 
 ---
@@ -103,31 +76,18 @@ It integrates with:
 ### For execution summary:
 
 # Automation Run Summary
-
-## Workflow
-
-…
-
+## Workflow …
 ## Steps Executed
-
 - …
-
 ## Outputs
-
 - …
-
 ## Notes
-
 - …
 
 ---
 
 ## Notes
 
-- Use Haiku for workflow design and step decomposition.
-- Use Opus for orchestration and explanation.
-- Always respect file structure and naming conventions.
-- Never delete or overwrite without explicit instruction.
-- For simple single-file saves, use Knowledge Memory instead (not this skill).
-- See `README.md` for documentation and workflow templates.
-- See `templates/` folder for pre-built workflow templates and integration examples.
+- Always respect file structure and naming conventions (see `.claude/rules/naming-conventions.md`)
+- Never delete or overwrite without explicit instruction
+- For simple single-file saves, use knowledge-memory instead (not this skill)

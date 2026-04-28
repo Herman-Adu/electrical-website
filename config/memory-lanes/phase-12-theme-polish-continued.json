@@ -1,77 +1,11 @@
 {
   "memoryLane": {
     "id": "feat-phase-12-theme-polish-continued",
-    "name": "Phase 12: Extend Light/Dark Theme Polish to Remaining Sections",
     "branch": "feat/phase-12-theme-polish-continued",
-    "phase": 12,
+    "dockerEntity": "feat-phase-12-theme-polish-continued",
     "status": "completed",
-    "created_date": "2026-04-21",
-    "completed_date": "2026-04-21",
-    "docker_entities": {
-      "project_state": "electrical-website-state",
-      "feature": "feat-phase-12-theme-polish-continued"
-    },
-    "focus": "THEME POLISH ONLY — No performance work in this phase",
-    "scope": [
-      "Apply light/dark theme consistency to Services page components",
-      "Apply light/dark theme consistency to Projects page components",
-      "Apply light/dark theme consistency to About page components",
-      "Apply light/dark theme consistency to News Hub components",
-      "Apply light/dark theme consistency to Contact page components",
-      "Verify all section backgrounds, buttons, text, and borders follow color strategy",
-      "Update Cypress baselines for all polished sections"
-    ],
-    "color_strategy": {
-      "light_theme_accent": "hsl(174 100% 35%) — electric-green",
-      "light_theme_borders": "border-foreground/50",
-      "light_theme_text": "text-foreground/80",
-      "dark_theme_accent": "electric-cyan (#00ffff)",
-      "dark_theme_borders": "border-electric-cyan",
-      "dark_theme_text": "text-electric-cyan/80"
-    },
-    "reference_components": [
-      "Phase 11 completed: Hero sections, navbar, breadcrumb, category buttons",
-      "Use these as template for remaining page sections"
-    ],
-    "sections_completed": [
-      "✅ Services section (components/sections/services.tsx)",
-      "✅ Contact Hero (components/sections/contact-hero.tsx)",
-      "✅ Contact Form (components/sections/contact.tsx)",
-      "✅ Contact Intro (components/sections/contact-intro.tsx)",
-      "✅ Contact CTA (components/sections/contact-cta.tsx)",
-      "✅ News Hub Hero (components/news-hub/news-hub-hero.tsx)",
-      "✅ Features section (components/sections/features.tsx)",
-      "✅ Dashboard section (components/sections/dashboard.tsx)"
-    ],
-    "test_coverage": {
-      "unit_tests_baseline": "267/270 passing, 4 skipped",
-      "unit_tests_final": "267 passed | 4 skipped (271 total) ✅",
-      "cypress_baseline": "All sections visually consistent",
-      "target": "All pages visually consistent light/dark theme ✅"
-    },
-    "build_gates": {
-      "typecheck": "✅ Passed (no TS errors)",
-      "build": "✅ 58/58 pages compiled in 7.2s",
-      "tests": "✅ 267 passed | 4 skipped"
-    },
-    "commits_created": [
-      "913391f - feat: Apply light/dark theme polish to Services, Contact, and News Hub sections",
-      "e5b6f4c - feat: Polish light/dark theme for contact intro and CTA sections",
-      "27e403c - feat: Complete light/dark theme polish for Features and Dashboard sections"
-    ],
-    "handoff_protocol": {
-      "on_every_commit": "Update this memory lane with: work completed, learnings discovered, current state, next tasks",
-      "on_main_merge": "Add session observations to Docker electrical-website-state entity",
-      "example": "After each commit: 'Completed: Services page styling. Learned: Grid layout resets on light theme. Next: Projects page'"
-    },
-    "learnings": [
-      "Light/dark theme consistency requires explicit color pairs for ALL interactive elements",
-      "Borders need both light (border-foreground/20-50) and dark (dark:border-electric-cyan) variants",
-      "Text elements must have light mode default + dark: override to avoid dark-only values",
-      "Hover states critical on both themes - light green (hsl(174 100% 35%)) vs dark cyan",
-      "Pattern proved from Phase 11 (about-hero.tsx) applies consistently across all sections"
-    ],
-    "next_phase": "Phase 13: Lighthouse Optimization - Performance metrics, Core Web Vitals, bundle analysis"
-  }
+    "openedAt": "2026-04-21T00:00:00.000Z",
+    "mergedAt": "2026-04-22T00:00:00.000Z",
+    "fallback_summary": "Phase 12 theme polish — Services, Contact, News Hub polished. Build: 58/58 pages. Tests: 267 passed."
   }
 }

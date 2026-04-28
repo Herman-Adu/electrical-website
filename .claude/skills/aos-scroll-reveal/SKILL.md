@@ -5,6 +5,12 @@ argument-hint: "[describe the scroll-reveal animations needed]"
 disable-model-invocation: true
 ---
 
+> **Check project decisions first.** Recent project phases have deliberately removed scroll-reveal animations from some components. Run `pnpm docker:mcp:memory:search "scroll-reveal"` and check `electrical-website-state` before adding AOS animations. Confirm with user if unsure.
+
+## Session Preflight
+
+`pnpm docker:mcp:memory:open electrical-website-state` — check active phase and verify scroll-reveal is appropriate for the target components.
+
 ## Live Context (auto-injected)
 
 Current sections: !`find app -path "*/page.tsx" -o -path "*/sections/*" 2>/dev/null | head -10 || echo "No sections detected"`
@@ -22,29 +28,29 @@ Animation needs: !`grep -r "data-aos\|whileInView\|ScrollTrigger" components --i
 - Staggered animations on lists
 
 **Trade-offs vs GSAP/Framer Motion:**
-- ✅ Simpler setup (HTML attributes)
-- ✅ Smaller bundle (~15KB)
-- ✅ Better for many identical animations
-- ❌ Less customizable
-- ❌ Limited gesture support
-- ❌ No timeline orchestration
+- Simpler setup (HTML attributes)
+- Smaller bundle (~15KB)
+- Better for many identical animations
+- Less customizable
+- Limited gesture support
+- No timeline orchestration
 
 ## When to Use AOS vs Alternatives
 
 | Scenario | Use AOS | Use Framer | Use GSAP |
 |----------|---------|-----------|---------|
-| Many fade-ins | ✅ | | |
-| Complex orchestration | | | ✅ |
-| Gesture interactions | | ✅ | |
-| Page-level animations | ✅ | | |
-| Scroll with position sync | | | ✅ |
-| Component animations | | ✅ | |
+| Many fade-ins | Yes | | |
+| Complex orchestration | | | Yes |
+| Gesture interactions | | Yes | |
+| Page-level animations | Yes | | |
+| Scroll with position sync | | | Yes |
+| Component animations | | Yes | |
 
 ## Execution Method
 
 1. **Install AOS**
    ```bash
-   npm install aos
+   pnpm add aos
    ```
 
 2. **Initialize in layout**
@@ -63,6 +69,8 @@ Animation needs: !`grep -r "data-aos\|whileInView\|ScrollTrigger" components --i
    - Proper element visibility
    - Clean after unmount
 
+For bulk animation systems spanning many page sections, delegate via `Agent(subagent_type='general-purpose')`.
+
 ## Pattern 1: Basic Scroll Reveal
 
 **When to use:** Simple fade-in entrance for sections
@@ -80,7 +88,7 @@ export default function RootLayout({ children }) {
     AOS.init({
       duration: 600,
       easing: 'ease-out-cubic',
-      once: true,        // ⭐ KEY: only animate once
+      once: true,        // KEY: only animate once
       offset: 100,       // Trigger when 100px from bottom
       disable: 'phone',  // Disable on mobile (optional)
     });
@@ -141,86 +149,19 @@ export function ProjectsGrid({ projects }) {
 }
 ```
 
-## Pattern 4: Directional Animations
-
-**When to use:** Different entrance directions for visual variety
-
-```typescript
-// Use different AOS animations
-<div data-aos="fade-left">Slides from right</div>
-<div data-aos="fade-right">Slides from left</div>
-<div data-aos="fade-up">Slides up from bottom</div>
-<div data-aos="fade-down">Slides down from top</div>
-<div data-aos="zoom-in">Scales up from center</div>
-<div data-aos="flip-left">Flips in from left</div>
-```
-
-## Pattern 5: Refresh After Dynamic Content
-
-**When to use:** Content loaded via pagination, infinite scroll, or data fetch
-
-```typescript
-// components/dynamic-list.tsx
-'use client';
-
-import AOS from 'aos';
-import { useEffect } from 'react';
-
-export function DynamicProjectList({ projects }) {
-  useEffect(() => {
-    // After content changes, refresh AOS measurements
-    AOS.refresh();
-  }, [projects]); // Re-run when projects change
-
-  return (
-    <div>
-      {projects.map((p) => (
-        <div key={p.id} data-aos="fade-up">
-          {p.title}
-        </div>
-      ))}
-    </div>
-  );
-}
-```
-
-## Pattern 6: Customize Per Element
-
-**When to use:** Override global config for specific elements
-
-```typescript
-// Global config: 600ms duration
-// But this element animates faster
-<div
-  data-aos="fade-in"
-  data-aos-duration="300"      // Faster animation
-  data-aos-delay="500"         // Longer delay before start
-  data-aos-offset="200"        // Trigger earlier (200px above)
-  data-aos-easing="ease-in-out"
-  data-aos-once="true"
->
-  Custom-configured element
-</div>
-```
+Patterns 4–6 (directional animations, dynamic content refresh, per-element overrides) are in [`patterns.md`](patterns.md).
 
 ## Available Animations
 
-**Fade:**
-- `fade` — Simple fade
-- `fade-up`, `fade-down`, `fade-left`, `fade-right`
+**Fade:** `fade`, `fade-up`, `fade-down`, `fade-left`, `fade-right`
 
-**Flip:**
-- `flip-left`, `flip-right`, `flip-up`, `flip-down`
+**Flip:** `flip-left`, `flip-right`, `flip-up`, `flip-down`
 
-**Slide:**
-- `slide-up`, `slide-down`, `slide-left`, `slide-right`
+**Slide:** `slide-up`, `slide-down`, `slide-left`, `slide-right`
 
-**Zoom:**
-- `zoom-in`, `zoom-in-up`, `zoom-in-down`, `zoom-in-left`, `zoom-in-right`
-- `zoom-out`, `zoom-out-up`, `zoom-out-down`, `zoom-out-left`, `zoom-out-right`
+**Zoom:** `zoom-in`, `zoom-in-up`, `zoom-in-down`, `zoom-in-left`, `zoom-in-right`, `zoom-out`, `zoom-out-up`, `zoom-out-down`, `zoom-out-left`, `zoom-out-right`
 
-**Bounce:**
-- `bounce-in`, `bounce-in-up`, `bounce-in-down`, `bounce-in-left`, `bounce-in-right`
+**Bounce:** `bounce-in`, `bounce-in-up`, `bounce-in-down`, `bounce-in-left`, `bounce-in-right`
 
 ## Global Configuration
 
@@ -228,7 +169,7 @@ export function DynamicProjectList({ projects }) {
 AOS.init({
   duration: 600,              // Animation duration (ms)
   easing: 'ease-out-cubic',   // Easing function
-  once: true,                 // ⭐ KEY: only animate once
+  once: true,                 // KEY: only animate once
   offset: 100,                // Trigger when 100px from bottom
   delay: 0,                   // Default delay
   mirror: false,              // Don't re-animate on scroll up
@@ -237,35 +178,15 @@ AOS.init({
 });
 ```
 
-## Anti-Patterns (Causes Issues)
+## Anti-Patterns
 
-❌ **Setting `once: false`** (re-animates every scroll)
-```typescript
-// DON'T: Flickers on scroll up/down
-AOS.init({ once: false });
-```
+Setting `once: false` re-animates every scroll — always use `once: true`.
 
-✅ **Use `once: true`** (smooth, one-time)
-```typescript
-// DO: Clean, professional
-AOS.init({ once: true });
-```
-
-❌ **Very short `offset` with long `duration`**
-```typescript
-// DON'T: Animation continues after scroll
-AOS.init({ duration: 2000, offset: 50 });
-```
-
-✅ **Balance offset and duration**
-```typescript
-// DO: Balanced
-AOS.init({ duration: 600, offset: 100 });
-```
+Very short `offset` with long `duration` causes animation to continue after scroll — balance them (`duration: 600, offset: 100`).
 
 ## Implementation Checklist
 
-- [ ] AOS installed (`npm install aos`)
+- [ ] AOS installed (`pnpm add aos`)
 - [ ] AOS CSS imported in layout
 - [ ] AOS initialized with `once: true`
 - [ ] Elements have `data-aos` attributes
@@ -275,6 +196,7 @@ AOS.init({ duration: 600, offset: 100 });
 - [ ] 60fps smooth on scroll
 - [ ] No flicker
 - [ ] Mobile performance acceptable
+- [ ] Test with `PLAYWRIGHT_REUSE_SERVER=true pnpm test` when dev server is running on port 3000
 
 ## Troubleshooting
 

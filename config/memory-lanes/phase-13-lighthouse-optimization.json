@@ -1,35 +1,11 @@
 {
   "memoryLane": {
     "id": "feat-phase-13-lighthouse-optimization",
-    "name": "Phase 13: Lighthouse Audit & Core Web Vitals Optimization",
     "branch": "feat/phase-13-lighthouse-optimization",
-    "phase": 13,
+    "dockerEntity": "feat-phase-13-lighthouse-optimization",
     "status": "pending",
-    "created_date": "2026-04-21",
-    "planned_date": "After Phase 12 completes",
-    "docker_entities": {
-      "project_state": "electrical-website-state",
-      "feature": "feat-phase-13-lighthouse-optimization"
-    },
-    "focus": "PERFORMANCE MEASUREMENT & OPTIMIZATION — Lighthouse scores, Core Web Vitals",
-    "scope": [
-      "Run Lighthouse audit on all major pages (home, about, services, projects, news-hub, contact)",
-      "Measure current Core Web Vitals: LCP, INP, CLS",
-      "Identify bottlenecks from Lighthouse report",
-      "Optimize image loading (formats, lazy-loading, responsive sizes)",
-      "Optimize font loading (preconnect, font-display strategy)",
-      "Optimize CSS delivery (critical CSS, deferred non-critical)",
-      "Target: 75+ Lighthouse score on all pages, green Core Web Vitals"
-    ],
-    "success_criteria": {
-      "lighthouse_score": "75+ on Performance, Accessibility, Best Practices, SEO",
-      "core_web_vitals": "All green (LCP <2.5s, INP <200ms, CLS <0.1)",
-      "lighthouse_ci": "Passing baseline established"
-    },
-    "test_coverage": {
-      "lighthouse_ci": "Automated Lighthouse CI checks on all PRs",
-      "web_vitals": "Monitor with Web Vitals library"
-    },
-    "blockers": "None — Phase 13 starts after Phase 12 completes"
+    "openedAt": "2026-04-21T00:00:00.000Z",
+    "mergedAt": null,
+    "fallback_summary": "Phase 13 Lighthouse Audit & Core Web Vitals Optimization — pending start after Phase 12."
   }
 }
