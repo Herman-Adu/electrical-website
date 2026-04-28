@@ -4,8 +4,9 @@ import {
   ProjectsHero,
   ProjectsFeaturedSection,
   ProjectsBentoGrid,
+  ProjectsListSection,
 } from "@/components/projects";
-import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
+import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
   getProjectListItemsExtended,
@@ -73,28 +74,11 @@ export default async function ProjectsPage({
           <ProjectsBentoGrid items={projectBentoItems} />
         </div>
       </section>
-      <section className="section-container section-padding bg-background">
-        <div className="section-content max-w-7xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-              {activeCategoryLabel} Projects
-            </span>
-            <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
-          </div>
-          <ContentGridLayout
-            items={projectListItems}
-            sidebarCards={sidebarCards}
-            cardType="project"
-            title="All Projects"
-            itemLabel="project"
-            itemLabelPlural="projects"
-            emptyMessage="No projects available in this category yet."
-            sidebarTitle="Project Resources"
-            sidebarDescription="Consultations, guides, and client testimonials for your project needs."
-          />
-        </div>
-      </section>
+      <ProjectsListSection
+        items={projectListItems}
+        sidebarCards={sidebarCards}
+        activeCategoryLabel={activeCategoryLabel}
+      />
       <Footer />
     </main>
   );
