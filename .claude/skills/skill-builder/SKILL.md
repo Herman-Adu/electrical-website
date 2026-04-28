@@ -27,9 +27,9 @@ For the complete technical reference on all frontmatter fields, advanced pattern
 
 **Step 2–N: Follow patterns below**
 
-## Successful Patterns from Our 20-Skill Ecosystem
+## Successful Patterns from Our 10-Skill Ecosystem
 
-These patterns have been proven across 20 production skills. Use them when building new skills:
+These patterns have been proven across 10 production skills. Use them when building new skills:
 
 ### Pattern 1: Context Injection for Personalization
 
@@ -40,7 +40,7 @@ These patterns have been proven across 20 production skills. Use them when build
 - research skill injects: current priorities, goals, brand voice
 - content-creation skill injects: brand voice, communication style
 - client-management skill injects: client context, brand voice
-- 12 of 20 skills use this pattern effectively
+- this pattern is used effectively across multiple skills in this ecosystem
 
 **Why it works:** File-read instructions are unreliable; injection is mechanically guaranteed
 
@@ -53,7 +53,7 @@ These patterns have been proven across 20 production skills. Use them when build
 - research skill: Synthesis step uses (ultrathink) to connect insights
 - business-strategy skill: Framework generation uses (ultrathink)
 - planning skill: Roadmap synthesis uses (ultrathink)
-- 6 of 20 skills use this pattern for high-value decisions
+- used selectively across this skill ecosystem for high-value decisions
 
 **Why it works:** Extended reasoning improves synthesis quality and reduces errors in complex decisions
 
@@ -65,7 +65,7 @@ These patterns have been proven across 20 production skills. Use them when build
 
 - code-generation delegates to Haiku for debugging, refactoring, test generation
 - content-creation delegates to Haiku for ideation, repurposing
-- 18 of 20 skills successfully use agent delegation
+- agent delegation is the standard pattern across all 10 skills
 
 **Why it works:** Keeps main skill context clean, enables parallel execution, improves cost efficiency
 
@@ -244,54 +244,7 @@ Test both invocation methods:
 
 If issues arise, see Troubleshooting in [reference.md](reference.md).
 
-### Complete Example
-
-Here's a minimal but complete skill you can use as a starting template:
-
-**File:** `.claude/skills/[skill-name]/SKILL.md` (example: meeting-notes skill)
-
-```yaml
----
-name: meeting-notes
-description: Use when someone asks to summarize meeting notes, recap a meeting, or format meeting minutes.
-argument-hint: "[topic or date]"
----
-
-## What This Skill Does
-
-Takes raw meeting notes and produces a structured summary with action items.
-
-## Steps
-
-1. Ask the user to paste their raw meeting notes (or provide a file path).
-2. Extract the following from the notes:
-   - **Attendees** -- Who was in the meeting
-   - **Key decisions** -- What was decided
-   - **Action items** -- Who owes what, with deadlines if mentioned
-   - **Open questions** -- Anything unresolved
-3. Format the output using the template below.
-4. If $ARGUMENTS is provided, use it as the meeting title. Otherwise, infer a title from the content.
-
-## Output Template
-
-# Meeting: [title]
-**Date:** [date if mentioned, otherwise "Not specified"]
-**Attendees:** [comma-separated list]
-
-## Key Decisions
-- [decision]
-
-## Action Items
-- [ ] [person]: [task] (due: [date or "TBD"])
-
-## Open Questions
-- [question]
-
-## Notes
-
-- Keep summaries concise. Don't add commentary or embellish.
-- If notes are too vague to extract action items, flag that to the user instead of making them up.
-```
+For a complete worked example of the meeting-notes skill and a Mode 4 evaluation template, see [`worked-examples.md`](worked-examples.md).
 
 ---
 
@@ -345,8 +298,7 @@ Use this checklist to audit any existing skill. Read the skill file first before
 - [ ] All file paths in AGENT.md match the skill's routing table (e.g., `images/brand/`, `images/social/`, `images/clients/`)
 - [ ] Paths in AGENT.md and SKILL.md are synchronized
 
-**To run an automated check:**
-Run `bash scripts/validate-skills.sh` to verify agent governance across all 20 skills (checks file location, completeness, stale paths, etc.)
+**To verify agent governance:** Use the Agent Governance Audit checklist above — check file location, completeness, stale paths, and second-person format.
 
 ### Content Audit
 
@@ -436,7 +388,7 @@ report generation from multiple sources.
 
 ## Governance Standards: The 9/9 Checks
 
-Our 20-skill ecosystem enforces 9 automated checks (run via `bash scripts/validate-skills.sh`). These prevent quality debt and architectural decay:
+This 10-skill ecosystem enforces 9 governance checks. Run them manually via the checklist below to prevent quality debt and architectural decay:
 
 | Check                          | What It Validates                                                  | Why It Matters                                                  |
 | ------------------------------ | ------------------------------------------------------------------ | --------------------------------------------------------------- |
@@ -450,9 +402,7 @@ Our 20-skill ecosystem enforces 9 automated checks (run via `bash scripts/valida
 | **8. Frontmatter Compliance**  | Only official Claude Code keys used (no unsupported keys)          | Prevents silent failures from ignored frontmatter               |
 | **9. Quality Gate**            | All worked-examples.md ≥ 150 lines                                 | Ensures example quality; prevents hollow documentation          |
 
-**Enforcement:** Pre-commit hook runs all 9 checks automatically. Commits fail if any check fails.
-
-**When building new skills:** Always run `bash scripts/validate-skills.sh` before committing to catch issues early.
+**Enforcement:** Run through the 9 checks manually before committing new or modified skills to catch issues early.
 
 ---
 
@@ -466,7 +416,7 @@ Adapt these to fit your project:
 - API keys go in environment variables, never hardcoded in skill files
 - Document all active skills in your project's CLAUDE.md
 - Frontmatter `description` is written as: "Use when someone asks to [action], [action], or [action]."
-- Run governance checks before every commit: `bash scripts/validate-skills.sh`
+- Run through the 9-check governance checklist before committing new or modified skills
 
 ## Mode 3: Optimize an Existing Skill
 
@@ -524,7 +474,7 @@ Test cases:
 
 **Output:** Evaluation report with score (X/N passing), failure analysis, priority improvements
 
-See `references/examples/skill-builder/worked-examples.md` for a full evaluation example.
+See [`worked-examples.md`](worked-examples.md) for a full evaluation example.
 
 ---
 
@@ -533,4 +483,4 @@ See `references/examples/skill-builder/worked-examples.md` for a full evaluation
 - Always read an existing skill before optimizing it. Never propose changes to a skill you haven't read.
 - When building a new skill, check if a similar skill already exists that could be extended instead.
 - For advanced patterns (subagent execution, hooks, permissions), see [reference.md](reference.md).
-- For complete worked examples of all 4 modes, see `references/examples/skill-builder/worked-examples.md`.
+- For complete worked examples of all 4 modes, see [`worked-examples.md`](worked-examples.md).
