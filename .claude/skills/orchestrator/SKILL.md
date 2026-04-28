@@ -23,6 +23,17 @@ pnpm docker:mcp:memory:open electrical-website-state
 ```
 Read: `current_branch`, `active_phase`, `next_tasks`, `blockers` from entity observations.
 
+**Lane validation (automatic — review injected context):**
+The `## Session Memory` block injected at session start contains the active lane status.
+Check the `> Branch:` and `Lane:` fields in the injected context.
+
+- If `BRANCH MISMATCH` appears → run `pnpm lane:activate` and report to user
+- If `Lane: paused` → run `pnpm lane:activate` to re-activate current branch lane
+- If `Docker: OFFLINE` → memory loaded from emergency summary; run `pnpm docker:mcp:ready`
+
+Include active lane status in the 3-bullet report:
+**Lane:** [lane-entity-name] ([status] | last synced [Xh ago])
+
 ### Step 3: Git State
 ```bash
 git log --oneline -5

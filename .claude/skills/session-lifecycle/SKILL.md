@@ -143,6 +143,20 @@ node scripts/mcp-memory-call.mjs create_relations '{
   }]
 }'
 # [create learning/decision entities if applicable]
+
+# Link session to active lane entity:
+# Get lane entity name from config/active-memory-lanes.json (.laneEntityName field)
+node scripts/mcp-memory-call.mjs create_relations '{
+  "relations": [{
+    "from": "session-YYYY-MM-DD-SEQ",
+    "to": "LANE_ENTITY_NAME",
+    "relationType": "documents"
+  }]
+}'
+
+# Flush local config (updates lastSyncedAt + emergencySummary)
+node scripts/memory-lane-stop.mjs --manual
+
 git add . && git commit -m "session-end: [summary]" && git push
 # Build continuation prompt → return to user
 ```
@@ -179,6 +193,9 @@ This skill is the **manual override** — hooks fire automatically but this skil
 - [ ] Learning and decision entities created for non-obvious patterns
 - [ ] Relations wired between new entities and existing context
 - [ ] No .md memory files written during this session
+- [ ] Active lane entity linked to session via `documents` relation
+- [ ] `active-memory-lanes.json` `lastSyncedAt` updated (check via `pnpm memory:status`)
+- [ ] `emergencySummary` is ≤150 words and reflects current work
 
 ---
 

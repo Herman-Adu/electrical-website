@@ -52,6 +52,14 @@ Session end (always, before closing):
 Entity types: `project_state`, `feature` (feat-), `learning` (learn-), `decision` (decide-), `session` (session-), `infrastructure` (infra-).
 Observations: arrays of strings — never objects. Every entity requires `entityType` field.
 
+## Memory Lanes
+
+Active lane: `config/active-memory-lanes.json` (`status` field — must be `active` to match current branch)
+Lifecycle: PENDING → ACTIVE → PAUSED/COMPLETED → ARCHIVED → HARD_DELETED (automated via hooks)
+Auto-managed: PostCheckout hook (activate/pause), Stop hook (sync session), PostCommit hook (observe)
+Manual commands: `pnpm lane:activate` | `pnpm memory:sync` | `pnpm memory:status` | `pnpm memory:stale`
+Token budget: ≤3,000 tokens at session start — enforced by `scripts/memory-rehydrate.mjs`
+
 ## Self-Check (before closing session)
 - [ ] All work committed and pushed
 - [ ] `pnpm typecheck && pnpm build` passing

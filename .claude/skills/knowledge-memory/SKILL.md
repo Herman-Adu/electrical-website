@@ -66,6 +66,36 @@ node scripts/mcp-memory-call.mjs add_observations '{
 5. `create_entities` — decision entities for any architectural choices made
 6. `create_relations` — `from: "session-YYYY-MM-DD-seq"`, `to: "electrical-website-state"`, `relationType: "updates"`
 
+**Step 5a — Update active lane entity with session work:**
+```bash
+node scripts/mcp-memory-call.mjs add_observations '{
+  "observations": [{
+    "entityName": "REPLACE_WITH_active_lane_entity_name",
+    "contents": [
+      "session_summary: REPLACE_WITH_work_completed | next: REPLACE_WITH_next_tasks | at: REPLACE_WITH_ISO8601",
+      "last_accessed_at: REPLACE_WITH_ISO8601"
+    ]
+  }]
+}'
+```
+Replace REPLACE_WITH_* with actual values. Get lane entity name from `config/active-memory-lanes.json`.
+
+**Step 5b — Trigger local file sync (updates lastSyncedAt + emergencySummary):**
+```bash
+node scripts/memory-lane-stop.mjs --manual
+```
+
+**Step 5c — Verify session entity linked to lane:**
+```bash
+node scripts/mcp-memory-call.mjs create_relations '{
+  "relations": [{
+    "from": "REPLACE_WITH_session_entity_name",
+    "to": "REPLACE_WITH_lane_entity_name",
+    "relationType": "documents"
+  }]
+}'
+```
+
 ---
 
 ## Search and Retrieval
@@ -85,3 +115,6 @@ Always search before creating — never duplicate entities. If a close match exi
 - Never use .md files as memory — the only exception is the one-line Docker-down fallback in `.claude/CLAUDE.md`
 - Never create entities for implementation details — those live in the code
 - Observations must be arrays of strings — never objects
+- Never create duplicate session entities — search `session-{YYYY-MM-DD}` before creating, increment SEQ
+- Always include `"last_accessed_at: {ISO8601}"` when manually accessing any `learn-*` or `decide-*` entity
+- Never call `read_graph` manually — only `memory-lane-staleness-check.mjs` should do this
