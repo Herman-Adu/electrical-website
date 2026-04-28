@@ -1,0 +1,28 @@
+name: Memory Lane Staleness Check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
+  workflow_dispatch:      # Also allow manual trigger
+
+jobs:
+  staleness-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Run staleness dry-run check
+        env:
+          MCP_GATEWAY_URL: ${{ vars.MCP_GATEWAY_URL || 'http://127.0.0.1:3100' }}
+        run: node scripts/memory-lane-staleness-check.mjs --dry-run
+
+      - name: Summary
+        run: echo "Staleness check complete. Review output above. To apply: run memory-lane-staleness-check.mjs without --dry-run flag."

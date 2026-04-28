@@ -1,0 +1,47 @@
+name: Memory Lane Sync on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  sync-memory-lane:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Derive entity name from branch
+        id: entity
+        run: |
+          ENTITY=$(echo "${{ github.event.pull_request.head.ref }}" | tr '[:upper:]' '[:lower:]' | sed 's|/|-|g' | sed 's|[^a-z0-9-]|-|g')
+          echo "name=$ENTITY" >> $GITHUB_OUTPUT
+          echo "Derived entity: $ENTITY"
+
+      - name: Run memory lane merge sync
+        env:
+          MCP_GATEWAY_URL: ${{ vars.MCP_GATEWAY_URL || 'http://127.0.0.1:3100' }}
+          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.event.pull_request.head.ref }}
+        run: node scripts/memory-lane-merge.mjs "${{ steps.entity.outputs.name }}"
+
+      - name: Commit updated manifests if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add config/active-memory-lanes.json config/memory-lanes/ || true
+          git diff --cached --quiet || git commit -m "chore: mark memory lane completed [${{ github.event.pull_request.head.ref }}]"
+          git push || true
+        continue-on-error: true
