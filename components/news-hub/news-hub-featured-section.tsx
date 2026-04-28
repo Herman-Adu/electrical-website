@@ -2,7 +2,7 @@
 
 import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
 import type { NewsArticle } from "@/types/news";
-import { NewsHubFeaturedCard } from "./news-hub-featured-card";
+import { NewsHubFeaturedCardAnimated } from "./news-hub-featured-card-animated";
 
 interface NewsHubFeaturedSectionProps {
   article: NewsArticle;
@@ -28,7 +28,7 @@ export function NewsHubFeaturedSection({ article }: NewsHubFeaturedSectionProps)
             Featured Story
           </span>
         </div>
-        <NewsHubFeaturedCard article={article} />
+        <NewsHubFeaturedCardAnimated article={article} />
       </div>
     </section>
   );

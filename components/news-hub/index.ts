@@ -1,6 +1,7 @@
 // Core layout components
 export { NewsHubHero } from "./news-hub-hero";
 export { NewsHubFeaturedCard } from "./news-hub-featured-card";
+export { NewsHubFeaturedCardAnimated } from "./news-hub-featured-card-animated";
 export { NewsHubBentoGrid } from "./news-hub-bento-grid";
 export { NewsHubFeaturedSection } from "./news-hub-featured-section";
 export { NewsHubGridSection } from "./news-hub-grid-section";
