@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { NewsArticle } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
+import { newsCategoryColors } from "@/data/news";
 
 interface NewsHubFeaturedCardProps {
   article: NewsArticle;
@@ -33,7 +34,7 @@ export function NewsHubFeaturedCard({ article }: NewsHubFeaturedCardProps) {
             ⚡ Featured
           </div>
           <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-3">
-            <span className="rounded-lg border border-electric-cyan/30 bg-background/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
+            <span className={`rounded-lg border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] ${newsCategoryColors[article.category].featuredBadge}`}>
               {article.categoryLabel}
             </span>
             {article.spotlightMetric ? (

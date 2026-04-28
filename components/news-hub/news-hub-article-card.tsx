@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { NewsArticleListItem } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
+import { newsCategoryColors } from "@/data/news";
 
 interface NewsHubArticleCardProps {
   item: NewsArticleListItem;
@@ -63,7 +64,7 @@ export function NewsHubArticleCard({
           <div className="space-y-3">
             {/* Meta info row */}
             <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/60">
-              <span className="rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2.5 py-1 text-electric-cyan">
+              <span className={`rounded-md border px-2.5 py-1 ${newsCategoryColors[item.category].badge}`}>
                 {item.categoryLabel}
               </span>
               <span className="text-foreground/50">{formatDate(item.publishedAt)}</span>

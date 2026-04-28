@@ -67,8 +67,8 @@ export function NewsHubHero({
   const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToFeed = () => {
-    const feed = document.getElementById("news-hub-feed");
-    if (feed) scrollToElementWithOffset(feed, { pageType: "article" });
+    const el = document.getElementById("news-hub-intro");
+    if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
   return (

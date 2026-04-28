@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projectCategories } from "@/data/projects";
+import { projectCategories, categoriesIntroData } from "@/data/projects";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
-import { ContentBreadcrumb } from "@/components/shared";
+import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
@@ -25,24 +25,18 @@ export default function ProjectCategoriesPage() {
         section="projects"
       />
 
+      <SectionIntro data={categoriesIntroData} />
+
       {/* Categories grid */}
       <section id="categories-grid" className="section-standard bg-background">
         <div className="section-content max-w-5xl">
-          {/* Section header */}
-          <div className="mb-10">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="h-px w-10 bg-electric-cyan/50" />
-              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-electric-cyan/70">
-                Specialist Sectors
-              </span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-              Choose a Category
-            </h2>
-            <p className="text-muted-foreground max-w-lg">
-              Each sector represents a distinct area of electrical expertise.
-              Select a category to explore the projects we&apos;ve delivered.
-            </p>
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+              Specialist Sectors
+            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
           </div>
 
           {/* Category Cards */}

@@ -63,11 +63,11 @@ export function ContentSidebar({
             as="div"
             className={`p-5 border-l-4 transition-all ${
               card.type === "campaign"
-                ? "border-l-electric-cyan dark:border-l-electric-cyan/60 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                ? "border-l-electric-cyan dark:border-l-electric-cyan/70 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
                 : card.type === "review"
-                  ? "border-l-amber-warning dark:border-l-amber-warning/60 hover:shadow-[0_0_20px_hsl(174_100%_35%/0.1)] dark:hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
+                  ? "border-l-amber-warning dark:border-l-amber-warning/70 hover:shadow-[0_0_20px_hsl(174_100%_35%/0.1)] dark:hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
                   : card.type === "cta"
-                    ? "border-l-cyan-500 dark:border-l-cyan-500/60 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                    ? "border-l-cyan-500 dark:border-l-cyan-500/70 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
                     : "border-l-[hsl(174_100%_35%)]/40 dark:border-l-electric-cyan/40"
             }`}
           >

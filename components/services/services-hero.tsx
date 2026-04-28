@@ -68,7 +68,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
   const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToGrid = () => {
-    const el = document.getElementById("services-grid");
+    const el = document.getElementById("services-intro");
     if (el) scrollToElementWithOffset(el);
   };
 

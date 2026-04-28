@@ -24,9 +24,7 @@ export function NewsHubSidebar({ cards }: NewsHubSidebarProps) {
         <div className="flex items-center gap-3">
           <NewsPulseIndicator label="Live Feed" variant="live" />
         </div>
-        <h3 className="text-lg font-bold text-foreground">
-          Strategic Modules
-        </h3>
+        <h3 className="text-lg font-bold text-foreground">Strategic Modules</h3>
         <p className="text-xs leading-5 text-foreground/60">
           Campaigns, social proof, partnerships, and customer reviews.
         </p>
@@ -43,10 +41,14 @@ export function NewsHubSidebar({ cards }: NewsHubSidebarProps) {
           <NewsArticleCardShell
             className={`p-5 border-l-4 transition-all ${
               card.type === "campaign"
-                ? "border-l-electric-cyan hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                ? "border-l-electric-cyan dark:border-l-electric-cyan/70 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
                 : card.type === "review"
-                ? "border-l-electric-cyan/70 hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
-                : "border-l-electric-cyan/40"
+                  ? "border-l-amber-warning dark:border-l-amber-warning/70 hover:shadow-[0_0_20px_hsl(174_100%_35%/0.1)] dark:hover:shadow-[0_0_20px_rgba(0,243,189,0.1)]"
+                  : card.type === "social"
+                    ? "border-l-cyan-500 dark:border-l-cyan-500/70 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                    : card.type === "partner"
+                      ? "border-l-cyan-500 dark:border-l-cyan-500/70 hover:shadow-[0_0_25px_hsl(174_100%_35%/0.15)] dark:hover:shadow-[0_0_25px_rgba(0,243,189,0.15)]"
+                      : "border-l-[hsl(174_100%_35%)]/40 dark:border-l-electric-cyan/40"
             }`}
           >
             <div className="space-y-3">
@@ -65,7 +67,19 @@ export function NewsHubSidebar({ cards }: NewsHubSidebarProps) {
                 </p>
               </div>
               <div className="flex items-center justify-between gap-3 pt-2 border-t border-electric-cyan/10">
-                <span className="rounded-md border border-electric-cyan/20 bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-electric-cyan/70">
+                <span
+                  className={`transition-all ${
+                    card.type === "campaign"
+                      ? "rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan"
+                      : card.type === "review"
+                        ? "rounded-md border border-amber-warning/50 dark:border-amber-warning/50 bg-amber-warning/10 dark:bg-amber-warning/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-amber-warning "
+                        : card.type === "social"
+                          ? "rounded-md border border-cyan-500/50 dark:border-cyan-500/50 bg-cyan-500/10 dark:bg-cyan-500/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-cyan-500"
+                          : card.type === "partner"
+                            ? "rounded-md border border-cyan-500/50 dark:border-cyan-500/50 bg-cyan-500/10 dark:bg-cyan-500/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-cyan-500"
+                            : "rounded-md border border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/20 bg-[hsl(174_100%_35%)]/10 dark:bg-electric-cyan/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[hsl(174_100%_35%)]/70 dark:text-electric-cyan"
+                  }`}
+                >
                   {card.type}
                 </span>
                 <Link

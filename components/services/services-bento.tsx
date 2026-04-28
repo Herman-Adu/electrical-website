@@ -540,32 +540,19 @@ export function ServicesBento() {
       />
 
       <div className="section-content">
-        {/* Section header */}
+        {/* Bento section eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border dark:border-electric-cyan/20 mb-6">
-            <span className="font-mono text-[10px] tracking-[0.3em] dark:text-electric-cyan/80 uppercase">
-              Service Catalogue
-            </span>
-            <div className="w-2 h-2 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white animate-pulse" />
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground uppercase tracking-tight mb-4 text-balance">
-            Full Spectrum{" "}
-            <span className="text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-              Electrical Solutions
-            </span>
-          </h2>
-
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base font-light leading-relaxed">
-            From 230V residential circuits to 33kV industrial infrastructure —
-            every project engineered with precision, delivered on time.
-          </p>
+          <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
+          <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
+            Service Catalogue
+          </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
         </motion.div>
 
         {/*

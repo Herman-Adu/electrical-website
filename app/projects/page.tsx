@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import {
   ProjectsHero,
-  ProjectsFeaturedCard,
+  ProjectsFeaturedSection,
   ProjectsBentoGrid,
+  ProjectsListSection,
 } from "@/components/projects";
-import { ContentGridLayout, ContentBreadcrumb } from "@/components/shared";
+import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedProjectByCategory,
   getProjectListItemsExtended,
   isProjectCategorySlug,
   projectBentoItems,
   projectCategories,
+  projectsIntroData,
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectsListMetadata } from "@/lib/metadata-projects";
@@ -42,6 +44,10 @@ export default async function ProjectsPage({
   const featuredProject = getFeaturedProjectByCategory(activeCategory);
   const projectListItems = getProjectListItemsExtended(activeCategory);
   const sidebarCards = getProjectsSidebarCards(activeCategory);
+  const activeCategoryLabel =
+    activeCategory === "all"
+      ? "All"
+      : (projectCategories.find((c) => c.slug === activeCategory)?.label ?? "All");
 
   return (
     <main className="relative">
@@ -58,33 +64,21 @@ export default async function ProjectsPage({
         section="projects"
       />
 
-      <section id="projects-grid" className="section-padding bg-background">
-        <div className="section-content max-w-xl">
-          {featuredProject ? (
-            <ProjectsFeaturedCard project={featuredProject} />
-          ) : null}
-        </div>
-      </section>
+      <SectionIntro data={projectsIntroData} />
+
+      {featuredProject ? (
+        <ProjectsFeaturedSection project={featuredProject} />
+      ) : null}
       <section className="section-container bg-background">
         <div className="section-content max-w-6xl">
           <ProjectsBentoGrid items={projectBentoItems} />
         </div>
       </section>
-      <section className="section-container section-padding bg-background">
-        <div className="section-content max-w-7xl">
-          <ContentGridLayout
-            items={projectListItems}
-            sidebarCards={sidebarCards}
-            cardType="project"
-            title="All Projects"
-            itemLabel="project"
-            itemLabelPlural="projects"
-            emptyMessage="No projects available in this category yet."
-            sidebarTitle="Project Resources"
-            sidebarDescription="Consultations, guides, and client testimonials for your project needs."
-          />
-        </div>
-      </section>
+      <ProjectsListSection
+        items={projectListItems}
+        sidebarCards={sidebarCards}
+        activeCategoryLabel={activeCategoryLabel}
+      />
       <Footer />
     </main>
   );

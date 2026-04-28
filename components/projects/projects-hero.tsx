@@ -57,7 +57,7 @@ export function ProjectsHero({
   const { currentText: statusText } = useCyclingText(statuses, 380);
 
   const scrollToGrid = () => {
-    const el = document.getElementById("projects-grid");
+    const el = document.getElementById("projects-intro");
     if (el) scrollToElementWithOffset(el, { pageType: "default" });
   };
 
