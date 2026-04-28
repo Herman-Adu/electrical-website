@@ -8,6 +8,7 @@
 5. Hard stop at 60% context — do not continue; sync Docker memory and wait for user
 6. Read Docker memory first on session start before any work begins
 7. Validate: `pnpm typecheck && pnpm build` must pass before any commit
+8. React 19 + Next.js 16 first — use `useTransition`, `useOptimistic`, `useActionState`, `useFormStatus`, `use()`, PPR, ISR, Suspense, Error Boundaries; **never** `useEffect` when a React 19 alternative exists
 
 ## Delegation Rules
 
@@ -35,6 +36,7 @@ Dispatch pattern: `Agent(subagent_type="general-purpose", prompt="...")` — nev
 
 Playwright: always set `PLAYWRIGHT_REUSE_SERVER=true` when dev server is running on port 3000.
 Docker compose: `pnpm docker:mcp:ready` starts all services. Health check: `pnpm docker:mcp:smoke`.
+Superpowers: brainstorm → plan (TDD) → execute → verify — mandatory for ALL code generation, planning, and architecture work.
 
 ## Memory Rules
 

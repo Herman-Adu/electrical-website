@@ -1,6 +1,8 @@
 # Claude Code — electrical-website
 
-Next.js 16 App Router, strict TypeScript. Server Components by default; `"use client"` only for browser interactivity. Server Actions for mutations. All external input validated with Zod before processing.
+Next.js 16 + **React 19** App Router, strict TypeScript. Server Components by default; `"use client"` only for browser interactivity. Server Actions for mutations. All external input validated with Zod before processing.
+
+**React 19 first:** Always use React 19 features (`useTransition`, `useOptimistic`, `useActionState`, `useFormStatus`, `use()`, Suspense, Error Boundaries, PPR, ISR, streaming) before falling back to older patterns. Never use `useEffect` when a React 19 alternative exists.
 
 **Build gate (mandatory before commit):** `pnpm typecheck && pnpm build`
 

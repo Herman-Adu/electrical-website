@@ -41,6 +41,40 @@ For bug fixes and quick refactors: skip to Step 4 directly.
 
 ---
 
+## React 19 + Next.js 16 Feature Priority
+
+**Always use React 19 features first.** Fall back to older patterns only when no React 19 equivalent exists.
+
+| React 19 Feature | Use instead of |
+|-----------------|---------------|
+| `useTransition` | `useState` + loading flag |
+| `useOptimistic` | Manually reverting state on error |
+| `useActionState` | `useState` + manual form submission tracking |
+| `useFormStatus` | Prop-drilling `isPending` through form components |
+| `use()` hook | `useEffect` + `useState` for async data fetching |
+| Server Components (default) | Client components fetching on mount |
+| Server Actions | REST API routes for mutations |
+| `<Suspense>` boundaries | `isLoading` state + conditional rendering |
+| Error Boundaries | `try/catch` in render |
+| PPR (Partial Pre-Rendering) | Full SSR or full CSR when mixed is needed |
+| ISR (Incremental Static Regen) | Full SSG rebuild for frequently updated data |
+| `useRouter`, `usePathname`, `useSearchParams` (App Router) | Legacy `next/router` |
+
+**`useEffect` policy:** Only use `useEffect` when the use case has no React 19 alternative (e.g. DOM measurement, third-party library imperative init, external event subscriptions with no React lifecycle). When you do use `useEffect`, add an inline comment:
+```ts
+// useEffect required: [reason — no React 19 alternative for this specific case]
+```
+
+**Superpowers workflow (mandatory for all code generation):**
+1. **Brainstorm** — extended thinking: scope, user stories, edge cases, React 19 feature choices → output spec
+2. **Plan** — Context7 + sequential reasoning: component hierarchy, data flow, test structure → roadmap
+3. **Execute** — TDD: tests first (unit + integration + e2e), then implementation to pass them
+4. **Verify** — `pnpm typecheck && pnpm build && pnpm test` + auto-review against spec
+
+Skip to Step 4 for bug fixes and trivial refactors only.
+
+---
+
 ## Output Format
 
 ### For code implementation:
