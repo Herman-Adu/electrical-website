@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import {
   ProjectsHero,
-  ProjectsFeaturedCard,
+  ProjectsFeaturedCardAnimated,
   ProjectsBentoGrid,
 } from "@/components/projects";
 import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
@@ -76,7 +76,7 @@ export default async function ProjectsPage({
                 </span>
                 <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
               </div>
-              <ProjectsFeaturedCard project={featuredProject} />
+              <ProjectsFeaturedCardAnimated project={featuredProject} />
             </>
           ) : null}
         </div>

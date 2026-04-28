@@ -1,6 +1,7 @@
 // Core display components
 export { ProjectsHero } from "./projects-hero";
 export { ProjectsFeaturedCard } from "./projects-featured-card";
+export { ProjectsFeaturedCardAnimated } from "./projects-featured-card-animated";
 export { ProjectsBentoGrid } from "./projects-bento-grid";
 export { ProjectsOptimisticList } from "./projects-optimistic-list";
 export { ProjectsInfiniteScroll } from "./projects-infinite-scroll";
