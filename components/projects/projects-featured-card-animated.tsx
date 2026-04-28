@@ -40,7 +40,7 @@ export function ProjectsFeaturedCardAnimated({
         <>
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute left-0 top-0 h-8 w-8 rounded-tl-xl border-l-2 border-t-2 border-electric-cyan/60 dark:border-electric-cyan/50 z-10"
+            //className="pointer-events-none absolute left-0 top-0 h-8 w-8 rounded-tl-xl border-l-2 border-t-2 border-electric-cyan/60 dark:border-electric-cyan/50 z-10"
             initial={{ opacity: 0, scaleX: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleX: 1, scaleY: 1 }}
             transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
@@ -48,7 +48,7 @@ export function ProjectsFeaturedCardAnimated({
           />
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute bottom-0 right-0 h-8 w-8 rounded-br-xl border-b-2 border-r-2 border-electric-cyan/60 dark:border-electric-cyan/50 z-10"
+            //className="pointer-events-none absolute bottom-0 right-0 h-8 w-8 rounded-br-xl border-b-2 border-r-2 border-electric-cyan/60 dark:border-electric-cyan/50 z-10"
             initial={{ opacity: 0, scaleX: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleX: 1, scaleY: 1 }}
             transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
