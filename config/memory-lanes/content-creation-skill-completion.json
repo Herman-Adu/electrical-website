@@ -3,7 +3,7 @@
     "id": "feat-content-creation-skill-completion",
     "branch": "feat/content-creation-skill-completion",
     "dockerEntity": "feat-content-creation-skill-completion",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-04-29T09:15:49.322Z",
     "mergedAt": null,
     "fallback_summary": "Auto-registered branch: feat/content-creation-skill-completion"

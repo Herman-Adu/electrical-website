@@ -1,14 +1,14 @@
 {
-  "active": "feat-content-creation-skill-completion",
+  "active": "feat-memory-lane-corruption-and-branch-mismatch",
   "status": "active",
-  "currentBranch": "feat/content-creation-skill-completion",
-  "laneEntityName": "feat-content-creation-skill-completion",
+  "currentBranch": "fix/memory-lane-corruption-and-branch-mismatch",
+  "laneEntityName": "feat-memory-lane-corruption-and-branch-mismatch",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-29T09:52:22.239Z",
-  "emergencySummary": "Branch feat/content-creation-skill-completion. _5m_input_tokens\":3637},\"inference_geo\":\"\",\"iterations\":[{\"input_tokens\":3,\"output_tokens\":70,\"cache. Build: unknown. No blockers.",
+  "lastSyncedAt": "2026-04-29T13:39:27.057Z",
+  "emergencySummary": "Branch main. Recent: dd72709 fix: e2e dev-server compatibility + platinum standard test quality (#111) 9754dd7 feat: complete content-creation skill � frontmatter, context files, orchestrator wiring (#110) 0a6a10f fix: ma",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-content-creation-skill-completion"
+    "feat-memory-lane-corruption-and-branch-mismatch"
   ],
   "phaseSequence": [
     {
