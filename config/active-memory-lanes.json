@@ -4,8 +4,8 @@
   "currentBranch": "fix/memory-lane-corruption-and-branch-mismatch",
   "laneEntityName": "feat-memory-lane-corruption-and-branch-mismatch",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-29T13:44:30.791Z",
-  "emergencySummary": "Branch fix/memory-lane-corruption-and-branch-mismatch. Recent: 716387a fix: memory lane emergencySummary corruption and session-start branch mismatch detection dd72709 fix: e2e dev-server compatibility + platinum standard test quality (#111) 9754dd7 feat: complet",
+  "lastSyncedAt": "2026-04-29T22:51:08.177Z",
+  "emergencySummary": "Branch main. Recent: d32f889 fix: obsidian proxy HTTPS + env_file credential fix (#115) ebb54f2 feat: Obsidian platinum second brain integration (Track A + B) (#114) 7a4ba1a feat: Batch B/C orchestrator infrastructure har",
   "memoryKeys": [
     "electrical-website-state",
     "feat-memory-lane-corruption-and-branch-mismatch"
