@@ -18,8 +18,9 @@ services:
     image: node:22-alpine
     working_dir: /srv
     command: ["node", "/srv/server.mjs"]
+    env_file:
+      - .env.local
     environment:
-      - OBSIDIAN_API_KEY=${OBSIDIAN_API_KEY}
       - OBSIDIAN_PORT=${OBSIDIAN_PORT:-27124}
       - OBSIDIAN_HOST=${OBSIDIAN_HOST:-host.docker.internal}
     volumes:
