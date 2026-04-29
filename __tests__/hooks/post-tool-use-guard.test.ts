@@ -24,4 +24,29 @@ describe('post-tool-use-guard', () => {
   it('returns null for Bash tool regardless of LOC', () => {
     expect(buildWarning('Bash', 999)).toBeNull();
   });
+
+  it('returns 0 for null input to countAddedLines', () => {
+    expect(countAddedLines(null as unknown as string)).toBe(0);
+  });
+
+  it('returns 0 for empty string to countAddedLines', () => {
+    expect(countAddedLines('')).toBe(0);
+  });
+
+  it('does not count +++ diff header lines', () => {
+    const diff = '+++ b/file.tsx\n+real line\n+another line';
+    expect(countAddedLines(diff)).toBe(2);
+  });
+
+  it('returns warning for Write tool with >50 lines', () => {
+    expect(buildWarning('Write', 51)).toContain('ORCHESTRATOR');
+  });
+
+  it('returns warning for NotebookEdit tool with >50 lines', () => {
+    expect(buildWarning('NotebookEdit', 51)).toContain('ORCHESTRATOR');
+  });
+
+  it('returns null for Write tool with <=50 lines', () => {
+    expect(buildWarning('Write', 50)).toBeNull();
+  });
 });

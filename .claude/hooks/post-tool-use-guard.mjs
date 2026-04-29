@@ -6,7 +6,7 @@ const LOC_THRESHOLD = 50;
 
 export function countAddedLines(diff) {
   if (!diff || typeof diff !== 'string') return 0;
-  return diff.split('\n').filter(l => l.startsWith('+')).length;
+  return diff.split('\n').filter(l => l.startsWith('+') && !l.startsWith('++')).length;
 }
 
 export function buildWarning(toolName, addedLines) {
@@ -20,9 +20,12 @@ async function main() {
   try {
     let raw = '';
     process.stdin.setEncoding('utf8');
-    for await (const chunk of process.stdin) raw += chunk;
+    await Promise.race([
+      (async () => { for await (const chunk of process.stdin) raw += chunk; })(),
+      new Promise(resolve => setTimeout(resolve, 2000)),
+    ]);
     input = JSON.parse(raw.trim());
-  } catch { /* missing stdin is fine */ }
+  } catch { /* invalid stdin defaults to empty — hook exits safely */ }
 
   const toolName = input?.tool_name ?? '';
   const toolOutput = input?.tool_response ?? '';
