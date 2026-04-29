@@ -2,7 +2,7 @@
   "[playwright]": {
     "editor.defaultFormatter": "ms-playwright.playwright"
   },
-  "playwright.reuseBrowser": false,
+  "playwright.reuseBrowser": true,
   "playwright.showBrowser": true,
   "playwright.launchOptions": {
     "headless": false
