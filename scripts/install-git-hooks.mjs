@@ -37,10 +37,11 @@ const SIGNATURE_COMMIT   = '# memory-lane-commit — installed by pnpm hooks:ins
 const POST_CHECKOUT_CONTENT = `#!/usr/bin/env bash
 ${SIGNATURE_CHECKOUT}
 # Runs synchronously (no &) to prevent concurrent writes with session-start-v2.mjs
+# timeout 10: prevents git checkout from blocking >10s if Docker health check is slow
 if [ "$3" != "1" ]; then exit 0; fi
 if ! command -v node >/dev/null 2>&1; then exit 0; fi
-node "$(git rev-parse --show-toplevel)/scripts/memory-lane-activate.mjs" "$1" "$2" "$3" \\
-  >/tmp/memory-lane-activate.log 2>&1
+timeout 10 node "$(git rev-parse --show-toplevel)/scripts/memory-lane-activate.mjs" "$1" "$2" "$3" \\
+  >/tmp/memory-lane-activate.log 2>&1 || true
 exit 0
 `;
 
