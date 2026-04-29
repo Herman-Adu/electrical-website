@@ -132,9 +132,12 @@ async function resolveSessionName(dockerOnline) {
 
 // Build concise emergency summary (<=150 words)
 function buildEmergencySummary(branch, workSummary) {
-  const truncated = workSummary.slice(0, 100).replace(/\n/g, ' ').trim();
-  const summary = `Branch ${branch}. ${truncated}. Build: unknown. No blockers.`;
-  return summary.slice(0, 600); // hard cap for emergencySummary field
+  // Extract git log portion only — transcript content is raw JSON, not human-readable
+  const gitPart = workSummary.includes('| git:')
+    ? workSummary.split('| git:').pop().trim()
+    : workSummary;
+  const truncated = gitPart.slice(0, 200).replace(/\n/g, ' ').trim();
+  return `Branch ${branch}. Recent: ${truncated}`.slice(0, 600);
 }
 
 async function main() {
@@ -180,7 +183,7 @@ async function main() {
         name: sessionName,
         entityType: 'session',
         observations: [
-          `work_completed: ${workSummary.slice(0, 300)}`,
+          `work_completed: ${gitLog.slice(0, 200).replace(/\n/g, ' | ')}`,
           `branch: ${currentBranch}`,
           `build_status: unknown`,
           `next_tasks: check git log for continuation`,
@@ -195,7 +198,7 @@ async function main() {
       observations: [{
         entityName: laneEntityName,
         contents: [
-          `session_summary: ${workSummary.slice(0, 200)} | at: ${now}`,
+          `session_summary: ${gitLog.slice(0, 150).replace(/\n/g, ' | ')} | at: ${now}`,
           `last_accessed_at: ${now}`,
         ],
       }],

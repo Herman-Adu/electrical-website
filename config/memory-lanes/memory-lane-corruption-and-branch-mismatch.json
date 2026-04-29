@@ -1,0 +1,11 @@
+{
+  "memoryLane": {
+    "id": "feat-memory-lane-corruption-and-branch-mismatch",
+    "branch": "fix/memory-lane-corruption-and-branch-mismatch",
+    "dockerEntity": "feat-memory-lane-corruption-and-branch-mismatch",
+    "status": "active",
+    "openedAt": "2026-04-29T13:42:51.188Z",
+    "mergedAt": null,
+    "fallback_summary": "Auto-registered branch: fix/memory-lane-corruption-and-branch-mismatch"
+  }
+}
