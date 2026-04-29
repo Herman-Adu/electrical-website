@@ -17,7 +17,7 @@ const PROJECT_ROOT = (() => {
 const [,, prevHead, newHead, branchFlag] = process.argv;
 
 // Post-checkout: skip file checkouts (branchFlag === '0')
-if (branchFlag === '0') process.exit(0);
+if (branchFlag === '0' && process.argv[1]?.endsWith('memory-lane-activate.mjs')) process.exit(0);
 
 async function memoryCall(toolName, args, timeoutMs = 4000) {
   const ctrl = new AbortController();
@@ -55,6 +55,11 @@ function writeJson(path, data) {
   try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
 }
 
+export function isAlreadyActive(currentBranch, activeLanes) {
+  if (!activeLanes?.currentBranch) return false;
+  return activeLanes.currentBranch === currentBranch;
+}
+
 // Convert branch name to manifest filename slug
 function branchToSlug(branch) {
   return branch
@@ -70,6 +75,13 @@ async function main() {
   const slug = branchToSlug(currentBranch);
   const manifestPath = join(PROJECT_ROOT, 'config', 'memory-lanes', `${slug}.json`);
   const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
+
+  // Idempotency guard — skip all writes if this branch is already active
+  const activeLanesEarly = readJson(activeLanesPath);
+  if (isAlreadyActive(currentBranch, activeLanesEarly)) {
+    console.log(`[lane:activate] Already active on "${currentBranch}" — no-op.`);
+    process.exit(0);
+  }
 
   // Check if manifest exists — auto-create for unregistered branches
   let newManifest = readJson(manifestPath);
@@ -166,7 +178,10 @@ async function main() {
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error(`[lane:activate] Error: ${err?.message ?? String(err)}`);
-  process.exit(0);
-});
+// Only run main() when executed directly (not when imported by tests)
+if (process.argv[1]?.endsWith('memory-lane-activate.mjs')) {
+  main().catch(err => {
+    console.error(`[lane:activate] Error: ${err?.message ?? String(err)}`);
+    process.exit(0);
+  });
+}
