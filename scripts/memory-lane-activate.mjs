@@ -5,7 +5,7 @@
 // branchFlag = "1" for branch checkout, "0" for file checkout
 // When called manually (pnpm lane:activate): no args, reads current branch
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, renameSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
 
@@ -51,9 +51,15 @@ function readJson(path) {
   try { return JSON.parse(readFileSync(path, 'utf8')); } catch { return null; }
 }
 
-function writeJson(path, data) {
-  try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
+export function writeJsonAtomic(filePath, data) {
+  const tmp = `${filePath}.tmp`;
+  try {
+    writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', 'utf8');
+    renameSync(tmp, filePath);
+  } catch { /* never fail — best-effort write */ }
 }
+
+function writeJson(filePath, data) { writeJsonAtomic(filePath, data); }
 
 export function isAlreadyActive(currentBranch, activeLanes) {
   if (!activeLanes?.currentBranch) return false;

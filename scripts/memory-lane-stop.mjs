@@ -3,7 +3,7 @@
 // Stop hook — creates session entity and flushes observations to Docker
 // Triggered by Claude Code Stop hook or manually: node scripts/memory-lane-stop.mjs --manual
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, renameSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
 
@@ -49,8 +49,12 @@ function readJson(path) {
   try { return JSON.parse(readFileSync(path, 'utf8')); } catch { return null; }
 }
 
-function writeJson(path, data) {
-  try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
+function writeJson(filePath, data) {
+  const tmp = `${filePath}.tmp`;
+  try {
+    writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', 'utf8');
+    renameSync(tmp, filePath);
+  } catch { /* never fail — Stop hook must not throw */ }
 }
 
 // Extract entities array from Docker response (mirrors memory-rehydrate.mjs)
