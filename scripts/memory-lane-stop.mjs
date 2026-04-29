@@ -3,7 +3,7 @@
 // Stop hook — creates session entity and flushes observations to Docker
 // Triggered by Claude Code Stop hook or manually: node scripts/memory-lane-stop.mjs --manual
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, renameSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
 
@@ -49,8 +49,12 @@ function readJson(path) {
   try { return JSON.parse(readFileSync(path, 'utf8')); } catch { return null; }
 }
 
-function writeJson(path, data) {
-  try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
+function writeJson(filePath, data) {
+  const tmp = `${filePath}.tmp`;
+  try {
+    writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', 'utf8');
+    renameSync(tmp, filePath);
+  } catch { /* never fail — Stop hook must not throw */ }
 }
 
 // Extract entities array from Docker response (mirrors memory-rehydrate.mjs)
@@ -69,6 +73,18 @@ function extractEntities(result) {
     } catch { /* ignore */ }
   }
   return [];
+}
+
+export function validateCreateEntitiesResponse(result) {
+  if (!result) return false;
+  if (Array.isArray(result?.entities) && result.entities.length > 0) return true;
+  const inner = result?.content?.[0]?.json;
+  if (Array.isArray(inner?.entities) && inner.entities.length > 0) return true;
+  return false;
+}
+
+export function buildRetryMessage(entityName) {
+  return `[memory:stop] WARNING: create_entities returned no confirmation for "${entityName}" — Docker may have dropped the write. Config NOT updated to avoid false sync state.`;
 }
 
 // Get current git branch
@@ -176,9 +192,11 @@ async function main() {
   // Step 4: Determine session entity name
   const sessionName = await resolveSessionName(dockerOnline);
 
+  let entityCreated = false;
+
   if (dockerOnline) {
-    // Step 5: Create session entity
-    await mcpCall('create_entities', {
+    // Step 5: Create session entity — validate response, retry once
+    const createArgs = {
       entities: [{
         name: sessionName,
         entityType: 'session',
@@ -191,7 +209,19 @@ async function main() {
           `docker_synced: true`,
         ],
       }],
-    });
+    };
+    let createResult = await mcpCall('create_entities', createArgs);
+    if (validateCreateEntitiesResponse(createResult)) {
+      entityCreated = true;
+    } else {
+      await new Promise(r => setTimeout(r, 500));
+      createResult = await mcpCall('create_entities', createArgs);
+      if (validateCreateEntitiesResponse(createResult)) {
+        entityCreated = true;
+      } else {
+        console.warn(buildRetryMessage(sessionName));
+      }
+    }
 
     // Step 6: Add observations to active lane entity
     await mcpCall('add_observations', {
@@ -226,20 +256,28 @@ async function main() {
     console.log(`[memory:stop] Session synced to Docker: ${sessionName}`);
   } else {
     console.log(`[memory:stop] Docker offline — skipping entity creation. Session: ${sessionName}`);
+    entityCreated = true; // Docker offline is expected — still update local config
   }
 
-  // Step 9: Update active-memory-lanes.json
-  lanesConfig.lastSyncedAt = now;
-  lanesConfig.emergencySummary = buildEmergencySummary(currentBranch, workSummary);
-  writeJson(activeLanesPath, lanesConfig);
-
-  console.log(`[memory:stop] local config updated. emergencySummary: ${lanesConfig.emergencySummary.slice(0, 80)}...`);
+  // Step 9: Update active-memory-lanes.json — only when entity write confirmed (or Docker offline)
+  if (entityCreated) {
+    lanesConfig.lastSyncedAt = now;
+    lanesConfig.emergencySummary = buildEmergencySummary(currentBranch, workSummary);
+    writeJson(activeLanesPath, lanesConfig);
+    console.log(`[memory:stop] local config updated. emergencySummary: ${lanesConfig.emergencySummary.slice(0, 80)}...`);
+  } else {
+    console.warn('[memory:stop] Skipping config update — Docker entity creation unconfirmed.');
+  }
 
   // Step 10: Always exit 0 — never fail session end
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error(`[memory:stop] Error (non-fatal): ${err?.message ?? String(err)}`);
-  process.exit(0);
-});
+// Only run main() when executed directly (not when imported by tests)
+const isMain = process.argv[1]?.endsWith('memory-lane-stop.mjs');
+if (isMain) {
+  main().catch(err => {
+    console.error(`[memory:stop] Error (non-fatal): ${err?.message ?? String(err)}`);
+    process.exit(0);
+  });
+}

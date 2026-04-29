@@ -12,6 +12,7 @@ const MAX_LEARNINGS = parseInt(process.env.MEMORY_MAX_LEARNINGS ?? '4');
 const MAX_DECISIONS = parseInt(process.env.MEMORY_MAX_DECISIONS ?? '2');
 const PROJECT_ROOT = process.cwd();
 const VERBOSE = process.argv.includes('--verbose');
+const TIER1_ONLY = process.argv.includes('--tier1-only');
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -229,79 +230,92 @@ async function main() {
   sections.push({ label: 'Project State', text: tier1Text || '(no project state found)' });
 
   // Tier 2: Active lane feature entity
-  if (VERBOSE) process.stderr.write(`[tier2] Loading lane entity: ${laneEntityName}\n`);
-  const tier2Result = await memoryCall('open_nodes', { names: [laneEntityName] });
-  const tier2Entities = extractEntities(tier2Result);
-  const featureEntity = tier2Entities[0] ?? null;
+  let featureEntity = null;
   let tier2Text = '';
-  if (featureEntity && tokenBudgetRemaining > 300) {
-    const raw = formatEntity(featureEntity);
-    tier2Text = truncateToTokens(raw, Math.floor(tokenBudgetRemaining * 0.45));
-    const tier2Tokens = countTokens(tier2Text);
-    tokenBudgetRemaining -= tier2Tokens;
-    if (VERBOSE) process.stderr.write(`[tier2] Lane entity: ${tier2Tokens} tokens\n`);
+  if (!TIER1_ONLY) {
+    if (VERBOSE) process.stderr.write(`[tier2] Loading lane entity: ${laneEntityName}\n`);
+    const tier2Result = await memoryCall('open_nodes', { names: [laneEntityName] });
+    const tier2Entities = extractEntities(tier2Result);
+    featureEntity = tier2Entities[0] ?? null;
+    if (featureEntity && tokenBudgetRemaining > 300) {
+      const raw = formatEntity(featureEntity);
+      tier2Text = truncateToTokens(raw, Math.floor(tokenBudgetRemaining * 0.45));
+      const tier2Tokens = countTokens(tier2Text);
+      tokenBudgetRemaining -= tier2Tokens;
+      if (VERBOSE) process.stderr.write(`[tier2] Lane entity: ${tier2Tokens} tokens\n`);
+    }
+  } else {
+    if (VERBOSE) process.stderr.write('[tier2] Skipped (--tier1-only)\n');
   }
   sections.push({ label: `Active Lane (${laneEntityName})`, text: tier2Text || '(no lane entity found in Docker)' });
 
   // Tier 3: Contextual learnings + decisions via keyword search
-  const keywords = extractKeywords(featureEntity, projectStateEntity);
-  if (VERBOSE) process.stderr.write(`[tier3] Keywords: ${keywords.join(', ')}\n`);
+  let learningsText = '';
+  let decisionsText = '';
+  if (!TIER1_ONLY) {
+    const keywords = extractKeywords(featureEntity, projectStateEntity);
+    if (VERBOSE) process.stderr.write(`[tier3] Keywords: ${keywords.join(', ')}\n`);
 
-  const learnings = [];
-  const decisions = [];
+    const learnings = [];
+    const decisions = [];
 
-  for (const keyword of keywords) {
-    if (learnings.length >= MAX_LEARNINGS && decisions.length >= MAX_DECISIONS) break;
-    if (tokenBudgetRemaining < 200) break;
+    for (const keyword of keywords) {
+      if (learnings.length >= MAX_LEARNINGS && decisions.length >= MAX_DECISIONS) break;
+      if (tokenBudgetRemaining < 200) break;
 
-    const searchResult = await memoryCall('search_nodes', { query: keyword }, 4000);
-    const found = extractEntities(searchResult);
+      const searchResult = await memoryCall('search_nodes', { query: keyword }, 4000);
+      const found = extractEntities(searchResult);
 
-    for (const entity of found) {
-      const name = entity?.name ?? '';
-      if (name.startsWith('learn-') && learnings.length < MAX_LEARNINGS) {
-        if (!learnings.find(l => l.name === name)) learnings.push(entity);
-      } else if (name.startsWith('decide-') && decisions.length < MAX_DECISIONS) {
-        if (!decisions.find(d => d.name === name)) decisions.push(entity);
+      for (const entity of found) {
+        const name = entity?.name ?? '';
+        if (name.startsWith('learn-') && learnings.length < MAX_LEARNINGS) {
+          if (!learnings.find(l => l.name === name)) learnings.push(entity);
+        } else if (name.startsWith('decide-') && decisions.length < MAX_DECISIONS) {
+          if (!decisions.find(d => d.name === name)) decisions.push(entity);
+        }
       }
     }
-  }
 
-  let learningsText = '';
-  for (const entity of learnings) {
-    if (tokenBudgetRemaining < 100) break;
-    const raw = formatEntity(entity);
-    const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
-    const toks = countTokens(truncated);
-    tokenBudgetRemaining -= toks;
-    learningsText += truncated + '\n\n';
-  }
-  if (VERBOSE) process.stderr.write(`[tier3] Learnings: ${learnings.length}, Decisions: ${decisions.length}\n`);
+    for (const entity of learnings) {
+      if (tokenBudgetRemaining < 100) break;
+      const raw = formatEntity(entity);
+      const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
+      const toks = countTokens(truncated);
+      tokenBudgetRemaining -= toks;
+      learningsText += truncated + '\n\n';
+    }
+    if (VERBOSE) process.stderr.write(`[tier3] Learnings: ${learnings.length}, Decisions: ${decisions.length}\n`);
 
-  let decisionsText = '';
-  for (const entity of decisions) {
-    if (tokenBudgetRemaining < 100) break;
-    const raw = formatEntity(entity);
-    const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
-    const toks = countTokens(truncated);
-    tokenBudgetRemaining -= toks;
-    decisionsText += truncated + '\n\n';
+    for (const entity of decisions) {
+      if (tokenBudgetRemaining < 100) break;
+      const raw = formatEntity(entity);
+      const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
+      const toks = countTokens(truncated);
+      tokenBudgetRemaining -= toks;
+      decisionsText += truncated + '\n\n';
+    }
+  } else {
+    if (VERBOSE) process.stderr.write('[tier3] Skipped (--tier1-only)\n');
   }
 
   // Tier 4: Last session entity
-  const sessionResult = await memoryCall('search_nodes', { query: 'session-2026' }, 3000);
-  const sessionEntities = extractEntities(sessionResult);
-  const lastSession = sessionEntities
-    .filter(e => (e?.name ?? '').startsWith('session-'))
-    .sort((a, b) => (b?.name ?? '').localeCompare(a?.name ?? ''))
-    [0] ?? null;
-
   let sessionText = '';
-  if (lastSession && tokenBudgetRemaining > 100) {
-    const raw = formatEntity(lastSession);
-    sessionText = truncateToTokens(raw, Math.min(300, tokenBudgetRemaining));
-    tokenBudgetRemaining -= countTokens(sessionText);
-    if (VERBOSE) process.stderr.write(`[tier4] Last session: ${lastSession.name}\n`);
+  if (!TIER1_ONLY) {
+    const sessionResult = await memoryCall('search_nodes', { query: 'session-2026' }, 3000);
+    const sessionEntities = extractEntities(sessionResult);
+    const lastSession = sessionEntities
+      .filter(e => (e?.name ?? '').startsWith('session-'))
+      .sort((a, b) => (b?.name ?? '').localeCompare(a?.name ?? ''))
+      [0] ?? null;
+
+    if (lastSession && tokenBudgetRemaining > 100) {
+      const raw = formatEntity(lastSession);
+      sessionText = truncateToTokens(raw, Math.min(300, tokenBudgetRemaining));
+      tokenBudgetRemaining -= countTokens(sessionText);
+      if (VERBOSE) process.stderr.write(`[tier4] Last session: ${lastSession.name}\n`);
+    }
+  } else {
+    if (VERBOSE) process.stderr.write('[tier4] Skipped (--tier1-only)\n');
   }
 
   // Step 7: Citation verification (across all text)
@@ -315,9 +329,13 @@ async function main() {
 
   const tokensUsed = TOKEN_BUDGET - tokenBudgetRemaining;
 
+  const tier1OnlyWarning = TIER1_ONLY
+    ? '\n> CONTEXT PRE-CHECK: >55% at session start — memory truncated to Tier 1 only.'
+    : '';
+
   let injectionBlock = `## Session Memory — ${today} [${tokensUsed} tokens]
 
-> Branch: ${currentBranch} | Lane: ${laneStatus} | Docker: online${driftWarning}
+> Branch: ${currentBranch} | Lane: ${laneStatus} | Docker: online${driftWarning}${tier1OnlyWarning}
 
 ### Project State
 ${sections[0]?.text ?? '(unavailable)'}

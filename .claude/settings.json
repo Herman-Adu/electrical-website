@@ -2,7 +2,11 @@
   "enabledPlugins": {
     "vercel@claude-plugins-official": true
   },
-  "enabledMcpjsonServers": ["MCP_DOCKER", "filesystem", "git"],
+  "enabledMcpjsonServers": [
+    "MCP_DOCKER",
+    "filesystem",
+    "git"
+  ],
   "hooks": {
     "SessionStart": [
       {
@@ -54,6 +58,18 @@
             "type": "command",
             "command": "bash \".claude/hooks/precompact-safety.sh\"",
             "timeout": 2
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/post-tool-use-guard.mjs\"",
+            "timeout": 3
           }
         ]
       }
