@@ -1,0 +1,11 @@
+{
+  "memoryLane": {
+    "id": "feat-compress-rules-reduce-context-overhead",
+    "branch": "chore/compress-rules-reduce-context-overhead",
+    "dockerEntity": "feat-compress-rules-reduce-context-overhead",
+    "status": "active",
+    "openedAt": "2026-04-29T08:26:16.642Z",
+    "mergedAt": null,
+    "fallback_summary": "Auto-registered branch: chore/compress-rules-reduce-context-overhead"
+  }
+}
