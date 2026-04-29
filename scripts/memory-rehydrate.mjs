@@ -83,13 +83,22 @@ function extractEntities(result) {
   if (Array.isArray(result)) return result;
   if (Array.isArray(result?.nodes)) return result.nodes;
   if (Array.isArray(result?.entities)) return result.entities;
-  // search_nodes may wrap differently
+  // Docker MCP gateway wraps responses as { content: [{ type, json|text }] }
   if (result?.content) {
+    // type:"json" — content[0].json holds the payload object
+    const jsonPayload = result.content?.[0]?.json;
+    if (jsonPayload) {
+      if (Array.isArray(jsonPayload?.nodes)) return jsonPayload.nodes;
+      if (Array.isArray(jsonPayload?.entities)) return jsonPayload.entities;
+      if (Array.isArray(jsonPayload)) return jsonPayload;
+    }
+    // type:"text" — content[0].text is a JSON string
     try {
       const inner = JSON.parse(
         Array.isArray(result.content) ? result.content[0]?.text ?? '{}' : result.content
       );
       if (Array.isArray(inner?.nodes)) return inner.nodes;
+      if (Array.isArray(inner?.entities)) return inner.entities;
       if (Array.isArray(inner)) return inner;
     } catch { /* ignore */ }
   }

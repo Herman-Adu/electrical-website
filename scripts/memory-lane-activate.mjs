@@ -55,9 +55,11 @@ function writeJson(path, data) {
   try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
 }
 
-// Convert branch name to manifest filename slug (replace / with -)
+// Convert branch name to manifest filename slug
 function branchToSlug(branch) {
-  return branch.replace(/^feat\//, '').replace(/^fix\//, '').replace(/\//g, '-');
+  return branch
+    .replace(/^(feat|fix|chore|refactor|docs|test|style|perf|ci|hotfix)\//, '')
+    .replace(/\//g, '-');
 }
 
 async function main() {
@@ -69,11 +71,39 @@ async function main() {
   const manifestPath = join(PROJECT_ROOT, 'config', 'memory-lanes', `${slug}.json`);
   const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
 
-  // Check if manifest exists for this branch
-  const newManifest = readJson(manifestPath);
+  // Check if manifest exists — auto-create for unregistered branches
+  let newManifest = readJson(manifestPath);
   if (!newManifest) {
-    console.log(`[lane:activate] No memory lane found for branch "${currentBranch}". Run: pnpm lane:open`);
-    process.exit(0);
+    const entityName = `feat-${slug}`;
+    const openedAt = new Date().toISOString();
+    newManifest = {
+      memoryLane: {
+        id: entityName,
+        branch: currentBranch,
+        dockerEntity: entityName,
+        status: 'pending',
+        openedAt,
+        mergedAt: null,
+        fallback_summary: `Auto-registered branch: ${currentBranch}`,
+      },
+    };
+    writeJson(manifestPath, newManifest);
+    console.log(`[lane:activate] Auto-registered lane ${entityName} for branch "${currentBranch}"`);
+    const dockerAvail = await checkDockerHealth();
+    if (dockerAvail) {
+      await memoryCall('create_entities', {
+        entities: [{
+          name: entityName,
+          entityType: 'feature',
+          observations: [
+            `branch: ${currentBranch}`,
+            `status: pending`,
+            `opened_at: ${openedAt}`,
+            `auto_registered: true`,
+          ],
+        }],
+      });
+    }
   }
 
   // Read current active lanes config
