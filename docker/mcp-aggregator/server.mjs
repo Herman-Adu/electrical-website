@@ -11,6 +11,7 @@ const SERVICES = [
   "wikipedia",
   "youtube-transcript",
   "openapi-schema",
+  "obsidian-vault",
 ];
 
 const SERVICE_BASE_URL = (service) => `http://${service}:8000`;
