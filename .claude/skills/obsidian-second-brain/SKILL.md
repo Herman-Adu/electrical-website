@@ -407,11 +407,13 @@ Complete this setup once before using the skill:
    ```
    Reference the variable name `OBSIDIAN_API_KEY` — never paste the value into any file other than `.env.local`.
 
-4. **Vault location:** `obsidian-vault/` in the project root. Confirm this path is excluded from the repo:
-   ```bash
-   grep obsidian-vault .gitignore
+4. **Vault location:** The vault lives as a sibling repo alongside this one — not inside it. Layout:
    ```
-   Add it if missing: `echo "obsidian-vault/" >> .gitignore`
+   C:\Users\herma\source\repository\
+     electrical-website\   ← this repo
+     obsidian-vault\       ← https://github.com/Herman-Adu/obsidian-vault
+   ```
+   The Docker proxy talks to the Local REST API over HTTP — it does not access the vault filesystem. Vault paths in tool calls are resolved relative to the vault root by Obsidian itself.
 
 5. **GitHub sync (optional):** Install the Git community plugin in Obsidian, configure it with a private GitHub remote, and set auto-push interval (recommended: 30 minutes). This keeps vault history without including it in the main project repo.
 

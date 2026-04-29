@@ -17,7 +17,7 @@ Platinum-standard knowledge management: read, write, and search an Obsidian vaul
 
 - Obsidian running with the **Local REST API** community plugin enabled (port 27124)
 - `OBSIDIAN_API_KEY=<your-key>` in `.env.local`
-- Vault at `obsidian-vault/` (gitignored from this repo; syncs to its own GitHub remote)
+- Vault at `C:\Users\herma\source\repository\obsidian-vault\` (sibling repo — [Herman-Adu/obsidian-vault](https://github.com/Herman-Adu/obsidian-vault))
 
 ## Relationship to Docker Memory
 
