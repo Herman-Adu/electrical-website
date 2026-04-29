@@ -1,14 +1,14 @@
 {
-  "active": "feat-memory-main-entity-typecheck",
+  "active": "feat-content-creation-skill-completion",
   "status": "active",
-  "currentBranch": "fix/memory-main-entity-typecheck",
-  "laneEntityName": "feat-memory-main-entity-typecheck",
+  "currentBranch": "feat/content-creation-skill-completion",
+  "laneEntityName": "feat-content-creation-skill-completion",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-29T08:50:30.816Z",
-  "emergencySummary": "Branch main. false,\"message\":{\"model\":\"claude-sonnet-4-6\",\"id\":\"msg_01XGF6x1fWpY25MctMJwDcyF\",\"type\":\"message\",\"r. Build: unknown. No blockers.",
+  "lastSyncedAt": "2026-04-29T09:52:22.239Z",
+  "emergencySummary": "Branch feat/content-creation-skill-completion. _5m_input_tokens\":3637},\"inference_geo\":\"\",\"iterations\":[{\"input_tokens\":3,\"output_tokens\":70,\"cache. Build: unknown. No blockers.",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-memory-main-entity-typecheck"
+    "feat-content-creation-skill-completion"
   ],
   "phaseSequence": [
     {
