@@ -6,31 +6,20 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
   });
 
   test('card height stable on hover (CLS < 0.05)', async ({ page }) => {
-    // Scroll into view, confirm element is in viewport (triggers ScrollReveal IO callback),
-    // then wait for opacity to reach 1 (animation complete).
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
+    // Scroll to the card directly (not the section header) so the IO callback fires,
+    // then wait for the documented ScrollReveal animation to finish (0.65s + 0.14s max delay).
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
     await expect(card).toBeInViewport({ timeout: 5000 });
-    await page.waitForFunction(() => {
-      const el = document.querySelector('[data-testid="section-value-card"]');
-      if (!el) return false;
-      return parseFloat(getComputedStyle(el).opacity) > 0.9;
-    }, undefined, { timeout: 5000 });
+    await page.waitForTimeout(800);
 
     const boundingBefore = await card.boundingBox();
 
     await card.hover();
-    // CSS hover transitions don't appear in getAnimations() — use two-frame height stability.
-    await page.waitForFunction(() =>
-      new Promise<boolean>((resolve) => {
-        const el = document.querySelector('[data-testid="section-value-card"]');
-        if (!el) return resolve(true);
-        const h1 = el.getBoundingClientRect().height;
-        requestAnimationFrame(() => {
-          resolve(Math.abs(el.getBoundingClientRect().height - h1) < 0.5);
-        });
-      }),
-    );
+    // Wait for CSS hover transition to settle — CSS transitions are not detectable via
+    // getAnimations() (Web Animations API only) or per-frame RAF comparison during smooth
+    // motion, so a targeted wait matching the transition duration is the correct approach.
+    await page.waitForTimeout(300);
 
     const boundingAfter = await card.boundingBox();
 
@@ -42,28 +31,15 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/about');
 
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
     await expect(card).toBeInViewport({ timeout: 5000 });
-    await page.waitForFunction(() => {
-      const el = document.querySelector('[data-testid="section-value-card"]');
-      if (!el) return false;
-      return parseFloat(getComputedStyle(el).opacity) > 0.9;
-    }, undefined, { timeout: 5000 });
+    await page.waitForTimeout(800);
 
     const heightBefore = await card.boundingBox();
 
     await card.hover();
-    await page.waitForFunction(() =>
-      new Promise<boolean>((resolve) => {
-        const el = document.querySelector('[data-testid="section-value-card"]');
-        if (!el) return resolve(true);
-        const h1 = el.getBoundingClientRect().height;
-        requestAnimationFrame(() => {
-          resolve(Math.abs(el.getBoundingClientRect().height - h1) < 0.5);
-        });
-      }),
-    );
+    await page.waitForTimeout(300);
 
     const heightAfter = await card.boundingBox();
     // Note: Mobile viewport (375px) exhibits consistent 14.82px shift due to fractional pixel calculations
@@ -78,28 +54,15 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto('/about');
 
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
     await expect(card).toBeInViewport({ timeout: 5000 });
-    await page.waitForFunction(() => {
-      const el = document.querySelector('[data-testid="section-value-card"]');
-      if (!el) return false;
-      return parseFloat(getComputedStyle(el).opacity) > 0.9;
-    }, undefined, { timeout: 5000 });
+    await page.waitForTimeout(800);
 
     const heightBefore = await card.boundingBox();
 
     await card.hover();
-    await page.waitForFunction(() =>
-      new Promise<boolean>((resolve) => {
-        const el = document.querySelector('[data-testid="section-value-card"]');
-        if (!el) return resolve(true);
-        const h1 = el.getBoundingClientRect().height;
-        requestAnimationFrame(() => {
-          resolve(Math.abs(el.getBoundingClientRect().height - h1) < 0.5);
-        });
-      }),
-    );
+    await page.waitForTimeout(300);
 
     const heightAfter = await card.boundingBox();
     expect(Math.abs((heightAfter?.height || 0) - (heightBefore?.height || 0))).toBeLessThan(2);
