@@ -35,3 +35,6 @@ npm-shrinkwrap.json
 
 # Playwright MCP session artefacts (logs, snapshots, screenshots)
 .playwright-mcp/
+
+# Obsidian vault — has its own git remote (GitHub), not tracked here
+obsidian-vault/

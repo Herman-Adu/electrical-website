@@ -1,0 +1,31 @@
+{
+  "memoryLane": {
+    "id": "feat-obsidian-second-brain-integration",
+    "branch": "feat/obsidian-second-brain-integration",
+    "dockerEntity": "feat-obsidian-second-brain-integration",
+    "status": "active",
+    "openedAt": "2026-04-29T21:12:07.610Z",
+    "mergedAt": null,
+    "fallback_summary": "Obsidian platinum second brain — Track A (Claude Code skill) + Track B (Docker MCP proxy)",
+    "phases": [
+      {
+        "phase": "0",
+        "name": "vault-hygiene",
+        "status": "completed",
+        "description": "obsidian-vault/ added to .gitignore; user to configure vault git remote on GitHub"
+      },
+      {
+        "phase": "1",
+        "name": "track-a-skill-activation",
+        "status": "in_progress",
+        "description": "Install obsidian-second-brain Claude Code skill; smoke-test against Local REST API port 27124"
+      },
+      {
+        "phase": "2",
+        "name": "track-b-docker-proxy",
+        "status": "pending",
+        "description": "Docker MCP proxy service (docker/mcp-obsidian/) wired into Caddy/aggregator stack"
+      }
+    ]
+  }
+}
