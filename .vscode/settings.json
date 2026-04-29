@@ -7,6 +7,9 @@
   "playwright.launchOptions": {
     "headless": false
   },
+  "playwright.env": {
+    "PLAYWRIGHT_REUSE_SERVER": "true"
+  },
   "files.exclude": {
     ".playwright": true,
     "playwright-report": true

@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
 /**
  * Phase 0: Baseline Capture
@@ -14,10 +14,8 @@ const SCREENSHOT_DIR = ".playwright/baselines";
 
 test.describe("Phase 0: Animation Baseline Capture", () => {
   test("capture hero section baseline", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-    // Wait for hero animations to initialize
-    await page.waitForTimeout(2000);
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main")).toBeVisible();
 
     await page.screenshot({
       path: `${SCREENSHOT_DIR}/01-hero-section.png`,
@@ -26,12 +24,12 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture smart-living section baseline", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Scroll to smart-living section
-    await page.locator('text=/smart living/i').first().scrollIntoViewIfNeeded();
-    await page.waitForTimeout(2000);
+    const target = page.locator('text=/smart living/i').first();
+    await target.scrollIntoViewIfNeeded();
+    await expect(target).toBeVisible();
 
     await page.screenshot({
       path: `${SCREENSHOT_DIR}/02-smart-living-section.png`,
@@ -40,14 +38,13 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture illumination section baseline", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Scroll to illumination section (counters, scan effects)
     const illuminationText = page.locator('text=/illumination|smart lighting/i').first();
     if (await illuminationText.isVisible({ timeout: 1000 }).catch(() => false)) {
       await illuminationText.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(2000);
+      await expect(illuminationText).toBeVisible();
 
       await page.screenshot({
         path: `${SCREENSHOT_DIR}/03-illumination-section.png`,
@@ -57,14 +54,13 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture cta-power section baseline (trust stats)", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Scroll to CTA section
     const ctaText = page.locator('text=/why choose|trust|statistics/i').first();
     if (await ctaText.isVisible({ timeout: 1000 }).catch(() => false)) {
       await ctaText.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(2000);
+      await expect(ctaText).toBeVisible();
 
       await page.screenshot({
         path: `${SCREENSHOT_DIR}/04-cta-power-section.png`,
@@ -74,9 +70,8 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture about page hero baseline", async ({ page }) => {
-    await page.goto("/about");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
+    await page.goto("/about", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main")).toBeVisible();
 
     await page.screenshot({
       path: `${SCREENSHOT_DIR}/05-about-hero.png`,
@@ -85,9 +80,8 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture services page hero baseline", async ({ page }) => {
-    await page.goto("/services");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
+    await page.goto("/services", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main")).toBeVisible();
 
     await page.screenshot({
       path: `${SCREENSHOT_DIR}/06-services-hero.png`,
@@ -96,9 +90,8 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture projects page hero baseline", async ({ page }) => {
-    await page.goto("/projects");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
+    await page.goto("/projects", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main")).toBeVisible();
 
     await page.screenshot({
       path: `${SCREENSHOT_DIR}/07-projects-hero.png`,
@@ -107,12 +100,11 @@ test.describe("Phase 0: Animation Baseline Capture", () => {
   });
 
   test("capture footer baseline", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Scroll to footer
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(1000);
+    await page.waitForFunction(() => window.scrollY > 0);
 
     const footer = page.locator('footer').first();
     if (await footer.isVisible({ timeout: 1000 }).catch(() => false)) {

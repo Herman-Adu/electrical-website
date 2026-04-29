@@ -1,12 +1,5 @@
-import { test, expect, type Page } from "@playwright/test";
-
-const resetContactStorage = async (page: Page) => {
-  await page.addInitScript(() => {
-    window.localStorage.removeItem("contact-form-storage");
-  });
-};
-
-const getContactForm = (page: Page) => page.locator("main form").first();
+import { test, expect } from "@playwright/test";
+import { resetContactStorage, getContactForm } from "./helpers/contact";
 
 test.describe("Turnstile CAPTCHA Integration", () => {
   test("Contact form loads with Turnstile widget", async ({ page }) => {

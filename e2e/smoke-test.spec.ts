@@ -1,4 +1,5 @@
-import { test, expect, type Locator, type Page } from "@playwright/test";
+import { test, expect, type Locator } from "@playwright/test";
+import { resetContactStorage, getContactForm } from "./helpers/contact";
 
 const clickWhenReady = async (locator: Locator) => {
   await locator.waitFor({ state: "visible" });
@@ -8,14 +9,6 @@ const clickWhenReady = async (locator: Locator) => {
   await locator.click({ trial: true });
   await locator.click();
 };
-
-const resetContactStorage = async (page: Page) => {
-  await page.addInitScript(() => {
-    window.localStorage.removeItem("contact-form-storage");
-  });
-};
-
-const getContactForm = (page: Page) => page.locator("main form").first();
 
 test.describe("UI Smoke Tests", () => {
   test("Contact Form renders and submits", async ({ page }) => {
@@ -77,7 +70,7 @@ test.describe("UI Smoke Tests", () => {
 
   test("Dropdown Menu toggles visibility", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     const mobileMenuToggle = page.getByRole("button", {
       name: /open menu|close menu/i,
@@ -140,7 +133,7 @@ test.describe("UI Smoke Tests", () => {
   test("Responsive layout adapts to viewport", async ({ page }) => {
     // Test mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     const navbar = page.getByRole("navigation", { name: /primary/i });
     await expect(navbar).toBeVisible();
