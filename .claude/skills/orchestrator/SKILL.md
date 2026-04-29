@@ -76,6 +76,26 @@ The general-purpose agent spawns specialised sub-agents (architecture-sme, code-
 
 ---
 
+## Code Standards (enforced for all dispatched sub-agents)
+
+Every agent prompt dispatched via `Agent(subagent_type=...)` **must** include these constraints:
+
+**React 19 + Next.js 16:**
+- Use React 19 features first: `useTransition`, `useOptimistic`, `useActionState`, `useFormStatus`, `use()`, Server Components, Server Actions, Suspense, Error Boundaries, PPR, ISR
+- Never use `useEffect` when a React 19 alternative exists — add comment if truly required
+- Default to Server Components; `"use client"` only for browser interactivity
+
+**Superpowers mandatory:**
+- All code generation uses: brainstorm → plan (TDD) → execute → verify
+- Tests written before implementation
+
+**Verification gate before reporting done:**
+```bash
+pnpm typecheck && pnpm build && pnpm test
+```
+
+---
+
 ## Delegation Reference
 
 | Need | Agent type |

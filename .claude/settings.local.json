@@ -102,7 +102,10 @@
       "Bash(curl -s http://localhost:3100/mcp/tools/call -X POST -H 'Content-Type: application/json' -d '{ *)",
       "Bash(curl -s -X POST http://localhost:3100/mcp/tools/call -H 'Content-Type: application/json' -d '{\"name\":\"memory_reference__search_nodes\",\"arguments\":{\"query\":\"electrical-website-state plan-phase-8b\"}}')",
       "Bash(node scripts/mcp-memory-call.mjs search_nodes \"electrical-website-state\")",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\herma\\\\source\\\\repository\\\\electrical-website\\\\.claude\\\\archives\")",
+      "Bash(mv \"C:\\\\Users\\\\herma\\\\source\\\\repository\\\\electrical-website\\\\.claude\\\\reference\\\\ANIMATION_AUDIT.md\" \"C:\\\\Users\\\\herma\\\\source\\\\repository\\\\electrical-website\\\\.claude\\\\archives\\\\ANIMATION_AUDIT.md\")",
+      "Bash(mv \"C:\\\\Users\\\\herma\\\\source\\\\repository\\\\electrical-website\\\\.claude\\\\reference\\\\ANIMATION_OPTIMIZATION_PLAN.md\" \"C:\\\\Users\\\\herma\\\\source\\\\repository\\\\electrical-website\\\\.claude\\\\archives\\\\ANIMATION_OPTIMIZATION_PLAN.md\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\herma\\source\\repository\\electrical-website\\.claude\\skills\\gsap-scrolltrigger",
