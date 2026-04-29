@@ -6,6 +6,11 @@ const OBSIDIAN_PORT = process.env.OBSIDIAN_PORT || "27124";
 const OBSIDIAN_HOST = process.env.OBSIDIAN_HOST || "host.docker.internal";
 const OBSIDIAN_BASE = `http://${OBSIDIAN_HOST}:${OBSIDIAN_PORT}`;
 
+// FIX 2 — Startup validation: warn if API key is absent (never log the value)
+if (!OBSIDIAN_API_KEY) {
+  console.warn("[obsidian-vault] WARNING: OBSIDIAN_API_KEY is not set — all tool calls will fail with 401");
+}
+
 const TOOL_DEFINITIONS = [
   {
     name: "list_vault_files",
@@ -86,11 +91,45 @@ const TOOL_DEFINITIONS = [
   },
 ];
 
+// FIX 3 — Encode each path segment individually so "/" separators are preserved
+function encodeVaultPath(path) {
+  return path.split("/").map(encodeURIComponent).join("/");
+}
+
+// FIX 1 — Body reader with 1MB cap and req.on("error") handler
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on("data", (chunk) => {
+      size += chunk.length;
+      if (size > 1_048_576) { // 1MB cap
+        req.destroy();
+        reject(new Error("Request body too large"));
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+    req.on("error", reject);
+  });
+}
+
 // Make an HTTP request to the Obsidian Local REST API
 function obsidianRequest(method, path, options = {}) {
   return new Promise((resolve, reject) => {
     const url = `${OBSIDIAN_BASE}${path}`;
     const parsedUrl = new URL(url);
+
+    const headers = {
+      Authorization: `Bearer ${OBSIDIAN_API_KEY}`,
+      ...options.headers,
+    };
+
+    // FIX 6 — Include Content-Length when sending a body
+    if (options.body !== undefined) {
+      headers["Content-Length"] = Buffer.byteLength(options.body);
+    }
 
     const reqOptions = {
       hostname: parsedUrl.hostname,
@@ -98,10 +137,7 @@ function obsidianRequest(method, path, options = {}) {
       path: parsedUrl.pathname + parsedUrl.search,
       method,
       timeout: 10000,
-      headers: {
-        Authorization: `Bearer ${OBSIDIAN_API_KEY}`,
-        ...options.headers,
-      },
+      headers,
     };
 
     const req = http.request(reqOptions, (res) => {
@@ -158,7 +194,7 @@ async function handleListVaultFiles() {
 }
 
 async function handleReadNote(args) {
-  const encodedPath = encodeURIComponent(args.path);
+  const encodedPath = encodeVaultPath(args.path);
   const res = await obsidianRequest("GET", `/vault/${encodedPath}`);
   if (res.statusCode < 200 || res.statusCode >= 300) {
     return {
@@ -171,7 +207,7 @@ async function handleReadNote(args) {
 }
 
 async function handleCreateOrUpdateNote(args) {
-  const encodedPath = encodeURIComponent(args.path);
+  const encodedPath = encodeVaultPath(args.path);
   const res = await obsidianRequest("PUT", `/vault/${encodedPath}`, {
     headers: { "Content-Type": "text/markdown" },
     body: args.content,
@@ -187,7 +223,7 @@ async function handleCreateOrUpdateNote(args) {
 }
 
 async function handleDeleteNote(args) {
-  const encodedPath = encodeURIComponent(args.path);
+  const encodedPath = encodeVaultPath(args.path);
   const res = await obsidianRequest("DELETE", `/vault/${encodedPath}`);
   if (res.statusCode < 200 || res.statusCode >= 300) {
     return {
@@ -221,7 +257,7 @@ async function handleSearchVault(args) {
 }
 
 async function handleAppendToNote(args) {
-  const encodedPath = encodeURIComponent(args.path);
+  const encodedPath = encodeVaultPath(args.path);
   const res = await obsidianRequest("POST", `/vault/${encodedPath}`, {
     headers: { "Content-Type": "text/plain" },
     body: args.content,
@@ -237,7 +273,7 @@ async function handleAppendToNote(args) {
 }
 
 async function handleOpenNoteInObsidian(args) {
-  const encodedPath = encodeURIComponent(args.path);
+  const encodedPath = encodeVaultPath(args.path);
   const res = await obsidianRequest("POST", `/open/${encodedPath}`);
   if (res.statusCode < 200 || res.statusCode >= 300) {
     return {
@@ -251,6 +287,21 @@ async function handleOpenNoteInObsidian(args) {
 
 // Dispatch tool call
 async function callTool(name, args) {
+  // FIX 2 — Guard: reject all tool calls when API key is missing
+  if (!OBSIDIAN_API_KEY) {
+    return {
+      content: [
+        {
+          type: "json",
+          json: {
+            error: "Configuration error",
+            message: "OBSIDIAN_API_KEY is not configured. Add it to .env.local and restart.",
+          },
+        },
+      ],
+    };
+  }
+
   switch (name) {
     case "list_vault_files":
       return handleListVaultFiles();
@@ -275,16 +326,16 @@ async function callTool(name, args) {
 const server = http.createServer(async (req, res) => {
   res.setHeader("Content-Type", "application/json");
 
-  // Health check — verify Obsidian is reachable
+  // FIX 4 + FIX 5 — Health check: always 200; obsidian reachability in payload only
   if (req.method === "GET" && req.url === "/health") {
     const reachable = await isObsidianReachable();
-    if (reachable) {
-      res.writeHead(200);
-      res.end("OK");
-    } else {
-      res.writeHead(503);
-      res.end("Obsidian offline");
-    }
+    res.writeHead(200);
+    res.end(
+      JSON.stringify({
+        status: "healthy",
+        obsidian: reachable ? "online" : "offline",
+      }),
+    );
     return;
   }
 
@@ -297,56 +348,74 @@ const server = http.createServer(async (req, res) => {
 
   // Call a tool
   if (req.method === "POST" && req.url === "/tools/call") {
-    const chunks = [];
-    req.on("data", (chunk) => chunks.push(chunk));
-    req.on("end", async () => {
-      let parsed;
-      try {
-        parsed = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-      } catch {
-        res.writeHead(400);
-        res.end(
-          JSON.stringify({
-            content: [
-              {
-                type: "json",
-                json: { error: "Invalid JSON", message: "Request body must be valid JSON" },
+    let bodyText;
+    try {
+      // FIX 1 — Use readBody helper (1MB cap + error handler)
+      bodyText = await readBody(req);
+    } catch (err) {
+      res.writeHead(400);
+      res.end(
+        JSON.stringify({
+          content: [
+            {
+              type: "json",
+              json: {
+                error: "Body read error",
+                message: err.message || "Failed to read request body",
               },
-            ],
-          }),
-        );
-        return;
-      }
+            },
+          ],
+        }),
+      );
+      return;
+    }
 
-      const { name, arguments: args = {} } = parsed;
+    let parsed;
+    try {
+      parsed = JSON.parse(bodyText);
+    } catch {
+      res.writeHead(400);
+      res.end(
+        JSON.stringify({
+          content: [
+            {
+              type: "json",
+              json: { error: "Invalid JSON", message: "Request body must be valid JSON" },
+            },
+          ],
+        }),
+      );
+      return;
+    }
 
-      try {
-        const result = await callTool(name, args);
-        res.writeHead(200);
-        res.end(
-          JSON.stringify({ content: [{ type: "json", json: result }] }),
-        );
-      } catch (err) {
-        const isOffline =
-          err.code === "ECONNREFUSED" ||
-          err.code === "ETIMEDOUT" ||
-          err.code === "ENOTFOUND";
+    const { name, arguments: args = {} } = parsed;
 
-        const json = isOffline
-          ? {
-              error: "Obsidian offline",
-              message:
-                "Obsidian must be running with Local REST API plugin enabled",
-            }
-          : {
-              error: "Tool execution failed",
-              message: err.message || String(err),
-            };
+    try {
+      const result = await callTool(name, args);
+      res.writeHead(200);
+      res.end(
+        JSON.stringify({ content: [{ type: "json", json: result }] }),
+      );
+    } catch (err) {
+      const isOffline =
+        err.code === "ECONNREFUSED" ||
+        err.code === "ETIMEDOUT" ||
+        err.code === "ENOTFOUND";
 
-        res.writeHead(200);
-        res.end(JSON.stringify({ content: [{ type: "json", json }] }));
-      }
-    });
+      const json = isOffline
+        ? {
+            error: "Obsidian offline",
+            message:
+              "Obsidian must be running with Local REST API plugin enabled",
+          }
+        : {
+            error: "Tool execution failed",
+            message: err.message || String(err),
+          };
+
+      res.writeHead(200);
+      res.end(JSON.stringify({ content: [{ type: "json", json }] }));
+    }
     return;
   }
 
@@ -357,6 +426,7 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`[obsidian-vault] listening on port ${PORT}`);
   console.log(`[obsidian-vault] Obsidian base URL: ${OBSIDIAN_BASE}`);
+  console.log(`[obsidian-vault] API key configured: ${OBSIDIAN_API_KEY ? "yes" : "no"}`);
 });
 
 process.on("SIGTERM", () => {
