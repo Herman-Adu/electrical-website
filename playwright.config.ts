@@ -34,7 +34,13 @@ export default defineConfig({
 
   projects: [
     {
-      name: "chromium",
+      name: "dev-and-production",
+      testIgnore: /\.production\.spec\.ts$/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "production-only",
+      testMatch: /\.production\.spec\.ts$/,
       use: { ...devices["Desktop Chrome"] },
     },
   ],

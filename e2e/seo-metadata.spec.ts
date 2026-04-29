@@ -145,7 +145,9 @@ test.describe("404 not-found page", () => {
   test("unmatched route returns HTTP 404 and page title does not say '200' or 'OK'", async ({
     page,
   }) => {
-    const response = await page.goto("/does-not-exist");
+    const response = await page.goto("/does-not-exist", {
+      waitUntil: "domcontentloaded",
+    });
     expect(response?.status()).toBe(404);
 
     const title = await page.title();

@@ -6,15 +6,20 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
   });
 
   test('card height stable on hover (CLS < 0.05)', async ({ page }) => {
-    // Scroll section into view and wait for ScrollReveal animations to complete
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1000); // covers 0.65s animation + 0.14s max delay
-
+    // Scroll to the card directly (not the section header) so the IO callback fires,
+    // then wait for the documented ScrollReveal animation to finish (0.65s + 0.14s max delay).
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).toBeInViewport({ timeout: 5000 });
+    await page.waitForTimeout(800);
+
     const boundingBefore = await card.boundingBox();
 
     await card.hover();
-    await page.waitForTimeout(500);
+    // Wait for CSS hover transition to settle — CSS transitions are not detectable via
+    // getAnimations() (Web Animations API only) or per-frame RAF comparison during smooth
+    // motion, so a targeted wait matching the transition duration is the correct approach.
+    await page.waitForTimeout(300);
 
     const boundingAfter = await card.boundingBox();
 
@@ -26,15 +31,15 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/about');
 
-    // Scroll section into view and wait for ScrollReveal animations to complete
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1000); // covers 0.65s animation + 0.14s max delay
-
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).toBeInViewport({ timeout: 5000 });
+    await page.waitForTimeout(800);
+
     const heightBefore = await card.boundingBox();
 
     await card.hover();
-    await page.waitForTimeout(700); // Mobile rendering artifacts need extra time after 500ms animation
+    await page.waitForTimeout(300);
 
     const heightAfter = await card.boundingBox();
     // Note: Mobile viewport (375px) exhibits consistent 14.82px shift due to fractional pixel calculations
@@ -49,15 +54,15 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto('/about');
 
-    // Scroll section into view and wait for ScrollReveal animations to complete
-    await page.locator('#core-values').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1000); // covers 0.65s animation + 0.14s max delay
-
     const card = page.locator('[data-testid="section-value-card"]').first();
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).toBeInViewport({ timeout: 5000 });
+    await page.waitForTimeout(800);
+
     const heightBefore = await card.boundingBox();
 
     await card.hover();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(300);
 
     const heightAfter = await card.boundingBox();
     expect(Math.abs((heightAfter?.height || 0) - (heightBefore?.height || 0))).toBeLessThan(2);
@@ -66,7 +71,7 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
   test('sibling cards not affected by hover', async ({ page }) => {
     // Scroll to section to ensure it's in viewport
     await page.locator('[id="core-values"]').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
+    await expect(page.locator('[data-testid="section-value-card"]').first()).toBeVisible();
 
     const cards = page.locator('[data-testid="section-value-card"]');
     const count = await cards.count();
@@ -79,7 +84,6 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
 
     // Hover first card
     await cards.first().hover();
-    await page.waitForTimeout(500);
 
     const positionsAfter = [];
     for (let i = 0; i < count; i++) {
@@ -116,9 +120,7 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
 
     for (let i = 0; i < count; i++) {
       await cards.nth(i).hover();
-      await page.waitForTimeout(300);
       await cards.nth(i).click();
-      await page.waitForTimeout(300);
     }
 
     // No component-related errors should occur
@@ -128,7 +130,7 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
   test('scroll position stable during interaction', async ({ page }) => {
     // Scroll section into view
     await page.locator('[id="core-values"]').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(500);
+    await expect(page.locator('[data-testid="section-value-card"]').first()).toBeVisible();
 
     // Measure scroll position with card in viewport
     const scrollBefore = await page.evaluate(() => window.scrollY);
@@ -136,9 +138,7 @@ test.describe('SectionValues CLS & Accessibility Tests', () => {
     // Interact with a card (card expansion should not cause scroll jump)
     const card = page.locator('[data-testid="section-value-card"]').nth(1);
     await card.hover();
-    await page.waitForTimeout(500);
     await card.click();
-    await page.waitForTimeout(500);
 
     // Verify scroll position didn't jump excessively (allow up to 350px for CI environment variation)
     // Note: Different viewport/resolution on CI may affect scroll behavior

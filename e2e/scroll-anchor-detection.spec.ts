@@ -8,7 +8,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Scroll to Core Values section
       const coreValuesSection = page.locator('#core-values');
       await coreValuesSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300); // Allow scroll to settle
 
       // Hover dropdown to open it
       const aboutLink = page.locator('nav a:has-text("About")').first();
@@ -29,7 +28,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Scroll to Timeline section
       const timelineSection = page.locator('#timeline');
       await timelineSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Verify Timeline is now highlighted (not previous section)
       const timelineDropdownLink = page.locator('button:has-text("Company History")').first();
@@ -38,7 +36,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Scroll further to Certifications
       const certSection = page.locator('#certifications');
       await certSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Verify Certifications is now highlighted
       const certDropdownLink = page.locator('button:has-text("Certifications")').first();
@@ -55,20 +52,17 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Scroll to Peace of Mind section while dropdown open
       const peaceSection = page.locator('#peace-of-mind');
       await peaceSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Close dropdown by moving mouse away
       await page.mouse.move(100, 100);
-      await page.waitForTimeout(300);
+      await page.waitForFunction(() => !document.querySelector('[data-state="open"]'));
 
       // Scroll further to Community section (dropdown is closed, no scroll detection)
       const communitySection = page.locator('#community');
       await communitySection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(500);
 
       // Reopen dropdown (should sync to current Community section)
       await aboutLink.hover();
-      await page.waitForTimeout(200);
 
       // Verify Community is highlighted (not Peace of Mind)
       const communityDropdownLink = page.locator('button:has-text("Community")').first();
@@ -130,17 +124,15 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Mobile viewport: open the mobile menu first (below lg breakpoint, menu is collapsed)
       const mobileMenuButton = page.locator('button[aria-label*="menu"]').first();
       await mobileMenuButton.click();
-      await page.waitForTimeout(200);
 
       // Find and click the dropdown toggle button for About (in mobile menu)
       const aboutDropdownToggle = page.locator('button[aria-label*="About"]').first();
+      await expect(aboutDropdownToggle).toBeVisible();
       await aboutDropdownToggle.click();
-      await page.waitForTimeout(300);
 
       // Scroll to Peace of Mind section
       const peaceSection = page.locator('#peace-of-mind');
       await peaceSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Verify Peace of Mind is highlighted (or at least visible) in the dropdown
       const peaceDropdownLink = page.locator('button:has-text("Peace of Mind")').first();
@@ -156,17 +148,15 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Tablet viewport: open the mobile menu first (below lg breakpoint, menu is collapsed)
       const mobileMenuButton = page.locator('button[aria-label*="menu"]').first();
       await mobileMenuButton.click();
-      await page.waitForTimeout(200);
 
       // Find and click the dropdown toggle button for About (in mobile menu)
       const aboutDropdownToggle = page.locator('button[aria-label*="About"]').first();
+      await expect(aboutDropdownToggle).toBeVisible();
       await aboutDropdownToggle.click();
-      await page.waitForTimeout(300);
 
       // Scroll to Vision & Mission section
       const visionSection = page.locator('#vision-mission');
       await visionSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Verify Vision & Mission is highlighted
       const visionDropdownLink = page.locator('button:has-text("Vision & Mission")').first();
@@ -182,7 +172,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Desktop viewport, scroll to Certifications
       const certSection = page.locator('#certifications');
       await certSection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Hover dropdown
       const aboutLink = page.locator('nav a:has-text("About")').first();
@@ -216,7 +205,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       // Scroll to bottom
       const communitySection = page.locator('#community');
       await communitySection.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(300);
 
       // Hover dropdown
       const aboutLink = page.locator('nav a:has-text("About")').first();
@@ -243,8 +231,6 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
         }
       });
 
-      await page.waitForTimeout(500); // Wait for observer callback
-
       // Last section should be highlighted
       const lastSectionLink = page.locator('button:has-text("Why Choose Us")').first();
       await expect(lastSectionLink).toBeVisible();
@@ -265,7 +251,10 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       await servicesSubmenuLink.click();
 
       // Verify scroll happened immediately (first click)
-      await page.waitForTimeout(500); // Allow smooth scroll to complete
+      await page.waitForFunction(
+        (before) => window.scrollY !== before,
+        scrollBefore
+      );
       const scrollAfter = await page.evaluate(() => window.scrollY);
 
       expect(scrollAfter).toBeGreaterThan(scrollBefore);
@@ -319,7 +308,10 @@ test.describe('Scroll-Anchor Detection: Dynamic Dropdown Highlighting', () => {
       await visionLink.click();
 
       // Wait for scroll to complete
-      await page.waitForTimeout(500);
+      await page.waitForFunction(
+        (before) => window.scrollY !== before,
+        scrollBefore
+      );
 
       // Verify hash changed
       const currentHash = await page.evaluate(() => window.location.hash);
