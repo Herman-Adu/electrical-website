@@ -43,9 +43,16 @@ async function main() {
   // Read input from stdin (Claude Code passes hook data as JSON on stdin)
   let input = null;
   try {
-    const stdinData = readFileSync('/dev/stdin', { encoding: 'utf8', flag: 'r' });
-    if (stdinData.trim()) input = JSON.parse(stdinData.trim());
-  } catch { /* no stdin or not parseable — continue without it */ }
+    input = await new Promise((resolve) => {
+      let raw = '';
+      if (process.stdin.isTTY) { resolve(null); return; }
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', (c) => { raw += c; });
+      process.stdin.on('end', () => { try { resolve(JSON.parse(raw.trim())); } catch { resolve(null); } });
+      process.stdin.on('error', () => resolve(null));
+      setTimeout(() => resolve(null), 2000);
+    });
+  } catch { /* continue without stdin */ }
 
   try {
     const transcriptPath = input?.transcript_path ?? null;
