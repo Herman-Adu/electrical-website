@@ -1,10 +1,11 @@
 import http from "node:http";
+import https from "node:https";
 
 const PORT = Number(process.env.PORT || 8000);
 const OBSIDIAN_API_KEY = process.env.OBSIDIAN_API_KEY || "";
 const OBSIDIAN_PORT = process.env.OBSIDIAN_PORT || "27124";
 const OBSIDIAN_HOST = process.env.OBSIDIAN_HOST || "host.docker.internal";
-const OBSIDIAN_BASE = `http://${OBSIDIAN_HOST}:${OBSIDIAN_PORT}`;
+const OBSIDIAN_BASE = `https://${OBSIDIAN_HOST}:${OBSIDIAN_PORT}`;
 
 // FIX 2 — Startup validation: warn if API key is absent (never log the value)
 if (!OBSIDIAN_API_KEY) {
@@ -138,9 +139,10 @@ function obsidianRequest(method, path, options = {}) {
       method,
       timeout: 10000,
       headers,
+      rejectUnauthorized: false, // Obsidian Local REST API uses a self-signed cert
     };
 
-    const req = http.request(reqOptions, (res) => {
+    const req = https.request(reqOptions, (res) => {
       const chunks = [];
       res.on("data", (chunk) => chunks.push(chunk));
       res.on("end", () => {
