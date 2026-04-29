@@ -36,10 +36,11 @@ const SIGNATURE_COMMIT   = '# memory-lane-commit — installed by pnpm hooks:ins
 
 const POST_CHECKOUT_CONTENT = `#!/usr/bin/env bash
 ${SIGNATURE_CHECKOUT}
+# Runs synchronously (no &) to prevent concurrent writes with session-start-v2.mjs
 if [ "$3" != "1" ]; then exit 0; fi
 if ! command -v node >/dev/null 2>&1; then exit 0; fi
 node "$(git rev-parse --show-toplevel)/scripts/memory-lane-activate.mjs" "$1" "$2" "$3" \\
-  >/tmp/memory-lane-activate.log 2>&1 &
+  >/tmp/memory-lane-activate.log 2>&1
 exit 0
 `;
 
