@@ -1,9 +1,9 @@
 ---
 topic: junior-guide-ai-memory
 audience: junior-dev
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~1500
+wordCount: ~1800
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -45,6 +45,23 @@ The good news: you don't need to be a systems engineer to set this up. The patte
 ---
 
 ## The Three-Layer Solution
+
+Three layers, three tools you already know — sticky note, filing cabinet, notebook. Here's how they work together:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph TD
+    A["Sticky Note\n(Hot Context)\nLoads automatically at session start\n~3,000 tokens"]:::amber
+    B["Filing Cabinet\n(Docker Knowledge Graph)\nAI searches on demand\nStructured entities + relations"]:::cyan
+    C["Notebook\n(Obsidian Vault)\nHuman-readable archive\nPARA-organised markdown"]:::teal
+
+    A -->|AI has branch context| B
+    B -->|search on demand| C
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+```
 
 Think of it like three tools you already know from the physical world.
 
@@ -104,7 +121,25 @@ If you work on multiple branches — which most teams do — you've probably hit
 
 **Memory lanes** solve this by giving each branch its own context.
 
-Think of it like having a separate desk for each task. Your feature branch has its own desk with its own sticky notes, its own filing cabinet searches, its own history. When you `git checkout feature-branch`, your feature desk activates automatically. When you switch back to main, the main desk takes over.
+Think of it like having a separate desk for each task.
+
+One git command, automatic context swap — the hook handles everything:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart LR
+    A[git checkout\nfeature-branch]:::slate --> B[Hook fires]:::amber --> C[Feature desk\nactivates]:::cyan --> D[Right context\nappears]:::deep
+
+    E[git checkout main]:::slate --> F[Hook fires]:::amber --> G[Feature desk\npauses]:::teal --> H[Main desk\nactivates]:::cyan
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
+
+Your feature branch has its own desk with its own sticky notes, its own filing cabinet searches, its own history. When you `git checkout feature-branch`, your feature desk activates automatically. When you switch back to main, the main desk takes over.
 
 This happens via a **PostCheckout hook** — a script that fires every time you change branches. It detects which branch you switched to, finds the matching memory lane, and activates it. No manual steps. The right context just appears.
 
@@ -113,6 +148,22 @@ For teams working on multiple features simultaneously, this is a game-changer.
 ---
 
 ## Getting Started: The Minimal Path
+
+Three steps, each building on the last — you can stop at Step 1 and still have a working memory system:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart TD
+    A["Step 1 — Foundation\nInstall Docker Desktop\nSet up memory-reference service\nFiling cabinet ready"]:::cyan
+    B["Step 2 — Automation\nAdd SessionStart hook\nAdd Stop hook\nSticky note automated"]:::deep
+    C["Step 3 — Human Layer\nInstall Obsidian\nEnable Local REST API plugin\nNotebook layer added\n(optional)"]:::teal
+
+    A --> B --> C
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+```
 
 You don't have to build all three layers at once. Here's how to start:
 

@@ -1,9 +1,9 @@
 ---
 topic: memory-lanes-context-switching
 audience: senior-dev
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~2000
+wordCount: ~2300
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -48,6 +48,10 @@ Each lane progresses through a lifecycle:
 PENDING → ACTIVE → PAUSED → COMPLETED → ARCHIVED → HARD_DELETED
 ```
 
+The state machine below shows all six lifecycle states and every valid transition — including the return path from PAUSED back to ACTIVE on branch re-checkout.
+
+> **Figure 1**: Memory lane state machine — 6 lifecycle states with PostCheckout and Stop hook transitions — open [`archives/diagrams/2026-04-30-memory-lane-state-machine-draft.excalidraw`](archives/diagrams/2026-04-30-memory-lane-state-machine-draft.excalidraw) in Excalidraw.
+
 - **PENDING**: Lane registered but not yet used
 - **ACTIVE**: Current branch — full context loaded at session start
 - **PAUSED**: Branch switched away — context preserved, not loaded
@@ -83,6 +87,20 @@ The system is entirely hook-driven. There is no `memory-lane activate` command y
 }
 ```
 
+The flowchart below traces the exact execution path the PostCheckout hook follows on every branch switch — from the git command to the updated lane config:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart LR
+    A[git checkout\nbranch]:::slate --> B[PostCheckout\nhook fires]:::amber --> C[Read branch\nname]:::teal --> D[Find lane\nconfig JSON]:::teal --> E[Set lane\nACTIVE]:::cyan --> F[Pause previous\nlane]:::deep --> G[Update active-\nmemory-lanes.json]:::slate
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
+
 **Stop Hook** — fires when the AI session ends:
 1. Reads the current active lane
 2. Writes a fresh `emergencySummary` — last N commit hashes plus a session summary string
@@ -107,6 +125,22 @@ At session start, `scripts/memory-rehydrate.mjs` runs and assembles the context 
 | PAUSED (recent) | Summary + last 2 commits | ~400 per lane |
 | PAUSED (stale >7 days) | One-line reference only | ~50 per lane |
 | ARCHIVED | Not included (loaded on demand) | 0 |
+
+The loading hierarchy in diagram form — each tier builds on the one below, with ACTIVE lanes getting the full picture and archived lanes consuming zero budget:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph TD
+    A["ACTIVE\n~1,800 tokens\nFull lane detail + last 5 commits\n+ Docker entity summary"]:::cyan
+    B["PAUSED — recent ≤7 days\n~400 tokens\nSummary + last 2 commits"]:::teal
+    C["ARCHIVED / PAUSED stale >7 days\n0 tokens\nNot loaded — on demand only"]:::pylon
+
+    A --> B --> C
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef pylon fill:#e2e8f0,stroke:#64748b,color:#1e1e1e
+```
 
 When the Docker memory service is available, the AI gets rich structured context — Docker `search_nodes()` pulls the full project knowledge graph, `open_nodes()` loads specific entities. But what happens when Docker is down?
 

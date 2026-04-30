@@ -1,9 +1,9 @@
 ---
 topic: beyond-rag-knowledge-graphs
 audience: rag-engineer
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~2500
+wordCount: ~2800
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -19,6 +19,26 @@ This post explains why we built a knowledge graph instead, what we learned from 
 ---
 
 ## Why We Didn't Use RAG
+
+The diagram below contrasts the two retrieval paths — flat probabilistic vector search on the left, deterministic multi-hop graph traversal on the right.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph LR
+    subgraph RAG ["RAG — Probabilistic Retrieval"]
+        Q1[Query]:::slate --> E[Embed query]:::teal --> V[(Vector store)]:::pylon --> K[Top-K chunks]:::teal --> R1[Approximate result]:::amber
+    end
+    subgraph KG ["Knowledge Graph — Deterministic Recall"]
+        Q2[Query]:::slate --> SN[search_nodes]:::cyan --> G[(Graph store)]:::cyan --> T[Traverse relations]:::deep --> R2[Exact result]:::cyan
+    end
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+    classDef pylon fill:#e2e8f0,stroke:#64748b,color:#1e1e1e
+```
 
 RAG works by converting documents into embeddings — dense numerical vectors that capture semantic meaning — then retrieving the most similar chunks when a query arrives. For semantic search over a corpus of documents, this is excellent. For structured session memory in a development workflow, it has five structural problems.
 
@@ -54,9 +74,36 @@ A knowledge graph models the world as entities and typed relations. An entity is
 
 **Multi-hop reasoning.** "What decisions influenced the animation architecture?" becomes a graph traversal: find feat-phase-7-animation-polish → follow derives_from edges → find decide-* entities → return. RAG cannot do this without multiple retrieval passes and LLM stitching, introducing probabilistic failure at every hop.
 
+A concrete example from the production graph — a single derives_from traversal reveals the full chain of decisions behind a feature:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph LR
+    F["feat-phase-8\nscrollreveal-production"]:::cyan -->|derives_from| D["decide-section\ncontainer-pattern"]:::amber
+    D -->|derives_from| L["learn-css-variable\nmedia-query-conflicts"]:::deep
+    SE["session-2026-04-20-004"]:::teal -->|updates| PS["electrical-website-state"]:::slate
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
+
 **Relation typing matters.** Not all relationships are equal. `updates`, `builds_on`, `derives_from`, `documents` each carry different semantics. When Claude at session start reads that session-2026-04-18-001 `updates` electrical-website-state, it knows this is a state transition, not a derivation. Typed edges are metadata-rich in a way flat embeddings are not.
 
 **The benchmarks support this.** Microsoft's GraphRAG (github.com/microsoft/graphrag) — which combines knowledge graph extraction with RAG — achieves 54.2% average accuracy improvement over plain RAG. On enterprise benchmarks: 86% accuracy versus 32% for baseline RAG. LazyGraphRAG outperformed all comparison conditions across 96 benchmark comparisons. A 2025 systematic review (arxiv:2502.11371) confirms GraphRAG outperforms vanilla RAG specifically on complex cross-document queries. The academic and industry evidence is converging: for structured, relational queries, graphs win.
+
+The accuracy gap is substantial on complex enterprise queries where relationship traversal matters:
+
+```mermaid
+%%{init: {"theme": "base"}}%%
+xychart-beta
+    title "GraphRAG vs Baseline RAG — Microsoft Enterprise Benchmark"
+    x-axis ["Baseline RAG", "GraphRAG"]
+    y-axis "Accuracy (%)" 0 --> 100
+    bar [32, 86]
+```
 
 The caveat: vanilla RAG still wins on simple single-document lookup. The domains are different. GraphRAG costs 3–5× more in LLM calls during extraction. It is not a universal replacement — it is the right tool for a specific class of problem.
 
