@@ -1,14 +1,14 @@
 {
-  "active": "feat-memory-lane-corruption-and-branch-mismatch",
+  "active": "electrical-website-state",
   "status": "active",
-  "currentBranch": "fix/memory-lane-corruption-and-branch-mismatch",
-  "laneEntityName": "feat-memory-lane-corruption-and-branch-mismatch",
+  "currentBranch": "main",
+  "laneEntityName": "electrical-website-state",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-29T22:51:08.177Z",
-  "emergencySummary": "Branch main. Recent: d32f889 fix: obsidian proxy HTTPS + env_file credential fix (#115) ebb54f2 feat: Obsidian platinum second brain integration (Track A + B) (#114) 7a4ba1a feat: Batch B/C orchestrator infrastructure har",
+  "lastSyncedAt": "2026-04-30T09:42:44.691Z",
+  "emergencySummary": "Branch main. Recent: f6b2699 chore: memory lane sync — session end 2026-04-29 d32f889 fix: obsidian proxy HTTPS + env_file credential fix (#115) ebb54f2 feat: Obsidian platinum second brain integration (Track A + B) (#114",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-memory-lane-corruption-and-branch-mismatch"
+    "feat-session-end-sync-2026-04-29"
   ],
   "phaseSequence": [
     {
