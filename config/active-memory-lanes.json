@@ -1,14 +1,14 @@
 {
-  "active": "feat-project-migration-medivet-watford",
+  "active": "feat-project-migration-ladbrokes-woking",
   "status": "active",
-  "currentBranch": "feat/project-migration-medivet-watford",
-  "laneEntityName": "feat-project-migration-medivet-watford",
+  "currentBranch": "feat/project-migration-ladbrokes-woking",
+  "laneEntityName": "feat-project-migration-ladbrokes-woking",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-30T21:07:16.600Z",
-  "emergencySummary": "Branch feat/project-migration-medivet-watford. Recent: 098a01e chore: remove rehydration prompt file — content moved to Docker memory entities f47b204 docs: update rehydration prompt — tighter orchestrator rules, Strapi-forward notes, architecture decisio",
+  "lastSyncedAt": "2026-04-30T23:35:40.374Z",
+  "emergencySummary": "Branch feat/project-migration-ladbrokes-woking. Recent: 00cdc6e feat: Medivet Watford migration � featured placement architecture + project data (#121) (#121) 21782c2 feat: DHL Reading polish � TOC nesting, 4 pillars, nav consolidation, featured swap (#120",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-project-migration-medivet-watford"
+    "feat-project-migration-ladbrokes-woking"
   ],
   "phaseSequence": [
     {

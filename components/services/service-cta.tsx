@@ -20,7 +20,13 @@ const serviceExcelReasons = [
   "24/7 responsive support and emergency electrical response",
 ];
 
-const featuredProject = {
+interface FeaturedProjectCard {
+  tag: string;
+  title: string;
+  excerpt: string;
+}
+
+const defaultFeaturedProject: FeaturedProjectCard = {
   tag: "Featured Project",
   title: "Industrial Retrofit — 50kW System Upgrade",
   excerpt:
@@ -29,7 +35,11 @@ const featuredProject = {
 
 // ─── Services CTA Component ────────────────────────────────────────────────
 
-export function ServicesCTA() {
+export function ServicesCTA({
+  featuredProject = defaultFeaturedProject,
+}: {
+  featuredProject?: FeaturedProjectCard;
+}) {
   const router = useRouter();
   const surgeRef = useRef<HTMLButtonElement>(null);
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
