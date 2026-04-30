@@ -1,246 +1,163 @@
 # Session Rehydration — Medivet Watford & Ladbrokes Woking Migration
 
-## Context
-
-New session. Continuing electrical-website project migration.
-DHL Reading Distribution Hub (PRs #119 + #120) is fully merged to main.
-Active branch: `feat/project-migration-medivet-watford`
-Next after that: `feat/project-migration-ladbrokes-woking` (branch from main after Medivet merges)
-
-**Full orchestrator mode. Docker memory first. Zero shortcuts. Superpowers mandatory.**
+New session. Full orchestrator mode from the first tool call. No shortcuts, no reminders needed.
 
 ---
 
-## Step 1 — Docker Memory (mandatory, in order)
+## Mandatory Startup Sequence (run ALL in order, no skipping)
 
+### 1. Docker preflight
+```bash
+curl -sf http://localhost:3100/health
+```
+If offline: `pnpm docker:mcp:ready` then re-check.
+
+### 2. Docker memory (read state before touching anything)
 ```bash
 pnpm docker:mcp:memory:search "electrical-website-state"
 pnpm docker:mcp:memory:open electrical-website-state
 pnpm docker:mcp:memory:search "learn-project-migration-full-process"
 pnpm docker:mcp:memory:open learn-project-migration-full-process
+```
+
+### 3. Git state
+```bash
 git log --oneline -5 && git status
 ```
 
-Report 3 bullets then STOP and await instruction.
+### 4. Report — exactly 3 bullets, then STOP and await instruction
+- **Branch:** [branch] | Last commit: [hash] [message]
+- **Build:** [pages count] pages | Tests: [status]
+- **Next:** [top task from Docker state]
 
 ---
 
-## Key Narrative Angle — The Woodhouse Partnership
+## Orchestrator Rules (always active — these are non-negotiable)
 
-**All three commercial projects (DHL, Medivet, Ladbrokes) share the same main contractor: Woodhouse Workspace.**
+| Rule | Enforcement |
+|------|-------------|
+| >50 LOC or multi-file | Delegate via `Agent(subagent_type="general-purpose")` — never implement directly |
+| Architecture decisions | `architecture-sme` first, then `code-generation` |
+| Security/auth/secrets | `security-sme` always, no exceptions |
+| Planning (2hr+ feature) | `planning` agent first, then `code-generation` |
+| Memory reads/writes | Docker MCP only — `mcp__MCP_DOCKER__memory_reference__*` |
+| GitHub ops | Docker GitHub MCP — `mcp__MCP_DOCKER__github_official__*` — never `gh` CLI |
+| Browser testing | Docker Playwright — `PLAYWRIGHT_REUSE_SERVER=true` |
+| Complex reasoning | Docker sequential thinking — `mcp__MCP_DOCKER__sequential_thinking__*` |
+| Build gate | `pnpm typecheck && pnpm build` before every commit |
+| Context limit | Hard stop at 60% — commit WIP, sync Docker, wait |
 
-This is Nexgen's central portfolio story: *Woodhouse's trusted electrical partner across multiple commercial programmes.* Each project reinforces the others. The narrative in all three should reference this relationship without being repetitive — each earns it on its own terms.
-
-- DHL: earned through years of demanding commercial delivery
-- Medivet: chosen again for precision in a regulated clinical environment
-- Ladbrokes: selected on confidence and brand compliance track record
+Superpowers for all code generation: brainstorm → plan (TDD) → execute → verify.
 
 ---
 
-## Project A — Medivet Watford ("The Ultimate Care")
+## Project State
 
-### Brief
-- **Slug:** `medivet-watford-veterinary-practice`
-- **ID:** `proj-medivet-watford-001`
-- **Category:** `"commercial"` | **categoryLabel:** `"Commercial"`
-- **clientSector:** `"Veterinary Healthcare"`
-- **Location:** Watford, Hertfordshire (Watford's business district)
-- **Size:** 18,000 sq ft
+**Main is clean.** DHL Reading Distribution Hub fully merged (PRs #119 + #120).
+**Active branch:** `feat/project-migration-medivet-watford`
+**Next branch:** `feat/project-migration-ladbrokes-woking` — create from main AFTER Medivet merges.
+
+---
+
+## Architecture Decision Needed First — Featured Projects on Multiple Pages
+
+**Do this before any data migration.** Use `architecture-sme` + sequential thinking.
+
+**The problem:** Projects need to appear as featured items on multiple pages (Projects hero, About page, Services page). Eventually this moves to Strapi with full relational content — author, partner (Woodhouse), client (Medivet/Ladbrokes), vendor (Schneider etc). The current `isFeatured: boolean` is a blunt instrument.
+
+**Constraints:**
+- Next.js 16 + React 19 — use Server Components, ISR, PPR where appropriate
+- Must be forward-compatible with Strapi CMS (relations: author, partner, client, vendor)
+- No prop-drilling, no context abuse — data fetching at the page/layout level
+- `getFeaturedProjectByCategory` already exists — don't break it
+
+**Options to evaluate:**
+1. `data/featured-projects.ts` — static lookup file, `getFeaturedProjectByPlacement(placement)` — zero runtime cost, swap by editing one file
+2. `featuredOn?: FeaturedPlacement[]` on the `Project` type — co-located with data, but bloats type and duplicates intent
+3. Strapi-forward: `featuredPlacements` as a standalone config entity (maps placement → project ID) — cleanest when Strapi arrives
+
+**Recommendation to architect:** Option 1 now (static file), designed to be replaced 1:1 by a Strapi singleton document when CMS lands. The utility function signature stays identical — only the data source changes.
+
+**Get the architect's verdict before building.**
+
+---
+
+## Migration Targets
+
+### Medivet Watford — "The Ultimate Care"
+- **IDs:** `proj-medivet-watford-001` | slug: `medivet-watford-veterinary-practice`
+- **Category:** `commercial` | clientSector: `"Veterinary Healthcare"`
+- **Location:** Watford, Hertfordshire | Size: 18,000 sq ft | Layout: North + south wing, own fuse board each
+- **Main contractor:** Woodhouse Workspace (same as DHL — reinforce the partnership narrative)
+- **isFeatured:** `true` (DHL set to `false` in same commit)
+- **Placement:** `featuredProjectsByPlacement.aboutPage`
+- **KPIs:** placeholders — Herman confirms with client. Fields: budget, timeline, capacity, location
+- **Testimonial:** placeholder or omit (optional field) — Herman confirms with client
+- **Images:** already at `public/images/projects/commercial/medivet/` — view, rename to `nexgen-medivet-watford-[descriptor].jpg`, update alt/aria/SEO same as DHL
+
+### Ladbrokes Woking — "A Safe Bet"
+- **IDs:** `proj-ladbrokes-woking-001` | slug: `ladbrokes-woking-retail-fitout`
+- **Category:** `commercial` | clientSector: `"Retail & Betting"`
+- **Location:** Woking, Surrey | Size: 12,000 sq ft | Layout: Two wings + large breakout
+- **Client:** Ladbrokes / Entain plc (FTSE 100) — 15,000 employees, 2,700+ shops
 - **Main contractor:** Woodhouse Workspace
-- **Layout:** North and south wing, each with own fuse board
-- **Existing install at handover:** Linear lighting (base build), cleaner's sockets on columns
-- **isFeatured:** `true` (replaces DHL as featured commercial project)
-- **featuredProjectsByPlacement:** `aboutPage`
-
-### Scope of Work (from old site)
-- Lighting installation
-- Power to tea points
-- Floor boxes with data and power points
-- New comms cabinet / data installation
-- Cable routes, cable calculations, drawings, tender
-- RAMS (Risk Assessment & Method Statements)
-- Technical drawings
-- Site inductions
-- Testing, commissioning, labelling
-- O&Ms (test certificates, as-built drawings, data sheets)
-
-### Old Site Copy (verbatim — use to inform Nexgen narrative, do NOT copy)
-
-**Lead:** "Intact Electrical were chosen as the preferred and trusted electrical contractor by Woodhouse Workspace as they strived to transform the Medivet new Watford office space Cat B fit out to the client's requirements."
-
-**The walkthrough:** "Intact Electrical attended a site visit with Woodhouse, at the new clean slate of Medivet's new office space, to go through the Cat B fit out electrical requirements in detail. An 18,000 square foot property in the heart of Watford's business district. The new office space consisted of a north and south wing each having their own fuse board, linear lighting (installed as base build) and cleaner's sockets fitted to columns as the existing install. An important stage for any large project, the walkthrough giving us the insight to fully understand the client's ultimate vision, and the opportunity to align and explain our own ethos with all stakeholders. Following expansion in recent years, combined with post-pandemic changes in the approach to work, the management team of Medivet were investing in a people-centric support centre."
-
-**Planning:** "After Intact Electrical were awarded the project, it was time to get all RAMS and technical drawings in place... Site inductions were arranged for our employees... Prior to the project start date, we arranged the procurement, ordering the materials to ensure they arrived on time."
-
-**Execution:** "The level of collaboration working with Woodhouse was first class. They are highly professional, leaders in their field, and respected as such within the industry. Intact Electrical were made to feel part of one team under one umbrella working to achieve the same goals. Co-ordinating with other trades throughout the project also allowed us to minimise any down time."
-
-**Completion:** "The office fitout ultimately showed a modern corporate identity filter from the reception area through the office workspace, crew and resolution rooms, all the way to the wc facilities. Once the Medivet electrical installation project was complete it was time to complete the O&Ms."
-
-### KPIs — NEEDS CONFIRMATION FROM HERMAN
-The old site has no KPIs. Draft plausible values for data structure, confirm with Herman before publishing:
-- Budget: `"£[TBC]"` — typical 18,000 sq ft Cat B office: £120K–£180K range
-- Timeline: `"[TBC] weeks"` — estimate 10–12 weeks
-- Capacity: `"[TBC]A"` — dual fuse boards (north + south wing)
-- Location: `"Watford, Hertfordshire"` ← confirmed
-
-### Testimonial — NEEDS NEXGEN ORIGINAL
-No testimonial on old site. If Herman has one, use it. If not, mark as pending or omit testimonial field entirely (it is optional in the ProjectDetailContent type).
-
-### Gallery Images (from old site CDN — need sourcing and renaming)
-Original filenames: `hero-medivet.jpg`, `01-medivet-project.jpg` through `12-medivet-project.jpg` (with gaps at 02,03,10,13).
-Target naming: `nexgen-medivet-watford-[descriptor].jpg`
-Target path: `public/images/projects/commercial/medivet-watford/`
-
-### Suggested Narrative Blocks
-```
-after-intro:  "Earning the Brief" — Woodhouse relationship, Medivet's people-centric investment
-after-scope:  "Working in a People-First Environment" — clinical sensitivity, coordination, zero disruption
-after-gallery: "The Result" — modern corporate identity, O&Ms delivered, partnership continues
-```
+- **isFeatured:** `false`
+- **Placement:** `featuredProjectsByPlacement.servicesPage`
+- **KPIs:** placeholders — Herman confirms with client
+- **Testimonial:** placeholder or omit — Herman confirms with client
+- **Images:** already at `public/images/projects/commercial/ladbrokes/` — view, rename to `nexgen-ladbrokes-woking-[descriptor].jpg`, update alt/aria/SEO same as DHL
 
 ---
 
-## Project B — Ladbrokes Woking ("A Safe Bet")
-
-### Brief
-- **Slug:** `ladbrokes-woking-retail-fitout`
-- **ID:** `proj-ladbrokes-woking-001`
-- **Category:** `"commercial"` | **categoryLabel:** `"Commercial"`
-- **clientSector:** `"Retail & Betting"`
-- **Location:** Woking, Surrey
-- **Size:** 12,000 sq ft
-- **Main contractor:** Woodhouse Workspace
-- **Layout:** Two wings with large breakout area between them
-- **Client:** Ladbrokes (Entain plc / FTSE 100) — 15,000 employees, 2,700+ shops, 6 countries
-- **isFeatured:** `false` (Medivet is featured for commercial; Ladbrokes on services page)
-- **featuredProjectsByPlacement:** `servicesPage`
-
-### Scope of Work (from old site)
-- Linear and feature lighting
-- Small power: sockets, feeds for air conditioning and door access
-- New fuse boards
-- UPS battery backup system
-- Power for appliances in breakout areas
-- Temporary site electrical requirements (site office & welfare area)
-- Lighting calculations, cable calculations, design and drawings
-- RAMS, technical drawings
-- Site inductions
-- Testing, commissioning, labelling
-- O&Ms
-
-### Old Site Copy (verbatim — use to inform Nexgen narrative)
-
-**Lead:** "Intact Electrical were chosen as the preferred and trusted electrical contractor by Woodhouse Workspace as they strived to transform Ladbrokes new Woking office space Cat B fit out to the client's requirements."
-
-**The walkthrough:** "A 12,000 square foot area which had a huge amount of potential to become a smarter workspace. The scheme featured a large breakout area between two wings. Ladbrokes wanted to have a more open, vibrant and contemporary workspace where teams could truly collaborate."
-
-**Execution:** "We began with installation of the temporary site electrical requirements for the site office & site welfare area. We performed another walk through of the project with our team of experienced qualified electricians... Once the project was fully underway weekly site meetings and walk arounds were carried out to ensure everything was running smoothly."
-
-**About Ladbrokes:** "Ladbrokes employs 15,000 people in six countries and is one of the world's leading betting and gaming enterprises... Ladbrokes is owned by Entain plc, formerly GVC Holdings... listed on the London Stock Exchange and part of the FTSE 100."
-
-### KPIs — NEEDS CONFIRMATION FROM HERMAN
-- Budget: `"£[TBC]"` — typical 12,000 sq ft Cat B office: £80K–£120K range
-- Timeline: `"[TBC] weeks"` — estimate 8–10 weeks
-- Capacity: `"[TBC]A"` — new fuse boards + UPS
-- Location: `"Woking, Surrey"` ← confirmed
-
-### Testimonial — NEEDS NEXGEN ORIGINAL
-No testimonial on old site. Mark as pending or omit.
-
-### Gallery Images (from old site CDN — need sourcing and renaming)
-Original filenames: `hero-ladbrokes.jpg`, `01-ladbrokes-project.jpg` through `06-ladbrokes-project.jpg`.
-Target naming: `nexgen-ladbrokes-woking-[descriptor].jpg`
-Target path: `public/images/projects/commercial/ladbrokes-woking/`
-
-### Suggested Narrative Blocks
-```
-after-intro:  "Earning the Brief" — Woodhouse partnership, Ladbrokes brand confidence
-after-scope:  "Working to a Fixed Specification" — brand-prescribed spec, speed + compliance differentiators
-after-gallery: "The Result" — brand compliant, on programme, O&Ms delivered
-```
-
----
-
-## Architecture to Build — `data/featured-projects.ts`
-
-Create this NEW file during the Medivet branch:
-
-```typescript
-// data/featured-projects.ts
-import { allProjects } from "./projects";
-import type { Project } from "@/types/projects";
-
-export type FeaturedPlacement = "projectsHero" | "aboutPage" | "servicesPage";
-
-const featuredProjectsByPlacement: Record<FeaturedPlacement, string> = {
-  projectsHero: "proj-dhl-reading-001",
-  aboutPage:    "proj-medivet-watford-001",
-  servicesPage: "proj-ladbrokes-woking-001",
-};
-
-export function getFeaturedProjectByPlacement(
-  placement: FeaturedPlacement,
-): Project | undefined {
-  const id = featuredProjectsByPlacement[placement];
-  return allProjects.find((p) => p.id === id);
-}
-```
-
-This is used by future About/Services page components. Build the file and the utility now even if the page components aren't wired yet — it's typed, ready, and correct.
-
----
-
-## Migration Checklist (DHL-proven, use for both projects)
+## Migration Checklist (DHL-proven)
 
 ```
-[ ] Images renamed nexgen-[client-slug]-[descriptor].jpg, placed in public/images/projects/commercial/[client]/
-[ ] allProjects entry added to data/projects/index.ts
+[ ] Architecture decision: featured placement pattern approved
+[ ] data/featured-projects.ts created (Medivet branch)
+[ ] Images viewed → renamed nexgen-[client-slug]-[descriptor].jpg → SEO alt/aria updated
+[ ] allProjects entry added (data/projects/index.ts)
 [ ] projectListItems entry added
-[ ] detail.intro: label, headlineWords, leadParagraph, bodyParagraphs, pillars (3-4)
-[ ] detail.scope: 8-12 items with correct icons
-[ ] detail.challenge + solution: concrete, named, specific
-[ ] detail.timeline: 4 phases (Pre-Construction, First Fix, Board/Distribution, Final Fix+Testing)
-[ ] detail.gallery: 10-16 images, SEO-rich alt, present-tense captions
-[ ] detail.testimonial: if available (optional — omit if none)
-[ ] detail.narrativeBlocks: 3 blocks with anchorId, heading, paragraphs, background
-[ ] narrativeBlock anchorIds: earning-the-brief, working-in-[context], the-result
-[ ] isFeatured: Medivet=true, Ladbrokes=false
-[ ] data/featured-projects.ts: created in Medivet branch
-[ ] pnpm typecheck && pnpm build — must pass (baseline: 61 pages)
-[ ] E2E: PLAYWRIGHT_REUSE_SERVER=true pnpm exec playwright test
-[ ] PR created via Docker GitHub MCP
-[ ] CI clean (mergeable_state: clean) before merge
-[ ] merge_pull_request via Docker GitHub MCP (squash)
+[ ] detail.intro: label, headlineWords, leadParagraph, bodyParagraphs, pillars (3-4 max)
+[ ] detail.scope: 8-12 items, correct icon names
+[ ] detail.challenge + solution: concrete, named, specific (no generic language)
+[ ] detail.timeline: 4 phases standard
+[ ] detail.gallery: all renamed images, SEO-rich alt, present-tense captions
+[ ] detail.testimonial: placeholder object or field omitted
+[ ] detail.narrativeBlocks: 3 blocks, anchorId on each (earning-the-brief / working-in-[x] / the-result)
+[ ] pnpm typecheck && pnpm build — must pass
+[ ] PLAYWRIGHT_REUSE_SERVER=true pnpm exec playwright test — must pass
+[ ] PR via Docker GitHub MCP (create_pull_request)
+[ ] Monitor CI via Docker GitHub MCP (get_pull_request → mergeable_state: clean)
+[ ] Merge via Docker GitHub MCP (merge_pull_request, squash)
+[ ] Docker memory sync: add_observations to electrical-website-state, create session entity
 ```
 
 ---
 
-## Critical Technical Rules (from DHL lessons)
+## Critical Technical Rules (learned from DHL)
 
-- `anchorId` on `<div className="max-w-prose">` NOT on `<section className="py-10">` — already fixed in project-narrative-block.tsx
-- TOC children are auto-generated by `generateTocItems` — just add anchorId + heading to narrativeBlocks
-- Tags = scope + technology only (NOT sector — sector is in clientSector)
-- `isFeatured`: when Medivet becomes true, do NOT change DHL to false (they're different categories... wait — both are commercial. Check getFeaturedProjectByCategory: it returns first isFeatured in scoped list. So when Medivet is added with isFeatured:true, DHL should become false for commercial category.)
-- Ladbrokes branch: create from main AFTER Medivet is merged
-
----
-
-## Branch Strategy
-```
-main (clean after DHL merge)
-  └── feat/project-migration-medivet-watford  ← ACTIVE NOW
-        ↓ (merge to main)
-  └── feat/project-migration-ladbrokes-woking ← create after Medivet merges
-```
+- `anchorId` on `<div className="max-w-prose">` NOT on `<section className="py-10">` — already correct in `project-narrative-block.tsx`
+- TOC children auto-generated — just set `anchorId` + `heading` on narrative blocks
+- Tags = scope + technology only (never sector — that's `clientSector`)
+- Pillars: 3 is lean, 4 is complete, 5+ becomes a list — use 4 max
+- `isFeatured`: when Medivet added as `true`, set DHL to `false` in same commit (both `commercial`)
+- Woodhouse narrative: all 3 projects share the same contractor — reference the partnership without repeating it
 
 ---
 
-## Build Baseline
-- Pages: 61 static (before Medivet + Ladbrokes add routes)
+## Strapi Forward-Compatibility Notes
+
+When designing any new data structures this session, ask: *"Would this be a Strapi field, a relation, or a singleton?"*
+- `Project` → Strapi Collection Type
+- `featuredProjectsByPlacement` → Strapi Single Type (one document, multiple placement fields)
+- Woodhouse, DHL, Medivet, Ladbrokes → Strapi relations: `partner` (Woodhouse), `client` (end client), `vendor` (Schneider etc)
+- `author`, `tags`, `category` → Strapi taxonomies
+- Nothing built now should require a schema migration to move to Strapi — keep data flat and ID-based
+
+---
+
+## Build Baseline (as of 2026-04-30 post-DHL)
+- Pages: 61 static
 - TypeScript: clean
-- E2E: 0 failures (confirmed ×3 runs)
+- E2E: 0 failures
 - Vitest: 299 pass / 4 skip (2 pre-existing SyntaxError in memory-lane scripts — not regressions)
-
----
-
-## STOP after Step 1. Report 3 bullets. Wait for Herman's instruction.
