@@ -1,9 +1,9 @@
 ---
 topic: platinum-second-brain
 audience: knowledge-worker
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~2050
+wordCount: ~2350
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -67,6 +67,10 @@ For our purposes, the combination gives us something specific: **PARA gives us t
 
 ## Our Three-Layer Architecture
 
+The architecture below shows how the three layers stack — hot context at session-start, Docker knowledge graph for structured AI recall, and the PARA-organised Obsidian vault for human-readable long-term storage.
+
+> **Figure 1**: Platinum second brain architecture — Hot Context, Docker Knowledge Graph with 5 entity types, and Obsidian PARA vault — open [`archives/diagrams/2026-04-30-para-layered-second-brain-draft.excalidraw`](archives/diagrams/2026-04-30-para-layered-second-brain-draft.excalidraw) in Excalidraw.
+
 We built our implementation on three layers. Each layer serves a different audience and purpose.
 
 **Layer 1: Hot Context (~3,000 tokens)**
@@ -102,6 +106,23 @@ This layer is designed for humans. Obsidian's visual graph shows how notes conne
 | Technical learnings / gotchas | Docker `learn-*` | AI needs to recall these during implementation |
 | Completed features | Docker `feat-*` + optional Obsidian mirror | AI needs the impl detail; human benefits from narrative |
 
+The routing decision tree makes the rule operational — apply it whenever new knowledge needs to be captured:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart TD
+    START([New content to capture]):::slate --> Q{What type\nof content?}:::amber
+    Q -->|AI needs next session| D["Docker entity\ndecide-* / learn-* / session-*"]:::cyan
+    Q -->|Human research / narrative| O["Obsidian vault\nResearch/ or Decisions/"]:::teal
+    Q -->|Both — architectural decision| B["Docker entity\n+ Obsidian mirror"]:::deep
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
+
 The rule we use to decide: *Would a developer search for this in six months?* → Obsidian. *Does the AI need to recall this in the next session?* → Docker.
 
 ---
@@ -113,6 +134,20 @@ The two layers — Docker and Obsidian — are connected by lifecycle hooks. The
 **At session end**, a Stop hook fires. It runs `memory-lane-stop.mjs`, which syncs the current memory lane (think: a branch-aware context envelope) and records a session summary. Then Claude creates a Docker session entity — `session-YYYY-MM-DD-NNN` — with what was completed, what was decided, and what comes next. Optionally, the human adds a narrative note to Obsidian's daily note: what it felt like, what surprised them, what questions remain.
 
 **At session start**, a SessionStart hook fires. It reads the current project state from Docker and injects the essential facts into the conversation context — the hot layer. By the time you type your first prompt, Claude already knows: you're on branch `feat/navbar-fix`, the build is passing, and the last session left off debugging hash navigation in `NavbarClient`.
+
+The session bridge is a closed loop — what gets persisted at session end becomes the context that starts the next session:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart LR
+    A[Stop Hook\nfires]:::amber --> B[memory-lane\n-stop.mjs syncs]:::slate --> C[Claude creates\nsession entity]:::cyan --> D[add_observations\nto project_state]:::deep --> E[SessionStart\nHook fires]:::amber --> F[Context\ninjected]:::teal --> G[AI begins\nsession oriented]:::cyan
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
 
 In practice, it feels like this. You open a new session and ask: "Where did we leave off with the navbar issue?" Claude says: "The last session resolved the `pushState` vs `location.hash` issue. The fix replaced `window.history.pushState()` with `location.hash` assignment to ensure `hashchange` events fire correctly. All 13 e2e tests now pass."
 

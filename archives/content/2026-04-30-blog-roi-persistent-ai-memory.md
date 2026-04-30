@@ -1,9 +1,9 @@
 ---
 topic: roi-persistent-ai-memory
 audience: cto
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~1500
+wordCount: ~1800
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -36,6 +36,22 @@ McKinsey's other finding is equally instructive: only 5.5% of organizations repo
 
 ## The Token Cost Reality
 
+The annual cost calculation has two components — lost developer productivity and direct token infrastructure spend:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph TD
+    A["10 developers\n× 200 hrs/yr re-explaining context\n× $100/hr fully loaded"]:::slate --> B["$200,000/yr\nproductivity context tax"]:::amber
+    C["100K tokens/session\n× 10 sessions/day\n× 10 developers"]:::slate --> D["$10,000–$18,000/yr\ntoken input costs"]:::teal
+    B --> E["Total annual overhead\n$210,000–$218,000+"]:::deep
+    D --> E
+
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
+
 There is also a direct, measurable infrastructure cost that most finance teams aren't tracking.
 
 Loading 100,000 tokens of codebase context — a reasonable amount for a meaningful project — costs approximately $0.30–$0.50 per session with Claude Sonnet at $3.00 per million input tokens. That sounds modest in isolation. At 10 sessions per day across 10 developers, that's $10,000–$18,000 per year in pure input token costs, before any output tokens, before mistakes or retries, before multi-step reasoning.
@@ -45,6 +61,24 @@ Anthropic's prompt caching feature can reduce repeated-context costs by up to 90
 Persistent structured memory changes the calculation. Instead of loading 100K tokens of raw codebase context every session, you load 3,000 tokens of distilled, structured knowledge: the current branch, the active decisions, the architectural constraints, the ongoing work items. That's a 97% reduction in session initialization cost. At scale, the infrastructure pays for itself in weeks, not quarters.
 
 ## The Compound Effect
+
+The compound effect becomes visible across sessions — two teams start the same project, but one builds accumulating returns while the other pays the same tax indefinitely:
+
+```mermaid
+%%{init: {"theme": "base"}}%%
+timeline
+    title AI Memory — Context Cost Trajectory Per Team
+    section Without Persistent Memory
+        Session 1   : 30 min re-explaining context
+        Session 10  : 30 min re-explaining context (same)
+        Session 50  : 30 min re-explaining context (no improvement)
+        Session 100 : 30 min re-explaining context (permanently flat)
+    section With Persistent Memory
+        Session 1   : Setup cost — build entity graph
+        Session 10  : Full context loads in under 5 seconds
+        Session 50  : AI knows project evolution
+        Session 100 : AI knows decisions better than most team members
+```
 
 The productivity math gets worse over time without intervention — and significantly better with it.
 
@@ -66,7 +100,24 @@ The architecture is straightforward. Three layers, one sprint to deploy:
 
 **Layer 3 — Session lifecycle automation:** Shell hooks that fire at session start (rehydrate context from the graph), during active work (update in-progress observations), and at session end (persist decisions, update project state). These automate memory discipline — developers don't need to remember to maintain the system; the system maintains itself.
 
-The breakeven calculation is straightforward. If a 10-developer team saves 2 hours per week per developer — conservative against the 200+ hours/year baseline — that's 1,040 hours per year at $100/hour fully loaded: $104,000 in recovered capacity. Infrastructure cost (Docker hosting, MCP service, one-time setup) is typically under $5,000. Payback period: under two weeks.
+The breakeven calculation is straightforward.
+
+Three inputs, one result — the payback period is measured in weeks, not quarters:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph LR
+    A["Setup cost\n2–4 weeks build time\n< $5,000 infrastructure"]:::amber --> D["Payback period\n< 2 weeks"]:::cyan
+    B["Annual return\n1,040 hrs recovered/yr\n× $100/hr = $104,000/yr"]:::deep --> D
+    C["Team size\n10 developers\n× 2 hrs/week saved"]:::teal --> D
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+```
+
+If a 10-developer team saves 2 hours per week per developer — conservative against the 200+ hours/year baseline — that's 1,040 hours per year at $100/hour fully loaded: $104,000 in recovered capacity. Infrastructure cost (Docker hosting, MCP service, one-time setup) is typically under $5,000. Payback period: under two weeks.
 
 Metrics to track after deployment: session ramp-up time (time to first relevant AI output), repeat-question frequency, PR cycle time, and build success rate. GitHub's 88% character acceptance rate for Copilot completions is the baseline; teams with persistent context consistently exceed it.
 

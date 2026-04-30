@@ -1,9 +1,9 @@
 ---
 topic: claude-code-memory-system
 audience: mid-dev
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~2500
+wordCount: ~2800
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -42,6 +42,10 @@ Approaches like MemGPT (now Letta) have tackled this with hierarchical memory �
 
 ## The Architecture: Three Layers
 
+The architecture below shows how the three layers connect — hot context is always in the session, the Docker graph is queried on demand, and Obsidian provides human-readable archive.
+
+> **Figure 1**: Three-layer AI memory architecture — open [`archives/diagrams/2026-04-30-three-layer-memory-architecture-draft.excalidraw`](archives/diagrams/2026-04-30-three-layer-memory-architecture-draft.excalidraw) in Excalidraw to view and edit.
+
 Our memory system has three distinct layers, each serving a different purpose. Claude Code uses them in priority order: hot context first, graph lookup on demand, Obsidian for long-form reference.
 
 ### Layer 1 — Hot Context (injected at session start)
@@ -73,6 +77,21 @@ Entities follow a strict naming convention:
 - `learning` — `learn-transforms-preserve-scroll-anchors`
 - `decision` — `decide-section-container-pattern`
 - `session` — `session-2026-04-20-001`
+
+The relations below show how entity types connect — a session updates project state, a feature derives from a decision, and a learning documents a feature.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph LR
+    S["session-*"]:::teal -->|updates| P["project_state"]:::cyan
+    F["feature feat-*"]:::cyan -->|derives_from| D["decision decide-*"]:::amber
+    L["learning learn-*"]:::deep -->|documents| F
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef amber fill:#fef3c7,stroke:#d97706,color:#1e1e1e
+```
 
 Each entity has typed observations (structured strings) and typed relations to other entities. A feature entity knows which decisions it derives from. A session entity knows which project state it updates. A learning entity knows which feature it documents.
 
@@ -107,6 +126,20 @@ What does NOT go in Obsidian: session rehydration state, structured decisions, s
 ## The Session Lifecycle
 
 The architecture only delivers value if it runs reliably every session, without manual intervention. Here's exactly what happens:
+
+Every session follows the same deterministic path — hook fires, context loads, work proceeds, session entity persists.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+stateDiagram-v2
+    direction LR
+    [*] --> SessionStart
+    SessionStart --> ContextLoaded : SessionStart hook fires\nsearch_nodes + open_nodes
+    ContextLoaded --> ActiveWork : AI begins oriented
+    ActiveWork --> StopHook : session ends
+    StopHook --> Persisted : create session entity\nadd_observations
+    Persisted --> [*]
+```
 
 **Session start:**
 1. You run `git checkout feature-branch`

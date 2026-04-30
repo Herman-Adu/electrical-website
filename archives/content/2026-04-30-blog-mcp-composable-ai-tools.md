@@ -1,9 +1,9 @@
 ---
 topic: mcp-composable-ai-tools
 audience: senior-dev
-status: draft
+status: diagram-enhanced
 date: 2026-04-30
-wordCount: ~1800
+wordCount: ~2100
 publicationTarget: blog
 series: ai-memory-architecture
 ---
@@ -17,6 +17,30 @@ Anthropic's Model Context Protocol changed that. MCP replaces N×M custom integr
 ---
 
 ## The N×M Integration Problem
+
+The integration problem is geometric — each new AI host requires connectors to every data source, until MCP makes the cost additive rather than multiplicative:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+graph LR
+    subgraph BEFORE ["Before MCP — N×M custom connectors"]
+        H1[AI Host 1]:::slate --> S1A[Data Source A]:::pylon
+        H1 --> S1B[Data Source B]:::pylon
+        H2[AI Host 2]:::slate --> S2A[Data Source A]:::pylon
+        H2 --> S2B[Data Source B]:::pylon
+    end
+    subgraph AFTER ["After MCP — N+M through standard protocol"]
+        HA[AI Host 1]:::slate --> MCP{MCP}:::cyan
+        HB[AI Host 2]:::slate --> MCP
+        MCP --> SA[Data Source A]:::teal
+        MCP --> SB[Data Source B]:::teal
+    end
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+    classDef pylon fill:#e2e8f0,stroke:#64748b,color:#1e1e1e
+```
 
 The problem was more fundamental than connector maintenance. Each custom integration made architectural assumptions: this tool speaks REST, that one needs a webhook, this other one requires a long-lived WebSocket. Integrations weren't composable — you couldn't easily chain them, route between them, or swap one for another.
 
@@ -35,6 +59,19 @@ MCP is a client-server protocol built on JSON-RPC 2.0. The core model has three 
 **Servers** — Lightweight processes that expose tools, resources, and prompts. A server might expose five tools (read_file, write_file, search_files, list_directory, get_file_info) or fifty. Each tool has a name and a JSON Schema describing its parameters. Servers are stateless by design (per the November 2025 spec revision) — state lives in the host or an external store, not in the server process.
 
 **Transport** — MCP is transport-agnostic. Servers can communicate via stdio (local subprocess), HTTP+SSE, or WebSockets. In our production stack, all 12 services communicate over HTTP with Server-Sent Events for streaming.
+
+Every tool call follows the same four-hop path — the AI never touches a service directly; host and aggregator handle all routing:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#c2fff1", "primaryBorderColor": "#006e56", "secondaryColor": "#e0faf6", "tertiaryColor": "#fef3c7"}}}%%
+flowchart LR
+    A[AI decides\ntool needed]:::slate --> B[Host routes\ncall]:::teal --> C[Aggregator\n:3100]:::cyan --> D[Target service\nexecutes]:::deep --> E[Returns\nresult]:::teal --> F[Host injects\ninto context]:::slate --> G[AI\ncontinues]:::cyan
+
+    classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
+    classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
+    classDef deep fill:#b3f5e6,stroke:#004a3a,color:#1e1e1e
+    classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
+```
 
 When an AI session starts, the host discovers available tools from connected servers and injects their schemas into the model's context. When the model decides to use a tool, the host routes the JSON-RPC call to the appropriate server, which executes and returns a result. The model never talks to servers directly — the host is always the intermediary.
 
@@ -84,6 +121,10 @@ Our 12-service Docker Compose stack covers the full surface area of an AI coding
 | `postgres` | Database operations | `query`, `describe_table`, + 3 more |
 | `aggregator` | Tool discovery and routing | (internal) |
 | `caddy` | API gateway, TLS, rate limiting | (infrastructure) |
+
+The hub-and-spoke topology below shows how the aggregator connects all 12 services — a single Claude Code entry point fans out to the full tool surface:
+
+> **Figure 2**: MCP Docker stack hub-and-spoke — aggregator at centre, 10 services as labelled spokes — open [`archives/diagrams/2026-04-30-mcp-twelve-service-hub-spoke-draft.excalidraw`](archives/diagrams/2026-04-30-mcp-twelve-service-hub-spoke-draft.excalidraw) in Excalidraw.
 
 **Service registry via Docker hostnames.** Services communicate over Docker's internal network using container names as hostnames. The aggregator reaches `memory-reference` at `http://memory-reference:3001` — no Caddy round-trip, no external DNS. This keeps tool call latency in the single-digit milliseconds for local services.
 
