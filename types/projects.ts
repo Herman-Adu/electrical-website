@@ -12,6 +12,7 @@ export interface ProjectCategory {
   slug: Exclude<ProjectCategorySlug, "all">;
   label: string;
   description: string;
+  showInNav?: boolean;
 }
 
 export interface ProjectKpis {
@@ -100,6 +101,7 @@ export interface ProjectNarrativeBlock {
     | "after-challenge"
     | "after-timeline"
     | "after-gallery";
+  anchorId?: string;
   heading?: string;
   paragraphs: string[];
   background?: "default" | "muted";

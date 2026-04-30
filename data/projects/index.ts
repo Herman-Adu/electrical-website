@@ -17,6 +17,7 @@ export const projectCategories: ProjectCategory[] = [
     label: "Commercial Lighting",
     description:
       "Retail, office, and mixed-use lighting modernisation projects.",
+    showInNav: false,
   },
   {
     slug: "power-boards",
@@ -67,7 +68,7 @@ export const allProjects: Project[] = [
     },
     tags: ["Switchgear", "Resilience", "High Voltage"],
     progress: 68,
-    isFeatured: true,
+    isFeatured: false,
     publishedAt: "2026-01-08T09:00:00.000Z",
     updatedAt: "2026-03-20T14:10:00.000Z",
     detail: {
@@ -1184,6 +1185,12 @@ export const allProjects: Project[] = [
             description:
               "End-to-end installation from main intake to final fix — lighting, small power, fire alarm, emergency lighting, and BMS integration across the entire facility.",
           },
+          {
+            num: "04",
+            title: "Pre-Construction Planning",
+            description:
+              "Rigorous pre-construction sequencing and supplier co-ordination delivered programme certainty before a single cable was pulled.",
+          },
         ],
       },
       scope: [
@@ -1363,6 +1370,7 @@ export const allProjects: Project[] = [
       narrativeBlocks: [
         {
           position: "after-intro",
+          anchorId: "earning-the-call",
           heading: "Earning the Call",
           paragraphs: [
             "Nexgen Electrical Innovations and Woodhouse have worked together across multiple commercial programmes, building a working relationship founded on shared standards and mutual accountability. When Woodhouse tendered for the DHL Reading hub contract, they needed an electrical contractor they could guarantee — one whose quality, programme discipline, and on-site management would reflect well on them in front of a major national client.",
@@ -1372,6 +1380,7 @@ export const allProjects: Project[] = [
         },
         {
           position: "after-scope",
+          anchorId: "live-construction-programme",
           heading: "Working in a Live Construction Programme",
           paragraphs: [
             "The warehouse floor was never quiet. From the day Nexgen's installation team mobilised, sorting equipment deliveries, structural steelwork, and warehouse racking were going in simultaneously. High-level cable tray runs required MEWP access in areas where other trades were working at ground level — requiring precise co-ordination with Woodhouse's site management team to avoid programme conflicts.",
@@ -1381,6 +1390,7 @@ export const allProjects: Project[] = [
         },
         {
           position: "after-gallery",
+          anchorId: "the-result",
           heading: "The Result",
           paragraphs: [
             "DHL's Reading hub opened on schedule. The electrical installation — from main LV intake to the final emergency lighting fitting — was complete, tested, and certified two days before the agreed handover date. Woodhouse received a clean EICR pack and commissioning certificates at practical completion.",

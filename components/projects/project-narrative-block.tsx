@@ -13,6 +13,7 @@ export function ProjectNarrativeBlock({
 
   return (
     <section
+      id={block.anchorId}
       className={`py-10 ${isMuted ? "bg-muted/30 dark:bg-muted/10 rounded-xl px-6 md:px-10" : ""} ${className ?? ""}`}
     >
       <div className="max-w-prose space-y-4">

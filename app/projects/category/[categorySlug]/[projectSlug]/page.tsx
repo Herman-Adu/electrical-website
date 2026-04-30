@@ -91,23 +91,58 @@ function generateTocItems(
   const detail = project.detail;
 
   if (detail?.intro) {
-    items.push({ id: "overview", label: "Overview" });
+    const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
+      .filter((b) => b.position === "after-intro" && b.anchorId && b.heading)
+      .map((b) => ({ id: b.anchorId!, label: b.heading! }));
+    items.push({
+      id: "overview",
+      label: "Overview",
+      children: narrativeChildren.length ? narrativeChildren : undefined,
+    });
   }
 
   if (detail?.scope && detail.scope.length > 0) {
-    items.push({ id: "scope", label: "Scope of Work" });
+    const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
+      .filter((b) => b.position === "after-scope" && b.anchorId && b.heading)
+      .map((b) => ({ id: b.anchorId!, label: b.heading! }));
+    items.push({
+      id: "scope",
+      label: "Scope of Work",
+      children: narrativeChildren.length ? narrativeChildren : undefined,
+    });
   }
 
   if (detail?.challenge && detail?.solution) {
-    items.push({ id: "challenge", label: "Challenge & Solution" });
+    const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
+      .filter((b) => b.position === "after-challenge" && b.anchorId && b.heading)
+      .map((b) => ({ id: b.anchorId!, label: b.heading! }));
+    items.push({
+      id: "challenge",
+      label: "Challenge & Solution",
+      children: narrativeChildren.length ? narrativeChildren : undefined,
+    });
   }
 
   if (hasTimeline) {
-    items.push({ id: "timeline", label: "Project Timeline" });
+    const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
+      .filter((b) => b.position === "after-timeline" && b.anchorId && b.heading)
+      .map((b) => ({ id: b.anchorId!, label: b.heading! }));
+    items.push({
+      id: "timeline",
+      label: "Project Timeline",
+      children: narrativeChildren.length ? narrativeChildren : undefined,
+    });
   }
 
   if (detail?.gallery && detail.gallery.length > 0) {
-    items.push({ id: "gallery", label: "Gallery" });
+    const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
+      .filter((b) => b.position === "after-gallery" && b.anchorId && b.heading)
+      .map((b) => ({ id: b.anchorId!, label: b.heading! }));
+    items.push({
+      id: "gallery",
+      label: "Gallery",
+      children: narrativeChildren.length ? narrativeChildren : undefined,
+    });
   }
 
   if (detail?.testimonial) {

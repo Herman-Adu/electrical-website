@@ -259,3 +259,14 @@ export const SCROLL_GAP = {
   default: DEFAULT_SCROLL_GAP,
   toc: TOC_SCROLL_GAP,
 } as const;
+
+/**
+ * Returns the total sticky header height (navbar + breadcrumb) in pixels.
+ * Use as scroll-margin-top value for in-page anchor targets.
+ */
+export function getStickyHeaderHeight(): number {
+  if (typeof window === "undefined") return DESKTOP_NAVBAR_FALLBACK_HEIGHT;
+  const navbarH = getNavbarHeight();
+  const breadcrumbH = getStickyBreadcrumbHeight();
+  return breadcrumbH > 0 ? breadcrumbH : navbarH;
+}

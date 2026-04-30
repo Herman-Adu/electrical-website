@@ -58,11 +58,8 @@ const navLinks = [
       { name: "All Projects", href: "/projects" },
       { name: "Browse Categories", href: "/projects/category" },
       { name: "Residential", href: "/projects/category/residential" },
-      {
-        name: "Commercial Lighting",
-        href: "/projects/category/commercial-lighting",
-      },
       { name: "Power Boards", href: "/projects/category/power-boards" },
+      { name: "Commercial", href: "/projects/category/commercial" },
     ],
   },
   {
