@@ -5,7 +5,8 @@ export type ProjectCategorySlug =
   | "residential"
   | "commercial-lighting"
   | "power-boards"
-  | "community";
+  | "community"
+  | "commercial";
 
 export interface ProjectCategory {
   slug: Exclude<ProjectCategorySlug, "all">;
@@ -92,6 +93,18 @@ export interface ProjectScope {
   description: string;
 }
 
+export interface ProjectNarrativeBlock {
+  position:
+    | "after-intro"
+    | "after-scope"
+    | "after-challenge"
+    | "after-timeline"
+    | "after-gallery";
+  heading?: string;
+  paragraphs: string[];
+  background?: "default" | "muted";
+}
+
 export interface ProjectDetailContent {
   /** Project-specific intro section */
   intro: ProjectIntroData;
@@ -106,6 +119,7 @@ export interface ProjectDetailContent {
   /** Challenge and solution narrative */
   challenge?: string;
   solution?: string;
+  narrativeBlocks?: ProjectNarrativeBlock[];
 }
 
 // =============================================================================
