@@ -1,9 +1,9 @@
 ---
 name: diagram-orchestrator
-description: Use this skill WHENEVER someone asks to diagram, draw, visualize, map out, flowchart, or show how something works — even if they don't say "diagram" explicitly. Trigger on: "how does X work", "show me the flow", "compare A vs B", "draw the architecture", "make a state machine", "hub and spoke", "timeline of", "data pipeline", "map out the system", "visualize this", "what's the topology", "workflow for", "process flow". Routes to the correct tier automatically: Mermaid for quick inline diagrams (≤5 nodes), Excalidraw JSON for editable drafts (6–15 nodes), kie.ai PNG for publish-quality images (16+ nodes or blog/docs context). Handles 7 diagram types: architecture, flowchart, comparison, state-machine, hub-and-spoke, timeline, data-flow. Use even when the user says "quick sketch" or just pastes a list of components and asks you to "show it visually".
+description: Use this skill WHENEVER someone asks to diagram, draw, visualize, map out, flowchart, or show how something works — even if they don't say "diagram" explicitly. Trigger on: "how does X work", "show me the flow", "compare A vs B", "draw the architecture", "make a state machine", "hub and spoke", "timeline of", "data pipeline", "map out the system", "visualize this", "what's the topology", "workflow for", "process flow", "photo", "headshot", "realistic image", "site photo", "team photo", "project photo". Routes to the correct tier automatically: Mermaid for quick inline diagrams (≤5 nodes), Excalidraw JSON for editable drafts (6–15 nodes), kie.ai PNG for publish-quality images (16+ nodes or blog/docs context), nano-banana-images for realistic photos and photography. Handles 8 diagram types: architecture, flowchart, comparison, state-machine, hub-and-spoke, timeline, data-flow, photo. Use even when the user says "quick sketch" or just pastes a list of components and asks you to "show it visually".
 argument-hint: "[diagram-type] [concept or system name] [quick|draft|publish]"
 disable-model-invocation: true
-compatibility: Requires visualization skill + excalidraw-diagram skill + excalidraw-visuals skill (kie.ai optional for Tier 3)
+compatibility: Requires visualization skill + excalidraw-diagram skill + excalidraw-visuals skill (kie.ai optional for Tier 3) + nano-banana-images skill (optional for Tier 4 photo generation)
 ---
 
 ## Diagram Orchestrator
@@ -25,6 +25,7 @@ Extract from `$ARGUMENTS`:
      - "hub", "spoke", "central", "topology", "radiates" → `hub-and-spoke`
      - "timeline", "chronological", "history", "sequence of events" → `timeline`
      - "pipeline", "data flow", "data movement", "stream" → `data-flow`
+     - "photo", "photography", "realistic", "headshot", "portrait", "team", "site" → `photo`
 
 2. **Node count estimate** — count distinct named entities in the concept:
    - ≤5 identifiable nodes → lean Tier 1
@@ -36,6 +37,7 @@ Extract from `$ARGUMENTS`:
    - `quick` or `inline` → force Tier 1
    - `draft` or `editable` → force Tier 2
    - `publish` or `png` or `blog` → force Tier 3
+   - `photo` or `realistic` or `headshot` → force Tier 4
 
 4. **Context clues** — note if user mentions: blog post, docs, README, presentation (→ lean Tier 3); internal notes, sketch, rough (→ lean Tier 2).
 
@@ -46,35 +48,39 @@ Extract from `$ARGUMENTS`:
 Apply this decision tree in order:
 
 ```
-1. Is there an override keyword? → Apply keyword tier, skip node count
-2. Is node count ≤5?           → Tier 1 (Mermaid via visualization)
-3. Is node count 6–15?         → Tier 2 (Excalidraw JSON via excalidraw-diagram)
-4. Is node count 16+?          → Tier 3 (kie.ai PNG via excalidraw-visuals)
-5. Cannot estimate node count? → Default Tier 2, notify user
+1.   Is there an override keyword 'photo'/'realistic'/'headshot'? → Tier 4 (nano-banana-images)
+1.5. Is diagram type 'photo' OR override keyword 'photo'/'realistic'/'headshot'? → Tier 4
+2.   Is there another override keyword? → Apply keyword tier, skip node count
+3.   Is node count ≤5?                  → Tier 1 (Mermaid via visualization)
+4.   Is node count 6–15?                → Tier 2 (Excalidraw JSON via excalidraw-diagram)
+5.   Is node count 16+?                 → Tier 3 (kie.ai PNG via excalidraw-visuals)
+6.   Cannot estimate node count?        → Default Tier 2, notify user
 ```
 
 **Auto-escalation rule:** If mid-generation the actual node count exceeds the tier's limit, escalate automatically and notify:
 > "Your diagram grew to 16 nodes — escalating to Tier 3 (kie.ai PNG) for a cleaner result."
 
-### Routing Table — All 7 Diagram Types
+### Routing Table — All 8 Diagram Types
 
-| Diagram Type   | Default Tier | Keyword Overrides        | Sequential Thinking? |
-|----------------|-------------|--------------------------|----------------------|
-| `architecture` | 2           | `quick` → 1, `publish` → 3 | Yes (always)         |
-| `flowchart`    | 1           | `draft` → 2, `publish` → 3 | No (≤10 nodes)       |
-| `comparison`   | 1           | `draft` → 2, `publish` → 3 | No                   |
-| `state-machine`| 2           | `quick` → 1, `publish` → 3 | Yes (>8 states)      |
-| `hub-and-spoke`| 2           | `quick` → 1, `publish` → 3 | No                   |
-| `timeline`     | 1           | `draft` → 2, `publish` → 3 | No                   |
-| `data-flow`    | 2           | `quick` → 1, `publish` → 3 | Yes (always)         |
+| Diagram Type   | Default Tier | Keyword Overrides           | Sequential Thinking? |
+|----------------|-------------|------------------------------|----------------------|
+| `architecture` | 2           | `quick` → 1, `publish` → 3  | Yes (always)         |
+| `flowchart`    | 1           | `draft` → 2, `publish` → 3  | No (≤10 nodes)       |
+| `comparison`   | 1           | `draft` → 2, `publish` → 3  | No                   |
+| `state-machine`| 2           | `quick` → 1, `publish` → 3  | Yes (>8 states)      |
+| `hub-and-spoke`| 2           | `quick` → 1, `publish` → 3  | No                   |
+| `timeline`     | 1           | `draft` → 2, `publish` → 3  | No                   |
+| `data-flow`    | 2           | `quick` → 1, `publish` → 3  | Yes (always)         |
+| `photo`        | 4           | — (always Tier 4)            | No                   |
 
 **Tier Summary:**
 
-| Tier | Tool                   | Skill                 | Node Range | Output          |
-|------|------------------------|-----------------------|------------|-----------------|
-| 1    | Mermaid (inline)       | `visualization`       | ≤5 nodes   | `.md` file      |
-| 2    | Excalidraw JSON        | `excalidraw-diagram`  | 6–15 nodes | `.excalidraw`   |
-| 3    | kie.ai PNG             | `excalidraw-visuals`  | 16+ nodes  | `.png` file     |
+| Tier | Tool                   | Skill                  | Node Range    | Output          |
+|------|------------------------|------------------------|---------------|-----------------|
+| 1    | Mermaid (inline)       | `visualization`        | ≤5 nodes      | `.md` file      |
+| 2    | Excalidraw JSON        | `excalidraw-diagram`   | 6–15 nodes    | `.excalidraw`   |
+| 3    | kie.ai PNG             | `excalidraw-visuals`   | 16+ nodes     | `.png` file     |
+| 4    | nano-banana-images     | `nano-banana-images`   | N/A (photo)   | `.jpg` file     |
 
 ---
 
@@ -144,6 +150,19 @@ Pass:
 - Brand palette for color assignments (map to kie.ai pastel equivalents)
 - Output path override: `archives/diagrams/YYYY-MM-DD-[slug]-publish.png`
 
+### Tier 4 → nano-banana-images skill
+
+Pass:
+- Subject description (person, team, site, equipment)
+- Context (LinkedIn headshot, project portfolio, marketing)
+- Style directives from nexgen brand guidelines
+- Output path override: `images/nexgen/[category]/[slug]-[YYYY-MM-DD].jpg`
+
+**Output routing:**
+- Team/headshots → `images/nexgen/team/[slug]-[YYYY-MM-DD].jpg`
+- Site/project   → `images/nexgen/projects/[slug]-[YYYY-MM-DD].jpg`
+- Marketing/social → `images/nexgen/marketing/[slug]-[YYYY-MM-DD].jpg`
+
 **CRITICAL:** Do NOT pass electrical-services brand voice to any downstream skill. Use technical/neutral language only. Describe diagrams in engineering terms, not marketing language.
 
 ---
@@ -159,6 +178,7 @@ Format: `archives/diagrams/YYYY-MM-DD-[slug]-[tier-suffix].[ext]`
 | 1    | `mermaid` | `.md`         | `2026-04-30-memory-architecture-mermaid.md` |
 | 2    | `draft`   | `.excalidraw` | `2026-04-30-mcp-stack-hub-spoke-draft.excalidraw` |
 | 3    | `publish` | `.png`        | `2026-04-30-graphrag-vs-rag-comparison-publish.png` |
+| 4    | `photo`   | `.jpg`        | `2026-04-30-herman-adu-headshot-photo.jpg` |
 
 **Slug rules:**
 - Kebab-case from the concept name (max 5 words)

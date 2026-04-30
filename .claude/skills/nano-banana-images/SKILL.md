@@ -7,7 +7,7 @@ argument-hint: "[subject or scene description]"
 
 ## Brand Guidelines (auto-injected)
 
-!`cat brand-assets/adu-dev-brand-guidelines.md 2>/dev/null || echo "No brand guidelines available. Use professional, modern aesthetics with clean design."`
+!`cat brand-assets/nexgen-brand-guidelines.md 2>/dev/null || echo "No brand guidelines available. Use professional, modern aesthetics with clean design."`
 
 # Nano Banana 2 Image Generation Master
 
