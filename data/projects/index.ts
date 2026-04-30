@@ -30,6 +30,12 @@ export const projectCategories: ProjectCategory[] = [
     description:
       "Public sector, community facilities, and social infrastructure electrical projects.",
   },
+  {
+    slug: "commercial",
+    label: "Commercial",
+    description:
+      "Full Cat B fit-out and electrical infrastructure for commercial and logistics facilities.",
+  },
 ];
 
 export function isProjectCategorySlug(
@@ -1122,6 +1128,267 @@ export const allProjects: Project[] = [
         role: "Head of Infrastructure",
         company: "Heathrow Airport Holdings",
       },
+    },
+  },
+  {
+    id: "proj-dhl-reading-001",
+    slug: "dhl-reading-distribution-hub",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "DHL Reading Distribution Hub",
+    clientSector: "Logistics & Distribution",
+    status: "completed",
+    description:
+      "Full Cat B electrical fit-out for DHL's Reading parcel sorting and distribution hub, encompassing conveyor power infrastructure, Schneider LV distribution, office fit-out, and emergency systems across a high-throughput logistics facility.",
+    coverImage: {
+      src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
+      alt: "DHL Reading distribution hub — completed operational facility by Nexgen Electrical Innovations",
+    },
+    kpis: {
+      budget: "£380K",
+      timeline: "14 weeks",
+      capacity: "800A TPN",
+      location: "Reading, Berkshire",
+    },
+    tags: ["Cat B Fit-Out", "Distribution Hub", "Schneider Electric", "Conveyor Infrastructure"],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2025-11-01T09:00:00.000Z",
+    updatedAt: "2025-11-01T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Commercial Project",
+        headlineWords: ["DHL", "Reading.", "Simply", "Delivered."],
+        leadParagraph:
+          "When Woodhouse were awarded the DHL Reading distribution hub contract, there was only one electrical contractor they called. Nexgen Electrical Innovations had earned that trust through years of reliable delivery on demanding commercial programmes — and when the brief came in for a full Cat B fit-out of a high-throughput parcel sorting facility, we delivered it exactly as Woodhouse and their client expected: on time, on spec, and without a single programme-critical incident.",
+        bodyParagraphs: [
+          "The Reading distribution hub is a purpose-built parcel sorting and logistics facility requiring a robust, high-capacity electrical infrastructure that could support automated conveyor sorters, goods-in scanning systems, office and welfare areas, and a comprehensive emergency services network — all delivered within an aggressive 14-week construction programme.",
+          "Nexgen's installation team worked closely with Woodhouse and DHL's project management team from pre-construction planning through to commissioning, delivering a complete electrical installation that met DHL's exacting operational standards and the M&E specification in full.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Conveyor Power Infrastructure",
+            description:
+              "Dedicated three-phase circuits and bespoke cable tray runs to power automated sorting conveyors and goods handling equipment throughout the warehouse floor.",
+          },
+          {
+            num: "02",
+            title: "Schneider LV Distribution",
+            description:
+              "Schneider Electric main and sub-distribution boards providing reliable, metered power distribution across all zones — warehouse, office, welfare, and plant.",
+          },
+          {
+            num: "03",
+            title: "Full Cat B Fit-Out",
+            description:
+              "End-to-end installation from main intake to final fix — lighting, small power, fire alarm, emergency lighting, and BMS integration across the entire facility.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Main LV Distribution",
+          description:
+            "800A TPN main distribution board with Schneider Electric metering and protection, serving all facility zones from a single consolidated intake.",
+        },
+        {
+          icon: "Warehouse",
+          title: "Conveyor Power Circuits",
+          description:
+            "Dedicated three-phase circuits for automated parcel sorting conveyor systems, designed for continuous 24/7 operational loading.",
+        },
+        {
+          icon: "Cable",
+          title: "Bespoke Cable Tray Infrastructure",
+          description:
+            "Fabricated and installed custom cable tray routing throughout the warehouse, sized for current capacity and future expansion.",
+        },
+        {
+          icon: "Building2",
+          title: "Office & Welfare Fit-Out",
+          description:
+            "Complete first and second fix electrical installation for office areas, welfare facilities, staff rooms, and ancillary spaces.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "Warehouse & Office Lighting",
+          description:
+            "High-bay LED luminaires for warehouse operations and recessed panel lighting for office areas, all compliant with CIBSE LG7 guidance.",
+        },
+        {
+          icon: "Shield",
+          title: "Emergency Lighting Systems",
+          description:
+            "BS 5266-compliant emergency lighting throughout, including maintained fittings at all escape routes, exits, and risk areas.",
+        },
+        {
+          icon: "Settings",
+          title: "Fire Alarm Integration",
+          description:
+            "Electrical works in support of L2 fire detection and alarm system, including power supplies, containment, and end-of-line devices.",
+        },
+        {
+          icon: "Gauge",
+          title: "Sub-Distribution Boards",
+          description:
+            "Schneider Electric sub-boards at warehouse, office, and plant zones providing localised protection, isolation, and metered consumption data.",
+        },
+        {
+          icon: "Network",
+          title: "Data & Comms Infrastructure",
+          description:
+            "Containment and power provisions for IT, communications, barcode scanning, and operational technology systems.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing & Commissioning",
+          description:
+            "Full NICEIC-compliant testing regime across all circuits, with EICRs and commissioning certificates provided at practical completion.",
+        },
+      ],
+      challenge:
+        "DHL's operational timeline allowed no margin for programme slippage — the facility had a fixed go-live date tied to their national network capacity plan. The warehouse floor installation had to proceed in parallel with the fit-out of elevated office pods, with multiple trades working in proximity and a constrained delivery window for long-lead electrical equipment including the Schneider main board.",
+      solution:
+        "Nexgen's pre-construction planning team produced a detailed installation programme sequenced to give other trades maximum access while ensuring electrical first-fix was never on the critical path. We pre-fabricated cable tray sections off-site and coordinated a just-in-time delivery schedule with Schneider Electric, eliminating plant room congestion. Dedicated supervisors for warehouse and office zones worked in parallel, with daily progress reporting to Woodhouse's project manager — delivering practical completion two days ahead of programme.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Pre-Construction & Survey",
+          description:
+            "Detailed M&E survey, design review, equipment procurement, and installation programme issued to Woodhouse.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "First Fix & Containment",
+          description:
+            "Main cable tray installation, primary containment runs, warehouse distribution cabling, and first fix to office pods and welfare areas.",
+          duration: "5 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Board Installation & Distribution",
+          description:
+            "Main LV board installation, Schneider sub-board fit-off, conveyor circuit energisation, and office second fix electrical.",
+          duration: "5 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Final Fix, Testing & Commissioning",
+          description:
+            "Lighting and small power final fix, emergency lighting installation, full circuit testing, EICR production, and witnessed commissioning with DHL's engineering team.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-site-overview.jpg",
+          alt: "DHL Reading distribution hub — site overview during Nexgen electrical installation",
+          caption: "Site overview — early-stage installation with containment in progress",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-cable-tray-installation.jpg",
+          alt: "Warehouse cable containment and tray installation at DHL Reading",
+          caption: "Primary cable tray routes being established across the warehouse ceiling",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-mewp-high-level-containment.jpg",
+          alt: "MEWP scissor lift access for high-level cable tray installation — DHL Reading",
+          caption: "Scissor lift access for high-level containment runs above the sorting floor",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-distribution-zone-first-fix.jpg",
+          alt: "Distribution zone first fix electrical installation — DHL Reading hub",
+          caption: "Distribution zone cabling during Phase 2 first fix works",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-first-fix-complete.jpg",
+          alt: "DHL Reading warehouse electrical installation — first fix complete",
+          caption: "Warehouse-wide installation progress — first fix complete",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-schneider-conveyor-control-panels.jpg",
+          alt: "Schneider Electric LV control panels for DHL Reading conveyor sorting systems",
+          caption: "Schneider LV control panels powering the automated parcel sorting conveyors",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-bespoke-cable-tray-prefabricated.jpg",
+          alt: "Bespoke prefabricated cable tray sections installed at DHL Reading",
+          caption: "Custom-fabricated cable tray sections — prefabricated off-site for precise fit",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-floor-containment-works.jpg",
+          alt: "DHL Reading warehouse floor showing completed containment and distribution works",
+          caption: "Warehouse floor showing completed containment and initial distribution works",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-office-welfare-second-fix.jpg",
+          alt: "Second fix electrical installation in DHL Reading office and welfare areas",
+          caption: "Second fix electrical works in staff welfare and office areas",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-sub-distribution-plant-zone.jpg",
+          alt: "Cable routing to sub-distribution panels in DHL Reading plant zone",
+          caption: "Cable routing to sub-distribution panels in the plant zone",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-main-lv-distribution-board.jpg",
+          alt: "Schneider Electric main LV distribution board installed and commissioned at DHL Reading",
+          caption: "Schneider Electric main distribution board — tested and commissioned",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-office-fitout-completed.jpg",
+          alt: "Completed DHL Reading office fit-out — lighting, small power, and data provisions",
+          caption: "Completed office fit-out — lighting, small power, and data provisions installed",
+        },
+        {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
+          alt: "DHL Reading distribution hub — completed and operational, delivered by Nexgen Electrical Innovations",
+          caption: "The completed DHL Reading hub — fully operational and delivering to programme",
+        },
+      ],
+      testimonial: {
+        quote:
+          "Nexgen delivered our Reading hub on time and to specification. Their team worked professionally throughout — always visible on site, always ahead of the programme. The electrical installation is exactly what we needed for a high-throughput operation like this. We wouldn't hesitate to use them again.",
+        author: "Project Manager",
+        role: "Senior Project Manager",
+        company: "DHL Supply Chain",
+      },
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          heading: "Earning the Call",
+          paragraphs: [
+            "Nexgen Electrical Innovations and Woodhouse have worked together across multiple commercial programmes, building a working relationship founded on shared standards and mutual accountability. When Woodhouse tendered for the DHL Reading hub contract, they needed an electrical contractor they could guarantee — one whose quality, programme discipline, and on-site management would reflect well on them in front of a major national client.",
+            "After competitive tendering from several regional contractors, Nexgen were selected. It was a vote of confidence the team took seriously from day one.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          heading: "Working in a Live Construction Programme",
+          paragraphs: [
+            "The warehouse floor was never quiet. From the day Nexgen's installation team mobilised, sorting equipment deliveries, structural steelwork, and warehouse racking were going in simultaneously. High-level cable tray runs required MEWP access in areas where other trades were working at ground level — requiring precise co-ordination with Woodhouse's site management team to avoid programme conflicts.",
+            "Our supervisors attended every site meeting, raised early warnings, and adjusted sequence where needed to keep electrical first-fix ahead of the follow-on trades. When a long-lead Schneider board delivery threatened to slip the Phase 3 programme, our procurement team escalated directly with the supplier and secured an accelerated delivery slot. The board arrived on time.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          heading: "The Result",
+          paragraphs: [
+            "DHL's Reading hub opened on schedule. The electrical installation — from main LV intake to the final emergency lighting fitting — was complete, tested, and certified two days before the agreed handover date. Woodhouse received a clean EICR pack and commissioning certificates at practical completion.",
+            "For Nexgen, this project is a benchmark: a demonstration of what a properly planned Cat B fit-out looks like when the right contractor is given the room to perform. It is also the foundation of a continued partnership — with Woodhouse, and with the clients they bring with them.",
+          ],
+          background: "muted",
+        },
+      ],
     },
   },
 ];
