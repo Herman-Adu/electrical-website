@@ -121,6 +121,8 @@ export interface TocItem {
   label: string;
   /** Heading level (1 = main, 2 = sub-section) */
   level?: 1 | 2;
+  /** Nested sub-items rendered as indented children */
+  children?: TocItem[];
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

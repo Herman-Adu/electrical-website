@@ -7,6 +7,7 @@ import {
   SCROLL_GAP,
   scrollToElementWithOffset,
   getStickyAnchorOffset,
+  getStickyHeaderHeight,
 } from "@/lib/scroll-to-section";
 import type { TocItem } from "@/types/shared-content";
 
@@ -48,16 +49,27 @@ export function ContentToc({
       }
 
       // Threshold = CSS top of sticky aside = exactly where section activates
-      // Falls back to 160px on mobile where aside is hidden (display:none → returns 0)
-      const threshold = getStickyAnchorOffset() || 160;
+      // Falls back to getStickyHeaderHeight() then 160px on mobile where aside is hidden
+      const threshold = getStickyAnchorOffset() || getStickyHeaderHeight() || 160;
       let active: string | null = null;
 
+      // Flatten items + children for intersection checking
+      const allIds: string[] = [];
       for (const item of items) {
-        const el = document.getElementById(item.id);
+        allIds.push(item.id);
+        if (item.children) {
+          for (const child of item.children) {
+            allIds.push(child.id);
+          }
+        }
+      }
+
+      for (const id of allIds) {
+        const el = document.getElementById(id);
         if (!el) continue;
         // Last anchor whose top has reached or passed the threshold = active section
         if (el.getBoundingClientRect().top <= threshold) {
-          active = item.id;
+          active = id;
         }
       }
 
@@ -217,6 +229,75 @@ export function ContentToc({
                       />
                     )}
                   </motion.button>
+
+                  {/* Nested children */}
+                  {item.children && item.children.length > 0 && (
+                    <ul className="mt-1 space-y-1 ml-4">
+                      {item.children.map((child, childIndex) => {
+                        const isChildActive = activeId === child.id;
+                        const isChildClicked = clickedId === child.id;
+
+                        return (
+                          <motion.li
+                            key={child.id}
+                            variants={itemVariants}
+                            className="relative"
+                          >
+                            <motion.div
+                              className={cn(
+                                "absolute bottom-1 left-0 top-1 w-0.5 rounded-full transition-colors duration-200",
+                                isChildActive
+                                  ? "bg-[hsl(174_100%_35%)] dark:bg-electric-cyan"
+                                  : "bg-[hsl(174_100%_35%)]/25 dark:bg-electric-cyan/20",
+                              )}
+                            />
+                            <motion.button
+                              type="button"
+                              onClick={() => handleClick(child.id)}
+                              animate={isChildClicked ? { scale: [1, 0.97, 1] } : {}}
+                              transition={{ duration: 0.2 }}
+                              className={cn(
+                                "group flex w-full items-center gap-2 rounded-lg pl-4 pr-3 py-1.5 text-left text-xs transition-all",
+                                isChildActive
+                                  ? "bg-[hsl(174_100%_35%)]/12 dark:bg-electric-cyan/15 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                                  : "text-foreground/70 dark:text-foreground/50 hover:bg-[hsl(174_100%_35%)]/5 dark:hover:bg-electric-cyan/5 hover:text-foreground",
+                              )}
+                            >
+                              <span
+                                className={cn(
+                                  "flex h-4 w-4 shrink-0 items-center justify-center rounded-md border font-mono text-[8px] transition-all",
+                                  isChildActive
+                                    ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                                    : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
+                                )}
+                              >
+                                {String(index + 1).padStart(2, "0")}{String.fromCharCode(97 + childIndex)}
+                              </span>
+                              <span
+                                className={cn(
+                                  "flex-1 truncate transition-all",
+                                  isChildActive && "font-medium",
+                                )}
+                              >
+                                {child.label}
+                              </span>
+                              {isChildActive && (
+                                <motion.span
+                                  layoutId="toc-active"
+                                  className="h-1.5 w-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white shadow-[0_0_8px_hsl(174_100%_35%/0.5)] dark:shadow-[0_0_8px_rgba(255,255,255,0.6)]"
+                                  transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30,
+                                  }}
+                                />
+                              )}
+                            </motion.button>
+                          </motion.li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </motion.li>
               );
             })}
