@@ -1,14 +1,14 @@
 {
-  "active": "feat-article-diagram-enhancement",
+  "active": "feat-project-migration-medivet-watford",
   "status": "active",
-  "currentBranch": "feat/article-diagram-enhancement",
-  "laneEntityName": "feat-article-diagram-enhancement",
+  "currentBranch": "feat/project-migration-medivet-watford",
+  "laneEntityName": "feat-project-migration-medivet-watford",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-30T13:21:48.028Z",
-  "emergencySummary": "Branch feat/article-diagram-enhancement. Recent: dc03ce2 feat: embed diagrams in all 7 AI memory articles ff7c29a feat: 3-tier diagram system + AI memory articles + Nexgen brand guidelines (#117) fab7a7e chore: memory lane sync — session end 2026-04",
+  "lastSyncedAt": "2026-04-30T21:07:16.600Z",
+  "emergencySummary": "Branch feat/project-migration-medivet-watford. Recent: 098a01e chore: remove rehydration prompt file — content moved to Docker memory entities f47b204 docs: update rehydration prompt — tighter orchestrator rules, Strapi-forward notes, architecture decisio",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-article-diagram-enhancement"
+    "feat-project-migration-medivet-watford"
   ],
   "phaseSequence": [
     {

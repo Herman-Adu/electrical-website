@@ -1153,7 +1153,7 @@ export const allProjects: Project[] = [
     },
     tags: ["Cat B Fit-Out", "Distribution Hub", "Schneider Electric", "Conveyor Infrastructure"],
     progress: 100,
-    isFeatured: true,
+    isFeatured: false,
     publishedAt: "2025-11-01T09:00:00.000Z",
     updatedAt: "2025-11-01T09:00:00.000Z",
     detail: {
@@ -1395,6 +1395,270 @@ export const allProjects: Project[] = [
           paragraphs: [
             "DHL's Reading hub opened on schedule. The electrical installation — from main LV intake to the final emergency lighting fitting — was complete, tested, and certified two days before the agreed handover date. Woodhouse received a clean EICR pack and commissioning certificates at practical completion.",
             "For Nexgen, this project is a benchmark: a demonstration of what a properly planned Cat B fit-out looks like when the right contractor is given the room to perform. It is also the foundation of a continued partnership — with Woodhouse, and with the clients they bring with them.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MEDIVET WATFORD — Veterinary Healthcare Commercial Fit-Out
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-medivet-watford-001",
+    slug: "medivet-watford-veterinary-practice",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Medivet Watford Veterinary Practice",
+    clientSector: "Veterinary Healthcare",
+    status: "completed",
+    description:
+      "Full electrical fit-out for Medivet's flagship 18,000 sqft Watford veterinary practice — a dual-wing healthcare facility requiring dedicated fuseboards for each wing, healthcare-grade compliance, and precise coordination with Woodhouse Workspace across a live construction programme.",
+    coverImage: {
+      src: "/images/projects/commercial/medivet/nexgen-medivet-watford-cover-primary.jpg",
+      alt: "Medivet Watford veterinary practice — completed electrical fit-out by Nexgen Electrical Innovations",
+    },
+    kpis: {
+      budget: "£320K",
+      timeline: "16 weeks",
+      capacity: "400A TPN",
+      location: "Watford, Hertfordshire",
+    },
+    tags: ["Healthcare Electrical", "Dual Fuseboard Design", "Cat B Fit-Out", "Woodhouse Workspace"],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2025-08-01T09:00:00.000Z",
+    updatedAt: "2025-08-01T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Commercial Project",
+        headlineWords: ["Medivet", "Watford.", "Precision", "Delivered."],
+        leadParagraph:
+          "When Woodhouse Workspace were awarded the Medivet Watford flagship fit-out, they brought Nexgen Electrical Innovations on board as electrical contractor — a partnership built on a shared commitment to programme certainty and quality delivery. The result is a 18,000 sqft dual-wing veterinary practice with electrical infrastructure engineered to the exacting standards healthcare environments demand.",
+        bodyParagraphs: [
+          "Medivet Watford is one of the most significant veterinary healthcare facilities of its kind in the region — a purpose-designed practice spanning a north wing and south wing, each operating as a functionally independent zone with its own dedicated fuseboard. The dual-fuseboard design was a deliberate engineering decision: it provides electrical resilience, simplifies fault isolation, and supports the different operational loads of consulting, surgical, and imaging areas without cross-dependency.",
+          "Nexgen's installation team worked closely with Woodhouse Workspace from pre-construction planning through to commissioning, navigating the particular challenges of a healthcare environment — including strict sterile zone protocols, sensitive equipment in active areas, and the coordination demands of a large, multi-trade fit-out delivered on a fixed programme.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Dual-Wing Fuseboard Design",
+            description:
+              "Dedicated fuseboards for the north and south wings ensure electrical independence between zones — supporting different operational loads and simplifying fault isolation without cross-dependency.",
+          },
+          {
+            num: "02",
+            title: "Healthcare Compliance",
+            description:
+              "Full BS 7671 compliance with healthcare-specific provisions — including medical IT systems, equipotential bonding, and protection against electromagnetic interference in imaging areas.",
+          },
+          {
+            num: "03",
+            title: "18,000 sqft Delivery",
+            description:
+              "End-to-end electrical fit-out across an 18,000 sqft dual-wing facility — from main intake through to final fix, testing, and commissioning certificates at practical completion.",
+          },
+          {
+            num: "04",
+            title: "Programme Certainty",
+            description:
+              "Pre-construction sequencing and parallel-wing installation strategy ensured electrical first-fix never constrained the follow-on trades — delivering to Woodhouse's programme milestone by milestone.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Main LV Distribution",
+          description:
+            "400A TPN main distribution board with metering and protection, serving both wings from a consolidated intake — with independent sub-distribution for north and south zones.",
+        },
+        {
+          icon: "Building2",
+          title: "Dual Dedicated Fuseboards",
+          description:
+            "Separate fuseboards for the north and south wings providing independent electrical circuits, fault isolation, and load management tailored to each zone's operational requirements.",
+        },
+        {
+          icon: "Shield",
+          title: "Healthcare-Grade Protection",
+          description:
+            "Medical IT panel installation, equipotential bonding in treatment and surgical areas, and RCD protection throughout — compliant with BS 7671 and healthcare premises guidance.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "Clinical & Welfare Lighting",
+          description:
+            "LED lighting specification across consulting rooms, surgical suites, imaging areas, reception, and staff welfare — designed to CIBSE guidance with appropriate colour rendering and lux levels.",
+        },
+        {
+          icon: "Cable",
+          title: "First Fix & Containment",
+          description:
+            "Full cable tray, conduit, and containment installation across both wings — coordinated with structural, mechanical, and fit-out trades to maintain programme sequence.",
+        },
+        {
+          icon: "Settings",
+          title: "Second Fix & Final Connection",
+          description:
+            "Complete second fix including accessories, socket outlets, data provisions, and final connections to clinical equipment power supplies throughout the practice.",
+        },
+        {
+          icon: "Gauge",
+          title: "Emergency Lighting",
+          description:
+            "BS 5266-compliant emergency lighting installation across all areas, including maintained fittings at escape routes, exits, and clinical risk zones.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing & Commissioning",
+          description:
+            "Full NICEIC-compliant testing regime with EICRs, commissioning certificates, and operation and maintenance documentation provided at practical completion.",
+        },
+      ],
+      challenge:
+        "Delivering a full electrical fit-out inside a live veterinary healthcare construction programme introduced constraints that a standard commercial fit-out does not carry. Sterile zones and sensitive clinical equipment in adjacent areas required careful sequencing of noisy or disruptive works. The dual-wing layout meant two parallel installation programmes running simultaneously, with first-fix in the north wing proceeding alongside structural works still completing in the south — demanding precise coordination with Woodhouse's site management team and a clear understanding of which areas were accessible at any given point in the programme.",
+      solution:
+        "Nexgen's pre-construction team produced a detailed installation programme sequenced wing-by-wing and zone-by-zone, with clear access windows agreed with Woodhouse before mobilisation. Running parallel installation teams in north and south wings allowed both programmes to advance simultaneously without cross-trade conflicts. Where clinical sensitivity required it, we scheduled noisy containment works outside core hours and used temporary screening to protect adjacent areas. Equipment procurement was managed to just-in-time delivery, keeping plant rooms clear and the programme moving.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Pre-Construction & Survey",
+          description:
+            "Detailed M&E survey, design review, healthcare compliance assessment, equipment procurement, and installation programme issued to Woodhouse Workspace.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "First Fix & Containment",
+          description:
+            "Parallel first-fix installation across north and south wings — cable tray, conduit, containment, and distribution cabling to all zones including clinical, welfare, and reception areas.",
+          duration: "6 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Board Installation & Distribution",
+          description:
+            "Main LV board installation, dedicated north and south wing fuseboard fit-off, sub-distribution cabling, and clinical equipment circuit connections.",
+          duration: "5 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Final Fix, Testing & Commissioning",
+          description:
+            "Second fix accessories, lighting and small power final fix, emergency lighting installation, full circuit testing, EICRs, O&M documentation, and witnessed commissioning.",
+          duration: "3 weeks",
+          status: "completed",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-cover-primary.jpg",
+          alt: "Medivet Watford veterinary practice — completed facility by Nexgen Electrical Innovations",
+          caption: "Completed Medivet Watford flagship practice — electrical installation by Nexgen",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-north-wing-fuseboards.jpg",
+          alt: "North wing dedicated fuseboard installation — Medivet Watford",
+          caption: "Dedicated north wing fuseboard — installed and commissioned by Nexgen",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-electrical-distribution-board.jpg",
+          alt: "Main LV distribution board installation at Medivet Watford",
+          caption: "Main LV distribution board serving both wings from a consolidated intake",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-first-fix-containment.jpg",
+          alt: "First fix cable containment works at Medivet Watford",
+          caption: "First fix containment in progress — north wing installation phase",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-cable-tray-installation.jpg",
+          alt: "Cable tray installation across Medivet Watford veterinary practice",
+          caption: "Primary cable tray routes across the clinical and welfare zones",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-north-wing-corridor.jpg",
+          alt: "North wing corridor electrical installation — Medivet Watford",
+          caption: "North wing corridor showing completed containment and lighting infrastructure",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-south-wing-fit-out.jpg",
+          alt: "South wing electrical fit-out at Medivet Watford",
+          caption: "South wing first fix in progress alongside structural completion works",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-consumer-unit-fit-off.jpg",
+          alt: "Consumer unit fit-off during Phase 3 installation — Medivet Watford",
+          caption: "Consumer unit fit-off during Phase 3 distribution works",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-lighting-installation.jpg",
+          alt: "Clinical and reception lighting installation — Medivet Watford",
+          caption: "LED lighting installation to clinical and reception areas",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-second-fix-wiring.jpg",
+          alt: "Second fix wiring and accessories at Medivet Watford",
+          caption: "Second fix accessories and final connections during Phase 4",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-emergency-lighting-install.jpg",
+          alt: "Emergency lighting installation at Medivet Watford",
+          caption: "BS 5266-compliant emergency lighting at escape routes and clinical zones",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-testing-commissioning.jpg",
+          alt: "Testing and commissioning at Medivet Watford veterinary practice",
+          caption: "Full NICEIC circuit testing and commissioning before practical completion",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-reception-area.jpg",
+          alt: "Completed reception area electrical installation — Medivet Watford",
+          caption: "Completed reception area — lighting, small power, and data provisions installed",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-treatment-room.jpg",
+          alt: "Treatment room electrical fit-out — Medivet Watford",
+          caption: "Treatment room fit-out with clinical-grade power provisions and emergency lighting",
+        },
+        {
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-completed-facility-overview.jpg",
+          alt: "Medivet Watford completed facility overview — delivered by Nexgen Electrical Innovations",
+          caption: "Completed Medivet Watford practice — fully operational at practical completion",
+        },
+      ],
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "earning-the-brief",
+          heading: "Earning the Brief",
+          paragraphs: [
+            "Woodhouse Workspace are a main contractor whose reputation depends on the subcontractors they bring with them. When they were awarded the Medivet Watford flagship fit-out — a prestigious, high-specification healthcare environment — they needed an electrical contractor they could trust to perform at the same level. Nexgen Electrical Innovations had already demonstrated that standard across previous programmes delivered together, and it was that track record that secured the appointment.",
+            "The brief was demanding: an 18,000 sqft dual-wing veterinary practice with healthcare compliance requirements, a fixed programme, and an end-client — Medivet — whose standards for their flagship facility left no room for compromise. Nexgen's appointment was a decision by Woodhouse, not Medivet. That distinction matters: it reflects the trust that had been built between the two contractors through consistent, accountable delivery.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "working-in-a-live-veterinary-practice",
+          heading: "Working in a Live Veterinary Practice",
+          paragraphs: [
+            "Veterinary healthcare facilities present a category of construction challenge that sits apart from standard commercial fit-outs. Sterile zones, sensitive imaging equipment, and the presence of animals in adjacent areas during later stages of fit-out all impose constraints on when, where, and how trades can work. Noisy or vibration-intensive activities — cutting containment, drilling, pulling cable through tight conduit runs — required careful scheduling to avoid clinical areas that were being handed over progressively to the Medivet team.",
+            "Nexgen's site supervisors worked in close coordination with Woodhouse's project manager to maintain a live access schedule, adjusting sequence as different areas became available and others became restricted. It required a level of situational awareness and flexibility that not every electrical contractor can sustain across a 16-week programme — but it is exactly the kind of environment in which Nexgen's site management approach performs at its best.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "The Result",
+          paragraphs: [
+            "Medivet Watford opened on programme. The electrical installation — from the main LV intake through to the final emergency lighting fitting in the surgical suite — was complete, tested, and certified at practical completion. Woodhouse received a full EICR pack, commissioning certificates, and operation and maintenance documentation ready for handover to Medivet's estates team.",
+            "For Nexgen, this project represents the standard we hold ourselves to in healthcare environments: technically correct, programme-certain, and delivered in a way that makes our client — Woodhouse — look exactly as good as they need to. It is a project we are proud of, and a partnership we intend to continue.",
           ],
           background: "muted",
         },

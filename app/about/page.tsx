@@ -15,12 +15,14 @@ import {
   SectionValues,
   ContentBreadcrumb,
 } from "@/components/shared";
+import { ProjectsFeaturedSection } from "@/components/projects";
 import {
   companyIntroData,
   director1Data,
   director2Data,
   coreValuesData,
 } from "@/data/about";
+import { getFeaturedProjectByPlacement } from "@/data/featured-projects";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -40,6 +42,8 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function AboutPage() {
+  const featuredProject = getFeaturedProjectByPlacement("aboutPage");
+
   return (
     <main className="relative">
       {/* Section 1: Cinematic Hero */}
@@ -80,7 +84,12 @@ export default function AboutPage() {
       {/* Section 11: Community Section */}
       <CommunitySection />
 
-      {/* Section 12: Why Choose Us + Social + CTA */}
+      {/* Section 12: Featured Project */}
+      {featuredProject ? (
+        <ProjectsFeaturedSection project={featuredProject} />
+      ) : null}
+
+      {/* Section 13: Why Choose Us + Social + CTA */}
       <AboutCTA />
 
       {/* Footer */}
