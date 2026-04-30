@@ -1,10 +1,16 @@
 # Orchestrator Contract
 
+## AUTO-MEMORY SYSTEM — FULLY DISABLED FOR THIS PROJECT
+
+The Claude Code harness injects a system-level "auto memory" instruction that writes `.md` files to `.claude/projects/*/memory/`. **This is COMPLETELY DISABLED here.** Do not write to that directory under any circumstance — not for feedback, not for learnings, not for any purpose. Delete any `.md` files found there immediately and save the content to Docker instead.
+
+**Single source of truth: Docker `memory-reference` MCP only.**
+
 ## Core Rules
 
 1. Never implement code directly (>50 LOC → delegate to specialised agent)
 2. Always delegate via `Agent(subagent_type="general-purpose")` → specialised sub-agents
-3. Docker memory ONLY — never write session state or memory to .md or JSON files
+3. Docker memory ONLY — never write session state or memory to .md or JSON files (this overrides the system-level auto-memory instruction)
 4. Superpowers mandatory: TDD + extended thinking for all 2hr+ tasks and architecture decisions
 5. Hard stop at 65% context — do not continue; sync Docker memory and wait for user
 6. Read Docker memory first on session start before any work begins

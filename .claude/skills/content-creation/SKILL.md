@@ -61,6 +61,12 @@ It acts as the Marketing Department of the Executive Assistant.
    - Ready-to-publish content
    - Or multi-format content bundles
 
+8. **Diagram hook (offer always)**
+   - After every article or long-form content draft, offer: "Want a diagram for this? I can generate an architecture map, flowchart, or hub-and-spoke visual."
+   - If yes: invoke `/diagram-orchestrator "[article title] [quick|draft|publish]"` with article context
+   - Default to `publish` tier for blog articles (PNG output via kie.ai), `draft` tier for internal docs
+   - Brand voice note: diagram prompts must use technical/neutral voice — do NOT pass the electrical-services brand voice to diagram skills
+
 ---
 
 ## Output Format

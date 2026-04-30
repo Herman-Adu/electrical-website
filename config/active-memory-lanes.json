@@ -1,14 +1,14 @@
 {
-  "active": "feat-memory-lane-corruption-and-branch-mismatch",
+  "active": "electrical-website-state",
   "status": "active",
-  "currentBranch": "fix/memory-lane-corruption-and-branch-mismatch",
-  "laneEntityName": "feat-memory-lane-corruption-and-branch-mismatch",
+  "currentBranch": "main",
+  "laneEntityName": "electrical-website-state",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-29T22:51:08.177Z",
-  "emergencySummary": "Branch main. Recent: d32f889 fix: obsidian proxy HTTPS + env_file credential fix (#115) ebb54f2 feat: Obsidian platinum second brain integration (Track A + B) (#114) 7a4ba1a feat: Batch B/C orchestrator infrastructure har",
+  "lastSyncedAt": "2026-04-30T11:38:40.338Z",
+  "emergencySummary": "Branch main. Recent: 3a5a949 feat: Nexgen brand guidelines + diagram-orchestrator Tier 4 (photo routing) abc0308 feat: professional diagram system — 3-tier orchestrator + brand palette + Nexgen assets 301eb87 feat: AI mem",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-memory-lane-corruption-and-branch-mismatch"
+    "feat-session-end-sync-2026-04-29"
   ],
   "phaseSequence": [
     {
