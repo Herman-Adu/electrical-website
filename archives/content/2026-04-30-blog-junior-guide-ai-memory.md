@@ -1,11 +1,12 @@
 ---
 topic: junior-guide-ai-memory
 audience: junior-dev
-status: diagram-enhanced
+status: production-validated
 date: 2026-04-30
 wordCount: ~1800
 publicationTarget: blog
 series: ai-memory-architecture
+lastValidated: 2026-05-01
 ---
 
 # How I Made My AI Coding Assistant Remember Everything: A Developer's Guide
@@ -180,6 +181,24 @@ Hooks are just config files that run scripts at specific moments: session start,
 Once Docker memory is working, Obsidian is the optional upgrade. Install the app, install the Local REST API community plugin, add your API key to your environment config, and you're done. Your AI can now read and write to your vault, and so can you.
 
 The whole pattern works with any AI tool that supports **MCP** (Model Context Protocol — the open standard for connecting AI tools to external services). Claude Code, Cursor, Windsurf, and others all support it. This is not Claude-specific.
+
+---
+
+## The Biggest Lesson from Real Projects
+
+This system has been used on real commercial projects — not just prototypes. And the single biggest practical lesson from running it in production is this: **give your AI assistant everything upfront**.
+
+Don't start a task by asking it questions. Don't prompt it and wait for it to ask you for more files. Don't have a back-and-forth where it slowly builds up the context it needs.
+
+Instead, brief it like a new contractor who just walked into the room. Tell it the file paths. Tell it the exact changes needed. Tell it the commands to run, in what order. Tell it what "done" looks like — the build gate to pass, the tests to run, the PR to create.
+
+One complete brief. One complete task. That's the pattern.
+
+We ran a full commercial project migration — 17 images renamed, project data wired, services page updated, build gate passed, end-to-end tests run, PR created, CI monitored — using exactly this pattern. Two agent dispatches, each with a complete brief, each executing start to finish without coming back for more context. Total cost: 80,777 tokens. Clean, auditable, repeatable.
+
+The AI didn't need to ask questions because we had given it the answers before it asked. That's not magic — that's just preparation. And the memory system is what makes preparation cheap: because the relevant file paths, architecture decisions, and patterns are already in Docker, the orchestrator can write a complete brief in seconds rather than spending ten minutes re-reading source files.
+
+Brief well. Dispatch once. Let the agent work.
 
 ---
 

@@ -1,11 +1,12 @@
 ---
 topic: claude-code-memory-system
 audience: mid-dev
-status: diagram-enhanced
+status: production-validated
 date: 2026-04-30
 wordCount: ~2800
 publicationTarget: blog
 series: ai-memory-architecture
+lastValidated: 2026-05-01
 ---
 
 # The Claude Code Memory System: How We Gave an AI a Persistent Brain
@@ -207,6 +208,30 @@ The key patterns to replicate are:
 The architecture emerged from a real frustration with real costs. The 200+ hours per year of context re-establishment, the $10K–18K in annual token costs for context loading, the productivity compound loss when AI operates without memory of past decisions — these are real numbers affecting real teams.
 
 We built this system to eliminate that overhead. It works. And the pattern is yours to apply.
+
+---
+
+## Real-World Validation
+
+The architecture described above has been validated across three commercial project migrations in production. Here's what that validation produced.
+
+**The three-migration case study:**
+
+DHL Reading, Medivet Watford, and Ladbrokes Woking each ran as independent feature branches on separate sessions. The Docker knowledge graph accumulated decisions and learnings from each one. By the third migration (Ladbrokes), the graph already held the `getFeaturedProjectByPlacement()` architecture from DHL and the `aboutPage` placement pattern from Medivet — both available via a single `search_nodes()` call, without the orchestrator re-reading any source files.
+
+**Real token counts:**
+
+The Ladbrokes migration — 17 images renamed, full project data wired, build gate passed (63/63 pages), E2E tests run (93 passed), PR created, CI monitored — completed in **80,777 tokens** total. That breaks down to one implementation agent dispatched once and one merge/cleanup agent dispatched once. Neither agent required a mid-task context re-read.
+
+Session startup for the Ladbrokes session consumed **876 of the 3,000-token hot context budget** — after three migrations of accumulated context. The three-layer loading hierarchy is working: the active lane loads at full detail, completed lanes drop off, and the 2,124-token headroom means the budget hasn't become a constraint even as the graph grows.
+
+**The single-dispatch pattern:**
+
+The critical implementation insight from these migrations: the orchestrator reads just enough to write a complete brief, then dispatches a single agent with every file path, every rename map, every code change, and every build/test/commit/PR instruction in one prompt. The agent executes from start to finish without coming back for more context. This pattern — the platinum standard workflow — is what produced 80,777 tokens for an end-to-end migration that would have cost 3–4x more with iterative context-sharing.
+
+**Next step — orchestration-optimization:**
+
+The current session startup uses ~876 tokens of the 3,000-token budget. The orchestration-optimization feature targets reducing that to ~500 tokens by making Docker the canonical source of truth and eliminating the parallel `config/active-memory-lanes.json` state. When that ships, the hot context layer will be leaner and the tier-based hierarchy will route even more aggressively to on-demand Docker retrieval.
 
 ---
 
