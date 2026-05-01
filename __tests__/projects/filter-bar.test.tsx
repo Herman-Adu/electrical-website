@@ -28,7 +28,7 @@ describe("ProjectFilterBar", () => {
         onSelect={vi.fn()}
       />
     );
-    expect(screen.getByRole("button", { name: /All Projects/i })).toBeDefined();
+    expect(screen.getByRole("button", { name: /All Projects/i })).toBeInTheDocument();
   });
 
   it("renders a button for each sector", () => {
@@ -40,10 +40,10 @@ describe("ProjectFilterBar", () => {
         onSelect={vi.fn()}
       />
     );
-    expect(screen.getByRole("button", { name: /Residential/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Commercial/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Industrial/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Community/i })).toBeDefined();
+    expect(screen.getByRole("button", { name: /Residential/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Commercial/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Industrial/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Community/i })).toBeInTheDocument();
   });
 
   it("calls onSelect with the slug when a sector button is clicked", () => {
@@ -69,7 +69,7 @@ describe("ProjectFilterBar", () => {
         onSelect={vi.fn()}
       />
     );
-    expect(screen.getByText("3")).toBeDefined(); // residential count
+    expect(screen.getByText("3")).toBeInTheDocument(); // residential count
   });
 
   it("calls onSelect with 'all' when All Projects button is clicked", () => {
@@ -84,5 +84,20 @@ describe("ProjectFilterBar", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: /All Projects/i }));
     expect(onSelect).toHaveBeenCalledWith("all");
+  });
+
+  it("marks the active sector button as pressed and inactive buttons as not pressed", () => {
+    render(
+      <ProjectFilterBar
+        categories={mockSectors}
+        activeSlug="residential"
+        counts={mockCounts}
+        onSelect={vi.fn()}
+      />
+    );
+    const residentialBtn = screen.getByRole("button", { name: /Residential/i });
+    const allBtn = screen.getByRole("button", { name: /All Projects/i });
+    expect(residentialBtn.getAttribute("aria-pressed")).toBe("true");
+    expect(allBtn.getAttribute("aria-pressed")).toBe("false");
   });
 });
