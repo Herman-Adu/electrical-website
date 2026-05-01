@@ -1151,7 +1151,12 @@ export const allProjects: Project[] = [
       capacity: "800A TPN",
       location: "Reading, Berkshire",
     },
-    tags: ["Cat B Fit-Out", "Distribution Hub", "Schneider Electric", "Conveyor Infrastructure"],
+    tags: [
+      "Cat B Fit-Out",
+      "Distribution Hub",
+      "Schneider Electric",
+      "Conveyor Infrastructure",
+    ],
     progress: 100,
     isFeatured: false,
     publishedAt: "2025-11-01T09:00:00.000Z",
@@ -1297,17 +1302,20 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-site-overview.jpg",
           alt: "DHL Reading distribution hub — site overview during Nexgen electrical installation",
-          caption: "Site overview — early-stage installation with containment in progress",
+          caption:
+            "Site overview — early-stage installation with containment in progress",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-cable-tray-installation.jpg",
           alt: "Warehouse cable containment and tray installation at DHL Reading",
-          caption: "Primary cable tray routes being established across the warehouse ceiling",
+          caption:
+            "Primary cable tray routes being established across the warehouse ceiling",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-mewp-high-level-containment.jpg",
           alt: "MEWP scissor lift access for high-level cable tray installation — DHL Reading",
-          caption: "Scissor lift access for high-level containment runs above the sorting floor",
+          caption:
+            "Scissor lift access for high-level containment runs above the sorting floor",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-distribution-zone-first-fix.jpg",
@@ -1322,22 +1330,26 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-schneider-conveyor-control-panels.jpg",
           alt: "Schneider Electric LV control panels for DHL Reading conveyor sorting systems",
-          caption: "Schneider LV control panels powering the automated parcel sorting conveyors",
+          caption:
+            "Schneider LV control panels powering the automated parcel sorting conveyors",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-bespoke-cable-tray-prefabricated.jpg",
           alt: "Bespoke prefabricated cable tray sections installed at DHL Reading",
-          caption: "Custom-fabricated cable tray sections — prefabricated off-site for precise fit",
+          caption:
+            "Custom-fabricated cable tray sections — prefabricated off-site for precise fit",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-floor-containment-works.jpg",
           alt: "DHL Reading warehouse floor showing completed containment and distribution works",
-          caption: "Warehouse floor showing completed containment and initial distribution works",
+          caption:
+            "Warehouse floor showing completed containment and initial distribution works",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-office-welfare-second-fix.jpg",
           alt: "Second fix electrical installation in DHL Reading office and welfare areas",
-          caption: "Second fix electrical works in staff welfare and office areas",
+          caption:
+            "Second fix electrical works in staff welfare and office areas",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-sub-distribution-plant-zone.jpg",
@@ -1347,17 +1359,20 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-main-lv-distribution-board.jpg",
           alt: "Schneider Electric main LV distribution board installed and commissioned at DHL Reading",
-          caption: "Schneider Electric main distribution board — tested and commissioned",
+          caption:
+            "Schneider Electric main distribution board — tested and commissioned",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-office-fitout-completed.jpg",
           alt: "Completed DHL Reading office fit-out — lighting, small power, and data provisions",
-          caption: "Completed office fit-out — lighting, small power, and data provisions installed",
+          caption:
+            "Completed office fit-out — lighting, small power, and data provisions installed",
         },
         {
           src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
           alt: "DHL Reading distribution hub — completed and operational, delivered by Nexgen Electrical Innovations",
-          caption: "The completed DHL Reading hub — fully operational and delivering to programme",
+          caption:
+            "The completed DHL Reading hub — fully operational and delivering to programme",
         },
       ],
       testimonial: {
@@ -1424,7 +1439,12 @@ export const allProjects: Project[] = [
       capacity: "400A TPN",
       location: "Watford, Hertfordshire",
     },
-    tags: ["Healthcare Electrical", "Dual Fuseboard Design", "Cat B Fit-Out", "Woodhouse Workspace"],
+    tags: [
+      "Healthcare Electrical",
+      "Dual Fuseboard Design",
+      "Cat B Fit-Out",
+      "Woodhouse Workspace",
+    ],
     progress: 100,
     isFeatured: true,
     publishedAt: "2025-08-01T09:00:00.000Z",
@@ -1558,37 +1578,44 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-cover-primary.jpg",
           alt: "Medivet Watford veterinary practice — completed facility by Nexgen Electrical Innovations",
-          caption: "Completed Medivet Watford flagship practice — electrical installation by Nexgen",
+          caption:
+            "Completed Medivet Watford flagship practice — electrical installation by Nexgen",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-north-wing-fuseboards.jpg",
           alt: "North wing dedicated fuseboard installation — Medivet Watford",
-          caption: "Dedicated north wing fuseboard — installed and commissioned by Nexgen",
+          caption:
+            "Dedicated north wing fuseboard — installed and commissioned by Nexgen",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-electrical-distribution-board.jpg",
           alt: "Main LV distribution board installation at Medivet Watford",
-          caption: "Main LV distribution board serving both wings from a consolidated intake",
+          caption:
+            "Main LV distribution board serving both wings from a consolidated intake",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-first-fix-containment.jpg",
           alt: "First fix cable containment works at Medivet Watford",
-          caption: "First fix containment in progress — north wing installation phase",
+          caption:
+            "First fix containment in progress — north wing installation phase",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-cable-tray-installation.jpg",
           alt: "Cable tray installation across Medivet Watford veterinary practice",
-          caption: "Primary cable tray routes across the clinical and welfare zones",
+          caption:
+            "Primary cable tray routes across the clinical and welfare zones",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-north-wing-corridor.jpg",
           alt: "North wing corridor electrical installation — Medivet Watford",
-          caption: "North wing corridor showing completed containment and lighting infrastructure",
+          caption:
+            "North wing corridor showing completed containment and lighting infrastructure",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-south-wing-fit-out.jpg",
           alt: "South wing electrical fit-out at Medivet Watford",
-          caption: "South wing first fix in progress alongside structural completion works",
+          caption:
+            "South wing first fix in progress alongside structural completion works",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-consumer-unit-fit-off.jpg",
@@ -1603,32 +1630,38 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-second-fix-wiring.jpg",
           alt: "Second fix wiring and accessories at Medivet Watford",
-          caption: "Second fix accessories and final connections during Phase 4",
+          caption:
+            "Second fix accessories and final connections during Phase 4",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-emergency-lighting-install.jpg",
           alt: "Emergency lighting installation at Medivet Watford",
-          caption: "BS 5266-compliant emergency lighting at escape routes and clinical zones",
+          caption:
+            "BS 5266-compliant emergency lighting at escape routes and clinical zones",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-testing-commissioning.jpg",
           alt: "Testing and commissioning at Medivet Watford veterinary practice",
-          caption: "Full NICEIC circuit testing and commissioning before practical completion",
+          caption:
+            "Full NICEIC circuit testing and commissioning before practical completion",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-reception-area.jpg",
           alt: "Completed reception area electrical installation — Medivet Watford",
-          caption: "Completed reception area — lighting, small power, and data provisions installed",
+          caption:
+            "Completed reception area — lighting, small power, and data provisions installed",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-treatment-room.jpg",
           alt: "Treatment room electrical fit-out — Medivet Watford",
-          caption: "Treatment room fit-out with clinical-grade power provisions and emergency lighting",
+          caption:
+            "Treatment room fit-out with clinical-grade power provisions and emergency lighting",
         },
         {
           src: "/images/projects/commercial/medivet/nexgen-medivet-watford-completed-facility-overview.jpg",
           alt: "Medivet Watford completed facility overview — delivered by Nexgen Electrical Innovations",
-          caption: "Completed Medivet Watford practice — fully operational at practical completion",
+          caption:
+            "Completed Medivet Watford practice — fully operational at practical completion",
         },
       ],
       narrativeBlocks: [
@@ -1852,7 +1885,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-lighting-installation.jpg",
           alt: "Ladbrokes Woking — LED lighting installation",
-          caption: "LED lighting installation — trading floor and back-of-house",
+          caption:
+            "LED lighting installation — trading floor and back-of-house",
         },
         {
           src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-north-wing-fit-out.jpg",
@@ -1943,7 +1977,7 @@ export const allProjects: Project[] = [
     description:
       "Design and installation of a new fully operational 3-phase electrical supply system for Biffa's workshop facility in Farnham, Surrey — a landmark project that established Nexgen as Biffa's preferred electrical partner.",
     coverImage: {
-      src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cover-primary.jpg",
+      src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-exterior-overview.jpg",
       alt: "Biffa Workshop Farnham — 3-phase electrical installation",
     },
     kpis: {
@@ -1952,7 +1986,12 @@ export const allProjects: Project[] = [
       capacity: "3-Phase Supply",
       location: "Farnham, Surrey",
     },
-    tags: ["3-Phase", "Commercial Workshop", "Preferred Partner", "New Build Services"],
+    tags: [
+      "3-Phase",
+      "Commercial Workshop",
+      "Preferred Partner",
+      "New Build Services",
+    ],
     progress: 100,
     isFeatured: true,
     publishedAt: "2026-05-01T09:00:00.000Z",
@@ -2074,7 +2113,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cover-primary.jpg",
           alt: "Biffa Workshop Farnham — 3-phase electrical installation overview",
-          caption: "Biffa Workshop Farnham — 3-phase electrical installation complete",
+          caption:
+            "Biffa Workshop Farnham — 3-phase electrical installation complete",
         },
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-exterior-overview.jpg",
@@ -2089,12 +2129,14 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-interior-overview.jpg",
           alt: "Biffa Workshop — interior electrical installation overview",
-          caption: "Interior overview — high-level lighting and containment installed",
+          caption:
+            "Interior overview — high-level lighting and containment installed",
         },
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-roller-shutter-circuits.jpg",
           alt: "Biffa Workshop — roller shutter door electrical circuits",
-          caption: "Roller shutter circuits — 3-phase supplies installed and commissioned",
+          caption:
+            "Roller shutter circuits — 3-phase supplies installed and commissioned",
         },
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-01.jpg",
@@ -2109,7 +2151,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-03.jpg",
           alt: "Biffa Workshop Farnham — lighting installation",
-          caption: "High-level lighting — installed and aligned to workshop layout",
+          caption:
+            "High-level lighting — installed and aligned to workshop layout",
         },
         {
           src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-04.jpg",
@@ -2121,7 +2164,8 @@ export const allProjects: Project[] = [
         {
           position: "after-intro",
           anchorId: "the-partnership-begins",
-          heading: "Biffa Chose Nexgen. Nexgen Delivered. The Partnership Grew.",
+          heading:
+            "Biffa Chose Nexgen. Nexgen Delivered. The Partnership Grew.",
           paragraphs: [
             "The Farnham workshop project wasn't just another commercial job — it was the project that established Nexgen as Biffa's preferred electrical contractor. Biffa needed a team they could trust with a new facility: one that would design the system correctly, install to a high standard, and hand over on time. Nexgen delivered all three.",
           ],
@@ -2142,6 +2186,195 @@ export const allProjects: Project[] = [
           heading: "On Time. On Budget. A Preferred Partner Ever Since.",
           paragraphs: [
             "The Biffa Farnham workshop was handed over inside 8 weeks and within the £65K budget. Every circuit certified, every system commissioned. Biffa's operations team had a fully functional facility from day one — and Nexgen had earned a partner relationship that has continued to grow across multiple projects since.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // TAPLOW DOMESTIC — Residential Electrical Installation
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-taplow-domestic-001",
+    slug: "taplow-domestic-installation",
+    category: "residential",
+    categoryLabel: "Residential",
+    title: "Domestic Installations — Taplow",
+    clientSector: "Residential",
+    status: "completed",
+    description:
+      "Full domestic electrical installation for a local Taplow homeowner — consumer unit replacement, new circuits throughout, lighting, power, and final accessories. Tested, certified to BS 7671, and handed over spotless.",
+    coverImage: {
+      src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+      alt: "Taplow domestic electrical installation — completed residential work",
+    },
+    kpis: {
+      budget: "£4,500",
+      timeline: "3 days",
+      capacity: "100A Supply",
+      location: "Taplow, Berkshire",
+    },
+    tags: ["Domestic", "Consumer Unit", "Residential", "BS 7671", "Berkshire"],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2026-05-01T09:00:00.000Z",
+    updatedAt: "2026-05-01T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Community Project",
+        headlineWords: ["Home.", "Done", "Right."],
+        leadParagraph:
+          "When a local Taplow homeowner needed a full domestic electrical installation, the brief was simple: do it properly, leave the place as you found it, and make it right. The kind of job that most electricians would rush — we took our time on.",
+        bodyParagraphs: [
+          "Domestic electrical work is different from commercial. There's no site manager, no programme board, no procurement chain. There's just someone's home — and the family who lives in it trusting you to do the job right and leave no trace. That trust matters more to us than any contract.",
+          "The Taplow installation covered a full consumer unit replacement, new circuits throughout the property, and everything from lighting and power to the final accessories. Tested, certified to BS 7671, and handed over clean — the way every domestic job should be.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Clean Workmanship",
+            description:
+              "Not a mark left behind. No plaster dust, no cable offcuts, no scuffs on the paintwork. Done properly, tidied completely.",
+          },
+          {
+            num: "02",
+            title: "Trust in Your Home",
+            description:
+              "You're letting someone into your space. We treat every home with the same respect we'd want shown in our own.",
+          },
+          {
+            num: "03",
+            title: "Right First Time",
+            description:
+              "No return visits. No remedial calls. Every circuit tested, every accessory fitted correctly — handed over with an Electrical Installation Certificate and zero outstanding items.",
+          },
+          {
+            num: "04",
+            title: "Local, and Proud of It",
+            description:
+              "Taplow is our community too. When a neighbour trusts us with their home, they get the same standard we'd expect in our own — and a recommendation they can pass on without hesitation.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Consumer Unit Replacement",
+          description:
+            "Full consumer unit replacement — new unit fitted, all circuits reconnected, tested, and certified to BS 7671.",
+        },
+        {
+          icon: "Cable",
+          title: "New Circuit Wiring",
+          description:
+            "New circuits throughout the property — correctly sized, routed, and terminated for a clean, compliant installation.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "Lighting Installation",
+          description:
+            "Lighting circuits installed throughout — pendants, downlights, and switches fitted neatly to the finished standard.",
+        },
+        {
+          icon: "Settings",
+          title: "Power & Final Accessories",
+          description:
+            "Socket outlets, switches, and final accessories fitted throughout — clean finishes, correctly positioned, and properly secured.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing, Certification & Handover",
+          description:
+            "Full circuit testing to BS 7671 with an Electrical Installation Certificate issued at handover — no outstanding items.",
+        },
+        {
+          icon: "Shield",
+          title: "Clean Completion",
+          description:
+            "The home left exactly as found — no dust, no debris, no marks. Every area worked in cleaned and restored before we left.",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+          alt: "Taplow domestic installation — overview",
+          caption: "Domestic installation — completed and certified",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/02-local-installation.jpg",
+          alt: "Taplow domestic installation — consumer unit",
+          caption: "Consumer unit replacement — tested and certified to BS 7671",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/03-local-installation.jpg",
+          alt: "Taplow domestic installation — circuit wiring",
+          caption: "New circuit wiring — routed and terminated cleanly",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/04-local-installation.jpg",
+          alt: "Taplow domestic installation — lighting installation",
+          caption: "Lighting installation — fitted to finished standard",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/05-local-installation.jpg",
+          alt: "Taplow domestic installation — power accessories",
+          caption: "Power accessories — sockets and switches fitted cleanly",
+        },
+        {
+          // 06-local-installation.jpg does not exist — intentionally skipped
+          src: "/images/projects/residential/domestic-installations/07-local-installation.jpg",
+          alt: "Taplow domestic installation — installation detail",
+          caption: "Installation detail — clean workmanship throughout",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/08-local-installation.jpg",
+          alt: "Taplow domestic installation — finished areas",
+          caption: "Finished areas — no marks, no debris left behind",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/09-local-installation.jpg",
+          alt: "Taplow domestic installation — final accessories",
+          caption: "Final accessories — correctly positioned and secured",
+        },
+        {
+          src: "/images/projects/residential/domestic-installations/10-local-installation.jpg",
+          alt: "Taplow domestic installation — completed property",
+          caption: "Completed installation — handed over clean and certified",
+        },
+      ],
+      testimonial: {
+        quote:
+          "I had high expectations before they even arrived — I'm particular about my home, always have been. Not a mark on the walls, not a speck of dust left behind. They came in, did the work properly, and left the place spotless. It sounds simple. It's not. I'd recommend them to any of our neighbours in Taplow without a second thought.",
+        author: "Sarah Adu",
+        role: "Homeowner, Taplow",
+        company: "Local Resident",
+      },
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "why-domestic-matters",
+          heading: "The Jobs That Build a Reputation in Your Own Community",
+          paragraphs: [
+            "Nexgen doesn't just work in Taplow — it's where the people behind Nexgen live. When a local homeowner asked us to handle their full domestic installation, we understood exactly what it meant: a family trusting us with the place they call home. That's a different kind of accountability to a commercial contract — and we take it just as seriously.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "the-standard-we-set",
+          heading: "Every Domestic Job Is a Showcase",
+          paragraphs: [
+            "Domestic work travels fast by word of mouth. A clean, tidy installation that leaves no trace means the next referral comes naturally. That's the standard we hold ourselves to on every domestic job — not because we have to, but because it's the right way to work in the community you serve.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "Done in 3 Days. Not a Mark Left Behind.",
+          paragraphs: [
+            "The Taplow installation was completed in 3 days. Full consumer unit replacement, new circuits throughout, lighting, power, and final accessories — tested, certified to BS 7671, and handed over with the property exactly as we found it. Sarah Adu's recommendation to her neighbours in Taplow says everything that needs to be said.",
           ],
           background: "muted",
         },
