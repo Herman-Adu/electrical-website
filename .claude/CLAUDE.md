@@ -31,6 +31,7 @@ The Claude Code harness injects a system-level "auto memory" instruction that wr
 | Content generation / copywriting  | `content-creation` skill                       |
 
 Dispatch pattern: `Agent(subagent_type="general-purpose", prompt="...")` — never invoke specialised agents directly from main context for large tasks.
+Obsidian pre-load: before dispatch, check lane/plan entity for `obsidian_note:` observation. If present and Obsidian online (`GET /obsidian/health`), fetch note (≤1,000 tokens) and embed as `[OBSIDIAN CONTEXT]` in the dispatch prompt.
 
 ## MCP Stack — localhost:3100 (Docker Compose — always first)
 
@@ -41,6 +42,7 @@ Dispatch pattern: `Agent(subagent_type="general-purpose", prompt="...")` — nev
 | `mcp__MCP_DOCKER__playwright__*`          | Browser automation and verification  | Manual browser    |
 | `mcp__MCP_DOCKER__sequential_thinking__*` | Complex multi-step reasoning         | —                 |
 | `mcp__MCP_DOCKER__nextjs_devtools__*`     | Build and type checking              | —                 |
+| `mcp__MCP_DOCKER__obsidian__*`            | Obsidian vault CRUD + search         | `curl localhost:27124` directly |
 
 Playwright: always set `PLAYWRIGHT_REUSE_SERVER=true` when dev server is running on port 3000.
 Docker compose: `pnpm docker:mcp:ready` starts all services. Health check: `pnpm docker:mcp:smoke`.

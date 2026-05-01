@@ -262,6 +262,45 @@ async function main() {
 
   // Tier 4: ELIMINATED — no session search
 
+  // Tier 5: Obsidian project note (optional, conditional)
+  let obsidianText = '';
+  if (!TIER1_ONLY && tokenBudgetRemaining > 600) {
+    const obsNote = featureEntity?.observations
+      ?.find(o => typeof o === 'string' && o.startsWith('obsidian_note:'))
+      ?.slice('obsidian_note:'.length)?.trim();
+
+    if (obsNote) {
+      if (VERBOSE) process.stderr.write(`[tier5] Loading Obsidian note: ${obsNote}\n`);
+      try {
+        const ctrl = new AbortController();
+        setTimeout(() => ctrl.abort(), 3000);
+        const res = await fetch(`${GATEWAY}/obsidian/tools/call`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: 'read_note', arguments: { path: obsNote } }),
+          signal: ctrl.signal,
+        });
+        if (res.ok) {
+          const raw = await res.json();
+          const noteText = raw?.content?.[0]?.json?.content ?? raw?.content?.[0]?.text ?? '';
+          if (noteText) {
+            const truncated = truncateToTokens(noteText, 600);
+            const noteToks = countTokens(truncated);
+            tokenBudgetRemaining -= noteToks;
+            obsidianText = truncated;
+            if (VERBOSE) process.stderr.write(`[tier5] Obsidian note loaded: ${noteToks} tokens\n`);
+          }
+        }
+      } catch {
+        if (VERBOSE) process.stderr.write('[tier5] Obsidian offline or note not found — skipped\n');
+      }
+    } else {
+      if (VERBOSE) process.stderr.write('[tier5] No obsidian_note: observation in lane entity — skipped\n');
+    }
+  } else {
+    if (VERBOSE) process.stderr.write('[tier5] Tier 5 skipped (budget exhausted or --tier1-only)\n');
+  }
+
   // Step 7: Citation verification (across all text)
   const allText = [tier1Text, tier2Text, learningsText, decisionsText].join('\n');
   const citations = verifyCitations(allText);
@@ -294,6 +333,10 @@ ${sections[1]?.text ?? '(unavailable)'}
 
   if (decisionsText.trim()) {
     injectionBlock += `\n### Decisions\n${decisionsText.trim()}\n`;
+  }
+
+  if (obsidianText.trim()) {
+    injectionBlock += `\n### Feature Context (Obsidian)\n${obsidianText.trim()}\n`;
   }
 
   const citationsSection = [

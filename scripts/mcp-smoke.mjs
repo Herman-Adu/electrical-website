@@ -36,6 +36,7 @@ const SERVICES = [
   { id: "executor", path: "/executor", name: "Executor Playwright" },
   { id: "wikipedia", path: "/wikipedia", name: "Wikipedia" },
   { id: "youtube", path: "/youtube", name: "YouTube Transcript" },
+  { id: "obsidian", path: "/obsidian", name: "Obsidian Vault", nonFatal: true },
 ];
 
 function makeRequest(
@@ -281,6 +282,42 @@ async function runTests() {
   // Test each MCP service
   for (const service of SERVICES) {
     console.log(`📍 ${service.name}:`);
+
+    // Special health check for Obsidian — proxy up is sufficient; desktop offline is expected
+    if (service.id === "obsidian") {
+      let obsidianPassed = true;
+      try {
+        const { status, data } = await makeRequest(
+          `${GATEWAY_URL}${service.path}/health`,
+          "GET",
+          {},
+          undefined,
+          5000,
+        );
+        if (status !== 200) {
+          console.log(`  ✗ GET ${service.path}/health [HTTP ${status}] (proxy unreachable)`);
+          obsidianPassed = false;
+        } else {
+          let parsed = {};
+          try { parsed = JSON.parse(data); } catch { /* non-JSON, still OK */ }
+          if (parsed?.obsidian === "offline") {
+            console.log(`  ✓ GET ${service.path}/health (proxy up; Obsidian desktop offline — expected)`);
+          } else {
+            console.log(`  ✓ GET ${service.path}/health (proxy up; Obsidian: ${parsed?.obsidian ?? "unknown"})`);
+          }
+        }
+      } catch (err) {
+        console.log(`  ⚠ GET ${service.path}/health [${err.message}] (non-fatal)`);
+        obsidianPassed = false;
+      }
+      // nonFatal: proxy failure is a warning only — do not fail overall test
+      if (!obsidianPassed) {
+        console.log(`  ⚠ ${service.name} proxy unreachable — non-fatal, continuing`);
+      }
+      results.push({ service: service.name, passed: true }); // always pass for nonFatal
+      console.log();
+      continue;
+    }
 
     // Test /SERVICE_ID/health
     const healthPassed = await testEndpoint(

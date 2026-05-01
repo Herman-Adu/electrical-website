@@ -304,17 +304,139 @@ async function main() {
     console.warn('[memory:stop] Skipping config update — Docker entity creation unconfirmed.');
   }
 
-  // Phase 9 (STUB): writeObsidianSessionNote()
-  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 9 skipped');
+  // Phase 9: writeObsidianSessionNote
+  const obsidianOnline = await checkObsidianHealth();
+  if (obsidianOnline) {
+    try {
+      const today = now.slice(0, 10);
+      const noteContent = `---
+dockerEntity: ${sessionName}
+entityType: session
+date: ${today}
+branch: ${currentBranch}
+---
 
-  // Phase 10 (STUB): writeObsidianDailyNote()
-  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 10 skipped');
+# Session: ${sessionName}
 
-  // Phase 11 (STUB): mirrorDecisions()
-  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 11 skipped');
+**Branch:** ${currentBranch}
+**Date:** ${today}
+
+## Recent Commits
+\`\`\`
+${gitLog.split('\n').slice(0, 5).join('\n')}
+\`\`\`
+
+## Notes
+- Session ended at: ${now}
+- Docker entity: ${entity}
+`;
+      const notePath = `Projects/Nexgen Electrical Innovations/Sessions/${sessionName}.md`;
+      const ok = await obsidianCall('create_or_update_note', { path: notePath, content: noteContent });
+      if (ok) {
+        console.log(`[memory:stop] [obsidian:phase9] Session note written: ${notePath}`);
+      } else {
+        console.warn('[memory:stop] [obsidian:phase9] create_or_update_note returned non-OK');
+      }
+    } catch (err) {
+      console.warn(`[memory:stop] [obsidian:phase9] Error (non-fatal): ${err?.message ?? String(err)}`);
+    }
+  } else {
+    console.log('[memory:stop] [obsidian:phase9] Obsidian offline — session note skipped');
+  }
+
+  // Phase 10: writeObsidianDailyNote
+  if (obsidianOnline) {
+    try {
+      const today = now.slice(0, 10);
+      const lastCommit = gitLog.split('\n')[0] ?? '(no commits)';
+      const dailyLine = `- ${currentBranch}: ${lastCommit} | session ${sessionName}\n`;
+      const ok = await obsidianCall('append_to_note', {
+        path: `Daily Notes/${today}.md`,
+        content: dailyLine,
+      });
+      if (ok) {
+        console.log('[memory:stop] [obsidian:phase10] Daily note updated');
+      } else {
+        console.warn('[memory:stop] [obsidian:phase10] append_to_note returned non-OK');
+      }
+    } catch (err) {
+      console.warn(`[memory:stop] [obsidian:phase10] Error (non-fatal): ${err?.message ?? String(err)}`);
+    }
+  } else {
+    console.log('[memory:stop] [obsidian:phase10] Obsidian offline — daily note skipped');
+  }
+
+  // Phase 11: mirrorDecisions — reads manifest written by PostToolUse hook
+  if (obsidianOnline) {
+    try {
+      const today = now.slice(0, 10);
+      const manifestPath = `/tmp/session-entities-${today}.json`;
+      let manifest = { entities: [] };
+      try {
+        manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+      } catch {
+        console.log('[memory:stop] [obsidian:phase11] No manifest — skipping decisions mirror');
+      }
+      const decideEntities = (manifest.entities ?? []).filter(e => (e?.name ?? '').startsWith('decide-'));
+      for (const ent of decideEntities) {
+        const obsLines = (ent.observations ?? []).map(o => `- ${o}`).join('\n');
+        const decisionContent = `---
+dockerEntity: ${ent.name}
+entityType: decision
+date: ${today}
+status: active
+---
+
+# ${ent.name}
+
+${obsLines}
+`;
+        const decPath = `Projects/Nexgen Electrical Innovations/Decisions/${ent.name}.md`;
+        await obsidianCall('create_or_update_note', { path: decPath, content: decisionContent });
+        console.log(`[memory:stop] [obsidian:phase11] Decision mirrored: ${decPath}`);
+      }
+      if (decideEntities.length === 0) {
+        console.log('[memory:stop] [obsidian:phase11] No decide-* entities in manifest');
+      }
+    } catch (err) {
+      console.warn(`[memory:stop] [obsidian:phase11] Error (non-fatal): ${err?.message ?? String(err)}`);
+    }
+  } else {
+    console.log('[memory:stop] [obsidian:phase11] Obsidian offline — decisions mirror skipped');
+  }
 
   // Always exit 0 — never fail session end
   process.exit(0);
+}
+
+// Obsidian MCP call via Caddy proxy
+async function obsidianCall(toolName, args, timeoutMs = 5000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(`${GATEWAY}/obsidian/tools/call`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: toolName, arguments: args }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(t);
+    return r.ok;
+  } catch {
+    clearTimeout(t);
+    return false;
+  }
+}
+
+async function checkObsidianHealth() {
+  try {
+    const ctrl = new AbortController();
+    setTimeout(() => ctrl.abort(), 2000);
+    const r = await fetch(`${GATEWAY}/obsidian/health`, { signal: ctrl.signal });
+    if (!r.ok) return false;
+    const data = await r.json();
+    return data?.obsidian === 'online';
+  } catch { return false; }
 }
 
 // Only run main() when executed directly (not when imported by tests)
