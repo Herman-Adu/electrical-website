@@ -19,12 +19,14 @@ import { ChevronDown } from "lucide-react";
 export interface DesktopNavSubmenuItem {
   name: string;
   href: string;
+  isHeader?: boolean;
 }
 
 export interface DesktopNavLink {
   name: string;
   href: string;
   submenu?: DesktopNavSubmenuItem[];
+  dropdownWidth?: string;
 }
 
 export interface DesktopNavProps {
@@ -63,6 +65,7 @@ export function DesktopNav({
 
   // Use prop-based isSubmenuActive if provided, else fall back to local logic
   const isSubmenuActive = (href: string): boolean => {
+    if (!href) return false;
     if (propIsSubmenuActive) {
       return propIsSubmenuActive(href);
     }
@@ -109,6 +112,7 @@ export function DesktopNav({
   };
 
   const getAriaCurrent = (href: string): "page" | "location" | undefined => {
+    if (!href) return undefined;
     const [rawPath, rawHash] = href.split("#");
     const targetPath = normalizePath(rawPath || "/");
     const currentPath = normalizePath(pathname);
@@ -126,7 +130,7 @@ export function DesktopNav({
     return navLinks.reduce<Record<string, boolean>>((accumulator, link) => {
       const topLevel = isTopLevelActive(link.href, Boolean(link.submenu));
       const submenu = Boolean(
-        link.submenu?.some((item) => isSubmenuActive(item.href)),
+        link.submenu?.some((item) => !item.isHeader && isSubmenuActive(item.href)),
       );
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
@@ -259,11 +263,23 @@ export function DesktopNav({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute left-0 top-full mt-4 w-56 backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 border border-slate-500/20 dark:border-electric-cyan/20 rounded-lg pt-2 shadow-lg"
+                      className={`absolute left-0 top-full mt-4 ${link.dropdownWidth ?? "w-56"} max-h-[80vh] overflow-y-auto backdrop-blur-lg supports-backdrop-filter:bg-background/85 dark:supports-backdrop-filter:bg-background/75 bg-background/90 dark:bg-background/85 border border-slate-500/20 dark:border-electric-cyan/20 rounded-lg pt-2 shadow-lg`}
                     >
                       {link.submenu.map((item) => {
                         const submenuActive = isSubmenuActive(item.href);
                         const submenuRefKey = `${link.name}-${item.name}`;
+
+                        if (item.isHeader) {
+                          return (
+                            <div
+                              key={item.name}
+                              aria-hidden="true"
+                              className="px-4 pt-3 pb-1 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/60 font-semibold"
+                            >
+                              {item.name}
+                            </div>
+                          );
+                        }
 
                         return (
                           <button

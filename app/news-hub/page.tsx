@@ -1,52 +1,41 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
-import {
-  NewsHubBentoGrid,
-  NewsHubFeaturedSection,
-  NewsHubGridSection,
-  NewsHubHero,
-} from "@/components/news-hub";
+import { NewsHubBentoGrid, NewsHubFeaturedSection, NewsHubHero } from "@/components/news-hub";
+import { NewsListSkeleton } from "@/components/news-hub/news-list-skeleton";
+import { NewsHubFilterClient } from "@/components/news-hub/news-hub-filter-client";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedNewsArticleByCategory,
   getNewsArticleListItemsByCategory,
   getSidebarCardsByCategory,
-  isNewsCategorySlug,
   newsCategories,
   newsHubMetricItems,
   newsHubIntroData,
+  allNewsArticles,
 } from "@/data/news";
-import { safeValidateNewsHubParams } from "@/lib/actions/validate-search-params";
 import { createNewsHubListMetadata } from "@/lib/metadata-news";
-import type { NewsCategorySlug } from "@/types/news";
 
-export const metadata: Metadata = createNewsHubListMetadata();
 export const revalidate = 3600;
+export const metadata: Metadata = createNewsHubListMetadata();
 
-export default async function NewsHubPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ category?: string | string[] }>;
-}) {
-  const resolvedSearchParams = await searchParams;
-  const validatedParams = await safeValidateNewsHubParams(
-    resolvedSearchParams || {},
-  );
-
-  const categoryParam = validatedParams.category;
-  const activeCategory: NewsCategorySlug =
-    categoryParam && isNewsCategorySlug(categoryParam) ? categoryParam : "all";
-
-  const featuredArticle = getFeaturedNewsArticleByCategory(activeCategory);
-  const listItems = getNewsArticleListItemsByCategory(activeCategory);
-  const sidebarCards = getSidebarCardsByCategory(activeCategory);
+export default async function NewsHubPage() {
+  const allItems = getNewsArticleListItemsByCategory("all");
+  const sidebarCards = getSidebarCardsByCategory("all");
+  const featuredArticle = getFeaturedNewsArticleByCategory("all");
+  const counts: Record<string, number> = {
+    all: allNewsArticles.length,
+    ...Object.fromEntries(
+      newsCategories.map((c) => [c.slug, allNewsArticles.filter((a) => a.category === c.slug).length])
+    ),
+  };
 
   return (
     <main className="relative bg-background">
       <NewsHubHero
         categories={newsCategories}
-        activeCategory={activeCategory}
-        totalArticles={listItems.length}
+        activeCategory="all"
+        totalArticles={allNewsArticles.length}
       />
 
       <ContentBreadcrumb
@@ -59,27 +48,27 @@ export default async function NewsHubPage({
 
       <SectionIntro data={newsHubIntroData} />
 
-      {featuredArticle ? (
-        <NewsHubFeaturedSection article={featuredArticle} />
-      ) : null}
+      {featuredArticle ? <NewsHubFeaturedSection article={featuredArticle} /> : null}
 
       <section className="section-container section-padding bg-background">
         <div className="section-content max-w-6xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-              Hub Performance
-            </span>
+            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">Hub Performance</span>
             <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
           </div>
           <NewsHubBentoGrid items={newsHubMetricItems} />
         </div>
       </section>
 
-      <NewsHubGridSection
-        items={listItems}
-        sidebarCards={sidebarCards}
-      />
+      <Suspense fallback={<NewsListSkeleton />}>
+        <NewsHubFilterClient
+          categories={newsCategories}
+          items={allItems}
+          sidebarCards={sidebarCards}
+          counts={counts}
+        />
+      </Suspense>
 
       <Footer />
     </main>
