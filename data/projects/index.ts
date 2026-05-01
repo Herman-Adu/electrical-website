@@ -11,6 +11,28 @@ export const projectCategories: ProjectCategory[] = [
     slug: "residential",
     label: "Residential",
     description: "Home and domestic electrical delivery projects.",
+    isSector: true,
+  },
+  {
+    slug: "commercial",
+    label: "Commercial",
+    description:
+      "Full Cat B fit-out and electrical infrastructure for commercial and logistics facilities.",
+    isSector: true,
+  },
+  {
+    slug: "industrial",
+    label: "Industrial",
+    description:
+      "High-voltage infrastructure, logistics, and manufacturing electrical projects.",
+    isSector: true,
+  },
+  {
+    slug: "community",
+    label: "Community",
+    description:
+      "Public sector, community facilities, and social infrastructure electrical projects.",
+    isSector: true,
   },
   {
     slug: "commercial-lighting",
@@ -18,24 +40,14 @@ export const projectCategories: ProjectCategory[] = [
     description:
       "Retail, office, and mixed-use lighting modernisation projects.",
     showInNav: false,
+    isSector: false,
   },
   {
     slug: "power-boards",
     label: "Power Boards",
     description:
       "Distribution, switchgear, and board upgrade infrastructure projects.",
-  },
-  {
-    slug: "community",
-    label: "Community",
-    description:
-      "Public sector, community facilities, and social infrastructure electrical projects.",
-  },
-  {
-    slug: "commercial",
-    label: "Commercial",
-    description:
-      "Full Cat B fit-out and electrical infrastructure for commercial and logistics facilities.",
+    isSector: false,
   },
 ];
 
@@ -49,8 +61,8 @@ export const allProjects: Project[] = [
   {
     id: "proj-001",
     slug: "west-dock-industrial-upgrade",
-    category: "power-boards",
-    categoryLabel: "Power Boards",
+    category: "industrial",
+    categoryLabel: "Industrial",
     title: "West Dock Industrial Upgrade",
     clientSector: "Industrial",
     status: "in-progress",
@@ -980,8 +992,8 @@ export const allProjects: Project[] = [
   {
     id: "proj-007",
     slug: "heathrow-cargo-substation-expansion",
-    category: "power-boards",
-    categoryLabel: "Power Boards",
+    category: "industrial",
+    categoryLabel: "Industrial",
     title: "Heathrow Cargo Substation Expansion",
     clientSector: "Aviation",
     status: "completed",

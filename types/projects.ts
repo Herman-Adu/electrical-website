@@ -6,13 +6,15 @@ export type ProjectCategorySlug =
   | "commercial-lighting"
   | "power-boards"
   | "community"
-  | "commercial";
+  | "commercial"
+  | "industrial";
 
 export interface ProjectCategory {
   slug: Exclude<ProjectCategorySlug, "all">;
   label: string;
   description: string;
   showInNav?: boolean;
+  isSector: boolean;
 }
 
 export interface ProjectKpis {

@@ -10,6 +10,7 @@ import { BrandSection } from "@/components/navigation/brand-section";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
 import { ActionBar } from "@/components/navigation/action-bar";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { projectCategories } from "@/data/projects";
 
 const navLinks = [
   {
@@ -57,9 +58,12 @@ const navLinks = [
     submenu: [
       { name: "All Projects", href: "/projects" },
       { name: "Browse Categories", href: "/projects/category" },
-      { name: "Residential", href: "/projects/category/residential" },
-      { name: "Power Boards", href: "/projects/category/power-boards" },
-      { name: "Commercial", href: "/projects/category/commercial" },
+      ...projectCategories
+        .filter((c) => c.isSector)
+        .map((c) => ({
+          name: c.label,
+          href: `/projects/category/${c.slug}`,
+        })),
     ],
   },
   {
