@@ -1,6 +1,6 @@
 {
-  "branch": "feat/projects-taxonomy-nav-preflight",
-  "entity": "feat-projects-taxonomy-nav-preflight",
-  "fallback": "f83bae9 chore: memory lane config sync — session state + taplow lane close | e87ccf9 docs: design spec — projects taxonomy, filter bar, category redesign, docker-preflight skill | 253a49f feat: Taplow domestic installation � residential flagship project (#126) (#126)",
-  "updatedAt": "2026-05-01T16:52:29.398Z"
+  "branch": "main",
+  "entity": "electrical-website-state",
+  "fallback": "575d6e1 feat: news-hub topic filter pages — per-topic hero, intro, and article grid | 6f4ec40 feat: news-hub phase 9 — topic filter, channel cards, PPR filter client, nav restructure | 4629eca feat: projects taxonomy, nav, filter bar, category redesign, docker-preflight (#127)",
+  "updatedAt": "2026-05-01T22:58:37.586Z"
 }
