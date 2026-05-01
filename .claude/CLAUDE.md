@@ -73,6 +73,16 @@ Auto-managed: PostCheckout hook (activate/pause), Stop hook (sync session), Post
 Manual commands: `pnpm lane:activate` | `pnpm memory:sync` | `pnpm memory:status` | `pnpm memory:stale`
 Token budget: ≤3,000 tokens at session start — enforced by `scripts/memory-rehydrate.mjs`
 
+## Scripts Runtime Policy
+
+| Context | Runtime | Reason |
+| ------- | ------- | ------ |
+| Claude Code hooks | Node.js MJS | Guaranteed Claude Code runtime |
+| Session scripts (`scripts/*.mjs`) | Node.js MJS | Consistent with hooks |
+| Git hooks (post-checkout, post-commit) | Python 3 | Atomic `Path.replace()`, no npm needed |
+
+Never wire MJS as a git hook. Never wire Python as a Claude Code hook.
+
 ## Self-Check (before closing session)
 
 - [ ] All work committed and pushed
