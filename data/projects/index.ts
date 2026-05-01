@@ -1665,6 +1665,272 @@ export const allProjects: Project[] = [
       ],
     },
   },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // LADBROKES WOKING — Retail Electrical Fit-Out
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-ladbrokes-woking-001",
+    slug: "ladbrokes-woking-retail-fit-out",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Ladbrokes Woking — Retail Electrical Fit-Out",
+    clientSector: "Retail & Betting",
+    status: "completed",
+    description:
+      "Full electrical Cat B fit-out for Ladbrokes' 12,000 sq ft FTSE100-standard Woking retail betting shop across two concurrent wings — delivered live in an operational retail environment.",
+    coverImage: {
+      src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-cover-primary.jpg",
+      alt: "Ladbrokes Woking retail electrical fit-out — completed trading floor",
+    },
+    kpis: {
+      budget: "£180K",
+      timeline: "10 weeks",
+      capacity: "400A TPN",
+      location: "Woking, Surrey",
+    },
+    tags: ["Retail", "Cat B Fit-Out", "Live Environment", "FTSE100"],
+    progress: 100,
+    isFeatured: false,
+    publishedAt: "2026-04-01T09:00:00.000Z",
+    updatedAt: "2026-05-01T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Commercial Project",
+        headlineWords: ["Ladbrokes", "Woking.", "Delivered", "Live."],
+        leadParagraph:
+          "When Woodhouse Contracts brought Nexgen in for Ladbrokes' Woking flagship, the brief was unambiguous: FTSE100 specification, zero customer disruption, 10-week delivery. Nexgen said yes — and delivered exactly that across two concurrent wings of a live retail betting shop.",
+        bodyParagraphs: [
+          "The Woking fit-out is a full Cat B electrical installation across 12,000 sq ft of retail betting space — north and south wings progressing simultaneously on independent programme tracks, with every phase of work scheduled around the shop's trading hours to ensure not a single customer interaction was lost.",
+          "Nexgen's installation team worked in close coordination with Woodhouse Contracts throughout, from pre-construction planning to final BS 7671 sign-off — delivering a complete electrical installation that met Entain plc's exacting standards for their FTSE100-listed retail estate.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "FTSE100 Specification",
+            description:
+              "Every installation met the exacting electrical standards required for a listed-company retail estate — from the 400A TPN main board through to final fix and certification.",
+          },
+          {
+            num: "02",
+            title: "Two-Wing Phasing",
+            description:
+              "North and south wings progressed simultaneously with independent programme tracks — no cross-dependency delays, maximum installation velocity.",
+          },
+          {
+            num: "03",
+            title: "Live Retail Environment",
+            description:
+              "Work executed during off-peak hours to maintain customer operations throughout the full 10-week programme — zero trading disruption.",
+          },
+          {
+            num: "04",
+            title: "Programme Certainty",
+            description:
+              "Daily coordination with Woodhouse Contracts ensured every trade handover landed on schedule, with no programme-critical incidents across the full duration.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "400A TPN Distribution Board",
+          description:
+            "Main 400A TPN distribution board installation — serving both wings from a consolidated intake point, with metering and protection to Entain specification.",
+        },
+        {
+          icon: "Cable",
+          title: "First Fix Wiring",
+          description:
+            "Full first-fix wiring across both north and south wings, with containment and cabling routed through ceiling voids ahead of follow-on trades.",
+        },
+        {
+          icon: "Building2",
+          title: "Consumer Unit Installation",
+          description:
+            "Consumer unit installation across both wings, circuit-tested and certified to BS 7671 — providing independent protection and load management for each zone.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "LED Lighting — Trading Floor & BOH",
+          description:
+            "LED lighting design and installation across the full trading floor and back-of-house areas, meeting Ladbrokes' brand specification and CIBSE lux level guidance.",
+        },
+        {
+          icon: "Shield",
+          title: "Emergency Lighting",
+          description:
+            "Full emergency lighting system installation — maintained fittings at all escape routes, exits, and risk areas — installed and commissioned to BS 5266.",
+        },
+        {
+          icon: "Layers",
+          title: "Cable Containment & Tray Routing",
+          description:
+            "Cable containment and tray routing through ceiling voids across both wings, co-ordinated with structural and fit-out trades to maintain programme sequence.",
+        },
+        {
+          icon: "Settings",
+          title: "Second Fix & Final Connection",
+          description:
+            "Complete second-fix including socket outlets, accessories, EPOS power provisions, self-service terminal supplies, and final connections throughout both wings.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing, Commissioning & Certification",
+          description:
+            "Full NICEIC-compliant circuit testing, BS 7671 certification, snagging, and formal handover to Woodhouse Contracts at practical completion.",
+        },
+      ],
+      challenge:
+        "Running two concurrent wing programmes inside a live retail betting shop — where any disruption to trading meant direct revenue loss for the client — demanded exceptional coordination, off-peak scheduling, and a phased approach that maintained operational continuity at every stage. The FTSE100 specification from Entain plc left no room for non-compliant workmanship or programme overruns.",
+      solution:
+        "Nexgen implemented a wing-by-wing phasing strategy with dedicated teams on each zone. Daily programme huddles with Woodhouse Contracts kept every trade sequenced correctly, and all high-impact work — distribution board energisation, ceiling void access, floor-level containment — was scheduled outside customer-facing hours. Pre-construction planning locked in access windows before mobilisation, eliminating surprises during the live programme.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Mobilisation & First Fix",
+          description:
+            "Site setup, cable containment installation, and first-fix wiring across both wings — co-ordinated with Woodhouse to avoid trade conflicts.",
+          duration: "3 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "Distribution Board & Containment",
+          description:
+            "400A TPN main board installation and full cable tray routing through ceiling voids — energisation scheduled outside trading hours.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Second Fix & Lighting",
+          description:
+            "Second-fix wiring, LED lighting installation, emergency lighting fit, and consumer unit commissioning across both wings simultaneously.",
+          duration: "3 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Testing, Commissioning & Handover",
+          description:
+            "Full circuit testing, BS 7671 certification, snagging remedials, and formal handover documentation issued to Woodhouse Contracts.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-cover-primary.jpg",
+          alt: "Ladbrokes Woking — completed trading floor electrical installation",
+          caption: "Completed trading floor — full Cat B electrical fit-out",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-trading-floor-overview.jpg",
+          alt: "Ladbrokes Woking — trading floor electrical overview",
+          caption: "Trading floor overview — north and south wings complete",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-reception-entrance.jpg",
+          alt: "Ladbrokes Woking — reception and entrance electrical installation",
+          caption: "Reception entrance — lighting and power installation",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-consumer-unit-installation.jpg",
+          alt: "Ladbrokes Woking — consumer unit installation",
+          caption: "Consumer unit installation — fully certified to BS 7671",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-cable-containment-tray.jpg",
+          alt: "Ladbrokes Woking — cable containment tray routing",
+          caption: "Cable containment tray — routed through ceiling voids",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-first-fix-wiring.jpg",
+          alt: "Ladbrokes Woking — first fix wiring installation",
+          caption: "First fix wiring — both wings progressing simultaneously",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-lighting-installation.jpg",
+          alt: "Ladbrokes Woking — LED lighting installation",
+          caption: "LED lighting installation — trading floor and back-of-house",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-north-wing-fit-out.jpg",
+          alt: "Ladbrokes Woking — north wing electrical fit-out in progress",
+          caption: "North wing fit-out — independent programme track",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-south-wing-fit-out.jpg",
+          alt: "Ladbrokes Woking — south wing electrical fit-out in progress",
+          caption: "South wing fit-out — simultaneous with north wing",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-breakout-area.jpg",
+          alt: "Ladbrokes Woking — breakout area electrical installation",
+          caption: "Breakout area — secondary circuit installation complete",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-second-fix-complete.jpg",
+          alt: "Ladbrokes Woking — second fix electrical installation complete",
+          caption: "Second fix complete — ready for lighting commissioning",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-testing-commissioning.jpg",
+          alt: "Ladbrokes Woking — electrical testing and commissioning",
+          caption: "Testing and commissioning — full circuit verification",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-completed-trading-floor.jpg",
+          alt: "Ladbrokes Woking — completed trading floor",
+          caption: "Completed trading floor — FTSE100 specification met",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-electrical-distribution-board.jpg",
+          alt: "Ladbrokes Woking — 400A TPN electrical distribution board",
+          caption: "400A TPN distribution board — main electrical supply point",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-emergency-lighting-install.jpg",
+          alt: "Ladbrokes Woking — emergency lighting installation",
+          caption: "Emergency lighting — full system installed and tested",
+        },
+        {
+          src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-final-inspection.jpg",
+          alt: "Ladbrokes Woking — final electrical inspection",
+          caption: "Final inspection — BS 7671 certification complete",
+        },
+      ],
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "earning-the-brief",
+          heading: "Woodhouse Brought Nexgen In for a Reason",
+          paragraphs: [
+            "Woodhouse Contracts had seen Nexgen deliver on complex commercial fit-outs before. When Entain plc — Ladbrokes Coral's parent group — needed a reliable electrical subcontractor for their Woking flagship, Woodhouse didn't hesitate. The brief was clear: FTSE100 standards, no retail disruption, 10-week delivery. Nexgen said yes.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "working-in-a-live-retail-environment",
+          heading: "Betting Shops Don't Close for Electrical Works",
+          paragraphs: [
+            "Every phase of this project happened while Ladbrokes served customers. That meant no noisy containment work during peak hours, no ceiling access above active trading areas, and no disruption to the EPOS and self-service systems running 12 hours a day. Nexgen's team planned around the retail schedule — early starts, late finishes, and a daily sync with Woodhouse to keep the programme intact.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "Delivered On Time. Zero Disruption. FTSE100 Sign-Off.",
+          paragraphs: [
+            "The Ladbrokes Woking fit-out completed on programme at week 10. Both wings handed over clean, certified to BS 7671, and signed off by the Entain compliance team. No snagging carryovers. No programme slippage. Woodhouse Contracts reported zero customer complaints throughout the works — the kind of result that builds long-term subcontractor relationships.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [

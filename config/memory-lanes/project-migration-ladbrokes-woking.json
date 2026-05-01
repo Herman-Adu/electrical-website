@@ -1,0 +1,11 @@
+{
+  "memoryLane": {
+    "id": "feat-project-migration-ladbrokes-woking",
+    "branch": "feat/project-migration-ladbrokes-woking",
+    "dockerEntity": "feat-project-migration-ladbrokes-woking",
+    "status": "active",
+    "openedAt": "2026-04-30T22:27:11.348Z",
+    "mergedAt": null,
+    "fallback_summary": "Auto-registered branch: feat/project-migration-ladbrokes-woking"
+  }
+}

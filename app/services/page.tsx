@@ -7,6 +7,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { SectionIntro, ContentBreadcrumb } from "@/components/shared";
 import { ServiceRequestFormContainer } from "@/features/service-request";
 import { servicesIntroData } from "@/data/services";
+import { getFeaturedProjectByPlacement } from "@/data/featured-projects";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Services | Nexgen Electrical Innovations",
@@ -26,6 +27,15 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function ServicesPage() {
+  const featuredProjectData = getFeaturedProjectByPlacement("servicesPage");
+  const servicesFeaturedProject = featuredProjectData
+    ? {
+        tag: featuredProjectData.categoryLabel,
+        title: featuredProjectData.title,
+        excerpt: featuredProjectData.description,
+      }
+    : undefined;
+
   return (
     <main>
       <ServicesHero />
@@ -61,7 +71,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <ServicesCTA />
+      <ServicesCTA featuredProject={servicesFeaturedProject} />
 
       <Footer />
     </main>
