@@ -66,7 +66,7 @@ Observations: arrays of strings — never objects. Every entity requires `entity
 
 ## Memory Lanes
 
-Active lane: `config/active-memory-lanes.json` (`status` field — must be `active` to match current branch)
+Active lane: `config/active-branch.json` (`branch` field — must match current git branch)
 Lifecycle: PENDING → ACTIVE → PAUSED/COMPLETED → ARCHIVED → HARD_DELETED (automated via hooks)
 Auto-managed: PostCheckout hook (activate/pause), Stop hook (sync session), PostCommit hook (observe)
 Manual commands: `pnpm lane:activate` | `pnpm memory:sync` | `pnpm memory:status` | `pnpm memory:stale`

@@ -1,11 +1,12 @@
 ---
 topic: memory-lanes-context-switching
 audience: senior-dev
-status: diagram-enhanced
+status: production-validated
 date: 2026-04-30
-wordCount: ~2300
+wordCount: ~2700
 publicationTarget: blog
 series: ai-memory-architecture
+lastValidated: 2026-05-01
 ---
 
 # Memory Lanes: How We Gave Our AI Context-Switching Superpowers for Multi-Branch Development
@@ -167,6 +168,16 @@ Zero manual steps. Zero context loss.
 
 The other concrete result: the `learn-transforms-preserve-scroll-anchors` learning entity in Docker — discovered during Phase 8 when we found that CSS `transform` and `filter` effects don't affect `getBoundingClientRect()` layout calculations — survived every branch switch. Future sessions on related branches can search for and load that learning without re-deriving it from scratch.
 
+**Commercial migration series — three branches, zero context loss:**
+
+The phase-8 branch was one branch over many sessions. The commercial migration series tested something different: three separate feature branches, each a distinct project migration, with context needing to carry across all three.
+
+DHL Reading (`feat/project-migration-dhl-reading`), Medivet Watford (`feat/project-migration-medivet-watford`), and Ladbrokes Woking (`feat/project-migration-ladbrokes-woking`) each ran as independent branches. The PostCheckout hook activated the correct lane on every switch. The Stop hook synced on every session end. Docker entities accumulated the decisions and learnings from each migration.
+
+The Ladbrokes session — which came third — benefited from both prior migrations. The `getFeaturedProjectByPlacement()` architecture was in Docker from the DHL session. The `aboutPage` placement pattern was in Docker from the Medivet session. The Ladbrokes agent could reference both without any orchestrator re-reads.
+
+Total session startup memory used across all three migrations: **876 / 3,000 tokens**. The tier-based rehydration budget held. Completed lanes were marked COMPLETED and no longer loaded at startup. The system managed itself.
+
 ---
 
 ## Building Your Own
@@ -196,9 +207,9 @@ If your AI tool supports "custom context injection at session start" — that's 
 
 Two things we'd change if we rebuilt this today:
 
-**Token budget is a blunt instrument.** We enforce ≤3,000 tokens globally, but the right budget depends on how complex the active branch is. A branch with 30+ commits and 5 related Docker entities needs more budget than a one-commit hotfix. A smarter rehydration script would allocate budget based on lane age and entity count, not a fixed cap.
+**Token budget is a blunt instrument.** We enforce ≤3,000 tokens globally, but the right budget depends on how complex the active branch is. A branch with 30+ commits and 5 related Docker entities needs more budget than a one-commit hotfix. A smarter rehydration script would allocate budget based on lane age and entity count, not a fixed cap. *Update: this is being addressed in the orchestration-optimization feature — dynamic budget allocation based on lane age and entity count, rather than a fixed 3,000-token cap. Target: session startup drops from ~3,000 to ~500 tokens by making Docker the canonical source and eliminating the parallel config JSON state.*
 
-**PAUSED lane summaries degrade too fast.** After seven days paused, a lane drops to one-line reference. In practice, we've resumed branches after a two-week break expecting more context than we got. The degradation curve should be configurable per branch type — feature branches should retain more context longer than hotfix branches.
+**PAUSED lane summaries degrade too fast.** After seven days paused, a lane drops to one-line reference. In practice, we've resumed branches after a two-week break expecting more context than we got. The degradation curve should be configurable per branch type — feature branches should retain more context longer than hotfix branches. *Update: the orchestration-optimization plan includes configurable degradation curves per branch type — feature branches will retain more context longer than hotfix branches.*
 
 Both are fixable with more configuration. The core pattern — hook-driven, branch-scoped, tier-based — is solid.
 

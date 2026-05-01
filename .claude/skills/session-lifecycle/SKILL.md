@@ -145,7 +145,7 @@ node scripts/mcp-memory-call.mjs create_relations '{
 # [create learning/decision entities if applicable]
 
 # Link session to active lane entity:
-# Get lane entity name from config/active-memory-lanes.json (.laneEntityName field)
+# Get lane entity name from config/active-branch.json (.entity field)
 node scripts/mcp-memory-call.mjs create_relations '{
   "relations": [{
     "from": "session-YYYY-MM-DD-SEQ",
@@ -194,7 +194,7 @@ This skill is the **manual override** — hooks fire automatically but this skil
 - [ ] Relations wired between new entities and existing context
 - [ ] No .md memory files written during this session
 - [ ] Active lane entity linked to session via `documents` relation
-- [ ] `active-memory-lanes.json` `lastSyncedAt` updated (check via `pnpm memory:status`)
+- [ ] `active-branch.json` `updatedAt` updated (check via `pnpm memory:status`)
 - [ ] `emergencySummary` is ≤150 words and reflects current work
 
 ---

@@ -1,11 +1,12 @@
 ---
 topic: beyond-rag-knowledge-graphs
 audience: rag-engineer
-status: diagram-enhanced
+status: production-validated
 date: 2026-04-30
 wordCount: ~2800
 publicationTarget: blog
 series: ai-memory-architecture
+lastValidated: 2026-05-01
 ---
 
 # Beyond RAG: Why We Built a Knowledge Graph for AI Development Memory
@@ -218,6 +219,14 @@ The RAG market is real and growing. The technology is mature and battle-tested. 
 We chose the harder path. The naming discipline is real overhead. The initial build-up period is real friction. And three months into production use, we have 120+ session handoffs without context loss, deterministic recall of every architectural decision we've made, and a graph we can query from any session with a single line.
 
 That trade-off, for us, is clearly worth it.
+
+**Production validation — three commercial migrations:**
+
+The knowledge graph approach was validated across three commercial project migrations: DHL Reading, Medivet Watford, and Ladbrokes Woking. Each migration ran on its own feature branch, each session started by querying the Docker graph, and each session end wrote new entities back.
+
+The multi-hop queries that would require multiple RAG retrievals with degrading accuracy at each hop resolved here as single deterministic traversals. When the Ladbrokes session needed the `getFeaturedProjectByPlacement()` architecture, a single `search_nodes("featured-placement")` call returned the `decide-` entity created during the DHL migration — three branches earlier, weeks prior. No re-embedding, no re-indexing, no probability threshold to tune. The entity was there; the traversal returned it.
+
+The graph accumulated without degradation across all three migrations. The third migration benefited from decisions stored in the first without any manual retrieval configuration. This is the core property that RAG cannot replicate at the relational level: a graph that grows richer with each session, where older decisions remain as structurally accessible as recent ones, and where the connections between them carry typed semantics that embeddings discard.
 
 ---
 

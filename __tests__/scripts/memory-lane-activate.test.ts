@@ -24,20 +24,20 @@ vi.mock('path', () => ({
 import { isAlreadyActive, writeJsonAtomic } from '../../scripts/memory-lane-activate.mjs';
 
 describe('isAlreadyActive', () => {
-  it('returns true when currentBranch matches activeLanes.currentBranch', () => {
-    expect(isAlreadyActive('main', { currentBranch: 'main', status: 'active' })).toBe(true);
+  it('returns true when currentBranch matches config.branch', () => {
+    expect(isAlreadyActive('main', { branch: 'main', entity: 'electrical-website-state' })).toBe(true);
   });
 
   it('returns false when branches differ', () => {
-    expect(isAlreadyActive('main', { currentBranch: 'feat/other', status: 'active' })).toBe(false);
+    expect(isAlreadyActive('main', { branch: 'feat/other', entity: 'feat-other' })).toBe(false);
   });
 
-  it('returns false when activeLanes is null', () => {
+  it('returns false when config is null', () => {
     expect(isAlreadyActive('main', null)).toBe(false);
   });
 
-  it('returns false when activeLanes has no currentBranch', () => {
-    expect(isAlreadyActive('main', { status: 'active' })).toBe(false);
+  it('returns false when config has no branch', () => {
+    expect(isAlreadyActive('main', { entity: 'electrical-website-state' })).toBe(false);
   });
 });
 

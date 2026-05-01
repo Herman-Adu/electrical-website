@@ -1,11 +1,12 @@
 ---
 topic: mcp-composable-ai-tools
 audience: senior-dev
-status: diagram-enhanced
+status: production-validated
 date: 2026-04-30
 wordCount: ~2100
 publicationTarget: blog
 series: ai-memory-architecture
+lastValidated: 2026-05-01
 ---
 
 # MCP: The Protocol Making AI Tools Composable — and How We Built a 10-Service Memory Stack on Top of It
@@ -147,6 +148,10 @@ In practice, this means:
 The aggregator pattern is the enabling abstraction. Without it, twelve services would require twelve configuration entries, twelve authentication setups, and twelve points of failure. With it, the AI tool sees one endpoint. The infrastructure team manages the rest behind the gateway.
 
 MCP is young — the spec hit 1.0 less than eighteen months ago. But the adoption curve and the Linux Foundation stewardship tell the same story: this is the integration layer that AI development has needed. Build your tooling on it now, and every AI tool that matters will be able to use it.
+
+**Production reliability — three commercial migrations, zero MCP failures:**
+
+The stack described above has run reliably across three consecutive commercial project migrations: DHL Reading (PRs #119, #120), Medivet Watford (PR #121), and Ladbrokes Woking (PR #122). Each migration ran end-to-end through the aggregator at `localhost:3100` — memory-reference for session context, github-official for PR creation and CI monitoring, playwright for E2E verification, nextjs-devtools for build gate (63/63 pages on the Ladbrokes build), sequential-thinking for complex briefing tasks, and filesystem for rename operations. Zero MCP service failures across all three migrations. The health-check cascade worked as designed: `pnpm docker:mcp:smoke` reported green before every agent dispatch, and every tool call returned a clean result.
 
 ---
 

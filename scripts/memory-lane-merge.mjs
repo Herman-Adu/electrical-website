@@ -138,26 +138,8 @@ async function main() {
     }
   }
 
-  // Step 6: Update active-memory-lanes.json phaseSequence
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-  const activeLanes = readJson(activeLanesPath) ?? {};
-
-  if (Array.isArray(activeLanes.phaseSequence)) {
-    let updated = false;
-    for (const entry of activeLanes.phaseSequence) {
-      if (entry.entity === entityName) {
-        entry.status = 'merged';
-        updated = true;
-        break;
-      }
-    }
-    if (updated) {
-      writeJson(activeLanesPath, activeLanes);
-      console.log(`[memory:merge] phaseSequence entry for "${entityName}" set to "merged".`);
-    } else {
-      console.log(`[memory:merge] No phaseSequence entry found for "${entityName}" — skipping phaseSequence update.`);
-    }
-  }
+  // Step 6: phaseSequence removed — active-branch.json has no phaseSequence field
+  // Docker entity already updated in Step 4 above
 
   // Step 7: Print JSON summary for GitHub Actions step output
   const summary = {

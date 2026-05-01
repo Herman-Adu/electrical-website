@@ -2,7 +2,7 @@
 // scripts/memory-lane-commit.mjs
 // Appends commit metadata to active lane Docker entity (PostCommit hook)
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, renameSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
 
@@ -16,7 +16,11 @@ function readJson(path) {
 }
 
 function writeJson(path, data) {
-  try { writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf8'); } catch { /* ignore */ }
+  const tmp = `${path}.tmp`;
+  try {
+    writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', 'utf8');
+    renameSync(tmp, path);
+  } catch { /* ignore */ }
 }
 
 async function memoryCall(toolName, args, timeoutMs = 1800) {
@@ -46,16 +50,27 @@ async function checkDockerHealth() {
   } catch { return false; }
 }
 
-async function main() {
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-  const activeLanes = readJson(activeLanesPath);
+// Build updated fallback: prepend new commit, keep last 3
+function buildUpdatedFallback(currentFallback, newCommitLine) {
+  const existing = (currentFallback ?? '').split(' | ').map(s => s.trim()).filter(Boolean);
+  const updated = [newCommitLine, ...existing].slice(0, 3);
+  return updated.join(' | ');
+}
 
-  // Only run if lane is active
-  if (!activeLanes || activeLanes.status !== 'active') {
+async function main() {
+  const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
+  const config = readJson(activeBranchPath);
+
+  // Get current git branch
+  let currentGitBranch = 'unknown';
+  try { currentGitBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim(); } catch { /* ignore */ }
+
+  // Only run if branch matches configured branch
+  if (!config || config.branch !== currentGitBranch) {
     process.exit(0);
   }
 
-  const laneEntityName = activeLanes.laneEntityName ?? 'electrical-website-state';
+  const entity = config.entity ?? 'electrical-website-state';
 
   // Get commit info
   let commitInfo = 'unknown commit';
@@ -84,15 +99,21 @@ async function main() {
   if (dockerOnline) {
     await memoryCall('add_observations', {
       observations: [{
-        entityName: laneEntityName,
+        entityName: entity,
         contents: [observation],
       }],
     }, 1800);
   }
 
-  // Update lastSyncedAt in config
-  activeLanes.lastSyncedAt = now;
-  writeJson(activeLanesPath, activeLanes);
+  // Update active-branch.json — updatedAt + fallback only
+  const newFallback = buildUpdatedFallback(config.fallback, commitInfo);
+  const updatedConfig = {
+    branch: config.branch,
+    entity: config.entity,
+    fallback: newFallback,
+    updatedAt: now,
+  };
+  writeJson(activeBranchPath, updatedConfig);
 
   process.exit(0);
 }

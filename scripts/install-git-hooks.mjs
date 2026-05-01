@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // scripts/install-git-hooks.mjs
 // Idempotent installer for post-checkout and post-commit git hooks
+// Prefers Python hooks if Python 3 is available; falls back to Node.js hooks.
 
 import { readFileSync, writeFileSync, existsSync, chmodSync } from 'fs';
 import { join, resolve } from 'path';
@@ -31,8 +32,56 @@ if (!hooksDir) {
   process.exit(0);
 }
 
+// Detect Python 3
+function detectPython() {
+  for (const cmd of ['python3', 'python']) {
+    try {
+      const out = execSync(`${cmd} --version`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+      if (out.startsWith('Python 3')) {
+        return cmd;
+      }
+    } catch {
+      // try next
+    }
+  }
+  return null;
+}
+
+const pythonCmd = detectPython();
+const usePython = pythonCmd !== null;
+
+if (usePython) {
+  console.log(`[hooks:install] Python 3 detected (${pythonCmd}) — installing Python hooks`);
+} else {
+  console.log('[hooks:install] Python 3 not found — installing Node.js hooks (fallback)');
+}
+
+// Python hook signatures (new)
+const SIGNATURE_CHECKOUT_PY = '# memory-lane-checkout-py — installed by pnpm hooks:install';
+const SIGNATURE_COMMIT_PY   = '# memory-lane-commit-py — installed by pnpm hooks:install';
+
+// Node.js hook signatures (legacy)
 const SIGNATURE_CHECKOUT = '# memory-lane-activate — installed by pnpm hooks:install';
 const SIGNATURE_COMMIT   = '# memory-lane-commit — installed by pnpm hooks:install';
+
+const POST_CHECKOUT_PY = `#!/usr/bin/env bash
+${SIGNATURE_CHECKOUT_PY}
+if [ "$3" != "1" ]; then exit 0; fi
+PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+if [ -z "$PYTHON" ]; then exit 0; fi
+timeout 10 "$PYTHON" "$(git rev-parse --show-toplevel)/scripts/memory_lane_checkout.py" "$1" "$2" "$3" \\
+  >/tmp/memory-lane-checkout.log 2>&1 || true
+exit 0
+`;
+
+const POST_COMMIT_PY = `#!/usr/bin/env bash
+${SIGNATURE_COMMIT_PY}
+PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+if [ -z "$PYTHON" ]; then exit 0; fi
+"$PYTHON" "$(git rev-parse --show-toplevel)/scripts/memory_lane_commit.py" \\
+  >/tmp/memory-lane-commit.log 2>&1 || true
+exit 0
+`;
 
 const POST_CHECKOUT_CONTENT = `#!/usr/bin/env bash
 ${SIGNATURE_CHECKOUT}
@@ -53,10 +102,16 @@ node "$(git rev-parse --show-toplevel)/scripts/memory-lane-commit.mjs" \\
 exit 0
 `;
 
-const hooks = [
-  { filename: 'post-checkout', signature: SIGNATURE_CHECKOUT, content: POST_CHECKOUT_CONTENT },
-  { filename: 'post-commit',   signature: SIGNATURE_COMMIT,   content: POST_COMMIT_CONTENT   },
-];
+// Choose hooks based on Python availability
+const hooks = usePython
+  ? [
+      { filename: 'post-checkout', signature: SIGNATURE_CHECKOUT_PY, content: POST_CHECKOUT_PY },
+      { filename: 'post-commit',   signature: SIGNATURE_COMMIT_PY,   content: POST_COMMIT_PY   },
+    ]
+  : [
+      { filename: 'post-checkout', signature: SIGNATURE_CHECKOUT, content: POST_CHECKOUT_CONTENT },
+      { filename: 'post-commit',   signature: SIGNATURE_COMMIT,   content: POST_COMMIT_CONTENT   },
+    ];
 
 for (const hook of hooks) {
   const hookPath = join(hooksDir, hook.filename);

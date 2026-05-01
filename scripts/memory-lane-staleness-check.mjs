@@ -82,17 +82,10 @@ function extractEntities(result) {
 // ---- Protected entity loader -----------------------------------------------
 
 function loadProtectedEntities() {
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-  const data = readJson(activeLanesPath) ?? {};
+  const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
+  const data = readJson(activeBranchPath) ?? {};
   const protected_ = new Set(['electrical-website-state']);
-
-  if (data.active) protected_.add(data.active);
-  if (data.laneEntityName) protected_.add(data.laneEntityName);
-
-  if (Array.isArray(data.memoryKeys)) {
-    for (const key of data.memoryKeys) protected_.add(key);
-  }
-
+  if (data.entity) protected_.add(data.entity);
   return protected_;
 }
 

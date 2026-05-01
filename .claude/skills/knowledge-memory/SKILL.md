@@ -78,7 +78,7 @@ node scripts/mcp-memory-call.mjs add_observations '{
   }]
 }'
 ```
-Replace REPLACE_WITH_* with actual values. Get lane entity name from `config/active-memory-lanes.json`.
+Replace REPLACE_WITH_* with actual values. Get lane entity name from `config/active-branch.json` (`.entity` field).
 
 **Step 5b — Trigger local file sync (updates lastSyncedAt + emergencySummary):**
 ```bash
