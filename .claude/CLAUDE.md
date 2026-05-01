@@ -52,9 +52,8 @@ Superpowers: brainstorm → plan (TDD) → execute → verify — mandatory for 
 
 Session start (always, in order):
 
-1. `pnpm docker:mcp:memory:search "electrical-website-state"` → note entity IDs
-2. `pnpm docker:mcp:memory:open electrical-website-state` → read current phase, next tasks, blockers
-3. `git log --oneline -5 && git status` → confirm code state
+1. Invoke `docker-preflight` skill — reads injected `## Session Memory`, reports branch/phase/next, no Docker commands
+2. `git log --oneline -5 && git status` → confirm code state
 
 Session end (always, before closing):
 
