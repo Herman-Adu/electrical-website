@@ -2033,7 +2033,7 @@ export const allProjects: Project[] = [
         },
       ],
       challenge:
-        "Designing and installing a complete 3-phase electrical system for a brand new workshop required precise load calculations, careful cable sizing, and careful sequencing of installation work to meet an 8-week programme. With Biffa's operations relying on the new facility being ready on schedule, there was no margin for programme overruns or rework.",
+        "Designing and installing a complete 3-phase electrical system for a brand new workshop required precise load calculations, accurate cable sizing, and careful sequencing of installation work to meet an 8-week programme. With Biffa's operations relying on the new facility being ready on schedule, there was no margin for programme overruns or rework.",
       solution:
         "Nexgen carried out a detailed design stage from the outset — calculating current carrying capacities, specifying cables and protective devices from load data, and planning item locations within the workshop. A thorough walkthrough with the client and a completed RAMS document ensured all site-specific requirements were captured before construction began. High-quality materials and meticulous workmanship ensured the installation progressed cleanly to handover.",
       timeline: [
