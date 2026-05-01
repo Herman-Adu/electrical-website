@@ -1931,6 +1931,223 @@ export const allProjects: Project[] = [
       ],
     },
   },
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-biffa-workshop-001",
+    slug: "biffa-workshop-farnham",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Biffa Workshop — 3-Phase Electrical Installation",
+    clientSector: "Waste Management & Sustainability",
+    status: "completed",
+    description:
+      "Design and installation of a new fully operational 3-phase electrical supply system for Biffa's workshop facility in Farnham, Surrey — a landmark project that established Nexgen as Biffa's preferred electrical partner.",
+    coverImage: {
+      src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cover-primary.jpg",
+      alt: "Biffa Workshop Farnham — 3-phase electrical installation",
+    },
+    kpis: {
+      budget: "£65K",
+      timeline: "8 weeks",
+      capacity: "3-Phase Supply",
+      location: "Farnham, Surrey",
+    },
+    tags: ["3-Phase", "Commercial Workshop", "Preferred Partner", "New Build Services"],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2026-05-01T09:00:00.000Z",
+    updatedAt: "2026-05-01T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Preferred Partner Project",
+        headlineWords: ["Biffa.", "No", "Time", "To", "Waste."],
+        leadParagraph:
+          "Biffa turned to Nexgen with a clear task: design and install a new, fully operational 3-phase electrical supply system for their brand new workshop in Farnham, Surrey. Delivered in 8 weeks, on budget, to specification — and the start of a partnership that has grown ever since.",
+        bodyParagraphs: [
+          "Biffa plc is one of the UK's leading waste management companies, committed to sustainability, recycling, and enabling the circular economy. When they needed a trusted electrical contractor for their Farnham facility, they came to Nexgen — and we've been their preferred electrical partner ever since.",
+          "The scope covered the full electrical fit-out of a new workshop: 3-phase distribution, high-level lighting, emergency lighting and exit signage, small power circuits, and 3-phase supplies for roller shutter doors, machinery, and welding equipment. Every installation was designed, executed, and certified to the highest standards.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Partnership Origin",
+            description:
+              "This Farnham project was the start of the Nexgen–Biffa relationship. Nexgen has delivered multiple projects for Biffa since, with the partnership evolving every year.",
+          },
+          {
+            num: "02",
+            title: "3-Phase Design",
+            description:
+              "Full 3-phase electrical supply system designed and installed from first principles — including distribution, protective devices, and capacity sized for Biffa's workshop operations.",
+          },
+          {
+            num: "03",
+            title: "Workshop-Ready Delivery",
+            description:
+              "Lighting, emergency systems, small power, and 3-phase machinery circuits — every system required for a fully operational workshop, installed and commissioned within 8 weeks.",
+          },
+          {
+            num: "04",
+            title: "On Budget. On Time.",
+            description:
+              "£65K. 8 weeks. Zero programme overruns. Nexgen delivered to the brief Biffa set — the kind of outcome that turns a first project into a long-term partnership.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "3-Phase Distribution System",
+          description:
+            "Full 3-phase electrical supply system — new distribution board, protective devices, and mains cabling designed and installed to BS 7671 specification.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "High-Level LED Lighting",
+          description:
+            "High-level LED lighting installation throughout the workshop — specified for industrial lux levels, energy efficient, and designed around Biffa's operational layout.",
+        },
+        {
+          icon: "Shield",
+          title: "Emergency Lighting & Exit Signage",
+          description:
+            "Full emergency lighting system and exit signage installed throughout — maintained fittings at all escape routes and risk areas, commissioned to BS 5266.",
+        },
+        {
+          icon: "Cable",
+          title: "Small Power Circuits",
+          description:
+            "Small power circuit installation for tools, chargers, and workshop equipment — wired, dressed on containment, and fixed into final positions per design.",
+        },
+        {
+          icon: "Settings",
+          title: "3-Phase Machinery & Equipment Circuits",
+          description:
+            "Dedicated 3-phase circuits for roller shutter doors, machinery, and welding equipment — sized and protected to meet Biffa's workshop operational requirements.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing, Commissioning & Certification",
+          description:
+            "Full circuit testing, commissioning, and BS 7671 certification across all installed systems — formally handed over to Biffa at practical completion.",
+        },
+      ],
+      challenge:
+        "Designing and installing a complete 3-phase electrical system for a brand new workshop required precise load calculations, careful cable sizing, and careful sequencing of installation work to meet an 8-week programme. With Biffa's operations relying on the new facility being ready on schedule, there was no margin for programme overruns or rework.",
+      solution:
+        "Nexgen carried out a detailed design stage from the outset — calculating current carrying capacities, specifying cables and protective devices from load data, and planning item locations within the workshop. A thorough walkthrough with the client and a completed RAMS document ensured all site-specific requirements were captured before construction began. High-quality materials and meticulous workmanship ensured the installation progressed cleanly to handover.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Design & RAMS",
+          description:
+            "Initial client meeting, load calculation, electrical system design, item location planning, risk assessment, and RAMS approval — all completed before mobilisation.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "First Fix & Containment",
+          description:
+            "Cable containment installation, first-fix wiring for all circuits, and distribution system rough-in — routed and dressed per design drawings.",
+          duration: "2 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Second Fix & Systems Installation",
+          description:
+            "High-level lighting, emergency lighting, small power, and 3-phase machinery circuits installed and fixed into final positions.",
+          duration: "3 weeks",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Testing, Commissioning & Handover",
+          description:
+            "Full circuit testing, BS 7671 certification, commissioning of all systems, and formal handover to Biffa at practical completion.",
+          duration: "1 week",
+          status: "completed",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cover-primary.jpg",
+          alt: "Biffa Workshop Farnham — 3-phase electrical installation overview",
+          caption: "Biffa Workshop Farnham — 3-phase electrical installation complete",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-exterior-overview.jpg",
+          alt: "Biffa Workshop Farnham — exterior overview",
+          caption: "Workshop exterior — new facility at Biffa's Farnham site",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-distribution-installation.jpg",
+          alt: "Biffa Workshop — distribution board installation",
+          caption: "Distribution installation — 3-phase supply system fitted",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-interior-overview.jpg",
+          alt: "Biffa Workshop — interior electrical installation overview",
+          caption: "Interior overview — high-level lighting and containment installed",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-roller-shutter-circuits.jpg",
+          alt: "Biffa Workshop — roller shutter door electrical circuits",
+          caption: "Roller shutter circuits — 3-phase supplies installed and commissioned",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-01.jpg",
+          alt: "Biffa Workshop Farnham — electrical installation progress",
+          caption: "Installation progress — first fix wiring complete",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-02.jpg",
+          alt: "Biffa Workshop Farnham — electrical containment and cabling",
+          caption: "Cable containment — routed and dressed per design",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-03.jpg",
+          alt: "Biffa Workshop Farnham — lighting installation",
+          caption: "High-level lighting — installed and aligned to workshop layout",
+        },
+        {
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-04.jpg",
+          alt: "Biffa Workshop Farnham — electrical systems complete",
+          caption: "Workshop systems — all circuits commissioned and certified",
+        },
+      ],
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "the-partnership-begins",
+          heading: "Biffa Chose Nexgen. Nexgen Delivered. The Partnership Grew.",
+          paragraphs: [
+            "The Farnham workshop project wasn't just another commercial job — it was the project that established Nexgen as Biffa's preferred electrical contractor. Biffa needed a team they could trust with a new facility: one that would design the system correctly, install to a high standard, and hand over on time. Nexgen delivered all three.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "the-technical-approach",
+          heading: "Designed Right. Installed Right. No Rework.",
+          paragraphs: [
+            "The design stage was thorough by necessity — every cable sized from load data, every protective device selected from specification sheets, every item location confirmed with the client before a single cable was pulled. The RAMS document was reviewed and signed before mobilisation. When the team arrived on site, they knew exactly what to build and how to build it.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "On Time. On Budget. A Preferred Partner Ever Since.",
+          paragraphs: [
+            "The Biffa Farnham workshop was handed over inside 8 weeks and within the £65K budget. Every circuit certified, every system commissioned. Biffa's operations team had a fully functional facility from day one — and Nexgen had earned a partner relationship that has continued to grow across multiple projects since.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [
