@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "electrical-website-state",
-  "fallback": "4882f5c feat: obsidian-integration � Platinum Second Brain Layer 3 (#124) | 4cf5850 feat: orchestration-optimization — slim config, 2-call rehydration, Stop hook phases 1-11 (#123) (#123) | 8082bda feat: Ladbrokes Woking migration — retail fit-out, 17 images, servicesPage wiring (#122) (#122)",
-  "updatedAt": "2026-05-01T11:34:02.798Z"
+  "branch": "feat/taplow-domestic-migration",
+  "entity": "feat-taplow-domestic-migration",
+  "fallback": "007ed4a feat: Biffa Workshop — 3-phase electrical installation, preferred partner project (#125) (#125) | 4882f5c feat: obsidian-integration � Platinum Second Brain Layer 3 (#124) | 4cf5850 feat: orchestration-optimization — slim config, 2-call rehydration, Stop hook phases 1-11 (#123) (#123)",
+  "updatedAt": "2026-05-01T12:55:25.272Z"
 }
