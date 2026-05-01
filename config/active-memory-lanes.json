@@ -1,14 +1,14 @@
 {
-  "active": "feat-project-migration-ladbrokes-woking",
+  "active": "feat-orchestration-optimization",
   "status": "active",
-  "currentBranch": "feat/project-migration-ladbrokes-woking",
-  "laneEntityName": "feat-project-migration-ladbrokes-woking",
+  "currentBranch": "feat/orchestration-optimization",
+  "laneEntityName": "feat-orchestration-optimization",
   "openedAt": "2026-04-28T09:00:00.000Z",
-  "lastSyncedAt": "2026-04-30T23:35:40.374Z",
-  "emergencySummary": "Branch feat/project-migration-ladbrokes-woking. Recent: 00cdc6e feat: Medivet Watford migration � featured placement architecture + project data (#121) (#121) 21782c2 feat: DHL Reading polish � TOC nesting, 4 pillars, nav consolidation, featured swap (#120",
+  "lastSyncedAt": "2026-05-01T00:03:29.961Z",
+  "emergencySummary": "Branch feat/orchestration-optimization. Recent: 8082bda feat: Ladbrokes Woking migration — retail fit-out, 17 images, servicesPage wiring (#122) (#122) 00cdc6e feat: Medivet Watford migration � featured placement architecture + project data (#121)",
   "memoryKeys": [
     "electrical-website-state",
-    "feat-project-migration-ladbrokes-woking"
+    "feat-orchestration-optimization"
   ],
   "phaseSequence": [
     {
