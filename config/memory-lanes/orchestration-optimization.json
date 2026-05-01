@@ -3,7 +3,7 @@
     "id": "feat-orchestration-optimization",
     "branch": "feat/orchestration-optimization",
     "dockerEntity": "feat-orchestration-optimization",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-05-01T00:03:20.224Z",
     "mergedAt": null,
     "fallback_summary": "Auto-registered branch: feat/orchestration-optimization"

@@ -1,6 +1,6 @@
 {
-  "branch": "feat/obsidian-integration",
-  "entity": "feat-obsidian-integration",
-  "fallback": "7112460 chore: open feat/obsidian-integration lane — active-branch.json + lane manifest | 4cf5850 feat: orchestration-optimization — slim config, 2-call rehydration, Stop hook phases 1-11 (#123) (#123) | 8082bda feat: Ladbrokes Woking migration — retail fit-out, 17 images, servicesPage wiring (#122) (#122)",
-  "updatedAt": "2026-05-01T02:05:16.423Z"
+  "branch": "main",
+  "entity": "electrical-website-state",
+  "fallback": "4882f5c feat: obsidian-integration � Platinum Second Brain Layer 3 (#124) | 4cf5850 feat: orchestration-optimization — slim config, 2-call rehydration, Stop hook phases 1-11 (#123) (#123) | 8082bda feat: Ladbrokes Woking migration — retail fit-out, 17 images, servicesPage wiring (#122) (#122)",
+  "updatedAt": "2026-05-01T11:34:02.798Z"
 }
