@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useOptimistic, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { ProjectFilterBar } from "@/components/projects/project-filter-bar";
 import { ProjectsListSection } from "@/components/projects/projects-list-section";
 import type { ProjectCategory } from "@/types/projects";
@@ -20,34 +20,29 @@ export function ProjectsFilterClient({
   counts,
 }: ProjectsFilterClientProps) {
   const [activeSlug, setActiveSlug] = useState("all");
-  const [optimisticSlug, setOptimisticSlug] = useOptimistic(
-    activeSlug,
-    (_, s: string) => s,
-  );
   const [isPending, startTransition] = useTransition();
 
   const handleSelect = (slug: string) => {
     startTransition(() => {
-      setOptimisticSlug(slug);
       setActiveSlug(slug);
     });
   };
 
   const filtered =
-    optimisticSlug === "all"
+    activeSlug === "all"
       ? items
-      : items.filter((p) => p.category === optimisticSlug);
+      : items.filter((p) => p.category === activeSlug);
 
   const activeCategoryLabel =
-    optimisticSlug === "all"
+    activeSlug === "all"
       ? "All"
-      : (sectors.find((s) => s.slug === optimisticSlug)?.label ?? "All");
+      : (sectors.find((s) => s.slug === activeSlug)?.label ?? "All");
 
   return (
     <>
       <ProjectFilterBar
         categories={sectors}
-        activeSlug={optimisticSlug}
+        activeSlug={activeSlug}
         counts={counts}
         onSelect={handleSelect}
       />
