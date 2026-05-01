@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
@@ -28,14 +27,17 @@ const itemVariants: Variants = {
   },
 };
 
+const flickerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 1, 0.6, 1, 0.8, 1],
+    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
+  },
+};
+
 export function ProjectsHero() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const statuses = [
     "INITIALIZING",
@@ -153,7 +155,7 @@ export function ProjectsHero() {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
+          animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
           {/* Status Label */}
@@ -242,11 +244,3 @@ export function ProjectsHero() {
     />
   );
 }
-
-const flickerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: [0, 1, 0.6, 1, 0.8, 1],
-    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
-  },
-};

@@ -71,4 +71,18 @@ describe("ProjectFilterBar", () => {
     );
     expect(screen.getByText("3")).toBeDefined(); // residential count
   });
+
+  it("calls onSelect with 'all' when All Projects button is clicked", () => {
+    const onSelect = vi.fn();
+    render(
+      <ProjectFilterBar
+        categories={mockSectors}
+        activeSlug="residential"
+        counts={mockCounts}
+        onSelect={onSelect}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: /All Projects/i }));
+    expect(onSelect).toHaveBeenCalledWith("all");
+  });
 });
