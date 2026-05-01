@@ -1,6 +1,6 @@
 {
-  "branch": "feat/orchestration-optimization",
-  "entity": "feat-orchestration-optimization",
-  "fallback": "fefaa43 docs: orchestration-optimization + obsidian-integration design spec | 09ca18d docs: update all 7 AI memory articles with platinum workflow + production validation | aae15bb chore: close ladbrokes lane, activate orchestration-optimization lane",
-  "updatedAt": "2026-05-01T01:12:24.158Z"
+  "branch": "feat/obsidian-integration",
+  "entity": "feat-obsidian-integration",
+  "fallback": "4cf5850 feat: orchestration-optimization — slim config, 2-call rehydration, Stop hook phases 1-11 (#123) (#123) | 8082bda feat: Ladbrokes Woking migration — retail fit-out, 17 images, servicesPage wiring (#122) (#122) | 00cdc6e feat: Medivet Watford migration � featured placement architecture + project data (#121) (#121)",
+  "updatedAt": "2026-05-01T01:48:09.835Z"
 }
