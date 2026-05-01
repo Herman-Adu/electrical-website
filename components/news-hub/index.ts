@@ -15,6 +15,7 @@ export { NewsDetailHero } from "./news-detail-hero";
 export { NewsRelatedArticles } from "./news-related-articles";
 export { NewsHubCategoriesHero } from "./news-hub-categories-hero";
 export { NewsCategoryHero } from "./news-category-hero";
+export { NewsTopicHero } from "./news-topic-hero";
 
 // Specialized content-type cards
 export { NewsCaseStudyCard } from "./news-case-study-card";

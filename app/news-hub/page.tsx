@@ -16,7 +16,7 @@ import {
 } from "@/data/news";
 import { createNewsHubListMetadata } from "@/lib/metadata-news";
 
-export const revalidate = 3600;
+export const experimental_ppr = true;
 export const metadata: Metadata = createNewsHubListMetadata();
 
 export default async function NewsHubPage() {
