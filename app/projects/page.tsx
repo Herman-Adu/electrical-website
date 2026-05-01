@@ -4,57 +4,26 @@ import {
   ProjectsHero,
   ProjectsFeaturedSection,
   ProjectsBentoGrid,
-  ProjectsListSection,
 } from "@/components/projects";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
-  getFeaturedProjectByCategory,
-  getProjectListItemsExtended,
-  isProjectCategorySlug,
   projectBentoItems,
   projectCategories,
   projectsIntroData,
+  allProjects,
+  getFeaturedProjectByCategory,
 } from "@/data/projects";
-import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectsListMetadata } from "@/lib/metadata-projects";
-import { safeValidateProjectsParams } from "@/lib/actions/validate-search-params";
-import type { ProjectCategorySlug } from "@/types/projects";
+import { ProjectsListWithFilter } from "@/components/projects/projects-list-with-filter";
 
 export const metadata: Metadata = createProjectsListMetadata();
 
-export default async function ProjectsPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ category?: string | string[] }>;
-}) {
-  const resolvedSearchParams = await searchParams;
-
-  // Validate search params with Zod schema
-  const validatedParams = await safeValidateProjectsParams(
-    resolvedSearchParams || {},
-  );
-
-  const categoryParam = validatedParams.category;
-
-  const activeCategory: ProjectCategorySlug =
-    categoryParam && isProjectCategorySlug(categoryParam)
-      ? categoryParam
-      : "all";
-
-  const featuredProject = getFeaturedProjectByCategory(activeCategory);
-  const projectListItems = getProjectListItemsExtended(activeCategory);
-  const sidebarCards = getProjectsSidebarCards(activeCategory);
-  const activeCategoryLabel =
-    activeCategory === "all"
-      ? "All"
-      : (projectCategories.find((c) => c.slug === activeCategory)?.label ?? "All");
+export default async function ProjectsPage() {
+  const featuredProject = getFeaturedProjectByCategory("all");
 
   return (
     <main className="relative">
-      <ProjectsHero
-        categories={projectCategories}
-        activeCategory={activeCategory}
-      />
+      <ProjectsHero />
 
       <ContentBreadcrumb
         items={[
@@ -74,11 +43,12 @@ export default async function ProjectsPage({
           <ProjectsBentoGrid items={projectBentoItems} />
         </div>
       </section>
-      <ProjectsListSection
-        items={projectListItems}
-        sidebarCards={sidebarCards}
-        activeCategoryLabel={activeCategoryLabel}
+
+      <ProjectsListWithFilter
+        sectors={projectCategories.filter((c) => c.isSector)}
+        allProjects={allProjects}
       />
+
       <Footer />
     </main>
   );
