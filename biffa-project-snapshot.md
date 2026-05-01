@@ -1,0 +1,188 @@
+- generic [ref=e4]:
+  - navigation [ref=e7]:
+    - link "Robot" [ref=e178] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e10]:
+        - img [ref=e180]
+        - img [ref=e181]
+        - img "Robot" [ref=e182]
+    - list [ref=e13]:
+      - listitem [ref=e14]:
+        - button "Home" [ref=e15]:
+          - link "Home" [ref=e16] [cursor=pointer]:
+            - /url: /
+      - listitem [ref=e17]:
+        - button "About" [ref=e18]:
+          - link "About" [ref=e19] [cursor=pointer]:
+            - /url: /about-us
+      - listitem [ref=e20]:
+        - button "Services" [ref=e21]:
+          - link "Services" [ref=e22] [cursor=pointer]:
+            - /url: /services
+      - listitem [ref=e23]:
+        - button "Projects" [ref=e24]:
+          - link "Projects" [ref=e25] [cursor=pointer]:
+            - /url: /projects
+      - listitem [ref=e26]:
+        - button "News" [ref=e27]:
+          - link "News" [ref=e28] [cursor=pointer]:
+            - /url: /news
+      - listitem [ref=e29]:
+        - button "Partners" [ref=e30]:
+          - link "Partners" [ref=e31] [cursor=pointer]:
+            - /url: /partners
+      - listitem [ref=e32]:
+        - button "Join" [ref=e33]:
+          - link "Join" [ref=e34] [cursor=pointer]:
+            - /url: /join-us
+      - listitem [ref=e35]:
+        - button "Contact" [ref=e36]:
+          - link "Contact" [ref=e37] [cursor=pointer]:
+            - /url: /contact-us
+    - generic [ref=e38]:
+      - link "Instagram icon" [ref=e39] [cursor=pointer]:
+        - /url: https://www.instagram.com/intact_electrical/
+        - img [ref=e40]
+      - link "Facebook icon" [ref=e42] [cursor=pointer]:
+        - /url: https://www.facebook.com/intactelectrics
+        - img [ref=e43]
+      - link "LinkedIn icon" [ref=e45] [cursor=pointer]:
+        - /url: https://uk.linkedin.com/company/intact-electrical-limited
+        - img [ref=e46]
+  - main [ref=e51]:
+    - generic [ref=e53]:
+      - img [ref=e184]
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e60]:
+            - img [ref=e186]
+            - img [ref=e187]
+            - img "Robot" [ref=e188]
+          - generic [ref=e64]:
+            - generic [ref=e65]: Intact Electrical
+            - generic [ref=e66]: Biffa
+        - paragraph [ref=e68]: We are meticulous in completing projects that leave our clients delighted, believing you're only as good as your last job.
+        - generic [ref=e69]:
+          - link "Services" [ref=e70] [cursor=pointer]:
+            - /url: /services
+            - button "Services" [ref=e71]
+          - link "Projects" [ref=e72] [cursor=pointer]:
+            - /url: /projects
+            - button "Projects" [ref=e73]
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - heading "Biffa workshop no time to waste" [level=2] [ref=e80]:
+            - text: Biffa workshop
+            - text: no time to waste
+          - paragraph [ref=e81]: Starting over 100 years ago, waste management simply meant taking it away. Today, Biffa helps organisations manage their waste sustainably and cost effectively.
+          - paragraph [ref=e82]: Biffa turned to Intact Electrical with the task of designing and installing a new fully operational 3 phase electrical supply system to their brand new workshop at one of their sites in Farnham.
+        - link "contact us link" [ref=e84] [cursor=pointer]:
+          - /url: /contact-us
+          - button "Contact us" [ref=e85]
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - img [ref=e190]
+            - img [ref=e191]
+            - img "biffa-gallery-16" [ref=e192]
+          - generic [ref=e91]:
+            - img [ref=e194]
+            - img [ref=e195]
+            - img "biffa-gallery-16" [ref=e196]
+        - generic [ref=e95]:
+          - img [ref=e198]
+          - img [ref=e199]
+          - img "biffa-gallery-16" [ref=e200]
+    - generic [ref=e103]:
+      - heading "About Biffa" [level=2] [ref=e104]
+      - paragraph [ref=e105]: Biffa plc is a waste management company headquartered in High Wycombe, England. It provides collection, landfill, recycling and special waste services to local authorities and industrial and commercial clients in the United Kingdom.
+      - paragraph [ref=e106]: Biffa is committed to sustainability, increasing recycling, reducing waste entering landfill, and enabling the circular economy. In the last decade, they have invested over £1bn in surplus redistribution, plastic recycling, energy recovery infrastructure and low carbon collections.
+      - heading "Design stage" [level=2] [ref=e107]
+      - paragraph [ref=e108]: After an initial meeting where the full requirements were laid out by the client, Intact Electrical took these to the design stage of the project. This included the planning of the item locations within the new workshop.
+      - paragraph [ref=e109]: This is a major component when carrying out a detailed design of the electrical system, enabling us to work out the correct current carrying capacities of the cables. This information, coupled with the specification and data sheets of the load items, then dictates what size cables and protective devices will be used within the system.
+      - heading "The walkthrough" [level=2] [ref=e110]
+      - paragraph [ref=e111]: Once the design stage was complete, we processed the risk assessment information for the project with a detailed walk around with the client at the new site and ensured that any potential hazards were highlighted. The RAMS document was subsequently created and sent to the client for approval and for any further amendments to be incorporated to suit their site specific requirements.
+      - heading "Joint execution" [level=2] [ref=e112]
+      - paragraph [ref=e113]: Once all site inductions were completed by the team and the RAMS were approved and signed, we progressed to the construction phase of the project. This is where Intact Electrical shine! High quality materials and the highest standards of workmanship are how a project comes together. We installed a new distribution system, with all new circuits wired and dressed on containment and fixed into their final positions as per the design and drawings previously provided.
+      - heading "Realising expectations" [level=2] [ref=e114]
+      - paragraph [ref=e115]: Another great client project completed by Intact Electrical. Our installations for Biffa included new high-level lighting, emergency lighting and exit signage; along with small power systems for use with tools and chargers and 3 phase circuits for use with the roller shutter doors, machinery, welding equipment etc.
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - heading "Biffa project gallery" [level=2] [ref=e119]:
+          - text: Biffa
+          - text: project gallery
+        - paragraph [ref=e121]: Intact Electrical had no time to waste for Biffa. On-brand, on-time, and on-budget. See the images below expressing how we helped make their expectation become reality.
+      - button "Hide gallery" [ref=e122] [cursor=pointer]
+      - generic [ref=e124]:
+        - img [ref=e203]
+        - img [ref=e206]
+        - img [ref=e209]
+        - img [ref=e212]
+        - img [ref=e215]
+        - img [ref=e218]
+  - generic [ref=e127]:
+    - generic [ref=e128]:
+      - generic [ref=e131]:
+        - img [ref=e220]
+        - img [ref=e221]
+        - img "Intact electrical logo banner" [ref=e222]
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - heading "Useful Links" [level=4] [ref=e136]
+          - list [ref=e137]:
+            - listitem [ref=e138] [cursor=pointer]:
+              - link "Home" [ref=e139]:
+                - /url: /
+            - listitem [ref=e140] [cursor=pointer]:
+              - link "About us" [ref=e141]:
+                - /url: /about-us
+            - listitem [ref=e142] [cursor=pointer]:
+              - link "Services" [ref=e143]:
+                - /url: /services
+            - listitem [ref=e144] [cursor=pointer]:
+              - link "Projects" [ref=e145]:
+                - /url: /projects
+            - listitem [ref=e146] [cursor=pointer]:
+              - link "News" [ref=e147]:
+                - /url: /news
+        - generic [ref=e148]:
+          - heading "Operations" [level=4] [ref=e149]
+          - list [ref=e150]:
+            - listitem [ref=e151] [cursor=pointer]:
+              - link "Contact us" [ref=e152]:
+                - /url: /contact-us
+            - listitem [ref=e153] [cursor=pointer]:
+              - link "Help center" [ref=e154]:
+                - /url: /help-centre
+            - listitem [ref=e155] [cursor=pointer]:
+              - link "Terms & conditions" [ref=e156]:
+                - /url: /terms-and-conditions
+            - listitem [ref=e157] [cursor=pointer]:
+              - link "Privacy policy" [ref=e158]:
+                - /url: /privacy-policy
+            - listitem [ref=e159] [cursor=pointer]:
+              - link "Accreditations" [ref=e160]:
+                - /url: /accreditations
+        - generic [ref=e161]:
+          - heading "Community" [level=4] [ref=e162]
+          - list [ref=e163]:
+            - listitem [ref=e164] [cursor=pointer]:
+              - link "Partnerships" [ref=e165]:
+                - /url: /partners
+            - listitem [ref=e166] [cursor=pointer]:
+              - link "Join us" [ref=e167]:
+                - /url: /join-us
+            - listitem [ref=e168] [cursor=pointer]:
+              - link "Careers" [ref=e169]:
+                - /url: /careers
+            - listitem [ref=e170] [cursor=pointer]:
+              - link "Latest event" [ref=e171]:
+                - /url: /articles/slough-in-bloom
+    - generic [ref=e172]:
+      - paragraph [ref=e173]: Copyright Ⓒ 2026 Intact Electrical Ltd - All Rights Reserved.
+      - paragraph [ref=e174]:
+        - text: Designed & built by
+        - link "Adu Dev Ltd" [ref=e176] [cursor=pointer]:
+          - /url: https://www.adudev.co.uk/
+        - text: powered by Gatsby.
