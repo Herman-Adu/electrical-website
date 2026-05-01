@@ -61,9 +61,9 @@ export function writeJsonAtomic(filePath, data) {
 
 function writeJson(filePath, data) { writeJsonAtomic(filePath, data); }
 
-export function isAlreadyActive(currentBranch, activeLanes) {
-  if (!activeLanes?.currentBranch) return false;
-  return activeLanes.currentBranch === currentBranch;
+export function isAlreadyActive(currentBranch, config) {
+  if (!config?.branch) return false;
+  return config.branch === currentBranch;
 }
 
 // Convert branch name to manifest filename slug
@@ -73,6 +73,14 @@ function branchToSlug(branch) {
     .replace(/\//g, '-');
 }
 
+// Build fallback string from last 3 git commits
+function buildFallback3() {
+  try {
+    const raw = execSync('git log --oneline -3', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim();
+    return raw.split('\n').map(l => l.trim()).filter(Boolean).join(' | ');
+  } catch { return '(git log unavailable)'; }
+}
+
 async function main() {
   // Detect current branch
   let currentBranch = 'unknown';
@@ -80,11 +88,11 @@ async function main() {
 
   const slug = branchToSlug(currentBranch);
   const manifestPath = join(PROJECT_ROOT, 'config', 'memory-lanes', `${slug}.json`);
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
+  const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
 
   // Idempotency guard — skip all writes if this branch is already active
-  const activeLanesEarly = readJson(activeLanesPath);
-  if (isAlreadyActive(currentBranch, activeLanesEarly)) {
+  const activeBranchEarly = readJson(activeBranchPath);
+  if (isAlreadyActive(currentBranch, activeBranchEarly)) {
     console.log(`[lane:activate] Already active on "${currentBranch}" — no-op.`);
     process.exit(0);
   }
@@ -125,9 +133,9 @@ async function main() {
     }
   }
 
-  // Read current active lanes config
-  const activeLanes = readJson(activeLanesPath) ?? {};
-  const previousLaneEntity = activeLanes.laneEntityName ?? null;
+  // Read current active-branch.json to get previous lane entity
+  const activeBranch = readJson(activeBranchPath) ?? {};
+  const previousLaneEntity = activeBranch.entity ?? null;
   const newLaneEntity = newManifest.memoryLane?.dockerEntity ?? newManifest.memoryLane?.id ?? slug;
   const now = new Date().toISOString();
 
@@ -135,7 +143,7 @@ async function main() {
 
   // Pause previous lane if different from new lane
   if (previousLaneEntity && previousLaneEntity !== newLaneEntity) {
-    const prevSlug = branchToSlug(activeLanes.currentBranch ?? '');
+    const prevSlug = branchToSlug(activeBranch.branch ?? '');
     const prevManifestPath = join(PROJECT_ROOT, 'config', 'memory-lanes', `${prevSlug}.json`);
     const prevManifest = readJson(prevManifestPath);
 
@@ -169,16 +177,15 @@ async function main() {
     });
   }
 
-  // Update active-memory-lanes.json
-  activeLanes.active = newLaneEntity;
-  activeLanes.status = 'active';
-  activeLanes.currentBranch = currentBranch;
-  activeLanes.laneEntityName = newLaneEntity;
-  if (!activeLanes.memoryKeys) activeLanes.memoryKeys = ['electrical-website-state'];
-  if (!activeLanes.memoryKeys.includes(newLaneEntity)) {
-    activeLanes.memoryKeys = ['electrical-website-state', newLaneEntity];
-  }
-  writeJson(activeLanesPath, activeLanes);
+  // Write active-branch.json — slim format only
+  const gitLog3 = buildFallback3();
+  const newActiveBranch = {
+    branch: currentBranch,
+    entity: newLaneEntity,
+    fallback: gitLog3,
+    updatedAt: now,
+  };
+  writeJson(activeBranchPath, newActiveBranch);
 
   console.log(`[lane:activate] Activated lane: ${newLaneEntity} (branch: ${currentBranch})`);
   process.exit(0);

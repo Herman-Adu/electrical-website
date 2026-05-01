@@ -3,7 +3,8 @@
 // Stop hook — creates session entity and flushes observations to Docker
 // Triggered by Claude Code Stop hook or manually: node scripts/memory-lane-stop.mjs --manual
 
-import { readFileSync, writeFileSync, renameSync } from 'fs';
+import { readFileSync, writeFileSync, renameSync, createReadStream } from 'fs';
+import { createInterface } from 'readline';
 import { join } from 'path';
 import { execSync } from 'child_process';
 
@@ -97,12 +98,12 @@ function getGitLog(n = 5) {
   try { return execSync(`git log --oneline -${n}`, { encoding: 'utf8', cwd: PROJECT_ROOT }).trim(); } catch { return '(git log unavailable)'; }
 }
 
-// Attempt to read transcript file (last 2000 chars)
-function readTranscriptTail(transcriptPath) {
+// Build fallback field: last 3 git commits as "hash msg | hash msg | hash msg"
+function buildFallback() {
   try {
-    const content = readFileSync(transcriptPath, 'utf8');
-    return content.length > 2000 ? content.slice(-2000) : content;
-  } catch { return null; }
+    const raw = execSync('git log --oneline -3', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim();
+    return raw.split('\n').map(l => l.trim()).filter(Boolean).join(' | ');
+  } catch { return '(git log unavailable)'; }
 }
 
 // Parse stdin JSON from Claude Code Stop hook (non-blocking)
@@ -124,6 +125,47 @@ async function parseStdinPayload() {
   });
 }
 
+// Streaming JSONL token + tool-use counter (avoids loading full transcript into memory)
+async function parseTranscriptCosts(transcriptPath) {
+  if (!transcriptPath) return { totalTokens: 0, toolUses: 0 };
+  return new Promise((resolve) => {
+    let totalTokens = 0;
+    let toolUses = 0;
+    const timer = setTimeout(() => resolve({ totalTokens, toolUses }), 5000);
+    try {
+      const rl = createInterface({
+        input: createReadStream(transcriptPath, { encoding: 'utf8' }),
+        crlfDelay: Infinity,
+      });
+      rl.on('line', (line) => {
+        try {
+          const obj = JSON.parse(line);
+          // Accumulate token usage from assistant messages
+          if (obj.type === 'assistant' && obj.message?.usage) {
+            const u = obj.message.usage;
+            totalTokens += (u.input_tokens || 0) + (u.cache_creation_input_tokens || 0) + (u.cache_read_input_tokens || 0) + (u.output_tokens || 0);
+          }
+          // Count tool uses
+          if (obj.type === 'tool_result' || obj.type === 'tool_use') {
+            toolUses++;
+          }
+        } catch { /* skip malformed lines */ }
+      });
+      rl.on('close', () => {
+        clearTimeout(timer);
+        resolve({ totalTokens, toolUses });
+      });
+      rl.on('error', () => {
+        clearTimeout(timer);
+        resolve({ totalTokens, toolUses });
+      });
+    } catch {
+      clearTimeout(timer);
+      resolve({ totalTokens, toolUses });
+    }
+  });
+}
+
 // Determine next session sequence number for today
 async function resolveSessionName(dockerOnline) {
   const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
@@ -132,8 +174,8 @@ async function resolveSessionName(dockerOnline) {
   if (dockerOnline) {
     const result = await mcpCall('search_nodes', { query: `session-${today}` }, 5000);
     const entities = extractEntities(result);
-    for (const entity of entities) {
-      const name = entity?.name ?? '';
+    for (const ent of entities) {
+      const name = ent?.name ?? '';
       const match = new RegExp(`^session-${today}-(\\d+)$`).exec(name);
       if (match) {
         const seq = parseInt(match[1], 10);
@@ -143,71 +185,59 @@ async function resolveSessionName(dockerOnline) {
   }
 
   const nextSeq = String(maxSeq + 1).padStart(3, '0');
-  return `session-${today}-${nextSeq}`;
-}
-
-// Build concise emergency summary (<=150 words)
-function buildEmergencySummary(branch, workSummary) {
-  // Extract git log portion only — transcript content is raw JSON, not human-readable
-  const gitPart = workSummary.includes('| git:')
-    ? workSummary.split('| git:').pop().trim()
-    : workSummary;
-  const truncated = gitPart.slice(0, 200).replace(/\n/g, ' ').trim();
-  return `Branch ${branch}. Recent: ${truncated}`.slice(0, 600);
+  return `session-${new Date().toISOString().slice(0, 10)}-${nextSeq}`;
 }
 
 async function main() {
-  // Step 1: Read active-memory-lanes.json
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-  const lanesConfig = readJson(activeLanesPath) ?? {};
+  // Phase 1: Read active-branch.json
+  const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
+  const config = readJson(activeBranchPath) ?? {};
+  const entity = config.entity ?? 'electrical-website-state';
 
-  if (lanesConfig.status !== 'active') {
-    console.log('[memory:stop] Lane status is not active — skipping sync.');
+  // Proceed if entity exists (always run — no status check needed)
+  if (!entity) {
+    console.log('[memory:stop] No entity configured in active-branch.json — skipping sync.');
     process.exit(0);
   }
 
-  const laneEntityName = lanesConfig.laneEntityName ?? 'electrical-website-state';
-
-  // Step 2: Get work summary
+  // Phase 2: Git log + branch detection
   const currentBranch = getCurrentBranch();
   const gitLog = getGitLog(5);
-  let workSummary = gitLog;
 
-  if (!IS_MANUAL) {
-    // Try reading from Stop hook stdin payload
-    const payload = await parseStdinPayload();
-    if (payload?.transcript_path) {
-      const transcriptContent = readTranscriptTail(payload.transcript_path);
-      if (transcriptContent) {
-        // Use transcript tail as enriched context, but still include git log
-        workSummary = `${transcriptContent.slice(0, 300).replace(/\n/g, ' ')}... | git: ${gitLog}`;
-      }
-    }
-  }
-
-  // Step 3: Docker health check
+  // Phase 3: Docker health check (3s timeout)
   const dockerOnline = await checkDockerHealth();
   const now = new Date().toISOString();
 
-  // Step 4: Determine session entity name
+  // Phase 4: Resolve session name (search Docker for today's sessions)
   const sessionName = await resolveSessionName(dockerOnline);
+
+  // Parse stdin for transcript path (non-blocking)
+  const payload = IS_MANUAL ? null : await parseStdinPayload();
+  const transcriptPath = payload?.transcript_path ?? null;
+
+  // Stream transcript costs (Phase 5 enrichment)
+  const { totalTokens, toolUses } = await parseTranscriptCosts(transcriptPath);
 
   let entityCreated = false;
 
   if (dockerOnline) {
-    // Step 5: Create session entity — validate response, retry once
+    // Phase 5: Create session entity in Docker
+    const sessionObs = [
+      `work_completed: ${gitLog.slice(0, 200).replace(/\n/g, ' | ')}`,
+      `branch: ${currentBranch}`,
+      `build_status: unknown`,
+      `next_tasks: check git log for continuation`,
+      `session_end_at: ${now}`,
+      `docker_synced: true`,
+    ];
+    if (totalTokens > 0) sessionObs.push(`token_count: ${totalTokens}`);
+    if (toolUses > 0) sessionObs.push(`tool_uses: ${toolUses}`);
+
     const createArgs = {
       entities: [{
         name: sessionName,
         entityType: 'session',
-        observations: [
-          `work_completed: ${gitLog.slice(0, 200).replace(/\n/g, ' | ')}`,
-          `branch: ${currentBranch}`,
-          `build_status: unknown`,
-          `next_tasks: check git log for continuation`,
-          `session_end_at: ${now}`,
-          `docker_synced: true`,
-        ],
+        observations: sessionObs,
       }],
     };
     let createResult = await mcpCall('create_entities', createArgs);
@@ -223,10 +253,10 @@ async function main() {
       }
     }
 
-    // Step 6: Add observations to active lane entity
+    // Phase 6: add_observations to lane entity
     await mcpCall('add_observations', {
       observations: [{
-        entityName: laneEntityName,
+        entityName: entity,
         contents: [
           `session_summary: ${gitLog.slice(0, 150).replace(/\n/g, ' | ')} | at: ${now}`,
           `last_accessed_at: ${now}`,
@@ -234,7 +264,7 @@ async function main() {
       }],
     });
 
-    // Step 7: Add observations to project state
+    // Phase 7: add_observations to project state
     await mcpCall('add_observations', {
       observations: [{
         entityName: 'electrical-website-state',
@@ -245,10 +275,10 @@ async function main() {
       }],
     });
 
-    // Step 8: Create relations
+    // Phase 8: create_relations
     await mcpCall('create_relations', {
       relations: [
-        { from: sessionName, to: laneEntityName, relationType: 'documents' },
+        { from: sessionName, to: entity, relationType: 'documents' },
         { from: sessionName, to: 'electrical-website-state', relationType: 'updates' },
       ],
     });
@@ -259,17 +289,31 @@ async function main() {
     entityCreated = true; // Docker offline is expected — still update local config
   }
 
-  // Step 9: Update active-memory-lanes.json — only when entity write confirmed (or Docker offline)
+  // Phase 8 (continued): Update active-branch.json — fallback field ONLY
   if (entityCreated) {
-    lanesConfig.lastSyncedAt = now;
-    lanesConfig.emergencySummary = buildEmergencySummary(currentBranch, workSummary);
-    writeJson(activeLanesPath, lanesConfig);
-    console.log(`[memory:stop] local config updated. emergencySummary: ${lanesConfig.emergencySummary.slice(0, 80)}...`);
+    const newFallback = buildFallback();
+    const updatedConfig = {
+      branch: config.branch ?? currentBranch,
+      entity: config.entity ?? entity,
+      fallback: newFallback,
+      updatedAt: now,
+    };
+    writeJson(activeBranchPath, updatedConfig);
+    console.log(`[memory:stop] active-branch.json updated. fallback: ${newFallback.slice(0, 80)}...`);
   } else {
     console.warn('[memory:stop] Skipping config update — Docker entity creation unconfirmed.');
   }
 
-  // Step 10: Always exit 0 — never fail session end
+  // Phase 9 (STUB): writeObsidianSessionNote()
+  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 9 skipped');
+
+  // Phase 10 (STUB): writeObsidianDailyNote()
+  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 10 skipped');
+
+  // Phase 11 (STUB): mirrorDecisions()
+  console.log('[memory:stop] [obsidian:pending — implement in feat/obsidian-integration] Phase 11 skipped');
+
+  // Always exit 0 — never fail session end
   process.exit(0);
 }
 

@@ -116,18 +116,19 @@ function runRehydrateVerbose() {
 async function main() {
   console.log('\n' + boxTitle('Memory Lane Health Status') + '\n');
 
-  // Step 1: Read active-memory-lanes.json
-  const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-  const lanesConfig = readJson(activeLanesPath) ?? {};
-  const {
-    active: activeLane = 'unknown',
-    status: laneStatus = 'unknown',
-    currentBranch: configBranch = 'unknown',
-    laneEntityName = 'unknown',
-    lastSyncedAt = null,
-    emergencySummary = '',
-    memoryKeys = [],
-  } = lanesConfig;
+  // Step 1: Read active-branch.json
+  const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
+  const lanesConfig = readJson(activeBranchPath) ?? {};
+  const activeLane = lanesConfig.entity ?? 'unknown';
+  const laneStatus = lanesConfig.entity ? 'active' : 'unknown';
+  const configBranch = lanesConfig.branch ?? 'unknown';
+  const laneEntityName = lanesConfig.entity ?? 'unknown';
+  const lastSyncedAt = lanesConfig.updatedAt ?? null;
+  const emergencySummary = lanesConfig.fallback ?? '';
+  // Derive memory keys from slim config
+  const memoryKeys = lanesConfig.entity
+    ? ['electrical-website-state', lanesConfig.entity]
+    : ['electrical-website-state'];
 
   // Step 2: Docker health check
   const dockerOnline = await checkDockerHealth();

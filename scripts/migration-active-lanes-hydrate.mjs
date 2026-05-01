@@ -4,26 +4,18 @@ import fs from "node:fs";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
 
-const memoryKeysFile = process.argv[2] || "config/active-memory-lanes.json";
+const memoryKeysFile = process.argv[2] || "config/active-branch.json";
 
 function readActiveMemoryKeys(path) {
   if (!fs.existsSync(path)) {
-    throw new Error(`Active memory keys file not found: ${path}`);
+    throw new Error(`Active branch config not found: ${path}`);
   }
 
   const raw = fs.readFileSync(path, "utf8");
   const parsed = JSON.parse(raw);
-  const keys = Array.isArray(parsed.memoryKeys)
-    ? parsed.memoryKeys.filter(
-        (k) => typeof k === "string" && k.trim().length > 0,
-      )
-    : [];
-
-  if (keys.length === 0) {
-    throw new Error(`No active memory keys configured in: ${path}`);
-  }
-
-  return [...new Set(keys)];
+  const entity = parsed.entity;
+  if (!entity) throw new Error(`No entity configured in: ${path}`);
+  return ['electrical-website-state', entity];
 }
 
 function openNodes(names) {

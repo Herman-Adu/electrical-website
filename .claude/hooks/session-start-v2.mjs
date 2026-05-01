@@ -73,19 +73,19 @@ async function main() {
       },
     };
 
-    // Branch mismatch guard — auto-correct stale lane
+   // Branch mismatch guard — auto-correct stale lane
     let laneWarning = '';
     try {
-      const activeLanesPath = join(PROJECT_ROOT, 'config', 'active-memory-lanes.json');
-      const activeLanes = JSON.parse(readFileSync(activeLanesPath, 'utf8'));
+      const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
+      const activeBranch = JSON.parse(readFileSync(activeBranchPath, 'utf8'));
       const gitBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim();
-      if (activeLanes.currentBranch && activeLanes.currentBranch !== gitBranch) {
+      if (activeBranch.branch && activeBranch.branch !== gitBranch) {
         execSync(`node "${join(PROJECT_ROOT, 'scripts/memory-lane-activate.mjs')}"`, {
           encoding: 'utf8', timeout: 8000, cwd: PROJECT_ROOT,
         });
         laneWarning = `
 
-> BRANCH MISMATCH DETECTED: lane was on '${activeLanes.currentBranch}', auto-corrected to '${gitBranch}'`;
+> BRANCH MISMATCH DETECTED: lane was on '${activeBranch.branch}', auto-corrected to '${gitBranch}'`;
       }
     } catch { /* non-fatal */ }
 

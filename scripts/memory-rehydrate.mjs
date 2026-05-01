@@ -8,8 +8,8 @@ import { execSync } from 'child_process';
 
 const GATEWAY = process.env.MCP_GATEWAY_URL ?? 'http://127.0.0.1:3100';
 const TOKEN_BUDGET = parseInt(process.env.MEMORY_TOKEN_BUDGET ?? '3000');
-const MAX_LEARNINGS = parseInt(process.env.MEMORY_MAX_LEARNINGS ?? '4');
-const MAX_DECISIONS = parseInt(process.env.MEMORY_MAX_DECISIONS ?? '2');
+const MAX_LEARNINGS = parseInt(process.env.MEMORY_MAX_LEARNINGS ?? '2');
+const MAX_DECISIONS = parseInt(process.env.MEMORY_MAX_DECISIONS ?? '1');
 const PROJECT_ROOT = process.cwd();
 const VERBOSE = process.argv.includes('--verbose');
 const TIER1_ONLY = process.argv.includes('--tier1-only');
@@ -114,41 +114,8 @@ function formatEntity(entity) {
   return `**${name}**\n${obs.slice(0, 8).map(o => `  ${o}`).join('\n')}`;
 }
 
-// Extract keywords for Tier 3 search
-function extractKeywords(featureEntity, projectStateEntity) {
-  const stopwords = new Set(['the','a','an','and','or','in','on','for','to','of','with','this','that','is','are','was','were']);
-  const tokens = new Set();
-
-  // From feature observations: scope: line
-  const featureObs = Array.isArray(featureEntity?.observations) ? featureEntity.observations : [];
-  for (const obs of featureObs) {
-    const scopeMatch = /^scope:\s*(.+)/i.exec(obs);
-    if (scopeMatch) {
-      scopeMatch[1].split(/[\s,]+/).filter(w => w.length > 3 && !stopwords.has(w.toLowerCase())).slice(0, 4).forEach(w => tokens.add(w.toLowerCase()));
-      break;
-    }
-  }
-
-  // From project state: next_tasks: line
-  const stateObs = Array.isArray(projectStateEntity?.observations) ? projectStateEntity.observations : [];
-  for (const obs of stateObs) {
-    const taskMatch = /^next_tasks?:\s*(.+)/i.exec(obs);
-    if (taskMatch) {
-      const firstTask = taskMatch[1].split(',')[0];
-      firstTask.split(/\s+/).filter(w => w.length > 3 && !stopwords.has(w.toLowerCase())).slice(0, 2).forEach(w => tokens.add(w.toLowerCase()));
-      break;
-    }
-  }
-
-  // From branch name
-  const branch = (process.env._CURRENT_BRANCH ?? '').replace(/^feat\//, '').replace(/^fix\//, '');
-  branch.split('-').filter(w => w.length > 3 && !stopwords.has(w.toLowerCase())).forEach(w => tokens.add(w.toLowerCase()));
-
-  return [...tokens].slice(0, 5);
-}
-
 // Build offline fallback block
-function buildOfflineBlock(currentBranch, emergencySummary) {
+function buildOfflineBlock(currentBranch, fallback) {
   let gitLog = '';
   try { gitLog = execSync('git log --oneline -5', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim(); } catch { gitLog = '(unavailable)'; }
 
@@ -157,7 +124,7 @@ function buildOfflineBlock(currentBranch, emergencySummary) {
 > Branch: ${currentBranch} | Docker: OFFLINE — using emergency summary
 
 ### Emergency Summary
-${emergencySummary}
+${fallback}
 
 ### Git State
 \`\`\`
@@ -175,34 +142,32 @@ async function main() {
   try { currentBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8', cwd: PROJECT_ROOT }).trim(); } catch { /* ignore */ }
   process.env._CURRENT_BRANCH = currentBranch;
 
-  // Step 2: Read active-memory-lanes.json
-  let lanesConfig = {};
+  // Step 2: Read active-branch.json
+  let config = {};
   try {
-    lanesConfig = JSON.parse(readFileSync(join(PROJECT_ROOT, 'config/active-memory-lanes.json'), 'utf8'));
+    config = JSON.parse(readFileSync(join(PROJECT_ROOT, 'config/active-branch.json'), 'utf8'));
   } catch { /* use defaults */ }
 
   const {
-    laneEntityName = 'electrical-website-state',
-    emergencySummary = 'No emergency summary available. Run git log --oneline -5 for current state.',
-    status: laneStatus = 'unknown',
-    currentBranch: expectedBranch = 'unknown',
-    memoryKeys = ['electrical-website-state'],
-  } = lanesConfig;
+    entity = 'electrical-website-state',
+    fallback: fallbackSummary = 'No emergency summary available. Run git log --oneline -5 for current state.',
+    branch: expectedBranch = 'unknown',
+  } = config;
 
   // Step 3: Docker health check (2s timeout)
   const dockerOnline = await checkDockerHealth();
 
   // Step 4: If Docker offline, return offline fallback
   if (!dockerOnline) {
-    const offlineBlock = buildOfflineBlock(currentBranch, emergencySummary);
+    const offlineBlock = buildOfflineBlock(currentBranch, fallbackSummary);
     const output = {
       dockerStatus: 'offline',
       branch: currentBranch,
-      laneStatus,
+      entity,
       tokenCount: countTokens(offlineBlock),
       injectionBlock: offlineBlock,
       citations: { verified: [], stale: [] },
-      emergencySummary,
+      fallback: fallbackSummary,
     };
     process.stdout.write(JSON.stringify(output) + '\n');
     return;
@@ -215,111 +180,90 @@ async function main() {
   let tokenBudgetRemaining = TOKEN_BUDGET;
   const sections = [];
 
-  // Tier 1: Project state (always load)
-  if (VERBOSE) process.stderr.write('[tier1] Loading project state entity\n');
-  const tier1Result = await memoryCall('open_nodes', { names: ['electrical-website-state'] });
-  const tier1Entities = extractEntities(tier1Result);
-  const projectStateEntity = tier1Entities[0] ?? null;
+  // Tier 1+2: Combined — project state + lane entity in ONE call
+  if (VERBOSE) process.stderr.write('[tier1+2] Loading project state + lane entity\n');
+  const tier12Result = await memoryCall('open_nodes', { names: ['electrical-website-state', entity] });
+  const tier12Entities = extractEntities(tier12Result);
+
+  // First entity = project state, second = lane entity (may be absent for new branches)
+  const projectStateEntity = tier12Entities.find(e => (e?.name ?? '') === 'electrical-website-state') ?? tier12Entities[0] ?? null;
+  const featureEntity = tier12Entities.find(e => (e?.name ?? '') === entity) ?? (tier12Entities.length > 1 ? tier12Entities[1] : null);
+
   let tier1Text = '';
   if (projectStateEntity) {
     tier1Text = formatEntity(projectStateEntity);
     const tier1Tokens = countTokens(tier1Text);
     tokenBudgetRemaining -= tier1Tokens;
-    if (VERBOSE) process.stderr.write(`[tier1] Project state: ${tier1Tokens} tokens\n`);
+    if (VERBOSE) process.stderr.write(`[tier1+2] Project state: ${tier1Tokens} tokens\n`);
   }
-  sections.push({ label: 'Project State', text: tier1Text || '(no project state found)' });
 
-  // Tier 2: Active lane feature entity
-  let featureEntity = null;
   let tier2Text = '';
-  if (!TIER1_ONLY) {
-    if (VERBOSE) process.stderr.write(`[tier2] Loading lane entity: ${laneEntityName}\n`);
-    const tier2Result = await memoryCall('open_nodes', { names: [laneEntityName] });
-    const tier2Entities = extractEntities(tier2Result);
-    featureEntity = tier2Entities[0] ?? null;
-    if (featureEntity && tokenBudgetRemaining > 300) {
-      const raw = formatEntity(featureEntity);
-      tier2Text = truncateToTokens(raw, Math.floor(tokenBudgetRemaining * 0.45));
-      const tier2Tokens = countTokens(tier2Text);
-      tokenBudgetRemaining -= tier2Tokens;
-      if (VERBOSE) process.stderr.write(`[tier2] Lane entity: ${tier2Tokens} tokens\n`);
-    }
-  } else {
-    if (VERBOSE) process.stderr.write('[tier2] Skipped (--tier1-only)\n');
+  if (!TIER1_ONLY && featureEntity && tokenBudgetRemaining > 300) {
+    const raw = formatEntity(featureEntity);
+    tier2Text = truncateToTokens(raw, Math.floor(tokenBudgetRemaining * 0.45));
+    const tier2Tokens = countTokens(tier2Text);
+    tokenBudgetRemaining -= tier2Tokens;
+    if (VERBOSE) process.stderr.write(`[tier1+2] Lane entity: ${tier2Tokens} tokens\n`);
+  } else if (TIER1_ONLY) {
+    if (VERBOSE) process.stderr.write('[tier1+2] Lane entity skipped (--tier1-only)\n');
   }
-  sections.push({ label: `Active Lane (${laneEntityName})`, text: tier2Text || '(no lane entity found in Docker)' });
 
-  // Tier 3: Contextual learnings + decisions via keyword search
+  const combinedTokens = (TOKEN_BUDGET - tokenBudgetRemaining);
+  if (VERBOSE) process.stderr.write(`[tier1+2] Combined: ${combinedTokens} tokens (project state + lane entity)\n`);
+
+  sections.push({ label: 'Project State', text: tier1Text || '(no project state found)' });
+  sections.push({ label: `Active Lane (${entity})`, text: tier2Text || '(no lane entity found in Docker)' });
+
+  // Tier 3: Contextual search — ONE search call using branch slug, conditional on budget
   let learningsText = '';
   let decisionsText = '';
-  if (!TIER1_ONLY) {
-    const keywords = extractKeywords(featureEntity, projectStateEntity);
-    if (VERBOSE) process.stderr.write(`[tier3] Keywords: ${keywords.join(', ')}\n`);
+  if (!TIER1_ONLY && tokenBudgetRemaining > 300) {
+    // Branch slug: remove feat/ prefix, use as search query
+    const branchSlug = (config.branch ?? currentBranch).replace(/^feat\//, '').replace(/^fix\//, '').replace(/^chore\//, '');
+    if (VERBOSE) process.stderr.write(`[tier3] Searching: "${branchSlug}"\n`);
+
+    const searchResult = await memoryCall('search_nodes', { query: branchSlug }, 4000);
+    const found = extractEntities(searchResult);
 
     const learnings = [];
     const decisions = [];
 
-    for (const keyword of keywords) {
-      if (learnings.length >= MAX_LEARNINGS && decisions.length >= MAX_DECISIONS) break;
-      if (tokenBudgetRemaining < 200) break;
-
-      const searchResult = await memoryCall('search_nodes', { query: keyword }, 4000);
-      const found = extractEntities(searchResult);
-
-      for (const entity of found) {
-        const name = entity?.name ?? '';
-        if (name.startsWith('learn-') && learnings.length < MAX_LEARNINGS) {
-          if (!learnings.find(l => l.name === name)) learnings.push(entity);
-        } else if (name.startsWith('decide-') && decisions.length < MAX_DECISIONS) {
-          if (!decisions.find(d => d.name === name)) decisions.push(entity);
-        }
+    for (const ent of found) {
+      const name = ent?.name ?? '';
+      if (name.startsWith('learn-') && learnings.length < MAX_LEARNINGS) {
+        learnings.push(ent);
+      } else if (name.startsWith('decide-') && decisions.length < MAX_DECISIONS) {
+        decisions.push(ent);
       }
     }
 
-    for (const entity of learnings) {
+    for (const ent of learnings) {
       if (tokenBudgetRemaining < 100) break;
-      const raw = formatEntity(entity);
-      const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
+      const raw = formatEntity(ent);
+      const truncated = truncateToTokens(raw, Math.min(100, tokenBudgetRemaining));
       const toks = countTokens(truncated);
       tokenBudgetRemaining -= toks;
       learningsText += truncated + '\n\n';
     }
-    if (VERBOSE) process.stderr.write(`[tier3] Learnings: ${learnings.length}, Decisions: ${decisions.length}\n`);
 
-    for (const entity of decisions) {
+    for (const ent of decisions) {
       if (tokenBudgetRemaining < 100) break;
-      const raw = formatEntity(entity);
-      const truncated = truncateToTokens(raw, Math.min(200, tokenBudgetRemaining));
+      const raw = formatEntity(ent);
+      const truncated = truncateToTokens(raw, Math.min(100, tokenBudgetRemaining));
       const toks = countTokens(truncated);
       tokenBudgetRemaining -= toks;
       decisionsText += truncated + '\n\n';
     }
+
+    if (VERBOSE) process.stderr.write(`[tier3] Learnings: ${learnings.length}, Decisions: ${decisions.length}\n`);
   } else {
-    if (VERBOSE) process.stderr.write('[tier3] Skipped (--tier1-only)\n');
+    if (VERBOSE) process.stderr.write('[tier3] Skipped (--tier1-only or budget exhausted)\n');
   }
 
-  // Tier 4: Last session entity
-  let sessionText = '';
-  if (!TIER1_ONLY) {
-    const sessionResult = await memoryCall('search_nodes', { query: 'session-2026' }, 3000);
-    const sessionEntities = extractEntities(sessionResult);
-    const lastSession = sessionEntities
-      .filter(e => (e?.name ?? '').startsWith('session-'))
-      .sort((a, b) => (b?.name ?? '').localeCompare(a?.name ?? ''))
-      [0] ?? null;
-
-    if (lastSession && tokenBudgetRemaining > 100) {
-      const raw = formatEntity(lastSession);
-      sessionText = truncateToTokens(raw, Math.min(300, tokenBudgetRemaining));
-      tokenBudgetRemaining -= countTokens(sessionText);
-      if (VERBOSE) process.stderr.write(`[tier4] Last session: ${lastSession.name}\n`);
-    }
-  } else {
-    if (VERBOSE) process.stderr.write('[tier4] Skipped (--tier1-only)\n');
-  }
+  // Tier 4: ELIMINATED — no session search
 
   // Step 7: Citation verification (across all text)
-  const allText = [tier1Text, tier2Text, learningsText, decisionsText, sessionText].join('\n');
+  const allText = [tier1Text, tier2Text, learningsText, decisionsText].join('\n');
   const citations = verifyCitations(allText);
 
   // Step 8: Compile injection block
@@ -335,12 +279,12 @@ async function main() {
 
   let injectionBlock = `## Session Memory — ${today} [${tokensUsed} tokens]
 
-> Branch: ${currentBranch} | Lane: ${laneStatus} | Docker: online${driftWarning}${tier1OnlyWarning}
+> Branch: ${currentBranch} | Lane: ${entity} | Docker: online${driftWarning}${tier1OnlyWarning}
 
 ### Project State
 ${sections[0]?.text ?? '(unavailable)'}
 
-### Active Lane (${laneEntityName})
+### Active Lane (${entity})
 ${sections[1]?.text ?? '(unavailable)'}
 `;
 
@@ -350,10 +294,6 @@ ${sections[1]?.text ?? '(unavailable)'}
 
   if (decisionsText.trim()) {
     injectionBlock += `\n### Decisions\n${decisionsText.trim()}\n`;
-  }
-
-  if (sessionText.trim()) {
-    injectionBlock += `\n### Last Session\n${sessionText.trim()}\n`;
   }
 
   const citationsSection = [
@@ -370,11 +310,11 @@ ${sections[1]?.text ?? '(unavailable)'}
   const output = {
     dockerStatus: 'online',
     branch: currentBranch,
-    laneStatus,
+    entity,
     tokenCount: countTokens(injectionBlock),
     injectionBlock,
     citations,
-    emergencySummary,
+    fallback: fallbackSummary,
   };
 
   process.stdout.write(JSON.stringify(output) + '\n');
@@ -385,11 +325,11 @@ main().catch(err => {
   const fallback = {
     dockerStatus: 'error',
     branch: 'unknown',
-    laneStatus: 'unknown',
+    entity: 'unknown',
     tokenCount: 10,
     injectionBlock: `## Session Memory — ${today} [error]\n\nMemory rehydration error: ${err?.message ?? String(err)}. Proceed without memory context.\n\n---\nMANDATORY: Report 3-bullet summary then STOP and await instruction.`,
     citations: { verified: [], stale: [] },
-    emergencySummary: '',
+    fallback: '',
   };
   process.stdout.write(JSON.stringify(fallback) + '\n');
   process.exit(0);

@@ -1,0 +1,6 @@
+{
+  "branch": "feat/orchestration-optimization",
+  "entity": "feat-orchestration-optimization",
+  "fallback": "fefaa43 docs: orchestration-optimization + obsidian-integration design spec | 09ca18d docs: update all 7 AI memory articles with platinum workflow + production validation | aae15bb chore: close ladbrokes lane, activate orchestration-optimization lane",
+  "updatedAt": "2026-05-01T01:12:24.158Z"
+}
