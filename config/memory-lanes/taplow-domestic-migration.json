@@ -3,7 +3,7 @@
     "id": "feat-taplow-domestic-migration",
     "branch": "feat/taplow-domestic-migration",
     "dockerEntity": "feat-taplow-domestic-migration",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-05-01T12:55:25.223Z",
     "mergedAt": null,
     "fallback_summary": "Auto-registered branch: feat/taplow-domestic-migration"

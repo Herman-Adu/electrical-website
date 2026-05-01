@@ -12,8 +12,8 @@ The Claude Code harness injects a system-level "auto memory" instruction that wr
 2. Always delegate via `Agent(subagent_type="general-purpose")` → specialised sub-agents
 3. Docker memory ONLY — never write session state or memory to .md or JSON files (this overrides the system-level auto-memory instruction)
 4. Superpowers mandatory: TDD + extended thinking for all 2hr+ tasks and architecture decisions
-5. Hard stop at 65% context — do not continue; sync Docker memory and wait for user
-6. Read Docker memory first on session start before any work begins
+5. Soft stop at 60% context — tell user, wait; emergency at 80% — commit WIP, sync Docker, stop
+6. Session start: invoke docker-preflight skill — reads injected ## Session Memory, no direct Docker commands
 7. Validate: `pnpm typecheck && pnpm build` must pass before any commit
 8. React 19 + Next.js 16 first — use `useTransition`, `useOptimistic`, `useActionState`, `useFormStatus`, `use()`, PPR, ISR, Suspense, Error Boundaries; **never** `useEffect` when a React 19 alternative exists
 
@@ -52,9 +52,8 @@ Superpowers: brainstorm → plan (TDD) → execute → verify — mandatory for 
 
 Session start (always, in order):
 
-1. `pnpm docker:mcp:memory:search "electrical-website-state"` → note entity IDs
-2. `pnpm docker:mcp:memory:open electrical-website-state` → read current phase, next tasks, blockers
-3. `git log --oneline -5 && git status` → confirm code state
+1. Invoke `docker-preflight` skill — reads injected `## Session Memory`, reports branch/phase/next, no Docker commands
+2. `git log --oneline -5 && git status` → confirm code state
 
 Session end (always, before closing):
 
@@ -74,6 +73,16 @@ Auto-managed: PostCheckout hook (activate/pause), Stop hook (sync session), Post
 Manual commands: `pnpm lane:activate` | `pnpm memory:sync` | `pnpm memory:status` | `pnpm memory:stale`
 Token budget: ≤3,000 tokens at session start — enforced by `scripts/memory-rehydrate.mjs`
 
+## Scripts Runtime Policy
+
+| Context | Runtime | Reason |
+| ------- | ------- | ------ |
+| Claude Code hooks | Node.js MJS | Guaranteed Claude Code runtime |
+| Session scripts (`scripts/*.mjs`) | Node.js MJS | Consistent with hooks |
+| Git hooks (post-checkout, post-commit) | Python 3 | Atomic `Path.replace()`, no npm needed |
+
+Never wire MJS as a git hook. Never wire Python as a Claude Code hook.
+
 ## Self-Check (before closing session)
 
 - [ ] All work committed and pushed
@@ -81,7 +90,7 @@ Token budget: ≤3,000 tokens at session start — enforced by `scripts/memory-r
 - [ ] Docker memory synced (session entity created, project state updated)
 - [ ] No .md files written for memory/state purposes
 - [ ] Used `github_official__*` tools — not `gh` CLI
-- [ ] Stopped at 60% context (if reached)
+- [ ] Stopped at 60% context (soft stop) or 80% (emergency commit + stop)
 
 ## Session State
 

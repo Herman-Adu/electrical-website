@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { projectCategories, categoriesIntroData } from "@/data/projects";
+import { projectCategories, categoriesIntroData, allProjects } from "@/data/projects";
+import { workTypes } from "@/data/projects/work-types";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
+import { SectorCard } from "@/components/projects/sector-card";
+import { WorkTypeFilter } from "@/components/projects/work-type-filter";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
 
@@ -27,7 +29,7 @@ export default function ProjectCategoriesPage() {
 
       <SectionIntro data={categoriesIntroData} />
 
-      {/* Categories grid */}
+      {/* Zone 1 — Specialist Sectors */}
       <section id="categories-grid" className="section-standard bg-background">
         <div className="section-content max-w-5xl">
           {/* Eyebrow */}
@@ -39,32 +41,43 @@ export default function ProjectCategoriesPage() {
             <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
           </div>
 
-          {/* Category Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {projectCategories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/projects/category/${category.slug}`}
-                className="group block rounded-lg border border-border/60 bg-card p-6 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 transition-all duration-200"
-              >
-                <div className="mb-3">
-                  <span className="inline-block font-mono text-[9px] uppercase tracking-[0.2em] text-electric-cyan/70 border border-electric-cyan/20 bg-electric-cyan/5 px-2 py-0.5 rounded-sm">
-                    Category
-                  </span>
-                </div>
-                <h2 className="text-lg font-bold text-foreground mb-2 group-hover:text-electric-cyan transition-colors">
-                  {category.label}
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {category.description}
-                </p>
-                <div className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-electric-cyan/60 group-hover:text-electric-cyan transition-colors">
-                  View Projects →
-                </div>
-              </Link>
-            ))}
+          {/* Sector Cards 2x2 grid */}
+          <div className="grid gap-5 sm:grid-cols-2">
+            {projectCategories
+              .filter((c) => c.isSector)
+              .map((category) => {
+                const catProjects = allProjects
+                  .filter((p) => p.category === category.slug)
+                  .sort((a, b) =>
+                    b.publishedAt.localeCompare(a.publishedAt)
+                  );
+                const mostRecent = catProjects[0];
+                return (
+                  <SectorCard
+                    key={category.slug}
+                    category={category}
+                    projectCount={catProjects.length}
+                    recentProjectTitle={mostRecent?.title ?? "Coming soon"}
+                    coverImageSrc={
+                      mostRecent?.coverImage.src ?? "/images/services-industrial.jpg"
+                    }
+                    coverImageAlt={
+                      mostRecent?.coverImage.alt ?? category.label
+                    }
+                  />
+                );
+              })}
           </div>
         </div>
+      </section>
+
+      {/* Zone 2 — Work Types */}
+      <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-16">
+        <h2 className="text-xl font-semibold mb-2 text-foreground">Browse by Work Type</h2>
+        <p className="text-sm text-muted-foreground mb-4">
+          Filter across all sectors by the type of electrical work
+        </p>
+        <WorkTypeFilter workTypes={workTypes} />
       </section>
       <Footer />
     </main>

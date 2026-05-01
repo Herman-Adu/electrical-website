@@ -1,0 +1,11 @@
+{
+  "memoryLane": {
+    "id": "feat-projects-taxonomy-nav-preflight",
+    "branch": "feat/projects-taxonomy-nav-preflight",
+    "dockerEntity": "feat-projects-taxonomy-nav-preflight",
+    "status": "active",
+    "openedAt": "2026-05-01T16:52:29.340Z",
+    "mergedAt": null,
+    "fallback_summary": "Auto-registered branch: feat/projects-taxonomy-nav-preflight"
+  }
+}

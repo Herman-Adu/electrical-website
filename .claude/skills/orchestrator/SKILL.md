@@ -9,42 +9,21 @@ disable-model-invocation: true
 
 ## Execution (run in order, then STOP)
 
-### Step 1: Docker Preflight
-Check Docker MCP stack health:
-```bash
-curl -sf http://localhost:3100/health
-```
-If offline: note "Docker offline" and use git history as fallback. Do not block — continue.
+### Step 1: Session Startup
+Invoke the `docker-preflight` skill. It reads the already-injected `## Session Memory`
+context — delivered by `session-start-v2.mjs` at session start — and reports the
+3-bullet status. **Do not execute any Docker or git commands here.**
 
-### Step 2: Load Project State
-```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
-pnpm docker:mcp:memory:open electrical-website-state
-```
-Read: `current_branch`, `active_phase`, `next_tasks`, `blockers` from entity observations.
-
-**Lane validation (automatic — review injected context):**
-The `## Session Memory` block injected at session start contains the active lane status.
-Check the `> Branch:` and `Lane:` fields in the injected context.
-
-- If `BRANCH MISMATCH` appears → run `pnpm lane:activate` and report to user
-- If `Lane: paused` → run `pnpm lane:activate` to re-activate current branch lane
-- If `Docker: OFFLINE` → memory loaded from emergency summary; run `pnpm docker:mcp:ready`
-
-Include active lane status in the 3-bullet report:
-**Lane:** [lane-entity-name] ([status] | last synced [Xh ago])
-
-### Step 3: Git State
+### Step 2: Git State
 ```bash
 git log --oneline -5
 git status
 ```
 
-### Step 4: Report and STOP
-Report to user — exactly 3 bullets, then stop:
+### Step 3: Report and STOP
+Report to user — git state summary (docker-preflight already reported next tasks):
 - **Branch:** [branch name] | Last commit: [hash] [message]
 - **Build:** [passing/failing] | Tests: [N/N passing]
-- **Next:** [top task from Docker state or git history]
 
 **Do not proceed. Wait for user instruction.**
 

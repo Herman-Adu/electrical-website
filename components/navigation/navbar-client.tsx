@@ -10,8 +10,12 @@ import { BrandSection } from "@/components/navigation/brand-section";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
 import { ActionBar } from "@/components/navigation/action-bar";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import { projectCategories } from "@/data/projects";
 
-const navLinks = [
+type NavSubItem = { name: string; href: string };
+type NavLink = { name: string; href: string; submenu?: NavSubItem[] };
+
+const navLinks: NavLink[] = [
   {
     name: "Home",
     href: "/",
@@ -57,9 +61,12 @@ const navLinks = [
     submenu: [
       { name: "All Projects", href: "/projects" },
       { name: "Browse Categories", href: "/projects/category" },
-      { name: "Residential", href: "/projects/category/residential" },
-      { name: "Power Boards", href: "/projects/category/power-boards" },
-      { name: "Commercial", href: "/projects/category/commercial" },
+      ...projectCategories
+        .filter((c) => c.isSector)
+        .map((c) => ({
+          name: c.label,
+          href: `/projects/category/${c.slug}`,
+        })),
     ],
   },
   {
@@ -112,11 +119,6 @@ export function NavbarClient() {
       window.removeEventListener("popstate", syncHash);
     };
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setCurrentHash(window.location.hash || "");
-  }, [pathname]);
 
   const closeMenus = () => {
     setIsMobileMenuOpen(false);

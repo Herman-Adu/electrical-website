@@ -1,22 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
-import type { ProjectCategory, ProjectCategorySlug } from "@/types/projects";
 
-interface ProjectsHeroProps {
-  categories: ProjectCategory[];
-  activeCategory: ProjectCategorySlug;
-}
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -35,17 +27,17 @@ const itemVariants: Variants = {
   },
 };
 
-export function ProjectsHero({
-  categories,
-  activeCategory,
-}: ProjectsHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+const flickerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 1, 0.6, 1, 0.8, 1],
+    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
+  },
+};
+
+export function ProjectsHero() {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const statuses = [
     "INITIALIZING",
@@ -163,7 +155,7 @@ export function ProjectsHero({
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
+          animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
           {/* Status Label */}
@@ -213,43 +205,6 @@ export function ProjectsHero({
             quality, and performance standards.
           </motion.p>
 
-          {/* Category pills */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-14"
-          >
-            <Link
-              href="/projects"
-              className={cn(
-                "px-4 py-2 rounded-xl border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                activeCategory === "all"
-                  ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 group shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                  : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300 group",
-              )}
-            >
-              All Projects
-            </Link>
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.slug}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
-              >
-                <Link
-                  href={`/projects?category=${category.slug}`}
-                  className={cn(
-                    "px-4 py-2 rounded-xl border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                    activeCategory === category.slug
-                      ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 group shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                      : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300 group",
-                  )}
-                >
-                  {category.label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
 
           {/* Meta */}
           <motion.div
@@ -289,11 +244,3 @@ export function ProjectsHero({
     />
   );
 }
-
-const flickerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: [0, 1, 0.6, 1, 0.8, 1],
-    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
-  },
-};
