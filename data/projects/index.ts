@@ -47,6 +47,7 @@ export const projectCategories: ProjectCategory[] = [
     label: "Power Boards",
     description:
       "Distribution, switchgear, and board upgrade infrastructure projects.",
+    showInNav: false,
     isSector: false,
   },
 ];

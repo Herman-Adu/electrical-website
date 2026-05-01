@@ -37,8 +37,8 @@ describe("project taxonomy — isSector flag", () => {
       (p) => p.slug === "west-dock-industrial-upgrade"
     );
     expect(project).toBeDefined();
-    expect(project!.category).toBe("industrial");
-    expect(project!.categoryLabel).toBe("Industrial");
+    expect(project?.category).toBe("industrial");
+    expect(project?.categoryLabel).toBe("Industrial");
   });
 
   it("migrates Heathrow Cargo Substation Expansion to industrial", () => {
@@ -46,7 +46,7 @@ describe("project taxonomy — isSector flag", () => {
       (p) => p.slug === "heathrow-cargo-substation-expansion"
     );
     expect(project).toBeDefined();
-    expect(project!.category).toBe("industrial");
-    expect(project!.categoryLabel).toBe("Industrial");
+    expect(project?.category).toBe("industrial");
+    expect(project?.categoryLabel).toBe("Industrial");
   });
 });

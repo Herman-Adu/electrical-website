@@ -12,7 +12,10 @@ import { ActionBar } from "@/components/navigation/action-bar";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { projectCategories } from "@/data/projects";
 
-const navLinks = [
+type NavSubItem = { name: string; href: string };
+type NavLink = { name: string; href: string; submenu?: NavSubItem[] };
+
+const navLinks: NavLink[] = [
   {
     name: "Home",
     href: "/",
@@ -116,11 +119,6 @@ export function NavbarClient() {
       window.removeEventListener("popstate", syncHash);
     };
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setCurrentHash(window.location.hash || "");
-  }, [pathname]);
 
   const closeMenus = () => {
     setIsMobileMenuOpen(false);
