@@ -1,6 +1,6 @@
 ---
 name: docker-preflight
-description: Use at EVERY session start to validate Docker health, confirm memory rehydration, check lane/branch state, and deliver the 3-bullet status report. Reads from the injected ## Session Memory block — never re-runs Docker commands. Invoked by orchestrator as its FIRST action. Trigger on: session start, /orchestrator, "what's the status", "load context", "check branch", "where were we", "resume work".
+description: Use at EVERY session start to validate Docker health, confirm memory rehydration, check lane/branch state, and deliver the 3-bullet status report. Reads from the injected ## Session Memory block — never re-runs Docker commands. Invoked by orchestrator as its FIRST action. Also invoke when the user asks about current state without starting a full orchestrator session. Trigger on: session start, /orchestrator, "what's the status", "load context", "check branch", "where were we", "resume work", "are we on the right branch", "what phase are we in".
 argument-hint: "[none required]"
 disable-model-invocation: true
 ---
@@ -19,6 +19,10 @@ execute bash commands or call Docker APIs — the hook already ran them.
 
 Find `## Session Memory` in the current session context (it appears in a
 `<system-reminder>` block at session start). It has this structure:
+
+> **If the block is not present:** Tell the user: "Session Memory block not found —
+> the SessionStart hook may not have run. Run `pnpm docker:mcp:ready` to start
+> Docker, then restart the session." Do not proceed further.
 
 ```
 ## Session Memory — YYYY-MM-DD [NNN tokens]

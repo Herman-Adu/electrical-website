@@ -21,10 +21,9 @@ git status
 ```
 
 ### Step 3: Report and STOP
-Report to user — exactly 3 bullets, then stop:
+Report to user — git state summary (docker-preflight already reported next tasks):
 - **Branch:** [branch name] | Last commit: [hash] [message]
 - **Build:** [passing/failing] | Tests: [N/N passing]
-- **Next:** [top task from Docker state or git history]
 
 **Do not proceed. Wait for user instruction.**
 
