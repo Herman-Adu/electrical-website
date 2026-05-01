@@ -93,7 +93,8 @@ function runRehydrateVerbose() {
     const stdout = result.stdout ?? '';
 
     const tiers = {};
-    const tierPattern = /\[tier(\d+)\]\s+(.+?):\s+(\d+)\s+tokens/g;
+    // Match both [tier1] / [tier2] and combined [tier1+2] labels
+    const tierPattern = /\[tier([\d+]+)\]\s+(.+?):\s+(\d+)\s+tokens/g;
     for (const match of stderr.matchAll(tierPattern)) {
       tiers[`tier${match[1]}`] = { label: match[2], tokens: parseInt(match[3], 10) };
     }
@@ -181,23 +182,28 @@ async function main() {
   console.log('\nMemory Budget:');
   if (dockerOnline) {
     const { tiers, totalTokens } = runRehydrateVerbose();
-    const tier1 = tiers.tier1;
-    const tier2 = tiers.tier2;
-    const tier3L = tiers.tier3;
+    const tier1 = tiers['tier1'];
+    const tier2 = tiers['tier2'];
+    const tier12 = tiers['tier1+2']; // combined call from new 2-call approach
     const total = totalTokens ?? 'unknown';
 
-    if (tier1) {
-      const mark = tier1.tokens <= 500 ? OK : WARN;
-      console.log(`  Project State: ~${tier1.tokens} tokens (budget: 500) ${mark}`);
+    if (tier12) {
+      // New combined tier1+2 call
+      const mark = tier12.tokens <= 650 ? OK : WARN;
+      console.log(`  Project State + Lane Entity: ~${tier12.tokens} tokens (budget: 650) ${mark}`);
     } else {
-      console.log(`  Project State: (not loaded)`);
-    }
-
-    if (tier2) {
-      const mark = tier2.tokens <= 1000 ? OK : WARN;
-      console.log(`  Feature Entity: ~${tier2.tokens} tokens (budget: 1000) ${mark}`);
-    } else {
-      console.log(`  Feature Entity: (not loaded)`);
+      if (tier1) {
+        const mark = tier1.tokens <= 500 ? OK : WARN;
+        console.log(`  Project State: ~${tier1.tokens} tokens (budget: 500) ${mark}`);
+      } else {
+        console.log(`  Project State: (not loaded)`);
+      }
+      if (tier2) {
+        const mark = tier2.tokens <= 1000 ? OK : WARN;
+        console.log(`  Feature Entity: ~${tier2.tokens} tokens (budget: 1000) ${mark}`);
+      } else {
+        console.log(`  Feature Entity: (not loaded)`);
+      }
     }
 
     // Tier 3 summary from stderr pattern
