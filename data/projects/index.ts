@@ -2152,23 +2152,23 @@ export const allProjects: Project[] = [
             "Roller shutter circuits — 3-phase supplies installed and commissioned",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-01.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-first-fix-wiring.jpg",
           alt: "Biffa Workshop Farnham — electrical installation progress",
           caption: "Installation progress — first fix wiring complete",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-02.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cable-containment.jpg",
           alt: "Biffa Workshop Farnham — electrical containment and cabling",
           caption: "Cable containment — routed and dressed per design",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-03.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-high-level-lighting.jpg",
           alt: "Biffa Workshop Farnham — lighting installation",
           caption:
             "High-level lighting — installed and aligned to workshop layout",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-04.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-final-commissioning.jpg",
           alt: "Biffa Workshop Farnham — electrical systems complete",
           caption: "Workshop systems — all circuits commissioned and certified",
         },
@@ -2219,7 +2219,7 @@ export const allProjects: Project[] = [
     description:
       "Full domestic electrical installation for a local Taplow homeowner — consumer unit replacement, new circuits throughout, lighting, power, and final accessories. Tested, certified to BS 7671, and handed over spotless.",
     coverImage: {
-      src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+      src: "/images/projects/residential/domestic-installations/nexgen-taplow-completed-installation.jpg",
       alt: "Taplow domestic electrical installation — completed residential work",
     },
     kpis: {
@@ -2310,49 +2310,49 @@ export const allProjects: Project[] = [
       ],
       gallery: [
         {
-          src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-completed-installation.jpg",
           alt: "Taplow domestic installation — overview",
           caption: "Domestic installation — completed and certified",
         },
         {
-          src: "/images/projects/residential/domestic-installations/02-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-consumer-unit-replacement.jpg",
           alt: "Taplow domestic installation — consumer unit",
           caption:
             "Consumer unit replacement — tested and certified to BS 7671",
         },
         {
-          src: "/images/projects/residential/domestic-installations/03-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-circuit-wiring.jpg",
           alt: "Taplow domestic installation — circuit wiring",
           caption: "New circuit wiring — routed and terminated cleanly",
         },
         {
-          src: "/images/projects/residential/domestic-installations/04-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-lighting-installation.jpg",
           alt: "Taplow domestic installation — lighting installation",
           caption: "Lighting installation — fitted to finished standard",
         },
         {
-          src: "/images/projects/residential/domestic-installations/05-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-power-accessories.jpg",
           alt: "Taplow domestic installation — power accessories",
           caption: "Power accessories — sockets and switches fitted cleanly",
         },
         {
           // 06-local-installation.jpg does not exist — intentionally skipped
-          src: "/images/projects/residential/domestic-installations/07-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-installation-detail.jpg",
           alt: "Taplow domestic installation — installation detail",
           caption: "Installation detail — clean workmanship throughout",
         },
         {
-          src: "/images/projects/residential/domestic-installations/08-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-finished-areas.jpg",
           alt: "Taplow domestic installation — finished areas",
           caption: "Finished areas — no marks, no debris left behind",
         },
         {
-          src: "/images/projects/residential/domestic-installations/09-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-final-accessories.jpg",
           alt: "Taplow domestic installation — final accessories",
           caption: "Final accessories — correctly positioned and secured",
         },
         {
-          src: "/images/projects/residential/domestic-installations/10-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-handover-certified.jpg",
           alt: "Taplow domestic installation — completed property",
           caption: "Completed installation — handed over clean and certified",
         },
@@ -2695,24 +2695,24 @@ export const allProjects: Project[] = [
             "The Hub Farnborough — award-winning 1930s building, Farnborough",
         },
         {
-          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-01.jpg",
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-internal-lighting.jpg",
           alt: "The Hub Farnborough — lighting installation",
           caption:
             "Internal lighting installation — contemporary office fit-out",
         },
         {
-          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-02.jpg",
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-lighting-detail.jpg",
           alt: "The Hub Farnborough — commercial lighting detail",
           caption: "Lighting detail — specification and finish",
         },
         {
-          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-03.jpg",
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-office-lighting.jpg",
           alt: "The Hub Farnborough — office electrical installation",
           caption:
             "Office lighting and electrical — installed to specification",
         },
         {
-          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-04.jpg",
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-completed-areas.jpg",
           alt: "The Hub Farnborough — completed areas",
           caption: "Completed areas — Intact Electrical flying high at The Hub",
         },
@@ -2734,8 +2734,8 @@ export const allProjects: Project[] = [
     description:
       "Electrical installation and upgrade works for the chiller systems at Harvey Nichols — one of the UK's most prestigious luxury department stores. Nexgen was selected as the trusted electrical contractor to deliver the chiller upgrade programme to the exacting standards the brand demands.",
     coverImage: {
-      src: "/images/projects/industrial/harvey-nichols/01-harvey-nichols-installation.jpg",
-      alt: "Harvey Nichols — chiller upgrade electrical installation",
+      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
+      alt: "Harvey Nichols — chiller upgrade electrical installation, London",
     },
     kpis: {
       budget: "Commercial Contract",
@@ -2761,75 +2761,74 @@ export const allProjects: Project[] = [
       },
       gallery: [
         {
-          src: "/images/projects/industrial/harvey-nichols/01-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols chiller upgrade — installation overview",
-          caption: "Chiller upgrade installation — Harvey Nichols",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
+          alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop",
+          caption: "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/02-harvey-nicholes-chiller-upgrade.jpg",
-          alt: "Harvey Nichols — chiller unit electrical connection",
-          caption:
-            "Chiller unit electrical connection — industrial supply installed",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg",
+          alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop",
+          caption: "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/02-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — electrical installation detail",
-          caption: "Installation detail — precision workmanship throughout",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg",
+          alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply",
+          caption: "Galvanised cable ladder — installed to route power feeds to chiller plant",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/03-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — chiller upgrade phase 1",
-          caption: "Phase 1 works — containment and cabling in progress",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg",
+          alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit",
+          caption: "Cable tray at chiller base — containment installed and dressed to specification",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/04-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — electrical containment installation",
-          caption: "Cable containment — routed and dressed to specification",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg",
+          alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage",
+          caption: "Trane chiller electrical connection — containment installed with correct danger labelling",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/05-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — chiller electrical systems",
-          caption: "Chiller electrical systems — installation underway",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg",
+          alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs",
+          caption: "Under-floor cable management — heavy cable bundles routed through basement void",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/06-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — industrial electrical works",
-          caption: "Industrial electrical works — delivered to a retail standard",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg",
+          alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring",
+          caption: "Chiller control panel — MCBs, contactors, and wiring installed to specification",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/07-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — installation progress",
-          caption: "Installation progress — works continuing to programme",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
+          alt: "Harvey Nichols — plant room with insulated pipework and cable containment",
+          caption: "Plant room installation — cable containment and services routed through mechanical plant area",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/08-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — electrical installation works",
-          caption: "Electrical installation — precision and care throughout",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg",
+          alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline",
+          caption: "Rooftop installation — electrical containment and pipework with London skyline in view",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/09-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — chiller system wiring",
-          caption: "Chiller system wiring — terminated and tested",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg",
+          alt: "Harvey Nichols — plant room walkway grating with cable containment below",
+          caption: "Plant room cable containment — routed below steel grating walkway in plant area",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/10-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — switchgear and distribution",
-          caption: "Switchgear and distribution — installed to specification",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg",
+          alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator",
+          caption: "Grundfos VFD pump controller — installed, cabled, and commissioned",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/11-harvey-nicholsinstallation.jpg",
-          alt: "Harvey Nichols — electrical installation site",
-          caption: "On-site installation — Nexgen team at Harvey Nichols",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg",
+          alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables",
+          caption: "Rooftop earthing cables — earth and bonding runs through steel grating structure",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/12-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — completed sections",
-          caption: "Completed sections — handed over clean and operational",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg",
+          alt: "Harvey Nichols — cable identification labels on supply cables through security mesh",
+          caption: "Cable identification labels — circuit labelling applied to all supply cables",
         },
         {
-          src: "/images/projects/industrial/harvey-nichols/14-harvey-nichols-installation.jpg",
-          alt: "Harvey Nichols — chiller upgrade progress",
-          caption: "Upgrade works progress — programme on track",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
+          alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop",
+          caption: "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop",
         },
       ],
     },
