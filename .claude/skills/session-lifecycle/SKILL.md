@@ -26,7 +26,7 @@ Provides manual control over the **Docker-first session lifecycle** without wait
 ### Mode 1: `start` — Load Docker State
 
 **What it does:**
-1. Searches Docker for `electrical-website-state` entity
+1. Searches Docker for `nexgen-electrical-innovations-state` entity
 2. Loads current branch, active phase, next tasks, blockers
 3. Runs `git status && git log --oneline -5`
 4. Reports: "[Session ready — Branch: X | Phase: Y | Next: Z | Blockers: N]"
@@ -81,7 +81,7 @@ Sync complete
 ```
 Session end complete
 - Session entity: session-YYYY-MM-DD-SEQ (created)
-- Project state: electrical-website-state (updated)
+- Project state: nexgen-electrical-innovations-state (updated)
 - Build: [passing/failing] | Tests: [passing/failing]
 - Learnings captured: [N] | Relations: [N] new links
 - Commits pushed: [N]
@@ -98,8 +98,8 @@ Session end complete
 ### Mode: `start`
 
 ```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
-pnpm docker:mcp:memory:open electrical-website-state
+pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
+pnpm docker:mcp:memory:open nexgen-electrical-innovations-state
 # Extract: branch, phase, next_tasks, blockers
 git status && git log --oneline -5
 # Report state
@@ -108,10 +108,10 @@ git status && git log --oneline -5
 ### Mode: `sync`
 
 ```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
+pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
 node scripts/mcp-memory-call.mjs add_observations '{
   "observations": [{
-    "entityName": "electrical-website-state",
+    "entityName": "nexgen-electrical-innovations-state",
     "contents": ["context_checkpoint: branch [X], build [Y], next: [task]"]
   }]
 }'
@@ -121,7 +121,7 @@ node scripts/mcp-memory-call.mjs add_observations '{
 ### Mode: `end`
 
 ```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
+pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
 node scripts/mcp-memory-call.mjs create_entities '{
   "entities": [{
     "name": "session-YYYY-MM-DD-SEQ",
@@ -131,14 +131,14 @@ node scripts/mcp-memory-call.mjs create_entities '{
 }'
 node scripts/mcp-memory-call.mjs add_observations '{
   "observations": [{
-    "entityName": "electrical-website-state",
+    "entityName": "nexgen-electrical-innovations-state",
     "contents": ["session_end: branch [X], build [Y], next tasks: [Z]"]
   }]
 }'
 node scripts/mcp-memory-call.mjs create_relations '{
   "relations": [{
     "from": "session-YYYY-MM-DD-SEQ",
-    "to": "electrical-website-state",
+    "to": "nexgen-electrical-innovations-state",
     "relationType": "updates"
   }]
 }'

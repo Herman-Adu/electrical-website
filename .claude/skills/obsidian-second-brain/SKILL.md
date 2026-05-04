@@ -92,7 +92,7 @@ curl -s -X DELETE "http://localhost:27124/vault/{path}" \
 
 ```bash
 curl -s -X POST \
-  "http://localhost:27124/search/simple/?query=electrical-website+current+feature&contextLength=100" \
+  "http://localhost:27124/search/simple/?query=Nexgen+Electrical+Innovations+current+feature&contextLength=100" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY"
 ```
 
@@ -275,13 +275,13 @@ Load vault context at session start alongside Docker memory. Vault provides long
 **Step 1 — Search for relevant notes:**
 ```bash
 curl -s -X POST \
-  "http://localhost:27124/search/simple/?query=electrical-website+current+feature&contextLength=200" \
+  "http://localhost:27124/search/simple/?query=Nexgen+Electrical+Innovations+current+feature&contextLength=200" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY"
 ```
 
 **Step 2 — Read active project note (if it exists):**
 ```bash
-curl -s "http://localhost:27124/vault/Projects/electrical-website.md" \
+curl -s "http://localhost:27124/vault/Projects/Nexgen Electrical Innovations/nexgen-electrical-innovations.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY"
 ```
 

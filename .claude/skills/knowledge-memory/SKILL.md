@@ -50,7 +50,7 @@ node scripts/mcp-memory-call.mjs create_entities '{
 **Project state update** — add to existing entity, never recreate it:
 ```
 node scripts/mcp-memory-call.mjs add_observations '{
-  "observations": [{ "entityName": "electrical-website-state",
+  "observations": [{ "entityName": "nexgen-electrical-innovations-state",
     "contents": ["Branch: ...", "Build status: passing", "Active phase: ...", "Next tasks: ..."] }]
 }'
 ```
@@ -59,12 +59,12 @@ node scripts/mcp-memory-call.mjs add_observations '{
 
 ## Session-End Checklist
 
-1. `pnpm docker:mcp:memory:search "electrical-website-state"` — confirm entity exists
+1. `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"` — confirm entity exists
 2. `add_observations` to project state — branch, build status, next tasks
 3. `create_entities` — session entity (`session-YYYY-MM-DD-seq`)
 4. `create_entities` — learning entities for any non-obvious patterns discovered
 5. `create_entities` — decision entities for any architectural choices made
-6. `create_relations` — `from: "session-YYYY-MM-DD-seq"`, `to: "electrical-website-state"`, `relationType: "updates"`
+6. `create_relations` — `from: "session-YYYY-MM-DD-seq"`, `to: "nexgen-electrical-innovations-state"`, `relationType: "updates"`
 
 **Step 5a — Update active lane entity with session work:**
 ```bash

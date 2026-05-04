@@ -49,7 +49,7 @@ The general-purpose agent spawns specialised sub-agents (architecture-sme, code-
 - At 80%: Emergency — commit WIP, sync Docker memory, then stop.
 
 **Session end (always):**
-1. `add_observations` to `electrical-website-state` — branch, build, next tasks
+1. `add_observations` to `nexgen-electrical-innovations-state` — branch, build, next tasks
 2. `create_entities` — `session-YYYY-MM-DD-seq` entity
 3. `create_relations` — session `updates` project_state
 

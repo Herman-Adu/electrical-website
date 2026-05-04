@@ -1,3 +1,5 @@
+name: nexgen-electrical-innovations
+
 services:
   web:
     build:
@@ -5,7 +7,7 @@ services:
       dockerfile: Dockerfile
       args:
         SKIP_ENV_VALIDATION: "false"
-    image: electrical-website:local
+    image: nexgen-electrical-innovations:local
     ports:
       - "3000:3000"
     env_file:

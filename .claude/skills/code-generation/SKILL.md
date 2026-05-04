@@ -5,15 +5,15 @@ argument-hint: "[language, goal, or description]"
 disable-model-invocation: true
 ---
 
-# Code Generation Skill — electrical-website
+# Code Generation Skill — Nexgen Electrical Innovations
 
-Generates, refactors, debugs, and reviews code for the electrical-website Next.js 16 App Router project (strict TypeScript, Tailwind v4, Zod validation, Server Actions).
+Generates, refactors, debugs, and reviews code for the Nexgen Electrical Innovations (electrical-website) Next.js 16 App Router project (strict TypeScript, Tailwind v4, Zod validation, Server Actions).
 
 ## Execution Method
 
 ### Step 0: Docker Preflight (Session Start)
-- Search for project state: `pnpm docker:mcp:memory:search "electrical-website-state"`
-- Load context: `pnpm docker:mcp:memory:open electrical-website-state`
+- Search for project state: `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"`
+- Load context: `pnpm docker:mcp:memory:open nexgen-electrical-innovations-state`
 - Extract: active phase, prior code decisions, test coverage status, blockers
 - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
 
