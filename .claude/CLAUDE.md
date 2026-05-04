@@ -57,10 +57,11 @@ Session start (always, in order):
 
 Session end (always, before closing):
 
-1. `add_observations` to project state entity — branch, build status, next tasks
+1. `add_observations` to `nexgen-electrical-innovations-state` — branch, build status, next tasks
 2. `create_entities` — new session entity (`session-YYYY-MM-DD-seq`)
-3. `create_relations` — link session → project state (`updates`)
+3. `create_relations` — link session → `nexgen-electrical-innovations-state` (`updates`)
 4. Search before creating — never duplicate entities
+5. **Never write to `electrical-website-state`** — that entity is archived historical context only
 
 Entity types: `project_state`, `feature` (feat-), `learning` (learn-), `decision` (decide-), `session` (session-), `infrastructure` (infra-).
 Observations: arrays of strings — never objects. Every entity requires `entityType` field.

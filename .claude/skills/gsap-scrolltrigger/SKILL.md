@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 ## Session Preflight
 
-`pnpm docker:mcp:memory:open electrical-website-state` — check active phase and existing animation patterns before generating new ones.
+`pnpm docker:mcp:memory:open nexgen-electrical-innovations-state` — check active phase and existing animation patterns before generating new ones.
 
 ## Live Context (auto-injected)
 

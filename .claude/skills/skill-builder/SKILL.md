@@ -19,7 +19,7 @@ For the complete technical reference on all frontmatter fields, advanced pattern
 ## Execution Method (Preflight)
 
 **Step 1: Docker Preflight (Session Start)**
-- Search for project state: `mcp__MCP_DOCKER__search_nodes("electrical-website-state")`
+- Search for project state: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")`
 - Load context: `mcp__MCP_DOCKER__open_nodes([returned_entity_ids])`
 - Extract: active phase, prior skill decisions, skill audit findings, blockers
 - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes

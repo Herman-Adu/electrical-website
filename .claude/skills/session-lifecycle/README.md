@@ -70,7 +70,7 @@ Response: /session-lifecycle end
 ### Mode: `start`
 
 ```
-1. Searches Docker for electrical-website-state
+1. Searches Docker for nexgen-electrical-innovations-state
 2. Loads: branch, active phase, next tasks, blockers
 3. Runs: git status && git log --oneline -5
 4. Reports: "[Session ready — Branch: X | Phase: Y | Next: Z]"
@@ -209,7 +209,7 @@ New Claude: Loaded continuation, resuming Phase 5 refactoring...
 ```
 ✅ Session complete
 - Session entity: session-2026-04-16-001 (created)
-- Project state: electrical-website-state (updated)
+- Project state: nexgen-electrical-innovations-state (updated)
 - Features completed: 3
 - Build status: passing
 - Tests: passing

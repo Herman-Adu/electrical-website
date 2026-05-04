@@ -5,11 +5,11 @@ argument-hint: "[describe the scroll-reveal animations needed]"
 disable-model-invocation: true
 ---
 
-> **Check project decisions first.** Recent project phases have deliberately removed scroll-reveal animations from some components. Run `pnpm docker:mcp:memory:search "scroll-reveal"` and check `electrical-website-state` before adding AOS animations. Confirm with user if unsure.
+> **Check project decisions first.** Recent project phases have deliberately removed scroll-reveal animations from some components. Run `pnpm docker:mcp:memory:search "scroll-reveal"` and check `nexgen-electrical-innovations-state` before adding AOS animations. Confirm with user if unsure.
 
 ## Session Preflight
 
-`pnpm docker:mcp:memory:open electrical-website-state` — check active phase and verify scroll-reveal is appropriate for the target components.
+`pnpm docker:mcp:memory:open nexgen-electrical-innovations-state` — check active phase and verify scroll-reveal is appropriate for the target components.
 
 ## Live Context (auto-injected)
 

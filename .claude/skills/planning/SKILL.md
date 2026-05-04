@@ -9,8 +9,8 @@ disable-model-invocation: true
 
 ## Session Preflight
 
-1. `pnpm docker:mcp:memory:search "electrical-website-state"` — load project state
-2. `pnpm docker:mcp:memory:open electrical-website-state` — read active phase, blockers, next tasks
+1. `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"` — load project state
+2. `pnpm docker:mcp:memory:open nexgen-electrical-innovations-state` — read active phase, blockers, next tasks
 3. `git log --oneline -5 && git status` — confirm code state
 
 ---
@@ -64,7 +64,7 @@ Then link it:
 node scripts/mcp-memory-call.mjs create_relations '{
   "relations": [{
     "from": "plan-[domain]-[goal]",
-    "to": "electrical-website-state",
+    "to": "nexgen-electrical-innovations-state",
     "relationType": "derives_from"
   }]
 }'

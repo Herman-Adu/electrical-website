@@ -5,9 +5,9 @@ argument-hint: "[workflow goal]"
 disable-model-invocation: true
 ---
 
-# MCP Automation Skill — electrical-website
+# MCP Automation Skill — Nexgen Electrical Innovations
 
-Orchestrates MCP tools and automates multi-step workflows for the electrical-website project. Always prefer MCP tools over CLI equivalents.
+Orchestrates MCP tools and automates multi-step workflows for the Nexgen Electrical Innovations project. Always prefer MCP tools over CLI equivalents.
 
 ## MCP Tool Namespace Reference
 
@@ -26,8 +26,8 @@ Orchestrates MCP tools and automates multi-step workflows for the electrical-web
 ## Execution Method
 
 1. **Docker Preflight**
-   - Search project state: `pnpm docker:mcp:memory:search "electrical-website-state"`
-   - Load context: `pnpm docker:mcp:memory:open electrical-website-state`
+   - Search project state: `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"`
+   - Load context: `pnpm docker:mcp:memory:open nexgen-electrical-innovations-state`
    - If Docker unavailable: check `.claude/CLAUDE.md` § Session State for fallback notes
 
 2. **Validate tool availability**
