@@ -2152,23 +2152,23 @@ export const allProjects: Project[] = [
             "Roller shutter circuits — 3-phase supplies installed and commissioned",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-01.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-first-fix-wiring.jpg",
           alt: "Biffa Workshop Farnham — electrical installation progress",
           caption: "Installation progress — first fix wiring complete",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-02.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-cable-containment.jpg",
           alt: "Biffa Workshop Farnham — electrical containment and cabling",
           caption: "Cable containment — routed and dressed per design",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-03.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-high-level-lighting.jpg",
           alt: "Biffa Workshop Farnham — lighting installation",
           caption:
             "High-level lighting — installed and aligned to workshop layout",
         },
         {
-          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-gallery-04.jpg",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-final-commissioning.jpg",
           alt: "Biffa Workshop Farnham — electrical systems complete",
           caption: "Workshop systems — all circuits commissioned and certified",
         },
@@ -2219,7 +2219,7 @@ export const allProjects: Project[] = [
     description:
       "Full domestic electrical installation for a local Taplow homeowner — consumer unit replacement, new circuits throughout, lighting, power, and final accessories. Tested, certified to BS 7671, and handed over spotless.",
     coverImage: {
-      src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+      src: "/images/projects/residential/domestic-installations/nexgen-taplow-completed-installation.jpg",
       alt: "Taplow domestic electrical installation — completed residential work",
     },
     kpis: {
@@ -2310,48 +2310,49 @@ export const allProjects: Project[] = [
       ],
       gallery: [
         {
-          src: "/images/projects/residential/domestic-installations/01-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-completed-installation.jpg",
           alt: "Taplow domestic installation — overview",
           caption: "Domestic installation — completed and certified",
         },
         {
-          src: "/images/projects/residential/domestic-installations/02-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-consumer-unit-replacement.jpg",
           alt: "Taplow domestic installation — consumer unit",
-          caption: "Consumer unit replacement — tested and certified to BS 7671",
+          caption:
+            "Consumer unit replacement — tested and certified to BS 7671",
         },
         {
-          src: "/images/projects/residential/domestic-installations/03-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-circuit-wiring.jpg",
           alt: "Taplow domestic installation — circuit wiring",
           caption: "New circuit wiring — routed and terminated cleanly",
         },
         {
-          src: "/images/projects/residential/domestic-installations/04-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-lighting-installation.jpg",
           alt: "Taplow domestic installation — lighting installation",
           caption: "Lighting installation — fitted to finished standard",
         },
         {
-          src: "/images/projects/residential/domestic-installations/05-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-power-accessories.jpg",
           alt: "Taplow domestic installation — power accessories",
           caption: "Power accessories — sockets and switches fitted cleanly",
         },
         {
           // 06-local-installation.jpg does not exist — intentionally skipped
-          src: "/images/projects/residential/domestic-installations/07-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-installation-detail.jpg",
           alt: "Taplow domestic installation — installation detail",
           caption: "Installation detail — clean workmanship throughout",
         },
         {
-          src: "/images/projects/residential/domestic-installations/08-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-finished-areas.jpg",
           alt: "Taplow domestic installation — finished areas",
           caption: "Finished areas — no marks, no debris left behind",
         },
         {
-          src: "/images/projects/residential/domestic-installations/09-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-final-accessories.jpg",
           alt: "Taplow domestic installation — final accessories",
           caption: "Final accessories — correctly positioned and secured",
         },
         {
-          src: "/images/projects/residential/domestic-installations/10-local-installation.jpg",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-handover-certified.jpg",
           alt: "Taplow domestic installation — completed property",
           caption: "Completed installation — handed over clean and certified",
         },
@@ -2390,6 +2391,444 @@ export const allProjects: Project[] = [
             "The Taplow installation was completed in 3 days. Full consumer unit replacement, new circuits throughout, lighting, power, and final accessories — tested, certified to BS 7671, and handed over with the property exactly as we found it. Sarah Adu's recommendation to her neighbours in Taplow says everything that needs to be said.",
           ],
           background: "muted",
+        },
+      ],
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HERSCHEL GRAMMAR SCHOOL — Commercial Education Sector Maintenance Contract
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-herschel-grammar-001",
+    slug: "herschel-grammar-school-contract",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Herschel Grammar School — Electrical Maintenance Contract",
+    clientSector: "Education — Grammar School",
+    status: "completed",
+    description:
+      "Exclusive electrical maintenance contract for Herschel Grammar School — a co-educational grammar school with academy status in Slough. From first meeting to ongoing partnership, trust and reliability are the defining pillars of this relationship.",
+    coverImage: {
+      src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-hero.jpg",
+      alt: "Herschel Grammar School — electrical maintenance contract",
+    },
+    kpis: {
+      budget: "Maintenance Contract",
+      timeline: "Ongoing since 2018",
+      capacity: "Emergency 1hr SLA",
+      location: "Slough, Berkshire",
+    },
+    tags: [
+      "Maintenance Contract",
+      "Education Sector",
+      "Emergency Response",
+      "Planned Works",
+    ],
+    progress: 100,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Education Sector Contract",
+        headlineWords: ["A", "school", "that", "trusted", "us."],
+        leadParagraph:
+          "Herschel Grammar School contacted Nexgen in late 2018 — their previous contractor was retiring and they urgently needed a reliable replacement. From the first meeting with site manager Phil Vance and caretaker Lewis, the relationship was built on trust. We explained our ethos, our accreditations, our track record — and were awarded the exclusive contract. That partnership has been maintained to this day.",
+        bodyParagraphs: [
+          "Herschel Grammar School is a co-educational grammar school with academy status in Slough, Berkshire. With children on site every day, the stakes for electrical reliability are higher than in any commercial environment. A fault that would be an inconvenience elsewhere can be a safety incident at a school.",
+          "Nexgen's contract covers the full spectrum of electrical need at Herschel: from emergency response within 1 hour for dangerous scenarios, to 24-hour resolution for non-emergency faults, to planned works — lighting upgrades, room layouts, service additions — all scheduled outside school hours or during holidays to ensure zero disruption to the school timetable.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Trust and Communication",
+            description:
+              "From first meeting, the relationship was built on transparency and reliability. Phil and Lewis knew exactly what to expect from Nexgen — and we've never given them reason to doubt it.",
+          },
+          {
+            num: "02",
+            title: "Zero Disruption to School Operations",
+            description:
+              "All planned works are scheduled around the school timetable — outside school hours or during holidays. Children come first; electrical works fit around them.",
+          },
+          {
+            num: "03",
+            title: "Emergency-Ready",
+            description:
+              "1-hour on-site response for dangerous or potentially dangerous electrical problems. With children on site, safety is paramount and response time is non-negotiable.",
+          },
+          {
+            num: "04",
+            title: "Full Compliance and Handover",
+            description:
+              "Every completed work is certified to BS 7671 and formally handed over. The school has a complete record of all electrical works carried out on site.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Emergency Response — 1 Hour SLA",
+          description:
+            "On-site within 1 hour for any dangerous or potentially dangerous electrical problem. With children present every school day, this is the most critical element of the contract.",
+        },
+        {
+          icon: "Settings",
+          title: "Standard Reactive Maintenance",
+          description:
+            "Non-emergency faults attended and resolved within 24 hours. Nexgen coordinates directly with Phil and Lewis to ensure minimal disruption to the school day.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "Planned Lighting Works",
+          description:
+            "Lighting upgrades across the school — reception ceiling lighting, office lighting, sports centre lighting, and accent lighting — all planned, specified, and installed outside teaching hours.",
+        },
+        {
+          icon: "Cable",
+          title: "Trunking & Containment",
+          description:
+            "Cable trunking and containment installations for new circuits, room layouts, and service additions — routed cleanly and dressed to a finished standard throughout.",
+        },
+        {
+          icon: "Building2",
+          title: "Outdoor Electrical Works",
+          description:
+            "External electrical installations covering outdoor power supplies and site lighting — all weatherproofed, IP-rated, and installed to the school's operational requirements.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Small Power & Sockets",
+          description:
+            "New socket and small power installations to meet evolving classroom and administrative needs — specified for correct loading, installed cleanly, and certified on completion.",
+        },
+      ],
+      challenge:
+        "Providing electrical maintenance and planned works to a grammar school with several hundred pupils requires a level of care and coordination that goes beyond a typical commercial contract. Works cannot disrupt the school day. Emergency faults must be resolved without delay. Every job must be completed to a standard that reflects the trust the school places in Nexgen — because children and staff are on site every day.",
+      solution:
+        "Nexgen established a clear communication channel with site manager Phil Vance and caretaker Lewis from day one. Emergency works are attended within 1 hour — Nexgen engineers are familiar with the site, know the layout, and can diagnose and resolve faults quickly. Planned works are scheduled and confirmed with the school in advance, completed outside school hours or during holidays. Every completed installation is certified to BS 7671 and a record kept for the school's compliance files.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Contract Award & Onboarding",
+          description:
+            "First meeting with Phil Vance (site manager) and Lewis (caretaker). Nexgen presented its ethos, accreditations, and experience. Exclusive maintenance contract awarded — late 2018.",
+          duration: "Late 2018",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "First Planned Works",
+          description:
+            "Initial planned works programme undertaken — lighting upgrades in reception, offices, and the sports centre. All works completed outside school hours with no disruption to the timetable.",
+          duration: "2019",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Ongoing Reactive & Planned Maintenance",
+          description:
+            "Continuous delivery of reactive maintenance (emergency and standard SLA) combined with planned works — trunking, outdoor electrics, small power, and service additions across the site.",
+          duration: "2019 – present",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Continued Partnership",
+          description:
+            "The relationship with Herschel Grammar School continues to this day. Nexgen remains the school's exclusive electrical contractor — a partnership built on trust and consistently maintained.",
+          duration: "Ongoing",
+          status: "in-progress",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-hero.jpg",
+          alt: "Herschel Grammar School — electrical maintenance contract",
+          caption:
+            "Herschel Grammar School — Nexgen's exclusive electrical maintenance partner since 2018",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-cover-primary.png",
+          alt: "Herschel Grammar School — school building exterior",
+          caption:
+            "Herschel Grammar School — co-educational grammar school with academy status, Slough",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — ceiling lighting installation",
+          caption:
+            "Ceiling lighting — installed and commissioned across the school",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-office-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — office ceiling lights",
+          caption:
+            "Office ceiling lights — upgraded as part of the planned works programme",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-reception-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — reception ceiling lighting",
+          caption:
+            "Reception ceiling lighting — clean finish, installed outside school hours",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-sports-centre-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — sports centre ceiling lights",
+          caption:
+            "Sports centre ceiling lights — high-level lighting to the required lux levels",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-accent-lights.jpg",
+          alt: "Herschel Grammar School — accent lighting",
+          caption:
+            "Accent lighting — specified and installed to enhance the school environment",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-trunking.jpg",
+          alt: "Herschel Grammar School — cable trunking installation",
+          caption:
+            "Cable trunking — routed cleanly for new circuits and service additions",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-outdoor-electrics.jpg",
+          alt: "Herschel Grammar School — outdoor electrical works",
+          caption:
+            "Outdoor electrics — weatherproofed and installed to operational requirements",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-sockets.jpg",
+          alt: "Herschel Grammar School — socket and small power installation",
+          caption:
+            "Small power and sockets — new circuits installed and certified throughout",
+        },
+      ],
+      testimonial: {
+        quote:
+          "Richard, Gavin and the team at Nexgen are quick to carry out both planned and reactive electrical works, to keep our school running. Innovative and practical solutions from the team, have helped us future proof our buildings while representing excellent value for money. We look forward to a continued working relationship with them.",
+        author: "Herschel Grammar School",
+        role: "Client",
+        company: "Herschel Grammar School, Slough",
+      },
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "why-schools-need-reliability",
+          heading: "A School That Trusted Us. A Standard We Took Personally.",
+          paragraphs: [
+            "When Phil Vance called Nexgen in 2018, he needed more than a contractor — he needed someone he could rely on without question. An electrical fault at a school isn't just an inconvenience. With children on site, every problem carries a different weight. Nexgen understood that from the first meeting, and it has shaped how we approach every job at Herschel ever since.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "the-cup-of-tea-standard",
+          heading: "The Cup of Tea Test.",
+          paragraphs: [
+            "We are proud of the ongoing service we give to Herschel Grammar School — and we are sure they appreciate what we do, because they always have a cup of tea or coffee with biscuits ready for us. It sounds like a small thing. It isn't. It's the clearest sign that the relationship is working: that the school trusts the team, values what they do, and is glad to see them when they arrive.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "Ongoing Since 2018. Still Going.",
+          paragraphs: [
+            "The Herschel Grammar School contract has been running since late 2018. Every reactive call attended on time. Every planned work completed without disruption. Every installation certified and on record. Nexgen is the school's exclusive electrical contractor — and the partnership shows no sign of ending.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // THE HUB FARNBOROUGH — Commercial Lighting Refurbishment (stub — in progress)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-the-hub-farnborough-001",
+    slug: "the-hub-farnborough-commercial-lighting",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "The Hub Farnborough — Commercial Lighting Refurbishment",
+    clientSector: "Commercial Office — Hospitality/Co-Working",
+    status: "in-progress",
+    description:
+      "Intact Electrical were chosen as the preferred and trusted electrical installation experts for The Hub Farnborough — an award-winning 1930s building originally an airport departure lounge and control tower, completely restored to provide contemporary office accommodation.",
+    coverImage: {
+      src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-cover-primary.jpg",
+      alt: "The Hub Farnborough — commercial lighting refurbishment",
+    },
+    kpis: {
+      budget: "Commercial Contract",
+      timeline: "In Progress",
+      capacity: "Internal & External",
+      location: "Farnborough, Hampshire",
+    },
+    tags: [
+      "Commercial Lighting",
+      "Office Refurbishment",
+      "Heritage Building",
+      "In Progress",
+    ],
+    progress: 30,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Commercial Lighting Project",
+        headlineWords: ["Flying", "high", "at", "The", "Hub."],
+        leadParagraph:
+          "The Hub Farnborough is an award-winning 1930s building — originally an airport departure lounge and control tower, completely restored and refurbished to provide contemporary office accommodation. Intact Electrical were chosen as the preferred and trusted electrical installation experts for the internal and external commercial office lighting refurbishments.",
+        bodyParagraphs: [
+          "We are meticulous in completing projects that leave our clients delighted, believing you are only as good as your last job.",
+          "Project detail will be updated as works progress. Gallery images below show the scope and quality of installation delivered to date.",
+        ],
+      },
+      gallery: [
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-cover-primary.jpg",
+          alt: "The Hub Farnborough — commercial lighting refurbishment",
+          caption:
+            "The Hub Farnborough — award-winning 1930s building, Farnborough",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-internal-lighting.jpg",
+          alt: "The Hub Farnborough — lighting installation",
+          caption:
+            "Internal lighting installation — contemporary office fit-out",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-lighting-detail.jpg",
+          alt: "The Hub Farnborough — commercial lighting detail",
+          caption: "Lighting detail — specification and finish",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-office-lighting.jpg",
+          alt: "The Hub Farnborough — office electrical installation",
+          caption:
+            "Office lighting and electrical — installed to specification",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-completed-areas.jpg",
+          alt: "The Hub Farnborough — completed areas",
+          caption: "Completed areas — Intact Electrical flying high at The Hub",
+        },
+      ],
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HARVEY NICHOLS — Industrial Chiller Upgrade (stub — in progress)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-harvey-nichols-001",
+    slug: "harvey-nichols-chiller-upgrade",
+    category: "industrial",
+    categoryLabel: "Industrial",
+    title: "Harvey Nichols — Chiller Upgrade",
+    clientSector: "Luxury Retail — Department Store",
+    status: "in-progress",
+    description:
+      "Electrical installation and upgrade works for the chiller systems at Harvey Nichols — one of the UK's most prestigious luxury department stores. Nexgen was selected as the trusted electrical contractor to deliver the chiller upgrade programme to the exacting standards the brand demands.",
+    coverImage: {
+      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
+      alt: "Harvey Nichols — chiller upgrade electrical installation, London",
+    },
+    kpis: {
+      budget: "Commercial Contract",
+      timeline: "In Progress",
+      capacity: "Industrial Supply",
+      location: "London",
+    },
+    tags: ["Chiller Upgrade", "Industrial", "Luxury Retail", "In Progress"],
+    progress: 40,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Industrial Electrical Project",
+        headlineWords: ["Precision.", "Under", "Pressure."],
+        leadParagraph:
+          "Harvey Nichols is one of the UK's most iconic luxury department stores — a brand where the standard of every trade is held to the highest expectation. When the chiller upgrade programme required a trusted electrical contractor, Nexgen was selected. The scope covers the electrical installation and upgrade works to support the chiller systems, delivered with minimal disruption to live retail operations.",
+        bodyParagraphs: [
+          "Working within an active, high-footfall luxury retail environment demands a level of programme management, site awareness, and finish quality that goes beyond a standard industrial installation. Every aspect of the works — from containment routing to termination detail — reflects the environment in which it is installed.",
+          "Full project detail will be published on completion. The gallery below documents the installation works to date.",
+        ],
+      },
+      gallery: [
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
+          alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop",
+          caption: "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg",
+          alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop",
+          caption: "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg",
+          alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply",
+          caption: "Galvanised cable ladder — installed to route power feeds to chiller plant",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg",
+          alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit",
+          caption: "Cable tray at chiller base — containment installed and dressed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg",
+          alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage",
+          caption: "Trane chiller electrical connection — containment installed with correct danger labelling",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg",
+          alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs",
+          caption: "Under-floor cable management — heavy cable bundles routed through basement void",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg",
+          alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring",
+          caption: "Chiller control panel — MCBs, contactors, and wiring installed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
+          alt: "Harvey Nichols — plant room with insulated pipework and cable containment",
+          caption: "Plant room installation — cable containment and services routed through mechanical plant area",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg",
+          alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline",
+          caption: "Rooftop installation — electrical containment and pipework with London skyline in view",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg",
+          alt: "Harvey Nichols — plant room walkway grating with cable containment below",
+          caption: "Plant room cable containment — routed below steel grating walkway in plant area",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg",
+          alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator",
+          caption: "Grundfos VFD pump controller — installed, cabled, and commissioned",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg",
+          alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables",
+          caption: "Rooftop earthing cables — earth and bonding runs through steel grating structure",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg",
+          alt: "Harvey Nichols — cable identification labels on supply cables through security mesh",
+          caption: "Cable identification labels — circuit labelling applied to all supply cables",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
+          alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop",
+          caption: "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop",
         },
       ],
     },

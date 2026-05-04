@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "electrical-website-state",
-  "fallback": "575d6e1 feat: news-hub topic filter pages — per-topic hero, intro, and article grid | 6f4ec40 feat: news-hub phase 9 — topic filter, channel cards, PPR filter client, nav restructure | 4629eca feat: projects taxonomy, nav, filter bar, category redesign, docker-preflight (#127)",
-  "updatedAt": "2026-05-01T22:58:37.586Z"
+  "branch": "feat/project-migrations-herschel-hub",
+  "entity": "feat-project-migrations-herschel-hub",
+  "fallback": "5b3caf2 feat: Harvey Nichols — industrial chiller upgrade stub | 651c60e feat: The Hub Farnborough — commercial lighting stub (Phase 3) | 830148f feat: Herschel Grammar School — full commercial project migration (Phase 2)",
+  "updatedAt": "2026-05-04T15:03:30.119Z"
 }
