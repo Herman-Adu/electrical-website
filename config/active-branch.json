@@ -1,6 +1,6 @@
 {
-  "branch": "feat/shared-section-features-about",
-  "entity": "feat-shared-section-features-about",
-  "fallback": "366897f Merge branch 'main' of https://github.com/Herman-Adu/nexgen-electrical-innovations | dc6bf1c chore: rebrand electrical-website → Nexgen Electrical Innovations (#131) | 195a053 chore: rebrand electrical-website → Nexgen Electrical Innovations",
-  "updatedAt": "2026-05-04T17:37:38.807Z"
+  "branch": "feat/article-detail-system",
+  "entity": "feat-article-detail-system",
+  "fallback": "8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133) | 247baff feat: consolidate About page to data-driven SectionFeatures (#132) | dc6bf1c chore: rebrand electrical-website → Nexgen Electrical Innovations (#131)",
+  "updatedAt": "2026-05-04T20:31:22.680Z"
 }

@@ -36,3 +36,6 @@ export { NewsArticleContent } from "./news-article-content";
 export { NewsChannelCard } from "./news-channel-card";
 export { NewsTopicFilter } from "./news-topic-filter";
 export { NewsListSkeleton } from "./news-list-skeleton";
+
+// Detail system — type-aware layout dispatch
+export { LayoutDispatcher, ReadingProgressBar } from "./detail";
