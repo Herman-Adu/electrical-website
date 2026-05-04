@@ -2640,6 +2640,75 @@ export const allProjects: Project[] = [
       ],
     },
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // THE HUB FARNBOROUGH — Commercial Lighting Refurbishment (stub — in progress)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-the-hub-farnborough-001",
+    slug: "the-hub-farnborough-commercial-lighting",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "The Hub Farnborough — Commercial Lighting Refurbishment",
+    clientSector: "Commercial Office — Hospitality/Co-Working",
+    status: "in-progress",
+    description:
+      "Intact Electrical were chosen as the preferred and trusted electrical installation experts for The Hub Farnborough — an award-winning 1930s building originally an airport departure lounge and control tower, completely restored to provide contemporary office accommodation.",
+    coverImage: {
+      src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-cover-primary.jpg",
+      alt: "The Hub Farnborough — commercial lighting refurbishment",
+    },
+    kpis: {
+      budget: "Commercial Contract",
+      timeline: "In Progress",
+      capacity: "Internal & External",
+      location: "Farnborough, Hampshire",
+    },
+    tags: ["Commercial Lighting", "Office Refurbishment", "Heritage Building", "In Progress"],
+    progress: 30,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Commercial Lighting Project",
+        headlineWords: ["Flying", "high", "at", "The", "Hub."],
+        leadParagraph:
+          "The Hub Farnborough is an award-winning 1930s building — originally an airport departure lounge and control tower, completely restored and refurbished to provide contemporary office accommodation. Intact Electrical were chosen as the preferred and trusted electrical installation experts for the internal and external commercial office lighting refurbishments.",
+        bodyParagraphs: [
+          "We are meticulous in completing projects that leave our clients delighted, believing you are only as good as your last job.",
+          "Project detail will be updated as works progress. Gallery images below show the scope and quality of installation delivered to date.",
+        ],
+      },
+      gallery: [
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-cover-primary.jpg",
+          alt: "The Hub Farnborough — commercial lighting refurbishment",
+          caption: "The Hub Farnborough — award-winning 1930s building, Farnborough",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-01.jpg",
+          alt: "The Hub Farnborough — lighting installation",
+          caption: "Internal lighting installation — contemporary office fit-out",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-02.jpg",
+          alt: "The Hub Farnborough — commercial lighting detail",
+          caption: "Lighting detail — specification and finish",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-03.jpg",
+          alt: "The Hub Farnborough — office electrical installation",
+          caption: "Office lighting and electrical — installed to specification",
+        },
+        {
+          src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-04.jpg",
+          alt: "The Hub Farnborough — completed areas",
+          caption: "Completed areas — Intact Electrical flying high at The Hub",
+        },
+      ],
+    },
+  },
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [
