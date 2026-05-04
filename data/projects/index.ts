@@ -2394,6 +2394,252 @@ export const allProjects: Project[] = [
       ],
     },
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HERSCHEL GRAMMAR SCHOOL — Commercial Education Sector Maintenance Contract
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-herschel-grammar-001",
+    slug: "herschel-grammar-school-contract",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Herschel Grammar School — Electrical Maintenance Contract",
+    clientSector: "Education — Grammar School",
+    status: "completed",
+    description:
+      "Exclusive electrical maintenance contract for Herschel Grammar School — a co-educational grammar school with academy status in Slough. From first meeting to ongoing partnership, trust and reliability are the defining pillars of this relationship.",
+    coverImage: {
+      src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-hero.jpg",
+      alt: "Herschel Grammar School — electrical maintenance contract",
+    },
+    kpis: {
+      budget: "Maintenance Contract",
+      timeline: "Ongoing since 2018",
+      capacity: "Emergency 1hr SLA",
+      location: "Slough, Berkshire",
+    },
+    tags: [
+      "Maintenance Contract",
+      "Education Sector",
+      "Emergency Response",
+      "Planned Works",
+    ],
+    progress: 100,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Education Sector Contract",
+        headlineWords: ["A", "school", "that", "trusted", "us."],
+        leadParagraph:
+          "Herschel Grammar School contacted Nexgen in late 2018 — their previous contractor was retiring and they urgently needed a reliable replacement. From the first meeting with site manager Phil Vance and caretaker Lewis, the relationship was built on trust. We explained our ethos, our accreditations, our track record — and were awarded the exclusive contract. That partnership has been maintained to this day.",
+        bodyParagraphs: [
+          "Herschel Grammar School is a co-educational grammar school with academy status in Slough, Berkshire. With children on site every day, the stakes for electrical reliability are higher than in any commercial environment. A fault that would be an inconvenience elsewhere can be a safety incident at a school.",
+          "Nexgen's contract covers the full spectrum of electrical need at Herschel: from emergency response within 1 hour for dangerous scenarios, to 24-hour resolution for non-emergency faults, to planned works — lighting upgrades, room layouts, service additions — all scheduled outside school hours or during holidays to ensure zero disruption to the school timetable.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Trust and Communication",
+            description:
+              "From first meeting, the relationship was built on transparency and reliability. Phil and Lewis knew exactly what to expect from Nexgen — and we've never given them reason to doubt it.",
+          },
+          {
+            num: "02",
+            title: "Zero Disruption to School Operations",
+            description:
+              "All planned works are scheduled around the school timetable — outside school hours or during holidays. Children come first; electrical works fit around them.",
+          },
+          {
+            num: "03",
+            title: "Emergency-Ready",
+            description:
+              "1-hour on-site response for dangerous or potentially dangerous electrical problems. With children on site, safety is paramount and response time is non-negotiable.",
+          },
+          {
+            num: "04",
+            title: "Full Compliance and Handover",
+            description:
+              "Every completed work is certified to BS 7671 and formally handed over. The school has a complete record of all electrical works carried out on site.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Emergency Response — 1 Hour SLA",
+          description:
+            "On-site within 1 hour for any dangerous or potentially dangerous electrical problem. With children present every school day, this is the most critical element of the contract.",
+        },
+        {
+          icon: "Settings",
+          title: "Standard Reactive Maintenance",
+          description:
+            "Non-emergency faults attended and resolved within 24 hours. Nexgen coordinates directly with Phil and Lewis to ensure minimal disruption to the school day.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "Planned Lighting Works",
+          description:
+            "Lighting upgrades across the school — reception ceiling lighting, office lighting, sports centre lighting, and accent lighting — all planned, specified, and installed outside teaching hours.",
+        },
+        {
+          icon: "Cable",
+          title: "Trunking & Containment",
+          description:
+            "Cable trunking and containment installations for new circuits, room layouts, and service additions — routed cleanly and dressed to a finished standard throughout.",
+        },
+        {
+          icon: "Building2",
+          title: "Outdoor Electrical Works",
+          description:
+            "External electrical installations covering outdoor power supplies and site lighting — all weatherproofed, IP-rated, and installed to the school's operational requirements.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Small Power & Sockets",
+          description:
+            "New socket and small power installations to meet evolving classroom and administrative needs — specified for correct loading, installed cleanly, and certified on completion.",
+        },
+      ],
+      challenge:
+        "Providing electrical maintenance and planned works to a grammar school with several hundred pupils requires a level of care and coordination that goes beyond a typical commercial contract. Works cannot disrupt the school day. Emergency faults must be resolved without delay. Every job must be completed to a standard that reflects the trust the school places in Nexgen — because children and staff are on site every day.",
+      solution:
+        "Nexgen established a clear communication channel with site manager Phil Vance and caretaker Lewis from day one. Emergency works are attended within 1 hour — Nexgen engineers are familiar with the site, know the layout, and can diagnose and resolve faults quickly. Planned works are scheduled and confirmed with the school in advance, completed outside school hours or during holidays. Every completed installation is certified to BS 7671 and a record kept for the school's compliance files.",
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Contract Award & Onboarding",
+          description:
+            "First meeting with Phil Vance (site manager) and Lewis (caretaker). Nexgen presented its ethos, accreditations, and experience. Exclusive maintenance contract awarded — late 2018.",
+          duration: "Late 2018",
+          status: "completed",
+        },
+        {
+          phase: "Phase 2",
+          title: "First Planned Works",
+          description:
+            "Initial planned works programme undertaken — lighting upgrades in reception, offices, and the sports centre. All works completed outside school hours with no disruption to the timetable.",
+          duration: "2019",
+          status: "completed",
+        },
+        {
+          phase: "Phase 3",
+          title: "Ongoing Reactive & Planned Maintenance",
+          description:
+            "Continuous delivery of reactive maintenance (emergency and standard SLA) combined with planned works — trunking, outdoor electrics, small power, and service additions across the site.",
+          duration: "2019 – present",
+          status: "completed",
+        },
+        {
+          phase: "Phase 4",
+          title: "Continued Partnership",
+          description:
+            "The relationship with Herschel Grammar School continues to this day. Nexgen remains the school's exclusive electrical contractor — a partnership built on trust and consistently maintained.",
+          duration: "Ongoing",
+          status: "in-progress",
+        },
+      ],
+      gallery: [
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-hero.jpg",
+          alt: "Herschel Grammar School — electrical maintenance contract",
+          caption:
+            "Herschel Grammar School — Nexgen's exclusive electrical maintenance partner since 2018",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-cover-primary.png",
+          alt: "Herschel Grammar School — school building exterior",
+          caption:
+            "Herschel Grammar School — co-educational grammar school with academy status, Slough",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — ceiling lighting installation",
+          caption: "Ceiling lighting — installed and commissioned across the school",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-office-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — office ceiling lights",
+          caption:
+            "Office ceiling lights — upgraded as part of the planned works programme",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-reception-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — reception ceiling lighting",
+          caption:
+            "Reception ceiling lighting — clean finish, installed outside school hours",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-sports-centre-ceiling-lights.jpg",
+          alt: "Herschel Grammar School — sports centre ceiling lights",
+          caption:
+            "Sports centre ceiling lights — high-level lighting to the required lux levels",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-accent-lights.jpg",
+          alt: "Herschel Grammar School — accent lighting",
+          caption:
+            "Accent lighting — specified and installed to enhance the school environment",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-trunking.jpg",
+          alt: "Herschel Grammar School — cable trunking installation",
+          caption:
+            "Cable trunking — routed cleanly for new circuits and service additions",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-outdoor-electrics.jpg",
+          alt: "Herschel Grammar School — outdoor electrical works",
+          caption:
+            "Outdoor electrics — weatherproofed and installed to operational requirements",
+        },
+        {
+          src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-sockets.jpg",
+          alt: "Herschel Grammar School — socket and small power installation",
+          caption:
+            "Small power and sockets — new circuits installed and certified throughout",
+        },
+      ],
+      testimonial: {
+        quote:
+          "Richard, Gavin and the team at Intact are quick to carry out both planned and reactive electrical works, to keep our school running. Innovative and practical solutions from the team, have helped us future proof our buildings while representing excellent value for money. We look forward to a continued working relationship with them.",
+        author: "Herschel Grammar School",
+        role: "Client",
+        company: "Herschel Grammar School, Slough",
+      },
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "why-schools-need-reliability",
+          heading: "A School That Trusted Us. A Standard We Took Personally.",
+          paragraphs: [
+            "When Phil Vance called Nexgen in 2018, he needed more than a contractor — he needed someone he could rely on without question. An electrical fault at a school isn't just an inconvenience. With children on site, every problem carries a different weight. Nexgen understood that from the first meeting, and it has shaped how we approach every job at Herschel ever since.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "the-cup-of-tea-standard",
+          heading: "The Cup of Tea Test.",
+          paragraphs: [
+            "We are proud of the ongoing service we give to Herschel Grammar School — and we are sure they appreciate what we do, because they always have a cup of tea or coffee with biscuits ready for us. It sounds like a small thing. It isn't. It's the clearest sign that the relationship is working: that the school trusts the team, values what they do, and is glad to see them when they arrive.",
+          ],
+          background: "default",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "Ongoing Since 2018. Still Going.",
+          paragraphs: [
+            "The Herschel Grammar School contract has been running since late 2018. Every reactive call attended on time. Every planned work completed without disruption. Every installation certified and on record. Nexgen is the school's exclusive electrical contractor — and the partnership shows no sign of ending.",
+          ],
+          background: "muted",
+        },
+      ],
+    },
+  },
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [
