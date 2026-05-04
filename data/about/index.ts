@@ -8,6 +8,7 @@ import type {
   SectionIntroData,
   SectionProfileData,
   SectionValuesData,
+  SectionFeaturesData,
 } from "@/types/sections";
 
 // =============================================================================
@@ -185,6 +186,66 @@ export const coreValuesData: SectionValuesData = {
 };
 
 // =============================================================================
+// PEACE OF MIND DATA
+// =============================================================================
+
+export const peaceOfMindData: SectionFeaturesData = {
+  sectionId: "peace-of-mind",
+  label: "Our Promise",
+  headline: "Peace of Mind, Guaranteed",
+  headlineHighlight: "Guaranteed",
+  description:
+    "Your electrical problems, solved with absolute confidence. We don’t just complete jobs — we deliver certainty. Here’s exactly what you can expect from us.",
+  pillars: [
+    {
+      icon: "Shield",
+      title: "Fully Licensed & Insured",
+      description:
+        "All work carried out by NICEIC Approved Contractors. Full public liability and professional indemnity insurance on every project.",
+      highlight: false,
+    },
+    {
+      icon: "Award",
+      title: "Workmanship Guaranteed",
+      description:
+        "Every installation backed by our comprehensive workmanship guarantee. If something isn’t right, we fix it — no questions asked.",
+      highlight: true,
+    },
+    {
+      icon: "Clock",
+      title: "24/7 Emergency Response",
+      description:
+        "Electrical emergencies don’t keep business hours. Our rapid response team is available around the clock, every day of the year.",
+      highlight: false,
+    },
+    {
+      icon: "ThumbsUp",
+      title: "Fixed Price Quotes",
+      description:
+        "No hidden charges. No surprise invoices. We quote clearly, and we deliver to budget. Your financial peace of mind matters to us.",
+      highlight: false,
+    },
+  ],
+  checklist: [
+    "Written quotations provided for every job",
+    "All work tested to BS 7671 18th Edition",
+    "Electrical Installation Certificate issued on completion",
+    "Full Part P notification where required",
+    "Manufacturer warranties honoured and documented",
+    "Annual free safety check for returning clients",
+  ],
+  partners: [
+    { name: "NICEIC", abbr: "NIC" },
+    { name: "Part P", abbr: "P.P" },
+    { name: "NAPIT", abbr: "NAP" },
+    { name: "ECS Gold", abbr: "ECS" },
+    { name: "CHAS", abbr: "CHA" },
+    { name: "ISO 9001", abbr: "ISO" },
+  ],
+  background: "dark",
+};
+
+// =============================================================================
 // ALL ABOUT DATA EXPORT
 // =============================================================================
 
@@ -193,4 +254,5 @@ export const aboutPageData = {
   director1: director1Data,
   director2: director2Data,
   coreValues: coreValuesData,
+  peaceOfMind: peaceOfMindData,
 };

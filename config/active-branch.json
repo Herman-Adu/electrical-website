@@ -1,6 +1,6 @@
 {
-  "branch": "feat/project-migrations-herschel-hub",
-  "entity": "feat-project-migrations-herschel-hub",
-  "fallback": "5b3caf2 feat: Harvey Nichols — industrial chiller upgrade stub | 651c60e feat: The Hub Farnborough — commercial lighting stub (Phase 3) | 830148f feat: Herschel Grammar School — full commercial project migration (Phase 2)",
-  "updatedAt": "2026-05-04T15:03:30.119Z"
+  "branch": "feat/shared-section-features-about",
+  "entity": "feat-shared-section-features-about",
+  "fallback": "366897f Merge branch 'main' of https://github.com/Herman-Adu/nexgen-electrical-innovations | dc6bf1c chore: rebrand electrical-website → Nexgen Electrical Innovations (#131) | 195a053 chore: rebrand electrical-website → Nexgen Electrical Innovations",
+  "updatedAt": "2026-05-04T17:37:38.807Z"
 }

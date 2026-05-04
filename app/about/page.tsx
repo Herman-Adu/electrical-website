@@ -3,7 +3,6 @@ import { Footer } from "@/components/sections";
 import {
   AboutHero,
   CompanyTimeline,
-  PeaceOfMind,
   VisionMission,
   Certifications,
   CommunitySection,
@@ -12,6 +11,7 @@ import {
 import {
   SectionIntro,
   SectionProfile,
+  SectionFeatures,
   SectionValues,
   ContentBreadcrumb,
 } from "@/components/shared";
@@ -21,6 +21,7 @@ import {
   director1Data,
   director2Data,
   coreValuesData,
+  peaceOfMindData,
 } from "@/data/about";
 import { getFeaturedProjectByPlacement } from "@/data/featured-projects";
 import { createPageMetadata } from "@/lib/metadata";
@@ -70,7 +71,7 @@ export default function AboutPage() {
       <CompanyTimeline />
 
       {/* Section 6: Peace of Mind Guaranteed */}
-      <PeaceOfMind />
+      <SectionFeatures data={peaceOfMindData} />
 
       {/* Section 7 & 8: Vision & Mission */}
       <VisionMission />
