@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useTransition } from "react";
 import {
   motion,
   AnimatePresence,
@@ -15,6 +15,8 @@ import {
 } from "@/lib/use-animated-borders";
 import type { ProjectGalleryImage } from "@/types/projects";
 //import { cn } from "@/lib/utils";
+
+const INITIAL_VISIBLE = 6;
 
 interface ProjectGalleryProps {
   images: ProjectGalleryImage[];
@@ -38,8 +40,13 @@ export function ProjectGallery({
   const shouldReduce = useReducedMotion();
   const { sectionRef, lineScale } = useAnimatedBorders();
 
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const [isPending, startTransition] = useTransition();
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const visibleImages = images.slice(0, visibleCount);
 
   const openLightbox = useCallback((index: number) => {
     setCurrentIndex(index);
@@ -120,13 +127,13 @@ export function ProjectGallery({
 
           {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {images.map((image, index) => (
+            {visibleImages.map((image, gridIdx) => (
               <motion.button
-                key={index}
+                key={gridIdx}
                 initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                onClick={() => openLightbox(index)}
+                transition={{ duration: 0.5, delay: gridIdx * 0.1 }}
+                onClick={() => openLightbox(gridIdx)}
                 className="group relative aspect-4/3 rounded-xl overflow-hidden border border-border bg-card/60 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label={`View ${image.alt} in lightbox`}
               >
@@ -159,6 +166,22 @@ export function ProjectGallery({
               </motion.button>
             ))}
           </div>
+
+          {/* Load-more button */}
+          {visibleCount < images.length && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() =>
+                  startTransition(() => setVisibleCount(images.length))
+                }
+                disabled={isPending}
+                aria-label={`Load ${images.length - visibleCount} more images`}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card/60 text-sm font-medium text-foreground hover:border-[hsl(174_100%_35%)] hover:text-[hsl(174_100%_35%)] dark:hover:border-electric-cyan dark:hover:text-electric-cyan transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isPending ? "Loading..." : `+ ${images.length - visibleCount} more`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
