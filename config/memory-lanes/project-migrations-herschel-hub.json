@@ -1,0 +1,11 @@
+{
+  "memoryLane": {
+    "id": "feat-project-migrations-herschel-hub",
+    "branch": "feat/project-migrations-herschel-hub",
+    "dockerEntity": "feat-project-migrations-herschel-hub",
+    "status": "active",
+    "openedAt": "2026-05-04T12:03:39.610Z",
+    "mergedAt": null,
+    "fallback_summary": "Auto-registered branch: feat/project-migrations-herschel-hub"
+  }
+}

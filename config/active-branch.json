@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "electrical-website-state",
-  "fallback": "575d6e1 feat: news-hub topic filter pages — per-topic hero, intro, and article grid | 6f4ec40 feat: news-hub phase 9 — topic filter, channel cards, PPR filter client, nav restructure | 4629eca feat: projects taxonomy, nav, filter bar, category redesign, docker-preflight (#127)",
-  "updatedAt": "2026-05-01T22:58:37.586Z"
+  "branch": "feat/project-migrations-herschel-hub",
+  "entity": "feat-project-migrations-herschel-hub",
+  "fallback": "388727f chore: add news-hub-phase9 memory lane config (#129) | 640809e feat: News Hub Phase 9 — topic filter, channel cards, PPR filter client, per-topic hero (#128) | 4629eca feat: projects taxonomy, nav, filter bar, category redesign, docker-preflight (#127)",
+  "updatedAt": "2026-05-04T12:03:39.667Z"
 }
