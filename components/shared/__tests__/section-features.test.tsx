@@ -30,7 +30,7 @@ vi.mock('../icon-map', () => ({
 
 // Mock ScrollReveal
 vi.mock('@/components/ui/scroll-reveal', () => ({
-  ScrollReveal: ({ children }: any) => <div>{children}</div>,
+  ScrollReveal: ({ children, className }: any) => <div className={className}>{children}</div>,
 }));
 
 describe('SectionFeatures — peaceOfMindData', () => {
@@ -122,5 +122,26 @@ describe('SectionFeatures — peaceOfMindData', () => {
     expect(
       screen.queryByText('What You Always Receive')
     ).not.toBeInTheDocument();
+  });
+});
+
+describe('SectionFeatures — pillar card equal height', () => {
+  it('each pillar card inner div has h-full class', () => {
+    const { container } = render(<SectionFeatures data={peaceOfMindData} />);
+    // rounded-2xl is only on pillar card divs in this component
+    const cards = container.querySelectorAll('.rounded-2xl');
+    expect(cards.length).toBe(4);
+    cards.forEach((card) => {
+      expect(card).toHaveClass('h-full');
+    });
+  });
+
+  it('ScrollReveal wrapper for each pillar has h-full class', () => {
+    const { container } = render(<SectionFeatures data={peaceOfMindData} />);
+    const cards = container.querySelectorAll('.rounded-2xl');
+    expect(cards.length).toBe(4);
+    cards.forEach((card) => {
+      expect(card.parentElement).toHaveClass('h-full');
+    });
   });
 });

@@ -100,9 +100,10 @@ export function SectionFeatures({ data }: SectionFeaturesProps) {
                 duration={0.65}
                 distance={40}
                 once
+                className="h-full"
               >
                 <div
-                  className={`relative p-7 rounded-2xl border transition-all duration-300 group ${
+                  className={`relative p-7 rounded-2xl border transition-all duration-300 group h-full ${
                     pillar.highlight
                       ? "border-electric-cyan/60 bg-electric-cyan/8 shadow-lg shadow-electric-cyan/15"
                       : "border-border bg-card/50 hover:border-electric-cyan/30"
