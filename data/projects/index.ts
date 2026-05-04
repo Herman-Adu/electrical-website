@@ -2317,7 +2317,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/residential/domestic-installations/02-local-installation.jpg",
           alt: "Taplow domestic installation — consumer unit",
-          caption: "Consumer unit replacement — tested and certified to BS 7671",
+          caption:
+            "Consumer unit replacement — tested and certified to BS 7671",
         },
         {
           src: "/images/projects/residential/domestic-installations/03-local-installation.jpg",
@@ -2557,7 +2558,8 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-ceiling-lights.jpg",
           alt: "Herschel Grammar School — ceiling lighting installation",
-          caption: "Ceiling lighting — installed and commissioned across the school",
+          caption:
+            "Ceiling lighting — installed and commissioned across the school",
         },
         {
           src: "/images/projects/commercial/herschel-grammar/nexgen-herschel-grammar-office-ceiling-lights.jpg",
@@ -2604,7 +2606,7 @@ export const allProjects: Project[] = [
       ],
       testimonial: {
         quote:
-          "Richard, Gavin and the team at Intact are quick to carry out both planned and reactive electrical works, to keep our school running. Innovative and practical solutions from the team, have helped us future proof our buildings while representing excellent value for money. We look forward to a continued working relationship with them.",
+          "Richard, Gavin and the team at Nexgen are quick to carry out both planned and reactive electrical works, to keep our school running. Innovative and practical solutions from the team, have helped us future proof our buildings while representing excellent value for money. We look forward to a continued working relationship with them.",
         author: "Herschel Grammar School",
         role: "Client",
         company: "Herschel Grammar School, Slough",
@@ -2664,7 +2666,12 @@ export const allProjects: Project[] = [
       capacity: "Internal & External",
       location: "Farnborough, Hampshire",
     },
-    tags: ["Commercial Lighting", "Office Refurbishment", "Heritage Building", "In Progress"],
+    tags: [
+      "Commercial Lighting",
+      "Office Refurbishment",
+      "Heritage Building",
+      "In Progress",
+    ],
     progress: 30,
     isFeatured: false,
     publishedAt: "2026-05-04T09:00:00.000Z",
@@ -2684,12 +2691,14 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-cover-primary.jpg",
           alt: "The Hub Farnborough — commercial lighting refurbishment",
-          caption: "The Hub Farnborough — award-winning 1930s building, Farnborough",
+          caption:
+            "The Hub Farnborough — award-winning 1930s building, Farnborough",
         },
         {
           src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-01.jpg",
           alt: "The Hub Farnborough — lighting installation",
-          caption: "Internal lighting installation — contemporary office fit-out",
+          caption:
+            "Internal lighting installation — contemporary office fit-out",
         },
         {
           src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-02.jpg",
@@ -2699,12 +2708,128 @@ export const allProjects: Project[] = [
         {
           src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-03.jpg",
           alt: "The Hub Farnborough — office electrical installation",
-          caption: "Office lighting and electrical — installed to specification",
+          caption:
+            "Office lighting and electrical — installed to specification",
         },
         {
           src: "/images/projects/commercial/the-hub-farnborough/nexgen-the-hub-farnborough-gallery-04.jpg",
           alt: "The Hub Farnborough — completed areas",
           caption: "Completed areas — Intact Electrical flying high at The Hub",
+        },
+      ],
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HARVEY NICHOLS — Industrial Chiller Upgrade (stub — in progress)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "proj-harvey-nichols-001",
+    slug: "harvey-nichols-chiller-upgrade",
+    category: "industrial",
+    categoryLabel: "Industrial",
+    title: "Harvey Nichols — Chiller Upgrade",
+    clientSector: "Luxury Retail — Department Store",
+    status: "in-progress",
+    description:
+      "Electrical installation and upgrade works for the chiller systems at Harvey Nichols — one of the UK's most prestigious luxury department stores. Nexgen was selected as the trusted electrical contractor to deliver the chiller upgrade programme to the exacting standards the brand demands.",
+    coverImage: {
+      src: "/images/projects/industrial/harvey-nichols/01-harvey-nichols-installation.jpg",
+      alt: "Harvey Nichols — chiller upgrade electrical installation",
+    },
+    kpis: {
+      budget: "Commercial Contract",
+      timeline: "In Progress",
+      capacity: "Industrial Supply",
+      location: "London",
+    },
+    tags: ["Chiller Upgrade", "Industrial", "Luxury Retail", "In Progress"],
+    progress: 40,
+    isFeatured: false,
+    publishedAt: "2026-05-04T09:00:00.000Z",
+    updatedAt: "2026-05-04T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Industrial Electrical Project",
+        headlineWords: ["Precision.", "Under", "Pressure."],
+        leadParagraph:
+          "Harvey Nichols is one of the UK's most iconic luxury department stores — a brand where the standard of every trade is held to the highest expectation. When the chiller upgrade programme required a trusted electrical contractor, Nexgen was selected. The scope covers the electrical installation and upgrade works to support the chiller systems, delivered with minimal disruption to live retail operations.",
+        bodyParagraphs: [
+          "Working within an active, high-footfall luxury retail environment demands a level of programme management, site awareness, and finish quality that goes beyond a standard industrial installation. Every aspect of the works — from containment routing to termination detail — reflects the environment in which it is installed.",
+          "Full project detail will be published on completion. The gallery below documents the installation works to date.",
+        ],
+      },
+      gallery: [
+        {
+          src: "/images/projects/industrial/harvey-nichols/01-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols chiller upgrade — installation overview",
+          caption: "Chiller upgrade installation — Harvey Nichols",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/02-harvey-nicholes-chiller-upgrade.jpg",
+          alt: "Harvey Nichols — chiller unit electrical connection",
+          caption:
+            "Chiller unit electrical connection — industrial supply installed",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/02-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — electrical installation detail",
+          caption: "Installation detail — precision workmanship throughout",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/03-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — chiller upgrade phase 1",
+          caption: "Phase 1 works — containment and cabling in progress",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/04-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — electrical containment installation",
+          caption: "Cable containment — routed and dressed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/05-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — chiller electrical systems",
+          caption: "Chiller electrical systems — installation underway",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/06-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — industrial electrical works",
+          caption: "Industrial electrical works — delivered to a retail standard",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/07-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — installation progress",
+          caption: "Installation progress — works continuing to programme",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/08-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — electrical installation works",
+          caption: "Electrical installation — precision and care throughout",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/09-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — chiller system wiring",
+          caption: "Chiller system wiring — terminated and tested",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/10-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — switchgear and distribution",
+          caption: "Switchgear and distribution — installed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/11-harvey-nicholsinstallation.jpg",
+          alt: "Harvey Nichols — electrical installation site",
+          caption: "On-site installation — Nexgen team at Harvey Nichols",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/12-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — completed sections",
+          caption: "Completed sections — handed over clean and operational",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/14-harvey-nichols-installation.jpg",
+          alt: "Harvey Nichols — chiller upgrade progress",
+          caption: "Upgrade works progress — programme on track",
         },
       ],
     },
