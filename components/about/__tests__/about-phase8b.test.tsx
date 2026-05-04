@@ -19,17 +19,12 @@ import { resolve } from 'path';
  */
 
 describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
-  let peaceOfMindSource: string;
   let visionMissionSource: string;
   let certificationsSource: string;
   let communitySectionSource: string;
   let aboutHeroSource: string;
 
   beforeEach(() => {
-    peaceOfMindSource = readFileSync(
-      resolve(__dirname, '../peace-of-mind.tsx'),
-      'utf-8'
-    );
     visionMissionSource = readFileSync(
       resolve(__dirname, '../vision-mission.tsx'),
       'utf-8'
@@ -56,22 +51,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
    * Instead, they will be wrapped with ScrollReveal component.
    */
   describe('Blocker 1: Animation Observer Conflict — Remove whileInView from cards', () => {
-    it('PeaceOfMind pillar cards should NOT have whileInView prop', () => {
-      // Verify whileInView is NOT present in pillar section
-      // (After refactor, pillars are wrapped with ScrollReveal)
-      const pillarSection = peaceOfMindSource.substring(
-        peaceOfMindSource.indexOf('Four pillars'),
-        peaceOfMindSource.indexOf('Two column')
-      );
-
-      // Verify whileInView is NOT present in pillar cards
-      expect(pillarSection).not.toContain('whileInView');
-      expect(pillarSection).not.toContain('viewport={{');
-
-      // Verify ScrollReveal is present
-      expect(pillarSection).toContain('ScrollReveal');
-    });
-
     it('VisionMission vision points should NOT have whileInView prop on card level', () => {
       // Vision points should use ScrollReveal wrapper
       const visionSection = visionMissionSource.substring(
@@ -121,25 +100,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
    * instead of per-card whileInView props.
    */
   describe('Phase 8b: ScrollReveal Integration Pattern', () => {
-    it('PeaceOfMind should import ScrollReveal component', () => {
-      expect(peaceOfMindSource).toMatch(
-        /import\s+.*ScrollReveal.*from\s+['"](.*scroll-reveal|.*ui)/
-      );
-    });
-
-    it('PeaceOfMind should wrap pillar grid with ScrollReveal or apply grid-level pattern', () => {
-      // After fix, pillars should be wrapped with ScrollReveal component
-      expect(peaceOfMindSource).toContain('ScrollReveal');
-      expect(peaceOfMindSource).toContain('direction=');
-    });
-
-    it('PeaceOfMind checks should be wrapped with ScrollReveal pattern (staggered)', () => {
-      // Checks items should have ScrollReveal wrapper
-      expect(peaceOfMindSource).toContain('ScrollReveal');
-      // Verify delay pattern is used
-      expect(peaceOfMindSource).toMatch(/delay={[0-9.]+}/);
-    });
-
     it('VisionMission should import ScrollReveal component', () => {
       expect(visionMissionSource).toContain('ScrollReveal');
       expect(visionMissionSource).toContain('from');
@@ -182,7 +142,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
     it('ScrollReveal wrappers should use staggered delay pattern', () => {
       // Grids should use staggered delays: delay={idx * 0.07} or similar
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
@@ -198,7 +157,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
 
     it('ScrollReveal wrappers should include direction prop', () => {
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
@@ -222,7 +180,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
   describe('WCAG Reduced Motion Non-Compliance (if applicable)', () => {
     it('Any setInterval effects should be guarded by useReducedMotion check', () => {
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
@@ -263,7 +220,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
   describe('Build & Type Safety', () => {
     it('all components should have valid TypeScript syntax', () => {
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
@@ -280,7 +236,6 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
       // Each motion.div should be properly closed or self-closing
       // Count: <motion.div...> and </motion.div> (both paired and self-closing)
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
@@ -307,15 +262,8 @@ describe('Phase 8b About Page ScrollReveal — Blocking Issues', () => {
    * =======================================
    */
   describe('Component Integration', () => {
-    it('PeaceOfMind floating particles should respect reduced motion', () => {
-      // Check if floating particle animation uses shouldReduce or similar
-      // (This is handled by useAnimatedBorders)
-      expect(peaceOfMindSource).toMatch(/useAnimatedBorders/);
-    });
-
     it('All components should use consistent animation patterns', () => {
       const allFiles = [
-        peaceOfMindSource,
         visionMissionSource,
         certificationsSource,
         communitySectionSource,
