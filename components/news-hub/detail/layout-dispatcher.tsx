@@ -10,7 +10,10 @@ interface LayoutDispatcherProps {
   timelineItems?: readonly TimelineItem[];
 }
 
-export function LayoutDispatcher({ article }: LayoutDispatcherProps) {
+export function LayoutDispatcher({
+  article,
+  timelineItems,
+}: LayoutDispatcherProps) {
   switch (article.category) {
     case "case-studies":
       return <CaseStudyLayout article={article} />;
@@ -20,6 +23,6 @@ export function LayoutDispatcher({ article }: LayoutDispatcherProps) {
       return <ReviewLayout article={article} />;
     default:
       // residential, industrial, partners
-      return <ArticleLayout article={article} />;
+      return <ArticleLayout article={article} timelineItems={timelineItems} />;
   }
 }

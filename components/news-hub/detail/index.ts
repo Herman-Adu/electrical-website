@@ -5,6 +5,7 @@ export { DetailTakeawayBlock } from "./detail-takeaway-block";
 export { DetailQuoteBlock } from "./detail-quote-block";
 export { DetailConclusionBlock } from "./detail-conclusion-block";
 export { DetailGalleryBlock } from "./detail-gallery-block";
+export { DetailTimelineBlock } from "./detail-timeline-block";
 export { CaseStudyStatusBadge } from "./case-study-status-badge";
 export { CaseStudyProgressMetrics } from "./case-study-progress-metrics";
 export { CaseStudyChallengeCards } from "./case-study-challenge-cards";
