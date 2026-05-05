@@ -18,5 +18,8 @@ export { InsightDataCallout } from "./insight-data-callout";
 export { InsightLayout } from "./insight-layout";
 export { ArticleLocationPill } from "./article-location-pill";
 export { ArticleLayout } from "./article-layout";
+export { ReviewVerifiedBadge } from "./review-verified-badge";
+export { ReviewHighlightQuote } from "./review-highlight-quote";
+export { ReviewLayout } from "./review-layout";
 export { LayoutDispatcher } from "./layout-dispatcher";
 export { ReadingProgressBar } from "./reading-progress-bar";
