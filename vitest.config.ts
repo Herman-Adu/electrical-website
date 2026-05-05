@@ -3,6 +3,17 @@ import path from "path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  plugins: [
+    {
+      name: 'strip-shebang',
+      enforce: 'pre' as const,
+      transform(code: string, id: string) {
+        if (/\.mjs$/.test(id) && code.startsWith('#!')) {
+          return code.replace(/^#![^\n]*\n?/, '');
+        }
+      },
+    },
+  ],
   test: {
     environment: "happy-dom",
     globals: true,
