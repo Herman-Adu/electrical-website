@@ -37,6 +37,18 @@ vi.mock('@/components/news-hub/news-article-content', () => ({
   ),
 }));
 
+vi.mock('../insight-layout', () => ({
+  InsightLayout: ({ article }: any) => (
+    <div data-testid="insight-layout">{article.detail.intro[0]}</div>
+  ),
+}));
+
+vi.mock('../article-layout', () => ({
+  ArticleLayout: ({ article }: any) => (
+    <div data-testid="article-layout">{article.detail.intro[0]}</div>
+  ),
+}));
+
 // Helper to build a mock article
 function mockArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
   return {
@@ -416,38 +428,180 @@ describe('LayoutDispatcher', () => {
     expect(screen.getByTestId('case-study-layout')).toBeInTheDocument();
   });
 
-  it('insights → does NOT render data-testid="case-study-layout"', async () => {
+  it('insights → renders data-testid="insight-layout"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'insights' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.queryByTestId('case-study-layout')).toBeNull();
+    expect(screen.getByTestId('insight-layout')).toBeInTheDocument();
   });
 
-  it('reviews → does NOT render data-testid="case-study-layout"', async () => {
+  it('reviews → renders data-testid="news-article-content"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'reviews' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.queryByTestId('case-study-layout')).toBeNull();
+    expect(screen.getByTestId('news-article-content')).toBeInTheDocument();
   });
 
-  it('residential → does NOT render data-testid="case-study-layout"', async () => {
+  it('residential → renders data-testid="article-layout"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'residential' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.queryByTestId('case-study-layout')).toBeNull();
+    expect(screen.getByTestId('article-layout')).toBeInTheDocument();
   });
 
-  it('industrial → does NOT render data-testid="case-study-layout"', async () => {
+  it('industrial → renders data-testid="article-layout"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'industrial' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.queryByTestId('case-study-layout')).toBeNull();
+    expect(screen.getByTestId('article-layout')).toBeInTheDocument();
   });
 
-  it('partners → does NOT render data-testid="case-study-layout"', async () => {
+  it('partners → renders data-testid="article-layout"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'partners' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.queryByTestId('case-study-layout')).toBeNull();
+    expect(screen.getByTestId('article-layout')).toBeInTheDocument();
+  });
+});
+
+// ─── InsightStatStrip ─────────────────────────────────────────────────────────
+describe('InsightStatStrip', () => {
+  it('renders spotlight metric values', async () => {
+    const { InsightStatStrip } = await import('../insight-stat-strip');
+    render(
+      <InsightStatStrip
+        spotlight={[
+          { label: 'Efficiency', value: '95%' },
+          { label: 'Savings', value: '$42K' },
+        ]}
+      />
+    );
+    expect(screen.getByText('95%')).toBeInTheDocument();
+    expect(screen.getByText('$42K')).toBeInTheDocument();
+  });
+
+  it('renders spotlight metric labels', async () => {
+    const { InsightStatStrip } = await import('../insight-stat-strip');
+    render(
+      <InsightStatStrip
+        spotlight={[
+          { label: 'Efficiency', value: '95%' },
+          { label: 'Savings', value: '$42K' },
+        ]}
+      />
+    );
+    expect(screen.getByText('Efficiency')).toBeInTheDocument();
+    expect(screen.getByText('Savings')).toBeInTheDocument();
+  });
+});
+
+// ─── InsightMethodologySteps ──────────────────────────────────────────────────
+describe('InsightMethodologySteps', () => {
+  it('renders methodology step text', async () => {
+    const { InsightMethodologySteps } = await import('../insight-methodology-steps');
+    render(
+      <InsightMethodologySteps
+        steps={['Assess the existing infrastructure', 'Design the upgrade plan']}
+      />
+    );
+    expect(screen.getByText('Assess the existing infrastructure')).toBeInTheDocument();
+    expect(screen.getByText('Design the upgrade plan')).toBeInTheDocument();
+  });
+
+  it('renders numbered steps', async () => {
+    const { InsightMethodologySteps } = await import('../insight-methodology-steps');
+    render(
+      <InsightMethodologySteps
+        steps={['Step alpha', 'Step beta', 'Step gamma']}
+      />
+    );
+    expect(screen.getByText('01')).toBeInTheDocument();
+    expect(screen.getByText('02')).toBeInTheDocument();
+    expect(screen.getByText('03')).toBeInTheDocument();
+  });
+});
+
+// ─── InsightDataCallout ───────────────────────────────────────────────────────
+describe('InsightDataCallout', () => {
+  it('renders callout text', async () => {
+    const { InsightDataCallout } = await import('../insight-data-callout');
+    render(<InsightDataCallout text="Energy efficiency increased by 40% after upgrade." />);
+    expect(
+      screen.getByText('Energy efficiency increased by 40% after upgrade.')
+    ).toBeInTheDocument();
+  });
+
+  it('renders eyebrow when provided', async () => {
+    const { InsightDataCallout } = await import('../insight-data-callout');
+    render(
+      <InsightDataCallout
+        text="Key finding from the study."
+        eyebrow="Key Insight"
+      />
+    );
+    expect(screen.getByText('Key Insight')).toBeInTheDocument();
+    expect(screen.getByText('Key finding from the study.')).toBeInTheDocument();
+  });
+});
+
+// ─── InsightLayout ────────────────────────────────────────────────────────────
+describe('InsightLayout', () => {
+  it('renders data-testid="insight-layout"', async () => {
+    const { InsightLayout } = await import('../insight-layout');
+    const article = mockArticle({ category: 'insights' });
+    render(<InsightLayout article={article} />);
+    expect(screen.getByTestId('insight-layout')).toBeInTheDocument();
+  });
+
+  it('renders intro content', async () => {
+    const { InsightLayout } = await import('../insight-layout');
+    const article = mockArticle({
+      category: 'insights',
+      detail: {
+        intro: ['Insight intro paragraph here'],
+        takeaways: ['Key takeaway'],
+      },
+    });
+    render(<InsightLayout article={article} />);
+    expect(screen.getByText('Insight intro paragraph here')).toBeInTheDocument();
+  });
+});
+
+// ─── ArticleLocationPill ──────────────────────────────────────────────────────
+describe('ArticleLocationPill', () => {
+  it('renders location text', async () => {
+    const { ArticleLocationPill } = await import('../article-location-pill');
+    render(<ArticleLocationPill location="London, UK" />);
+    expect(screen.getByText('London, UK')).toBeInTheDocument();
+  });
+
+  it('renders the map pin icon', async () => {
+    const { ArticleLocationPill } = await import('../article-location-pill');
+    const { container } = render(<ArticleLocationPill location="Manchester" />);
+    const svg = container.querySelector('svg');
+    expect(svg).toBeTruthy();
+  });
+});
+
+// ─── ArticleLayout ────────────────────────────────────────────────────────────
+describe('ArticleLayout', () => {
+  it('renders data-testid="article-layout"', async () => {
+    const { ArticleLayout } = await import('../article-layout');
+    const article = mockArticle({ category: 'residential' });
+    render(<ArticleLayout article={article} />);
+    expect(screen.getByTestId('article-layout')).toBeInTheDocument();
+  });
+
+  it('renders intro content', async () => {
+    const { ArticleLayout } = await import('../article-layout');
+    const article = mockArticle({
+      category: 'residential',
+      detail: {
+        intro: ['Residential article intro text'],
+        takeaways: ['Key takeaway'],
+      },
+    });
+    render(<ArticleLayout article={article} />);
+    expect(screen.getByText('Residential article intro text')).toBeInTheDocument();
   });
 });

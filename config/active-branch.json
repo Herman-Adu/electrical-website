@@ -1,6 +1,6 @@
 {
   "branch": "feat/article-detail-system",
   "entity": "feat-article-detail-system",
-  "fallback": "8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133) | 247baff feat: consolidate About page to data-driven SectionFeatures (#132) | dc6bf1c chore: rebrand electrical-website → Nexgen Electrical Innovations (#131)",
-  "updatedAt": "2026-05-04T20:31:22.680Z"
+  "fallback": "fffea47 feat: Phase 1 article detail system — LayoutDispatcher + CaseStudyLayout + 14 blocks | 8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133) | 247baff feat: consolidate About page to data-driven SectionFeatures (#132)",
+  "updatedAt": "2026-05-04T21:04:41.777Z"
 }
