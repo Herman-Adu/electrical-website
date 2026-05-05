@@ -4,9 +4,9 @@ import {
   NewsDetailHero,
   NewsRelatedArticles,
   NewsArticleToc,
-  NewsArticleContent,
   type TocItem,
 } from "@/components/news-hub";
+import { LayoutDispatcher, ReadingProgressBar } from "@/components/news-hub/detail";
 import { Footer } from "@/components/sections/footer";
 import { ContentBreadcrumb } from "@/components/shared";
 import {
@@ -182,6 +182,7 @@ export default async function NewsArticlePage({
 
   return (
     <main className="relative bg-background">
+      <ReadingProgressBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -210,8 +211,8 @@ export default async function NewsArticlePage({
       >
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
           {/* Main Content */}
-          <NewsArticleContent
-            detail={article.detail}
+          <LayoutDispatcher
+            article={article}
             timelineItems={canonicalTimeline?.items}
           />
 
