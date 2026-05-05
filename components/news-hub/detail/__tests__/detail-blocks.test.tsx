@@ -49,6 +49,12 @@ vi.mock('../article-layout', () => ({
   ),
 }));
 
+vi.mock('../review-layout', () => ({
+  ReviewLayout: ({ article }: any) => (
+    <div data-testid="review-layout">{article.detail.intro[0]}</div>
+  ),
+}));
+
 // Helper to build a mock article
 function mockArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
   return {
@@ -435,11 +441,11 @@ describe('LayoutDispatcher', () => {
     expect(screen.getByTestId('insight-layout')).toBeInTheDocument();
   });
 
-  it('reviews → renders data-testid="news-article-content"', async () => {
+  it('reviews → renders data-testid="review-layout"', async () => {
     const { LayoutDispatcher } = await import('../layout-dispatcher');
     const article = mockArticle({ category: 'reviews' });
     render(<LayoutDispatcher article={article} />);
-    expect(screen.getByTestId('news-article-content')).toBeInTheDocument();
+    expect(screen.getByTestId('review-layout')).toBeInTheDocument();
   });
 
   it('residential → renders data-testid="article-layout"', async () => {
@@ -603,5 +609,72 @@ describe('ArticleLayout', () => {
     });
     render(<ArticleLayout article={article} />);
     expect(screen.getByText('Residential article intro text')).toBeInTheDocument();
+  });
+});
+
+// ─── ReviewVerifiedBadge ──────────────────────────────────────────────────────
+describe('ReviewVerifiedBadge', () => {
+  it('renders client name', async () => {
+    const { ReviewVerifiedBadge } = await import('../review-verified-badge');
+    render(
+      <ReviewVerifiedBadge clientName="Sarah Johnson" role="Facilities Manager" />
+    );
+    expect(screen.getByText('Sarah Johnson')).toBeInTheDocument();
+  });
+
+  it('renders verified indicator', async () => {
+    const { ReviewVerifiedBadge } = await import('../review-verified-badge');
+    const { container } = render(
+      <ReviewVerifiedBadge clientName="Tom Richards" role="Project Director" isVerified />
+    );
+    const svg = container.querySelector('svg');
+    expect(svg).toBeTruthy();
+  });
+});
+
+// ─── ReviewHighlightQuote ─────────────────────────────────────────────────────
+describe('ReviewHighlightQuote', () => {
+  it('renders quote text', async () => {
+    const { ReviewHighlightQuote } = await import('../review-highlight-quote');
+    render(
+      <ReviewHighlightQuote
+        quote={{ quote: 'Outstanding electrical work on our project', author: 'Emma Clarke', role: 'Site Manager' }}
+      />
+    );
+    expect(screen.getByText('Outstanding electrical work on our project')).toBeInTheDocument();
+  });
+
+  it('renders author name', async () => {
+    const { ReviewHighlightQuote } = await import('../review-highlight-quote');
+    render(
+      <ReviewHighlightQuote
+        quote={{ quote: 'Delivered on time and budget', author: 'Marcus Webb', role: 'Property Developer' }}
+      />
+    );
+    expect(screen.getByText('Marcus Webb')).toBeInTheDocument();
+  });
+});
+
+// ─── ReviewLayout ─────────────────────────────────────────────────────────────
+describe('ReviewLayout', () => {
+  it('renders data-testid="review-layout"', async () => {
+    const { ReviewLayout } = await import('../review-layout');
+    const article = mockArticle({ category: 'reviews' });
+    render(<ReviewLayout article={article} />);
+    expect(screen.getByTestId('review-layout')).toBeInTheDocument();
+  });
+
+  it('renders intro content', async () => {
+    const { ReviewLayout } = await import('../review-layout');
+    const article = mockArticle({
+      category: 'reviews',
+      detail: {
+        intro: ['Review intro text here'],
+        takeaways: ['Key takeaway'],
+        quote: { quote: 'Exceptional service provided', author: 'Client A', role: 'Director' },
+      },
+    });
+    render(<ReviewLayout article={article} />);
+    expect(screen.getByText('Review intro text here')).toBeInTheDocument();
   });
 });
