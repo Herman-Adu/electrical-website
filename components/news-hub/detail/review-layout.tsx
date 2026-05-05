@@ -33,7 +33,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
 
       {/* Progress metrics */}
       {detail.spotlight && detail.spotlight.length > 0 && (
-        <CaseStudyProgressMetrics spotlight={detail.spotlight} />
+        <CaseStudyProgressMetrics metrics={detail.spotlight} />
       )}
 
       {/* Body */}
@@ -58,7 +58,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
       {detail.additionalQuotes && detail.additionalQuotes.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {detail.additionalQuotes.map((q, i) => (
-            <DetailQuoteBlock key={i} quote={q} variant="secondary" />
+            <DetailQuoteBlock key={`quote-${q.author}-${i}`} quote={q} variant="secondary" />
           ))}
         </div>
       )}
