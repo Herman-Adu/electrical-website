@@ -6,7 +6,7 @@ interface InsightStatStripProps {
 
 export function InsightStatStrip({ spotlight }: InsightStatStripProps) {
   return (
-    <div className="w-full rounded-lg bg-border/10 px-6 py-8">
+    <section id="spotlight" className="w-full rounded-lg bg-border/10 px-6 py-8">
       <div className="flex flex-wrap items-center justify-around gap-8">
         {spotlight.map((metric, index) => (
           <div key={`stat-${index}`} className="flex flex-col items-center gap-1">
@@ -19,6 +19,6 @@ export function InsightStatStrip({ spotlight }: InsightStatStripProps) {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

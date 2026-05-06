@@ -17,7 +17,7 @@ export function ReviewHighlightQuote({
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="w-full py-8 md:py-12">
+    <section id="client-quote" className="w-full py-8 md:py-12">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}

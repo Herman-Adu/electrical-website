@@ -56,6 +56,13 @@ export function NewsArticleToc({
     };
   }, [items]);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return;
+    const missing = items.filter((i) => !document.getElementById(i.id));
+    if (missing.length)
+      console.warn("[TOC] Missing section IDs:", missing.map((i) => i.id));
+  }, [items]);
+
   const handleClick = useCallback((id: string) => {
     // Trigger click animation
     setClickedId(id);

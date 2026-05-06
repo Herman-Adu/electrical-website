@@ -1,4 +1,6 @@
+import React from "react";
 import type { NewsArticle } from "@/types/news";
+import type { TocItem } from "@/types/shared-content";
 import type { TimelineItem } from "@/types/timeline";
 import { ArticleLocationPill } from "./article-location-pill";
 import { DetailIntroBlock } from "./detail-intro-block";
@@ -13,6 +15,21 @@ import { CaseStudyChallengeCards } from "./case-study-challenge-cards";
 import { CaseStudySpecsGrid } from "./case-study-specs-grid";
 import { CaseStudyResultsShowcase } from "./case-study-results-showcase";
 
+const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
+  { id: "overview", label: "Overview", level: 1 },
+  { id: "details", label: "Details", level: 1 },
+  { id: "scope", label: "Scope", level: 1 },
+  { id: "methodology", label: "Methodology", level: 1 },
+  { id: "challenges", label: "Challenges", level: 1 },
+  { id: "timeline", label: "Timeline", level: 1 },
+  { id: "specifications", label: "Specifications", level: 1 },
+  { id: "results", label: "Results", level: 1 },
+  { id: "takeaways", label: "Key Takeaways", level: 1 },
+  { id: "gallery", label: "Gallery", level: 1 },
+  { id: "conclusion", label: "Conclusion", level: 1 },
+  { id: "testimonial", label: "Testimonial", level: 1 },
+];
+
 interface ArticleLayoutProps {
   article: NewsArticle;
   timelineItems?: readonly TimelineItem[];
@@ -21,89 +38,110 @@ interface ArticleLayoutProps {
 export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
   const { detail } = article;
 
+  function renderSection(id: string) {
+    switch (id) {
+      case "overview":
+        return <DetailIntroBlock intro={detail.intro} />;
+
+      case "details":
+        return detail.body && detail.body.length > 0 ? (
+          <DetailBodyBlock body={detail.body} />
+        ) : null;
+
+      case "scope":
+        return detail.scope && detail.scope.length > 0 ? (
+          <CaseStudyScopeList scope={detail.scope} />
+        ) : null;
+
+      case "methodology":
+        return detail.methodology && detail.methodology.length > 0 ? (
+          <section id="methodology" className="space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">
+              Methodology &amp; Approach
+            </h2>
+            <div className="space-y-4">
+              {detail.methodology.map((paragraph, index) => (
+                <p
+                  key={`method-${index}`}
+                  className="text-base leading-8 text-foreground/80"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        ) : null;
+
+      case "challenges":
+        return detail.challenges && detail.challenges.length > 0 ? (
+          <CaseStudyChallengeCards challenges={detail.challenges} />
+        ) : null;
+
+      case "timeline":
+        return timelineItems && timelineItems.length > 0 ? (
+          <DetailTimelineBlock items={timelineItems} />
+        ) : null;
+
+      case "specifications":
+        return detail.specifications && detail.specifications.length > 0 ? (
+          <CaseStudySpecsGrid specifications={detail.specifications} />
+        ) : null;
+
+      case "results":
+        return detail.results && detail.results.length > 0 ? (
+          <CaseStudyResultsShowcase results={detail.results} />
+        ) : null;
+
+      case "takeaways":
+        return <DetailTakeawayBlock takeaways={detail.takeaways} />;
+
+      case "gallery":
+        return detail.gallery && detail.gallery.length > 0 ? (
+          <DetailGalleryBlock gallery={detail.gallery} />
+        ) : null;
+
+      case "conclusion":
+        return detail.conclusion && detail.conclusion.length > 0 ? (
+          <DetailConclusionBlock conclusion={detail.conclusion} />
+        ) : null;
+
+      case "testimonial":
+        return (
+          <>
+            {detail.quote && (
+              <DetailQuoteBlock quote={detail.quote} variant="primary" />
+            )}
+            {detail.additionalQuotes && detail.additionalQuotes.length > 0 && (
+              <section className="grid gap-6 sm:grid-cols-2">
+                {detail.additionalQuotes.map((q, index) => (
+                  <DetailQuoteBlock
+                    key={`aq-${index}`}
+                    quote={q}
+                    variant="secondary"
+                  />
+                ))}
+              </section>
+            )}
+          </>
+        );
+
+      default:
+        return null;
+    }
+  }
+
   return (
     <div data-testid="article-layout" className="space-y-16">
-      {/* Location pill */}
+      {/* Location pill — fixed position, outside toc loop */}
       {article.location && (
         <ArticleLocationPill location={article.location} />
       )}
 
-      {/* Gallery — image-led, shown early */}
-      {detail.gallery && detail.gallery.length > 0 && (
-        <DetailGalleryBlock gallery={detail.gallery} />
-      )}
-
-      {/* Introduction */}
-      <DetailIntroBlock intro={detail.intro} />
-
-      {/* Body */}
-      {detail.body && detail.body.length > 0 && (
-        <DetailBodyBlock body={detail.body} />
-      )}
-
-      {/* Scope */}
-      {detail.scope && detail.scope.length > 0 && (
-        <CaseStudyScopeList scope={detail.scope} />
-      )}
-
-      {/* Methodology & Approach */}
-      {detail.methodology && detail.methodology.length > 0 && (
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-foreground">
-            Methodology &amp; Approach
-          </h2>
-          <div className="space-y-4">
-            {detail.methodology.map((paragraph, index) => (
-              <p
-                key={`method-${index}`}
-                className="text-base leading-8 text-foreground/80"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Challenges & Solutions */}
-      {detail.challenges && detail.challenges.length > 0 && (
-        <CaseStudyChallengeCards challenges={detail.challenges} />
-      )}
-
-      {/* Project Timeline */}
-      {timelineItems && timelineItems.length > 0 && (
-        <DetailTimelineBlock items={timelineItems} />
-      )}
-
-      {/* Technical specifications */}
-      {detail.specifications && detail.specifications.length > 0 && (
-        <CaseStudySpecsGrid specifications={detail.specifications} />
-      )}
-
-      {/* Results */}
-      {detail.results && detail.results.length > 0 && (
-        <CaseStudyResultsShowcase results={detail.results} />
-      )}
-
-      {/* Key takeaways */}
-      <DetailTakeawayBlock takeaways={detail.takeaways} />
-
-      {/* Primary quote */}
-      {detail.quote && <DetailQuoteBlock quote={detail.quote} variant="primary" />}
-
-      {/* Additional quotes — 2-col grid */}
-      {detail.additionalQuotes && detail.additionalQuotes.length > 0 && (
-        <section className="grid gap-6 sm:grid-cols-2">
-          {detail.additionalQuotes.map((q, index) => (
-            <DetailQuoteBlock key={`aq-${index}`} quote={q} variant="secondary" />
-          ))}
-        </section>
-      )}
-
-      {/* Conclusion */}
-      {detail.conclusion && detail.conclusion.length > 0 && (
-        <DetailConclusionBlock conclusion={detail.conclusion} />
-      )}
+      {(detail.toc ?? DEFAULT_ARTICLE_TOC).map((item) => (
+        <React.Fragment key={item.id}>
+          {renderSection(item.id)}
+        </React.Fragment>
+      ))}
     </div>
   );
 }

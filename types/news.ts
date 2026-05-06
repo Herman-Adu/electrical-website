@@ -1,3 +1,5 @@
+import type { TocItem } from "./shared-content";
+
 export type NewsCategorySlug =
   | "all"
   | "residential"
@@ -73,6 +75,7 @@ export interface NewsDetailContent {
   gallery?: NewsGalleryImage[];
   conclusion?: string[];
   additionalQuotes?: NewsQuote[];
+  toc?: TocItem[];
 }
 
 export interface NewsArticle {
