@@ -1,12 +1,13 @@
 "use client";
 
-import { useOptimistic, useTransition } from "react";
+import { useOptimistic, useTransition, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import type { NewsArticleListItem, NewsSidebarCard } from "@/types/news";
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
 import { NewsHubSidebar } from "@/components/news-hub/news-hub-sidebar";
 import { NewsPulseIndicator } from "./news-pulse-indicator";
 import { LoadMoreButton } from "./load-more-button";
+import { NewsHubCategorySlider } from "./news-hub-category-slider";
 import { useNewsPagination } from "@/hooks/use-news-pagination";
 
 interface NewsGridLayoutProps {
@@ -18,8 +19,13 @@ interface NewsGridLayoutProps {
   initialCount?: number;
   /** Number of items to load per batch (default: 3) */
   batchSize?: number;
-  /** Header title (default: "Latest Articles") */
-  title?: string;
+  /**
+   * Header title — accepts a string (rendered as <h2>) or a ReactNode (rendered as-is).
+   * ReactNode form lets callers pass in a client component like
+   * `<NewsHubCategoryTitle />` that reads the URL and animates between labels.
+   * Default: "Latest Articles".
+   */
+  title?: ReactNode;
   /** Show live feed indicator (default: true) */
   showLiveIndicator?: boolean;
   /** Custom empty state message */
@@ -57,14 +63,14 @@ export function NewsGridLayout({
   >([], (current, articleId) =>
     current.includes(articleId)
       ? current.filter((id) => id !== articleId)
-      : [...current, articleId]
+      : [...current, articleId],
   );
 
   // Empty state
   if (items.length === 0) {
     return (
       <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] lg:items-start">
-        <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">
+        <div className="min-w-0 rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">
           {emptyMessage}
         </div>
         <NewsHubSidebar cards={sidebarCards} />
@@ -75,16 +81,23 @@ export function NewsGridLayout({
   return (
     <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] lg:items-start">
       {/* Main Feed Column */}
-      <div className="space-y-4">
+      <div className="min-w-0 space-y-2">
+        {/* category buttons - left aligned */}
+        <NewsHubCategorySlider />
+
         {/* Header */}
         <div className="flex items-center justify-between gap-4 px-1">
           <div>
             {showLiveIndicator && (
               <NewsPulseIndicator label="Live Feed" variant="live" />
             )}
-            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-              {title}
-            </h2>
+            {typeof title === "string" ? (
+              <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+                {title}
+              </h2>
+            ) : (
+              <div className="mt-2">{title}</div>
+            )}
           </div>
           <div className="flex flex-col items-end gap-1">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">

@@ -21,7 +21,9 @@ const CATEGORY_OPTIONS: readonly CategoryOption[] = [
   ...newsCategories.map(({ slug, label }) => ({ slug, label })),
 ] as const;
 
-const VALID_SLUGS = new Set<NewsCategorySlug>(CATEGORY_OPTIONS.map((c) => c.slug));
+const VALID_SLUGS = new Set<NewsCategorySlug>(
+  CATEGORY_OPTIONS.map((c) => c.slug),
+);
 
 function isValidSlug(value: string | null): value is NewsCategorySlug {
   return value !== null && VALID_SLUGS.has(value as NewsCategorySlug);
@@ -34,13 +36,17 @@ const CHIP_BASE_CLASS =
 const CHIP_ACTIVE_CLASS =
   "bg-electric-cyan/20 ring-1 ring-electric-cyan/50 shadow-[0_0_15px_rgba(0,243,189,0.15)]";
 
-export function NewsHubCategorySlider({ className }: NewsHubCategorySliderProps) {
+export function NewsHubCategorySlider({
+  className,
+}: NewsHubCategorySliderProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
 
   const rawCategory = searchParams?.get("category") ?? null;
-  const active: NewsCategorySlug = isValidSlug(rawCategory) ? rawCategory : "all";
+  const active: NewsCategorySlug = isValidSlug(rawCategory)
+    ? rawCategory
+    : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
 
@@ -49,7 +55,11 @@ export function NewsHubCategorySlider({ className }: NewsHubCategorySliderProps)
   useEffect(() => {
     const node = activeChipRef.current;
     if (node === null) return;
-    node.scrollIntoView({ inline: "center", behavior: "smooth", block: "nearest" });
+    node.scrollIntoView({
+      inline: "center",
+      behavior: "smooth",
+      block: "nearest",
+    });
   }, [active]);
 
   const handleSelect = (slug: NewsCategorySlug) => {
@@ -60,8 +70,12 @@ export function NewsHubCategorySlider({ className }: NewsHubCategorySliderProps)
     });
   };
 
+  // Sticky chip rail — pins below the global header on scroll. Requires NO
+  // `overflow: hidden` ancestor between this nav and the viewport (verified
+  // in `news-hub-grid-section.tsx`, which intentionally omits overflow-hidden).
+  // Top offsets (top-26 / lg:top-30) match the global header height.
   const navClassName = [
-    "sticky top-26 lg:top-30 z-30 bg-background/95 backdrop-blur-md border-b border-electric-cyan/10",
+    "sticky top-26 lg:top-30 z-30 bg-background/95 backdrop-blur-md",
     className,
   ]
     .filter(Boolean)
@@ -69,33 +83,29 @@ export function NewsHubCategorySlider({ className }: NewsHubCategorySliderProps)
 
   return (
     <nav aria-label="Filter articles by category" className={navClassName}>
-      <div className="section-container">
-        <div className="section-content">
-          <ul
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-px-4 gap-2 -mx-4 px-4 py-3 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-            role="list"
-          >
-            {CATEGORY_OPTIONS.map((option) => {
-              const isActive = option.slug === active;
-              return (
-                <li key={option.slug} className="snap-start shrink-0">
-                  <button
-                    ref={isActive ? activeChipRef : null}
-                    type="button"
-                    onClick={() => handleSelect(option.slug)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
-                      .filter(Boolean)
-                      .join(" ")}
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+      <ul
+        className="flex overflow-x-auto snap-x snap-mandatory scroll-px-4 gap-2 px-2 py-3 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
+        role="list"
+      >
+        {CATEGORY_OPTIONS.map((option) => {
+          const isActive = option.slug === active;
+          return (
+            <li key={option.slug} className="snap-start shrink-0">
+              <button
+                ref={isActive ? activeChipRef : null}
+                type="button"
+                onClick={() => handleSelect(option.slug)}
+                aria-current={isActive ? "page" : undefined}
+                className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                {option.label}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
   );
 }
