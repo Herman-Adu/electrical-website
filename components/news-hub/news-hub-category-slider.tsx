@@ -49,17 +49,15 @@ export function NewsHubCategorySlider({
     : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
+  const sliderRef = useRef<HTMLUListElement | null>(null);
 
-  // Center the active chip in the horizontal scroll viewport whenever the
-  // active category changes (driven by URL).
+  // Scroll the rail horizontally only — avoids scrollIntoView touching page vertical scroll.
   useEffect(() => {
-    const node = activeChipRef.current;
-    if (node === null) return;
-    node.scrollIntoView({
-      inline: "center",
-      behavior: "smooth",
-      block: "nearest",
-    });
+    const chip = activeChipRef.current;
+    const rail = sliderRef.current;
+    if (!chip || !rail) return;
+    const chipCenter = chip.offsetLeft + chip.offsetWidth / 2;
+    rail.scrollLeft = chipCenter - rail.offsetWidth / 2;
   }, [active]);
 
   const handleSelect = (slug: NewsCategorySlug) => {
@@ -84,6 +82,7 @@ export function NewsHubCategorySlider({
   return (
     <nav aria-label="Filter articles by category" className={navClassName}>
       <ul
+        ref={sliderRef}
         className="flex overflow-x-auto snap-x snap-mandatory scroll-px-4 gap-2 px-2 py-3 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
         role="list"
       >

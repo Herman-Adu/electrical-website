@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "nexgen-electrical-innovations-state",
-  "fallback": "771d3a6 fix: update playwright baselines post news-hub slider merge (#137) | 272f870 feat: news hub TOC sticky fix + URL-driven category slider (#136)",
-  "updatedAt": "2026-05-06T16:15:00.000Z"
+  "branch": "fix/news-hub-filter-scroll-and-header",
+  "entity": "feat-news-hub-filter-scroll-and-header",
+  "fallback": "b016e5c chore: mark fix/news-hub-e2e-failures lane completed + sync active-branch config (#138) | 771d3a6 fix: update playwright baselines post news-hub slider merge (#137) | 272f870 feat: news hub TOC sticky fix + URL-driven category slider (#136)",
+  "updatedAt": "2026-05-06T18:00:36.958Z"
 }

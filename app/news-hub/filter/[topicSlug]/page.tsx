@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
+import { NewsHubCategoryTitle, NewsHubCategorySlider } from "@/components/news-hub";
 import { NewsTopicHero } from "@/components/news-hub/news-topic-hero";
 import { SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
@@ -43,19 +44,14 @@ export default async function NewsTopicFilterPage({ params }: PageProps) {
 
       <SectionIntro data={introData} />
 
-      <section id="topic-articles" className="section-standard bg-background">
+      <section id="topic-articles" className="section-standard bg-background" style={{ overflow: 'visible' }}>
         <div className="section-content max-w-6xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-              {topic.label} Articles
-            </span>
-            <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
-          </div>
+          <NewsHubCategorySlider />
           <NewsGridLayout
             items={items}
             sidebarCards={sidebarCards}
-            title={topic.label}
+            title={<NewsHubCategoryTitle label={topic.label} />}
+            showSlider={false}
             initialCount={4}
             batchSize={3}
             emptyMessage={`No articles found for the ${topic.label} topic yet.`}
