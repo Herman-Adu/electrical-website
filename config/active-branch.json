@@ -1,6 +1,6 @@
 {
   "branch": "feat/news-hub-toc-and-category-slider",
   "entity": "feat-news-hub-toc-and-category-slider",
-  "fallback": "a2b1866 feat: news-hub category slider + animated title (Phase 2) | 5ab6baf feat: news-hub article TOC sticky fix + Client Testimonial heading (Phase 1) | 2d369e8 Merge pull request #135 from Herman-Adu/feat/toc-data-driven-article",
-  "updatedAt": "2026-05-06T14:22:49.234Z"
+  "fallback": "3d69fad feat: news-hub URL-driven category slider integration (Phase 3+4) | a2b1866 feat: news-hub category slider + animated title (Phase 2) | 5ab6baf feat: news-hub article TOC sticky fix + Client Testimonial heading (Phase 1)",
+  "updatedAt": "2026-05-06T14:26:25.770Z"
 }

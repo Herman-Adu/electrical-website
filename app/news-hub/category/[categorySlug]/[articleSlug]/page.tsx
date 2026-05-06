@@ -220,7 +220,7 @@ export default async function NewsArticlePage({
             />
 
             {/* Related Articles — packed into left cell so the grid row extends and the sticky aside has scroll-room */}
-            <div className="mt-16">
+            <div className="mt-16" data-related-articles="true">
               <NewsRelatedArticles articles={relatedArticles} />
             </div>
           </div>
