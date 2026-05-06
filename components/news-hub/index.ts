@@ -5,7 +5,6 @@ export { NewsHubFeaturedCardAnimated } from "./news-hub-featured-card-animated";
 export { NewsHubBentoGrid } from "./news-hub-bento-grid";
 export { NewsHubFeaturedSection } from "./news-hub-featured-section";
 export { NewsHubGridSection } from "./news-hub-grid-section";
-export { NewsHubFeed } from "./news-hub-feed";
 export { NewsGridLayout } from "./news-grid-layout";
 export { NewsHubArticleCard } from "./news-hub-article-card";
 export { NewsHubSidebar } from "./news-hub-sidebar";
@@ -36,6 +35,8 @@ export { NewsArticleContent } from "./news-article-content";
 export { NewsChannelCard } from "./news-channel-card";
 export { NewsTopicFilter } from "./news-topic-filter";
 export { NewsListSkeleton } from "./news-list-skeleton";
+export { NewsHubCategorySlider } from "./news-hub-category-slider";
+export { NewsHubCategoryTitle } from "./news-hub-category-title";
 
 // Detail system — type-aware layout dispatch
 export { LayoutDispatcher, ReadingProgressBar } from "./detail";

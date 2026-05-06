@@ -212,16 +212,23 @@ export default async function NewsArticlePage({
         className="section-padding bg-background overflow-visible!"
       >
         <div className="section-content grid max-w-6xl gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,320px)]">
-          {/* Main Content */}
-          <LayoutDispatcher
-            article={article}
-            timelineItems={canonicalTimeline?.items}
-          />
+          {/* Left column: article body + related articles (inside grid to extend gridHeight for sticky TOC) */}
+          <div>
+            <LayoutDispatcher
+              article={article}
+              timelineItems={canonicalTimeline?.items}
+            />
+
+            {/* Related Articles — packed into left cell so the grid row extends and the sticky aside has scroll-room */}
+            <div className="mt-16" data-related-articles="true">
+              <NewsRelatedArticles articles={relatedArticles} />
+            </div>
+          </div>
 
           {/* Sticky Sidebar */}
           <aside
             data-sticky-toc="true"
-            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-33 self-start min-h-[calc(100vh-132px)]"
+            className="hidden xl:flex xl:flex-col xl:gap-6 sticky top-37.5 self-start mt-2"
           >
             {/* Table of Contents */}
             <NewsArticleToc items={tocItems} />
@@ -301,12 +308,6 @@ export default async function NewsArticlePage({
               </div>
             )}
           </aside>
-        </div>
-      </section>
-
-      <section className="section-container section-padding bg-background">
-        <div className="section-content max-w-6xl">
-          <NewsRelatedArticles articles={relatedArticles} />
         </div>
       </section>
 

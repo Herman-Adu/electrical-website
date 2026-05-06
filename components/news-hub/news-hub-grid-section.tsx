@@ -1,22 +1,41 @@
 "use client";
 
-import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders";
+import {
+  useAnimatedBorders,
+  AnimatedBorders,
+} from "@/lib/use-animated-borders";
 import type { NewsArticleListItem, NewsSidebarCard } from "@/types/news";
 import { NewsGridLayout } from "./news-grid-layout";
+import { NewsHubCategoryTitle } from "./news-hub-category-title";
 
 interface NewsHubGridSectionProps {
   items: NewsArticleListItem[];
   sidebarCards: NewsSidebarCard[];
 }
 
-export function NewsHubGridSection({ items, sidebarCards }: NewsHubGridSectionProps) {
-  const { sectionRef, lineScale, lineScaleBottom, shouldReduce } = useAnimatedBorders();
+export function NewsHubGridSection({
+  items,
+  sidebarCards,
+}: NewsHubGridSectionProps) {
+  const { sectionRef, lineScale, lineScaleBottom, shouldReduce } =
+    useAnimatedBorders();
 
+  // Sticky chip rail (NewsHubCategorySlider, rendered inside <NewsGridLayout>)
+  // requires NO `overflow: hidden` ancestor between itself and the viewport.
+  // The conventional `overflow-hidden` is intentionally OMITTED here:
+  //   - AnimatedBorders self-clips: each border has its own `overflow-hidden`
+  //     wrapper around its gradient (see lib/use-animated-borders.tsx), so the
+  //     section does not need to clip them.
+  //   - `section-container` is also dropped (it injects `overflow: hidden`).
+  //   - Horizontal motion entrances on children (e.g. sidebar `x: 20 → 0`)
+  //     are still backstopped by `<body className="overflow-x-hidden">` in
+  //     app/layout.tsx, so removing section-level clip cannot create page-wide
+  //     horizontal scroll.
   return (
     <section
       id="news-hub-feed"
       ref={sectionRef}
-      className="relative overflow-hidden section-container section-padding bg-background"
+      className="relative section-padding bg-background"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
@@ -25,17 +44,10 @@ export function NewsHubGridSection({ items, sidebarCards }: NewsHubGridSectionPr
         showBottom={true}
       />
       <div className="section-content max-w-6xl">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-          <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-            Latest Articles
-          </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
-        </div>
         <NewsGridLayout
           items={items}
           sidebarCards={sidebarCards}
-          title="Latest Articles"
+          title={<NewsHubCategoryTitle />}
           initialCount={4}
           batchSize={3}
         />

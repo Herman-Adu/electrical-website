@@ -1,40 +1,40 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { NewsArticleFilterBar } from "@/components/news-hub/news-article-filter-bar";
+import { useSearchParams } from "next/navigation";
 import { NewsHubGridSection } from "@/components/news-hub/news-hub-grid-section";
-import type { NewsCategory, NewsArticleListItem, NewsSidebarCard, NewsCategorySlug } from "@/types/news";
+import type { NewsArticleListItem, NewsCategorySlug, NewsSidebarCard } from "@/types/news";
 
 interface NewsHubFilterClientProps {
-  categories: NewsCategory[];
   items: NewsArticleListItem[];
   sidebarCards: NewsSidebarCard[];
-  counts: Record<string, number>;
 }
 
-export function NewsHubFilterClient({ categories, items, sidebarCards, counts }: NewsHubFilterClientProps) {
-  const [activeSlug, setActiveSlug] = useState<NewsCategorySlug>("all");
-  const [isPending, startTransition] = useTransition();
+// Defensive validation — keep this list in sync with the literal union in
+// `types/news.ts`. We intentionally do not import the slider's helper to keep
+// the filter client independent of slider internals.
+const VALID_SLUGS = new Set<NewsCategorySlug>([
+  "all",
+  "residential",
+  "industrial",
+  "partners",
+  "case-studies",
+  "insights",
+  "reviews",
+]);
 
-  const handleSelect = (slug: NewsCategorySlug) => {
-    startTransition(() => {
-      setActiveSlug(slug);
-    });
-  };
+function isValidCategorySlug(value: string | null): value is NewsCategorySlug {
+  return value !== null && VALID_SLUGS.has(value as NewsCategorySlug);
+}
+
+export function NewsHubFilterClient({ items, sidebarCards }: NewsHubFilterClientProps) {
+  // Single source of truth: the URL. The slider mutates `?category=<slug>` (or
+  // clears it for "all"); this component reads it. No local state, no props
+  // for the active category — if the URL says it, that's the truth.
+  const searchParams = useSearchParams();
+  const rawCategory = searchParams?.get("category") ?? null;
+  const activeSlug: NewsCategorySlug = isValidCategorySlug(rawCategory) ? rawCategory : "all";
 
   const filtered = activeSlug === "all" ? items : items.filter((a) => a.category === activeSlug);
 
-  return (
-    <>
-      <NewsArticleFilterBar
-        categories={categories}
-        activeSlug={activeSlug}
-        counts={counts}
-        onSelect={handleSelect}
-      />
-      <div className={isPending ? "opacity-60 transition-opacity" : "transition-opacity"}>
-        <NewsHubGridSection items={filtered} sidebarCards={sidebarCards} />
-      </div>
-    </>
-  );
+  return <NewsHubGridSection items={filtered} sidebarCards={sidebarCards} />;
 }

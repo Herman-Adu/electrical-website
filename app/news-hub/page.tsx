@@ -1,7 +1,11 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
-import { NewsHubBentoGrid, NewsHubFeaturedSection, NewsHubHero } from "@/components/news-hub";
+import {
+  NewsHubBentoGrid,
+  NewsHubFeaturedSection,
+  NewsHubHero,
+} from "@/components/news-hub";
 import { NewsListSkeleton } from "@/components/news-hub/news-list-skeleton";
 import { NewsHubFilterClient } from "@/components/news-hub/news-hub-filter-client";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
@@ -9,7 +13,6 @@ import {
   getFeaturedNewsArticleByCategory,
   getNewsArticleListItemsByCategory,
   getSidebarCardsByCategory,
-  newsCategories,
   newsHubMetricItems,
   newsHubIntroData,
   allNewsArticles,
@@ -23,20 +26,10 @@ export default async function NewsHubPage() {
   const allItems = getNewsArticleListItemsByCategory("all");
   const sidebarCards = getSidebarCardsByCategory("all");
   const featuredArticle = getFeaturedNewsArticleByCategory("all");
-  const counts: Record<string, number> = {
-    all: allNewsArticles.length,
-    ...Object.fromEntries(
-      newsCategories.map((c) => [c.slug, allNewsArticles.filter((a) => a.category === c.slug).length])
-    ),
-  };
 
   return (
     <main className="relative bg-background">
-      <NewsHubHero
-        categories={newsCategories}
-        activeCategory="all"
-        totalArticles={allNewsArticles.length}
-      />
+      <NewsHubHero totalArticles={allNewsArticles.length} />
 
       <ContentBreadcrumb
         items={[
@@ -61,13 +54,16 @@ export default async function NewsHubPage() {
         </div>
       </section>
 
+      {/*
+        Suspense boundary covers the URL-aware filter client subtree. The
+        category slider and animated category title now live INSIDE the
+        article list section (rendered by NewsHubGridSection inside the
+        filter client), so a single Suspense at this level still satisfies
+        Next.js 16's `useSearchParams` requirement for every descendant
+        that reads search params.
+      */}
       <Suspense fallback={<NewsListSkeleton />}>
-        <NewsHubFilterClient
-          categories={newsCategories}
-          items={allItems}
-          sidebarCards={sidebarCards}
-          counts={counts}
-        />
+        <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} />
       </Suspense>
 
       <Footer />

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
@@ -9,13 +8,9 @@ import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { cn } from "@/lib/utils";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
-import type { NewsCategory, NewsCategorySlug } from "@/types/news";
 
 interface NewsHubHeroProps {
-  categories: NewsCategory[];
-  activeCategory: NewsCategorySlug;
   totalArticles: number;
 }
 
@@ -44,11 +39,7 @@ const flickerVariants: Variants = {
   },
 };
 
-export function NewsHubHero({
-  categories,
-  activeCategory,
-  totalArticles,
-}: NewsHubHeroProps) {
+export function NewsHubHero({ totalArticles }: NewsHubHeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
@@ -220,51 +211,6 @@ export function NewsHubHero({
             partner updates. Powered by typed content models ready for scalable
             CMS integration.
           </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            className="mb-10 flex flex-wrap items-center justify-center gap-3"
-          >
-            <Link
-              href="/news-hub"
-              className={cn(
-                "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
-                activeCategory === "all"
-                  ? "bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-[hsl(174_100%_35%)] dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                  : "bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
-              )}
-            >
-              All Stories
-            </Link>
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.slug}
-                initial={
-                  shouldReduceMotion ? undefined : { opacity: 0, scale: 0.92 }
-                }
-                animate={
-                  shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }
-                }
-                transition={
-                  shouldReduceMotion
-                    ? undefined
-                    : { delay: 0.4 + index * 0.08, duration: 0.3 }
-                }
-              >
-                <Link
-                  href={`/news-hub?category=${category.slug}`}
-                  className={cn(
-                    "rounded-xl border px-4 py-2 font-mono text-[11px] tracking-widest uppercase backdrop-blur-sm transition-all duration-300",
-                    activeCategory === category.slug
-                      ? "bg-foreground/20 dark:bg-white/15 border-[hsl(174_100%_35%)] dark:border-electric-cyan backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                      : "bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300",
-                  )}
-                >
-                  {category.label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
 
           <motion.div
             variants={itemVariants}
