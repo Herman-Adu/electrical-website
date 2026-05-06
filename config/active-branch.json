@@ -1,6 +1,6 @@
 {
-  "branch": "feat/news-hub-toc-and-category-slider",
-  "entity": "feat-news-hub-toc-and-category-slider",
-  "fallback": "3d69fad feat: news-hub URL-driven category slider integration (Phase 3+4) | a2b1866 feat: news-hub category slider + animated title (Phase 2) | 5ab6baf feat: news-hub article TOC sticky fix + Client Testimonial heading (Phase 1)",
-  "updatedAt": "2026-05-06T14:26:25.770Z"
+  "branch": "main",
+  "entity": "nexgen-electrical-innovations-state",
+  "fallback": "771d3a6 fix: update playwright baselines post news-hub slider merge (#137) | 272f870 feat: news hub TOC sticky fix + URL-driven category slider (#136)",
+  "updatedAt": "2026-05-06T16:15:00.000Z"
 }
