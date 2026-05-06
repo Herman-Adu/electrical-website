@@ -30,6 +30,7 @@ interface NewsGridLayoutProps {
   showLiveIndicator?: boolean;
   /** Custom empty state message */
   emptyMessage?: string;
+  showSlider?: boolean;
 }
 
 export function NewsGridLayout({
@@ -40,6 +41,7 @@ export function NewsGridLayout({
   title = "Latest Articles",
   showLiveIndicator = true,
   emptyMessage = "No stories available in this category yet.",
+  showSlider,
 }: NewsGridLayoutProps) {
   // Pagination state - clean separation of concerns
   const {
@@ -83,7 +85,7 @@ export function NewsGridLayout({
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
         {/* category buttons - left aligned */}
-        <NewsHubCategorySlider />
+        {showSlider !== false && <NewsHubCategorySlider />}
 
         {/* Header */}
         <div className="flex items-center justify-between gap-4 px-1">

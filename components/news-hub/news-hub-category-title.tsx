@@ -7,6 +7,7 @@ import type { NewsCategorySlug } from "@/types/news";
 
 interface NewsHubCategoryTitleProps {
   className?: string;
+  label?: string;
 }
 
 // Build label map from existing data + synthetic "all". newsCategories already carries
@@ -25,11 +26,11 @@ function isValidSlug(value: string | null): value is NewsCategorySlug {
   return value !== null && VALID_SLUGS.has(value as NewsCategorySlug);
 }
 
-export function NewsHubCategoryTitle({ className }: NewsHubCategoryTitleProps) {
+export function NewsHubCategoryTitle({ className, label: labelOverride }: NewsHubCategoryTitleProps) {
   const searchParams = useSearchParams();
   const rawCategory = searchParams?.get("category") ?? null;
   const active: NewsCategorySlug = isValidSlug(rawCategory) ? rawCategory : "all";
-  const label = TITLE_LABELS[active];
+  const label = labelOverride ?? TITLE_LABELS[active];
 
   const wrapperClassName = ["relative", className].filter(Boolean).join(" ");
 
@@ -37,7 +38,7 @@ export function NewsHubCategoryTitle({ className }: NewsHubCategoryTitleProps) {
     <div className={wrapperClassName}>
       <AnimatePresence mode="wait">
         <motion.h2
-          key={active}
+          key={label}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
