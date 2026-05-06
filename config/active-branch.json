@@ -1,6 +1,6 @@
 {
   "branch": "feat/toc-data-driven-article",
   "entity": "feat-toc-data-driven-article",
-  "fallback": "198441d feat: type-aware article detail system � Phase 1+2+3 complete (#134) | 8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133) | 247baff feat: consolidate About page to data-driven SectionFeatures (#132)",
-  "updatedAt": "2026-05-06T10:26:25.367Z"
+  "fallback": "3a045cf feat: data-driven TOC per article — layout render order from toc field | 198441d feat: type-aware article detail system � Phase 1+2+3 complete (#134) | 8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133)",
+  "updatedAt": "2026-05-06T10:46:44.141Z"
 }
