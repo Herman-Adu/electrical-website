@@ -25,7 +25,7 @@ const itemVariants: Variants = {
 
 export function InsightMethodologySteps({ steps }: InsightMethodologyStepsProps) {
   return (
-    <section className="space-y-6">
+    <section id="methodology" className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground">Methodology</h2>
       <motion.ul
         variants={containerVariants}

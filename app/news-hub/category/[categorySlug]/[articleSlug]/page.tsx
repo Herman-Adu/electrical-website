@@ -69,7 +69,7 @@ export async function generateMetadata({
 }
 
 // Generate TOC items based on available content sections
-function generateTocItems(
+function autoGenerateTocItems(
   article: NewsArticle,
   hasTimeline: boolean,
 ): TocItem[] {
@@ -121,6 +121,11 @@ function generateTocItems(
   }
 
   return items;
+}
+
+function getTocItems(article: NewsArticle): TocItem[] {
+  if (article.detail.toc?.length) return article.detail.toc;
+  return autoGenerateTocItems(article, (article.detail.timeline?.length ?? 0) > 0);
 }
 
 export default async function NewsArticlePage({
@@ -175,10 +180,7 @@ export default async function NewsArticlePage({
     }
   }
 
-  const tocItems = generateTocItems(
-    article,
-    (canonicalTimeline?.items.length ?? 0) > 0,
-  );
+  const tocItems = getTocItems(article);
 
   return (
     <main className="relative bg-background">

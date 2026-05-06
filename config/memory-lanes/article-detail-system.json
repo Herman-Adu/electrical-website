@@ -3,7 +3,7 @@
     "id": "feat-article-detail-system",
     "branch": "feat/article-detail-system",
     "dockerEntity": "feat-article-detail-system",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-05-04T20:17:51.955Z",
     "mergedAt": null,
     "fallback_summary": "Auto-registered branch: feat/article-detail-system"
