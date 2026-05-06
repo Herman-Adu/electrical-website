@@ -3,7 +3,7 @@
     "id": "electrical-website-state",
     "branch": "main",
     "dockerEntity": "electrical-website-state",
-    "status": "paused",
+    "status": "active",
     "openedAt": "2026-04-28T09:00:00.000Z",
     "mergedAt": null,
     "fallback_summary": "Main branch — project state entity is electrical-website-state"

@@ -1,6 +1,6 @@
 {
-  "branch": "feat/toc-data-driven-article",
-  "entity": "feat-toc-data-driven-article",
-  "fallback": "3a045cf feat: data-driven TOC per article — layout render order from toc field | 198441d feat: type-aware article detail system � Phase 1+2+3 complete (#134) | 8dc8d04 chore: mark feat-shared-section-features-about lane as completed (PR #132 merged) (#133)",
-  "updatedAt": "2026-05-06T10:46:44.141Z"
+  "branch": "feat/news-hub-toc-and-category-slider",
+  "entity": "feat-news-hub-toc-and-category-slider",
+  "fallback": "2d369e8 Merge pull request #135 from Herman-Adu/feat/toc-data-driven-article | 4b040b1 chore: commit spec doc, next-env types, and active-branch config | 3a045cf feat: data-driven TOC per article — layout render order from toc field",
+  "updatedAt": "2026-05-06T13:00:20.126Z"
 }
