@@ -1,6 +1,6 @@
 {
   "branch": "feat/news-hub-toc-and-category-slider",
   "entity": "feat-news-hub-toc-and-category-slider",
-  "fallback": "2d369e8 Merge pull request #135 from Herman-Adu/feat/toc-data-driven-article | 4b040b1 chore: commit spec doc, next-env types, and active-branch config | 3a045cf feat: data-driven TOC per article — layout render order from toc field",
-  "updatedAt": "2026-05-06T13:00:20.126Z"
+  "fallback": "5ab6baf feat: news-hub article TOC sticky fix + Client Testimonial heading (Phase 1) | 2d369e8 Merge pull request #135 from Herman-Adu/feat/toc-data-driven-article | 4b040b1 chore: commit spec doc, next-env types, and active-branch config",
+  "updatedAt": "2026-05-06T13:12:53.197Z"
 }
