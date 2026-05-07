@@ -1,6 +1,6 @@
 {
-  "branch": "fix/news-hub-filter-scroll-and-header",
-  "entity": "feat-news-hub-filter-scroll-and-header",
-  "fallback": "b016e5c chore: mark fix/news-hub-e2e-failures lane completed + sync active-branch config (#138) | 771d3a6 fix: update playwright baselines post news-hub slider merge (#137) | 272f870 feat: news hub TOC sticky fix + URL-driven category slider (#136)",
-  "updatedAt": "2026-05-06T18:00:36.958Z"
+  "branch": "fix/navbar-active-category-links",
+  "entity": "feat-navbar-active-category-links",
+  "fallback": "9f4763f fix: remove snap CSS so all chips reachable by wheel + guard stale drag state | 2fc54c2 fix: add mouse drag-to-scroll + snap-proximity so all chips reachable on desktop | 10b882a fix: separate scroll container from sticky nav to fix desktop chip scroll (Chrome backdrop-filter compositing bug)",
+  "updatedAt": "2026-05-07T14:19:13.673Z"
 }
