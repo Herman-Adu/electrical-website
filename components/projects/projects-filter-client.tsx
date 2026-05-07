@@ -29,6 +29,7 @@ export function ProjectsFilterClient({
     <ProjectsListSection
       items={filtered}
       sidebarCards={sidebarCards}
+      counts={counts}
     />
   );
 }

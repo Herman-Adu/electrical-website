@@ -16,8 +16,6 @@ import { LoadMoreButton } from "./load-more-button";
 // Import card components directly - these are client components
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
 import { ProjectListCard } from "@/components/projects/project-list-card";
-import { NewsHubCategorySlider } from "../news-hub";
-
 /** Supported card types */
 type CardType = "article" | "project";
 
@@ -46,7 +44,8 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
   sidebarTitle?: string;
   /** Sidebar header description */
   sidebarDescription?: string;
-  showSlider?: boolean;
+  /** Optional slider rendered as first item in the feed column, above the eyebrow */
+  slider?: ReactNode;
 }
 
 /**
@@ -96,7 +95,7 @@ export function ContentGridLayout<T extends ContentListItem>({
   emptyMessage = "No content available yet.",
   sidebarTitle = "Strategic Modules",
   sidebarDescription = "Campaigns, social proof, partnerships, and customer reviews.",
-  showSlider,
+  slider,
 }: ContentGridLayoutProps<T>) {
   // Pagination state - clean separation of concerns
   const {
@@ -134,8 +133,8 @@ export function ContentGridLayout<T extends ContentListItem>({
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
         <div className="space-y-4">
-          {/* category buttons - left aligned */}
-          {showSlider !== false && <NewsHubCategorySlider />}
+          {/* Slider slot — rendered above eyebrow if provided */}
+          {slider}
 
           {/* Header */}
           <div className="flex items-center justify-between gap-4 px-1">

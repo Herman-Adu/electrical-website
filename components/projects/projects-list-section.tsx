@@ -8,15 +8,18 @@ import type { ProjectListItemExtended } from "@/types/shared-content";
 import type { SidebarCard } from "@/types/shared-content";
 import { ContentGridLayout } from "@/components/shared";
 import { ProjectCategoryTitle } from "./project-category-title";
+import { ProjectCategorySlider } from "./project-category-slider";
 
 interface ProjectsListSectionProps {
   items: ProjectListItemExtended[];
   sidebarCards: SidebarCard[];
+  counts: Record<string, number>;
 }
 
 export function ProjectsListSection({
   items,
   sidebarCards,
+  counts,
 }: ProjectsListSectionProps) {
   const { sectionRef, lineScale, lineScaleBottom, shouldReduce } =
     useAnimatedBorders();
@@ -38,6 +41,7 @@ export function ProjectsListSection({
           sidebarCards={sidebarCards}
           cardType="project"
           title={<ProjectCategoryTitle />}
+          slider={<ProjectCategorySlider counts={counts} />}
           itemLabel="project"
           itemLabelPlural="projects"
           emptyMessage="No projects available in this category yet."
