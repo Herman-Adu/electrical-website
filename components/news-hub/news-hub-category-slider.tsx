@@ -96,6 +96,13 @@ export function NewsHubCategorySlider({
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isDown) return;
+      if (e.buttons === 0) {
+        // mouse button released outside the window — clean up
+        isDown = false;
+        rail.style.cursor = '';
+        rail.style.userSelect = '';
+        return;
+      }
       const dx = e.clientX - startX;
       if (Math.abs(dx) > 3) hasMoved = true;
       rail.scrollLeft = startScrollLeft - dx;
@@ -152,7 +159,7 @@ export function NewsHubCategorySlider({
     <nav aria-label="Filter articles by category" className={navClassName}>
       <div
         ref={sliderRef}
-        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-proximity scroll-px-4 cursor-grab scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
+        className="w-full overflow-x-auto overflow-y-hidden cursor-grab scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
       >
         <ul
           className="flex w-max gap-2 pl-2 pr-8 py-3"
@@ -161,7 +168,7 @@ export function NewsHubCategorySlider({
           {CATEGORY_OPTIONS.map((option) => {
             const isActive = option.slug === active;
             return (
-              <li key={option.slug} className="snap-start shrink-0">
+              <li key={option.slug} className="shrink-0">
                 <button
                   ref={isActive ? activeChipRef : null}
                   type="button"
