@@ -7,7 +7,7 @@ import { NavbarClient } from './navbar-client';
 // that check the DOM at domcontentloaded before client-side hydration completes.
 function NavbarFallback() {
   return (
-    <nav aria-label="Primary" className="hidden lg:flex items-center gap-1">
+    <nav aria-label="Primary" className="hidden">
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
       <Link href="/services">Services</Link>
