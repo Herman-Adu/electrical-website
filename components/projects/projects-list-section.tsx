@@ -33,14 +33,11 @@ export function ProjectsListSection({
       />
       <ProjectCategorySlider counts={counts} />
       <div className="section-content max-w-7xl">
-        <div className="mb-8">
-          <ProjectCategoryTitle />
-        </div>
         <ContentGridLayout
           items={items}
           sidebarCards={sidebarCards}
           cardType="project"
-          title="All Projects"
+          title={<ProjectCategoryTitle />}
           itemLabel="project"
           itemLabelPlural="projects"
           emptyMessage="No projects available in this category yet."

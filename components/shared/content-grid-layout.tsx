@@ -1,5 +1,6 @@
 "use client";
 
+import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import type {
   ContentListItem,
@@ -26,8 +27,8 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
   sidebarCards: SidebarCard[];
   /** Card type to render - determines which card component to use */
   cardType: CardType;
-  /** Header title */
-  title: string;
+  /** Header title — string or ReactNode (e.g. animated <ProjectCategoryTitle />) */
+  title: ReactNode;
   /** Initial number of visible items */
   initialCount?: number;
   /** Number of items to load per batch */
@@ -135,9 +136,13 @@ export function ContentGridLayout<T extends ContentListItem>({
             {showLiveIndicator && (
               <ContentPulseIndicator label="Live Feed" variant="live" />
             )}
-            <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-              {title}
-            </h2>
+            {typeof title === "string" ? (
+              <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+                {title}
+              </h2>
+            ) : (
+              <div className="mt-2">{title}</div>
+            )}
           </div>
           <div className="flex flex-col items-end gap-1">
             <span className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-electric-cyan">
