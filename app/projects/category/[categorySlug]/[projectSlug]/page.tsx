@@ -19,6 +19,7 @@ import {
   ProjectSupplementalSection,
 } from "@/components/projects";
 import { ContentToc, ContentBreadcrumb, SectionIntro } from "@/components/shared";
+import { ReadingProgressBar } from "@/components/news-hub/detail";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
 import { adaptProjectTimeline } from "@/lib/timeline/adapters";
@@ -225,6 +226,7 @@ export default async function CategoryProjectDetailPage({
 
   return (
     <main className="relative">
+      <ReadingProgressBar />
       {/* JSON-LD Schema */}
       <script
         type="application/ld+json"
