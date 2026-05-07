@@ -74,6 +74,61 @@ export function NewsHubCategorySlider({
     return () => rail.removeEventListener("wheel", handleWheel);
   }, []);
 
+  // Mouse drag-to-scroll — lets desktop users click-drag the rail horizontally.
+  // Suppresses click-through on buttons after a drag gesture.
+  useEffect(() => {
+    const rail = sliderRef.current;
+    if (!rail) return;
+
+    let isDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let hasMoved = false;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      hasMoved = false;
+      startX = e.clientX;
+      startScrollLeft = rail.scrollLeft;
+      rail.style.cursor = 'grabbing';
+      rail.style.userSelect = 'none';
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) hasMoved = true;
+      rail.scrollLeft = startScrollLeft - dx;
+    };
+
+    const onMouseUp = () => {
+      isDown = false;
+      rail.style.cursor = '';
+      rail.style.userSelect = '';
+    };
+
+    // Suppress click-through after drag
+    const onClickCapture = (e: MouseEvent) => {
+      if (hasMoved) {
+        e.stopPropagation();
+        e.preventDefault();
+        hasMoved = false;
+      }
+    };
+
+    rail.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    rail.addEventListener('click', onClickCapture, true);
+
+    return () => {
+      rail.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      rail.removeEventListener('click', onClickCapture, true);
+    };
+  }, []);
+
   const handleSelect = (slug: NewsCategorySlug) => {
     if (slug === active) return;
     const target = slug === "all" ? "/news-hub" : `/news-hub?category=${slug}`;
@@ -97,10 +152,10 @@ export function NewsHubCategorySlider({
     <nav aria-label="Filter articles by category" className={navClassName}>
       <div
         ref={sliderRef}
-        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
+        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-proximity scroll-px-4 cursor-grab scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
       >
         <ul
-          className="flex w-max gap-2 px-2 py-3"
+          className="flex w-max gap-2 pl-2 pr-8 py-3"
           role="list"
         >
           {CATEGORY_OPTIONS.map((option) => {
