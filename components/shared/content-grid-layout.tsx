@@ -16,6 +16,7 @@ import { LoadMoreButton } from "./load-more-button";
 // Import card components directly - these are client components
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
 import { ProjectListCard } from "@/components/projects/project-list-card";
+import { NewsHubCategorySlider } from "../news-hub";
 
 /** Supported card types */
 type CardType = "article" | "project";
@@ -45,6 +46,7 @@ interface ContentGridLayoutProps<T extends ContentListItem> {
   sidebarTitle?: string;
   /** Sidebar header description */
   sidebarDescription?: string;
+  showSlider?: boolean;
 }
 
 /**
@@ -94,6 +96,7 @@ export function ContentGridLayout<T extends ContentListItem>({
   emptyMessage = "No content available yet.",
   sidebarTitle = "Strategic Modules",
   sidebarDescription = "Campaigns, social proof, partnerships, and customer reviews.",
+  showSlider,
 }: ContentGridLayoutProps<T>) {
   // Pagination state - clean separation of concerns
   const {
@@ -129,62 +132,70 @@ export function ContentGridLayout<T extends ContentListItem>({
   return (
     <div className="grid gap-12 xl:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] xl:items-start">
       {/* Main Feed Column */}
-      <div className="space-y-4">
-        {/* Header */}
-        <div className="flex items-center justify-between gap-4 px-1">
-          <div>
-            {showLiveIndicator && (
-              <ContentPulseIndicator label="Live Feed" variant="live" />
-            )}
-            {typeof title === "string" ? (
-              <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-                {title}
-              </h2>
-            ) : (
-              <div className="mt-2">{title}</div>
-            )}
-          </div>
-          <div className="flex flex-col items-end gap-1">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-electric-cyan">
-              {totalCount} {totalCount === 1 ? itemLabel : itemLabelPlural}
-            </span>
-          </div>
-        </div>
+      <div className="min-w-0 space-y-2">
+        <div className="space-y-4">
+          {/* category buttons - left aligned */}
+          {showSlider !== false && <NewsHubCategorySlider />}
 
-        {/* Content List */}
-        <div className="space-y-4" role="feed" aria-busy={isPaginationLoading}>
-          {visibleItems.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-            >
-              {renderCardByType(item, cardType)}
-            </motion.div>
-          ))}
-        </div>
+          {/* Header */}
+          <div className="flex items-center justify-between gap-4 px-1">
+            <div>
+              {showLiveIndicator && (
+                <ContentPulseIndicator label="Live Feed" variant="live" />
+              )}
+              {typeof title === "string" ? (
+                <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+                  {title}
+                </h2>
+              ) : (
+                <div className="mt-2">{title}</div>
+              )}
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <span className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-electric-cyan">
+                {totalCount} {totalCount === 1 ? itemLabel : itemLabelPlural}
+              </span>
+            </div>
+          </div>
 
-        {/* Load More / End State */}
-        {hasMore ? (
-          <LoadMoreButton
-            onLoadMore={loadMore}
-            remainingCount={remainingCount}
-            isLoading={isPaginationLoading}
-            itemLabel={itemLabel}
-            itemLabelPlural={itemLabelPlural}
-          />
-        ) : totalCount > initialCount ? (
+          {/* Content List */}
           <div
-            className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
-            role="status"
-            aria-live="polite"
+            className="space-y-4"
+            role="feed"
+            aria-busy={isPaginationLoading}
           >
-            All {totalCount} {itemLabelPlural} loaded
+            {visibleItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+              >
+                {renderCardByType(item, cardType)}
+              </motion.div>
+            ))}
           </div>
-        ) : null}
-      </div>
 
+          {/* Load More / End State */}
+          {hasMore ? (
+            <LoadMoreButton
+              onLoadMore={loadMore}
+              remainingCount={remainingCount}
+              isLoading={isPaginationLoading}
+              itemLabel={itemLabel}
+              itemLabelPlural={itemLabelPlural}
+            />
+          ) : totalCount > initialCount ? (
+            <div
+              className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
+              role="status"
+              aria-live="polite"
+            >
+              All {totalCount} {itemLabelPlural} loaded
+            </div>
+          ) : null}
+        </div>
+      </div>
       {/* Sidebar */}
       <ContentSidebar
         cards={sidebarCards}
