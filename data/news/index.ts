@@ -15,10 +15,22 @@ export const newsCategories: NewsCategory[] = [
       "Home electrification stories, smart living upgrades, and homeowner guidance.",
   },
   {
+    slug: "commercial",
+    label: "Commercial",
+    description:
+      "Commercial fit-outs, property management upgrades, and retail electrical work.",
+  },
+  {
     slug: "industrial",
     label: "Industrial",
     description:
       "Operational resilience, infrastructure rollouts, and industrial transformation updates.",
+  },
+  {
+    slug: "community",
+    label: "Community",
+    description:
+      "Education, healthcare, and public sector electrical projects making a local impact.",
   },
   {
     slug: "partners",
@@ -50,9 +62,9 @@ export const newsHubMetricItems: NewsHubMetricItem[] = [
   {
     id: "metric-001",
     title: "Live Channels",
-    value: "6",
+    value: "8",
     description:
-      "Residential, Industrial, Partners, Case Studies, Insights, and Reviews.",
+      "Residential, Commercial, Industrial, Community, Partners, Case Studies, Insights, and Reviews.",
   },
   {
     id: "metric-002",

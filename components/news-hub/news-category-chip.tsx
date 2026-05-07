@@ -16,7 +16,9 @@ interface NewsCategoryChipProps {
 const categoryIcons: Record<NewsCategorySlug, string> = {
   all: "📰",
   residential: "🏠",
+  commercial: "🏢",
   industrial: "🏭",
+  community: "🏙️",
   partners: "🤝",
   "case-studies": "📊",
   insights: "💡",

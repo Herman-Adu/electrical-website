@@ -1,10 +1,33 @@
+import Link from 'next/link';
+import { Suspense } from 'react';
 import { NavbarClient } from './navbar-client';
+
+// Static fallback rendered before NavbarClient hydrates.
+// Ensures nav links are present in the initial HTML for crawlers and E2E tests
+// that check the DOM at domcontentloaded before client-side hydration completes.
+function NavbarFallback() {
+  return (
+    <nav aria-label="Primary" className="hidden">
+      <Link href="/">Home</Link>
+      <Link href="/about">About</Link>
+      <Link href="/services">Services</Link>
+      <Link href="/projects">Projects</Link>
+      <Link href="/news-hub">News Hub</Link>
+      <Link href="/contact">Contact</Link>
+    </nav>
+  );
+}
 
 /**
  * Navbar Server Component
- * Renders the client-side navbar component with proper async server handling.
- * This allows the navigation to be placed in layout.tsx and appear on all pages.
+ * Wraps NavbarClient in a Suspense boundary so that useSearchParams() inside
+ * NavbarClient does not block static generation of pages that include the
+ * root layout.
  */
 export function Navbar() {
-  return <NavbarClient />;
+  return (
+    <Suspense fallback={<NavbarFallback />}>
+      <NavbarClient />
+    </Suspense>
+  );
 }

@@ -49,7 +49,7 @@ export function NewsHubCategorySlider({
     : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
-  const sliderRef = useRef<HTMLUListElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll the rail horizontally only — avoids scrollIntoView touching page vertical scroll.
   useEffect(() => {
@@ -59,6 +59,82 @@ export function NewsHubCategorySlider({
     const chipCenter = chip.offsetLeft + chip.offsetWidth / 2;
     rail.scrollLeft = chipCenter - rail.offsetWidth / 2;
   }, [active]);
+
+  // Mouse wheel support — map both horizontal and vertical delta to scrollLeft so
+  // chips beyond the visible rail are reachable without touch/trackpad.
+  // { passive: false } is required to allow e.preventDefault().
+  useEffect(() => {
+    const rail = sliderRef.current;
+    if (!rail) return;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      rail.scrollLeft += e.deltaX || e.deltaY;
+    };
+    rail.addEventListener("wheel", handleWheel, { passive: false });
+    return () => rail.removeEventListener("wheel", handleWheel);
+  }, []);
+
+  // Mouse drag-to-scroll — lets desktop users click-drag the rail horizontally.
+  // Suppresses click-through on buttons after a drag gesture.
+  useEffect(() => {
+    const rail = sliderRef.current;
+    if (!rail) return;
+
+    let isDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let hasMoved = false;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      hasMoved = false;
+      startX = e.clientX;
+      startScrollLeft = rail.scrollLeft;
+      rail.style.cursor = 'grabbing';
+      rail.style.userSelect = 'none';
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      if (e.buttons === 0) {
+        // mouse button released outside the window — clean up
+        isDown = false;
+        rail.style.cursor = '';
+        rail.style.userSelect = '';
+        return;
+      }
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) hasMoved = true;
+      rail.scrollLeft = startScrollLeft - dx;
+    };
+
+    const onMouseUp = () => {
+      isDown = false;
+      rail.style.cursor = '';
+      rail.style.userSelect = '';
+    };
+
+    // Suppress click-through after drag
+    const onClickCapture = (e: MouseEvent) => {
+      if (hasMoved) {
+        e.stopPropagation();
+        e.preventDefault();
+        hasMoved = false;
+      }
+    };
+
+    rail.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    rail.addEventListener('click', onClickCapture, true);
+
+    return () => {
+      rail.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      rail.removeEventListener('click', onClickCapture, true);
+    };
+  }, []);
 
   const handleSelect = (slug: NewsCategorySlug) => {
     if (slug === active) return;
@@ -81,30 +157,34 @@ export function NewsHubCategorySlider({
 
   return (
     <nav aria-label="Filter articles by category" className={navClassName}>
-      <ul
+      <div
         ref={sliderRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scroll-px-4 gap-2 px-2 py-3 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
-        role="list"
+        className="w-full overflow-x-auto overflow-y-hidden cursor-grab scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
       >
-        {CATEGORY_OPTIONS.map((option) => {
-          const isActive = option.slug === active;
-          return (
-            <li key={option.slug} className="snap-start shrink-0">
-              <button
-                ref={isActive ? activeChipRef : null}
-                type="button"
-                onClick={() => handleSelect(option.slug)}
-                aria-current={isActive ? "page" : undefined}
-                className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                {option.label}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+        <ul
+          className="flex w-max gap-2 pl-2 pr-8 py-3"
+          role="list"
+        >
+          {CATEGORY_OPTIONS.map((option) => {
+            const isActive = option.slug === active;
+            return (
+              <li key={option.slug} className="shrink-0">
+                <button
+                  ref={isActive ? activeChipRef : null}
+                  type="button"
+                  onClick={() => handleSelect(option.slug)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {option.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }

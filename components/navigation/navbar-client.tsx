@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -78,9 +78,9 @@ const navLinks: NavLink[] = [
       { name: "Browse Channels",   href: "/news-hub/category" },
       { name: "Articles by Topic", href: "", isHeader: true },
       { name: "Residential",       href: "/news-hub?category=residential" },
-      { name: "Commercial",        href: "/news-hub/filter/commercial" },
+      { name: "Commercial",        href: "/news-hub?category=commercial" },
       { name: "Industrial",        href: "/news-hub?category=industrial" },
-      { name: "Community",         href: "/news-hub/filter/community" },
+      { name: "Community",         href: "/news-hub?category=community" },
       { name: "Campaigns",         href: "/news-hub/filter/campaigns" },
       { name: "Marketing",         href: "/news-hub/filter/marketing" },
       { name: "Social Media",      href: "/news-hub/filter/social-media" },
@@ -97,6 +97,7 @@ const navLinks: NavLink[] = [
 export function NavbarClient() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -173,16 +174,23 @@ export function NavbarClient() {
     return path.endsWith("/") ? path.slice(0, -1) : path;
   };
 
-  const isSubmenuActive = (href: string) => {
+  const isSubmenuActive = (href: string): boolean => {
     if (!href) return false;
-    const [rawPath, rawHash] = href.split("#");
-    const targetPath = normalizePath(rawPath || "/");
+    const [pathAndQuery, rawHash] = href.split('#');
+    const [rawPath, rawQuery] = pathAndQuery.split('?');
     const currentPath = normalizePath(pathname);
-
+    const targetPath = normalizePath(rawPath || "/");
+    if (rawQuery) {
+      if (currentPath !== targetPath) return false;
+      const params = new URLSearchParams(rawQuery);
+      for (const [key, value] of params.entries()) {
+        if (searchParams.get(key) !== value) return false;
+      }
+      return true;
+    }
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`;
     }
-
     return currentPath === targetPath;
   };
 
@@ -219,16 +227,23 @@ export function NavbarClient() {
 
   const getAriaCurrent = (href: string): "page" | "location" | undefined => {
     if (!href) return undefined;
-    const [rawPath, rawHash] = href.split("#");
-    const targetPath = normalizePath(rawPath || "/");
+    const [pathAndQuery, rawHash] = href.split('#');
+    const [rawPath, rawQuery] = pathAndQuery.split('?');
     const currentPath = normalizePath(pathname);
-
+    const targetPath = normalizePath(rawPath || "/");
+    if (rawQuery) {
+      if (currentPath !== targetPath) return undefined;
+      const params = new URLSearchParams(rawQuery);
+      for (const [key, value] of params.entries()) {
+        if (searchParams.get(key) !== value) return undefined;
+      }
+      return "page";
+    }
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`
         ? "location"
         : undefined;
     }
-
     return currentPath === targetPath ? "page" : undefined;
   };
 

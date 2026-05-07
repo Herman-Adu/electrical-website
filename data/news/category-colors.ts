@@ -15,11 +15,23 @@ export const newsCategoryColors: Record<
     featuredBadge:
       "border-[hsl(174_100%_35%)]/30 dark:border-electric-cyan/30 bg-background/90 text-[hsl(174_100%_35%)] dark:text-electric-cyan",
   },
+  commercial: {
+    badge:
+      "border-sky-500/30 bg-sky-500/10 dark:bg-sky-500/20 text-sky-500",
+    featuredBadge:
+      "border-sky-500/30 bg-background/90 text-sky-500",
+  },
   industrial: {
     badge:
       "border-amber-warning/30 bg-amber-warning/10 dark:bg-amber-warning/20 text-amber-warning",
     featuredBadge:
       "border-amber-warning/30 bg-background/90 text-amber-warning",
+  },
+  community: {
+    badge:
+      "border-orange-500/30 bg-orange-500/10 dark:bg-orange-500/20 text-orange-500",
+    featuredBadge:
+      "border-orange-500/30 bg-background/90 text-orange-500",
   },
   partners: {
     badge:

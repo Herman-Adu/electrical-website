@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -54,6 +54,7 @@ export function DesktopNav({
   isSubmenuActive: propIsSubmenuActive,
 }: DesktopNavProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [focusedDropdown, setFocusedDropdown] = useState<string | null>(null);
 
@@ -70,15 +71,22 @@ export function DesktopNav({
       return propIsSubmenuActive(href);
     }
 
-    // Fallback: local logic
-    const [rawPath, rawHash] = href.split("#");
-    const targetPath = normalizePath(rawPath || "/");
+    // Fallback: query-aware local logic
+    const [pathAndQuery, rawHash] = href.split('#');
+    const [rawPath, rawQuery] = pathAndQuery.split('?');
     const currentPath = normalizePath(pathname);
-
+    const targetPath = normalizePath(rawPath || "/");
+    if (rawQuery) {
+      if (currentPath !== targetPath) return false;
+      const params = new URLSearchParams(rawQuery);
+      for (const [key, value] of params.entries()) {
+        if (searchParams.get(key) !== value) return false;
+      }
+      return true;
+    }
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`;
     }
-
     return currentPath === targetPath;
   };
 
@@ -113,16 +121,23 @@ export function DesktopNav({
 
   const getAriaCurrent = (href: string): "page" | "location" | undefined => {
     if (!href) return undefined;
-    const [rawPath, rawHash] = href.split("#");
-    const targetPath = normalizePath(rawPath || "/");
+    const [pathAndQuery, rawHash] = href.split('#');
+    const [rawPath, rawQuery] = pathAndQuery.split('?');
     const currentPath = normalizePath(pathname);
-
+    const targetPath = normalizePath(rawPath || "/");
+    if (rawQuery) {
+      if (currentPath !== targetPath) return undefined;
+      const params = new URLSearchParams(rawQuery);
+      for (const [key, value] of params.entries()) {
+        if (searchParams.get(key) !== value) return undefined;
+      }
+      return "page";
+    }
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`
         ? "location"
         : undefined;
     }
-
     return currentPath === targetPath ? "page" : undefined;
   };
 
@@ -135,7 +150,7 @@ export function DesktopNav({
       accumulator[link.name] = topLevel || submenu;
       return accumulator;
     }, {});
-  }, [navLinks, pathname, propCurrentHash]);
+  }, [navLinks, pathname, propCurrentHash, searchParams]);
 
   const isDropdownOpen = (linkName: string): boolean => {
     return hoveredDropdown === linkName || focusedDropdown === linkName;

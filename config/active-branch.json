@@ -1,6 +1,6 @@
 {
-  "branch": "fix/news-hub-filter-scroll-and-header",
-  "entity": "feat-news-hub-filter-scroll-and-header",
-  "fallback": "b016e5c chore: mark fix/news-hub-e2e-failures lane completed + sync active-branch config (#138) | 771d3a6 fix: update playwright baselines post news-hub slider merge (#137) | 272f870 feat: news hub TOC sticky fix + URL-driven category slider (#136)",
-  "updatedAt": "2026-05-06T18:00:36.958Z"
+  "branch": "fix/navbar-active-category-links",
+  "entity": "feat-navbar-active-category-links",
+  "fallback": "74772bb chore: final active-branch sync before push | 7bdb43f chore: update active-branch fallback after memory lane config commit | be189b7 chore: sync memory lane configs for navbar-active-category-links branch",
+  "updatedAt": "2026-05-07T15:02:01.331Z"
 }
