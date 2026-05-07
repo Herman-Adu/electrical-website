@@ -1,10 +1,16 @@
+import { Suspense } from 'react';
 import { NavbarClient } from './navbar-client';
 
 /**
  * Navbar Server Component
- * Renders the client-side navbar component with proper async server handling.
- * This allows the navigation to be placed in layout.tsx and appear on all pages.
+ * Wraps NavbarClient in a Suspense boundary so that useSearchParams() inside
+ * NavbarClient does not block static generation of pages that include the
+ * root layout.
  */
 export function Navbar() {
-  return <NavbarClient />;
+  return (
+    <Suspense fallback={null}>
+      <NavbarClient />
+    </Suspense>
+  );
 }

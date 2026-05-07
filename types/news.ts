@@ -3,7 +3,9 @@ import type { TocItem } from "./shared-content";
 export type NewsCategorySlug =
   | "all"
   | "residential"
+  | "commercial"
   | "industrial"
+  | "community"
   | "partners"
   | "case-studies"
   | "insights"

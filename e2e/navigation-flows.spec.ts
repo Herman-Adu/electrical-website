@@ -199,7 +199,29 @@ test.describe("dropdown navigation to in-page sections", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 6. Page metadata
+// 6. Navbar active category link highlight for ?category= params
+// ---------------------------------------------------------------------------
+test.describe("navbar active category link", () => {
+  test("navbar highlights active category link for ?category= query params", async ({ page }) => {
+    await page.goto("/news-hub?category=insights");
+    await page.waitForLoadState("domcontentloaded");
+
+    // Hover the News Hub nav item to open its dropdown
+    const newsHubTrigger = page.locator('nav a:has-text("News Hub")').first();
+    await newsHubTrigger.hover();
+
+    // Find the Insights submenu button — should be aria-current="page"
+    const insightsItem = page.locator('button[role="menuitem"]:has-text("Insights")').first();
+    await expect(insightsItem).toHaveAttribute("aria-current", "page");
+
+    // Partnerships link should NOT be active
+    const partnershipsItem = page.locator('button[role="menuitem"]:has-text("Partnerships")').first();
+    await expect(partnershipsItem).not.toHaveAttribute("aria-current", "page");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 7. Page metadata
 // ---------------------------------------------------------------------------
 test.describe("page metadata", () => {
   test("homepage <meta name='description'> is set and non-empty", async ({
