@@ -27,7 +27,7 @@ export function ProjectsListSection({
   return (
     <section
       ref={sectionRef}
-      className="relative section-container section-padding bg-background"
+      className="relative section-padding bg-background"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}

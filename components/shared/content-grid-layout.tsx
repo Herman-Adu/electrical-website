@@ -132,10 +132,10 @@ export function ContentGridLayout<T extends ContentListItem>({
     <div className="grid gap-12 xl:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] xl:items-start">
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
-        <div className="space-y-4">
-          {/* Slider slot — rendered above eyebrow if provided */}
-          {slider}
+        {/* Slider — direct child of space-y-2, above eyebrow (mirrors news-grid-layout.tsx:88) */}
+        {slider}
 
+        <div className="space-y-4">
           {/* Header */}
           <div className="flex items-center justify-between gap-4 px-1">
             <div>
