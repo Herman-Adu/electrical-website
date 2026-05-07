@@ -1,6 +1,6 @@
 {
   "branch": "fix/navbar-active-category-links",
   "entity": "feat-navbar-active-category-links",
-  "fallback": "7bdb43f chore: update active-branch fallback after memory lane config commit | be189b7 chore: sync memory lane configs for navbar-active-category-links branch | 9f4763f fix: remove snap CSS so all chips reachable by wheel + guard stale drag state",
-  "updatedAt": "2026-05-07T14:19:46.971Z"
+  "fallback": "74772bb chore: final active-branch sync before push | 7bdb43f chore: update active-branch fallback after memory lane config commit | be189b7 chore: sync memory lane configs for navbar-active-category-links branch",
+  "updatedAt": "2026-05-07T15:02:01.331Z"
 }
