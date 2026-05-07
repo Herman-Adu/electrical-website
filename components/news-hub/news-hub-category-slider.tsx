@@ -60,6 +60,20 @@ export function NewsHubCategorySlider({
     rail.scrollLeft = chipCenter - rail.offsetWidth / 2;
   }, [active]);
 
+  // Mouse wheel support — map both horizontal and vertical delta to scrollLeft so
+  // chips beyond the visible rail are reachable without touch/trackpad.
+  // { passive: false } is required to allow e.preventDefault().
+  useEffect(() => {
+    const rail = sliderRef.current;
+    if (!rail) return;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      rail.scrollLeft += e.deltaX || e.deltaY;
+    };
+    rail.addEventListener("wheel", handleWheel, { passive: false });
+    return () => rail.removeEventListener("wheel", handleWheel);
+  }, []);
+
   const handleSelect = (slug: NewsCategorySlug) => {
     if (slug === active) return;
     const target = slug === "all" ? "/news-hub" : `/news-hub?category=${slug}`;
