@@ -4,24 +4,26 @@ import { useAnimatedBorders, AnimatedBorders } from "@/lib/use-animated-borders"
 import type { ProjectListItemExtended } from "@/types/shared-content";
 import type { SidebarCard } from "@/types/shared-content";
 import { ContentGridLayout } from "@/components/shared";
+import { ProjectCategorySlider } from "./project-category-slider";
+import { ProjectCategoryTitle } from "./project-category-title";
 
 interface ProjectsListSectionProps {
   items: ProjectListItemExtended[];
   sidebarCards: SidebarCard[];
-  activeCategoryLabel: string;
+  counts: Record<string, number>;
 }
 
 export function ProjectsListSection({
   items,
   sidebarCards,
-  activeCategoryLabel,
+  counts,
 }: ProjectsListSectionProps) {
   const { sectionRef, lineScale, lineScaleBottom, shouldReduce } = useAnimatedBorders();
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden section-container section-padding bg-background"
+      className="relative section-container section-padding bg-background"
     >
       <AnimatedBorders
         shouldReduce={shouldReduce}
@@ -29,13 +31,10 @@ export function ProjectsListSection({
         lineScaleBottom={lineScaleBottom}
         showBottom={true}
       />
+      <ProjectCategorySlider counts={counts} />
       <div className="section-content max-w-7xl">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="h-px w-8 bg-[hsl(174_100%_35%)] dark:bg-electric-cyan" />
-          <span className="font-mono text-xs tracking-widest uppercase font-bold text-[hsl(174_100%_35%)] dark:text-electric-cyan">
-            {activeCategoryLabel} Projects
-          </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-electric-cyan animate-pulse" />
+        <div className="mb-8">
+          <ProjectCategoryTitle />
         </div>
         <ContentGridLayout
           items={items}

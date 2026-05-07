@@ -65,7 +65,6 @@ export default async function ProjectsPage() {
 
       <Suspense fallback={<ProjectListSkeleton />}>
         <ProjectsFilterClient
-          sectors={sectors}
           items={allItems}
           sidebarCards={sidebarCards}
           counts={counts}
