@@ -49,7 +49,7 @@ export function NewsHubCategorySlider({
     : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
-  const sliderRef = useRef<HTMLUListElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll the rail horizontally only — avoids scrollIntoView touching page vertical scroll.
   useEffect(() => {
@@ -95,30 +95,34 @@ export function NewsHubCategorySlider({
 
   return (
     <nav aria-label="Filter articles by category" className={navClassName}>
-      <ul
+      <div
         ref={sliderRef}
-        className="w-full flex overflow-x-auto snap-x snap-mandatory scroll-px-4 gap-2 px-2 py-3 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
-        role="list"
+        className="w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
       >
-        {CATEGORY_OPTIONS.map((option) => {
-          const isActive = option.slug === active;
-          return (
-            <li key={option.slug} className="snap-start shrink-0">
-              <button
-                ref={isActive ? activeChipRef : null}
-                type="button"
-                onClick={() => handleSelect(option.slug)}
-                aria-current={isActive ? "page" : undefined}
-                className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                {option.label}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+        <ul
+          className="flex w-max gap-2 px-2 py-3"
+          role="list"
+        >
+          {CATEGORY_OPTIONS.map((option) => {
+            const isActive = option.slug === active;
+            return (
+              <li key={option.slug} className="snap-start shrink-0">
+                <button
+                  ref={isActive ? activeChipRef : null}
+                  type="button"
+                  onClick={() => handleSelect(option.slug)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={[CHIP_BASE_CLASS, isActive ? CHIP_ACTIVE_CLASS : ""]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {option.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }
