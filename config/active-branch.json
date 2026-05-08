@@ -1,6 +1,6 @@
 {
-  "branch": "chore/post-merge-cleanup-145",
-  "entity": "feat-post-merge-cleanup-145",
-  "fallback": "1e9aeb1 chore: post-merge cleanup — memory-lanes + active-branch after PR #144 (#145) | c6a531e fix: retain category slider + header when category has zero items (#144) | 5c2b497 chore: post-merge cleanup — gitignore, baselines, memory-lane configs (#143)",
-  "updatedAt": "2026-05-08T13:19:39.075Z"
+  "branch": "feat/project-category-slider",
+  "entity": "feat-project-category-slider",
+  "fallback": "53fcef2 chore: post-merge cleanup — memory-lane configs after PRs #144 + #145 (#146) | 1e9aeb1 chore: post-merge cleanup — memory-lanes + active-branch after PR #144 (#145) | c6a531e fix: retain category slider + header when category has zero items (#144)",
+  "updatedAt": "2026-05-08T15:02:32.993Z"
 }

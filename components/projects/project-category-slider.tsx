@@ -8,6 +8,8 @@ import type { ProjectCategorySlug } from "@/types/projects";
 export interface ProjectCategorySliderProps {
   counts?: Record<string, number>;
   className?: string;
+  activeSlug?: string;
+  categoryBasePath?: string;
 }
 
 interface CategoryOption {
@@ -42,15 +44,20 @@ const CHIP_ACTIVE_CLASS = "bg-electric-cyan/20 ring-1 ring-electric-cyan/50";
 export function ProjectCategorySlider({
   counts,
   className,
+  activeSlug: activeSlugProp,
+  categoryBasePath,
 }: ProjectCategorySliderProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
 
   const rawCategory = searchParams?.get("category") ?? null;
-  const active: ProjectCategorySlug = isValidSlug(rawCategory)
-    ? rawCategory
-    : "all";
+  const active: ProjectCategorySlug =
+    activeSlugProp != null && isValidSlug(activeSlugProp)
+      ? activeSlugProp
+      : isValidSlug(rawCategory)
+        ? rawCategory
+        : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
@@ -142,8 +149,9 @@ export function ProjectCategorySlider({
 
   const handleSelect = (slug: ProjectCategorySlug) => {
     if (slug === active) return;
-    const target =
-      slug === "all" ? "/projects" : `/projects?category=${slug}`;
+    const target = categoryBasePath
+      ? slug === "all" ? "/projects" : `${categoryBasePath}/${slug}`
+      : slug === "all" ? "/projects" : `/projects?category=${slug}`;
     startTransition(() => {
       router.replace(target, { scroll: false });
     });
