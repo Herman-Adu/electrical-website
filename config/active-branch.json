@@ -1,6 +1,6 @@
 {
-  "branch": "fix/navbar-active-category-links",
-  "entity": "feat-navbar-active-category-links",
-  "fallback": "74772bb chore: final active-branch sync before push | 7bdb43f chore: update active-branch fallback after memory lane config commit | be189b7 chore: sync memory lane configs for navbar-active-category-links branch",
-  "updatedAt": "2026-05-07T15:02:01.331Z"
+  "branch": "chore/post-merge-cleanup",
+  "entity": "feat-post-merge-cleanup",
+  "fallback": "b454a69 chore: sync active-branch and memory-lane for post-merge-cleanup | 4d80486 chore: sync memory-lane configs and mark vault-cleanup lane completed | 9ea5e61 chore: update playwright visual baselines",
+  "updatedAt": "2026-05-08T09:11:50.922Z"
 }

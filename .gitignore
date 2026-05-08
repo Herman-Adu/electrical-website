@@ -38,3 +38,9 @@ npm-shrinkwrap.json
 
 # Obsidian vault — has its own git remote (GitHub), not tracked here
 obsidian-vault/
+
+# pnpm content-addressable store (local cache, never commit)
+.pnpm-store/
+
+# Claude scheduled tasks lock
+.claude/scheduled_tasks.lock
