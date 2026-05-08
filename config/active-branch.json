@@ -1,6 +1,6 @@
 {
-  "branch": "feat/project-category-slider",
-  "entity": "feat-project-category-slider",
-  "fallback": "53fcef2 chore: post-merge cleanup — memory-lane configs after PRs #144 + #145 (#146) | 1e9aeb1 chore: post-merge cleanup — memory-lanes + active-branch after PR #144 (#145) | c6a531e fix: retain category slider + header when category has zero items (#144)",
-  "updatedAt": "2026-05-08T15:02:32.993Z"
+  "branch": "main",
+  "entity": "nexgen-electrical-innovations-state",
+  "fallback": "aedd1ae feat: project category slider — list section, title, and category page updates (#147)",
+  "updatedAt": "2026-05-08T16:50:19.547Z"
 }
