@@ -150,10 +150,14 @@ export function ProjectCategorySlider({
   const handleSelect = (slug: ProjectCategorySlug) => {
     if (slug === active) return;
     const target = categoryBasePath
-      ? slug === "all" ? "/projects" : `${categoryBasePath}/${slug}`
+      ? slug === "all" ? "/projects#projects-list" : `${categoryBasePath}/${slug}`
       : slug === "all" ? "/projects" : `/projects?category=${slug}`;
     startTransition(() => {
-      router.replace(target, { scroll: false });
+      if (categoryBasePath && slug === "all") {
+        router.push(target);
+      } else {
+        router.replace(target, { scroll: false });
+      }
     });
   };
 
