@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "electrical-website-state",
-  "fallback": "9ea5e61 chore: update playwright visual baselines | c43e8e0 chore: ignore pnpm-store and scheduled_tasks.lock | 21e3edd fix: docker dev server + obsidian vault path corrections (#142)",
-  "updatedAt": "2026-05-08T09:10:26.217Z"
+  "branch": "chore/post-merge-cleanup",
+  "entity": "feat-post-merge-cleanup",
+  "fallback": "4d80486 chore: sync memory-lane configs and mark vault-cleanup lane completed | 9ea5e61 chore: update playwright visual baselines | c43e8e0 chore: ignore pnpm-store and scheduled_tasks.lock",
+  "updatedAt": "2026-05-08T09:11:31.904Z"
 }
