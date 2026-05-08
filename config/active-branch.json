@@ -1,6 +1,6 @@
 {
   "branch": "chore/post-merge-cleanup",
   "entity": "feat-post-merge-cleanup",
-  "fallback": "4d80486 chore: sync memory-lane configs and mark vault-cleanup lane completed | 9ea5e61 chore: update playwright visual baselines | c43e8e0 chore: ignore pnpm-store and scheduled_tasks.lock",
-  "updatedAt": "2026-05-08T09:11:31.904Z"
+  "fallback": "b454a69 chore: sync active-branch and memory-lane for post-merge-cleanup | 4d80486 chore: sync memory-lane configs and mark vault-cleanup lane completed | 9ea5e61 chore: update playwright visual baselines",
+  "updatedAt": "2026-05-08T09:11:50.922Z"
 }
