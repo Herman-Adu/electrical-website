@@ -1,6 +1,8 @@
 "use client";
 
 import { useOptimistic, useTransition, type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import type { NewsArticleListItem, NewsSidebarCard } from "@/types/news";
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
@@ -43,6 +45,8 @@ export function NewsGridLayout({
   emptyMessage = "No stories available in this category yet.",
   showSlider,
 }: NewsGridLayoutProps) {
+  const pathname = usePathname();
+
   // Pagination state - clean separation of concerns
   const {
     visibleItems,
@@ -67,18 +71,6 @@ export function NewsGridLayout({
       ? current.filter((id) => id !== articleId)
       : [...current, articleId],
   );
-
-  // Empty state
-  if (items.length === 0) {
-    return (
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] lg:items-start">
-        <div className="min-w-0 rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-muted-foreground">
-          {emptyMessage}
-        </div>
-        <NewsHubSidebar cards={sidebarCards} />
-      </div>
-    );
-  }
 
   return (
     <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] lg:items-start">
@@ -111,45 +103,64 @@ export function NewsGridLayout({
           </div>
         </div>
 
-        {/* Article List */}
-        <div className="space-y-4" role="feed" aria-busy={isPaginationLoading}>
-          {visibleItems.map((item, index) => (
-            <motion.article
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-            >
-              <NewsHubArticleCard
-                item={item}
-                isPending={isSavePending}
-                isSaved={optimisticSavedIds.includes(item.id)}
-                onToggleSave={() => {
-                  startSaveTransition(() => {
-                    toggleSavedOptimistically(item.id);
-                  });
-                }}
-              />
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Load More / End State */}
-        {hasMore ? (
-          <LoadMoreButton
-            onLoadMore={loadMore}
-            remainingCount={remainingCount}
-            isLoading={isPaginationLoading}
-          />
-        ) : totalCount > initialCount ? (
-          <div
-            className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50"
-            role="status"
-            aria-live="polite"
-          >
-            All {totalCount} stories loaded
+        {/* Content List or Enhanced Empty State */}
+        {items.length === 0 ? (
+          <div className="rounded-3xl border border-border/50 bg-card/60 p-8 space-y-3">
+            <h3 className="text-base font-semibold text-foreground">
+              No stories yet
+            </h3>
+            <p className="text-sm text-foreground/70">{emptyMessage}</p>
+            {showSlider !== false && (
+              <Link
+                href={pathname}
+                scroll={false}
+                className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan transition-all hover:bg-electric-cyan/20"
+              >
+                View all stories →
+              </Link>
+            )}
           </div>
-        ) : null}
+        ) : (
+          <div className="space-y-4" role="feed" aria-busy={isPaginationLoading}>
+            {visibleItems.map((item, index) => (
+              <motion.article
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+              >
+                <NewsHubArticleCard
+                  item={item}
+                  isPending={isSavePending}
+                  isSaved={optimisticSavedIds.includes(item.id)}
+                  onToggleSave={() => {
+                    startSaveTransition(() => {
+                      toggleSavedOptimistically(item.id);
+                    });
+                  }}
+                />
+              </motion.article>
+            ))}
+          </div>
+        )}
+
+        {/* Load More / End State — only when items exist */}
+        {items.length > 0 &&
+          (hasMore ? (
+            <LoadMoreButton
+              onLoadMore={loadMore}
+              remainingCount={remainingCount}
+              isLoading={isPaginationLoading}
+            />
+          ) : totalCount > initialCount ? (
+            <div
+              className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50"
+              role="status"
+              aria-live="polite"
+            >
+              All {totalCount} stories loaded
+            </div>
+          ) : null)}
       </div>
 
       {/* Sidebar */}
