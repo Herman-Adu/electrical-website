@@ -3,7 +3,7 @@
     "id": "nexgen-electrical-innovations-state",
     "branch": "main",
     "dockerEntity": "nexgen-electrical-innovations-state",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-04-28T09:00:00.000Z",
     "mergedAt": null,
     "fallback_summary": "Main branch — project state entity is nexgen-electrical-innovations-state | Last merged: c6a531e PR #144 fix/content-grid-empty-state-nav (2026-05-08)"
