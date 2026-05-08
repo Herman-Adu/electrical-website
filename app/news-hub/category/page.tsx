@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { NewsChannelCard, NewsHubCategoriesHero, NewsTopicFilter } from "@/components/news-hub";
+import {
+  NewsChannelCard,
+  NewsHubCategoriesHero,
+  NewsTopicFilter,
+} from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
-import { allNewsArticles, newsCategories, newsCategoriesIntroData } from "@/data/news";
+import {
+  allNewsArticles,
+  newsCategories,
+  newsCategoriesIntroData,
+} from "@/data/news";
 import { newsTopics } from "@/data/news/topics";
 import { createNewsHubCategoriesMetadata } from "@/lib/metadata-news";
 
@@ -46,14 +54,22 @@ export default function NewsHubCategoriesPage() {
         </div>
         <div className="section-content grid max-w-6xl gap-5 sm:grid-cols-2">
           {newsCategories.map((cat) => {
-            const catArticles = allNewsArticles.filter((a) => a.category === cat.slug);
+            const catArticles = allNewsArticles.filter(
+              (a) => a.category === cat.slug,
+            );
             const articleCount = catArticles.length;
             const sortedArticles = [...catArticles].sort(
-              (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+              (a, b) =>
+                new Date(b.publishedAt).getTime() -
+                new Date(a.publishedAt).getTime(),
             );
-            const recentArticleTitle = sortedArticles[0]?.title ?? "Coming soon";
+            const recentArticleTitle =
+              sortedArticles[0]?.title ?? "Coming soon";
             const recentImage = sortedArticles[0]?.featuredImage?.src;
-            const coverImageSrc = recentImage ?? (coverImageFallbacks[cat.slug] ?? "/images/services-commercial.jpg");
+            const coverImageSrc =
+              recentImage ??
+              coverImageFallbacks[cat.slug] ??
+              "/images/services-commercial.jpg";
             return (
               <NewsChannelCard
                 key={cat.slug}
@@ -68,11 +84,11 @@ export default function NewsHubCategoriesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-16">
+      {/* <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-16">
         <h2 className="text-xl font-semibold mb-2 text-foreground">Browse by Topic</h2>
         <p className="text-sm text-muted-foreground mb-4">Filter articles across all channels by topic</p>
         <NewsTopicFilter topics={newsTopics} />
-      </section>
+      </section> */}
 
       <Footer />
     </main>

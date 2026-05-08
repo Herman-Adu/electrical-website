@@ -7,6 +7,7 @@ import { VALID_SLUGS } from "./project-category-slider";
 
 interface ProjectCategoryTitleProps {
   className?: string;
+  label?: string;
 }
 
 const TITLE_LABELS: Record<ProjectCategorySlug, string> = {
@@ -23,13 +24,13 @@ function isValidSlug(value: string | null): value is ProjectCategorySlug {
   return value !== null && VALID_SLUGS.has(value as ProjectCategorySlug);
 }
 
-export function ProjectCategoryTitle({ className }: ProjectCategoryTitleProps) {
+export function ProjectCategoryTitle({ className, label: labelProp }: ProjectCategoryTitleProps) {
   const searchParams = useSearchParams();
   const rawCategory = searchParams?.get("category") ?? null;
   const active: ProjectCategorySlug = isValidSlug(rawCategory)
     ? rawCategory
     : "all";
-  const label = TITLE_LABELS[active];
+  const label = labelProp ?? TITLE_LABELS[active];
 
   const wrapperClassName = ["relative", className].filter(Boolean).join(" ");
 

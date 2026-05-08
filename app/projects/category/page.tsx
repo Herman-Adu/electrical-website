@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { projectCategories, categoriesIntroData, allProjects } from "@/data/projects";
+import {
+  projectCategories,
+  categoriesIntroData,
+  allProjects,
+} from "@/data/projects";
 import { workTypes } from "@/data/projects/work-types";
 import { createProjectCategoriesMetadata } from "@/lib/metadata-projects";
 import { ProjectsCategoriesHero } from "@/components/projects/projects-categories-hero";
@@ -48,9 +52,7 @@ export default function ProjectCategoriesPage() {
               .map((category) => {
                 const catProjects = allProjects
                   .filter((p) => p.category === category.slug)
-                  .sort((a, b) =>
-                    b.publishedAt.localeCompare(a.publishedAt)
-                  );
+                  .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
                 const mostRecent = catProjects[0];
                 return (
                   <SectorCard
@@ -59,11 +61,10 @@ export default function ProjectCategoriesPage() {
                     projectCount={catProjects.length}
                     recentProjectTitle={mostRecent?.title ?? "Coming soon"}
                     coverImageSrc={
-                      mostRecent?.coverImage.src ?? "/images/services-industrial.jpg"
+                      mostRecent?.coverImage.src ??
+                      "/images/services-industrial.jpg"
                     }
-                    coverImageAlt={
-                      mostRecent?.coverImage.alt ?? category.label
-                    }
+                    coverImageAlt={mostRecent?.coverImage.alt ?? category.label}
                   />
                 );
               })}
@@ -72,13 +73,13 @@ export default function ProjectCategoriesPage() {
       </section>
 
       {/* Zone 2 — Work Types */}
-      <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-16">
+      {/* <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-16">
         <h2 className="text-xl font-semibold mb-2 text-foreground">Browse by Work Type</h2>
         <p className="text-sm text-muted-foreground mb-4">
           Filter across all sectors by the type of electrical work
         </p>
         <WorkTypeFilter workTypes={workTypes} />
-      </section>
+      </section> */}
       <Footer />
     </main>
   );

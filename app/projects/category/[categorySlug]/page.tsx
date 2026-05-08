@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -5,11 +6,14 @@ import {
   getCategorySlugs,
   getProjectListItemsExtended,
   categoryProjectsIntroData,
+  allProjects,
+  projectCategories,
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
 import { ProjectCategoryHero } from "@/components/projects";
-import { ContentGridLayout, ContentBreadcrumb, SectionIntro } from "@/components/shared";
+import { ProjectCategoryListSection } from "@/components/projects/project-category-list-section";
+import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 
 export const revalidate = 86400; // 24 hours
@@ -52,6 +56,17 @@ export default async function CategoryProjectsPage({
   const projectListItems = getProjectListItemsExtended(category.slug);
   const sidebarCards = getProjectsSidebarCards(category.slug);
 
+  const sectors = projectCategories.filter((c) => c.isSector);
+  const counts: Record<string, number> = {
+    all: allProjects.length,
+    ...Object.fromEntries(
+      sectors.map((s) => [
+        s.slug,
+        allProjects.filter((p) => p.category === s.slug).length,
+      ]),
+    ),
+  };
+
   return (
     <main className="relative">
       {/* Hero Section */}
@@ -73,24 +88,15 @@ export default async function CategoryProjectsPage({
       <SectionIntro data={categoryProjectsIntroData} />
 
       {/* Projects Grid Section */}
-      <section
-        id="category-projects"
-        className="section-standard bg-background"
-      >
-        <div className="section-content max-w-7xl">
-          <ContentGridLayout
-            items={projectListItems}
-            sidebarCards={sidebarCards}
-            cardType="project"
-            title={`${category.label} Projects`}
-            itemLabel="project"
-            itemLabelPlural="projects"
-            emptyMessage={`No ${category.label.toLowerCase()} projects available yet.`}
-            sidebarTitle={`${category.label} Resources`}
-            sidebarDescription={`Guides, consultations, and resources for ${category.label.toLowerCase()} projects.`}
-          />
-        </div>
-      </section>
+      <Suspense fallback={null}>
+        <ProjectCategoryListSection
+          items={projectListItems}
+          sidebarCards={sidebarCards}
+          counts={counts}
+          category={category}
+          categorySlug={categorySlug}
+        />
+      </Suspense>
       <Footer />
     </main>
   );
