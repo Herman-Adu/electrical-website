@@ -1,6 +1,8 @@
 "use client";
 
 import { type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import type {
   ContentListItem,
@@ -12,8 +14,6 @@ import { usePagination } from "@/hooks/use-pagination";
 import { ContentSidebar } from "./content-sidebar";
 import { ContentPulseIndicator } from "./content-pulse-indicator";
 import { LoadMoreButton } from "./load-more-button";
-
-// Import card components directly - these are client components
 import { NewsHubArticleCard } from "@/components/news-hub/news-hub-article-card";
 import { ProjectListCard } from "@/components/projects/project-list-card";
 /** Supported card types */
@@ -97,6 +97,8 @@ export function ContentGridLayout<T extends ContentListItem>({
   sidebarDescription = "Campaigns, social proof, partnerships, and customer reviews.",
   slider,
 }: ContentGridLayoutProps<T>) {
+  const pathname = usePathname();
+
   // Pagination state - clean separation of concerns
   const {
     visibleItems,
@@ -111,28 +113,11 @@ export function ContentGridLayout<T extends ContentListItem>({
     batchSize,
   });
 
-  // Empty state
-  if (items.length === 0) {
-    return (
-      <div className="grid gap-12 xl:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] xl:items-start">
-        <div className="rounded-3xl border border-border/50 bg-card/60 p-8 text-sm text-foreground">
-          {emptyMessage}
-        </div>
-        <ContentSidebar
-          cards={sidebarCards}
-          title={sidebarTitle}
-          description={sidebarDescription}
-          showLiveIndicator={showLiveIndicator}
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="grid gap-12 xl:grid-cols-[minmax(0,3fr)_minmax(280px,320px)] xl:items-start">
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
-        {/* Slider — direct child of space-y-2, above eyebrow (mirrors news-grid-layout.tsx:88) */}
+        {/* Slider — direct child of space-y-2, above eyebrow */}
         {slider}
 
         <div className="space-y-4">
@@ -157,44 +142,64 @@ export function ContentGridLayout<T extends ContentListItem>({
             </div>
           </div>
 
-          {/* Content List */}
-          <div
-            className="space-y-4"
-            role="feed"
-            aria-busy={isPaginationLoading}
-          >
-            {visibleItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.3 }}
-              >
-                {renderCardByType(item, cardType)}
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Load More / End State */}
-          {hasMore ? (
-            <LoadMoreButton
-              onLoadMore={loadMore}
-              remainingCount={remainingCount}
-              isLoading={isPaginationLoading}
-              itemLabel={itemLabel}
-              itemLabelPlural={itemLabelPlural}
-            />
-          ) : totalCount > initialCount ? (
-            <div
-              className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
-              role="status"
-              aria-live="polite"
-            >
-              All {totalCount} {itemLabelPlural} loaded
+          {/* Content List or Enhanced Empty State */}
+          {items.length === 0 ? (
+            <div className="rounded-3xl border border-border/50 bg-card/60 p-8 space-y-3">
+              <h3 className="text-base font-semibold text-foreground">
+                No {itemLabelPlural} yet
+              </h3>
+              <p className="text-sm text-foreground/70">{emptyMessage}</p>
+              {slider && (
+                <Link
+                  href={pathname}
+                  scroll={false}
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-electric-cyan transition-all hover:bg-electric-cyan/20"
+                >
+                  View all {itemLabelPlural} →
+                </Link>
+              )}
             </div>
-          ) : null}
+          ) : (
+            <div
+              className="space-y-4"
+              role="feed"
+              aria-busy={isPaginationLoading}
+            >
+              {visibleItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                >
+                  {renderCardByType(item, cardType)}
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Load More / End State — only when items exist */}
+          {items.length > 0 &&
+            (hasMore ? (
+              <LoadMoreButton
+                onLoadMore={loadMore}
+                remainingCount={remainingCount}
+                isLoading={isPaginationLoading}
+                itemLabel={itemLabel}
+                itemLabelPlural={itemLabelPlural}
+              />
+            ) : totalCount > initialCount ? (
+              <div
+                className="py-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
+                role="status"
+                aria-live="polite"
+              >
+                All {totalCount} {itemLabelPlural} loaded
+              </div>
+            ) : null)}
         </div>
       </div>
+
       {/* Sidebar */}
       <ContentSidebar
         cards={sidebarCards}

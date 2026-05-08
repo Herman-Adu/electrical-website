@@ -125,6 +125,109 @@ test.describe("projects category slider — URL-driven filtering", () => {
     });
     await expect(commercialChip).toHaveAttribute("aria-current", "page");
   });
+
+  test("community category shows slider, animated title, and 0-count badge", async ({
+    page,
+  }) => {
+    await page.goto("/projects?category=community", {
+      waitUntil: "domcontentloaded",
+    });
+
+    // Slider must still be present when category has 0 items
+    const sliderNav = page.getByRole("navigation", {
+      name: /filter projects by category/i,
+    });
+    await expect(sliderNav).toBeVisible({ timeout: 10000 });
+
+    // Community chip is active
+    const communityChip = sliderNav.getByRole("button", { name: /^Community/ });
+    await expect(communityChip).toHaveAttribute("aria-current", "page");
+
+    // Animated title "Community Projects" is visible
+    const title = page.getByRole("heading", {
+      level: 2,
+      name: /community\s+projects/i,
+    });
+    await expect(title).toBeVisible({ timeout: 5000 });
+
+    // Count badge shows "0 projects" (DOM text is lowercase; CSS uppercases it)
+    await expect(page.getByText(/^0 projects$/i)).toBeVisible();
+  });
+
+  test("empty category shows enhanced card with heading and CTA link", async ({
+    page,
+  }) => {
+    await page.goto("/projects?category=community", {
+      waitUntil: "domcontentloaded",
+    });
+
+    const sliderNav = page.getByRole("navigation", {
+      name: /filter projects by category/i,
+    });
+    await expect(sliderNav).toBeVisible({ timeout: 10000 });
+
+    // Enhanced empty-state heading replaces the bare message
+    await expect(
+      page.getByRole("heading", { level: 3, name: /no projects yet/i }),
+    ).toBeVisible({ timeout: 5000 });
+
+    // CTA <Link> (rendered as <a>) is present
+    await expect(
+      page.getByRole("link", { name: /view all projects/i }),
+    ).toBeVisible();
+  });
+
+  test("empty category CTA link clears ?category and activates All chip", async ({
+    page,
+  }) => {
+    await page.goto("/projects?category=community", {
+      waitUntil: "domcontentloaded",
+    });
+
+    const ctaLink = page.getByRole("link", { name: /view all projects/i });
+    await expect(ctaLink).toBeVisible({ timeout: 10000 });
+    await ctaLink.click();
+
+    // URL has no ?category param
+    await expect(page).toHaveURL(/\/projects(?:\/?$|\?(?!category=).*)/, {
+      timeout: 5000,
+    });
+    expect(page.url()).not.toContain("category=community");
+
+    // All chip becomes active
+    const sliderNav = page.getByRole("navigation", {
+      name: /filter projects by category/i,
+    });
+    const allChip = sliderNav.getByRole("button", { name: /^All/ });
+    await expect(allChip).toHaveAttribute("aria-current", "page");
+  });
+
+  test("slider remains usable from empty Community category — can navigate to Residential", async ({
+    page,
+  }) => {
+    await page.goto("/projects?category=community", {
+      waitUntil: "domcontentloaded",
+    });
+
+    const sliderNav = page.getByRole("navigation", {
+      name: /filter projects by category/i,
+    });
+    await expect(sliderNav).toBeVisible({ timeout: 10000 });
+
+    // Navigate away via the slider — must work from an empty category
+    const residentialChip = sliderNav.getByRole("button", {
+      name: /^Residential/,
+    });
+    await residentialChip.click();
+
+    await expect(page).toHaveURL(/\?category=residential$/, { timeout: 5000 });
+    await expect(residentialChip).toHaveAttribute("aria-current", "page");
+
+    // Projects load (2 residential projects exist)
+    await expect(
+      page.getByRole("heading", { level: 2, name: /residential\s+projects/i }),
+    ).toBeVisible({ timeout: 5000 });
+  });
 });
 
 test.describe("project detail hero — scroll animation regression (Part B)", () => {
