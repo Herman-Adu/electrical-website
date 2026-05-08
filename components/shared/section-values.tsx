@@ -116,7 +116,7 @@ export function SectionValues({ data }: SectionValuesProps) {
               >
                 <motion.div
                   data-testid="section-value-card"
-                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-all duration-400 overflow-hidden flex flex-col h-80"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/40 hover:border-electric-cyan/30 transition-[border-color,background-color,box-shadow,opacity] duration-400 overflow-hidden flex flex-col h-80"
                   initial="hidden"
                   whileInView="visible"
                   variants={cardVariants}
@@ -138,7 +138,7 @@ export function SectionValues({ data }: SectionValuesProps) {
                   {/* Icon — staggered reveal */}
                   <motion.div
                     variants={childVariants}
-                    className="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-300"
+                    className="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-[border-color,background-color,opacity,transform] duration-300"
                     style={{
                       borderColor: `${accentColor}30`,
                       background: `${accentColor}10`,
@@ -175,7 +175,7 @@ export function SectionValues({ data }: SectionValuesProps) {
 
                   {/* Bottom accent line */}
                   <div
-                    className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500"
+                    className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-[width,opacity] duration-500"
                     style={{ background: `${accentColor}` }}
                   />
                 </motion.div>
