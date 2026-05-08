@@ -63,13 +63,15 @@ export default async function ProjectsPage() {
         </div>
       </section>
 
-      <Suspense fallback={<ProjectListSkeleton />}>
-        <ProjectsFilterClient
-          items={allItems}
-          sidebarCards={sidebarCards}
-          counts={counts}
-        />
-      </Suspense>
+      <section id="projects-list" className="scroll-mt-26 lg:scroll-mt-30">
+        <Suspense fallback={<ProjectListSkeleton />}>
+          <ProjectsFilterClient
+            items={allItems}
+            sidebarCards={sidebarCards}
+            counts={counts}
+          />
+        </Suspense>
+      </section>
 
       <Footer />
     </main>
