@@ -3,7 +3,7 @@
     "id": "feat-navbar-active-category-links",
     "branch": "fix/navbar-active-category-links",
     "dockerEntity": "feat-navbar-active-category-links",
-    "status": "active",
+    "status": "paused",
     "openedAt": "2026-05-07T13:02:52.917Z",
     "mergedAt": null,
     "fallback_summary": "Auto-registered branch: fix/navbar-active-category-links"
