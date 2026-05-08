@@ -134,7 +134,7 @@ Opens the note in the Obsidian desktop application. Requires Obsidian to be runn
 
 ### Daily Note
 
-Create or append to today's daily note at `Daily Notes/YYYY-MM-DD.md`.
+Create or append to today's daily note at `Projects/Nexgen Electrical Innovations/Daily Notes/YYYY-MM-DD.md`.
 
 Get today's date:
 ```bash
@@ -146,7 +146,7 @@ Create the daily note (PUT — full create or overwrite):
 ```bash
 DATE=$(node -e "console.log(new Date().toISOString().slice(0,10))")
 
-curl -s -X PUT "http://localhost:27124/vault/Daily%20Notes/${DATE}.md" \
+curl -s -X PUT "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Daily%20Notes/${DATE}.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/markdown" \
   --data-raw "# ${DATE}
@@ -170,7 +170,7 @@ Append a work entry to an existing daily note:
 ```bash
 DATE=$(node -e "console.log(new Date().toISOString().slice(0,10))")
 
-curl -s -X POST "http://localhost:27124/vault/Daily%20Notes/${DATE}.md" \
+curl -s -X POST "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Daily%20Notes/${DATE}.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/plain" \
   --data-raw "
@@ -181,12 +181,12 @@ curl -s -X POST "http://localhost:27124/vault/Daily%20Notes/${DATE}.md" \
 
 ### Session Note
 
-Create a session note that links to the corresponding Docker memory session entity. Path convention: `Sessions/session-YYYY-MM-DD-NNN.md`.
+Create a session note that links to the corresponding Docker memory session entity. Path convention: `Projects/Nexgen Electrical Innovations/Sessions/session-YYYY-MM-DD-NNN.md`.
 
 ```bash
 SESSION_ID="session-YYYY-MM-DD-001"  # replace with actual session entity name from Docker
 
-curl -s -X PUT "http://localhost:27124/vault/Sessions/${SESSION_ID}.md" \
+curl -s -X PUT "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Sessions/${SESSION_ID}.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/markdown" \
   --data-raw "---
@@ -218,12 +218,12 @@ See \`${SESSION_ID}\` in Docker memory for structured handoff context.
 
 ### Decision Log
 
-Create a decision log at `Decisions/decide-{kebab-name}.md` as a human-readable mirror of a Docker `decide-*` entity.
+Create a decision log at `Projects/Nexgen Electrical Innovations/Decisions/decide-{kebab-name}.md` as a human-readable mirror of a Docker `decide-*` entity.
 
 ```bash
 ENTITY="decide-DOMAIN-CHOICE"  # replace with actual entity name, e.g. decide-auth-jwt-vs-session
 
-curl -s -X PUT "http://localhost:27124/vault/Decisions/${ENTITY}.md" \
+curl -s -X PUT "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Decisions/${ENTITY}.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/markdown" \
   --data-raw "---
@@ -288,7 +288,7 @@ curl -s "http://localhost:27124/vault/Projects/Nexgen Electrical Innovations/nex
 **Step 3 — Read today's daily note:**
 ```bash
 DATE=$(node -e "console.log(new Date().toISOString().slice(0,10))")
-curl -s "http://localhost:27124/vault/Daily%20Notes/${DATE}.md" \
+curl -s "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Daily%20Notes/${DATE}.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY"
 ```
 
@@ -334,7 +334,7 @@ node scripts/mcp-memory-call.mjs create_entities '{
 
 # 2. Mirror to Obsidian (PUT /vault/Decisions/decide-auth-strategy-clerk.md)
 curl -s -X PUT \
-  "http://localhost:27124/vault/Decisions/decide-auth-strategy-clerk.md" \
+  "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Decisions/decide-auth-strategy-clerk.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/markdown" \
   --data-raw "---
@@ -368,7 +368,7 @@ After creating a session entity in Docker, link it from the Obsidian session not
 ```bash
 # Append Docker link to existing session note
 curl -s -X POST \
-  "http://localhost:27124/vault/Sessions/session-2026-04-29-001.md" \
+  "http://localhost:27124/vault/Projects/Nexgen%20Electrical%20Innovations/Sessions/session-2026-04-29-001.md" \
   -H "Authorization: Bearer $OBSIDIAN_API_KEY" \
   -H "Content-Type: text/plain" \
   --data-raw "
@@ -433,8 +433,8 @@ Complete this setup once before using the skill:
 - [ ] Load Docker memory first, then Obsidian context (Docker is primary)
 - [ ] Create daily note at session start if it does not exist
 - [ ] Append work summary to daily note at session end
-- [ ] Mirror any new `decide-*` Docker entities to `Decisions/` in vault
-- [ ] Create session note in `Sessions/` and link to Docker session entity
+- [ ] Mirror any new `decide-*` Docker entities to `Projects/Nexgen Electrical Innovations/Decisions/` in vault
+- [ ] Create session note in `Projects/Nexgen Electrical Innovations/Sessions/` and link to Docker session entity
 - [ ] Append long-form research to `Research/{topic}.md` — not to Docker
 - [ ] Never expose `OBSIDIAN_API_KEY` value in logs, outputs, or files other than `.env.local`
 - [ ] Confirm Obsidian OFFLINE does not block session end or Docker memory sync

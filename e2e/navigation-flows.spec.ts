@@ -203,8 +203,7 @@ test.describe("dropdown navigation to in-page sections", () => {
 // ---------------------------------------------------------------------------
 test.describe("navbar active category link", () => {
   test("navbar highlights active category link for ?category= query params", async ({ page }) => {
-    await page.goto("/news-hub?category=insights");
-    await page.waitForLoadState("domcontentloaded");
+    await page.goto("/news-hub?category=insights", { waitUntil: "domcontentloaded" });
 
     // Hover the News Hub nav item to open its dropdown
     const newsHubTrigger = page.locator('nav a:has-text("News Hub")').first();
