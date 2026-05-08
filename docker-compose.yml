@@ -2,18 +2,29 @@ name: nexgen-electrical-innovations
 
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        SKIP_ENV_VALIDATION: "false"
-    image: nexgen-electrical-innovations:local
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "corepack enable && pnpm install --frozen-lockfile && pnpm dev"
+    volumes:
+      - .:/app
+      - web_node_modules:/app/node_modules
+      - web_next_cache:/app/.next
     ports:
       - "3000:3000"
     env_file:
       - .env.local
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
+      HOSTNAME: "0.0.0.0"
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000"]
+      interval: 15s
+      timeout: 5s
+      retries: 24
+      start_period: 120s
     restart: unless-stopped
 
   obsidian-vault:
@@ -266,3 +277,5 @@ volumes:
   caddy_data:
   caddy_config:
   memory_data:
+  web_node_modules:
+  web_next_cache:

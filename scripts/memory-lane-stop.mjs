@@ -267,7 +267,7 @@ async function main() {
     // Phase 7: add_observations to project state
     await mcpCall('add_observations', {
       observations: [{
-        entityName: 'electrical-website-state',
+        entityName: 'nexgen-electrical-innovations-state',
         contents: [
           `session_end: branch ${currentBranch}, session ${sessionName} at: ${now}`,
           `next_tasks: check active lane entity for continuation`,
@@ -279,7 +279,7 @@ async function main() {
     await mcpCall('create_relations', {
       relations: [
         { from: sessionName, to: entity, relationType: 'documents' },
-        { from: sessionName, to: 'electrical-website-state', relationType: 'updates' },
+        { from: sessionName, to: 'nexgen-electrical-innovations-state', relationType: 'updates' },
       ],
     });
 
@@ -351,7 +351,7 @@ ${gitLog.split('\n').slice(0, 5).join('\n')}
       const lastCommit = gitLog.split('\n')[0] ?? '(no commits)';
       const dailyLine = `- ${currentBranch}: ${lastCommit} | session ${sessionName}\n`;
       const ok = await obsidianCall('append_to_note', {
-        path: `Daily Notes/${today}.md`,
+        path: `Projects/Nexgen Electrical Innovations/Daily Notes/${today}.md`,
         content: dailyLine,
       });
       if (ok) {
