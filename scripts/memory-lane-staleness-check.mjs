@@ -84,7 +84,7 @@ function extractEntities(result) {
 function loadProtectedEntities() {
   const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
   const data = readJson(activeBranchPath) ?? {};
-  const protected_ = new Set(['electrical-website-state']);
+  const protected_ = new Set(['nexgen-electrical-innovations-state']);
   if (data.entity) protected_.add(data.entity);
   return protected_;
 }

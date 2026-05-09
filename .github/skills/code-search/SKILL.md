@@ -1,6 +1,6 @@
 ---
 name: code-search
-description: "Search the codebase for AST patterns, symbols, function usages, class references, or import chains using ast-grep. Use this when asked to find, locate, analyse, or trace code patterns, symbol usage, or structural patterns across the electrical-website repository."
+description: "Search the codebase for AST patterns, symbols, function usages, class references, or import chains using ast-grep. Use this when asked to find, locate, analyse, or trace code patterns, symbol usage, or structural patterns across the nexgen-electrical-innovations repository."
 ---
 
 # Code Search Skill

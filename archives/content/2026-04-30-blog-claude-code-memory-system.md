@@ -73,7 +73,7 @@ Hot context carries the essential state. But a project accumulates far more know
 For this, we run a **knowledge graph** as an MCP service inside Docker Compose. The service is `memory-reference`, exposed at `localhost:3100`, and it holds a typed entity graph.
 
 Entities follow a strict naming convention:
-- `project_state` — `electrical-website-state` (one per project)
+- `project_state` — `nexgen-electrical-innovations-state` (one per project)
 - `feature` — `feat-phase-8-scrollreveal-production`
 - `learning` — `learn-transforms-preserve-scroll-anchors`
 - `decision` — `decide-section-container-pattern`
@@ -147,7 +147,7 @@ stateDiagram-v2
 2. A `PostCheckout` hook fires automatically
 3. The hook reads `config/active-memory-lanes.json`, finds the lane matching the checked-out branch, and sets it to `active`
 4. The `SessionStart` hook fires before Claude's first response
-5. It calls `search_nodes("electrical-website-state")` on the Docker graph, then `open_nodes(["electrical-website-state"])` to load current project state
+5. It calls `search_nodes("nexgen-electrical-innovations-state")` on the Docker graph, then `open_nodes(["nexgen-electrical-innovations-state"])` to load current project state
 6. The result is injected as the session memory block — branch, build status, phase, last commits, blockers
 7. Claude begins the session already oriented
 

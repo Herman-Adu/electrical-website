@@ -112,7 +112,7 @@ def main() -> None:
         })
 
     # Determine new entity name
-    new_entity = 'electrical-website-state' if slug == 'main' else f'feat-{slug}'
+    new_entity = 'nexgen-electrical-innovations-state' if slug == 'main' else f'feat-{slug}'
 
     # Ensure lane manifest exists in config/memory-lanes/
     manifest_path = PROJECT_ROOT / 'config' / 'memory-lanes' / f'{slug}.json'

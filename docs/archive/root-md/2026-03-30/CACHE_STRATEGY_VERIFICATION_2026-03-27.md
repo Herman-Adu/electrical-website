@@ -255,7 +255,7 @@ images: {
 ### After Deployment to Production
 
 1. **Vercel Analytics:**
-   - Navigate: https://vercel.com/dashboard → electrical-website → Analytics
+   - Navigate: https://vercel.com/dashboard → nexgen-electrical-innovations → Analytics
    - Monitor: Cache Hit Ratio (target >80% after warmup)
    - Watch: Edge Network request volume (should decrease with good cache hit rate)
 

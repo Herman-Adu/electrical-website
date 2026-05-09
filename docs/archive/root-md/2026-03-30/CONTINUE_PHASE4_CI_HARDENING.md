@@ -4,7 +4,7 @@
 
 ---
 
-I am working in `C:\Users\herma\source\repository\electrical-website` on Windows (VS Code).
+I am working in `C:\Users\herma\source\repository\nexgen-electrical-innovations` on Windows (VS Code).
 Stack: Next.js 16 App Router, TypeScript, Tailwind, pnpm, Docker Desktop.
 
 ## Repo rules (mandatory)

@@ -7,12 +7,12 @@
     "filesystem": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-filesystem",
-               "C:/Users/herma/source/repository/electrical-website"]
+               "C:/Users/herma/source/repository/nexgen-electrical-innovations"]
     },
     "git": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-git",
-               "--repository", "C:/Users/herma/source/repository/electrical-website"]
+               "--repository", "C:/Users/herma/source/repository/nexgen-electrical-innovations"]
     }
   }
 }

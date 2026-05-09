@@ -1,6 +1,6 @@
 ---
 name: mcp-automation
-description: Use this skill WHENEVER the user mentions repetition, batch operations, or workflow sequences on the electrical-website project — even if they don't explicitly ask to "automate". Use for: automating multi-step workflows, batch operations, orchestrating MCP tools together, setting up pipelines, GitHub automation (PRs, CI checks, merges), Playwright browser automation, chaining operations. Trigger on: "automate X", "batch process", "connect these tools", "can we chain", "I need to do this every time", "set up a workflow", "run CI", "merge PR", or any mention of doing the same thing multiple times.
+description: Use this skill WHENEVER the user mentions repetition, batch operations, or workflow sequences on the nexgen-electrical-innovations project — even if they don't explicitly ask to "automate". Use for: automating multi-step workflows, batch operations, orchestrating MCP tools together, setting up pipelines, GitHub automation (PRs, CI checks, merges), Playwright browser automation, chaining operations. Trigger on: "automate X", "batch process", "connect these tools", "can we chain", "I need to do this every time", "set up a workflow", "run CI", "merge PR", or any mention of doing the same thing multiple times.
 argument-hint: "[workflow goal]"
 disable-model-invocation: true
 ---

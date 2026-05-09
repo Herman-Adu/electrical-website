@@ -2,7 +2,7 @@
 
 ## CONTEXT SUMMARY
 
-**Project:** electrical-website (Next.js 16 + React 19)  
+**Project:** nexgen-electrical-innovations (Next.js 16 + React 19)  
 **Current Status:** ✅ Phase 1 COMPLETE & MERGED TO MAIN  
 **Branch:** main (5 commits ahead of origin/main)  
 **Last Merge:** Phase 1 integration complete (commit 4e94ff6)
@@ -319,7 +319,7 @@ PHASE 2 COMPLETE ✅
 
 ## CONTEXT FOR AGENTS
 
-- **Repository:** Herman-Adu/electrical-website (private)
+- **Repository:** Herman-Adu/nexgen-electrical-innovations (private)
 - **Framework:** Next.js 16 (App Router) + React 19 + TypeScript strict
 - **Styling:** Tailwind CSS v4
 - **Components:** shadcn/ui + custom components

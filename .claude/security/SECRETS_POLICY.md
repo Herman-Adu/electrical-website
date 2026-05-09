@@ -344,7 +344,7 @@ When context reaches 70% and a sync is required, `context-monitor.mjs` generates
 
 **Variant A (Docker Available):**
 - Includes mcp__MCP_DOCKER__ tools in "Available MCP Tools" section
-- States "Docker entity updated: electrical-website-state ✓"
+- States "Docker entity updated: nexgen-electrical-innovations-state ✓"
 - All values (branch, commit, timestamps) are pre-redacted
 
 **Variant B (Docker Unavailable):**

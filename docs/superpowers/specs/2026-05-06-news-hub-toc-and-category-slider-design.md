@@ -200,7 +200,7 @@ After plan approval, sync the new lane lean — only what's needed for execution
 **Lane manifest** (`config/memory-lanes/news-hub-toc-and-category-slider.json`):
 - Includes only the 4 critical files above + the `lib/scroll-to-section.ts` reference
 - Includes the plan + decision entities
-- Excludes the Phase 1–7 historical context (already on `electrical-website-state` archived entity)
+- Excludes the Phase 1–7 historical context (already on `nexgen-electrical-innovations-state` archived entity)
 - Token budget target: ≤2,000 at session rehydration (well under 3,000 enforced cap)
 
 **Obsidian note:** `Projects/Nexgen Electrical Innovations/Features/feat-news-hub-toc-and-category-slider.md` — link to plan + decision entities, link to spec doc, link to PR (after creation).

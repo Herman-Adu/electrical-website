@@ -49,7 +49,7 @@ on:
 
 ### Step 1: Navigate to GitHub Actions
 
-1. Open: https://github.com/Herman-Adu/electrical-website/actions
+1. Open: https://github.com/Herman-Adu/nexgen-electrical-innovations/actions
 2. View: Under "Lighthouse CI" workflow in the sidebar
 
 ### Step 2: Trigger Workflow Manually
@@ -71,7 +71,7 @@ gh workflow run lighthouse-ci.yml -r main
 curl -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/Herman-Adu/electrical-website/actions/workflows/252675777/dispatches \
+  https://api.github.com/repos/Herman-Adu/nexgen-electrical-innovations/actions/workflows/252675777/dispatches \
   -d '{"ref":"main"}'
 ```
 
@@ -162,7 +162,7 @@ After Lighthouse CI completes:
 
 - **Lighthouse Config:** Check `.lighthouseci/lighthouserc.json` if it exists
 - **CI File:** [.github/workflows/lighthouse-ci.yml](.github/workflows/lighthouse-ci.yml)
-- **Workflow Logs:** Available at https://github.com/Herman-Adu/electrical-website/actions under Lighthouse CI runs
+- **Workflow Logs:** Available at https://github.com/Herman-Adu/nexgen-electrical-innovations/actions under Lighthouse CI runs
 
 ---
 

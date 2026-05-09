@@ -192,7 +192,7 @@ async function main() {
   // Phase 1: Read active-branch.json
   const activeBranchPath = join(PROJECT_ROOT, 'config', 'active-branch.json');
   const config = readJson(activeBranchPath) ?? {};
-  const entity = config.entity ?? 'electrical-website-state';
+  const entity = config.entity ?? 'nexgen-electrical-innovations-state';
 
   // Proceed if entity exists (always run — no status check needed)
   if (!entity) {

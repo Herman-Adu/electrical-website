@@ -9,9 +9,9 @@
 
 ## The Problem (Already Diagnosed)
 
-The `memory-reference` Docker container is serving **225 entities from a contact-migration project** (not electrical-website). When Phase 7 tried to create entities, the service returned `createdCount: 0` — writes are failing.
+The `memory-reference` Docker container is serving **225 entities from a contact-migration project** (not nexgen-electrical-innovations). When Phase 7 tried to create entities, the service returned `createdCount: 0` — writes are failing.
 
-Root cause: The Docker volume `electrical-website_memory_data` persists to a shared location and contains stale project data. The service won't accept new writes for electrical-website entities while it's serving the wrong project's graph.
+Root cause: The Docker volume `nexgen-electrical-innovations_memory_data` persists to a shared location and contains stale project data. The service won't accept new writes for nexgen-electrical-innovations entities while it's serving the wrong project's graph.
 
 ---
 
@@ -30,7 +30,7 @@ Expected output: All services stopped. Caddy, memory-reference, aggregator, etc.
 ### Step 2: Remove the Contaminated Memory Volume
 
 ```bash
-docker volume rm electrical-website_memory_data
+docker volume rm nexgen-electrical-innovations_memory_data
 ```
 
 **WARNING:** This destroys any prior memory state. This is intentional — we're resetting to clean.
@@ -102,7 +102,7 @@ The plan has 3 layers:
 
 ### Layer 1: Data Fixes (Most Impactful)
 
-1. **Create electrical-website-state entity** — the root project state entity
+1. **Create nexgen-electrical-innovations-state entity** — the root project state entity
 2. **Create phase-8-next-steps.json** — the active lane config
 3. **Update active-memory-lanes.json** — point to verified entities
 
@@ -124,10 +124,10 @@ The plan has 3 layers:
 Once memory is clean, run these in order:
 
 ```bash
-# 1. Create electrical-website-state entity
+# 1. Create nexgen-electrical-innovations-state entity
 node scripts/mcp-memory-call.mjs create_entities '{
   "entities": [{
-    "name": "electrical-website-state",
+    "name": "nexgen-electrical-innovations-state",
     "entityType": "project_state",
     "observations": [
       "2026-04-18: Phase 7 complete. Main branch, all tests passing.",
@@ -149,8 +149,8 @@ node scripts/mcp-memory-call.mjs create_entities '{
 # (See plan file Layer 2)
 
 # 5. Verify everything works
-pnpm docker:mcp:memory:search -- "electrical-website-state"
-pnpm docker:mcp:memory:open -- "electrical-website-state"
+pnpm docker:mcp:memory:search -- "nexgen-electrical-innovations-state"
+pnpm docker:mcp:memory:open -- "nexgen-electrical-innovations-state"
 ```
 
 ---
@@ -173,12 +173,12 @@ The fix reported as "complete" was actually incomplete because the memory write 
 
 - [ ] Run Step 1–5 of "The Fix" sequence above
 - [ ] Verify `entities: 0` and `relations: 0` in memory info
-- [ ] Create electrical-website-state entity and confirm `createdCount: 1`
+- [ ] Create nexgen-electrical-innovations-state entity and confirm `createdCount: 1`
 - [ ] Read the full plan at `.claude/plans/expressive-hugging-cray.md`
 - [ ] Implement Layer 1, 2, 3 edits
 - [ ] Verify with `pnpm docker:mcp:smoke`
-- [ ] Commit changes: `git add . && git commit -m "fix(docker): Reset memory service, create electrical-website-state, update lane configs and docs"`
-- [ ] Proceed with normal work — next session's preflight will load electrical-website-state successfully
+- [ ] Commit changes: `git add . && git commit -m "fix(docker): Reset memory service, create nexgen-electrical-innovations-state, update lane configs and docs"`
+- [ ] Proceed with normal work — next session's preflight will load nexgen-electrical-innovations-state successfully
 
 ---
 
@@ -194,7 +194,7 @@ echo "🔧 Stopping Docker services..."
 pnpm docker:mcp:down
 
 echo "🗑️  Removing contaminated memory volume..."
-docker volume rm electrical-website_memory_data
+docker volume rm nexgen-electrical-innovations_memory_data
 
 echo "🚀 Restarting Docker services..."
 pnpm docker:mcp:up
@@ -205,10 +205,10 @@ sleep 60
 echo "✅ Verifying memory service is empty..."
 pnpm docker:mcp:memory:search -- "state"
 
-echo "📝 Creating electrical-website-state entity..."
+echo "📝 Creating nexgen-electrical-innovations-state entity..."
 node scripts/mcp-memory-call.mjs create_entities '{
   "entities": [{
-    "name": "electrical-website-state",
+    "name": "nexgen-electrical-innovations-state",
     "entityType": "project_state",
     "observations": [
       "2026-04-18: Phase 7 complete. Main branch, all tests passing.",
@@ -239,14 +239,14 @@ Run with: `bash scripts/reset-memory-and-bootstrap.sh`
 
 After completing this handoff in the new window:
 
-1. ✅ Memory service reports `entities: 1` and `relations: 0` (just electrical-website-state)
-2. ✅ `pnpm docker:mcp:memory:open -- "electrical-website-state"` loads successfully
+1. ✅ Memory service reports `entities: 1` and `relations: 0` (just nexgen-electrical-innovations-state)
+2. ✅ `pnpm docker:mcp:memory:open -- "nexgen-electrical-innovations-state"` loads successfully
 3. ✅ Phase-8 lane config exists in `config/memory-lanes/`
 4. ✅ `active-memory-lanes.json` points to clean entities
 5. ✅ CLAUDE.md has mandatory preflight block at top
 6. ✅ All three documentation layers applied
 7. ✅ `pnpm build && pnpm test` pass
-8. ✅ New session starts, hook injects `open_nodes(["electrical-website-state"])`, Claude executes it
+8. ✅ New session starts, hook injects `open_nodes(["nexgen-electrical-innovations-state"])`, Claude executes it
 
 ---
 

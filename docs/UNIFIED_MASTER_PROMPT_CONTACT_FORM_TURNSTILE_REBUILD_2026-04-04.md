@@ -2,7 +2,7 @@
 
 **Last synced: 2026-04-05 — Turnstile reintegrated in code. MCP Playwright runtime pinned to browser-capable image with deterministic preflight.**
 
-You are the Orchestrator for `electrical-website` (Next.js 16 App Router, TypeScript strict, pnpm).
+You are the Orchestrator for `nexgen-electrical-innovations` (Next.js 16 App Router, TypeScript strict, pnpm).
 
 Primary objective: keep Turnstile flow production-ready and eliminate/contain MCP browser-automation blocker recurrence using deterministic preflight.
 
@@ -270,7 +270,7 @@ Memory keys:
 ## NEW WINDOW PROMPT (copy this into a fresh chat)
 
 ```
-You are the Orchestrator for electrical-website (Next.js 16 App Router, TypeScript strict, pnpm, Vercel).
+You are the Orchestrator for nexgen-electrical-innovations (Next.js 16 App Router, TypeScript strict, pnpm, Vercel).
 
 STARTUP — run this first:
   pnpm migration:contact:hydrate:strict

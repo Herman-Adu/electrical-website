@@ -191,7 +191,7 @@ Phase 10 successfully completed a comprehensive 4-axis closure pass (Architectur
 **Channel:**
 - Title: "Nexgen Electrical Innovations — Featured Projects"
 - Description: "Latest electrical infrastructure and renewable energy projects"
-- Link: https://electrical-website.vercel.app
+- Link: https://nexgen-electrical-innovations.vercel.app
 - lastBuildDate: Current timestamp
 
 **Items:** All 4 projects
@@ -224,7 +224,7 @@ Phase 10 successfully completed a comprehensive 4-axis closure pass (Architectur
 
 **Metadata Integration:** `lib/metadata-projects.ts` generates dynamic OG URLs for all project pages:  
 ```
-ogImage: `https://electrical-website.vercel.app/api/og?title=${encodeURIComponent(project.name)}&category=${encodeURIComponent(project.category)}&location=${encodeURIComponent(locationString)}`
+ogImage: `https://nexgen-electrical-innovations.vercel.app/api/og?title=${encodeURIComponent(project.name)}&category=${encodeURIComponent(project.category)}&location=${encodeURIComponent(locationString)}`
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Testing Workflow Guide
 
-This guide outlines the recommended workflows for different testing scenarios in the electrical-website repository.
+This guide outlines the recommended workflows for different testing scenarios in the nexgen-electrical-innovations repository.
 
 ## Local green run (exact commands)
 

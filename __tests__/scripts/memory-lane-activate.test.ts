@@ -25,7 +25,7 @@ import { isAlreadyActive, writeJsonAtomic } from '../../scripts/memory-lane-acti
 
 describe('isAlreadyActive', () => {
   it('returns true when currentBranch matches config.branch', () => {
-    expect(isAlreadyActive('main', { branch: 'main', entity: 'electrical-website-state' })).toBe(true);
+    expect(isAlreadyActive('main', { branch: 'main', entity: 'nexgen-electrical-innovations-state' })).toBe(true);
   });
 
   it('returns false when branches differ', () => {
@@ -37,7 +37,7 @@ describe('isAlreadyActive', () => {
   });
 
   it('returns false when config has no branch', () => {
-    expect(isAlreadyActive('main', { entity: 'electrical-website-state' })).toBe(false);
+    expect(isAlreadyActive('main', { entity: 'nexgen-electrical-innovations-state' })).toBe(false);
   });
 });
 

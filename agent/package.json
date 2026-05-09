@@ -1,5 +1,5 @@
 {
-  "name": "@electrical-website/agent",
+  "name": "@nexgen-electrical-innovations/agent",
   "version": "0.1.0",
   "description": "MCP Orchestration Runtime — composable agent skill system",
   "type": "module",

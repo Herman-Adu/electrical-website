@@ -128,8 +128,8 @@ async function main() {
   const emergencySummary = lanesConfig.fallback ?? '';
   // Derive memory keys from slim config
   const memoryKeys = lanesConfig.entity
-    ? ['electrical-website-state', lanesConfig.entity]
-    : ['electrical-website-state'];
+    ? ['nexgen-electrical-innovations-state', lanesConfig.entity]
+    : ['nexgen-electrical-innovations-state'];
 
   // Step 2: Docker health check
   const dockerOnline = await checkDockerHealth();

@@ -1,6 +1,6 @@
 # Animation Optimization Execution Plan
 
-**Goal:** Systematically fix clunky animations across electrical-website → smooth, professional 60fps animations
+**Goal:** Systematically fix clunky animations across nexgen-electrical-innovations → smooth, professional 60fps animations
 
 **Status:** Ready for execution in new Claude Code window
 

@@ -142,7 +142,7 @@ headers: async () => {
 
 - **On Vercel Production:** Verify cache headers match staging
 - **Check via Vercel Dashboard:**
-  1. Navigate: https://vercel.com/dashboard → electrical-website
+  1. Navigate: https://vercel.com/dashboard → nexgen-electrical-innovations
   2. Analytics → Cache Hit Ratio (should show >80% hit rate after warmup)
   3. Deployments → Latest → Inspect response headers
 
@@ -192,7 +192,7 @@ headers: async () => {
 
 ### Production Testing (via Vercel)
 
-1. Navigate to https://electrical-website.vercel.app/
+1. Navigate to https://nexgen-electrical-innovations.vercel.app/
 2. Open DevTools → Network tab
 3. Check response headers for key pages:
    - Homepage: Cache-Control behavior
@@ -250,7 +250,7 @@ output: "standalone",
 
 1. Verify headers() function returns array
 2. Test locally with `curl -i`
-3. Check Vercel logs: https://vercel.com/dashboard → electrical-website → Logs
+3. Check Vercel logs: https://vercel.com/dashboard → nexgen-electrical-innovations → Logs
 
 ### Issue: ISR not revalidating
 
@@ -291,7 +291,7 @@ Template section to fill in during testing:
 # Cache Strategy Verification Results
 
 **Date:** 2026-03-27
-**Environment:** Production (https://electrical-website.vercel.app)
+**Environment:** Production (https://nexgen-electrical-innovations.vercel.app)
 
 ## Homepage Cache Headers
 

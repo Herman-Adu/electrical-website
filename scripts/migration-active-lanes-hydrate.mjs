@@ -15,7 +15,7 @@ function readActiveMemoryKeys(path) {
   const parsed = JSON.parse(raw);
   const entity = parsed.entity;
   if (!entity) throw new Error(`No entity configured in: ${path}`);
-  return ['electrical-website-state', entity];
+  return ['nexgen-electrical-innovations-state', entity];
 }
 
 function openNodes(names) {

@@ -18,7 +18,7 @@ const WorkflowAction = z.enum([
 const InputSchema = z.object({
   action: WorkflowAction,
   owner: z.string().default("Herman-Adu"),
-  repo: z.string().default("electrical-website"),
+  repo: z.string().default("nexgen-electrical-innovations"),
   /** Pull request number — required for deploy-preview and copilot-review */
   pullNumber: z.number().int().positive().optional(),
   /** Workflow file name — required for trigger-* actions */

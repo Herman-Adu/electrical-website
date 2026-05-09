@@ -407,7 +407,7 @@ NEXT SESSION: Agent finds learning automatically
 
 ```bash
 # Preflight: Load project context from Docker
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 mcp__MCP_DOCKER__open_nodes([state_id])
 
 # Load animation agent

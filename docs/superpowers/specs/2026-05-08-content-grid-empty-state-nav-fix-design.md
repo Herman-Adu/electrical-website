@@ -188,7 +188,7 @@ For a future session to execute this fix cold:
 TASK: Fix empty-state navigation regression on /projects?category=community
 
 CONTEXT:
-- Repo: electrical-website (Next.js 16 + React 19, App Router, strict TS)
+- Repo: nexgen-electrical-innovations (Next.js 16 + React 19, App Router, strict TS)
 - Problem: ContentGridLayout's early-return at lines 114–129 strips the category slider,
   eyebrow, title, and count when items.length === 0. User cannot navigate away.
 - Approved solution: Option A — remove early-return, inline empty state into content area,

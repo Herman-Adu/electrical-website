@@ -287,7 +287,7 @@ Docker `memory_reference` MCP service is the **single source of truth** for all 
 **Session Start (Rehydration):**
 ```typescript
 // Load prior context in ~5 seconds at ~50 tokens
-const results = await mcp__MCP_DOCKER__search_nodes("electrical-website-state");
+const results = await mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state");
 const entities = await mcp__MCP_DOCKER__open_nodes([results.entity_ids]);
 // Read: current_branch, active_phase, next_tasks, blockers
 ```

@@ -1,5 +1,5 @@
 # Claude Code — Nexgen Electrical Innovations
-<!-- Product: Nexgen Electrical Innovations | Git repo: electrical-website | GitHub: Herman-Adu/nexgen-electrical-innovations | Docker entity: nexgen-electrical-innovations-state -->
+<!-- Product: Nexgen Electrical Innovations | Git repo: nexgen-electrical-innovations | GitHub: Herman-Adu/nexgen-electrical-innovations | Docker entity: nexgen-electrical-innovations-state -->
 
 Next.js 16 + **React 19** App Router, strict TypeScript. Server Components by default; `"use client"` only for browser interactivity. Server Actions for mutations. All external input validated with Zod before processing.
 

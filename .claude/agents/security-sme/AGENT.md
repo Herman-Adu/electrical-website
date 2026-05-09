@@ -302,7 +302,7 @@ Option B: Loose rate limits (100 requests/minute)
 Before analysis, load project context:
 
 ```
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 → mcp__MCP_DOCKER__open_nodes([entity_id])
 ```
 

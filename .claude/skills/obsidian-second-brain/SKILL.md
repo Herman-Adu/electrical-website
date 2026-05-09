@@ -410,7 +410,7 @@ Complete this setup once before using the skill:
 4. **Vault location:** The vault lives as a sibling repo alongside this one — not inside it. Layout:
    ```
    C:\Users\herma\source\repository\
-     electrical-website\   ← this repo
+     nexgen-electrical-innovations\   ← this repo
      obsidian-vault\       ← https://github.com/Herman-Adu/obsidian-vault
    ```
    The Docker proxy talks to the Local REST API over HTTP — it does not access the vault filesystem. Vault paths in tool calls are resolved relative to the vault root by Obsidian itself.

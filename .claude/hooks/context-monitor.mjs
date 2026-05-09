@@ -59,7 +59,7 @@ async function main() {
 
     if (pct >= 80) {
       process.stdout.write(JSON.stringify({
-        systemMessage: `CONTEXT ${p}% — HARD STOP. Do not respond to the user's message yet.\n\n1. Run: git add -A && git commit -m "WIP: context limit at ${p}%"\n2. Sync Docker: POST http://localhost:3100/mcp/tools/call {name:"memory_reference__add_observations"} to electrical-website-state + create session entity\n3. Then tell the user: "Context at ${p}%. WIP committed and Docker synced. Starting a fresh session is recommended."\n\nDo not proceed with the user's request until steps 1–2 are complete.`,
+        systemMessage: `CONTEXT ${p}% — HARD STOP. Do not respond to the user's message yet.\n\n1. Run: git add -A && git commit -m "WIP: context limit at ${p}%"\n2. Sync Docker: POST http://localhost:3100/mcp/tools/call {name:"memory_reference__add_observations"} to nexgen-electrical-innovations-state + create session entity\n3. Then tell the user: "Context at ${p}%. WIP committed and Docker synced. Starting a fresh session is recommended."\n\nDo not proceed with the user's request until steps 1–2 are complete.`,
       }));
       process.exit(0);
     }

@@ -1,6 +1,6 @@
 # Quick Reference: Architectural Review Summary
 
-## electrical-website | Next.js 16 + React 19
+## nexgen-electrical-innovations | Next.js 16 + React 19
 
 **Generated:** March 25, 2026 | **Status:** ✅ COMPLETE
 
@@ -194,7 +194,7 @@ All Tier 1 recommendations are:
 ## 🔗 DOCUMENT LOCATIONS
 
 ```
-c:\Users\herma\source\repository\electrical-website\docs\
+c:\Users\herma\source\repository\nexgen-electrical-innovations\docs\
 ├─ ARCHITECTURAL-REVIEW.md          ← Detailed analysis (10 sections)
 ├─ IMPLEMENTATION-GUIDE.md          ← Code examples + step-by-step
 ├─ ARCHITECTURE-INDEX.md            ← Timeline + overview

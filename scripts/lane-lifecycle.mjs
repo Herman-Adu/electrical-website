@@ -88,7 +88,7 @@ function commandOpen(phaseName) {
       status: 'active',
       created_date: now.split('T')[0],
       docker_entities: {
-        project_state: 'electrical-website-state',
+        project_state: 'nexgen-electrical-innovations-state',
         feature: `feat-${phaseName}`,
       },
       related_learnings: [],
