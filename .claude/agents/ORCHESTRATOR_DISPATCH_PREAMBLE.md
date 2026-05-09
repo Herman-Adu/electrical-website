@@ -142,7 +142,7 @@ You **CANNOT:**
 ## Project Context
 
 ### Project Name
-**electrical-website** — Next.js 16 App Router application. TypeScript strict mode. Orchestrator-driven development.
+**nexgen-electrical-innovations** — Next.js 16 App Router application. TypeScript strict mode. Orchestrator-driven development.
 
 ### Recent Phase
 **Phase 6 (COMPLETE & MERGED):** CLS (Cumulative Layout Shift) fixes. All tests passing. Build passing.
@@ -158,7 +158,7 @@ You **CANNOT:**
 To load prior decisions, learnings, and project state:
 
 ```
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 → mcp__MCP_DOCKER__open_nodes([returned_id])
 → Extract: current_branch, active_phase, next_tasks, blockers
 ```

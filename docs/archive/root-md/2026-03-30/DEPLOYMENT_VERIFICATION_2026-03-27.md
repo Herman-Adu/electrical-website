@@ -82,7 +82,7 @@
 
 ## 🚀 Production Deployment URL
 
-**Expected Production URL:** https://electrical-website.vercel.app  
+**Expected Production URL:** https://nexgen-electrical-innovations.vercel.app  
 **GitHub Auto-Deploy:** Enabled (main branch push → Vercel webhook)  
 **Last Deployment Updated:** 2026-03-26 (20:37 UTC, commit 130e04a)  
 **Latest Commit Ready:** 2026-03-27 23:21 UTC (commit 26b4f338)

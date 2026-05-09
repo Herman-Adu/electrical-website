@@ -13,5 +13,11 @@
   "files.exclude": {
     ".playwright": true,
     "playwright-report": true
-  }
+  },
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": false,
+  "python.terminal.activateEnvironment": false,
+  "python.terminal.activateEnvInCurrentTerminal": false,
+  "vitest.rootConfig": "./vitest.config.ts",
+  "vitest.enable": true
 }

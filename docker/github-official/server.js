@@ -427,7 +427,7 @@ function githubApiCall(method, path, body) {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "electrical-website-mcp/1.0",
+        "User-Agent": "nexgen-electrical-innovations-mcp/1.0",
         "Content-Type": "application/json",
         ...(payload ? { "Content-Length": Buffer.byteLength(payload) } : {}),
       },

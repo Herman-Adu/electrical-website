@@ -82,8 +82,8 @@ High / Medium / Low
 
 1. **Session Start** — Load prior context
    ```bash
-   pnpm docker:mcp:memory:search "electrical-website-state"
-   pnpm docker:mcp:memory:open electrical-website-state
+   pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
+   pnpm docker:mcp:memory:open nexgen-electrical-innovations-state
    ```
 
 2. **While Working** — Accumulate findings in memory (do NOT spam Docker mid-task)
@@ -102,7 +102,7 @@ High / Medium / Low
    # Add observations to project state
    node scripts/mcp-memory-call.mjs add_observations '{
      "observations": [{
-       "entityName": "electrical-website-state",
+       "entityName": "nexgen-electrical-innovations-state",
        "contents": ["Session end update...", "Next tasks..."]
      }]
    }'
@@ -111,7 +111,7 @@ High / Medium / Low
    node scripts/mcp-memory-call.mjs create_relations '{
      "relations": [{
        "from": "session-2026-04-20-001",
-       "to": "electrical-website-state",
+       "to": "nexgen-electrical-innovations-state",
        "relationType": "updates"
      }]
    }'

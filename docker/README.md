@@ -1,6 +1,6 @@
 # Docker MCP Services Stack
 
-The `electrical-website` project uses a **Docker-based Model Context Protocol (MCP) services stack** as the single source of truth for persistent session context, code intelligence, and workflow automation.
+The `nexgen-electrical-innovations` project uses a **Docker-based Model Context Protocol (MCP) services stack** as the single source of truth for persistent session context, code intelligence, and workflow automation.
 
 ## 🎯 Purpose
 
@@ -109,7 +109,7 @@ The `memory-reference` service is the **single source of truth** for all persist
 
 **Session Start (5 seconds, ~50 tokens):**
 ```bash
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 # Returns: entity_id (e.g., "state-abc123")
 
 mcp__MCP_DOCKER__open_nodes([entity_id])
@@ -127,7 +127,7 @@ mcp__MCP_DOCKER__create_relations([new_links])
 
 | Type | Purpose | Example |
 |------|---------|---------|
-| `project_state` | Current branch, build status, phase, tasks | `electrical-website-state` |
+| `project_state` | Current branch, build status, phase, tasks | `nexgen-electrical-innovations-state` |
 | `feature` | Deliverable work (spec, implementation, tests) | `feat-phase-5-animation-optimization` |
 | `learning` | Technical patterns and insights | `learn-gpu-transform-compositing` |
 | `decision` | Architectural choices with rationale | `decide-memory-docker-over-files` |
@@ -168,7 +168,7 @@ Runs `bash .claude/hooks/precompact-safety.sh` before compression:
 ### Load Project State at Session Start
 
 ```bash
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 # Returns: { entity_id: "state-abc123" }
 
 mcp__MCP_DOCKER__open_nodes(["state-abc123"])

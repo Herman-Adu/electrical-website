@@ -31,7 +31,7 @@ GIT_LOG=$(cd "$PROJECT_ROOT" && git log --oneline -3 2>/dev/null || echo "no com
 GIT_SHORT=$(cd "$PROJECT_ROOT" && git status --short 2>/dev/null | head -5 || echo "")
 
 # 3. Memory keys (from config if present, else default)
-MEMORY_KEY="electrical-website-state"
+MEMORY_KEY="nexgen-electrical-innovations-state"
 if [ -f "$PROJECT_ROOT/config/active-memory-lanes.json" ]; then
     KEY=$(cat "$PROJECT_ROOT/config/active-memory-lanes.json" 2>/dev/null | \
         node -e "try{const c=JSON.parse(require('fs').readFileSync(0,'utf-8'));console.log((c.memoryKeys||[])[0]||'')}catch{console.log('')}" 2>/dev/null || echo "")

@@ -68,7 +68,7 @@ function callMemoryService(name, arguments_obj) {
 async function searchProjectState() {
   console.log('\n📍 Step 1: Searching for project state...');
   const result = await callMemoryService('search_nodes', {
-    query: 'electrical-website-state',
+    query: 'nexgen-electrical-innovations-state',
   });
   console.log('✓ Search result:', JSON.stringify(result, null, 2));
   return result;
@@ -302,7 +302,7 @@ async function addObservationToProjectState(projectStateName) {
     const createResult = await callMemoryService('create_entities', {
       entities: [
         {
-          name: 'electrical-website-state',
+          name: 'nexgen-electrical-innovations-state',
           entityType: 'project_state',
           observations: observationContent,
         },

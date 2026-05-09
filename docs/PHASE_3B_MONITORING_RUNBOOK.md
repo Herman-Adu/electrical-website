@@ -67,7 +67,7 @@ This runbook documents the production monitoring stack, alert thresholds, and in
 ## Sentry Error Tracking
 
 **Dashboard:** https://sentry.io/  
-**Project:** electrical-website  
+**Project:** nexgen-electrical-innovations  
 **Integration:** @sentry/nextjs (initialized in app/layout.tsx)
 
 ### Error Rate Thresholds

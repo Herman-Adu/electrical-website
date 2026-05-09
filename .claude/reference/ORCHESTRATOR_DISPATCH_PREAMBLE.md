@@ -24,4 +24,4 @@
 
 ## Context
 
-**Project:** electrical-website | **Branch:** [filled by orchestrator at dispatch time]
+**Project:** nexgen-electrical-innovations | **Branch:** [filled by orchestrator at dispatch time]

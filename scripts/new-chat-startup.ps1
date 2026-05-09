@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
-    One-command startup macro for a new chat session on electrical-website.
+    One-command startup macro for a new chat session on nexgen-electrical-innovations.
     Runs MCP readiness, optional active-lane hydration, Playwright bootstrap,
     git status, and opens active memory nodes in a single pass.
 

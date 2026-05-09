@@ -59,12 +59,12 @@ Intensity: FULL (comprehensive, include error handling)
 
 1. **Fetch GitHub Activity**
    - Query GitHub API for PRs merged, issues closed, commits pushed
-   - Filter by repo: electrical-website
+   - Filter by repo: nexgen-electrical-innovations
    - Date range: last 7 days
    - Output: JSON array of events
 
 2. **Load Project State from Docker**
-   - Search: `mcp__MCP_DOCKER__search_nodes("electrical-website-state")`
+   - Search: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")`
    - Load: `mcp__MCP_DOCKER__open_nodes([returned_id])`
    - Extract: active_phase, current_branch, build_status
    - Output: project context object
@@ -155,7 +155,7 @@ Intensity: FULL (comprehensive, include error handling)
 
 ```bash
 curl -H "Authorization: token $GITHUB_TOKEN" \
-  "https://api.github.com/repos/electrical-website/events?per_page=100"
+  "https://api.github.com/repos/nexgen-electrical-innovations/events?per_page=100"
 ```
 
 **Output:**
@@ -177,7 +177,7 @@ curl -H "Authorization: token $GITHUB_TOKEN" \
 ### Step 2: Load Project State
 
 ```bash
-mcp__MCP_DOCKER__search_nodes("electrical-website-state")
+mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
 # Returns: entity_id = "abc123"
 
 mcp__MCP_DOCKER__open_nodes(["abc123"])
@@ -312,7 +312,7 @@ mcp__MCP_DOCKER__create_entities([{
 ### Step 8: Add Observations
 
 ```bash
-mcp__MCP_DOCKER__add_observations("electrical-website-state", [{
+mcp__MCP_DOCKER__add_observations("nexgen-electrical-innovations-state", [{
   "category": "automation_run",
   "timestamp": "2026-04-20T17:00:00Z",
   "automation_name": "weekly-progress-review",
@@ -335,7 +335,7 @@ mcp__MCP_DOCKER__create_relations([
   {
     "type": "updates",
     "source": "session-2026-04-18-weekly-automation",
-    "target": "electrical-website-state",
+    "target": "nexgen-electrical-innovations-state",
     "reason": "Session captures project state at end of week"
   },
   {
@@ -423,7 +423,7 @@ mcp__MCP_DOCKER__create_entities([{
       "Wire relations"
     ],
     "configuration": {
-      "github_repo": "electrical-website",
+      "github_repo": "nexgen-electrical-innovations",
       "date_range_days": 7,
       "output_format": "markdown",
       "archive_path": "archives/weekly-progress/",

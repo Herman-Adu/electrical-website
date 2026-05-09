@@ -82,7 +82,7 @@ A concrete example from the production graph — a single derives_from traversal
 graph LR
     F["feat-phase-8\nscrollreveal-production"]:::cyan -->|derives_from| D["decide-section\ncontainer-pattern"]:::amber
     D -->|derives_from| L["learn-css-variable\nmedia-query-conflicts"]:::deep
-    SE["session-2026-04-20-004"]:::teal -->|updates| PS["electrical-website-state"]:::slate
+    SE["session-2026-04-20-004"]:::teal -->|updates| PS["nexgen-electrical-innovations-state"]:::slate
 
     classDef cyan fill:#c2fff1,stroke:#006e56,color:#1e1e1e
     classDef teal fill:#e0faf6,stroke:#00b2a9,color:#1e1e1e
@@ -91,7 +91,7 @@ graph LR
     classDef slate fill:#f1f5f9,stroke:#334155,color:#1e1e1e
 ```
 
-**Relation typing matters.** Not all relationships are equal. `updates`, `builds_on`, `derives_from`, `documents` each carry different semantics. When Claude at session start reads that session-2026-04-18-001 `updates` electrical-website-state, it knows this is a state transition, not a derivation. Typed edges are metadata-rich in a way flat embeddings are not.
+**Relation typing matters.** Not all relationships are equal. `updates`, `builds_on`, `derives_from`, `documents` each carry different semantics. When Claude at session start reads that session-2026-04-18-001 `updates` nexgen-electrical-innovations-state, it knows this is a state transition, not a derivation. Typed edges are metadata-rich in a way flat embeddings are not.
 
 **The benchmarks support this.** Microsoft's GraphRAG (github.com/microsoft/graphrag) — which combines knowledge graph extraction with RAG — achieves 54.2% average accuracy improvement over plain RAG. On enterprise benchmarks: 86% accuracy versus 32% for baseline RAG. LazyGraphRAG outperformed all comparison conditions across 96 benchmark comparisons. A 2025 systematic review (arxiv:2502.11371) confirms GraphRAG outperforms vanilla RAG specifically on complex cross-document queries. The academic and industry evidence is converging: for structured, relational queries, graphs win.
 
@@ -148,7 +148,7 @@ We run `memory-reference` as a Docker MCP service — a knowledge graph engine a
 
 | Entity type | Naming convention | Purpose |
 |---|---|---|
-| `project_state` | `electrical-website-state` | Single entity per project; current branch, build status, active phase, next tasks |
+| `project_state` | `nexgen-electrical-innovations-state` | Single entity per project; current branch, build status, active phase, next tasks |
 | `feature` | `feat-phase-8-scrollreveal-production` | Deliverable work unit; spec, implementation notes, test results |
 | `learning` | `learn-transforms-preserve-scroll-anchors` | Technical patterns and gotchas; searchable by topic |
 | `decision` | `decide-section-container-pattern` | Architectural choice with rationale and alternatives considered |
@@ -157,7 +157,7 @@ We run `memory-reference` as a Docker MCP service — a knowledge graph engine a
 **Relations in practice:**
 
 ```
-session-2026-04-20-004  --[updates]--> electrical-website-state
+session-2026-04-20-004  --[updates]--> nexgen-electrical-innovations-state
 feat-phase-8            --[builds_on]--> decide-section-container-pattern
 learn-hash-nav-pattern  --[documents]--> feat-phase-8-scrollreveal-production
 ```

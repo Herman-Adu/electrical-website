@@ -149,7 +149,7 @@ function fetchUrlJson(url) {
         timeout: 10000,
         headers: {
           Accept: "application/json",
-          "User-Agent": "electrical-website-openapi-adapter/1.0",
+          "User-Agent": "nexgen-electrical-innovations-openapi-adapter/1.0",
         },
       },
       (res) => {

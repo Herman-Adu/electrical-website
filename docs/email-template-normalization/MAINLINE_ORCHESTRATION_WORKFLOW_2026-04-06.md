@@ -12,7 +12,7 @@ Provide a full, repeatable workflow to move the normalization lane safely into `
 
 1. Run orchestrator `/health-check` before any operation.
 2. Hydrate continuity keys:
-   - `agent:v1:project:electrical-website`
+   - `agent:v1:project:nexgen-electrical-innovations`
    - current normalization snapshots/handoff keys
    - current drift keys
 3. Confirm branch continuity and commit anchor.
@@ -62,7 +62,7 @@ Write the following at close-out:
 4. **Orchestrator handoff key**
    - `agent:v1:handoff:master-orchestrator-mainline-workflow-2026-04-06`
 5. **Project root observations**
-   - append distilled “what worked / what failed / preferred execution path” to `agent:v1:project:electrical-website`
+   - append distilled “what worked / what failed / preferred execution path” to `agent:v1:project:nexgen-electrical-innovations`
 
 ## E) MCP Learnings to Persist (Orchestrator-Aware)
 

@@ -174,7 +174,7 @@ Docker memory entities follow a strict naming scheme to ensure discoverability a
 
 | Entity Type | Prefix | Purpose | Example |
 |-------------|--------|---------|---------|
-| `project_state` | (none) | Single project state entity | `electrical-website-state` |
+| `project_state` | (none) | Single project state entity | `nexgen-electrical-innovations-state` |
 | `feature` | `feat-` | Completed/in-progress work units | `feat-phase-5-animation-optimization` |
 | `learning` | `learn-` | Technical patterns and insights | `learn-gpu-transform-compositing` |
 | `decision` | `decide-` | Architectural choices with rationale | `decide-memory-docker-over-files` |
@@ -196,7 +196,7 @@ Docker memory entities follow a strict naming scheme to ensure discoverability a
 ### Valid Examples
 
 ```
-electrical-website-state
+nexgen-electrical-innovations-state
 feat-phase-5-animation-optimization
 learn-gpu-transform-compositing
 decide-memory-docker-over-files

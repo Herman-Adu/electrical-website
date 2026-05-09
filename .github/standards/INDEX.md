@@ -4,7 +4,7 @@
 
 **Status:** Authoritative Standards (v2.0.0)  
 **Date:** March 30, 2026  
-**Scope:** electrical-website news-hub
+**Scope:** nexgen-electrical-innovations news-hub
 
 ---
 
@@ -523,7 +523,7 @@ This standards document is living.
 | **Version**      | 2.0.0                         |
 | **Status**       | Authoritative / Active        |
 | **Last Updated** | 2026-03-30                    |
-| **Scope**        | electrical-website news-hub   |
+| **Scope**        | nexgen-electrical-innovations news-hub   |
 | **Owner**        | Engineering Team              |
 | **Review Cycle** | Every 6 months or post-launch |
 | **Related ADRs** | ADR-008 (Factory Pattern)     |

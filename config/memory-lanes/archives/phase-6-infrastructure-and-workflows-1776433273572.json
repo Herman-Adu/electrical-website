@@ -8,7 +8,7 @@
     "status": "completed",
     "created_date": "2026-04-17",
     "docker_entities": {
-      "project_state": "electrical-website-state",
+      "project_state": "nexgen-electrical-innovations-state",
       "feature": "feat-phase-6-infrastructure-and-workflows"
     },
     "related_learnings": [

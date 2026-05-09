@@ -1,13 +1,13 @@
 ---
 name: code-generation
-description: Use this skill WHENEVER someone on the electrical-website project mentions code, files, implementation, or debugging — even if they don't explicitly ask for "code generation". Use for: writing new components (React/Next.js App Router), refactoring existing code, implementing server actions, creating hooks/utilities, writing tests (unit/integration/e2e with Playwright), debugging TypeScript errors, documenting code. Trigger on: "how do I", "I'm stuck", "can you fix", "what's wrong with this", "build X", "implement Y", "why does this fail", or any mention of TypeScript, React, Next.js, API routes, server actions, Tailwind, Zod, or specific component names.
+description: Use this skill WHENEVER someone on the nexgen-electrical-innovations project mentions code, files, implementation, or debugging — even if they don't explicitly ask for "code generation". Use for: writing new components (React/Next.js App Router), refactoring existing code, implementing server actions, creating hooks/utilities, writing tests (unit/integration/e2e with Playwright), debugging TypeScript errors, documenting code. Trigger on: "how do I", "I'm stuck", "can you fix", "what's wrong with this", "build X", "implement Y", "why does this fail", or any mention of TypeScript, React, Next.js, API routes, server actions, Tailwind, Zod, or specific component names.
 argument-hint: "[language, goal, or description]"
 disable-model-invocation: true
 ---
 
 # Code Generation Skill — Nexgen Electrical Innovations
 
-Generates, refactors, debugs, and reviews code for the Nexgen Electrical Innovations (electrical-website) Next.js 16 App Router project (strict TypeScript, Tailwind v4, Zod validation, Server Actions).
+Generates, refactors, debugs, and reviews code for the Nexgen Electrical Innovations (nexgen-electrical-innovations) Next.js 16 App Router project (strict TypeScript, Tailwind v4, Zod validation, Server Actions).
 
 ## Execution Method
 

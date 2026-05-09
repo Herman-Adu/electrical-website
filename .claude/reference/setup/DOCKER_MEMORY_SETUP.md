@@ -7,7 +7,7 @@
 
 ## Quick Start
 
-This guide walks through setting up the Docker `memory-reference` MCP service for the electrical-website project.
+This guide walks through setting up the Docker `memory-reference` MCP service for the nexgen-electrical-innovations project.
 
 ---
 
@@ -111,14 +111,14 @@ Create the initial `project_state` entity:
 cat > init_project_state.sh <<'EOF'
 #!/bin/bash
 
-# Initialize electrical-website project state via MCP gateway
+# Initialize nexgen-electrical-innovations project state via MCP gateway
 curl -X POST http://localhost:3100/memory/tools/call \
   -H "Content-Type: application/json" \
   -d '{"params":{"name":"create_entities","arguments":{"entities":[{
     "type": "project_state",
-    "name": "electrical-website-state",
+    "name": "nexgen-electrical-innovations-state",
     "properties": {
-      "project_name": "electrical-website",
+      "project_name": "nexgen-electrical-innovations",
       "current_branch": "main",
       "build_status": "passing",
       "active_phase": null,
@@ -157,7 +157,7 @@ curl -X POST http://localhost:3100/memory/tools/call \
 # Search for project state entity
 curl -X POST http://localhost:3100/memory/tools/call \
   -H "Content-Type: application/json" \
-  -d '{"params":{"name":"search_nodes","arguments":{"query":"electrical-website-state"}}}'
+  -d '{"params":{"name":"search_nodes","arguments":{"query":"nexgen-electrical-innovations-state"}}}'
 ```
 
 ---
@@ -170,7 +170,7 @@ The orchestrator (main Claude agent) integrates with Docker memory via these too
 
 ```python
 # Search for project state at session start
-search_nodes("electrical-website-state")
+search_nodes("nexgen-electrical-innovations-state")
 → Returns: [entity_id_1, entity_id_2, ...]
 ```
 
@@ -249,7 +249,7 @@ docker logs caddy-gateway
 
 ### Entities Not Found
 
-**Symptom:** `search_nodes("electrical-website-state")` returns empty
+**Symptom:** `search_nodes("nexgen-electrical-innovations-state")` returns empty
 
 **Diagnosis:**
 ```bash

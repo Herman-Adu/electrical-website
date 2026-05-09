@@ -10,7 +10,7 @@ Status: Implementation completed; awaiting QA evidence + Checkpoint B sign-off
 - [ ] Working branch confirmed for email-template normalization scope
 - [ ] `pnpm docker:mcp:smoke` healthy
 - [ ] Memory sync complete for:
-  - `agent:v1:project:electrical-website`
+  - `agent:v1:project:nexgen-electrical-innovations`
   - `agent:v1:heuristic_snapshots:2026-04-06-template-normalization-quotation-bootstrap`
   - `agent:v1:next-task:email-template-normalization:quotation-first-2026-04-06`
 

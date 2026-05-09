@@ -1,4 +1,4 @@
-# @electrical-website/agent
+# @nexgen-electrical-innovations/agent
 
 Production-grade composable agent skill system on top of the Docker MCP gateway.
 

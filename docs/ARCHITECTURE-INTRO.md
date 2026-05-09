@@ -1,6 +1,6 @@
 # Architecture Introduction — Getting Started Guide
 
-**electrical-website** | Next.js 16 + React 19 + TypeScript  
+**nexgen-electrical-innovations** | Next.js 16 + React 19 + TypeScript  
 **Document Version:** 1.0  
 **Last Updated:** March 27, 2026
 
@@ -41,7 +41,7 @@
 ### High-Level Organization
 
 ```
-electrical-website/
+nexgen-electrical-innovations/
 ├── app/                      # Next.js App Router pages & layouts
 │   ├── api/                  # API routes (server-side endpoints)
 │   ├── layout.tsx            # Root layout with metadata, providers
@@ -552,8 +552,8 @@ describe("myFunction", () => {
 
 ```bash
 # Clone repo
-git clone https://github.com/Herman-Adu/electrical-website.git
-cd electrical-website
+git clone https://github.com/Herman-Adu/nexgen-electrical-innovations.git
+cd nexgen-electrical-innovations
 
 # Install dependencies
 pnpm install
@@ -703,7 +703,7 @@ Browser Toast / Navigation
    - Read `.github/copilot-instructions.md` for custom agent rules
 
 2. **Pick a task:**
-   - Fix a bug in [GitHub Issues](https://github.com/Herman-Adu/electrical-website/issues)
+   - Fix a bug in [GitHub Issues](https://github.com/Herman-Adu/nexgen-electrical-innovations/issues)
    - Add a feature (contact form refinement, new page, etc.)
    - Improve tests or documentation
 

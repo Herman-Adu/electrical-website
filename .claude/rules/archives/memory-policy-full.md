@@ -56,8 +56,8 @@ Every observation must include `category` and `timestamp` (ISO8601).
 ## Session Lifecycle
 
 **Phase 1 — Start (Rehydration, ~50 tokens):**
-- `pnpm docker:mcp:memory:search "electrical-website-state"`
-- `pnpm docker:mcp:memory:open electrical-website-state`
+- `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"`
+- `pnpm docker:mcp:memory:open nexgen-electrical-innovations-state`
 - Read `current_branch`, `active_phase`, `next_tasks`, `blockers`
 
 **Phase 2 — Active Work:**

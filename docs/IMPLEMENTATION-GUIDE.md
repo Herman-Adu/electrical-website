@@ -1,6 +1,6 @@
 # Implementation Guide: Server/Client Boundary Optimization
 
-## electrical-website | ActionableRefactoring Specifications
+## nexgen-electrical-innovations | ActionableRefactoring Specifications
 
 **Document Version:** 1.0  
 **Last Updated:** March 25, 2026  

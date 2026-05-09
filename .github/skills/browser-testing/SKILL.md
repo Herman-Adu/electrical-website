@@ -1,6 +1,6 @@
 ---
 name: browser-testing
-description: "Execute browser automation using the Docker MCP Playwright runtime. Two modes: inspect (default) — single-page navigate/screenshot/extract-text via the playwright server; workflow — multi-step goto/wait sequences via the executor-playwright server. Use when asked to run browser tests, verify UI behaviour, take screenshots, test navigation flows, smoke-test after deploy, or run ordered page sequences on the electrical-website or any URL."
+description: "Execute browser automation using the Docker MCP Playwright runtime. Two modes: inspect (default) — single-page navigate/screenshot/extract-text via the playwright server; workflow — multi-step goto/wait sequences via the executor-playwright server. Use when asked to run browser tests, verify UI behaviour, take screenshots, test navigation flows, smoke-test after deploy, or run ordered page sequences on the nexgen-electrical-innovations or any URL."
 ---
 
 # Browser Testing Skill (v2.0.0)

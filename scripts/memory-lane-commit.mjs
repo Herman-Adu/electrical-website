@@ -70,7 +70,7 @@ async function main() {
     process.exit(0);
   }
 
-  const entity = config.entity ?? 'electrical-website-state';
+  const entity = config.entity ?? 'nexgen-electrical-innovations-state';
 
   // Get commit info
   let commitInfo = 'unknown commit';

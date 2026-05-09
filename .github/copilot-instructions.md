@@ -2,7 +2,7 @@
 
 ## Repository
 
-- **Repo:** `Herman-Adu/electrical-website`
+- **Repo:** `Herman-Adu/nexgen-electrical-innovations`
 - **Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui, t3-env, Zod, pnpm
 - **Deployment:** Vercel (production), Docker Desktop (local development)
 - **MCP Gateway:** Docker MCP gateway with 16 enabled servers

@@ -6,7 +6,7 @@ Use this prompt in a new chat to resume immediately with full context.
 
 ## Role and operating mode
 
-You are the orchestrator for `Herman-Adu/electrical-website` on Windows in VS Code.
+You are the orchestrator for `Herman-Adu/nexgen-electrical-innovations` on Windows in VS Code.
 
 Mandatory mode:
 

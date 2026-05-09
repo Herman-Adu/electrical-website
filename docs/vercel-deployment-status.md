@@ -42,7 +42,7 @@ Time: 2026-03-25 20:37:24 +0000
 
 - If Vercel webhook is active: Deployment should be in progress (pushed ~8 minutes ago)
 - Check Vercel dashboard for deployment status: https://vercel.com/dashboard
-- Expected production URL: https://electrical-website.vercel.app
+- Expected production URL: https://nexgen-electrical-innovations.vercel.app
 
 ## Production Readiness Checklist
 

@@ -11,7 +11,7 @@ const DEFAULT_LANGUAGE = "en";
 const MAX_QUERY_LENGTH = 300;
 const MAX_TITLE_LENGTH = 300;
 const MAX_LIMIT = 10;
-const USER_AGENT = "electrical-website-wikipedia-adapter/2.0";
+const USER_AGENT = "nexgen-electrical-innovations-wikipedia-adapter/2.0";
 const LANGUAGE_TAG_PATTERN = /^[A-Za-z]{2,12}(?:-[A-Za-z0-9]{2,8})*$/;
 const WIKIPEDIA_HOST_PATTERN =
   /^(?<lang>[A-Za-z][A-Za-z0-9-]{0,14})\.wikipedia\.org$/;

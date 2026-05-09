@@ -149,7 +149,7 @@ async function main() {
   } catch { /* use defaults */ }
 
   const {
-    entity = 'electrical-website-state',
+    entity = 'nexgen-electrical-innovations-state',
     fallback: fallbackSummary = 'No emergency summary available. Run git log --oneline -5 for current state.',
     branch: expectedBranch = 'unknown',
   } = config;
@@ -182,11 +182,11 @@ async function main() {
 
   // Tier 1+2: Combined — project state + lane entity in ONE call
   if (VERBOSE) process.stderr.write('[tier1+2] Loading project state + lane entity\n');
-  const tier12Result = await memoryCall('open_nodes', { names: ['electrical-website-state', entity] });
+  const tier12Result = await memoryCall('open_nodes', { names: ['nexgen-electrical-innovations-state', entity] });
   const tier12Entities = extractEntities(tier12Result);
 
   // First entity = project state, second = lane entity (may be absent for new branches)
-  const projectStateEntity = tier12Entities.find(e => (e?.name ?? '') === 'electrical-website-state') ?? tier12Entities[0] ?? null;
+  const projectStateEntity = tier12Entities.find(e => (e?.name ?? '') === 'nexgen-electrical-innovations-state') ?? tier12Entities[0] ?? null;
   const featureEntity = tier12Entities.find(e => (e?.name ?? '') === entity) ?? (tier12Entities.length > 1 ? tier12Entities[1] : null);
 
   let tier1Text = '';

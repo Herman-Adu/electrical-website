@@ -8,7 +8,7 @@
 
 ## Overview
 
-All MCP services in the `electrical-website` project fetch secrets from Docker `memory-reference` service instead of `.env` files. This provides centralized, auditable secret management with automatic fallback to environment variables for backward compatibility.
+All MCP services in the `nexgen-electrical-innovations` project fetch secrets from Docker `memory-reference` service instead of `.env` files. This provides centralized, auditable secret management with automatic fallback to environment variables for backward compatibility.
 
 ### Benefits
 

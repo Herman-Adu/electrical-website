@@ -2,7 +2,7 @@
 
 ## Scope
 
-- Repo: `Herman-Adu/electrical-website`
+- Repo: `Herman-Adu/nexgen-electrical-innovations`
 - Route: `/about`
 - Target component: `components/about/company-timeline.tsx`
 - Parent usage: `app/about/page.tsx`

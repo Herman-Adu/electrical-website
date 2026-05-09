@@ -4,7 +4,7 @@
  *
  * Selective rehydration for orchestrator sessions.
  *
- * BEFORE (full load): search_nodes("electrical-website-state") → ~500 tokens
+ * BEFORE (full load): search_nodes("nexgen-electrical-innovations-state") → ~500 tokens
  * AFTER (selective): open_nodes([project_state, current_feature]) → ~30 tokens
  * SAVINGS: 470 tokens/session, ~9,400 tokens/month (20 sessions)
  *
@@ -157,10 +157,10 @@ async function main() {
   if (!configPath) {
     console.log(
       `⚠️  No memory lane config found for branch "${branch}".`,
-      '\n   Falling back to default: HTTP search_nodes("electrical-website-state")'
+      '\n   Falling back to default: HTTP search_nodes("nexgen-electrical-innovations-state")'
     );
     console.log('');
-    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}'`);
+    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"nexgen-electrical-innovations-state"}}'`);
     return;
   }
 
@@ -172,7 +172,7 @@ async function main() {
       `⚠️  No docker_entities found in config. Falling back to default.`
     );
     console.log('');
-    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"electrical-website-state"}}'`);
+    console.log(`curl -s -X POST http://localhost:3100/mcp/tools/call -H "Content-Type: application/json" -d '{"name":"memory_reference__search_nodes","arguments":{"query":"nexgen-electrical-innovations-state"}}'`);
     return;
   }
 

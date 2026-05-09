@@ -11,7 +11,7 @@ const DEFAULT_LANGUAGE = "en";
 const MAX_LANGUAGE_LENGTH = 32;
 const LANGUAGE_TAG_PATTERN = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/;
 const YOUTUBE_VIDEO_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/;
-const USER_AGENT = "electrical-website-youtube-adapter/2.0";
+const USER_AGENT = "nexgen-electrical-innovations-youtube-adapter/2.0";
 
 const TOOL_DEFINITIONS = [
   {

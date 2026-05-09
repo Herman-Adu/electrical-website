@@ -25,7 +25,7 @@ Complete schema definitions for all Docker memory entity types.
 
 ```json
 {
-  "name": "electrical-website-state",
+  "name": "nexgen-electrical-innovations-state",
   "entityType": "project_state",
   "observations": [
     "current_branch: main",

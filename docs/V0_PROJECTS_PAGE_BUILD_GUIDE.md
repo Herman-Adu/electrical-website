@@ -645,7 +645,7 @@ Output **complete** file contents — no elisions, no `// ...existing code` plac
 ## v0 Prompt (copy exactly into v0.dev)
 
 ```
-I have a working Next.js 16 App Router project (electrical-website). All routes, data, server actions, and metadata are complete and must not be changed. I need you to design and build a highly creative, visually stunning, fully animated component layer for the Projects section.
+I have a working Next.js 16 App Router project (nexgen-electrical-innovations). All routes, data, server actions, and metadata are complete and must not be changed. I need you to design and build a highly creative, visually stunning, fully animated component layer for the Projects section.
 
 TECH STACK (exact versions — do not deviate):
 - Next.js 16, TypeScript strict mode

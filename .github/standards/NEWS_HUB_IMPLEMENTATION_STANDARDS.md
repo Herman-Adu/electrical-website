@@ -1,7 +1,7 @@
 # News-Hub Multi-Article-Type Implementation Standards
 
 **Last Updated:** March 30, 2026  
-**Scope:** electrical-website news-hub system  
+**Scope:** nexgen-electrical-innovations news-hub system  
 **Status:** Authoritative Engineering Playbook
 
 ---

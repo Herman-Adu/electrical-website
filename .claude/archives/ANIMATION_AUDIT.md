@@ -1,4 +1,4 @@
-# Animation Audit — electrical-website
+# Animation Audit — nexgen-electrical-innovations
 
 **Audited:** 2026-04-16  
 **Status:** Ready for optimization  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The electrical-website project uses a **mixed animation strategy** across Framer Motion, CSS animations, and custom JavaScript hooks. While visually polished, several animations suffer from:
+The nexgen-electrical-innovations project uses a **mixed animation strategy** across Framer Motion, CSS animations, and custom JavaScript hooks. While visually polished, several animations suffer from:
 
 - **Jank on scroll:** setInterval-based counters and parallax effects not synced to scroll frame rate
 - **Potential layout shift:** SVG stroke animations and opacity changes that trigger recalculation

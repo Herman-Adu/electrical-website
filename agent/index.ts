@@ -1,5 +1,5 @@
 /**
- * @electrical-website/agent
+ * @nexgen-electrical-innovations/agent
  * MCP Orchestration Runtime — public API
  *
  * Primary entry point: Orchestrator.create(config)

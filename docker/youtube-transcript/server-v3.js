@@ -40,7 +40,7 @@ async function loadYoutubeTranscript() {
 
 const port = Number(process.env.PORT || 8000);
 const MAX_BODY_BYTES = 1_048_576;
-const USER_AGENT = "electrical-website-youtube-adapter/3.0";
+const USER_AGENT = "nexgen-electrical-innovations-youtube-adapter/3.0";
 
 const TOOL_DEFINITIONS = [
   {

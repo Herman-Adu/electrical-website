@@ -1,7 +1,7 @@
 # Orchestrator: Service Request Form Implementation — Memory-First Workflow
 
 **Date:** 2026-04-06  
-**Repository:** Herman-Adu/electrical-website  
+**Repository:** Herman-Adu/nexgen-electrical-innovations  
 **Branch:** feat/service-request-animated-shared-core-2026-04-05 (merged to main as PR #48)  
 **Status:** Implementation Complete ✓ | Ready for Orchestrated Workflow
 
@@ -279,7 +279,7 @@ All memory entities use prefix `agent:v1:` for cross-session continuity.
 ### Key Entities to Track
 
 ```
-agent:v1:project:electrical-website
+agent:v1:project:nexgen-electrical-innovations
 ├─ tracks → agent:v1:batch:service-request:implementation-2026-04-06
 │           ├─ status: in-progress / completed
 │           ├─ findings: [checkpoint data]

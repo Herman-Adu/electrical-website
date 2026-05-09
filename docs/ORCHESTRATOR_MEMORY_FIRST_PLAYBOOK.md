@@ -8,7 +8,7 @@ Run this in order before broad repo reads:
 
 1. Hydrate memory entity `agent:v1:heuristic_snapshots:2026-04-02-project-detail-scroll-clean-base`
 2. Hydrate memory entity `agent:v1:reasoning:next-chat-feature-start-memory-first-2026-04-02`
-3. Hydrate memory entity `agent:v1:project:electrical-website`
+3. Hydrate memory entity `agent:v1:project:nexgen-electrical-innovations`
 
 Then hydrate current policy contract:
 
@@ -219,7 +219,7 @@ Use this at the top of new sessions:
 
 1. `agent:v1:heuristic_snapshots:2026-04-02-project-detail-scroll-clean-base`
 2. `agent:v1:reasoning:next-chat-feature-start-memory-first-2026-04-02`
-3. `agent:v1:project:electrical-website`
+3. `agent:v1:project:nexgen-electrical-innovations`
    Then hydrate:
 
 - `agent:v1:orchestrator:policy:current`

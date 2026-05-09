@@ -100,8 +100,8 @@ async function main() {
   // Check if manifest exists — auto-create for unregistered branches
   let newManifest = readJson(manifestPath);
   if (!newManifest) {
-    // For main branch, always use electrical-website-state
-    const entityName = slug === 'main' ? 'electrical-website-state' : `feat-${slug}`;
+    // For main branch, always use nexgen-electrical-innovations-state
+    const entityName = slug === 'main' ? 'nexgen-electrical-innovations-state' : `feat-${slug}`;
     const openedAt = new Date().toISOString();
     newManifest = {
       memoryLane: {

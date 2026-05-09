@@ -161,8 +161,8 @@ If offline: note "Docker offline" and use git history as fallback. Do not block 
 
 ### Step 2: Load Project State
 ```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
-pnpm docker:mcp:memory:open electrical-website-state
+pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
+pnpm docker:mcp:memory:open nexgen-electrical-innovations-state
 ```
 Read: `current_branch`, `active_phase`, `next_tasks`, `blockers` from entity observations.
 
@@ -218,8 +218,8 @@ Look for:
 ```
 Session start (always, in order):
 
-1. `pnpm docker:mcp:memory:search "electrical-website-state"` → note entity IDs
-2. `pnpm docker:mcp:memory:open electrical-website-state` → read current phase, next tasks, blockers
+1. `pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"` → note entity IDs
+2. `pnpm docker:mcp:memory:open nexgen-electrical-innovations-state` → read current phase, next tasks, blockers
 3. `git log --oneline -5 && git status` → confirm code state
 ```
 

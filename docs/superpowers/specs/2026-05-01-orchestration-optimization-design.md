@@ -55,7 +55,7 @@ Replace `config/active-memory-lanes.json` with a single-purpose pointer file:
 Replace 4-tier, N-query approach with 2-call approach:
 
 ```
-Tier 1+2 combined: open_nodes(['electrical-website-state', laneEntityName])
+Tier 1+2 combined: open_nodes(['nexgen-electrical-innovations-state', laneEntityName])
   → One HTTP call, two entities. Target: ≤500 tokens total.
 
 Tier 3 (conditional): ONE keyword search using branch name slug only.
@@ -107,7 +107,7 @@ Replace no-op `{}` output with a system message:
 
 ```bash
 #!/bin/bash
-echo '{"systemMessage": "PRECOMPACT: Context compacting. Before accepting — run add_observations on electrical-website-state with: current branch, build status, next 2 tasks. Prevents context loss at compaction boundary."}'
+echo '{"systemMessage": "PRECOMPACT: Context compacting. Before accepting — run add_observations on nexgen-electrical-innovations-state with: current branch, build status, next 2 tasks. Prevents context loss at compaction boundary."}'
 exit 0
 ```
 

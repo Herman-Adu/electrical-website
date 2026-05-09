@@ -17,8 +17,8 @@
 ## 1. Session Start
 
 ```bash
-pnpm docker:mcp:memory:search "electrical-website-state"
-pnpm docker:mcp:memory:open electrical-website-state
+pnpm docker:mcp:memory:search "nexgen-electrical-innovations-state"
+pnpm docker:mcp:memory:open nexgen-electrical-innovations-state
 # Read: current_branch, active_phase, next_tasks, blockers
 ```
 
@@ -51,7 +51,7 @@ node scripts/mcp-memory-call.mjs create_entities '{
 node scripts/mcp-memory-call.mjs add_observations '{
   "observations": [
     {
-      "entityName": "electrical-website-state",
+      "entityName": "nexgen-electrical-innovations-state",
       "contents": [
         "Session end: [date] — [summary]",
         "Build: passing",
@@ -71,7 +71,7 @@ node scripts/mcp-memory-call.mjs create_relations '{
   "relations": [
     {
       "from": "session-YYYY-MM-DD-001",
-      "to": "electrical-website-state",
+      "to": "nexgen-electrical-innovations-state",
       "relationType": "updates"
     }
   ]
@@ -97,7 +97,7 @@ node scripts/mcp-memory-call.mjs create_entities '{
 # Step 2: Update project state
 node scripts/mcp-memory-call.mjs add_observations '{
   "observations": [{
-    "entityName": "electrical-website-state",
+    "entityName": "nexgen-electrical-innovations-state",
     "contents": ["Session end update", "Next tasks: ..."]
   }]
 }'
@@ -106,7 +106,7 @@ node scripts/mcp-memory-call.mjs add_observations '{
 node scripts/mcp-memory-call.mjs create_relations '{
   "relations": [{
     "from": "session-YYYY-MM-DD-seq",
-    "to": "electrical-website-state",
+    "to": "nexgen-electrical-innovations-state",
     "relationType": "updates"
   }]
 }'
