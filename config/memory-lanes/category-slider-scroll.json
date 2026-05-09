@@ -3,9 +3,9 @@
     "id": "feat-category-slider-scroll",
     "branch": "fix/category-slider-scroll",
     "dockerEntity": "feat-category-slider-scroll",
-    "status": "paused",
+    "status": "completed",
     "openedAt": "2026-05-08T20:58:29.785Z",
-    "mergedAt": null,
+    "mergedAt": "2026-05-08T00:00:00.000Z",
     "fallback_summary": "Auto-registered branch: fix/category-slider-scroll"
   }
 }
