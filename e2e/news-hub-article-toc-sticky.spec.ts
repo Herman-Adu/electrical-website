@@ -108,7 +108,7 @@ test.describe("article TOC stays sticky through related articles", () => {
     );
     expect(response?.status()).toBe(200);
 
-    const aside = page.locator('[data-sticky-toc="true"]');
+    const aside = page.locator('[data-sticky-toc="true"]').first();
     await expect(aside).toBeVisible({ timeout: 10000 });
 
     const relatedWrapper = page.locator('[data-related-articles="true"]');

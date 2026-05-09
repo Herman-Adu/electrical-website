@@ -12,8 +12,9 @@ import { test, expect } from "@playwright/test";
  * 5. Invalid parameters (should reject)
  */
 
-// Base URL for tests
-const BASE_URL = "http://localhost:3000";
+// Base URL for tests — respects PLAYWRIGHT_BASE_URL env var to avoid
+// localhost vs 127.0.0.1 IPv6/IPv4 mismatch on Windows
+const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
 
 test.describe("OG Route Authentication", () => {
   /**
