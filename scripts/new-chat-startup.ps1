@@ -269,7 +269,7 @@ function Update-MasterPrompt {
 }
 
 # ────────────────────────────────────────────────────────────────────────────
-Write-Banner "ELECTRICAL-WEBSITE — NEW CHAT STARTUP"
+Write-Banner "NEXGEN ELECTRICAL INNOVATIONS — NEW CHAT STARTUP"
 
 # Step 1: MCP readiness + optional lane hydration
 # ────────────────────────────────────────────────────────────────────────────
