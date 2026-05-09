@@ -1,11 +1,9 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { motion, type Variants } from "framer-motion";
 import {
   Activity,
   Building2,
@@ -23,24 +21,37 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsTopic } from "@/data/news/topics";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
+import type { TrustIndicatorItem } from "@/components/shared/hero-trust-indicators";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-const topicConfig: Record<
-  string,
-  {
-    image: string;
-    icon: ReactNode;
-    accentWord: string;
-    description: string;
-  }
-> = {
+// ---------------------------------------------------------------------------
+// Typed per-slug config objects
+// ---------------------------------------------------------------------------
+
+interface TopicSlugConfig {
+  readonly image: string;
+  readonly icon: React.ReactNode;
+  readonly accentWord: string;
+  readonly description: string;
+  readonly trustIndicators: readonly TrustIndicatorItem[];
+}
+
+const topicConfig: Record<string, TopicSlugConfig> = {
   residential: {
     image: "/images/smart-living-interior.jpg",
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Living",
     description:
       "Smart home upgrades, rewiring projects, EV charging installations, and energy efficiency guides for homeowners and domestic landlords.",
+    trustIndicators: [
+      { icon: 'Home',   title: 'Smart Home Ready',    description: '' },
+      { icon: 'Zap',    title: 'EV Charging Experts', description: '' },
+      { icon: 'Shield', title: 'NICEIC Certified',    description: '' },
+      { icon: 'Clock',  title: '24-7 Support',        description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   commercial: {
     image: "/images/services-commercial.jpg",
@@ -48,6 +59,12 @@ const topicConfig: Record<
     accentWord: "Commerce",
     description:
       "Retail fitouts, property management upgrades, multi-site standardisation, and hospitality electrical delivery across commercial environments.",
+    trustIndicators: [
+      { icon: 'Building2',      title: 'Retail Fitouts',      description: '' },
+      { icon: 'Gauge',          title: 'Energy Efficiency',   description: '' },
+      { icon: 'ClipboardCheck', title: 'Compliance First',    description: '' },
+      { icon: 'Users',          title: 'Multi-site Delivery', description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   industrial: {
     image: "/images/services-industrial.jpg",
@@ -55,6 +72,12 @@ const topicConfig: Record<
     accentWord: "Operations",
     description:
       "Switchgear commissioning, data centre power infrastructure, critical systems maintenance, and energy efficiency programmes for industrial operators.",
+    trustIndicators: [
+      { icon: 'Factory',  title: 'Industrial Grade',     description: '' },
+      { icon: 'Settings', title: 'Maintenance Plans',    description: '' },
+      { icon: 'Zap',      title: 'Power Infrastructure', description: '' },
+      { icon: 'Shield',   title: 'Safety Certified',     description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   community: {
     image: "/images/community-hero.jpg",
@@ -62,6 +85,12 @@ const topicConfig: Record<
     accentWord: "Community",
     description:
       "Education, healthcare, and public sector electrical programmes — including summer works schedules, HTM 06-01 compliance, and resilience upgrades.",
+    trustIndicators: [
+      { icon: 'Users',          title: 'Public Sector',    description: '' },
+      { icon: 'Award',          title: 'HTM 06-01',        description: '' },
+      { icon: 'Building2',      title: 'Education Works',  description: '' },
+      { icon: 'ClipboardCheck', title: 'Trusted Partner',  description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   campaigns: {
     image: "/images/power-distribution.jpg",
@@ -69,6 +98,12 @@ const topicConfig: Record<
     accentWord: "Campaigns",
     description:
       "Partner-led campaigns, framework agreements, Schneider Electric certification milestones, and coordinated multi-trade delivery programmes.",
+    trustIndicators: [
+      { icon: 'Award',    title: 'Framework Certified', description: '' },
+      { icon: 'Users',    title: 'Multi-trade',         description: '' },
+      { icon: 'Activity', title: 'Live Campaigns',      description: '' },
+      { icon: 'Gauge',    title: 'Growth Focus',        description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   marketing: {
     image: "/images/system-diagnostics.jpg",
@@ -76,6 +111,12 @@ const topicConfig: Record<
     accentWord: "Insights",
     description:
       "Market commentary, net zero transition guides, compliance intelligence, and strategic content helping clients navigate electrification decisions.",
+    trustIndicators: [
+      { icon: 'BookOpen',   title: 'Market Intelligence', description: '' },
+      { icon: 'Activity',   title: 'Industry Updates',    description: '' },
+      { icon: 'Lightbulb',  title: 'Strategic Insights',  description: '' },
+      { icon: 'Users',      title: 'Sector Coverage',     description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   "social-media": {
     image: "/images/warehouse-lighting.jpg",
@@ -83,20 +124,47 @@ const topicConfig: Record<
     accentWord: "Reviews",
     description:
       "Client testimonials, service highlights, and satisfaction stories that build trust with new commercial and domestic clients.",
+    trustIndicators: [
+      { icon: 'Star',      title: 'Client Reviews',   description: '' },
+      { icon: 'ThumbsUp',  title: '5-Star Service',   description: '' },
+      { icon: 'Users',     title: 'Community Trust',  description: '' },
+      { icon: 'Heart',     title: 'Customer First',   description: '' },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
 };
 
-const fallbackConfig = {
+const fallbackConfig: TopicSlugConfig = {
   image: "/images/services-commercial.jpg",
   icon: <FolderOpen className="h-8 w-8 text-electric-cyan" />,
   accentWord: "Coverage",
   description: "Browse articles by topic across all editorial channels.",
+  trustIndicators: [
+    { icon: 'Shield',   title: 'Fully Certified',  description: '' },
+    { icon: 'BookOpen', title: 'Expert Editorial', description: '' },
+    { icon: 'Activity', title: 'Live Updates',     description: '' },
+    { icon: 'Users',    title: 'Sector Coverage',  description: '' },
+  ] as const satisfies readonly TrustIndicatorItem[],
 };
+
+const TOPIC_STATUSES = [
+  "INITIALIZING",
+  "LOADING_TOPICS",
+  "INDEXING_ARTICLES",
+  "TOPIC_READY",
+];
+
+// ---------------------------------------------------------------------------
+// Props
+// ---------------------------------------------------------------------------
 
 interface NewsTopicHeroProps {
   topic: NewsTopic;
   articleCount: number;
 }
+
+// ---------------------------------------------------------------------------
+// Animation variants
+// ---------------------------------------------------------------------------
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -124,25 +192,18 @@ const flickerVariants: Variants = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded] = useState(() => typeof window !== "undefined");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
 
   const config = topicConfig[topic.slug] ?? fallbackConfig;
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const statuses = [
-    "INITIALIZING",
-    "LOADING_TOPICS",
-    "INDEXING_ARTICLES",
-    "TOPIC_READY",
-  ];
-
-  const { currentText: statusText } = useCyclingText(statuses, 380);
+  const { currentText: statusText } = useCyclingText(TOPIC_STATUSES, 380);
 
   const scrollToArticles = () => {
     const el = document.getElementById("topic-intro");
@@ -210,7 +271,7 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
         >
           {/* Status indicator */}
           <motion.div
-            variants={itemVariants}
+            variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
             <div className="flex items-center gap-3 border-l-2 border-white pl-4 font-bold">
@@ -298,6 +359,8 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
           >
             {config.description}
           </motion.p>
+
+          <HeroTrustIndicators items={config.trustIndicators} />
 
           {/* Topic hero action buttons */}
           <motion.div

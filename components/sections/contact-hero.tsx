@@ -5,14 +5,16 @@ import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
-import {
-  HERO_H1_COMPACT_BLUEPRINT,
-  //HERO_H1_TALL_BLUEPRINT,
-} from "@/components/hero/hero-tokens";
+import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { MarketingContactContent } from "@/types/marketing";
 import { HeroTrustIndicators } from "@/components/shared";
 import type { TrustIndicatorItem } from "@/components/shared";
+import { ContactCircuit } from "@/components/hero/circuits/contact-circuit";
+
+// ---------------------------------------------------------------------------
+// Animation variants
+// ---------------------------------------------------------------------------
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,10 +42,18 @@ const itemVariants = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Props
+// ---------------------------------------------------------------------------
+
 interface ContactHeroProps {
   hero: MarketingContactContent["hero"];
   trustIndicators: MarketingContactContent["trustIndicators"];
 }
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
 
 export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
@@ -61,80 +71,7 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
       safeArea="page"
       background={<BlueprintBackground showScanLine={false} />}
       backgroundFrameStyle={backgroundFrameStyle}
-      decor={
-        <>
-          {/* Horizontal circuit lines */}
-          <svg
-            className="absolute inset-0 h-full w-full opacity-15"
-            viewBox="0 0 1440 600"
-            fill="none"
-            aria-hidden="true"
-          >
-            <motion.path
-              d="M0 300 H500 L540 260 H900 L940 300 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="1"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2, delay: 0.5, ease: "easeOut" }
-              }
-            />
-            <motion.path
-              d="M0 380 H300 L340 340 H700 L780 420 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="0.5"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2, delay: 0.9, ease: "easeOut" }
-              }
-            />
-            {(
-              [
-                [540, 260],
-                [940, 300],
-                [340, 340],
-                [700, 420],
-              ] as [number, number][]
-            ).map(([cx, cy], i) => (
-              <motion.circle
-                key={i}
-                cx={cx}
-                cy={cy}
-                r="3"
-                fill="var(--electric-cyan)"
-                initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.5 }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : { delay: 1.2 + i * 0.1, duration: 0.3 }
-                }
-              />
-            ))}
-          </svg>
-
-          {/* Scan line */}
-          {!shouldReduceMotion && (
-            <motion.div
-              className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
-              animate={{ top: ["0%", "100%"] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            />
-          )}
-        </>
-      }
+      decor={<ContactCircuit shouldReduceMotion={shouldReduceMotion} />}
       content={
         <motion.div
           variants={containerVariants}
