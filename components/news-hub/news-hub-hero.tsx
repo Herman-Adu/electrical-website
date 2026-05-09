@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { useState } from "react";
+import { motion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
@@ -9,10 +9,39 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import { HubCircuit } from "@/components/hero/circuits/hub-circuit";
+import type { TrustIndicatorItem } from "@/components/shared";
+
+// ---------------------------------------------------------------------------
+// Config data
+// ---------------------------------------------------------------------------
+
+const NEWS_HUB_TRUST_INDICATORS: readonly TrustIndicatorItem[] = [
+  { icon: "BookOpen",      title: "Expert-Led Insights",   description: "In-depth analysis from UK electrical industry specialists" },
+  { icon: "ClipboardCheck", title: "Editorial Standards",  description: "Every article reviewed and verified before publication" },
+  { icon: "Activity",      title: "Live Campaign Feed",    description: "Case studies and project updates delivered in real time" },
+  { icon: "Users",         title: "Full Sector Coverage",  description: "Commercial, industrial and residential stories in one place" },
+] as const satisfies readonly TrustIndicatorItem[];
+
+const NEWS_HUB_STATUSES = [
+  "INITIALIZING",
+  "LOADING_EDITORIAL",
+  "INDEXING_STORIES",
+  "SYSTEMS_READY",
+];
+
+// ---------------------------------------------------------------------------
+// Props
+// ---------------------------------------------------------------------------
 
 interface NewsHubHeroProps {
   totalArticles: number;
 }
+
+// ---------------------------------------------------------------------------
+// Animation variants
+// ---------------------------------------------------------------------------
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -39,23 +68,16 @@ const flickerVariants: Variants = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export function NewsHubHero({ totalArticles }: NewsHubHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded] = useState(() => typeof window !== "undefined");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const statuses = [
-    "INITIALIZING",
-    "LOADING_EDITORIAL",
-    "INDEXING_STORIES",
-    "SYSTEMS_READY",
-  ];
-
-  const { currentText: statusText } = useCyclingText(statuses, 380);
+  const { currentText: statusText } = useCyclingText(NEWS_HUB_STATUSES, 380);
 
   const scrollToFeed = () => {
     const el = document.getElementById("news-hub-intro");
@@ -69,99 +91,7 @@ export function NewsHubHero({ totalArticles }: NewsHubHeroProps) {
       safeArea="page"
       background={<BlueprintBackground showScanLine={false} />}
       backgroundFrameStyle={backgroundFrameStyle}
-      decor={
-        <>
-          <svg
-            className="absolute inset-0 h-full w-full opacity-15"
-            viewBox="0 0 1440 700"
-            fill="none"
-          >
-            <motion.path
-              d="M0 320 H320 L420 230 H740 L840 320 H1160 L1260 250 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="1"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2.6, delay: 0.5, ease: "easeOut" }
-              }
-            />
-            <motion.path
-              d="M0 470 H260 L360 390 H620 L760 510 H980 L1120 430 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="0.5"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2.6, delay: 0.95, ease: "easeOut" }
-              }
-            />
-            {[
-              [420, 230],
-              [840, 320],
-              [1260, 250],
-              [360, 390],
-              [760, 510],
-              [1120, 430],
-            ].map(([cx, cy], index) => (
-              <motion.circle
-                key={index}
-                cx={cx}
-                cy={cy}
-                r="3"
-                fill="var(--electric-cyan)"
-                initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.5 }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : { delay: 1.5 + index * 0.09, duration: 0.3 }
-                }
-              />
-            ))}
-          </svg>
-
-          {!shouldReduceMotion ? (
-            <motion.div
-              className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
-              animate={{ top: ["0%", "100%"] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            />
-          ) : null}
-
-          {!shouldReduceMotion ? (
-            <div className="absolute inset-0">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute size-1 rounded-full bg-electric-cyan/30"
-                  style={{
-                    left: `${10 + i * 15}%`,
-                    top: `${22 + (i % 3) * 20}%`,
-                  }}
-                  animate={{ y: [0, -18, 0], opacity: [0.15, 0.45, 0.15] }}
-                  transition={{
-                    duration: 3 + i * 0.45,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.3,
-                  }}
-                />
-              ))}
-            </div>
-          ) : null}
-        </>
-      }
+      decor={<HubCircuit shouldReduceMotion={shouldReduceMotion} />}
       content={
         <motion.div
           variants={containerVariants}
@@ -211,6 +141,11 @@ export function NewsHubHero({ totalArticles }: NewsHubHeroProps) {
             partner updates. Powered by typed content models ready for scalable
             CMS integration.
           </motion.p>
+
+          <HeroTrustIndicators
+            items={NEWS_HUB_TRUST_INDICATORS}
+            variants={itemVariants}
+          />
 
           <motion.div
             variants={itemVariants}

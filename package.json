@@ -5,6 +5,8 @@
   "packageManager": "pnpm@10.11.0",
   "scripts": {
     "dev": "next dev",
+    "docker:dev": "docker compose watch",
+    "docker:dev:build": "docker compose build web",
     "build": "next build",
     "typecheck": "tsc --noEmit",
     "start": "next start",

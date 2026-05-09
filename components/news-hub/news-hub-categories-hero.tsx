@@ -1,20 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Activity, ChevronDown, Layers } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
+import type { TrustIndicatorItem } from "@/components/shared/hero-trust-indicators";
+import { CategoriesCircuit } from "@/components/hero/circuits/categories-circuit";
+
+// ---------------------------------------------------------------------------
+// Config data
+// ---------------------------------------------------------------------------
+
+const CATEGORIES_TRUST_INDICATORS = [
+  { icon: 'Gauge',          title: 'Content Lanes',    description: 'Six dedicated editorial channels' },
+  { icon: 'BookOpen',       title: 'Expert Editorial', description: 'Every article verified by specialists' },
+  { icon: 'Activity',       title: 'Live Updates',     description: 'Real-time campaign and case study delivery' },
+  { icon: 'ClipboardCheck', title: 'CMS Ready',        description: 'Category-first routing for scalable CMS' },
+] as const satisfies readonly TrustIndicatorItem[];
+
+const CATEGORIES_STATUSES = [
+  "INITIALIZING",
+  "LOADING_LANES",
+  "SCANNING_CATEGORIES",
+  "SYSTEMS_READY",
+];
+
+// ---------------------------------------------------------------------------
+// Props
+// ---------------------------------------------------------------------------
 
 interface NewsHubCategoriesHeroProps {
   categoryCount: number;
 }
+
+// ---------------------------------------------------------------------------
+// Animation variants
+// ---------------------------------------------------------------------------
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -42,40 +70,19 @@ const flickerVariants: Variants = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export function NewsHubCategoriesHero({
   categoryCount,
 }: NewsHubCategoriesHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [statusText, setStatusText] = useState("INITIALIZING");
+  // Lazy initializer: true in browser (client component), false during SSR
+  const [isLoaded] = useState(() => typeof window !== "undefined");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "compact" });
-  const shouldReduce = useReducedMotion();
 
-  useEffect(() => {
-    setIsLoaded(true);
-    const statuses = [
-      "INITIALIZING",
-      "LOADING_LANES",
-      "SCANNING_CATEGORIES",
-      "SYSTEMS_READY",
-    ];
-
-    if (shouldReduce) {
-      setStatusText(statuses.at(-1) ?? "SYSTEMS_READY");
-      return;
-    }
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx++;
-      if (idx < statuses.length) {
-        setStatusText(statuses[idx]);
-      } else {
-        clearInterval(interval);
-      }
-    }, 380);
-    return () => clearInterval(interval);
-  }, [shouldReduce]);
+  const { currentText: statusText } = useCyclingText(CATEGORIES_STATUSES, 380);
 
   const scrollToCategories = () => {
     const el = document.getElementById("news-categories-intro");
@@ -89,100 +96,7 @@ export function NewsHubCategoriesHero({
       safeArea="page"
       background={<BlueprintBackground showScanLine={false} />}
       backgroundFrameStyle={backgroundFrameStyle}
-      decor={
-        <>
-          <svg
-            className="absolute inset-0 h-full w-full opacity-15"
-            viewBox="0 0 1440 700"
-            fill="none"
-          >
-            <motion.path
-              d="M0 280 H300 L380 200 H700 L780 280 H1100 L1180 200 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="1"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2.8, delay: 0.5, ease: "easeOut" }
-              }
-            />
-            <motion.path
-              d="M0 480 H200 L280 420 H560 L640 480 H900 L980 420 H1440"
-              stroke="var(--electric-cyan)"
-              strokeWidth="0.5"
-              fill="none"
-              initial={
-                shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-              }
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 2.8, delay: 0.9, ease: "easeOut" }
-              }
-            />
-            {[380, 780, 1180].map((x, index) => (
-              <motion.line
-                key={index}
-                x1={x}
-                y1={200}
-                x2={x}
-                y2={160}
-                stroke="var(--electric-cyan)"
-                strokeWidth="0.5"
-                initial={
-                  shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }
-                }
-                animate={{ pathLength: 1, opacity: 0.6 }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : { duration: 0.4, delay: 2 + index * 0.15 }
-                }
-              />
-            ))}
-            {[
-              [380, 200],
-              [700, 280],
-              [780, 280],
-              [1100, 280],
-              [280, 420],
-              [640, 480],
-              [980, 420],
-            ].map(([cx, cy], index) => (
-              <motion.circle
-                key={index}
-                cx={cx}
-                cy={cy}
-                r="3.5"
-                fill="none"
-                stroke="var(--electric-cyan)"
-                strokeWidth="1"
-                initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.5 }}
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : { delay: 1.6 + index * 0.1, duration: 0.3 }
-                }
-              />
-            ))}
-          </svg>
-
-          {!shouldReduceMotion ? (
-            <motion.div
-              className="absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-electric-cyan/30 to-transparent"
-              animate={{ top: ["0%", "100%"] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            />
-          ) : null}
-        </>
-      }
+      decor={<CategoriesCircuit shouldReduceMotion={shouldReduceMotion} />}
       content={
         <motion.div
           variants={containerVariants}
@@ -276,38 +190,7 @@ export function NewsHubCategoriesHero({
             seamless CMS migration. Each category is a full publishing route.
           </motion.p>
 
-          <motion.div
-            variants={itemVariants}
-            className="mb-10 flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg bg-white/10 border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "border-electric-cyan/50 hover:border-electric-cyan dark:hover:border-electric-cyan/70 hover:bg-electric-cyan/15",
-                "text-foreground dark:text-foreground/80 shadow-md shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-                "hover:text-electric-cyan dark:hover:text-electric-cyan",
-              )}
-            >
-              <Link href="/projects">
-                <span>← All News</span>
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg bg-white/10 border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "border-electric-cyan/50 hover:border-electric-cyan dark:hover:border-electric-cyan/70 hover:bg-electric-cyan/15",
-                "text-foreground dark:text-foreground/80 shadow-md shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-                "hover:text-electric-cyan dark:hover:text-electric-cyan",
-              )}
-            >
-              <Link href="/projects">
-                <span>Start a Campaign</span>
-              </Link>
-            </Button>
-          </motion.div>
+          <HeroTrustIndicators items={CATEGORIES_TRUST_INDICATORS} />
 
           {/* Meta bar */}
           <motion.div

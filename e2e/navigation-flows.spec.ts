@@ -199,11 +199,11 @@ test.describe("dropdown navigation to in-page sections", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 6. Navbar active category link highlight for ?category= params
+// 6. Navbar active category link highlight for clean path URLs
 // ---------------------------------------------------------------------------
 test.describe("navbar active category link", () => {
-  test("navbar highlights active category link for ?category= query params", async ({ page }) => {
-    await page.goto("/news-hub?category=insights", { waitUntil: "domcontentloaded" });
+  test("navbar highlights active category link for clean path URLs", async ({ page }) => {
+    await page.goto("/news-hub/category/insights", { waitUntil: "domcontentloaded" });
 
     // Hover the News Hub nav item to open its dropdown
     const newsHubTrigger = page.locator('nav a:has-text("News Hub")').first();

@@ -25,6 +25,8 @@ import {
   Star,
   Activity,
   BookOpen,
+  Mail,
+  MessageSquare,
   type LucideIcon,
 } from 'lucide-react';
 import type { IconName } from '@/types/sections';
@@ -54,6 +56,8 @@ export const iconMap: Record<IconName, LucideIcon> = {
   Star,
   Activity,
   BookOpen,
+  Mail,
+  MessageSquare,
 };
 
 export function getIcon(name: IconName): LucideIcon {

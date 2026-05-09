@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
@@ -21,8 +21,8 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsCategory } from "@/types/news";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
+import type { TrustIndicatorItem } from "@/components/shared/hero-trust-indicators";
 
 const categoryConfig: Record<
   string,
@@ -30,37 +30,74 @@ const categoryConfig: Record<
     image: string;
     icon: ReactNode;
     accentWord: string;
+    trustIndicators: readonly TrustIndicatorItem[];
   }
 > = {
   residential: {
     image: "/images/smart-living-interior.jpg",
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Living",
+    trustIndicators: [
+      { icon: "Home",   title: "Smart Living",     description: "Domestic installations and smart home systems" },
+      { icon: "Zap",    title: "EV Charging",      description: "Home and workplace EV solutions" },
+      { icon: "Shield", title: "NICEIC Certified", description: "Fully accredited domestic electricians" },
+      { icon: "Clock",  title: "24-7 Support",     description: "Around-the-clock emergency cover" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   industrial: {
     image: "/images/services-industrial.jpg",
     icon: <Factory className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Operations",
+    trustIndicators: [
+      { icon: "Factory",  title: "Industrial Grade",     description: "Heavy-duty industrial installations" },
+      { icon: "Settings", title: "Maintenance Plans",    description: "Scheduled and reactive maintenance" },
+      { icon: "Zap",      title: "Power Infrastructure", description: "High-voltage and distribution systems" },
+      { icon: "Shield",   title: "Safety Certified",     description: "Full health and safety compliance" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   partners: {
     image: "/images/community-hero.jpg",
     icon: <Handshake className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Partnerships",
+    trustIndicators: [
+      { icon: "Users",          title: "Strategic Partners", description: "Long-term framework agreements" },
+      { icon: "Award",          title: "Accredited Network", description: "Pre-approved and vetted contractors" },
+      { icon: "Building2",      title: "Multi-sector",       description: "Across residential, commercial and industrial" },
+      { icon: "ClipboardCheck", title: "Due Diligence",      description: "Fully vetted partner relationships" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   "case-studies": {
     image: "/images/power-distribution.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Outcomes",
+    trustIndicators: [
+      { icon: "Lightbulb",      title: "Real Outcomes",     description: "Documented project results and impact" },
+      { icon: "ClipboardCheck", title: "Verified Projects", description: "Every case study independently verified" },
+      { icon: "Building2",      title: "Multi-sector",      description: "Spanning commercial, industrial and community" },
+      { icon: "Activity",       title: "Live Results",      description: "Up-to-date with completed project data" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   insights: {
     image: "/images/system-diagnostics.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Intelligence",
+    trustIndicators: [
+      { icon: "BookOpen",  title: "Market Intelligence", description: "In-depth sector analysis and trends" },
+      { icon: "Activity",  title: "Industry Updates",    description: "Latest news from the electrical sector" },
+      { icon: "Lightbulb", title: "Strategic Insights",  description: "Expert commentary and analysis" },
+      { icon: "Users",     title: "Sector Coverage",     description: "Residential, commercial and industrial" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
   reviews: {
     image: "/images/warehouse-lighting.jpg",
     icon: <MessageSquareQuote className="h-8 w-8 text-electric-cyan" />,
     accentWord: "Feedback",
+    trustIndicators: [
+      { icon: "Star",     title: "Client Reviews",  description: "Verified testimonials from clients" },
+      { icon: "ThumbsUp", title: "5-Star Service",  description: "Consistently top-rated by customers" },
+      { icon: "Users",    title: "Community Trust", description: "Built through quality and reliability" },
+      { icon: "Heart",    title: "Customer First",  description: "Service excellence at every stage" },
+    ] as const satisfies readonly TrustIndicatorItem[],
   },
 };
 
@@ -68,6 +105,12 @@ const fallbackConfig = {
   image: "/images/services-commercial.jpg",
   icon: <FolderOpen className="h-8 w-8 text-electric-cyan" />,
   accentWord: "Coverage",
+  trustIndicators: [
+    { icon: "Shield",   title: "Fully Certified",  description: "NICEIC approved contractor" },
+    { icon: "BookOpen", title: "Expert Editorial", description: "Content verified by specialists" },
+    { icon: "Activity", title: "Live Updates",     description: "Real-time news and updates" },
+    { icon: "Users",    title: "Sector Coverage",  description: "Across all electrical disciplines" },
+  ] as const satisfies readonly TrustIndicatorItem[],
 };
 
 interface NewsCategoryHeroProps {
@@ -105,15 +148,11 @@ export function NewsCategoryHero({
   category,
   articleCount,
 }: NewsCategoryHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded] = useState(() => typeof window !== "undefined");
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
 
   const config = categoryConfig[category.slug] ?? fallbackConfig;
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const statuses = [
     "INITIALIZING",
@@ -279,44 +318,13 @@ export function NewsCategoryHero({
             {category.description}
           </motion.p>
 
-          {/* Category hero action buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
-          >
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "bg-white/10 border-electric-cyan/50 ",
-                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
-                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-              )}
-            >
-              <Link href="/projects">
-                <span>All News</span>
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "bg-white/10 border-electric-cyan/50 ",
-                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
-                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-              )}
-            >
-              <Link href="/news-hub/category">
-                <span>All Categories</span>
-              </Link>
-            </Button>
-          </motion.div>
+          {/* Trust indicators */}
+          <HeroTrustIndicators items={config.trustIndicators} />
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
+            className="mt-12 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
