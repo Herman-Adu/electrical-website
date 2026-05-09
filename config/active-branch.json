@@ -1,6 +1,6 @@
 {
   "branch": "feat/final-theme-polish",
   "entity": "feat-final-theme-polish",
-  "fallback": "04781ee fix: add missing active-memory-lanes.json + fix startup script banner | 46bf547 chore: post-merge cleanup — memory-lanes + active-branch after PR #150 (#151) | e0117d2 chore: rename electrical-website → nexgen-electrical-innovations (#150) (#150)",
-  "updatedAt": "2026-05-09T11:41:48.805Z"
+  "fallback": "c67b860 fix: match contact-hero spacing across all news hub heroes + remove remaining buttons | dfd46ae fix: remove All News/Channels buttons, fill trust indicator descriptions, add category hero trust indicators | 5d9639f feat: hero consolidation — atoms, circuits, base components, Phase 1 fixes",
+  "updatedAt": "2026-05-09T20:52:02.538Z"
 }
