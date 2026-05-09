@@ -119,10 +119,9 @@ import { useCyclingText } from '@/lib/hooks/use-cycling-text';
 // ---------------------------------------------------------------------------
 describe('NewsHubCategoriesHero', () => {
   describe('Button hrefs', () => {
-    it('Start a Campaign button links to /news-hub/filter/campaigns', () => {
+    it('does not render Start a Campaign button', () => {
       render(<NewsHubCategoriesHero categoryCount={6} />);
-      const campaignLink = screen.getByRole('link', { name: /start a campaign/i });
-      expect(campaignLink).toHaveAttribute('href', '/news-hub/filter/campaigns');
+      expect(screen.queryByRole('link', { name: /start a campaign/i })).not.toBeInTheDocument();
     });
 
     it('No button links to /projects', () => {
@@ -182,14 +181,9 @@ describe('NewsHubCategoriesHero', () => {
       expect(screen.getByText('CMS Ready')).toBeInTheDocument();
     });
 
-    it('trust indicators render before the Campaign button', () => {
+    it('trust indicators render in the hero', () => {
       render(<NewsHubCategoriesHero categoryCount={6} />);
-      const trustSection = screen.getByTestId('hero-trust-indicators');
-      const campaignBtn = screen.getByRole('link', { name: /start a campaign/i });
-
-      // Trust indicators should be in DOM before the campaign button
-      const trustPosition = trustSection.compareDocumentPosition(campaignBtn);
-      expect(trustPosition & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(screen.getByTestId('hero-trust-indicators')).toBeInTheDocument();
     });
   });
 
