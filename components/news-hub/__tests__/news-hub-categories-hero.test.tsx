@@ -119,12 +119,6 @@ import { useCyclingText } from '@/lib/hooks/use-cycling-text';
 // ---------------------------------------------------------------------------
 describe('NewsHubCategoriesHero', () => {
   describe('Button hrefs', () => {
-    it('All News button links to /news-hub', () => {
-      render(<NewsHubCategoriesHero categoryCount={6} />);
-      const allNewsLink = screen.getByRole('link', { name: /all news/i });
-      expect(allNewsLink).toHaveAttribute('href', '/news-hub');
-    });
-
     it('Start a Campaign button links to /news-hub/filter/campaigns', () => {
       render(<NewsHubCategoriesHero categoryCount={6} />);
       const campaignLink = screen.getByRole('link', { name: /start a campaign/i });
@@ -188,14 +182,13 @@ describe('NewsHubCategoriesHero', () => {
       expect(screen.getByText('CMS Ready')).toBeInTheDocument();
     });
 
-    it('trust indicators appear between description and buttons', () => {
+    it('trust indicators render before the Campaign button', () => {
       render(<NewsHubCategoriesHero categoryCount={6} />);
       const trustSection = screen.getByTestId('hero-trust-indicators');
-      const allNewsBtn = screen.getByRole('link', { name: /all news/i });
+      const campaignBtn = screen.getByRole('link', { name: /start a campaign/i });
 
-      // Trust indicators should be in DOM before buttons
-      const trustPosition = trustSection.compareDocumentPosition(allNewsBtn);
-      // DOCUMENT_POSITION_FOLLOWING = 4 means allNewsBtn comes after trustSection
+      // Trust indicators should be in DOM before the campaign button
+      const trustPosition = trustSection.compareDocumentPosition(campaignBtn);
       expect(trustPosition & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     });
   });

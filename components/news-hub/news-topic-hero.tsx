@@ -47,10 +47,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Smart home upgrades, rewiring projects, EV charging installations, and energy efficiency guides for homeowners and domestic landlords.",
     trustIndicators: [
-      { icon: 'Home',   title: 'Smart Home Ready',    description: '' },
-      { icon: 'Zap',    title: 'EV Charging Experts', description: '' },
-      { icon: 'Shield', title: 'NICEIC Certified',    description: '' },
-      { icon: 'Clock',  title: '24-7 Support',        description: '' },
+      { icon: 'Home',   title: 'Smart Home Ready',    description: 'Automated lighting and smart systems' },
+      { icon: 'Zap',    title: 'EV Charging Experts', description: 'Home and workplace EV installation' },
+      { icon: 'Shield', title: 'NICEIC Certified',    description: 'Fully accredited domestic electricians' },
+      { icon: 'Clock',  title: '24-7 Support',        description: 'Around-the-clock emergency cover' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   commercial: {
@@ -60,10 +60,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Retail fitouts, property management upgrades, multi-site standardisation, and hospitality electrical delivery across commercial environments.",
     trustIndicators: [
-      { icon: 'Building2',      title: 'Retail Fitouts',      description: '' },
-      { icon: 'Gauge',          title: 'Energy Efficiency',   description: '' },
-      { icon: 'ClipboardCheck', title: 'Compliance First',    description: '' },
-      { icon: 'Users',          title: 'Multi-site Delivery', description: '' },
+      { icon: 'Building2',      title: 'Retail Fitouts',      description: 'Complete commercial electrical fit-outs' },
+      { icon: 'Gauge',          title: 'Energy Efficiency',   description: 'Reduce energy costs with smart solutions' },
+      { icon: 'ClipboardCheck', title: 'Compliance First',    description: 'Meet all commercial wiring regulations' },
+      { icon: 'Users',          title: 'Multi-site Delivery', description: 'Coordinated across multiple locations' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   industrial: {
@@ -73,10 +73,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Switchgear commissioning, data centre power infrastructure, critical systems maintenance, and energy efficiency programmes for industrial operators.",
     trustIndicators: [
-      { icon: 'Factory',  title: 'Industrial Grade',     description: '' },
-      { icon: 'Settings', title: 'Maintenance Plans',    description: '' },
-      { icon: 'Zap',      title: 'Power Infrastructure', description: '' },
-      { icon: 'Shield',   title: 'Safety Certified',     description: '' },
+      { icon: 'Factory',  title: 'Industrial Grade',     description: 'Heavy-duty industrial installations' },
+      { icon: 'Settings', title: 'Maintenance Plans',    description: 'Scheduled and reactive maintenance' },
+      { icon: 'Zap',      title: 'Power Infrastructure', description: 'High-voltage and distribution systems' },
+      { icon: 'Shield',   title: 'Safety Certified',     description: 'Full health and safety compliance' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   community: {
@@ -86,10 +86,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Education, healthcare, and public sector electrical programmes — including summer works schedules, HTM 06-01 compliance, and resilience upgrades.",
     trustIndicators: [
-      { icon: 'Users',          title: 'Public Sector',    description: '' },
-      { icon: 'Award',          title: 'HTM 06-01',        description: '' },
-      { icon: 'Building2',      title: 'Education Works',  description: '' },
-      { icon: 'ClipboardCheck', title: 'Trusted Partner',  description: '' },
+      { icon: 'Users',          title: 'Public Sector',    description: 'Trusted by councils and NHS trusts' },
+      { icon: 'Award',          title: 'HTM 06-01',        description: 'Healthcare electrical compliance standard' },
+      { icon: 'Building2',      title: 'Education Works',  description: 'Schools, colleges and universities' },
+      { icon: 'ClipboardCheck', title: 'Trusted Partner',  description: 'Long-term framework agreements' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   campaigns: {
@@ -99,10 +99,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Partner-led campaigns, framework agreements, Schneider Electric certification milestones, and coordinated multi-trade delivery programmes.",
     trustIndicators: [
-      { icon: 'Award',    title: 'Framework Certified', description: '' },
-      { icon: 'Users',    title: 'Multi-trade',         description: '' },
-      { icon: 'Activity', title: 'Live Campaigns',      description: '' },
-      { icon: 'Gauge',    title: 'Growth Focus',        description: '' },
+      { icon: 'Award',    title: 'Framework Certified', description: 'Pre-approved for major frameworks' },
+      { icon: 'Users',    title: 'Multi-trade',         description: 'Electrical across multiple disciplines' },
+      { icon: 'Activity', title: 'Live Campaigns',      description: 'Active procurement and tendering' },
+      { icon: 'Gauge',    title: 'Growth Focus',        description: 'Driving sector expansion' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   marketing: {
@@ -112,10 +112,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Market commentary, net zero transition guides, compliance intelligence, and strategic content helping clients navigate electrification decisions.",
     trustIndicators: [
-      { icon: 'BookOpen',   title: 'Market Intelligence', description: '' },
-      { icon: 'Activity',   title: 'Industry Updates',    description: '' },
-      { icon: 'Lightbulb',  title: 'Strategic Insights',  description: '' },
-      { icon: 'Users',      title: 'Sector Coverage',     description: '' },
+      { icon: 'BookOpen',   title: 'Market Intelligence', description: 'In-depth sector analysis and trends' },
+      { icon: 'Activity',   title: 'Industry Updates',    description: 'Latest news from the electrical sector' },
+      { icon: 'Lightbulb',  title: 'Strategic Insights',  description: 'Expert commentary and analysis' },
+      { icon: 'Users',      title: 'Sector Coverage',     description: 'Residential, commercial and industrial' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   "social-media": {
@@ -125,10 +125,10 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Client testimonials, service highlights, and satisfaction stories that build trust with new commercial and domestic clients.",
     trustIndicators: [
-      { icon: 'Star',      title: 'Client Reviews',   description: '' },
-      { icon: 'ThumbsUp',  title: '5-Star Service',   description: '' },
-      { icon: 'Users',     title: 'Community Trust',  description: '' },
-      { icon: 'Heart',     title: 'Customer First',   description: '' },
+      { icon: 'Star',      title: 'Client Reviews',   description: 'Verified testimonials from clients' },
+      { icon: 'ThumbsUp',  title: '5-Star Service',   description: 'Consistently top-rated by customers' },
+      { icon: 'Users',     title: 'Community Trust',  description: 'Built through quality and reliability' },
+      { icon: 'Heart',     title: 'Customer First',   description: 'Service excellence at every stage' },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
 };
@@ -139,10 +139,10 @@ const fallbackConfig: TopicSlugConfig = {
   accentWord: "Coverage",
   description: "Browse articles by topic across all editorial channels.",
   trustIndicators: [
-    { icon: 'Shield',   title: 'Fully Certified',  description: '' },
-    { icon: 'BookOpen', title: 'Expert Editorial', description: '' },
-    { icon: 'Activity', title: 'Live Updates',     description: '' },
-    { icon: 'Users',    title: 'Sector Coverage',  description: '' },
+    { icon: 'Shield',   title: 'Fully Certified',  description: 'NICEIC approved contractor' },
+    { icon: 'BookOpen', title: 'Expert Editorial', description: 'Content verified by specialists' },
+    { icon: 'Activity', title: 'Live Updates',     description: 'Real-time news and updates' },
+    { icon: 'Users',    title: 'Sector Coverage',  description: 'Across all electrical disciplines' },
   ] as const satisfies readonly TrustIndicatorItem[],
 };
 
@@ -361,40 +361,6 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
           </motion.p>
 
           <HeroTrustIndicators items={config.trustIndicators} />
-
-          {/* Topic hero action buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
-          >
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "bg-white/10 border-electric-cyan/50 ",
-                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
-                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-              )}
-            >
-              <Link href="/news-hub">
-                <span>← All News</span>
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "bg-white/10 border-electric-cyan/50 ",
-                "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
-                "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-              )}
-            >
-              <Link href="/news-hub/category">
-                <span>All Channels</span>
-              </Link>
-            </Button>
-          </motion.div>
 
           {/* Meta */}
           <motion.div

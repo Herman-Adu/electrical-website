@@ -207,20 +207,6 @@ export function NewsHubCategoriesHero({
                 "hover:text-electric-cyan dark:hover:text-electric-cyan",
               )}
             >
-              <Link href="/news-hub">
-                <span>← All News</span>
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                "px-4 py-2 rounded-lg bg-white/10 border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                "border-electric-cyan/50 hover:border-electric-cyan dark:hover:border-electric-cyan/70 hover:bg-electric-cyan/15",
-                "text-foreground dark:text-foreground/80 shadow-md shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-                "hover:text-electric-cyan dark:hover:text-electric-cyan",
-              )}
-            >
               <Link href="/news-hub/filter/campaigns">
                 <span>Start a Campaign</span>
               </Link>

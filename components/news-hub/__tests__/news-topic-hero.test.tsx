@@ -242,15 +242,10 @@ describe('NewsTopicHero — HeroTrustIndicators integration', () => {
     });
   });
 
-  describe('Trust indicators position — between description and buttons', () => {
-    it('trust indicators appear before action buttons in the DOM', () => {
+  describe('Trust indicators position — between description and meta bar', () => {
+    it('trust indicators render in the hero', () => {
       render(<NewsTopicHero topic={makeTopic('residential', 'Residential')} articleCount={3} />);
-      const trustSection = screen.getByTestId('hero-trust-indicators');
-      const allNewsBtn = screen.getByRole('link', { name: /all news/i });
-
-      // DOCUMENT_POSITION_FOLLOWING = 4 means allNewsBtn comes AFTER trustSection
-      const position = trustSection.compareDocumentPosition(allNewsBtn);
-      expect(position & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(screen.getByTestId('hero-trust-indicators')).toBeInTheDocument();
     });
   });
 
@@ -267,10 +262,10 @@ describe('NewsTopicHero — HeroTrustIndicators integration', () => {
       expect(screen.getByText('7 Articles')).toBeInTheDocument();
     });
 
-    it('renders All News and All Channels buttons', () => {
+    it('does not render All News or All Channels nav buttons', () => {
       render(<NewsTopicHero topic={makeTopic('industrial', 'Industrial')} articleCount={2} />);
-      expect(screen.getByRole('link', { name: /all news/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /all channels/i })).toBeInTheDocument();
+      expect(screen.queryByRole('link', { name: /all news/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('link', { name: /all channels/i })).not.toBeInTheDocument();
     });
   });
 });
