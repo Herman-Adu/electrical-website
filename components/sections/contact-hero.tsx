@@ -227,6 +227,8 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
                   key={item.title}
                   className="relative p-5 rounded-xl border bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
                 >
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-foreground/50  dark:border-electric-cyan/30 rounded-tr dark:group-hover:border-electric-cyan/60 transition-colors" />
+                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-foreground/50  dark:border-electric-cyan/30 rounded-bl dark:group-hover:border-electric-cyan/60 transition-colors" />
                   {Icon ? (
                     <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan/70 dark:text-electric-cyan group-hover:text-electric-cyan transition-colors" />
                   ) : null}

@@ -16,8 +16,6 @@ services:
     environment:
       NODE_ENV: development
       HOSTNAME: "0.0.0.0"
-      WATCHPACK_POLLING: "true"
-      CHOKIDAR_USEPOLLING: "true"
       NEXT_TELEMETRY_DISABLED: "1"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000"]
@@ -26,6 +24,23 @@ services:
       retries: 24
       start_period: 120s
     restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /app
+          ignore:
+            - node_modules
+            - .next
+            - .git
+            - .claude
+            - .turbo
+        - action: sync+restart
+          path: package.json
+          target: /app/package.json
+        - action: sync+restart
+          path: pnpm-lock.yaml
+          target: /app/pnpm-lock.yaml
 
   obsidian-vault:
     image: node:22-alpine

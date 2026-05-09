@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "nexgen-electrical-innovations-state",
-  "fallback": "c4ad7ba chore: rename electrical-website → nexgen-electrical-innovations (#150) | 505b8a4 fix: category slider scroll-to-top on first click from category slug pages (#149) | 049229b chore: post-merge cleanup — active-branch + memory-lane after PR #147 (#148)",
-  "updatedAt": "2026-05-09T09:58:00.875Z"
+  "branch": "feat/final-theme-polish",
+  "entity": "feat-final-theme-polish",
+  "fallback": "04781ee fix: add missing active-memory-lanes.json + fix startup script banner | 46bf547 chore: post-merge cleanup — memory-lanes + active-branch after PR #150 (#151) | e0117d2 chore: rename electrical-website → nexgen-electrical-innovations (#150) (#150)",
+  "updatedAt": "2026-05-09T11:41:48.805Z"
 }
