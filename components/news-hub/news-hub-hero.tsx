@@ -9,6 +9,15 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/components/shared";
+
+const NEWS_HUB_TRUST_INDICATORS: readonly TrustIndicatorItem[] = [
+  { icon: "BookOpen",      title: "Expert-Led Insights",   description: "In-depth analysis from UK electrical industry specialists" },
+  { icon: "ClipboardCheck", title: "Editorial Standards",  description: "Every article reviewed and verified before publication" },
+  { icon: "Activity",      title: "Live Campaign Feed",    description: "Case studies and project updates delivered in real time" },
+  { icon: "Users",         title: "Full Sector Coverage",  description: "Commercial, industrial and residential stories in one place" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 interface NewsHubHeroProps {
   totalArticles: number;
@@ -211,6 +220,11 @@ export function NewsHubHero({ totalArticles }: NewsHubHeroProps) {
             partner updates. Powered by typed content models ready for scalable
             CMS integration.
           </motion.p>
+
+          <HeroTrustIndicators
+            items={NEWS_HUB_TRUST_INDICATORS}
+            variants={itemVariants}
+          />
 
           <motion.div
             variants={itemVariants}

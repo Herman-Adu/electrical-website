@@ -1,3 +1,5 @@
+import type { IconName } from '@/types/sections';
+
 export type MarketingIconName =
   | "Zap"
   | "Home"
@@ -143,7 +145,7 @@ export interface MarketingContactContent {
     description: string;
   };
   trustIndicators: Array<{
-    icon: MarketingIconName;
+    icon: IconName;
     title: string;
     description: string;
   }>;

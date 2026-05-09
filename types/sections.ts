@@ -32,7 +32,9 @@ export type IconName =
   | 'Heart'
   | 'Star'
   | 'Activity'
-  | 'BookOpen';
+  | 'BookOpen'
+  | 'Mail'
+  | 'MessageSquare';
 
 export type AccentColor = 'cyan' | 'amber';
 

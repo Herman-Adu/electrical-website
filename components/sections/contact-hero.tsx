@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Activity,
-  ChevronDown,
-  Clock,
-  Mail,
-  MessageSquare,
-  Shield,
-} from "lucide-react";
+import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
@@ -17,10 +10,9 @@ import {
   //HERO_H1_TALL_BLUEPRINT,
 } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import type {
-  MarketingContactContent,
-  MarketingIconName,
-} from "@/types/marketing";
+import type { MarketingContactContent } from "@/types/marketing";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/components/shared";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -48,22 +40,10 @@ const itemVariants = {
   },
 };
 
-const iconMap = {
-  Mail,
-  MessageSquare,
-  Shield,
-  Clock,
-} as const;
-
-type HeroIconName = keyof typeof iconMap;
-
 interface ContactHeroProps {
   hero: MarketingContactContent["hero"];
   trustIndicators: MarketingContactContent["trustIndicators"];
 }
-
-const getIcon = (name?: MarketingIconName) =>
-  name ? iconMap[name as HeroIconName] : undefined;
 
 export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
@@ -215,33 +195,10 @@ export function ContactHero({ hero, trustIndicators }: ContactHeroProps) {
           </motion.p>
 
           {/* Trust indicators */}
-          <motion.div
+          <HeroTrustIndicators
+            items={trustIndicators as readonly TrustIndicatorItem[]}
             variants={itemVariants}
-            className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4"
-          >
-            {trustIndicators.map((item) => {
-              const Icon = getIcon(item.icon);
-
-              return (
-                <div
-                  key={item.title}
-                  className="relative p-5 rounded-xl border bg-white/20 dark:bg-white/15 border-[hsl(174_100%_35%)]/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
-                >
-                  <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-foreground/50  dark:border-electric-cyan/30 rounded-tr dark:group-hover:border-electric-cyan/60 transition-colors" />
-                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-foreground/50  dark:border-electric-cyan/30 rounded-bl dark:group-hover:border-electric-cyan/60 transition-colors" />
-                  {Icon ? (
-                    <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan/70 dark:text-electric-cyan group-hover:text-electric-cyan transition-colors" />
-                  ) : null}
-                  <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 hidden text-xs text-foreground/90 dark:text-foreground/70 sm:block">
-                    {item.description}
-                  </p>
-                </div>
-              );
-            })}
-          </motion.div>
+          />
 
           {/* Technical metadata */}
           <motion.div
