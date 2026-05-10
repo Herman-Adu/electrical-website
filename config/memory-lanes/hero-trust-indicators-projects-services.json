@@ -3,9 +3,9 @@
     "id": "feat-hero-trust-indicators-projects-services",
     "branch": "feat/hero-trust-indicators-projects-services",
     "dockerEntity": "feat-hero-trust-indicators-projects-services",
-    "status": "active",
+    "status": "completed",
     "openedAt": "2026-05-10T12:40:08.044Z",
-    "mergedAt": null,
-    "fallback_summary": "Auto-registered branch: feat/hero-trust-indicators-projects-services"
+    "mergedAt": "2026-05-10T14:00:00.000Z",
+    "fallback_summary": "Merged PR #154 — trust indicators across all projects and services heroes (projects-hero, projects-categories-hero, project-category-hero, services-hero, service-page-hero, quotation-hero) + spacing fix + metadata strip"
   }
 }

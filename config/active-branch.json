@@ -1,6 +1,6 @@
 {
-  "branch": "feat/hero-trust-indicators-projects-services",
-  "entity": "feat-hero-trust-indicators-projects-services",
-  "fallback": "3be0b5f feat: trust indicators across all projects and services heroes | b429638 feat: final theme polish — hero trust indicators, test fixes, CLS fix (#153) | 3b34550 feat: hero consolidation — atoms, circuits, trust indicators, spacing alignment (#152)",
-  "updatedAt": "2026-05-10T13:07:13.261Z"
+  "branch": "main",
+  "entity": "nexgen-electrical-innovations-state",
+  "fallback": "649413c feat: trust indicators across all projects and services heroes — PR #154 merged 2026-05-10",
+  "updatedAt": "2026-05-10T14:00:00.000Z"
 }

@@ -3,9 +3,9 @@
     "id": "nexgen-electrical-innovations-state",
     "branch": "main",
     "dockerEntity": "nexgen-electrical-innovations-state",
-    "status": "paused",
+    "status": "active",
     "openedAt": "2026-04-28T09:00:00.000Z",
     "mergedAt": null,
-    "fallback_summary": "Main branch — project state entity is nexgen-electrical-innovations-state | Last merged: e0117d2 PR #150 chore/rename-to-nexgen-electrical-innovations (2026-05-09)"
+    "fallback_summary": "Main branch — project state entity is nexgen-electrical-innovations-state | Last merged: 649413c PR #154 feat/hero-trust-indicators-projects-services (2026-05-10)"
   }
 }
