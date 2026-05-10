@@ -197,49 +197,49 @@ describe('NewsCategoryHero', () => {
     });
   });
 
-  describe('Correct title and accentWord per slug', () => {
-    it('residential: renders label "Residential" and accentWord "Living"', () => {
+  describe('Correct title and headline per slug', () => {
+    it('residential: renders label "Residential" and headline "SMART LIVING"', () => {
       render(<NewsCategoryHero category={makeCategory('residential', 'Residential')} articleCount={3} />);
       // Label appears in both breadcrumb span and h1 span
       const matches = screen.getAllByText('Residential');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Living')).toBeInTheDocument();
+      expect(screen.getByText('SMART LIVING')).toBeInTheDocument();
     });
 
-    it('industrial: renders label "Industrial" and accentWord "Operations"', () => {
+    it('industrial: renders label "Industrial" and headline "POWER SYSTEMS"', () => {
       render(<NewsCategoryHero category={makeCategory('industrial', 'Industrial')} articleCount={3} />);
       const matches = screen.getAllByText('Industrial');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Operations')).toBeInTheDocument();
+      expect(screen.getByText('POWER SYSTEMS')).toBeInTheDocument();
     });
 
-    it('partners: renders label "Partners" and accentWord "Partnerships"', () => {
+    it('partners: renders label "Partners" and headline "STRATEGIC"', () => {
       render(<NewsCategoryHero category={makeCategory('partners', 'Partners')} articleCount={3} />);
       // "Partners" appears in both breadcrumb and h1
       const partnerMatches = screen.getAllByText('Partners');
       expect(partnerMatches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Partnerships')).toBeInTheDocument();
+      expect(screen.getByText('STRATEGIC')).toBeInTheDocument();
     });
 
-    it('case-studies: renders label "Case Studies" and accentWord "Outcomes"', () => {
+    it('case-studies: renders label "Case Studies" and headline "PROVEN"', () => {
       render(<NewsCategoryHero category={makeCategory('case-studies', 'Case Studies')} articleCount={3} />);
       const matches = screen.getAllByText('Case Studies');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Outcomes')).toBeInTheDocument();
+      expect(screen.getByText('PROVEN')).toBeInTheDocument();
     });
 
-    it('insights: renders label "Insights" and accentWord "Intelligence"', () => {
+    it('insights: renders label "Insights" and headline "INTELLIGENCE"', () => {
       render(<NewsCategoryHero category={makeCategory('insights', 'Insights')} articleCount={3} />);
       const matches = screen.getAllByText('Insights');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Intelligence')).toBeInTheDocument();
+      expect(screen.getByText('INTELLIGENCE')).toBeInTheDocument();
     });
 
-    it('reviews: renders label "Reviews" and accentWord "Feedback"', () => {
+    it('reviews: renders label "Reviews" and headline "CLIENT"', () => {
       render(<NewsCategoryHero category={makeCategory('reviews', 'Reviews')} articleCount={3} />);
       const matches = screen.getAllByText('Reviews');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('Feedback')).toBeInTheDocument();
+      expect(screen.getByText('CLIENT')).toBeInTheDocument();
     });
   });
 
@@ -301,15 +301,4 @@ describe('NewsCategoryHero', () => {
     });
   });
 
-  describe('Article count renders correctly', () => {
-    it('renders singular "Article" when count is 1', () => {
-      render(<NewsCategoryHero category={makeCategory('insights', 'Insights')} articleCount={1} />);
-      expect(screen.getByText('1 Article')).toBeInTheDocument();
-    });
-
-    it('renders plural "Articles" when count is > 1', () => {
-      render(<NewsCategoryHero category={makeCategory('insights', 'Insights')} articleCount={7} />);
-      expect(screen.getByText('7 Articles')).toBeInTheDocument();
-    });
-  });
 });

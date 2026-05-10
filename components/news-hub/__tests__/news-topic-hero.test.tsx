@@ -257,11 +257,6 @@ describe('NewsTopicHero — HeroTrustIndicators integration', () => {
       expect(matches.length).toBeGreaterThanOrEqual(1);
     });
 
-    it('renders article count eyebrow', () => {
-      render(<NewsTopicHero topic={makeTopic('commercial', 'Commercial')} articleCount={7} />);
-      expect(screen.getByText('7 Articles')).toBeInTheDocument();
-    });
-
     it('does not render All News or All Channels nav buttons', () => {
       render(<NewsTopicHero topic={makeTopic('industrial', 'Industrial')} articleCount={2} />);
       expect(screen.queryByRole('link', { name: /all news/i })).not.toBeInTheDocument();

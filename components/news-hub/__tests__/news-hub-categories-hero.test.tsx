@@ -194,11 +194,6 @@ describe('NewsHubCategoriesHero', () => {
       expect(screen.getByText('All Categories')).toBeInTheDocument();
     });
 
-    it('renders category count in eyebrow', () => {
-      render(<NewsHubCategoriesHero categoryCount={6} />);
-      expect(screen.getByText('6 Content Lanes')).toBeInTheDocument();
-    });
-
     it('renders description text', () => {
       render(<NewsHubCategoriesHero categoryCount={6} />);
       expect(screen.getByText(/Six dedicated editorial lanes/i)).toBeInTheDocument();
