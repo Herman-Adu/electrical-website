@@ -241,6 +241,20 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
               );
             })}
           </motion.div>
+
+          {/* Metadata credential strip */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+          >
+            <span>NICEIC Approved</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>48hr Turnaround</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>Free No-Obligation Quote</span>
+            <span className="hidden sm:inline opacity-40">|</span>
+            <span>15+ Years Experience</span>
+          </motion.div>
         </motion.div>
       }
       contentStyle={contentStyle}

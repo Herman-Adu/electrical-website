@@ -1,6 +1,6 @@
 {
-  "branch": "feat/final-theme-polish",
-  "entity": "feat-final-theme-polish",
-  "fallback": "a7c0593 chore: update playwright baselines + lane config after hero consolidation | 25b091c fix: update e2e tests for clean-path nav links and fix localhost/127.0.0.1 mismatch | c67b860 fix: match contact-hero spacing across all news hub heroes + remove remaining buttons",
-  "updatedAt": "2026-05-10T08:35:55.218Z"
+  "branch": "feat/hero-trust-indicators-projects-services",
+  "entity": "feat-hero-trust-indicators-projects-services",
+  "fallback": "3be0b5f feat: trust indicators across all projects and services heroes | b429638 feat: final theme polish — hero trust indicators, test fixes, CLS fix (#153) | 3b34550 feat: hero consolidation — atoms, circuits, trust indicators, spacing alignment (#152)",
+  "updatedAt": "2026-05-10T13:07:13.261Z"
 }

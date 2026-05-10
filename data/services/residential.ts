@@ -33,6 +33,13 @@ export const residentialPageData: ServicePageData = {
       alt: "Modern residential electrical installation",
       priority: true,
     },
+    trustIndicators: [
+      { icon: "Home" as const, title: "Domestic Specialists", description: "Full rewires, consumer units, EV chargers and smart installs" },
+      { icon: "CheckCircle" as const, title: "Part P Certified", description: "All residential work registered and certified with council" },
+      { icon: "Shield" as const, title: "5-Year Guarantee", description: "Workmanship guarantee on all domestic electrical installations" },
+      { icon: "Lightbulb" as const, title: "Smart Home Ready", description: "Future-ready wiring for home automation and energy management" },
+    ],
+    metadata: ["NICEIC Approved", "Part P Certified", "EV Certified", "1200+ Homes"],
   },
   intro: {
     sectionId: "our-promise",

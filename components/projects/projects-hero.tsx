@@ -8,7 +8,15 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
+const PROJECTS_TRUST_INDICATORS = [
+  { icon: "Award" as const, title: "NICEIC Certified", description: "Approved contractor delivering across every project type" },
+  { icon: "Shield" as const, title: "Safety Record", description: "Zero LTI incidents maintained across all active sites" },
+  { icon: "CheckCircle" as const, title: "Programme Delivery", description: "95% of projects completed on schedule and within budget" },
+  { icon: "ClipboardCheck" as const, title: "Full Documentation", description: "Test certificates and handover packs included as standard" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -198,7 +206,7 @@ export function ProjectsHero() {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             A data-driven portfolio of industrial, commercial, and critical
             infrastructure electrical projects delivered with strict safety,
@@ -206,10 +214,16 @@ export function ProjectsHero() {
           </motion.p>
 
 
+          {/* Trust Indicators */}
+          <HeroTrustIndicators
+            items={PROJECTS_TRUST_INDICATORS}
+            variants={itemVariants}
+          />
+
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>

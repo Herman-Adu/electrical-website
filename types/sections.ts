@@ -36,6 +36,12 @@ export type IconName =
   | 'Mail'
   | 'MessageSquare';
 
+export interface TrustIndicatorItem {
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
 export type AccentColor = 'cyan' | 'amber';
 
 export interface ImageData {
@@ -78,6 +84,8 @@ export interface SectionHeroData {
   subheadline: string;
   /** Stats bar below subheadline */
   stats?: SectionHeroStat[];
+  /** Trust indicator items shown below subheadline */
+  trustIndicators?: readonly TrustIndicatorItem[];
   /** Technical metadata tags */
   metadata?: string[];
   /** Scroll target section ID */

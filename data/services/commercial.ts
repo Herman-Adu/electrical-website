@@ -33,6 +33,13 @@ export const commercialPageData: ServicePageData = {
       alt: "Commercial electrical installation",
       priority: true,
     },
+    trustIndicators: [
+      { icon: "Building2" as const, title: "Commercial Specialists", description: "Electrical experts across warehouses, retail, offices and schools" },
+      { icon: "Award" as const, title: "NICEIC Certified", description: "Fully accredited delivery on every commercial installation" },
+      { icon: "Shield" as const, title: "CDM Compliant", description: "All commercial installations meet HSE and CDM requirements" },
+      { icon: "Wrench" as const, title: "Design and Build", description: "From initial design through to test, commission and handover" },
+    ],
+    metadata: ["NICEIC Approved", "BS 7671 Compliant", "CDM Ready", "500+ Commercial Sites"],
   },
   intro: {
     sectionId: "our-approach",

@@ -3,54 +3,64 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
-import {
-  Activity,
-  ChevronDown,
-  Home,
-  Lightbulb,
-  Zap,
-  FolderOpen,
-  Layers,
-} from "lucide-react";
+import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_CATEGORY_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { cn } from "@/lib/utils";
-import { categoryHeroButtons } from "@/data/projects/category-hero-buttons";
 import type { ProjectCategory } from "@/types/projects";
-import { categoriesHeroButtons } from "@/data/projects/categories-hero-buttons";
-import { Button } from "../ui/button";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
-// Map each category slug to its dedicated hero image and icon
+// Map each category slug to its dedicated hero image and trust indicators
 const categoryConfig: Record<
   string,
-  { image: string; icon: React.ReactNode; accentWord: string }
+  { image: string; accentWord: string; trustIndicators: readonly TrustIndicatorItem[] }
 > = {
   residential: {
     image: "/images/hero-residential.jpg",
-    icon: <Home className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Living",
+    trustIndicators: [
+      { icon: "Home", title: "Domestic Specialists", description: "Full rewires, consumer units, EV chargers and smart installs" },
+      { icon: "CheckCircle", title: "Part P Certified", description: "All residential work registered and certified with council" },
+      { icon: "Shield", title: "5-Year Guarantee", description: "Workmanship guarantee on every domestic installation" },
+      { icon: "Lightbulb", title: "Smart Home Ready", description: "Future-ready wiring for home automation and EV charging" },
+    ],
   },
   "commercial-lighting": {
     image: "/images/hero-commercial-lighting.jpg",
-    icon: <Lightbulb className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Illuminated",
+    trustIndicators: [
+      { icon: "Lightbulb", title: "Lighting Specialists", description: "Design-led commercial lighting from fitout to ongoing maintenance" },
+      { icon: "Award", title: "NICEIC Certified", description: "Fully accredited commercial lighting installation and testing" },
+      { icon: "Zap", title: "Energy Efficient", description: "LED and smart lighting upgrades that reduce energy spend" },
+      { icon: "ClipboardCheck", title: "Full Commissioning", description: "All lighting circuits tested, certified and fully documented" },
+    ],
   },
   "power-boards": {
     image: "/images/hero-power-boards.jpg",
-    icon: <Zap className="w-9 h-9 text-electric-cyan" />,
     accentWord: "Powered",
+    trustIndicators: [
+      { icon: "Zap", title: "HV-LV Specialists", description: "Main distribution boards from initial design to commissioning" },
+      { icon: "Shield", title: "18th Edition", description: "Every panel built and tested to BS 7671 18th Edition standards" },
+      { icon: "Settings", title: "Custom Build", description: "Bespoke DB and MCC panels for any industrial specification" },
+      { icon: "ClipboardCheck", title: "Full Certification", description: "Complete test certificates on every board installation" },
+    ],
   },
 };
 
-const fallbackConfig = {
+const fallbackConfig: { image: string; accentWord: string; trustIndicators: readonly TrustIndicatorItem[] } = {
   image: "",
-  icon: <FolderOpen className="w-9 h-9 text-electric-cyan" />,
   accentWord: "Delivered",
+  trustIndicators: [
+    { icon: "CheckCircle", title: "Quality Assured", description: "NICEIC certified, Part P compliant delivery on every project" },
+    { icon: "Shield", title: "Safe Installation", description: "Strict HSE compliance enforced across all electrical work" },
+    { icon: "Activity", title: "Progress Tracking", description: "Real-time updates from first survey to final sign-off" },
+    { icon: "ClipboardCheck", title: "Complete Handover", description: "Test certificates and certification packs included as standard" },
+  ],
 };
 
 interface ProjectCategoryHeroProps {
@@ -76,13 +86,6 @@ const itemVariants: Variants = {
   },
 };
 
-const flickerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: [0, 1, 0.6, 1, 0.8, 1],
-    transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
-  },
-};
 
 export function ProjectCategoryHero({
   category,
@@ -215,41 +218,11 @@ export function ProjectCategoryHero({
             <span className="text-electric-cyan">{category.label}</span>
           </motion.nav>
 
-          {/* Icon */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center mb-6"
-          >
-            <div className="relative">
-              <div className="w-16 h-16 rounded-xl border border-white bg-white/10 flex items-center justify-center backdrop-blur-sm">
-                <span className="flex items-center justify-center w-9 h-9 text-white">
-                  {config.icon}
-                </span>
-              </div>
-              {/* Glow ring */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
-                animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </div>
-          </motion.div>
+          {/* Icon — commented out; replaced by HeroTrustIndicators below */}
+          {false && null}
 
-          {/* Project count eyebrow */}
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-4 mb-6"
-          >
-            <span className="h-px w-12 bg-electric-cyan" />
-            <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
-              {projectCount} Project{projectCount !== 1 ? "s" : ""}
-            </span>
-            <span className="h-px w-12 bg-electric-cyan" />
-          </motion.div>
+          {/* Project count eyebrow — commented out */}
+          {false && null}
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
@@ -262,44 +235,22 @@ export function ProjectCategoryHero({
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-white/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg text-white/80 mb-6 max-w-2xl mx-auto font-light leading-relaxed"
           >
             {category.description}
           </motion.p>
 
-          {/* Category hero action buttons */}
-          <motion.div
+          {/* Trust Indicators */}
+          <HeroTrustIndicators
+            items={config.trustIndicators}
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
-          >
-            {categoriesHeroButtons.map((button, index) => (
-              <motion.div
-                key={button.href}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
-              >
-                <Button
-                  asChild
-                  className={cn(
-                    "px-4 py-2 rounded-lg border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                    "bg-white/10 border-electric-cyan/50 ",
-                    "hover:border-electric-cyan dark:hover:border-electric-cyan/70 shadow-md shadow-electric-cyan/30 hover:bg-electric-cyan/15",
-                    "text-white shadow-[0_0_20px_rgba(0,211,165,0.1)] hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-                  )}
-                >
-                  <Link href="/projects">
-                    <span>{button.label}</span>
-                  </Link>
-                </Button>
-              </motion.div>
-            ))}
-          </motion.div>
+            variant="image-overlay"
+          />
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
+            className="mt-10 flex flex-wrap justify-center gap-6 font-mono text-[10px] tracking-[0.2em] text-white/80 font-bold uppercase"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
