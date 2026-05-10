@@ -1,6 +1,6 @@
 {
   "branch": "feat/final-theme-polish",
   "entity": "feat-final-theme-polish",
-  "fallback": "c67b860 fix: match contact-hero spacing across all news hub heroes + remove remaining buttons | dfd46ae fix: remove All News/Channels buttons, fill trust indicator descriptions, add category hero trust indicators | 5d9639f feat: hero consolidation — atoms, circuits, base components, Phase 1 fixes",
-  "updatedAt": "2026-05-09T20:52:02.538Z"
+  "fallback": "a7c0593 chore: update playwright baselines + lane config after hero consolidation | 25b091c fix: update e2e tests for clean-path nav links and fix localhost/127.0.0.1 mismatch | c67b860 fix: match contact-hero spacing across all news hub heroes + remove remaining buttons",
+  "updatedAt": "2026-05-10T08:35:55.218Z"
 }

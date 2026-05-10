@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { newsCategories } from "@/data/news";
 import type { NewsCategorySlug } from "@/types/news";
 
@@ -40,6 +40,7 @@ export function NewsHubCategorySlider({
   className,
 }: NewsHubCategorySliderProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
 
@@ -138,9 +139,15 @@ export function NewsHubCategorySlider({
 
   const handleSelect = (slug: NewsCategorySlug) => {
     if (slug === active) return;
-    const target = slug === "all" ? "/news-hub" : `/news-hub?category=${slug}`;
+    const isOnHubPage = pathname === "/news-hub";
+    const base = slug === "all" ? "/news-hub" : `/news-hub?category=${slug}`;
+    const target = isOnHubPage ? base : `${base}#news-hub-articles`;
     startTransition(() => {
-      router.replace(target, { scroll: false });
+      if (isOnHubPage) {
+        router.replace(target, { scroll: false });
+      } else {
+        router.push(target);
+      }
     });
   };
 

@@ -29,14 +29,14 @@ const categoryConfig: Record<
   {
     image: string;
     icon: ReactNode;
-    accentWord: string;
+    headline: readonly string[];
     trustIndicators: readonly TrustIndicatorItem[];
   }
 > = {
   residential: {
     image: "/images/smart-living-interior.jpg",
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Living",
+    headline: ["RESIDENTIAL", "SMART LIVING"],
     trustIndicators: [
       { icon: "Home",   title: "Smart Living",     description: "Domestic installations and smart home systems" },
       { icon: "Zap",    title: "EV Charging",      description: "Home and workplace EV solutions" },
@@ -47,7 +47,7 @@ const categoryConfig: Record<
   industrial: {
     image: "/images/services-industrial.jpg",
     icon: <Factory className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Operations",
+    headline: ["INDUSTRIAL", "POWER SYSTEMS"],
     trustIndicators: [
       { icon: "Factory",  title: "Industrial Grade",     description: "Heavy-duty industrial installations" },
       { icon: "Settings", title: "Maintenance Plans",    description: "Scheduled and reactive maintenance" },
@@ -58,7 +58,7 @@ const categoryConfig: Record<
   partners: {
     image: "/images/community-hero.jpg",
     icon: <Handshake className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Partnerships",
+    headline: ["STRATEGIC", "PARTNER", "NETWORK"],
     trustIndicators: [
       { icon: "Users",          title: "Strategic Partners", description: "Long-term framework agreements" },
       { icon: "Award",          title: "Accredited Network", description: "Pre-approved and vetted contractors" },
@@ -69,7 +69,7 @@ const categoryConfig: Record<
   "case-studies": {
     image: "/images/power-distribution.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Outcomes",
+    headline: ["PROVEN", "PROJECT", "OUTCOMES"],
     trustIndicators: [
       { icon: "Lightbulb",      title: "Real Outcomes",     description: "Documented project results and impact" },
       { icon: "ClipboardCheck", title: "Verified Projects", description: "Every case study independently verified" },
@@ -80,7 +80,7 @@ const categoryConfig: Record<
   insights: {
     image: "/images/system-diagnostics.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Intelligence",
+    headline: ["ELECTRICAL", "MARKET", "INTELLIGENCE"],
     trustIndicators: [
       { icon: "BookOpen",  title: "Market Intelligence", description: "In-depth sector analysis and trends" },
       { icon: "Activity",  title: "Industry Updates",    description: "Latest news from the electrical sector" },
@@ -91,7 +91,7 @@ const categoryConfig: Record<
   reviews: {
     image: "/images/warehouse-lighting.jpg",
     icon: <MessageSquareQuote className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Feedback",
+    headline: ["CLIENT", "STORIES &", "REVIEWS"],
     trustIndicators: [
       { icon: "Star",     title: "Client Reviews",  description: "Verified testimonials from clients" },
       { icon: "ThumbsUp", title: "5-Star Service",  description: "Consistently top-rated by customers" },
@@ -104,7 +104,7 @@ const categoryConfig: Record<
 const fallbackConfig = {
   image: "/images/services-commercial.jpg",
   icon: <FolderOpen className="h-8 w-8 text-electric-cyan" />,
-  accentWord: "Coverage",
+  headline: ["EDITORIAL", "COVERAGE"],
   trustIndicators: [
     { icon: "Shield",   title: "Fully Certified",  description: "NICEIC approved contractor" },
     { icon: "BookOpen", title: "Expert Editorial", description: "Content verified by specialists" },
@@ -267,7 +267,7 @@ export function NewsCategoryHero({
           </motion.nav>
 
           {/* Icon */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex justify-center mb-6"
           >
@@ -277,7 +277,6 @@ export function NewsCategoryHero({
                   {config.icon}
                 </span>
               </div>
-              {/* Glow ring */}
               <motion.div
                 className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
                 animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
@@ -288,10 +287,10 @@ export function NewsCategoryHero({
                 }}
               />
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Article count eyebrow */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
@@ -300,14 +299,17 @@ export function NewsCategoryHero({
               {articleCount} Article{articleCount !== 1 ? "s" : ""}
             </span>
             <span className="h-px w-12 bg-electric-cyan" />
-          </motion.div>
+          </motion.div> */}
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
-            <span className="block">{category.label}</span>
+            <span className="block">{config.headline[0]}</span>
             <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
-              {config.accentWord}
+              {config.headline[1]}
             </span>
+            {config.headline[2] && (
+              <span className="block">{config.headline[2]}</span>
+            )}
           </motion.h1>
 
           {/* Description */}
@@ -319,7 +321,7 @@ export function NewsCategoryHero({
           </motion.p>
 
           {/* Trust indicators */}
-          <HeroTrustIndicators items={config.trustIndicators} />
+          <HeroTrustIndicators items={config.trustIndicators} variant="image-overlay" />
 
           {/* Meta */}
           <motion.div

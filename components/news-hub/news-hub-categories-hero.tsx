@@ -137,7 +137,7 @@ export function NewsHubCategoriesHero({
           </motion.nav>
 
           {/* Icon */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex justify-center mb-6"
           >
@@ -147,7 +147,6 @@ export function NewsHubCategoriesHero({
                   <Layers className="w-9 h-9 text-foreground dark:text-white/80" />
                 </span>
               </div>
-              {/* Glow ring */}
               <motion.div
                 className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
                 animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
@@ -158,10 +157,10 @@ export function NewsHubCategoriesHero({
                 }}
               />
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Eyebrow */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
@@ -170,7 +169,7 @@ export function NewsHubCategoriesHero({
               {categoryCount} Content Lanes
             </span>
             <span className="h-px w-12 bg-electric-cyan font-bold" />
-          </motion.div>
+          </motion.div> */}
 
           <motion.h1
             variants={itemVariants}
