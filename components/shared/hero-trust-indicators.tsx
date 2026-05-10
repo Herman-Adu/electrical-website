@@ -3,12 +3,9 @@
 import { motion, type Variants } from "framer-motion";
 import { getIcon } from "@/components/shared/icon-map";
 import type { IconName } from "@/types/sections";
+import type { TrustIndicatorItem } from "@/types/sections";
 
-export interface TrustIndicatorItem {
-  icon: IconName;
-  title: string;
-  description: string;
-}
+export type { TrustIndicatorItem };
 
 interface HeroTrustIndicatorsProps {
   items: readonly TrustIndicatorItem[];

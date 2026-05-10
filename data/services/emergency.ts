@@ -33,6 +33,13 @@ export const emergencyPageData: ServicePageData = {
       alt: "24/7 emergency electrical response",
       priority: true,
     },
+    trustIndicators: [
+      { icon: "Wrench" as const, title: "24/7 Rapid Response", description: "Always-on emergency electrical service, any hour of any day" },
+      { icon: "Zap" as const, title: "2-Hour SLA", description: "Guaranteed response commitment for all urgent electrical faults" },
+      { icon: "Shield" as const, title: "Safe and Certified", description: "Emergency work documented and certified for insurance purposes" },
+      { icon: "Phone" as const, title: "Direct Emergency Line", description: "Call direct to reach our qualified emergency electrical team" },
+    ],
+    metadata: ["NICEIC Approved", "24/7 Cover", "2-Hour SLA", "365 Days/Year"],
   },
   intro: {
     sectionId: "when-seconds-matter",

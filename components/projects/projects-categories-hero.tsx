@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { Activity, ChevronDown, Layers } from "lucide-react";
+import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
-import { categoriesHeroButtons } from "@/data/projects/categories-hero-buttons";
-import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -38,6 +37,13 @@ const flickerVariants: Variants = {
     transition: { duration: 0.8, times: [0, 0.2, 0.3, 0.5, 0.7, 1] },
   },
 };
+
+const CATEGORIES_TRUST_INDICATORS = [
+  { icon: "Building2" as const, title: "Sector-Specific Work", description: "Every project scoped and delivered to sector requirements" },
+  { icon: "Award" as const, title: "Accredited Delivery", description: "All projects NICEIC certified and fully Part P compliant" },
+  { icon: "Activity" as const, title: "Active Portfolio", description: "Real project updates from current and completed site work" },
+  { icon: "Users" as const, title: "Client-First Approach", description: "Delivery aligned to your spec, timeline and sector standards" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 interface ProjectsCategoriesHeroProps {
   categoryCount: number;
@@ -280,6 +286,7 @@ export function ProjectsCategoriesHero({
           </motion.nav>
 
           {/* Icon */}
+          {/*
           <motion.div
             variants={itemVariants}
             className="flex justify-center mb-6"
@@ -290,7 +297,7 @@ export function ProjectsCategoriesHero({
                   <Layers className="w-9 h-9 text-foreground dark:text-white/80" />
                 </span>
               </div>
-              {/* Glow ring */}
+              Glow ring
               <motion.div
                 className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
                 animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
@@ -302,8 +309,10 @@ export function ProjectsCategoriesHero({
               />
             </div>
           </motion.div>
+          */}
 
           {/* Eyebrow */}
+          {/*
           <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
@@ -314,6 +323,7 @@ export function ProjectsCategoriesHero({
             </span>
             <span className="h-px w-12 bg-electric-cyan font-bold" />
           </motion.div>
+          */}
 
           {/* Headline */}
           <motion.h1
@@ -329,46 +339,23 @@ export function ProjectsCategoriesHero({
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Each sector represents a distinct area of electrical engineering
             expertise. Explore our project portfolio by the type of environment
             we&apos;ve transformed.
           </motion.p>
 
-          {/* Category hero action buttons */}
-          <motion.div
+          {/* Trust Indicators */}
+          <HeroTrustIndicators
+            items={CATEGORIES_TRUST_INDICATORS}
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
-          >
-            {categoriesHeroButtons.map((button, index) => (
-              <motion.div
-                key={button.href}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
-              >
-                <Button
-                  asChild
-                  className={cn(
-                    "px-4 py-2 rounded-lg bg-white/10 border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                    "border-electric-cyan/50 hover:border-electric-cyan dark:hover:border-electric-cyan/70 hover:bg-electric-cyan/15",
-                    "text-foreground dark:text-foreground/80 shadow-md shadow-electric-cyan/30 hover:shadow-[0_0_20px_rgba(0,211,165,0.4)]",
-                    "hover:text-electric-cyan dark:hover:text-electric-cyan",
-                  )}
-                >
-                  <Link href="/projects">
-                    <span>{button.label}</span>
-                  </Link>
-                </Button>
-              </motion.div>
-            ))}
-          </motion.div>
+          />
 
           {/* Meta bar */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>

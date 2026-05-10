@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -38,25 +37,20 @@ const flickerVariants: Variants = {
   },
 };
 
-const serviceCategories = [
-  { label: "Commercial", slug: "commercial", color: "cyan" },
-  { label: "Industrial", slug: "industrial", color: "cyan" },
-  { label: "Residential", slug: "residential", color: "cyan" },
-  { label: "Emergency", slug: "emergency", color: "amber" },
-];
+const SERVICES_TRUST_INDICATORS = [
+  { icon: "Zap" as const, title: "Full Electrical Range", description: "From high-voltage industrial to smart residential installations" },
+  { icon: "Building2" as const, title: "Commercial Specialists", description: "Trusted by schools, warehouses and retail chains across the UK" },
+  { icon: "Wrench" as const, title: "24/7 Emergency Cover", description: "Rapid response with a guaranteed 2-hour callout commitment" },
+  { icon: "Star" as const, title: "15+ Years Expertise", description: "Precision electrical engineering with a proven UK track record" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 interface ServicesHeroProps {
   activeService?: string;
 }
 
-export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
-  const [isLoaded, setIsLoaded] = useState(false);
+export function ServicesHero({ activeService: _activeService }: ServicesHeroProps = {}) {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
     useHeroParallax({ size: "tall" });
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const statuses = [
     "INITIALIZING",
@@ -174,7 +168,7 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
+          animate="visible"
           className="mx-auto max-w-5xl px-4 text-center"
         >
           {/* Status Label */}
@@ -217,44 +211,23 @@ export function ServicesHero({ activeService }: ServicesHeroProps = {}) {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Comprehensive electrical solutions from high-voltage industrial
             systems to intelligent residential installations — all backed by 15+
             years of precision engineering.
           </motion.p>
 
-          {/* Category pills */}
-          <motion.div
+          {/* Trust Indicators */}
+          <HeroTrustIndicators
+            items={SERVICES_TRUST_INDICATORS}
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 mb-14"
-          >
-            {serviceCategories.map((cat, index) => (
-              <motion.div
-                key={cat.slug}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.08, duration: 0.3 }}
-              >
-                <Link
-                  href={`/services/${cat.slug}`}
-                  className={cn(
-                    "px-4 py-2 rounded-xl border backdrop-blur-sm font-mono text-[11px] tracking-widest uppercase transition-all duration-300",
-                    activeService === cat.slug
-                      ? "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-[hsl(174_100%_35%)] backdrop-blur-md text-foreground dark:text-electric-cyan transition-all duration-300 shadow-[0_0_20px_rgba(0,211,165,0.4)]"
-                      : "bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300",
-                  )}
-                >
-                  {cat.label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+          />
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline">|</span>

@@ -34,6 +34,13 @@ export const industrialPageData: ServicePageData = {
       alt: "Industrial electrical systems",
       priority: true,
     },
+    trustIndicators: [
+      { icon: "Zap" as const, title: "HV-LV Specialists", description: "High and low voltage design-build for industrial environments" },
+      { icon: "Shield" as const, title: "ATEX Compliant", description: "Explosion-protected installations for hazardous area projects" },
+      { icon: "Award" as const, title: "Fully Accredited", description: "NICEIC certified for heavy industrial electrical installation" },
+      { icon: "Settings" as const, title: "Custom Engineering", description: "Bespoke designs for complex manufacturing and process plants" },
+    ],
+    metadata: ["NICEIC Approved", "HV-LV Certified", "ATEX Capable", "200+ Industrial Sites"],
   },
   intro: {
     sectionId: "our-expertise",

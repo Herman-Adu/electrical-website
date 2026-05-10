@@ -10,6 +10,7 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_IMAGE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { SectionHeroData } from "@/types/sections";
+import { HeroTrustIndicators } from "@/components/shared";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -43,6 +44,8 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
     headlineHighlight,
     subheadline,
     stats = [],
+    trustIndicators,
+    metadata,
     scrollTargetId,
     scrollLabel = "Explore",
     backgroundImage,
@@ -197,13 +200,19 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             {subheadline}
           </motion.p>
 
-          {/* Stats bar */}
-          {stats.length > 0 && (
+          {/* Trust Indicators or Stats */}
+          {trustIndicators && trustIndicators.length > 0 ? (
+            <HeroTrustIndicators
+              items={trustIndicators}
+              variants={itemVariants}
+              variant={backgroundImage ? "image-overlay" : "default"}
+            />
+          ) : stats.length > 0 ? (
             <motion.div
               variants={itemVariants}
               className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
@@ -221,6 +230,21 @@ export function ServicePageHero({ data }: ServicePageHeroProps) {
                     {stat.label}
                   </div>
                 </div>
+              ))}
+            </motion.div>
+          ) : null}
+
+          {/* Metadata credential strip */}
+          {metadata && metadata.length > 0 && (
+            <motion.div
+              variants={itemVariants}
+              className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80"
+            >
+              {metadata.map((item, i) => (
+                <React.Fragment key={item}>
+                  {i > 0 && <span className="hidden sm:inline opacity-40">|</span>}
+                  <span>{item}</span>
+                </React.Fragment>
               ))}
             </motion.div>
           )}
