@@ -1,6 +1,6 @@
 {
   "branch": "main",
   "entity": "nexgen-electrical-innovations-state",
-  "fallback": "649413c feat: trust indicators across all projects and services heroes — PR #154 merged 2026-05-10",
-  "updatedAt": "2026-05-10T14:00:00.000Z"
+  "fallback": "10a871b feat: trust indicators on home and about heroes (#156) | fd4f0c8 chore: post-merge cleanup — memory-lanes + active-branch after PR #154 (#155) | 649413c feat: trust indicators across all projects and services heroes (#154)",
+  "updatedAt": "2026-05-10T20:15:00.000Z"
 }
