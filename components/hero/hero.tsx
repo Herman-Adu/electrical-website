@@ -12,6 +12,8 @@ import { useHeroParallax } from "./use-hero-parallax";
 import { HERO_H1_SCREEN } from "./hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
 const isClient = typeof window !== "undefined";
 
@@ -114,6 +116,13 @@ const statsContainerVariants = {
     },
   },
 };
+
+const HOME_TRUST_INDICATORS = [
+  { icon: "Zap" as const, title: "Commercial Experts", description: "High-voltage to smart-home solutions delivered with precision" },
+  { icon: "Award" as const, title: "NICEIC Approved", description: "Accredited contractor across all electrical work types in the UK" },
+  { icon: "Shield" as const, title: "15+ Years Track Record", description: "Proven delivery across 500+ commercial and industrial installations" },
+  { icon: "Wrench" as const, title: "24/7 Emergency Cover", description: "Guaranteed two-hour response, any time, any day of the year" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 export function Hero() {
   const { sectionRef, backgroundFrameStyle, contentStyle, shouldReduceMotion } =
@@ -281,14 +290,15 @@ export function Hero() {
           {/* Sub headline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Expert electrical engineering and installations for commercial and
             industrial frontiers. Precision-engineered power solutions delivered
             with absolute excellence.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons — commented out, replaced by HeroTrustIndicators */}
+          {/*
           <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -305,7 +315,6 @@ export function Hero() {
                 Initiate System
                 <Zap size={18} className="group-hover:animate-pulse" />
               </span>
-              {/* Hover sweep effect */}
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             </motion.button>
 
@@ -315,11 +324,13 @@ export function Hero() {
               </span>
             </button>
           </motion.div>
+          */}
+          <HeroTrustIndicators items={HOME_TRUST_INDICATORS} variants={itemVariants} />
 
           {/* Technical Metadata */}
           <motion.div
             variants={statsContainerVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>Est. 2024</span>
             <span className="hidden sm:inline">|</span>

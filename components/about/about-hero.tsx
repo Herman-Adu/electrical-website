@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
 import { BlueprintBackground } from "@/components/hero/blueprint-background";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
@@ -9,6 +9,8 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
+import { HeroTrustIndicators } from "@/components/shared";
+import type { TrustIndicatorItem } from "@/types/sections";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -36,12 +38,12 @@ const flickerVariants = {
   },
 };
 
-const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "150+", label: "Projects Completed" },
-  { value: "99.7%", label: "Client Satisfaction" },
-  { value: "24/7", label: "Emergency Support" },
-];
+const ABOUT_TRUST_INDICATORS = [
+  { icon: "Award" as const, title: "NICEIC Approved", description: "Certified contractor meeting the highest UK electrical standards" },
+  { icon: "Building2" as const, title: "Est. 2009", description: "15+ years serving London and the Home Counties with precision" },
+  { icon: "Users" as const, title: "500+ Projects", description: "Commercial, industrial and residential installations completed" },
+  { icon: "Star" as const, title: "99.7% Satisfaction", description: "Client-rated excellence across every project we deliver" },
+] as const satisfies readonly TrustIndicatorItem[];
 
 export function AboutHero() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -245,40 +247,19 @@ export function AboutHero() {
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Where engineering excellence meets genuine community commitment.
             Delivering gold-standard electrical solutions across commercial,
             industrial, and residential sectors.
           </motion.p>
 
-          {/* Stats bar */}
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-          >
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-muted-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
-              >
-                <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-foreground/50  dark:border-electric-cyan/30 rounded-tr dark:group-hover:border-electric-cyan/60 transition-colors" />
-                <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-foreground/50  dark:border-electric-cyan/30 rounded-bl dark:group-hover:border-electric-cyan/60 transition-colors" />
-
-                <div className="text-2xl font-black font-mono dark:text-electric-cyan mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs dark:text-foreground font-medium tracking-wide">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
+          <HeroTrustIndicators items={ABOUT_TRUST_INDICATORS} variants={itemVariants} />
 
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
