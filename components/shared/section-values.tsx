@@ -121,7 +121,6 @@ export function SectionValues({ data }: SectionValuesProps) {
                   whileInView="visible"
                   variants={cardVariants}
                   viewport={{ once: true }}
-                  style={{ contain: "content" }}
                 >
                   {/* Hover background fill */}
                   <div

@@ -36,25 +36,25 @@ export const newsCategories: NewsCategory[] = [
     slug: "partners",
     label: "Partners",
     description:
-      "Collaboration stories with developers, suppliers, and delivery partners.",
+      "Collaboration stories with developers, suppliers, and delivery partners. Strategic alliances and framework agreements that drive better outcomes, from design through to delivery.",
   },
   {
     slug: "case-studies",
     label: "Case Studies",
     description:
-      "Outcome-led delivery breakdowns showing how complex electrical work performs in the real world.",
+      "Outcome-led delivery breakdowns showing how complex electrical work performs in the real world. Each study documents real challenges, decisions, and measurable results.",
   },
   {
     slug: "insights",
     label: "Insights",
     description:
-      "Market intelligence, design guidance, and strategic commentary from the field.",
+      "Market intelligence, design guidance, and strategic commentary from the field. Stay ahead of UK industry trends, compliance changes, and emerging technology with expert analysis.",
   },
   {
     slug: "reviews",
     label: "Reviews",
     description:
-      "Client feedback, service highlights, and trust-building proof points.",
+      "Client feedback, service highlights, and trust-building proof points. Hear from clients about the quality, reliability, and professionalism that defines every Nexgen project.",
   },
 ];
 

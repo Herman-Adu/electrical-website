@@ -14,13 +14,41 @@ interface HeroTrustIndicatorsProps {
   items: readonly TrustIndicatorItem[];
   variants?: Variants;
   className?: string;
+  variant?: "default" | "image-overlay";
 }
+
+const STYLES = {
+  default: {
+    article:
+      "relative p-5 rounded-xl border border-foreground/50 dark:border-foreground/30 bg-foreground/3 dark:bg-white/15 backdrop-blur-md hover:bg-electric-cyan/2 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group",
+    cornerTR:
+      "absolute top-2 right-2 w-3 h-3 border-t border-r border-electric-cyan/50 rounded-tr group-hover:border-foreground dark:group-hover:border-foreground/60 transition-colors",
+    cornerBL:
+      "absolute bottom-2 left-2 w-3 h-3 border-b border-l border-electric-cyan/50 rounded-bl group-hover:border-foreground dark:group-hover:border-foreground/60 transition-colors",
+    icon: "mx-auto mb-2 h-6 w-6 text-foreground/70 group-hover:text-electric-cyan/70 transition-colors",
+    title: "text-sm font-medium text-electric-cyan group-hover:text-foreground transition-colors",
+    description: "mt-1 hidden text-xs text-foreground/90 dark:text-foreground/70 sm:block",
+  },
+  "image-overlay": {
+    article:
+      "relative p-5 rounded-xl border border-white/50 dark:border-foreground/30 bg-black/35 dark:bg-white/15 backdrop-blur-md hover:bg-electric-cyan/10 hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300 group",
+    cornerTR:
+      "absolute top-2 right-2 w-3 h-3 border-t border-r border-white/40 dark:border-electric-cyan/50 rounded-tr group-hover:border-electric-cyan dark:group-hover:border-foreground/60 transition-colors",
+    cornerBL:
+      "absolute bottom-2 left-2 w-3 h-3 border-b border-l border-white/40 dark:border-electric-cyan/50 rounded-bl group-hover:border-electric-cyan dark:group-hover:border-foreground/60 transition-colors",
+    icon: "mx-auto mb-2 h-6 w-6 text-white/80 dark:text-foreground/70 group-hover:text-electric-cyan transition-colors",
+    title: "text-sm font-medium text-electric-cyan group-hover:text-white dark:group-hover:text-foreground transition-colors",
+    description: "mt-1 hidden text-xs text-white/75 dark:text-foreground/70 sm:block",
+  },
+} as const;
 
 export function HeroTrustIndicators({
   items,
   variants,
   className,
+  variant = "default",
 }: HeroTrustIndicatorsProps): React.JSX.Element {
+  const s = STYLES[variant];
   return (
     <motion.div
       variants={variants}
@@ -29,25 +57,12 @@ export function HeroTrustIndicators({
       {items.map((item) => {
         const Icon = getIcon(item.icon);
         return (
-          <article
-            key={item.title}
-            className="relative p-5 rounded-xl border border-foreground/50 dark:border-foreground/30 bg-foreground/3 dark:bg-white/15 backdrop-blur-md hover:bg-electric-cyan/2 hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
-          >
-            <div
-              aria-hidden="true"
-              className="absolute top-2 right-2 w-3 h-3 border-t border-r border-electric-cyan/50 rounded-tr group-hover:border-foreground dark:group-hover:border-foreground/60 transition-colors"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-electric-cyan/50 rounded-bl group-hover:border-foreground dark:group-hover:border-foreground/60 transition-colors"
-            />
-            <Icon className="mx-auto mb-2 h-6 w-6 text-foreground/70 group-hover:text-electric-cyan/70 transition-colors" />
-            <p className="text-sm font-medium text-electric-cyan group-hover:text-foreground transition-colors">
-              {item.title}
-            </p>
-            <p className="mt-1 hidden text-xs text-foreground/90 dark:text-foreground/70 sm:block">
-              {item.description}
-            </p>
+          <article key={item.title} className={s.article}>
+            <div aria-hidden="true" className={s.cornerTR} />
+            <div aria-hidden="true" className={s.cornerBL} />
+            <Icon className={s.icon} />
+            <p className={s.title}>{item.title}</p>
+            <p className={s.description}>{item.description}</p>
           </article>
         );
       })}

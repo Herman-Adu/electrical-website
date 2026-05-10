@@ -62,9 +62,11 @@ export default async function NewsHubPage() {
         Next.js 16's `useSearchParams` requirement for every descendant
         that reads search params.
       */}
-      <Suspense fallback={<NewsListSkeleton />}>
-        <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} />
-      </Suspense>
+      <section id="news-hub-articles" className="scroll-mt-26 lg:scroll-mt-30">
+        <Suspense fallback={<NewsListSkeleton />}>
+          <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} />
+        </Suspense>
+      </section>
 
       <Footer />
     </main>

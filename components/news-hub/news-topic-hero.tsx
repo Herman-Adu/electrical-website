@@ -34,7 +34,7 @@ import { cn } from "@/lib/utils";
 interface TopicSlugConfig {
   readonly image: string;
   readonly icon: React.ReactNode;
-  readonly accentWord: string;
+  readonly headline: readonly string[];
   readonly description: string;
   readonly trustIndicators: readonly TrustIndicatorItem[];
 }
@@ -43,7 +43,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   residential: {
     image: "/images/smart-living-interior.jpg",
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Living",
+    headline: ["RESIDENTIAL", "SMART LIVING"],
     description:
       "Smart home upgrades, rewiring projects, EV charging installations, and energy efficiency guides for homeowners and domestic landlords.",
     trustIndicators: [
@@ -56,7 +56,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   commercial: {
     image: "/images/services-commercial.jpg",
     icon: <Building2 className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Commerce",
+    headline: ["COMMERCIAL", "ELECTRICAL", "EXCELLENCE"],
     description:
       "Retail fitouts, property management upgrades, multi-site standardisation, and hospitality electrical delivery across commercial environments.",
     trustIndicators: [
@@ -69,7 +69,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   industrial: {
     image: "/images/services-industrial.jpg",
     icon: <Factory className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Operations",
+    headline: ["INDUSTRIAL", "POWER", "SYSTEMS"],
     description:
       "Switchgear commissioning, data centre power infrastructure, critical systems maintenance, and energy efficiency programmes for industrial operators.",
     trustIndicators: [
@@ -82,7 +82,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   community: {
     image: "/images/community-hero.jpg",
     icon: <Users className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Community",
+    headline: ["COMMUNITY", "PUBLIC SECTOR", "PROJECTS"],
     description:
       "Education, healthcare, and public sector electrical programmes — including summer works schedules, HTM 06-01 compliance, and resilience upgrades.",
     trustIndicators: [
@@ -95,7 +95,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   campaigns: {
     image: "/images/power-distribution.jpg",
     icon: <Megaphone className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Campaigns",
+    headline: ["FRAMEWORK", "CAMPAIGNS &", "PARTNERSHIPS"],
     description:
       "Partner-led campaigns, framework agreements, Schneider Electric certification milestones, and coordinated multi-trade delivery programmes.",
     trustIndicators: [
@@ -108,7 +108,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   marketing: {
     image: "/images/system-diagnostics.jpg",
     icon: <TrendingUp className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Insights",
+    headline: ["MARKET", "INTELLIGENCE"],
     description:
       "Market commentary, net zero transition guides, compliance intelligence, and strategic content helping clients navigate electrification decisions.",
     trustIndicators: [
@@ -121,7 +121,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
   "social-media": {
     image: "/images/warehouse-lighting.jpg",
     icon: <MessageSquareQuote className="h-8 w-8 text-electric-cyan" />,
-    accentWord: "Reviews",
+    headline: ["CLIENT", "STORIES &", "REVIEWS"],
     description:
       "Client testimonials, service highlights, and satisfaction stories that build trust with new commercial and domestic clients.",
     trustIndicators: [
@@ -136,7 +136,7 @@ const topicConfig: Record<string, TopicSlugConfig> = {
 const fallbackConfig: TopicSlugConfig = {
   image: "/images/services-commercial.jpg",
   icon: <FolderOpen className="h-8 w-8 text-electric-cyan" />,
-  accentWord: "Coverage",
+  headline: ["EDITORIAL", "COVERAGE"],
   description: "Browse articles by topic across all editorial channels.",
   trustIndicators: [
     { icon: 'Shield',   title: 'Fully Certified',  description: 'NICEIC approved contractor' },
@@ -309,7 +309,7 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
           </motion.nav>
 
           {/* Icon */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex justify-center mb-6"
           >
@@ -319,7 +319,6 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
                   {config.icon}
                 </span>
               </div>
-              {/* Glow ring */}
               <motion.div
                 className="absolute inset-0 rounded-2xl border border-electric-cyan/20"
                 animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
@@ -330,10 +329,10 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
                 }}
               />
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Article count eyebrow */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
@@ -342,14 +341,17 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
               {articleCount} Article{articleCount !== 1 ? "s" : ""}
             </span>
             <span className="h-px w-12 bg-electric-cyan" />
-          </motion.div>
+          </motion.div> */}
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_CATEGORY_IMAGE}>
-            <span className="block">{topic.label}</span>
+            <span className="block">{config.headline[0]}</span>
             <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
-              {config.accentWord}
+              {config.headline[1]}
             </span>
+            {config.headline[2] && (
+              <span className="block">{config.headline[2]}</span>
+            )}
           </motion.h1>
 
           {/* Description */}
@@ -360,7 +362,7 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
             {config.description}
           </motion.p>
 
-          <HeroTrustIndicators items={config.trustIndicators} />
+          <HeroTrustIndicators items={config.trustIndicators} variant="image-overlay" />
 
           {/* Meta */}
           <motion.div
