@@ -66,6 +66,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Industrial",
     title: "West Dock Industrial Upgrade",
     heroHeadline: ['West Dock', 'Industrial Upgrade'],
+    heroIndicators: [
+      { icon: 'Factory', title: 'Industrial Grade', description: 'Full industrial specification upgrade to 3-phase distribution meeting BS 7671:2018 requirements.' },
+      { icon: 'Zap', title: '3-Phase Supply', description: 'Heavy-duty 3-phase power infrastructure installed to support high-demand industrial equipment.' },
+      { icon: 'ClipboardCheck', title: 'NICEIC Certified', description: 'All works tested, inspected and certified by NICEIC-approved engineers to current standards.' },
+      { icon: 'MapPin', title: 'West Dock Site', description: 'Delivered on active industrial site with phased programme to maintain operational continuity.' },
+    ] as const,
     clientSector: "Industrial",
     status: "in-progress",
     description:
@@ -220,6 +226,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial Lighting",
     title: "Riverside Commercial Retrofit",
     heroHeadline: ['Riverside', 'Commercial Retrofit'],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Commercial Retrofit', description: 'Full electrical retrofit of occupied commercial premises with minimal disruption to tenants.' },
+      { icon: 'Lightbulb', title: 'LED Upgrade', description: 'Energy-efficient LED lighting system replacing legacy fluorescent throughout all areas.' },
+      { icon: 'Shield', title: 'Part P Compliant', description: 'All residential areas compliant with Part P Building Regulations fully notified to local authority.' },
+      { icon: 'Gauge', title: 'Energy Saving', description: 'Retrofit delivers measurable reduction in energy consumption with improved power distribution.' },
+    ] as const,
     clientSector: "Commercial",
     status: "completed",
     description:
@@ -375,6 +387,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Residential",
     title: "North Estate Residential Phase 2",
     heroHeadline: ['North Estate', 'Residential Phase 2'],
+    heroIndicators: [
+      { icon: 'Home', title: 'Part P Certified', description: 'All domestic electrical works registered and certified under Part P of the Building Regulations.' },
+      { icon: 'Zap', title: 'Phase 2 Scope', description: 'Second phase extending the estate-wide installation programme across additional residential units.' },
+      { icon: 'ClipboardCheck', title: 'Consumer Units', description: 'New BS EN 61439 consumer units fitted with RCBO protection to all circuits throughout.' },
+      { icon: 'MapPin', title: 'North Estate', description: 'Multi-property delivery across the North Estate coordinated to minimise resident disruption.' },
+    ] as const,
     clientSector: "Residential",
     status: "in-progress",
     description:
@@ -531,6 +549,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Power Boards",
     title: "City Hospital Emergency Power Ring",
     heroHeadline: ['City Hospital', 'Emergency Power'],
+    heroIndicators: [
+      { icon: 'Shield', title: 'Critical Systems', description: 'Emergency power ring designed to HTM 06-01 standards ensuring uninterrupted supply to life-critical areas.' },
+      { icon: 'Activity', title: 'Ring Main Design', description: 'Fully redundant ring main architecture providing failover protection across all critical departments.' },
+      { icon: 'ClipboardCheck', title: 'HTM Compliant', description: 'Health Technical Memorandum 06-01 compliance verified and signed off by NHS Estates team.' },
+      { icon: 'Calendar', title: 'Live Environment', description: 'Works executed in live hospital environment with zero disruption to patient care operations.' },
+    ] as const,
     clientSector: "Critical Infrastructure",
     status: "planned",
     description:
@@ -692,6 +716,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Power Boards",
     title: "Thames Gateway Data Centre Power Infrastructure",
     heroHeadline: ['Thames Gateway', 'Data Centre Power'],
+    heroIndicators: [
+      { icon: 'Zap', title: 'Tier III Power', description: 'Concurrent-maintainable power infrastructure meeting Uptime Institute Tier III concurrency requirements.' },
+      { icon: 'Battery', title: 'UPS Integration', description: 'Uninterruptible power supply systems integrated with N+1 redundancy across all critical loads.' },
+      { icon: 'Gauge', title: 'HV Distribution', description: 'High-voltage distribution network designed to support multi-megawatt data centre capacity.' },
+      { icon: 'Shield', title: 'Zero Downtime', description: 'Phased delivery strategy ensured no interruption to live data centre operations throughout.' },
+    ] as const,
     clientSector: "Data Centres",
     status: "completed",
     description:
@@ -847,6 +877,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Power Boards",
     title: "Canary Wharf Tower Mains Upgrade",
     heroHeadline: ['Canary Wharf', 'Mains Upgrade'],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Commercial HV', description: 'High-rise commercial mains upgrade delivering increased capacity to all occupied office floors.' },
+      { icon: 'Zap', title: 'Mains Upgrade', description: 'Full LV mains replacement with upgraded switchgear and distribution boards throughout the tower.' },
+      { icon: 'ClipboardCheck', title: 'ECA Certified', description: 'All works completed to ECA standards by fully qualified commercial engineers.' },
+      { icon: 'Calendar', title: 'Out of Hours', description: 'Critical mains works executed outside business hours to protect tenant operations and SLAs.' },
+    ] as const,
     clientSector: "Commercial Property",
     status: "in-progress",
     description:
@@ -1003,6 +1039,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Industrial",
     title: "Heathrow Cargo Substation Expansion",
     heroHeadline: ['Heathrow Cargo', 'Substation Expansion'],
+    heroIndicators: [
+      { icon: 'Factory', title: 'HV Substation', description: 'High-voltage substation expansion to support increased power demand across the cargo terminal.' },
+      { icon: 'Gauge', title: 'Transformers', description: 'New HV/LV transformers installed with full protection relay system and remote monitoring capability.' },
+      { icon: 'Shield', title: 'CAA Compliant', description: 'All airside electrical works compliant with Civil Aviation Authority requirements and Heathrow standards.' },
+      { icon: 'Settings', title: 'SCADA Ready', description: 'Infrastructure designed for SCADA integration allowing centralised monitoring of all substation assets.' },
+    ] as const,
     clientSector: "Aviation",
     status: "completed",
     description:
@@ -1158,6 +1200,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "DHL Reading Distribution Hub",
     heroHeadline: ['DHL Reading', 'Distribution Hub'],
+    heroIndicators: [
+      { icon: 'Factory', title: 'Logistics Spec', description: 'Full industrial electrical specification for high-throughput 24/7 distribution hub operations.' },
+      { icon: 'Zap', title: '3-Phase Power', description: 'Three-phase power distribution installed to support conveyor systems, dock levellers and MHE equipment.' },
+      { icon: 'Lightbulb', title: 'LED Warehouse', description: 'High-bay LED lighting delivering 300+ lux throughout with DALI controls and daylight harvesting.' },
+      { icon: 'MapPin', title: 'Reading Hub', description: 'Completed to programme within the live DHL Reading distribution centre with no operational downtime.' },
+    ] as const,
     clientSector: "Logistics & Distribution",
     status: "completed",
     description:
@@ -1447,6 +1495,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "Medivet Watford Veterinary Practice",
     heroHeadline: ['Medivet Watford', 'Veterinary Practice'],
+    heroIndicators: [
+      { icon: 'Shield', title: 'Medical Grade', description: 'Medical-grade electrical installation compliant with HTM 06-01 for specialist veterinary equipment.' },
+      { icon: 'Zap', title: 'Theatre Supply', description: 'Isolated power supply systems to operating theatres meeting IEC 60364-7-710 medical location requirements.' },
+      { icon: 'Lightbulb', title: 'Clinical Lighting', description: 'LED clinical lighting to consultation rooms, theatres and recovery areas with correct colour rendering.' },
+      { icon: 'ClipboardCheck', title: 'NICEIC Approved', description: 'Works certified by NICEIC-approved engineers with full test documentation for CQC compliance.' },
+    ] as const,
     clientSector: "Veterinary Healthcare",
     status: "completed",
     description:
@@ -1730,6 +1784,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "Ladbrokes Woking — Retail Electrical Fit-Out",
     heroHeadline: ['Ladbrokes Woking', 'Retail Fit-Out'],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Retail Fitout', description: 'Full Category A to B retail electrical fit-out delivered to Ladbrokes brand specification.' },
+      { icon: 'Lightbulb', title: 'Feature Lighting', description: 'Bespoke retail lighting design with LED feature strips, display lighting and emergency systems.' },
+      { icon: 'ClipboardCheck', title: 'Part P Certified', description: 'Complete installation certified under Part P with full EICR issued at handover.' },
+      { icon: 'Calendar', title: 'Fast Track', description: 'Completed within tight retail refurbishment programme to meet opening date requirements.' },
+    ] as const,
     clientSector: "Retail & Betting",
     status: "completed",
     description:
@@ -1996,6 +2056,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "Biffa Workshop — 3-Phase Electrical Installation",
     heroHeadline: ['Biffa Workshop', '3-Phase Electrical'],
+    heroIndicators: [
+      { icon: 'Factory', title: '3-Phase Install', description: 'New 3-phase supply and distribution installed to power heavy workshop machinery and compressors.' },
+      { icon: 'Zap', title: 'DNO Connection', description: 'New DNO connection arranged and managed end-to-end with supply authority for upgraded capacity.' },
+      { icon: 'Shield', title: 'NICEIC Certified', description: 'Full installation certified by NICEIC-approved engineers with minor works certificates issued.' },
+      { icon: 'Wrench', title: 'Workshop Ready', description: 'Distribution boards sized and positioned to serve all current and future machinery layouts.' },
+    ] as const,
     clientSector: "Waste Management & Sustainability",
     status: "completed",
     description:
@@ -2226,6 +2292,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Residential",
     title: "Domestic Installations — Taplow",
     heroHeadline: ['Taplow', 'Done Right'],
+    heroIndicators: [
+      { icon: 'Home', title: 'Part P Certified', description: 'Complete domestic electrical installation registered and certified under Part P Building Regulations.' },
+      { icon: 'ClipboardCheck', title: 'RCBO Protected', description: 'Individual RCBO protection to every circuit in a new consumer unit for maximum safety.' },
+      { icon: 'Wifi', title: 'Smart Ready', description: 'Pre-wired for smart home integration including data points, EV charger spur and outdoor circuits.' },
+      { icon: 'MapPin', title: 'Taplow Berks', description: 'Delivered to a private residential property in Taplow, Berkshire on time and snagging-free.' },
+    ] as const,
     clientSector: "Residential",
     status: "completed",
     description:
@@ -2418,6 +2490,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "Herschel Grammar School — Electrical Maintenance Contract",
     heroHeadline: ['Herschel Grammar', 'Trusted Partner'],
+    heroIndicators: [
+      { icon: 'ClipboardCheck', title: 'PPM Contract', description: 'Planned preventive maintenance programme covering all electrical systems across the school estate.' },
+      { icon: 'Shield', title: 'NICEIC Approved', description: 'All maintenance delivered by NICEIC-approved engineers meeting DfE and Ofsted compliance standards.' },
+      { icon: 'Calendar', title: 'Term Scheduled', description: 'All invasive works scheduled during school holidays to avoid disruption to curriculum delivery.' },
+      { icon: 'Award', title: 'Trusted Partner', description: 'Multi-year maintenance relationship delivering consistent compliance and rapid reactive response.' },
+    ] as const,
     clientSector: "Education — Grammar School",
     status: "completed",
     description:
@@ -2666,6 +2744,12 @@ export const allProjects: Project[] = [
     categoryLabel: "Commercial",
     title: "The Hub Farnborough — Commercial Lighting Refurbishment",
     heroHeadline: ['Hub Farnborough', 'Lighting Refurb'],
+    heroIndicators: [
+      { icon: 'Lightbulb', title: 'LED Refurb', description: 'Full LED lighting refurbishment replacing legacy metal halide and fluorescent throughout.' },
+      { icon: 'Gauge', title: 'Energy Savings', description: 'Significant reduction in lighting energy consumption verified by post-completion energy monitoring.' },
+      { icon: 'Building2', title: 'Commercial Fit', description: 'Designed to CIBSE LG7 standards for office and public-facing commercial areas within The Hub.' },
+      { icon: 'MapPin', title: 'Farnborough', description: 'Delivered within The Hub Farnborough commercial development with tenant occupation maintained.' },
+    ] as const,
     clientSector: "Commercial Office — Hospitality/Co-Working",
     status: "in-progress",
     description:
@@ -2744,6 +2828,12 @@ export const allProjects: Project[] = [
   categoryLabel: "Industrial",
   title: "Harvey Nichols Chiller Upgrade",
   heroHeadline: ['Harvey Nichols', 'Chiller Upgrade'],
+  heroIndicators: [
+    { icon: 'Zap', title: 'Chiller Supply', description: 'Dedicated 3-phase electrical supply and control system for new chiller plant on roof level.' },
+    { icon: 'Shield', title: 'Commercial Grade', description: 'All works to commercial specification with full switchgear protection and isolation arrangements.' },
+    { icon: 'ClipboardCheck', title: 'NICEIC Certified', description: 'Chiller electrical installation tested, certified and handed over with full documentation package.' },
+    { icon: 'Building2', title: 'Harvey Nichols', description: 'Executed within live luxury retail environment maintaining store operations throughout installation.' },
+  ] as const,
   clientSector: "Luxury Retail — Department Store",
   status: "completed",
   description:
@@ -2852,6 +2942,12 @@ export const allProjects: Project[] = [
   categoryLabel: "Residential",
   title: "Calcot Park Luxury Rewire",
   heroHeadline: ['Calcot Park', 'Luxury Rewire'],
+  heroIndicators: [
+    { icon: 'Home', title: 'Full Rewire', description: 'Complete luxury domestic rewire including all first and second fix wiring to all rooms and outbuildings.' },
+    { icon: 'Wifi', title: 'Smart Home', description: 'Integrated smart lighting, automated blinds, CCTV and AV wiring throughout the property.' },
+    { icon: 'Shield', title: '100A RCBO Board', description: 'New 100A RCBO-protected consumer unit with dedicated circuits for EV charger and pool equipment.' },
+    { icon: 'MapPin', title: 'Calcot Park', description: 'Delivered at a prestigious property within the Calcot Park Golf Club estate, Berkshire.' },
+  ] as const,
   clientSector: "Residential — High-End Property",
   status: "completed",
   description:
