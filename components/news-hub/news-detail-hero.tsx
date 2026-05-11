@@ -8,6 +8,7 @@ import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_DETAIL_ARTICLE } from "@/components/hero/hero-tokens";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import type { NewsArticle } from "@/types/news";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
 
 interface NewsDetailHeroProps {
   article: NewsArticle;
@@ -179,39 +180,17 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             {article.description}
           </motion.p>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-3 mt-8"
-          >
-            <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm">
-              <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
-                Author
-              </div>
-              <div className="mt-1 font-semibold text-white/80">
-                {article.author.name}
-              </div>
-            </div>
-            {article.spotlightMetric ? (
-              <div className="rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-3 backdrop-blur-sm shadow-[0_0_20px_rgba(0,243,189,0.15)]">
-                <div className="font-mono text-[10px] tracking-[0.18em] text-electric-cyan/70 uppercase">
-                  {article.spotlightMetric.label}
-                </div>
-                <div className="mt-1 font-semibold text-white/80">
-                  {article.spotlightMetric.value}
-                </div>
-              </div>
-            ) : null}
-            {article.location && (
-              <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
-                <div className="font-mono text-[10px] tracking-[0.18em] text-white/60 uppercase">
-                  Location
-                </div>
-                <div className="mt-1 font-semibold text-white">
-                  {article.location}
-                </div>
-              </div>
-            )}
-          </motion.div>
+          {article.heroIndicators && (
+            <motion.div
+              variants={itemVariants}
+              className="w-full"
+            >
+              <HeroTrustIndicators
+                items={article.heroIndicators}
+                variant="image-overlay"
+              />
+            </motion.div>
+          )}
         </motion.div>
       }
       contentStyle={contentStyle}
