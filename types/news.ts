@@ -1,4 +1,5 @@
 import type { TocItem } from "./shared-content";
+import type { TrustIndicatorItem } from '@/types/sections';
 
 export type NewsCategorySlug =
   | "all"
@@ -96,6 +97,7 @@ export interface NewsArticle {
   tags: string[];
   isFeatured: boolean;
   heroHeadline: [string, string?, string?];
+  heroIndicators?: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
   publishedAt: string;
   updatedAt: string;
   spotlightMetric?: NewsSpotlightMetric;
