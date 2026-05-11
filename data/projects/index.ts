@@ -2784,6 +2784,23 @@ export const allProjects: Project[] = [
           "We are meticulous in completing projects that leave our clients delighted, believing you are only as good as your last job.",
           "Project detail will be updated as works progress. Gallery images below show the scope and quality of installation delivered to date.",
         ],
+        pillars: [
+          {
+            num: "01",
+            title: "Heritage-Sensitive Installation",
+            description: "Working within a Grade II listed 1930s former airport building demands precision and restraint. Every lighting position, conduit route, and fixing point is agreed with the client and building manager before work commences — no surprises, no remedial reinstatement.",
+          },
+          {
+            num: "02",
+            title: "CIBSE LG7 Compliant Output",
+            description: "Commercial office illuminance levels and glare-control ratios are met throughout. Luminaire selection, mounting heights, and aiming angles are calculated to LG7 specification — delivering a workspace that performs for occupants from day one.",
+          },
+          {
+            num: "03",
+            title: "Phased Around Live Tenants",
+            description: "The Hub is fully occupied during the refurbishment programme. Work is sequenced floor-by-floor and room-by-room around tenant schedules, with temporary lighting maintained throughout. Each area is signed off and handed back before the next phase begins.",
+          },
+        ],
       },
       gallery: [
         {

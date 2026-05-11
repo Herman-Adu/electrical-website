@@ -253,7 +253,13 @@ export default async function CategoryProjectDetailPage({
         section="projects"
       />
 
-      <SectionIntro data={projectDetailIntroData} />
+      <SectionIntro
+        data={
+          project.detail?.intro
+            ? { sectionId: "project-intro", ...project.detail.intro }
+            : projectDetailIntroData
+        }
+      />
 
       {/* Main Content with Sticky Sidebar */}
       <section
