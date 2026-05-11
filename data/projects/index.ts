@@ -2728,7 +2728,7 @@ export const allProjects: Project[] = [
   slug: "harvey-nichols-chiller-upgrade",
   category: "industrial",
   categoryLabel: "Industrial",
-  title: "Harvey Nichols — Chiller Upgrade",
+  title: "Harvey Nichols Chiller Upgrade",
   clientSector: "Luxury Retail — Department Store",
   status: "completed",
   description:
@@ -2835,7 +2835,7 @@ export const allProjects: Project[] = [
   slug: "calcot-park-luxury-rewire",
   category: "residential",
   categoryLabel: "Residential",
-  title: "Calcot Park — Luxury Rewire",
+  title: "Calcot Park Luxury Rewire",
   clientSector: "Residential — High-End Property",
   status: "completed",
   description:
