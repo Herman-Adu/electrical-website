@@ -180,17 +180,15 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
             {article.description}
           </motion.p>
 
-          {article.heroIndicators && (
-            <motion.div
-              variants={itemVariants}
-              className="w-full"
-            >
-              <HeroTrustIndicators
-                items={article.heroIndicators}
-                variant="image-overlay"
-              />
-            </motion.div>
-          )}
+          <motion.div
+            variants={itemVariants}
+            className="w-full"
+          >
+            <HeroTrustIndicators
+              items={article.heroIndicators}
+              variant="image-overlay"
+            />
+          </motion.div>
         </motion.div>
       }
       contentStyle={contentStyle}

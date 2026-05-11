@@ -184,12 +184,10 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              {project.heroIndicators && (
-                <HeroTrustIndicators
-                  items={project.heroIndicators}
-                  variant="image-overlay"
-                />
-              )}
+              <HeroTrustIndicators
+                items={project.heroIndicators}
+                variant="image-overlay"
+              />
             </motion.div>
 
             {/* Meta */}

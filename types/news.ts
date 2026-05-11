@@ -97,7 +97,7 @@ export interface NewsArticle {
   tags: string[];
   isFeatured: boolean;
   heroHeadline: [string, string?, string?];
-  heroIndicators?: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
+  heroIndicators: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
   publishedAt: string;
   updatedAt: string;
   spotlightMetric?: NewsSpotlightMetric;

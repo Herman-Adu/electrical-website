@@ -71,6 +71,12 @@ function mockArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
     tags: ['test'],
     isFeatured: false,
     heroHeadline: ['Test Article', 'Mock'],
+    heroIndicators: [
+      { icon: 'Shield' as const, title: 'Test Indicator', description: 'Test description for mock article indicator one.' },
+      { icon: 'CheckCircle' as const, title: 'Mock Coverage', description: 'Test description for mock article indicator two.' },
+      { icon: 'Award' as const, title: 'Test Quality', description: 'Test description for mock article indicator three.' },
+      { icon: 'Star' as const, title: 'Mock Value', description: 'Test description for mock article indicator four.' },
+    ],
     publishedAt: '2026-01-01',
     updatedAt: '2026-01-01',
     detail: {

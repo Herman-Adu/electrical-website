@@ -148,7 +148,7 @@ export interface Project {
   progress: number;
   isFeatured: boolean;
   heroHeadline: [string, string?, string?];
-  heroIndicators?: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
+  heroIndicators: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
   publishedAt: string;
   updatedAt: string;
   /** Extended detail content for project pages */
