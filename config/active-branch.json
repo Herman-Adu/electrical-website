@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "nexgen-electrical-innovations-state",
-  "fallback": "10a871b feat: trust indicators on home and about heroes (#156) | fd4f0c8 chore: post-merge cleanup — memory-lanes + active-branch after PR #154 (#155) | 649413c feat: trust indicators across all projects and services heroes (#154)",
-  "updatedAt": "2026-05-10T20:15:00.000Z"
+  "branch": "feat/hub-farnborough-harvey-nichols-content",
+  "entity": "feat-hub-farnborough-harvey-nichols-content",
+  "fallback": "90fb7db feat: make heroIndicators required, remove conditional guards, update test mock | 25d5728 feat: add content-specific heroIndicators to all 24 articles | ce53d58 feat: add content-specific heroIndicators to all 16 projects",
+  "updatedAt": "2026-05-11T19:12:50.595Z"
 }

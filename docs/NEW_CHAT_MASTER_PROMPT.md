@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-05-09 11:31:59 +01:00
+Last generated: 2026-05-11 16:44:22 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -72,13 +72,13 @@ agent:v1:next-task:YYYY-MM-DD-<short-workstream-id>
 
 ## Current Session Baseline (Auto-Generated)
 
-- Branch: feat/final-theme-polish
-- HEAD: 04781ee fix: add missing active-memory-lanes.json + fix startup script banner
+- Branch: feat/hub-farnborough-harvey-nichols-content
+- HEAD: 25eea2a chore: post-merge cleanup ΓÇö memory-lanes + active-branch after PR #156 (#157) (#157)
 - Memory nodes loaded: 1
 
 ### Hydrated Memory Nodes
 
-- nexgen-electrical-innovations-state (project_state, observations: 374)
+- nexgen-electrical-innovations-state (project_state, observations: 570)
 
 ## Optimized MCP / Tool Allocation
 
@@ -140,6 +140,6 @@ Use playwright for general browser tasks and executor-playwright for determinist
 Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
 Require local test gates to pass before any GitHub workflow/check trigger or rerun.
 Keep tool scope minimal and optimize token usage.
-Current branch: feat/final-theme-polish
-Current HEAD: 04781ee fix: add missing active-memory-lanes.json + fix startup script banner
+Current branch: feat/hub-farnborough-harvey-nichols-content
+Current HEAD: 25eea2a chore: post-merge cleanup ΓÇö memory-lanes + active-branch after PR #156 (#157) (#157)
 
