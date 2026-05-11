@@ -5,7 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ChevronDown, Activity } from "lucide-react";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
-import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { HERO_H1_DETAIL_PROJECT } from "@/components/hero/hero-tokens";
@@ -177,14 +177,19 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
               {project.description}
             </motion.p>
 
-            {/* KPI stats */}
+            {/* Hero indicators */}
             <motion.div
               className="mt-12 mb-12"
               initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <ProjectKpiGrid kpis={project.kpis} />
+              {project.heroIndicators && (
+                <HeroTrustIndicators
+                  items={project.heroIndicators}
+                  variant="image-overlay"
+                />
+              )}
             </motion.div>
 
             {/* Meta */}
