@@ -95,4 +95,4 @@ Never wire MJS as a git hook. Never wire Python as a Claude Code hook.
 
 ## Session State
 
-2026-05-11 — heroIndicators complete: 4 trust cards on all 16 project + 24 article detail heroes. 7 commits pushed (90fb7db). Build ✓, 674 tests ✓. Next: PR feat/hub-farnborough-harvey-nichols-content → main.
+[Docker-down fallback only — one line: YYYY-MM-DD — summary. Delete when Docker recovers.]
