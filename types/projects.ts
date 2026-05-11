@@ -1,3 +1,5 @@
+import type { TrustIndicatorItem } from '@/types/sections';
+
 export type ProjectStatus = "planned" | "in-progress" | "completed";
 
 export type ProjectCategorySlug =
@@ -91,7 +93,8 @@ export interface ProjectScope {
     | "Building2"
     | "Cable"
     | "Warehouse"
-    | "Thermometer";
+    | "Thermometer"
+    | "Activity";
   title: string;
   description: string;
 }
@@ -144,6 +147,8 @@ export interface Project {
   tags: string[];
   progress: number;
   isFeatured: boolean;
+  heroHeadline: [string, string?, string?];
+  heroIndicators: readonly [TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem, TrustIndicatorItem];
   publishedAt: string;
   updatedAt: string;
   /** Extended detail content for project pages */

@@ -97,6 +97,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "Taplow Residential Energy Refresh Cuts Waste Without Compromising Comfort",
+    heroHeadline: ["Taplow", "Energy Refresh"],
+    heroIndicators: [
+      { icon: 'Home', title: 'Residential Work', description: 'Hands-on case study of a complete domestic energy refresh combining LED upgrade and smart controls.' },
+      { icon: 'Gauge', title: 'Energy Saving', description: 'Significant reduction in annual energy consumption achieved through targeted LED and controls upgrade.' },
+      { icon: 'ClipboardCheck', title: 'Part P Notified', description: 'All works notified and certified under Part P of the Building Regulations on completion.' },
+      { icon: 'MapPin', title: 'Taplow Berks', description: 'Project based in Taplow, Berkshire — typical of Nexgen residential energy improvement programme.' },
+    ] as const,
     excerpt:
       "A behind-the-scenes look at how a phased home electrification programme reduced energy waste while preserving day-to-day comfort for a growing family home.",
     description:
@@ -278,6 +285,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Docklands Switchgear Watch: What Real-Time Monitoring Changed in Month One",
+    heroHeadline: ["Docklands", "Switchgear Watch"],
+    heroIndicators: [
+      { icon: 'Settings', title: 'Switchgear Watch', description: 'Ongoing switchgear monitoring programme for commercial properties across the Docklands area.' },
+      { icon: 'AlertTriangle', title: 'Early Warning', description: 'Thermal imaging and testing programme identifies faults before they cause operational disruption.' },
+      { icon: 'Shield', title: 'HV Expertise', description: 'Specialist HV switchgear engineers with AP(E) authorisation covering all voltage levels.' },
+      { icon: 'Building2', title: 'Docklands Sites', description: 'Programme covers multiple commercial buildings across Canary Wharf and Docklands catchment area.' },
+    ] as const,
     excerpt:
       "Operational telemetry from a live industrial upgrade reveals how monitoring reshaped response times, maintenance planning, and risk visibility within the first month.",
     description:
@@ -446,6 +460,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Partner Spotlight: How Early Programme Alignment Reduced Rework on a Mixed-Use Scheme",
+    heroHeadline: ["Partner", "Spotlight"],
+    heroIndicators: [
+      { icon: 'Users', title: 'Partner Insight', description: 'Strategic insight on how early electrical contractor involvement reduces programme risk and cost.' },
+      { icon: 'Calendar', title: 'Early Alignment', description: 'Research shows bringing in specialist contractors at RIBA Stage 2 saves significant rework downstream.' },
+      { icon: 'Building2', title: 'Sector Focus', description: 'Applicable across commercial, residential and mixed-use development pipelines.' },
+      { icon: 'Award', title: 'Industry Voice', description: 'Nexgen perspective shared with developers and main contractors across the South East region.' },
+    ] as const,
     excerpt:
       "A partner story on coordination discipline, early design decisions, and the commercial benefits of treating electrical delivery as a programme conversation from day one.",
     description:
@@ -627,6 +648,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Hospital Emergency Power Ring: Lessons Learned from a Live Critical Infrastructure Upgrade",
+    heroHeadline: ["Emergency Power", "Ring Upgrade"],
+    heroIndicators: [
+      { icon: 'Shield', title: 'HTM 06-01', description: 'Deep dive into Health Technical Memorandum requirements for hospital emergency power systems.' },
+      { icon: 'Activity', title: 'Ring Topology', description: 'Explains why ring main topology provides superior resilience for life-critical hospital installations.' },
+      { icon: 'ClipboardCheck', title: 'Compliance Guide', description: 'Practical compliance checklist for NHS Estates and FM teams managing critical power infrastructure.' },
+      { icon: 'Zap', title: 'Nexgen Expertise', description: 'Authored from direct delivery experience on NHS emergency power ring main installations.' },
+    ] as const,
     excerpt:
       "This case study distils delivery lessons from a live hospital power-ring upgrade where resilience, communication, and sequencing all had zero room for error.",
     description:
@@ -806,6 +834,13 @@ export const allNewsArticles: NewsArticle[] = [
     category: "insights",
     categoryLabel: "Insights",
     title: "Why EV Readiness Starts at the Board, Not the Charger",
+    heroHeadline: ["EV Readiness", "Starts Here"],
+    heroIndicators: [
+      { icon: 'Zap', title: 'EV Readiness', description: 'Why EV infrastructure decisions must begin at the distribution board, not the car park.' },
+      { icon: 'Gauge', title: 'Load Assessment', description: 'Explains how to conduct a demand assessment before specifying EV charger quantities and types.' },
+      { icon: 'Building2', title: 'For Developers', description: 'Essential reading for commercial developers and housing associations planning EV provision.' },
+      { icon: 'ClipboardCheck', title: 'OZEV Aligned', description: 'Guidance aligned to OZEV requirements and Building Regulations Part S for EV infrastructure.' },
+    ] as const,
     excerpt:
       "A practical insight piece for clients planning EV rollouts, showing why upstream infrastructure decisions determine speed, budget, and future flexibility.",
     description:
@@ -944,6 +979,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Latest Client Review: Canary Wharf Retrofit Delivery Earns Repeat Appointment",
+    heroHeadline: ["Canary Wharf", "Repeat Appointment"],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Client Review', description: 'Post-project review from the Canary Wharf tower mains upgrade client covering outcomes and delivery.' },
+      { icon: 'Award', title: 'Repeat Client', description: 'Client commissioned Nexgen for a second project following outstanding performance on the mains upgrade.' },
+      { icon: 'ThumbsUp', title: 'Zero Disruption', description: 'Client highlights zero disruption to tenant operations as the standout delivery achievement.' },
+      { icon: 'Star', title: 'Canary Wharf', description: "Project delivered within one of London's most demanding commercial environments." },
+    ] as const,
     excerpt:
       "A new review from a repeat commercial client explains why calm delivery, transparent updates, and tidy handovers still win long after installation is complete.",
     description:
@@ -1119,6 +1161,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Community Electrification Week Launches with Partner-Led Campaign Assets",
+    heroHeadline: ["Community", "Electrification Week"],
+    heroIndicators: [
+      { icon: 'Users', title: 'Community Event', description: 'Annual Nexgen community electrification week bringing free electrical safety checks to local residents.' },
+      { icon: 'Heart', title: 'Local Impact', description: 'Over 50 homes checked across the local area with safety issues identified and resolved at no charge.' },
+      { icon: 'Shield', title: 'Safety Focus', description: 'Consumer unit checks, smoke alarm testing and earthing verification carried out by qualified engineers.' },
+      { icon: 'Award', title: 'NICEIC Backed', description: 'Event supported by NICEIC as part of national electrical safety awareness programme.' },
+    ] as const,
     excerpt:
       "A campaign-led partner update showing how shared storytelling, campaign cards, and site-ready assets can turn delivery milestones into usable marketing momentum.",
     description:
@@ -1288,6 +1337,13 @@ export const allNewsArticles: NewsArticle[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "Complete Home Rewire: Victorian Terrace Transformation in Hackney",
+    heroHeadline: ["Victorian Terrace", "Rewire Hackney"],
+    heroIndicators: [
+      { icon: 'Home', title: 'Full Rewire', description: 'Complete rewire of a Victorian mid-terrace in Hackney from original rubber cable to modern wiring.' },
+      { icon: 'Shield', title: 'Heritage Build', description: 'Specialist approach to routing cables through lath and plaster walls with minimal decorative damage.' },
+      { icon: 'ClipboardCheck', title: 'EICR Issued', description: 'Full EICR and completion certificate issued satisfying landlord and mortgage lender requirements.' },
+      { icon: 'MapPin', title: 'Hackney London', description: 'Typical of Victorian stock rewire work across East and North London residential areas.' },
+    ] as const,
     excerpt:
       "How a full electrical rewire brought a 1890s Victorian terrace into the modern era while preserving period features and meeting BS 7671 19th Edition standards.",
     description:
@@ -1469,6 +1525,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "Smart Home Automation: Integrating KNX and Lighting Control in a New Build",
+    heroHeadline: ["Smart Home", "Automation"],
+    heroIndicators: [
+      { icon: 'Wifi', title: 'Smart Wiring', description: 'Comprehensive guide to integrating smart home wiring at first fix stage in new build properties.' },
+      { icon: 'Lightbulb', title: 'KNX and DALI', description: 'Covers KNX bus wiring and DALI lighting control protocols for residential automation systems.' },
+      { icon: 'Home', title: 'New Build Spec', description: 'Practical specification guide for housebuilders and self-builders commissioning smart home infrastructure.' },
+      { icon: 'Zap', title: 'EV and Solar', description: 'Wiring strategy for EV charger integration, solar PV, battery storage and home energy management.' },
+    ] as const,
     excerpt:
       "A comprehensive guide to specifying and installing KNX-based home automation in new-build properties, from initial design through to commissioning and handover.",
     description:
@@ -1651,6 +1714,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "EV Charger Installation: Domestic Load Assessment and DNO Notification",
+    heroHeadline: ["EV Charger", "Installation Guide"],
+    heroIndicators: [
+      { icon: 'Zap', title: 'EV Installation', description: 'Step-by-step guide to domestic EV charger installation covering supply assessment and cable routes.' },
+      { icon: 'Gauge', title: 'Load Check', description: 'How to assess whether your existing DNO supply can support a 7kW or 22kW home charger.' },
+      { icon: 'ClipboardCheck', title: 'OZEV Grant', description: 'Guidance on qualifying for OZEV Electric Vehicle Infrastructure Grant for domestic installations.' },
+      { icon: 'Shield', title: 'BS 7671 Wiring', description: 'Covers Part 7-722 requirements from BS 7671:2018 Amendment 2 for EV charging installations.' },
+    ] as const,
     excerpt:
       "Understanding the electrical requirements for home EV charger installation, including maximum demand calculations, earthing arrangements, and DNO application processes.",
     description:
@@ -1826,6 +1896,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Data Centre Power Distribution: Achieving Tier III Compliance in a London Facility",
+    heroHeadline: ["Data Centre", "Tier III Power"],
+    heroIndicators: [
+      { icon: 'Zap', title: 'Tier III Design', description: 'Technical overview of concurrent-maintainable power architecture for Tier III data centres.' },
+      { icon: 'Battery', title: 'UPS and Backup', description: 'Design principles for N+1 UPS configuration and generator backup in mission-critical environments.' },
+      { icon: 'Gauge', title: 'PUE Efficiency', description: 'Power Usage Effectiveness considerations in LV distribution design for energy-efficient operations.' },
+      { icon: 'Shield', title: 'Uptime Ready', description: 'Aligned to Uptime Institute Tier III standards and IEC 62077 data centre infrastructure guidance.' },
+    ] as const,
     excerpt:
       "A technical deep-dive into the electrical infrastructure design required for Tier III data centre certification, including redundancy, UPS topology, and generator paralleling.",
     description:
@@ -2008,6 +2085,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Power Factor Correction: Eliminating Reactive Charges in Manufacturing",
+    heroHeadline: ["Power Factor", "Correction"],
+    heroIndicators: [
+      { icon: 'Gauge', title: 'PFC Systems', description: 'Explains how automatic power factor correction panels reduce reactive energy charges in manufacturing.' },
+      { icon: 'Factory', title: 'Industrial Apply', description: 'Practical guide to PFC system selection for heavy industrial and manufacturing environments.' },
+      { icon: 'Activity', title: 'Energy Savings', description: 'Real-world ROI calculations showing payback periods for PFC installation in production facilities.' },
+      { icon: 'ClipboardCheck', title: 'G99 Compliance', description: 'Covers G99 connection requirements and DNO notification process for PFC systems above 16A.' },
+    ] as const,
     excerpt:
       "How automatic power factor correction systems can reduce electricity costs by up to 15% in industrial facilities with significant motor loads.",
     description:
@@ -2181,6 +2265,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Warehouse LED Lighting Retrofit: Energy Savings and ROI Analysis",
+    heroHeadline: ["Warehouse LED", "Lighting Retrofit"],
+    heroIndicators: [
+      { icon: 'Lightbulb', title: 'LED Retrofit', description: 'Complete workflow for retrofitting high-bay LED luminaires in large warehouse and logistics facilities.' },
+      { icon: 'Gauge', title: '60pct Saving', description: 'Demonstrates 60 percent average energy reduction when replacing 400W metal halide with 150W LED fittings.' },
+      { icon: 'Factory', title: 'Logistics Fit', description: 'Addresses emergency lighting, PIR zoning and DALI controls for warehouse environment compliance.' },
+      { icon: 'Calendar', title: 'Live Retrofit', description: 'Programme methodology for executing LED retrofit in live 24/7 distribution environments.' },
+    ] as const,
     excerpt:
       "A comprehensive analysis of LED lighting upgrade costs, energy savings, and return on investment for large-scale warehouse and logistics facilities.",
     description:
@@ -2367,6 +2458,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Private Hospital Operating Theatre: Complete Electrical Infrastructure Upgrade",
+    heroHeadline: ["Hospital Theatre", "Complete Upgrade"],
+    heroIndicators: [
+      { icon: 'Shield', title: 'Theatre Grade', description: 'IEC 60364-7-710 compliant isolated power supply installation to private hospital operating theatres.' },
+      { icon: 'Activity', title: 'IPSS Systems', description: 'Installation of Isolated Power Supply System with insulation monitoring to all Class 2 medical areas.' },
+      { icon: 'ClipboardCheck', title: 'HTM 06-01', description: 'Compliance with NHS Health Technical Memorandum 06-01 for all theatre electrical installations.' },
+      { icon: 'Award', title: 'CQC Compliant', description: 'Full documentation package supporting CQC inspection requirements for medical electrical safety.' },
+    ] as const,
     excerpt:
       "A detailed case study of upgrading electrical systems in live operating theatre environments while maintaining clinical operations and HTM 06-01 compliance.",
     description:
@@ -2546,6 +2644,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "University Campus HV Network Modernisation: 11kV Ring Main Replacement",
+    heroHeadline: ["University Campus", "HV Modernisation"],
+    heroIndicators: [
+      { icon: 'Zap', title: 'HV Network', description: 'Campus-wide HV ring main modernisation replacing aged 11kV infrastructure across 25 buildings.' },
+      { icon: 'Gauge', title: '11kV Systems', description: 'New 11kV switchgear and ring main units installed to improve network resilience and metering accuracy.' },
+      { icon: 'Settings', title: 'SCADA Control', description: 'Integration of new HV assets into campus SCADA system for centralised monitoring and fault detection.' },
+      { icon: 'Calendar', title: 'Vacation Works', description: 'Major HV switching operations timed to university vacation periods to protect academic programme.' },
+    ] as const,
     excerpt:
       "How a phased high-voltage network upgrade programme maintained power to 40+ buildings while replacing aging 1970s switchgear and transformers.",
     description:
@@ -2719,6 +2824,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Retail Chain Electrical Standardisation: 150-Store Rollout Programme",
+    heroHeadline: ["Retail Chain", "150-Store Rollout"],
+    heroIndicators: [
+      { icon: 'Building2', title: '150 Stores', description: 'National electrical standardisation programme delivering consistent specification across 150 retail units.' },
+      { icon: 'ClipboardCheck', title: 'Compliance Fix', description: 'Remediation of non-compliant legacy installations identified during initial EICR survey programme.' },
+      { icon: 'Lightbulb', title: 'LED Standard', description: 'Standardised LED lighting specification rolled out across all stores with uniform lux levels and CCT.' },
+      { icon: 'Settings', title: 'Framework Deal', description: 'Delivered under multi-year electrical services framework agreement with the retail group.' },
+    ] as const,
     excerpt:
       "A case study in scaling electrical installation standards across a national retail portfolio, from specification development through to completion.",
     description:
@@ -2895,6 +3007,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "BS 7671 19th Edition: Key Changes Every Contractor Needs to Know",
+    heroHeadline: ["BS 7671", "19th Edition"],
+    heroIndicators: [
+      { icon: 'BookOpen', title: '19th Edition', description: 'Key changes in BS 7671:2018 19th Edition every electrical contractor needs to understand.' },
+      { icon: 'Shield', title: 'AFDD Rules', description: 'New requirements for arc fault detection devices in domestic and student accommodation premises.' },
+      { icon: 'Zap', title: 'EV Charging', description: 'Part 7-722 EV charging location requirements now mandatory for new installations and alterations.' },
+      { icon: 'ClipboardCheck', title: 'Compliance Date', description: 'Transition period guidance ensuring existing and new projects comply with correct edition.' },
+    ] as const,
     excerpt:
       "A practical summary of the most significant changes in the 19th Edition wiring regulations and their impact on everyday installation practice.",
     description:
@@ -3064,6 +3183,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "Future-Proofing Electrical Infrastructure for Building Electrification",
+    heroHeadline: ["Future-Proofing", "Electrification"],
+    heroIndicators: [
+      { icon: 'Lightbulb', title: 'Future-Proof', description: 'Strategic guide to specifying electrical infrastructure that accommodates electrification of heat and transport.' },
+      { icon: 'Zap', title: 'Grid Demand', description: 'How building-level demand management and smart metering will reshape electrical design by 2030.' },
+      { icon: 'Battery', title: 'Storage Ready', description: 'Wiring and switchgear specifications for battery storage and solar PV integration in commercial buildings.' },
+      { icon: 'Gauge', title: 'Net Zero Path', description: 'Practical steps for aligning electrical infrastructure investment with net zero carbon commitments.' },
+    ] as const,
     excerpt:
       "Strategic guidance on designing electrical systems that can accommodate heat pump retrofits, EV charging expansion, and solar PV integration.",
     description:
@@ -3234,6 +3360,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "Electrical Contractor Insurance: Understanding Coverage Requirements",
+    heroHeadline: ["Contractor", "Insurance Guide"],
+    heroIndicators: [
+      { icon: 'Shield', title: 'Insurance Guide', description: 'Essential insurance coverage every electrical contractor must carry to protect clients and business.' },
+      { icon: 'ClipboardCheck', title: 'Public Liability', description: 'Minimum 5M public liability insurance required for commercial and public sector contracts.' },
+      { icon: 'Award', title: 'Nexgen Covered', description: 'Nexgen carries comprehensive cover including professional indemnity, public liability and employers liability.' },
+      { icon: 'Users', title: 'Client Assurance', description: 'How to verify contractor insurance certificates and what to look for in certificates of currency.' },
+    ] as const,
     excerpt:
       "A comprehensive guide to the insurance policies electrical contractors need, from public liability to professional indemnity and contract works cover.",
     description:
@@ -3406,6 +3539,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Manufacturer Partnership: Schneider Electric Technical Training Programme",
+    heroHeadline: ["Schneider Electric", "Partnership"],
+    heroIndicators: [
+      { icon: 'Award', title: 'Schneider Partner', description: 'Nexgen achieves Schneider Electric preferred partner status following accredited technical training.' },
+      { icon: 'Zap', title: 'Acti9 Trained', description: 'Engineers trained on Schneider Acti9 consumer units, Prisma switchgear and EcoStruxure platforms.' },
+      { icon: 'ClipboardCheck', title: 'Certified Skills', description: 'Formal Schneider Electric product certification covering installation, commissioning and maintenance.' },
+      { icon: 'Users', title: 'Team Training', description: 'Whole-team training programme ensuring consistent product knowledge and specification capability.' },
+    ] as const,
     excerpt:
       "How our partnership with Schneider Electric provides engineers with certified training on the latest switchgear, automation, and power monitoring technologies.",
     description:
@@ -3578,6 +3718,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Developer Framework Agreement: Delivering Electrical Packages for Major Residential Schemes",
+    heroHeadline: ["Developer", "Framework Agreement"],
+    heroIndicators: [
+      { icon: 'Users', title: 'Framework Deal', description: 'How a strategic developer framework agreement delivers programme certainty for large residential schemes.' },
+      { icon: 'Building2', title: '850+ Units', description: 'Framework covers delivery of electrical packages across residential schemes totalling over 850 units.' },
+      { icon: 'ClipboardCheck', title: 'NHBC Aligned', description: 'All residential electrical works aligned to NHBC Technical Standards and warranty requirements.' },
+      { icon: 'Calendar', title: 'Programme Lock', description: 'Framework agreement secures Nexgen resource allocation across multi-year development programme.' },
+    ] as const,
     excerpt:
       "How framework agreements with volume housebuilders create efficiency through standardised specifications, bulk procurement, and dedicated delivery teams.",
     description:
@@ -3754,6 +3901,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Hotel Group Review: Planned Preventive Maintenance Contract Renewal",
+    heroHeadline: ["Hotel Group", "PPM Renewal"],
+    heroIndicators: [
+      { icon: 'Award', title: 'PPM Renewed', description: 'Multi-site planned preventive maintenance contract renewed following three years of consistent delivery.' },
+      { icon: 'Building2', title: 'Hotel Sector', description: 'PPM programme covering all electrical systems across a portfolio of branded hotel properties.' },
+      { icon: 'ClipboardCheck', title: 'Compliance Log', description: 'Full compliance documentation maintained for each property supporting annual insurance inspections.' },
+      { icon: 'Calendar', title: 'Zero Downtime', description: 'Maintenance scheduled outside peak occupancy periods with no guest-facing disruption throughout.' },
+    ] as const,
     excerpt:
       "A hospitality client shares their experience of working with our team on a multi-site planned maintenance contract, highlighting response times and service quality.",
     description:
@@ -3930,6 +4084,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Academy Trust Review: Summer Works Programme Delivery Across 6 Schools",
+    heroHeadline: ["Academy Trust", "Summer Works"],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Academy Trust', description: 'Annual summer electrical works programme across a multi-academy trust estate during school holidays.' },
+      { icon: 'Shield', title: 'DfE Compliant', description: 'All works carried out to DfE Good Estates Management for Schools guidance and BB101 standards.' },
+      { icon: 'Calendar', title: 'Summer Window', description: 'Complete programme delivered within 6-week summer holiday window across multiple school sites.' },
+      { icon: 'ClipboardCheck', title: 'NICEIC Certified', description: 'Full certification and condition reports issued to support Ofsted and ESFA compliance requirements.' },
+    ] as const,
     excerpt:
       "An education client reviews the delivery of electrical upgrade works across multiple school sites during the summer holiday period.",
     description:
@@ -4106,6 +4267,13 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Commercial Landlord Review: Multi-Tenanted Building Common Parts Upgrade",
+    heroHeadline: ["Commercial Landlord", "Common Parts Upgrade"],
+    heroIndicators: [
+      { icon: 'Building2', title: 'Common Parts', description: 'Electrical upgrade to common parts of a multi-tenanted commercial building including car park and reception.' },
+      { icon: 'Lightbulb', title: 'LED Common', description: 'LED lighting and emergency lighting upgrade throughout common areas with PIR occupancy control.' },
+      { icon: 'ClipboardCheck', title: 'EICR Compliant', description: 'EICR remedial works completed across all common area circuits with new certificate issued.' },
+      { icon: 'Shield', title: 'Landlord Ready', description: 'Works satisfy landlord obligations under the Electrical Safety Standards in the Private Rented Sector Regulations.' },
+    ] as const,
     excerpt:
       "A property management company reviews the delivery of common parts electrical upgrades in an occupied commercial building.",
     description:

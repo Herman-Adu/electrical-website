@@ -1,0 +1,14 @@
+{
+  "memoryLane": {
+    "id": "feat-hub-farnborough-harvey-nichols-content",
+    "branch": "feat/hub-farnborough-harvey-nichols-content",
+    "dockerEntity": "feat-hub-farnborough-harvey-nichols-content",
+    "status": "active",
+    "openedAt": "2026-05-11T15:38:56.548Z",
+    "mergedAt": null,
+    "fallback_summary": "Harvey Nichols + Calcot Park content implementation. Plan: plan-harvey-nichols-calcot-content. Feats: feat-harvey-nichols-chiller-complete, feat-calcot-park-luxury-rewire. File: data/projects/index.ts only.",
+    "planEntity": "plan-harvey-nichols-calcot-content",
+    "featEntities": ["feat-harvey-nichols-chiller-complete", "feat-calcot-park-luxury-rewire"],
+    "obsidianNote": "Projects/harvey-nichols-calcot-park-plan.md"
+  }
+}

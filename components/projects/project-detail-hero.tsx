@@ -5,7 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ChevronDown, Activity } from "lucide-react";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
-import { ProjectKpiGrid } from "@/components/projects/project-kpi-grid";
+import { HeroTrustIndicators } from "@/components/shared/hero-trust-indicators";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { HERO_H1_DETAIL_PROJECT } from "@/components/hero/hero-tokens";
@@ -150,30 +150,21 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
               <span className="h-px w-8 bg-electric-cyan/60 font-bold" />
             </motion.div>
 
-            {/* Two-tone title — first half white, rest electric cyan */}
+            {/* Headline — explicit phrases: [0]=white [1]=cyan [2]=white */}
             <motion.h1
               className={HERO_H1_DETAIL_PROJECT}
               initial={shouldReduce ? {} : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.5 }}
             >
-              {(() => {
-                const words = project.title.split(" ");
-                const half = Math.ceil(words.length / 2);
-                const firstHalf = words.slice(0, half).join(" ");
-                const secondHalf = words.slice(half).join(" ");
-                return (
-                  <>
-                    <span className="text-white">{firstHalf}</span>
-                    {secondHalf && (
-                      <>
-                        {" "}
-                        <span className="text-electric-cyan">{secondHalf}</span>
-                      </>
-                    )}
-                  </>
-                );
-              })()}
+              {project.heroHeadline.map((phrase, i) => (
+                <span
+                  key={i}
+                  className={i === 1 ? "block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/20 via-electric-cyan to-electric-cyan/20" : "block text-white"}
+                >
+                  {phrase}
+                </span>
+              ))}
             </motion.h1>
 
             {/* Description */}
@@ -186,14 +177,17 @@ export function ProjectDetailHero({ project }: ProjectDetailHeroProps) {
               {project.description}
             </motion.p>
 
-            {/* KPI stats */}
+            {/* Hero indicators */}
             <motion.div
               className="mt-12 mb-12"
               initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <ProjectKpiGrid kpis={project.kpis} />
+              <HeroTrustIndicators
+                items={project.heroIndicators}
+                variant="image-overlay"
+              />
             </motion.div>
 
             {/* Meta */}

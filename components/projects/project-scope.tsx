@@ -21,6 +21,7 @@ import {
   Cable,
   Warehouse,
   Thermometer,
+  Activity,
   type LucideIcon,
 } from "lucide-react";
 import {
@@ -49,6 +50,7 @@ const iconMap: Record<ProjectScope["icon"], LucideIcon> = {
   Cable,
   Warehouse,
   Thermometer,
+  Activity,
 };
 
 interface ProjectScopeGridProps {

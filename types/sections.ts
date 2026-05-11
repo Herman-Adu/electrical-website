@@ -34,7 +34,9 @@ export type IconName =
   | 'Activity'
   | 'BookOpen'
   | 'Mail'
-  | 'MessageSquare';
+  | 'MessageSquare'
+  | 'MapPin'
+  | 'Calendar';
 
 export interface TrustIndicatorItem {
   icon: IconName;
