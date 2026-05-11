@@ -91,7 +91,8 @@ export interface ProjectScope {
     | "Building2"
     | "Cable"
     | "Warehouse"
-    | "Thermometer";
+    | "Thermometer"
+    | "Activity";
   title: string;
   description: string;
 }

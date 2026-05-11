@@ -2721,118 +2721,212 @@ export const allProjects: Project[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // HARVEY NICHOLS — Industrial Chiller Upgrade (stub — in progress)
+  // HARVEY NICHOLS — Industrial Chiller Upgrade
   // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: "proj-harvey-nichols-001",
-    slug: "harvey-nichols-chiller-upgrade",
-    category: "industrial",
-    categoryLabel: "Industrial",
-    title: "Harvey Nichols — Chiller Upgrade",
-    clientSector: "Luxury Retail — Department Store",
-    status: "in-progress",
-    description:
-      "Electrical installation and upgrade works for the chiller systems at Harvey Nichols — one of the UK's most prestigious luxury department stores. Nexgen was selected as the trusted electrical contractor to deliver the chiller upgrade programme to the exacting standards the brand demands.",
-    coverImage: {
-      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
-      alt: "Harvey Nichols — chiller upgrade electrical installation, London",
-    },
-    kpis: {
-      budget: "Commercial Contract",
-      timeline: "In Progress",
-      capacity: "Industrial Supply",
-      location: "London",
-    },
-    tags: ["Chiller Upgrade", "Industrial", "Luxury Retail", "In Progress"],
-    progress: 40,
-    isFeatured: false,
-    publishedAt: "2026-05-04T09:00:00.000Z",
-    updatedAt: "2026-05-04T09:00:00.000Z",
-    detail: {
-      intro: {
-        label: "Industrial Electrical Project",
-        headlineWords: ["Precision.", "Under", "Pressure."],
-        leadParagraph:
-          "Harvey Nichols is one of the UK's most iconic luxury department stores — a brand where the standard of every trade is held to the highest expectation. When the chiller upgrade programme required a trusted electrical contractor, Nexgen was selected. The scope covers the electrical installation and upgrade works to support the chiller systems, delivered with minimal disruption to live retail operations.",
-        bodyParagraphs: [
-          "Working within an active, high-footfall luxury retail environment demands a level of programme management, site awareness, and finish quality that goes beyond a standard industrial installation. Every aspect of the works — from containment routing to termination detail — reflects the environment in which it is installed.",
-          "Full project detail will be published on completion. The gallery below documents the installation works to date.",
-        ],
-      },
-      gallery: [
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
-          alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop",
-          caption: "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg",
-          alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop",
-          caption: "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg",
-          alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply",
-          caption: "Galvanised cable ladder — installed to route power feeds to chiller plant",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg",
-          alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit",
-          caption: "Cable tray at chiller base — containment installed and dressed to specification",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg",
-          alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage",
-          caption: "Trane chiller electrical connection — containment installed with correct danger labelling",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg",
-          alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs",
-          caption: "Under-floor cable management — heavy cable bundles routed through basement void",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg",
-          alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring",
-          caption: "Chiller control panel — MCBs, contactors, and wiring installed to specification",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
-          alt: "Harvey Nichols — plant room with insulated pipework and cable containment",
-          caption: "Plant room installation — cable containment and services routed through mechanical plant area",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg",
-          alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline",
-          caption: "Rooftop installation — electrical containment and pipework with London skyline in view",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg",
-          alt: "Harvey Nichols — plant room walkway grating with cable containment below",
-          caption: "Plant room cable containment — routed below steel grating walkway in plant area",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg",
-          alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator",
-          caption: "Grundfos VFD pump controller — installed, cabled, and commissioned",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg",
-          alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables",
-          caption: "Rooftop earthing cables — earth and bonding runs through steel grating structure",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg",
-          alt: "Harvey Nichols — cable identification labels on supply cables through security mesh",
-          caption: "Cable identification labels — circuit labelling applied to all supply cables",
-        },
-        {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
-          alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop",
-          caption: "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop",
-        },
+  id: "proj-harvey-nichols-001",
+  slug: "harvey-nichols-chiller-upgrade",
+  category: "industrial",
+  categoryLabel: "Industrial",
+  title: "Harvey Nichols — Chiller Upgrade",
+  clientSector: "Luxury Retail — Department Store",
+  status: "completed",
+  description:
+    "Full electrical package for the rooftop chiller upgrade at Harvey Nichols Knightsbridge — one of the UK's most prestigious luxury department stores. Nexgen managed complete strip-out, new containment, Schneider MCCB panel installation, and commissioning within a live retail environment.",
+  coverImage: {
+    src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg",
+    alt: "Harvey Nichols Knightsbridge rooftop — Trane chiller units installed and staged during upgrade works",
+  },
+  kpis: {
+    budget: "Commercial Contract",
+    timeline: "Completed",
+    capacity: "LV / MCCB Distribution",
+    location: "Knightsbridge, London",
+  },
+  tags: ["Chiller Upgrade", "Industrial", "Luxury Retail", "Knightsbridge", "Trane", "Schneider", "MCCB", "Cable Management"],
+  progress: 100,
+  isFeatured: true,
+  publishedAt: "2026-05-10T09:00:00.000Z",
+  updatedAt: "2026-05-10T09:00:00.000Z",
+  detail: {
+    intro: {
+      label: "Industrial Electrical Project",
+      headlineWords: ["Knightsbridge.", "Delivered", "Right."],
+      leadParagraph:
+        "Harvey Nichols Knightsbridge is one of the most iconic luxury department stores in the world — a site where the standard expected of every contractor is as high as the brand itself. Nexgen was appointed to deliver the full electrical package for the rooftop chiller upgrade, covering complete strip-out of the existing installation, new containment infrastructure, Schneider MCCB panel boards, power distribution cabling, and full commissioning.",
+      bodyParagraphs: [
+        "Working above one of London's busiest retail destinations required meticulous planning, strict access coordination, and workmanship that matched the environment. Rooftop crane operations, carefully sequenced road closures, and a phased programme ensured no disruption to live retail below.",
+        "The completed installation delivers a modern, resilient electrical infrastructure to support the new Trane chiller plant — engineered to last, fully documented, and certified to BS 7671.",
+      ],
+      pillars: [
+        { num: "01", title: "Live Environment Delivery", description: "Complete chiller upgrade executed above an active luxury retail store — zero disruption to trading operations throughout." },
+        { num: "02", title: "Crane & Logistics Expertise", description: "Road closures, lift plans, and crane operations coordinated in central Knightsbridge to deliver heavy materials safely to a restricted rooftop." },
+        { num: "03", title: "Engineered to Last", description: "New containment, Schneider MCCB panels, and full BS 7671 certification — a future-ready electrical infrastructure for the upgraded chiller plant." },
       ],
     },
+    scope: [
+      { icon: "Zap", title: "Full Electrical Strip-Out", description: "Safe isolation and complete removal of all redundant electrical cabling, containment, and ageing switchgear back to the main rooftop transformer position." },
+      { icon: "Settings", title: "Crane Operations & Logistics", description: "Coordination of road closures, crane lifts, and controlled delivery schedules to transport large-scale materials onto the Knightsbridge rooftop safely." },
+      { icon: "Cable", title: "New Cable Containment", description: "Installation of heavy-duty ladder rack, galvanised cable tray, and conduit systems across the rooftop plant area for power and control cabling." },
+      { icon: "Shield", title: "Schneider MCCB Panel Boards", description: "Two new Schneider MCCB panel boards providing enhanced protection, improved fault discrimination, and increased reliability for the chiller infrastructure." },
+      { icon: "Gauge", title: "Power Distribution & Control Wiring", description: "New power distribution cabling, control and interface wiring to mechanical plant, circuit identification, labelling, and final terminations throughout." },
+      { icon: "CheckCircle", title: "Testing, Commissioning & Certification", description: "Full electrical testing and inspection to BS 7671, functional testing of controls, phase rotation checks, commissioning support, and final certification." },
+    ],
+    timeline: [
+      { phase: "Phase 1", title: "Strip-Out & Isolation", duration: "2 weeks", status: "completed", description: "Safe isolation of existing systems, full strip-out of redundant cabling, containment, and ageing switchgear back to the rooftop transformer." },
+      { phase: "Phase 2", title: "Crane Operations & Material Delivery", duration: "1 week", status: "completed", description: "Road closures coordinated, crane lifts executed to deliver cable drums, ladder rack, MCCB panels, and containment materials to the rooftop." },
+      { phase: "Phase 3", title: "Containment & Panel Installation", duration: "3 weeks", status: "completed", description: "New ladder rack, cable tray, and conduit systems installed. Schneider MCCB panel boards installed and wired. Power and control cabling pulled through." },
+      { phase: "Phase 4", title: "Testing, Commissioning & Handover", duration: "1 week", status: "completed", description: "Full BS 7671 testing and inspection, functional commissioning of chiller plant controls, final certification and documentation handover." },
+    ],
+    challenge:
+      "Delivering a full electrical strip-out and new infrastructure installation on the rooftop of an active, high-footfall luxury department store in central Knightsbridge — with restricted access, sensitive crane operations on a busy public street, and zero tolerance for retail disruption.",
+    solution:
+      "Nexgen developed a detailed sequencing programme with phased crane operations, traffic management coordination with local authorities, and a hot-work permit regime. All rooftop access, material lifts, and critical works were scheduled outside trading hours or in controlled windows — ensuring Harvey Nichols remained fully operational throughout.",
+    gallery: [
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg", alt: "Harvey Nichols — five Trane chiller units installed and staged on Knightsbridge rooftop", caption: "Five Trane chiller units installed and staged on the Harvey Nichols rooftop, Knightsbridge" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-chiller-walkway.jpg", alt: "Harvey Nichols — rooftop chiller walkway with containment and London skyline visible", caption: "Rooftop walkway between chiller units — containment installed with the Knightsbridge skyline behind" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-main-switchboard-panel.jpg", alt: "Harvey Nichols — completed ABB main distribution switchboard with S6 labelled circuit breakers", caption: "Completed main switchboard — S6 circuit breakers serving chiller plant, PFC, and generator changeover" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-existing-panel-live-connections.jpg", alt: "Harvey Nichols — existing distribution panel showing live cable terminations before strip-out", caption: "Existing panel before strip-out — live terminations showing the complexity of the legacy installation" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg", alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop", caption: "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg", alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop", caption: "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg", alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply", caption: "Galvanised cable ladder — installed to route power feeds to chiller plant" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg", alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit", caption: "Cable tray at chiller base — containment installed and dressed to specification" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg", alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage", caption: "Trane chiller electrical connection — containment installed with correct danger labelling" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg", alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs", caption: "Under-floor cable management — heavy cable bundles routed through basement void" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg", alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring", caption: "Chiller control panel — MCBs, contactors, and wiring installed to specification" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg", alt: "Harvey Nichols — plant room with insulated pipework and cable containment", caption: "Plant room installation — cable containment and services routed through mechanical plant area" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg", alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline", caption: "Rooftop installation — electrical containment and pipework with London skyline in view" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg", alt: "Harvey Nichols — plant room walkway grating with cable containment below", caption: "Plant room cable containment — routed below steel grating walkway in plant area" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg", alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator", caption: "Grundfos VFD pump controller — installed, cabled, and commissioned" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg", alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables", caption: "Rooftop earthing cables — earth and bonding runs through steel grating structure" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg", alt: "Harvey Nichols — cable identification labels on supply cables through security mesh", caption: "Cable identification labels — circuit labelling applied to all supply cables" },
+      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg", alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop", caption: "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop" },
+    ],
+    narrativeBlocks: [
+      {
+        position: "after-intro",
+        anchorId: "knightsbridge-standard",
+        heading: "The Standard the Brand Demands",
+        paragraphs: [
+          "Harvey Nichols sets the benchmark for luxury retail in the UK. Every trade entering the building is expected to match the quality the brand represents. When Nexgen was appointed to the chiller upgrade programme, the standard required went beyond a typical industrial installation.",
+          "On a project like this, workmanship is not just about compliance — it is about presentation. Every cable entry, every label, every containment run is visible to the building management team and reflects on Nexgen's reputation. The installation was completed to the same standard we apply to every project, regardless of client or contract value.",
+        ],
+        background: "muted",
+      },
+      {
+        position: "after-scope",
+        anchorId: "crane-logistics",
+        heading: "Crane Operations in Central London",
+        paragraphs: [
+          "Delivering materials to a restricted rooftop in Knightsbridge is not a standard logistics challenge. It requires detailed lift plans, coordination with Transport for London, local authority road closure agreements, traffic management teams, and precise timing to minimise disruption to one of London's busiest shopping streets.",
+          "Nexgen managed the full logistics operation — from initial site surveys and lift plan development through to on-the-day crane coordination. Large SWA cable drums, Schneider MCCB panel boards, lengths of ladder rack, and galvanised cable tray were all craned to the rooftop within controlled delivery windows. Nothing was left to chance.",
+        ],
+        background: "default",
+      },
+    ],
   },
+},
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CALCOT PARK GOLF CLUB — Luxury Domestic Rewire
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+  id: "proj-calcot-park-001",
+  slug: "calcot-park-luxury-rewire",
+  category: "residential",
+  categoryLabel: "Residential",
+  title: "Calcot Park — Luxury Rewire",
+  clientSector: "Residential — High-End Property",
+  status: "completed",
+  description:
+    "Full luxury domestic rewire at a prestigious property within the grounds of Calcot Park Golf Club, Berkshire. Nexgen delivered a comprehensive electrical upgrade combining premium LED lighting design, smart home integration, external feature and security lighting, CCTV, and a fully compliant new consumer unit.",
+  coverImage: {
+    src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg",
+    alt: "Calcot Park luxury property — external lighting illuminating the front elevation at night",
+  },
+  kpis: {
+    budget: "Premium Residential",
+    timeline: "Completed",
+    capacity: "100A — RCBO Protected",
+    location: "Calcot Park, Berkshire",
+  },
+  tags: ["Luxury Rewire", "Residential", "LED Lighting", "Smart Home", "CCTV", "Berkshire", "Consumer Unit", "External Lighting", "Calcot Park"],
+  progress: 100,
+  isFeatured: true,
+  publishedAt: "2026-05-10T09:00:00.000Z",
+  updatedAt: "2026-05-10T09:00:00.000Z",
+  detail: {
+    intro: {
+      label: "Luxury Residential Project",
+      headlineWords: ["Premium.", "Smart.", "Done", "Right."],
+      leadParagraph:
+        "When a prestige property within the grounds of Calcot Park Golf Club required a full electrical upgrade, Nexgen was appointed to deliver a comprehensive rewire that matched the quality of the home. The scope combined premium LED lighting design, smart home integration, external feature and security lighting, CCTV installation, and a new compliant consumer unit — all completed to the highest standard of workmanship.",
+      bodyParagraphs: [
+        "Luxury residential work demands a different approach. Every decision — from the selection of fittings to the routing of cables — is made with the client's lifestyle and the property's aesthetic in mind. Nexgen worked with care and precision throughout, protecting finishes and delivering a result the client was proud of.",
+        "The completed installation transformed every aspect of the property's electrical infrastructure — from the consumer unit to the final switch plate, from the external driveway lights to the recessed downlights in every room.",
+      ],
+      pillars: [
+        { num: "01", title: "Premium Lighting Design", description: "Recessed LED downlights throughout every room, bespoke feature lighting, and externally designed lighting to complement the architecture and grounds." },
+        { num: "02", title: "Smart Home Integration", description: "Nest Learning Thermostat, multimedia cabling, and dedicated data infrastructure — technology integrated cleanly and unobtrusively into a high-spec interior." },
+        { num: "03", title: "Security & External", description: "Full CCTV installation with HD remote access, and strategically positioned external security lighting covering the property and grounds." },
+        { num: "04", title: "Certified & Compliant", description: "New consumer unit with individual RCBOs and surge protection. Full BS 7671 testing, inspection, and certification — documentation provided at handover." },
+      ],
+    },
+    scope: [
+      { icon: "Zap", title: "Full Electrical Rewire", description: "Complete strip-out of the existing electrical installation and full rewire designed around the client's high-specification requirements." },
+      { icon: "Lightbulb", title: "LED Lighting Throughout", description: "Recessed LED downlights installed throughout all rooms, with bespoke feature lighting to key architectural areas of the property." },
+      { icon: "Activity", title: "External Feature & Security Lighting", description: "Strategically positioned external security and feature lighting installed to enhance the property and grounds at night — showcased in the project gallery." },
+      { icon: "Settings", title: "Data, Multimedia & Smart Home", description: "Dedicated data points, high-speed network infrastructure, media wall installations with concealed cabling, and Nest Learning Thermostat integration." },
+      { icon: "Gauge", title: "CCTV System", description: "Full CCTV installation covering the property with high-definition monitoring and remote access capability configured and commissioned." },
+      { icon: "Shield", title: "New Consumer Unit", description: "New consumer unit with individual RCBOs and surge protection device — improved safety, reliability, and full compliance with current BS 7671 wiring regulations." },
+      { icon: "CheckCircle", title: "Testing, Certification & Handover", description: "Full BS 7671 electrical testing and inspection. Every circuit tested, results documented, and full certification provided at handover." },
+    ],
+    challenge:
+      "Delivering a comprehensive full rewire of a high-specification luxury property within the grounds of a prestigious golf club — with a client expecting the quality of finish to match the quality of their home, and zero tolerance for damage to premium interior finishes and landscaping.",
+    solution:
+      "Nexgen worked methodically, protecting all surfaces and finishes before starting each phase. Cable routes were planned to minimise disruption to completed rooms, and all chasing and make-good works were managed to the highest standard. A room-by-room programme allowed the client to use areas of the home throughout the project.",
+    gallery: [
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg", alt: "Calcot Park luxury property — beautifully illuminated front elevation at night with porch spotlights and wall lights", caption: "Front elevation at night — porch spotlights, wall lights, and driveway lighting installed and commissioned" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-night-panorama.jpg", alt: "Calcot Park — full property panorama at night showing complete external lighting scheme", caption: "Full property at night — complete external lighting scheme illuminating the entire grounds" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-rear-patio-night-uplighters.jpg", alt: "Calcot Park — rear patio at night with wall uplighters, bi-fold door lighting, and garden lights", caption: "Rear patio at night — wall uplighters and patio lighting with bi-fold door exterior illuminated" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-wide.jpg", alt: "Calcot Park — wide night shot showing entire property illuminated with full external lighting scheme", caption: "Wide night elevation — external lighting covering front, side, and garage areas of the property" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-step-lights-night.jpg", alt: "Calcot Park — landscaped garden terrace at night with recessed step lights and wall plinth lights glowing warmly", caption: "Garden terrace at night — recessed step lights and plinth lights illuminating the landscaped area" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-recessed-ground-lights-night.jpg", alt: "Calcot Park — garden terrace with recessed ground lights along wall base and step lighting at night", caption: "Recessed ground lights — installed at the base of garden walls and along terrace steps" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-plinth-lights-seating-night.jpg", alt: "Calcot Park — garden plinth lights and raised seating area illuminated at night", caption: "Garden plinth lights — seating area and raised planters illuminated at night" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-living-room-led-downlights.jpg", alt: "Calcot Park — interior living room with recessed LED downlights, herringbone floor and modern fireplace", caption: "Living room — recessed LED downlights throughout, complementing the herringbone floor and fireplace" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-kitchen-led-downlights.jpg", alt: "Calcot Park — high-spec kitchen with recessed LED downlights, high-gloss units, and integrated appliances wired", caption: "Kitchen — LED downlights, integrated appliances wired, and all kitchen circuits installed" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-dining-room-led-downlights.jpg", alt: "Calcot Park — dining room with recessed LED downlights and premium velvet and marble interior", caption: "Dining room — recessed LED downlights complementing the luxury interior design" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg", alt: "Calcot Park — Nest Learning Thermostat installed as part of smart home integration package", caption: "Nest Learning Thermostat — smart home integration installed, wired, and configured" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-floodlight-cctv.jpg", alt: "Calcot Park — external security floodlight and CCTV camera installed on gable end of property", caption: "External security — floodlight and CCTV camera installed on gable, covering driveway approach" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-light-dusk.jpg", alt: "Calcot Park — external security light installed under eaves, property exterior at dusk", caption: "External security light — installed under eaves, covering the property perimeter" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-exterior-side-view.jpg", alt: "Calcot Park — property exterior side view showing yellow brick, patio area, and mature tree setting", caption: "Property exterior — side elevation showing the quality and setting of the home" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-daylight.jpg", alt: "Calcot Park — landscaped garden terrace in daylight with steps, planted borders, and grassed area", caption: "Garden terrace in daylight — landscaped steps and planters where external ground lights were installed" },
+      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-planters.jpg", alt: "Calcot Park — garden terrace alternate angle showing planted borders and recessed lighting positions", caption: "Garden terrace — alternate view of planted borders and terrace where external lighting was installed" },
+    ],
+    narrativeBlocks: [
+      {
+        position: "after-intro",
+        anchorId: "luxury-residential-standard",
+        heading: "The Detail That Makes the Difference",
+        paragraphs: [
+          "In a home like this, electrical work is not background infrastructure — it is part of the design. The placement of each downlight, the routing of every cable, the choice of fittings — all of it contributes to how the finished space looks and feels. Nexgen's approach to premium residential work starts with understanding the client's vision and working backwards from the end result.",
+          "The Calcot Park rewire was delivered with the care and precision the property deserved. Every room was treated as a showcase. The external lighting scheme was designed to complement the architecture, not just illuminate it — and the results speak for themselves in the night photography.",
+        ],
+        background: "muted",
+      },
+      {
+        position: "after-gallery",
+        anchorId: "the-result",
+        heading: "A Home Transformed",
+        paragraphs: [
+          "The completed installation covers every electrical system in the property — from the new consumer unit to the final external ground light. The client now has a home with premium interior lighting in every room, a full external security and feature lighting scheme, smart home controls, high-definition CCTV, and a fully certified, compliant electrical installation.",
+          "This is Nexgen residential work at its best — thorough, detail-focused, and completed to a standard that lasts.",
+        ],
+        background: "default",
+      },
+    ],
+  },
+},
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [
