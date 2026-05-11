@@ -162,7 +162,14 @@ export function NewsDetailHero({ article }: NewsDetailHeroProps) {
           </motion.div>
 
           <motion.h1 variants={itemVariants} className={HERO_H1_DETAIL_ARTICLE}>
-            {article.title}
+            {article.heroHeadline.map((phrase, i) => (
+              <span
+                key={i}
+                className={i === 1 ? "block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/20 via-electric-cyan to-electric-cyan/20" : "block text-white"}
+              >
+                {phrase}
+              </span>
+            ))}
           </motion.h1>
 
           <motion.p

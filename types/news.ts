@@ -95,6 +95,7 @@ export interface NewsArticle {
   readTime: string;
   tags: string[];
   isFeatured: boolean;
+  heroHeadline: [string, string?, string?];
   publishedAt: string;
   updatedAt: string;
   spotlightMetric?: NewsSpotlightMetric;

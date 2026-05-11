@@ -65,6 +65,7 @@ export const allProjects: Project[] = [
     category: "industrial",
     categoryLabel: "Industrial",
     title: "West Dock Industrial Upgrade",
+    heroHeadline: ['West Dock', 'Industrial Upgrade'],
     clientSector: "Industrial",
     status: "in-progress",
     description:
@@ -218,6 +219,7 @@ export const allProjects: Project[] = [
     category: "commercial-lighting",
     categoryLabel: "Commercial Lighting",
     title: "Riverside Commercial Retrofit",
+    heroHeadline: ['Riverside', 'Commercial Retrofit'],
     clientSector: "Commercial",
     status: "completed",
     description:
@@ -372,6 +374,7 @@ export const allProjects: Project[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "North Estate Residential Phase 2",
+    heroHeadline: ['North Estate', 'Residential Phase 2'],
     clientSector: "Residential",
     status: "in-progress",
     description:
@@ -527,6 +530,7 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "City Hospital Emergency Power Ring",
+    heroHeadline: ['City Hospital', 'Emergency Power'],
     clientSector: "Critical Infrastructure",
     status: "planned",
     description:
@@ -687,6 +691,7 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "Thames Gateway Data Centre Power Infrastructure",
+    heroHeadline: ['Thames Gateway', 'Data Centre Power'],
     clientSector: "Data Centres",
     status: "completed",
     description:
@@ -841,6 +846,7 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "Canary Wharf Tower Mains Upgrade",
+    heroHeadline: ['Canary Wharf', 'Mains Upgrade'],
     clientSector: "Commercial Property",
     status: "in-progress",
     description:
@@ -996,6 +1002,7 @@ export const allProjects: Project[] = [
     category: "industrial",
     categoryLabel: "Industrial",
     title: "Heathrow Cargo Substation Expansion",
+    heroHeadline: ['Heathrow Cargo', 'Substation Expansion'],
     clientSector: "Aviation",
     status: "completed",
     description:
@@ -1150,6 +1157,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "DHL Reading Distribution Hub",
+    heroHeadline: ['DHL Reading', 'Distribution Hub'],
     clientSector: "Logistics & Distribution",
     status: "completed",
     description:
@@ -1438,6 +1446,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Medivet Watford Veterinary Practice",
+    heroHeadline: ['Medivet Watford', 'Veterinary Practice'],
     clientSector: "Veterinary Healthcare",
     status: "completed",
     description:
@@ -1720,6 +1729,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Ladbrokes Woking — Retail Electrical Fit-Out",
+    heroHeadline: ['Ladbrokes Woking', 'Retail Fit-Out'],
     clientSector: "Retail & Betting",
     status: "completed",
     description:
@@ -1985,6 +1995,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Biffa Workshop — 3-Phase Electrical Installation",
+    heroHeadline: ['Biffa Workshop', '3-Phase Electrical'],
     clientSector: "Waste Management & Sustainability",
     status: "completed",
     description:
@@ -2214,6 +2225,7 @@ export const allProjects: Project[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "Domestic Installations — Taplow",
+    heroHeadline: ['Taplow', 'Done Right'],
     clientSector: "Residential",
     status: "completed",
     description:
@@ -2405,6 +2417,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Herschel Grammar School — Electrical Maintenance Contract",
+    heroHeadline: ['Herschel Grammar', 'Trusted Partner'],
     clientSector: "Education — Grammar School",
     status: "completed",
     description:
@@ -2652,6 +2665,7 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "The Hub Farnborough — Commercial Lighting Refurbishment",
+    heroHeadline: ['Hub Farnborough', 'Lighting Refurb'],
     clientSector: "Commercial Office — Hospitality/Co-Working",
     status: "in-progress",
     description:
@@ -2729,6 +2743,7 @@ export const allProjects: Project[] = [
   category: "industrial",
   categoryLabel: "Industrial",
   title: "Harvey Nichols Chiller Upgrade",
+  heroHeadline: ['Harvey Nichols', 'Chiller Upgrade'],
   clientSector: "Luxury Retail — Department Store",
   status: "completed",
   description:
@@ -2836,6 +2851,7 @@ export const allProjects: Project[] = [
   category: "residential",
   categoryLabel: "Residential",
   title: "Calcot Park Luxury Rewire",
+  heroHeadline: ['Calcot Park', 'Luxury Rewire'],
   clientSector: "Residential — High-End Property",
   status: "completed",
   description:

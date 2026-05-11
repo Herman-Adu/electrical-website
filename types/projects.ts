@@ -145,6 +145,7 @@ export interface Project {
   tags: string[];
   progress: number;
   isFeatured: boolean;
+  heroHeadline: [string, string?, string?];
   publishedAt: string;
   updatedAt: string;
   /** Extended detail content for project pages */

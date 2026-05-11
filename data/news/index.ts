@@ -97,6 +97,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "Taplow Residential Energy Refresh Cuts Waste Without Compromising Comfort",
+    heroHeadline: ["Taplow", "Energy Refresh"],
     excerpt:
       "A behind-the-scenes look at how a phased home electrification programme reduced energy waste while preserving day-to-day comfort for a growing family home.",
     description:
@@ -278,6 +279,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Docklands Switchgear Watch: What Real-Time Monitoring Changed in Month One",
+    heroHeadline: ["Docklands", "Switchgear Watch"],
     excerpt:
       "Operational telemetry from a live industrial upgrade reveals how monitoring reshaped response times, maintenance planning, and risk visibility within the first month.",
     description:
@@ -446,6 +448,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Partner Spotlight: How Early Programme Alignment Reduced Rework on a Mixed-Use Scheme",
+    heroHeadline: ["Partner", "Spotlight"],
     excerpt:
       "A partner story on coordination discipline, early design decisions, and the commercial benefits of treating electrical delivery as a programme conversation from day one.",
     description:
@@ -627,6 +630,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Hospital Emergency Power Ring: Lessons Learned from a Live Critical Infrastructure Upgrade",
+    heroHeadline: ["Emergency Power", "Ring Upgrade"],
     excerpt:
       "This case study distils delivery lessons from a live hospital power-ring upgrade where resilience, communication, and sequencing all had zero room for error.",
     description:
@@ -806,6 +810,7 @@ export const allNewsArticles: NewsArticle[] = [
     category: "insights",
     categoryLabel: "Insights",
     title: "Why EV Readiness Starts at the Board, Not the Charger",
+    heroHeadline: ["EV Readiness", "Starts Here"],
     excerpt:
       "A practical insight piece for clients planning EV rollouts, showing why upstream infrastructure decisions determine speed, budget, and future flexibility.",
     description:
@@ -944,6 +949,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Latest Client Review: Canary Wharf Retrofit Delivery Earns Repeat Appointment",
+    heroHeadline: ["Canary Wharf", "Repeat Appointment"],
     excerpt:
       "A new review from a repeat commercial client explains why calm delivery, transparent updates, and tidy handovers still win long after installation is complete.",
     description:
@@ -1119,6 +1125,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Community Electrification Week Launches with Partner-Led Campaign Assets",
+    heroHeadline: ["Community", "Electrification Week"],
     excerpt:
       "A campaign-led partner update showing how shared storytelling, campaign cards, and site-ready assets can turn delivery milestones into usable marketing momentum.",
     description:
@@ -1288,6 +1295,7 @@ export const allNewsArticles: NewsArticle[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "Complete Home Rewire: Victorian Terrace Transformation in Hackney",
+    heroHeadline: ["Victorian Terrace", "Rewire Hackney"],
     excerpt:
       "How a full electrical rewire brought a 1890s Victorian terrace into the modern era while preserving period features and meeting BS 7671 19th Edition standards.",
     description:
@@ -1469,6 +1477,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "Smart Home Automation: Integrating KNX and Lighting Control in a New Build",
+    heroHeadline: ["Smart Home", "Automation"],
     excerpt:
       "A comprehensive guide to specifying and installing KNX-based home automation in new-build properties, from initial design through to commissioning and handover.",
     description:
@@ -1651,6 +1660,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Residential",
     title:
       "EV Charger Installation: Domestic Load Assessment and DNO Notification",
+    heroHeadline: ["EV Charger", "Installation Guide"],
     excerpt:
       "Understanding the electrical requirements for home EV charger installation, including maximum demand calculations, earthing arrangements, and DNO application processes.",
     description:
@@ -1826,6 +1836,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Data Centre Power Distribution: Achieving Tier III Compliance in a London Facility",
+    heroHeadline: ["Data Centre", "Tier III Power"],
     excerpt:
       "A technical deep-dive into the electrical infrastructure design required for Tier III data centre certification, including redundancy, UPS topology, and generator paralleling.",
     description:
@@ -2008,6 +2019,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Power Factor Correction: Eliminating Reactive Charges in Manufacturing",
+    heroHeadline: ["Power Factor", "Correction"],
     excerpt:
       "How automatic power factor correction systems can reduce electricity costs by up to 15% in industrial facilities with significant motor loads.",
     description:
@@ -2181,6 +2193,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Industrial",
     title:
       "Warehouse LED Lighting Retrofit: Energy Savings and ROI Analysis",
+    heroHeadline: ["Warehouse LED", "Lighting Retrofit"],
     excerpt:
       "A comprehensive analysis of LED lighting upgrade costs, energy savings, and return on investment for large-scale warehouse and logistics facilities.",
     description:
@@ -2367,6 +2380,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Private Hospital Operating Theatre: Complete Electrical Infrastructure Upgrade",
+    heroHeadline: ["Hospital Theatre", "Complete Upgrade"],
     excerpt:
       "A detailed case study of upgrading electrical systems in live operating theatre environments while maintaining clinical operations and HTM 06-01 compliance.",
     description:
@@ -2546,6 +2560,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "University Campus HV Network Modernisation: 11kV Ring Main Replacement",
+    heroHeadline: ["University Campus", "HV Modernisation"],
     excerpt:
       "How a phased high-voltage network upgrade programme maintained power to 40+ buildings while replacing aging 1970s switchgear and transformers.",
     description:
@@ -2719,6 +2734,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Case Studies",
     title:
       "Retail Chain Electrical Standardisation: 150-Store Rollout Programme",
+    heroHeadline: ["Retail Chain", "150-Store Rollout"],
     excerpt:
       "A case study in scaling electrical installation standards across a national retail portfolio, from specification development through to completion.",
     description:
@@ -2895,6 +2911,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "BS 7671 19th Edition: Key Changes Every Contractor Needs to Know",
+    heroHeadline: ["BS 7671", "19th Edition"],
     excerpt:
       "A practical summary of the most significant changes in the 19th Edition wiring regulations and their impact on everyday installation practice.",
     description:
@@ -3064,6 +3081,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "Future-Proofing Electrical Infrastructure for Building Electrification",
+    heroHeadline: ["Future-Proofing", "Electrification"],
     excerpt:
       "Strategic guidance on designing electrical systems that can accommodate heat pump retrofits, EV charging expansion, and solar PV integration.",
     description:
@@ -3234,6 +3252,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Insights",
     title:
       "Electrical Contractor Insurance: Understanding Coverage Requirements",
+    heroHeadline: ["Contractor", "Insurance Guide"],
     excerpt:
       "A comprehensive guide to the insurance policies electrical contractors need, from public liability to professional indemnity and contract works cover.",
     description:
@@ -3406,6 +3425,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Manufacturer Partnership: Schneider Electric Technical Training Programme",
+    heroHeadline: ["Schneider Electric", "Partnership"],
     excerpt:
       "How our partnership with Schneider Electric provides engineers with certified training on the latest switchgear, automation, and power monitoring technologies.",
     description:
@@ -3578,6 +3598,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Partners",
     title:
       "Developer Framework Agreement: Delivering Electrical Packages for Major Residential Schemes",
+    heroHeadline: ["Developer", "Framework Agreement"],
     excerpt:
       "How framework agreements with volume housebuilders create efficiency through standardised specifications, bulk procurement, and dedicated delivery teams.",
     description:
@@ -3754,6 +3775,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Hotel Group Review: Planned Preventive Maintenance Contract Renewal",
+    heroHeadline: ["Hotel Group", "PPM Renewal"],
     excerpt:
       "A hospitality client shares their experience of working with our team on a multi-site planned maintenance contract, highlighting response times and service quality.",
     description:
@@ -3930,6 +3952,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Academy Trust Review: Summer Works Programme Delivery Across 6 Schools",
+    heroHeadline: ["Academy Trust", "Summer Works"],
     excerpt:
       "An education client reviews the delivery of electrical upgrade works across multiple school sites during the summer holiday period.",
     description:
@@ -4106,6 +4129,7 @@ export const allNewsArticles: NewsArticle[] = [
     categoryLabel: "Reviews",
     title:
       "Commercial Landlord Review: Multi-Tenanted Building Common Parts Upgrade",
+    heroHeadline: ["Commercial Landlord", "Common Parts Upgrade"],
     excerpt:
       "A property management company reviews the delivery of common parts electrical upgrades in an occupied commercial building.",
     description:

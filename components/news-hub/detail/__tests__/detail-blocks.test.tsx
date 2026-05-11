@@ -70,6 +70,7 @@ function mockArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
     readTime: '5 min',
     tags: ['test'],
     isFeatured: false,
+    heroHeadline: ['Test Article', 'Mock'],
     publishedAt: '2026-01-01',
     updatedAt: '2026-01-01',
     detail: {
