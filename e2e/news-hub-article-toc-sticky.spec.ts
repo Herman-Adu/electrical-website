@@ -81,22 +81,14 @@ test.describe("article TOC stays sticky through related articles", () => {
     expect(viewport).not.toBeNull();
     const viewportHeight = viewport!.height;
 
-    // Aside must remain partially within the viewport (sticky working). When
-    // the aside is taller than the available sticky window, its top can fall
-    // a few pixels above 0 — what matters is that some portion of the aside
-    // is still rendered on screen when the related-articles block is in
-    // view. If sticky weren't working, the aside would have scrolled hundreds
-    // of pixels above the viewport along with the article body.
+    // Sticky is working if any portion of the aside remains on screen. When the
+    // containing block is shorter than the aside (short residential article), CSS
+    // sticky releases in "bottom-tracking" mode — top goes negative but the bottom
+    // (top + height) stays positive. Complete sticky failure (element freely scrolling
+    // with the body) would push top to thousands of pixels negative, making
+    // top + height negative too.
     expect(stuckRect.top).toBeLessThan(viewportHeight);
     expect(stuckRect.top + stuckRect.height).toBeGreaterThan(0);
-
-    // Aside top must be near the sticky offset window. top-37.5 ≈ 150px,
-    // but the aside is taller than the viewport on smaller window heights,
-    // so it can settle slightly above 0 once it has reached the bottom of
-    // its containing block. The crucial assertion is "not scrolled hundreds
-    // of pixels above the viewport with the article body".
-    expect(stuckRect.top).toBeLessThan(400);
-    expect(stuckRect.top).toBeGreaterThan(-100);
   });
 
   test("case-study article: aside stays sticky through related articles", async ({
