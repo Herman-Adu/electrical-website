@@ -1,6 +1,6 @@
 {
-  "branch": "feat/hub-farnborough-harvey-nichols-content",
-  "entity": "feat-hub-farnborough-harvey-nichols-content",
-  "fallback": "90fb7db feat: make heroIndicators required, remove conditional guards, update test mock | 25d5728 feat: add content-specific heroIndicators to all 24 articles | ce53d58 feat: add content-specific heroIndicators to all 16 projects",
-  "updatedAt": "2026-05-11T19:12:50.595Z"
+  "branch": "main",
+  "entity": "nexgen-electrical-innovations-state",
+  "fallback": "332a766 feat: heroIndicators — 4 trust cards on every project and article hero (#158)",
+  "updatedAt": "2026-05-11T20:00:00.000Z"
 }
