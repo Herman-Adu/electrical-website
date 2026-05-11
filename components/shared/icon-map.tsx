@@ -27,6 +27,8 @@ import {
   BookOpen,
   Mail,
   MessageSquare,
+  MapPin,
+  Calendar,
   type LucideIcon,
 } from 'lucide-react';
 import type { IconName } from '@/types/sections';
@@ -58,6 +60,8 @@ export const iconMap: Record<IconName, LucideIcon> = {
   BookOpen,
   Mail,
   MessageSquare,
+  MapPin,
+  Calendar,
 };
 
 export function getIcon(name: IconName): LucideIcon {
