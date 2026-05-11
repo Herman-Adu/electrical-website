@@ -11,7 +11,7 @@ import {
 
 const certs = [
   {
-    abbr: "NICEIC",
+    abbr: "NICEIC Approved",
     name: "NICEIC Approved Contractor Scheme",
     category: "Professional Accreditation",
     level: "Platinum Service Provider",
@@ -25,10 +25,10 @@ const certs = [
     featured: false,
   },
   {
-    abbr: "NAPIT",
-    name: "Registered Member",
-    category: "Industry Body",
-    level: "Member",
+    abbr: "NICEIC Domestic",
+    name: "NICEIC Domestic Installer Scheme",
+    category: "Domestic Accreditation",
+    level: "Part P Registered",
     featured: false,
   },
   {
@@ -130,7 +130,7 @@ export function Certifications() {
               distance={40}
             >
               <div
-                className={`relative group rounded-2xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
+                className={`relative group rounded-xl border p-6 transition-all duration-300 cursor-default overflow-hidden ${
                   cert.featured
                     ? "border-[hsl(174_100%_35%)]/50 dark:border-electric-cyan/50 bg-[hsl(174_100%_35%)]/5 dark:bg-electric-cyan/8 hover:shadow-xl hover:shadow-[hsl(174_100%_35%)]/10 dark:hover:shadow-electric-cyan/20"
                     : "border-border bg-card/40 hover:border-electric-cyan/30 hover:bg-electric-cyan/5"
@@ -140,8 +140,8 @@ export function Certifications() {
                 {/* <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-electric-cyan/5 to-transparent" /> */}
 
                 {/* Corner brackets */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                <div className="absolute top-2 left-2 w-4 h-4 border-t border-l rounded-tl-lg border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
+                <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r rounded-br-lg border-electric-cyan/30 group-hover:border-electric-cyan/60 transition-colors" />
 
                 {/* Featured star */}
                 {cert.featured && (
@@ -192,7 +192,7 @@ export function Certifications() {
         {/* Bottom statement */}
         <ScrollReveal direction="up" blur delay={0.2} duration={0.65}>
           <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-card/40">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-border bg-card/40">
               <Award
                 size={16}
                 className="text-[hsl(174_100%_35%)] dark:text-electric-cyan"
