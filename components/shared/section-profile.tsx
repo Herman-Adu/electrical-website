@@ -97,7 +97,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
 
       <div className="section-content relative z-10">
         <div
-          className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 lg:gap-20 items-center`}
+          className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 lg:gap-20 items-center md:items-stretch`}
         >
           <motion.div
             initial={{ opacity: 0, x: imageInitialX }}
@@ -106,7 +106,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
             viewport={{ once: true, margin: "-80px" }}
             className="w-full md:w-5/12 shrink-0"
           >
-            <div className="relative p-2">
+            <div className="relative p-2 md:h-full md:flex md:flex-col">
               <div className="absolute -inset-6 border border-[--electric-cyan]/08 rounded-3xl" />
 
               <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-tl-xl z-10 p2" />
@@ -114,7 +114,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
               <div className="absolute -bottom-1 -left-1 w-8 h-8 border-b-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-bl-xl z-10" />
               <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-br-xl z-10" />
 
-              <div className={`relative w-full ${imageAspect === 'landscape' ? 'aspect-4/3' : 'aspect-3/4'} rounded-xl overflow-hidden`}>
+              <div className={`relative w-full ${imageAspect === 'landscape' ? 'aspect-4/3' : 'aspect-3/4'} md:aspect-auto md:flex-1 rounded-xl overflow-hidden`}>
                 <motion.div
                   className="absolute inset-0 w-full h-[115%]"
                   style={{ filter: brightnessFilter }}

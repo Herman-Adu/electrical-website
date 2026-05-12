@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "nexgen-electrical-innovations-state",
-  "fallback": "73c232d docs: services profile enrichment — spec, plan, and session handoff prompt | 880321f feat: hero overlay fixes, category images, and dark mode trust indicators (#162) | 55280df feat: per-project intro section on all project detail pages (#161)",
-  "updatedAt": "2026-05-12T16:59:41.796Z"
+  "branch": "feat/services-profile-enrichment",
+  "entity": "feat-services-profile-enrichment",
+  "fallback": "99ff349 feat: services profile enrichment — real project images rich highlights industrial features+dashboard (#163) | a409cf9 feat: services data hero images and navbar updates (WIP baseline) | 73c232d docs: services profile enrichment — spec, plan, and session handoff prompt",
+  "updatedAt": "2026-05-12T18:41:10.164Z"
 }
