@@ -1,74 +1,181 @@
-import type { ServicePageData } from "@/types/sections";
+# Emergency Response Page Enrichment Implementation Plan
 
-export const emergencyPageData: ServicePageData = {
-  slug: "emergency",
-  meta: {
-    title: "Emergency Electrical Services | 24/7 Callout | NexGen Electrical",
-    description:
-      "24/7 emergency electrical response for commercial, industrial, and residential properties. Rapid response, expert diagnosis, immediate solutions.",
-    keywords: [
-      "emergency electrician",
-      "24/7 electrical",
-      "electrical emergency",
-      "power outage",
-      "emergency callout",
-    ],
-  },
-  hero: {
-    eyebrow: "24/7 Emergency Response",
-    headline: ["Always", "On", "Call"],
-    headlineHighlight: "On",
-    subheadline:
-      "Electrical emergencies don't keep business hours — and neither do we. Rapid response, expert diagnosis, and immediate solutions when you need them most.",
-    stats: [
-      { value: "< 2hr", label: "Response Time" },
-      { value: "24/7", label: "Availability" },
-      { value: "365", label: "Days a Year" },
-      { value: "100%", label: "Resolution" },
-    ],
-    scrollTargetId: "response",
-    scrollLabel: "Get Help Now",
-    backgroundImage: {
-      src: "/images/services-emergency.jpg",
-      alt: "24/7 emergency electrical response",
-      priority: true,
-    },
-    trustIndicators: [
-      { icon: "Wrench" as const, title: "24/7 Rapid Response", description: "Always-on emergency electrical service, any hour of any day" },
-      { icon: "Zap" as const, title: "2-Hour SLA", description: "Guaranteed response commitment for all urgent electrical faults" },
-      { icon: "Shield" as const, title: "Safe and Certified", description: "Emergency work documented and certified for insurance purposes" },
-      { icon: "Phone" as const, title: "Direct Emergency Line", description: "Call direct to reach our qualified emergency electrical team" },
-    ],
-    metadata: ["NICEIC Approved", "24/7 Cover", "2-Hour SLA", "365 Days/Year"],
-  },
-  intro: {
-    sectionId: "when-seconds-matter",
-    label: "When Seconds Matter",
-    headlineWords: ["Electrical", "Emergencies", "Don't", "Wait"],
-    leadParagraph:
-      "When your power fails or a fault puts you at risk, you need help immediately. We maintain a 24/7 rapid-response team ready to diagnose and fix electrical emergencies before they become disasters.",
-    bodyParagraphs: [
-      "Whether a breaker won't reset, smoke is visible in a wall, or you've lost power entirely, our emergency electricians respond within minutes. We arrive equipped to diagnose any issue and implement immediate solutions, from temporary power restoration to permanent repairs.",
-      "Our emergency service covers commercial facilities, industrial plants, and residential properties. We're available every day of the year, including holidays, with no call-out surcharges — just honest expert help when you need it most.",
-    ],
-    pillars: [
-      {
-        num: "01",
-        title: "60-Min Response",
-        description: "Rapid dispatch and arrival to stabilize your situation.",
-      },
-      {
-        num: "02",
-        title: "24/7 Availability",
-        description: "Always on call, including weekends and holidays.",
-      },
-      {
-        num: "03",
-        title: "No Call-Out Fees",
-        description: "Transparent pricing with no emergency surcharges.",
-      },
-    ],
-  },
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Replace 2 vague profile sections in `data/services/emergency.ts` with 3 domain-specific SectionProfile sections (residential, commercial, industrial), each with 4 highlights, bio, quote, credentials, placeholder image, and CTA.
+
+**Architecture:** Data-only change — no new components, no type changes, no new files. The SectionProfile component and SectionProfileData type already support all required fields. Placeholder images are real project images; swap only `image.src` when van branding photos arrive.
+
+**Tech Stack:** TypeScript, Next.js 16, Vitest (tests), Playwright (visual verification)
+
+**Branch:** `feat/emergency-response-enrichment`
+**Spec:** `docs/superpowers/specs/2026-05-12-emergency-response-enrichment-design.md`
+
+---
+
+## File Map
+
+| File | Action | Responsibility |
+|------|--------|---------------|
+| `data/services/__tests__/emergency.test.ts` | Modify | Add profile section assertions (TDD — write first) |
+| `data/services/emergency.ts` | Modify | Replace sections[0] and sections[3] with 3 domain profile sections |
+
+---
+
+## Task 1: Extend the test file (TDD — write failing tests first)
+
+**Files:**
+- Modify: `data/services/__tests__/emergency.test.ts`
+
+The existing test file checks features sections. We add a new describe block that asserts
+the three domain-specific profile sections exist with proper structure. These tests will
+FAIL until Task 2 is complete — that is the intent.
+
+- [ ] **Step 1.1: Read the current test file**
+
+```bash
+cat data/services/__tests__/emergency.test.ts
+```
+
+Expected: Shows the existing `SectionFeaturesData entries` describe block (3 tests). No profile section tests exist yet.
+
+- [ ] **Step 1.2: Add profile section assertions to the test file**
+
+Open `data/services/__tests__/emergency.test.ts` and **append** this describe block after the existing one (do not replace anything):
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { emergencyPageData } from '../emergency';
+import type { SectionFeaturesData, SectionProfileData } from '@/types/sections';
+
+describe('emergency page data — SectionFeaturesData entries', () => {
+  const featureSections = emergencyPageData.sections
+    .filter((s) => s.type === 'features')
+    .map((s) => s.data as SectionFeaturesData);
+
+  it('has exactly 2 features sections', () => {
+    expect(featureSections.length).toBe(2);
+  });
+
+  it('every features section has a non-empty checklist', () => {
+    featureSections.forEach((data) => {
+      expect(data.checklist).toBeDefined();
+      expect(data.checklist!.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('every features section has non-empty partners', () => {
+    featureSections.forEach((data) => {
+      expect(data.partners).toBeDefined();
+      expect(data.partners!.length).toBeGreaterThan(0);
+    });
+  });
+});
+
+describe('emergency page data — SectionProfileData entries', () => {
+  const profileSections = emergencyPageData.sections
+    .filter((s) => s.type === 'profile')
+    .map((s) => s.data as SectionProfileData);
+
+  it('has exactly 3 profile sections', () => {
+    expect(profileSections.length).toBe(3);
+  });
+
+  it('profile sections cover residential, commercial, and industrial domains', () => {
+    const sectionIds = profileSections.map((s) => s.sectionId);
+    expect(sectionIds).toContain('residential-emergency');
+    expect(sectionIds).toContain('commercial-emergency');
+    expect(sectionIds).toContain('industrial-emergency');
+  });
+
+  it('every profile section has exactly 4 highlights', () => {
+    profileSections.forEach((data) => {
+      expect(data.highlights).toBeDefined();
+      expect(data.highlights!.length).toBe(4);
+    });
+  });
+
+  it('every highlight has a non-empty icon, title, and description', () => {
+    profileSections.forEach((data) => {
+      data.highlights!.forEach((h) => {
+        expect(h.icon).toBeTruthy();
+        expect(h.title.length).toBeGreaterThan(0);
+        expect(h.description.length).toBeGreaterThan(0);
+      });
+    });
+  });
+
+  it('every profile section has a 2-paragraph bio', () => {
+    profileSections.forEach((data) => {
+      expect(data.bio.length).toBe(2);
+      data.bio.forEach((p) => expect(p.length).toBeGreaterThan(0));
+    });
+  });
+
+  it('every profile section has a quote', () => {
+    profileSections.forEach((data) => {
+      expect(data.quote).toBeTruthy();
+    });
+  });
+
+  it('every profile section has a cta', () => {
+    profileSections.forEach((data) => {
+      expect(data.cta).toBeDefined();
+      expect(data.cta!.label.length).toBeGreaterThan(0);
+      expect(data.cta!.href.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('commercial section is reversed, others are not', () => {
+    const commercial = profileSections.find((s) => s.sectionId === 'commercial-emergency');
+    const residential = profileSections.find((s) => s.sectionId === 'residential-emergency');
+    const industrial = profileSections.find((s) => s.sectionId === 'industrial-emergency');
+    expect(commercial?.reversed).toBe(true);
+    expect(residential?.reversed).toBeFalsy();
+    expect(industrial?.reversed).toBeFalsy();
+  });
+});
+```
+
+Note: Replace the **entire file** with the content above (it includes the original tests).
+
+- [ ] **Step 1.3: Run the new tests — verify they FAIL**
+
+```bash
+pnpm test data/services/__tests__/emergency.test.ts
+```
+
+Expected output: 3 original tests PASS, new profile tests FAIL:
+```
+✓ has exactly 2 features sections
+✓ every features section has a non-empty checklist
+✓ every features section has non-empty partners
+✗ has exactly 3 profile sections — Expected 3, received 2
+✗ profile sections cover residential, commercial, and industrial domains
+✗ every profile section has exactly 4 highlights
+...
+```
+
+If ALL tests pass, the data already has the right shape — skip to Task 3.
+If the features tests fail, stop and investigate before proceeding.
+
+---
+
+## Task 2: Replace emergency.ts sections array
+
+**Files:**
+- Modify: `data/services/emergency.ts`
+
+Replace the entire `sections` array with the 6-section version below.
+Sections 1–3 are new domain-specific profiles. Sections 4–6 are the existing
+features + CTA sections copied verbatim from the current file.
+
+- [ ] **Step 2.1: Replace the sections array**
+
+In `data/services/emergency.ts`, find and replace the entire `sections: [...]` array
+(from `sections: [` to the matching closing `],`) with:
+
+```typescript
   sections: [
     {
       type: "profile",
@@ -357,4 +464,181 @@ export const emergencyPageData: ServicePageData = {
       },
     },
   ],
-};
+```
+
+---
+
+## Task 3: Run tests — all must pass
+
+**Files:** No changes in this task.
+
+- [ ] **Step 3.1: Run the emergency data tests**
+
+```bash
+pnpm test data/services/__tests__/emergency.test.ts
+```
+
+Expected: All 11 tests PASS (3 original features tests + 8 new profile tests):
+```
+✓ has exactly 2 features sections
+✓ every features section has a non-empty checklist
+✓ every features section has non-empty partners
+✓ has exactly 3 profile sections
+✓ profile sections cover residential, commercial, and industrial domains
+✓ every profile section has exactly 4 highlights
+✓ every highlight has a non-empty icon, title, and description
+✓ every profile section has a 2-paragraph bio
+✓ every profile section has a quote
+✓ every profile section has a cta
+✓ commercial section is reversed, others are not
+```
+
+If any test fails, fix `data/services/emergency.ts` before proceeding.
+
+- [ ] **Step 3.2: Run the full test suite — confirm no regressions**
+
+```bash
+pnpm test
+```
+
+Expected: All pre-existing tests still pass. Total count may increase by 8 (new profile tests).
+If any previously-passing test now fails, investigate before proceeding.
+
+---
+
+## Task 4: TypeScript + build verification
+
+**Files:** No changes in this task.
+
+- [ ] **Step 4.1: TypeScript strict check**
+
+```bash
+pnpm typecheck
+```
+
+Expected: Exit 0, zero errors. If errors appear:
+- `Type '"ClipboardCheck"' is not assignable to type 'IconName'` — check `components/shared/icon-map.tsx` and use the correct name
+- `Property 'imageAspect' does not exist` — verify `SectionProfileData` in `types/sections.ts` has the field
+- `Property 'quoteAttribution' does not exist` — same check
+
+- [ ] **Step 4.2: Production build**
+
+```bash
+pnpm build
+```
+
+Expected: Successful build, **84 static pages** (count unchanged — the emergency page already existed).
+If page count drops, a data shape error caused the page to fail generation — check typecheck output first.
+
+---
+
+## Task 5: Playwright visual verification
+
+**Files:** No changes in this task.
+
+Assumes dev server is running on port 3000 (`pnpm dev` in a separate terminal).
+
+- [ ] **Step 5.1: Navigate to the emergency page**
+
+```bash
+PLAYWRIGHT_REUSE_SERVER=true npx playwright test --headed --grep "emergency" 2>/dev/null || echo "No emergency playwright spec — run manual check"
+```
+
+If no Playwright spec exists, perform a manual browser check:
+Open `http://localhost:3000/services/emergency` and verify:
+
+1. **3 profile sections visible** — scroll down past the hero/intro. Three `SectionProfile` blocks
+   should appear before the "What We Handle" features block.
+2. **Residential section** — label "Home & Property", 4 highlight cards, quote block, "Call Emergency Line" CTA
+3. **Commercial section** — label "Business & Retail", image on RIGHT (reversed layout), 4 highlight cards, "Commercial Emergency Support" CTA
+4. **Industrial section** — label "Industrial & Manufacturing", 4 highlight cards, "Industrial Emergency Line" CTA
+5. **Placeholder images** — each section shows a real project image (not broken)
+6. **"What We Handle" features** — still present below the 3 profiles
+7. **"All Sectors Covered" features** — dark background, still present
+8. **CTA block** — "Electrical Emergency?" at bottom, still present
+
+- [ ] **Step 5.2: Check responsive layout**
+
+Resize browser to 768px width (tablet). Verify:
+- Each profile section stacks (image above text or text above image)
+- Highlights grid switches to 2 columns
+
+Resize to 375px (mobile). Verify:
+- Highlights grid switches to 1 column
+- No horizontal overflow
+
+- [ ] **Step 5.3: Check dark mode**
+
+Toggle dark mode in browser dev tools or via the site's theme switch. Verify:
+- Profile section backgrounds render correctly
+- Quote block border visible
+- CTA buttons readable
+
+---
+
+## Task 6: Commit and push
+
+- [ ] **Step 6.1: Stage changed files**
+
+```bash
+git add data/services/emergency.ts data/services/__tests__/emergency.test.ts docs/superpowers/specs/2026-05-12-emergency-response-enrichment-design.md docs/superpowers/plans/2026-05-12-emergency-response-enrichment.md
+```
+
+- [ ] **Step 6.2: Commit**
+
+```bash
+git commit -m "$(cat <<'EOF'
+feat: emergency response page — residential, commercial, industrial domain sections
+
+Replace 2 generic profile sections with 3 domain-specific SectionProfile sections.
+Each section has 4 highlights, bio, quote, credentials, placeholder image, and CTA.
+Placeholder images to be swapped for van branding photos when available.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+EOF
+)"
+```
+
+- [ ] **Step 6.3: Push**
+
+```bash
+git push
+```
+
+- [ ] **Step 6.4: Confirm on GitHub**
+
+Visit the branch on GitHub and confirm the commit appears:
+`https://github.com/Herman-Adu/nexgen-electrical-innovations/tree/feat/emergency-response-enrichment`
+
+---
+
+## Verification Checklist (before raising PR)
+
+- [ ] `pnpm typecheck` — zero errors
+- [ ] `pnpm build` — 84 static pages
+- [ ] `pnpm test` — all tests pass (no regressions)
+- [ ] `/services/emergency` — 3 profile sections, each with 4 highlight cards
+- [ ] Commercial section — image appears on right (reversed)
+- [ ] Mobile — highlights grid is single column
+- [ ] Dark mode — renders correctly
+- [ ] Placeholder images — all 3 load without 404
+- [ ] CTA buttons — correct labels and `/contact` hrefs
+
+---
+
+## Post-Implementation: Image Swap Guide
+
+When van branding photos arrive, update only these 3 lines in `data/services/emergency.ts`:
+
+```typescript
+// Residential — line ~53
+src: "/images/services/emergency-residential-van.jpg",
+
+// Commercial — line ~103
+src: "/images/services/emergency-commercial-van.jpg",
+
+// Industrial — line ~153
+src: "/images/services/emergency-industrial-van.jpg",
+```
+
+No component, type, or test changes needed for the image swap.
