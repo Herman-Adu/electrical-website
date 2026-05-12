@@ -73,29 +73,157 @@ export const emergencyPageData: ServicePageData = {
     {
       type: "profile",
       data: {
-        sectionId: "response",
-        label: "24/7 Emergency Response",
-        name: "Rapid Emergency Callout",
+        sectionId: "residential-emergency",
+        label: "Home & Property",
+        name: "Residential Emergency Callouts",
+        title: "Fast, Safe Electrical Response for Homeowners",
+        credentials: [
+          "Consumer Unit Failures",
+          "Electrical Fire Risk",
+          "After-Hours Response",
+          "Power Loss Investigation",
+        ],
         bio: [
-          "When electrical emergencies strike, every minute counts. Our emergency response team is on standby 24 hours a day, 7 days a week, ready to mobilize within minutes of your call.",
-          "We handle everything from complete power failures and dangerous faults to tripping circuits and burning smells. Our vans are fully stocked with parts and equipment to resolve most emergencies on the first visit.",
+          "Whether it's a total power loss at midnight or a tripped board that won't reset, our residential emergency team provides rapid, professional response across Berkshire, Surrey, and the surrounding counties. We cover single-property faults, multi-unit blocks, and managed residential estates — arriving with the diagnostic equipment and common parts to identify and resolve most faults on a first visit.",
+          "Our engineers are NICEIC-accredited and trained to work safely under pressure. We carry standard parts — consumer units, RCDs, MCBs, SPDs — so the most common residential faults are resolved same-visit, without waiting for a return appointment.",
+        ],
+        highlights: [
+          {
+            icon: "Clock" as const,
+            title: "2-Hour Response",
+            description: "Most residential callouts attended within 2 hours, including evenings and weekends.",
+          },
+          {
+            icon: "AlertTriangle" as const,
+            title: "Consumer Unit Failures",
+            description: "Immediate diagnosis and safe isolation of faulty boards, RCDs, and MCBs.",
+          },
+          {
+            icon: "Shield" as const,
+            title: "Electrical Fire Risk",
+            description: "Rapid fault finding to eliminate arc faults, overloads, and potential fire hazards.",
+          },
+          {
+            icon: "Phone" as const,
+            title: "24/7 Availability",
+            description: "Night, weekend, and bank holiday cover — with no premium out-of-hours surcharge.",
+          },
         ],
         quote:
-          "In an electrical emergency, you need someone who'll pick up the phone — and show up fast.",
-        credentials: [
-          "2-Hour Response",
-          "Fully Stocked Vans",
-          "Expert Diagnosis",
-          "Immediate Solutions",
-          "All Sectors",
-        ],
+          "When your home goes dark, you need someone who responds fast and gets it right the first time.",
+        quoteAttribution: "NexGen Emergency Response Team",
         image: {
-          src: "/images/services-emergency.jpg",
-          alt: "Emergency electrician responding to callout",
-          priority: true,
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg",
+          alt: "Nexgen residential emergency electrical response — placeholder",
+          priority: false,
         },
-        cta: { label: "Call Now", href: "tel:+442012345678" },
+        imageAspect: "landscape" as const,
         reversed: false,
+        cta: { label: "Call Emergency Line", href: "/contact" },
+      },
+    },
+    {
+      type: "profile",
+      data: {
+        sectionId: "commercial-emergency",
+        label: "Business & Retail",
+        name: "Commercial Emergency Callouts",
+        title: "Protecting Business Operations When It Matters Most",
+        credentials: [
+          "Business Continuity",
+          "Switchgear & Panel Restoration",
+          "Compliance Emergencies",
+          "Retail & Hospitality",
+        ],
+        bio: [
+          "Electrical failures in commercial premises don't just cause inconvenience — they cost revenue, can breach licensing conditions, and may trigger immediate closure notices. Our commercial emergency service is built around business continuity. From a failed distribution board in a retail unit to a total site outage at a hotel, we arrive prepared to diagnose and restore power efficiently.",
+          "We stock commercial-grade parts on our vehicles — breakers, busbars, isolation switches, and cable — so the most common commercial faults are resolved without ordering delays. For complex installations, we coordinate with your facilities manager and maintain full compliance documentation throughout.",
+        ],
+        highlights: [
+          {
+            icon: "Building2" as const,
+            title: "Business Continuity",
+            description: "Priority commercial response focused on restoring trading capability as fast as possible.",
+          },
+          {
+            icon: "Zap" as const,
+            title: "Switchgear Failures",
+            description: "Emergency restoration of distribution boards, panels, and switchroom equipment.",
+          },
+          {
+            icon: "ClipboardCheck" as const,
+            title: "Compliance Emergencies",
+            description: "Urgent remedial works and EICR investigations following fault or inspection failure.",
+          },
+          {
+            icon: "Users" as const,
+            title: "Sector Experience",
+            description: "Retail, hospitality, offices, healthcare, and licensed premises all covered.",
+          },
+        ],
+        quote:
+          "A power failure costs far more than the repair. We know that — and our commercial response is built around speed and precision.",
+        quoteAttribution: "NexGen Commercial Emergency Team",
+        image: {
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
+          alt: "Nexgen commercial emergency electrical response — placeholder",
+          priority: false,
+        },
+        imageAspect: "landscape" as const,
+        reversed: true,
+        cta: { label: "Commercial Emergency Support", href: "/contact" },
+      },
+    },
+    {
+      type: "profile",
+      data: {
+        sectionId: "industrial-emergency",
+        label: "Industrial & Manufacturing",
+        name: "Industrial Emergency Callouts",
+        title: "Critical Infrastructure Response for Industrial Facilities",
+        credentials: [
+          "Production Line Recovery",
+          "High-Voltage Support",
+          "Motor & Drive Failures",
+          "Site-Wide Coordination",
+        ],
+        bio: [
+          "For industrial sites, electrical downtime translates directly to production loss — often measured in thousands per hour. Our industrial emergency team is trained to work on complex, high-voltage installations including switchrooms, substations, motor control centres, and variable speed drive systems. We carry certified HV engineers and the specialist test equipment required for large-site diagnostics.",
+          "We work alongside your in-house maintenance and engineering teams, integrating with existing LOTO procedures and site safety protocols. Our engineers understand the operational pressure to restore production — and the non-negotiable requirement to do so safely and correctly.",
+        ],
+        highlights: [
+          {
+            icon: "Activity" as const,
+            title: "Production Line Recovery",
+            description: "Critical electrical systems restored with focus on minimising production downtime.",
+          },
+          {
+            icon: "Gauge" as const,
+            title: "High-Voltage Support",
+            description: "Certified HV engineers for substation, switchroom, and LV/HV interface emergencies.",
+          },
+          {
+            icon: "Settings" as const,
+            title: "Motor & Drive Failures",
+            description: "Emergency diagnosis of VSD, motor control, and MCC panel faults under operational pressure.",
+          },
+          {
+            icon: "MapPin" as const,
+            title: "Site-Wide Coordination",
+            description: "Coordinated emergency response for large facilities with multiple distribution points.",
+          },
+        ],
+        quote:
+          "Industrial downtime is measured in thousands per hour. Our engineers are trained to move fast — and to get it right every time.",
+        quoteAttribution: "NexGen Industrial Emergency Team",
+        image: {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
+          alt: "Nexgen industrial emergency electrical response — placeholder",
+          priority: false,
+        },
+        imageAspect: "landscape" as const,
+        reversed: false,
+        cta: { label: "Industrial Emergency Line", href: "/contact" },
       },
     },
     {
@@ -211,33 +339,6 @@ export const emergencyPageData: ServicePageData = {
           { name: "ISO 9001", abbr: "ISO" },
         ],
         background: "dark",
-      },
-    },
-    {
-      type: "profile",
-      data: {
-        sectionId: "diagnosis",
-        label: "Expert Diagnosis",
-        name: "Fast & Accurate Fault Finding",
-        bio: [
-          "Our emergency electricians are experienced troubleshooters who quickly identify root causes — not just symptoms. We use thermal imaging, advanced metering, and systematic testing to diagnose even the most elusive faults.",
-          "Many emergencies are caused by underlying issues that need proper resolution, not quick fixes. We'll explain exactly what went wrong and ensure it doesn't happen again.",
-        ],
-        quote:
-          "Finding the fault is half the battle. We don't leave until we've fixed the cause, not just the symptom.",
-        credentials: [
-          "Thermal Imaging",
-          "Advanced Metering",
-          "Systematic Testing",
-          "Root Cause Analysis",
-          "Full Reports",
-        ],
-        image: {
-          src: "/images/system-diagnostics.jpg",
-          alt: "Electrician using thermal imaging for fault diagnosis",
-        },
-        cta: { label: "Report a Fault", href: "/contact" },
-        reversed: true,
       },
     },
     {
