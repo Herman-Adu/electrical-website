@@ -65,12 +65,32 @@ export const allProjects: Project[] = [
     category: "industrial",
     categoryLabel: "Industrial",
     title: "West Dock Industrial Upgrade",
-    heroHeadline: ['West Dock', 'Industrial Upgrade'],
+    heroHeadline: ["West Dock", "Industrial Upgrade"],
     heroIndicators: [
-      { icon: 'Factory', title: 'Industrial Grade', description: 'Full industrial specification upgrade to 3-phase distribution meeting BS 7671:2018 requirements.' },
-      { icon: 'Zap', title: '3-Phase Supply', description: 'Heavy-duty 3-phase power infrastructure installed to support high-demand industrial equipment.' },
-      { icon: 'ClipboardCheck', title: 'NICEIC Certified', description: 'All works tested, inspected and certified by NICEIC-approved engineers to current standards.' },
-      { icon: 'MapPin', title: 'West Dock Site', description: 'Delivered on active industrial site with phased programme to maintain operational continuity.' },
+      {
+        icon: "Factory",
+        title: "Industrial Grade",
+        description:
+          "Full industrial specification upgrade to 3-phase distribution meeting BS 7671:2018 requirements.",
+      },
+      {
+        icon: "Zap",
+        title: "3-Phase Supply",
+        description:
+          "Heavy-duty 3-phase power infrastructure installed to support high-demand industrial equipment.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "NICEIC Certified",
+        description:
+          "All works tested, inspected and certified by NICEIC-approved engineers to current standards.",
+      },
+      {
+        icon: "MapPin",
+        title: "West Dock Site",
+        description:
+          "Delivered on active industrial site with phased programme to maintain operational continuity.",
+      },
     ] as const,
     clientSector: "Industrial",
     status: "in-progress",
@@ -225,12 +245,32 @@ export const allProjects: Project[] = [
     category: "commercial-lighting",
     categoryLabel: "Commercial Lighting",
     title: "Riverside Commercial Retrofit",
-    heroHeadline: ['Riverside', 'Commercial Retrofit'],
+    heroHeadline: ["Riverside", "Commercial Retrofit"],
     heroIndicators: [
-      { icon: 'Building2', title: 'Commercial Retrofit', description: 'Full electrical retrofit of occupied commercial premises with minimal disruption to tenants.' },
-      { icon: 'Lightbulb', title: 'LED Upgrade', description: 'Energy-efficient LED lighting system replacing legacy fluorescent throughout all areas.' },
-      { icon: 'Shield', title: 'Part P Compliant', description: 'All residential areas compliant with Part P Building Regulations fully notified to local authority.' },
-      { icon: 'Gauge', title: 'Energy Saving', description: 'Retrofit delivers measurable reduction in energy consumption with improved power distribution.' },
+      {
+        icon: "Building2",
+        title: "Commercial Retrofit",
+        description:
+          "Full electrical retrofit of occupied commercial premises with minimal disruption to tenants.",
+      },
+      {
+        icon: "Lightbulb",
+        title: "LED Upgrade",
+        description:
+          "Energy-efficient LED lighting system replacing legacy fluorescent throughout all areas.",
+      },
+      {
+        icon: "Shield",
+        title: "Part P Compliant",
+        description:
+          "All residential areas compliant with Part P Building Regulations fully notified to local authority.",
+      },
+      {
+        icon: "Gauge",
+        title: "Energy Saving",
+        description:
+          "Retrofit delivers measurable reduction in energy consumption with improved power distribution.",
+      },
     ] as const,
     clientSector: "Commercial",
     status: "completed",
@@ -386,12 +426,32 @@ export const allProjects: Project[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "North Estate Residential Phase 2",
-    heroHeadline: ['North Estate', 'Residential Phase 2'],
+    heroHeadline: ["North Estate", "Residential Phase 2"],
     heroIndicators: [
-      { icon: 'Home', title: 'Part P Certified', description: 'All domestic electrical works registered and certified under Part P of the Building Regulations.' },
-      { icon: 'Zap', title: 'Phase 2 Scope', description: 'Second phase extending the estate-wide installation programme across additional residential units.' },
-      { icon: 'ClipboardCheck', title: 'Consumer Units', description: 'New BS EN 61439 consumer units fitted with RCBO protection to all circuits throughout.' },
-      { icon: 'MapPin', title: 'North Estate', description: 'Multi-property delivery across the North Estate coordinated to minimise resident disruption.' },
+      {
+        icon: "Home",
+        title: "Part P Certified",
+        description:
+          "All domestic electrical works registered and certified under Part P of the Building Regulations.",
+      },
+      {
+        icon: "Zap",
+        title: "Phase 2 Scope",
+        description:
+          "Second phase extending the estate-wide installation programme across additional residential units.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Consumer Units",
+        description:
+          "New BS EN 61439 consumer units fitted with RCBO protection to all circuits throughout.",
+      },
+      {
+        icon: "MapPin",
+        title: "North Estate",
+        description:
+          "Multi-property delivery across the North Estate coordinated to minimise resident disruption.",
+      },
     ] as const,
     clientSector: "Residential",
     status: "in-progress",
@@ -548,12 +608,32 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "City Hospital Emergency Power Ring",
-    heroHeadline: ['City Hospital', 'Emergency Power'],
+    heroHeadline: ["City Hospital", "Emergency Power"],
     heroIndicators: [
-      { icon: 'Shield', title: 'Critical Systems', description: 'Emergency power ring designed to HTM 06-01 standards ensuring uninterrupted supply to life-critical areas.' },
-      { icon: 'Activity', title: 'Ring Main Design', description: 'Fully redundant ring main architecture providing failover protection across all critical departments.' },
-      { icon: 'ClipboardCheck', title: 'HTM Compliant', description: 'Health Technical Memorandum 06-01 compliance verified and signed off by NHS Estates team.' },
-      { icon: 'Calendar', title: 'Live Environment', description: 'Works executed in live hospital environment with zero disruption to patient care operations.' },
+      {
+        icon: "Shield",
+        title: "Critical Systems",
+        description:
+          "Emergency power ring designed to HTM 06-01 standards ensuring uninterrupted supply to life-critical areas.",
+      },
+      {
+        icon: "Activity",
+        title: "Ring Main Design",
+        description:
+          "Fully redundant ring main architecture providing failover protection across all critical departments.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "HTM Compliant",
+        description:
+          "Health Technical Memorandum 06-01 compliance verified and signed off by NHS Estates team.",
+      },
+      {
+        icon: "Calendar",
+        title: "Live Environment",
+        description:
+          "Works executed in live hospital environment with zero disruption to patient care operations.",
+      },
     ] as const,
     clientSector: "Critical Infrastructure",
     status: "planned",
@@ -715,12 +795,32 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "Thames Gateway Data Centre Power Infrastructure",
-    heroHeadline: ['Thames Gateway', 'Data Centre Power'],
+    heroHeadline: ["Thames Gateway", "Data Centre Power"],
     heroIndicators: [
-      { icon: 'Zap', title: 'Tier III Power', description: 'Concurrent-maintainable power infrastructure meeting Uptime Institute Tier III concurrency requirements.' },
-      { icon: 'Battery', title: 'UPS Integration', description: 'Uninterruptible power supply systems integrated with N+1 redundancy across all critical loads.' },
-      { icon: 'Gauge', title: 'HV Distribution', description: 'High-voltage distribution network designed to support multi-megawatt data centre capacity.' },
-      { icon: 'Shield', title: 'Zero Downtime', description: 'Phased delivery strategy ensured no interruption to live data centre operations throughout.' },
+      {
+        icon: "Zap",
+        title: "Tier III Power",
+        description:
+          "Concurrent-maintainable power infrastructure meeting Uptime Institute Tier III concurrency requirements.",
+      },
+      {
+        icon: "Battery",
+        title: "UPS Integration",
+        description:
+          "Uninterruptible power supply systems integrated with N+1 redundancy across all critical loads.",
+      },
+      {
+        icon: "Gauge",
+        title: "HV Distribution",
+        description:
+          "High-voltage distribution network designed to support multi-megawatt data centre capacity.",
+      },
+      {
+        icon: "Shield",
+        title: "Zero Downtime",
+        description:
+          "Phased delivery strategy ensured no interruption to live data centre operations throughout.",
+      },
     ] as const,
     clientSector: "Data Centres",
     status: "completed",
@@ -876,12 +976,32 @@ export const allProjects: Project[] = [
     category: "power-boards",
     categoryLabel: "Power Boards",
     title: "Canary Wharf Tower Mains Upgrade",
-    heroHeadline: ['Canary Wharf', 'Mains Upgrade'],
+    heroHeadline: ["Canary Wharf", "Mains Upgrade"],
     heroIndicators: [
-      { icon: 'Building2', title: 'Commercial HV', description: 'High-rise commercial mains upgrade delivering increased capacity to all occupied office floors.' },
-      { icon: 'Zap', title: 'Mains Upgrade', description: 'Full LV mains replacement with upgraded switchgear and distribution boards throughout the tower.' },
-      { icon: 'ClipboardCheck', title: 'ECA Certified', description: 'All works completed to ECA standards by fully qualified commercial engineers.' },
-      { icon: 'Calendar', title: 'Out of Hours', description: 'Critical mains works executed outside business hours to protect tenant operations and SLAs.' },
+      {
+        icon: "Building2",
+        title: "Commercial HV",
+        description:
+          "High-rise commercial mains upgrade delivering increased capacity to all occupied office floors.",
+      },
+      {
+        icon: "Zap",
+        title: "Mains Upgrade",
+        description:
+          "Full LV mains replacement with upgraded switchgear and distribution boards throughout the tower.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "ECA Certified",
+        description:
+          "All works completed to ECA standards by fully qualified commercial engineers.",
+      },
+      {
+        icon: "Calendar",
+        title: "Out of Hours",
+        description:
+          "Critical mains works executed outside business hours to protect tenant operations and SLAs.",
+      },
     ] as const,
     clientSector: "Commercial Property",
     status: "in-progress",
@@ -1038,12 +1158,32 @@ export const allProjects: Project[] = [
     category: "industrial",
     categoryLabel: "Industrial",
     title: "Heathrow Cargo Substation Expansion",
-    heroHeadline: ['Heathrow Cargo', 'Substation Expansion'],
+    heroHeadline: ["Heathrow Cargo", "Substation Expansion"],
     heroIndicators: [
-      { icon: 'Factory', title: 'HV Substation', description: 'High-voltage substation expansion to support increased power demand across the cargo terminal.' },
-      { icon: 'Gauge', title: 'Transformers', description: 'New HV/LV transformers installed with full protection relay system and remote monitoring capability.' },
-      { icon: 'Shield', title: 'CAA Compliant', description: 'All airside electrical works compliant with Civil Aviation Authority requirements and Heathrow standards.' },
-      { icon: 'Settings', title: 'SCADA Ready', description: 'Infrastructure designed for SCADA integration allowing centralised monitoring of all substation assets.' },
+      {
+        icon: "Factory",
+        title: "HV Substation",
+        description:
+          "High-voltage substation expansion to support increased power demand across the cargo terminal.",
+      },
+      {
+        icon: "Gauge",
+        title: "Transformers",
+        description:
+          "New HV/LV transformers installed with full protection relay system and remote monitoring capability.",
+      },
+      {
+        icon: "Shield",
+        title: "CAA Compliant",
+        description:
+          "All airside electrical works compliant with Civil Aviation Authority requirements and Heathrow standards.",
+      },
+      {
+        icon: "Settings",
+        title: "SCADA Ready",
+        description:
+          "Infrastructure designed for SCADA integration allowing centralised monitoring of all substation assets.",
+      },
     ] as const,
     clientSector: "Aviation",
     status: "completed",
@@ -1199,12 +1339,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "DHL Reading Distribution Hub",
-    heroHeadline: ['DHL Reading', 'Distribution Hub'],
+    heroHeadline: ["DHL Reading", "Distribution Hub"],
     heroIndicators: [
-      { icon: 'Factory', title: 'Logistics Spec', description: 'Full industrial electrical specification for high-throughput 24/7 distribution hub operations.' },
-      { icon: 'Zap', title: '3-Phase Power', description: 'Three-phase power distribution installed to support conveyor systems, dock levellers and MHE equipment.' },
-      { icon: 'Lightbulb', title: 'LED Warehouse', description: 'High-bay LED lighting delivering 300+ lux throughout with DALI controls and daylight harvesting.' },
-      { icon: 'MapPin', title: 'Reading Hub', description: 'Completed to programme within the live DHL Reading distribution centre with no operational downtime.' },
+      {
+        icon: "Factory",
+        title: "Logistics Spec",
+        description:
+          "Full industrial electrical specification for high-throughput 24/7 distribution hub operations.",
+      },
+      {
+        icon: "Zap",
+        title: "3-Phase Power",
+        description:
+          "Three-phase power distribution installed to support conveyor systems, dock levellers and MHE equipment.",
+      },
+      {
+        icon: "Lightbulb",
+        title: "LED Warehouse",
+        description:
+          "High-bay LED lighting delivering 300+ lux throughout with DALI controls and daylight harvesting.",
+      },
+      {
+        icon: "MapPin",
+        title: "Reading Hub",
+        description:
+          "Completed to programme within the live DHL Reading distribution centre with no operational downtime.",
+      },
     ] as const,
     clientSector: "Logistics & Distribution",
     status: "completed",
@@ -1494,12 +1654,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Medivet Watford Veterinary Practice",
-    heroHeadline: ['Medivet Watford', 'Veterinary Practice'],
+    heroHeadline: ["Medivet Watford", "Veterinary Practice"],
     heroIndicators: [
-      { icon: 'Shield', title: 'Medical Grade', description: 'Medical-grade electrical installation compliant with HTM 06-01 for specialist veterinary equipment.' },
-      { icon: 'Zap', title: 'Theatre Supply', description: 'Isolated power supply systems to operating theatres meeting IEC 60364-7-710 medical location requirements.' },
-      { icon: 'Lightbulb', title: 'Clinical Lighting', description: 'LED clinical lighting to consultation rooms, theatres and recovery areas with correct colour rendering.' },
-      { icon: 'ClipboardCheck', title: 'NICEIC Approved', description: 'Works certified by NICEIC-approved engineers with full test documentation for CQC compliance.' },
+      {
+        icon: "Shield",
+        title: "Medical Grade",
+        description:
+          "Medical-grade electrical installation compliant with HTM 06-01 for specialist veterinary equipment.",
+      },
+      {
+        icon: "Zap",
+        title: "Theatre Supply",
+        description:
+          "Isolated power supply systems to operating theatres meeting IEC 60364-7-710 medical location requirements.",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Clinical Lighting",
+        description:
+          "LED clinical lighting to consultation rooms, theatres and recovery areas with correct colour rendering.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "NICEIC Approved",
+        description:
+          "Works certified by NICEIC-approved engineers with full test documentation for CQC compliance.",
+      },
     ] as const,
     clientSector: "Veterinary Healthcare",
     status: "completed",
@@ -1783,12 +1963,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Ladbrokes Woking — Retail Electrical Fit-Out",
-    heroHeadline: ['Ladbrokes Woking', 'Retail Fit-Out'],
+    heroHeadline: ["Ladbrokes Woking", "Retail Fit-Out"],
     heroIndicators: [
-      { icon: 'Building2', title: 'Retail Fitout', description: 'Full Category A to B retail electrical fit-out delivered to Ladbrokes brand specification.' },
-      { icon: 'Lightbulb', title: 'Feature Lighting', description: 'Bespoke retail lighting design with LED feature strips, display lighting and emergency systems.' },
-      { icon: 'ClipboardCheck', title: 'Part P Certified', description: 'Complete installation certified under Part P with full EICR issued at handover.' },
-      { icon: 'Calendar', title: 'Fast Track', description: 'Completed within tight retail refurbishment programme to meet opening date requirements.' },
+      {
+        icon: "Building2",
+        title: "Retail Fitout",
+        description:
+          "Full Category A to B retail electrical fit-out delivered to Ladbrokes brand specification.",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Feature Lighting",
+        description:
+          "Bespoke retail lighting design with LED feature strips, display lighting and emergency systems.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Part P Certified",
+        description:
+          "Complete installation certified under Part P with full EICR issued at handover.",
+      },
+      {
+        icon: "Calendar",
+        title: "Fast Track",
+        description:
+          "Completed within tight retail refurbishment programme to meet opening date requirements.",
+      },
     ] as const,
     clientSector: "Retail & Betting",
     status: "completed",
@@ -2055,12 +2255,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Biffa Workshop — 3-Phase Electrical Installation",
-    heroHeadline: ['Biffa Workshop', '3-Phase Electrical'],
+    heroHeadline: ["Biffa Workshop", "3-Phase Electrical"],
     heroIndicators: [
-      { icon: 'Factory', title: '3-Phase Install', description: 'New 3-phase supply and distribution installed to power heavy workshop machinery and compressors.' },
-      { icon: 'Zap', title: 'DNO Connection', description: 'New DNO connection arranged and managed end-to-end with supply authority for upgraded capacity.' },
-      { icon: 'Shield', title: 'NICEIC Certified', description: 'Full installation certified by NICEIC-approved engineers with minor works certificates issued.' },
-      { icon: 'Wrench', title: 'Workshop Ready', description: 'Distribution boards sized and positioned to serve all current and future machinery layouts.' },
+      {
+        icon: "Factory",
+        title: "3-Phase Install",
+        description:
+          "New 3-phase supply and distribution installed to power heavy workshop machinery and compressors.",
+      },
+      {
+        icon: "Zap",
+        title: "DNO Connection",
+        description:
+          "New DNO connection arranged and managed end-to-end with supply authority for upgraded capacity.",
+      },
+      {
+        icon: "Shield",
+        title: "NICEIC Certified",
+        description:
+          "Full installation certified by NICEIC-approved engineers with minor works certificates issued.",
+      },
+      {
+        icon: "Wrench",
+        title: "Workshop Ready",
+        description:
+          "Distribution boards sized and positioned to serve all current and future machinery layouts.",
+      },
     ] as const,
     clientSector: "Waste Management & Sustainability",
     status: "completed",
@@ -2291,12 +2511,32 @@ export const allProjects: Project[] = [
     category: "residential",
     categoryLabel: "Residential",
     title: "Domestic Installations — Taplow",
-    heroHeadline: ['Taplow', 'Done Right'],
+    heroHeadline: ["Taplow", "Done Right"],
     heroIndicators: [
-      { icon: 'Home', title: 'Part P Certified', description: 'Complete domestic electrical installation registered and certified under Part P Building Regulations.' },
-      { icon: 'ClipboardCheck', title: 'RCBO Protected', description: 'Individual RCBO protection to every circuit in a new consumer unit for maximum safety.' },
-      { icon: 'Wifi', title: 'Smart Ready', description: 'Pre-wired for smart home integration including data points, EV charger spur and outdoor circuits.' },
-      { icon: 'MapPin', title: 'Taplow Berks', description: 'Delivered to a private residential property in Taplow, Berkshire on time and snagging-free.' },
+      {
+        icon: "Home",
+        title: "Part P Certified",
+        description:
+          "Complete domestic electrical installation registered and certified under Part P Building Regulations.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "RCBO Protected",
+        description:
+          "Individual RCBO protection to every circuit in a new consumer unit for maximum safety.",
+      },
+      {
+        icon: "Wifi",
+        title: "Smart Ready",
+        description:
+          "Pre-wired for smart home integration including data points, EV charger spur and outdoor circuits.",
+      },
+      {
+        icon: "MapPin",
+        title: "Taplow Berks",
+        description:
+          "Delivered to a private residential property in Taplow, Berkshire on time and snagging-free.",
+      },
     ] as const,
     clientSector: "Residential",
     status: "completed",
@@ -2489,12 +2729,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "Herschel Grammar School — Electrical Maintenance Contract",
-    heroHeadline: ['Herschel Grammar', 'Trusted Partner'],
+    heroHeadline: ["Herschel Grammar", "Trusted Partner"],
     heroIndicators: [
-      { icon: 'ClipboardCheck', title: 'PPM Contract', description: 'Planned preventive maintenance programme covering all electrical systems across the school estate.' },
-      { icon: 'Shield', title: 'NICEIC Approved', description: 'All maintenance delivered by NICEIC-approved engineers meeting DfE and Ofsted compliance standards.' },
-      { icon: 'Calendar', title: 'Term Scheduled', description: 'All invasive works scheduled during school holidays to avoid disruption to curriculum delivery.' },
-      { icon: 'Award', title: 'Trusted Partner', description: 'Multi-year maintenance relationship delivering consistent compliance and rapid reactive response.' },
+      {
+        icon: "ClipboardCheck",
+        title: "PPM Contract",
+        description:
+          "Planned preventive maintenance programme covering all electrical systems across the school estate.",
+      },
+      {
+        icon: "Shield",
+        title: "NICEIC Approved",
+        description:
+          "All maintenance delivered by NICEIC-approved engineers meeting DfE and Ofsted compliance standards.",
+      },
+      {
+        icon: "Calendar",
+        title: "Term Scheduled",
+        description:
+          "All invasive works scheduled during school holidays to avoid disruption to curriculum delivery.",
+      },
+      {
+        icon: "Award",
+        title: "Trusted Partner",
+        description:
+          "Multi-year maintenance relationship delivering consistent compliance and rapid reactive response.",
+      },
     ] as const,
     clientSector: "Education — Grammar School",
     status: "completed",
@@ -2743,12 +3003,32 @@ export const allProjects: Project[] = [
     category: "commercial",
     categoryLabel: "Commercial",
     title: "The Hub Farnborough — Commercial Lighting Refurbishment",
-    heroHeadline: ['Hub Farnborough', 'Lighting Refurb'],
+    heroHeadline: ["Hub Farnborough", "Lighting Refurb"],
     heroIndicators: [
-      { icon: 'Lightbulb', title: 'LED Refurb', description: 'Full LED lighting refurbishment replacing legacy metal halide and fluorescent throughout.' },
-      { icon: 'Gauge', title: 'Energy Savings', description: 'Significant reduction in lighting energy consumption verified by post-completion energy monitoring.' },
-      { icon: 'Building2', title: 'Commercial Fit', description: 'Designed to CIBSE LG7 standards for office and public-facing commercial areas within The Hub.' },
-      { icon: 'MapPin', title: 'Farnborough', description: 'Delivered within The Hub Farnborough commercial development with tenant occupation maintained.' },
+      {
+        icon: "Lightbulb",
+        title: "LED Refurb",
+        description:
+          "Full LED lighting refurbishment replacing legacy metal halide and fluorescent throughout.",
+      },
+      {
+        icon: "Gauge",
+        title: "Energy Savings",
+        description:
+          "Significant reduction in lighting energy consumption verified by post-completion energy monitoring.",
+      },
+      {
+        icon: "Building2",
+        title: "Commercial Fit",
+        description:
+          "Designed to CIBSE LG7 standards for office and public-facing commercial areas within The Hub.",
+      },
+      {
+        icon: "MapPin",
+        title: "Farnborough",
+        description:
+          "Delivered within The Hub Farnborough commercial development with tenant occupation maintained.",
+      },
     ] as const,
     clientSector: "Commercial Office — Hospitality/Co-Working",
     status: "in-progress",
@@ -2788,17 +3068,20 @@ export const allProjects: Project[] = [
           {
             num: "01",
             title: "Heritage-Sensitive Installation",
-            description: "Working within a Grade II listed 1930s former airport building demands precision and restraint. Every lighting position, conduit route, and fixing point is agreed with the client and building manager before work commences — no surprises, no remedial reinstatement.",
+            description:
+              "Working within a Grade II listed 1930s former airport building demands precision and restraint. Every lighting position, conduit route, and fixing point is agreed with the client and building manager before work commences — no surprises, no remedial reinstatement.",
           },
           {
             num: "02",
             title: "CIBSE LG7 Compliant Output",
-            description: "Commercial office illuminance levels and glare-control ratios are met throughout. Luminaire selection, mounting heights, and aiming angles are calculated to LG7 specification — delivering a workspace that performs for occupants from day one.",
+            description:
+              "Commercial office illuminance levels and glare-control ratios are met throughout. Luminaire selection, mounting heights, and aiming angles are calculated to LG7 specification — delivering a workspace that performs for occupants from day one.",
           },
           {
             num: "03",
             title: "Phased Around Live Tenants",
-            description: "The Hub is fully occupied during the refurbishment programme. Work is sequenced floor-by-floor and room-by-room around tenant schedules, with temporary lighting maintained throughout. Each area is signed off and handed back before the next phase begins.",
+            description:
+              "The Hub is fully occupied during the refurbishment programme. Work is sequenced floor-by-floor and room-by-room around tenant schedules, with temporary lighting maintained throughout. Each area is signed off and handed back before the next phase begins.",
           },
         ],
       },
@@ -2839,223 +3122,580 @@ export const allProjects: Project[] = [
   // HARVEY NICHOLS — Industrial Chiller Upgrade
   // ═══════════════════════════════════════════════════════════════════════════
   {
-  id: "proj-harvey-nichols-001",
-  slug: "harvey-nichols-chiller-upgrade",
-  category: "industrial",
-  categoryLabel: "Industrial",
-  title: "Harvey Nichols Chiller Upgrade",
-  heroHeadline: ['Harvey Nichols', 'Chiller Upgrade'],
-  heroIndicators: [
-    { icon: 'Zap', title: 'Chiller Supply', description: 'Dedicated 3-phase electrical supply and control system for new chiller plant on roof level.' },
-    { icon: 'Shield', title: 'Commercial Grade', description: 'All works to commercial specification with full switchgear protection and isolation arrangements.' },
-    { icon: 'ClipboardCheck', title: 'NICEIC Certified', description: 'Chiller electrical installation tested, certified and handed over with full documentation package.' },
-    { icon: 'Building2', title: 'Harvey Nichols', description: 'Executed within live luxury retail environment maintaining store operations throughout installation.' },
-  ] as const,
-  clientSector: "Luxury Retail — Department Store",
-  status: "completed",
-  description:
-    "Full electrical package for the rooftop chiller upgrade at Harvey Nichols Knightsbridge — one of the UK's most prestigious luxury department stores. Nexgen managed complete strip-out, new containment, Schneider MCCB panel installation, and commissioning within a live retail environment.",
-  coverImage: {
-    src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg",
-    alt: "Harvey Nichols Knightsbridge rooftop — Trane chiller units installed and staged during upgrade works",
-  },
-  kpis: {
-    budget: "Commercial Contract",
-    timeline: "Completed",
-    capacity: "LV / MCCB Distribution",
-    location: "Knightsbridge, London",
-  },
-  tags: ["Chiller Upgrade", "Industrial", "Luxury Retail", "Knightsbridge", "Trane", "Schneider", "MCCB", "Cable Management"],
-  progress: 100,
-  isFeatured: true,
-  publishedAt: "2026-05-10T09:00:00.000Z",
-  updatedAt: "2026-05-10T09:00:00.000Z",
-  detail: {
-    intro: {
-      label: "Industrial Electrical Project",
-      headlineWords: ["Knightsbridge.", "Delivered", "Right."],
-      leadParagraph:
-        "Harvey Nichols Knightsbridge is one of the most iconic luxury department stores in the world — a site where the standard expected of every contractor is as high as the brand itself. Nexgen was appointed to deliver the full electrical package for the rooftop chiller upgrade, covering complete strip-out of the existing installation, new containment infrastructure, Schneider MCCB panel boards, power distribution cabling, and full commissioning.",
-      bodyParagraphs: [
-        "Working above one of London's busiest retail destinations required meticulous planning, strict access coordination, and workmanship that matched the environment. Rooftop crane operations, carefully sequenced road closures, and a phased programme ensured no disruption to live retail below.",
-        "The completed installation delivers a modern, resilient electrical infrastructure to support the new Trane chiller plant — engineered to last, fully documented, and certified to BS 7671.",
+    id: "proj-harvey-nichols-001",
+    slug: "harvey-nichols-chiller-upgrade",
+    category: "industrial",
+    categoryLabel: "Industrial",
+    title: "Harvey Nichols Chiller Upgrade",
+    heroHeadline: ["Harvey Nichols", "Chiller Upgrade"],
+    heroIndicators: [
+      {
+        icon: "Zap",
+        title: "Chiller Supply",
+        description:
+          "Dedicated 3-phase electrical supply and control system for new chiller plant on roof level.",
+      },
+      {
+        icon: "Shield",
+        title: "Commercial Grade",
+        description:
+          "All works to commercial specification with full switchgear protection and isolation arrangements.",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "NICEIC Certified",
+        description:
+          "Chiller electrical installation tested, certified and handed over with full documentation package.",
+      },
+      {
+        icon: "Building2",
+        title: "Harvey Nichols",
+        description:
+          "Executed within live luxury retail environment maintaining store operations throughout installation.",
+      },
+    ] as const,
+    clientSector: "Luxury Retail — Department Store",
+    status: "completed",
+    description:
+      "Full electrical package for the rooftop chiller upgrade at Harvey Nichols Knightsbridge — one of the UK's most prestigious luxury department stores. Nexgen managed complete strip-out, new containment, Schneider MCCB panel installation, and commissioning within a live retail environment.",
+    coverImage: {
+      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg",
+      alt: "Harvey Nichols Knightsbridge rooftop — Trane chiller units installed and staged during upgrade works",
+    },
+    kpis: {
+      budget: "Commercial Contract",
+      timeline: "Completed",
+      capacity: "LV / MCCB Distribution",
+      location: "Knightsbridge, London",
+    },
+    tags: [
+      "Chiller Upgrade",
+      "Industrial",
+      "Luxury Retail",
+      "Knightsbridge",
+      "Trane",
+      "Schneider",
+      "MCCB",
+      "Cable Management",
+    ],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2026-05-10T09:00:00.000Z",
+    updatedAt: "2026-05-10T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Industrial Electrical Project",
+        headlineWords: ["Knightsbridge.", "Delivered", "Right."],
+        leadParagraph:
+          "Harvey Nichols Knightsbridge is one of the most iconic luxury department stores in the world — a site where the standard expected of every contractor is as high as the brand itself. Nexgen was appointed to deliver the full electrical package for the rooftop chiller upgrade, covering complete strip-out of the existing installation, new containment infrastructure, Schneider MCCB panel boards, power distribution cabling, and full commissioning.",
+        bodyParagraphs: [
+          "Working above one of London's busiest retail destinations required meticulous planning, strict access coordination, and workmanship that matched the environment. Rooftop crane operations, carefully sequenced road closures, and a phased programme ensured no disruption to live retail below.",
+          "The completed installation delivers a modern, resilient electrical infrastructure to support the new Trane chiller plant — engineered to last, fully documented, and certified to BS 7671.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Live Environment Delivery",
+            description:
+              "Complete chiller upgrade executed above an active luxury retail store — zero disruption to trading operations throughout.",
+          },
+          {
+            num: "02",
+            title: "Crane & Logistics Expertise",
+            description:
+              "Road closures, lift plans, and crane operations coordinated in central Knightsbridge to deliver heavy materials safely to a restricted rooftop.",
+          },
+          {
+            num: "03",
+            title: "Engineered to Last",
+            description:
+              "New containment, Schneider MCCB panels, and full BS 7671 certification — a future-ready electrical infrastructure for the upgraded chiller plant.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Full Electrical Strip-Out",
+          description:
+            "Safe isolation and complete removal of all redundant electrical cabling, containment, and ageing switchgear back to the main rooftop transformer position.",
+        },
+        {
+          icon: "Settings",
+          title: "Crane Operations & Logistics",
+          description:
+            "Coordination of road closures, crane lifts, and controlled delivery schedules to transport large-scale materials onto the Knightsbridge rooftop safely.",
+        },
+        {
+          icon: "Cable",
+          title: "New Cable Containment",
+          description:
+            "Installation of heavy-duty ladder rack, galvanised cable tray, and conduit systems across the rooftop plant area for power and control cabling.",
+        },
+        {
+          icon: "Shield",
+          title: "Schneider MCCB Panel Boards",
+          description:
+            "Two new Schneider MCCB panel boards providing enhanced protection, improved fault discrimination, and increased reliability for the chiller infrastructure.",
+        },
+        {
+          icon: "Gauge",
+          title: "Power Distribution & Control Wiring",
+          description:
+            "New power distribution cabling, control and interface wiring to mechanical plant, circuit identification, labelling, and final terminations throughout.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing, Commissioning & Certification",
+          description:
+            "Full electrical testing and inspection to BS 7671, functional testing of controls, phase rotation checks, commissioning support, and final certification.",
+        },
       ],
-      pillars: [
-        { num: "01", title: "Live Environment Delivery", description: "Complete chiller upgrade executed above an active luxury retail store — zero disruption to trading operations throughout." },
-        { num: "02", title: "Crane & Logistics Expertise", description: "Road closures, lift plans, and crane operations coordinated in central Knightsbridge to deliver heavy materials safely to a restricted rooftop." },
-        { num: "03", title: "Engineered to Last", description: "New containment, Schneider MCCB panels, and full BS 7671 certification — a future-ready electrical infrastructure for the upgraded chiller plant." },
+      timeline: [
+        {
+          phase: "Phase 1",
+          title: "Strip-Out & Isolation",
+          duration: "2 weeks",
+          status: "completed",
+          description:
+            "Safe isolation of existing systems, full strip-out of redundant cabling, containment, and ageing switchgear back to the rooftop transformer.",
+        },
+        {
+          phase: "Phase 2",
+          title: "Crane Operations & Material Delivery",
+          duration: "1 week",
+          status: "completed",
+          description:
+            "Road closures coordinated, crane lifts executed to deliver cable drums, ladder rack, MCCB panels, and containment materials to the rooftop.",
+        },
+        {
+          phase: "Phase 3",
+          title: "Containment & Panel Installation",
+          duration: "3 weeks",
+          status: "completed",
+          description:
+            "New ladder rack, cable tray, and conduit systems installed. Schneider MCCB panel boards installed and wired. Power and control cabling pulled through.",
+        },
+        {
+          phase: "Phase 4",
+          title: "Testing, Commissioning & Handover",
+          duration: "1 week",
+          status: "completed",
+          description:
+            "Full BS 7671 testing and inspection, functional commissioning of chiller plant controls, final certification and documentation handover.",
+        },
+      ],
+      challenge:
+        "Delivering a full electrical strip-out and new infrastructure installation on the rooftop of an active, high-footfall luxury department store in central Knightsbridge — with restricted access, sensitive crane operations on a busy public street, and zero tolerance for retail disruption.",
+      solution:
+        "Nexgen developed a detailed sequencing programme with phased crane operations, traffic management coordination with local authorities, and a hot-work permit regime. All rooftop access, material lifts, and critical works were scheduled outside trading hours or in controlled windows — ensuring Harvey Nichols remained fully operational throughout.",
+      gallery: [
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg",
+          alt: "Harvey Nichols — five Trane chiller units installed and staged on Knightsbridge rooftop",
+          caption:
+            "Five Trane chiller units installed and staged on the Harvey Nichols rooftop, Knightsbridge",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-chiller-walkway.jpg",
+          alt: "Harvey Nichols — rooftop chiller walkway with containment and London skyline visible",
+          caption:
+            "Rooftop walkway between chiller units — containment installed with the Knightsbridge skyline behind",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-main-switchboard-panel.jpg",
+          alt: "Harvey Nichols — completed ABB main distribution switchboard with S6 labelled circuit breakers",
+          caption:
+            "Completed main switchboard — S6 circuit breakers serving chiller plant, PFC, and generator changeover",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-existing-panel-live-connections.jpg",
+          alt: "Harvey Nichols — existing distribution panel showing live cable terminations before strip-out",
+          caption:
+            "Existing panel before strip-out — live terminations showing the complexity of the legacy installation",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg",
+          alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop",
+          caption:
+            "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg",
+          alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop",
+          caption:
+            "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg",
+          alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply",
+          caption:
+            "Galvanised cable ladder — installed to route power feeds to chiller plant",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg",
+          alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit",
+          caption:
+            "Cable tray at chiller base — containment installed and dressed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg",
+          alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage",
+          caption:
+            "Trane chiller electrical connection — containment installed with correct danger labelling",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg",
+          alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs",
+          caption:
+            "Under-floor cable management — heavy cable bundles routed through basement void",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg",
+          alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring",
+          caption:
+            "Chiller control panel — MCBs, contactors, and wiring installed to specification",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
+          alt: "Harvey Nichols — plant room with insulated pipework and cable containment",
+          caption:
+            "Plant room installation — cable containment and services routed through mechanical plant area",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg",
+          alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline",
+          caption:
+            "Rooftop installation — electrical containment and pipework with London skyline in view",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg",
+          alt: "Harvey Nichols — plant room walkway grating with cable containment below",
+          caption:
+            "Plant room cable containment — routed below steel grating walkway in plant area",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg",
+          alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator",
+          caption:
+            "Grundfos VFD pump controller — installed, cabled, and commissioned",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg",
+          alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables",
+          caption:
+            "Rooftop earthing cables — earth and bonding runs through steel grating structure",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg",
+          alt: "Harvey Nichols — cable identification labels on supply cables through security mesh",
+          caption:
+            "Cable identification labels — circuit labelling applied to all supply cables",
+        },
+        {
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
+          alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop",
+          caption:
+            "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop",
+        },
+      ],
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "knightsbridge-standard",
+          heading: "The Standard the Brand Demands",
+          paragraphs: [
+            "Harvey Nichols sets the benchmark for luxury retail in the UK. Every trade entering the building is expected to match the quality the brand represents. When Nexgen was appointed to the chiller upgrade programme, the standard required went beyond a typical industrial installation.",
+            "On a project like this, workmanship is not just about compliance — it is about presentation. Every cable entry, every label, every containment run is visible to the building management team and reflects on Nexgen's reputation. The installation was completed to the same standard we apply to every project, regardless of client or contract value.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-scope",
+          anchorId: "crane-logistics",
+          heading: "Crane Operations in Central London",
+          paragraphs: [
+            "Delivering materials to a restricted rooftop in Knightsbridge is not a standard logistics challenge. It requires detailed lift plans, coordination with Transport for London, local authority road closure agreements, traffic management teams, and precise timing to minimise disruption to one of London's busiest shopping streets.",
+            "Nexgen managed the full logistics operation — from initial site surveys and lift plan development through to on-the-day crane coordination. Large SWA cable drums, Schneider MCCB panel boards, lengths of ladder rack, and galvanised cable tray were all craned to the rooftop within controlled delivery windows. Nothing was left to chance.",
+          ],
+          background: "default",
+        },
       ],
     },
-    scope: [
-      { icon: "Zap", title: "Full Electrical Strip-Out", description: "Safe isolation and complete removal of all redundant electrical cabling, containment, and ageing switchgear back to the main rooftop transformer position." },
-      { icon: "Settings", title: "Crane Operations & Logistics", description: "Coordination of road closures, crane lifts, and controlled delivery schedules to transport large-scale materials onto the Knightsbridge rooftop safely." },
-      { icon: "Cable", title: "New Cable Containment", description: "Installation of heavy-duty ladder rack, galvanised cable tray, and conduit systems across the rooftop plant area for power and control cabling." },
-      { icon: "Shield", title: "Schneider MCCB Panel Boards", description: "Two new Schneider MCCB panel boards providing enhanced protection, improved fault discrimination, and increased reliability for the chiller infrastructure." },
-      { icon: "Gauge", title: "Power Distribution & Control Wiring", description: "New power distribution cabling, control and interface wiring to mechanical plant, circuit identification, labelling, and final terminations throughout." },
-      { icon: "CheckCircle", title: "Testing, Commissioning & Certification", description: "Full electrical testing and inspection to BS 7671, functional testing of controls, phase rotation checks, commissioning support, and final certification." },
-    ],
-    timeline: [
-      { phase: "Phase 1", title: "Strip-Out & Isolation", duration: "2 weeks", status: "completed", description: "Safe isolation of existing systems, full strip-out of redundant cabling, containment, and ageing switchgear back to the rooftop transformer." },
-      { phase: "Phase 2", title: "Crane Operations & Material Delivery", duration: "1 week", status: "completed", description: "Road closures coordinated, crane lifts executed to deliver cable drums, ladder rack, MCCB panels, and containment materials to the rooftop." },
-      { phase: "Phase 3", title: "Containment & Panel Installation", duration: "3 weeks", status: "completed", description: "New ladder rack, cable tray, and conduit systems installed. Schneider MCCB panel boards installed and wired. Power and control cabling pulled through." },
-      { phase: "Phase 4", title: "Testing, Commissioning & Handover", duration: "1 week", status: "completed", description: "Full BS 7671 testing and inspection, functional commissioning of chiller plant controls, final certification and documentation handover." },
-    ],
-    challenge:
-      "Delivering a full electrical strip-out and new infrastructure installation on the rooftop of an active, high-footfall luxury department store in central Knightsbridge — with restricted access, sensitive crane operations on a busy public street, and zero tolerance for retail disruption.",
-    solution:
-      "Nexgen developed a detailed sequencing programme with phased crane operations, traffic management coordination with local authorities, and a hot-work permit regime. All rooftop access, material lifts, and critical works were scheduled outside trading hours or in controlled windows — ensuring Harvey Nichols remained fully operational throughout.",
-    gallery: [
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg", alt: "Harvey Nichols — five Trane chiller units installed and staged on Knightsbridge rooftop", caption: "Five Trane chiller units installed and staged on the Harvey Nichols rooftop, Knightsbridge" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-chiller-walkway.jpg", alt: "Harvey Nichols — rooftop chiller walkway with containment and London skyline visible", caption: "Rooftop walkway between chiller units — containment installed with the Knightsbridge skyline behind" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-main-switchboard-panel.jpg", alt: "Harvey Nichols — completed ABB main distribution switchboard with S6 labelled circuit breakers", caption: "Completed main switchboard — S6 circuit breakers serving chiller plant, PFC, and generator changeover" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-existing-panel-live-connections.jpg", alt: "Harvey Nichols — existing distribution panel showing live cable terminations before strip-out", caption: "Existing panel before strip-out — live terminations showing the complexity of the legacy installation" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-drums-rooftop.jpg", alt: "Harvey Nichols chiller upgrade — cable drums and materials staged on London rooftop", caption: "Cable drums staged on the London rooftop — scale of materials for the chiller upgrade programme" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg", alt: "Harvey Nichols — row of Trane R454B chiller units installed on rooftop", caption: "Trane R454B chiller units — installed, cabled, and commissioned on the Harvey Nichols rooftop" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-ladder-installation.jpg", alt: "Harvey Nichols — galvanised cable ladder installation for chiller power supply", caption: "Galvanised cable ladder — installed to route power feeds to chiller plant" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-cable-tray.jpg", alt: "Harvey Nichols — cable tray and containment at base of Trane chiller unit", caption: "Cable tray at chiller base — containment installed and dressed to specification" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-electrical.jpg", alt: "Harvey Nichols — Trane Technologies chiller unit with electrical containment and danger signage", caption: "Trane chiller electrical connection — containment installed with correct danger labelling" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-underfloor-cable-management.jpg", alt: "Harvey Nichols — under-floor cable management vault with heavy cable runs", caption: "Under-floor cable management — heavy cable bundles routed through basement void" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg", alt: "Harvey Nichols — open chiller control panel showing MCBs and wiring", caption: "Chiller control panel — MCBs, contactors, and wiring installed to specification" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg", alt: "Harvey Nichols — plant room with insulated pipework and cable containment", caption: "Plant room installation — cable containment and services routed through mechanical plant area" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-pipework-containment.jpg", alt: "Harvey Nichols — rooftop electrical containment with pipework and London skyline", caption: "Rooftop installation — electrical containment and pipework with London skyline in view" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-cable-containment.jpg", alt: "Harvey Nichols — plant room walkway grating with cable containment below", caption: "Plant room cable containment — routed below steel grating walkway in plant area" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg", alt: "Harvey Nichols — Grundfos VFD pump controller with cable runs and isolator", caption: "Grundfos VFD pump controller — installed, cabled, and commissioned" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-rooftop-earthing-cables.jpg", alt: "Harvey Nichols — rooftop steel grating with earth and bonding cables", caption: "Rooftop earthing cables — earth and bonding runs through steel grating structure" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-cable-identification-labels.jpg", alt: "Harvey Nichols — cable identification labels on supply cables through security mesh", caption: "Cable identification labels — circuit labelling applied to all supply cables" },
-      { src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg", alt: "Harvey Nichols — commissioned Trane R454B chiller bank on rooftop", caption: "Chiller bank commissioned — Trane R454B units operational on Harvey Nichols rooftop" },
-    ],
-    narrativeBlocks: [
-      {
-        position: "after-intro",
-        anchorId: "knightsbridge-standard",
-        heading: "The Standard the Brand Demands",
-        paragraphs: [
-          "Harvey Nichols sets the benchmark for luxury retail in the UK. Every trade entering the building is expected to match the quality the brand represents. When Nexgen was appointed to the chiller upgrade programme, the standard required went beyond a typical industrial installation.",
-          "On a project like this, workmanship is not just about compliance — it is about presentation. Every cable entry, every label, every containment run is visible to the building management team and reflects on Nexgen's reputation. The installation was completed to the same standard we apply to every project, regardless of client or contract value.",
-        ],
-        background: "muted",
-      },
-      {
-        position: "after-scope",
-        anchorId: "crane-logistics",
-        heading: "Crane Operations in Central London",
-        paragraphs: [
-          "Delivering materials to a restricted rooftop in Knightsbridge is not a standard logistics challenge. It requires detailed lift plans, coordination with Transport for London, local authority road closure agreements, traffic management teams, and precise timing to minimise disruption to one of London's busiest shopping streets.",
-          "Nexgen managed the full logistics operation — from initial site surveys and lift plan development through to on-the-day crane coordination. Large SWA cable drums, Schneider MCCB panel boards, lengths of ladder rack, and galvanised cable tray were all craned to the rooftop within controlled delivery windows. Nothing was left to chance.",
-        ],
-        background: "default",
-      },
-    ],
   },
-},
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALCOT PARK GOLF CLUB — Luxury Domestic Rewire
   // ═══════════════════════════════════════════════════════════════════════════
   {
-  id: "proj-calcot-park-001",
-  slug: "calcot-park-luxury-rewire",
-  category: "residential",
-  categoryLabel: "Residential",
-  title: "Calcot Park Luxury Rewire",
-  heroHeadline: ['Calcot Park', 'Luxury Rewire'],
-  heroIndicators: [
-    { icon: 'Home', title: 'Full Rewire', description: 'Complete luxury domestic rewire including all first and second fix wiring to all rooms and outbuildings.' },
-    { icon: 'Wifi', title: 'Smart Home', description: 'Integrated smart lighting, automated blinds, CCTV and AV wiring throughout the property.' },
-    { icon: 'Shield', title: '100A RCBO Board', description: 'New 100A RCBO-protected consumer unit with dedicated circuits for EV charger and pool equipment.' },
-    { icon: 'MapPin', title: 'Calcot Park', description: 'Delivered at a prestigious property within the Calcot Park Golf Club estate, Berkshire.' },
-  ] as const,
-  clientSector: "Residential — High-End Property",
-  status: "completed",
-  description:
-    "Full luxury domestic rewire at a prestigious property within the grounds of Calcot Park Golf Club, Berkshire. Nexgen delivered a comprehensive electrical upgrade combining premium LED lighting design, smart home integration, external feature and security lighting, CCTV, and a fully compliant new consumer unit.",
-  coverImage: {
-    src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg",
-    alt: "Calcot Park luxury property — external lighting illuminating the front elevation at night",
-  },
-  kpis: {
-    budget: "Premium Residential",
-    timeline: "Completed",
-    capacity: "100A — RCBO Protected",
-    location: "Calcot Park, Berkshire",
-  },
-  tags: ["Luxury Rewire", "Residential", "LED Lighting", "Smart Home", "CCTV", "Berkshire", "Consumer Unit", "External Lighting", "Calcot Park"],
-  progress: 100,
-  isFeatured: true,
-  publishedAt: "2026-05-10T09:00:00.000Z",
-  updatedAt: "2026-05-10T09:00:00.000Z",
-  detail: {
-    intro: {
-      label: "Luxury Residential Project",
-      headlineWords: ["Premium.", "Smart.", "Done", "Right."],
-      leadParagraph:
-        "When a prestige property within the grounds of Calcot Park Golf Club required a full electrical upgrade, Nexgen was appointed to deliver a comprehensive rewire that matched the quality of the home. The scope combined premium LED lighting design, smart home integration, external feature and security lighting, CCTV installation, and a new compliant consumer unit — all completed to the highest standard of workmanship.",
-      bodyParagraphs: [
-        "Luxury residential work demands a different approach. Every decision — from the selection of fittings to the routing of cables — is made with the client's lifestyle and the property's aesthetic in mind. Nexgen worked with care and precision throughout, protecting finishes and delivering a result the client was proud of.",
-        "The completed installation transformed every aspect of the property's electrical infrastructure — from the consumer unit to the final switch plate, from the external driveway lights to the recessed downlights in every room.",
+    id: "proj-calcot-park-001",
+    slug: "calcot-park-luxury-rewire",
+    category: "residential",
+    categoryLabel: "Residential",
+    title: "Calcot Park Luxury Rewire",
+    heroHeadline: ["Calcot Park", "Luxury Rewire"],
+    heroIndicators: [
+      {
+        icon: "Home",
+        title: "Full Rewire",
+        description:
+          "Complete luxury domestic rewire including all first and second fix wiring to all rooms and outbuildings.",
+      },
+      {
+        icon: "Wifi",
+        title: "Smart Home",
+        description:
+          "Integrated smart lighting, automated blinds, CCTV and AV wiring throughout the property.",
+      },
+      {
+        icon: "Shield",
+        title: "100A RCBO Board",
+        description:
+          "New 100A RCBO-protected consumer unit with dedicated circuits for EV charger and pool equipment.",
+      },
+      {
+        icon: "MapPin",
+        title: "Calcot Park",
+        description:
+          "Delivered at a prestigious property within the Calcot Park Golf Club estate, Berkshire.",
+      },
+    ] as const,
+    clientSector: "Residential — High-End Property",
+    status: "completed",
+    description:
+      "Full luxury domestic rewire at a prestigious property within the grounds of Calcot Park Golf Club, Berkshire. Nexgen delivered a comprehensive electrical upgrade combining premium LED lighting design, smart home integration, external feature and security lighting, CCTV, and a fully compliant new consumer unit.",
+    coverImage: {
+      src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg",
+      alt: "Calcot Park luxury property — external lighting illuminating the front elevation at night",
+    },
+    kpis: {
+      budget: "Premium Residential",
+      timeline: "Completed",
+      capacity: "100A — RCBO Protected",
+      location: "Calcot Park, Berkshire",
+    },
+    tags: [
+      "Luxury Rewire",
+      "Residential",
+      "LED Lighting",
+      "Smart Home",
+      "CCTV",
+      "Berkshire",
+      "Consumer Unit",
+      "External Lighting",
+      "Calcot Park",
+    ],
+    progress: 100,
+    isFeatured: true,
+    publishedAt: "2026-05-10T09:00:00.000Z",
+    updatedAt: "2026-05-10T09:00:00.000Z",
+    detail: {
+      intro: {
+        label: "Luxury Residential Project",
+        headlineWords: ["Premium.", "Smart.", "Done", "Right."],
+        leadParagraph:
+          "When a prestige property within the grounds of Calcot Park Golf Club required a full electrical upgrade, Nexgen was appointed to deliver a comprehensive rewire that matched the quality of the home. The scope combined premium LED lighting design, smart home integration, external feature and security lighting, CCTV installation, and a new compliant consumer unit — all completed to the highest standard of workmanship.",
+        bodyParagraphs: [
+          "Luxury residential work demands a different approach. Every decision — from the selection of fittings to the routing of cables — is made with the client's lifestyle and the property's aesthetic in mind. Nexgen worked with care and precision throughout, protecting finishes and delivering a result the client was proud of.",
+          "The completed installation transformed every aspect of the property's electrical infrastructure — from the consumer unit to the final switch plate, from the external driveway lights to the recessed downlights in every room.",
+        ],
+        pillars: [
+          {
+            num: "01",
+            title: "Premium Lighting Design",
+            description:
+              "Recessed LED downlights throughout every room, bespoke feature lighting, and externally designed lighting to complement the architecture and grounds.",
+          },
+          {
+            num: "02",
+            title: "Smart Home Integration",
+            description:
+              "Nest Learning Thermostat, multimedia cabling, and dedicated data infrastructure — technology integrated cleanly and unobtrusively into a high-spec interior.",
+          },
+          {
+            num: "03",
+            title: "Security & External",
+            description:
+              "Full CCTV installation with HD remote access, and strategically positioned external security lighting covering the property and grounds.",
+          },
+          {
+            num: "04",
+            title: "Certified & Compliant",
+            description:
+              "New consumer unit with individual RCBOs and surge protection. Full BS 7671 testing, inspection, and certification — documentation provided at handover.",
+          },
+        ],
+      },
+      scope: [
+        {
+          icon: "Zap",
+          title: "Full Electrical Rewire",
+          description:
+            "Complete strip-out of the existing electrical installation and full rewire designed around the client's high-specification requirements.",
+        },
+        {
+          icon: "Lightbulb",
+          title: "LED Lighting Throughout",
+          description:
+            "Recessed LED downlights installed throughout all rooms, with bespoke feature lighting to key architectural areas of the property.",
+        },
+        {
+          icon: "Activity",
+          title: "External Feature & Security Lighting",
+          description:
+            "Strategically positioned external security and feature lighting installed to enhance the property and grounds at night — showcased in the project gallery.",
+        },
+        {
+          icon: "Settings",
+          title: "Data, Multimedia & Smart Home",
+          description:
+            "Dedicated data points, high-speed network infrastructure, media wall installations with concealed cabling, and Nest Learning Thermostat integration.",
+        },
+        {
+          icon: "Gauge",
+          title: "CCTV System",
+          description:
+            "Full CCTV installation covering the property with high-definition monitoring and remote access capability configured and commissioned.",
+        },
+        {
+          icon: "Shield",
+          title: "New Consumer Unit",
+          description:
+            "New consumer unit with individual RCBOs and surge protection device — improved safety, reliability, and full compliance with current BS 7671 wiring regulations.",
+        },
+        {
+          icon: "CheckCircle",
+          title: "Testing, Certification & Handover",
+          description:
+            "Full BS 7671 electrical testing and inspection. Every circuit tested, results documented, and full certification provided at handover.",
+        },
       ],
-      pillars: [
-        { num: "01", title: "Premium Lighting Design", description: "Recessed LED downlights throughout every room, bespoke feature lighting, and externally designed lighting to complement the architecture and grounds." },
-        { num: "02", title: "Smart Home Integration", description: "Nest Learning Thermostat, multimedia cabling, and dedicated data infrastructure — technology integrated cleanly and unobtrusively into a high-spec interior." },
-        { num: "03", title: "Security & External", description: "Full CCTV installation with HD remote access, and strategically positioned external security lighting covering the property and grounds." },
-        { num: "04", title: "Certified & Compliant", description: "New consumer unit with individual RCBOs and surge protection. Full BS 7671 testing, inspection, and certification — documentation provided at handover." },
+      challenge:
+        "Delivering a comprehensive full rewire of a high-specification luxury property within the grounds of a prestigious golf club — with a client expecting the quality of finish to match the quality of their home, and zero tolerance for damage to premium interior finishes and landscaping.",
+      solution:
+        "Nexgen worked methodically, protecting all surfaces and finishes before starting each phase. Cable routes were planned to minimise disruption to completed rooms, and all chasing and make-good works were managed to the highest standard. A room-by-room programme allowed the client to use areas of the home throughout the project.",
+      gallery: [
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg",
+          alt: "Calcot Park luxury property — beautifully illuminated front elevation at night with porch spotlights and wall lights",
+          caption:
+            "Front elevation at night — porch spotlights, wall lights, and driveway lighting installed and commissioned",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-night-panorama.jpg",
+          alt: "Calcot Park — full property panorama at night showing complete external lighting scheme",
+          caption:
+            "Full property at night — complete external lighting scheme illuminating the entire grounds",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-rear-patio-night-uplighters.jpg",
+          alt: "Calcot Park — rear patio at night with wall uplighters, bi-fold door lighting, and garden lights",
+          caption:
+            "Rear patio at night — wall uplighters and patio lighting with bi-fold door exterior illuminated",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-wide.jpg",
+          alt: "Calcot Park — wide night shot showing entire property illuminated with full external lighting scheme",
+          caption:
+            "Wide night elevation — external lighting covering front, side, and garage areas of the property",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-step-lights-night.jpg",
+          alt: "Calcot Park — landscaped garden terrace at night with recessed step lights and wall plinth lights glowing warmly",
+          caption:
+            "Garden terrace at night — recessed step lights and plinth lights illuminating the landscaped area",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-recessed-ground-lights-night.jpg",
+          alt: "Calcot Park — garden terrace with recessed ground lights along wall base and step lighting at night",
+          caption:
+            "Recessed ground lights — installed at the base of garden walls and along terrace steps",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-plinth-lights-seating-night.jpg",
+          alt: "Calcot Park — garden plinth lights and raised seating area illuminated at night",
+          caption:
+            "Garden plinth lights — seating area and raised planters illuminated at night",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-living-room-led-downlights.jpg",
+          alt: "Calcot Park — interior living room with recessed LED downlights, herringbone floor and modern fireplace",
+          caption:
+            "Living room — recessed LED downlights throughout, complementing the herringbone floor and fireplace",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-kitchen-led-downlights.jpg",
+          alt: "Calcot Park — high-spec kitchen with recessed LED downlights, high-gloss units, and integrated appliances wired",
+          caption:
+            "Kitchen — LED downlights, integrated appliances wired, and all kitchen circuits installed",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-dining-room-led-downlights.jpg",
+          alt: "Calcot Park — dining room with recessed LED downlights and premium velvet and marble interior",
+          caption:
+            "Dining room — recessed LED downlights complementing the luxury interior design",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg",
+          alt: "Calcot Park — Nest Learning Thermostat installed as part of smart home integration package",
+          caption:
+            "Nest Learning Thermostat — smart home integration installed, wired, and configured",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-floodlight-cctv.jpg",
+          alt: "Calcot Park — external security floodlight and CCTV camera installed on gable end of property",
+          caption:
+            "External security — floodlight and CCTV camera installed on gable, covering driveway approach",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-light-dusk.jpg",
+          alt: "Calcot Park — external security light installed under eaves, property exterior at dusk",
+          caption:
+            "External security light — installed under eaves, covering the property perimeter",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-exterior-side-view.jpg",
+          alt: "Calcot Park — property exterior side view showing yellow brick, patio area, and mature tree setting",
+          caption:
+            "Property exterior — side elevation showing the quality and setting of the home",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-daylight.jpg",
+          alt: "Calcot Park — landscaped garden terrace in daylight with steps, planted borders, and grassed area",
+          caption:
+            "Garden terrace in daylight — landscaped steps and planters where external ground lights were installed",
+        },
+        {
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-planters.jpg",
+          alt: "Calcot Park — garden terrace alternate angle showing planted borders and recessed lighting positions",
+          caption:
+            "Garden terrace — alternate view of planted borders and terrace where external lighting was installed",
+        },
+      ],
+      narrativeBlocks: [
+        {
+          position: "after-intro",
+          anchorId: "luxury-residential-standard",
+          heading: "The Detail That Makes the Difference",
+          paragraphs: [
+            "In a home like this, electrical work is not background infrastructure — it is part of the design. The placement of each downlight, the routing of every cable, the choice of fittings — all of it contributes to how the finished space looks and feels. Nexgen's approach to premium residential work starts with understanding the client's vision and working backwards from the end result.",
+            "The Calcot Park rewire was delivered with the care and precision the property deserved. Every room was treated as a showcase. The external lighting scheme was designed to complement the architecture, not just illuminate it — and the results speak for themselves in the night photography.",
+          ],
+          background: "muted",
+        },
+        {
+          position: "after-gallery",
+          anchorId: "the-result",
+          heading: "A Home Transformed",
+          paragraphs: [
+            "The completed installation covers every electrical system in the property — from the new consumer unit to the final external ground light. The client now has a home with premium interior lighting in every room, a full external security and feature lighting scheme, smart home controls, high-definition CCTV, and a fully certified, compliant electrical installation.",
+            "This is Nexgen residential work at its best — thorough, detail-focused, and completed to a standard that lasts.",
+          ],
+          background: "default",
+        },
       ],
     },
-    scope: [
-      { icon: "Zap", title: "Full Electrical Rewire", description: "Complete strip-out of the existing electrical installation and full rewire designed around the client's high-specification requirements." },
-      { icon: "Lightbulb", title: "LED Lighting Throughout", description: "Recessed LED downlights installed throughout all rooms, with bespoke feature lighting to key architectural areas of the property." },
-      { icon: "Activity", title: "External Feature & Security Lighting", description: "Strategically positioned external security and feature lighting installed to enhance the property and grounds at night — showcased in the project gallery." },
-      { icon: "Settings", title: "Data, Multimedia & Smart Home", description: "Dedicated data points, high-speed network infrastructure, media wall installations with concealed cabling, and Nest Learning Thermostat integration." },
-      { icon: "Gauge", title: "CCTV System", description: "Full CCTV installation covering the property with high-definition monitoring and remote access capability configured and commissioned." },
-      { icon: "Shield", title: "New Consumer Unit", description: "New consumer unit with individual RCBOs and surge protection device — improved safety, reliability, and full compliance with current BS 7671 wiring regulations." },
-      { icon: "CheckCircle", title: "Testing, Certification & Handover", description: "Full BS 7671 electrical testing and inspection. Every circuit tested, results documented, and full certification provided at handover." },
-    ],
-    challenge:
-      "Delivering a comprehensive full rewire of a high-specification luxury property within the grounds of a prestigious golf club — with a client expecting the quality of finish to match the quality of their home, and zero tolerance for damage to premium interior finishes and landscaping.",
-    solution:
-      "Nexgen worked methodically, protecting all surfaces and finishes before starting each phase. Cable routes were planned to minimise disruption to completed rooms, and all chasing and make-good works were managed to the highest standard. A room-by-room programme allowed the client to use areas of the home throughout the project.",
-    gallery: [
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg", alt: "Calcot Park luxury property — beautifully illuminated front elevation at night with porch spotlights and wall lights", caption: "Front elevation at night — porch spotlights, wall lights, and driveway lighting installed and commissioned" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-night-panorama.jpg", alt: "Calcot Park — full property panorama at night showing complete external lighting scheme", caption: "Full property at night — complete external lighting scheme illuminating the entire grounds" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-rear-patio-night-uplighters.jpg", alt: "Calcot Park — rear patio at night with wall uplighters, bi-fold door lighting, and garden lights", caption: "Rear patio at night — wall uplighters and patio lighting with bi-fold door exterior illuminated" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-wide.jpg", alt: "Calcot Park — wide night shot showing entire property illuminated with full external lighting scheme", caption: "Wide night elevation — external lighting covering front, side, and garage areas of the property" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-step-lights-night.jpg", alt: "Calcot Park — landscaped garden terrace at night with recessed step lights and wall plinth lights glowing warmly", caption: "Garden terrace at night — recessed step lights and plinth lights illuminating the landscaped area" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-recessed-ground-lights-night.jpg", alt: "Calcot Park — garden terrace with recessed ground lights along wall base and step lighting at night", caption: "Recessed ground lights — installed at the base of garden walls and along terrace steps" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-plinth-lights-seating-night.jpg", alt: "Calcot Park — garden plinth lights and raised seating area illuminated at night", caption: "Garden plinth lights — seating area and raised planters illuminated at night" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-living-room-led-downlights.jpg", alt: "Calcot Park — interior living room with recessed LED downlights, herringbone floor and modern fireplace", caption: "Living room — recessed LED downlights throughout, complementing the herringbone floor and fireplace" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-kitchen-led-downlights.jpg", alt: "Calcot Park — high-spec kitchen with recessed LED downlights, high-gloss units, and integrated appliances wired", caption: "Kitchen — LED downlights, integrated appliances wired, and all kitchen circuits installed" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-dining-room-led-downlights.jpg", alt: "Calcot Park — dining room with recessed LED downlights and premium velvet and marble interior", caption: "Dining room — recessed LED downlights complementing the luxury interior design" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg", alt: "Calcot Park — Nest Learning Thermostat installed as part of smart home integration package", caption: "Nest Learning Thermostat — smart home integration installed, wired, and configured" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-floodlight-cctv.jpg", alt: "Calcot Park — external security floodlight and CCTV camera installed on gable end of property", caption: "External security — floodlight and CCTV camera installed on gable, covering driveway approach" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-exterior-security-light-dusk.jpg", alt: "Calcot Park — external security light installed under eaves, property exterior at dusk", caption: "External security light — installed under eaves, covering the property perimeter" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-property-exterior-side-view.jpg", alt: "Calcot Park — property exterior side view showing yellow brick, patio area, and mature tree setting", caption: "Property exterior — side elevation showing the quality and setting of the home" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-daylight.jpg", alt: "Calcot Park — landscaped garden terrace in daylight with steps, planted borders, and grassed area", caption: "Garden terrace in daylight — landscaped steps and planters where external ground lights were installed" },
-      { src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-garden-terrace-planters.jpg", alt: "Calcot Park — garden terrace alternate angle showing planted borders and recessed lighting positions", caption: "Garden terrace — alternate view of planted borders and terrace where external lighting was installed" },
-    ],
-    narrativeBlocks: [
-      {
-        position: "after-intro",
-        anchorId: "luxury-residential-standard",
-        heading: "The Detail That Makes the Difference",
-        paragraphs: [
-          "In a home like this, electrical work is not background infrastructure — it is part of the design. The placement of each downlight, the routing of every cable, the choice of fittings — all of it contributes to how the finished space looks and feels. Nexgen's approach to premium residential work starts with understanding the client's vision and working backwards from the end result.",
-          "The Calcot Park rewire was delivered with the care and precision the property deserved. Every room was treated as a showcase. The external lighting scheme was designed to complement the architecture, not just illuminate it — and the results speak for themselves in the night photography.",
-        ],
-        background: "muted",
-      },
-      {
-        position: "after-gallery",
-        anchorId: "the-result",
-        heading: "A Home Transformed",
-        paragraphs: [
-          "The completed installation covers every electrical system in the property — from the new consumer unit to the final external ground light. The client now has a home with premium interior lighting in every room, a full external security and feature lighting scheme, smart home controls, high-definition CCTV, and a fully certified, compliant electrical installation.",
-          "This is Nexgen residential work at its best — thorough, detail-focused, and completed to a standard that lasts.",
-        ],
-        background: "default",
-      },
-    ],
   },
-},
 ];
 
 export const projectBentoItems: ProjectBentoItem[] = [

@@ -28,14 +28,14 @@ const STYLES = {
   },
   "image-overlay": {
     article:
-      "relative p-5 rounded-xl border border-white/50 dark:border-foreground/30 bg-black/35 dark:bg-white/15 backdrop-blur-md hover:bg-electric-cyan/10 hover:border-electric-cyan dark:hover:border-electric-cyan transition-all duration-300 group",
+      "relative p-5 rounded-xl border border-white/50 bg-black/35 backdrop-blur-md hover:bg-electric-cyan/10 hover:border-electric-cyan transition-all duration-300 group",
     cornerTR:
-      "absolute top-2 right-2 w-3 h-3 border-t border-r border-white/40 dark:border-electric-cyan/50 rounded-tr group-hover:border-electric-cyan dark:group-hover:border-foreground/60 transition-colors",
+      "absolute top-2 right-2 w-3 h-3 border-t border-r border-white/40 rounded-tr group-hover:border-electric-cyan transition-colors",
     cornerBL:
-      "absolute bottom-2 left-2 w-3 h-3 border-b border-l border-white/40 dark:border-electric-cyan/50 rounded-bl group-hover:border-electric-cyan dark:group-hover:border-foreground/60 transition-colors",
-    icon: "mx-auto mb-2 h-6 w-6 text-white/80 dark:text-foreground/70 group-hover:text-electric-cyan transition-colors",
-    title: "text-sm font-medium text-electric-cyan group-hover:text-white dark:group-hover:text-foreground transition-colors",
-    description: "mt-1 hidden text-xs text-white/75 dark:text-foreground/70 sm:block",
+      "absolute bottom-2 left-2 w-3 h-3 border-b border-l border-white/40 rounded-bl group-hover:border-electric-cyan transition-colors",
+    icon: "mx-auto mb-2 h-6 w-6 text-white/80 group-hover:text-electric-cyan transition-colors",
+    title: "text-sm font-medium text-electric-cyan group-hover:text-white transition-colors",
+    description: "mt-1 hidden text-xs text-white/75 sm:block",
   },
 } as const;
 

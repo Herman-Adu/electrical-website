@@ -41,42 +41,93 @@ interface TopicSlugConfig {
 
 const topicConfig: Record<string, TopicSlugConfig> = {
   residential: {
-    image: "/images/smart-living-interior.jpg",
+    image:
+      "/images/projects/residential/residential-ambient-lighting-exposed-brick-interior.jpg",
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
     headline: ["RESIDENTIAL", "SMART LIVING"],
     description:
       "Smart home upgrades, rewiring projects, EV charging installations, and energy efficiency guides for homeowners and domestic landlords.",
     trustIndicators: [
-      { icon: 'Home',   title: 'Smart Home Ready',    description: 'Automated lighting and smart systems' },
-      { icon: 'Zap',    title: 'EV Charging Experts', description: 'Home and workplace EV installation' },
-      { icon: 'Shield', title: 'NICEIC Certified',    description: 'Fully accredited domestic electricians' },
-      { icon: 'Clock',  title: '24-7 Support',        description: 'Around-the-clock emergency cover' },
+      {
+        icon: "Home",
+        title: "Smart Home Ready",
+        description: "Automated lighting and smart systems",
+      },
+      {
+        icon: "Zap",
+        title: "EV Charging Experts",
+        description: "Home and workplace EV installation",
+      },
+      {
+        icon: "Shield",
+        title: "NICEIC Certified",
+        description: "Fully accredited domestic electricians",
+      },
+      {
+        icon: "Clock",
+        title: "24-7 Support",
+        description: "Around-the-clock emergency cover",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   commercial: {
-    image: "/images/services-commercial.jpg",
+    image:
+      "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
     icon: <Building2 className="h-8 w-8 text-electric-cyan" />,
     headline: ["COMMERCIAL", "ELECTRICAL", "EXCELLENCE"],
     description:
       "Retail fitouts, property management upgrades, multi-site standardisation, and hospitality electrical delivery across commercial environments.",
     trustIndicators: [
-      { icon: 'Building2',      title: 'Retail Fitouts',      description: 'Complete commercial electrical fit-outs' },
-      { icon: 'Gauge',          title: 'Energy Efficiency',   description: 'Reduce energy costs with smart solutions' },
-      { icon: 'ClipboardCheck', title: 'Compliance First',    description: 'Meet all commercial wiring regulations' },
-      { icon: 'Users',          title: 'Multi-site Delivery', description: 'Coordinated across multiple locations' },
+      {
+        icon: "Building2",
+        title: "Retail Fitouts",
+        description: "Complete commercial electrical fit-outs",
+      },
+      {
+        icon: "Gauge",
+        title: "Energy Efficiency",
+        description: "Reduce energy costs with smart solutions",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Compliance First",
+        description: "Meet all commercial wiring regulations",
+      },
+      {
+        icon: "Users",
+        title: "Multi-site Delivery",
+        description: "Coordinated across multiple locations",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   industrial: {
-    image: "/images/services-industrial.jpg",
+    image:
+      "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-units-rooftop.jpg",
     icon: <Factory className="h-8 w-8 text-electric-cyan" />,
     headline: ["INDUSTRIAL", "POWER", "SYSTEMS"],
     description:
       "Switchgear commissioning, data centre power infrastructure, critical systems maintenance, and energy efficiency programmes for industrial operators.",
     trustIndicators: [
-      { icon: 'Factory',  title: 'Industrial Grade',     description: 'Heavy-duty industrial installations' },
-      { icon: 'Settings', title: 'Maintenance Plans',    description: 'Scheduled and reactive maintenance' },
-      { icon: 'Zap',      title: 'Power Infrastructure', description: 'High-voltage and distribution systems' },
-      { icon: 'Shield',   title: 'Safety Certified',     description: 'Full health and safety compliance' },
+      {
+        icon: "Factory",
+        title: "Industrial Grade",
+        description: "Heavy-duty industrial installations",
+      },
+      {
+        icon: "Settings",
+        title: "Maintenance Plans",
+        description: "Scheduled and reactive maintenance",
+      },
+      {
+        icon: "Zap",
+        title: "Power Infrastructure",
+        description: "High-voltage and distribution systems",
+      },
+      {
+        icon: "Shield",
+        title: "Safety Certified",
+        description: "Full health and safety compliance",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   community: {
@@ -86,49 +137,115 @@ const topicConfig: Record<string, TopicSlugConfig> = {
     description:
       "Education, healthcare, and public sector electrical programmes — including summer works schedules, HTM 06-01 compliance, and resilience upgrades.",
     trustIndicators: [
-      { icon: 'Users',          title: 'Public Sector',    description: 'Trusted by councils and NHS trusts' },
-      { icon: 'Award',          title: 'HTM 06-01',        description: 'Healthcare electrical compliance standard' },
-      { icon: 'Building2',      title: 'Education Works',  description: 'Schools, colleges and universities' },
-      { icon: 'ClipboardCheck', title: 'Trusted Partner',  description: 'Long-term framework agreements' },
+      {
+        icon: "Users",
+        title: "Public Sector",
+        description: "Trusted by councils and NHS trusts",
+      },
+      {
+        icon: "Award",
+        title: "HTM 06-01",
+        description: "Healthcare electrical compliance standard",
+      },
+      {
+        icon: "Building2",
+        title: "Education Works",
+        description: "Schools, colleges and universities",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Trusted Partner",
+        description: "Long-term framework agreements",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   campaigns: {
-    image: "/images/power-distribution.jpg",
+    image: "/images/projects/campaign-hero.jpg",
     icon: <Megaphone className="h-8 w-8 text-electric-cyan" />,
     headline: ["FRAMEWORK", "CAMPAIGNS &", "PARTNERSHIPS"],
     description:
       "Partner-led campaigns, framework agreements, Schneider Electric certification milestones, and coordinated multi-trade delivery programmes.",
     trustIndicators: [
-      { icon: 'Award',    title: 'Framework Certified', description: 'Pre-approved for major frameworks' },
-      { icon: 'Users',    title: 'Multi-trade',         description: 'Electrical across multiple disciplines' },
-      { icon: 'Activity', title: 'Live Campaigns',      description: 'Active procurement and tendering' },
-      { icon: 'Gauge',    title: 'Growth Focus',        description: 'Driving sector expansion' },
+      {
+        icon: "Award",
+        title: "Framework Certified",
+        description: "Pre-approved for major frameworks",
+      },
+      {
+        icon: "Users",
+        title: "Multi-trade",
+        description: "Electrical across multiple disciplines",
+      },
+      {
+        icon: "Activity",
+        title: "Live Campaigns",
+        description: "Active procurement and tendering",
+      },
+      {
+        icon: "Gauge",
+        title: "Growth Focus",
+        description: "Driving sector expansion",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   marketing: {
-    image: "/images/system-diagnostics.jpg",
+    image:
+      "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-lighting-installation.jpg",
     icon: <TrendingUp className="h-8 w-8 text-electric-cyan" />,
     headline: ["MARKET", "INTELLIGENCE"],
     description:
       "Market commentary, net zero transition guides, compliance intelligence, and strategic content helping clients navigate electrification decisions.",
     trustIndicators: [
-      { icon: 'BookOpen',   title: 'Market Intelligence', description: 'In-depth sector analysis and trends' },
-      { icon: 'Activity',   title: 'Industry Updates',    description: 'Latest news from the electrical sector' },
-      { icon: 'Lightbulb',  title: 'Strategic Insights',  description: 'Expert commentary and analysis' },
-      { icon: 'Users',      title: 'Sector Coverage',     description: 'Residential, commercial and industrial' },
+      {
+        icon: "BookOpen",
+        title: "Market Intelligence",
+        description: "In-depth sector analysis and trends",
+      },
+      {
+        icon: "Activity",
+        title: "Industry Updates",
+        description: "Latest news from the electrical sector",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Strategic Insights",
+        description: "Expert commentary and analysis",
+      },
+      {
+        icon: "Users",
+        title: "Sector Coverage",
+        description: "Residential, commercial and industrial",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   "social-media": {
-    image: "/images/warehouse-lighting.jpg",
+    image:
+      "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-first-fix-wiring.jpg",
     icon: <MessageSquareQuote className="h-8 w-8 text-electric-cyan" />,
     headline: ["CLIENT", "STORIES &", "REVIEWS"],
     description:
       "Client testimonials, service highlights, and satisfaction stories that build trust with new commercial and domestic clients.",
     trustIndicators: [
-      { icon: 'Star',      title: 'Client Reviews',   description: 'Verified testimonials from clients' },
-      { icon: 'ThumbsUp',  title: '5-Star Service',   description: 'Consistently top-rated by customers' },
-      { icon: 'Users',     title: 'Community Trust',  description: 'Built through quality and reliability' },
-      { icon: 'Heart',     title: 'Customer First',   description: 'Service excellence at every stage' },
+      {
+        icon: "Star",
+        title: "Client Reviews",
+        description: "Verified testimonials from clients",
+      },
+      {
+        icon: "ThumbsUp",
+        title: "5-Star Service",
+        description: "Consistently top-rated by customers",
+      },
+      {
+        icon: "Users",
+        title: "Community Trust",
+        description: "Built through quality and reliability",
+      },
+      {
+        icon: "Heart",
+        title: "Customer First",
+        description: "Service excellence at every stage",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
 };
@@ -139,10 +256,26 @@ const fallbackConfig: TopicSlugConfig = {
   headline: ["EDITORIAL", "COVERAGE"],
   description: "Browse articles by topic across all editorial channels.",
   trustIndicators: [
-    { icon: 'Shield',   title: 'Fully Certified',  description: 'NICEIC approved contractor' },
-    { icon: 'BookOpen', title: 'Expert Editorial', description: 'Content verified by specialists' },
-    { icon: 'Activity', title: 'Live Updates',     description: 'Real-time news and updates' },
-    { icon: 'Users',    title: 'Sector Coverage',  description: 'Across all electrical disciplines' },
+    {
+      icon: "Shield",
+      title: "Fully Certified",
+      description: "NICEIC approved contractor",
+    },
+    {
+      icon: "BookOpen",
+      title: "Expert Editorial",
+      description: "Content verified by specialists",
+    },
+    {
+      icon: "Activity",
+      title: "Live Updates",
+      description: "Real-time news and updates",
+    },
+    {
+      icon: "Users",
+      title: "Sector Coverage",
+      description: "Across all electrical disciplines",
+    },
   ] as const satisfies readonly TrustIndicatorItem[],
 };
 
@@ -362,7 +495,10 @@ export function NewsTopicHero({ topic, articleCount }: NewsTopicHeroProps) {
             {config.description}
           </motion.p>
 
-          <HeroTrustIndicators items={config.trustIndicators} variant="image-overlay" />
+          <HeroTrustIndicators
+            items={config.trustIndicators}
+            variant="image-overlay"
+          />
 
           {/* Meta */}
           <motion.div

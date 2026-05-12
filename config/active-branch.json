@@ -1,6 +1,6 @@
 {
   "branch": "main",
   "entity": "nexgen-electrical-innovations-state",
-  "fallback": "332a766 feat: heroIndicators — 4 trust cards on every project and article hero (#158)",
-  "updatedAt": "2026-05-11T20:00:00.000Z"
+  "fallback": "55280df feat: per-project intro section on all project detail pages (#161) | c233c77 fix: relax TOC sticky assertion for residential article sticky-bottom mode (#160) | a85f352 chore: post-merge cleanup — active-branch → main, clear CLAUDE.md fallback after PR #158 (#159)",
+  "updatedAt": "2026-05-12T13:34:04.927Z"
 }

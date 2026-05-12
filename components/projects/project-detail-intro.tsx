@@ -43,9 +43,13 @@ export function ProjectDetailIntro({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-background section-padding-bottom pt-6"
+      className="relative overflow-hidden bg-background section-padding"
     >
-      <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} showBottom={false} />
+      <AnimatedBorders
+        shouldReduce={shouldReduce}
+        lineScale={lineScale}
+        showBottom={false}
+      />
       <div className="section-content max-w-6xl">
         {/* Section label */}
         <motion.div
