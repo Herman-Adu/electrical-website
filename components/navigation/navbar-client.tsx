@@ -12,8 +12,18 @@ import { ActionBar } from "@/components/navigation/action-bar";
 import { scrollToElementWithOffset } from "@/lib/scroll-to-section";
 import { projectCategories } from "@/data/projects";
 
-type NavSubItem = { name: string; href: string; isHeader?: boolean; dropdownWidth?: string };
-type NavLink = { name: string; href: string; submenu?: NavSubItem[]; dropdownWidth?: string };
+type NavSubItem = {
+  name: string;
+  href: string;
+  isHeader?: boolean;
+  dropdownWidth?: string;
+};
+type NavLink = {
+  name: string;
+  href: string;
+  submenu?: NavSubItem[];
+  dropdownWidth?: string;
+};
 
 const navLinks: NavLink[] = [
   {
@@ -48,9 +58,9 @@ const navLinks: NavLink[] = [
     name: "Services",
     href: "/services",
     submenu: [
+      { name: "Residential & Domestic", href: "/services/residential" },
       { name: "Commercial & Retail", href: "/services/commercial" },
       { name: "Industrial & Infrastructure", href: "/services/industrial" },
-      { name: "Residential & Domestic", href: "/services/residential" },
       { name: "Emergency Response", href: "/services/emergency" },
       { name: "Quotation", href: "/quotation" },
     ],
@@ -74,21 +84,21 @@ const navLinks: NavLink[] = [
     href: "/news-hub",
     dropdownWidth: "w-64",
     submenu: [
-      { name: "Latest News",       href: "/news-hub" },
-      { name: "Browse Channels",   href: "/news-hub/category" },
+      { name: "Latest News", href: "/news-hub" },
+      { name: "Browse Channels", href: "/news-hub/category" },
       { name: "Articles by Topic", href: "", isHeader: true },
-      { name: "Residential",       href: "/news-hub/filter/residential" },
-      { name: "Commercial",        href: "/news-hub/filter/commercial" },
-      { name: "Industrial",        href: "/news-hub/filter/industrial" },
-      { name: "Community",         href: "/news-hub/filter/community" },
-      { name: "Campaigns",         href: "/news-hub/filter/campaigns" },
-      { name: "Marketing",         href: "/news-hub/filter/marketing" },
-      { name: "Social Media",      href: "/news-hub/filter/social-media" },
-      { name: "Channels",          href: "", isHeader: true },
-      { name: "Partnerships",      href: "/news-hub/category/partners" },
-      { name: "Case Studies",      href: "/news-hub/category/case-studies" },
-      { name: "Insights",          href: "/news-hub/category/insights" },
-      { name: "Reviews",           href: "/news-hub/category/reviews" },
+      { name: "Residential", href: "/news-hub/filter/residential" },
+      { name: "Commercial", href: "/news-hub/filter/commercial" },
+      { name: "Industrial", href: "/news-hub/filter/industrial" },
+      { name: "Community", href: "/news-hub/filter/community" },
+      { name: "Campaigns", href: "/news-hub/filter/campaigns" },
+      { name: "Marketing", href: "/news-hub/filter/marketing" },
+      { name: "Social Media", href: "/news-hub/filter/social-media" },
+      { name: "Channels", href: "", isHeader: true },
+      { name: "Partnerships", href: "/news-hub/category/partners" },
+      { name: "Case Studies", href: "/news-hub/category/case-studies" },
+      { name: "Insights", href: "/news-hub/category/insights" },
+      { name: "Reviews", href: "/news-hub/category/reviews" },
     ],
   },
   { name: "Contact", href: "/contact" },
@@ -176,8 +186,8 @@ export function NavbarClient() {
 
   const isSubmenuActive = (href: string): boolean => {
     if (!href) return false;
-    const [pathAndQuery, rawHash] = href.split('#');
-    const [rawPath, rawQuery] = pathAndQuery.split('?');
+    const [pathAndQuery, rawHash] = href.split("#");
+    const [rawPath, rawQuery] = pathAndQuery.split("?");
     const currentPath = normalizePath(pathname);
     const targetPath = normalizePath(rawPath || "/");
     if (rawQuery) {
@@ -227,8 +237,8 @@ export function NavbarClient() {
 
   const getAriaCurrent = (href: string): "page" | "location" | undefined => {
     if (!href) return undefined;
-    const [pathAndQuery, rawHash] = href.split('#');
-    const [rawPath, rawQuery] = pathAndQuery.split('?');
+    const [pathAndQuery, rawHash] = href.split("#");
+    const [rawPath, rawQuery] = pathAndQuery.split("?");
     const currentPath = normalizePath(pathname);
     const targetPath = normalizePath(rawPath || "/");
     if (rawQuery) {
@@ -318,7 +328,9 @@ export function NavbarClient() {
                   const topLevelActive =
                     isTopLevelActive(link.href, Boolean(link.submenu)) ||
                     Boolean(
-                      link.submenu?.some((item) => !item.isHeader && isSubmenuActive(item.href)),
+                      link.submenu?.some(
+                        (item) => !item.isHeader && isSubmenuActive(item.href),
+                      ),
                     );
 
                   return (
@@ -373,8 +385,11 @@ export function NavbarClient() {
                                 {link.submenu.map((item) => {
                                   if (item.isHeader) {
                                     return (
-                                      <div key={item.name} aria-hidden="true"
-                                        className="pl-6 xs:pl-8 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/50 font-semibold">
+                                      <div
+                                        key={item.name}
+                                        aria-hidden="true"
+                                        className="pl-6 xs:pl-8 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/50 font-semibold"
+                                      >
                                         {item.name}
                                       </div>
                                     );

@@ -30,17 +30,42 @@ export const industrialPageData: ServicePageData = {
     scrollTargetId: "systems",
     scrollLabel: "Our Capabilities",
     backgroundImage: {
-      src: "/images/services-industrial.jpg",
+      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
       alt: "Industrial electrical systems",
       priority: true,
     },
     trustIndicators: [
-      { icon: "Zap" as const, title: "HV-LV Specialists", description: "High and low voltage design-build for industrial environments" },
-      { icon: "Shield" as const, title: "ATEX Compliant", description: "Explosion-protected installations for hazardous area projects" },
-      { icon: "Award" as const, title: "Fully Accredited", description: "NICEIC certified for heavy industrial electrical installation" },
-      { icon: "Settings" as const, title: "Custom Engineering", description: "Bespoke designs for complex manufacturing and process plants" },
+      {
+        icon: "Zap" as const,
+        title: "HV-LV Specialists",
+        description:
+          "High and low voltage design-build for industrial environments",
+      },
+      {
+        icon: "Shield" as const,
+        title: "ATEX Compliant",
+        description:
+          "Explosion-protected installations for hazardous area projects",
+      },
+      {
+        icon: "Award" as const,
+        title: "Fully Accredited",
+        description:
+          "NICEIC certified for heavy industrial electrical installation",
+      },
+      {
+        icon: "Settings" as const,
+        title: "Custom Engineering",
+        description:
+          "Bespoke designs for complex manufacturing and process plants",
+      },
     ],
-    metadata: ["NICEIC Approved", "HV-LV Certified", "ATEX Capable", "200+ Industrial Sites"],
+    metadata: [
+      "NICEIC Approved",
+      "HV-LV Certified",
+      "ATEX Capable",
+      "200+ Industrial Sites",
+    ],
   },
   intro: {
     sectionId: "our-expertise",
