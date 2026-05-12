@@ -154,6 +154,10 @@ export interface SectionProfileData {
   reversed?: boolean;
   /** CTA button */
   cta?: CTAData;
+  /** Highlight items rendered as icon+title+description grid below bio */
+  highlights?: { icon: IconName; title: string; description: string }[];
+  /** Image aspect ratio — defaults to portrait (3/4) for About page compat */
+  imageAspect?: 'portrait' | 'landscape';
 }
 
 // =============================================================================
@@ -265,7 +269,7 @@ export interface SectionCTAData {
 // PAGE DATA STRUCTURES
 // =============================================================================
 
-export type SectionType = 'hero' | 'intro' | 'profile' | 'features' | 'values' | 'cta';
+export type SectionType = 'hero' | 'intro' | 'profile' | 'features' | 'values' | 'cta' | 'features-animated' | 'live-dashboard';
 
 export interface PageSection {
   type: SectionType;

@@ -29,17 +29,42 @@ export const residentialPageData: ServicePageData = {
     scrollTargetId: "electrical",
     scrollLabel: "Our Services",
     backgroundImage: {
-      src: "/images/smart-living-interior.jpg",
+      src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-front-elevation-night-lighting.jpg",
       alt: "Modern residential electrical installation",
       priority: true,
     },
     trustIndicators: [
-      { icon: "Home" as const, title: "Domestic Specialists", description: "Full rewires, consumer units, EV chargers and smart installs" },
-      { icon: "CheckCircle" as const, title: "Part P Certified", description: "All residential work registered and certified with council" },
-      { icon: "Shield" as const, title: "5-Year Guarantee", description: "Workmanship guarantee on all domestic electrical installations" },
-      { icon: "Lightbulb" as const, title: "Smart Home Ready", description: "Future-ready wiring for home automation and energy management" },
+      {
+        icon: "Home" as const,
+        title: "Domestic Specialists",
+        description:
+          "Full rewires, consumer units, EV chargers and smart installs",
+      },
+      {
+        icon: "CheckCircle" as const,
+        title: "Part P Certified",
+        description:
+          "All residential work registered and certified with council",
+      },
+      {
+        icon: "Shield" as const,
+        title: "5-Year Guarantee",
+        description:
+          "Workmanship guarantee on all domestic electrical installations",
+      },
+      {
+        icon: "Lightbulb" as const,
+        title: "Smart Home Ready",
+        description:
+          "Future-ready wiring for home automation and energy management",
+      },
     ],
-    metadata: ["NICEIC Approved", "Part P Certified", "EV Certified", "1200+ Homes"],
+    metadata: [
+      "NICEIC Approved",
+      "Part P Certified",
+      "EV Certified",
+      "1200+ Homes",
+    ],
   },
   intro: {
     sectionId: "our-promise",
@@ -92,10 +117,33 @@ export const residentialPageData: ServicePageData = {
           "Part P Certified",
         ],
         image: {
-          src: "/images/smart-living-interior.jpg",
-          alt: "Modern residential electrical installation",
+          src: "/images/projects/residential/domestic-installations/nexgen-taplow-completed-installation.jpg",
+          alt: "Taplow completed residential electrical installation",
           priority: true,
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'CheckCircle' as const,
+            title: 'Full House Rewires',
+            description: 'Complete rewires from studio flats to 5-bedroom homes, clean and efficient with minimal disruption to daily life',
+          },
+          {
+            icon: 'Shield' as const,
+            title: 'Consumer Unit Upgrades',
+            description: 'Replacement consumer units with RCBO protection on every circuit, tested and certified to BS 7671 18th Edition',
+          },
+          {
+            icon: 'Award' as const,
+            title: 'Part P Notification',
+            description: 'Every installation formally notified to local building control with completion certificate issued same day',
+          },
+          {
+            icon: 'Wrench' as const,
+            title: 'Extensions and New Builds',
+            description: 'First and second fix wiring for extensions, loft conversions, garages, and new build residential developments',
+          },
+        ],
         cta: { label: "Get a Quote", href: "/contact" },
         reversed: false,
       },
@@ -120,9 +168,32 @@ export const residentialPageData: ServicePageData = {
           "Voice Control",
         ],
         image: {
-          src: "/images/smart-living-interior.jpg",
-          alt: "Smart home control panel and EV charger",
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg",
+          alt: "Calcot Park Nest thermostat smart home heating installation",
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Zap' as const,
+            title: 'EV Charge Point Installation',
+            description: 'OZEV-approved tethered and untethered charge point installations with smart scheduling and load balancing',
+          },
+          {
+            icon: 'Lightbulb' as const,
+            title: 'Smart Lighting Systems',
+            description: 'Philips Hue, Lutron, and bespoke DALI systems — from single-room scenes to whole-home intelligent lighting',
+          },
+          {
+            icon: 'Home' as const,
+            title: 'Home Automation',
+            description: 'KNX, Control4, and Apple HomeKit ecosystems wired and commissioned by certified smart home engineers',
+          },
+          {
+            icon: 'Shield' as const,
+            title: 'Solar-Ready Consumer Units',
+            description: 'Future-proofed boards with PV isolator space, battery storage circuit, and generation metering provision',
+          },
+        ],
         cta: { label: "Upgrade Your Home", href: "/contact" },
         reversed: true,
       },

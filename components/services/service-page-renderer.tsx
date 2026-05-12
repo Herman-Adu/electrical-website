@@ -4,6 +4,8 @@ import React from 'react';
 import { ServicePageHero } from './service-page-hero';
 import { SectionProfile, SectionFeatures, SectionValues, SectionIntro, SectionCTA, ContentBreadcrumb } from '@/components/shared';
 import { Footer } from '@/components/sections/footer';
+import { Features } from '@/components/sections/features';
+import { Dashboard } from '@/components/sections/dashboard';
 import type { ServicePageData, PageSection, SectionProfileData, SectionFeaturesData, SectionValuesData, SectionIntroData, SectionCTAData } from '@/types/sections';
 
 interface ServicePageRendererProps {
@@ -22,6 +24,10 @@ function renderSection(section: PageSection, index: number) {
       return <SectionIntro key={index} data={section.data as SectionIntroData} />;
     case 'cta':
       return <SectionCTA key={index} data={section.data as SectionCTAData} />;
+    case 'features-animated':
+      return <Features key={index} />;
+    case 'live-dashboard':
+      return <Dashboard key={index} />;
     default:
       return null;
   }

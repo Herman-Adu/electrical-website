@@ -29,17 +29,43 @@ export const commercialPageData: ServicePageData = {
     scrollTargetId: "installations",
     scrollLabel: "Our Services",
     backgroundImage: {
-      src: "/images/services-commercial.jpg",
+      //src: "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-news-hero.jpeg",
+      src: "/images/projects/commercial/herschel-grammar/sports-hall-upgrade/commercial-lighting-hero-v2.JPG",
       alt: "Commercial electrical installation",
       priority: true,
     },
     trustIndicators: [
-      { icon: "Building2" as const, title: "Commercial Specialists", description: "Electrical experts across warehouses, retail, offices and schools" },
-      { icon: "Award" as const, title: "NICEIC Certified", description: "Fully accredited delivery on every commercial installation" },
-      { icon: "Shield" as const, title: "CDM Compliant", description: "All commercial installations meet HSE and CDM requirements" },
-      { icon: "Wrench" as const, title: "Design and Build", description: "From initial design through to test, commission and handover" },
+      {
+        icon: "Building2" as const,
+        title: "Commercial Specialists",
+        description:
+          "Electrical experts across warehouses, retail, offices and schools",
+      },
+      {
+        icon: "Award" as const,
+        title: "NICEIC Certified",
+        description:
+          "Fully accredited delivery on every commercial installation",
+      },
+      {
+        icon: "Shield" as const,
+        title: "CDM Compliant",
+        description:
+          "All commercial installations meet HSE and CDM requirements",
+      },
+      {
+        icon: "Wrench" as const,
+        title: "Design and Build",
+        description:
+          "From initial design through to test, commission and handover",
+      },
     ],
-    metadata: ["NICEIC Approved", "BS 7671 Compliant", "CDM Ready", "500+ Commercial Sites"],
+    metadata: [
+      "NICEIC Approved",
+      "BS 7671 Compliant",
+      "CDM Ready",
+      "500+ Commercial Sites",
+    ],
   },
   intro: {
     sectionId: "our-approach",
@@ -99,10 +125,33 @@ export const commercialPageData: ServicePageData = {
           "Full Compliance",
         ],
         image: {
-          src: "/images/services-commercial.jpg",
-          alt: "Commercial electrical installation in progress",
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
+          alt: "DHL Reading completed operational facility",
           priority: true,
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Building2' as const,
+            title: 'Design and Build Delivery',
+            description: 'Single-point responsibility from concept through commissioning, eliminating coordination risk on complex projects',
+          },
+          {
+            icon: 'Shield' as const,
+            title: 'CDM Principal Contractor',
+            description: 'Full principal contractor and designer roles under CDM 2015 for all notifiable commercial projects',
+          },
+          {
+            icon: 'Clock' as const,
+            title: 'Programme Certainty',
+            description: 'Dedicated project managers and phased delivery plans that protect your fit-out programme and handover date',
+          },
+          {
+            icon: 'Award' as const,
+            title: 'NICEIC Certification',
+            description: 'Every installation certified to BS 7671 18th Edition with full documentation pack for insurers and landlords',
+          },
+        ],
         cta: { label: "Request a Quote", href: "/contact" },
         reversed: false,
       },
@@ -127,9 +176,32 @@ export const commercialPageData: ServicePageData = {
           "Energy Savings",
         ],
         image: {
-          src: "/images/warehouse-lighting.jpg",
-          alt: "Modern commercial LED lighting installation",
+          src: "/images/projects/commercial/herschel-grammar/sports-hall-upgrade/commercial-lighting-hero-v2.JPG",
+          alt: "Herschel Grammar sports hall commercial lighting upgrade",
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Zap' as const,
+            title: 'LED Retrofit and Design',
+            description: 'Up to 70% energy reduction through specification-grade LED luminaires, drivers, and scene-setting controls',
+          },
+          {
+            icon: 'Settings' as const,
+            title: 'DALI-2 Smart Controls',
+            description: 'DALI-2 addressable systems with presence detection, daylight harvesting, scene scheduling, and BMS integration',
+          },
+          {
+            icon: 'Gauge' as const,
+            title: 'BS EN 12464-1 Compliance',
+            description: 'All designs achieve workplace lux levels with correct uniformity ratios for task areas and circulation zones',
+          },
+          {
+            icon: 'ClipboardCheck' as const,
+            title: 'Emergency Lighting',
+            description: 'Self-test emergency luminaires with central monitoring and full BS 5266 compliance documentation',
+          },
+        ],
         cta: { label: "Explore Lighting", href: "/contact" },
         reversed: true,
       },
@@ -154,9 +226,32 @@ export const commercialPageData: ServicePageData = {
           "10-Year Support",
         ],
         image: {
-          src: "/images/services-data-comms.jpg",
-          alt: "Structured cabling and network infrastructure",
+          src: "/images/projects/commercial/medivet/nexgen-medivet-watford-electrical-distribution-board.jpg",
+          alt: "Medivet Watford electrical distribution board",
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Award' as const,
+            title: 'Cat6A Structured Cabling',
+            description: 'End-to-end Cat6A and fibre installations certified to ISO/IEC 11801 with channel test reports included',
+          },
+          {
+            icon: 'Settings' as const,
+            title: 'Server Room Fit-Out',
+            description: 'Rack systems, PDUs, containment, and dedicated UPS circuits for critical IT and data centre infrastructure',
+          },
+          {
+            icon: 'Shield' as const,
+            title: '10-Year Channel Warranty',
+            description: 'Manufacturer-backed 10-year system warranties covering both cable plant and connectivity components',
+          },
+          {
+            icon: 'Wrench' as const,
+            title: 'AV and Access Control',
+            description: 'Integrated containment for door access, CCTV, PA, and AV systems alongside structured data cabling',
+          },
+        ],
         cta: { label: "Plan Your Network", href: "/contact" },
         reversed: false,
       },
