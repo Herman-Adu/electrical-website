@@ -1,6 +1,6 @@
 {
-  "branch": "main",
-  "entity": "nexgen-electrical-innovations-state",
-  "fallback": "55280df feat: per-project intro section on all project detail pages (#161) | c233c77 fix: relax TOC sticky assertion for residential article sticky-bottom mode (#160) | a85f352 chore: post-merge cleanup — active-branch → main, clear CLAUDE.md fallback after PR #158 (#159)",
-  "updatedAt": "2026-05-12T13:34:04.927Z"
+  "branch": "feat/services-profile-enrichment",
+  "entity": "feat-services-profile-enrichment",
+  "fallback": "99ff349 feat: services profile enrichment — real project images rich highlights industrial features+dashboard (#163) | a409cf9 feat: services data hero images and navbar updates (WIP baseline) | 73c232d docs: services profile enrichment — spec, plan, and session handoff prompt",
+  "updatedAt": "2026-05-12T18:41:10.164Z"
 }
