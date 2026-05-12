@@ -100,7 +100,6 @@ export const industrialPageData: ServicePageData = {
   },
   sections: [
     { type: 'features-animated' as const, data: {} as never },
-    { type: 'live-dashboard' as const, data: {} as never },
     {
       type: "profile",
       data: {
@@ -310,6 +309,7 @@ export const industrialPageData: ServicePageData = {
         background: "dark",
       },
     },
+    { type: 'live-dashboard' as const, data: {} as never },
     {
       type: "features",
       data: {

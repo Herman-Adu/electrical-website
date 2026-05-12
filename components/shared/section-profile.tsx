@@ -97,7 +97,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
 
       <div className="section-content relative z-10">
         <div
-          className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 lg:gap-20 items-center md:items-stretch`}
+          className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 lg:gap-20 items-center`}
         >
           <motion.div
             initial={{ opacity: 0, x: imageInitialX }}
@@ -106,7 +106,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
             viewport={{ once: true, margin: "-80px" }}
             className="w-full md:w-5/12 shrink-0"
           >
-            <div className="relative p-2 md:h-full md:flex md:flex-col">
+            <div className="relative p-2">
               <div className="absolute -inset-6 border border-[--electric-cyan]/08 rounded-3xl" />
 
               <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-tl-xl z-10 p2" />
@@ -114,7 +114,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
               <div className="absolute -bottom-1 -left-1 w-8 h-8 border-b-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-bl-xl z-10" />
               <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-br-xl z-10" />
 
-              <div className={`relative w-full ${imageAspect === 'landscape' ? 'aspect-4/3' : 'aspect-3/4'} md:aspect-auto md:flex-1 rounded-xl overflow-hidden`}>
+              <div className={`relative w-full ${imageAspect === 'landscape' ? 'aspect-4/3' : 'aspect-3/4'} rounded-xl overflow-hidden`}>
                 <motion.div
                   className="absolute inset-0 w-full h-[115%]"
                   style={{ filter: brightnessFilter }}
@@ -239,40 +239,45 @@ export function SectionProfile({ data }: SectionProfileProps) {
                 </motion.p>
               ))}
             </div>
+          </div>
+        </div>
 
-            {highlights && highlights.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true, margin: "-80px" }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
-              >
-                {highlights.map((item) => {
-                  const Icon = iconMap[item.icon];
-                  return (
-                    <div key={item.title} className="flex gap-3 p-4 rounded-lg bg-card/30 border border-border/30">
-                      <div className="shrink-0 mt-0.5">
-                        <Icon size={18} className="text-[hsl(174_100%_35%)] dark:text-electric-cyan" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground mb-1">{item.title}</p>
-                        <p className="text-xs text-foreground/60 leading-relaxed">{item.description}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </motion.div>
-            )}
+        {highlights && highlights.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12"
+          >
+            {highlights.map((item) => {
+              const Icon = iconMap[item.icon];
+              return (
+                <div key={item.title} className="flex gap-3 p-4 rounded-lg bg-card/30 border border-border/30">
+                  <div className="shrink-0 mt-0.5">
+                    <Icon size={18} className="text-[hsl(174_100%_35%)] dark:text-electric-cyan" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground mb-1">{item.title}</p>
+                    <p className="text-xs text-foreground/60 leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
+        )}
 
+        {(quote || cta) && (
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             {quote && (
               <motion.div
-                initial={{ opacity: 0, x: textInitialX * 0.4 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.45 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true, margin: "-80px" }}
+                className="flex-1"
               >
-                <blockquote className="border-l-4 border-[hsl(174_100%_35%)] dark:border-electric-cyan pl-5 py-2 mb-8">
+                <blockquote className="border-l-4 border-[hsl(174_100%_35%)] dark:border-electric-cyan pl-5 py-2">
                   <p className="text-foreground/80 italic leading-relaxed">{quote}</p>
                   {data.quoteAttribution && (
                     <footer className="mt-2 text-xs font-mono text-foreground/50">— {data.quoteAttribution}</footer>
@@ -280,13 +285,13 @@ export function SectionProfile({ data }: SectionProfileProps) {
                 </blockquote>
               </motion.div>
             )}
-
             {cta && (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
                 viewport={{ once: true, margin: "-80px" }}
+                className="shrink-0"
               >
                 <a
                   href={cta.href}
@@ -299,7 +304,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
               </motion.div>
             )}
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

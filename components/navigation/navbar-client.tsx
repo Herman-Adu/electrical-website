@@ -32,9 +32,7 @@ const navLinks: NavLink[] = [
     submenu: [
       { name: "Services", href: "/#services" },
       { name: "Illumination", href: "/#illumination" },
-      { name: "Features", href: "/#features" },
       { name: "Architecture", href: "/#architecture" },
-      { name: "Dashboard", href: "/#dashboard" },
       { name: "Smart Living", href: "/#smart-living" },
       { name: "Power Your Vision", href: "/#power-vision" },
     ],
