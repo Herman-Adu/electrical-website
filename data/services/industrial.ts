@@ -99,6 +99,8 @@ export const industrialPageData: ServicePageData = {
     ],
   },
   sections: [
+    { type: 'features-animated' as const, data: {} as never },
+    { type: 'live-dashboard' as const, data: {} as never },
     {
       type: "profile",
       data: {
@@ -119,10 +121,33 @@ export const industrialPageData: ServicePageData = {
           "ATEX Certified",
         ],
         image: {
-          src: "/images/services-industrial.jpg",
-          alt: "Industrial electrical control panel installation",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
+          alt: "Harvey Nichols plant room installation",
           priority: true,
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Zap' as const,
+            title: 'Motor Control Systems',
+            description: 'Full integration of motor control centres, star-delta starters, and variable speed drives for heavy industrial loads',
+          },
+          {
+            icon: 'Settings' as const,
+            title: 'PLC and Automation Integration',
+            description: 'Seamless integration with SCADA and PLC systems to automate processes and enable remote monitoring',
+          },
+          {
+            icon: 'Shield' as const,
+            title: 'ATEX-Rated Installations',
+            description: 'Explosion-protected equipment and cabling for hazardous areas compliant with ATEX Zone 1 and Zone 2 classifications',
+          },
+          {
+            icon: 'ClipboardCheck' as const,
+            title: 'Full Documentation Pack',
+            description: 'As-built drawings, test certificates, O&M manuals, and BS 7671 certification delivered on every project',
+          },
+        ],
         cta: { label: "Discuss Your Project", href: "/contact" },
         reversed: false,
       },
@@ -147,9 +172,32 @@ export const industrialPageData: ServicePageData = {
           "Power Factor Correction",
         ],
         image: {
-          src: "/images/power-distribution.jpg",
-          alt: "High voltage switchgear and power distribution",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-control-panel.jpg",
+          alt: "Harvey Nichols chiller control panel",
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Zap' as const,
+            title: '11kV to LV Design',
+            description: 'Complete design and installation from primary HV substations through transformers to final circuit distribution boards',
+          },
+          {
+            icon: 'Settings' as const,
+            title: 'Switchgear and Busbar Systems',
+            description: 'Type-tested switchgear assemblies, busbar trunking, and sub-main panels installed to BS EN 61439',
+          },
+          {
+            icon: 'Gauge' as const,
+            title: 'Power Factor Correction',
+            description: 'Automatic power factor correction that reduces reactive power charges and improves site grid stability',
+          },
+          {
+            icon: 'Award' as const,
+            title: 'Sub-Metering Networks',
+            description: 'Multi-point sub-metering for granular energy visibility at machine, zone, or departmental level',
+          },
+        ],
         cta: { label: "Plan Your Distribution", href: "/contact" },
         reversed: true,
       },
@@ -174,9 +222,32 @@ export const industrialPageData: ServicePageData = {
           "Sustainability",
         ],
         image: {
-          src: "/images/services-energy.jpg",
-          alt: "Energy management system dashboard and analytics",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-vfd-pump-controller.jpg",
+          alt: "Harvey Nichols VFD pump controller",
         },
+        imageAspect: 'landscape' as const,
+        highlights: [
+          {
+            icon: 'Activity' as const,
+            title: 'SCADA Integration',
+            description: 'Real-time energy data aggregated into SCADA dashboards for site-wide operational visibility and control',
+          },
+          {
+            icon: 'Gauge' as const,
+            title: 'Demand Management Systems',
+            description: 'Automated load shedding and demand management that prevents peak charges and smooths load profiles',
+          },
+          {
+            icon: 'Award' as const,
+            title: 'ISO 50001 Alignment',
+            description: 'Monitoring systems and reporting structured to support your ISO 50001 energy management certification',
+          },
+          {
+            icon: 'Shield' as const,
+            title: 'Sustainability Reporting',
+            description: 'Carbon tracking, Scope 2 emissions reporting, and net-zero roadmap support built into every energy project',
+          },
+        ],
         cta: { label: "Optimize Your Energy", href: "/contact" },
         reversed: false,
       },

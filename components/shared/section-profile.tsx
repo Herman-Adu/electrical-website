@@ -22,7 +22,9 @@ import {
   Facebook,
   Instagram,
   Youtube,
+  ArrowRight,
 } from "lucide-react";
+import { iconMap } from "@/components/shared/icon-map";
 import type { SectionProfileData } from "@/types/sections";
 
 const socialIcons = {
@@ -49,6 +51,10 @@ export function SectionProfile({ data }: SectionProfileProps) {
     image,
     socialLinks = [],
     reversed = false,
+    quote,
+    cta,
+    highlights,
+    imageAspect,
   } = data;
 
   const shouldReduce = useReducedMotion();
@@ -108,7 +114,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
               <div className="absolute -bottom-1 -left-1 w-8 h-8 border-b-2 border-l-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-bl-xl z-10" />
               <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-[hsl(174_100%_35%)] dark:border-electric-cyan/60 rounded-br-xl z-10" />
 
-              <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden">
+              <div className={`relative w-full ${imageAspect === 'landscape' ? 'aspect-4/3' : 'aspect-3/4'} rounded-xl overflow-hidden`}>
                 <motion.div
                   className="absolute inset-0 w-full h-[115%]"
                   style={{ filter: brightnessFilter }}
@@ -233,6 +239,65 @@ export function SectionProfile({ data }: SectionProfileProps) {
                 </motion.p>
               ))}
             </div>
+
+            {highlights && highlights.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true, margin: "-80px" }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+              >
+                {highlights.map((item) => {
+                  const Icon = iconMap[item.icon];
+                  return (
+                    <div key={item.title} className="flex gap-3 p-4 rounded-lg bg-card/30 border border-border/30">
+                      <div className="shrink-0 mt-0.5">
+                        <Icon size={18} className="text-[hsl(174_100%_35%)] dark:text-electric-cyan" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground mb-1">{item.title}</p>
+                        <p className="text-xs text-foreground/60 leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </motion.div>
+            )}
+
+            {quote && (
+              <motion.div
+                initial={{ opacity: 0, x: textInitialX * 0.4 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                viewport={{ once: true, margin: "-80px" }}
+              >
+                <blockquote className="border-l-4 border-[hsl(174_100%_35%)] dark:border-electric-cyan pl-5 py-2 mb-8">
+                  <p className="text-foreground/80 italic leading-relaxed">{quote}</p>
+                  {data.quoteAttribution && (
+                    <footer className="mt-2 text-xs font-mono text-foreground/50">— {data.quoteAttribution}</footer>
+                  )}
+                </blockquote>
+              </motion.div>
+            )}
+
+            {cta && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                viewport={{ once: true, margin: "-80px" }}
+              >
+                <a
+                  href={cta.href}
+                  {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(174_100%_35%)] dark:text-electric-cyan hover:underline"
+                >
+                  {cta.label}
+                  <ArrowRight size={14} />
+                </a>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

@@ -3,9 +3,7 @@ import { Hero } from "@/components/hero";
 import { createPageMetadata } from "@/lib/metadata";
 import {
   Services,
-  Features,
   Schematic,
-  Dashboard,
   Illumination,
   SmartLiving,
   CTAPower,
@@ -46,14 +44,8 @@ export default function Home() {
       {/* Illumination Reveal - Industrial Showcase */}
       <Illumination />
 
-      {/* Animated Feature Cards */}
-      <Features />
-
       {/* Schematic Architecture Section */}
       <Schematic />
-
-      {/* Live Dashboard with metrics */}
-      <Dashboard />
 
       {/* Smart Living - Residential Showcase */}
       <SmartLiving />
