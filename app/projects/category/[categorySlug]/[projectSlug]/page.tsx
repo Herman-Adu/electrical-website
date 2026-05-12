@@ -18,7 +18,11 @@ import {
   ProjectSocialCTA,
   ProjectSupplementalSection,
 } from "@/components/projects";
-import { ContentToc, ContentBreadcrumb, SectionIntro } from "@/components/shared";
+import {
+  ContentToc,
+  ContentBreadcrumb,
+  SectionIntro,
+} from "@/components/shared";
 import { ReadingProgressBar } from "@/components/news-hub/detail";
 import { Footer } from "@/components/sections/footer";
 import { siteConfig } from "@/lib/site-config";
@@ -115,7 +119,9 @@ function generateTocItems(
 
   if (detail?.challenge && detail?.solution) {
     const narrativeChildren: TocItem[] = (detail?.narrativeBlocks ?? [])
-      .filter((b) => b.position === "after-challenge" && b.anchorId && b.heading)
+      .filter(
+        (b) => b.position === "after-challenge" && b.anchorId && b.heading,
+      )
       .map((b) => ({ id: b.anchorId!, label: b.heading! }));
     items.push({
       id: "challenge",
@@ -253,13 +259,13 @@ export default async function CategoryProjectDetailPage({
         section="projects"
       />
 
-      <SectionIntro
+      {/* <SectionIntro
         data={
           project.detail?.intro
             ? { sectionId: "project-intro", ...project.detail.intro }
             : projectDetailIntroData
         }
-      />
+      /> */}
 
       {/* Main Content with Sticky Sidebar */}
       <section

@@ -8,6 +8,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useCyclingText } from "@/lib/hooks/use-cycling-text";
 import {
   Activity,
+  Building2,
   ChevronDown,
   Factory,
   FolderOpen,
@@ -38,10 +39,26 @@ const categoryConfig: Record<
     icon: <Home className="h-8 w-8 text-electric-cyan" />,
     headline: ["RESIDENTIAL", "SMART LIVING"],
     trustIndicators: [
-      { icon: "Home",   title: "Smart Living",     description: "Domestic installations and smart home systems" },
-      { icon: "Zap",    title: "EV Charging",      description: "Home and workplace EV solutions" },
-      { icon: "Shield", title: "NICEIC Certified", description: "Fully accredited domestic electricians" },
-      { icon: "Clock",  title: "24-7 Support",     description: "Around-the-clock emergency cover" },
+      {
+        icon: "Home",
+        title: "Smart Living",
+        description: "Domestic installations and smart home systems",
+      },
+      {
+        icon: "Zap",
+        title: "EV Charging",
+        description: "Home and workplace EV solutions",
+      },
+      {
+        icon: "Shield",
+        title: "NICEIC Certified",
+        description: "Fully accredited domestic electricians",
+      },
+      {
+        icon: "Clock",
+        title: "24-7 Support",
+        description: "Around-the-clock emergency cover",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   industrial: {
@@ -49,54 +66,165 @@ const categoryConfig: Record<
     icon: <Factory className="h-8 w-8 text-electric-cyan" />,
     headline: ["INDUSTRIAL", "POWER SYSTEMS"],
     trustIndicators: [
-      { icon: "Factory",  title: "Industrial Grade",     description: "Heavy-duty industrial installations" },
-      { icon: "Settings", title: "Maintenance Plans",    description: "Scheduled and reactive maintenance" },
-      { icon: "Zap",      title: "Power Infrastructure", description: "High-voltage and distribution systems" },
-      { icon: "Shield",   title: "Safety Certified",     description: "Full health and safety compliance" },
+      {
+        icon: "Factory",
+        title: "Industrial Grade",
+        description: "Heavy-duty industrial installations",
+      },
+      {
+        icon: "Settings",
+        title: "Maintenance Plans",
+        description: "Scheduled and reactive maintenance",
+      },
+      {
+        icon: "Zap",
+        title: "Power Infrastructure",
+        description: "High-voltage and distribution systems",
+      },
+      {
+        icon: "Shield",
+        title: "Safety Certified",
+        description: "Full health and safety compliance",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   partners: {
-    image: "/images/community-hero.jpg",
+    image: "/images/projects/view-professional-handshake-business-people.jpg",
     icon: <Handshake className="h-8 w-8 text-electric-cyan" />,
     headline: ["STRATEGIC", "PARTNER", "NETWORK"],
     trustIndicators: [
-      { icon: "Users",          title: "Strategic Partners", description: "Long-term framework agreements" },
-      { icon: "Award",          title: "Accredited Network", description: "Pre-approved and vetted contractors" },
-      { icon: "Building2",      title: "Multi-sector",       description: "Across residential, commercial and industrial" },
-      { icon: "ClipboardCheck", title: "Due Diligence",      description: "Fully vetted partner relationships" },
+      {
+        icon: "Users",
+        title: "Strategic Partners",
+        description: "Long-term framework agreements",
+      },
+      {
+        icon: "Award",
+        title: "Accredited Network",
+        description: "Pre-approved and vetted contractors",
+      },
+      {
+        icon: "Building2",
+        title: "Multi-sector",
+        description: "Across residential, commercial and industrial",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Due Diligence",
+        description: "Fully vetted partner relationships",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   "case-studies": {
-    image: "/images/power-distribution.jpg",
+    image:
+      "/images/projects/nexgen-medivet-watford-completed-facility-overview-hero.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
     headline: ["PROVEN", "PROJECT", "OUTCOMES"],
     trustIndicators: [
-      { icon: "Lightbulb",      title: "Real Outcomes",     description: "Documented project results and impact" },
-      { icon: "ClipboardCheck", title: "Verified Projects", description: "Every case study independently verified" },
-      { icon: "Building2",      title: "Multi-sector",      description: "Spanning commercial, industrial and community" },
-      { icon: "Activity",       title: "Live Results",      description: "Up-to-date with completed project data" },
+      {
+        icon: "Lightbulb",
+        title: "Real Outcomes",
+        description: "Documented project results and impact",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Verified Projects",
+        description: "Every case study independently verified",
+      },
+      {
+        icon: "Building2",
+        title: "Multi-sector",
+        description: "Spanning commercial, industrial and community",
+      },
+      {
+        icon: "Activity",
+        title: "Live Results",
+        description: "Up-to-date with completed project data",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   insights: {
-    image: "/images/system-diagnostics.jpg",
+    image:
+      "/images/projects/commercial/dhl/nexgen-dhl-reading-schneider-conveyor-control-panels.jpg",
     icon: <Lightbulb className="h-8 w-8 text-electric-cyan" />,
-    headline: ["ELECTRICAL", "MARKET", "INTELLIGENCE"],
+    headline: ["ELECTRICAL", "MARKET INTELLIGENCE"],
     trustIndicators: [
-      { icon: "BookOpen",  title: "Market Intelligence", description: "In-depth sector analysis and trends" },
-      { icon: "Activity",  title: "Industry Updates",    description: "Latest news from the electrical sector" },
-      { icon: "Lightbulb", title: "Strategic Insights",  description: "Expert commentary and analysis" },
-      { icon: "Users",     title: "Sector Coverage",     description: "Residential, commercial and industrial" },
+      {
+        icon: "BookOpen",
+        title: "Market Intelligence",
+        description: "In-depth sector analysis and trends",
+      },
+      {
+        icon: "Activity",
+        title: "Industry Updates",
+        description: "Latest news from the electrical sector",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Strategic Insights",
+        description: "Expert commentary and analysis",
+      },
+      {
+        icon: "Users",
+        title: "Sector Coverage",
+        description: "Residential, commercial and industrial",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
   reviews: {
-    image: "/images/warehouse-lighting.jpg",
+    image:
+      "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-first-fix-complete.jpg",
     icon: <MessageSquareQuote className="h-8 w-8 text-electric-cyan" />,
     headline: ["CLIENT", "STORIES &", "REVIEWS"],
     trustIndicators: [
-      { icon: "Star",     title: "Client Reviews",  description: "Verified testimonials from clients" },
-      { icon: "ThumbsUp", title: "5-Star Service",  description: "Consistently top-rated by customers" },
-      { icon: "Users",    title: "Community Trust", description: "Built through quality and reliability" },
-      { icon: "Heart",    title: "Customer First",  description: "Service excellence at every stage" },
+      {
+        icon: "Star",
+        title: "Client Reviews",
+        description: "Verified testimonials from clients",
+      },
+      {
+        icon: "ThumbsUp",
+        title: "5-Star Service",
+        description: "Consistently top-rated by customers",
+      },
+      {
+        icon: "Users",
+        title: "Community Trust",
+        description: "Built through quality and reliability",
+      },
+      {
+        icon: "Heart",
+        title: "Customer First",
+        description: "Service excellence at every stage",
+      },
+    ] as const satisfies readonly TrustIndicatorItem[],
+  },
+  commercial: {
+    image:
+      "/images/projects/commercial/ladbrokes/nexgen-ladbrokes-woking-lighting-installation.jpg",
+    icon: <Building2 className="h-8 w-8 text-electric-cyan" />,
+    headline: ["COMMERCIAL", "ELECTRICAL", "DELIVERY"],
+    trustIndicators: [
+      {
+        icon: "CheckCircle",
+        title: "Quality Assured",
+        description: "NICEIC certified delivery on every commercial project",
+      },
+      {
+        icon: "Shield",
+        title: "Safe Installation",
+        description: "Strict HSE compliance across all electrical work",
+      },
+      {
+        icon: "Activity",
+        title: "Progress Tracking",
+        description: "Real-time updates from first survey to final sign-off",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Handover",
+        description: "Test certificates and certification packs as standard",
+      },
     ] as const satisfies readonly TrustIndicatorItem[],
   },
 };
@@ -106,10 +234,26 @@ const fallbackConfig = {
   icon: <FolderOpen className="h-8 w-8 text-electric-cyan" />,
   headline: ["EDITORIAL", "COVERAGE"],
   trustIndicators: [
-    { icon: "Shield",   title: "Fully Certified",  description: "NICEIC approved contractor" },
-    { icon: "BookOpen", title: "Expert Editorial", description: "Content verified by specialists" },
-    { icon: "Activity", title: "Live Updates",     description: "Real-time news and updates" },
-    { icon: "Users",    title: "Sector Coverage",  description: "Across all electrical disciplines" },
+    {
+      icon: "Shield",
+      title: "Fully Certified",
+      description: "NICEIC approved contractor",
+    },
+    {
+      icon: "BookOpen",
+      title: "Expert Editorial",
+      description: "Content verified by specialists",
+    },
+    {
+      icon: "Activity",
+      title: "Live Updates",
+      description: "Real-time news and updates",
+    },
+    {
+      icon: "Users",
+      title: "Sector Coverage",
+      description: "Across all electrical disciplines",
+    },
   ] as const satisfies readonly TrustIndicatorItem[],
 };
 
@@ -321,7 +465,10 @@ export function NewsCategoryHero({
           </motion.p>
 
           {/* Trust indicators */}
-          <HeroTrustIndicators items={config.trustIndicators} variant="image-overlay" />
+          <HeroTrustIndicators
+            items={config.trustIndicators}
+            variant="image-overlay"
+          />
 
           {/* Meta */}
           <motion.div

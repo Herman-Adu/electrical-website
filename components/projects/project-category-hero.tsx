@@ -18,48 +18,222 @@ import type { TrustIndicatorItem } from "@/types/sections";
 // Map each category slug to its dedicated hero image and trust indicators
 const categoryConfig: Record<
   string,
-  { image: string; accentWord: string; trustIndicators: readonly TrustIndicatorItem[] }
+  {
+    image: string;
+    accentWord: string;
+    trustIndicators: readonly TrustIndicatorItem[];
+  }
 > = {
   residential: {
-    image: "/images/hero-residential.jpg",
+    image:
+      "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-rear-patio-night-uplighters.jpg",
     accentWord: "Living",
     trustIndicators: [
-      { icon: "Home", title: "Domestic Specialists", description: "Full rewires, consumer units, EV chargers and smart installs" },
-      { icon: "CheckCircle", title: "Part P Certified", description: "All residential work registered and certified with council" },
-      { icon: "Shield", title: "5-Year Guarantee", description: "Workmanship guarantee on every domestic installation" },
-      { icon: "Lightbulb", title: "Smart Home Ready", description: "Future-ready wiring for home automation and EV charging" },
+      {
+        icon: "Home",
+        title: "Domestic Specialists",
+        description:
+          "Full rewires, consumer units, EV chargers and smart installs",
+      },
+      {
+        icon: "CheckCircle",
+        title: "Part P Certified",
+        description:
+          "All residential work registered and certified with council",
+      },
+      {
+        icon: "Shield",
+        title: "5-Year Guarantee",
+        description: "Workmanship guarantee on every domestic installation",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Smart Home Ready",
+        description: "Future-ready wiring for home automation and EV charging",
+      },
     ],
   },
   "commercial-lighting": {
-    image: "/images/hero-commercial-lighting.jpg",
+    image:
+      "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
     accentWord: "Illuminated",
     trustIndicators: [
-      { icon: "Lightbulb", title: "Lighting Specialists", description: "Design-led commercial lighting from fitout to ongoing maintenance" },
-      { icon: "Award", title: "NICEIC Certified", description: "Fully accredited commercial lighting installation and testing" },
-      { icon: "Zap", title: "Energy Efficient", description: "LED and smart lighting upgrades that reduce energy spend" },
-      { icon: "ClipboardCheck", title: "Full Commissioning", description: "All lighting circuits tested, certified and fully documented" },
+      {
+        icon: "Lightbulb",
+        title: "Lighting Specialists",
+        description:
+          "Design-led commercial lighting from fitout to ongoing maintenance",
+      },
+      {
+        icon: "Award",
+        title: "NICEIC Certified",
+        description:
+          "Fully accredited commercial lighting installation and testing",
+      },
+      {
+        icon: "Zap",
+        title: "Energy Efficient",
+        description: "LED and smart lighting upgrades that reduce energy spend",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Commissioning",
+        description:
+          "All lighting circuits tested, certified and fully documented",
+      },
     ],
   },
   "power-boards": {
     image: "/images/hero-power-boards.jpg",
     accentWord: "Powered",
     trustIndicators: [
-      { icon: "Zap", title: "HV-LV Specialists", description: "Main distribution boards from initial design to commissioning" },
-      { icon: "Shield", title: "18th Edition", description: "Every panel built and tested to BS 7671 18th Edition standards" },
-      { icon: "Settings", title: "Custom Build", description: "Bespoke DB and MCC panels for any industrial specification" },
-      { icon: "ClipboardCheck", title: "Full Certification", description: "Complete test certificates on every board installation" },
+      {
+        icon: "Zap",
+        title: "HV-LV Specialists",
+        description:
+          "Main distribution boards from initial design to commissioning",
+      },
+      {
+        icon: "Shield",
+        title: "18th Edition",
+        description:
+          "Every panel built and tested to BS 7671 18th Edition standards",
+      },
+      {
+        icon: "Settings",
+        title: "Custom Build",
+        description:
+          "Bespoke DB and MCC panels for any industrial specification",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Certification",
+        description: "Complete test certificates on every board installation",
+      },
+    ],
+  },
+  commercial: {
+    image:
+      "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
+    accentWord: "Delivered",
+    trustIndicators: [
+      {
+        icon: "CheckCircle",
+        title: "Quality Assured",
+        description:
+          "NICEIC certified, Part P compliant delivery on every project",
+      },
+      {
+        icon: "Shield",
+        title: "Safe Installation",
+        description:
+          "Strict HSE compliance enforced across all electrical work",
+      },
+      {
+        icon: "Activity",
+        title: "Progress Tracking",
+        description: "Real-time updates from first survey to final sign-off",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Complete Handover",
+        description:
+          "Test certificates and certification packs included as standard",
+      },
+    ],
+  },
+  industrial: {
+    image:
+      "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-trane-chiller-bank-staged.jpg",
+    accentWord: "Delivered",
+    trustIndicators: [
+      {
+        icon: "Zap",
+        title: "HV Specialists",
+        description:
+          "High-voltage infrastructure, switchgear and distribution for industrial sites",
+      },
+      {
+        icon: "Shield",
+        title: "HSE Compliant",
+        description:
+          "Strict health and safety standards enforced on every industrial project",
+      },
+      {
+        icon: "Activity",
+        title: "Progress Tracking",
+        description: "Real-time updates from first survey to final sign-off",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Certification",
+        description:
+          "Complete test certificates and handover packs on every installation",
+      },
+    ],
+  },
+  community: {
+    image: "/images/community-hero.jpg",
+    accentWord: "Connected",
+    trustIndicators: [
+      {
+        icon: "Users",
+        title: "Public Sector",
+        description:
+          "Delivering electrical infrastructure for community and public facilities",
+      },
+      {
+        icon: "CheckCircle",
+        title: "Fully Accredited",
+        description:
+          "NICEIC approved contractor for all public and social sector work",
+      },
+      {
+        icon: "Shield",
+        title: "Safe & Compliant",
+        description:
+          "Strict HSE and Part P compliance on every community project",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Handover",
+        description:
+          "Complete documentation and certification packs included as standard",
+      },
     ],
   },
 };
 
-const fallbackConfig: { image: string; accentWord: string; trustIndicators: readonly TrustIndicatorItem[] } = {
+const fallbackConfig: {
+  image: string;
+  accentWord: string;
+  trustIndicators: readonly TrustIndicatorItem[];
+} = {
   image: "",
   accentWord: "Delivered",
   trustIndicators: [
-    { icon: "CheckCircle", title: "Quality Assured", description: "NICEIC certified, Part P compliant delivery on every project" },
-    { icon: "Shield", title: "Safe Installation", description: "Strict HSE compliance enforced across all electrical work" },
-    { icon: "Activity", title: "Progress Tracking", description: "Real-time updates from first survey to final sign-off" },
-    { icon: "ClipboardCheck", title: "Complete Handover", description: "Test certificates and certification packs included as standard" },
+    {
+      icon: "CheckCircle",
+      title: "Quality Assured",
+      description:
+        "NICEIC certified, Part P compliant delivery on every project",
+    },
+    {
+      icon: "Shield",
+      title: "Safe Installation",
+      description: "Strict HSE compliance enforced across all electrical work",
+    },
+    {
+      icon: "Activity",
+      title: "Progress Tracking",
+      description: "Real-time updates from first survey to final sign-off",
+    },
+    {
+      icon: "ClipboardCheck",
+      title: "Complete Handover",
+      description:
+        "Test certificates and certification packs included as standard",
+    },
   ],
 };
 
@@ -85,7 +259,6 @@ const itemVariants: Variants = {
     transition: { type: "spring", damping: 25, stiffness: 120 },
   },
 };
-
 
 export function ProjectCategoryHero({
   category,
@@ -132,7 +305,7 @@ export function ProjectCategoryHero({
               className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/25 to-black/80" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/55 to-black/80" />
             <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
           </>
         ) : (
@@ -235,7 +408,7 @@ export function ProjectCategoryHero({
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-white/80 mb-6 max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-base sm:text-lg text-white mb-6 max-w-2xl mx-auto font-light leading-relaxed"
           >
             {category.description}
           </motion.p>
