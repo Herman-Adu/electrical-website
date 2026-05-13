@@ -57,7 +57,7 @@ if (usePython) {
 }
 
 // Python hook signatures (new)
-const SIGNATURE_CHECKOUT_PY = '# memory-lane-checkout-py — installed by pnpm hooks:install';
+const SIGNATURE_CHECKOUT_PY = '# memory-lane-checkout-v2-py — installed by pnpm hooks:install';
 const SIGNATURE_COMMIT_PY   = '# memory-lane-commit-py — installed by pnpm hooks:install';
 
 // Node.js hook signatures (legacy)
@@ -69,7 +69,7 @@ ${SIGNATURE_CHECKOUT_PY}
 if [ "$3" != "1" ]; then exit 0; fi
 PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
 if [ -z "$PYTHON" ]; then exit 0; fi
-timeout 10 "$PYTHON" "$(git rev-parse --show-toplevel)/scripts/memory_lane_checkout.py" "$1" "$2" "$3" \\
+timeout 10 "$PYTHON" "$(git rev-parse --show-toplevel)/scripts/memory_lane_checkout_v2.py" "$1" "$2" "$3" \\
   >/tmp/memory-lane-checkout.log 2>&1 || true
 exit 0
 `;
@@ -89,7 +89,7 @@ ${SIGNATURE_CHECKOUT}
 # timeout 10: prevents git checkout from blocking >10s if Docker health check is slow
 if [ "$3" != "1" ]; then exit 0; fi
 if ! command -v node >/dev/null 2>&1; then exit 0; fi
-timeout 10 node "$(git rev-parse --show-toplevel)/scripts/memory-lane-activate.mjs" "$1" "$2" "$3" \\
+timeout 10 node "$(git rev-parse --show-toplevel)/scripts/lane-activate-v2.mjs" "$1" "$2" "$3" \\
   >/tmp/memory-lane-activate.log 2>&1 || true
 exit 0
 `;

@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"scripts/memory-lane-stop.mjs\"",
+            "command": "node \"scripts/lane-stop-v2.mjs\"",
             "timeout": 15
           }
         ]
