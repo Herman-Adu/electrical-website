@@ -31,8 +31,8 @@ describe('emergency page data — SectionProfileData entries', () => {
     .filter((s) => s.type === 'profile')
     .map((s) => s.data as SectionProfileData);
 
-  it('has exactly 3 profile sections', () => {
-    expect(profileSections.length).toBe(3);
+  it('has exactly 4 profile sections', () => {
+    expect(profileSections.length).toBe(4);
   });
 
   it('profile sections cover residential, commercial, and industrial domains', () => {

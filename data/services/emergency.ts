@@ -138,8 +138,8 @@ export const emergencyPageData: ServicePageData = {
           "When your home goes dark, you need someone who responds fast and gets it right the first time.",
         quoteAttribution: "NexGen Emergency Response Team",
         image: {
-          src: "/images/services/emergency/nexgen-emergency-electrician-residential-street-response.jpg",
-          alt: "NexGen emergency electrician arriving beside branded company van at residential property for urgent home electrical fault callout",
+          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-rear-patio-night-uplighters.jpg",
+          alt: "NexGen residential electrical installation — external patio night uplighting at Calcot Park Golf Club",
           priority: false,
         },
         imageAspect: "landscape" as const,
@@ -194,8 +194,8 @@ export const emergencyPageData: ServicePageData = {
           "A power failure costs far more than the repair. We know that — and our commercial response is built around speed and precision.",
         quoteAttribution: "NexGen Commercial Emergency Team",
         image: {
-          src: "/images/services/emergency/nexgen-emergency-response-van-full-livery-side-profile.jpg",
-          alt: "NexGen Electrical branded emergency response van with full company livery, fully equipped and ready for commercial callout",
+          src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-first-fix-wiring.jpg",
+          alt: "NexGen commercial electrical installation — first-fix wiring at Biffa waste management workshop",
           priority: false,
         },
         imageAspect: "landscape" as const,
@@ -250,13 +250,69 @@ export const emergencyPageData: ServicePageData = {
           "Industrial downtime is measured in thousands per hour. Our engineers are trained to move fast — and to get it right every time.",
         quoteAttribution: "NexGen Industrial Emergency Team",
         image: {
-          src: "/images/services/emergency/nexgen-emergency-response-van-deployed-on-site.jpg",
-          alt: "NexGen emergency response van deployed on industrial site, ready for fault diagnosis and electrical system restoration",
+          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
+          alt: "NexGen industrial electrical installation — chiller bank electrical commissioning at Harvey Nichols",
           priority: false,
         },
         imageAspect: "landscape" as const,
         reversed: false,
         cta: { label: "Industrial Emergency Line", href: "/contact" },
+      },
+    },
+    {
+      type: "profile",
+      data: {
+        sectionId: "ready-to-respond",
+        label: "Always Ready",
+        name: "Fully Equipped. Fully Certified. Always Ready.",
+        title: "The Right Parts, Right Now — Every Time",
+        credentials: [
+          "Fully Stocked Response Vans",
+          "IET 18th Edition Compliance",
+          "NICEIC Certified Engineers",
+          "Transparent Callout Terms",
+        ],
+        bio: [
+          "Every NexGen emergency response van carries a curated stock of the components most commonly needed to resolve faults on a first visit — consumer units, RCDs, MCBs, SPDs, isolation switches, cable, and conduit. We arrive prepared, not guessing. That means faster resolution, fewer return visits, and less time without power for you, your business, or your facility.",
+          "All emergency works are carried out in strict compliance with BS 7671 IET 18th Edition Wiring Regulations and applicable sector standards. Every callout is attended by a NICEIC-certified engineer and fully documented — fault report and completion certificate issued on site before we leave. By contacting us to request emergency cover — by phone or via our contact form — you confirm acceptance of our standard callout terms.",
+        ],
+        highlights: [
+          {
+            icon: "Wrench" as const,
+            title: "Stocked for First-Visit Resolution",
+            description:
+              "Vans carry the parts needed to resolve the most common residential, commercial, and industrial faults on arrival — no waiting on parts.",
+          },
+          {
+            icon: "BookOpen" as const,
+            title: "BS 7671 Compliant",
+            description:
+              "All emergency works carried out to IET 18th Edition Wiring Regulations as standard, with full documentation issued on site.",
+          },
+          {
+            icon: "Award" as const,
+            title: "NICEIC Certified Engineers",
+            description:
+              "Every callout attended by a qualified, NICEIC-registered electrician — no sub-contractors, no exceptions.",
+          },
+          {
+            icon: "ClipboardCheck" as const,
+            title: "Callout Terms Apply",
+            description:
+              "A standard callout fee applies when you book emergency cover. Full terms are provided before confirmation.",
+          },
+        ],
+        quote:
+          "We carry the parts. We know the regs. We leave with the job done.",
+        quoteAttribution: "NexGen Emergency Response Team",
+        image: {
+          src: "/images/services/emergency/nexgen-branded-van-and-driver-hero.jpg",
+          alt: "NexGen emergency electrician beside fully stocked branded response van, NICEIC certified and ready for 24/7 callout",
+          priority: false,
+        },
+        imageAspect: "landscape" as const,
+        reversed: true,
+        cta: { label: "View Callout Terms", href: "/contact" },
       },
     },
     {
