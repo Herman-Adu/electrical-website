@@ -1,6 +1,6 @@
 ---
 name: mcp-automation
-description: Use this skill WHENEVER the user mentions repetition, batch operations, or workflow sequences on the nexgen-electrical-innovations project — even if they don't explicitly ask to "automate". Use for: automating multi-step workflows, batch operations, orchestrating MCP tools together, setting up pipelines, GitHub automation (PRs, CI checks, merges), Playwright browser automation, chaining operations. Trigger on: "automate X", "batch process", "connect these tools", "can we chain", "I need to do this every time", "set up a workflow", "run CI", "merge PR", or any mention of doing the same thing multiple times.
+description: Use when automating multi-step workflows, chaining MCP tools, or setting up pipelines. Trigger phrases: automate, batch process, workflow, chain operations, repeat, run CI, set up a pipeline.
 argument-hint: "[workflow goal]"
 disable-model-invocation: true
 ---
@@ -91,3 +91,4 @@ Orchestrates MCP tools and automates multi-step workflows for the Nexgen Electri
 - Always respect file structure and naming conventions (see `.claude/rules/naming-conventions.md`)
 - Never delete or overwrite without explicit instruction
 - For simple single-file saves, use knowledge-memory instead (not this skill)
+- Safety guardrails (rate limits, rollback policy, destructive-op rules): see [guardrails.md](guardrails.md)

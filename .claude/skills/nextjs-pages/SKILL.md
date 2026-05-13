@@ -1,6 +1,6 @@
 ---
 name: nextjs-pages
-description: Use this skill BEFORE writing any new Next.js page or route. Determines the correct rendering strategy (SSG, ISR, SSR, PPR) for the page being built. Invoke when creating a new page component, adding a new route, or changing how data is fetched in an existing page. Trigger phrases: "new page", "add a route", "create a page", "server component", "data fetching", "getStaticProps", "revalidate", "dynamic route", "ISR", "SSR", "SSG", "PPR".
+description: Use before writing any new Next.js page or route to determine the correct rendering strategy. Trigger phrases: new page, add a route, SSG, ISR, SSR, PPR, revalidate, dynamic route, data fetching.
 argument-hint: "[describe the page: what data it shows and how often it changes]"
 disable-model-invocation: true
 ---

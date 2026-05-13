@@ -1,6 +1,6 @@
 ---
 name: framer-motion
-description: Use this skill WHENEVER building smooth component animations, entrance/exit animations, gesture-driven interactions, or reusable animation components. Triggers on "smooth transition", "motion component", "entrance animation", "gesture", "animation variant", "smooth state change". Provides production-grade Framer Motion patterns for Next.js 16 App Router with zero configuration overhead.
+description: Use when building smooth component animations, entrance/exit, gestures, or reusable motion variants. Trigger phrases: smooth animation, motion component, entrance animation, gesture, animation variant, Framer Motion.
 argument-hint: "[describe the animation or interaction needed]"
 disable-model-invocation: true
 ---

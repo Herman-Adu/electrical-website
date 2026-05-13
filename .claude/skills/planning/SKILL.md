@@ -70,7 +70,7 @@ node scripts/mcp-memory-call.mjs create_relations '{
 }'
 ```
 
-Never write plans to `archives/plans/*.md` or `context/*.md` — Docker entities only.
+Never write plans to `.md` files — Docker entities only. (Memory: see CLAUDE.md rule 3)
 
 ---
 

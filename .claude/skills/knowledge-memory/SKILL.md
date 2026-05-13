@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 ## Core Rule
 
-Docker memory is the ONLY persistent store. Never write session state, learnings, or decisions to .md files, JSON files, or any file in `.claude/`. Use the Docker graph DB exclusively.
+(Memory: see CLAUDE.md rule 3) Docker graph DB is the sole persistent store.
 
 ---
 
@@ -111,8 +111,7 @@ Always search before creating — never duplicate entities. If a close match exi
 
 ## Prohibitions
 
-- Never write `archives/*.md` or `context/*.md` files for memory purposes
-- Never use .md files as memory — the only exception is the one-line Docker-down fallback in `.claude/CLAUDE.md`
+- Never write `.md` or JSON files for memory (Memory: see CLAUDE.md rule 3)
 - Never create entities for implementation details — those live in the code
 - Observations must be arrays of strings — never objects
 - Never create duplicate session entities — search `session-{YYYY-MM-DD}` before creating, increment SEQ

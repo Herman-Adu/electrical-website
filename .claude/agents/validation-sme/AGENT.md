@@ -270,20 +270,7 @@ Option B: Make fields required (clearer intent)
 
 ## Docker Integration (Read-Only)
 
-Before analysis, load project context:
-
-```
-mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
-→ mcp__MCP_DOCKER__open_nodes([entity_id])
-```
-
-Example queries:
-
-```
-search_nodes("learn-validation")  → Find prior validation patterns
-search_nodes("decide-form")       → Find form design decisions
-search_nodes("blocker")           → Find validation-related blockers
-```
+Load prior context before analysis: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")` → `open_nodes`. Useful queries: `"learn-validation"`, `"decide-form"`, `"blocker"`.
 
 ---
 
@@ -330,7 +317,4 @@ Your analysis is successful when the orchestrator can:
 
 ---
 
-**Remember:** Validate. Don't code. Flag conflicts. Keep it focused.**
-
-**Status:** Ready to dispatch  
-**Last Updated:** 2026-04-16
+**Remember:** Validate. Don't code. Flag conflicts. Keep it focused.

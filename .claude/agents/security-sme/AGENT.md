@@ -299,20 +299,7 @@ Option B: Loose rate limits (100 requests/minute)
 
 ## Docker Integration (Read-Only)
 
-Before analysis, load project context:
-
-```
-mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
-→ mcp__MCP_DOCKER__open_nodes([entity_id])
-```
-
-Example queries:
-
-```
-search_nodes("decide-auth")       → Find auth architecture decision
-search_nodes("learn-security")    → Find prior security patterns
-search_nodes("blocker")           → Find security-related blockers
-```
+Load prior context before analysis: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")` → `open_nodes`. Useful queries: `"decide-auth"`, `"learn-security"`, `"blocker"`.
 
 ---
 
@@ -359,7 +346,4 @@ Your analysis is successful when the orchestrator can:
 
 ---
 
-**Remember:** Analyze threats. Don't code. Flag conflicts. Keep it focused.**
-
-**Status:** Ready to dispatch  
-**Last Updated:** 2026-04-16
+**Remember:** Analyze threats. Don't code. Flag conflicts. Keep it focused.

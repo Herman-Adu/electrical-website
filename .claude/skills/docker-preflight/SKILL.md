@@ -1,6 +1,6 @@
 ---
 name: docker-preflight
-description: Use at EVERY session start to validate Docker health, confirm memory rehydration, check lane/branch state, and deliver the 3-bullet status report. Reads from the injected ## Session Memory block — never re-runs Docker commands. Invoked by orchestrator as its FIRST action. Also invoke when the user asks about current state without starting a full orchestrator session. Trigger on: session start, /orchestrator, "what's the status", "load context", "check branch", "where were we", "resume work", "are we on the right branch", "what phase are we in".
+description: Use at every session start and when checking current state. Reads the injected Session Memory block and delivers a 3-bullet status report. Trigger phrases: session start, load context, what's the status, where were we, check branch, what phase.
 argument-hint: "[none required]"
 disable-model-invocation: true
 ---

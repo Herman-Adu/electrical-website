@@ -1,6 +1,6 @@
 ---
 name: code-generation
-description: Use this skill WHENEVER someone on the nexgen-electrical-innovations project mentions code, files, implementation, or debugging — even if they don't explicitly ask for "code generation". Use for: writing new components (React/Next.js App Router), refactoring existing code, implementing server actions, creating hooks/utilities, writing tests (unit/integration/e2e with Playwright), debugging TypeScript errors, documenting code. Trigger on: "how do I", "I'm stuck", "can you fix", "what's wrong with this", "build X", "implement Y", "why does this fail", or any mention of TypeScript, React, Next.js, API routes, server actions, Tailwind, Zod, or specific component names.
+description: Use when writing components, refactoring, implementing server actions, creating hooks, writing tests, or debugging. Trigger phrases: TypeScript, React, Next.js, server actions, Tailwind, Zod, "build X", "implement Y", "fix", "debug", "how do I".
 argument-hint: "[language, goal, or description]"
 disable-model-invocation: true
 ---
