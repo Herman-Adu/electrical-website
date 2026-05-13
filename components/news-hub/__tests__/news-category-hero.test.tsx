@@ -23,7 +23,6 @@ vi.mock('next/link', () => ({
 
 vi.mock('next/image', () => ({
   default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => (
-    // eslint-disable-next-line @next/next/no-img-element
     <img src={src} alt={alt} {...props} />
   ),
 }));
@@ -95,6 +94,7 @@ vi.mock('@/components/shared/hero-trust-indicators', () => ({
 
 vi.mock('lucide-react', () => ({
   Activity: () => <svg data-testid="icon-activity" />,
+  Building2: () => <svg data-testid="icon-building2" />,
   ChevronDown: () => <svg data-testid="icon-chevron-down" />,
   Factory: () => <svg data-testid="icon-factory" />,
   FolderOpen: () => <svg data-testid="icon-folder-open" />,
@@ -228,11 +228,11 @@ describe('NewsCategoryHero', () => {
       expect(screen.getByText('PROVEN')).toBeInTheDocument();
     });
 
-    it('insights: renders label "Insights" and headline "INTELLIGENCE"', () => {
+    it('insights: renders label "Insights" and headline "MARKET INTELLIGENCE"', () => {
       render(<NewsCategoryHero category={makeCategory('insights', 'Insights')} articleCount={3} />);
       const matches = screen.getAllByText('Insights');
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText('INTELLIGENCE')).toBeInTheDocument();
+      expect(screen.getByText('MARKET INTELLIGENCE')).toBeInTheDocument();
     });
 
     it('reviews: renders label "Reviews" and headline "CLIENT"', () => {
