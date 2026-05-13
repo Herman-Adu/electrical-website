@@ -96,8 +96,10 @@ test.describe("Turnstile CAPTCHA Integration", () => {
     // This test checks that the server-side CAPTCHA verification is in place
     // by verifying the contact action exists and makes calls to verify tokens
 
-    // Navigate to contact page to trigger the client-side code
-    await page.goto("/contact", { waitUntil: "load" });
+    // Navigate to contact page to trigger the client-side code.
+    // Use domcontentloaded — Cloudflare Turnstile CDN script blocks the "load"
+    // event indefinitely in CI where the CDN is unreachable (no valid site key).
+    await page.goto("/contact", { waitUntil: "domcontentloaded" });
 
     await resetContactStorage(page);
     const form = getContactForm(page);

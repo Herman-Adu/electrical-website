@@ -57,7 +57,9 @@ test.describe("core page availability", () => {
   test("contact page responds with HTTP 200 and form is visible", async ({
     page,
   }) => {
-    const response = await page.goto("/contact");
+    // Use domcontentloaded — Cloudflare Turnstile CDN script blocks the "load"
+    // event indefinitely in CI where the external CDN is unreachable.
+    const response = await page.goto("/contact", { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBe(200);
 
     const form = page.locator("form").first();

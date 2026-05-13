@@ -45,7 +45,10 @@ test.describe("article TOC stays sticky through related articles", () => {
     );
     expect(response?.status()).toBe(200);
 
-    const aside = page.locator('[data-sticky-toc="true"]');
+    // Use .first() — Next.js App Router streaming can briefly produce two identical
+    // aside elements in the DOM during SSR→hydration, triggering strict mode.
+    // The case-study test at line 103 already uses this pattern correctly.
+    const aside = page.locator('[data-sticky-toc="true"]').first();
     await expect(aside).toBeVisible({ timeout: 10000 });
 
     // Initial position — aside renders inside the article-content section.
