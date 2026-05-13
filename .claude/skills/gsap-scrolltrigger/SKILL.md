@@ -1,6 +1,6 @@
 ---
 name: gsap-scrolltrigger
-description: Use this skill WHENEVER fixing scroll-triggered animations, removing animation flicker, solving layout shift issues, or optimizing scroll performance. Triggers on "smooth scroll", "scroll animation flicker", "scroll jumps", "animation not syncing", "flickering entrance", "scroll jank". Provides GSAP ScrollTrigger patterns with zero flicker, GPU acceleration, and layout-shift prevention for Next.js 16 App Router.
+description: Use when fixing scroll-triggered animation flicker, layout shift, or jank. Trigger phrases: scroll animation, flicker, scroll jank, GSAP, ScrollTrigger, layout shift, animation not syncing.
 argument-hint: "[describe the scroll animation issue or target]"
 disable-model-invocation: true
 ---

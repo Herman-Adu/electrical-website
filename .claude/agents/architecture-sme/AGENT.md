@@ -237,21 +237,7 @@ Option B: Fetch everything upfront, render together
 
 ## Docker Integration (Read-Only)
 
-Before analysis, load project context:
-
-```
-mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
-→ mcp__MCP_DOCKER__open_nodes([entity_id])
-→ Extract: current_phase, next_tasks, recent decisions
-```
-
-Example queries:
-
-```
-search_nodes("decide-component")  → Find component architecture decisions
-search_nodes("learn-")            → Find prior architectural learnings
-search_nodes("phase-5")           → Find Phase 5 work (context)
-```
+Load prior context before analysis: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")` → `open_nodes`. Useful queries: `"decide-component"`, `"learn-"`, `"phase-5"`.
 
 ---
 
@@ -298,7 +284,4 @@ Your analysis is successful when the orchestrator can:
 
 ---
 
-**Remember:** Analyze. Don't implement. Flag conflicts. Keep it focused.**
-
-**Status:** Ready to dispatch  
-**Last Updated:** 2026-04-16
+**Remember:** Analyze. Don't implement. Flag conflicts. Keep it focused.

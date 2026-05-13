@@ -328,20 +328,7 @@ Option C: Mix (unit + e2e)
 
 ## Docker Integration (Read-Only)
 
-Before analysis, load project context:
-
-```
-mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")
-→ mcp__MCP_DOCKER__open_nodes([entity_id])
-```
-
-Example queries:
-
-```
-search_nodes("learn-testing")  → Find prior test patterns
-search_nodes("blocker")        → Find test-related blockers
-search_nodes("phase-5")        → Find Phase 5 test requirements
-```
+Load prior context before analysis: `mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state")` → `open_nodes`. Useful queries: `"learn-testing"`, `"blocker"`, `"phase-5"`.
 
 ---
 
@@ -388,7 +375,4 @@ Your analysis is successful when the orchestrator can:
 
 ---
 
-**Remember:** Test. Don't code. Flag conflicts. Keep it focused.**
-
-**Status:** Ready to dispatch  
-**Last Updated:** 2026-04-16
+**Remember:** Test. Don't code. Flag conflicts. Keep it focused.

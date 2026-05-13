@@ -388,21 +388,18 @@ report generation from multiple sources.
 
 ## Governance Standards: The 9/9 Checks
 
-This 10-skill ecosystem enforces 9 governance checks. Run them manually via the checklist below to prevent quality debt and architectural decay:
+Run these before committing new or modified skills. Full table and Mode 4 evaluation loop: [`governance-checks.md`](governance-checks.md).
 
-| Check                          | What It Validates                                                  | Why It Matters                                                  |
-| ------------------------------ | ------------------------------------------------------------------ | --------------------------------------------------------------- |
-| **1. Agent Location**          | All AGENT.md live in `.claude/agents/`, never in `.claude/skills/` | Prevents agent orphaning; enables central agent governance      |
-| **2. Agent Pairs**             | Each agent has BOTH AGENT.md + README.md                           | Documentation completeness; prevents incomplete agents          |
-| **3. Agent Delegation Syntax** | Agent calls use body text, not `agent:` frontmatter field          | Ensures proper invocation; prevents deprecated syntax           |
-| **4. Skill Structure**         | Each skill has BOTH SKILL.md + README.md                           | Full documentation; prevents stubs                              |
-| **5. Size Limits**             | All SKILL.md < 500 lines                                           | Enforces modularity; prevents bloat; indicates refactoring need |
-| **6. Stale Paths**             | No dead links in AGENT.md files                                    | Prevents broken references; keeps documentation accurate        |
-| **7. Script Existence**        | All scripts referenced in skills actually exist                    | Prevents runtime failures; catches missing files                |
-| **8. Frontmatter Compliance**  | Only official Claude Code keys used (no unsupported keys)          | Prevents silent failures from ignored frontmatter               |
-| **9. Quality Gate**            | All worked-examples.md ≥ 150 lines                                 | Ensures example quality; prevents hollow documentation          |
-
-**Enforcement:** Run through the 9 checks manually before committing new or modified skills to catch issues early.
+**Quick checklist:**
+1. Agent Location — all AGENT.md in `.claude/agents/`
+2. Agent Pairs — each agent has AGENT.md + README.md
+3. Agent Delegation Syntax — calls use body text, not `agent:` frontmatter
+4. Skill Structure — each skill has SKILL.md + README.md
+5. Size Limits — all SKILL.md < 500 lines
+6. Stale Paths — no dead links in AGENT.md
+7. Script Existence — all referenced scripts exist
+8. Frontmatter Compliance — only official Claude Code keys used
+9. Quality Gate — all worked-examples.md ≥ 150 lines
 
 ---
 
@@ -441,40 +438,14 @@ Propose improvements to existing skills using evaluation-driven development. Ana
 
 ## Mode 4: Evaluate a Skill (Claude A/Claude B Loop)
 
-Test whether a skill performs correctly on real-world inputs before deploying. Based on the official Anthropic skill evaluation pattern.
-
-**Provide:**
-
-- The skill to evaluate
-- 3+ test cases (trigger prompt + expected behavior)
+Test whether a skill performs correctly on real-world inputs before deploying.
 
 **Steps:**
+1. Call `.claude/agents/skill-builder/AGENT.md` with `mode: evaluate` and 3+ test cases
+2. Review evaluation report; fix FAIL/PARTIAL items using Mode 3
+3. Re-run until all test cases pass
 
-1. Call `.claude/agents/skill-builder/AGENT.md` with `mode: evaluate` and test cases
-2. Review the evaluation report
-3. Fix FAIL and PARTIAL items using Mode 3: Optimize
-4. Re-run evaluation to confirm improvements
-5. Repeat until all test cases pass
-
-**Example input:**
-
-```
-/skill-builder evaluate research
-
-Test cases:
-1. Happy path: "Research TypeScript performance improvements 2026"
-   Expected: 5+ sources, synthesis, key findings, recommendations
-
-2. Edge case 1: "Research [empty]"
-   Expected: Skill asks for research topic, doesn't error
-
-3. Edge case 2: "Research with 100+ sources"
-   Expected: Handles efficiently, maybe delegates to agent
-```
-
-**Output:** Evaluation report with score (X/N passing), failure analysis, priority improvements
-
-See [`worked-examples.md`](worked-examples.md) for a full evaluation example.
+For the full Claude A/B loop design, input schema, and worked examples, see [`governance-checks.md`](governance-checks.md) and [`worked-examples.md`](worked-examples.md).
 
 ---
 

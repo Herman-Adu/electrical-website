@@ -1,6 +1,6 @@
 ---
 name: aos-scroll-reveal
-description: Use this skill WHENEVER adding bulk scroll-reveal animations to multiple elements, fixing flicker on scroll-in, or applying simple entrance animations without complex setup. Triggers on "scroll reveal", "animate on scroll", "entrance animation", "scroll animation", "bulk animations", "reveal effect". Provides AOS library patterns with zero flicker for Next.js 16 with minimal configuration.
+description: Use when adding bulk scroll-reveal animations or simple entrance animations. Trigger phrases: scroll reveal, animate on scroll, entrance animation, bulk animations, reveal effect, AOS.
 argument-hint: "[describe the scroll-reveal animations needed]"
 disable-model-invocation: true
 ---

@@ -134,6 +134,8 @@ Section C: x=450, w=600  -> right edge = 1050
 
 ## Color System
 
+Full brand palette with hex codes, nesting intensity variants, and accessibility notes: see [brand-palette.md](brand-palette.md).
+
 | Zone | Use for | strokeColor | backgroundColor |
 |------|---------|-------------|-----------------|
 | Cyan | Primary nodes, key decisions, entry points | `#006e56` | `#c2fff1` |

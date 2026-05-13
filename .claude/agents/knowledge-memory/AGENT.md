@@ -278,83 +278,9 @@ Append to existing entities without creating new ones:
 }
 ```
 
-## Memory_Reference Integration (Authoritative Source)
+## Memory_Reference Integration
 
-Docker `memory_reference` MCP service is the **single source of truth** for all session persistence. No file-based memory is permitted.
-
-### Canonical Docker MCP Signatures
-
-**Session Start (Rehydration):**
-```typescript
-// Load prior context in ~5 seconds at ~50 tokens
-const results = await mcp__MCP_DOCKER__search_nodes("nexgen-electrical-innovations-state");
-const entities = await mcp__MCP_DOCKER__open_nodes([results.entity_ids]);
-// Read: current_branch, active_phase, next_tasks, blockers
-```
-
-**Session End (Persistence):**
-```typescript
-// Persist work in ~3 minutes at ~200–300 tokens
-await mcp__MCP_DOCKER__create_entities([session_entity, learning_entities...]);
-await mcp__MCP_DOCKER__add_observations(project_state_id, [session_end_observation]);
-await mcp__MCP_DOCKER__add_observations(feature_id, [build_observation, learning_observation]);
-await mcp__MCP_DOCKER__create_relations([derives_from, depends_on, documents...]);
-```
-
-### Entity Naming Rules (Mandatory)
-
-All entity names must:
-- Use `kebab-case` only — lowercase, hyphens, no underscores or spaces
-- Include type prefix: `feat-`, `learn-`, `decide-`, `infra-`, `session-`, `plan-`, `task-`
-- Be specific enough to search (avoid `learn-bug`, `feat-fix`)
-- Search for duplicates before creating: `search_nodes("learn-hooks")` → check results
-
-**Valid examples:**
-```
-learn-gpu-transform-compositing
-decide-usespring-animation-standard
-infra-mcp-docker-services
-session-2026-04-16-001
-feat-phase-5-animation-optimization
-```
-
-**Invalid examples:**
-```
-LearningGPUTransform          ← not kebab-case
-learning_gpu_transform        ← underscore instead of hyphen
-gpu                           ← too generic, unsearchable
-decision-animation            ← missing domain (what about animation?)
-```
-
-### Relation Types (Canonical)
-
-When suggesting relations to parent skill, use these types only:
-
-- **`derives_from`** — feature implements a decision
-- **`depends_on`** — feature requires another feature
-- **`documents`** — decision explains rationale for feature
-- **`updates`** — session updates project_state
-- **`supersedes`** — new decision replaces old decision
-- **`related_to`** — soft conceptual link (non-dependency)
-
-Example relations to return:
-
-```json
-[
-  {
-    "type": "derives_from",
-    "source": "feat-phase-5-animation-optimization",
-    "target": "decide-gpu-transform-standardization",
-    "reason": "Feature implements GPU transform standard across all hero components"
-  },
-  {
-    "type": "documents",
-    "source": "learn-svg-useid-hydration-safety",
-    "target": "feat-phase-5-animation-optimization",
-    "reason": "Learning explains SVG hydration pattern used in feature"
-  }
-]
-```
+(Memory: see CLAUDE.md rule 3) Docker `memory_reference` is the sole store. Entity naming: `kebab-case` + type prefix (`feat-`, `learn-`, `decide-`, `infra-`, `session-`, `plan-`, `task-`). Relation types: `derives_from`, `depends_on`, `documents`, `updates`, `supersedes`, `related_to`. Search before creating to avoid duplicates.
 
 ## Output Format
 
