@@ -44,3 +44,12 @@ obsidian-vault/
 
 # Claude scheduled tasks lock
 .claude/scheduled_tasks.lock
+
+# Root-level session screenshots — never commit
+/*.png
+
+# Coverage reports
+coverage/
+
+# Windows crash dumps
+*.stackdump
