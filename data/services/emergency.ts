@@ -16,8 +16,8 @@ export const emergencyPageData: ServicePageData = {
   },
   hero: {
     eyebrow: "24/7 Emergency Response",
-    headline: ["Always", "On", "Call"],
-    headlineHighlight: "On",
+    headline: ["We Answer", "Every Call,", "Day or Night"],
+    headlineHighlight: "Every Call,",
     subheadline:
       "Electrical emergencies don't keep business hours — and neither do we. Rapid response, expert diagnosis, and immediate solutions when you need them most.",
     stats: [
@@ -29,15 +29,36 @@ export const emergencyPageData: ServicePageData = {
     scrollTargetId: "response",
     scrollLabel: "Get Help Now",
     backgroundImage: {
-      src: "/images/services-emergency.jpg",
-      alt: "24/7 emergency electrical response",
+      //src: "/images/services-emergency.jpg",
+      src: "/images/services/emergency/nexgen-branded-van-and-driver-hero.jpg",
+      alt: "NexGen emergency electrician with branded response van, keys in hand, ready for 24/7 callout",
       priority: true,
     },
     trustIndicators: [
-      { icon: "Wrench" as const, title: "24/7 Rapid Response", description: "Always-on emergency electrical service, any hour of any day" },
-      { icon: "Zap" as const, title: "2-Hour SLA", description: "Guaranteed response commitment for all urgent electrical faults" },
-      { icon: "Shield" as const, title: "Safe and Certified", description: "Emergency work documented and certified for insurance purposes" },
-      { icon: "Phone" as const, title: "Direct Emergency Line", description: "Call direct to reach our qualified emergency electrical team" },
+      {
+        icon: "Wrench" as const,
+        title: "24/7 Rapid Response",
+        description:
+          "Always-on emergency electrical service, any hour of any day",
+      },
+      {
+        icon: "Zap" as const,
+        title: "2-Hour SLA",
+        description:
+          "Guaranteed response commitment for all urgent electrical faults",
+      },
+      {
+        icon: "Shield" as const,
+        title: "Safe and Certified",
+        description:
+          "Emergency work documented and certified for insurance purposes",
+      },
+      {
+        icon: "Phone" as const,
+        title: "Direct Emergency Line",
+        description:
+          "Call direct to reach our qualified emergency electrical team",
+      },
     ],
     metadata: ["NICEIC Approved", "24/7 Cover", "2-Hour SLA", "365 Days/Year"],
   },
@@ -91,30 +112,34 @@ export const emergencyPageData: ServicePageData = {
           {
             icon: "Clock" as const,
             title: "2-Hour Response",
-            description: "Most residential callouts attended within 2 hours, including evenings and weekends.",
+            description:
+              "Most residential callouts attended within 2 hours, including evenings and weekends.",
           },
           {
             icon: "AlertTriangle" as const,
             title: "Consumer Unit Failures",
-            description: "Immediate diagnosis and safe isolation of faulty boards, RCDs, and MCBs.",
+            description:
+              "Immediate diagnosis and safe isolation of faulty boards, RCDs, and MCBs.",
           },
           {
             icon: "Shield" as const,
             title: "Electrical Fire Risk",
-            description: "Rapid fault finding to eliminate arc faults, overloads, and potential fire hazards.",
+            description:
+              "Rapid fault finding to eliminate arc faults, overloads, and potential fire hazards.",
           },
           {
             icon: "Phone" as const,
             title: "24/7 Availability",
-            description: "Night, weekend, and bank holiday cover — with no premium out-of-hours surcharge.",
+            description:
+              "Night, weekend, and bank holiday cover — with no premium out-of-hours surcharge.",
           },
         ],
         quote:
           "When your home goes dark, you need someone who responds fast and gets it right the first time.",
         quoteAttribution: "NexGen Emergency Response Team",
         image: {
-          src: "/images/projects/residential/calcot-park-golf-club/nexgen-calcot-park-nest-thermostat-smart-heating.jpg",
-          alt: "Nexgen residential emergency electrical response — placeholder",
+          src: "/images/services/emergency/nexgen-emergency-electrician-residential-street-response.jpg",
+          alt: "NexGen emergency electrician arriving beside branded company van at residential property for urgent home electrical fault callout",
           priority: false,
         },
         imageAspect: "landscape" as const,
@@ -143,30 +168,34 @@ export const emergencyPageData: ServicePageData = {
           {
             icon: "Building2" as const,
             title: "Business Continuity",
-            description: "Priority commercial response focused on restoring trading capability as fast as possible.",
+            description:
+              "Priority commercial response focused on restoring trading capability as fast as possible.",
           },
           {
             icon: "Zap" as const,
             title: "Switchgear Failures",
-            description: "Emergency restoration of distribution boards, panels, and switchroom equipment.",
+            description:
+              "Emergency restoration of distribution boards, panels, and switchroom equipment.",
           },
           {
             icon: "ClipboardCheck" as const,
             title: "Compliance Emergencies",
-            description: "Urgent remedial works and EICR investigations following fault or inspection failure.",
+            description:
+              "Urgent remedial works and EICR investigations following fault or inspection failure.",
           },
           {
             icon: "Users" as const,
             title: "Sector Experience",
-            description: "Retail, hospitality, offices, healthcare, and licensed premises all covered.",
+            description:
+              "Retail, hospitality, offices, healthcare, and licensed premises all covered.",
           },
         ],
         quote:
           "A power failure costs far more than the repair. We know that — and our commercial response is built around speed and precision.",
         quoteAttribution: "NexGen Commercial Emergency Team",
         image: {
-          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-completed-operational-facility.jpg",
-          alt: "Nexgen commercial emergency electrical response — placeholder",
+          src: "/images/services/emergency/nexgen-emergency-response-van-full-livery-side-profile.jpg",
+          alt: "NexGen Electrical branded emergency response van with full company livery, fully equipped and ready for commercial callout",
           priority: false,
         },
         imageAspect: "landscape" as const,
@@ -195,30 +224,34 @@ export const emergencyPageData: ServicePageData = {
           {
             icon: "Activity" as const,
             title: "Production Line Recovery",
-            description: "Critical electrical systems restored with focus on minimising production downtime.",
+            description:
+              "Critical electrical systems restored with focus on minimising production downtime.",
           },
           {
             icon: "Gauge" as const,
             title: "High-Voltage Support",
-            description: "Certified HV engineers for substation, switchroom, and LV/HV interface emergencies.",
+            description:
+              "Certified HV engineers for substation, switchroom, and LV/HV interface emergencies.",
           },
           {
             icon: "Settings" as const,
             title: "Motor & Drive Failures",
-            description: "Emergency diagnosis of VSD, motor control, and MCC panel faults under operational pressure.",
+            description:
+              "Emergency diagnosis of VSD, motor control, and MCC panel faults under operational pressure.",
           },
           {
             icon: "MapPin" as const,
             title: "Site-Wide Coordination",
-            description: "Coordinated emergency response for large facilities with multiple distribution points.",
+            description:
+              "Coordinated emergency response for large facilities with multiple distribution points.",
           },
         ],
         quote:
           "Industrial downtime is measured in thousands per hour. Our engineers are trained to move fast — and to get it right every time.",
         quoteAttribution: "NexGen Industrial Emergency Team",
         image: {
-          src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-chiller-bank-commissioned.jpg",
-          alt: "Nexgen industrial emergency electrical response — placeholder",
+          src: "/images/services/emergency/nexgen-emergency-response-van-deployed-on-site.jpg",
+          alt: "NexGen emergency response van deployed on industrial site, ready for fault diagnosis and electrical system restoration",
           priority: false,
         },
         imageAspect: "landscape" as const,
