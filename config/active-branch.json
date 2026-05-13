@@ -1,6 +1,6 @@
 {
-  "branch": "feat/services-profile-enrichment",
-  "entity": "feat-services-profile-enrichment",
-  "fallback": "99ff349 feat: services profile enrichment — real project images rich highlights industrial features+dashboard (#163) | a409cf9 feat: services data hero images and navbar updates (WIP baseline) | 73c232d docs: services profile enrichment — spec, plan, and session handoff prompt",
-  "updatedAt": "2026-05-12T18:41:10.164Z"
+  "branch": "main",
+  "entity": "nexgen-electrical-innovations-state",
+  "fallback": "7f60186 feat: emergency response page — residential, commercial, industrial domain sections (#164) | 9f50a23 feat: services profile enrichment — highlights, real images, layout refactor (#164) (#163) | 880321f feat: hero overlay fixes, category images, and dark mode trust indicators (#162)",
+  "updatedAt": "2026-05-13T11:37:38.952Z"
 }
