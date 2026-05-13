@@ -3,7 +3,7 @@
     "vercel@claude-plugins-official": true
   },
   "enabledMcpjsonServers": [
-    "MCP_DOCKER",
+    "memory",
     "filesystem",
     "git"
   ],
