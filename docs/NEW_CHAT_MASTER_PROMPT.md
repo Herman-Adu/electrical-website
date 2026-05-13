@@ -1,6 +1,6 @@
 # NEW CHAT MASTER PROMPT — Orchestrator Mode (Docker Memory Aligned)
 
-Last generated: 2026-05-13 12:14:44 +01:00
+Last generated: 2026-05-13 18:13:29 +01:00
 
 Use this prompt at the start of every new chat window.
 
@@ -73,12 +73,12 @@ agent:v1:next-task:YYYY-MM-DD-<short-workstream-id>
 ## Current Session Baseline (Auto-Generated)
 
 - Branch: main
-- HEAD: 7f60186 feat: emergency response page ΓÇö residential, commercial, industrial domain sections (#164)
+- HEAD: bc9c0a7 fix: e2e contact timeout and TOC strict mode (#167) (#167)
 - Memory nodes loaded: 1
 
 ### Hydrated Memory Nodes
 
-- nexgen-electrical-innovations-state (project_state, observations: 818)
+- nexgen-electrical-innovations-state (project_state, observations: 868)
 
 ## Optimized MCP / Tool Allocation
 
@@ -133,13 +133,49 @@ This keeps Docker memory and this master prompt aligned for the next task/chat.
 
 Paste this into a fresh chat:
 
-Operate in orchestrator-only mode with SME delegation first.
-Use memory-first context loading from hydrated Docker memory.
-Run tasks via pnpm orchestrator:task -Task "<task-command>" so startup and close-sync are never skipped.
-Use playwright for general browser tasks and executor-playwright for deterministic multi-step form workflows.
-Use sequential-thinking for complex decisions and nextjs-devtools for runtime diagnostics.
-Require local test gates to pass before any GitHub workflow/check trigger or rerun.
-Keep tool scope minimal and optimize token usage.
-Current branch: main
-Current HEAD: 7f60186 feat: emergency response page ΓÇö residential, commercial, industrial domain sections (#164)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HANDOFF — On-Demand Tool OS Implementation
+Branch: create feat/on-demand-tool-os from main (after merging PR #168)
+Plan: docs/superpowers/plans/2026-05-13-on-demand-tool-os.md
+Docker: plan-on-demand-tool-os
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TASK: Execute the On-Demand Tool OS implementation plan — 9 batches, 16 tasks.
+All code is in the plan. Execute it. No planning, no brainstorming, no new design.
+
+SESSION START (mandatory, in order):
+1. Invoke orchestrator skill
+2. pnpm docker:mcp:memory:open plan-on-demand-tool-os
+3. pnpm docker:mcp:memory:open nexgen-electrical-innovations-state
+4. git log --oneline -5 && git status
+5. Merge PR #168 via github-ops skill (squash merge, spec + plan into main)
+6. git checkout main && git pull origin main
+7. git checkout -b feat/on-demand-tool-os
+8. Invoke superpowers:executing-plans skill with docs/superpowers/plans/2026-05-13-on-demand-tool-os.md
+
+DONE (do not redo):
+✅ Spec: docs/superpowers/specs/2026-05-13-on-demand-tool-os-design.md (D1–D10)
+✅ Plan: docs/superpowers/plans/2026-05-13-on-demand-tool-os.md (16 tasks, 9 batches)
+✅ PR #168 open on docs/on-demand-tool-os-spec — merge it first
+✅ Docker: plan-on-demand-tool-os + 6 decision/learning entities + relations
+✅ Obsidian: Projects/Nexgen Electrical Innovations/On-Demand Tool OS/ (spec + plan)
+
+BATCH ORDER (strict):
+Batch 0 → Batch 1 (MCP bridge, highest priority) → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+Gate after every batch: pnpm typecheck && pnpm build && pnpm test
+
+KEY FACTS:
+- .mcp.json: replace MCP_DOCKER (HTTP type) with memory (stdio: node .claude/mcp/memory-bridge.mjs)
+- bridge speaks MCP JSON-RPC (initialize → tools/list → tools/call) proxying to localhost:3100/memory
+- branchToEntity(): main → nexgen-electrical-innovations-state, feat/x → feat-x
+- config/active-branch.json + config/memory-lanes/*.json (47 files) → DELETED after Batch 0 migration
+- settings.local.json additionalDirectories: remove .claude directory entry (was loading all archives)
+- Scripts deleted in Batch 7: lane-lifecycle.mjs, load-active-memory-lane.mjs, memory-lane-staleness-check.mjs
+
+SESSION END:
+- add_observations to nexgen-electrical-innovations-state (build status, PR number)
+- add_observations to plan-on-demand-tool-os (status: COMPLETED)
+- create session entity (session-2026-05-13-NNN, next after 022)
+- create_relations: session → plan-on-demand-tool-os (documents), session → state (updates)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
