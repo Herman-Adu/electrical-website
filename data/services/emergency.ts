@@ -306,7 +306,7 @@ export const emergencyPageData: ServicePageData = {
           "We carry the parts. We know the regs. We leave with the job done.",
         quoteAttribution: "NexGen Emergency Response Team",
         image: {
-          src: "/images/services/emergency/nexgen-branded-van-and-driver-hero.jpg",
+          src: "/images/projects/commercial/dhl/nexgen-dhl-reading-bespoke-cable-tray-prefabricated.jpg",
           alt: "NexGen emergency electrician beside fully stocked branded response van, NICEIC certified and ready for 24/7 callout",
           priority: false,
         },
