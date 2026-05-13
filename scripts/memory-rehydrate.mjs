@@ -16,6 +16,15 @@ const TIER1_ONLY = process.argv.includes('--tier1-only');
 
 const today = new Date().toISOString().slice(0, 10);
 
+// Filter entities with lifecycle: archived observations
+function isArchived(entity) {
+  const lifecycleObs = (entity.observations ?? [])
+    .filter(o => typeof o === 'string' && o.includes('lifecycle:'));
+  if (!lifecycleObs.length) return false;
+  const latest = lifecycleObs.at(-1);
+  return latest.includes('archived');
+}
+
 // Token counting: approximate words * 1.33
 function countTokens(text) {
   return Math.ceil(text.split(/\s+/).length * 1.33);
@@ -223,7 +232,7 @@ async function main() {
     if (VERBOSE) process.stderr.write(`[tier3] Searching: "${branchSlug}"\n`);
 
     const searchResult = await memoryCall('search_nodes', { query: branchSlug }, 4000);
-    const found = extractEntities(searchResult);
+    const found = extractEntities(searchResult).filter(e => !isArchived(e));
 
     const learnings = [];
     const decisions = [];

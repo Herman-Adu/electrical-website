@@ -86,3 +86,17 @@ pnpm typecheck && pnpm build && pnpm test
 | Planning (2hr+ features) | `planning` first, then `code-generation` |
 | Skills audit | `skill-builder` |
 | Docker memory capture | `knowledge-memory` |
+
+## Plan-Sync Gate
+
+Before dispatching any implementation agent, check:
+```bash
+cat C:\tmp\pending-plan-sync.txt 2>/dev/null || cat /tmp/pending-plan-sync.txt 2>/dev/null
+```
+
+If a path is returned: run `plan-sync` skill with that path before proceeding. Clear the file after sync:
+```bash
+rm C:\tmp\pending-plan-sync.txt 2>/dev/null; rm /tmp/pending-plan-sync.txt 2>/dev/null
+```
+
+Implementation cannot begin on an unsynced plan.

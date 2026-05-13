@@ -3,7 +3,7 @@
     "vercel@claude-plugins-official": true
   },
   "enabledMcpjsonServers": [
-    "MCP_DOCKER",
+    "memory",
     "filesystem",
     "git"
   ],
@@ -14,8 +14,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \".claude/hooks/session-start-v2.mjs\"",
-            "timeout": 10
+            "command": "node \".claude/hooks/session-start-v3.mjs\"",
+            "timeout": 5
           }
         ]
       }
@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"scripts/memory-lane-stop.mjs\"",
+            "command": "node \"scripts/lane-stop-v2.mjs\"",
             "timeout": 15
           }
         ]
@@ -36,12 +36,6 @@
       {
         "matcher": "",
         "hooks": [
-          {
-            "type": "command",
-            "command": "cat \".claude/hooks/orchestrator-enforcement.txt\"",
-            "timeout": 2,
-            "displayResult": true
-          },
           {
             "type": "command",
             "command": "node \".claude/hooks/context-monitor.mjs\"",

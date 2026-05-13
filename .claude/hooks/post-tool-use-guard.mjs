@@ -68,6 +68,19 @@ async function main() {
   const addedLines = countAddedLines(typeof toolOutput === 'string' ? toolOutput : JSON.stringify(toolOutput));
   const warning = buildWarning(toolName, addedLines);
 
+  // Detect plan file writes — signal to orchestrator
+  if (toolName === 'Write' || toolName === 'Edit') {
+    const toolInput = input?.tool_input ?? {};
+    const filePath = toolInput?.file_path ?? toolInput?.path ?? '';
+    if (filePath.includes('docs/superpowers/plans/') && filePath.endsWith('.md')) {
+      const { writeFileSync } = await import('fs');
+      const tmp = process.platform === 'win32' ? 'C:\\tmp\\pending-plan-sync.txt' : '/tmp/pending-plan-sync.txt';
+      try {
+        writeFileSync(tmp, filePath, 'utf8');
+      } catch { /* ignore */ }
+    }
+  }
+
   if (warning) {
     process.stdout.write(JSON.stringify({ systemMessage: warning }));
   } else {
