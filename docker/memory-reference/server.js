@@ -549,7 +549,7 @@ const server = http.createServer(async (req, res) => {
           : {};
 
       const result = callTool(toolName, args);
-      writeJson(res, 200, { content: [{ type: "json", json: result }] });
+      writeJson(res, 200, { content: [{ type: "text", text: JSON.stringify(result) }] });
       return;
     } catch (error) {
       writeJson(res, 400, { error: error.message || "Tool call failed" });

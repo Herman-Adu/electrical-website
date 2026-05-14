@@ -1,6 +1,6 @@
 ---
 name: knowledge-memory
-description: Use this skill to capture learnings, decisions, and project state to Docker memory. Trigger on: "remember this", "save this", "capture this pattern", "update project state", "session end sync". NEVER write to .md files — Docker memory is the ONLY store.
+description: Use when capturing a learning, decision, or pattern discovered during development. Also trigger on: "remember this", "save this", "capture this decision", "capture this pattern", "log this learning", "update project state", "session end sync", or any time session context needs to be persisted before the session ends. Covers: learning entities for non-obvious patterns, decision entities for architectural choices, session-end handoff with session entity creation, project-state updates to the canonical state entity, feature entity tracking, and active-lane sync. Writes exclusively to Docker memory — never to .md or JSON files.
 argument-hint: "[what to capture: learning | decision | session-end | project-state]"
 disable-model-invocation: true
 ---
@@ -9,7 +9,19 @@ disable-model-invocation: true
 
 ## Core Rule
 
-(Memory: see CLAUDE.md rule 3) Docker graph DB is the sole persistent store.
+(Memory: see CLAUDE.md rule 3) Docker graph DB is the sole persistent store. Never write `.md` or JSON files.
+
+---
+
+## Invocation — Primary and Fallback
+
+**Primary:** `mcp__memory__*` tools (create_entities, add_observations, create_relations, search_nodes, open_nodes).
+
+**If any `mcp__memory__*` call fails:** Go immediately to curl — see `.claude/rules/mcp-invocation.md` for exact format. Entry point: `localhost:3100/memory/tools/call`.
+
+**If curl also fails:** Stop. Tell the user: "Memory service unavailable. Options: (1) run `pnpm docker:mcp:ready` and retry, (2) skip memory sync for now." Do not write to `.md` files.
+
+> **Entity patterns below** use `node scripts/mcp-memory-call.mjs` — a pnpm wrapper that calls localhost:3100 via Node HTTP. Equivalent to curl. Use it in terminal; use `mcp__memory__*` or curl when operating as Claude.
 
 ---
 
