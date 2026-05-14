@@ -9,7 +9,46 @@ disable-model-invocation: true
 
 ## Core Rule
 
-(Memory: see CLAUDE.md rule 3) Docker graph DB is the sole persistent store.
+(Memory: see CLAUDE.md rule 3) Docker graph DB is the sole persistent store. Never write `.md` or JSON files.
+
+---
+
+## Invocation — Primary and Fallback
+
+**Primary:** Use `mcp__memory__*` tools directly:
+- `mcp__memory__create_entities` — create new entities
+- `mcp__memory__add_observations` — add to existing entities
+- `mcp__memory__create_relations` — wire entity relations
+- `mcp__memory__search_nodes` — search by name/keyword
+- `mcp__memory__open_nodes` — load specific entities by name
+
+**If any `mcp__memory__*` call returns an error — go here immediately, do not retry with other namespaces:**
+```bash
+# Health check first — if non-200, stop and tell user
+curl -s http://localhost:3100/memory/health
+
+# Create entities
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name":"create_entities","arguments":{"entities":[{"name":"...","entityType":"...","observations":["..."]}]}}'
+
+# Add observations
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name":"add_observations","arguments":{"observations":[{"entityName":"...","contents":["..."]}]}}'
+
+# Create relations
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name":"create_relations","arguments":{"relations":[{"from":"...","to":"...","relationType":"..."}]}}'
+
+# Search
+curl -s -X POST http://localhost:3100/memory/search_nodes \
+  -H "Content-Type: application/json" \
+  -d '{"query":"nexgen-electrical-innovations-state"}'
+```
+
+**If curl also fails:** Stop. Tell the user: "Memory service unavailable. Options: (1) run `pnpm docker:mcp:ready` and retry, (2) skip memory sync for now." Do not write to `.md` files.
 
 ---
 

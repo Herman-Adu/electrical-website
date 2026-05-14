@@ -10,9 +10,9 @@ disable-model-invocation: true
 ## Execution (run in order, then STOP)
 
 ### Step 1: Session Startup
-Invoke the `docker-preflight` skill. It reads the already-injected `## Session Memory`
-context — delivered by `session-start-v2.mjs` at session start — and reports the
-3-bullet status. **Do not execute any Docker or git commands here.**
+Invoke the `docker-preflight` skill. It calls Docker memory live via curl and reports
+the 3-bullet status (branch, phase, next tasks). **Do not execute any Docker or git
+commands here — docker-preflight handles it.**
 
 ### Step 2: Git State
 ```bash
@@ -38,20 +38,28 @@ Agent(subagent_type="general-purpose", prompt="[full context + task]")
 The general-purpose agent spawns specialised sub-agents (architecture-sme, code-generation, security-sme, qa-sme, planning).
 
 **MCP first — always:**
-| Task | Use | Not |
-|------|-----|-----|
-| GitHub PRs, merges, CI | `mcp__MCP_DOCKER__github_official__*` | `gh` CLI |
-| Session memory | `mcp__MCP_DOCKER__memory_reference__*` | .md files |
-| Browser testing | `mcp__MCP_DOCKER__playwright__*` with `PLAYWRIGHT_REUSE_SERVER=true` | Manual |
+| Task | Primary tool | Fallback | Never |
+|------|-------------|---------|-------|
+| GitHub PRs, merges, CI | `mcp__MCP_DOCKER__github_official__*` | — | `gh` CLI |
+| Session memory read/write | `mcp__memory__*` | `curl localhost:3100/memory/tools/call` | `.md` files, `mcp__MCP_DOCKER__memory_reference__*` (does not exist) |
+| Browser testing | `mcp__MCP_DOCKER__playwright__*` | — | Manual, set `PLAYWRIGHT_REUSE_SERVER=true` |
+| Obsidian notes | `mcp__MCP_DOCKER__obsidian_*` | `curl localhost:3100/obsidian/tools/call` | `.md` files in vault root |
+
+**If any `mcp__memory__*` call returns an error:** go immediately to the curl fallback — do not retry with a different MCP namespace. Report the error to user if curl also fails.
+
+**Port map — never confuse these:**
+- `localhost:3100` — Caddy gateway to all Docker MCP services
+- `localhost:3000` — Next.js dev server (no MCP services here)
 
 **Context limit:**
 - At 60%: Stop. Tell user. Wait for decision.
 - At 80%: Emergency — commit WIP, sync Docker memory, then stop.
 
-**Session end (always):**
-1. `add_observations` to `nexgen-electrical-innovations-state` — branch, build, next tasks
-2. `create_entities` — `session-YYYY-MM-DD-seq` entity
-3. `create_relations` — session `updates` project_state
+**Session end (always) — invoke `knowledge-memory` skill:**
+1. `mcp__memory__add_observations` to `nexgen-electrical-innovations-state` — branch, build, next tasks
+2. `mcp__memory__create_entities` — `session-YYYY-MM-DD-seq` entity
+3. `mcp__memory__create_relations` — session `updates` project_state
+4. If any `mcp__memory__*` call fails: use `curl localhost:3100/memory/tools/call` immediately — do not try other namespaces
 
 ---
 

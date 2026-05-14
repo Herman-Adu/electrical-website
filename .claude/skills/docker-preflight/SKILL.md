@@ -1,6 +1,6 @@
 ---
 name: docker-preflight
-description: Use at every session start and when checking current state. Reads the injected Session Memory block and delivers a 3-bullet status report. Trigger phrases: session start, load context, what's the status, where were we, check branch, what phase.
+description: Use at every session start and when checking current state. Calls the Docker memory service live via curl to deliver a 3-bullet status report. Trigger phrases: session start, load context, what's the status, where were we, check branch, what phase.
 argument-hint: "[none required]"
 disable-model-invocation: true
 ---
@@ -9,61 +9,60 @@ disable-model-invocation: true
 
 ## What this does
 
-Reads the `## Session Memory` block already injected by the `SessionStart` hook
-(`session-start-v2.mjs` → `memory-rehydrate.mjs`). Reports status. Does NOT
-execute bash commands or call Docker APIs — the hook already ran them.
+Calls the Docker memory-reference service **live** via `curl http://localhost:3100` to read project state and report session status. Does NOT rely on any injected block from the session hook — it always goes to the source of truth directly.
 
 ## Steps (run in order, then STOP)
 
-### Step 1: Locate the injected block
+### Step 1: Health check
 
-Find `## Session Memory` in the current session context (it appears in a
-`<system-reminder>` block at session start). It has this structure:
-
-> **If the block is not present:** Tell the user: "Session Memory block not found —
-> the SessionStart hook may not have run. Run `pnpm docker:mcp:ready` to start
-> Docker, then restart the session." Do not proceed further.
-
-```
-## Session Memory — YYYY-MM-DD [NNN tokens]
-
-> Branch: <branch> | Lane: <entity> | Docker: online|OFFLINE
-> [optional: WARNING: Branch mismatch — ...]
-
-### Project State
-...
-
-### Active Lane (<entity>)
-...
+```bash
+curl -s http://localhost:3100/memory/health
 ```
 
-### Step 2: Extract these fields
+Expected response: `{"status":"healthy","service":"memory-reference",...}`
 
-| Field | Location |
-|-------|----------|
-| Current branch | `> Branch:` line |
-| Lane entity | `> Lane:` line |
-| Docker status | `> Docker:` field (online / OFFLINE) |
-| Active phase | `### Project State` — look for `Active phase:` observation |
-| Build status | `### Project State` — look for `Build status:` observation |
-| Next tasks | `### Project State` — look for `Next tasks:` observation |
-| Lane status | `### Active Lane` — look for `lane_status:` observation |
+> **If health check fails or returns non-200:** Stop immediately. Tell the user:
+> "Docker memory service is not responding at localhost:3100. Run `pnpm docker:mcp:ready` to start Docker, then restart the session."
+> Do not proceed. Do not try alternative tools.
 
-### Step 3: Validate
+### Step 2: Read project state
 
-Check for these alert conditions in the injected block:
+```bash
+curl -s -X POST http://localhost:3100/memory/search_nodes \
+  -H "Content-Type: application/json" \
+  -d '{"query":"nexgen-electrical-innovations-state"}'
+```
 
-- `WARNING: Branch mismatch` → tell user: "Run `pnpm lane:activate` to correct the lane."
-- `Docker: OFFLINE` → tell user: "Run `pnpm docker:mcp:ready` to restore Docker."
-- `lane_status: paused` → tell user: "Run `pnpm lane:activate` to resume lane."
+This returns the project state entity with all current observations.
+
+### Step 3: Extract these fields from the response
+
+| Field | Look for in observations |
+|-------|--------------------------|
+| Active branch | `"Branch: ..."` observation |
+| Active phase | `"Active phase: ..."` observation |
+| Build status | `"Build status: ..."` observation |
+| Next tasks | `"Next tasks: ..."` observation |
+| Active lane | `"lane_status: ..."` or `"Active lane: ..."` |
+
+> **If entity not found or observations empty:** Tell the user:
+> "Project state entity not found in Docker memory. Run `pnpm docker:mcp:smoke` to verify services, then check if `nexgen-electrical-innovations-state` entity exists."
+> Do not invent status — report exactly what was returned.
 
 ### Step 4: Report — exactly 3 bullets, then STOP
 
 ```
-- **Branch:** [branch name] | Lane: [entity] ([lane_status])
+- **Branch:** [current branch] | Docker: healthy | Lane: [active lane or "none"]
 - **Phase:** [active phase] | Build: [build status]
-- **Next:** [top next task from Project State]
+- **Next:** [top next task]
 ```
 
-**Do not proceed. Do not run git commands. Do not run Docker commands.
-Wait for user instruction.**
+**Do not proceed further. Wait for user instruction.**
+
+---
+
+## Fail-fast rules
+
+- One curl call per step. If it fails: stop and report to user — do not retry with a different tool or namespace.
+- Never read an injected `## Session Memory` block — the v3 hook does not write one. Always call curl directly.
+- Never call `mcp__MCP_DOCKER__memory_reference__*` — that namespace does not exist.
