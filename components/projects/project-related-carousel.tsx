@@ -9,10 +9,20 @@ import {
   type Variants,
   type PanInfo,
 } from "framer-motion";
-import { ArrowRight, MapPin, GripHorizontal } from "lucide-react";
+import { MapPin, GripHorizontal } from "lucide-react";
 import { useAnimatedBorders } from "@/lib/use-animated-borders";
 import type { Project } from "@/types/projects";
 import { ProjectStatusBadge } from "@/components/projects/project-status-badge";
+
+function formatDate(value: string) {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  })
+    .format(new Date(value))
+    .toUpperCase();
+}
 
 interface ProjectRelatedCarouselProps {
   projects: Project[];
@@ -144,47 +154,68 @@ export function ProjectRelatedCarousel({
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="shrink-0 w-70 sm:w-[320px]"
+              className="shrink-0 w-72 sm:w-[300px]"
             >
               <Link
                 href={`/projects/category/${categorySlug}/${project.slug}`}
-                className="group block rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan/40 hover:shadow-[0_0_20px_rgba(0,243,189,0.06)]"
+                className="group flex flex-col rounded-xl border border-border/40 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-electric-cyan/40 hover:shadow-[0_0_20px_rgba(0,243,189,0.08)]"
                 onClick={(e) => e.stopPropagation()}
                 draggable={false}
               >
                 {/* Image */}
-                <div className="relative h-32 sm:h-36 overflow-hidden">
+                <div className="relative h-44 sm:h-48 w-full shrink-0 overflow-hidden">
                   <Image
                     src={project.coverImage.src}
                     alt={project.coverImage.alt}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="320px"
+                    sizes="300px"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
-
-                  {/* Status badge */}
-                  <div className="absolute bottom-2 left-2">
-                    <ProjectStatusBadge status={project.status} />
-                  </div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                 </div>
 
                 {/* Content */}
-                <div className="p-4">
-                  <h3 className="text-sm font-bold text-foreground leading-snug line-clamp-1 transition-colors duration-300 group-hover:text-electric-cyan">
-                    {project.title}
-                  </h3>
+                <div className="flex flex-1 flex-col justify-between gap-3 p-4">
+                  <div className="space-y-2.5">
+                    {/* Badges */}
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="rounded-md border border-electric-cyan/30 bg-electric-cyan/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-electric-cyan">
+                        {project.categoryLabel}
+                      </span>
+                      <ProjectStatusBadge status={project.status} />
+                    </div>
 
-                  <div className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <MapPin className="h-3 w-3 shrink-0" />
-                    <span className="truncate">{project.kpis.location}</span>
+                    {/* Date */}
+                    <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/50">
+                      {formatDate(project.publishedAt)}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-sm font-bold text-foreground leading-snug line-clamp-2 transition-colors duration-300 group-hover:text-electric-cyan">
+                      {project.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-xs leading-5 text-foreground/60 line-clamp-3">
+                      {project.description}
+                    </p>
                   </div>
 
-                  {/* Arrow CTA */}
-                  <div className="mt-3 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-electric-cyan/60 transition-all duration-300 group-hover:text-electric-cyan">
-                    <span>View Project</span>
-                    <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+                  {/* Footer */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.12em] text-foreground/50">
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3 shrink-0" />
+                        {project.kpis.location}
+                      </span>
+                      <span className="text-foreground/30">·</span>
+                      <span>{project.categoryLabel}</span>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1.5 rounded-lg border border-electric-cyan/30 bg-electric-cyan/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-electric-cyan transition-all group-hover:bg-electric-cyan/20 group-hover:shadow-[0_0_15px_rgba(0,243,189,0.15)]">
+                      View Project →
+                    </div>
                   </div>
                 </div>
               </Link>

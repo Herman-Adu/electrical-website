@@ -129,8 +129,11 @@ function autoGenerateTocItems(
 }
 
 function getTocItems(article: NewsArticle): TocItem[] {
-  if (article.detail.toc?.length) return article.detail.toc;
-  return autoGenerateTocItems(article, (article.detail.timeline?.length ?? 0) > 0);
+  const base = article.detail.toc?.length
+    ? article.detail.toc
+    : autoGenerateTocItems(article, (article.detail.timeline?.length ?? 0) > 0);
+  if (base.some((item) => item.id === "get-started")) return base;
+  return [...base, { id: "get-started", label: "Get Started" }];
 }
 
 export default async function NewsArticlePage({
