@@ -44,3 +44,4 @@ export { LayoutDispatcher, ReadingProgressBar } from "./detail";
 // CTA components
 export { NewsArticleClosingCTA } from "./news-article-closing-cta";
 export { NewsHubListCTA } from "./news-hub-list-cta";
+export { NewsTopicCard } from "./news-topic-card";
