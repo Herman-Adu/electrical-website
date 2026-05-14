@@ -9,7 +9,8 @@ import {
   CTAPower,
   Footer,
 } from "@/components/sections";
-import { ContentBreadcrumb } from "@/components/shared";
+import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
+import { homeIntroData } from "@/data/home";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Nexgen Electrical Innovations | Powering the Future",
@@ -37,6 +38,9 @@ export default function Home() {
         items={[{ label: "Home", href: "/", isCurrent: true }]}
         section="home"
       />
+
+      {/* Home Introduction */}
+      <SectionIntro data={homeIntroData} />
 
       {/* Core Services Grid */}
       <Services />

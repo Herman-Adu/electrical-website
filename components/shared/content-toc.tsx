@@ -198,7 +198,7 @@ export function ContentToc({
                         "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border font-mono text-[9px] transition-all",
                         isSubItem && "h-4 w-4 text-[8px]",
                         isActive
-                          ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                          ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-white"
                           : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
                       )}
                     >
@@ -267,7 +267,7 @@ export function ContentToc({
                                 className={cn(
                                   "flex h-4 w-4 shrink-0 items-center justify-center rounded-md border font-mono text-[8px] transition-all",
                                   isChildActive
-                                    ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
+                                    ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-white"
                                     : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
                                 )}
                               >
