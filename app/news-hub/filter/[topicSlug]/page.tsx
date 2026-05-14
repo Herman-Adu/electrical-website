@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
 import { NewsHubCategoryTitle } from "@/components/news-hub";
 import { NewsTopicHero } from "@/components/news-hub/news-topic-hero";
-import { SectionIntro } from "@/components/shared";
+import { SectionIntro, ContentBreadcrumb } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { allNewsArticles, getSidebarCardsByCategory } from "@/data/news";
 import { getNewsArticlesByTopic, getNewsTopicBySlug, newsTopics } from "@/data/news/topics";
@@ -41,6 +41,16 @@ export default async function NewsTopicFilterPage({ params }: PageProps) {
   return (
     <main className="relative bg-background">
       <NewsTopicHero topic={topic} articleCount={items.length} />
+
+      <ContentBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "News Hub", href: "/news-hub" },
+          { label: "Topics", href: "/news-hub/category" },
+          { label: topic.label, href: "#", isCurrent: true },
+        ]}
+        section="news"
+      />
 
       <SectionIntro data={introData} />
 
