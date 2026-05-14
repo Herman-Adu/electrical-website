@@ -22,7 +22,7 @@ Never use port 3000 for MCP operations. Never confuse these two.
 
 ## Curl Invocation Pattern
 
-All Docker MCP services accept the same POST format:
+All Docker MCP services accept this standard POST format:
 
 ```bash
 curl -s -X POST http://localhost:3100/{service}/tools/call \
@@ -30,10 +30,21 @@ curl -s -X POST http://localhost:3100/{service}/tools/call \
   -d '{"name":"tool_name","arguments":{...}}'
 ```
 
-Health check for any service:
+The memory-reference service also exposes these shorthand routes (Caddy passthrough):
 ```bash
-curl -s http://localhost:3100/memory/health
-curl -s http://localhost:3100/health
+# Search — shorthand for tools/call with name=search_nodes
+curl -s -X POST http://localhost:3100/memory/search_nodes \
+  -H "Content-Type: application/json" \
+  -d '{"query":"..."}'
+
+# Read graph — GET shorthand
+curl -s http://localhost:3100/memory/read_graph
+```
+
+Health check:
+```bash
+curl -s http://localhost:3100/memory/health   # memory service
+curl -s http://localhost:3100/health          # Caddy router
 ```
 
 ## Fail-Fast Rule

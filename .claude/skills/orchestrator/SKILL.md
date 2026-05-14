@@ -1,6 +1,6 @@
 ---
 name: orchestrator
-description: Use at the start of EVERY new session to load project state, report status, and await instruction. Also invoke when: starting a new feature, returning from a break, resuming work from a different machine. This skill IS the session startup — never paste a large prompt, just run /orchestrator. Triggers: "start session", "new session", "what were we doing", "resume work", "where were we", "what's the status", "load project state".
+description: Use when starting any new session, resuming work after a break, returning from a different machine, beginning a new feature, or any time project state needs to be loaded fresh. Also trigger on: "start session", "new session", "what were we doing", "resume work", "where were we", "what's the status", "load project state", "show me where we are", "check current status". Always run /orchestrator — never substitute with a manual prompt or git commands alone. Accepts an optional feature name or context hint.
 argument-hint: "[optional: feature name or context to focus on]"
 disable-model-invocation: true
 ---
@@ -47,9 +47,7 @@ The general-purpose agent spawns specialised sub-agents (architecture-sme, code-
 
 **If any `mcp__memory__*` call returns an error:** go immediately to the curl fallback — do not retry with a different MCP namespace. Report the error to user if curl also fails.
 
-**Port map — never confuse these:**
-- `localhost:3100` — Caddy gateway to all Docker MCP services
-- `localhost:3000` — Next.js dev server (no MCP services here)
+**Port map:** See `.claude/rules/mcp-invocation.md`. `localhost:3100` = Caddy (all MCP services). `localhost:3000` = Next.js dev server only.
 
 **Context limit:**
 - At 60%: Stop. Tell user. Wait for decision.
@@ -99,12 +97,16 @@ pnpm typecheck && pnpm build && pnpm test
 
 Before dispatching any implementation agent, check:
 ```bash
-cat C:\tmp\pending-plan-sync.txt 2>/dev/null || cat /tmp/pending-plan-sync.txt 2>/dev/null
+# Windows (Bash tool)
+cat /c/tmp/pending-plan-sync.txt 2>/dev/null
+# PowerShell
+if (Test-Path C:\tmp\pending-plan-sync.txt) { Get-Content C:\tmp\pending-plan-sync.txt }
 ```
 
 If a path is returned: run `plan-sync` skill with that path before proceeding. Clear the file after sync:
 ```bash
-rm C:\tmp\pending-plan-sync.txt 2>/dev/null; rm /tmp/pending-plan-sync.txt 2>/dev/null
+rm -f /c/tmp/pending-plan-sync.txt
+# PowerShell: Remove-Item C:\tmp\pending-plan-sync.txt -ErrorAction SilentlyContinue
 ```
 
 Implementation cannot begin on an unsynced plan.

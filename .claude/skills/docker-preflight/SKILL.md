@@ -1,6 +1,6 @@
 ---
 name: docker-preflight
-description: Use at every session start and when checking current state. Calls the Docker memory service live via curl to deliver a 3-bullet status report. Trigger phrases: session start, load context, what's the status, where were we, check branch, what phase.
+description: Use when starting any session, resuming work, or checking current project status. Also invoke when the user asks "where were we", "what's the status", "what phase are we in", "check branch", "load context", "what were we doing", or types "session start". Invoke before any implementation work begins — reads Docker memory directly to confirm the service is live and returns branch, phase, and next-task status from the knowledge graph. Do not substitute git log or memory injection for this skill. Works without arguments.
 argument-hint: "[none required]"
 disable-model-invocation: true
 ---
@@ -59,10 +59,4 @@ This returns the project state entity with all current observations.
 
 **Do not proceed further. Wait for user instruction.**
 
----
-
-## Fail-fast rules
-
-- One curl call per step. If it fails: stop and report to user — do not retry with a different tool or namespace.
-- Never read an injected `## Session Memory` block — the v3 hook does not write one. Always call curl directly.
-- Never call `mcp__MCP_DOCKER__memory_reference__*` — that namespace does not exist.
+Follows the fail-fast rule in `.claude/rules/mcp-invocation.md`: one call per step, stop on failure, no retries with alternative namespaces. Never read an injected `## Session Memory` block — the v3 hook does not write one.
