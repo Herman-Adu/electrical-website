@@ -31,8 +31,6 @@
       "Read(C:/tmp/**)",
       "WebFetch(domain:github.com)"
     ],
-    "additionalDirectories": [
-      "C:\\Users\\herma\\source\\repository\\nexgen-electrical-innovations\\.claude\\skills\\gsap-scrolltrigger"
-    ]
+    "additionalDirectories": []
   }
 }
