@@ -171,9 +171,10 @@ test.describe("projects category slider — URL-driven filtering", () => {
       page.getByRole("heading", { level: 3, name: /no projects yet/i }),
     ).toBeVisible({ timeout: 5000 });
 
-    // CTA <Link> (rendered as <a>) is present
+    // CTA <Link> (rendered as <a>) is present — use .first() because
+    // ProjectsListCTA also renders a "View All Projects" link on the same page.
     await expect(
-      page.getByRole("link", { name: /view all projects/i }),
+      page.getByRole("link", { name: /view all projects/i }).first(),
     ).toBeVisible();
   });
 
@@ -184,7 +185,8 @@ test.describe("projects category slider — URL-driven filtering", () => {
       waitUntil: "domcontentloaded",
     });
 
-    const ctaLink = page.getByRole("link", { name: /view all projects/i });
+    // .first() scopes to the empty-state card link; ProjectsListCTA adds a second match.
+    const ctaLink = page.getByRole("link", { name: /view all projects/i }).first();
     await expect(ctaLink).toBeVisible({ timeout: 10000 });
     await ctaLink.click();
 
