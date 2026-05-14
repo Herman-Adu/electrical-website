@@ -1,5 +1,5 @@
 # Naming Conventions (Cheatsheet)
-> Full reference: `.claude/rules/archives/naming-conventions-full.md`
+> Full reference: `docs/standards/naming-conventions-full.md`
 
 | Type | Convention | Example |
 |------|-----------|---------|

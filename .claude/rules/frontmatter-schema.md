@@ -1,5 +1,5 @@
 # Frontmatter Schema (Cheatsheet)
-> Full reference: `.claude/rules/archives/frontmatter-schema-full.md`
+> Full reference: `docs/standards/frontmatter-schema-full.md`
 
 **SKILL.md** — required fields: `name` (kebab-case), `description` (80–200 words, starts "Use this skill…"), `argument-hint`, `disable-model-invocation: true`
 
