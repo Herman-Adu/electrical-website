@@ -4,6 +4,7 @@ import {
   NewsDetailHero,
   NewsRelatedArticles,
   NewsArticleToc,
+  NewsArticleClosingCTA,
   type TocItem,
 } from "@/components/news-hub";
 import { LayoutDispatcher, ReadingProgressBar } from "@/components/news-hub/detail";
@@ -15,7 +16,9 @@ import {
   getNewsCategoryBySlug,
   getNewsCategorySlugs,
   getRelatedNewsArticles,
+  getSidebarCardsByCategory,
 } from "@/data/news";
+import { ProjectSupplementalSection } from "@/components/projects";
 import { createNewsArticleMetadata } from "@/lib/metadata-news";
 import {
   getBreadcrumbSchema,
@@ -120,6 +123,8 @@ function autoGenerateTocItems(
     items.push({ id: "testimonial", label: "Testimonial" });
   }
 
+  items.push({ id: "get-started", label: "Get Started" });
+
   return items;
 }
 
@@ -142,6 +147,7 @@ export default async function NewsArticlePage({
   }
 
   const relatedArticles = getRelatedNewsArticles(article);
+  const articleSidebarCards = getSidebarCardsByCategory("all");
   const articleSchema = getNewsArticleSchema(article);
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", url: siteConfig.getUrl(siteConfig.routes.home) },
@@ -219,10 +225,14 @@ export default async function NewsArticlePage({
               timelineItems={canonicalTimeline?.items}
             />
 
-            {/* Related Articles — packed into left cell so the grid row extends and the sticky aside has scroll-room */}
-            <div className="mt-16" data-related-articles="true">
-              <NewsRelatedArticles articles={relatedArticles} />
-            </div>
+            {/* Get Started — pads left cell so sticky TOC has scroll-room */}
+            <ProjectSupplementalSection
+              cards={articleSidebarCards.slice(0, 2).map((c) => ({
+                ...c,
+                section: "news" as const,
+                targetCategories: c.targetCategories ?? [],
+              }))}
+            />
           </div>
 
           {/* Sticky Sidebar */}
@@ -308,6 +318,22 @@ export default async function NewsArticlePage({
               </div>
             )}
           </aside>
+        </div>
+      </section>
+
+      {/* Continue Reading — full-width, outside sticky grid */}
+      {relatedArticles.length > 0 && (
+        <section className="section-container section-padding bg-background">
+          <div className="section-content max-w-6xl">
+            <NewsRelatedArticles articles={relatedArticles} />
+          </div>
+        </section>
+      )}
+
+      {/* Editorial CTA */}
+      <section className="section-container section-padding bg-card/30">
+        <div className="section-content max-w-6xl">
+          <NewsArticleClosingCTA categorySlug={categorySlug} />
         </div>
       </section>
 
