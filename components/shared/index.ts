@@ -21,3 +21,4 @@ export { ContentBreadcrumb } from "./content-breadcrumb";
 export { BreadcrumbMobileToggle } from "./breadcrumb-mobile-toggle";
 export { HeroTrustIndicators } from './hero-trust-indicators';
 export type { TrustIndicatorItem } from '@/types/sections';
+export { CategoryPageLayout } from "./category-page-layout";

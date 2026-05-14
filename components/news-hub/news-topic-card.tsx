@@ -3,26 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import type { NewsCategory } from "@/types/news";
+import type { NewsTopic } from "@/data/news/topics";
 
-interface NewsChannelCardProps {
-  category: NewsCategory;
+interface NewsTopicCardProps {
+  topic: NewsTopic;
   articleCount: number;
-  recentArticleTitle: string;
   coverImageSrc: string;
   coverImageAlt: string;
-  description?: string;
 }
 
-export function NewsChannelCard({
-  category,
-  articleCount,
-  recentArticleTitle,
-  coverImageSrc,
-  coverImageAlt,
-  description,
-}: NewsChannelCardProps) {
+export function NewsTopicCard({ topic, articleCount, coverImageSrc, coverImageAlt }: NewsTopicCardProps) {
   const shouldReduce = useReducedMotion();
+  const previewTags = topic.tags.slice(0, 3);
 
   return (
     <motion.div
@@ -31,7 +23,7 @@ export function NewsChannelCard({
       animate="rest"
       className="group relative flex h-64 flex-col justify-end overflow-hidden rounded-xl sm:h-72 border border-transparent hover:border-electric-cyan/40 hover:shadow-[0_0_30px_rgba(0,243,189,0.12)] transition-all duration-300"
     >
-      <Link href={`/news-hub/category/${category.slug}`} className="absolute inset-0 z-20" aria-label={`Browse ${category.label} articles`} />
+      <Link href={`/news-hub/filter/${topic.slug}`} className="absolute inset-0 z-20" aria-label={`Browse ${topic.label} articles`} />
       <Image
         src={coverImageSrc}
         alt={coverImageAlt}
@@ -44,19 +36,23 @@ export function NewsChannelCard({
 
       <div className="relative z-10 p-5">
         <div className="flex items-center gap-2">
-          <h2 className="text-xl font-bold text-white">{category.label}</h2>
+          <h2 className="text-xl font-bold text-white">{topic.label}</h2>
           <span className="rounded-full bg-cyan-400 px-2 py-0.5 text-xs font-semibold text-black">{articleCount}</span>
         </div>
-        <p className="mt-1 text-sm text-white/70 line-clamp-1">{recentArticleTitle}</p>
 
         <motion.div
           variants={{ rest: { opacity: 0, y: 10 }, hover: { opacity: 1, y: 0 } }}
           transition={{ duration: 0.22 }}
+          className="mt-2 space-y-2"
         >
-          {description && (
-            <p className="mt-2 text-xs text-white/60 leading-relaxed line-clamp-2">{description}</p>
-          )}
-          <p className="mt-2 text-xs font-semibold text-electric-cyan">
+          <div className="flex flex-wrap gap-1.5">
+            {previewTags.map((tag) => (
+              <span key={tag} className="rounded-full border border-electric-cyan/30 bg-electric-cyan/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-electric-cyan">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <p className="text-xs font-semibold text-electric-cyan">
             Browse {articleCount} article{articleCount !== 1 ? "s" : ""} →
           </p>
         </motion.div>
@@ -66,7 +62,7 @@ export function NewsChannelCard({
           transition={{ duration: 0.15 }}
           className="mt-2 text-xs font-medium text-cyan-400"
         >
-          View {articleCount} article{articleCount !== 1 ? "s" : ""} →
+          {articleCount} article{articleCount !== 1 ? "s" : ""} →
         </motion.p>
       </div>
     </motion.div>
