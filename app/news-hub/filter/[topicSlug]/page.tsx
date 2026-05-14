@@ -3,6 +3,7 @@ import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
 import { NewsHubCategoryTitle } from "@/components/news-hub";
 import { NewsTopicHero } from "@/components/news-hub/news-topic-hero";
 import { SectionIntro, ContentBreadcrumb } from "@/components/shared";
+import { NewsHubListCTA } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
 import { allNewsArticles, getSidebarCardsByCategory } from "@/data/news";
 import { getNewsArticlesByTopic, getNewsTopicBySlug, newsTopics } from "@/data/news/topics";
@@ -64,6 +65,12 @@ export default async function NewsTopicFilterPage({ params }: PageProps) {
             batchSize={3}
             emptyMessage={`No articles found for the ${topic.label} topic yet.`}
           />
+        </div>
+      </section>
+
+      <section className="section-container section-padding bg-card/30">
+        <div className="section-content max-w-6xl">
+          <NewsHubListCTA />
         </div>
       </section>
 

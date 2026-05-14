@@ -11,6 +11,7 @@ import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import { SectorCard } from "@/components/projects/sector-card";
 import { WorkTypeFilter } from "@/components/projects/work-type-filter";
+import { ProjectsListCTA } from "@/components/projects";
 
 export const metadata: Metadata = createProjectCategoriesMetadata();
 
@@ -80,6 +81,13 @@ export default function ProjectCategoriesPage() {
         </p>
         <WorkTypeFilter workTypes={workTypes} />
       </section> */}
+
+      <section className="section-container section-padding bg-background">
+        <div className="section-content max-w-6xl">
+          <ProjectsListCTA />
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
