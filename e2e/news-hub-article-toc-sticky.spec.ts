@@ -13,10 +13,8 @@ import { test, expect } from "@playwright/test";
  *      heading).
  *
  * Test seams:
- *   - <aside data-sticky-toc="true"> on the article detail page (already
- *     present before this spec was authored).
- *   - <div data-related-articles="true"> wrapping NewsRelatedArticles
- *     (added in Phase 5 alongside this spec).
+ *   - <aside data-sticky-toc="true"> on the article detail page.
+ *   - <h2>Continue Reading</h2> inside the related articles section.
  *
  * Articles exercised:
  *   - /news-hub/category/residential/taplow-residential-energy-refresh
@@ -58,12 +56,15 @@ test.describe("article TOC stays sticky through related articles", () => {
     });
     expect(initialRect.height).toBeGreaterThan(0);
 
-    // Scroll the related-articles wrapper into view. CSS sticky should keep
+    // Scroll the "Continue Reading" section into view. CSS sticky should keep
     // the aside docked at its `top-37.5` (≈150px) offset rather than scrolling
     // away with the article body.
-    const relatedWrapper = page.locator('[data-related-articles="true"]');
-    await expect(relatedWrapper).toBeAttached();
-    await relatedWrapper.evaluate((el) =>
+    const relatedHeading = page.getByRole("heading", {
+      level: 2,
+      name: /continue reading/i,
+    });
+    await expect(relatedHeading).toBeAttached();
+    await relatedHeading.evaluate((el) =>
       el.scrollIntoView({ block: "center", behavior: "auto" }),
     );
 
@@ -106,9 +107,12 @@ test.describe("article TOC stays sticky through related articles", () => {
     const aside = page.locator('[data-sticky-toc="true"]').first();
     await expect(aside).toBeVisible({ timeout: 10000 });
 
-    const relatedWrapper = page.locator('[data-related-articles="true"]');
-    await expect(relatedWrapper).toBeAttached();
-    await relatedWrapper.evaluate((el) =>
+    const relatedHeading = page.getByRole("heading", {
+      level: 2,
+      name: /continue reading/i,
+    });
+    await expect(relatedHeading).toBeAttached();
+    await relatedHeading.evaluate((el) =>
       el.scrollIntoView({ block: "center", behavior: "auto" }),
     );
 

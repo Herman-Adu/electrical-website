@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { NewsCategoryHero, NewsHubCategoryTitle } from "@/components/news-hub";
+import { NewsCategoryHero, NewsHubCategoryTitle, NewsHubListCTA } from "@/components/news-hub";
 import { NewsGridLayout } from "@/components/news-hub/news-grid-layout";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
@@ -82,6 +82,12 @@ export default async function NewsCategoryPage({
             batchSize={3}
             emptyMessage={`No stories are available in the ${category.label} category yet.`}
           />
+        </div>
+      </section>
+
+      <section className="section-container section-padding bg-card/30">
+        <div className="section-content max-w-6xl">
+          <NewsHubListCTA />
         </div>
       </section>
 

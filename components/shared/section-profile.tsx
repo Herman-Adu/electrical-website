@@ -104,7 +104,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-80px" }}
-            className="w-full md:w-5/12 shrink-0"
+            className="w-full md:w-5/12 shrink-0 order-2 md:order-none"
           >
             <div className="relative p-2">
               <div className="absolute -inset-6 border border-[--electric-cyan]/08 rounded-3xl" />
@@ -189,7 +189,7 @@ export function SectionProfile({ data }: SectionProfileProps) {
             </div>
           </motion.div>
 
-          <div className="w-full md:w-7/12 relative z-20 bg-background/40 backdrop-blur-sm rounded-xl p-8 lg:p-12">
+          <div className="w-full md:w-7/12 relative z-20 bg-background/40 backdrop-blur-sm rounded-xl p-8 lg:p-12 order-1 md:order-none">
             <motion.div
               initial={{ opacity: 0, x: textInitialX }}
               whileInView={{ opacity: 1, x: 0 }}

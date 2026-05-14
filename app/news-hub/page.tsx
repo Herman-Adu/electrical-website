@@ -5,6 +5,7 @@ import {
   NewsHubBentoGrid,
   NewsHubFeaturedSection,
   NewsHubHero,
+  NewsHubListCTA,
 } from "@/components/news-hub";
 import { NewsListSkeleton } from "@/components/news-hub/news-list-skeleton";
 import { NewsHubFilterClient } from "@/components/news-hub/news-hub-filter-client";
@@ -66,6 +67,12 @@ export default async function NewsHubPage() {
         <Suspense fallback={<NewsListSkeleton />}>
           <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} />
         </Suspense>
+      </section>
+
+      <section className="section-container section-padding bg-card/30">
+        <div className="section-content max-w-6xl">
+          <NewsHubListCTA />
+        </div>
       </section>
 
       <Footer />

@@ -3,6 +3,7 @@ import {
   NewsChannelCard,
   NewsHubCategoriesHero,
   NewsTopicFilter,
+  NewsHubListCTA,
 } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
@@ -89,6 +90,12 @@ export default function NewsHubCategoriesPage() {
         <p className="text-sm text-muted-foreground mb-4">Filter articles across all channels by topic</p>
         <NewsTopicFilter topics={newsTopics} />
       </section> */}
+
+      <section className="section-container section-padding bg-card/30">
+        <div className="section-content max-w-6xl">
+          <NewsHubListCTA />
+        </div>
+      </section>
 
       <Footer />
     </main>

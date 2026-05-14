@@ -11,7 +11,7 @@ import {
 } from "@/data/projects";
 import { getProjectsSidebarCards } from "@/data/shared/sidebar-cards";
 import { createProjectCategoryMetadata } from "@/lib/metadata-projects";
-import { ProjectCategoryHero } from "@/components/projects";
+import { ProjectCategoryHero, ProjectsListCTA } from "@/components/projects";
 import { ProjectCategoryListSection } from "@/components/projects/project-category-list-section";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
@@ -97,6 +97,13 @@ export default async function CategoryProjectsPage({
           categorySlug={categorySlug}
         />
       </Suspense>
+
+      <section className="section-container section-padding bg-background">
+        <div className="section-content max-w-6xl">
+          <ProjectsListCTA />
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

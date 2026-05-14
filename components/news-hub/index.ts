@@ -40,3 +40,7 @@ export { NewsHubCategoryTitle } from "./news-hub-category-title";
 
 // Detail system — type-aware layout dispatch
 export { LayoutDispatcher, ReadingProgressBar } from "./detail";
+
+// CTA components
+export { NewsArticleClosingCTA } from "./news-article-closing-cta";
+export { NewsHubListCTA } from "./news-hub-list-cta";

@@ -160,7 +160,7 @@ export function NewsArticleToc({
                         "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border font-mono text-[9px] transition-all",
                         isSubItem && "h-4 w-4 text-[8px]",
                         isActive
-                          ? "border-electric-cyan/40 bg-electric-cyan/20 text-electric-cyan"
+                          ? "border-electric-cyan/40 bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-white"
                           : "border-border/40 bg-background/50 text-foreground/40 group-hover:border-electric-cyan/20",
                       )}
                     >
@@ -182,7 +182,7 @@ export function NewsArticleToc({
                     {isActive && (
                       <motion.span
                         layoutId="toc-active"
-                        className="h-1.5 w-1.5 rounded-full bg-electric-cyan shadow-[0_0_8px_rgba(0,243,189,0.6)]"
+                        className="h-1.5 w-1.5 rounded-full bg-[hsl(174_100%_35%)] dark:bg-white shadow-[0_0_8px_hsl(174_100%_35%/0.6)] dark:shadow-[0_0_8px_rgba(255,255,255,0.6)]"
                         transition={{
                           type: "spring",
                           stiffness: 300,
