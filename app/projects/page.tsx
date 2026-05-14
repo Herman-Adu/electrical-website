@@ -5,6 +5,7 @@ import {
   ProjectsHero,
   ProjectsFeaturedSection,
   ProjectsBentoGrid,
+  ProjectsListCTA,
 } from "@/components/projects";
 import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
@@ -71,6 +72,12 @@ export default async function ProjectsPage() {
             counts={counts}
           />
         </Suspense>
+      </section>
+
+      <section className="section-container section-padding bg-background">
+        <div className="section-content max-w-6xl">
+          <ProjectsListCTA />
+        </div>
       </section>
 
       <Footer />

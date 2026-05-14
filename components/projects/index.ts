@@ -33,3 +33,4 @@ export { ProjectSocialCTA } from "./project-social-cta";
 export { ProjectArticleContent } from "./project-article-content";
 export { ProjectSupplementalSection } from "./project-supplemental-section";
 export { ProjectNarrativeBlock } from "./project-narrative-block";
+export { ProjectsListCTA } from "./projects-list-cta";
