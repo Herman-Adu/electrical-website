@@ -154,7 +154,7 @@ export function ProjectRelatedCarousel({
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="shrink-0 w-72 sm:w-[300px]"
+              className="shrink-0 w-[360px]"
             >
               <Link
                 href={`/projects/category/${categorySlug}/${project.slug}`}
