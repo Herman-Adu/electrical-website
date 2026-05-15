@@ -7,10 +7,9 @@ import { test, expect } from "@playwright/test";
  *   1. The right-column TOC aside on news article detail pages stays docked
  *      below the navbar while the related-articles block scrolls into view
  *      (mirrors the /projects sticky-aside pattern).
- *   2. Clicking the "Client Testimonial" TOC entry on a case-study article
- *      lands the page on a visible <h2>Client Testimonial</h2> heading above
- *      the quote block (Phase 1 fix — bare blockquote replaced with proper
- *      heading).
+ *   2. Clicking the "Testimonial" TOC entry on an insights article lands the
+ *      page on a visible <h2>Client Testimonial</h2> heading above the quote
+ *      block (Phase 1 fix — bare blockquote replaced with proper heading).
  *
  * Test seams:
  *   - <aside data-sticky-toc="true"> on the article detail page.
@@ -18,9 +17,9 @@ import { test, expect } from "@playwright/test";
  *
  * Articles exercised:
  *   - /news-hub/category/residential/taplow-residential-energy-refresh
- *     (residential layout — has a quote block + TOC entry "Homeowner Feedback")
- *   - /news-hub/category/case-studies/hospital-power-ring-lessons-learned
- *     (case-study layout — has a quote block + TOC entry "Client Testimonial")
+ *     (residential layout — has a quote block + TOC entry "Testimonial")
+ *   - /news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors
+ *     (insight layout — has a quote block + TOC entry "Testimonial", h2 "Client Testimonial")
  *
  * Prerequisites:
  *   - Next.js dev or production server on http://127.0.0.1:3000
@@ -45,7 +44,6 @@ test.describe("article TOC stays sticky through related articles", () => {
 
     // Use .first() — Next.js App Router streaming can briefly produce two identical
     // aside elements in the DOM during SSR→hydration, triggering strict mode.
-    // The case-study test at line 103 already uses this pattern correctly.
     const aside = page.locator('[data-sticky-toc="true"]').first();
     await expect(aside).toBeVisible({ timeout: 10000 });
 
@@ -95,11 +93,11 @@ test.describe("article TOC stays sticky through related articles", () => {
     expect(stuckRect.top + stuckRect.height).toBeGreaterThan(0);
   });
 
-  test("case-study article: aside stays sticky through related articles", async ({
+  test("insights article: aside stays sticky through related articles", async ({
     page,
   }) => {
     const response = await page.goto(
-      "/news-hub/category/case-studies/hospital-power-ring-lessons-learned",
+      "/news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors",
       { waitUntil: "domcontentloaded" },
     );
     expect(response?.status()).toBe(200);
@@ -145,18 +143,18 @@ test.describe("client testimonial heading is visible", () => {
     page,
   }) => {
     const response = await page.goto(
-      "/news-hub/category/case-studies/hospital-power-ring-lessons-learned",
+      "/news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors",
       { waitUntil: "domcontentloaded" },
     );
     expect(response?.status()).toBe(200);
 
     // TOC nav lives inside the sticky aside. The testimonial entry exists
-    // because article.detail.quote is defined (TOC label "Client Testimonial").
+    // because article.detail.quote is defined (TOC label "Testimonial").
     const tocNav = page.getByRole("navigation", { name: /table of contents/i });
     await expect(tocNav).toBeVisible({ timeout: 10000 });
 
     const testimonialLink = tocNav.getByRole("button", {
-      name: /client testimonial/i,
+      name: /testimonial/i,
     });
     await expect(testimonialLink).toBeVisible();
     await testimonialLink.click();
