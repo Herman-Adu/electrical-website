@@ -126,8 +126,38 @@ Both are passed as the `emptyMessage` prop in the respective category page templ
 
 ## Task Breakdown
 
+### T0 — Fix active nav link on detail pages
+
+**File:** `components/navigation/navbar-client.tsx` — `isSubmenuActive` function
+
+**Root cause:** `isSubmenuActive` uses exact path matching (`currentPath === targetPath`). On detail pages like `/news-hub/taplow-residential-energy-refresh` or `/projects/dhl-reading-distribution-hub`, no submenu item matches, so the active indicator disappears from the open dropdown. `isTopLevelActive` already has `startsWith` logic and keeps the top-level tab lit correctly — only the submenu indicator is missing.
+
+**Fix:** Add parent-path fallback in `isSubmenuActive` for the two detail-page cases:
+
+```ts
+// After existing query/hash handling, before final return:
+if (targetPath === '/news-hub'
+  && currentPath.startsWith('/news-hub/')
+  && !currentPath.startsWith('/news-hub/category')
+  && !currentPath.startsWith('/news-hub/filter')) {
+  return true; // article detail — highlight "Latest News"
+}
+if (targetPath === '/projects'
+  && currentPath.startsWith('/projects/')
+  && !currentPath.startsWith('/projects/category')
+  && !currentPath.startsWith('/projects/filter')) {
+  return true; // project detail — highlight "All Projects"
+}
+```
+
+**Acceptance:** Navigate to any article detail page (`/news-hub/[slug]`) — "Latest News" submenu item shows active. Navigate to any project detail page (`/projects/[slug]`) — "All Projects" submenu item shows active. Category and filter paths unchanged.
+
+**Commit:** `fix(nav): active link disappears on article and project detail pages`
+
 ### T1 — Cross-reference audit
 Grep `data/news/index.ts` for all 19 removed article slugs appearing in `relatedArticles` or `featuredArticle` fields of surviving articles. Document every hit. Fix in T3.
+
+**Note:** Pre-session grep confirmed NO `relatedArticles` or `featuredArticle` fields exist anywhere in `data/news/index.ts`. T1 is a fast confirmation pass — expected to return clean. The 4 Insights articles do not reference any removed projects or articles.
 
 **Acceptance:** zero removed slugs referenced in surviving data
 
