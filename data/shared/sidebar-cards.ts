@@ -1,4 +1,6 @@
 import type { SidebarCard, ContentSection } from "@/types/shared-content";
+import { allNewsArticles } from "@/data/news";
+import { allProjects } from "@/data/projects";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // SHARED SIDEBAR CARDS DATA
@@ -228,6 +230,25 @@ export const allSidebarCards: SidebarCard[] = [
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
+// CONTENT LINK VALIDATION
+// ═══════════════════════════════════════════════════════════════════════════
+
+function isContentLinkValid(href: string): boolean {
+  // News article link — validate slug exists
+  const newsMatch = href.match(/^\/news-hub\/category\/[^/]+\/([^/?#]+)/);
+  if (newsMatch) {
+    return allNewsArticles.some((a) => a.slug === newsMatch[1]);
+  }
+  // Project link — validate slug exists
+  const projMatch = href.match(/^\/projects\/category\/[^/]+\/([^/?#]+)/);
+  if (projMatch) {
+    return allProjects.some((p) => p.slug === projMatch[1]);
+  }
+  // Contact, services, about, external — always valid
+  return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // GETTER FUNCTIONS
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -239,9 +260,9 @@ export function getSidebarCards(
   section: ContentSection,
   category?: string
 ): SidebarCard[] {
-  // Filter by section (or "all")
+  // Filter by section (or "all"), removing cards with stale content links
   const sectionCards = allSidebarCards.filter(
-    (card) => card.section === section || card.section === "all"
+    (card) => (card.section === section || card.section === "all") && isContentLinkValid(card.href)
   );
 
   // Global cards (empty targetCategories) for this section

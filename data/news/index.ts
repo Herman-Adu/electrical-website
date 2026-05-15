@@ -6,6 +6,7 @@ import type {
   NewsHubMetricItem,
   NewsSidebarCard,
 } from "@/types/news";
+import { allProjects } from "@/data/projects";
 
 export const newsCategories: NewsCategory[] = [
   {
@@ -1135,12 +1136,27 @@ export function getNewsArticleSlugsByCategory(
     .map((article) => article.slug);
 }
 
+function isContentLinkValid(href: string): boolean {
+  // News article link — validate slug exists
+  const newsMatch = href.match(/^\/news-hub\/category\/[^/]+\/([^/?#]+)/);
+  if (newsMatch) {
+    return allNewsArticles.some((a) => a.slug === newsMatch[1]);
+  }
+  // Project link — validate slug exists
+  const projMatch = href.match(/^\/projects\/category\/[^/]+\/([^/?#]+)/);
+  if (projMatch) {
+    return allProjects.some((p) => p.slug === projMatch[1]);
+  }
+  // Contact, services, about, external — always valid
+  return true;
+}
+
 export function getSidebarCardsByCategory(
   category: NewsCategorySlug,
 ): NewsSidebarCard[] {
   // Global cards (empty targetCategories) show everywhere
   const globalCards = newsSidebarCards.filter(
-    (card) => !card.targetCategories || card.targetCategories.length === 0,
+    (card) => (!card.targetCategories || card.targetCategories.length === 0) && isContentLinkValid(card.href),
   );
 
   if (category === "all") {
@@ -1152,7 +1168,8 @@ export function getSidebarCardsByCategory(
     (card) =>
       card.targetCategories &&
       card.targetCategories.length > 0 &&
-      card.targetCategories.includes(category),
+      card.targetCategories.includes(category) &&
+      isContentLinkValid(card.href),
   );
 
   // Return category-specific cards first, then fill with global cards (max 4 total)
