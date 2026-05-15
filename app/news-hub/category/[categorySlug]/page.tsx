@@ -80,7 +80,7 @@ export default async function NewsCategoryPage({
             title={<NewsHubCategoryTitle label={category.label} />}
             initialCount={4}
             batchSize={3}
-            emptyMessage={`No stories are available in the ${category.label} category yet.`}
+            emptyMessage={`New ${category.label} content coming soon — we're building this with real Nexgen work.`}
           />
         </div>
       </section>
