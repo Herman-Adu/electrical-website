@@ -199,6 +199,22 @@ export function NavbarClient() {
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`;
     }
+    if (
+      targetPath === "/news-hub" &&
+      currentPath.startsWith("/news-hub/") &&
+      !currentPath.startsWith("/news-hub/category") &&
+      !currentPath.startsWith("/news-hub/filter")
+    ) {
+      return true;
+    }
+    if (
+      targetPath === "/projects" &&
+      currentPath.startsWith("/projects/") &&
+      !currentPath.startsWith("/projects/category") &&
+      !currentPath.startsWith("/projects/filter")
+    ) {
+      return true;
+    }
     return currentPath === targetPath;
   };
 
