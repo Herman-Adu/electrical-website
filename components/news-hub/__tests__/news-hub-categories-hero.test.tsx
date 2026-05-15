@@ -37,8 +37,11 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-vi.mock('@/components/hero/blueprint-background', () => ({
-  BlueprintBackground: () => <div data-testid="blueprint-background" />,
+vi.mock('next/image', () => ({
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} {...(props as React.ImgHTMLAttributes<HTMLImageElement>)} />
+  ),
 }));
 
 vi.mock('@/components/hero/circuits/categories-circuit', () => ({

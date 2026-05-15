@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
-import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import Image from "next/image";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
@@ -73,8 +73,30 @@ export function AboutHero() {
       sectionRef={sectionRef}
       size="tall"
       safeArea="page"
-      background={<BlueprintBackground showScanLine={false} />}
+      background={
+        <>
+          <Image
+            src="/images/about/about-hero-bs7671-wiring-regulations.png"
+            alt="BS7671 18th Edition Wiring Regulations and On-Site Guide on a desk — the compliance standards underpinning every Nexgen Electrical installation"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/65 to-black/85" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
+        </>
+      }
       backgroundFrameStyle={backgroundFrameStyle}
+      overlay={
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.10) 100%)",
+          }}
+        />
+      }
       decor={
         <>
           <svg
@@ -212,12 +234,12 @@ export function AboutHero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-white/60 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Profile // {statusText}
               </span>
             </div>
@@ -237,29 +259,29 @@ export function AboutHero() {
 
           {/* Main Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
-            <span className="block">Powering the</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
+            <span className="block text-white">Powering the</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Next Generation
             </span>
-            <span className="block">of Innovation</span>
+            <span className="block text-white">of Innovation</span>
           </motion.h1>
 
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Where engineering excellence meets genuine community commitment.
             Delivering gold-standard electrical solutions across commercial,
             industrial, and residential sectors.
           </motion.p>
 
-          <HeroTrustIndicators items={ABOUT_TRUST_INDICATORS} variants={itemVariants} />
+          <HeroTrustIndicators items={ABOUT_TRUST_INDICATORS} variants={itemVariants} variant="image-overlay" />
 
           {/* Technical metadata */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80"
           >
             <span>Est. 2009</span>
             <span className="hidden sm:inline">|</span>
@@ -278,7 +300,7 @@ export function AboutHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToContent}
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 font-bold hover:text-electric-cyan transition-colors duration-300"
           aria-label="Scroll to services"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

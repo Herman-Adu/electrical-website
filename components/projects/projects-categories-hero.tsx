@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
-import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import Image from "next/image";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
@@ -94,8 +94,30 @@ export function ProjectsCategoriesHero({
       sectionRef={sectionRef}
       size="compact"
       safeArea="page"
-      background={<BlueprintBackground showScanLine={false} />}
+      background={
+        <>
+          <Image
+            src="/images/projects/commercial/herschel-grammar/sports-hall-upgrade/sports-hall-commercial-lighting-workers.jpg"
+            alt="Nexgen electricians installing commercial LED lighting in a sports hall ceiling"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/55 to-black/80" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
+        </>
+      }
       backgroundFrameStyle={backgroundFrameStyle}
+      overlay={
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 100%)",
+          }}
+        />
+      }
       decor={
         <>
           <svg
@@ -258,12 +280,12 @@ export function ProjectsCategoriesHero({
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-white/60 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Projects // {statusText}
               </span>
             </div>
@@ -273,7 +295,7 @@ export function ProjectsCategoriesHero({
           <motion.nav
             variants={itemVariants}
             aria-label="Breadcrumb"
-            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase font-bold tracking-[0.14em] text-foreground mb-8"
+            className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase font-bold tracking-[0.14em] text-white/80 mb-8"
           >
             <Link
               href="/projects"
@@ -330,8 +352,8 @@ export function ProjectsCategoriesHero({
             variants={itemVariants}
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
-            <span className="block">Browse by</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
+            <span className="block text-white">Browse by</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Sector
             </span>
           </motion.h1>
@@ -339,7 +361,7 @@ export function ProjectsCategoriesHero({
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             Each sector represents a distinct area of electrical engineering
             expertise. Explore our project portfolio by the type of environment
@@ -350,12 +372,13 @@ export function ProjectsCategoriesHero({
           <HeroTrustIndicators
             items={CATEGORIES_TRUST_INDICATORS}
             variants={itemVariants}
+            variant="image-overlay"
           />
 
           {/* Meta bar */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -374,7 +397,7 @@ export function ProjectsCategoriesHero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.5 }}
           onClick={scrollToCategories}
-          className="flex cursor-pointer flex-col items-center gap-2 font-bold text-foreground dark:text-foreground/80 transition-colors dark:hover:text-electric-cyan hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 font-bold text-white/80 transition-colors hover:text-electric-cyan"
           aria-label="Scroll to categories"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

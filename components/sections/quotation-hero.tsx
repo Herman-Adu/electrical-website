@@ -9,7 +9,7 @@ import {
   ShieldCheck,
   Wrench,
 } from "lucide-react";
-import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import Image from "next/image";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_COMPACT_BLUEPRINT } from "@/components/hero/hero-tokens";
@@ -89,8 +89,30 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
       sectionRef={sectionRef}
       size="compact"
       safeArea="page"
-      background={<BlueprintBackground showScanLine={false} />}
+      background={
+        <>
+          <Image
+            src="/images/contact/contact-hero-team-project-planning.jpg"
+            alt="Business team collaborating around a table reviewing project analytics and plans — get in touch with Nexgen Electrical Innovations"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/70 to-black/85" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
+        </>
+      }
       backgroundFrameStyle={backgroundFrameStyle}
+      overlay={
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.10) 100%)",
+          }}
+        />
+      }
       decor={
         <>
           <svg
@@ -152,12 +174,12 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-white/60 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Services // {statusText}
               </span>
             </div>
@@ -179,11 +201,11 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
             variants={itemVariants}
             className={HERO_H1_COMPACT_BLUEPRINT}
           >
-            <span className="block">Request Your</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
+            <span className="block text-white">Request Your</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Quotation
             </span>
-            <span className="block">Today</span>
+            <span className="block text-white">Today</span>
           </motion.h1>
 
           {/* <motion.h1
@@ -210,7 +232,7 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
 
           <motion.p
             variants={itemVariants}
-            className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg"
+            className="mx-auto max-w-2xl text-base leading-relaxed text-white/80 text-pretty sm:text-lg"
           >
             {header.description}
           </motion.p>
@@ -226,15 +248,15 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
               return (
                 <div
                   key={item.title}
-                  className="relative p-5 rounded-xl border bg-foreground/20 dark:bg-white/15 border-foreground/20 dark:border-electric-cyan/10 backdrop-blur-md hover:border-[hsl(174_100%_35%)] dark:hover:border-electric-cyan transition-all duration-300 group"
+                  className="relative p-5 rounded-xl border bg-black/35 border-white/20 backdrop-blur-md hover:border-electric-cyan transition-all duration-300 group"
                 >
                   {Icon ? (
-                    <Icon className="mx-auto mb-2 h-6 w-6 text-foreground/70 dark:text-electric-cyan group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors" />
+                    <Icon className="mx-auto mb-2 h-6 w-6 text-electric-cyan group-hover:text-electric-cyan transition-colors" />
                   ) : null}
-                  <p className="text-sm font-medium text-foreground group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-electric-cyan transition-colors">
+                  <p className="text-sm font-medium text-white group-hover:text-electric-cyan transition-colors">
                     {item.title}
                   </p>
-                  <p className="mt-1 hidden text-xs text-foreground/70 dark:text-foreground/70 sm:block">
+                  <p className="mt-1 hidden text-xs text-white/60 sm:block">
                     {item.description}
                   </p>
                 </div>
@@ -245,7 +267,7 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
           {/* Metadata credential strip */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -264,7 +286,7 @@ export function QuotationHero({ header, trustIndicators }: QuotationHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.45 }}
           onClick={scrollToQuotationForm}
-          className="flex cursor-pointer flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-electric-cyan"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 font-bold transition-colors hover:text-electric-cyan"
           aria-label="Scroll to quotation form"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">

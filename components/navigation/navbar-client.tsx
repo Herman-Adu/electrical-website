@@ -60,7 +60,7 @@ const navLinks: NavLink[] = [
       { name: "Commercial & Retail", href: "/services/commercial" },
       { name: "Industrial & Infrastructure", href: "/services/industrial" },
       { name: "Emergency Response", href: "/services/emergency" },
-      { name: "Quotation", href: "/quotation" },
+      { name: "Quotation Request", href: "/quotation" },
     ],
   },
   {

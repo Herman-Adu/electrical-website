@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Activity, ChevronDown } from "lucide-react";
-import { BlueprintBackground } from "@/components/hero/blueprint-background";
+import Image from "next/image";
 import { HeroParallaxShell } from "@/components/hero/hero-parallax-shell";
 import { useHeroParallax } from "@/components/hero/use-hero-parallax";
 import { HERO_H1_TALL_BLUEPRINT } from "@/components/hero/hero-tokens";
@@ -66,8 +66,30 @@ export function ProjectsHero() {
       sectionRef={sectionRef}
       size="tall"
       safeArea="page"
-      background={<BlueprintBackground showScanLine={false} />}
+      background={
+        <>
+          <Image
+            src="/images/projects/commercial/herschel-grammar/sports-hall-upgrade/sports-hall-commercial-lighting-workers.jpg"
+            alt="Nexgen electricians installing commercial LED lighting in a sports hall ceiling"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/55 to-black/80" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/70 to-transparent" />
+        </>
+      }
       backgroundFrameStyle={backgroundFrameStyle}
+      overlay={
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 100%)",
+          }}
+        />
+      }
       decor={
         <>
           <svg
@@ -171,12 +193,12 @@ export function ProjectsHero() {
             variants={flickerVariants}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="flex items-center gap-3 border-l-2 border-foreground/60 dark:border-foreground/70 pl-4 font-bold">
+            <div className="flex items-center gap-3 border-l-2 border-white/60 pl-4 font-bold">
               <Activity
                 size={14}
                 className="text-electric-cyan animate-pulse"
               />
-              <span className="font-mono text-[10px] tracking-[0.3em] text-foreground uppercase font-bold">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-white uppercase font-bold">
                 Projects // {statusText}
               </span>
             </div>
@@ -187,26 +209,26 @@ export function ProjectsHero() {
             variants={itemVariants}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80 font-bold" />
+            <span className="h-px w-12 bg-electric-cyan/80 font-bold" />
             <span className="font-mono text-xs tracking-[0.3em] uppercase text-electric-cyan font-bold">
               Our Portfolio
             </span>
-            <span className="h-px w-12 bg-foreground/80 dark:bg-electric-cyan/80 font-bold" />
+            <span className="h-px w-12 bg-electric-cyan/80 font-bold" />
           </motion.div>
 
           {/* Headline */}
           <motion.h1 variants={itemVariants} className={HERO_H1_TALL_BLUEPRINT}>
-            <span className="block">Engineered</span>
-            <span className="block text-transparent bg-clip-text bg-linear-to-r dark:from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
+            <span className="block text-white">Engineered</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-electric-cyan/10 via-electric-cyan to-electric-cyan/10">
               Delivery
             </span>
-            <span className="block">Proven Results</span>
+            <span className="block text-white">Proven Results</span>
           </motion.h1>
 
           {/* Subline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
           >
             A data-driven portfolio of industrial, commercial, and critical
             infrastructure electrical projects delivered with strict safety,
@@ -218,12 +240,13 @@ export function ProjectsHero() {
           <HeroTrustIndicators
             items={PROJECTS_TRUST_INDICATORS}
             variants={itemVariants}
+            variant="image-overlay"
           />
 
           {/* Meta */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-foreground/80"
+            className="mt-10 flex flex-wrap justify-center gap-8 text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80"
           >
             <span>NICEIC Approved</span>
             <span className="hidden sm:inline opacity-40">|</span>
@@ -243,7 +266,7 @@ export function ProjectsHero() {
           transition={{ delay: 2, duration: 0.5 }}
           onClick={scrollToGrid}
           type="button"
-          className="flex cursor-pointer flex-col items-center gap-2 text-foreground dark:text-foreground/80 font-bold hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors duration-300"
+          className="flex cursor-pointer flex-col items-center gap-2 text-white/80 font-bold hover:text-electric-cyan transition-colors duration-300"
           aria-label="Explore Projects"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
