@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
  *   1. The right-column TOC aside on news article detail pages stays docked
  *      below the navbar while the related-articles block scrolls into view
  *      (mirrors the /projects sticky-aside pattern).
- *   2. Clicking the "Expert Commentary" TOC entry on an insights article lands
+ *   2. Clicking the "Client Testimonial" TOC entry on an insights article lands
  *      the page on a visible <h2>Client Testimonial</h2> heading above the
  *      quote block (Phase 1 fix — bare blockquote replaced with proper heading).
  *
@@ -17,7 +17,7 @@ import { test, expect } from "@playwright/test";
  *
  * Articles exercised:
  *   - /news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors
- *     (insight layout — has a quote block + TOC entry "Expert Commentary",
+ *     (insight layout — has a quote block + TOC entry "Client Testimonial",
  *      related articles block with "Continue Reading" h2, h2 "Client Testimonial")
  *
  * Prerequisites:
@@ -89,12 +89,12 @@ test.describe("client testimonial heading is visible", () => {
 
     // TOC nav lives inside the sticky aside. The testimonial entry exists
     // because article.detail.quote is defined. This insights article labels it
-    // "Expert Commentary" (id="testimonial" in the TOC config).
+    // "Client Testimonial" (id="testimonial" in the TOC config).
     const tocNav = page.getByRole("navigation", { name: /table of contents/i });
     await expect(tocNav).toBeVisible({ timeout: 10000 });
 
     const testimonialLink = tocNav.getByRole("button", {
-      name: /expert commentary/i,
+      name: /client testimonial/i,
     });
     await expect(testimonialLink).toBeVisible();
     await testimonialLink.click();

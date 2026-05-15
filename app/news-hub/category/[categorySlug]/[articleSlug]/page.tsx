@@ -102,7 +102,7 @@ function autoGenerateTocItems(
     article.detail.specifications &&
     article.detail.specifications.length > 0
   ) {
-    items.push({ id: "specifications", label: "Technical Specs" });
+    items.push({ id: "specifications", label: "Technical Specifications" });
   }
 
   items.push({ id: "takeaways", label: "Key Takeaways" });
@@ -120,7 +120,7 @@ function autoGenerateTocItems(
   }
 
   if (article.detail.quote) {
-    items.push({ id: "testimonial", label: "Testimonial" });
+    items.push({ id: "testimonial", label: "Client Testimonial" });
   }
 
   items.push({ id: "get-started", label: "Get Started" });
