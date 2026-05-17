@@ -416,7 +416,7 @@ export const allNewsArticles: NewsArticle[] = [
         { id: "metrics", label: "Key Metrics", level: 1 },
         { id: "challenges", label: "Challenges", level: 1 },
         { id: "scope", label: "Scope of Works", level: 1 },
-        { id: "specifications", label: "Technical Spec", level: 1 },
+        { id: "specifications", label: "Technical Specifications", level: 1 },
         { id: "results", label: "Outcomes", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "conclusion", label: "What This Demonstrates", level: 1 },
@@ -780,7 +780,7 @@ export const allNewsArticles: NewsArticle[] = [
         "If you are buying an EV in the near future, the practical step is to book a survey with an OZEV-approved, NICEIC-registered installer before your vehicle arrives — not after. Installation lead times vary, and having the charger ready when the car arrives is significantly more convenient than using public charging while you wait for a slot.",
       ],
       toc: [
-        { id: "spotlight", label: "Grant & Spec", level: 1 },
+        { id: "spotlight", label: "Grant & Specifications", level: 1 },
         { id: "overview", label: "What the Installation Involves", level: 1 },
         { id: "details", label: "What Your Home Needs", level: 1 },
         { id: "methodology", label: "Six Steps Before You Book", level: 1 },
