@@ -1,0 +1,16 @@
+{
+  "branch": "feat/news-hub-content-first-wave",
+  "entity": "feat-news-hub-content-first-wave",
+  "fallback": "feat-news-hub-content-first-wave — 11-article content plan complete. Placeholders deleted. Write articles in priority order: LV infrastructure → DHL case study → why cheap costs more.",
+  "updatedAt": "2026-05-17T16:30:00.000Z",
+  "emergencySummary": "Branch feat/news-hub-content-first-wave. Content first wave: 11 articles planned. CLUSTER 1 (write first, LV tender): lv-infrastructure-commercial-buildings-guide (commercial, 2000-2500w), dhl-reading-distribution-hub-case-study (case-studies, 1200-1500w), why-cheap-electrical-contractors-cost-more (insights, 1200-1500w). All placeholder articles deleted from data/news/index.ts. Use content-creation skill for each article. Full plan in Obsidian: Projects/Nexgen Electrical Innovations/Plans/plan-news-hub-content-first-wave.md. CRITICAL: never name old company. TVAP article held until project status = completed.",
+  "focusedSearchTerms": [
+    "feat-news-hub-content-first-wave",
+    "plan-news-hub-content-first-wave-2026-05-17",
+    "task-article-lv-infrastructure",
+    "task-article-dhl-case-study",
+    "task-article-why-cheap-costs-more",
+    "decide-lv-tender-publication-sequence",
+    "learn-news-hub-content-architecture"
+  ]
+}

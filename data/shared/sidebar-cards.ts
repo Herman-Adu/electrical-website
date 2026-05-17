@@ -9,46 +9,6 @@ import { allProjects } from "@/data/projects";
 
 export const allSidebarCards: SidebarCard[] = [
   // ═══════════════════════════════════════════════════════════════════════════
-  // NEWS HUB - GLOBAL CARDS (shown on main hub and all categories)
-  // ═══════════════════════════════════════════════════════════════════════════
-  {
-    id: "news-global-001",
-    type: "campaign",
-    eyebrow: "Net Zero Campaign",
-    title: "Building Electrification Guide 2026",
-    description:
-      "Free download: Planning electrical infrastructure for heat pumps, EV charging, and solar PV integration.",
-    ctaLabel: "Download Guide",
-    href: "/news-hub/category/insights/future-proofing-electrical-infrastructure-electrification",
-    section: "news",
-    targetCategories: [],
-  },
-  {
-    id: "news-global-002",
-    type: "partner",
-    eyebrow: "Partner Spotlight",
-    title: "Schneider Electric Certified Team",
-    description:
-      "24 engineers certified on the latest switchgear and automation technologies through our manufacturer partnership.",
-    ctaLabel: "Read More",
-    href: "/news-hub/category/partners/manufacturer-partnership-schneider-electric-training",
-    section: "news",
-    targetCategories: [],
-  },
-  {
-    id: "news-global-003",
-    type: "review",
-    eyebrow: "Client Review",
-    title: "IHG Hotels: 3rd Contract Renewal",
-    description:
-      "98.5% PPM compliance across 8 hotel properties. Read why our hospitality clients keep coming back.",
-    ctaLabel: "Read Review",
-    href: "/news-hub/category/reviews/hotel-group-electrical-maintenance-contract-review",
-    section: "news",
-    targetCategories: [],
-  },
-
-  // ═══════════════════════════════════════════════════════════════════════════
   // NEWS HUB - RESIDENTIAL CATEGORY CARDS
   // ═══════════════════════════════════════════════════════════════════════════
   {
@@ -60,18 +20,6 @@ export const allSidebarCards: SidebarCard[] = [
       "Free assessment for homeowners planning heat pump, EV charger, or solar PV installation.",
     ctaLabel: "Book Assessment",
     href: "/contact?service=residential-assessment",
-    section: "news",
-    targetCategories: ["residential"],
-  },
-  {
-    id: "news-res-002",
-    type: "social",
-    eyebrow: "Customer Story",
-    title: "Taplow Whole-Home Upgrade",
-    description:
-      "See how we transformed a 1960s property with LED lighting, smart controls, and EV charging.",
-    ctaLabel: "View Project",
-    href: "/news-hub/category/residential/taplow-residential-energy-refresh",
     section: "news",
     targetCategories: ["residential"],
   },
@@ -88,18 +36,6 @@ export const allSidebarCards: SidebarCard[] = [
       "Comprehensive assessment of your HV/LV switchgear condition with thermal imaging.",
     ctaLabel: "Request Survey",
     href: "/contact?service=switchgear-survey",
-    section: "news",
-    targetCategories: ["industrial"],
-  },
-  {
-    id: "news-ind-002",
-    type: "partner",
-    eyebrow: "Technical Whitepaper",
-    title: "Real-Time Monitoring ROI",
-    description:
-      "Download our analysis of monitoring system payback periods across industrial facilities.",
-    ctaLabel: "Download PDF",
-    href: "/news-hub/category/industrial/docklands-switchgear-monitoring-upgrade",
     section: "news",
     targetCategories: ["industrial"],
   },
