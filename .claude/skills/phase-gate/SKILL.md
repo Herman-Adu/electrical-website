@@ -24,9 +24,9 @@ If planEntity ≠ entity: also add to feat entity.
 Fallback: `curl -s -X POST http://localhost:3100/memory/tools/call -H "Content-Type: application/json" -d '{"name":"add_observations","arguments":{...}}'`
 
 ### Lock 3 — Obsidian
-Call `mcp__MCP_DOCKER__obsidian_append_content` on `obsidianFeatureDoc`:
+Call `append_to_note` via `curl -s -X POST http://localhost:3100/obsidian/tools/call` with `path` = `obsidianFeatureDoc`:
 Append: `\n## [phase-name] — YYYY-MM-DD\n[summary]\nNext: [next-task]\n`
-Fallback: `curl -s -X POST http://localhost:3100/obsidian/tools/call -H "Content-Type: application/json" -d '{"name":"obsidian_append_content","arguments":{...}}'`
+Fallback: `curl -s -X POST http://localhost:3100/obsidian/tools/call -H "Content-Type: application/json" -d '{"name":"append_to_note","arguments":{"path":"...","content":"..."}}'`
 
 ### Lock 1 — Git
 Update `config/active-branch.json`: set `nextTask` to the next phase description, `updatedAt` to now ISO string, `status` to `[phase-name] complete`.
@@ -71,4 +71,11 @@ git push origin [branch]
 ```
 
 ### Report
-`WIP locked. Next session: /rehydrate resumes at [specific file/task].`
+```
+WIP locked. All three locks confirmed.
+→ Run /compact now — context is clean and fully persisted.
+→ After compact, run /rehydrate to reload from Docker memory.
+Next task: [specific file/task from active-branch.json nextTask]
+```
+
+**Compact loop:** phase-gate → /compact → /rehydrate → continue. Repeat after every task and at 60%.
