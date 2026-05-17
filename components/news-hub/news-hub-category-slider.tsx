@@ -8,6 +8,7 @@ import type { NewsCategorySlug } from "@/types/news";
 interface NewsHubCategorySliderProps {
   className?: string;
   counts?: Record<string, number>;
+  activeSlug?: string;
 }
 
 interface CategoryOption {
@@ -40,6 +41,7 @@ const CHIP_ACTIVE_CLASS =
 export function NewsHubCategorySlider({
   className,
   counts,
+  activeSlug: activeSlugProp,
 }: NewsHubCategorySliderProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -47,9 +49,12 @@ export function NewsHubCategorySlider({
   const [, startTransition] = useTransition();
 
   const rawCategory = searchParams?.get("category") ?? null;
-  const active: NewsCategorySlug = isValidSlug(rawCategory)
-    ? rawCategory
-    : "all";
+  const active: NewsCategorySlug =
+    activeSlugProp != null && isValidSlug(activeSlugProp)
+      ? activeSlugProp
+      : isValidSlug(rawCategory)
+        ? rawCategory
+        : "all";
 
   const activeChipRef = useRef<HTMLButtonElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
