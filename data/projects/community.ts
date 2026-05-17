@@ -291,11 +291,11 @@ export const communityProjects: Project[] = [
       narrativeBlocks: [
         {
           position: "after-intro",
-          anchorId: "same-values",
-          heading: "Same Values. New Name.",
+          anchorId: "the-competition",
+          heading: "Year 32. New Leadership. Same Mission.",
           paragraphs: [
-            "Nexgen Electrical Innovations was built on something that came before — a team with deep roots in the local electrical industry and an equally deep commitment to the communities they served. When this company was founded, one of the first things we did was return to support Slough in Bloom. Not because it was on a list of things to do. Because the people who make up Nexgen had always believed in it.",
-            "The 2023 chapter proved something to us: that community involvement isn't just feel-good language in a company brochure. It changes how your team sees themselves, how your neighbours see you, and how connected you feel to the place where you work. In 2026, that belief is still intact — and Nexgen is listed on the Slough in Bloom website as a current sponsor for year 32.",
+            "Slough in Bloom's 32nd year launched on 5 May 2026 under new chairman Phil Vance, with Mayor Siobhan Dauti at the opening event. The competition spans 10 judging categories — from residential front gardens to community roundabouts, school grounds, allotments, and environmental projects — and is free to enter for anyone in the borough. That open-entry model is the foundation of what makes it meaningful: the entries come from residents who have tended a front garden for years without recognition, from school gardening clubs, from allotment holders who have worked the same plot across three decades.",
+            "The judging process visits hundreds of locations across Slough each summer. Trained judges score every entry against consistent criteria, ensuring each entrant's effort is counted rather than overlooked. An awards ceremony in autumn closes the loop — giving Slough a structured, annual reason to notice what is growing in its streets, recognise the people who planted it, and celebrate them publicly. It is a small, unglamorous machine. It has been running without interruption for 32 years. Nexgen is proud to help keep it running.",
           ],
           background: "muted",
         },
