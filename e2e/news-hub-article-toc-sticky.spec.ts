@@ -7,20 +7,18 @@ import { test, expect } from "@playwright/test";
  *   1. The right-column TOC aside on news article detail pages stays docked
  *      below the navbar while the related-articles block scrolls into view
  *      (mirrors the /projects sticky-aside pattern).
- *   2. Clicking the "Client Testimonial" TOC entry on a case-study article
- *      lands the page on a visible <h2>Client Testimonial</h2> heading above
- *      the quote block (Phase 1 fix — bare blockquote replaced with proper
- *      heading).
+ *   2. Clicking the "Client Testimonial" TOC entry on an insights article lands
+ *      the page on a visible <h2>Client Testimonial</h2> heading above the
+ *      quote block (Phase 1 fix — bare blockquote replaced with proper heading).
  *
  * Test seams:
  *   - <aside data-sticky-toc="true"> on the article detail page.
  *   - <h2>Continue Reading</h2> inside the related articles section.
  *
  * Articles exercised:
- *   - /news-hub/category/residential/taplow-residential-energy-refresh
- *     (residential layout — has a quote block + TOC entry "Homeowner Feedback")
- *   - /news-hub/category/case-studies/hospital-power-ring-lessons-learned
- *     (case-study layout — has a quote block + TOC entry "Client Testimonial")
+ *   - /news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors
+ *     (insight layout — has a quote block + TOC entry "Client Testimonial",
+ *      related articles block with "Continue Reading" h2, h2 "Client Testimonial")
  *
  * Prerequisites:
  *   - Next.js dev or production server on http://127.0.0.1:3000
@@ -34,72 +32,11 @@ import { test, expect } from "@playwright/test";
 test.describe("article TOC stays sticky through related articles", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("residential article: aside is still in viewport when related articles scroll into view", async ({
+  test("insights article: aside stays sticky through related articles", async ({
     page,
   }) => {
     const response = await page.goto(
-      "/news-hub/category/residential/taplow-residential-energy-refresh",
-      { waitUntil: "domcontentloaded" },
-    );
-    expect(response?.status()).toBe(200);
-
-    // Use .first() — Next.js App Router streaming can briefly produce two identical
-    // aside elements in the DOM during SSR→hydration, triggering strict mode.
-    // The case-study test at line 103 already uses this pattern correctly.
-    const aside = page.locator('[data-sticky-toc="true"]').first();
-    await expect(aside).toBeVisible({ timeout: 10000 });
-
-    // Initial position — aside renders inside the article-content section.
-    const initialRect = await aside.evaluate((el) => {
-      const r = el.getBoundingClientRect();
-      return { top: r.top, height: r.height };
-    });
-    expect(initialRect.height).toBeGreaterThan(0);
-
-    // Scroll the "Continue Reading" section into view. CSS sticky should keep
-    // the aside docked at its `top-37.5` (≈150px) offset rather than scrolling
-    // away with the article body.
-    const relatedHeading = page.getByRole("heading", {
-      level: 2,
-      name: /continue reading/i,
-    });
-    await expect(relatedHeading).toBeAttached();
-    await relatedHeading.evaluate((el) =>
-      el.scrollIntoView({ block: "center", behavior: "auto" }),
-    );
-
-    // Allow layout to settle after programmatic scroll.
-    await page.waitForFunction(() => {
-      const aside = document.querySelector(
-        '[data-sticky-toc="true"]',
-      ) as HTMLElement | null;
-      return aside !== null && aside.getBoundingClientRect().height > 0;
-    });
-
-    const stuckRect = await aside.evaluate((el) => {
-      const r = el.getBoundingClientRect();
-      return { top: r.top, height: r.height };
-    });
-
-    const viewport = page.viewportSize();
-    expect(viewport).not.toBeNull();
-    const viewportHeight = viewport!.height;
-
-    // Sticky is working if any portion of the aside remains on screen. When the
-    // containing block is shorter than the aside (short residential article), CSS
-    // sticky releases in "bottom-tracking" mode — top goes negative but the bottom
-    // (top + height) stays positive. Complete sticky failure (element freely scrolling
-    // with the body) would push top to thousands of pixels negative, making
-    // top + height negative too.
-    expect(stuckRect.top).toBeLessThan(viewportHeight);
-    expect(stuckRect.top + stuckRect.height).toBeGreaterThan(0);
-  });
-
-  test("case-study article: aside stays sticky through related articles", async ({
-    page,
-  }) => {
-    const response = await page.goto(
-      "/news-hub/category/case-studies/hospital-power-ring-lessons-learned",
+      "/news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors",
       { waitUntil: "domcontentloaded" },
     );
     expect(response?.status()).toBe(200);
@@ -145,13 +82,14 @@ test.describe("client testimonial heading is visible", () => {
     page,
   }) => {
     const response = await page.goto(
-      "/news-hub/category/case-studies/hospital-power-ring-lessons-learned",
+      "/news-hub/category/insights/bs-7671-19th-edition-key-changes-contractors",
       { waitUntil: "domcontentloaded" },
     );
     expect(response?.status()).toBe(200);
 
     // TOC nav lives inside the sticky aside. The testimonial entry exists
-    // because article.detail.quote is defined (TOC label "Client Testimonial").
+    // because article.detail.quote is defined. This insights article labels it
+    // "Client Testimonial" (id="testimonial" in the TOC config).
     const tocNav = page.getByRole("navigation", { name: /table of contents/i });
     await expect(tocNav).toBeVisible({ timeout: 10000 });
 

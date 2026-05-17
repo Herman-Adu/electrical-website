@@ -7,6 +7,7 @@ import type { NewsCategorySlug } from "@/types/news";
 
 interface NewsHubCategorySliderProps {
   className?: string;
+  counts?: Record<string, number>;
 }
 
 interface CategoryOption {
@@ -38,6 +39,7 @@ const CHIP_ACTIVE_CLASS =
 
 export function NewsHubCategorySlider({
   className,
+  counts,
 }: NewsHubCategorySliderProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -186,6 +188,9 @@ export function NewsHubCategorySlider({
                     .join(" ")}
                 >
                   {option.label}
+                  {counts && counts[option.slug] !== undefined && (
+                    <span className="opacity-60">({counts[option.slug]})</span>
+                  )}
                 </button>
               </li>
             );

@@ -15,19 +15,19 @@ import { CaseStudyChallengeCards } from "./case-study-challenge-cards";
 import { CaseStudySpecsGrid } from "./case-study-specs-grid";
 import { CaseStudyResultsShowcase } from "./case-study-results-showcase";
 
-const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
+export const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
-  { id: "details", label: "Details", level: 1 },
-  { id: "scope", label: "Scope", level: 1 },
+  { id: "details", label: "Project Details", level: 1 },
+  { id: "scope", label: "Project Scope", level: 1 },
   { id: "methodology", label: "Methodology", level: 1 },
   { id: "challenges", label: "Challenges", level: 1 },
   { id: "timeline", label: "Timeline", level: 1 },
-  { id: "specifications", label: "Specifications", level: 1 },
+  { id: "specifications", label: "Technical Specifications", level: 1 },
   { id: "results", label: "Results", level: 1 },
   { id: "takeaways", label: "Key Takeaways", level: 1 },
-  { id: "gallery", label: "Gallery", level: 1 },
+  { id: "gallery", label: "Project Gallery", level: 1 },
   { id: "conclusion", label: "Conclusion", level: 1 },
-  { id: "testimonial", label: "Testimonial", level: 1 },
+  { id: "testimonial", label: "Client Testimonial", level: 1 },
 ];
 
 interface ArticleLayoutProps {

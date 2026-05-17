@@ -17,6 +17,7 @@ import {
   newsHubMetricItems,
   newsHubIntroData,
   allNewsArticles,
+  newsCategories,
 } from "@/data/news";
 import { createNewsHubListMetadata } from "@/lib/metadata-news";
 
@@ -27,6 +28,15 @@ export default async function NewsHubPage() {
   const allItems = getNewsArticleListItemsByCategory("all");
   const sidebarCards = getSidebarCardsByCategory("all");
   const featuredArticle = getFeaturedNewsArticleByCategory("all");
+  const counts: Record<string, number> = {
+    all: allNewsArticles.length,
+    ...Object.fromEntries(
+      newsCategories.map((c) => [
+        c.slug,
+        allNewsArticles.filter((a) => a.category === c.slug).length,
+      ]),
+    ),
+  };
 
   return (
     <main className="relative bg-background">
@@ -65,7 +75,7 @@ export default async function NewsHubPage() {
       */}
       <section id="news-hub-articles" className="scroll-mt-26 lg:scroll-mt-30">
         <Suspense fallback={<NewsListSkeleton />}>
-          <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} />
+          <NewsHubFilterClient items={allItems} sidebarCards={sidebarCards} counts={counts} />
         </Suspense>
       </section>
 

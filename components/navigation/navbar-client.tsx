@@ -199,6 +199,41 @@ export function NavbarClient() {
     if (rawHash) {
       return currentPath === targetPath && currentHash === `#${rawHash}`;
     }
+    if (
+      targetPath === "/news-hub" &&
+      currentPath.startsWith("/news-hub/") &&
+      !currentPath.startsWith("/news-hub/category") &&
+      !currentPath.startsWith("/news-hub/filter")
+    ) {
+      return true;
+    }
+    if (
+      targetPath === "/projects" &&
+      currentPath.startsWith("/projects/") &&
+      !currentPath.startsWith("/projects/category") &&
+      !currentPath.startsWith("/projects/filter")
+    ) {
+      return true;
+    }
+    // Article detail: /news-hub/category/[slug]/[article]
+    // Activate only the nav item for that specific category — not "Browse Channels".
+    // Channel articles (/news-hub/category/insights) match their channel nav item.
+    // Sector articles (/news-hub/category/residential) match their filter nav item.
+    const newsArticleMatch = currentPath.match(/^\/news-hub\/category\/([^/]+)\/[^/]+$/);
+    if (newsArticleMatch) {
+      const cat = newsArticleMatch[1];
+      return targetPath === `/news-hub/category/${cat}` || targetPath === `/news-hub/filter/${cat}`;
+    }
+    // Category listing: /news-hub/category/[slug] — sector categories use /news-hub/filter/[slug] in the nav
+    const newsCategoryMatch = currentPath.match(/^\/news-hub\/category\/([^/]+)$/);
+    if (newsCategoryMatch) {
+      if (targetPath === `/news-hub/filter/${newsCategoryMatch[1]}`) return true;
+    }
+    // Project detail: /projects/category/[slug]/[project] — activate only that category's nav item
+    const projectDetailMatch = currentPath.match(/^\/projects\/category\/([^/]+)\/[^/]+$/);
+    if (projectDetailMatch) {
+      return targetPath === `/projects/category/${projectDetailMatch[1]}`;
+    }
     return currentPath === targetPath;
   };
 

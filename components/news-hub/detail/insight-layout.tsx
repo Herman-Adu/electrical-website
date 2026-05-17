@@ -12,16 +12,16 @@ import { DetailGalleryBlock } from "./detail-gallery-block";
 import { CaseStudyScopeList } from "./case-study-scope-list";
 import { CaseStudySpecsGrid } from "./case-study-specs-grid";
 
-const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
+export const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
   { id: "spotlight", label: "Spotlight", level: 1 },
   { id: "overview", label: "Overview", level: 1 },
   { id: "methodology", label: "Methodology", level: 1 },
-  { id: "details", label: "Details", level: 1 },
-  { id: "scope", label: "Scope", level: 1 },
-  { id: "specifications", label: "Specifications", level: 1 },
+  { id: "details", label: "Project Details", level: 1 },
+  { id: "scope", label: "Project Scope", level: 1 },
+  { id: "specifications", label: "Technical Specifications", level: 1 },
   { id: "takeaways", label: "Key Takeaways", level: 1 },
-  { id: "testimonial", label: "Testimonial", level: 1 },
-  { id: "gallery", label: "Gallery", level: 1 },
+  { id: "testimonial", label: "Client Testimonial", level: 1 },
+  { id: "gallery", label: "Project Gallery", level: 1 },
   { id: "conclusion", label: "Conclusion", level: 1 },
 ];
 

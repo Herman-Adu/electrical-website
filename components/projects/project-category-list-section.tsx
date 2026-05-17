@@ -54,7 +54,7 @@ export function ProjectCategoryListSection({
           }
           itemLabel="project"
           itemLabelPlural="projects"
-          emptyMessage={`No ${category.label.toLowerCase()} projects available yet.`}
+          emptyMessage={`Nexgen ${category.label} projects coming soon — this section is actively growing.`}
           sidebarTitle={`${category.label} Resources`}
           sidebarDescription={`Guides, consultations, and resources for ${category.label.toLowerCase()} projects.`}
         />
