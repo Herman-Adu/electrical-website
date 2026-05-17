@@ -1,0 +1,29 @@
+Excalidraw-style hand-drawn diagram on a clean white background. All text uses neat, consistent architect-style handwriting -- legible, slightly rounded letters with medium stroke weight. Letter sizes are uniform within each label. Titles are bold and larger. Body labels are smaller but equally neat. This is NOT sloppy handwriting -- it looks like a designer wrote it carefully with a thick marker.
+
+Shapes are rounded rectangles with a 2-3px slate (#334155) hand-drawn outline and brand-palette fills. Lines and arrows are slightly wobbly and hand-drawn, not ruler-straight. Arrowheads are simple triangles. Nothing is pixel-perfect -- everything has a natural, sketched feel with visible stroke texture.
+
+Color palette: electric teal (#00b2a9 stroke / #e0faf6 fill), deep cyan (#006e56 stroke / #c2fff1 fill), rich amber (#d97706 stroke / #fef3c7 fill), deep forest (#004a3a stroke / #b3f5e6 fill), industrial slate (#334155 stroke / #f1f5f9 fill). All text is near-black (#1e1e1e). All lines and arrows are slate (#334155). Background is always clean white.
+
+Layout is clean and spacious with generous whitespace. Visual hierarchy is clear -- title is largest, labels are short. The overall feel is educational, friendly, and slightly more polished than basic Excalidraw -- colored fills, intentional spacing, consistent sizing, and meaningful color coding elevate it.
+
+Do NOT include: realistic photos, gradients, drop shadows, 3D effects, corporate clip art, stock imagery, dark backgrounds, heavy borders.
+
+---
+
+Diagram concept: LV Upgrade Process
+
+Layout: Left-to-Right Flow -- 6 equal rounded rectangles in a single horizontal row, connected by right-pointing arrows. Each box has a step label inside and a small duration note centered below it.
+
+Title at top center, bold and large: "LV Upgrade Process"
+
+Elements (left to right):
+1. Box filled deep cyan (#c2fff1), label: "Desktop Review", duration below: "1-2 wks"
+2. Box filled amber (#fef3c7), label: "Eng. Design", duration below: "2-4 wks"
+3. Box filled electric teal (#e0faf6), label: "Procure", duration below: "4-8 wks"
+4. Box filled deep cyan (#c2fff1), label: "Phased Install", duration below: "agreed"
+5. Box filled amber (#fef3c7), label: "Test & Certify", duration below: "1-3 days"
+6. Box filled deep forest (#b3f5e6), label: "Handover Docs", duration below: "1 wk"
+
+Connections: slate right-pointing arrows between each consecutive box, slightly hand-drawn.
+
+All 6 boxes same height and width. Generous vertical whitespace above title and below duration notes.

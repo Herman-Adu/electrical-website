@@ -1,0 +1,34 @@
+Excalidraw-style hand-drawn diagram on a clean white background. All text uses neat, consistent architect-style handwriting -- legible, slightly rounded letters with medium stroke weight. Letter sizes are uniform within each label. Titles are bold and larger. Body labels are smaller but equally neat. This is NOT sloppy handwriting -- it looks like a designer wrote it carefully with a thick marker.
+
+Shapes are rounded rectangles with a 2-3px slate (#334155) hand-drawn outline and brand-palette fills. Lines and arrows are slightly wobbly and hand-drawn, not ruler-straight. Arrowheads are simple triangles. Nothing is pixel-perfect -- everything has a natural, sketched feel with visible stroke texture.
+
+Color palette: electric teal (#00b2a9 stroke / #e0faf6 fill), deep cyan (#006e56 stroke / #c2fff1 fill), rich amber (#d97706 stroke / #fef3c7 fill), deep forest (#004a3a stroke / #b3f5e6 fill), industrial slate (#334155 stroke / #f1f5f9 fill). All text is near-black (#1e1e1e). All lines and arrows are slate (#334155). Background is always clean white.
+
+Layout is clean and spacious with generous whitespace. Visual hierarchy is clear -- title is largest, labels are short. The overall feel is educational, friendly, and slightly more polished than basic Excalidraw.
+
+Do NOT include: realistic photos, gradients, drop shadows, 3D effects, corporate clip art, stock imagery, dark backgrounds, heavy borders.
+
+---
+
+Diagram concept: EV Ready?
+
+Layout: Two-column layout. Left column: 8 stacked numbered checklist items. Right column: vertical traffic-light result panel with 3 zones. A horizontal arrow points from the checklist to the result panel.
+
+Title at top center, bold and large: "EV Ready?"
+
+Left column -- 8 checklist items, each a slate (#f1f5f9) rounded rectangle with a numbered circle on the left:
+1. "Board capacity free?"
+2. "Earthing type known?"
+3. "Supply cable rated?"
+4. "Meter rating OK?"
+5. "DNO approval done?"
+6. "Load survey done?"
+7. "Phase balance OK?"
+8. "Smart charger spec?"
+
+Right column -- result panel, 3 stacked zones:
+- Top zone: deep cyan (#c2fff1), label: "7-8 Yes", badge: "EV Ready"
+- Middle zone: amber (#fef3c7), label: "4-6 Yes", badge: "Assess First"
+- Bottom zone: deep forest (#b3f5e6), label: "0-3 Yes", badge: "Upgrade Needed"
+
+Horizontal arrow from checklist pointing right to result panel, labeled: "score"

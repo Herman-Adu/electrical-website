@@ -261,6 +261,162 @@ export const allNewsArticles: NewsArticle[] = [
       ],
     },
   },
+  {
+    id: "news-dhl-001",
+    slug: "dhl-reading-distribution-hub-case-study",
+    category: "case-studies",
+    categoryLabel: "Case Studies",
+    title: "DHL Reading Distribution Hub — LV Fit-Out",
+    excerpt:
+      "Nexgen delivered the full Cat B electrical fit-out for DHL's Reading distribution hub — an 800A TPN main distribution board, 3-phase conveyor power, and a complete certification package, all inside a 14-week programme in a live 24/7 logistics operation. Operational continuity was non-negotiable; the go-live was fixed.",
+    description:
+      "Cat B electrical fit-out for DHL Reading distribution hub — LV distribution, 3-phase conveyor power, and 14-week delivery with zero operational downtime.",
+    featuredImage: {
+      src: "/images/news/dhl-reading-case-study.jpg",
+      alt: "DHL Reading distribution hub electrical installation",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Commercial LV Specialists",
+    },
+    partnerLabel: "Woodhouse",
+    location: "Reading, Berkshire",
+    readTime: "6 min",
+    tags: [
+      "DHL",
+      "Case Study",
+      "LV Distribution",
+      "Cat B Fit-Out",
+      "Conveyor Power",
+      "Schneider Electric",
+      "Distribution Hub",
+      "Commercial",
+    ],
+    isFeatured: false,
+    heroHeadline: ["DHL Reading", "Distribution Hub", "LV Fit-Out"],
+    heroIndicators: [
+      {
+        icon: "Factory",
+        title: "Live Operation",
+        description:
+          "Delivered in a 24/7 active distribution centre without disruption to operations",
+      },
+      {
+        icon: "Zap",
+        title: "800A TPN Board",
+        description:
+          "Schneider Electric main distribution board to full manufacturer specification",
+      },
+      {
+        icon: "Clock",
+        title: "14-Week Programme",
+        description:
+          "On-time delivery alongside Woodhouse as principal contractor",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "Full Certification",
+        description:
+          "Complete EICR and Electrical Installation Certificate at handover",
+      },
+    ] as const,
+    publishedAt: "2026-05-19",
+    updatedAt: "2026-05-19",
+    spotlightMetric: { label: "Programme", value: "14 weeks" },
+    detail: {
+      intro: [
+        "DHL's Reading Distribution Hub is a high-bay, 24/7 logistics and parcel sorting facility operating continuous shifts in Reading, Berkshire. Nexgen delivered the full Cat B electrical fit-out as part of a tenant fit-out programme, working alongside Woodhouse as principal contractor. The scope was substantial: main LV distribution infrastructure, 3-phase power for conveyor sorting equipment, dock leveller supplies, and LED high-bay warehouse lighting installed across the full facility footprint.",
+        "The electrical works centred on an 800A TPN main distribution board built to Schneider Electric specification — a panel that forms the backbone of the facility's entire power infrastructure. From that board, the 3-phase supply network fans out to the conveyor sorter systems that define the operational capability of the building. Every conveyor circuit, every dock leveller supply, and every lighting circuit in the warehouse passes through the electrical infrastructure Nexgen designed and installed.",
+        "The fundamental challenge of this project was not technical complexity in isolation — it was the combination of a fixed go-live date, a live operational environment, and a 14-week programme window in which multiple trades were working simultaneously. DHL's go-live was immovable. Any delay to the electrical programme would have cascaded directly into a delayed building handover with immediate commercial consequences. This was a project where programme management and operational awareness were as critical as engineering execution.",
+      ],
+      challenges: [
+        {
+          title: "Live 24/7 Operation",
+          description:
+            "DHL operates continuous distribution shifts. Any electrical work creating unplanned operational disruption would have immediate cost consequences for the client.",
+          solution:
+            "Planned every shutdown window in advance with DHL operations. Temporary supply arrangements maintained power to critical areas. No unplanned operational stoppages occurred.",
+        },
+        {
+          title: "Fixed Go-Live Date",
+          description:
+            "DHL's operational go-live was fixed. A delayed electrical programme would have cascaded into a delayed building handover and direct commercial loss for DHL.",
+          solution:
+            "Programme-managed the installation sequence against the critical path. Regular progress reviews with Woodhouse. Commissioning and EICR completed ahead of handover milestone.",
+        },
+        {
+          title: "Multi-Trade Coordination",
+          description:
+            "The facility fit-out involved multiple trades working in a constrained space and programme. Electrical installation had to be sequenced with civils, mechanical, and fit-out teams without conflict.",
+          solution:
+            "Early engagement with the principal contractor at pre-construction stage. Clear demarcation of working zones and sequenced handover of areas. No programme-critical delays attributable to trade coordination.",
+        },
+      ],
+      scope: [
+        "800A TPN main LV distribution board (Schneider Electric specification and build)",
+        "3-phase conveyor sorter power infrastructure throughout the facility",
+        "Dock leveller electrical supplies — full dock count",
+        "LED high-bay warehouse lighting complete installation",
+        "Small power and general services distribution",
+        "Site-wide cable containment — trunking and tray systems",
+        "Full EICR and EIC certification package at handover",
+      ],
+      specifications: [
+        {
+          category: "Main Distribution",
+          items: [
+            { label: "Board Rating", value: "800A TPN" },
+            { label: "Manufacturer", value: "Schneider Electric" },
+            { label: "Build Standard", value: "Manufacturer specification" },
+            { label: "Protection", value: "MCCB main incomer, MCCB sub-ways" },
+          ],
+        },
+        {
+          category: "Programme",
+          items: [
+            { label: "Duration", value: "14 weeks" },
+            { label: "Principal Contractor", value: "Woodhouse" },
+            { label: "Certification", value: "EICR + EIC at handover" },
+            { label: "Incidents", value: "Zero programme-critical" },
+          ],
+        },
+      ],
+      results: [
+        "Programme completed on schedule within 14-week window — DHL go-live achieved without delay",
+        "Zero programme-critical incidents across the full installation programme",
+        "800A TPN main distribution board installed and commissioned to Schneider Electric specification",
+        "Full EICR and Electrical Installation Certificate issued at handover — facility ready for occupation",
+        "DHL operational from day one of go-live — no post-handover remedials attributable to electrical works",
+      ],
+      takeaways: [
+        "LV infrastructure in a live logistics facility requires phased planning before a single cable is pulled — shutdown windows cannot be improvised on site",
+        "An 800A TPN board is not a commodity purchase — specifying it to manufacturer standards with an accredited installer means it carries a manufacturer guarantee and full type-test compliance",
+        "A fixed go-live date is the real programme driver in tenant fit-out work. Electrical contractors who understand critical path management deliver differently from those who don't",
+        "Working alongside a principal contractor on a complex multi-trade programme requires early engagement, clear zone demarcation, and direct communication — not just responding to instructions",
+        "Full certification at handover is not a box-tick — it is the legal document that confirms the installation is safe, compliant with BS 7671, and the client's asset",
+      ],
+      spotlight: [
+        { label: "Main Board Rating", value: "800A TPN" },
+        { label: "Programme", value: "14 weeks" },
+        { label: "Incidents", value: "Zero" },
+      ],
+      conclusion: [
+        "Projects like DHL Reading are the benchmark for what Cat B electrical fit-out looks like at the commercial end of the logistics and distribution sector. Delivering this scope — an 800A TPN board to manufacturer specification, 3-phase conveyor infrastructure, dock levellers, high-bay lighting, and full containment — requires a contractor with the LV engineering capability to design and build the distribution infrastructure correctly, the Schneider Electric accreditation to back the installed equipment with a manufacturer guarantee, and the programme management discipline to bring it all together inside a fixed window. Logistics and warehousing facilities increasingly sit at the intersection of all three demands simultaneously.",
+        "What the DHL project demonstrates specifically about Nexgen's approach is the emphasis on pre-construction engagement over reactive problem-solving. The phased installation sequence — maintaining supply to active operational areas throughout, coordinating shutdown windows with DHL's operations management, sequencing electrical work around other trades under Woodhouse's principal contract — was planned before work started, not improvised when conflicts arose. The certification package issued at handover was the result of a commissioning process that ran in parallel with the installation programme, not a last-minute task bolted onto the end of the job.",
+        "For property managers, developers, and principal contractors procuring electrical work on similar facilities, the questions worth asking are straightforward: Can the contractor demonstrate experience at this scale, in live operational environments, not just shell-and-core fit-outs? Are they manufacturer-accredited for the specified distribution equipment — and can they show you the accreditation rather than simply claiming it? Do they have a track record of on-programme delivery in projects where the go-live date carried real commercial weight? This project is Nexgen's answer to those questions.",
+      ],
+      toc: [
+        { id: "overview", label: "The Project", level: 1 },
+        { id: "metrics", label: "Key Metrics", level: 1 },
+        { id: "challenges", label: "Challenges", level: 1 },
+        { id: "scope", label: "Scope of Works", level: 1 },
+        { id: "specifications", label: "Technical Spec", level: 1 },
+        { id: "results", label: "Outcomes", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "conclusion", label: "What This Demonstrates", level: 1 },
+      ],
+    },
+  },
 ];
 
 export const newsSidebarCards: NewsSidebarCard[] = [
