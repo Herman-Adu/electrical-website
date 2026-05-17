@@ -6,6 +6,7 @@ import { DetailSectionHeading } from "./detail-section-heading";
 interface DetailBodyBlockProps {
   body: string[];
   title?: string;
+  id?: string;
 }
 
 const sectionVariants: Variants = {
@@ -17,14 +18,14 @@ const sectionVariants: Variants = {
   },
 };
 
-export function DetailBodyBlock({ body, title = 'Project Details' }: DetailBodyBlockProps) {
+export function DetailBodyBlock({ body, title = 'Project Details', id = 'details' }: DetailBodyBlockProps) {
   if (!body || body.length === 0) {
     return null;
   }
 
   return (
     <motion.section
-      id="details"
+      id={id}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"

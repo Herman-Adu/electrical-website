@@ -72,6 +72,7 @@ export interface NewsPillarItem {
 export interface NewsDetailContent {
   intro: string[];
   body?: string[];
+  bodyContext?: string[];
   pillars?: NewsPillarItem[];
   takeaways: string[];
   spotlight?: NewsSpotlightMetric[];

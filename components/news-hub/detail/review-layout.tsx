@@ -83,6 +83,11 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
           </>
         );
 
+      case "body-context":
+        return detail.bodyContext && detail.bodyContext.length > 0 ? (
+          <DetailBodyBlock body={detail.bodyContext} title={title} id="body-context" />
+        ) : null;
+
       case "get-started":
         return <DetailGetStartedBlock tags={article.tags} />;
 
