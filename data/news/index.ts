@@ -778,6 +778,120 @@ export const allNewsArticles: NewsArticle[] = [
       ],
     },
   },
+  {
+    id: "news-commercial-002",
+    slug: "commercial-pat-testing-facilities-managers-guide",
+    category: "commercial",
+    categoryLabel: "Commercial",
+    title: "Commercial PAT Testing: A Guide for Facilities Managers",
+    excerpt:
+      "PAT testing in a commercial setting is not the same problem as booking an annual inspection visit. Facilities managers responsible for multi-site portfolios or logistics operations are managing a compliance programme — with insurance conditions, risk-based frequency schedules, and documentation obligations that a label and a summary sheet do not satisfy.",
+    description:
+      "How commercial property managers structure PAT testing compliance — scheduling, insurance requirements, risk-based frequency, and documentation.",
+    featuredImage: {
+      src: "/images/news/commercial-pat-testing-facilities-managers-guide.jpg",
+      alt: "PAT testing equipment and electrical asset register in a commercial environment",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Commercial Electrical Specialists",
+    },
+    readTime: "7 min",
+    tags: [
+      "PAT Testing",
+      "Commercial Property",
+      "Facilities Management",
+      "IET Code of Practice",
+      "Electrical Safety",
+      "Insurance Compliance",
+      "Asset Register",
+      "Electricity at Work Regulations",
+    ],
+    isFeatured: false,
+    heroHeadline: [
+      "Commercial PAT Testing",
+      "A Guide for",
+      "Facilities Managers",
+    ],
+    heroIndicators: [
+      {
+        icon: "Building2",
+        title: "Commercial Focus",
+        description:
+          "Written for facilities managers responsible for PAT compliance across commercial property portfolios",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "IET Code of Practice",
+        description:
+          "Risk-based frequency assessment using the IET CoP — the recognised method for commercial PAT compliance",
+      },
+      {
+        icon: "Shield",
+        title: "Insurance Alignment",
+        description:
+          "Commercial policies frequently contain electrical maintenance conditions — know what yours requires",
+      },
+      {
+        icon: "Award",
+        title: "NICEIC Registered",
+        description:
+          "PAT testing by an approved contractor producing documentation that satisfies insurer and regulator requirements",
+      },
+    ] as const,
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    spotlightMetric: { label: "Equipment Classes", value: "3" },
+    detail: {
+      intro: [
+        "PAT testing in a commercial setting is not the same problem as booking an annual inspection visit for a small office. A facilities manager responsible for multiple buildings, hundreds of portable appliances, or a logistics operation with high-turnover equipment is managing a compliance programme — with its own scheduling logic, documentation requirements, and insurance implications. Treating it as a single annual visit, repeated without review, is one of the most common ways that commercial PAT compliance develops gaps without anyone noticing.",
+        "The regulatory basis is the Electricity at Work Regulations 1989, which require that electrical systems and equipment be maintained in a safe condition. The Regulations impose a duty; they do not specify how to fulfil it. The Health and Safety Executive's recognised method is the IET Code of Practice for In-Service Inspection and Testing of Electrical Equipment (4th edition). The IET CoP provides the framework for risk-based frequency assessment — what type of equipment, in what environment, used how often, warrants what retesting interval. Annual testing is not mandated for all equipment. It is the correct frequency for some categories and excessive for others.",
+        "This guide is for facilities managers responsible for PAT compliance across commercial portfolios: office buildings, warehouses, retail premises, or mixed-use sites. It covers how the IET CoP frequency framework applies to commercial environments, what insurance conditions typically require, how to structure documentation that satisfies an insurer or enforcement inquiry, and the specific considerations for logistics and high-turnover environments where equipment control is as important as testing frequency.",
+      ],
+      body: [
+        "The IET Code of Practice classifies portable appliances by equipment class and operating environment. Class I equipment depends on an earth connection for protection — desktop computers, floor-standing printers, catering equipment, power tools. Class II equipment is double-insulated — most power supplies, some portable tools, battery chargers. Class III equipment operates at safety extra-low voltage (SELV) — below 50V AC — and presents the lowest electrical risk. For each class, the IET CoP provides recommended retesting intervals by environment: office and hotel environments warrant the longest intervals; commercial kitchens, construction sites, and warehouses warrant significantly shorter ones. Class I equipment in a standard office environment — a desktop computer used eight hours per day by the same person — might reasonably be on a four-year retest cycle based on risk assessment. The same class of equipment in a commercial kitchen or warehouse, subject to physical handling, moisture, and higher-frequency use, warrants an annual or sub-annual interval.",
+        "Commercial property insurance is the area where PAT compliance most directly affects financial exposure for facilities managers — and the area where the implications are most frequently misunderstood. Many commercial and property owner insurance policies contain conditions around electrical equipment maintenance. These conditions vary between policies and between insurers, but the common thread is consistent: if an electrical fault causes a fire, a business interruption loss, or a theft claim (triggered by a door held open by an extension lead, for example), and the insurer's investigation reveals that electrical equipment was not maintained to an industry-recognised standard, the policy conditions may not be met. That can mean a reduced settlement or a declined claim. The IET Code of Practice is the recognised standard against which maintenance is assessed. What your policy specifically requires — whether it mandates annual testing, references the IET CoP, or leaves frequency to the duty holder's assessment — should be confirmed with your insurance broker in writing and held on file.",
+        "A logistics or warehousing environment presents PAT challenges that a standard commercial office programme does not. Equipment changes hands between shifts, is moved between buildings, is borrowed by contractors, and is sometimes replaced ad hoc with non-standard items procured outside normal purchasing routes. In a distribution centre operating continuous shift patterns, the risk is not just that equipment ages between test dates — it is that the equipment in active use at any given time may not be the equipment that was tested. Managing this requires operational controls alongside testing: a visible pass label system that allows any operator to identify untested or out-of-date equipment at a glance, a defined incoming equipment process that quarantines new or transferred items until tested, and a register that is updated in real time rather than once per year.",
+        "An asset register is the operational foundation of any commercial PAT programme. Without one, retesting intervals cannot be managed, failed equipment cannot be tracked through remediation, and documentation cannot be produced in the event of an insurance or enforcement inquiry. The minimum a commercial asset register needs to capture is: unique asset identifier, equipment description, equipment class, test date, next test date, test result (pass/fail for visual inspection, insulation resistance in MΩ, earth continuity in Ω for Class I equipment), any remedial action taken, and the name of the contractor who carried out the test. A barcode or QR label system linked to a management database makes re-test scheduling systematic — automated reminders when items are due, immediate register update when tests are completed, and instant access to historical records for any item. For large estates, this is not a luxury; it is the only practical way to maintain accuracy across hundreds of assets.",
+        "The contractor delivering your PAT programme determines the quality of the documentation you receive. A contractor who issues pass/fail labels and a one-line summary has delivered a testing visit; they have not delivered a compliance programme. The documentation you need is a test register that identifies each appliance individually, records its class, shows the test results as numeric values (not just pass/fail), notes any visual failures separately from electrical failures, and includes the tester's identification and qualification. That register is the document an insurance loss adjuster or HSE inspector will ask for. It should be available in a format that can be retained electronically and produced on request — a PDF or CSV export from a management system, not a handwritten log that may not survive a move or a filing restructure.",
+      ],
+      methodology: [
+        "Establish the asset register before the testing programme, not alongside it. If a register does not exist, commission the PAT contractor to carry out an inventory audit as part of the first testing cycle: walk the estate, tag all in-scope equipment, test it, and produce the baseline register in a single programme. Starting with a known, tagged inventory eliminates the uncertainty about what is in scope and where it is.",
+        "Apply the IET Code of Practice risk matrix to determine frequency bands for each equipment category. Group your estate by environment — office, commercial kitchen, warehouse, plant room — and within each environment by equipment class. The IET CoP tables give recommended initial intervals; apply them as the starting point for your written risk assessment, not as fixed mandatory schedules. The written risk assessment is what demonstrates the frequency decision was made on identifiable grounds, not arbitrary choice.",
+        "Confirm your insurance policy's electrical maintenance conditions with your broker before setting your schedule. Some policies specify annual testing for all portable appliances regardless of risk category; others reference the IET CoP and defer to the duty holder's assessment. If your policy contains a specific frequency requirement, your programme must meet it. A copy of your broker's written confirmation of what the policy requires should be held alongside your PAT register.",
+        "Implement an incoming equipment control process. Any equipment arriving on site — purchased, transferred from another location, borrowed by or from a contractor, or hired — should either be PAT tested before it enters service or quarantined in a designated area until tested. This is especially important in logistics and warehousing environments where equipment movement is continuous. A simple tagging system — green label for tested, yellow label for quarantine pending test — is enough to make the control visible to operational staff.",
+        "Commission the contractor to update your asset register, not just issue test labels. The test visit should conclude with an updated electronic register identifying every item tested, every failure and remedial action, and the next test date for each asset. Retain the register in a format you can access without contacting the contractor — exported CSV or PDF — and back it up. The register's value is in its accessibility when it is needed, which is often at short notice.",
+        "Review your frequency bands annually, not just at test time. Equipment categories change as operations evolve: new equipment classes enter service, old equipment is retired, environments change with tenancy or operational activity. A brief annual review of the risk assessment — updating equipment categories and frequency bands to reflect current operations — keeps the programme current and the written justification accurate.",
+      ],
+      takeaways: [
+        "PAT testing frequency is determined by risk assessment, not mandatory annual schedules — the IET Code of Practice provides the recognised framework; document the assessment, not just the testing",
+        "Commercial insurance policies often contain electrical maintenance conditions — confirm what yours requires in writing from your broker; a declined claim after a fire is not the moment to find a compliance gap",
+        "Class I equipment in kitchens, warehouses, and construction environments warrants significantly shorter retesting intervals than equivalent equipment in office environments — the same equipment class, different risk profile",
+        "An asset register with individual item tracking, numeric test results, and remedial action records is the compliance foundation — a pass/fail label is an operational control, not a compliance document",
+        "Incoming equipment controls are as important as the testing schedule — untested equipment entering service in high-turnover environments is the most common source of compliance gaps",
+        "The contractor delivers the documentation, not just the test — insist on a test register that produces numeric results, identifies equipment class, and is available in a format you can retain and access independently",
+      ],
+      quote: {
+        quote:
+          "The test label tells your staff that an item was tested. The test register tells your insurer, your regulator, and your lawyer what was tested, when, to what standard, and what was done when it failed. Both matter — but they are not the same thing.",
+        author: "Nexgen Engineering Team",
+        role: "Commercial Electrical Specialists",
+      },
+      conclusion: [
+        "Compliance with the Electricity at Work Regulations in a commercial setting does not require a rigid annual testing schedule applied uniformly to every portable appliance in the building. It requires demonstrable maintenance of electrical equipment to a safe standard, with a documented risk assessment justifying the frequency decisions and test records that can be produced on request. A programme built around the IET Code of Practice — with frequency bands grounded in risk assessment, an asset register that is updated at every test cycle, and documentation produced by a competent contractor — is both compliant and defensible in the event of an insurer or enforcement inquiry.",
+        "The test register is the document that matters most in a compliance challenge. It demonstrates that the programme was systematic rather than reactive, that equipment failures were identified and addressed rather than labelled over, and that the duty holder — the facilities manager and the organisation they represent — took the Electricity at Work Regulations seriously as an operational obligation. A stack of test labels confirms that a visit took place. A properly maintained register confirms that a programme is in place.",
+        "For facilities managers inheriting a PAT programme without clear documentation, the practical step is a baseline audit — a single visit by the PAT contractor to inventory, tag, test, and register all in-scope equipment across the estate. That baseline produces the asset register and sets the frequency schedule. From that point, the programme is systematic: scheduled retests, incoming equipment control, and annual risk assessment review. The cost of the baseline audit is a fraction of the cost of reconstructing compliance records after an event that required them.",
+      ],
+      toc: [
+        { id: "overview", label: "What PAT Means at Portfolio Scale", level: 1 },
+        { id: "details", label: "Frequency, Risk, and Insurance", level: 1 },
+        { id: "methodology", label: "Structuring Your PAT Programme", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "testimonial", label: "Label vs Register", level: 1 },
+        { id: "conclusion", label: "Documentation That Works", level: 1 },
+      ],
+    },
+  },
 ];
 
 export const newsSidebarCards: NewsSidebarCard[] = [
