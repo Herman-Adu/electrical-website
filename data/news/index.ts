@@ -614,16 +614,86 @@ export const allNewsArticles: NewsArticle[] = [
         { label: "Pre-Commission Checks", value: "8" },
       ],
       intro: [
-        "The EV charging conversation in commercial property is dominated by two things: the government mandate and the charger manufacturer's specification sheet. Both start at the car park. Neither starts at the LV board. The consequence is that properties are being quoted for EV charger installations that their electrical infrastructure cannot currently support — and nobody involved in the early discussion has flagged it, because nobody present had an incentive to raise the complication.",
-        "A 7kW AC charger — the standard workplace charging unit — draws a 32A single-phase supply. A 22kW AC charger draws 32A three-phase. An installation of 20 × 7kW chargers represents an additional 40kW of continuous electrical load: roughly equivalent to adding a medium-sized office floor of equipment to your building's electrical system, all of it potentially running simultaneously overnight. Whether your existing LV infrastructure can absorb that load — in what configuration, at what cost, within what programme — is an engineering question. It should be answered before a planning application is submitted, before a charger manufacturer is approached, and certainly before a cable route is excavated.",
-        "This article is a practical reference for commercial property managers, fleet managers, and facilities directors evaluating or specifying EV charging infrastructure. It covers what an LV assessment involves, what the common constraint scenarios look like in practice, and eight questions to answer before any charger installation is commissioned.",
+        "The EV charging conversation in commercial property is dominated by the government mandate and the charger manufacturer's specification sheet — both start at the car park, neither starts at the LV board. Properties are being quoted for EV charger installations their electrical infrastructure cannot currently support, and the gap goes unraised because nobody present has an incentive to flag it. An installation of 20 × 7kW chargers adds 40kW of continuous load to your building: an engineering question that must be answered before a planning application is submitted, a charger manufacturer is approached, or a cable route is excavated.",
       ],
       body: [
         "The main LV distribution board is the starting point for any EV infrastructure assessment. The fundamental question is available spare capacity: the difference between the board's rated current and the installation's current maximum demand. A board rated at 400A with a measured maximum demand of 340A has approximately 60A of theoretical spare capacity — enough for one or two 7kW chargers before demand management is considered. A board operating at 85–90% of its rated capacity has no meaningful spare capacity for additional continuous loads, and any charger installation requires either a new supply, a diversity management solution, or a board upgrade before a single charger can be specified.",
-        "Maximum demand calculations in a commercial building account for diversity — the statistical expectation that not all loads operate at peak simultaneously. EV chargers do not behave like typical office equipment. Where vehicles charge overnight, multiple charger sessions overlap in the same window, eroding the diversity factor the distribution system was designed around. Smart charging (mandatory for chargers above 3.5kW under the EV Smart Charge Points Regulations 2021) manages this through demand scheduling — but the aggregate peak demand must still be within the LV infrastructure's capacity after smart charging is applied. The design needs to account for worst-case simultaneous demand, not just average load.",
-        "Commercial EV infrastructure typically requires dedicated sub-metering — for energy cost recovery, fleet reimbursement, tenant billing, or DNO reporting. Where workplace charging is offered as an employee benefit, HMRC guidelines require accurate metering to determine the taxable value of the charge provided. Sub-metering requirements determine the distribution board architecture: a dedicated EV charging distribution board, a sub-main cable from the main switchboard, metering equipment, and communication links to the charge point management system (CPMS). These are electrical infrastructure additions that need to be designed and installed — they are not incidental to the charger installation, they are a prerequisite for it.",
-        "For aggregate installations above 69kW — approximately 10 × 7kW chargers operating simultaneously — formal notification to the Distribution Network Operator (DNO) is required under Engineering Recommendation G99/G100. For larger commercial or industrial installations, the DNO may require a network capacity assessment before approving the connection: a process that can take several months and may result in a requirement for grid reinforcement, a connection upgrade, or a demand management agreement as a condition of consent. DNO engagement is the single most common cause of programme delay in commercial EV projects when it is started late. It should begin before a programme commitment is made to stakeholders, not after.",
-        "Running sub-main cables from the LV switchroom to car park charging locations is often the largest single element of EV installation cost and programme. Cable routes through occupied buildings — through plant rooms, across ceiling voids, down external risers — require fire-stopping at every penetration, coordination with other services, and access to areas that are not always straightforward in a live commercial building. Trenching across car park surfaces or landscaped areas requires planning, potentially planning permission for certain route options, and significant reinstatement that is often underestimated at the outset. A well-designed commercial EV infrastructure makes provision for future expansion at the design stage: a main EV charging board sized for the ultimate charging capacity, pre-installed trunking and ducting to remote charging zones, and sufficient sub-main conductor capacity to serve future phases without requiring reinforcement. These provisions cost a fraction of retrospective remediation.",
+        "Maximum demand calculations in a commercial building account for diversity — the statistical expectation that not all loads operate at peak simultaneously. EV chargers do not behave like typical office equipment. Where vehicles charge overnight, multiple charger sessions overlap in the same window, eroding the diversity factor the distribution system was designed around. Smart charging manages this through demand scheduling — but the aggregate peak demand must still be within the LV infrastructure's capacity after smart charging is applied. The design needs to account for worst-case simultaneous demand, not just average load.",
+      ],
+      specifications: [
+        {
+          category: "LV Infrastructure Thresholds",
+          items: [
+            {
+              label: "Load per 7kW AC charger",
+              value: "32A single-phase",
+            },
+            {
+              label: "Load per 22kW AC charger",
+              value: "32A three-phase",
+            },
+            {
+              label: "Smart charging mandate",
+              value: "Mandatory above 3.5kW — EV Smart Charge Points Regulations 2021",
+            },
+            {
+              label: "DNO notification threshold",
+              value: "69kW aggregate (approx. 10 × 7kW chargers) — Engineering Recommendation G99/G100",
+            },
+            {
+              label: "DNO formal application trigger",
+              value: "Above approx. 100kW — network capacity assessment required; allow several months",
+            },
+          ],
+        },
+        {
+          category: "Sub-Metering Requirements",
+          items: [
+            {
+              label: "Cost recovery categories",
+              value: "Fleet reimbursement, tenant billing, energy cost recovery, DNO reporting",
+            },
+            {
+              label: "HMRC compliance",
+              value: "Accurate metering required where workplace charging is an employee benefit — determines taxable value",
+            },
+            {
+              label: "Board architecture implications",
+              value: "Dedicated EV charging distribution board, sub-main cable from main switchboard, metering equipment, CPMS communication links",
+            },
+          ],
+        },
+      ],
+      scope: [
+        "LV board capacity assessment — rated current, current maximum demand, and available spare capacity",
+        "DNO engagement process — notification requirements under G99/G100 and connection application timeline",
+        "Cable route planning — sub-main routing from LV switchroom to car park charging zones, groundworks, and fire-stopping",
+        "Sub-metering architecture — board design for fleet reimbursement, tenant billing, and HMRC compliance",
+        "Future-phase provision — oversized EV board, pre-installed trunking and ducting sized for ultimate charging capacity",
+        "Smart charging compliance — EV Smart Charge Points Regulations 2021 and worst-case simultaneous demand design",
+      ],
+      challenges: [
+        {
+          title: "Infrastructure Capacity Gap Discovered After Commitment",
+          description:
+            "Properties commit to EV programmes — and in some cases submit planning applications or approach charger suppliers — before an LV assessment has been completed. When the infrastructure gap is identified mid-project, the cost and programme implications are at their worst: a board upgrade or new supply cannot be accelerated to meet an already-announced programme.",
+          solution:
+            "Commission an LV infrastructure assessment before any programme commitment is made. The assessment covers board spare capacity, supply configuration, DNO obligations, and cable route options — it is the prerequisite that determines what the programme can credibly promise.",
+        },
+        {
+          title: "DNO Programme Delay from Late Engagement",
+          description:
+            "DNO engagement for installations above 69kW is the single most common cause of programme delay in commercial EV projects. When notification under G99/G100 is initiated after a stakeholder programme has been communicated, the months-long DNO assessment process — and any resulting requirement for grid reinforcement or a demand management agreement — cannot be absorbed without slipping the committed dates.",
+          solution:
+            "Start DNO engagement before any programme commitment is made to stakeholders. For larger installations above approximately 100kW, initiate the formal connection application process at the same time as the feasibility assessment, not after a contractor has been appointed.",
+        },
+        {
+          title: "Cable Route Cost Underestimated at Outset",
+          description:
+            "Clients and programme managers typically focus planning attention on charger specification and quantity. The sub-main cable route from the LV switchroom to car park charging locations — through occupied buildings, across ceiling voids, down risers, and potentially involving excavation and reinstatement across car park surfaces — is frequently the largest single cost element and the one most likely to carry a programme risk that was not modelled at the outset.",
+          solution:
+            "Include cable route survey and groundworks assessment in the initial feasibility scope. Where resurfacing or major access works are already planned within 12–18 months, design EV cable ducting provision into that programme — the marginal cost is a fraction of excavating a completed surface retrospectively.",
+        },
       ],
       methodology: [
         "What is the rated current of your main LV distribution board and what is your installation's current maximum demand? Available spare capacity is the baseline — if there is none, your options are a new supply, load management, or a board upgrade before any charger is specified.",
@@ -661,8 +731,11 @@ export const allNewsArticles: NewsArticle[] = [
       },
       toc: [
         { id: "spotlight", label: "Key Numbers", level: 1 },
-        { id: "overview", label: "The EV Charging Problem", level: 1 },
-        { id: "details", label: "What Needs to Happen First", level: 1 },
+        { id: "overview", label: "Why EV Charging Is an LV Problem First", level: 1 },
+        { id: "details", label: "LV Board Capacity and Demand Assessment", level: 1 },
+        { id: "specifications", label: "Infrastructure Thresholds and Compliance Standards", level: 1 },
+        { id: "scope", label: "What This Guide Covers", level: 1 },
+        { id: "challenges", label: "Common Planning Failures and How to Avoid Them", level: 1 },
         { id: "methodology", label: "8 Pre-Commission Questions", level: 1 },
         { id: "infographic", label: "EV Readiness Checklist", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },

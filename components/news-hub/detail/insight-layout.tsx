@@ -11,6 +11,7 @@ import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
 import { DetailListBlock } from "./detail-list-block";
 import { DetailSpecsBlock } from "./detail-specs-block";
+import { DetailSplitCardsBlock } from "./detail-split-cards-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
 
 export const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
@@ -61,6 +62,11 @@ export function InsightLayout({ article }: InsightLayoutProps) {
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
           <DetailSpecsBlock specifications={detail.specifications} title={title} />
+        ) : null;
+
+      case "challenges":
+        return detail.challenges && detail.challenges.length > 0 ? (
+          <DetailSplitCardsBlock challenges={detail.challenges} title={title} />
         ) : null;
 
       case "takeaways":
