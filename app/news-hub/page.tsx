@@ -13,11 +13,11 @@ import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import {
   getFeaturedNewsArticleByCategory,
   getNewsArticleListItemsByCategory,
+  getNewsArticleCounts,
   getSidebarCardsByCategory,
   newsHubMetricItems,
   newsHubIntroData,
   allNewsArticles,
-  newsCategories,
 } from "@/data/news";
 import { createNewsHubListMetadata } from "@/lib/metadata-news";
 
@@ -28,15 +28,7 @@ export default async function NewsHubPage() {
   const allItems = getNewsArticleListItemsByCategory("all");
   const sidebarCards = getSidebarCardsByCategory("all");
   const featuredArticle = getFeaturedNewsArticleByCategory("all");
-  const counts: Record<string, number> = {
-    all: allNewsArticles.length,
-    ...Object.fromEntries(
-      newsCategories.map((c) => [
-        c.slug,
-        allNewsArticles.filter((a) => a.category === c.slug).length,
-      ]),
-    ),
-  };
+  const counts = getNewsArticleCounts();
 
   return (
     <main className="relative bg-background">

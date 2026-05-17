@@ -35,6 +35,8 @@ interface NewsGridLayoutProps {
   /** Custom empty state message */
   emptyMessage?: string;
   showSlider?: boolean;
+  /** Override the slider's active chip — use when category is in URL path, not ?category= param */
+  activeSlug?: string;
 }
 
 export function NewsGridLayout({
@@ -47,6 +49,7 @@ export function NewsGridLayout({
   showLiveIndicator = true,
   emptyMessage = "No stories available in this category yet.",
   showSlider,
+  activeSlug,
 }: NewsGridLayoutProps) {
   const pathname = usePathname();
 
@@ -80,7 +83,7 @@ export function NewsGridLayout({
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
         {/* category buttons - left aligned */}
-        {showSlider !== false && <NewsHubCategorySlider counts={counts} />}
+        {showSlider !== false && <NewsHubCategorySlider counts={counts} activeSlug={activeSlug} />}
 
         {/* Header */}
         <div className="flex items-center justify-between gap-4 px-1">

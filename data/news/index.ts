@@ -1192,6 +1192,18 @@ export function getRelatedNewsArticles(
 }
 
 export { newsHubIntroData } from './news-hub-intro';
+
+export function getNewsArticleCounts(): Record<string, number> {
+  return {
+    all: allNewsArticles.length,
+    ...Object.fromEntries(
+      newsCategories.map((c) => [
+        c.slug,
+        allNewsArticles.filter((a) => a.category === c.slug).length,
+      ]),
+    ),
+  };
+}
 export { newsCategoriesIntroData } from './categories-intro';
 export { newsCategoryIntroData } from './category-intro';
 export { newsCategoryColors } from "./category-colors";

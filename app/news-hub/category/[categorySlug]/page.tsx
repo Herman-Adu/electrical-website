@@ -6,6 +6,7 @@ import { ContentBreadcrumb, SectionIntro } from "@/components/shared";
 import { Footer } from "@/components/sections/footer";
 import {
   getNewsArticleListItemsByCategory,
+  getNewsArticleCounts,
   getNewsCategoryBySlug,
   getNewsCategorySlugs,
   getSidebarCardsByCategory,
@@ -51,6 +52,7 @@ export default async function NewsCategoryPage({
 
   const items = getNewsArticleListItemsByCategory(category.slug);
   const sidebarCards = getSidebarCardsByCategory(category.slug);
+  const counts = getNewsArticleCounts();
 
   return (
     <main className="relative bg-background">
@@ -77,6 +79,8 @@ export default async function NewsCategoryPage({
           <NewsGridLayout
             items={items}
             sidebarCards={sidebarCards}
+            counts={counts}
+            activeSlug={categorySlug}
             title={<NewsHubCategoryTitle label={category.label} />}
             initialCount={4}
             batchSize={3}

@@ -5,7 +5,7 @@ import { NewsTopicHero } from "@/components/news-hub/news-topic-hero";
 import { SectionIntro, ContentBreadcrumb } from "@/components/shared";
 import { NewsHubListCTA } from "@/components/news-hub";
 import { Footer } from "@/components/sections/footer";
-import { allNewsArticles, getSidebarCardsByCategory } from "@/data/news";
+import { allNewsArticles, getNewsArticleCounts, getSidebarCardsByCategory } from "@/data/news";
 import { getNewsArticlesByTopic, getNewsTopicBySlug, newsTopics } from "@/data/news/topics";
 import { newsTopicIntros } from "@/data/news/topic-intros";
 import type { NewsArticleListItem } from "@/types/news";
@@ -23,6 +23,7 @@ export default async function NewsTopicFilterPage({ params }: PageProps) {
 
   const articles = getNewsArticlesByTopic(topicSlug, allNewsArticles);
   const sidebarCards = getSidebarCardsByCategory("all");
+  const counts = getNewsArticleCounts();
   const introData = newsTopicIntros[topicSlug] ?? newsTopicIntros["residential"];
 
   const items: NewsArticleListItem[] = articles.map((a) => ({
@@ -60,6 +61,8 @@ export default async function NewsTopicFilterPage({ params }: PageProps) {
           <NewsGridLayout
             items={items}
             sidebarCards={sidebarCards}
+            counts={counts}
+            activeSlug={topicSlug}
             title={<NewsHubCategoryTitle label={topic.label} />}
             initialCount={4}
             batchSize={3}
