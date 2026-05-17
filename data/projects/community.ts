@@ -297,7 +297,7 @@ export const communityProjects: Project[] = [
             "Slough in Bloom's 32nd year launched on 5 May 2026 under new chairman Phil Vance, with Mayor Siobhan Dauti at the opening event. The competition spans 10 judging categories — from residential front gardens to community roundabouts, school grounds, allotments, and environmental projects — and is free to enter for anyone in the borough. That open-entry model is the foundation of what makes it meaningful: the entries come from residents who have tended a front garden for years without recognition, from school gardening clubs, from allotment holders who have worked the same plot across three decades.",
             "The judging process visits hundreds of locations across Slough each summer. Trained judges score every entry against consistent criteria, ensuring each entrant's effort is counted rather than overlooked. An awards ceremony in autumn closes the loop — giving Slough a structured, annual reason to notice what is growing in its streets, recognise the people who planted it, and celebrate them publicly. It is a small, unglamorous machine. It has been running without interruption for 32 years. Nexgen is proud to help keep it running.",
           ],
-          background: "muted",
+          background: "default",
         },
         {
           position: "after-challenge",
