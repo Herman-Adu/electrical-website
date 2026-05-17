@@ -100,12 +100,10 @@ No changes to routes, components, types, or TOC logic. Both projects are served 
 
 ### Cover Image
 ```
-src: "/images/projects/community/tvap/nexgen-tvap-pat-testing-hero.jpg"
-alt: "Thames Valley Adventure Playground — Nexgen free PAT testing community initiative"
+src: "/images/projects/community/thames-valley-adventure-playground/tvap-hero.jpg"
+alt: "Thames Valley Adventure Playground — inclusive play facility, Taplow, Berkshire"
 ```
-**Note:** No image exists yet. Use a placeholder path. The file must be added after the site visit.
-Placeholder recommendation: copy a neutral community image as a stand-in, or omit cover image if the
-component supports graceful fallback. Confirm rendering before shipping.
+Image exists at the specified path.
 
 ### TOC (derived from `detail` fields present)
 
@@ -114,9 +112,10 @@ component supports graceful fallback. Confirm rendering before shipping.
    └─ What Community Means to Nexgen  ← narrativeBlock(after-intro, anchorId: "our-values")
 2. Scope of Work                      ← detail.scope
 3. Project Timeline                   ← detail.timeline
+4. Gallery                            ← detail.gallery (3 images)
 ```
 
-No `challenge`/`solution`, no `gallery` (no images), no `testimonial` (planned).
+No `challenge`/`solution`, no `testimonial` (planned).
 
 ### detail.intro
 
@@ -195,6 +194,16 @@ background: "muted"
 | Phase 1 | Site Survey & Appliance Register | Pre-visit survey to establish appliance count, site layout, and access requirements. Full appliance register produced prior to testing day. | TBC | `upcoming` |
 | Phase 2 | Testing & Inspection Programme | Full site PAT testing day(s) — visual inspection, electrical testing, labelling, and real-time recording for all portable appliances across the facility. | TBC | `upcoming` |
 | Phase 3 | Certification & Handover | Test register finalised, NICEIC certificates produced, and full documentation package handed to TVAP management. Remedial items reported separately. | TBC | `upcoming` |
+
+### detail.gallery (3 images)
+
+| # | src | alt | caption |
+|---|---|---|---|
+| 1 | `/images/projects/community/thames-valley-adventure-playground/tvap-hero.jpg` | Thames Valley Adventure Playground — inclusive outdoor play area | TVAP Outdoor Play Facility |
+| 2 | `/images/projects/community/thames-valley-adventure-playground/Thames_Valley_Adventure_Playground.width-1000.jpg` | Thames Valley Adventure Playground — facilities overview | TVAP Facilities |
+| 3 | `/images/projects/community/thames-valley-adventure-playground/Thames_Valley_Adventure_Playground-map.jpg` | Thames Valley Adventure Playground — location, Taplow, Berkshire | Location — Taplow, Berkshire |
+
+`tvap.jpg` is available as a fallback / additional image if needed.
 
 ---
 
@@ -435,12 +444,15 @@ The Margaret Inniss reference grounds the narrative in the competition's real hi
 ## Implementation Constraints
 
 - `heroIndicators` must be exactly 4 items, typed `as const`
-- `heroHeadline` is `[string, string?, string?]` — max 3 strings
+- `heroHeadline` is `[string, string?, string?]` — renders as static fade-in phrases, NOT animated.
+  Index 0 = white, index 1 = electric-cyan gradient, index 2 = white. Max 3 strings.
+- `detail.intro.headlineWords` is the animated component (`AnimatedWord` per word). Keep it punchy.
 - `narrativeBlocks` positions: `"after-intro" | "after-scope" | "after-challenge" | "after-timeline" | "after-gallery"`
 - TOC items are auto-generated — `anchorId` and `heading` on narrative blocks create sub-items
 - `ProjectScope.icon` type is separate from `TrustIndicatorItem.icon` — use only icons valid for each
-- TVAP cover image does not exist yet — confirm placeholder behaviour before shipping
-- Slough cover image exists at the specified path — verify filename casing matches filesystem
+- All TVAP images exist at `public/images/projects/community/thames-valley-adventure-playground/`
+- Slough images exist at `public/images/projects/community/slough-in-bloom/`
+- Verify filename casing matches filesystem before build (Windows is case-insensitive, Linux/Vercel is not)
 
 ---
 
@@ -451,5 +463,6 @@ Before committing:
 pnpm typecheck && pnpm build
 ```
 
-All 13 gallery images exist. TVAP cover image is a placeholder path — either add a real image
-or confirm the component renders gracefully without it before the gate runs.
+All 13 Slough in Bloom images exist. All 4 TVAP images exist. Verify filename casing on
+`Thames_Valley_Adventure_Playground.width-1000.jpg` and `Thames_Valley_Adventure_Playground-map.jpg`
+— these contain uppercase characters that will cause 404s on Vercel (Linux FS) if not exact.
