@@ -295,7 +295,7 @@ export const communityProjects: Project[] = [
           heading: "Same Values. New Name.",
           paragraphs: [
             "Nexgen Electrical Innovations was built on something that came before — a team with deep roots in the local electrical industry and an equally deep commitment to the communities they served. When this company was founded, one of the first things we did was return to support Slough in Bloom. Not because it was on a list of things to do. Because the people who make up Nexgen had always believed in it.",
-            "The 2023 chapter proved something to us: that community involvement isn't just feel-good language in a company brochure. It changes how your team sees themselves, how your neighbours see you, and how connected you feel to the place where you work. In 2026, that belief is still intact — and NxtGen is listed on the Slough in Bloom website as a current sponsor for year 32.",
+            "The 2023 chapter proved something to us: that community involvement isn't just feel-good language in a company brochure. It changes how your team sees themselves, how your neighbours see you, and how connected you feel to the place where you work. In 2026, that belief is still intact — and Nexgen is listed on the Slough in Bloom website as a current sponsor for year 32.",
           ],
           background: "muted",
         },
@@ -373,7 +373,7 @@ export const communityProjects: Project[] = [
           phase: "Phase 3",
           title: "2026 — We Came Back",
           description:
-            "As Nexgen Electrical Innovations, we returned as sponsors for the competition's 32nd year. Under new chairman Phil Vance, with Mayor Siobhan Dauti at the launch on 5 May 2026, NxtGen is listed as an active sponsor on sloughinbloom.com.",
+            "As Nexgen Electrical Innovations, we returned as sponsors for the competition's 32nd year. Under new chairman Phil Vance, with Mayor Siobhan Dauti at the launch on 5 May 2026, Nexgen is listed as an active sponsor on sloughinbloom.com.",
           duration: "2026 (active)",
           status: "in-progress",
         },
