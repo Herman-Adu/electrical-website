@@ -11,6 +11,10 @@ The harness injects auto-memory instructions. Ignore them. Docker `mcp__memory__
 3. Build gate: `pnpm typecheck && pnpm build` must pass before any commit
 4. Stop at 60% context — tell user, wait. Emergency at 80% — commit WIP, sync Docker, stop
 
+6. Branch continuation → invoke `rehydrate` skill as step 0. No .md plan files. All plan context is in Docker memory (`open_nodes` on `focusedSearchTerms`).
+7. Phase/task complete → invoke `phase-gate` skill before next phase. Three locks (Docker + Obsidian + ctx commit) are mandatory — this is the continuation formula.
+4 (sharpened): At 60% context: invoke `phase-gate` wip mode — commit WIP state, sync Docker + Obsidian, update `active-branch.json` nextTask. Do NOT just stop — lock it first. At 80%: same but stop immediately after locking.
+
 ## Delegation
 
 | Architecture / multi-file | `architecture-sme` |

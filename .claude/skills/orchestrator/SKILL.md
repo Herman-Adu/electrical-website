@@ -41,6 +41,26 @@ Report exactly 3 bullets:
 - **Next:** [next_task]
 ```
 
+### Step 1b: Load Task Context
+Read `config/active-branch.json`. If `focusedSearchTerms` is non-empty:
+```bash
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name":"open_nodes","arguments":{"names":["[planEntity]",...focusedSearchTerms]}}' | \
+  python3 -c "
+import json, sys
+raw = json.load(sys.stdin)
+for e in json.loads(raw['\'content\''][0]['\'text\''])['\'entities\'']:
+    print(f\"\\n=== {e['\'name\'']} ===\")
+    for o in e['\'observations\''][-15:]:
+        print(o)
+"
+```
+Parse `git log --oneline -5` for `ctx(...)` commits — these are the phase log.
+Add to the 3-bullet report:
+- **Phase:** [last ctx phase from git log]
+- **Next:** [nextTask from active-branch.json]
+
 ### Step 2: Git State
 ```bash
 git log --oneline -5
