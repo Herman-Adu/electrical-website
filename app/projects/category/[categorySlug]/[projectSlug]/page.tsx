@@ -301,39 +301,39 @@ export default async function CategoryProjectDetailPage({
                 Project Details
               </h3>
               <dl className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Status</dt>
-                  <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Status</dt>
+                  <dd className="font-medium text-[hsl(174_100%_35%)] dark:text-electric-cyan capitalize text-right">
                     {project.status.replace("-", " ")}
                   </dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Budget</dt>
-                  <dd className="font-medium text-foreground">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Budget</dt>
+                  <dd className="font-medium text-foreground text-right">
                     {project.kpis.budget}
                   </dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Timeline</dt>
-                  <dd className="font-medium text-foreground">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Timeline</dt>
+                  <dd className="font-medium text-foreground text-right">
                     {project.kpis.timeline}
                   </dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Location</dt>
-                  <dd className="font-medium text-foreground">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Location</dt>
+                  <dd className="font-medium text-foreground text-right">
                     {project.kpis.location}
                   </dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Capacity</dt>
-                  <dd className="font-medium text-foreground">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Capacity</dt>
+                  <dd className="font-medium text-foreground text-right">
                     {project.kpis.capacity}
                   </dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-foreground/50">Sector</dt>
-                  <dd className="font-medium text-foreground">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-foreground/50 shrink-0">Sector</dt>
+                  <dd className="font-medium text-foreground min-w-0 truncate text-right">
                     {project.clientSector}
                   </dd>
                 </div>
