@@ -1019,6 +1019,20 @@ export const allNewsArticles: NewsArticle[] = [
         "For HMO landlords, PAT compliance sits within a broader regulatory framework that includes licensing, planning, and fire safety. The PAT register is the element most likely to be checked at a licensing inspection — because it is documentable and checkable in a way that some other obligations are not. A landlord with a current, well-maintained register in a proper compliance file is in a fundamentally different position from one relying on a folder of expired test labels.",
         "The most common gap in landlord PAT compliance is the boundary question. Landlords who treat tenant appliances as their responsibility overspend and create confusion about inventory ownership. Landlords who leave landlord-supplied appliances off the register may find that the distinction is unhelpful when an insurance claim is raised or a licensing inspector is on site. The starting point is the inventory — every appliance the landlord owns and supplies is in scope. Everything else is not.",
       ],
+      specifications: [{
+        category: 'Regulatory Framework',
+        items: [
+          { label: 'Legislation', value: 'EICR 5yr cycle, Housing Act 2004, Electricity at Work Regs 1989' },
+          { label: 'Obligation Scope', value: 'Furnished lets, HMO communal areas, landlord-boundary appliances' },
+          { label: 'Enforcement', value: 'Local authority inspection, civil liability, insurance invalidation' }
+        ]
+      }],
+      scope: [
+        'Portable appliances provided with the tenancy (white goods, kettles, lamps)',
+        'HMO communal area equipment (hoovers, shared kitchen appliances)',
+        'Landlord-supplied items in furnished lets',
+        'Any appliance within the landlord boundary'
+      ],
       infographic: {
         src: "/images/news/infographic-pat-frequency-guide.png",
         alt: "PAT testing frequency guide — equipment class and environment risk matrix",
@@ -1028,6 +1042,8 @@ export const allNewsArticles: NewsArticle[] = [
         { id: "spotlight", label: "At a Glance", level: 1 },
         { id: "overview", label: "Landlord PAT Obligations", level: 1 },
         { id: "details", label: "EICR vs PAT vs HMO Rules", level: 1 },
+        { id: "specifications", label: "Regulatory Framework", level: 1 },
+        { id: "scope", label: "What Landlord PAT Covers", level: 1 },
         { id: "infographic", label: "PAT Frequency Guide", level: 1 },
         { id: "methodology", label: "Six Steps for Landlords", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
@@ -1145,6 +1161,26 @@ export const allNewsArticles: NewsArticle[] = [
         "The 110V CTE system is a distinctive feature of UK construction and industrial practice, providing meaningful risk reduction for portable tool use in high-risk environments. It requires contractors with specific testing competence. Ensuring a PAT contractor working on a 110V site holds the appropriate test equipment and procedural knowledge is a prerequisite for valid testing — not a minor detail that can be assumed. Ask specifically, and ask before commissioning.",
         "For industrial facilities, the PAT programme should be designed as part of the broader PUWER inspection schedule, not as a standalone annual event delivered independently of the wider equipment management framework. Frequency bands should reflect actual operating environments. Records should satisfy both PAT and PUWER requirements under common asset identifiers. And the programme should be reviewed when the facility changes — because the equipment changes, the environments change, and the risk profile changes with the operation.",
       ],
+      specifications: [{
+        category: 'Equipment Classification Reference',
+        items: [
+          { label: 'Class I Equipment', value: 'Earth-dependent: motors, industrial tools — test insulation + earth continuity' },
+          { label: 'Class II Equipment', value: 'Double-insulated: hand tools, IT equipment — insulation resistance test only' },
+          { label: '110V CTE Systems', value: 'Centre-tapped earth at 55V to earth — dedicated test process, 3-monthly retest' }
+        ]
+      }],
+      challenges: [
+        {
+          title: '110V CTE Testing Complexity',
+          description: 'Centre-tapped earth systems operating at 55V to earth require dedicated test equipment and procedures not universally held by PAT contractors.',
+          solution: 'Dedicated CTE-capable PAT testers required. Test phase-to-earth at 55V. Retest interval 3 months for high-use sites.'
+        },
+        {
+          title: 'High-Turnover Equipment Environments',
+          description: 'Industrial sites with continuous shift patterns see equipment moved, replaced, and borrowed between teams — meaning the asset register can quickly fall out of date.',
+          solution: 'Asset-tagged inventory with QR-code labels. Rolling retest schedule by zone. PUWER inspection log maintained digitally.'
+        }
+      ],
       infographic: {
         src: "/images/news/infographic-pat-frequency-guide.png",
         alt: "PAT testing frequency guide — equipment class and environment risk matrix for industrial environments",
@@ -1154,6 +1190,8 @@ export const allNewsArticles: NewsArticle[] = [
         { id: "spotlight", label: "At a Glance", level: 1 },
         { id: "overview", label: "PUWER and PAT Testing", level: 1 },
         { id: "details", label: "Equipment Classes and 110V CTE", level: 1 },
+        { id: "specifications", label: "Equipment Classification", level: 1 },
+        { id: "challenges", label: "Common Testing Challenges", level: 1 },
         { id: "infographic", label: "PAT Frequency Guide", level: 1 },
         { id: "methodology", label: "Six Steps for Industrial Sites", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
