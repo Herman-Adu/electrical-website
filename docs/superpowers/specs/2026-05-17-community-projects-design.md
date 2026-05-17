@@ -100,8 +100,8 @@ No changes to routes, components, types, or TOC logic. Both projects are served 
 
 ### Cover Image
 ```
-src: "/images/projects/community/thames-valley-adventure-playground/tvap-hero.jpg"
-alt: "Thames Valley Adventure Playground — inclusive play facility, Taplow, Berkshire"
+src: "/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-inclusive-adventure-playground-castle-taplow.jpg"
+alt: "Thames Valley Adventure Playground — wooden castle fortress with red slide and accessible ramp, Taplow, Berkshire"
 ```
 Image exists at the specified path.
 
@@ -112,7 +112,7 @@ Image exists at the specified path.
    └─ What Community Means to Nexgen  ← narrativeBlock(after-intro, anchorId: "our-values")
 2. Scope of Work                      ← detail.scope
 3. Project Timeline                   ← detail.timeline
-4. Gallery                            ← detail.gallery (3 images)
+4. Gallery                            ← detail.gallery (4 images)
 ```
 
 No `challenge`/`solution`, no `testimonial` (planned).
@@ -195,15 +195,14 @@ background: "muted"
 | Phase 2 | Testing & Inspection Programme | Full site PAT testing day(s) — visual inspection, electrical testing, labelling, and real-time recording for all portable appliances across the facility. | TBC | `upcoming` |
 | Phase 3 | Certification & Handover | Test register finalised, NICEIC certificates produced, and full documentation package handed to TVAP management. Remedial items reported separately. | TBC | `upcoming` |
 
-### detail.gallery (3 images)
+### detail.gallery (4 images)
 
 | # | src | alt | caption |
 |---|---|---|---|
-| 1 | `/images/projects/community/thames-valley-adventure-playground/tvap-hero.jpg` | Thames Valley Adventure Playground — inclusive outdoor play area | TVAP Outdoor Play Facility |
-| 2 | `/images/projects/community/thames-valley-adventure-playground/Thames_Valley_Adventure_Playground.width-1000.jpg` | Thames Valley Adventure Playground — facilities overview | TVAP Facilities |
-| 3 | `/images/projects/community/thames-valley-adventure-playground/Thames_Valley_Adventure_Playground-map.jpg` | Thames Valley Adventure Playground — location, Taplow, Berkshire | Location — Taplow, Berkshire |
-
-`tvap.jpg` is available as a fallback / additional image if needed.
+| 1 | `/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-inclusive-adventure-playground-castle-taplow.jpg` | Thames Valley Adventure Playground — wooden castle fortress with red slide and accessible ramp, Taplow | TVAP Play Castle — Accessible Design |
+| 2 | `/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-outdoor-play-area-panoramic-taplow.jpg` | Thames Valley Adventure Playground — panoramic view of outdoor play area with multiple structures and sandpit | TVAP Outdoor Play Area |
+| 3 | `/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-adventure-playground-facility-building.jpg` | Thames Valley Adventure Playground — log cabin facility building exterior, Taplow | TVAP Facility Building |
+| 4 | `/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-site-plan-taplow-berkshire.jpg` | Thames Valley Adventure Playground — site plan display board, 2.5-acre facility at Taplow, Berkshire | TVAP Site Plan |
 
 ---
 
@@ -256,8 +255,8 @@ not a named company. The narrative is Nexgen's story from the beginning.
 
 ### Cover Image
 ```
-src: "/images/projects/community/slough-in-bloom/01-slough-in-bloom-2023-overall-winner.jpg"
-alt: "Slough in Bloom 2023 — overall winner, sponsored by Nexgen Electrical Innovations"
+src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-overall-winner-award.jpg"
+alt: "Slough in Bloom 2023 — overall winner award presentation, sponsored by Nexgen Electrical Innovations"
 ```
 
 ### TOC (derived from `detail` fields present)
@@ -394,19 +393,19 @@ background: "default"
 
 | # | src | alt | caption |
 |---|---|---|---|
-| 1 | `/images/projects/community/slough-in-bloom/01-slough-in-bloom-2023-overall-winner.jpg` | Slough in Bloom 2023 — overall winner Simon Richardson | 2023 Overall Winner — Simon Richardson |
-| 2 | `/images/projects/community/slough-in-bloom/02-slough-in-bloom-gold-winners.jpg` | Slough in Bloom 2023 — gold winner | 2023 Gold Award |
-| 3 | `/images/projects/community/slough-in-bloom/03-slough-in-bloom-gold-winners.jpg` | Slough in Bloom 2023 — gold winner | 2023 Gold Award |
-| 4 | `/images/projects/community/slough-in-bloom/04-slough-in-bloom-gold-winners.jpg` | Slough in Bloom 2023 — gold winner | 2023 Gold Award |
-| 5 | `/images/projects/community/slough-in-bloom/05-slough-in-bloom-gold-winners.jpg` | Slough in Bloom 2023 — gold winner | 2023 Gold Award |
-| 6 | `/images/projects/community/slough-in-bloom/06-slough-in-bloom-gold-winners.jpg` | Slough in Bloom 2023 — gold winner | 2023 Gold Award |
-| 7 | `/images/projects/community/slough-in-bloom/slough-in-bloom-01.jpg` | Slough in Bloom competition — community entries | Community Entries |
-| 8 | `/images/projects/community/slough-in-bloom/slough-in-bloom-03.jpg` | Slough in Bloom competition — community display | Community Display |
-| 9 | `/images/projects/community/slough-in-bloom/slough-in-bloom-04.jpg` | Slough in Bloom competition — garden entry | Garden Entry |
-| 10 | `/images/projects/community/slough-in-bloom/slough-in-bloom-05.jpg` | Slough in Bloom competition — floral display | Floral Display |
-| 11 | `/images/projects/community/slough-in-bloom/slough-in-bloom-v1.jpg` | Slough in Bloom 2023 — community competition | Competition Display |
-| 12 | `/images/projects/community/slough-in-bloom/slough-in-bloom-v2.jpg` | Slough in Bloom 2023 — community competition | Competition Display |
-| 13 | `/images/projects/community/slough-in-bloom/001-slough-in-bloom-2023-overall-winner.jpg` | Slough in Bloom 2023 — overall winner celebration | Overall Winner Celebration |
+| 1 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-overall-winner-award.jpg` | Slough in Bloom 2023 — overall winner award presentation | 2023 Overall Winner Award |
+| 2 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-overall-winner-display.jpg` | Slough in Bloom 2023 — overall winner display board at ceremony | 2023 Overall Winner Display |
+| 3 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-01.jpg` | Slough in Bloom 2023 — gold award winner category 1 | 2023 Gold Award Winner |
+| 4 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-02.jpg` | Slough in Bloom 2023 — gold award winner category 2 | 2023 Gold Award Winner |
+| 5 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-03.jpg` | Slough in Bloom 2023 — gold award winner category 3 | 2023 Gold Award Winner |
+| 6 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-04.jpg` | Slough in Bloom 2023 — gold award winner category 4 | 2023 Gold Award Winner |
+| 7 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-05.jpg` | Slough in Bloom 2023 — gold award winner category 5 | 2023 Gold Award Winner |
+| 8 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-community-garden-entry-01.jpg` | Slough in Bloom 2023 — community garden competition entry, Slough | Community Garden Entry |
+| 9 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-community-garden-entry-02.jpg` | Slough in Bloom 2023 — community garden competition entry, Slough | Community Garden Entry |
+| 10 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-community-garden-entry-03.jpg` | Slough in Bloom 2023 — community garden competition entry, Slough | Community Garden Entry |
+| 11 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-community-garden-entry-04.jpg` | Slough in Bloom 2023 — community garden competition entry, Slough | Community Garden Entry |
+| 12 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-prize-winning-garden-display.jpg` | Slough in Bloom 2023 — prize-winning garden competition display, Berkshire | Prize-Winning Garden Display |
+| 13 | `/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-competition-floral-display.jpg` | Slough in Bloom 2023 — competition floral display entry, Slough Berkshire | Competition Floral Display |
 
 ### detail.testimonial
 
@@ -463,6 +462,5 @@ Before committing:
 pnpm typecheck && pnpm build
 ```
 
-All 13 Slough in Bloom images exist. All 4 TVAP images exist. Verify filename casing on
-`Thames_Valley_Adventure_Playground.width-1000.jpg` and `Thames_Valley_Adventure_Playground-map.jpg`
-— these contain uppercase characters that will cause 404s on Vercel (Linux FS) if not exact.
+All 13 Slough in Bloom images exist. All 4 TVAP images exist. All filenames are lowercase and
+hyphen-separated — Vercel (Linux FS) safe. No uppercase or underscore characters remain.
