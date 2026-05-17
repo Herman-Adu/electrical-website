@@ -1,9 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { SCROLL_GAP, scrollToElementWithOffset } from "@/lib/scroll-to-section";
+import {
+  SCROLL_GAP,
+  getStickyAnchorOffset,
+  getStickyHeaderHeight,
+  scrollToElementWithOffset,
+} from "@/lib/scroll-to-section";
 
 export interface TocItem {
   id: string;
@@ -23,36 +28,36 @@ export function NewsArticleToc({
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [clickedId, setClickedId] = useState<string | null>(null);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
-    // Show TOC after initial render with delay
     const showTimer = setTimeout(() => setIsVisible(true), 300);
+    let rafId: number;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0% -60% 0%",
-        threshold: 0,
-      },
-    );
-
-    // Observe all section elements
-    items.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) {
-        observer.observe(element);
+    const findActive = () => {
+      if (isScrollingRef.current) return;
+      const threshold = getStickyAnchorOffset() || getStickyHeaderHeight() || 160;
+      let active: string | null = null;
+      for (const item of items) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= threshold) active = item.id;
       }
-    });
+      setActiveId(active);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(findActive);
+    };
+
+    findActive();
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       clearTimeout(showTimer);
-      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
     };
   }, [items]);
 
@@ -64,16 +69,20 @@ export function NewsArticleToc({
   }, [items]);
 
   const handleClick = useCallback((id: string) => {
-    // Trigger click animation
+    setActiveId(id);
+    isScrollingRef.current = true;
     setClickedId(id);
     setTimeout(() => setClickedId(null), 300);
 
     const element = document.getElementById(id);
     if (element) {
       scrollToElementWithOffset(element, {
-        pageType: 'article',
-        // baseGap will be resolved to SCROLL_GAP.toc (8px) by pageType
+        baseGap: SCROLL_GAP.toc,
+      }).then(() => {
+        isScrollingRef.current = false;
       });
+    } else {
+      isScrollingRef.current = false;
     }
   }, []);
 

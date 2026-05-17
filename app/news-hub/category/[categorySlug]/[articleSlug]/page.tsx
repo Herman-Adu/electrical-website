@@ -8,6 +8,8 @@ import {
   type TocItem,
 } from "@/components/news-hub";
 import { LayoutDispatcher, ReadingProgressBar } from "@/components/news-hub/detail";
+import { DEFAULT_INSIGHT_TOC } from "@/components/news-hub/detail/insight-layout";
+import { DEFAULT_ARTICLE_TOC } from "@/components/news-hub/detail/article-layout";
 import { Footer } from "@/components/sections/footer";
 import { ContentBreadcrumb } from "@/components/shared";
 import {
@@ -71,69 +73,46 @@ export async function generateMetadata({
   );
 }
 
-// Generate TOC items based on available content sections
-function autoGenerateTocItems(
+// Derive TOC items by filtering the layout's canonical default order against available data.
+// Single source of truth: the default TOC in each layout file controls section order;
+// this function only decides which sections are present for a given article.
+function deriveTocFromLayout(
+  defaultToc: readonly TocItem[],
   article: NewsArticle,
   hasTimeline: boolean,
 ): TocItem[] {
-  const items: TocItem[] = [{ id: "overview", label: "Overview" }];
-
-  if (article.detail.body && article.detail.body.length > 0) {
-    items.push({ id: "details", label: "Project Details" });
-  }
-
-  if (article.detail.scope && article.detail.scope.length > 0) {
-    items.push({ id: "scope", label: "Project Scope" });
-  }
-
-  if (article.detail.methodology && article.detail.methodology.length > 0) {
-    items.push({ id: "methodology", label: "Methodology" });
-  }
-
-  if (article.detail.challenges && article.detail.challenges.length > 0) {
-    items.push({ id: "challenges", label: "Challenges & Solutions" });
-  }
-
-  if (hasTimeline) {
-    items.push({ id: "timeline", label: "Project Timeline" });
-  }
-
-  if (
-    article.detail.specifications &&
-    article.detail.specifications.length > 0
-  ) {
-    items.push({ id: "specifications", label: "Technical Specifications" });
-  }
-
-  items.push({ id: "takeaways", label: "Key Takeaways" });
-
-  if (article.detail.results && article.detail.results.length > 0) {
-    items.push({ id: "results", label: "Results" });
-  }
-
-  if (article.detail.gallery && article.detail.gallery.length > 0) {
-    items.push({ id: "gallery", label: "Gallery" });
-  }
-
-  if (article.detail.conclusion && article.detail.conclusion.length > 0) {
-    items.push({ id: "conclusion", label: "Conclusion" });
-  }
-
-  if (article.detail.quote) {
-    items.push({ id: "testimonial", label: "Client Testimonial" });
-  }
-
-  items.push({ id: "get-started", label: "Get Started" });
-
-  return items;
+  const { detail } = article;
+  const hasData: Record<string, boolean> = {
+    spotlight: (detail.spotlight?.length ?? 0) > 0,
+    overview: true,
+    methodology: (detail.methodology?.length ?? 0) > 0,
+    details: (detail.body?.length ?? 0) > 0,
+    scope: (detail.scope?.length ?? 0) > 0,
+    specifications: (detail.specifications?.length ?? 0) > 0,
+    takeaways: true,
+    testimonial: !!detail.quote,
+    gallery: (detail.gallery?.length ?? 0) > 0,
+    conclusion: (detail.conclusion?.length ?? 0) > 0,
+    challenges: (detail.challenges?.length ?? 0) > 0,
+    timeline: hasTimeline,
+    results: (detail.results?.length ?? 0) > 0,
+  };
+  return [
+    ...defaultToc.filter((item) => hasData[item.id] !== false),
+    { id: "get-started", label: "Get Started" },
+  ];
 }
 
-function getTocItems(article: NewsArticle): TocItem[] {
-  const base = article.detail.toc?.length
-    ? article.detail.toc
-    : autoGenerateTocItems(article, (article.detail.timeline?.length ?? 0) > 0);
-  if (base.some((item) => item.id === "get-started")) return base;
-  return [...base, { id: "get-started", label: "Get Started" }];
+function getTocItems(article: NewsArticle, hasTimeline: boolean): TocItem[] {
+  if (article.detail.toc?.length) {
+    const base = article.detail.toc;
+    return base.some((item) => item.id === "get-started")
+      ? base
+      : [...base, { id: "get-started", label: "Get Started" }];
+  }
+  const defaultToc =
+    article.category === "insights" ? DEFAULT_INSIGHT_TOC : DEFAULT_ARTICLE_TOC;
+  return deriveTocFromLayout(defaultToc, article, hasTimeline);
 }
 
 export default async function NewsArticlePage({
@@ -189,7 +168,7 @@ export default async function NewsArticlePage({
     }
   }
 
-  const tocItems = getTocItems(article);
+  const tocItems = getTocItems(article, (article.detail.timeline?.length ?? 0) > 0);
 
   return (
     <main className="relative bg-background">
