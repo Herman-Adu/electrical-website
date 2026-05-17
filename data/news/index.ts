@@ -938,16 +938,56 @@ export const allNewsArticles: NewsArticle[] = [
         { label: "Smart Charger", value: "Mandatory" },
       ],
       intro: [
-        "The most common question when someone buys an electric vehicle is 'how do I get a charger at home?' It's a reasonable question, and in most cases the answer is straightforward. But the answer depends on what's already in your home — specifically your consumer unit, your earthing arrangement, and whether your electrical system can support a dedicated 32A radial circuit without anything needing to be upgraded first.",
-        "A domestic EV charger installation is not complicated electrical work, but it is regulated electrical work. It is notifiable under Part P of the Building Regulations, which means it must be certified by an approved scheme contractor or submitted to building control. It requires a dedicated 32A circuit from your consumer unit to the charger location. And since 2022, any new charger installed in England must be a smart charger — a device capable of communicating with the grid and scheduling charging, not just a dumb socket that draws maximum power from the moment you plug in.",
-        "This guide covers what your home's electrical system actually needs before a charger is installed, what the OZEV Electric Vehicle Homecharge Scheme (EVHS) grant covers, and what to check before you ring an installer — so you're not surprised by what comes up during the survey.",
+        "Most people buying an electric vehicle think about range, charging speed, and monthly fuel savings — not about whether their consumer unit has a spare 32A way or what earthing arrangement the distribution network uses at their property. That gap between purchasing an EV and understanding what the home electrical system actually needs first is where installations stall, surveys reveal unexpected costs, and OZEV grant eligibility is sometimes lost before a cable is run.",
       ],
       body: [
-        "The starting point is your consumer unit. An EV charger draws a continuous 32A load: that's the equivalent of a large electric shower running non-stop for however many hours your vehicle charges. Your consumer unit needs a spare 32A way to accommodate the new circuit. A modern consumer unit with RCBO protection and a spare way is the ideal scenario — the new circuit drops in cleanly. An older consumer unit without spare capacity, or one that uses rewirable fuses rather than MCBs, presents a different picture. At minimum, a spare way needs to be created. At worst, the consumer unit requires replacement — work that, while not triggered solely by the EV charger, brings the whole installation up to current standards as a side benefit.",
-        "Your home's earthing arrangement matters more for EV charging than for most domestic electrical additions. The three earthing systems in UK domestic properties are TN-S (separate neutral and protective conductors from the street), TN-C-S (combined neutral and earth from the distribution network, fed into your main earth terminal — this is PME, the most common arrangement), and TT (earth electrode at the property, no metallic earth return path). For TT systems, an EV charger installation requires careful attention: the charger must either have a mode 3 socket with appropriate protective devices or use a charger with built-in protection suitable for TT earthing. Your installer should identify the earthing system during the pre-installation survey — if they don't, ask.",
-        "The EV Smart Charge Points Regulations 2021 (amended 2022) make smart charging functionality mandatory for all new EV chargepoints installed at domestic premises in England, Wales, and Scotland. A smart charger can communicate with the grid, respond to time-of-use tariff signals, and schedule charging to off-peak hours. For most homeowners, this means the charger can be set to charge overnight on an off-peak tariff — cheaper electricity and a flatter load on the distribution network. What this means practically is that you cannot lawfully install a standard hardwired socket or a basic 'dumb' EVSE unit as a home charger any longer. Any installer offering a non-smart unit for a new residential installation in 2024 onwards is offering non-compliant equipment.",
-        "The Office for Zero Emission Vehicles Electric Vehicle Homecharge Scheme (OZEV EVHS) provides a grant of up to £350 towards the cost of a home EV charger installation. To be eligible, you must own or have ordered a qualifying EV or plug-in hybrid (PHEV), the property must be a home with off-street parking, and the charger must be installed by an OZEV-approved installer using eligible equipment. The grant is applied directly by the installer — you don't apply separately. Landlords have access to a separate OZEV landlord grant for rental properties with off-street parking, covering up to £350 per socket for up to 200 sockets per landlord application. If you are a landlord fitting chargers across a rental portfolio, the landlord scheme is the correct route. Ask your installer which scheme applies to your situation before the installation is booked.",
-        "EV charger installation is notifiable work under Part P of the Building Regulations — it must be either certified by an approved scheme contractor (NICEIC, ECA, NAPIT) or submitted to building control. This certification is the document that confirms the installation meets BS 7671 and Building Regulations requirements. It is not an optional extra: you will need it if you sell the property, if your buildings insurer asks for evidence of compliance, or if an EV charger fault becomes the subject of an insurance claim. Ask for the Electrical Installation Certificate at handover — if your installer cannot provide one, they are not an approved scheme contractor and the installation is not properly certified.",
+        "The starting point is your consumer unit. An EV charger draws a continuous 32A load: that's the equivalent of a large electric shower running non-stop for however many hours your vehicle charges. A modern consumer unit with RCBO protection and a spare way is the ideal scenario — the new circuit drops in cleanly. An older consumer unit without spare capacity, or one that uses rewirable fuses rather than MCBs, presents a different picture. At minimum, a spare way needs to be created; at worst, the consumer unit requires replacement. Your home's earthing arrangement matters more for EV charging than for most domestic additions. TN-C-S (PME) is the most common UK domestic arrangement. For TT properties — where the earth is via an electrode at the property rather than a metallic return from the distributor — the charger must have built-in protection suitable for TT earthing. Your installer should identify the earthing system at survey; if they don't, ask.",
+        "The EV Smart Charge Points Regulations 2021 make smart charging functionality mandatory for all new EV chargepoints at domestic premises in England, Wales, and Scotland. A compliant smart charger communicates with the grid, responds to time-of-use tariff signals, and schedules charging to off-peak hours. Any installer offering a non-smart unit for a new residential installation is offering non-compliant equipment. The OZEV Electric Vehicle Homecharge Scheme (EVHS) grant of up to £350 is applied by the installer — you don't apply separately — but only OZEV-approved installers can apply it, and only OZEV-approved charger models are eligible. Landlords use a separate scheme covering up to £350 per socket for up to 200 sockets per application.",
+      ],
+      specifications: [
+        {
+          category: "Consumer Unit Requirements",
+          items: [
+            { label: "RCD/RCBO standard", value: "RCBO per circuit preferred; dual RCD acceptable on modern boards" },
+            { label: "Spare ways required", value: "Minimum 1 spare 32A way for dedicated EV circuit" },
+            { label: "Age/condition threshold", value: "Units with rewirable fuses or no spare capacity require replacement or upgrade before installation" },
+            { label: "EV circuit type", value: "Dedicated 32A radial circuit from consumer unit to charger location" },
+          ],
+        },
+        {
+          category: "OZEV Grant & Smart Charger Rules",
+          items: [
+            { label: "EVHS grant (homeowner)", value: "Up to £350 off a home charger installation" },
+            { label: "Landlord scheme", value: "Up to £350 per socket, up to 200 sockets per application" },
+            { label: "Smart charger mandate", value: "EV Smart Charge Points Regulations 2021 — mandatory for all new domestic installations in England, Wales, and Scotland" },
+            { label: "Tethered vs untethered", value: "Both types eligible; must meet smart charger specification and appear on OZEV-approved equipment list" },
+            { label: "Grant application route", value: "Applied by OZEV-approved installer — no separate homeowner application" },
+          ],
+        },
+      ],
+      scope: [
+        "Consumer unit condition and spare circuit capacity assessment",
+        "Earthing arrangement identification (TN-S, TN-C-S/PME, or TT) and protective device requirements",
+        "Existing cable route survey from consumer unit to intended charger location",
+        "Smart charger compliance and OZEV-approved equipment confirmation",
+        "Part P Building Regulations notification and Electrical Installation Certificate at completion",
+      ],
+      challenges: [
+        {
+          title: "TN-C-S earthing upgrade required",
+          description: "Properties supplied via PME (TN-C-S) earthing sometimes present conductor imbalance risks at the charger location that require additional earthing measures.",
+          solution: "Installer confirms earthing arrangement at survey; where required, a supplementary earth electrode or charger with integral protection is specified before installation proceeds.",
+        },
+        {
+          title: "Consumer unit too old or no spare capacity",
+          description: "Older consumer units with rewirable fuses, no spare MCB ways, or inadequate RCD protection cannot accept a new 32A EV circuit without prior upgrade work.",
+          solution: "Consumer unit replacement or upgrade is scoped and costed at survey — not discovered on installation day. Combining the upgrade with the EV installation brings the whole board to current standards.",
+        },
+        {
+          title: "Grant eligibility lost due to non-approved installer or equipment",
+          description: "Only OZEV-approved installers using OZEV-approved charger models can apply the EVHS grant. Non-approved installers or equipment choices made before checking eligibility can forfeit the £350.",
+          solution: "Confirm installer OZEV approval number and verify the chosen charger model on the OZEV-approved equipment list before booking installation — retrospective grant applications are not possible.",
+        },
       ],
       methodology: [
         "Check your consumer unit before booking an installation survey. Count the spare ways — if the unit is full, or uses rewirable fuses, flag this to the installer before the survey so they can cost the full scope. Modern consumer units with spare ways mean the charger circuit installs cleanly; older units may need work first.",
@@ -977,9 +1017,12 @@ export const allNewsArticles: NewsArticle[] = [
         "If you are buying an EV in the near future, the practical step is to book a survey with an OZEV-approved, NICEIC-registered installer before your vehicle arrives — not after. Installation lead times vary, and having the charger ready when the car arrives is significantly more convenient than using public charging while you wait for a slot.",
       ],
       toc: [
-        { id: "spotlight", label: "Grant & Specifications", level: 1 },
+        { id: "spotlight", label: "Grant & Key Metrics", level: 1 },
         { id: "overview", label: "What the Installation Involves", level: 1 },
-        { id: "details", label: "What Your Home Needs", level: 1 },
+        { id: "details", label: "Home Electrical System Context", level: 1 },
+        { id: "specifications", label: "Consumer Unit and Grant Specifications", level: 1 },
+        { id: "scope", label: "What the Installation Survey Covers", level: 1 },
+        { id: "challenges", label: "Common Installation Complications", level: 1 },
         { id: "methodology", label: "Six Steps Before You Book", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "testimonial", label: "A Note on Surveys", level: 1 },
@@ -1053,16 +1096,57 @@ export const allNewsArticles: NewsArticle[] = [
     spotlightMetric: { label: "Equipment Classes", value: "3" },
     detail: {
       intro: [
-        "PAT testing in a commercial setting is not the same problem as booking an annual inspection visit for a small office. A facilities manager responsible for multiple buildings, hundreds of portable appliances, or a logistics operation with high-turnover equipment is managing a compliance programme — with its own scheduling logic, documentation requirements, and insurance implications. Treating it as a single annual visit, repeated without review, is one of the most common ways that commercial PAT compliance develops gaps without anyone noticing.",
-        "The regulatory basis is the Electricity at Work Regulations 1989, which require that electrical systems and equipment be maintained in a safe condition. The Regulations impose a duty; they do not specify how to fulfil it. The Health and Safety Executive's recognised method is the IET Code of Practice for In-Service Inspection and Testing of Electrical Equipment (4th edition). The IET CoP provides the framework for risk-based frequency assessment — what type of equipment, in what environment, used how often, warrants what retesting interval. Annual testing is not mandated for all equipment. It is the correct frequency for some categories and excessive for others.",
-        "This guide is for facilities managers responsible for PAT compliance across commercial portfolios: office buildings, warehouses, retail premises, or mixed-use sites. It covers how the IET CoP frequency framework applies to commercial environments, what insurance conditions typically require, how to structure documentation that satisfies an insurer or enforcement inquiry, and the specific considerations for logistics and high-turnover environments where equipment control is as important as testing frequency.",
+        "PAT testing is widely misunderstood as a straightforward legal requirement — book a contractor, label the equipment, file the sheet. The reality is more nuanced: there is no law mandating annual PAT testing for every appliance, but there is a clear legal duty to maintain electrical equipment in a safe condition, and the consequences of treating compliance as a box-ticking exercise surface most visibly when an insurance claim is declined or an enforcement inquiry produces a documentation gap that should not have been there.",
       ],
       body: [
-        "The IET Code of Practice classifies portable appliances by equipment class and operating environment. Class I equipment depends on an earth connection for protection — desktop computers, floor-standing printers, catering equipment, power tools. Class II equipment is double-insulated — most power supplies, some portable tools, battery chargers. Class III equipment operates at safety extra-low voltage (SELV) — below 50V AC — and presents the lowest electrical risk. For each class, the IET CoP provides recommended retesting intervals by environment: office and hotel environments warrant the longest intervals; commercial kitchens, construction sites, and warehouses warrant significantly shorter ones. Class I equipment in a standard office environment — a desktop computer used eight hours per day by the same person — might reasonably be on a four-year retest cycle based on risk assessment. The same class of equipment in a commercial kitchen or warehouse, subject to physical handling, moisture, and higher-frequency use, warrants an annual or sub-annual interval.",
-        "Commercial property insurance is the area where PAT compliance most directly affects financial exposure for facilities managers — and the area where the implications are most frequently misunderstood. Many commercial and property owner insurance policies contain conditions around electrical equipment maintenance. These conditions vary between policies and between insurers, but the common thread is consistent: if an electrical fault causes a fire, a business interruption loss, or a theft claim (triggered by a door held open by an extension lead, for example), and the insurer's investigation reveals that electrical equipment was not maintained to an industry-recognised standard, the policy conditions may not be met. That can mean a reduced settlement or a declined claim. The IET Code of Practice is the recognised standard against which maintenance is assessed. What your policy specifically requires — whether it mandates annual testing, references the IET CoP, or leaves frequency to the duty holder's assessment — should be confirmed with your insurance broker in writing and held on file.",
-        "A logistics or warehousing environment presents PAT challenges that a standard commercial office programme does not. Equipment changes hands between shifts, is moved between buildings, is borrowed by contractors, and is sometimes replaced ad hoc with non-standard items procured outside normal purchasing routes. In a distribution centre operating continuous shift patterns, the risk is not just that equipment ages between test dates — it is that the equipment in active use at any given time may not be the equipment that was tested. Managing this requires operational controls alongside testing: a visible pass label system that allows any operator to identify untested or out-of-date equipment at a glance, a defined incoming equipment process that quarantines new or transferred items until tested, and a register that is updated in real time rather than once per year.",
-        "An asset register is the operational foundation of any commercial PAT programme. Without one, retesting intervals cannot be managed, failed equipment cannot be tracked through remediation, and documentation cannot be produced in the event of an insurance or enforcement inquiry. The minimum a commercial asset register needs to capture is: unique asset identifier, equipment description, equipment class, test date, next test date, test result (pass/fail for visual inspection, insulation resistance in MΩ, earth continuity in Ω for Class I equipment), any remedial action taken, and the name of the contractor who carried out the test. A barcode or QR label system linked to a management database makes re-test scheduling systematic — automated reminders when items are due, immediate register update when tests are completed, and instant access to historical records for any item. For large estates, this is not a luxury; it is the only practical way to maintain accuracy across hundreds of assets.",
-        "The contractor delivering your PAT programme determines the quality of the documentation you receive. A contractor who issues pass/fail labels and a one-line summary has delivered a testing visit; they have not delivered a compliance programme. The documentation you need is a test register that identifies each appliance individually, records its class, shows the test results as numeric values (not just pass/fail), notes any visual failures separately from electrical failures, and includes the tester's identification and qualification. That register is the document an insurance loss adjuster or HSE inspector will ask for. It should be available in a format that can be retained electronically and produced on request — a PDF or CSV export from a management system, not a handwritten log that may not survive a move or a filing restructure.",
+        "The IET Code of Practice classifies portable appliances by equipment class and operating environment. Class I equipment depends on an earth connection for protection — desktop computers, floor-standing printers, catering equipment, power tools. Class II is double-insulated — most power supplies, portable tools, battery chargers. Class III operates at safety extra-low voltage and presents the lowest electrical risk. For each class, the IET CoP provides recommended retesting intervals by environment: office and hotel environments warrant the longest intervals; commercial kitchens, construction sites, and warehouses warrant significantly shorter ones. Class I equipment in a standard office might reasonably sit on a four-year retest cycle; the same class in a warehouse or commercial kitchen warrants annual or sub-annual testing based on risk. The IET CoP frequency recommendations are starting points for a written risk assessment — not fixed mandatory schedules.",
+        "Commercial property insurance is where PAT compliance most directly affects financial exposure. Many commercial and property owner policies contain electrical equipment maintenance conditions. If an electrical fault causes a fire or business interruption loss and the insurer's investigation reveals equipment was not maintained to an industry-recognised standard, the policy conditions may not be met — meaning a reduced settlement or a declined claim. The IET Code of Practice is the standard against which maintenance is assessed. Whether your policy mandates annual testing, references the IET CoP, or defers to the duty holder's risk assessment should be confirmed in writing from your broker and held on file alongside the test register.",
+      ],
+      specifications: [
+        {
+          category: "Testing Frequency by Equipment Class",
+          items: [
+            { label: "Class I (earthed)", value: "Examples: computers, floor printers, catering equipment, power tools — earth-dependent protection" },
+            { label: "Class II (double-insulated)", value: "Examples: most power supplies, portable tools, battery chargers — no earth required" },
+            { label: "Class III (SELV)", value: "Examples: low-voltage chargers, below 50V AC — lowest electrical risk category" },
+            { label: "Office/hotel environments", value: "Class I: 4-year initial interval; Class II: 2-year initial interval (per IET CoP risk matrix)" },
+            { label: "Warehouses/commercial kitchens", value: "Class I: annual or sub-annual; Class II: annual — higher-use, higher-risk environments" },
+            { label: "Construction/logistics", value: "Class I: 3-month to 6-month intervals; equipment control programme required alongside testing" },
+          ],
+        },
+        {
+          category: "Regulatory Reference Points",
+          items: [
+            { label: "Electricity at Work Regulations 1989", value: "Requires electrical systems and equipment to be maintained in a safe condition — duty imposed, method not specified" },
+            { label: "HSE guidance", value: "Endorses the IET Code of Practice as the recognised method for fulfilling the Electricity at Work duty" },
+            { label: "IET Code of Practice (5th Ed.)", value: "Risk-based frequency framework — the standard against which commercial PAT compliance is assessed by insurers and regulators" },
+            { label: "Insurance requirements", value: "Policies frequently contain electrical maintenance conditions — confirm with broker in writing; non-compliance can result in declined or reduced claims" },
+          ],
+        },
+      ],
+      scope: [
+        "Visual inspection and electrical tests (insulation resistance, earth continuity for Class I) for all in-scope portable appliances",
+        "Equipment register maintenance — unique asset ID, class, test date, numeric results, next test date, and remedial actions recorded per item",
+        "Failed equipment quarantine procedure — removed from service, tagged, and tracked through repair or disposal",
+        "Test certificate and full test report in a format retainable electronically and producible for insurer or enforcement inquiry",
+        "Risk-based retesting schedule — frequency bands set per equipment class and operating environment, documented in a written risk assessment",
+      ],
+      challenges: [
+        {
+          title: "No equipment register exists",
+          description: "Facilities managers inheriting a PAT programme often find no structured asset register — just historical test labels and a summary sheet that cannot be interrogated by asset, class, or retest date.",
+          solution: "Commission the PAT contractor to carry out an inventory audit as part of the first cycle: walk the estate, tag all in-scope equipment, test it, and produce the baseline register in a single programme.",
+        },
+        {
+          title: "Mixed Class I/II estate with no risk categorisation",
+          description: "Treating all portable appliances as equivalent — same testing frequency regardless of class, environment, or use pattern — either over-tests low-risk items or under-tests high-risk ones.",
+          solution: "Apply the IET CoP risk matrix to group the estate by environment and equipment class. Document the written risk assessment justifying each frequency band — this is what demonstrates compliance is deliberate rather than arbitrary.",
+        },
+        {
+          title: "Previous contractor issued pass certificates without adequate testing",
+          description: "Pass labels and summary sheets issued without numeric test results, individual asset identification, or documented visual failures provide no compliance value and no defence in an insurance or enforcement inquiry.",
+          solution: "Insist on a test register per item with numeric insulation resistance and earth continuity readings, tester identification, and electronic export capability. A contractor unable to provide this has not delivered a compliance programme.",
+        },
       ],
       methodology: [
         "Establish the asset register before the testing programme, not alongside it. If a register does not exist, commission the PAT contractor to carry out an inventory audit as part of the first testing cycle: walk the estate, tag all in-scope equipment, test it, and produce the baseline register in a single programme. Starting with a known, tagged inventory eliminates the uncertainty about what is in scope and where it is.",
@@ -1097,8 +1181,12 @@ export const allNewsArticles: NewsArticle[] = [
         caption: "PAT Testing Frequency Guide: IET Code of Practice",
       },
       toc: [
+        { id: "spotlight", label: "Equipment Classes at a Glance", level: 1 },
         { id: "overview", label: "What PAT Means at Portfolio Scale", level: 1 },
-        { id: "details", label: "Frequency, Risk, and Insurance", level: 1 },
+        { id: "details", label: "Frequency, Risk, and Insurance Context", level: 1 },
+        { id: "specifications", label: "Testing Frequencies and Regulatory Reference", level: 1 },
+        { id: "scope", label: "What a Commercial PAT Programme Covers", level: 1 },
+        { id: "challenges", label: "Common Facilities Management Complications", level: 1 },
         { id: "infographic", label: "PAT Frequency Guide", level: 1 },
         { id: "methodology", label: "Structuring Your PAT Programme", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
