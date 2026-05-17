@@ -27,13 +27,25 @@ Expected response: `{"status":"healthy","service":"memory-reference",...}`
 
 ### Step 2: Read project state
 
+Use `open_nodes` piped through python to extract the last 10 observations only.
+- `search_nodes` returns 150K+ chars (full graph) — never use it for this
+- `open_nodes` raw also returns 100K+ (entity has hundreds of historical obs) — pipe it
+- Last 10 observations = current state; all prior = historical noise
+
 ```bash
-curl -s -X POST http://localhost:3100/memory/search_nodes \
+curl -s -X POST http://localhost:3100/memory/tools/call \
   -H "Content-Type: application/json" \
-  -d '{"query":"nexgen-electrical-innovations-state"}'
+  -d '{"name":"open_nodes","arguments":{"names":["nexgen-electrical-innovations-state"]}}' | \
+  python3 -c "
+import json, sys
+raw = json.load(sys.stdin)
+obs = json.loads(raw['content'][0]['text'])['entities'][0]['observations']
+for o in obs[-10:]:
+    print(o)
+"
 ```
 
-This returns the project state entity with all current observations.
+This returns the 10 most recent observations from `nexgen-electrical-innovations-state`.
 
 ### Step 3: Extract these fields from the response
 
