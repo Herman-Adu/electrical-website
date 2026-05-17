@@ -5,6 +5,7 @@ import type {
   ProjectCategorySlug,
   ProjectListItem,
 } from "@/types/projects";
+import { communityProjects } from "./community";
 
 export const projectCategories: ProjectCategory[] = [
   {
@@ -59,6 +60,7 @@ export function isProjectCategorySlug(
 }
 
 export const allProjects: Project[] = [
+  ...communityProjects,
   {
     id: "proj-dhl-reading-001",
     slug: "dhl-reading-distribution-hub",
