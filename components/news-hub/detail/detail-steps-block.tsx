@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { DetailSectionHeading } from "./detail-section-heading";
 
-interface InsightMethodologyStepsProps {
+interface DetailStepsBlockProps {
   steps: string[];
   title?: string;
 }
@@ -25,7 +25,7 @@ const itemVariants: Variants = {
   },
 };
 
-export function InsightMethodologySteps({ steps, title = 'Methodology' }: InsightMethodologyStepsProps) {
+export function DetailStepsBlock({ steps, title = 'Methodology' }: DetailStepsBlockProps) {
   return (
     <section id="methodology" className="space-y-6">
       <DetailSectionHeading title={title} />

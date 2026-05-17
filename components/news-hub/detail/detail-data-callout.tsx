@@ -1,9 +1,9 @@
-interface InsightDataCalloutProps {
+interface DetailDataCalloutProps {
   text: string;
   eyebrow?: string;
 }
 
-export function InsightDataCallout({ text, eyebrow }: InsightDataCalloutProps) {
+export function DetailDataCallout({ text, eyebrow }: DetailDataCalloutProps) {
   return (
     <blockquote className="border-l-4 border-l-electric-cyan bg-electric-cyan/5 px-6 py-5">
       {eyebrow && (

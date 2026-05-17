@@ -5,7 +5,7 @@ import type { NewsChallengeItem } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
 import { DetailSectionHeading } from "./detail-section-heading";
 
-interface CaseStudyChallengeCardsProps {
+interface DetailSplitCardsBlockProps {
   challenges: NewsChallengeItem[];
   title?: string;
 }
@@ -32,10 +32,10 @@ const cardVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
-export function CaseStudyChallengeCards({
+export function DetailSplitCardsBlock({
   challenges,
   title = 'Challenges & Solutions',
-}: CaseStudyChallengeCardsProps) {
+}: DetailSplitCardsBlockProps) {
   return (
     <motion.section
       id="challenges"

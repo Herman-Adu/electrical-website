@@ -1,10 +1,10 @@
 import type { NewsSpotlightMetric } from "@/types/news";
 
-interface InsightStatStripProps {
+interface DetailStatStripProps {
   spotlight: NewsSpotlightMetric[];
 }
 
-export function InsightStatStrip({ spotlight }: InsightStatStripProps) {
+export function DetailStatStrip({ spotlight }: DetailStatStripProps) {
   return (
     <section id="spotlight" className="w-full rounded-lg bg-border/10 px-6 py-8">
       <div className="flex flex-wrap items-center justify-around gap-8">

@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { DetailSectionHeading } from "./detail-section-heading";
 
-interface CaseStudyResultsShowcaseProps {
+interface DetailHighlightListBlockProps {
   results: string[];
   title?: string;
 }
@@ -30,10 +30,10 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
 };
 
-export function CaseStudyResultsShowcase({
+export function DetailHighlightListBlock({
   results,
   title = 'Outcomes',
-}: CaseStudyResultsShowcaseProps) {
+}: DetailHighlightListBlockProps) {
   return (
     <motion.section
       id="results"

@@ -1,16 +1,16 @@
 import React from "react";
 import type { NewsArticle } from "@/types/news";
 import type { TocItem } from "@/types/shared-content";
-import { InsightStatStrip } from "./insight-stat-strip";
-import { InsightMethodologySteps } from "./insight-methodology-steps";
+import { DetailStatStrip } from "./detail-stat-strip";
+import { DetailStepsBlock } from "./detail-steps-block";
 import { DetailIntroBlock } from "./detail-intro-block";
 import { DetailBodyBlock } from "./detail-body-block";
 import { DetailTakeawayBlock } from "./detail-takeaway-block";
 import { DetailQuoteBlock } from "./detail-quote-block";
 import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
-import { CaseStudyScopeList } from "./case-study-scope-list";
-import { CaseStudySpecsGrid } from "./case-study-specs-grid";
+import { DetailListBlock } from "./detail-list-block";
+import { DetailSpecsBlock } from "./detail-specs-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
 
 export const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
@@ -37,7 +37,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
     switch (id) {
       case "spotlight":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <InsightStatStrip spotlight={detail.spotlight} />
+          <DetailStatStrip spotlight={detail.spotlight} />
         ) : null;
 
       case "overview":
@@ -45,7 +45,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
 
       case "methodology":
         return detail.methodology && detail.methodology.length > 0 ? (
-          <InsightMethodologySteps steps={detail.methodology} />
+          <DetailStepsBlock steps={detail.methodology} />
         ) : null;
 
       case "details":
@@ -55,12 +55,12 @@ export function InsightLayout({ article }: InsightLayoutProps) {
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <CaseStudyScopeList scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} />
         ) : null;
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <CaseStudySpecsGrid specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} />
         ) : null;
 
       case "takeaways":

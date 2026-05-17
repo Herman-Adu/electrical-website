@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { DetailSectionHeading } from "./detail-section-heading";
 
-interface CaseStudyScopeListProps {
+interface DetailListBlockProps {
   scope: string[];
   title?: string;
 }
@@ -30,7 +30,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
 };
 
-export function CaseStudyScopeList({ scope, title = 'Scope' }: CaseStudyScopeListProps) {
+export function DetailListBlock({ scope, title = 'Scope' }: DetailListBlockProps) {
   return (
     <motion.section
       id="scope"

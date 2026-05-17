@@ -3,7 +3,7 @@ import type { NewsArticle } from "@/types/news";
 import type { TocItem } from "@/types/shared-content";
 import type { TimelineItem } from "@/types/timeline";
 import { ArticleLocationPill } from "./article-location-pill";
-import { InsightStatStrip } from "./insight-stat-strip";
+import { DetailStatStrip } from "./detail-stat-strip";
 import { DetailIntroBlock } from "./detail-intro-block";
 import { DetailBodyBlock } from "./detail-body-block";
 import { DetailTakeawayBlock } from "./detail-takeaway-block";
@@ -11,10 +11,10 @@ import { DetailQuoteBlock } from "./detail-quote-block";
 import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
 import { DetailTimelineBlock } from "./detail-timeline-block";
-import { CaseStudyScopeList } from "./case-study-scope-list";
-import { CaseStudyChallengeCards } from "./case-study-challenge-cards";
-import { CaseStudySpecsGrid } from "./case-study-specs-grid";
-import { CaseStudyResultsShowcase } from "./case-study-results-showcase";
+import { DetailListBlock } from "./detail-list-block";
+import { DetailSplitCardsBlock } from "./detail-split-cards-block";
+import { DetailSpecsBlock } from "./detail-specs-block";
+import { DetailHighlightListBlock } from "./detail-highlight-list-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
 
 export const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
@@ -44,7 +44,7 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
     switch (id) {
       case "spotlight":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <InsightStatStrip spotlight={detail.spotlight} />
+          <DetailStatStrip spotlight={detail.spotlight} />
         ) : null;
 
       case "overview":
@@ -57,7 +57,7 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <CaseStudyScopeList scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} />
         ) : null;
 
       case "methodology":
@@ -81,7 +81,7 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
 
       case "challenges":
         return detail.challenges && detail.challenges.length > 0 ? (
-          <CaseStudyChallengeCards challenges={detail.challenges} />
+          <DetailSplitCardsBlock challenges={detail.challenges} />
         ) : null;
 
       case "timeline":
@@ -91,12 +91,12 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <CaseStudySpecsGrid specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} />
         ) : null;
 
       case "results":
         return detail.results && detail.results.length > 0 ? (
-          <CaseStudyResultsShowcase results={detail.results} />
+          <DetailHighlightListBlock results={detail.results} />
         ) : null;
 
       case "takeaways":

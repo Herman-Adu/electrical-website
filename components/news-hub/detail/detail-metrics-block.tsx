@@ -5,7 +5,7 @@ import { motion, useInView, useMotionValue, animate, type Variants } from "frame
 import type { NewsSpotlightMetric } from "@/types/news";
 import { DetailSectionHeading } from "./detail-section-heading";
 
-interface CaseStudyProgressMetricsProps {
+interface DetailMetricsBlockProps {
   metrics: NewsSpotlightMetric[];
   title?: string;
 }
@@ -111,10 +111,10 @@ function MetricCard({ metric }: { metric: NewsSpotlightMetric }) {
   );
 }
 
-export function CaseStudyProgressMetrics({
+export function DetailMetricsBlock({
   metrics,
   title = 'Metrics',
-}: CaseStudyProgressMetricsProps) {
+}: DetailMetricsBlockProps) {
   return (
     <motion.section
       id="metrics"

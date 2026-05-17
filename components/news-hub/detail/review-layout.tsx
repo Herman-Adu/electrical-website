@@ -9,7 +9,7 @@ import { DetailTakeawayBlock } from "./detail-takeaway-block";
 import { DetailQuoteBlock } from "./detail-quote-block";
 import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
-import { CaseStudyProgressMetrics } from "./case-study-progress-metrics";
+import { DetailMetricsBlock } from "./detail-metrics-block";
 
 const DEFAULT_REVIEW_TOC: readonly TocItem[] = [
   { id: "client-quote", label: "Client Quote", level: 1 },
@@ -40,7 +40,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <CaseStudyProgressMetrics metrics={detail.spotlight} />
+          <DetailMetricsBlock metrics={detail.spotlight} />
         ) : null;
 
       case "details":

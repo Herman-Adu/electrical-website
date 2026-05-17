@@ -7,12 +7,12 @@ import { DetailTakeawayBlock } from "./detail-takeaway-block";
 import { DetailQuoteBlock } from "./detail-quote-block";
 import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
-import { CaseStudyStatusBadge } from "./case-study-status-badge";
-import { CaseStudyProgressMetrics } from "./case-study-progress-metrics";
-import { CaseStudyChallengeCards } from "./case-study-challenge-cards";
-import { CaseStudySpecsGrid } from "./case-study-specs-grid";
-import { CaseStudyScopeList } from "./case-study-scope-list";
-import { CaseStudyResultsShowcase } from "./case-study-results-showcase";
+import { DetailStatusBadge } from "./detail-status-badge";
+import { DetailMetricsBlock } from "./detail-metrics-block";
+import { DetailSplitCardsBlock } from "./detail-split-cards-block";
+import { DetailSpecsBlock } from "./detail-specs-block";
+import { DetailListBlock } from "./detail-list-block";
+import { DetailHighlightListBlock } from "./detail-highlight-list-block";
 
 const DEFAULT_CASE_STUDY_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
@@ -42,17 +42,17 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <CaseStudyProgressMetrics metrics={detail.spotlight} />
+          <DetailMetricsBlock metrics={detail.spotlight} />
         ) : null;
 
       case "challenges":
         return detail.challenges && detail.challenges.length > 0 ? (
-          <CaseStudyChallengeCards challenges={detail.challenges} />
+          <DetailSplitCardsBlock challenges={detail.challenges} />
         ) : null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <CaseStudyScopeList scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} />
         ) : null;
 
       case "details":
@@ -62,12 +62,12 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <CaseStudySpecsGrid specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} />
         ) : null;
 
       case "results":
         return detail.results && detail.results.length > 0 ? (
-          <CaseStudyResultsShowcase results={detail.results} />
+          <DetailHighlightListBlock results={detail.results} />
         ) : null;
 
       case "takeaways":
@@ -97,7 +97,7 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
     <div data-testid="case-study-layout" className="space-y-16">
       {/* Status badge header row — fixed position, outside toc loop */}
       <div className="flex items-center gap-4">
-        <CaseStudyStatusBadge status="Completed" />
+        <DetailStatusBadge status="Completed" />
       </div>
 
       {(detail.toc ?? DEFAULT_CASE_STUDY_TOC).map((item) => (

@@ -238,27 +238,27 @@ describe('DetailGalleryBlock', () => {
   });
 });
 
-// ─── CaseStudyStatusBadge ─────────────────────────────────────────────────────
-describe('CaseStudyStatusBadge', () => {
+// ─── DetailStatusBadge ───────────────────────────────────────────────────────
+describe('DetailStatusBadge', () => {
   it('renders status text', async () => {
-    const { CaseStudyStatusBadge } = await import('../case-study-status-badge');
-    render(<CaseStudyStatusBadge status="In Progress" />);
+    const { DetailStatusBadge } = await import('../detail-status-badge');
+    render(<DetailStatusBadge status="In Progress" />);
     expect(screen.getByText('In Progress')).toBeInTheDocument();
   });
 
   it('renders "Completed" by default', async () => {
-    const { CaseStudyStatusBadge } = await import('../case-study-status-badge');
-    render(<CaseStudyStatusBadge />);
+    const { DetailStatusBadge } = await import('../detail-status-badge');
+    render(<DetailStatusBadge />);
     expect(screen.getByText('Completed')).toBeInTheDocument();
   });
 });
 
-// ─── CaseStudyProgressMetrics ─────────────────────────────────────────────────
-describe('CaseStudyProgressMetrics', () => {
+// ─── DetailMetricsBlock ───────────────────────────────────────────────────────
+describe('DetailMetricsBlock', () => {
   it('renders metric labels', async () => {
-    const { CaseStudyProgressMetrics } = await import('../case-study-progress-metrics');
+    const { DetailMetricsBlock } = await import('../detail-metrics-block');
     render(
-      <CaseStudyProgressMetrics
+      <DetailMetricsBlock
         metrics={[
           { label: 'Energy Efficiency', value: '95%' },
           { label: 'Cost Reduction', value: '30%' },
@@ -270,9 +270,9 @@ describe('CaseStudyProgressMetrics', () => {
   });
 
   it('renders metric values', async () => {
-    const { CaseStudyProgressMetrics } = await import('../case-study-progress-metrics');
+    const { DetailMetricsBlock } = await import('../detail-metrics-block');
     render(
-      <CaseStudyProgressMetrics
+      <DetailMetricsBlock
         metrics={[{ label: 'Uptime', value: '99.9%' }]}
       />
     );
@@ -281,12 +281,12 @@ describe('CaseStudyProgressMetrics', () => {
   });
 });
 
-// ─── CaseStudyChallengeCards ──────────────────────────────────────────────────
-describe('CaseStudyChallengeCards', () => {
+// ─── DetailSplitCardsBlock ────────────────────────────────────────────────────
+describe('DetailSplitCardsBlock', () => {
   it('renders challenge titles', async () => {
-    const { CaseStudyChallengeCards } = await import('../case-study-challenge-cards');
+    const { DetailSplitCardsBlock } = await import('../detail-split-cards-block');
     render(
-      <CaseStudyChallengeCards
+      <DetailSplitCardsBlock
         challenges={[
           {
             title: 'Power Distribution Issue',
@@ -300,9 +300,9 @@ describe('CaseStudyChallengeCards', () => {
   });
 
   it('renders solution text', async () => {
-    const { CaseStudyChallengeCards } = await import('../case-study-challenge-cards');
+    const { DetailSplitCardsBlock } = await import('../detail-split-cards-block');
     render(
-      <CaseStudyChallengeCards
+      <DetailSplitCardsBlock
         challenges={[
           {
             title: 'Wiring Fault',
@@ -316,12 +316,12 @@ describe('CaseStudyChallengeCards', () => {
   });
 });
 
-// ─── CaseStudySpecsGrid ───────────────────────────────────────────────────────
-describe('CaseStudySpecsGrid', () => {
+// ─── DetailSpecsBlock ─────────────────────────────────────────────────────────
+describe('DetailSpecsBlock', () => {
   it('renders specification category names', async () => {
-    const { CaseStudySpecsGrid } = await import('../case-study-specs-grid');
+    const { DetailSpecsBlock } = await import('../detail-specs-block');
     render(
-      <CaseStudySpecsGrid
+      <DetailSpecsBlock
         specifications={[
           {
             category: 'Electrical Systems',
@@ -334,9 +334,9 @@ describe('CaseStudySpecsGrid', () => {
   });
 
   it('renders spec item labels and values', async () => {
-    const { CaseStudySpecsGrid } = await import('../case-study-specs-grid');
+    const { DetailSpecsBlock } = await import('../detail-specs-block');
     render(
-      <CaseStudySpecsGrid
+      <DetailSpecsBlock
         specifications={[
           {
             category: 'Power',
@@ -355,20 +355,20 @@ describe('CaseStudySpecsGrid', () => {
   });
 });
 
-// ─── CaseStudyScopeList ───────────────────────────────────────────────────────
-describe('CaseStudyScopeList', () => {
+// ─── DetailListBlock ──────────────────────────────────────────────────────────
+describe('DetailListBlock', () => {
   it('renders scope items', async () => {
-    const { CaseStudyScopeList } = await import('../case-study-scope-list');
+    const { DetailListBlock } = await import('../detail-list-block');
     render(
-      <CaseStudyScopeList scope={['Install solar panels on rooftop']} />
+      <DetailListBlock scope={['Install solar panels on rooftop']} />
     );
     expect(screen.getByText('Install solar panels on rooftop')).toBeInTheDocument();
   });
 
   it('renders numbered scope steps', async () => {
-    const { CaseStudyScopeList } = await import('../case-study-scope-list');
+    const { DetailListBlock } = await import('../detail-list-block');
     render(
-      <CaseStudyScopeList
+      <DetailListBlock
         scope={['Survey and assessment', 'Design and planning', 'Installation']}
       />
     );
@@ -378,12 +378,12 @@ describe('CaseStudyScopeList', () => {
   });
 });
 
-// ─── CaseStudyResultsShowcase ─────────────────────────────────────────────────
-describe('CaseStudyResultsShowcase', () => {
+// ─── DetailHighlightListBlock ─────────────────────────────────────────────────
+describe('DetailHighlightListBlock', () => {
   it('renders result items', async () => {
-    const { CaseStudyResultsShowcase } = await import('../case-study-results-showcase');
+    const { DetailHighlightListBlock } = await import('../detail-highlight-list-block');
     render(
-      <CaseStudyResultsShowcase
+      <DetailHighlightListBlock
         results={['Reduced energy consumption by 40 percent']}
       />
     );
@@ -393,9 +393,9 @@ describe('CaseStudyResultsShowcase', () => {
   });
 
   it('renders all results', async () => {
-    const { CaseStudyResultsShowcase } = await import('../case-study-results-showcase');
+    const { DetailHighlightListBlock } = await import('../detail-highlight-list-block');
     render(
-      <CaseStudyResultsShowcase
+      <DetailHighlightListBlock
         results={[
           'Result alpha completed',
           'Result beta achieved',
@@ -477,12 +477,12 @@ describe('LayoutDispatcher', () => {
   });
 });
 
-// ─── InsightStatStrip ─────────────────────────────────────────────────────────
-describe('InsightStatStrip', () => {
+// ─── DetailStatStrip ──────────────────────────────────────────────────────────
+describe('DetailStatStrip', () => {
   it('renders spotlight metric values', async () => {
-    const { InsightStatStrip } = await import('../insight-stat-strip');
+    const { DetailStatStrip } = await import('../detail-stat-strip');
     render(
-      <InsightStatStrip
+      <DetailStatStrip
         spotlight={[
           { label: 'Efficiency', value: '95%' },
           { label: 'Savings', value: '$42K' },
@@ -494,9 +494,9 @@ describe('InsightStatStrip', () => {
   });
 
   it('renders spotlight metric labels', async () => {
-    const { InsightStatStrip } = await import('../insight-stat-strip');
+    const { DetailStatStrip } = await import('../detail-stat-strip');
     render(
-      <InsightStatStrip
+      <DetailStatStrip
         spotlight={[
           { label: 'Efficiency', value: '95%' },
           { label: 'Savings', value: '$42K' },
@@ -508,12 +508,12 @@ describe('InsightStatStrip', () => {
   });
 });
 
-// ─── InsightMethodologySteps ──────────────────────────────────────────────────
-describe('InsightMethodologySteps', () => {
+// ─── DetailStepsBlock ─────────────────────────────────────────────────────────
+describe('DetailStepsBlock', () => {
   it('renders methodology step text', async () => {
-    const { InsightMethodologySteps } = await import('../insight-methodology-steps');
+    const { DetailStepsBlock } = await import('../detail-steps-block');
     render(
-      <InsightMethodologySteps
+      <DetailStepsBlock
         steps={['Assess the existing infrastructure', 'Design the upgrade plan']}
       />
     );
@@ -522,9 +522,9 @@ describe('InsightMethodologySteps', () => {
   });
 
   it('renders numbered steps', async () => {
-    const { InsightMethodologySteps } = await import('../insight-methodology-steps');
+    const { DetailStepsBlock } = await import('../detail-steps-block');
     render(
-      <InsightMethodologySteps
+      <DetailStepsBlock
         steps={['Step alpha', 'Step beta', 'Step gamma']}
       />
     );
@@ -534,20 +534,20 @@ describe('InsightMethodologySteps', () => {
   });
 });
 
-// ─── InsightDataCallout ───────────────────────────────────────────────────────
-describe('InsightDataCallout', () => {
+// ─── DetailDataCallout ────────────────────────────────────────────────────────
+describe('DetailDataCallout', () => {
   it('renders callout text', async () => {
-    const { InsightDataCallout } = await import('../insight-data-callout');
-    render(<InsightDataCallout text="Energy efficiency increased by 40% after upgrade." />);
+    const { DetailDataCallout } = await import('../detail-data-callout');
+    render(<DetailDataCallout text="Energy efficiency increased by 40% after upgrade." />);
     expect(
       screen.getByText('Energy efficiency increased by 40% after upgrade.')
     ).toBeInTheDocument();
   });
 
   it('renders eyebrow when provided', async () => {
-    const { InsightDataCallout } = await import('../insight-data-callout');
+    const { DetailDataCallout } = await import('../detail-data-callout');
     render(
-      <InsightDataCallout
+      <DetailDataCallout
         text="Key finding from the study."
         eyebrow="Key Insight"
       />

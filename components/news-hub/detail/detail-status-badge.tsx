@@ -5,13 +5,13 @@ import { gsap } from "gsap";
 
 // GSAP requires direct DOM access — useEffect is appropriate here
 
-interface CaseStudyStatusBadgeProps {
+interface DetailStatusBadgeProps {
   status?: string;
 }
 
-export function CaseStudyStatusBadge({
+export function DetailStatusBadge({
   status = "Completed",
-}: CaseStudyStatusBadgeProps) {
+}: DetailStatusBadgeProps) {
   const dotRef = useRef<HTMLSpanElement>(null);
 
   // GSAP requires direct DOM access — useEffect is appropriate here
