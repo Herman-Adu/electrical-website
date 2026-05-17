@@ -4,9 +4,9 @@
   "planEntity": "plan-detail-block-arch",
   "obsidianPlanDoc": "Projects/Nexgen Electrical Innovations/Plans/plan-detail-block-arch.md",
   "obsidianFeatureDoc": "Projects/Nexgen Electrical Innovations/Features/feat-news-hub-content-first-wave.md",
-  "updatedAt": "2026-05-17T21:46:00.000Z",
-  "status": "batch-1-complete: lv-charging migrated, insight-layout challenges case added",
-  "nextTask": "ARTICLE MIGRATION Batch 2: delegate to general-purpose agent — restructure lv-infrastructure-commercial-buildings-guide AND why-cheap-electrical-contractors-cost-more in data/news/index.ts. Same pattern as lv-charging reference: intro->1 paragraph, body->2 max, translate prose into scope/specs/challenges/methodology. Preserve ALL information. Update toc entries. typecheck+build must pass.",
+  "updatedAt": "2026-05-17T21:56:00.000Z",
+  "status": "batch-2-complete: lv-infrastructure + why-cheap migrated",
+  "nextTask": "ARTICLE MIGRATION Batch 3: delegate to general-purpose agent — restructure home-ev-charging-residential-electrical-guide AND commercial-pat-testing-facilities-managers-guide in data/news/index.ts. Same pattern: intro->1 paragraph, body->2 max, translate prose to scope/specs/challenges. Check NewsChallengeItem type (requires title+description+solution). typecheck+build must pass.",
   "emergencySummary": "HANDOFF 2026-05-17 ctx-64pct: Branch feat/news-hub-content-first-wave. plan-detail-block-arch COMPLETE (all 10 phases, 686 tests). Content-creation skill updated with article structure philosophy. NEW TASK: article content migration. AUDIT: all 10 articles have 4 intro paragraphs (should be 1 max) + excess body prose. MIGRATION RULE: preserve ALL information — collapse intro to 1 hook paragraph, translate body prose into structured fields (methodology/specs/scope/challenges/results). BATCH PLAN: B1=lv-charging (reference article), B2=lv-infrastructure+why-cheap, B3=home-ev+commercial-pat, B4=community(why-nexgen+slough-in-bloom). DHL case study: 0 body already, only needs intro collapsed. Community articles last (narrative, may keep 2-3 body paragraphs). ORCHESTRATOR MODE: delegate each batch to general-purpose agent. Phase-gate after each batch. CRITICAL: never name old company. THE RULE: TocItem.label IS the rendered section heading.",
   "focusedSearchTerms": [
     "feat-news-hub-content-first-wave",

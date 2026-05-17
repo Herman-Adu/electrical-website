@@ -156,19 +156,80 @@ export const allNewsArticles: NewsArticle[] = [
     spotlightMetric: { label: "Upgrade Stages", value: "6" },
     detail: {
       intro: [
-        "Most commercial building managers can describe what their building does. Far fewer could describe what their LV electrical infrastructure consists of, when it was installed, or what condition it's in. That gap is a risk — not an abstract one, but the kind that produces unplanned shutdowns, failed insurance inspections, and fit-out programmes derailed by infrastructure that should have been addressed years earlier.",
-        "Electricity enters a commercial building at high voltage — typically 11kV from the local distribution network — and passes through a substation transformer that steps it down to Low Voltage: 400V three-phase and 230V single-phase. From that point, it travels through the LV distribution system to reach every power point, light fitting, piece of HVAC equipment, and data rack in the building. That journey passes through the main switchboard, sub-distribution boards, final circuit wiring, and all the protective devices and cable containment that hold the system together.",
-        "The system you're responsible for includes: the main LV distribution board (MLVDB), sub-main boards and moulded case circuit breakers (MCCBs), final circuit distribution boards, busbars and cable containment, power factor correction equipment on larger sites, and standby generation with automatic transfer switching panels where fitted. It's not glamorous. It doesn't come with a dashboard. But it is the single point of failure that, if it fails, stops your building.",
+        "Most commercial building managers can describe what their building does — far fewer could describe what their LV electrical infrastructure consists of, when it was installed, or what condition it's in. That gap is a risk of the kind that produces unplanned shutdowns, failed insurance inspections, and fit-out programmes derailed by infrastructure that should have been addressed years earlier. LV electrical systems — from the main switchboard through sub-distribution boards to every final circuit — are the invisible backbone of a commercial building, and most are operating well beyond their original design life.",
       ],
       body: [
-        "Switchgear installed in the 1980s and 1990s uses electromechanical protection technology that was designed for a service life of 20–25 years. Many commercial buildings are still operating equipment that is well beyond that design life. Physical degradation is cumulative: cables with early PVC insulation become brittle over decades of thermal cycling; bus bar connections that are not regularly torque-checked loosen; switchgear enclosures corrode; arc chutes that were designed to interrupt fault currents clear fewer operations than the manufacturer's figures assumed. An installation that appears operational can be operating with significantly degraded fault clearance capability.",
-        "Load growth is the second force compounding against ageing infrastructure. A commercial building that originally housed 40 office workers running desktop computers and a small kitchen may now host dense IT infrastructure, multiple commercial kitchen appliances, two or three EV charging points, and close-control air conditioning units. The LV system was not designed for that load profile. Protection devices that were appropriately rated at commissioning may now be under-specified for the actual load they're protecting — a condition that creates both fire risk and operational vulnerability.",
-        "Major switchgear manufacturers announce end-of-life dates for older product ranges, at which point spare parts become unavailable, technical support ceases, and type-tested replacement components no longer exist. A site built around an obsolete switchboard range is exposed to a specific risk: if a device fails, a like-for-like replacement may not be possible, and the alternative — replacing the entire switchboard on an emergency basis — is significantly more expensive and disruptive than a planned upgrade would have been.",
-        "Regulatory change adds a fourth dimension. BS 7671 18th Edition — and its second amendment — introduced RCD protection requirements, arc fault detection device (AFDD) provisions, and protective equipotential bonding standards that many existing installations do not meet. An installation that was compliant when built may not satisfy the current edition of the wiring regulations, with implications for insurance, building control sign-off on refurbishment works, and liability in the event of an incident.",
-        "The warning signs are usually present before a failure occurs. Nuisance tripping — circuit breakers that trip under normal operating loads or fail to hold on reset — is one of the most reliable early indicators. It suggests overloaded circuits, ageing protective devices losing their calibration, or developing fault conditions that the system is reacting to intermittently rather than clearing definitively.",
-        "Hot distribution boards are a more serious indicator. During maintenance access, if switchboard enclosures are warm to the touch or if a thermal imaging survey reveals hot spots on busbars and terminations, the causes are almost always loose terminations, overloaded conductors, or failing components — all of which represent fire risk and potential unplanned failure.",
-        "Capacity constraints signal infrastructure that has reached its design limits. If your distribution boards are full with no spare ways, and solutions such as tandem MCBs have been fitted to accommodate additional circuits, the installation is not compliant and you have an infrastructure capacity problem that cannot be solved by adding circuits to existing boards.",
-        "Age, overdue EICR, and upcoming refurbishment are the three administrative triggers that should prompt assessment even in the absence of operational symptoms. A commercial installation that has not been subject to an Electrical Installation Condition Report within five years — or that contains switchgear over 25 years old — should be professionally assessed. A Cat A or Cat B fit-out is the single best opportunity to address LV infrastructure before a space is finished, because corrective work in a completed commercial interior costs disproportionately more than addressing it during the strip-out or shell phase.",
+        "Physical degradation, load growth, and manufacturer end-of-life act simultaneously on ageing LV infrastructure. Switchgear installed in the 1980s and 1990s was designed for a service life of 20–25 years: cables with early PVC insulation become brittle through thermal cycling, bus bar connections loosen without regular torque-checking, and arc chutes clear fewer fault operations than their rated figures. At the same time, load profiles have changed fundamentally — a building that originally housed desktop computers and a small kitchen may now run dense IT infrastructure, close-control air conditioning, and EV charging points that its distribution system was never sized for.",
+        "Regulatory change adds a further dimension. BS 7671 18th Edition and its second amendment introduced RCD protection requirements, AFDD provisions, and protective equipotential bonding standards that many existing installations do not meet. An installation that was compliant when built may no longer satisfy current wiring regulations, with direct implications for insurance, building control sign-off on refurbishment works, and liability in the event of an incident.",
+      ],
+      specifications: [
+        {
+          category: "Distribution Board Standards",
+          items: [
+            { label: "Wiring Regulations", value: "BS 7671: 2018 + A2: 2022 (18th Edition, 2nd Amendment)" },
+            { label: "RCD protection", value: "Required for all socket-outlet circuits up to 32A — 18th Edition Ch. 41" },
+            { label: "AFDD provisions", value: "Arc fault detection device requirements introduced in 18th Edition" },
+            { label: "Certification", value: "Electrical Installation Certificate (EIC) — required on completion of new installations" },
+            { label: "EICR frequency", value: "5-yearly recommended for commercial premises; triggered on any change of use or significant load change" },
+          ],
+        },
+        {
+          category: "Protection Requirements",
+          items: [
+            { label: "Main protection", value: "MCCB (Moulded Case Circuit Breaker) on main incomer — rated to maximum demand" },
+            { label: "Sub-main protection", value: "MCCBs on each sub-main feed; discrimination study required" },
+            { label: "Final circuit protection", value: "MCBs to BS EN 60898; RCDs to BS EN 61008 where mandated" },
+            { label: "Power factor correction", value: "Required on installations with significant motor or inductive load — assessed site-by-site" },
+          ],
+        },
+        {
+          category: "Cable Specifications",
+          items: [
+            { label: "Sub-main cable sizing", value: "Sized to BS 7671 current-carrying capacity tables — load, installation method, and grouping factors applied" },
+            { label: "Containment", value: "Steel trunking, cable tray, or conduit to IP rating appropriate to environment" },
+            { label: "PVC insulation life", value: "20–25 years typical; thermal cycling accelerates degradation in high-load environments" },
+            { label: "XLPE alternative", value: "Cross-linked polyethylene — higher temperature rating, longer service life, specified for replacement works" },
+          ],
+        },
+        {
+          category: "Regulatory Thresholds",
+          items: [
+            { label: "Switchgear end-of-life", value: "25 years — beyond this, spare parts availability and type-tested replacements cannot be guaranteed" },
+            { label: "Emergency replacement cost", value: "Typically 3–5× the cost of a planned upgrade when a switchboard fails unplanned in a live building" },
+            { label: "Manufacturer programmes", value: "Schneider Electric, ABB, Eaton, Hager — all operate formal contractor accreditation and end-of-life notification processes" },
+          ],
+        },
+      ],
+      scope: [
+        "LV board capacity assessment — current maximum demand, spare ways, and rated current against actual load profile",
+        "EICR condition inspection — age, visible degradation, protection device calibration, and code C1/C2/C3 findings",
+        "Single-line diagram production or update — full distribution topology from incoming mains to final circuits",
+        "Protection coordination study — discrimination verification between all devices in the distribution hierarchy",
+        "Cable sizing and containment survey — sub-main and final circuit conductors assessed against current BS 7671 tables",
+        "Regulatory compliance gap analysis — 18th Edition RCD and AFDD requirements against existing installation",
+      ],
+      challenges: [
+        {
+          title: "Nuisance Tripping and Failing Protection Devices",
+          description:
+            "Circuit breakers that trip under normal operating loads or fail to hold on reset indicate overloaded circuits, ageing protective devices losing calibration, or intermittent fault conditions the system cannot clear definitively. This is typically the first visible symptom of infrastructure past its design life.",
+          solution:
+            "Thermal imaging survey to identify hot spots at terminations and busbars, followed by a protection coordination study. Devices operating outside calibration are replaced; overloaded circuits are reconfigured or the sub-board is upgraded to restore rated capacity.",
+        },
+        {
+          title: "No Spare Board Capacity for New Circuits",
+          description:
+            "Distribution boards that are full — with tandem MCBs fitted to accommodate additional circuits — represent a non-compliant installation and an infrastructure capacity problem. The condition is common in commercial buildings where load has grown incrementally since the original installation.",
+          solution:
+            "Sub-board extension or replacement with a new board of adequate size, properly sized sub-main cable from the upstream distribution point, and a revised board schedule. Future-phase capacity is designed in at this stage rather than repeating the problem.",
+        },
+        {
+          title: "Planned Fit-Out Disrupted by Undiagnosed Infrastructure Condition",
+          description:
+            "A Cat A or Cat B fit-out programme discovers aged or non-compliant LV infrastructure at strip-out — too late to address without programme impact. Remedial electrical work in a finished commercial interior costs disproportionately more than addressing it during the shell or strip-out phase.",
+          solution:
+            "LV desktop assessment and site survey carried out before RIBA Stage 4 — identifying infrastructure constraints before design is fixed. Upgrade works are programmed into the fit-out sequence, not retrofitted after completion.",
+        },
       ],
       timeline: [
         {
@@ -254,16 +315,15 @@ export const allNewsArticles: NewsArticle[] = [
       },
       toc: [
         { id: "overview", label: "What Is LV Infrastructure?", level: 1 },
-        { id: "details", label: "Why Infrastructure Degrades", level: 1 },
-        { id: "timeline", label: "The Upgrade Process — 6 Stages", level: 1 },
-        { id: "infographic", label: "Upgrade Process", level: 1 },
-        {
-          id: "methodology",
-          label: "What to Expect From Your Contractor",
-          level: 1,
-        },
+        { id: "details", label: "Why LV Infrastructure Degrades", level: 1 },
+        { id: "specifications", label: "Technical Standards and Specifications", level: 1 },
+        { id: "scope", label: "What an LV Assessment Covers", level: 1 },
+        { id: "challenges", label: "Common LV Upgrade Challenges", level: 1 },
+        { id: "timeline", label: "The Six-Stage Upgrade Process", level: 1 },
+        { id: "infographic", label: "LV Upgrade Process Flowchart", level: 1 },
+        { id: "methodology", label: "How to Select a Qualified LV Contractor", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
-        { id: "conclusion", label: "Writing a Better Tender", level: 1 },
+        { id: "conclusion", label: "Writing a Better Tender Brief", level: 1 },
       ],
     },
   },
@@ -493,16 +553,78 @@ export const allNewsArticles: NewsArticle[] = [
         { label: "Risk Categories", value: "3" },
       ],
       intro: [
-        "Every electrical contractor in the market uses the same language. Qualified, insured, experienced. The language is consistent because the words are easy to apply and difficult to disprove without doing work the client was never expecting to do. The cheapest quote feels like a rational decision when the underlying product appears identical — the same wires, the same fittings, the same claimed compliance.",
-        "The problem is that behind those words lies a spectrum of compliance, insurance coverage, and professional accountability that varies significantly across the market. NICEIC registration, Part P self-certification, and professional indemnity insurance are not equivalent conditions across all contractors. The gap between a contractor who carries all three and one who carries none is invisible in the quote. It surfaces when the work is challenged, the property changes hands, or the insurance claim is raised.",
-        "This guide covers three areas where compliance differences carry real financial and legal consequences: registration and self-certification, Part P notification, and insurance. It also covers how to verify each one — independently, through public registers and insurer-issued documents, rather than contractor-supplied copies.",
+        "Every electrical contractor in the market uses the same language — qualified, insured, experienced. Behind those words lies a spectrum of compliance, insurance coverage, and professional accountability that varies significantly across the market. The gap between a contractor carrying NICEIC registration, Part P self-certification authority, and professional indemnity insurance and one carrying none of these is invisible in the quote — and it surfaces when the work is challenged, the property changes hands, or the insurance claim is raised. Choosing by price alone is a false economy with a deferred cost.",
       ],
       body: [
-        "NICEIC approval means a contractor is approved to self-certify electrical work to BS 7671. The scheme is not nominal. To gain approval, a contractor must pass an initial assessment of their technical competence and quality of installed work. To maintain it, they submit to annual site inspections where a visiting NICEIC engineer examines recently completed installations against the standard. A contractor whose work repeatedly fails those inspections loses their approval — and with it, their right to self-certify. The scheme exists precisely to ensure that work claiming to be self-certified to BS 7671 actually meets that standard. Without NICEIC or ECA approval, a contractor cannot self-certify: every notifiable job must be submitted to local building control, adding time and cost, or the work is left uncertified. Uncertified notifiable work is a building regulations offence.",
-        "Part P of the Building Regulations makes certain electrical work notifiable in England. New circuits anywhere in a property, consumer unit replacements, and most electrical work in kitchens, bathrooms, and outbuildings must be certified through an approved scheme or submitted to building control. The practical implication of skipping notification is not only a technical offence. When you sell a property, your conveyancer will ask for certificates for notifiable electrical work carried out since 2005. If the work was performed by a non-scheme contractor and not submitted to building control, there is no certificate to produce. At minimum, this results in the purchase of a building regulations indemnity policy. At worst, it produces a delayed or abortive sale. For landlords, the exposure extends further: uncertified electrical work in a tenanted property creates a liability question that sits with the landlord, not the contractor who originally did the job.",
-        "Three insurance types are relevant to electrical contracting work. Public liability insurance (PLI) covers third-party bodily injury and property damage arising from the contractor's operations — most contractors carry this, and most clients know to ask for it. Employer's liability insurance is a legal requirement for any contractor employing staff, covering injuries to employees at work. Professional indemnity insurance (PI) is where the spectrum narrows sharply. PI covers losses arising from professional negligence in design or specification. If a circuit is sized incorrectly, a protection device is under-specified, or a design decision leads to a system failure, the PI policy is what funds the remedy. Smaller contractors frequently carry PLI but not PI. The consequence is that design liability either remains with the client or sits uninsured — and the client may not know which until a claim is raised.",
-        "The real cost of defective electrical work arrives from three directions. Remedial works: stripping back a completed domestic installation — wall tiles removed, plasterboard cut, finishes destroyed — to access and correct incorrect wiring will routinely exceed the original contract value. In a commercial setting, the cost of remediating a finished space adds to the cost of operational disruption during works. Fire damage: in a worst-case scenario, the insurance investigation will establish whether the installation was certified, whether that certification was issued through an approved scheme, and whether the work was notified correctly. An uncertified installation that contributes to a fire creates a liability question that is slow to resolve and may resolve unfavourably. Certification delays: a failed EICR at a property sale, triggered by works that were not properly certified, costs whatever it costs to remediate before re-inspection — plus the delay to exchange.",
-        "The cheapest quote typically represents a contractor operating with lower overhead. Sometimes that reflects genuine operational efficiency. More often it reflects a lower compliance burden: no scheme membership, no annual assessment visits, no PI insurance premium. Those savings appear in the quote. They do not disappear — they reappear in a different form at a later point. The question worth asking when evaluating quotes is not why one contractor is cheaper, but what the cheaper contractor is not carrying that the others are. The answer determines whether the saving is real.",
+        "NICEIC approval means a contractor is approved to self-certify electrical work to BS 7671. To gain approval, a contractor must pass an initial assessment of technical competence and quality of installed work; to maintain it, they submit to annual site inspections where a visiting NICEIC engineer examines recently completed installations against the standard. Without NICEIC or ECA approval, a contractor cannot self-certify: every notifiable job must go to local building control, or the work is left uncertified — a Building Regulations offence.",
+        "Professional indemnity insurance is where the compliance spectrum narrows most sharply. Public liability insurance covers third-party bodily injury and property damage — most contractors carry it and most clients know to ask. PI insurance covers losses arising from professional negligence in design or specification: an incorrectly sized circuit, an under-specified protection device, or a design decision that leads to system failure. Smaller contractors frequently carry PLI but not PI — leaving design liability either with the client or uninsured, and the client may not know which until a claim is raised.",
+      ],
+      specifications: [
+        {
+          category: "NICEIC and NAPIT Certification",
+          items: [
+            { label: "NICEIC register", value: "Public search at niceic.com — approval status verifiable by company name or postcode" },
+            { label: "ECA register", value: "Public search at eca.co.uk — separate approval route with equivalent BS 7671 self-certification authority" },
+            { label: "Annual inspection", value: "NICEIC visiting engineer assesses recently completed installations annually — approval can be withdrawn for repeated failures" },
+            { label: "Self-certification scope", value: "Approved contractors self-certify notifiable work; non-approved contractors must notify building control — adding time, cost, or leaving work uncertified" },
+          ],
+        },
+        {
+          category: "Building Regulations Part P",
+          items: [
+            { label: "Notifiable work", value: "New circuits anywhere; consumer unit replacements; electrical work in kitchens, bathrooms, and outbuildings" },
+            { label: "Enforcement in force", value: "Since 1 January 2005 — conveyancers request certificates for notifiable work carried out since that date" },
+            { label: "Non-certification consequence", value: "Building regulations indemnity policy required at property sale, or delayed / abortive exchange" },
+            { label: "Landlord exposure", value: "Uncertified electrical work in tenanted property — liability sits with landlord, not original contractor" },
+          ],
+        },
+        {
+          category: "BS 7671 References",
+          items: [
+            { label: "Current edition", value: "BS 7671: 2018 + A2: 2022 — 18th Edition, 2nd Amendment" },
+            { label: "Design liability trigger", value: "Any work involving circuit sizing, protection specification, or layout decisions creates professional liability" },
+            { label: "EIC requirement", value: "Electrical Installation Certificate required on completion of a new installation or significant alteration" },
+          ],
+        },
+        {
+          category: "Remediation Cost Ranges",
+          items: [
+            { label: "Domestic remediation", value: "Stripping back a completed domestic installation to correct incorrect wiring routinely exceeds the original contract value" },
+            { label: "Commercial remediation", value: "Finished commercial space remediation adds operational disruption cost to the physical remedial works cost" },
+            { label: "EICR failure at sale", value: "Failed EICR triggered by uncertified works — remediation cost plus delay to exchange; in worst cases, abortive transaction" },
+          ],
+        },
+      ],
+      scope: [
+        "NICEIC or ECA registration with current annual visiting engineer inspection — verifiable independently through public registers",
+        "Part P self-certification authority for all notifiable work types relevant to the project scope",
+        "Public liability insurance at an appropriate limit for the scale of work — certificate of currency from the insurer, not a scanned historic certificate",
+        "Professional indemnity insurance covering design and specification liability — separate from PLI and frequently absent in lower-cost contractors",
+        "Employer's liability insurance where the contractor employs staff — a statutory requirement, not optional coverage",
+        "Comparable project references verifiable by client contact — demonstrating programme adherence and certification quality at handover",
+      ],
+      challenges: [
+        {
+          title: "Uncertified Notifiable Work Surfaces at Property Sale",
+          description:
+            "Electrical work carried out by a non-scheme contractor and not submitted to building control produces no certificate. When the property is sold, the conveyancer requests certificates for notifiable work since 2005. The absence triggers either a building regulations indemnity policy or a delayed exchange — at the seller's cost.",
+          solution:
+            "Instruct only NICEIC or ECA-registered contractors for notifiable work. Verify registration independently before award. Retain the EIC or Building Regulations Completion Certificate at handover — it is the seller's evidence at any future transaction.",
+        },
+        {
+          title: "Design Liability Is Uninsured After a Fault",
+          description:
+            "A contractor without professional indemnity insurance cannot fund losses arising from design errors — incorrectly sized circuits, under-specified protection, or specification decisions that lead to system failure. The liability falls to the client or remains unresolved, which the client may not discover until a claim is raised.",
+          solution:
+            "Ask specifically for PI insurance as a separate question from PLI at tender stage. Request the certificate of currency — the current-year insurer-issued document. If the contractor does not carry PI, clarify in writing how design liability is allocated before any contract is signed.",
+        },
+        {
+          title: "Defective Work in a Completed Space Costs More to Remedy Than to Do Correctly",
+          description:
+            "Remediating incorrect wiring in a finished domestic installation — tiles removed, plasterboard cut, finishes destroyed — routinely exceeds the original contract value. In a commercial environment, the remedial works cost combines with operational disruption cost and a potential failed EICR before re-occupation.",
+          solution:
+            "Evaluate total risk cost, not headline price. The compliance overhead carried by approved, insured contractors is reflected in their pricing — and it is the overhead that funds the remedy if something goes wrong. A contractor with no scheme membership and no PI is cheaper because they are not carrying those costs; the client carries them instead.",
+        },
       ],
       methodology: [
         "Check the NICEIC register independently at niceic.com — search by company name or postcode. Approval status is public information. Do not accept a logo on a letterhead or a scanned certificate as verification; check the live register directly. ECA membership can be verified at eca.co.uk — both are valid approval routes with different technical requirements.",
@@ -532,13 +654,15 @@ export const allNewsArticles: NewsArticle[] = [
         "The cheapest electrical quote is not always the wrong choice. But it is never the right choice by default. Verify registration, confirm insurance, and ask the three questions before you award. The cost of that verification is negligible. The cost of not doing it is not.",
       ],
       toc: [
-        { id: "spotlight", label: "The Numbers", level: 1 },
-        { id: "overview", label: "The Cheap Quote Problem", level: 1 },
-        { id: "details", label: "Three Risk Areas", level: 1 },
-        { id: "methodology", label: "How to Verify a Contractor", level: 1 },
+        { id: "spotlight", label: "The Compliance Numbers", level: 1 },
+        { id: "overview", label: "Why Cheap Quotes Carry Hidden Costs", level: 1 },
+        { id: "details", label: "NICEIC, Part P, and Insurance — The Risk Areas", level: 1 },
+        { id: "specifications", label: "Certification and Regulatory Reference", level: 1 },
+        { id: "scope", label: "What a Qualified Contractor Provides", level: 1 },
+        { id: "challenges", label: "What Goes Wrong With Unqualified Contractors", level: 1 },
+        { id: "methodology", label: "How to Verify a Contractor Before Award", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
-        { id: "testimonial", label: "A Note on Risk", level: 1 },
-        { id: "conclusion", label: "The Bottom Line", level: 1 },
+        { id: "conclusion", label: "The Bottom Line on Contractor Selection", level: 1 },
       ],
     },
   },
