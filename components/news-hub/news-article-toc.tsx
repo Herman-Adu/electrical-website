@@ -29,6 +29,7 @@ export function NewsArticleToc({
   const [isVisible, setIsVisible] = useState(false);
   const [clickedId, setClickedId] = useState<string | null>(null);
   const isScrollingRef = useRef(false);
+  const tocListRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const showTimer = setTimeout(() => setIsVisible(true), 300);
@@ -67,6 +68,15 @@ export function NewsArticleToc({
     if (missing.length)
       console.warn("[TOC] Missing section IDs:", missing.map((i) => i.id));
   }, [items]);
+
+  // Scroll the active TOC item into view within the list when it changes
+  useEffect(() => {
+    if (!activeId || !tocListRef.current) return;
+    const el = tocListRef.current.querySelector<HTMLElement>(
+      `[data-toc-id="${activeId}"]`,
+    );
+    el?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [activeId]);
 
   const handleClick = useCallback((id: string) => {
     setActiveId(id);
@@ -122,7 +132,10 @@ export function NewsArticleToc({
             </h3>
           </div>
 
-          <ul className="space-y-1">
+          <ul
+            ref={tocListRef}
+            className="space-y-1 overflow-y-auto max-h-[calc(100vh-320px)] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-electric-cyan/20 pr-0.5"
+          >
             {items.map((item, index) => {
               const isActive = activeId === item.id;
               const isSubItem = item.level === 2;
@@ -131,6 +144,7 @@ export function NewsArticleToc({
               return (
                 <motion.li
                   key={item.id}
+                  data-toc-id={item.id}
                   variants={itemVariants}
                   className={cn("relative", isSubItem && "ml-4")}
                 >
