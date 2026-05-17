@@ -1,5 +1,9 @@
 {
   "memoryKeys": [
-    "nexgen-electrical-innovations-state"
+    "nexgen-electrical-innovations-state",
+    "plan-detail-block-arch",
+    "feat-news-hub-content-first-wave",
+    "decide-toc-label-as-section-heading",
+    "learn-generic-layout-primitives"
   ]
 }

@@ -1,10 +1,13 @@
 {
   "branch": "feat/news-hub-content-first-wave",
   "entity": "feat-news-hub-content-first-wave",
-  "updatedAt": "2026-05-17T19:00:00.000Z",
-  "status": "articles 1-10 complete — architecture refactor required before article 11",
-  "emergencySummary": "HANDOFF 2026-05-17: Branch feat/news-hub-content-first-wave. Articles 1-10 written and committed (last commit 14a7b61). ARCHITECTURAL BREAKTHROUGH: all 14 detail block components have hardcoded section headings — TocItem.label is discarded in renderSection(id) and never reaches the component. FIX PLAN (plan-detail-block-arch in Docker memory + ~/.claude/plans/spicy-bubbling-lecun.md): (1) create DetailSectionHeading primitive, (2) add title prop to all 14 blocks, (3) rename CaseStudy*/Insight* to Detail* layout primitives, (4) renderSection(id, title) passing item.label in all dispatchers. RULE: TocItem.label IS the rendered section heading — single source of truth. Components are layout shapes not content domains. THREE-LOCK OS: after each task sync Docker memory + Obsidian + ctx commit. CRITICAL: never name old company. TVAP article held until project status = completed.",
-  "nextTask": "implement plan-detail-block-arch — Phase 1: DetailSectionHeading primitive, Phase 2: title prop all 14 blocks, Phase 3: rename CaseStudy*/Insight* to Detail*, Phase 4: renderSection(id,title) in dispatchers, Phase 5: build gate pnpm typecheck && pnpm build",
+  "planEntity": "plan-detail-block-arch",
+  "obsidianPlanDoc": "Projects/Nexgen Electrical Innovations/Plans/plan-detail-block-arch.md",
+  "obsidianFeatureDoc": "Projects/Nexgen Electrical Innovations/Features/feat-news-hub-content-first-wave.md",
+  "updatedAt": "2026-05-17T19:30:00.000Z",
+  "status": "OS infrastructure pending — then plan-detail-block-arch Phase 1",
+  "nextTask": "PART A: create rehydrate + phase-gate skills, update orchestrator Step 1, update CLAUDE.md rules 5+6. THEN PART B: plan-detail-block-arch Phase 1 — create components/news-hub/detail/detail-section-heading.tsx",
+  "emergencySummary": "HANDOFF 2026-05-17: Branch feat/news-hub-content-first-wave. Articles 1-10 done (last code commit 14a7b61). THE RULE: TocItem.label IS the rendered section heading — components are layout primitives not domain-locked. PLAN: plan-detail-block-arch in Docker memory (31 obs). PART A FIRST: build rehydrate skill + phase-gate skill + update orchestrator + CLAUDE.md rules. PART B: 10 phases — (1) DetailSectionHeading, (2) title prop 14 blocks, (3) rename CaseStudy*/Insight* to Detail*, (4) renderSection(id,title) dispatchers, (5) build gate, (6) TOC audit 1-6, (7) enrich 7-8 specs+challenges, (8) enrich 9-10 scope, (9) final test, (10) commit. SYNC AFTER EACH PHASE: Docker obs + Obsidian append + ctx commit. AT 60% context: sync WIP + commit + continue in next session via /rehydrate. CRITICAL: never name old company.",
   "focusedSearchTerms": [
     "feat-news-hub-content-first-wave",
     "plan-detail-block-arch",
