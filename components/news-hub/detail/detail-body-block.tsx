@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface DetailBodyBlockProps {
   body: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -15,7 +17,7 @@ const sectionVariants: Variants = {
   },
 };
 
-export function DetailBodyBlock({ body }: DetailBodyBlockProps) {
+export function DetailBodyBlock({ body, title = 'Project Details' }: DetailBodyBlockProps) {
   if (!body || body.length === 0) {
     return null;
   }
@@ -29,7 +31,7 @@ export function DetailBodyBlock({ body }: DetailBodyBlockProps) {
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Project Details</h2>
+      <DetailSectionHeading title={title} />
       <div className="space-y-4">
         {body.map((paragraph, index) => (
           <p key={`body-${index}`} className="text-base leading-8 text-foreground/75">

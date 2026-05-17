@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface DetailIntroBlockProps {
   intro: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -32,7 +34,7 @@ const staggerContainer: Variants = {
   },
 };
 
-export function DetailIntroBlock({ intro }: DetailIntroBlockProps) {
+export function DetailIntroBlock({ intro, title = 'Overview' }: DetailIntroBlockProps) {
   return (
     <motion.section
       id="overview"
@@ -42,13 +44,7 @@ export function DetailIntroBlock({ intro }: DetailIntroBlockProps) {
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-linear-to-r from-electric-cyan/40 to-transparent" />
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-cyan">
-          Overview
-        </h2>
-        <div className="h-px flex-1 bg-linear-to-l from-electric-cyan/40 to-transparent" />
-      </div>
+      <DetailSectionHeading title={title} mono />
       <motion.div variants={staggerContainer} className="space-y-4">
         {intro.map((paragraph, index) => (
           <motion.p

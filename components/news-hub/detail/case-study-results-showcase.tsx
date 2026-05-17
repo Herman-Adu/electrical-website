@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface CaseStudyResultsShowcaseProps {
   results: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -30,6 +32,7 @@ const itemVariants: Variants = {
 
 export function CaseStudyResultsShowcase({
   results,
+  title = 'Outcomes',
 }: CaseStudyResultsShowcaseProps) {
   return (
     <motion.section
@@ -40,7 +43,7 @@ export function CaseStudyResultsShowcase({
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Results &amp; Outcomes</h2>
+      <DetailSectionHeading title={title} />
       <div className="rounded-xl border border-electric-cyan/30 bg-linear-to-br from-electric-cyan/10 to-transparent p-6">
         <motion.div variants={staggerContainer} className="space-y-4">
           {results.map((result, index) => (

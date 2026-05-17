@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface InsightMethodologyStepsProps {
   steps: string[];
+  title?: string;
 }
 
 const containerVariants: Variants = {
@@ -23,10 +25,10 @@ const itemVariants: Variants = {
   },
 };
 
-export function InsightMethodologySteps({ steps }: InsightMethodologyStepsProps) {
+export function InsightMethodologySteps({ steps, title = 'Methodology' }: InsightMethodologyStepsProps) {
   return (
     <section id="methodology" className="space-y-6">
-      <h2 className="text-2xl font-bold text-foreground">Methodology</h2>
+      <DetailSectionHeading title={title} />
       <motion.ul
         variants={containerVariants}
         initial="hidden"

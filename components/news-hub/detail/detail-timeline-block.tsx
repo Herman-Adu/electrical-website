@@ -1,15 +1,17 @@
 import type { TimelineItem } from "@/types/timeline";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface DetailTimelineBlockProps {
   items: readonly TimelineItem[];
+  title?: string;
 }
 
-export function DetailTimelineBlock({ items }: DetailTimelineBlockProps) {
+export function DetailTimelineBlock({ items, title = 'Timeline' }: DetailTimelineBlockProps) {
   if (!items.length) return null;
 
   return (
     <section id="timeline" className="space-y-6">
-      <h2 className="text-2xl font-bold text-foreground">Project Timeline</h2>
+      <DetailSectionHeading title={title} />
       <ol className="relative m-0 list-none space-y-6 p-0">
         {items.map((item) => (
           <li

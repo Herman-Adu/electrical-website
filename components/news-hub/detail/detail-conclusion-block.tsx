@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface DetailConclusionBlockProps {
   conclusion?: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -15,7 +17,7 @@ const sectionVariants: Variants = {
   },
 };
 
-export function DetailConclusionBlock({ conclusion }: DetailConclusionBlockProps) {
+export function DetailConclusionBlock({ conclusion, title = 'Conclusion' }: DetailConclusionBlockProps) {
   if (!conclusion || conclusion.length === 0) {
     return null;
   }
@@ -29,7 +31,7 @@ export function DetailConclusionBlock({ conclusion }: DetailConclusionBlockProps
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Conclusion</h2>
+      <DetailSectionHeading title={title} />
       <div className="space-y-4">
         {conclusion.map((paragraph, index) => (
           <p

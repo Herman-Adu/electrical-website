@@ -3,9 +3,11 @@
 import { useRef, useEffect } from "react";
 import { motion, useInView, useMotionValue, animate, type Variants } from "framer-motion";
 import type { NewsSpotlightMetric } from "@/types/news";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface CaseStudyProgressMetricsProps {
   metrics: NewsSpotlightMetric[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -111,6 +113,7 @@ function MetricCard({ metric }: { metric: NewsSpotlightMetric }) {
 
 export function CaseStudyProgressMetrics({
   metrics,
+  title = 'Metrics',
 }: CaseStudyProgressMetricsProps) {
   return (
     <motion.section
@@ -121,7 +124,7 @@ export function CaseStudyProgressMetrics({
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Performance Metrics</h2>
+      <DetailSectionHeading title={title} />
       <motion.div
         variants={staggerContainer}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"

@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface DetailTakeawayBlockProps {
   takeaways: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -28,7 +30,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export function DetailTakeawayBlock({ takeaways }: DetailTakeawayBlockProps) {
+export function DetailTakeawayBlock({ takeaways, title = 'Key Takeaways' }: DetailTakeawayBlockProps) {
   return (
     <motion.section
       id="takeaways"
@@ -38,7 +40,7 @@ export function DetailTakeawayBlock({ takeaways }: DetailTakeawayBlockProps) {
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Key Takeaways</h2>
+      <DetailSectionHeading title={title} />
       <motion.ul variants={staggerContainer} className="space-y-3">
         {takeaways.map((takeaway, index) => (
           <motion.li

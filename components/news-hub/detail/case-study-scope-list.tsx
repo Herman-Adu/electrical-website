@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface CaseStudyScopeListProps {
   scope: string[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -28,7 +30,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
 };
 
-export function CaseStudyScopeList({ scope }: CaseStudyScopeListProps) {
+export function CaseStudyScopeList({ scope, title = 'Scope' }: CaseStudyScopeListProps) {
   return (
     <motion.section
       id="scope"
@@ -38,7 +40,7 @@ export function CaseStudyScopeList({ scope }: CaseStudyScopeListProps) {
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Project Scope</h2>
+      <DetailSectionHeading title={title} />
       <motion.ul
         variants={staggerContainer}
         className="grid gap-3 sm:grid-cols-2"

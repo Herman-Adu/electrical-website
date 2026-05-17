@@ -3,9 +3,11 @@
 import { motion, type Variants } from "framer-motion";
 import type { NewsChallengeItem } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface CaseStudyChallengeCardsProps {
   challenges: NewsChallengeItem[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -32,6 +34,7 @@ const cardVariants: Variants = {
 
 export function CaseStudyChallengeCards({
   challenges,
+  title = 'Challenges & Solutions',
 }: CaseStudyChallengeCardsProps) {
   return (
     <motion.section
@@ -42,14 +45,7 @@ export function CaseStudyChallengeCards({
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <div className="flex items-center gap-3">
-        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-electric-cyan/20 font-mono text-[10px] text-electric-cyan">
-          C
-        </span>
-        <h2 className="text-2xl font-bold text-foreground">
-          Challenges &amp; Solutions
-        </h2>
-      </div>
+      <DetailSectionHeading title={title} />
       <motion.div variants={staggerContainer} className="space-y-4">
         {challenges.map((challenge, index) => (
           <motion.div key={`challenge-${index}`} variants={cardVariants}>

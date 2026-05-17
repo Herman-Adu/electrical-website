@@ -3,9 +3,11 @@
 import { motion, type Variants } from "framer-motion";
 import type { NewsSpecification } from "@/types/news";
 import { NewsArticleCardShell } from "@/components/news-hub/news-article-card-shell";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 interface CaseStudySpecsGridProps {
   specifications: NewsSpecification[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -30,7 +32,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
-export function CaseStudySpecsGrid({ specifications }: CaseStudySpecsGridProps) {
+export function CaseStudySpecsGrid({ specifications, title = 'Specifications' }: CaseStudySpecsGridProps) {
   return (
     <motion.section
       id="specifications"
@@ -40,9 +42,7 @@ export function CaseStudySpecsGrid({ specifications }: CaseStudySpecsGridProps) 
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">
-        Technical Specifications
-      </h2>
+      <DetailSectionHeading title={title} />
       <motion.div
         variants={staggerContainer}
         className="grid gap-4 sm:grid-cols-2"

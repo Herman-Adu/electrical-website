@@ -6,12 +6,14 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { NewsGalleryImage } from "@/types/news";
+import { DetailSectionHeading } from "./detail-section-heading";
 
 // GSAP requires direct DOM access — useEffect is appropriate here
 gsap.registerPlugin(ScrollTrigger);
 
 interface DetailGalleryBlockProps {
   gallery: NewsGalleryImage[];
+  title?: string;
 }
 
 const sectionVariants: Variants = {
@@ -146,7 +148,7 @@ function GridGallery({ gallery }: { gallery: NewsGalleryImage[] }) {
   );
 }
 
-export function DetailGalleryBlock({ gallery }: DetailGalleryBlockProps) {
+export function DetailGalleryBlock({ gallery, title = 'Gallery' }: DetailGalleryBlockProps) {
   const useHorizontalScroll = gallery.length >= 3;
 
   return (
@@ -158,7 +160,7 @@ export function DetailGalleryBlock({ gallery }: DetailGalleryBlockProps) {
       viewport={{ once: true, margin: "-50px" }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-bold text-foreground">Project Gallery</h2>
+      <DetailSectionHeading title={title} />
       {useHorizontalScroll ? (
         <HorizontalScrollGallery gallery={gallery} />
       ) : (
