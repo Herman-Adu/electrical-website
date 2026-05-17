@@ -11,11 +11,13 @@ import { NewsHubCategoryTitle } from "./news-hub-category-title";
 interface NewsHubGridSectionProps {
   items: NewsArticleListItem[];
   sidebarCards: NewsSidebarCard[];
+  counts: Record<string, number>;
 }
 
 export function NewsHubGridSection({
   items,
   sidebarCards,
+  counts,
 }: NewsHubGridSectionProps) {
   const { sectionRef, lineScale, lineScaleBottom, shouldReduce } =
     useAnimatedBorders();
@@ -47,6 +49,7 @@ export function NewsHubGridSection({
         <NewsGridLayout
           items={items}
           sidebarCards={sidebarCards}
+          counts={counts}
           title={<NewsHubCategoryTitle />}
           initialCount={4}
           batchSize={3}

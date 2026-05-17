@@ -7,6 +7,7 @@ import type { NewsArticleListItem, NewsCategorySlug, NewsSidebarCard } from "@/t
 interface NewsHubFilterClientProps {
   items: NewsArticleListItem[];
   sidebarCards: NewsSidebarCard[];
+  counts: Record<string, number>;
 }
 
 // Defensive validation — keep this list in sync with the literal union in
@@ -26,7 +27,7 @@ function isValidCategorySlug(value: string | null): value is NewsCategorySlug {
   return value !== null && VALID_SLUGS.has(value as NewsCategorySlug);
 }
 
-export function NewsHubFilterClient({ items, sidebarCards }: NewsHubFilterClientProps) {
+export function NewsHubFilterClient({ items, sidebarCards, counts }: NewsHubFilterClientProps) {
   // Single source of truth: the URL. The slider mutates `?category=<slug>` (or
   // clears it for "all"); this component reads it. No local state, no props
   // for the active category — if the URL says it, that's the truth.
@@ -36,5 +37,5 @@ export function NewsHubFilterClient({ items, sidebarCards }: NewsHubFilterClient
 
   const filtered = activeSlug === "all" ? items : items.filter((a) => a.category === activeSlug);
 
-  return <NewsHubGridSection items={filtered} sidebarCards={sidebarCards} />;
+  return <NewsHubGridSection items={filtered} sidebarCards={sidebarCards} counts={counts} />;
 }

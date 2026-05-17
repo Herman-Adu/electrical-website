@@ -17,6 +17,8 @@ interface NewsGridLayoutProps {
   items: NewsArticleListItem[];
   /** Sidebar cards - filtered by category from data layer */
   sidebarCards: NewsSidebarCard[];
+  /** Article counts per category slug (including "all"), calculated server-side */
+  counts?: Record<string, number>;
   /** Initial number of visible items (default: 4) */
   initialCount?: number;
   /** Number of items to load per batch (default: 3) */
@@ -38,6 +40,7 @@ interface NewsGridLayoutProps {
 export function NewsGridLayout({
   items,
   sidebarCards,
+  counts,
   initialCount = 4,
   batchSize = 3,
   title = "Latest Articles",
@@ -77,7 +80,7 @@ export function NewsGridLayout({
       {/* Main Feed Column */}
       <div className="min-w-0 space-y-2">
         {/* category buttons - left aligned */}
-        {showSlider !== false && <NewsHubCategorySlider />}
+        {showSlider !== false && <NewsHubCategorySlider counts={counts} />}
 
         {/* Header */}
         <div className="flex items-center justify-between gap-4 px-1">
