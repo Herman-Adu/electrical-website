@@ -1295,9 +1295,16 @@ export const allNewsArticles: NewsArticle[] = [
       toc: [
         { id: "overview", label: "Why Community Investment", level: 1 },
         { id: "details", label: "TVAP and Slough in Bloom", level: 1 },
+        { id: "scope", label: "Community Projects", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "testimonial", label: "Real Work, Real Standards", level: 1 },
         { id: "conclusion", label: "The Practical Choice", level: 1 },
+      ],
+      scope: [
+        'Thames Valley Adventure Playground (TVAP) — pro-bono electrical safety inspections',
+        'Slough in Bloom — electrical support for public garden lighting and installations',
+        'Local school and community hall electrical assessments at no charge',
+        'Future: annual community electrical safety day planned for Slough residents'
       ],
     },
   },
@@ -1418,10 +1425,17 @@ export const allNewsArticles: NewsArticle[] = [
       toc: [
         { id: "overview", label: "Slough in Bloom 2026", level: 1 },
         { id: "details", label: "The 2023 Gold Award", level: 1 },
+        { id: "scope", label: "What Britain in Bloom Judges", level: 1 },
         { id: "gallery", label: "2023 Competition Gallery", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "testimonial", label: "Why We Came Back", level: 1 },
         { id: "conclusion", label: "The Partnership Continues", level: 1 },
+      ],
+      scope: [
+        'Horticultural achievement and plant display quality',
+        'Environmental responsibility and sustainability practices',
+        'Community participation and volunteer engagement',
+        'Overall impact on the local area and public spaces'
       ],
     },
   },
