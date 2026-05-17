@@ -109,7 +109,7 @@ describe('ContentToc: Click Active State', () => {
 
     // Key test: activeId updated SYNCHRONOUSLY on click (optimistic update)
     const updated = screen.getAllByRole('button');
-    const active = updated.find(b => b.className?.includes('bg-[hsl(174_100%_35%)]/12'));
+    const active = updated.find(b => b.getAttribute('aria-current') === 'true');
     expect(active?.textContent).toContain('Challenge');
   });
 
@@ -123,7 +123,7 @@ describe('ContentToc: Click Active State', () => {
     fireEvent.click(overviewButton!);
 
     let active = screen.getAllByRole('button').find(b =>
-      b.className?.includes('bg-[hsl(174_100%_35%)]/12')
+      b.getAttribute('aria-current') === 'true'
     );
     expect(active?.textContent).toContain('Overview');
 
@@ -134,7 +134,7 @@ describe('ContentToc: Click Active State', () => {
 
     // Should show 'Challenge' immediately (not 'Overview' from previous)
     active = screen.getAllByRole('button').find(b =>
-      b.className?.includes('bg-[hsl(174_100%_35%)]/12')
+      b.getAttribute('aria-current') === 'true'
     );
     expect(active?.textContent).toContain('Challenge');
     expect(active?.textContent).not.toContain('Overview');
@@ -153,7 +153,7 @@ describe('ContentToc: Click Active State', () => {
 
       // Verify each click immediately activates (no lag)
       const active = screen.getAllByRole('button').find(b =>
-        b.className?.includes('bg-[hsl(174_100%_35%)]/12')
+        b.getAttribute('aria-current') === 'true'
       );
       expect(active?.textContent).toContain(label);
 
@@ -172,7 +172,7 @@ describe('ContentToc: Click Active State', () => {
     fireEvent.click(solutionButton!);
 
     let active = screen.getAllByRole('button').find(b =>
-      b.className?.includes('bg-[hsl(174_100%_35%)]/12')
+      b.getAttribute('aria-current') === 'true'
     );
     expect(active?.textContent).toContain('Solution');
 
@@ -184,7 +184,7 @@ describe('ContentToc: Click Active State', () => {
 
     // Second click should activate immediately (no lag/suppression)
     active = screen.getAllByRole('button').find(b =>
-      b.className?.includes('bg-[hsl(174_100%_35%)]/12')
+      b.getAttribute('aria-current') === 'true'
     );
     expect(active?.textContent).toContain('Results');
   });

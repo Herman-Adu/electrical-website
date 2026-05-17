@@ -184,6 +184,7 @@ export function ContentToc({
                     onClick={() => handleClick(item.id)}
                     animate={isClicked ? { scale: [1, 0.97, 1] } : {}}
                     transition={{ duration: 0.2 }}
+                    aria-current={isActive ? "true" : undefined}
                     className={cn(
                       "group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-all",
                       isSubItem && "pl-4",
@@ -256,6 +257,7 @@ export function ContentToc({
                               onClick={() => handleClick(child.id)}
                               animate={isChildClicked ? { scale: [1, 0.97, 1] } : {}}
                               transition={{ duration: 0.2 }}
+                              aria-current={isChildActive ? "true" : undefined}
                               className={cn(
                                 "group flex w-full items-center gap-2 rounded-lg pl-4 pr-3 py-1.5 text-left text-xs transition-all",
                                 isChildActive
