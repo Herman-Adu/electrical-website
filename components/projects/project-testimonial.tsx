@@ -42,7 +42,7 @@ export function ProjectTestimonialCard({
         lineScale={lineScale}
         showBottom={true}
       />
-      <div className="section-content max-w-6xl" ref={containerRef}>
+      <div ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
           id={anchorId}

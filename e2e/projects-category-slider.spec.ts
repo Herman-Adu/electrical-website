@@ -126,14 +126,13 @@ test.describe("projects category slider — URL-driven filtering", () => {
     await expect(commercialChip).toHaveAttribute("aria-current", "page");
   });
 
-  test("community category shows slider, animated title, and 0-count badge", async ({
+  test("community category shows slider, animated title, and project count badge", async ({
     page,
   }) => {
     await page.goto("/projects?category=community", {
       waitUntil: "domcontentloaded",
     });
 
-    // Slider must still be present when category has 0 items
     const sliderNav = page.getByRole("navigation", {
       name: /filter projects by category/i,
     });
@@ -150,14 +149,15 @@ test.describe("projects category slider — URL-driven filtering", () => {
     });
     await expect(title).toBeVisible({ timeout: 5000 });
 
-    // Count badge shows "0 projects" (DOM text is lowercase; CSS uppercases it)
-    await expect(page.getByText(/^0 projects$/i)).toBeVisible();
+    // Count badge shows project count (DOM text lowercase; CSS uppercases it)
+    await expect(page.getByText(/^\d+ projects$/i)).toBeVisible();
   });
 
   test("empty category shows enhanced card with heading and CTA link", async ({
     page,
   }) => {
-    await page.goto("/projects?category=community", {
+    // commercial-lighting is a valid category slug with 0 projects (showInNav: false)
+    await page.goto("/projects?category=commercial-lighting", {
       waitUntil: "domcontentloaded",
     });
 

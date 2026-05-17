@@ -294,7 +294,7 @@ export function ProjectTimeline({
       className="relative overflow-hidden bg-background section-padding"
     >
       <AnimatedBorders shouldReduce={shouldReduce} lineScale={lineScale} showBottom={false} />
-      <div className="section-content max-w-6xl" ref={containerRef}>
+      <div ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
           id={anchorId}

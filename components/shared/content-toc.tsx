@@ -184,12 +184,13 @@ export function ContentToc({
                     onClick={() => handleClick(item.id)}
                     animate={isClicked ? { scale: [1, 0.97, 1] } : {}}
                     transition={{ duration: 0.2 }}
+                    aria-current={isActive ? "true" : undefined}
                     className={cn(
                       "group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-all",
                       isSubItem && "pl-4",
                       isActive
                         ? "bg-[hsl(174_100%_35%)]/12 dark:bg-electric-cyan/15 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
-                        : "text-foreground dark:text-foreground/70 hover:bg-[hsl(174_100%_35%)]/5 dark:hover:bg-electric-cyan/5 hover:text-foreground",
+                        : "text-foreground dark:text-foreground/70 hover:bg-[hsl(174_100%_35%)]/12 dark:hover:bg-electric-cyan/15 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan",
                     )}
                   >
                     {/* Progress indicator */}
@@ -199,7 +200,7 @@ export function ContentToc({
                         isSubItem && "h-4 w-4 text-[8px]",
                         isActive
                           ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-white"
-                          : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
+                          : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/35 dark:group-hover:border-electric-cyan/40 group-hover:bg-[hsl(174_100%_35%)]/18 dark:group-hover:bg-electric-cyan/20 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-white",
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -209,7 +210,7 @@ export function ContentToc({
                     <span
                       className={cn(
                         "flex-1 truncate transition-all",
-                        isActive && "font-medium",
+                        isActive ? "font-medium" : "group-hover:font-medium",
                         isSubItem && "text-xs",
                       )}
                     >
@@ -256,11 +257,12 @@ export function ContentToc({
                               onClick={() => handleClick(child.id)}
                               animate={isChildClicked ? { scale: [1, 0.97, 1] } : {}}
                               transition={{ duration: 0.2 }}
+                              aria-current={isChildActive ? "true" : undefined}
                               className={cn(
                                 "group flex w-full items-center gap-2 rounded-lg pl-4 pr-3 py-1.5 text-left text-xs transition-all",
                                 isChildActive
                                   ? "bg-[hsl(174_100%_35%)]/12 dark:bg-electric-cyan/15 text-[hsl(174_100%_35%)] dark:text-electric-cyan"
-                                  : "text-foreground/70 dark:text-foreground/50 hover:bg-[hsl(174_100%_35%)]/5 dark:hover:bg-electric-cyan/5 hover:text-foreground",
+                                  : "text-foreground/70 dark:text-foreground/50 hover:bg-[hsl(174_100%_35%)]/12 dark:hover:bg-electric-cyan/15 hover:text-[hsl(174_100%_35%)] dark:hover:text-electric-cyan",
                               )}
                             >
                               <span
@@ -268,7 +270,7 @@ export function ContentToc({
                                   "flex h-4 w-4 shrink-0 items-center justify-center rounded-md border font-mono text-[8px] transition-all",
                                   isChildActive
                                     ? "border-[hsl(174_100%_35%)]/35 dark:border-electric-cyan/40 bg-[hsl(174_100%_35%)]/18 dark:bg-electric-cyan/20 text-[hsl(174_100%_35%)] dark:text-white"
-                                    : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/20 dark:group-hover:border-electric-cyan/20",
+                                    : "border-border/40 bg-background/50 text-foreground/70 group-hover:border-[hsl(174_100%_35%)]/35 dark:group-hover:border-electric-cyan/40 group-hover:bg-[hsl(174_100%_35%)]/18 dark:group-hover:bg-electric-cyan/20 group-hover:text-[hsl(174_100%_35%)] dark:group-hover:text-white",
                                 )}
                               >
                                 {String(index + 1).padStart(2, "0")}{String.fromCharCode(97 + childIndex)}
@@ -276,7 +278,7 @@ export function ContentToc({
                               <span
                                 className={cn(
                                   "flex-1 truncate transition-all",
-                                  isChildActive && "font-medium",
+                                  isChildActive ? "font-medium" : "group-hover:font-medium",
                                 )}
                               >
                                 {child.label}

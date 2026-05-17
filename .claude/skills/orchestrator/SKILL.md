@@ -9,10 +9,37 @@ disable-model-invocation: true
 
 ## Execution (run in order, then STOP)
 
-### Step 1: Session Startup
-Invoke the `docker-preflight` skill. It calls Docker memory live via curl and reports
-the 3-bullet status (branch, phase, next tasks). **Do not execute any Docker or git
-commands here — docker-preflight handles it.**
+### Step 1: Session Startup — Docker Preflight (inlined — do NOT invoke via Skill tool)
+
+**Health check:**
+```bash
+curl -s http://localhost:3100/memory/health
+```
+Expected: `{"status":"healthy","service":"memory-reference",...}`. If not healthy — stop immediately. Tell user: "Docker memory service is not responding at localhost:3100. Run `pnpm docker:mcp:ready` then restart the session." Do not proceed.
+
+**Load project state — last 10 observations only (entity has 100s of historical obs; last 10 = current state):**
+```bash
+curl -s -X POST http://localhost:3100/memory/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name":"open_nodes","arguments":{"names":["nexgen-electrical-innovations-state"]}}' | \
+  python3 -c "
+import json, sys
+raw = json.load(sys.stdin)
+obs = json.loads(raw['content'][0]['text'])['entities'][0]['observations']
+for o in obs[-10:]:
+    print(o)
+"
+```
+If entity not found or python fails: tell user "Project state entity not found. Run `pnpm docker:mcp:smoke` to verify services." Do not invent status.
+
+Extract from the printed lines: active branch, active feature, build status, next task, lane status.
+
+Report exactly 3 bullets:
+```
+- **Branch:** [branch] | Docker: healthy | Lane: [lane_status or "none"]
+- **Feature:** [active_feature] | Build: [build status]
+- **Next:** [next_task]
+```
 
 ### Step 2: Git State
 ```bash
