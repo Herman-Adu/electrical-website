@@ -42,7 +42,7 @@ export function ProjectChallengeSolution({
         lineScale={lineScale}
         showBottom={false}
       />
-      <div className="section-content max-w-6xl" ref={containerRef}>
+      <div ref={containerRef}>
         {/* Eyebrow */}
         <motion.div
           id={anchorId}

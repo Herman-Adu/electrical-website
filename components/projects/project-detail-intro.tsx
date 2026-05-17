@@ -50,7 +50,7 @@ export function ProjectDetailIntro({
         lineScale={lineScale}
         showBottom={false}
       />
-      <div className="section-content max-w-6xl">
+      <div>
         {/* Section label */}
         <motion.div
           id={anchorId}
