@@ -16,6 +16,7 @@ import { DetailSplitCardsBlock } from "./detail-split-cards-block";
 import { DetailSpecsBlock } from "./detail-specs-block";
 import { DetailHighlightListBlock } from "./detail-highlight-list-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
+import { DetailStepsBlock } from "./detail-steps-block";
 
 export const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
@@ -40,7 +41,7 @@ interface ArticleLayoutProps {
 export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
   const { detail } = article;
 
-  function renderSection(id: string) {
+  function renderSection(id: string, title: string) {
     switch (id) {
       case "spotlight":
         return detail.spotlight && detail.spotlight.length > 0 ? (
@@ -48,68 +49,54 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} />;
+        return <DetailIntroBlock intro={detail.intro} title={title} />;
 
       case "details":
         return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} />
+          <DetailBodyBlock body={detail.body} title={title} />
         ) : null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <DetailListBlock scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} title={title} />
         ) : null;
 
       case "methodology":
         return detail.methodology && detail.methodology.length > 0 ? (
-          <section id="methodology" className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">
-              Methodology &amp; Approach
-            </h2>
-            <div className="space-y-4">
-              {detail.methodology.map((paragraph, index) => (
-                <p
-                  key={`method-${index}`}
-                  className="text-base leading-8 text-foreground/80"
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </section>
+          <DetailStepsBlock steps={detail.methodology} title={title} />
         ) : null;
 
       case "challenges":
         return detail.challenges && detail.challenges.length > 0 ? (
-          <DetailSplitCardsBlock challenges={detail.challenges} />
+          <DetailSplitCardsBlock challenges={detail.challenges} title={title} />
         ) : null;
 
       case "timeline":
         return timelineItems && timelineItems.length > 0 ? (
-          <DetailTimelineBlock items={timelineItems} />
+          <DetailTimelineBlock items={timelineItems} title={title} />
         ) : null;
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <DetailSpecsBlock specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} title={title} />
         ) : null;
 
       case "results":
         return detail.results && detail.results.length > 0 ? (
-          <DetailHighlightListBlock results={detail.results} />
+          <DetailHighlightListBlock results={detail.results} title={title} />
         ) : null;
 
       case "takeaways":
-        return <DetailTakeawayBlock takeaways={detail.takeaways} />;
+        return <DetailTakeawayBlock takeaways={detail.takeaways} title={title} />;
 
       case "gallery":
         return detail.gallery && detail.gallery.length > 0 ? (
-          <DetailGalleryBlock gallery={detail.gallery} />
+          <DetailGalleryBlock gallery={detail.gallery} title={title} />
         ) : null;
 
       case "conclusion":
         return detail.conclusion && detail.conclusion.length > 0 ? (
-          <DetailConclusionBlock conclusion={detail.conclusion} />
+          <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
         ) : null;
 
       case "infographic":
@@ -155,7 +142,7 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
 
       {(detail.toc ?? DEFAULT_ARTICLE_TOC).map((item) => (
         <React.Fragment key={item.id}>
-          {renderSection(item.id)}
+          {renderSection(item.id, item.label)}
         </React.Fragment>
       ))}
     </div>

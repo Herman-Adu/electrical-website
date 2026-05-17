@@ -35,47 +35,47 @@ interface CaseStudyLayoutProps {
 export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
   const { detail } = article;
 
-  function renderSection(id: string) {
+  function renderSection(id: string, title: string) {
     switch (id) {
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} />;
+        return <DetailIntroBlock intro={detail.intro} title={title} />;
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <DetailMetricsBlock metrics={detail.spotlight} />
+          <DetailMetricsBlock metrics={detail.spotlight} title={title} />
         ) : null;
 
       case "challenges":
         return detail.challenges && detail.challenges.length > 0 ? (
-          <DetailSplitCardsBlock challenges={detail.challenges} />
+          <DetailSplitCardsBlock challenges={detail.challenges} title={title} />
         ) : null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <DetailListBlock scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} title={title} />
         ) : null;
 
       case "details":
         return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} />
+          <DetailBodyBlock body={detail.body} title={title} />
         ) : null;
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <DetailSpecsBlock specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} title={title} />
         ) : null;
 
       case "results":
         return detail.results && detail.results.length > 0 ? (
-          <DetailHighlightListBlock results={detail.results} />
+          <DetailHighlightListBlock results={detail.results} title={title} />
         ) : null;
 
       case "takeaways":
-        return <DetailTakeawayBlock takeaways={detail.takeaways} />;
+        return <DetailTakeawayBlock takeaways={detail.takeaways} title={title} />;
 
       case "gallery":
         return detail.gallery && detail.gallery.length > 0 ? (
-          <DetailGalleryBlock gallery={detail.gallery} />
+          <DetailGalleryBlock gallery={detail.gallery} title={title} />
         ) : null;
 
       case "testimonial":
@@ -85,7 +85,7 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
 
       case "conclusion":
         return detail.conclusion && detail.conclusion.length > 0 ? (
-          <DetailConclusionBlock conclusion={detail.conclusion} />
+          <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
         ) : null;
 
       default:
@@ -102,7 +102,7 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
 
       {(detail.toc ?? DEFAULT_CASE_STUDY_TOC).map((item) => (
         <React.Fragment key={item.id}>
-          {renderSection(item.id)}
+          {renderSection(item.id, item.label)}
         </React.Fragment>
       ))}
     </div>

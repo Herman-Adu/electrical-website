@@ -33,7 +33,7 @@ interface InsightLayoutProps {
 export function InsightLayout({ article }: InsightLayoutProps) {
   const { detail } = article;
 
-  function renderSection(id: string) {
+  function renderSection(id: string, title: string) {
     switch (id) {
       case "spotlight":
         return detail.spotlight && detail.spotlight.length > 0 ? (
@@ -41,30 +41,30 @@ export function InsightLayout({ article }: InsightLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} />;
+        return <DetailIntroBlock intro={detail.intro} title={title} />;
 
       case "methodology":
         return detail.methodology && detail.methodology.length > 0 ? (
-          <DetailStepsBlock steps={detail.methodology} />
+          <DetailStepsBlock steps={detail.methodology} title={title} />
         ) : null;
 
       case "details":
         return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} />
+          <DetailBodyBlock body={detail.body} title={title} />
         ) : null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
-          <DetailListBlock scope={detail.scope} />
+          <DetailListBlock scope={detail.scope} title={title} />
         ) : null;
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
-          <DetailSpecsBlock specifications={detail.specifications} />
+          <DetailSpecsBlock specifications={detail.specifications} title={title} />
         ) : null;
 
       case "takeaways":
-        return <DetailTakeawayBlock takeaways={detail.takeaways} />;
+        return <DetailTakeawayBlock takeaways={detail.takeaways} title={title} />;
 
       case "testimonial":
         return detail.quote ? (
@@ -73,7 +73,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
 
       case "gallery":
         return detail.gallery && detail.gallery.length > 0 ? (
-          <DetailGalleryBlock gallery={detail.gallery} />
+          <DetailGalleryBlock gallery={detail.gallery} title={title} />
         ) : null;
 
       case "infographic":
@@ -87,7 +87,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
 
       case "conclusion":
         return detail.conclusion && detail.conclusion.length > 0 ? (
-          <DetailConclusionBlock conclusion={detail.conclusion} />
+          <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
         ) : null;
 
       default:
@@ -99,7 +99,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
     <div data-testid="insight-layout" className="space-y-16">
       {(detail.toc ?? DEFAULT_INSIGHT_TOC).map((item) => (
         <React.Fragment key={item.id}>
-          {renderSection(item.id)}
+          {renderSection(item.id, item.label)}
         </React.Fragment>
       ))}
     </div>

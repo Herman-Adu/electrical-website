@@ -28,7 +28,7 @@ interface ReviewLayoutProps {
 export function ReviewLayout({ article }: ReviewLayoutProps) {
   const { detail } = article;
 
-  function renderSection(id: string) {
+  function renderSection(id: string, title: string) {
     switch (id) {
       case "client-quote":
         return detail.quote ? (
@@ -36,31 +36,31 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} />;
+        return <DetailIntroBlock intro={detail.intro} title={title} />;
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
-          <DetailMetricsBlock metrics={detail.spotlight} />
+          <DetailMetricsBlock metrics={detail.spotlight} title={title} />
         ) : null;
 
       case "details":
         return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} />
+          <DetailBodyBlock body={detail.body} title={title} />
         ) : null;
 
       case "takeaways":
-        return <DetailTakeawayBlock takeaways={detail.takeaways} />;
+        return <DetailTakeawayBlock takeaways={detail.takeaways} title={title} />;
 
       case "gallery":
         return detail.gallery && detail.gallery.length > 0 ? (
-          <DetailGalleryBlock gallery={detail.gallery} />
+          <DetailGalleryBlock gallery={detail.gallery} title={title} />
         ) : null;
 
       case "conclusion":
         return (
           <>
             {detail.conclusion && detail.conclusion.length > 0 && (
-              <DetailConclusionBlock conclusion={detail.conclusion} />
+              <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
             )}
             {detail.additionalQuotes && detail.additionalQuotes.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -92,7 +92,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
 
       {(detail.toc ?? DEFAULT_REVIEW_TOC).map((item) => (
         <React.Fragment key={item.id}>
-          {renderSection(item.id)}
+          {renderSection(item.id, item.label)}
         </React.Fragment>
       ))}
     </div>
