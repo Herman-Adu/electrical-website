@@ -69,6 +69,43 @@ It acts as the Marketing Department of the Executive Assistant.
 
 ---
 
+## News Hub Article Structure (Nexgen Electrical Innovations)
+
+When creating a news hub article (`data/news/index.ts` entry), the following philosophy applies:
+
+### THE RULE
+The layout component system drives user behaviour — not paragraphs of prose. Potential clients reading walls of text will drift. Section headings, structured components, and scannable data keep them engaged and moving through the page.
+
+### Field Priorities (highest first)
+
+| Field | Rule | Component rendered |
+|-------|------|--------------------|
+| `spotlight` | Always 3 metrics — numbers clients can anchor to | `DetailStatStrip` |
+| `intro` | **Max 1 paragraph** — hook + problem statement only. Stop there. | `DetailIntroBlock` |
+| `methodology` / steps | Numbered actionable content. If it can be a step, make it a step. | `DetailStepsBlock` |
+| `specifications` | Technical reference in a grid — measurements, standards, thresholds | `DetailSpecsBlock` |
+| `scope` | Bulleted list — what's covered, what's included | `DetailListBlock` |
+| `challenges` | Problem / solution pairs — client pain points + how Nexgen resolves them | `DetailSplitCardsBlock` |
+| `results` | Outcomes with impact — what changed, what was achieved | `DetailHighlightListBlock` |
+| `takeaways` | 4–6 scannable bullets — the "if you read nothing else" summary | `DetailTakeawayBlock` |
+| `quote` | Client or engineer voice — one strong quote | `DetailQuoteBlock` |
+| `body` | **Max 2 paragraphs** — supplementary detail that doesn't fit any structured field above | `DetailBodyBlock` |
+| `conclusion` | 2 paragraphs max — so-what + clear CTA | `DetailConclusionBlock` |
+| `heroIndicators` | Always 4 — value propositions shown in the hero, not the body | Hero section |
+
+### What to avoid
+- More than 1 intro paragraph — if you have 3 paragraphs of context, turn them into steps or scope items
+- More than 2 body paragraphs — restructure as specs, challenges, or a list
+- TOC entries for `overview` and `details` only — every article should have at least 5 TOC sections
+- Generic labels like "Details" — every `TocItem.label` is rendered as an h2 heading on the page
+
+### What good looks like
+An article with: `spotlight` (3 metrics) + `intro` (1 paragraph) + `methodology` (6–8 steps) + `specifications` (1–2 groups) + `scope` (4–6 items) + `takeaways` (5 bullets) + `quote` + `conclusion` (2 paragraphs)
+
+That is 7+ distinct component sections with clear headings — a page a client navigates, not a document they read.
+
+---
+
 ## Output Format
 
 ### For posts:

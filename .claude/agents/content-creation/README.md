@@ -210,6 +210,20 @@ For detailed, step-by-step examples of agent invocation patterns, see:
 
 Provide concise research/samples to maximize available ideation tokens.
 
+## News Hub Articles
+
+For `NewsArticle` entries in `data/news/index.ts`, output the full `detail` object — not prose. Field priorities:
+
+1. `spotlight` — 3 anchor metrics
+2. `intro` — 1 paragraph hook
+3. Structured fields first: `methodology`, `specifications`, `scope`, `challenges`, `results`
+4. `body` only for content that genuinely doesn't fit a structured field (max 2 paragraphs)
+5. `takeaways` — 4–6 bullets
+6. `quote` — strong voice
+7. `conclusion` — 2 paragraphs + CTA
+
+Every `toc` label is rendered as an h2 on the page. Make labels heading-worthy.
+
 ## Debugging & Support
 
 **If ideas are repetitive or shallow:**

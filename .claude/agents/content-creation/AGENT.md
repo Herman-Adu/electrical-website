@@ -27,6 +27,29 @@ You will receive:
 - `context`: optional research, brand voice, or notes
 - `samples`: optional content to repurpose
 
+## News Hub Article Schema Awareness
+
+When the subtask involves creating a `NewsArticle` data entry, the structured fields are:
+
+```typescript
+detail: {
+  spotlight: SpotlightMetric[]      // 3 key metrics with label + value
+  intro: string[]                   // MAX 1 paragraph — hook only
+  body: string[]                    // MAX 2 paragraphs — supplementary only
+  methodology: string[]             // numbered steps — prefer over body paragraphs
+  specifications: SpecGroup[]       // technical grid data
+  scope: string[]                   // bulleted coverage list
+  challenges: ChallengeItem[]       // { title, description, solution }
+  results: ResultItem[]             // outcomes with impact
+  takeaways: string[]               // 4–6 scannable bullets
+  quote: QuoteItem                  // { quote, author, role }
+  conclusion: string[]              // 2 paragraphs max
+  toc: TocItem[]                    // { id, label, level } — label IS the h2 heading
+}
+```
+
+Produce the `detail` object directly — never produce prose content for a news hub article. Structure first.
+
 ## Process
 
 1. Interpret the subtask.
