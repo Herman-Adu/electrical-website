@@ -16,6 +16,7 @@ export { CaseStudyLayout } from "./case-study-layout";
 export { InsightStatStrip } from "./insight-stat-strip";
 export { InsightMethodologySteps } from "./insight-methodology-steps";
 export { InsightDataCallout } from "./insight-data-callout";
+export { DetailInfographicBlock } from "./detail-infographic-block";
 export { InsightLayout } from "./insight-layout";
 export { ArticleLocationPill } from "./article-location-pill";
 export { ArticleLayout } from "./article-layout";

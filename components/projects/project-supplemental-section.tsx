@@ -22,7 +22,9 @@ export function ProjectSupplementalSection({
   const { sectionRef, lineScale, shouldReduce } = useAnimatedBorders();
 
   if (!hasTags && !hasCards) {
-    return null;
+    // Attach ref to avoid framer-motion useScroll "ref not attached" invariant error.
+    // Keep id="get-started" so TOC scroll target resolves.
+    return <section id="get-started" ref={sectionRef} aria-hidden="true" />;
   }
 
   return (

@@ -78,6 +78,7 @@ export interface NewsDetailContent {
   gallery?: NewsGalleryImage[];
   conclusion?: string[];
   additionalQuotes?: NewsQuote[];
+  infographic?: { src: string; alt: string; caption?: string };
   toc?: TocItem[];
 }
 

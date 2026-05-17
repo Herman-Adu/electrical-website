@@ -11,6 +11,7 @@ import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
 import { CaseStudyScopeList } from "./case-study-scope-list";
 import { CaseStudySpecsGrid } from "./case-study-specs-grid";
+import { DetailInfographicBlock } from "./detail-infographic-block";
 
 export const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
   { id: "spotlight", label: "Spotlight", level: 1 },
@@ -73,6 +74,15 @@ export function InsightLayout({ article }: InsightLayoutProps) {
       case "gallery":
         return detail.gallery && detail.gallery.length > 0 ? (
           <DetailGalleryBlock gallery={detail.gallery} />
+        ) : null;
+
+      case "infographic":
+        return detail.infographic ? (
+          <DetailInfographicBlock
+            src={detail.infographic.src}
+            alt={detail.infographic.alt}
+            caption={detail.infographic.caption}
+          />
         ) : null;
 
       case "conclusion":

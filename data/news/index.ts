@@ -102,8 +102,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "LV electrical infrastructure for commercial buildings — degradation signs, upgrade process, and what separates a competent LV contractor from the rest.",
     featuredImage: {
-      src: "/images/news/lv-infrastructure-commercial-buildings.jpg",
-      alt: "LV distribution board in a commercial building",
+      src: "/images/projects/commercial/dhl/nexgen-dhl-reading-main-lv-distribution-board.jpg",
+      alt: "LV main distribution board — commercial electrical infrastructure",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -247,10 +247,16 @@ export const allNewsArticles: NewsArticle[] = [
         "The quality of your LV tender brief determines the quality of responses you receive. Vague briefs attract vague prices — often artificially low because the contractor is excluding scope they were never asked to price. A brief that produces meaningful, comparable responses should include: the age and condition of existing switchgear, or a copy of the most recent EICR; current connected load and any anticipated increases; any manufacturer end-of-life constraints affecting existing equipment; downtime constraints including shift patterns and critical loads that cannot be interrupted; any planning or building control requirements relevant to the works; and the documentation package required at handover.",
         "When reviewing tender returns, go beyond the headline number. Ask about demonstrated experience at comparable scale — not domestic or light commercial, but projects of similar complexity and programme risk. Verify NICEIC or ECA approval independently via the relevant register. Ask to see a single-line diagram and protection coordination study from a comparable project. Confirm manufacturer accreditation is current, not historical. Check that professional indemnity insurance is in force. The cheapest price on an LV tender is rarely the right choice. LV infrastructure work that is under-specified, incorrectly commissioned, or not certified to BS 7671 creates ongoing liability — and corrective work in a finished commercial space costs significantly more than getting it right the first time.",
       ],
+      infographic: {
+        src: "/images/news/infographic-lv-upgrade-process.png",
+        alt: "LV infrastructure upgrade process — 6-stage flowchart",
+        caption: "LV Infrastructure Upgrade: 6-Stage Process",
+      },
       toc: [
         { id: "overview", label: "What Is LV Infrastructure?", level: 1 },
         { id: "details", label: "Why Infrastructure Degrades", level: 1 },
         { id: "timeline", label: "The Upgrade Process — 6 Stages", level: 1 },
+        { id: "infographic", label: "Upgrade Process", level: 1 },
         {
           id: "methodology",
           label: "What to Expect From Your Contractor",
@@ -272,8 +278,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "Cat B electrical fit-out for DHL Reading distribution hub — LV distribution, 3-phase conveyor power, and 14-week delivery with zero operational downtime.",
     featuredImage: {
-      src: "/images/news/dhl-reading-case-study.jpg",
-      alt: "DHL Reading distribution hub electrical installation",
+      src: "/images/projects/commercial/dhl/nexgen-dhl-reading-warehouse-cable-tray-installation.jpg",
+      alt: "Cable tray installation at DHL Reading distribution hub — Cat B electrical fit-out",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -428,8 +434,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "NICEIC registration, Part P compliance, and insurance — why the cheapest electrical quote rarely delivers value and what defective work costs to put right.",
     featuredImage: {
-      src: "/images/news/why-cheap-electrical-contractors-cost-more.jpg",
-      alt: "Electrical contractor reviewing compliance documentation",
+      src: "/images/projects/commercial/medivet/nexgen-medivet-watford-testing-commissioning.jpg",
+      alt: "Electrical testing and commissioning — NICEIC-certified contractor work",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -548,8 +554,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "EV charging starts at the LV board, not the car park. What commercial properties need to assess and upgrade before installing EV chargers at scale.",
     featuredImage: {
-      src: "/images/news/lv-charging-infrastructure-board-to-charging-point.jpg",
-      alt: "Commercial EV charging infrastructure and LV distribution board",
+      src: "/images/projects/commercial/biffa/biffa-workshop/nexgen-biffa-workshop-3-phase-distribution-board.jpg",
+      alt: "Three-phase distribution board — commercial electrical infrastructure for EV charging",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -648,11 +654,17 @@ export const allNewsArticles: NewsArticle[] = [
         "The DHL Reading Distribution Hub project illustrates what an LV infrastructure designed with headroom looks like in practice. The 800A TPN main distribution board Nexgen installed isn't solely the power supply for today's conveyor systems — it is the electrical backbone that supports future load growth across the facility, including EV infrastructure as DHL electrifies its fleet operations. Infrastructure designed with future capacity in mind is always cheaper than infrastructure retrofitted under pressure. The principle applies as directly to a commercial car park as to a distribution warehouse.",
         "The eight questions in this guide are a structured starting point, not a substitute for a full assessment. A commercial EV charging feasibility study by a qualified LV engineer — covering board capacity, DNO requirements, metering architecture, cable routes, and phasing strategy — costs a fraction of the downstream expense of identifying an infrastructure gap after a programme commitment has been made and a car park has been dug up. Commission the assessment before you commission the chargers.",
       ],
+      infographic: {
+        src: "/images/news/infographic-ev-readiness-checklist.png",
+        alt: "EV readiness checklist for commercial properties",
+        caption: "EV Readiness Checklist: 8 Pre-Commission Questions",
+      },
       toc: [
         { id: "spotlight", label: "Key Numbers", level: 1 },
         { id: "overview", label: "The EV Charging Problem", level: 1 },
         { id: "details", label: "What Needs to Happen First", level: 1 },
         { id: "methodology", label: "8 Pre-Commission Questions", level: 1 },
+        { id: "infographic", label: "EV Readiness Checklist", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "testimonial", label: "A Note From the Field", level: 1 },
         { id: "conclusion", label: "Commission the Assessment First", level: 1 },
@@ -670,8 +682,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "What your home's wiring actually needs before you install an EV charger — consumer unit, earthing, smart charger rules, and OZEV grant eligibility.",
     featuredImage: {
-      src: "/images/news/home-ev-charging-residential-electrical-guide.jpg",
-      alt: "Residential EV charger installation on a house exterior",
+      src: "/images/projects/residential/domestic-installations/nexgen-taplow-consumer-unit-replacement.jpg",
+      alt: "Consumer unit replacement — residential electrical preparation for EV charger installation",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -789,8 +801,8 @@ export const allNewsArticles: NewsArticle[] = [
     description:
       "How commercial property managers structure PAT testing compliance — scheduling, insurance requirements, risk-based frequency, and documentation.",
     featuredImage: {
-      src: "/images/news/commercial-pat-testing-facilities-managers-guide.jpg",
-      alt: "PAT testing equipment and electrical asset register in a commercial environment",
+      src: "/images/services-testing.jpg",
+      alt: "PAT testing in a commercial environment — portable appliance inspection and certification",
     },
     author: {
       name: "Nexgen Engineering Team",
@@ -882,13 +894,496 @@ export const allNewsArticles: NewsArticle[] = [
         "The test register is the document that matters most in a compliance challenge. It demonstrates that the programme was systematic rather than reactive, that equipment failures were identified and addressed rather than labelled over, and that the duty holder — the facilities manager and the organisation they represent — took the Electricity at Work Regulations seriously as an operational obligation. A stack of test labels confirms that a visit took place. A properly maintained register confirms that a programme is in place.",
         "For facilities managers inheriting a PAT programme without clear documentation, the practical step is a baseline audit — a single visit by the PAT contractor to inventory, tag, test, and register all in-scope equipment across the estate. That baseline produces the asset register and sets the frequency schedule. From that point, the programme is systematic: scheduled retests, incoming equipment control, and annual risk assessment review. The cost of the baseline audit is a fraction of the cost of reconstructing compliance records after an event that required them.",
       ],
+      infographic: {
+        src: "/images/news/infographic-pat-frequency-guide.png",
+        alt: "PAT testing frequency guide — IET Code of Practice risk matrix",
+        caption: "PAT Testing Frequency Guide: IET Code of Practice",
+      },
       toc: [
         { id: "overview", label: "What PAT Means at Portfolio Scale", level: 1 },
         { id: "details", label: "Frequency, Risk, and Insurance", level: 1 },
+        { id: "infographic", label: "PAT Frequency Guide", level: 1 },
         { id: "methodology", label: "Structuring Your PAT Programme", level: 1 },
         { id: "takeaways", label: "Key Takeaways", level: 1 },
         { id: "testimonial", label: "Label vs Register", level: 1 },
         { id: "conclusion", label: "Documentation That Works", level: 1 },
+      ],
+    },
+  },
+  {
+    id: "news-res-002",
+    slug: "landlord-pat-testing-obligations-guide",
+    category: "residential",
+    categoryLabel: "Residential",
+    title: "Landlord PAT Testing: Obligations, HMO Rules, and What Actually Needs to Be Tested",
+    excerpt:
+      "Landlords supplying electrical appliances as part of a furnished tenancy carry obligations under the Electricity at Work Regulations 1989. The scope is defined by the inventory — and for HMO landlords, PAT compliance is a licensing condition, not a recommendation.",
+    description:
+      "Landlord PAT testing obligations under the Electricity at Work Regulations — EICR vs PAT, HMO licensing conditions, frequency assessment, and the documentation that matters.",
+    featuredImage: {
+      src: "/images/projects/residential/domestic-installations/nexgen-taplow-handover-certified.jpg",
+      alt: "Electrical handover certificate — landlord compliance documentation",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Residential Electrical Specialists",
+    },
+    readTime: "6 min",
+    tags: [
+      "PAT Testing",
+      "Landlord Compliance",
+      "HMO",
+      "EICR",
+      "Electricity at Work Regulations",
+      "IET Code of Practice",
+      "Residential Electrical",
+      "Furnished Tenancy",
+    ],
+    isFeatured: false,
+    heroHeadline: [
+      "Landlord PAT Testing",
+      "Obligations, HMO Rules,",
+      "What Needs Testing",
+    ],
+    heroIndicators: [
+      {
+        icon: "Home",
+        title: "Residential Focus",
+        description:
+          "Written for residential landlords managing single lets, HMOs, and portfolio properties",
+      },
+      {
+        icon: "Shield",
+        title: "Legal Obligations",
+        description:
+          "Electricity at Work Regulations 1989 apply to landlord-supplied appliances in furnished tenancies",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "IET Code of Practice",
+        description:
+          "Risk-based frequency assessment using the IET CoP — the recognised framework for landlord PAT compliance",
+      },
+      {
+        icon: "Award",
+        title: "NICEIC Registered",
+        description:
+          "PAT testing by an approved contractor producing documentation that satisfies licensing inspections and insurance",
+      },
+    ] as const,
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    spotlightMetric: { label: "EICR Cycle", value: "5 years" },
+    detail: {
+      spotlight: [
+        { label: "EICR Cycle", value: "5 years" },
+        { label: "Furnished Let Obligation", value: "Landlord-supplied" },
+        { label: "HMO Licensing", value: "Required" },
+      ],
+      intro: [
+        "The Electricity at Work Regulations 1989 apply to landlords who supply electrical equipment as part of a tenancy. For a furnished let, that includes every portable appliance provided with the property. The landlord's duty extends to those appliances — not only to the fixed installation. It is a maintenance obligation: the equipment must be kept in a safe condition throughout the tenancy, not just at the point of letting.",
+        "The obligations are not the same across all tenancy types. A single-let furnished property carries different risk than an HMO. An HMO licence includes electrical safety conditions — meaning PAT compliance is a licensing condition, not merely a recommendation. A landlord operating an HMO without a PAT register, or with a register that is not current, is not just exposed to a compliance gap. They may be in breach of their licence conditions.",
+        "This guide is for residential landlords managing single lets, HMOs, or mixed portfolios. It covers the legal basis for the obligation, how EICR and PAT differ and why each is needed, how to set testing frequency using the IET Code of Practice, and what documentation a landlord needs to hold to satisfy licensing inspections, insurance inquiries, and enforcement action.",
+      ],
+      body: [
+        "The Electricity at Work Regulations 1989 impose a duty on those in control of electrical systems and equipment to ensure they are maintained in a safe condition. For landlords, that duty extends to electrical equipment supplied as part of a furnished tenancy — every appliance on the tenancy inventory is, in principle, in scope. The IET Code of Practice for In-Service Inspection and Testing of Electrical Equipment (4th edition) is the recognised method for discharging that duty in relation to portable appliances. It provides a risk-based framework for determining how often equipment in different categories and environments should be tested. Using the IET CoP as the basis for a frequency schedule is not merely best practice — it is the approach that demonstrates, in the event of an enforcement inquiry or insurance claim, that the landlord took a reasoned and documented approach to the obligation.",
+        "EICR and PAT are separate obligations that address different parts of the same legal framework. An Electrical Installation Condition Report is an inspection of the fixed wiring and installation — the consumer unit, circuits, sockets, and all permanent electrical infrastructure within the property. Under the Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020, a valid EICR is required every five years for all residential tenancies. PAT testing is the inspection and testing of portable appliances supplied by the landlord — the washing machine, fridge, toaster, television, and any other appliance on the inventory. An EICR does not cover portable appliances. A current PAT register does not remove the obligation for a five-year EICR. Both are required, and neither substitutes for the other.",
+        "For HMO landlords, PAT compliance operates within the mandatory licensing framework under the Housing Act 2004. Local authorities set licence conditions for HMOs, and electrical safety — including the maintenance of landlord-supplied appliances — is a standard condition. In practice, this means that a licensing inspection or a complaint-triggered visit may specifically check that a current PAT register exists for the property and that it covers the appliances supplied by the landlord. A landlord who cannot produce the register, or who holds only pass labels without a supporting test register, is in a materially weaker position than one with a properly documented programme. In the most straightforward assessment: if your HMO licence can be lost, PAT compliance is a licence condition, not a recommendation.",
+        "The scope of the landlord's PAT obligation is defined by the boundary of landlord-supplied equipment. Items on the tenancy inventory that were provided by the landlord are in scope. Items brought to the property by the tenant are the tenant's responsibility and are not the landlord's PAT obligation. In communal areas of HMOs — shared kitchens, laundry rooms, common living spaces — all equipment supplied by the landlord is in scope, and the communal nature of the usage typically means shorter retest intervals are appropriate: shared equipment, used by multiple people in varied ways, presents a higher-risk profile than the same equipment type in a single-occupancy property. The inventory is the starting point. Every item on it that was landlord-supplied is potentially in scope.",
+        "Frequency under the IET Code of Practice is a function of equipment type and operating environment. In a furnished residential let, kitchen and laundry appliances — microwaves, kettles, washing machines, dishwashers, toasters — are used regularly by occupants who may not treat them with the same care as owner-occupiers, and in an environment where moisture, food residue, and physical handling are routine. The IET CoP framework supports annual or two-year intervals for this category in rented accommodation. Living room and bedroom equipment — televisions, lamps, audio equipment — in the same tenanted environment can often be assessed at two-to-four year intervals. A written risk assessment documenting the reasoning for frequency decisions, per equipment category, is what transforms a PAT label into a defensible compliance record.",
+      ],
+      methodology: [
+        "Take a full inventory of landlord-supplied appliances — every item on the tenancy inventory that was provided by the landlord is potentially in scope; the inventory is the starting point for the scope assessment, not an afterthought",
+        "Apply the IET CoP risk matrix per category — kitchen appliances annual or two-year intervals; living area and bedroom equipment two to four years; document the reasoning for each category in a written risk assessment that is held alongside the test register",
+        "Commission a qualified PAT contractor to produce a registered asset list — not just test labels, but a full numeric test register identifying each appliance individually, showing test results, test date, and next test date",
+        "For HMOs, hold the PAT register as part of the licence compliance file — local authority licensing inspections will check it; the register should be current, accessible, and cover all communal areas as well as landlord-supplied items in individual rooms",
+        "Confirm your insurance policy's electrical maintenance conditions with your broker in writing before setting your schedule — some landlord insurance policies contain specific maintenance requirements; the written confirmation should be held alongside the PAT register",
+        "At every tenancy changeover, visually inspect all landlord-supplied appliances — consider testing if the next scheduled test date is more than six months away for kitchen and laundry equipment, as changeover is the moment of highest risk for undetected damage or misuse",
+      ],
+      takeaways: [
+        "Electricity at Work Regulations apply to landlords — the obligation is to maintain landlord-supplied appliances in safe condition; the IET Code of Practice is the recognised method for setting frequency and producing the documentation that demonstrates compliance",
+        "EICR and PAT are separate obligations — EICR covers the fixed installation every five years; PAT covers landlord-supplied portable appliances on a risk-assessed frequency; neither replaces the other",
+        "HMO landlords face stricter obligations — PAT compliance is typically a licensing condition under Housing Act 2004 mandatory licensing; the test register forms part of the licence compliance file and may be checked at inspection",
+        "The obligation applies only to landlord-supplied appliances — tenant-owned property is not the landlord's PAT responsibility; the boundary is defined by the tenancy inventory",
+        "Kitchen and laundry appliances in rented accommodation warrant shorter retest intervals than equivalent equipment in owner-occupied homes — multiple users, moisture, and high-frequency use increase the risk profile materially",
+        "Documentation — a proper test register with numeric results — is what satisfies insurance conditions, licensing inspections, and enforcement inquiries; pass labels alone are not sufficient evidence of a compliance programme",
+      ],
+      quote: {
+        quote:
+          "The label tells the tenant the appliance was tested. The register tells the licensing officer, the insurance loss adjuster, and the enforcement inspector everything they need to know. One is a sticker; the other is evidence.",
+        author: "Nexgen Engineering Team",
+        role: "Residential Electrical Specialists",
+      },
+      conclusion: [
+        "The landlord's PAT obligation is a maintenance and documentation responsibility, not a complex engineering challenge. Appliances in scope are defined by the inventory. Frequency is set by a risk assessment using the IET Code of Practice. The contractor produces the register. The register is held, kept accessible, and updated at each test cycle. That programme, executed consistently, is what demonstrates compliance with the Electricity at Work Regulations in the event of any inquiry.",
+        "For HMO landlords, PAT compliance sits within a broader regulatory framework that includes licensing, planning, and fire safety. The PAT register is the element most likely to be checked at a licensing inspection — because it is documentable and checkable in a way that some other obligations are not. A landlord with a current, well-maintained register in a proper compliance file is in a fundamentally different position from one relying on a folder of expired test labels.",
+        "The most common gap in landlord PAT compliance is the boundary question. Landlords who treat tenant appliances as their responsibility overspend and create confusion about inventory ownership. Landlords who leave landlord-supplied appliances off the register may find that the distinction is unhelpful when an insurance claim is raised or a licensing inspector is on site. The starting point is the inventory — every appliance the landlord owns and supplies is in scope. Everything else is not.",
+      ],
+      infographic: {
+        src: "/images/news/infographic-pat-frequency-guide.png",
+        alt: "PAT testing frequency guide — equipment class and environment risk matrix",
+        caption: "PAT Testing Frequency Guide: IET Code of Practice Risk Matrix",
+      },
+      toc: [
+        { id: "spotlight", label: "At a Glance", level: 1 },
+        { id: "overview", label: "Landlord PAT Obligations", level: 1 },
+        { id: "details", label: "EICR vs PAT vs HMO Rules", level: 1 },
+        { id: "infographic", label: "PAT Frequency Guide", level: 1 },
+        { id: "methodology", label: "Six Steps for Landlords", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "testimonial", label: "Register vs Label", level: 1 },
+        { id: "conclusion", label: "The Boundary Question", level: 1 },
+      ],
+    },
+  },
+  {
+    id: "news-ind-001",
+    slug: "industrial-pat-testing-puwer-compliance-guide",
+    category: "industrial",
+    categoryLabel: "Industrial",
+    title: "Industrial PAT Testing and PUWER Compliance: Class I, Class II, and 110V CTE Systems",
+    excerpt:
+      "PUWER 1998 creates the legal duty to maintain work equipment in industrial environments. PAT testing is the electrical inspection component — and in construction and manufacturing settings, equipment class, operating environment, and 110V CTE systems require a significantly different approach from standard commercial testing.",
+    description:
+      "Industrial PAT testing under PUWER 1998 — equipment classes, 110V CTE system procedures, RIDDOR implications, and documentation for industrial and construction environments.",
+    featuredImage: {
+      src: "/images/projects/industrial/harvey-nichols/nexgen-harvey-nichols-plant-room-installation.jpg",
+      alt: "Plant room electrical installation — industrial compliance and testing",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Industrial Electrical Specialists",
+    },
+    readTime: "8 min",
+    tags: [
+      "PAT Testing",
+      "PUWER",
+      "Industrial Electrical",
+      "110V CTE",
+      "RIDDOR",
+      "Equipment Classes",
+      "Construction Site",
+      "IET Code of Practice",
+    ],
+    isFeatured: false,
+    heroHeadline: [
+      "Industrial PAT Testing",
+      "PUWER Compliance",
+      "110V CTE Systems",
+    ],
+    heroIndicators: [
+      {
+        icon: "Factory",
+        title: "Industrial Focus",
+        description:
+          "Written for health and safety managers, facilities engineers, and site managers in industrial environments",
+      },
+      {
+        icon: "Shield",
+        title: "PUWER 1998",
+        description:
+          "Provision and Use of Work Equipment Regulations — PAT testing is the electrical inspection component of PUWER compliance",
+      },
+      {
+        icon: "Zap",
+        title: "110V CTE Systems",
+        description:
+          "Reduced-voltage systems used on UK construction and industrial sites require separate testing procedures",
+      },
+      {
+        icon: "ClipboardCheck",
+        title: "RIDDOR Compliance",
+        description:
+          "Electrical incidents resulting in hospitalisation are RIDDOR-reportable — the PAT register is the documentary defence",
+      },
+    ] as const,
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    spotlightMetric: { label: "PUWER Year", value: "1998" },
+    detail: {
+      spotlight: [
+        { label: "PUWER Year", value: "1998" },
+        { label: "Equipment Classes", value: "3" },
+        { label: "CTE Voltage", value: "110V" },
+      ],
+      intro: [
+        "PUWER 1998 — the Provision and Use of Work Equipment Regulations — applies to all work equipment in UK workplaces. PAT testing is the electrical inspection component for portable and transportable equipment within that framework. In industrial environments where equipment operates under continuous load, is operated by multiple workers across shifts, and handles materials under physical stress, both the legal framework and the risk profile are more demanding than in light commercial settings. The duty is not aspirational; it is statutory.",
+        "Equipment class, operating environment, and PUWER inspection frequency interact in ways that a standard commercial PAT programme does not address. Class I equipment on a construction site or in a manufacturing facility — angle grinders, drills, welding sets, portable heaters — requires a significantly different approach from Class II double-insulated equipment in a dry, temperature-controlled environment. And 110V reduced-voltage equipment, used across UK construction sites and many industrial settings as a risk-reduction measure, has its own testing procedures and record requirements that not all PAT contractors are equipped to deliver.",
+        "This guide is for health and safety managers, facilities engineers, and site managers in industrial, manufacturing, and construction environments. It covers the PUWER framework as it applies to portable electrical equipment, how equipment classes map to industrial tool categories and retest intervals, how 110V CTE systems sit within the compliance picture, and what documentation satisfies both a PAT contractor's register and a PUWER inspection record.",
+      ],
+      body: [
+        "PUWER 1998 requires that work equipment is maintained in an efficient state, in efficient working order, and in good repair throughout its working life. For portable electrical equipment, the IET Code of Practice for In-Service Inspection and Testing of Electrical Equipment provides the recognised method for the electrical inspection element of that duty. The distinction matters: PUWER sets the legal duty; the IET CoP provides the framework for fulfilling it in relation to electrical testing. A PAT programme designed around the IET CoP is a PUWER-compliant approach to the electrical inspection component. A PAT programme that ignores the IET CoP framework — testing everything annually on a uniform schedule regardless of equipment class or environment — may fulfil the letter of the duty but does not demonstrate the risk-based reasoning that a PUWER inspection record should show.",
+        "In industrial environments, the equipment class distinction has direct consequences for both test procedures and retest intervals. Class I equipment — angle grinders, power drills, welding sets, floor-standing tools, catering equipment — relies on an earth connection for protection. Testing Class I equipment requires both insulation resistance testing and earth continuity testing; a pass on one does not substitute for the other. In a warehouse or manufacturing environment, Class I equipment warrants retest intervals of six to twelve months. On a construction site, where the same equipment category is exposed to mechanical damage, moisture ingress, and handling by multiple operatives across shifting teams, three-month intervals are the IET CoP recommendation. Class II double-insulated equipment presents a lower risk profile — no earth to check, insulation resistance testing only — and can operate on longer intervals in the same environments. Class III equipment, operating at safety extra-low voltage below 50V AC, presents the lowest electrical risk and the least demanding test requirements.",
+        "The 110V Centre-Tapped Earth (CTE) system is a distinctive feature of UK construction and industrial practice. A step-down transformer reduces the 230V supply to 110V, with the centre tap of the secondary winding connected to earth — so the maximum voltage to earth from either conductor is 55V. Orange-coloured equipment and connectors to BS EN 60309 identify 110V CTE systems in the field. The risk-reduction benefit over 230V tools is well established; the shock risk from a 55V-to-earth contact is materially lower than from a 230V system. The testing requirement is also different: 110V CTE equipment must be tested at reduced test voltages appropriate to the system, not at the standard test voltages applied to 230V Class I equipment. Not all PAT contractors carry 110V test adapters or hold the procedural knowledge for CTE systems. For any site operating 110V CTE tools, confirming the PAT contractor's specific competence for CTE testing before commissioning is a prerequisite for valid test results, not a minor verification step.",
+        "RIDDOR 2013 — the Reporting of Injuries, Diseases and Dangerous Occurrences Regulations — requires reporting of electrical incidents in the workplace that result in hospitalisation, specified injuries, or dangerous occurrences involving electrical discharge. When an HSE investigation follows a RIDDOR-reportable electrical incident, the investigation will examine the maintenance record for the equipment involved: when it was last tested, what the test showed, whether any defects were identified and what action was taken, and whether the equipment was in service at the time it should have been out of service. The PAT register — showing test results as numeric values per asset, remedial actions taken, and next test dates — is the documentary record that demonstrates the employer discharged their PUWER duty for that equipment. A site with no register, or with a register limited to pass/fail labels without supporting test data, is substantially more exposed in that investigation than a site with a complete, current, properly formatted register.",
+        "The PUWER inspection obligation is broader than the PAT test alone. PUWER requires inspection of work equipment for physical condition, suitability for its intended use, guarding, and operator safety — not only electrical safety. A combined inspection programme, where the PAT contractor carries out the electrical inspection component and a PUWER-competent assessor reviews the broader physical condition in the same visit, produces records that satisfy both obligations from a single contractor visit. For industrial facilities with large equipment estates, commissioning this as a single combined programme is more efficient than managing separate schedules, reduces the number of operational disruptions, and produces a documentation package that links electrical test results to PUWER inspection records under a common asset identifier.",
+      ],
+      methodology: [
+        "Map electrical work equipment against PUWER categories — portable and transportable equipment (Class I, II, and III) plus 110V CTE tools require PAT testing; fixed installed equipment is subject to PUWER inspection but not PAT scope; the asset map is the foundation of the compliance programme",
+        "Identify the operating environment for each equipment category — dry stores, wet process areas, construction sites, plant rooms, and manufacturing floors each map to different IET CoP environment categories with different recommended retest intervals; document the environment classification for each category in the written risk assessment",
+        "For 110V CTE equipment, confirm your PAT contractor holds correct test equipment and procedures before commissioning — ask specifically whether they carry 110V adapters and whether they test to CTE-appropriate test voltages; a contractor without CTE competence cannot produce valid test results for 110V equipment",
+        "Establish a PUWER inspection record alongside the PAT register — link both to the same asset identifier so that electrical test results and broader physical condition records are accessible together; a combined asset record is what an HSE inspector or insurer will expect to see",
+        "Implement an out-of-service process for equipment that fails a test — failed equipment must be physically removed from the working area, not merely labelled as failed; in a busy industrial environment, a failed label is not a reliable barrier to re-use; quarantine to a designated out-of-service area is the only control that works consistently",
+        "Review frequency bands at least annually to reflect current operations — new equipment enters service, environments change with production activity, old equipment is retired; a brief annual review updates the risk assessment and keeps the programme documentation current and accurate",
+      ],
+      takeaways: [
+        "PUWER 1998 creates the legal duty to maintain work equipment — PAT testing is the electrical inspection component of that duty, providing the documented evidence of compliance with the Electricity at Work Regulations within the PUWER framework",
+        "Class I equipment in industrial and construction environments warrants three to six month retest intervals — significantly shorter than equivalent equipment in office environments, reflecting continuous load, multi-operator use, physical handling, and exposure to moisture and mechanical damage",
+        "110V CTE tools require different test procedures from standard 230V equipment — the reduced test voltages appropriate to a centre-tapped earth system are not applied by all PAT contractors; confirm CTE competence before commissioning on any site running 110V tools",
+        "RIDDOR 2013 requires reporting of electrical incidents resulting in hospitalisation — an HSE investigation will examine test history for the equipment involved; a complete PAT register with numeric results, remedial actions, and next test dates is the documentary defence for the employer",
+        "PUWER inspection encompasses PAT test results plus broader physical condition checks — a combined inspection programme produces records satisfying both obligations from a single contractor visit and links results under a common asset identifier",
+        "Equipment that fails a test should be physically removed from the working area, not just labelled — a failed label in a busy industrial or construction environment does not prevent re-use; physical quarantine to a designated out-of-service area is the only reliable control",
+      ],
+      quote: {
+        quote:
+          "On a construction site or in a manufacturing facility, a failed PAT label isn't a sufficient control. The equipment needs to leave the working area. The register records what failed and what was done about it — that's the difference between a documentation exercise and a compliance programme.",
+        author: "Nexgen Engineering Team",
+        role: "Industrial Electrical Specialists",
+      },
+      conclusion: [
+        "PUWER and the IET Code of Practice together provide a comprehensive compliance structure for industrial portable appliance testing. PUWER creates the duty; the IET CoP provides the method. The documentation — PAT register, PUWER inspection record, written risk assessment — is the evidence that the employer's obligations are being taken seriously as operational requirements rather than administrative exercises. A programme built around that structure is both legally defensible and operationally coherent.",
+        "The 110V CTE system is a distinctive feature of UK construction and industrial practice, providing meaningful risk reduction for portable tool use in high-risk environments. It requires contractors with specific testing competence. Ensuring a PAT contractor working on a 110V site holds the appropriate test equipment and procedural knowledge is a prerequisite for valid testing — not a minor detail that can be assumed. Ask specifically, and ask before commissioning.",
+        "For industrial facilities, the PAT programme should be designed as part of the broader PUWER inspection schedule, not as a standalone annual event delivered independently of the wider equipment management framework. Frequency bands should reflect actual operating environments. Records should satisfy both PAT and PUWER requirements under common asset identifiers. And the programme should be reviewed when the facility changes — because the equipment changes, the environments change, and the risk profile changes with the operation.",
+      ],
+      infographic: {
+        src: "/images/news/infographic-pat-frequency-guide.png",
+        alt: "PAT testing frequency guide — equipment class and environment risk matrix for industrial environments",
+        caption: "PAT Testing Frequency Guide: Industrial and Construction Site Equipment",
+      },
+      toc: [
+        { id: "spotlight", label: "At a Glance", level: 1 },
+        { id: "overview", label: "PUWER and PAT Testing", level: 1 },
+        { id: "details", label: "Equipment Classes and 110V CTE", level: 1 },
+        { id: "infographic", label: "PAT Frequency Guide", level: 1 },
+        { id: "methodology", label: "Six Steps for Industrial Sites", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "testimonial", label: "Out of Service Means Out of Area", level: 1 },
+        { id: "conclusion", label: "Programme Design", level: 1 },
+      ],
+    },
+  },
+  {
+    id: "news-community-001",
+    slug: "why-nexgen-invests-in-local-community",
+    category: "community",
+    categoryLabel: "Community",
+    title: "Why Nexgen Invests in the Local Community",
+    excerpt:
+      "Nexgen's community investment is not a marketing exercise. Real electrical work at Thames Valley Adventure Playground and sponsorship of the Slough in Bloom gold award entry — both delivered to the same standard as commercial projects, because the work is the same.",
+    description:
+      "Why Nexgen Electrical Innovations invests in Berkshire community projects — Thames Valley Adventure Playground, Slough in Bloom, and the reasoning behind local capability applied to local need.",
+    featuredImage: {
+      src: "/images/projects/community/thames-valley-adventure-playground/nexgen-tvap-adventure-playground-facility-building.jpg",
+      alt: "Thames Valley Adventure Playground facility — Nexgen community electrical project",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Community Engagement",
+    },
+    readTime: "5 min",
+    tags: [
+      "Community",
+      "Thames Valley Adventure Playground",
+      "Slough in Bloom",
+      "Berkshire",
+      "Local Investment",
+      "NICEIC",
+      "Charity Electrical Work",
+    ],
+    isFeatured: false,
+    heroHeadline: [
+      "Why Nexgen Invests",
+      "in the Local",
+      "Community",
+    ],
+    heroIndicators: [
+      {
+        icon: "Users",
+        title: "Community Focus",
+        description:
+          "Supporting Thames Valley Adventure Playground and Slough in Bloom as part of Nexgen's local commitment",
+      },
+      {
+        icon: "Heart",
+        title: "Real Contribution",
+        description:
+          "Real electrical work delivered to the same standard as commercial projects — not charity events",
+      },
+      {
+        icon: "Award",
+        title: "Gold Award Partner",
+        description:
+          "Supporting the Slough in Bloom entry that won gold in 2023 under the RHS Britain in Bloom programme",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Local Capability",
+        description:
+          "Berkshire contractor applying local capability to local community need — a practical choice, not a marketing exercise",
+      },
+    ] as const,
+    publishedAt: "2026-05-30",
+    updatedAt: "2026-05-30",
+    detail: {
+      intro: [
+        "Nexgen Electrical Innovations is based in Berkshire. The work is in logistics warehouses in Reading, veterinary hospitals in Watford, and office fit-outs across the Thames Valley. Community investment sits alongside that work as a deliberate choice — not an incidental benefit, and not a statement made only when it is convenient to make it.",
+        "The Thames Valley Adventure Playground in Taplow and Slough in Bloom are two community projects Nexgen has been involved with. Neither is a typical electrical project. Both matter to the communities they serve. Nexgen's involvement reflects something the company's director takes seriously: that a Berkshire business with the capability to contribute to community infrastructure should use that capability in its own area.",
+        "This article explains the reasoning behind Nexgen's community investment — what it involves, what it produces, and why it sits alongside the commercial work rather than being separate from it.",
+      ],
+      body: [
+        "Thames Valley Adventure Playground in Taplow is a registered charity providing a fully accessible outdoor adventure play environment for children and young people with disabilities and additional needs. It is not a project that requires elaborate justification. The charity serves a population with limited options for accessible outdoor play facilities in the area, operates on a charity budget, and requires the same reliable electrical infrastructure as any other building — outdoor lighting, welfare facilities, safe and certified installation throughout. Nexgen has delivered that work to the same standard as any commercial project: inspected, certified, and signed off to BS 7671. The difference is the client, the budget parameters, and the reason the work matters to the people who use the facility.",
+        "Slough in Bloom is the local branch of the Britain in Bloom programme, organised annually by the Royal Horticultural Society and coordinated locally with the support of Slough Borough Council and local business sponsors. The competition judges entries from gardening clubs, schools, community groups, and businesses on horticulture, environmental responsibility, and community participation. Nexgen supported the 2023 entry as a sponsor. That entry won the gold award and was named overall winner in the Slough category. The connection is local: the competition celebrates the area Nexgen works in, requires sustained volunteer effort over a full year, and produces visible improvements to public spaces in Slough that persist long after the judging is over.",
+        "Community investment makes sense for a contractor not because of a corporate CSR budget — Nexgen does not operate at that scale — but because of what a contractor actually has: engineers, equipment, installation capability, and a contact network within the local trade and supply chain. Applying that capability to community projects is a direct translation of what the business does into a form that benefits local people directly. The cost is real; the resource is real; the result is real. That is different from writing a cheque for a sponsorship that has no operational connection to the business.",
+        "What community investment produces for Nexgen is concrete and observable. For TVAP: better electrical infrastructure serving children with disabilities in Berkshire. For Slough in Bloom: consistent local business support for an organisation that produces visible community benefit. For Nexgen: a connection to the area that extends beyond the commercial project portfolio, a reputation built on what the business actually does rather than what it says about itself, and institutional knowledge gained from working with organisations that operate under very different constraints from commercial clients. All of those have value.",
+      ],
+      takeaways: [
+        "Nexgen's community investment is practical, not performative — real electrical work delivered to the same inspection and certification standard as commercial projects, within the operational and budget constraints of community organisations",
+        "Thames Valley Adventure Playground and Slough in Bloom represent two distinct forms of community engagement — one as a contractor delivering electrical infrastructure, one as a sponsor supporting a community programme — both contributing to local amenity in Berkshire",
+        "Community projects operate under different constraints from commercial work: smaller budgets, volunteer-driven organisations, and tighter scheduling windows; understanding those constraints is part of delivering the work properly",
+        "For a Berkshire-based contractor, supporting Berkshire community organisations is a direct application of local capability to local need — a practical operational choice rather than an abstract statement of values",
+        "Nexgen's director has made community engagement a deliberate part of how the business operates — a commitment that runs consistently alongside the commercial work rather than appearing only when it is convenient to mention it",
+      ],
+      quote: {
+        quote:
+          "The work we do for TVAP and Slough in Bloom is real work. It gets inspected, certified, and signed off to the same standard as anything we do commercially. The difference is who it's for and why it matters — and those reasons are good enough.",
+        author: "Herman Adu",
+        role: "Director, Nexgen Electrical Innovations",
+      },
+      conclusion: [
+        "Community investment and commercial electrical work are not in tension at Nexgen — they operate in parallel as expressions of the same capability applied to different contexts. Engineering standards are the same. Commitment to delivering properly is the same. What changes is the client, the budget, and the reason the work matters to the people on the receiving end of it.",
+        "Both TVAP and Slough in Bloom will be ongoing relationships. TVAP's facility requires ongoing maintenance and future improvements as the charity grows its programme and its user base. Slough in Bloom is an annual commitment. Neither is a one-time engagement entered for the association and then allowed to lapse.",
+        "For businesses considering community investment: the most useful form is usually the simplest — apply what you already do to organisations that need it and cannot easily afford it. For an electrical contractor, that means treating a community project with the same professionalism as a commercial one and signing off to the same standards. That is the form of community investment that actually helps the organisations it is intended to support.",
+      ],
+      toc: [
+        { id: "overview", label: "Why Community Investment", level: 1 },
+        { id: "details", label: "TVAP and Slough in Bloom", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "testimonial", label: "Real Work, Real Standards", level: 1 },
+        { id: "conclusion", label: "The Practical Choice", level: 1 },
+      ],
+    },
+  },
+  {
+    id: "news-community-002",
+    slug: "slough-in-bloom-why-nexgen-came-back",
+    category: "community",
+    categoryLabel: "Community",
+    title: "Slough in Bloom 2026: Why Nexgen Is Coming Back",
+    excerpt:
+      "Nexgen first supported Slough in Bloom in 2023. The entry won gold and overall winner. In 2026, Nexgen is returning as supporting partner — because the first involvement produced a result and the organisation is worth continuing to support.",
+    description:
+      "Nexgen returns as supporting partner for Slough in Bloom 2026 — a continuation of the partnership that backed the 2023 gold award and overall winner in the RHS Britain in Bloom programme.",
+    featuredImage: {
+      src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-01.jpg",
+      alt: "Slough in Bloom 2023 gold award winning display — community garden entry",
+    },
+    author: {
+      name: "Nexgen Engineering Team",
+      role: "Community Engagement",
+    },
+    readTime: "4 min",
+    tags: [
+      "Community",
+      "Slough in Bloom",
+      "Britain in Bloom",
+      "RHS",
+      "Berkshire",
+      "Local Sponsorship",
+      "Gold Award",
+    ],
+    isFeatured: false,
+    heroHeadline: [
+      "Slough in Bloom 2026",
+      "Why Nexgen",
+      "Is Coming Back",
+    ],
+    heroIndicators: [
+      {
+        icon: "Award",
+        title: "Gold Award 2023",
+        description:
+          "Supporting the Slough in Bloom entry that won gold and overall winner in the 2023 competition",
+      },
+      {
+        icon: "Users",
+        title: "Community Partnership",
+        description:
+          "Returning as supporting partner for the 2026 competition — a continuation of Nexgen's local commitment",
+      },
+      {
+        icon: "Heart",
+        title: "RHS Britain in Bloom",
+        description:
+          "Britain in Bloom is the UK's largest horticultural campaign, run by the Royal Horticultural Society since 1964",
+      },
+      {
+        icon: "Lightbulb",
+        title: "Local Investment",
+        description:
+          "Slough in Bloom produces visible improvements to public spaces and builds community capacity for environmental stewardship",
+      },
+    ] as const,
+    publishedAt: "2026-05-30",
+    updatedAt: "2026-05-30",
+    detail: {
+      intro: [
+        "Nexgen Electrical Innovations first supported Slough in Bloom in 2023. The entry won the gold award and the overall winner prize in the Slough category. The competition attracts entries from gardening clubs, schools, businesses, and community groups across Slough, with judging carried out by the Royal Horticultural Society under the Britain in Bloom programme framework. Winning gold at that level requires sustained effort across the full year — not a display assembled in the weeks before judging.",
+        "Slough in Bloom 2026 is the next engagement. Nexgen is returning as a supporting partner. The reason is straightforward: the first involvement produced a result, the organisation is worth supporting, and the commitment to the local area that made the first involvement sensible still applies in 2026 as it did in 2023.",
+        "This article covers what Slough in Bloom is, what Nexgen's involvement in 2023 produced, and why the partnership continues into 2026.",
+      ],
+      body: [
+        "Slough in Bloom is the local branch of the Britain in Bloom programme, which the Royal Horticultural Society has run since 1964. It is the UK's largest horticultural campaign, structured in regional and national tiers, with local entries feeding upward into regional competitions such as Thames and Chiltern. The judging framework covers three areas: horticultural achievement, environmental responsibility, and community participation. Displaying well on judging day is necessary but not sufficient — a gold award entry demonstrates sustained community engagement, environmental commitments that go beyond surface appearance, and a programme of work that the judges can verify has been consistent throughout the year.",
+        "The 2023 entry that Nexgen supported won the gold award in the Slough category and was named overall winner for that year's competition. Gold is not awarded for display quality alone. The assessment encompasses the breadth of community involvement, the environmental sustainability of the programme, the quality of year-round maintenance, and evidence that the effort represents a genuine community undertaking rather than a one-off exercise. An overall winner result, on top of the gold award, reflects the judges' assessment that the entry was outstanding across all three judging criteria.",
+        "Nexgen's contribution was as a supporting sponsor — contributing to the resources required to develop and maintain the entry over a full year. Preparation for a Britain in Bloom entry begins in the preceding autumn with planting schedules that run through winter and spring, with the main growing season requiring sustained maintenance and development leading up to the summer judging period. The sponsorship supports those activities: materials, plant stock, and the resources needed to keep a gold-level programme running. A gold award entry is the product of that kind of sustained, resourced effort — not a single push in the weeks before the judges arrive.",
+        "The reason for returning in 2026 is the same as the reason for first becoming involved in 2023. Slough in Bloom is a serious local effort producing visible and lasting results in Slough's public spaces. The competition's value to the local area — community engagement, environmental improvement, improved public spaces — is real and ongoing. So is Nexgen's commitment. In 2025 the partnership continued; in 2026 Nexgen returns as supporting partner for what is now the second confirmed competition cycle of an ongoing local relationship.",
+      ],
+      takeaways: [
+        "Slough in Bloom is a serious horticultural competition under the RHS Britain in Bloom framework — judging covers horticultural achievement, environmental responsibility, and community participation, not display quality alone",
+        "Nexgen supported the entry that won the 2023 gold award and overall winner — a result that reflects sustained effort across the full year of preparation, maintenance, and community engagement, not a single event",
+        "Nexgen is returning as supporting partner for 2026, continuing a local business commitment now in its second confirmed competition cycle following involvement in 2023 and 2025",
+        "Britain in Bloom produces lasting improvements to public spaces and builds community capacity for environmental stewardship — results that persist well beyond the competition cycle and benefit the wider Slough community",
+        "Nexgen's support for Slough in Bloom is part of a broader community engagement programme that includes the Thames Valley Adventure Playground — local capability applied to local community need across both charitable and civic contexts",
+      ],
+      quote: {
+        quote:
+          "We came back because the first time worked. The entry won, the community benefited, and the people running Slough in Bloom put in the work that justified winning. That's the kind of partnership worth continuing.",
+        author: "Herman Adu",
+        role: "Director, Nexgen Electrical Innovations",
+      },
+      conclusion: [
+        "Slough in Bloom 2026 continues a partnership that produced a gold award win and overall winner result in 2023. The commitment is consistent support for an organisation that does the work well and delivers visible benefit to the local area. The competition will be judged in summer 2026. Preparation is already underway.",
+        "Britain in Bloom competitions at the gold level are not marketing exercises — they require genuine community engagement, environmental commitment, and horticultural quality sustained over a full year. Supporting that kind of effort is something Nexgen takes seriously, because the competition takes it seriously. The standard that the judges apply is the same standard Nexgen applies to its own work.",
+        "For businesses considering local community sponsorship: the most effective partnerships are with organisations that hold themselves to a high standard and produce measurable results. Slough in Bloom meets that standard. The partnership will continue for as long as that remains true.",
+      ],
+      gallery: [
+        {
+          src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-01.jpg",
+          alt: "Slough in Bloom 2023 gold award winning display",
+          caption: "2023 Gold Award Winner",
+        },
+        {
+          src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-gold-award-winner-02.jpg",
+          alt: "Slough in Bloom 2023 gold award garden display",
+          caption: "2023 Competition Display",
+        },
+        {
+          src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-overall-winner-award.jpg",
+          alt: "Slough in Bloom 2023 overall winner award",
+          caption: "2023 Overall Winner",
+        },
+        {
+          src: "/images/projects/community/slough-in-bloom/nexgen-slough-in-bloom-2023-prize-winning-garden-display.jpg",
+          alt: "Slough in Bloom 2023 prize-winning garden display",
+          caption: "Prize-Winning Garden",
+        },
+      ],
+      toc: [
+        { id: "overview", label: "Slough in Bloom 2026", level: 1 },
+        { id: "details", label: "The 2023 Gold Award", level: 1 },
+        { id: "gallery", label: "2023 Competition Gallery", level: 1 },
+        { id: "takeaways", label: "Key Takeaways", level: 1 },
+        { id: "testimonial", label: "Why We Came Back", level: 1 },
+        { id: "conclusion", label: "The Partnership Continues", level: 1 },
       ],
     },
   },

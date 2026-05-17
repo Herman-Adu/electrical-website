@@ -3,6 +3,7 @@ import type { NewsArticle } from "@/types/news";
 import type { TocItem } from "@/types/shared-content";
 import type { TimelineItem } from "@/types/timeline";
 import { ArticleLocationPill } from "./article-location-pill";
+import { InsightStatStrip } from "./insight-stat-strip";
 import { DetailIntroBlock } from "./detail-intro-block";
 import { DetailBodyBlock } from "./detail-body-block";
 import { DetailTakeawayBlock } from "./detail-takeaway-block";
@@ -14,6 +15,7 @@ import { CaseStudyScopeList } from "./case-study-scope-list";
 import { CaseStudyChallengeCards } from "./case-study-challenge-cards";
 import { CaseStudySpecsGrid } from "./case-study-specs-grid";
 import { CaseStudyResultsShowcase } from "./case-study-results-showcase";
+import { DetailInfographicBlock } from "./detail-infographic-block";
 
 export const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
@@ -40,6 +42,11 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
 
   function renderSection(id: string) {
     switch (id) {
+      case "spotlight":
+        return detail.spotlight && detail.spotlight.length > 0 ? (
+          <InsightStatStrip spotlight={detail.spotlight} />
+        ) : null;
+
       case "overview":
         return <DetailIntroBlock intro={detail.intro} />;
 
@@ -103,6 +110,15 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
       case "conclusion":
         return detail.conclusion && detail.conclusion.length > 0 ? (
           <DetailConclusionBlock conclusion={detail.conclusion} />
+        ) : null;
+
+      case "infographic":
+        return detail.infographic ? (
+          <DetailInfographicBlock
+            src={detail.infographic.src}
+            alt={detail.infographic.alt}
+            caption={detail.infographic.caption}
+          />
         ) : null;
 
       case "testimonial":
