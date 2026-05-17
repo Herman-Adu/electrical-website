@@ -17,8 +17,9 @@ interface CategoryOption {
   label: string;
 }
 
-// Only the four isSector categories are shown in the slider. Non-sector slugs
-// (commercial-lighting, power-boards) are not surfaced as primary filter chips.
+// Only the four isSector categories are shown as slider chips. Non-sector slugs
+// (commercial-lighting, power-boards) are not surfaced as primary filter chips
+// but are still valid URL ?category= values so the empty state renders correctly.
 const CATEGORY_OPTIONS: readonly CategoryOption[] = [
   { slug: "all", label: "All" },
   ...projectCategories
@@ -26,9 +27,10 @@ const CATEGORY_OPTIONS: readonly CategoryOption[] = [
     .map(({ slug, label }) => ({ slug, label })),
 ] as const;
 
-export const VALID_SLUGS = new Set<ProjectCategorySlug>(
-  CATEGORY_OPTIONS.map((c) => c.slug),
-);
+export const VALID_SLUGS = new Set<ProjectCategorySlug>([
+  "all",
+  ...projectCategories.map((c) => c.slug),
+]);
 
 function isValidSlug(value: string | null): value is ProjectCategorySlug {
   return value !== null && VALID_SLUGS.has(value as ProjectCategorySlug);
