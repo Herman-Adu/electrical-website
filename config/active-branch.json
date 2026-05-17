@@ -4,16 +4,17 @@
   "planEntity": "plan-detail-block-arch",
   "obsidianPlanDoc": "Projects/Nexgen Electrical Innovations/Plans/plan-detail-block-arch.md",
   "obsidianFeatureDoc": "Projects/Nexgen Electrical Innovations/Features/feat-news-hub-content-first-wave.md",
-  "updatedAt": "2026-05-17T23:15:00.000Z",
-  "status": "MIGRATION COMPLETE: all 10 articles migrated — 686 tests passing, build clean",
-  "nextTask": "PR feat/news-hub-content-first-wave to main. All 10 articles: intro=1 hook para, body max 2 paras, structured fields (specs+scope+challenges) preserved. plan-detail-block-arch all 10 phases done. Ready to merge.",
-  "emergencySummary": "MIGRATION COMPLETE 2026-05-17: Branch feat/news-hub-content-first-wave. All 10 articles migrated across 5 batches. B1=lv-charging, B2=lv-infrastructure+why-cheap, B3=home-ev+commercial-pat, B4=community+DHL, B5=landlord-pat+industrial-pat. plan-detail-block-arch COMPLETE (all 10 phases). 686 tests pass, 0 typecheck errors, build 65 pages clean. RULE: TocItem.label IS the rendered section heading. CRITICAL: never name old company.",
+  "updatedAt": "2026-05-17T23:45:00.000Z",
+  "status": "ctx-63pct-sync: DetailIntroBlock + DetailGetStartedBlock (DRY) complete — body 2-col content fix pending",
+  "nextTask": "CONTENT RESTRUCTURE: all 10 articles — trim 2-col body to SHORT engagement paragraphs (3-4 sentences each, NOT walls of text). Move excess detail into level-2 TOC sub-sections (TocItem level:2) with separate blocks. DHL project page is the reference pattern. Update content-creation skill with this philosophy: 2-col = engagement only, detail = separate level-2 blocks with eyebrow headings. WORKFLOW CHANGE: compact at 60% (not 80%) — sync then compact, rehydrate from memory.",
+  "emergencySummary": "SYNC 2026-05-17 ctx-63pct. Branch feat/news-hub-content-first-wave. COMPLETED: (1) all 10 articles migrated B1-B5, (2) DetailIntroBlock redesigned (eyebrow+AnimatedWord+lead+2col+pillars), (3) DetailGetStartedBlock DRY refactor (wraps ProjectSupplementalSection, passes article.tags), (4) all 4 layout dispatchers updated, (5) 4 pillars per article, (6) get-started in all TOCs. 686 tests passing. PENDING: article body 2-col text is too dense — needs short engagement paragraphs (3-4 sentences per col), excess detail moved to level-2 TOC sub-sections with separate block renders. DHL case study is the correct reference pattern. RULE: TocItem.label IS the rendered section heading. CRITICAL: never name old company.",
   "focusedSearchTerms": [
     "feat-news-hub-content-first-wave",
     "plan-detail-block-arch",
     "decide-toc-label-as-section-heading",
     "learn-generic-layout-primitives",
     "learn-three-lock-context-os",
+    "learn-article-content-rhythm",
     "session-2026-05-17-005"
   ]
 }
