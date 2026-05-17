@@ -26,3 +26,4 @@ export { ReviewHighlightQuote } from "./review-highlight-quote";
 export { ReviewLayout } from "./review-layout";
 export { LayoutDispatcher } from "./layout-dispatcher";
 export { ReadingProgressBar } from "./reading-progress-bar";
+export { DetailGetStartedBlock } from "./detail-get-started-block";

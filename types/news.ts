@@ -63,9 +63,16 @@ export interface NewsGalleryImage {
   caption?: string;
 }
 
+export interface NewsPillarItem {
+  num: string;   // "01", "02", "03", "04"
+  title: string;
+  description: string;
+}
+
 export interface NewsDetailContent {
   intro: string[];
   body?: string[];
+  pillars?: NewsPillarItem[];
   takeaways: string[];
   spotlight?: NewsSpotlightMetric[];
   quote?: NewsQuote;

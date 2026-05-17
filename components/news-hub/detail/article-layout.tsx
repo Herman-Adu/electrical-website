@@ -17,6 +17,7 @@ import { DetailSpecsBlock } from "./detail-specs-block";
 import { DetailHighlightListBlock } from "./detail-highlight-list-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
 import { DetailStepsBlock } from "./detail-steps-block";
+import { DetailGetStartedBlock } from "./detail-get-started-block";
 
 export const DEFAULT_ARTICLE_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
@@ -49,12 +50,18 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} title={title} />;
+        return (
+          <DetailIntroBlock
+            intro={detail.intro}
+            title={title}
+            eyebrow={article.categoryLabel}
+            body={detail.body}
+            pillars={detail.pillars}
+          />
+        );
 
       case "details":
-        return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} title={title} />
-        ) : null;
+        return null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
@@ -127,6 +134,9 @@ export function ArticleLayout({ article, timelineItems }: ArticleLayoutProps) {
             )}
           </>
         );
+
+      case "get-started":
+        return <DetailGetStartedBlock />;
 
       default:
         return null;

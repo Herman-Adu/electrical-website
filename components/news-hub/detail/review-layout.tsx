@@ -10,6 +10,7 @@ import { DetailQuoteBlock } from "./detail-quote-block";
 import { DetailConclusionBlock } from "./detail-conclusion-block";
 import { DetailGalleryBlock } from "./detail-gallery-block";
 import { DetailMetricsBlock } from "./detail-metrics-block";
+import { DetailGetStartedBlock } from "./detail-get-started-block";
 
 const DEFAULT_REVIEW_TOC: readonly TocItem[] = [
   { id: "client-quote", label: "Client Quote", level: 1 },
@@ -36,7 +37,15 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} title={title} />;
+        return (
+          <DetailIntroBlock
+            intro={detail.intro}
+            title={title}
+            eyebrow={article.categoryLabel}
+            body={detail.body}
+            pillars={detail.pillars}
+          />
+        );
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
@@ -44,9 +53,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
         ) : null;
 
       case "details":
-        return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} title={title} />
-        ) : null;
+        return null;
 
       case "takeaways":
         return <DetailTakeawayBlock takeaways={detail.takeaways} title={title} />;
@@ -75,6 +82,9 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
             )}
           </>
         );
+
+      case "get-started":
+        return <DetailGetStartedBlock />;
 
       default:
         return null;

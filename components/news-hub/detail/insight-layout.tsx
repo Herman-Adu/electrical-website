@@ -13,6 +13,7 @@ import { DetailListBlock } from "./detail-list-block";
 import { DetailSpecsBlock } from "./detail-specs-block";
 import { DetailSplitCardsBlock } from "./detail-split-cards-block";
 import { DetailInfographicBlock } from "./detail-infographic-block";
+import { DetailGetStartedBlock } from "./detail-get-started-block";
 
 export const DEFAULT_INSIGHT_TOC: readonly TocItem[] = [
   { id: "spotlight", label: "Spotlight", level: 1 },
@@ -42,7 +43,15 @@ export function InsightLayout({ article }: InsightLayoutProps) {
         ) : null;
 
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} title={title} />;
+        return (
+          <DetailIntroBlock
+            intro={detail.intro}
+            title={title}
+            eyebrow={article.categoryLabel}
+            body={detail.body}
+            pillars={detail.pillars}
+          />
+        );
 
       case "methodology":
         return detail.methodology && detail.methodology.length > 0 ? (
@@ -50,9 +59,7 @@ export function InsightLayout({ article }: InsightLayoutProps) {
         ) : null;
 
       case "details":
-        return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} title={title} />
-        ) : null;
+        return null;
 
       case "scope":
         return detail.scope && detail.scope.length > 0 ? (
@@ -95,6 +102,9 @@ export function InsightLayout({ article }: InsightLayoutProps) {
         return detail.conclusion && detail.conclusion.length > 0 ? (
           <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
         ) : null;
+
+      case "get-started":
+        return <DetailGetStartedBlock />;
 
       default:
         return null;

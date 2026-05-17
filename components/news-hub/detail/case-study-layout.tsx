@@ -13,6 +13,7 @@ import { DetailSplitCardsBlock } from "./detail-split-cards-block";
 import { DetailSpecsBlock } from "./detail-specs-block";
 import { DetailListBlock } from "./detail-list-block";
 import { DetailHighlightListBlock } from "./detail-highlight-list-block";
+import { DetailGetStartedBlock } from "./detail-get-started-block";
 
 const DEFAULT_CASE_STUDY_TOC: readonly TocItem[] = [
   { id: "overview", label: "Overview", level: 1 },
@@ -38,7 +39,15 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
   function renderSection(id: string, title: string) {
     switch (id) {
       case "overview":
-        return <DetailIntroBlock intro={detail.intro} title={title} />;
+        return (
+          <DetailIntroBlock
+            intro={detail.intro}
+            title={title}
+            eyebrow={article.categoryLabel}
+            body={detail.body}
+            pillars={detail.pillars}
+          />
+        );
 
       case "metrics":
         return detail.spotlight && detail.spotlight.length > 0 ? (
@@ -56,9 +65,7 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
         ) : null;
 
       case "details":
-        return detail.body && detail.body.length > 0 ? (
-          <DetailBodyBlock body={detail.body} title={title} />
-        ) : null;
+        return null;
 
       case "specifications":
         return detail.specifications && detail.specifications.length > 0 ? (
@@ -87,6 +94,9 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
         return detail.conclusion && detail.conclusion.length > 0 ? (
           <DetailConclusionBlock conclusion={detail.conclusion} title={title} />
         ) : null;
+
+      case "get-started":
+        return <DetailGetStartedBlock />;
 
       default:
         return null;
