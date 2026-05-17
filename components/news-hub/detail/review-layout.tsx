@@ -84,7 +84,7 @@ export function ReviewLayout({ article }: ReviewLayoutProps) {
         );
 
       case "get-started":
-        return <DetailGetStartedBlock />;
+        return <DetailGetStartedBlock tags={article.tags} />;
 
       default:
         return null;

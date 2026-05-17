@@ -96,7 +96,7 @@ export function CaseStudyLayout({ article }: CaseStudyLayoutProps) {
         ) : null;
 
       case "get-started":
-        return <DetailGetStartedBlock />;
+        return <DetailGetStartedBlock tags={article.tags} />;
 
       default:
         return null;

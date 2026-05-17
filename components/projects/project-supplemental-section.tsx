@@ -10,11 +10,17 @@ import type { SidebarCard } from "@/types/shared-content";
 export interface ProjectSupplementalSectionProps {
   tags?: string[];
   cards: SidebarCard[];
+  tagsLabel?: string;
+  title?: string;
+  description?: string;
 }
 
 export function ProjectSupplementalSection({
   tags,
   cards,
+  tagsLabel = "Project Tags",
+  title = "Get Started",
+  description = "Ready to discuss your project requirements?",
 }: ProjectSupplementalSectionProps) {
   const hasTags = tags && tags.length > 0;
   const hasCards = cards.length > 0;
@@ -46,7 +52,7 @@ export function ProjectSupplementalSection({
         {hasTags && (
           <div className="space-y-3">
             <h3 className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-electric-cyan/70 dark:text-electric-cyan/70">
-              Project Tags
+              {tagsLabel}
             </h3>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
@@ -65,8 +71,8 @@ export function ProjectSupplementalSection({
         {hasCards && (
           <ContentSidebar
             cards={cards}
-            title="Get Started"
-            description="Ready to discuss your project requirements?"
+            title={title}
+            description={description}
             showLiveIndicator={false}
           />
         )}

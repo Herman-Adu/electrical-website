@@ -1,21 +1,49 @@
-import Link from "next/link";
-import { DetailSectionHeading } from "./detail-section-heading";
+import type { SidebarCard } from "@/types/shared-content";
+import { ProjectSupplementalSection } from "@/components/projects/project-supplemental-section";
 
-export function DetailGetStartedBlock() {
+const DEFAULT_CARDS: SidebarCard[] = [
+  {
+    id: "article-cta-quote",
+    type: "cta",
+    eyebrow: "Free Site Assessment",
+    title: "Request a Service Quotation",
+    description:
+      "Get a clear, no-obligation quote from Nexgen's qualified engineering team.",
+    ctaLabel: "Get Quote",
+    href: "/get-quote",
+    section: "news",
+    targetCategories: [],
+  },
+  {
+    id: "article-cta-contact",
+    type: "campaign",
+    eyebrow: "Expert Consultation",
+    title: "Speak to Our Engineers",
+    description:
+      "Have a project question? Our team is available for technical consultation.",
+    ctaLabel: "Contact Us",
+    href: "/contact",
+    section: "news",
+    targetCategories: [],
+  },
+];
+
+interface DetailGetStartedBlockProps {
+  tags?: string[];
+  cards?: SidebarCard[];
+}
+
+export function DetailGetStartedBlock({
+  tags = [],
+  cards,
+}: DetailGetStartedBlockProps) {
   return (
-    <section id="get-started" className="space-y-6">
-      <DetailSectionHeading title="Get Started" />
-      <div className="rounded-2xl border border-electric-cyan/30 bg-gradient-to-br from-background to-[hsl(174_100%_35%)]/5 p-8">
-        <p className="text-foreground/70 leading-relaxed mb-6">
-          Have a project in mind? The Nexgen engineering team offers free site assessments — clear scope, honest programme, no obligation.
-        </p>
-        <Link
-          href="/get-quote"
-          className="inline-block bg-electric-cyan text-background font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
-        >
-          Get a Free Assessment
-        </Link>
-      </div>
-    </section>
+    <ProjectSupplementalSection
+      tags={tags}
+      cards={cards ?? DEFAULT_CARDS}
+      tagsLabel="Article Tags"
+      title="Get Started"
+      description="Ready to discuss your requirements?"
+    />
   );
 }
